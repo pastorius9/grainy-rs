@@ -42,7 +42,7 @@ pub const COMMANDS: &[Command] = &[
     Command { id: "photo.reset", label: "선택 사진 보정 초기화", enabled: has_photos, run: reset_command },
     Command {
         id: "photo.show_folder",
-        label: "탐색기에서 폴더 열기",
+        label: crate::system_open::SHOW_FOLDER_IN_FILE_MANAGER,
         enabled: super::photo_open,
         run: show_folder_command,
     },

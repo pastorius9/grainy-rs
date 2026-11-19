@@ -8,12 +8,21 @@ cargo clippy --workspace --all-targets --all-features -- -D warnings
 cargo test --workspace --all-features
 ```
 
-Windows with the MSVC toolchain is the tested platform (a C/C++ compiler builds the vendored LibRaw, Little CMS
-and libjpeg-turbo). Tests use generated data and temporary folders only and never use the network.
+Windows (MSVC toolchain) and macOS (Xcode command line tools) are built and tested by GitHub Actions on every
+push (`.github/workflows/build.yml`: format, clippy, tests, release build, package, smoke run). A C/C++ compiler
+builds the vendored LibRaw, Little CMS and libjpeg-turbo. Tests use generated data and temporary folders only and
+never use the network.
+
+The release packages are made by `tools/release/make_release.py` (Windows zip; checked with
+`tools/release/check_imports.py` and `tools/release/smoke.py`) and `tools/release/make_macos.py` (macOS app bundle
+and disk image, on a Mac; `--dry-run` shows what it makes on any system). `tools/release/scan_public.py` must find
+nothing before anything is published.
 
 The application's window tests compare rendered pictures with `crates/grainy-app/tests/snapshots/*.png`; to
 replace them after an intended change, run the tests with `GRAINY_UPDATE_SNAPSHOTS=1` and look at every changed
-picture (see `crates/grainy-app/ARCHITECTURE.md`).
+picture (see `crates/grainy-app/ARCHITECTURE.md`). Pictures can differ between systems in font rendering and GPU
+output: do not replace the checked-in snapshots with ones made on another system without looking at every
+difference.
 
 ## Reference data (goldens)
 

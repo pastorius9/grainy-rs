@@ -25,8 +25,9 @@ pub fn directory_identity(path: &Path) -> Option<Identity> {
         return None;
     }
     // Creation time guards against reused file IDs on Windows. POSIX ctime changes during a rename and must
-    // not be used as a creation timestamp.
-    let birth = if cfg!(any(windows, target_os = "macos")) {
+    // not be used as a creation timestamp. The oracle reads `st_birthtime_ns`, which Python has on Windows only
+    // (macOS has the float `st_birthtime` alone): 0 on macOS too, so identities match the oracle's there.
+    let birth = if cfg!(windows) {
         meta.created()
             .ok()
             .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())

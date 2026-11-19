@@ -282,20 +282,18 @@ impl FileWait {
         then: fn(&mut AppContext, PathBuf),
     ) -> Self {
         let (sender, receiver) = channel();
-        let work = move || {
-            let mut dialog = rfd::AsyncFileDialog::new().set_title(&title).add_filter(filter.0, &filter.1);
-            if let Some(start) = start.filter(|s| s.is_dir()) {
-                dialog = dialog.set_directory(start);
-            }
-            let chosen = match save {
-                Some(name) => pollster::block_on(dialog.set_file_name(name).save_file()),
-                None => pollster::block_on(dialog.pick_file()),
-            };
-            let _ = sender.send(chosen.map(|f| f.path().to_path_buf()));
-        };
-        if let Err(error) = std::thread::Builder::new().name("grainy-dialog".into()).spawn(work) {
-            log::error!("cannot open the file dialog: {error}");
+        // Started here, on the window's thread; only the answer is awaited elsewhere (`native`).
+        let mut dialog = rfd::AsyncFileDialog::new().set_title(&title).add_filter(filter.0, &filter.1);
+        if let Some(start) = start.filter(|s| s.is_dir()) {
+            dialog = dialog.set_directory(start);
         }
+        let send = move |chosen: Option<rfd::FileHandle>| {
+            let _ = sender.send(chosen.map(super::native::path_of));
+        };
+        match save {
+            Some(name) => super::native::await_answer(dialog.set_file_name(name).save_file(), send),
+            None => super::native::await_answer(dialog.pick_file(), send),
+        };
         Self { receiver, then: Some(then) }
     }
 

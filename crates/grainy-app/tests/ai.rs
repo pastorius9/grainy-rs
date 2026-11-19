@@ -569,6 +569,75 @@ fn installers_and_sign_in_open_the_oracles_consoles() {
     }
 }
 
+/// macOS: sign-in and installers run in Terminal from a script the person sees (`launch_sign_in` / `launch_install`
+/// with `platform='darwin'`): `open -a Terminal <script>`, the script touching `closed` when it ends, the installer
+/// with the tool folders on `PATH` and a pause. Nothing is started: the computer is a fake that records consoles.
+#[test]
+fn macos_sign_in_and_installers_open_terminal_scripts() {
+    let _turn = common::language_lock();
+    grainy_i18n::set_language(Language::Korean);
+    let root = fixed_dir("ai-launch-mac");
+    let sys = FakeSystem::new(Os::MacOs, isolated_env(&root, &[]));
+    let settings = root.join("settings");
+    let q = grainy_app::ai::auth::shell_quote;
+    let opened = |folder: &str, name: &str| {
+        let launch = sys.consoles.lock().unwrap().pop().expect("a console was opened");
+        assert_eq!(&launch.argv[..3], ["open", "-a", "Terminal"]);
+        assert_eq!(launch.argv.len(), 4);
+        assert_eq!(launch.env, None, "Terminal keeps its own environment; the script sets PATH");
+        let script = PathBuf::from(&launch.argv[3]);
+        assert_eq!(script.file_name().unwrap(), name);
+        let directory = script.parent().unwrap();
+        assert_eq!(directory.parent().unwrap(), settings.join(folder));
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            assert_eq!(std::fs::metadata(&script).unwrap().permissions().mode() & 0o777, 0o700);
+        }
+        let done = directory.join("closed");
+        (std::fs::read_to_string(&script).unwrap(), q(&format!("touch {}", q(&done.to_string_lossy()))))
+    };
+    for profile in PROFILES.iter() {
+        let exe = vec![format!("/Users/kim/.local/bin/{}", profile.key)];
+        grainy_app::ai::auth::launch_sign_in(profile, Some(&exe), &settings, Os::MacOs, &sys).unwrap();
+        let (text, touch) = opened("ai-login", "signin.command");
+        let argv: Vec<String> =
+            exe.iter().map(String::as_str).chain(profile.login_args.iter().copied()).map(q).collect();
+        let home = q(&sys.home().to_string_lossy());
+        let expected = format!(
+            "#!/bin/sh\ntrap {touch} EXIT\ntrap 'exit 0' HUP INT TERM\ncd {home} || exit 1\n{}\n",
+            argv.join(" ")
+        );
+        assert_eq!(text, expected, "{}", profile.key);
+    }
+    let path = std::iter::once(root.join("empty-path"))
+        .chain(discover::tool_folders(&sys, Os::MacOs))
+        .map(|p| p.to_string_lossy().into_owned())
+        .collect::<Vec<_>>()
+        .join(":");
+    assert!(path.contains("/opt/homebrew/bin:/usr/local/bin:"), "{path}");
+    let pause = q("결과를 확인한 뒤 아무 키나 누르면 이 설치 실행을 마칩니다.");
+    let place = q(&settings.join("ai-install").to_string_lossy());
+    for (key, _, installer) in install::INSTALLERS.iter().filter(|(_, os, _)| *os == Os::MacOs) {
+        install::launch_install(installer, &settings, Os::MacOs, &sys).unwrap();
+        let (text, touch) = opened("ai-install", "install.command");
+        let expected = format!(
+            "#!/bin/bash\nset -o pipefail\ntrap {touch} EXIT\ntrap 'exit 0' HUP INT TERM\nexport PATH={}\ncd {place} || exit 1\n(\n{}\n)\nresult=$?\nprintf '\\n%s\\n' {pause}\nread -r -n 1\nexit \"$result\"\n",
+            q(&path),
+            installer.command,
+        );
+        assert_eq!(text, expected, "{key}");
+    }
+    assert_eq!(
+        install::INSTALLERS.iter().filter(|(_, os, _)| *os == Os::MacOs).map(|(_, _, i)| i.command).collect::<Vec<_>>(),
+        [
+            "curl -fsSL https://claude.ai/install.sh | bash",
+            "curl -fsSL https://chatgpt.com/codex/install.sh | sh",
+            "npm install -g @google/gemini-cli"
+        ]
+    );
+}
+
 // ---- the connection ------------------------------------------------------------------------------------------
 
 /// A server that never opens a socket: ports in `taken` fail as a used port does.

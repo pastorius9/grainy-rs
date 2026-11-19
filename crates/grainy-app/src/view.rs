@@ -94,6 +94,10 @@ impl AppContext {
                 scale = new;
             }
         }
+        // macOS: a trackpad scroll moves the photo (the oracle's `wheelEvent` there); pinching zooms (above).
+        if cfg!(target_os = "macos") && response.hovered() && self.zoom != Zoom::Fit {
+            self.pan += ui.input(|i| trackpad_pan(&i.events));
+        }
         let shown = size * scale;
         // The open tool takes the pointer first (in frame coordinates); otherwise a drag pans.
         let view = ViewTransform { rect: self.photo_rect.unwrap_or(area) };
@@ -437,4 +441,47 @@ fn checkerboard(painter: &egui::Painter, rect: Rect) {
 
 fn hint(key: &str) -> String {
     grainy_i18n::shortcuts::key_hint(key, grainy_i18n::Platform::current()).unwrap_or_else(|| key.to_owned())
+}
+
+/// What a trackpad (or Magic Mouse) scroll moves the photo by this frame, on macOS: luma/widgets.py `wheelEvent`
+/// with `MAC` (scrolls in pixels, many events per swipe, move the photo as everywhere on macOS:
+/// `scrollBar.setValue(value - delta)`). Scrolls in points only, momentum included; a scroll with ⌘ is egui's zoom.
+pub(crate) fn trackpad_pan(events: &[egui::Event]) -> Vec2 {
+    events
+        .iter()
+        .filter_map(|event| match event {
+            egui::Event::MouseWheel { unit: egui::MouseWheelUnit::Point, delta, modifiers, .. }
+                if !modifiers.command =>
+            {
+                Some(*delta)
+            }
+            _ => None,
+        })
+        .fold(Vec2::ZERO, |sum, delta| sum + delta)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn a_trackpad_scroll_pans_and_a_wheel_or_command_scroll_does_not() {
+        let wheel = |unit, delta: Vec2, modifiers| egui::Event::MouseWheel {
+            unit,
+            delta,
+            phase: egui::TouchPhase::Move,
+            source: egui::MouseWheelSource::Trackpad,
+            modifiers,
+        };
+        let none = egui::Modifiers::NONE;
+        let events = [
+            wheel(egui::MouseWheelUnit::Point, Vec2::new(3.0, -4.0), none),
+            wheel(egui::MouseWheelUnit::Point, Vec2::new(1.0, 2.0), egui::Modifiers::SHIFT),
+            wheel(egui::MouseWheelUnit::Point, Vec2::new(50.0, 50.0), egui::Modifiers::COMMAND),
+            wheel(egui::MouseWheelUnit::Line, Vec2::new(0.0, 1.0), none),
+            egui::Event::Zoom(1.1),
+        ];
+        assert_eq!(trackpad_pan(&events), Vec2::new(4.0, -2.0));
+        assert_eq!(trackpad_pan(&[]), Vec2::ZERO);
+    }
 }

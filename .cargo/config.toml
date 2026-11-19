@@ -1,0 +1,5 @@
+# Windows: the C runtime is linked statically into every program (Rust and the vendored C/C++ code, which the
+# `cc` crate then compiles with /MT), so Grainy RS starts on a PC without the Visual C++ Redistributable. OpenMP
+# (LibRaw) has no static form: its vcomp140.dll ships beside the program (tools/release/make_release.py).
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]

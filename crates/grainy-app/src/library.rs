@@ -192,7 +192,7 @@ impl AppContext {
         if let Some(path) = path {
             ui.separator();
             item(self, ui, "library.sync_folder", "폴더 동기화 · 새 사진 가져오기", Some(path));
-            item(self, ui, "library.open_folder", "탐색기에서 열기", Some(path));
+            item(self, ui, "library.open_folder", crate::system_open::SHOW_IN_FILE_MANAGER, Some(path));
             if std::path::Path::new(path).parent().is_some() {
                 item(self, ui, "library.show_parent", "상위 폴더 표시", Some(path));
                 item(self, ui, "library.locate_folder", "폴더 위치 다시 지정…", Some(path));

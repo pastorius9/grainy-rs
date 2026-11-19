@@ -42,6 +42,10 @@ Redistributable), which is not shipped with the program.
   film names are trademarks of their owners (see `NOTICE.txt` there).
 - **Natural Earth** (`crates/grainy-app/assets/world.geojson`, the offline map): 1:110m countries, public domain,
   <https://www.naturalearthdata.com/>.
+- **Pillow's built-in font** (`crates/grainy-mcp/assets/pillow-default-font.ttf`, the contact sheets' caption font
+  where the system has none of the oracle's fonts, as on macOS): the subset of Aileron Regular by Sora Sagano
+  (<http://www.dotcolon.net>, "No Rights Reserved", CC0 1.0) that Pillow 12.3.0 embeds for
+  `ImageFont.load_default`, unmodified; Pillow is MIT-CMU. See `PILLOW-DEFAULT-FONT-NOTICE.txt` there.
 
 ## Rust crates
 

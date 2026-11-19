@@ -36,6 +36,7 @@ pub mod shortcuts;
 pub mod smoke;
 pub mod startup;
 pub mod state;
+pub mod system_open;
 pub mod text;
 pub mod theme;
 pub mod thumbjpeg;

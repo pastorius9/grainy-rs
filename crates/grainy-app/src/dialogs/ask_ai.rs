@@ -169,7 +169,9 @@ impl AskAiDialog {
         ui.add_space(4.0);
         let input = ui.add(
             egui::TextEdit::multiline(&mut model.input)
-                .hint_text(tr("Grainy에 시킬 일을 입력하세요. Ctrl+Enter로 보냅니다."))
+                // The key is Command+Enter on macOS (`modifiers.command` below): written ⌘Enter there, as every
+                // other shortcut text (`keys`); the oracle left this one as "Ctrl+Enter".
+                .hint_text(grainy_i18n::keys_here(&tr("Grainy에 시킬 일을 입력하세요. Ctrl+Enter로 보냅니다.")))
                 .desired_rows(4)
                 .desired_width(f32::INFINITY),
         );

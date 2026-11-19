@@ -50,3 +50,74 @@ fn caption_layout_matches_pillow() {
     eprintln!("caption advance widths: largest difference from Pillow {worst} px");
     assert!(worst <= 2.0, "advance widths differ by {worst} px");
 }
+
+/// Pillow's own font (`ImageFont.load_default(size)`), the oracle's caption font where neither Malgun Gothic nor
+/// DejaVu Sans is found (macOS): the same bytes, laid out as Pillow lays them out (golden/mcp/builtin_font.json).
+#[test]
+fn the_builtin_font_is_pillows_and_lays_out_as_pillow() {
+    let path = grainy_testkit::root().join("golden").join("mcp").join("builtin_font.json");
+    let golden: Value = serde_json::from_str(&std::fs::read_to_string(path).unwrap()).unwrap();
+    use sha2::Digest;
+    let digest: String = sha2::Sha256::digest(grainy_mcp::text::BUILTIN).iter().map(|b| format!("{b:02x}")).collect();
+    assert_eq!(digest, golden["sha256"].as_str().unwrap(), "the bytes of Pillow's load_default");
+    assert_eq!(grainy_mcp::text::BUILTIN.len() as u64, golden["bytes"].as_u64().unwrap());
+    let samples: Vec<&str> = golden["samples"].as_array().unwrap().iter().map(|s| s.as_str().unwrap()).collect();
+    let mut worst = 0.0f64;
+    for case in golden["cases"].as_array().unwrap() {
+        let size = case["size"].as_u64().unwrap() as u32;
+        let font = Font::builtin(size).expect("the built-in font parses");
+        let metrics = case["metrics"].as_array().unwrap();
+        assert_eq!(
+            font.metrics(),
+            (metrics[0].as_i64().unwrap() as i32, metrics[1].as_i64().unwrap() as i32),
+            "size {size}: ascent and descent"
+        );
+        for (text, length) in samples.iter().zip(case["lengths"].as_array().unwrap()) {
+            worst = worst.max((font.length(text) - length.as_f64().unwrap()).abs());
+        }
+    }
+    // Pillow's own advances (assets/pillow-default-font-advances.json): every width equals Pillow's.
+    eprintln!("built-in font advance widths: largest difference from Pillow {worst} px");
+    assert_eq!(worst, 0.0, "advance widths differ by {worst} px");
+    // A system without the candidate files draws with it (`font_path` then names no file).
+    assert_eq!(grainy_mcp::text::uses_builtin(), grainy_mcp::text::font_path().is_none());
+    assert!(Font::new(13).is_some(), "captions are always drawn");
+}
+
+/// Where Pillow's `truetype` looks for a bare font name on each system (the oracle's `photo_images._font` asks for
+/// `DejaVuSans.ttf`).
+#[test]
+fn the_font_folders_are_pillows() {
+    use grainy_mcp::text::{font_folders, FontSystem};
+    use std::path::PathBuf;
+    let env = |pairs: &'static [(&'static str, &'static str)]| {
+        move |key: &str| pairs.iter().find(|(k, _)| *k == key).map(|(_, v)| (*v).to_owned())
+    };
+    let paths = |list: &[&str]| list.iter().map(PathBuf::from).collect::<Vec<_>>();
+    assert_eq!(
+        font_folders(FontSystem::Windows, &env(&[("WINDIR", r"C:\Windows")])),
+        vec![PathBuf::from(r"C:\Windows").join("fonts")]
+    );
+    assert_eq!(font_folders(FontSystem::Windows, &env(&[])), Vec::<PathBuf>::new());
+    assert_eq!(
+        font_folders(FontSystem::MacOs, &env(&[("HOME", "/Users/kim")])),
+        vec![
+            PathBuf::from("/Library/Fonts"),
+            PathBuf::from("/System/Library/Fonts"),
+            PathBuf::from("/Users/kim").join("Library").join("Fonts")
+        ]
+    );
+    assert_eq!(
+        font_folders(FontSystem::Linux, &env(&[("HOME", "/home/kim")])),
+        vec![
+            PathBuf::from("/home/kim").join(".local").join("share").join("fonts"),
+            PathBuf::from("/usr/local/share").join("fonts"),
+            PathBuf::from("/usr/share").join("fonts"),
+        ]
+    );
+    assert_eq!(
+        font_folders(FontSystem::Linux, &env(&[("XDG_DATA_HOME", "/x"), ("XDG_DATA_DIRS", "/a:/b")])),
+        paths(&["/x", "/a", "/b"]).into_iter().map(|p| p.join("fonts")).collect::<Vec<_>>()
+    );
+    assert_eq!(font_folders(FontSystem::Other, &env(&[("HOME", "/h")])), Vec::<PathBuf>::new());
+}

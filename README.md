@@ -7,24 +7,41 @@ tested against reference data computed by the Python Grainy.
 **This is an early release.** The Python Grainy at <https://github.com/pastorius9/grainy> stays the main product
 for now; use Grainy RS to try it out and report what you find.
 
-## Download and run (Windows)
+## Download and run
+
+### Windows
 
 1. Download `GrainyRS-<version>-windows-x64.zip` from the
    [releases](https://github.com/pastorius9/grainy-rs/releases) page.
-2. Unzip the whole `GrainyRS` folder anywhere and start `GrainyRS.exe`. Nothing is installed.
-3. If Windows reports that `VCOMP140.dll` or `VCRUNTIME140.dll` is missing, install the Microsoft Visual C++
-   Redistributable for Visual Studio 2015-2022 (x64) and start again.
+2. Unzip the whole `GrainyRS` folder anywhere and start `GrainyRS.exe`. Nothing is installed, and the Microsoft
+   Visual C++ Redistributable is **not** needed: the C runtime is built into the program, and the one Microsoft
+   file it uses (`vcomp140.dll`) is in the folder. Keep the files of the folder together.
 
 `grainy-cli.exe` in the same folder renders a photo from the command line with the same pixels as an export
-(`grainy-cli.exe --help`).
+(`grainy-cli.exe --help`). Windows 10 or 11, 64-bit.
 
-Windows 10 or 11, 64-bit, is the only packaged platform so far.
+### macOS
+
+1. Download `GrainyRS-<version>-macos-universal.dmg` from the
+   [releases](https://github.com/pastorius9/grainy-rs/releases) page. It runs natively on Apple Silicon and on
+   Intel Macs, macOS 11 or newer.
+2. Open the disk image and drag **Grainy RS** to the Applications folder.
+3. First start: the app is signed with a self-signed certificate and is not notarized by Apple, so macOS blocks
+   it once. Right-click (or Control-click) Grainy RS in the Applications folder, choose **Open**, then **Open**
+   again. Or try to open it, then go to System Settings > Privacy & Security and press **Open Anyway**.
+   After that it starts normally, and updates keep the same signature, so macOS keeps the permissions it gave
+   the app.
+
+The data folder is `~/Library/Application Support/GrainyRS` (separate from the Python Grainy's). The
+command-line program is inside the app: `/Applications/Grainy RS.app/Contents/MacOS/grainy-cli --help`. To
+uninstall, move the app to the Trash (delete the data folder as well to remove the edits).
 
 ## Where it keeps its data
 
 - Original photo files are never written, moved or deleted. Edits are stored in the library.
-- Grainy RS has its own data folder, `%LOCALAPPDATA%\GrainyRS` (library, previews, settings), separate from the
-  Python Grainy's. `GrainyRS.exe --library <folder>` opens another library; the environment variable
+- Grainy RS has its own data folder, `%LOCALAPPDATA%\GrainyRS` on Windows and
+  `~/Library/Application Support/GrainyRS` on macOS (library, previews, settings), separate from the Python
+  Grainy's. `GrainyRS.exe --library <folder>` opens another library; the environment variable
   `GRAINY_RS_HOME` moves the whole data folder.
 - **A Grainy library can be opened read-only** (File menu, *Open the Grainy Library Read-Only*): the Python
   Grainy's library is read from a snapshot copy, nothing in it is changed, and edits made there stay in that
@@ -41,7 +58,10 @@ Windows 10 or 11, 64-bit, is the only packaged platform so far.
 - The automatic lens-correction scale is the least exact part of the engine (within 4e-4 of the Python Grainy;
   everything else is equal or within float rounding).
 - Simple RAW develops are slower than in the Python Grainy for some cameras (Fujifilm X-Trans in particular).
-- Only Windows is packaged; other systems are not tested.
+- macOS: the first macOS release. It passes the automated tests, but few Macs have run it. There is no
+  OpenMP on macOS (the serial code path, which gives the same pixels, only slower for some RAW files).
+  <!-- macOS: what is not done yet, to be filled after the first macOS test run. -->
+- Linux is not packaged or tested.
 
 ## Licence
 
@@ -52,8 +72,9 @@ own licences: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), the `NOTICE`
 
 ## Build and test
 
-Rust 1.90 or newer with the MSVC toolchain on Windows (a C/C++ compiler is needed: LibRaw, Little CMS and
-libjpeg-turbo are compiled from the vendored sources).
+Rust 1.90 or newer. A C/C++ compiler is needed: LibRaw, Little CMS and libjpeg-turbo are compiled from the
+vendored sources. On Windows use the MSVC toolchain (Visual Studio Build Tools). On macOS install the Xcode
+command line tools (`xcode-select --install`); Homebrew packages are not needed.
 
 ```
 cargo build --release -p grainy-app -p grainy-cli
@@ -61,7 +82,10 @@ cargo test --workspace --all-features
 cargo clippy --workspace --all-targets --all-features -- -D warnings
 ```
 
-The application is `target/release/grainy-app.exe` (`GrainyRS.exe` in the release package). How the reference
+The application is `target/release/grainy-app` (`grainy-app.exe` on Windows; `GrainyRS.exe` in the Windows
+package). The release packages are made by `tools/release/make_release.py` (Windows zip) and
+`tools/release/make_macos.py` (macOS app and disk image, on a Mac: `rustup target add aarch64-apple-darwin
+x86_64-apple-darwin` first); GitHub Actions builds both (`.github/workflows/build.yml`). How the reference
 data in `golden/` is made, and how to contribute: [CONTRIBUTING.md](CONTRIBUTING.md). The workspace is one crate
 per part of the engine (`crates/grainy-*`); the application's structure is described in
 [crates/grainy-app/ARCHITECTURE.md](crates/grainy-app/ARCHITECTURE.md).
@@ -72,9 +96,11 @@ Grainy RS는 사진 편집기 [Grainy](https://github.com/pastorius9/grainy)를 
 같은 보정, 같은 픽셀 결과를 냅니다. **아직 초기 버전**이며, 당분간은 Python으로 된 Grainy가 주 제품입니다.
 
 - 설치: [Releases](https://github.com/pastorius9/grainy-rs/releases)에서 `GrainyRS-<버전>-windows-x64.zip`을 받아 압축을
-  풀고 `GrainyRS.exe`를 실행합니다. `VCOMP140.dll`이 없다는 오류가 나오면 Microsoft Visual C++ 재배포 패키지(x64)를
-  설치하세요.
-- 데이터: 원본 사진은 절대 수정·이동·삭제하지 않습니다. 라이브러리와 설정은 `%LOCALAPPDATA%\GrainyRS`에
-  따로 저장됩니다. 기존 Grainy 라이브러리는 읽기 전용으로 열 수 있습니다(파일 메뉴).
+  풀고 `GrainyRS.exe`를 실행합니다. Microsoft Visual C++ 재배포 패키지는 필요 없습니다.
+- macOS: `GrainyRS-<버전>-macos-universal.dmg`를 열고 Grainy RS를 Applications 폴더로 끌어다 놓습니다. 처음 한 번은
+  자체 서명 인증서라 막히므로, 앱을 우클릭(또는 Control-클릭) > 열기 > 열기를 하거나 시스템 설정 > 개인정보 보호 및
+  보안에서 "그래도 열기"를 누르세요. 데이터는 `~/Library/Application Support/GrainyRS`에 저장됩니다.
+- 데이터: 원본 사진은 절대 수정·이동·삭제하지 않습니다. 라이브러리와 설정은 `%LOCALAPPDATA%\GrainyRS`(Windows) 또는
+  `~/Library/Application Support/GrainyRS`(macOS)에 따로 저장됩니다. 기존 Grainy 라이브러리는 읽기 전용으로 열 수 있습니다(파일 메뉴).
 - 네트워크는 피드백 보내기와 업데이트 확인에만 쓰며, `--offline`으로 완전히 끌 수 있습니다.
 - 라이선스: MIT. 함께 들어 있는 외부 라이브러리와 데이터의 라이선스는 `THIRD_PARTY_NOTICES.md`를 보세요.

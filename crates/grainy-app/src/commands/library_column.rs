@@ -25,7 +25,12 @@ pub const COMMANDS: &[Command] = &[
     Command {
         id: "library.sync_folder", label: "폴더 동기화 · 새 사진 가져오기", enabled: can_sync, run: sync_folder
     },
-    Command { id: "library.open_folder", label: "탐색기에서 열기", enabled: always, run: open_folder },
+    Command {
+        id: "library.open_folder",
+        label: crate::system_open::SHOW_IN_FILE_MANAGER,
+        enabled: always,
+        run: open_folder,
+    },
     Command { id: "library.show_parent", label: "상위 폴더 표시", enabled: always, run: show_parent },
     Command {
         id: "library.remove_folder", label: "카탈로그에서 폴더 제거…", enabled: can_remove, run: remove_folder
@@ -69,20 +74,14 @@ fn sync_folder(cx: &mut AppContext, invocation: &Invocation) {
     }
 }
 
-/// `QDesktopServices.openUrl(QUrl.fromLocalFile(path))`: the folder in the system's file manager.
+/// `QDesktopServices.openUrl(QUrl.fromLocalFile(path))`: the folder in the system's file manager (Explorer, Finder;
+/// [`crate::system_open`]).
 fn open_folder(_: &mut AppContext, invocation: &Invocation) {
     let Some(path) = path_of(invocation) else { return };
     if LAUNCH_DISABLED.load(std::sync::atomic::Ordering::Relaxed) {
         return;
     }
-    let program = if cfg!(windows) {
-        "explorer"
-    } else if cfg!(target_os = "macos") {
-        "open"
-    } else {
-        "xdg-open"
-    };
-    if let Err(error) = std::process::Command::new(program).arg(&path).spawn() {
+    if let Err(error) = crate::system_open::open(crate::system_open::Target::Folder, &path) {
         log::warn!("cannot open {path}: {error}");
     }
 }

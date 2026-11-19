@@ -10,9 +10,19 @@
 //! `Grainy.app` bundle and works in `Application Support/Grainy/Update`. `UpdateController` (the dialogs and menu)
 //! is UI and is not ported.
 //!
+//! **The Rust build** ([`RS_PACKAGE`]) has its own release files and rule ([`RUST_MARKER`]): on Windows the zip
+//! `GrainyRS-<version>-windows-x64.zip` with the folder `GrainyRS/` ([`RS_ITEMS`] are swapped), on macOS the disk
+//! image `GrainyRS-<version>-macos-universal.dmg` holding `Grainy RS.app` ([`RS_MAC`]: attached read-only, the
+//! bundle and its identifier checked, copied with ditto, [`stage_disk_image`]), swapped as a whole like the
+//! oracle's bundle, with the work folder `Application Support/GrainyRS/Update` ([`work_folder_for`]).
+//!
 //! Choices: the zip reading uses the `zip` crate and the checksum the `sha2` crate; the recycle bin is the `trash`
 //! crate (the oracle uses Send2Trash); free disk space comes from `fs4`; the macOS steps shell out to `/usr/bin/ditto`
-//! exactly as the oracle does (they cannot run on Windows, but their name checks and the swap are tested).
+//! and `/usr/bin/hdiutil` (arguments as lists) as the oracle shells out to ditto (they cannot run on Windows: their
+//! checks, arguments and the swap are tested there with fakes, the real tools on macOS); `Info.plist` is read by
+//! [`plist`] (XML through `roxmltree`, binary by a small reader).
+
+pub mod plist;
 
 use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
@@ -49,8 +59,9 @@ pub const RS_DOWNLOADS: &str = "https://github.com/pastorius9/grainy-rs/releases
 /// Everything a release folder holds.
 pub const ITEMS: [&str; 4] = ["Grainy.exe", "_internal", "THIRD_PARTY_LICENSES", "LICENSE.txt"];
 
-/// What a Windows release zip holds and what the swap replaces: the one top folder of the zip, the program in it,
-/// the items of the program folder that belong to the release, and a folder that must not be empty.
+/// What a release holds and what its swap replaces. Windows: the one top folder of the zip, the program in it, the
+/// items of the program folder that belong to the release, and a folder that must not be empty. macOS: the app
+/// bundle ([`MacBundle`]), replaced as a whole.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Package {
     /// The zip's only top folder (`Grainy`, `GrainyRS`).
@@ -61,23 +72,65 @@ pub struct Package {
     pub items: &'static [&'static str],
     /// A folder inside the top folder that must hold at least one entry (the oracle's `_internal`).
     pub required_folder: Option<&'static str>,
+    /// The macOS app bundle of the same release.
+    pub mac: MacBundle,
 }
 
+/// What a macOS release holds and what its swap replaces: one app bundle, moved as a whole (a bundle must not be
+/// changed from the inside).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct MacBundle {
+    /// The bundle's folder name (`Grainy.app`, `Grainy RS.app`).
+    pub name: &'static str,
+    /// The program inside it, relative to the bundle (`Contents/MacOS/Grainy`).
+    pub program: &'static str,
+    /// The `CFBundleIdentifier` a staged bundle must carry in its `Contents/Info.plist`; none for the oracle, whose
+    /// zip is not checked for one.
+    pub identifier: Option<&'static str>,
+    /// The folder under `~/Library/Application Support` whose `Update` folder is the work folder
+    /// ([`work_folder_for`]).
+    pub data: &'static str,
+}
+
+/// The Python Grainy's bundle (port of `BUNDLE`, `PROGRAM` and the macOS `work_folder`; the oracle's goldens).
+pub const ORACLE_MAC: MacBundle = MacBundle { name: BUNDLE, program: PROGRAM, identifier: None, data: "Grainy" };
+
 /// The Python Grainy's release (port of `ITEMS`, `stage`, `launch`, `finish`; the oracle's goldens).
-pub const ORACLE_PACKAGE: Package =
-    Package { folder: "Grainy", program: "Grainy.exe", items: &ITEMS, required_folder: Some("_internal") };
+pub const ORACLE_PACKAGE: Package = Package {
+    folder: "Grainy",
+    program: "Grainy.exe",
+    items: &ITEMS,
+    required_folder: Some("_internal"),
+    mac: ORACLE_MAC,
+};
 
-/// The files of the Rust build's release folder (`GrainyRS/` in its zip). The lens database is built into the
-/// program, so nothing else is needed beside it.
-pub const RS_ITEMS: [&str; 5] = ["GrainyRS.exe", "grainy-cli.exe", "LICENSE", "THIRD_PARTY_NOTICES.txt", "README.txt"];
+/// The files of the Rust build's Windows release folder (`GrainyRS/` in its zip): the program, the command-line
+/// program, OpenMP's runtime `vcomp140.dll` (the C runtime is linked statically, but OpenMP has no static form, so
+/// it ships beside the program; 0.1.0 had none), the licence, the third-party notices and the read-me. The lens
+/// database is built into the program. A file added to a later release is added here in that release: the new
+/// version's list governs its own swap. (One line: `tools/release/layout.py` reads it.)
+#[rustfmt::skip]
+pub const RS_ITEMS: [&str; 6] = ["GrainyRS.exe", "grainy-cli.exe", "vcomp140.dll", "LICENSE", "THIRD_PARTY_NOTICES.txt", "README.txt"];
 
-/// The Rust build's release: `GrainyRS-<version>-windows-x64.zip` holding one folder `GrainyRS/` with
-/// [`RS_ITEMS`]; only `GrainyRS.exe` is required.
+/// The Rust build's macOS app bundle.
+pub const RS_BUNDLE: &str = "Grainy RS.app";
+/// The program inside [`RS_BUNDLE`].
+pub const RS_PROGRAM: &str = "Contents/MacOS/GrainyRS";
+/// The Rust build's bundle identifier (never the Python Grainy's `io.github.pastorius9.grainy`: the two apps must
+/// not share macOS permissions). A staged bundle must carry it.
+pub const RS_BUNDLE_ID: &str = "io.github.pastorius9.grainyrs";
+/// The Rust build's macOS release: `GrainyRS-<version>-macos-universal.dmg` holding [`RS_BUNDLE`]; its update work
+/// folder is `~/Library/Application Support/GrainyRS/Update` (never the Python Grainy's).
+pub const RS_MAC: MacBundle =
+    MacBundle { name: RS_BUNDLE, program: RS_PROGRAM, identifier: Some(RS_BUNDLE_ID), data: "GrainyRS" };
+
+/// The Rust build's release: on Windows `GrainyRS-<version>-windows-x64.zip` holding one folder `GrainyRS/` with
+/// [`RS_ITEMS`] (only `GrainyRS.exe` is required); on macOS the disk image with [`RS_MAC`].
 pub const RS_PACKAGE: Package =
-    Package { folder: "GrainyRS", program: "GrainyRS.exe", items: &RS_ITEMS, required_folder: None };
-/// The macOS bundle name.
+    Package { folder: "GrainyRS", program: "GrainyRS.exe", items: &RS_ITEMS, required_folder: None, mac: RS_MAC };
+/// The oracle's macOS bundle name.
 pub const BUNDLE: &str = "Grainy.app";
-/// The program inside the bundle.
+/// The program inside the oracle's bundle.
 pub const PROGRAM: &str = "Contents/MacOS/Grainy";
 /// Seconds between automatic checks.
 pub const INTERVAL: u64 = 24 * 3600;
@@ -188,21 +241,28 @@ pub fn asset_pattern(layout: &Layout) -> AssetPattern {
     AssetPattern { prefix, tail: format!("-macos-{machine}.zip") }
 }
 
-/// The marker of this Rust build's release files: `GrainyRS-<version>-windows-x64.zip` (macOS
-/// `GrainyRS-<version>-macos-<arm64|x64>.zip`).
+/// The marker of this Rust build's release files: `GrainyRS-<version>-windows-x64.zip` on Windows,
+/// `GrainyRS-<version>-macos-universal.dmg` on macOS (one disk image for Apple Silicon and Intel).
 ///
 /// **The update rule of the Rust build.** It reads only its own repository's feed ([`RS_FEED`]), never the Python
-/// Grainy's, and never downloads or starts a Python installer (`Grainy-<version>-...zip`). A release qualifies only
-/// when it carries a file whose name starts with this marker, with the oracle's other conditions unchanged: not a
-/// draft or prerelease, a positive integer size, GitHub's `sha256:` digest of the file (checked after the download,
-/// as the oracle does) and an address under [`RS_DOWNLOADS`], even with a feed override; and only when its version
-/// is newer than [`crate::RS_VERSION`]. The two patterns exclude each other (`Grainy-` never matches `GrainyRS-` and
-/// the reverse), so neither program picks up the other's installer.
+/// Grainy's, and never downloads or starts a Python installer (`Grainy-<version>-...`). A release qualifies only
+/// when it carries this system's file whose name starts with this marker, with the oracle's other conditions
+/// unchanged: not a draft or prerelease, a positive integer size, GitHub's `sha256:` digest of the file (checked
+/// with the size after the download, as the oracle does) and an address under [`RS_DOWNLOADS`], even with a feed
+/// override; and only when its version is newer than [`crate::RS_VERSION`]. The two patterns exclude each other
+/// (`Grainy-` never matches `GrainyRS-` and the reverse), so neither program picks up the other's installer.
 pub const RUST_MARKER: &str = "GrainyRS-";
 
-/// The release file of this Rust build for this system ([`RUST_MARKER`]).
+/// The end of this Rust build's Windows release file name.
+pub const RS_WINDOWS_TAIL: &str = "-windows-x64.zip";
+/// The end of this Rust build's macOS release file name (a universal disk image).
+pub const RS_MAC_TAIL: &str = "-macos-universal.dmg";
+
+/// The release file of this Rust build for this system ([`RUST_MARKER`]): [`RS_WINDOWS_TAIL`], or on macOS
+/// [`RS_MAC_TAIL`] whatever the processor.
 pub fn rust_asset_pattern(layout: &Layout) -> AssetPattern {
-    AssetPattern { prefix: RUST_MARKER.to_string(), ..asset_pattern(layout) }
+    let tail = if layout.system.is_mac() { RS_MAC_TAIL } else { RS_WINDOWS_TAIL };
+    AssetPattern { prefix: RUST_MARKER.to_string(), tail: tail.to_string() }
 }
 
 /// Whether `release` is this Rust build's file for this system: its name carries [`RUST_MARKER`] and the
@@ -389,6 +449,16 @@ pub fn work_folder(app: &Path, layout: &Layout) -> PathBuf {
         return app.join(".update");
     }
     local_data(&layout.env, "Grainy", None).join("Update")
+}
+
+/// [`work_folder`] for `package`: on Windows `.update` in the program folder, on macOS
+/// `~/Library/Application Support/<package.mac.data>/Update` (the Rust build: `GrainyRS/Update`, never the Python
+/// Grainy's folder).
+pub fn work_folder_for(app: &Path, layout: &Layout, package: &Package) -> PathBuf {
+    if !layout.system.is_mac() {
+        return app.join(".update");
+    }
+    layout.env.home.join("Library").join("Application Support").join(package.mac.data).join("Update")
 }
 
 /// Free bytes on the disk that holds `path` (what `shutil.disk_usage(path).free` reports).
@@ -628,6 +698,205 @@ pub fn stage_package(archive: &Path, work: &Path, package: &Package) -> Result<P
     Ok(staged)
 }
 
+// ---- the Rust build's macOS release: a disk image ---------------------------------------------------------------
+
+/// The macOS programs the staging of a disk image runs ([`SystemTools`]); tests give fakes. Every program gets its
+/// arguments as a list, never a shell string.
+pub trait DiskImageTools: Send + Sync {
+    /// Attaches `image` at the empty folder `mount` (`hdiutil` with [`attach_arguments`]).
+    fn attach(&self, image: &Path, mount: &Path) -> std::io::Result<()>;
+    /// Detaches the volume at `mount` (`hdiutil` with [`detach_arguments`]).
+    fn detach(&self, mount: &Path, force: bool) -> std::io::Result<()>;
+    /// Copies a bundle with its links, permissions and attributes (`/usr/bin/ditto <source> <target>`).
+    fn copy(&self, source: &Path, target: &Path) -> std::io::Result<()>;
+    /// Whether a volume is attached at `mount` (the folder is on another device than its parent folder). Nothing
+    /// is detached that is not one, so a detach can never reach the disk the folder itself is on.
+    fn mounted(&self, mount: &Path) -> bool {
+        is_mount_point(mount)
+    }
+}
+
+/// The real tools: `/usr/bin/hdiutil` and `/usr/bin/ditto` (macOS only; elsewhere they fail to start).
+#[derive(Debug, Clone, Copy, Default)]
+pub struct SystemTools;
+
+/// `hdiutil`'s arguments that attach a release's disk image at `mount`: hidden from the Finder, read-only, not
+/// opened in a window and not verified again (its SHA-256 was checked after the download).
+pub fn attach_arguments(image: &Path, mount: &Path) -> Vec<std::ffi::OsString> {
+    let mut arguments: Vec<std::ffi::OsString> =
+        ["attach", "-nobrowse", "-readonly", "-noautoopen", "-noverify", "-mountpoint"].map(Into::into).into();
+    arguments.push(mount.into());
+    arguments.push(image.into());
+    arguments
+}
+
+/// `hdiutil`'s arguments that detach the volume at `mount` (`-force` for the second try).
+pub fn detach_arguments(mount: &Path, force: bool) -> Vec<std::ffi::OsString> {
+    let mut arguments: Vec<std::ffi::OsString> = vec!["detach".into(), mount.into()];
+    if force {
+        arguments.push("-force".into());
+    }
+    arguments
+}
+
+fn run_tool(program: &str, arguments: &[std::ffi::OsString]) -> std::io::Result<()> {
+    let output = std::process::Command::new(program).args(arguments).stdin(std::process::Stdio::null()).output()?;
+    if output.status.success() {
+        return Ok(());
+    }
+    let text = String::from_utf8_lossy(&output.stderr).trim().to_string();
+    Err(std::io::Error::other(if text.is_empty() { format!("{program}: {}", output.status) } else { text }))
+}
+
+impl DiskImageTools for SystemTools {
+    fn attach(&self, image: &Path, mount: &Path) -> std::io::Result<()> {
+        run_tool("/usr/bin/hdiutil", &attach_arguments(image, mount))
+    }
+
+    fn detach(&self, mount: &Path, force: bool) -> std::io::Result<()> {
+        run_tool("/usr/bin/hdiutil", &detach_arguments(mount, force))
+    }
+
+    fn copy(&self, source: &Path, target: &Path) -> std::io::Result<()> {
+        run_tool("/usr/bin/ditto", &[source.into(), target.into()])
+    }
+}
+
+/// Whether `path` is a folder on another device than its parent folder (a volume is mounted there).
+#[cfg(unix)]
+pub fn is_mount_point(path: &Path) -> bool {
+    use std::os::unix::fs::MetadataExt;
+    let (Ok(inner), Some(Ok(outer))) = (std::fs::metadata(path), path.parent().map(std::fs::metadata)) else {
+        return false;
+    };
+    inner.is_dir() && inner.dev() != outer.dev()
+}
+
+/// Whether `path` is a folder on another device than its parent folder (never on this system: no disk images).
+#[cfg(not(unix))]
+pub fn is_mount_point(_path: &Path) -> bool {
+    false
+}
+
+/// The largest `Info.plist` read.
+const PLIST_LIMIT: u64 = 1 << 20;
+
+fn real(path: &Path, folder: bool) -> bool {
+    std::fs::symlink_metadata(path).is_ok_and(|m| if folder { m.is_dir() } else { m.is_file() })
+}
+
+/// The checks of a bundle on a release's disk image, and of its copy: a real folder (no link anywhere on the way
+/// to the program) holding the program and `Contents/Info.plist` as files, the plist (XML or binary) naming
+/// `bundle.identifier` as its `CFBundleIdentifier`.
+pub fn check_bundle_folder(path: &Path, bundle: &MacBundle) -> Result<(), UpdateError> {
+    if !real(path, true) {
+        return Err(bad_structure());
+    }
+    let parts = posix_parts(bundle.program);
+    let mut folder = path.to_path_buf();
+    for (index, part) in parts.iter().enumerate() {
+        folder.push(part);
+        if !real(&folder, index + 1 < parts.len()) {
+            return Err(bad_structure());
+        }
+    }
+    let plist = path.join("Contents").join("Info.plist");
+    if !real(&path.join("Contents"), true) || !real(&plist, false) {
+        return Err(bad_structure());
+    }
+    if let Some(wanted) = bundle.identifier {
+        let mut bytes = Vec::new();
+        std::fs::File::open(&plist)?.take(PLIST_LIMIT + 1).read_to_end(&mut bytes)?;
+        if bytes.len() as u64 > PLIST_LIMIT || plist::bundle_identifier(&bytes).as_deref() != Some(wanted) {
+            return Err(bad_structure());
+        }
+    }
+    Ok(())
+}
+
+/// Detaches the volume at `mount` if one is there: plainly, then with `-force` if it is still there.
+fn detach_volume(mount: &Path, tools: &dyn DiskImageTools) -> std::io::Result<()> {
+    if !tools.mounted(mount) {
+        return Ok(());
+    }
+    match tools.detach(mount, false) {
+        Ok(()) => Ok(()),
+        Err(_) if !tools.mounted(mount) => Ok(()),
+        Err(_) => tools.detach(mount, true),
+    }
+}
+
+fn copy_from_volume(
+    volume: &Path,
+    scratch: &Path,
+    bundle: &MacBundle,
+    tools: &dyn DiskImageTools,
+) -> Result<(), UpdateError> {
+    let source = volume.join(bundle.name);
+    check_bundle_folder(&source, bundle)?;
+    std::fs::create_dir_all(scratch)?;
+    let copy = scratch.join(bundle.name);
+    tools.copy(&source, &copy)?;
+    // The copy is what will run: checked again.
+    check_bundle_folder(&copy, bundle)
+}
+
+/// Stages the Rust build's macOS release, a disk image whose size and SHA-256 were checked (port of the oracle's
+/// `_stage_bundle` for a disk image instead of a zip): the image is attached read-only at the new empty folder
+/// `work/mount-<hex>` (hidden from the Finder, not opened), its `<bundle.name>` is checked
+/// ([`check_bundle_folder`]: a real folder with the program and an `Info.plist` naming `bundle.identifier`) and
+/// copied with ditto, and the copy, checked again, becomes `work/new/<bundle.name>`, which is returned. The image is
+/// always detached again (`-force` as a second try), also when a check fails, and its empty folder removed.
+/// Refused like the oracle's: a staged copy left from before (`work/new`), and any bundle that fails the checks
+/// ("업데이트 파일의 구조가 올바르지 않습니다.").
+pub fn stage_disk_image(
+    image: &Path,
+    work: &Path,
+    bundle: &MacBundle,
+    tools: &dyn DiskImageTools,
+) -> Result<PathBuf, UpdateError> {
+    let staged = work.join("new");
+    if staged.exists() {
+        return Err(unfinished());
+    }
+    let id = unique_hex();
+    let mount = work.join(format!("mount-{id}"));
+    let scratch = work.join(format!("extract-{id}"));
+    std::fs::create_dir_all(&mount)?;
+    let outcome = match tools.attach(image, &mount) {
+        Err(error) => {
+            // A volume attached although hdiutil reported a failure is still detached.
+            let _ = detach_volume(&mount, tools);
+            Err(UpdateError::Io(error))
+        }
+        Ok(()) => {
+            let copied = copy_from_volume(&mount, &scratch, bundle, tools);
+            let detached = detach_volume(&mount, tools);
+            copied.and_then(|()| detached.map_err(UpdateError::Io))
+        }
+    };
+    // Only an empty folder is removed: never anything on a volume that stayed attached.
+    let _ = std::fs::remove_dir(&mount);
+    outcome?;
+    std::fs::rename(&scratch, &staged)?;
+    Ok(staged.join(bundle.name))
+}
+
+/// Stages this Rust build's release for the system: the Windows zip ([`stage_package`] with [`RS_PACKAGE`]) or the
+/// macOS disk image ([`stage_disk_image`] with [`RS_MAC`], through `tools`). Returns what [`launch_for`] starts from.
+pub fn stage_rust(
+    archive: &Path,
+    work: &Path,
+    layout: &Layout,
+    tools: &dyn DiskImageTools,
+) -> Result<PathBuf, UpdateError> {
+    if layout.system.is_mac() {
+        stage_disk_image(archive, work, &RS_PACKAGE.mac, tools)
+    } else {
+        stage_package(archive, work, &RS_PACKAGE)
+    }
+}
+
 /// Port of `restart_arguments`: the arguments the app was started with, without update commands.
 pub fn restart_arguments(argv: &[String]) -> Vec<String> {
     argv.iter().filter(|a| a.as_str() != "--update-now").cloned().collect()
@@ -644,7 +913,8 @@ pub fn launch_command(
     launch_command_for(staged, app, arguments, own_pid, layout, &ORACLE_PACKAGE)
 }
 
-/// [`launch_command`] for `package` (on Windows its program in the staged folder).
+/// [`launch_command`] for `package`: on Windows its program in the staged folder, on macOS the program of its
+/// staged bundle, started in the folder that holds the bundle.
 pub fn launch_command_for(
     staged: &Path,
     app: &Path,
@@ -662,7 +932,7 @@ pub fn launch_command_for(
     ];
     command.extend(arguments.iter().cloned());
     if layout.system.is_mac() {
-        (staged.join(PROGRAM), command, staged.parent().unwrap_or(staged).to_path_buf())
+        (staged.join(package.mac.program), command, staged.parent().unwrap_or(staged).to_path_buf())
     } else {
         (staged.join(package.program), command, staged.to_path_buf())
     }
@@ -733,7 +1003,8 @@ pub fn place(source: &Path, target: &Path) -> std::io::Result<()> {
     }
 }
 
-fn copy_file(source: &Path, target: &Path) -> std::io::Result<()> {
+/// Port of `shutil.copy2(source, target)`: the bytes and the modification time.
+pub fn copy_file(source: &Path, target: &Path) -> std::io::Result<()> {
     std::fs::copy(source, target)?;
     // shutil.copy2 keeps the modification time.
     if let Ok(modified) = std::fs::metadata(source).and_then(|m| m.modified()) {
@@ -767,6 +1038,8 @@ pub fn copy_tree(source: &Path, target: &Path) -> std::io::Result<()> {
 pub struct Hooks {
     /// Copies a folder to a new place (default [`copy_tree`]).
     pub copy_tree: fn(&Path, &Path) -> std::io::Result<()>,
+    /// Copies a file of the release folder to the program folder (default [`copy_file`]).
+    pub copy_file: fn(&Path, &Path) -> std::io::Result<()>,
     /// Moves a bundle (default [`place`]).
     pub place: fn(&Path, &Path) -> std::io::Result<()>,
     /// The time stamp of the `previous-*` and `failed-*` folders (default: now, local time, `%Y%m%d-%H%M%S`).
@@ -777,7 +1050,7 @@ pub struct Hooks {
 
 impl Default for Hooks {
     fn default() -> Self {
-        Hooks { copy_tree, place, stamp: None, exit_wait: Duration::from_secs(EXIT_WAIT) }
+        Hooks { copy_tree, copy_file, place, stamp: None, exit_wait: Duration::from_secs(EXIT_WAIT) }
     }
 }
 
@@ -794,17 +1067,20 @@ fn reason(error: &std::io::Error) -> String {
     }
 }
 
+/// The macOS swap (port of `_finish_bundle`): the old bundle to `previous-*/`, the staged one into its place; on a
+/// failure what reached the app's place goes to `failed-*/` and the old bundle comes back.
+#[allow(clippy::too_many_arguments)]
 fn finish_bundle(
     app: &Path,
     staged: &Path,
     pid: i64,
     note: &mut dyn FnMut(&str),
-    layout: &Layout,
+    work: &Path,
     hooks: &Hooks,
     stamp: &str,
+    bundle: &MacBundle,
 ) -> String {
-    let work = work_folder(app, layout);
-    if !staged.join(PROGRAM).is_file() {
+    if !staged.join(bundle.program).is_file() {
         return "staged version is incomplete".into();
     }
     if !wait_for_exit(pid, hooks.exit_wait) {
@@ -823,8 +1099,8 @@ fn finish_bundle(
         }
         note(&format!("previous version moved to {}", backup.file_name().unwrap_or_default().to_string_lossy()));
         (hooks.place)(staged, app)?;
-        if !app.join(PROGRAM).is_file() {
-            return Err(std::io::Error::other("Grainy.app is incomplete after the move"));
+        if !app.join(bundle.program).is_file() {
+            return Err(std::io::Error::other(format!("{} is incomplete after the move", bundle.name)));
         }
         note("new version in place");
         Ok(())
@@ -868,8 +1144,12 @@ pub fn finish_with(
     finish_package(app, staged, pid, log, layout, hooks, &ORACLE_PACKAGE)
 }
 
-/// [`finish_with`] for `package`: on Windows only `package.items` of the program folder are moved aside and
-/// replaced, and its program must be in place afterwards.
+/// [`finish_with`] for `package`: on Windows only `package.items` of the program folder are moved aside (those the
+/// folder has: an item new in this release has nothing to move) and replaced, and its program must be in place
+/// afterwards; anything else in the folder, also an item an older release had and this one does not name, is left
+/// alone. On any failure every item copied so far goes to `failed-*` (an added item is removed again) and the
+/// moved ones come back, so the folder is as it was. On macOS `package.mac` is swapped as a whole. The work folder
+/// is [`work_folder_for`].
 pub fn finish_package(
     app: &Path,
     staged: &Path,
@@ -879,7 +1159,7 @@ pub fn finish_package(
     hooks: &Hooks,
     package: &Package,
 ) -> String {
-    let work = work_folder(app, layout);
+    let work = work_folder_for(app, layout, package);
     let stamp = hooks.stamp.clone().unwrap_or_else(|| chrono::Local::now().format("%Y%m%d-%H%M%S").to_string());
     let mut log = log;
     let mut note = |text: &str| {
@@ -889,7 +1169,7 @@ pub fn finish_package(
         }
     };
     if layout.system.is_mac() {
-        return finish_bundle(app, staged, pid, &mut note, layout, hooks, &stamp);
+        return finish_bundle(app, staged, pid, &mut note, &work, hooks, &stamp, &package.mac);
     }
     if !staged.join(package.program).is_file() {
         return "staged version is incomplete".into();
@@ -921,7 +1201,7 @@ pub fn finish_package(
                 (hooks.copy_tree)(&source, &app.join(name))?;
             } else if source.is_file() {
                 copied.push(name);
-                copy_file(&source, &app.join(name))?;
+                (hooks.copy_file)(&source, &app.join(name))?;
             }
         }
         if !app.join(package.program).is_file() {
@@ -957,9 +1237,9 @@ pub fn finish_logged(app: &Path, staged: &Path, pid: i64, layout: &Layout) -> St
     finish_logged_for(app, staged, pid, layout, &ORACLE_PACKAGE)
 }
 
-/// [`finish_logged`] for `package`.
+/// [`finish_logged`] for `package` (its work folder: [`work_folder_for`]).
 pub fn finish_logged_for(app: &Path, staged: &Path, pid: i64, layout: &Layout, package: &Package) -> String {
-    let work = work_folder(app, layout);
+    let work = work_folder_for(app, layout, package);
     let _ = std::fs::create_dir_all(&work);
     match std::fs::OpenOptions::new().create(true).append(true).open(work.join("update.log")) {
         Ok(mut log) => finish_package(app, staged, pid, Some(&mut log), layout, &Hooks::default(), package),
@@ -967,9 +1247,9 @@ pub fn finish_logged_for(app: &Path, staged: &Path, pid: i64, layout: &Layout, p
     }
 }
 
-/// Sends a path to the recycle bin; false when that fails.
+/// Sends a path to the recycle bin (the Trash on macOS); false when that fails ([`crate::recycle::recycle`]).
 pub fn recycle(path: &Path) -> bool {
-    trash::delete(path).is_ok()
+    crate::recycle::recycle(path)
 }
 
 fn resolved(path: &Path) -> PathBuf {
@@ -998,18 +1278,40 @@ fn matching(work: &Path, prefix: &str, directories_only: bool) -> Vec<PathBuf> {
 /// staged copy, downloads, failed attempts, extractions, and all but the newest previous version. Does nothing when
 /// the running program is itself the staged copy (`executable`).
 pub fn cleanup(app: &Path, layout: &Layout, executable: &Path, discard: &mut dyn FnMut(&Path) -> bool) {
-    let work = work_folder(app, layout);
-    if !work.is_dir() || resolved(executable).ancestors().skip(1).any(|p| p == resolved(&work.join("new"))) {
-        return;
+    cleanup_in(&work_folder(app, layout), executable, discard);
+}
+
+/// [`cleanup`] for `package` (its work folder: [`work_folder_for`]). Also removes the empty `mount-*` folders a
+/// disk image staging left (only empty ones, so never anything on a volume still attached).
+pub fn cleanup_for(
+    app: &Path,
+    layout: &Layout,
+    executable: &Path,
+    discard: &mut dyn FnMut(&Path) -> bool,
+    package: &Package,
+) {
+    let work = work_folder_for(app, layout, package);
+    if cleanup_in(&work, executable, discard) {
+        for mount in matching(&work, "mount-", true) {
+            let _ = std::fs::remove_dir(mount);
+        }
     }
-    let previous = matching(&work, "previous-", true);
+}
+
+/// Returns whether it tidied (the work folder exists and the program does not run from its staged copy).
+fn cleanup_in(work: &Path, executable: &Path, discard: &mut dyn FnMut(&Path) -> bool) -> bool {
+    if !work.is_dir() || resolved(executable).ancestors().skip(1).any(|p| p == resolved(&work.join("new"))) {
+        return false;
+    }
+    let previous = matching(work, "previous-", true);
     let mut paths = vec![work.join("new"), work.join("download")];
-    paths.extend(matching(&work, "failed-", false));
-    paths.extend(matching(&work, "extract-", false));
+    paths.extend(matching(work, "failed-", false));
+    paths.extend(matching(work, "extract-", false));
     paths.extend(previous.iter().take(previous.len().saturating_sub(1)).cloned());
     for path in paths {
         if path.exists() {
             let _ = discard(&path);
         }
     }
+    true
 }

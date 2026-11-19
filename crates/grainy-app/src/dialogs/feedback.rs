@@ -5,7 +5,7 @@
 //! The post goes through a [`Transport`]: the program's start installs `crate::network::HttpTransport` (unless the
 //! network is switched off with `--offline` / `GRAINY_OFFLINE=1`); without one it is [`Unavailable`], which fails
 //! with "not available in this build". Tests put a fake in [`FeedbackState::transport`] and read what it would
-//! have sent. The version field carries `grainy_platform::BUILD_VERSION` (`rs-0.1.0`), so the Rust build's
+//! have sent. The version field carries `grainy_platform::BUILD_VERSION` (`rs-0.2.0`), so the Rust build's
 //! messages are told apart; the local record of a sent reference keeps the oracle's version.
 
 use std::sync::{Arc, Mutex};

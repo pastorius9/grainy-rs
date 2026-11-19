@@ -172,17 +172,16 @@ impl ImportCopyDialog {
         };
         let (title, start) = (tr(title), PathBuf::from(start.trim()));
         let (sender, receiver) = channel();
-        let work = move || {
-            let mut dialog = rfd::AsyncFileDialog::new().set_title(&title);
-            if start.is_dir() {
-                dialog = dialog.set_directory(&start);
-            }
-            let chosen = pollster::block_on(dialog.pick_folder());
-            let _ = sender.send(chosen.map(|f| f.path().to_path_buf()));
+        // Started here, on the window's thread; only the answer is awaited elsewhere (`native`).
+        let mut dialog = rfd::AsyncFileDialog::new().set_title(&title);
+        if start.is_dir() {
+            dialog = dialog.set_directory(&start);
+        }
+        let send = move |chosen: Option<rfd::FileHandle>| {
+            let _ = sender.send(chosen.map(super::native::path_of));
         };
-        match std::thread::Builder::new().name("grainy-dialog".into()).spawn(work) {
-            Ok(_) => self.picking = Some((field, receiver)),
-            Err(error) => log::error!("cannot open the folder dialog: {error}"),
+        if super::native::await_answer(dialog.pick_folder(), send) {
+            self.picking = Some((field, receiver));
         }
     }
 

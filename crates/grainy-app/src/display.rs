@@ -14,9 +14,12 @@
 //!
 //! The monitor the window is on (`DisplayTarget.screen_name` and Qt's `screenChanged`): [`watch_window`] runs before
 //! every frame (one hook line in `GrainyApp`'s `eframe::App::ui`); when the window moved, changed size or scale, or
-//! [`SCREEN_CHECK`] passed, it asks grainy-platform for the device name of the window's monitor (a cheap system call
-//! on the window handle, which egui hands over without `unsafe`), and a different name asks for the profile again.
-//! The profile query itself runs on the job, as before.
+//! [`SCREEN_CHECK`] passed, it asks grainy-platform for the name of the window's monitor, and a different name asks
+//! for the profile again. Windows: the device name of the monitor of the window handle (a cheap system call on the
+//! handle, which egui hands over without `unsafe`). macOS: `'Name (id)'` of the CoreGraphics display under the
+//! window, found from the window's place and its monitor's size (egui's points times the zoom factor are the
+//! system's points, in CoreGraphics' global display space), as the oracle names a macOS screen for
+//! `mac_profile_data`. The profile query itself runs on the job, as before.
 
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -62,9 +65,9 @@ const LIGHTS_OUT: Color32 = UNKNOWN_BACKGROUND;
 pub type System = Arc<dyn SystemProfiles + Send + Sync>;
 
 /// The real system lookups: on Windows `GetICMProfileW` of the screen's display context
-/// (`grainy_platform::monitor::windows_profile_path`, the oracle's `windows_profile_path`); on other systems the
-/// system default (sRGB), as the oracle does for a screen it cannot name (macOS's `CGDisplayCopyColorSpace` is not
-/// ported). A manual profile works everywhere.
+/// (`grainy_platform::monitor::windows_profile_path`, the oracle's `windows_profile_path`); on macOS the ICC data
+/// ColorSync gives the display (`grainy_platform::monitor::mac_profile_data`: `CGDisplayCopyColorSpace`,
+/// `CGColorSpaceCopyICCData`); elsewhere the system default (sRGB). A manual profile works everywhere.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct OsProfiles;
 
@@ -77,8 +80,8 @@ impl SystemProfiles for OsProfiles {
         grainy_platform::monitor::windows_profile_path(screen)
     }
 
-    fn mac_profile_data(&self, _screen: &str) -> Result<Option<Vec<u8>>, String> {
-        Ok(None)
+    fn mac_profile_data(&self, screen: &str) -> Result<Option<Vec<u8>>, String> {
+        grainy_platform::monitor::mac_profile_data(screen)
     }
 }
 
@@ -293,13 +296,35 @@ fn window_place(ctx: &eframe::egui::Context) -> [u32; 7] {
     })
 }
 
-/// The window's native handle as a number (a Windows `HWND`), `None` where the toolkit gives none (tests).
-fn native_handle(frame: &eframe::Frame) -> Option<isize> {
+/// The window toolkit's native window, as far as the monitor lookup needs it.
+enum Native {
+    /// A Windows window: its `HWND` as a number.
+    Windows(isize),
+    /// A macOS window (looked up by its place).
+    Mac,
+}
+
+/// The window's native window, `None` where the toolkit gives none (tests) or on other systems.
+fn native_window(frame: &eframe::Frame) -> Option<Native> {
     use raw_window_handle::{HasWindowHandle, RawWindowHandle};
     match frame.window_handle().ok()?.as_raw() {
-        RawWindowHandle::Win32(handle) => Some(handle.hwnd.get()),
+        RawWindowHandle::Win32(handle) => Some(Native::Windows(handle.hwnd.get())),
+        RawWindowHandle::AppKit(_) => Some(Native::Mac),
         _ => None,
     }
+}
+
+/// The window's outer rectangle `[left, top, right, bottom]` and its monitor's size in the system's points: egui's
+/// points times the zoom factor (egui divides the system's pixels by the scale and the zoom).
+pub fn system_place(ctx: &eframe::egui::Context) -> Option<([f64; 4], Option<[f64; 2]>)> {
+    let zoom = f64::from(ctx.zoom_factor());
+    ctx.input(|i| {
+        let viewport = i.viewport();
+        let rect = viewport.outer_rect?;
+        let window = [rect.min.x, rect.min.y, rect.max.x, rect.max.y].map(|v| f64::from(v) * zoom);
+        let monitor = viewport.monitor_size.map(|size| [f64::from(size.x) * zoom, f64::from(size.y) * zoom]);
+        Some((window, monitor))
+    })
 }
 
 /// Before every frame: the monitor the window is on, looked up when the window moved (or every [`SCREEN_CHECK`]);
@@ -310,10 +335,17 @@ pub fn watch_window(cx: &mut AppContext, frame: &eframe::Frame) {
     if !cx.state::<ScreenWatch>().due(place, Instant::now()) {
         return;
     }
-    let Some(handle) = native_handle(frame) else {
-        return;
+    let screen = match native_window(frame) {
+        Some(Native::Windows(handle)) => grainy_platform::monitor::screen_of_window(handle).unwrap_or_default(),
+        Some(Native::Mac) => match system_place(&cx.egui) {
+            Some((window, monitor)) => {
+                grainy_platform::monitor::mac_screen_of_window(window, monitor).unwrap_or_default()
+            }
+            // Not placed yet (or minimised): asked again when the window moves.
+            None => return,
+        },
+        None => return,
     };
-    let screen = grainy_platform::monitor::screen_of_window(handle).unwrap_or_default();
     cx.state::<DisplayState>().screen_seen(&screen);
 }
 

@@ -325,11 +325,14 @@ impl McpDialog {
                 let start = view.export_folder.clone();
                 let (tx, rx) = channel();
                 let title = tr("AI 내보내기 폴더");
-                std::thread::spawn(move || {
-                    let chosen = rfd::FileDialog::new().set_title(title).set_directory(start).pick_folder();
-                    let _ = tx.send(chosen);
-                });
-                self.chooser = Some(rx);
+                // Started here, on the window's thread; only the answer is awaited elsewhere (`native`).
+                let answer = rfd::AsyncFileDialog::new().set_title(title).set_directory(start).pick_folder();
+                let send = move |chosen: Option<rfd::FileHandle>| {
+                    let _ = tx.send(chosen.map(super::native::path_of));
+                };
+                if super::native::await_answer(answer, send) {
+                    self.chooser = Some(rx);
+                }
             }
             Some("undo") => self.undo_message = crate::commands::ai::undo_last(cx),
             Some("show") => self.state.key_visible = !self.state.key_visible,

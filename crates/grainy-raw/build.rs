@@ -61,7 +61,11 @@ fn main() {
     };
     // Only these measured, independently tiled paths enable OpenMP. In particular,
     // xtrans_demosaic.cpp has no parallel regions, independent of OMP_NUM_THREADS.
-    // Other platforms retain the serial build until their toolchains are verified.
+    // Other platforms retain the serial build until their toolchains are verified: on macOS
+    // Apple's clang has no OpenMP (Homebrew's libomp is never used), so every file is compiled
+    // without `-fopenmp`, `_OPENMP` stays undefined and LibRaw takes its serial path, which
+    // gives the same pixels. Everything here follows the target (`CARGO_CFG_*`), never the host,
+    // so a cross build for the other Mac architecture uses the same flags.
     let msvc = env::var("CARGO_CFG_TARGET_ENV").as_deref() == Ok("msvc");
     let parallel_names = ["ahd_demosaic.cpp", "crx.cpp", "fuji_compressed.cpp"];
     let (parallel, serial): (Vec<_>, Vec<_>) = sources(&raw.join("src"), "cpp", true)

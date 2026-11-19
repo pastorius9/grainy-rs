@@ -115,7 +115,7 @@ fn cleanup(cx: &mut AppContext) {
     let layout = updater::Layout::current();
     let exe = executable(cx);
     if let Some(app) = updater::app_folder(&exe, &layout) {
-        updater::cleanup(&app, &layout, &exe, &mut |path| updater::recycle(path));
+        updater::cleanup_for(&app, &layout, &exe, &mut |path| updater::recycle(path), &updater::RS_PACKAGE);
     }
 }
 
@@ -234,7 +234,7 @@ pub fn install(cx: &mut AppContext, release: Release) {
         fail(cx, tr("업데이트할 수 있는 설치본이 아닙니다."));
         return;
     };
-    let work = updater::work_folder(&app, &layout);
+    let work = updater::work_folder_for(&app, &layout, &updater::RS_PACKAGE);
     let backend: Arc<dyn Backend> = cx.state::<UpdateEnv>().backend.clone().unwrap_or_else(|| Arc::new(Unavailable));
     let arguments = cx
         .state::<UpdateEnv>()

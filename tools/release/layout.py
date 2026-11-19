@@ -48,3 +48,7 @@ def rs_items() -> list[str]:
 
 def zip_name(v: str | None = None) -> str:
     return f'GrainyRS-{v or version()}-windows-x64.zip'
+
+
+def dmg_name(v: str | None = None) -> str:
+    return f'GrainyRS-{v or version()}-macos-universal.dmg'

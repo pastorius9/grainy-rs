@@ -153,7 +153,9 @@ pub fn resolve(mode: &str, screen: &str, path: &str, system: &dyn SystemProfiles
     let attempt = (|| -> Result<DisplayProfile> {
         if mode == "auto" && system.is_mac() {
             selected.clear();
-            if let Some(data) = system.mac_profile_data(screen).map_err(CmsError::System)? {
+            // `if system:` — empty bytes are no profile either.
+            let system_data = system.mac_profile_data(screen).map_err(CmsError::System)?;
+            if let Some(data) = system_data.filter(|data| !data.is_empty()) {
                 let found = checked(&data, "")?;
                 let display = screen.rsplit_once(" (").map_or(screen, |(head, _)| head);
                 return Ok(DisplayProfile {

@@ -17,6 +17,8 @@ trash.workspace = true
 sysinfo.workspace = true
 fs4.workspace = true
 chrono.workspace = true
+# Already in the workspace (grainy-adobe, MIT/Apache-2.0): the XML `Info.plist` of a staged macOS bundle.
+roxmltree.workspace = true
 # The HTTP client of feedback and updates (feature `http`, the application turns it on): ureq with the operating
 # system's TLS (native-tls: SChannel on Windows, Security.framework on macOS), MIT/Apache-2.0 throughout.
 ureq = { version = "2.12", default-features = false, features = ["native-tls"], optional = true }

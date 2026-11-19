@@ -8,9 +8,9 @@ same edits and the same pixels as Grainy 0.6.8. This is an EARLY RELEASE: the Py
 Start
 -----
 Unzip the whole GrainyRS folder anywhere (for example into your Documents folder) and double-click
-GrainyRS.exe. No installation is needed. Windows may warn about an unknown publisher the first time.
-If Windows reports that VCOMP140.dll or VCRUNTIME140.dll is missing, install the Microsoft Visual C++
-Redistributable for Visual Studio 2015-2022 (x64) from Microsoft and start again.
+GrainyRS.exe. No installation is needed (the Visual C++ Redistributable is not needed either: the one
+Microsoft file the program uses, vcomp140.dll, is in the folder). Windows may warn about an unknown
+publisher the first time. Keep all the files of the folder together.
 
 grainy-cli.exe renders a photo from the command line with the same pixels as an export:
     grainy-cli.exe render photo.jpg -o out.jpg --settings settings.json

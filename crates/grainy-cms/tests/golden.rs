@@ -407,6 +407,10 @@ fn display_resolve_cases() {
         let data = got.data.as_ref().map(|p| sha256_hex(p.bytes()));
         assert_eq!(data.as_deref(), want["data_sha256"].as_str(), "{key} data");
     }
+    // Empty data from the system is no profile (the oracle's `if system:` on `b''`): as without data.
+    let empty = display::resolve("auto", "Studio Display (2)", "", &mac(Some(Vec::new())));
+    let none = display::resolve("auto", "Studio Display (2)", "", &mac(None));
+    assert_eq!((empty.message, empty.error, empty.digest), (none.message, none.error, none.digest));
     let _ = std::fs::remove_dir_all(&dir);
 }
 

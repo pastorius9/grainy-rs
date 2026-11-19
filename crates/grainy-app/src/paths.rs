@@ -12,6 +12,7 @@
 
 use std::path::{Component, Path, PathBuf};
 
+use grainy_catalog::folders::Platform;
 use grainy_platform::{Environment, System};
 
 /// The folder name of the Rust app's data.
@@ -77,7 +78,9 @@ impl Locations {
     }
 }
 
-/// The path with `.` and `..` resolved lexically and, on Windows, compared without case.
+/// The path with `.` and `..` resolved lexically and compared as the system's file system compares names: on
+/// Windows without case, on macOS (APFS, HFS+) without case and Unicode composition (NFC and lower case, the
+/// oracle's `folders.path_key` there), elsewhere exactly.
 fn key(path: &Path, system: System) -> Vec<String> {
     let absolute = std::path::absolute(path).unwrap_or_else(|_| path.to_path_buf());
     let mut parts: Vec<String> = Vec::new();
@@ -90,7 +93,11 @@ fn key(path: &Path, system: System) -> Vec<String> {
             other => {
                 let text = other.as_os_str().to_string_lossy().replace('/', "\\");
                 let text = text.trim_end_matches('\\').to_owned();
-                parts.push(if system == System::Windows { text.to_lowercase() } else { text });
+                parts.push(match system {
+                    System::Windows => text.to_lowercase(),
+                    System::MacOs => Platform::Mac.stored_path(&text).to_lowercase(),
+                    System::Other => text,
+                });
             }
         }
     }
@@ -256,6 +263,39 @@ mod tests {
         ] {
             assert!(!is_oracle_folder(Path::new(path), &w), "{path}");
         }
+    }
+
+    /// macOS names its folders without case or Unicode composition: the Python Grainy's folder is recognised however
+    /// a path spells it (the paths are only compared, never looked at on disk).
+    #[test]
+    fn the_python_grainys_folder_is_recognised_on_macos_in_any_case_and_composition() {
+        let mac = Locations {
+            env: Environment { system: System::MacOs, local_app_data: None, home: PathBuf::from("/Users/kim") },
+            home_override: None,
+            xdg_data_home: None,
+        };
+        for path in [
+            "/Users/kim/Library/Application Support/Grainy",
+            "/Users/kim/Library/Application Support/Grainy/Library/catalog.sqlite",
+            "/users/KIM/library/application support/GRAINY/mcp",
+            "/Users/kim/Library/Application Support/GrainyRS/../Grainy/x",
+        ] {
+            assert!(is_oracle_folder(Path::new(path), &mac), "{path}");
+        }
+        for path in
+            ["/Users/kim/Library/Application Support/GrainyRS/Library", "/Users/kim/Pictures/Grainy", "/Volumes/x"]
+        {
+            assert!(!is_oracle_folder(Path::new(path), &mac), "{path}");
+        }
+        // A user folder written decomposed (as Finder may) is the composed one.
+        let composed = Locations {
+            env: Environment { system: System::MacOs, local_app_data: None, home: PathBuf::from("/Users/\u{d55c}") },
+            ..mac
+        };
+        assert!(is_oracle_folder(
+            Path::new("/Users/\u{1112}\u{1161}\u{11ab}/Library/Application Support/Grainy"),
+            &composed
+        ));
     }
 
     #[test]

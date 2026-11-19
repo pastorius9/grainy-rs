@@ -14,7 +14,7 @@ use std::time::Duration;
 use eframe::egui;
 use grainy_library::Cancel;
 
-use super::Dialog;
+use super::{native, Dialog};
 use crate::context::AppContext;
 use crate::text::tr;
 use crate::theme as t;
@@ -170,27 +170,27 @@ impl PathWait {
         then: impl FnOnce(&mut AppContext, PathBuf) + 'static,
     ) -> Self {
         let (sender, receiver) = channel();
-        let work = move || {
-            let mut dialog = rfd::AsyncFileDialog::new().set_title(&title);
-            if let Some(start) = start.filter(|s| s.is_dir()) {
-                dialog = dialog.set_directory(start);
-            }
-            let chosen = match pick {
-                Pick::Open(filter) => {
-                    if let Some((label, extensions)) = filter {
-                        dialog = dialog.add_filter(label, &extensions);
-                    }
-                    pollster::block_on(dialog.pick_file())
-                }
-                Pick::Save(name, (label, extensions)) => {
-                    pollster::block_on(dialog.add_filter(label, &extensions).set_file_name(name).save_file())
-                }
-                Pick::Folder => pollster::block_on(dialog.pick_folder()),
-            };
-            let _ = sender.send(chosen.map(|f| f.path().to_path_buf()));
+        // Started here, on the window's thread; only the answer is awaited elsewhere (`native`).
+        let mut dialog = rfd::AsyncFileDialog::new().set_title(&title);
+        if let Some(start) = start.filter(|s| s.is_dir()) {
+            dialog = dialog.set_directory(start);
+        }
+        let send = move |chosen: Option<rfd::FileHandle>| {
+            let _ = sender.send(chosen.map(native::path_of));
         };
-        if let Err(error) = std::thread::Builder::new().name("grainy-dialog".into()).spawn(work) {
-            log::error!("cannot open the file dialog: {error}");
+        match pick {
+            Pick::Open(filter) => {
+                if let Some((label, extensions)) = filter {
+                    dialog = dialog.add_filter(label, &extensions);
+                }
+                native::await_answer(dialog.pick_file(), send);
+            }
+            Pick::Save(name, (label, extensions)) => {
+                native::await_answer(dialog.add_filter(label, &extensions).set_file_name(name).save_file(), send);
+            }
+            Pick::Folder => {
+                native::await_answer(dialog.pick_folder(), send);
+            }
         }
         Self { receiver, then: Some(Box::new(then)) }
     }

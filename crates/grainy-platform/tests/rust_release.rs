@@ -1,5 +1,6 @@
-//! The update rule of the Rust build (HANDOFF2 A): only a release file marked `GrainyRS-` qualifies, never the
-//! Python Grainy's `Grainy-` files. Synthetic feeds only; nothing touches the network.
+//! The update rule of the Rust build (HANDOFF2 A, HANDOFF4): only a release file marked `GrainyRS-` qualifies (the
+//! Windows zip, the macOS universal disk image), never the Python Grainy's `Grainy-` files. Synthetic feeds only;
+//! nothing touches the network.
 
 use std::path::PathBuf;
 
@@ -54,7 +55,7 @@ fn the_python_grainys_files_never_qualify() {
 #[test]
 fn a_marked_file_qualifies_beside_the_python_files() {
     let mut assets = vec![asset("Grainy-0.7.0-windows-x64.zip", 100, 'a')];
-    assets.push(asset("GrainyRS-0.7.0-macos-arm64.zip", 300, 'c'));
+    assets.push(asset("GrainyRS-0.7.0-macos-universal.dmg", 300, 'c'));
     assets.push(asset("GrainyRS-0.7.0-windows-x64.zip", 200, 'b'));
     let payload = feed(&assets);
     let windows = layout(System::Windows, "AMD64");
@@ -65,7 +66,7 @@ fn a_marked_file_qualifies_beside_the_python_files() {
     assert_eq!(release.sha256, "b".repeat(64));
     assert!(updater::is_rust_release(&release, &windows));
     let mac = layout(System::MacOs, "arm64");
-    assert_eq!(updater::parse_rust_release(&payload, None, &mac).unwrap().name, "GrainyRS-0.7.0-macos-arm64.zip");
+    assert_eq!(updater::parse_rust_release(&payload, None, &mac).unwrap().name, "GrainyRS-0.7.0-macos-universal.dmg");
     // The Python rule never takes the marked file.
     assert_eq!(updater::parse_release(&payload, None, &windows).unwrap().name, "Grainy-0.7.0-windows-x64.zip");
 }
@@ -144,4 +145,92 @@ fn a_python_release_is_not_a_rust_release() {
     assert!(!updater::is_rust_release(&release("GrainyRS-0.7.0-windows-x64.zip", "0.7.1"), &windows));
     assert!(!updater::is_rust_release(&release("GrainyRS-0.7.0-macos-arm64.zip", "0.7.0"), &windows));
     assert!(updater::is_rust_release(&release("GrainyRS-0.7.0-windows-x64.zip", "0.7.0"), &windows));
+}
+
+// ---- macOS: one universal disk image ---------------------------------------------------------------------------
+
+/// The shape of the 0.2.0 release: the Rust build's two files beside the Python Grainy's three.
+fn mixed_feed(version: &str) -> Value {
+    feed(&[
+        asset(&format!("Grainy-{version}-macos-arm64.dmg"), 105, 'd'),
+        asset(&format!("Grainy-{version}-macos-arm64.zip"), 92, 'c'),
+        asset(&format!("Grainy-{version}-windows-x64.zip"), 129, '0'),
+        asset(&format!("GrainyRS-{version}-macos-arm64.zip"), 7, '7'),
+        asset(&format!("GrainyRS-{version}-windows-x64.zip"), 22, 'a'),
+        asset(&format!("GrainyRS-{version}-macos-universal.dmg"), 31, 'b'),
+    ])
+}
+
+#[test]
+fn a_mac_takes_the_universal_disk_image_on_either_processor() {
+    let payload = mixed_feed("0.2.0");
+    for machine in ["arm64", "x86_64"] {
+        let mac = layout(System::MacOs, machine);
+        assert_eq!(updater::rust_asset_pattern(&mac).tail(), "-macos-universal.dmg");
+        let release = updater::parse_rust_release(&payload, Some(updater::RS_DOWNLOADS), &mac).unwrap();
+        assert_eq!(release.name, "GrainyRS-0.2.0-macos-universal.dmg");
+        assert_eq!(release.version, "0.2.0");
+        assert_eq!((release.size, release.sha256.as_str()), (31, "b".repeat(64).as_str()));
+        assert_eq!(release.url, format!("{}v1/GrainyRS-0.2.0-macos-universal.dmg", updater::RS_DOWNLOADS));
+        assert!(updater::is_rust_release(&release, &mac));
+        // Windows takes its zip from the same feed, never the disk image.
+        assert!(!updater::is_rust_release(&release, &layout(System::Windows, "AMD64")));
+    }
+    let windows = layout(System::Windows, "AMD64");
+    assert_eq!(
+        updater::parse_rust_release(&payload, Some(updater::RS_DOWNLOADS), &windows).unwrap().name,
+        "GrainyRS-0.2.0-windows-x64.zip"
+    );
+}
+
+#[test]
+fn a_mac_never_takes_a_python_file_or_a_zip() {
+    let mac = layout(System::MacOs, "arm64");
+    let take = |assets: &[String]| updater::parse_rust_release(&feed(assets), Some(updater::RS_DOWNLOADS), &mac);
+    // The Python Grainy's macOS zip and disk image, the old per-processor zip shape, the Windows zip.
+    assert_eq!(take(&[asset("Grainy-0.7.0-macos-arm64.zip", 5, 'a')]), None);
+    assert_eq!(take(&[asset("Grainy-0.7.0-macos-arm64.dmg", 5, 'a')]), None);
+    assert_eq!(take(&[asset("Grainy-0.7.0-macos-universal.dmg", 5, 'a')]), None);
+    assert_eq!(take(&[asset("GrainyRS-0.7.0-macos-arm64.zip", 5, 'a')]), None);
+    assert_eq!(take(&[asset("GrainyRS-0.7.0-macos-x64.zip", 5, 'a')]), None);
+    assert_eq!(take(&[asset("GrainyRS-0.7.0-windows-x64.zip", 5, 'a')]), None);
+    assert_eq!(take(&[asset("GrainyRS-0.7.0-macos-universal.dmg.zip", 5, 'a')]), None);
+    // The oracle's other conditions: a size, GitHub's digest, the repository's address, a released version.
+    assert_eq!(take(&[asset("GrainyRS-0.7.0-macos-universal.dmg", 0, 'a')]), None);
+    assert_eq!(take(&[asset("GrainyRS-0.7.0-macos-universal.dmg", 5, 'A')]), None);
+    let foreign =
+        asset("GrainyRS-0.7.0-macos-universal.dmg", 5, 'a').replace(updater::RS_DOWNLOADS, "https://example.invalid/");
+    assert_eq!(take(&[foreign]), None);
+    let python_project =
+        asset("GrainyRS-0.7.0-macos-universal.dmg", 5, 'a').replace(updater::RS_DOWNLOADS, updater::ORACLE_DOWNLOADS);
+    assert_eq!(take(std::slice::from_ref(&python_project)), None);
+    for flag in ["draft", "prerelease"] {
+        let text =
+            format!(r#"{{"{flag}": true, "assets": [{}]}}"#, asset("GrainyRS-0.7.0-macos-universal.dmg", 5, 'a'));
+        assert_eq!(updater::parse_rust_release(&Value::parse(&text).unwrap(), None, &mac), None, "{flag}");
+    }
+    // A feed override cannot relax the address rule on macOS either.
+    let text = feed(&[python_project]).dump(None, false);
+    let open = |_: &str| -> std::io::Result<Box<dyn std::io::Read>> {
+        Ok(Box::new(std::io::Cursor::new(text.clone().into_bytes())))
+    };
+    assert!(updater::latest_rust(&open, Some("https://example.invalid/feed"), &mac).unwrap().is_none());
+    // The Python Grainy's rule on a Mac never takes the Rust build's disk image.
+    assert_eq!(updater::parse_release(&mixed_feed("0.2.0"), None, &mac).unwrap().name, "Grainy-0.2.0-macos-arm64.zip");
+}
+
+#[test]
+fn the_mac_check_reads_the_rust_feed_through_the_opener() {
+    let mac = layout(System::MacOs, "x86_64");
+    let text = mixed_feed("0.2.0").dump(None, false);
+    let asked = std::sync::Mutex::new(Vec::new());
+    let open = |url: &str| -> std::io::Result<Box<dyn std::io::Read>> {
+        asked.lock().unwrap().push(url.to_string());
+        Ok(Box::new(std::io::Cursor::new(text.clone().into_bytes())))
+    };
+    let release = updater::latest_rust(&open, None, &mac).unwrap().unwrap();
+    assert_eq!(*asked.lock().unwrap(), [updater::RS_FEED]);
+    assert_eq!(release.name, "GrainyRS-0.2.0-macos-universal.dmg");
+    assert!(updater::newer(&release.version, "0.1.0"));
+    assert!(!updater::newer(&release.version, grainy_platform::RS_VERSION), "0.2.0 offers 0.2.0 to nobody");
 }

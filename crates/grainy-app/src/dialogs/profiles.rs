@@ -732,15 +732,14 @@ impl ProfileDialog {
     fn add_folder(&mut self) {
         let (sender, receiver) = channel();
         let title = tr("DCP 프로파일이 있는 폴더");
-        let work = move || {
-            let chosen = pollster::block_on(rfd::AsyncFileDialog::new().set_title(&title).pick_folder());
-            let _ = sender.send(chosen.map(|f| f.path().to_path_buf()));
+        // Started here, on the window's thread; only the answer is awaited elsewhere (`native`).
+        let answer = rfd::AsyncFileDialog::new().set_title(&title).pick_folder();
+        let send = move |chosen: Option<rfd::FileHandle>| {
+            let _ = sender.send(chosen.map(super::native::path_of));
         };
-        if let Err(error) = std::thread::Builder::new().name("grainy-dialog".into()).spawn(work) {
-            log::error!("cannot open the folder dialog: {error}");
-            return;
+        if super::native::await_answer(answer, send) {
+            self.folder = Some(receiver);
         }
-        self.folder = Some(receiver);
     }
 
     /// A folder chosen in 프로파일 폴더 추가 (or by a test): stored in `dcp_folders`, then searched.

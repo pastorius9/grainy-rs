@@ -113,7 +113,9 @@ impl HostSystem {
     }
 }
 
+#[cfg(windows)]
 const CREATE_NO_WINDOW: u32 = 0x0800_0000;
+#[cfg(windows)]
 const CREATE_NEW_CONSOLE: u32 = 0x0000_0010;
 
 fn command(launch: &Launch) -> std::io::Result<std::process::Command> {
@@ -282,12 +284,13 @@ impl System for HostSystem {
         if require_online().is_err() {
             return false;
         }
-        let (program, args): (&str, Vec<&str>) = match self.os() {
-            Os::Windows => ("rundll32", vec!["url.dll,FileProtocolHandler", url]),
-            Os::MacOs => ("open", vec![url]),
-            Os::Other => ("xdg-open", vec![url]),
+        let system = match self.os() {
+            Os::Windows => grainy_platform::System::Windows,
+            Os::MacOs => grainy_platform::System::MacOs,
+            Os::Other => grainy_platform::System::Other,
         };
-        std::process::Command::new(program).args(args).spawn().is_ok()
+        let (program, args) = crate::system_open::command(system, crate::system_open::Target::Document, url);
+        crate::system_open::run(program, &args).is_ok()
     }
 }
 

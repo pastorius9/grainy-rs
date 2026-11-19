@@ -120,7 +120,10 @@ build" (`startup::unavailable`); the real ones (`network.rs`, on `grainy_platfor
 TLS) are installed only by `GrainyApp::from_arguments`, at the program's start. Updates read only the Rust build's
 own repository (`updater::RS_FEED`, `pastorius9/grainy-rs`), never the Python Grainy's (`ORACLE_*`, goldens only),
 and compare with the Rust version (`grainy_platform::RS_VERSION`, the crate version; `APP_VERSION` 0.6.8 is kept
-only for data shared with the Python Grainy). The whole rule is in `docs/STATUS.md` ("Packaging: update rule").
+only for data shared with the Python Grainy). Windows swaps the release files of the program folder
+(`updater::RS_ITEMS`); macOS swaps the whole `Grainy RS.app`, staged from the release's disk image
+(`updater::stage_disk_image`: `hdiutil` and `ditto` behind `updater::DiskImageTools`, which tests fake). The whole
+rule is in `docs/STATUS.md` ("Packaging: update rule").
 
 **The switch: `--offline` or `GRAINY_OFFLINE=1`** (any value except empty and `0`) turns every network use off:
 nothing is installed and `grainy_platform::net` refuses every request before opening a connection. The real AI
@@ -129,6 +132,33 @@ binders remain usable by tests. HTTPS is required for both requests and redirect
 use it (`cargo run -p grainy-app -- --offline`). The tests' helpers (`common::language_lock`, `common::temp_dir`)
 switch it on for the whole test process; tests use fake transports, fake address readers and fake launchers
 (`tests/network.rs`) and never start an installer.
+
+## Per system (Windows, macOS)
+
+Code that differs per system keeps the system call small and behind `cfg`, and the logic in plain functions that
+take the system as a parameter, so Windows tests cover the macOS branch too (`paths::Locations`, `system_open`,
+`grainy_platform::monitor`, `ai::system::Os`).
+
+* **Data**: `paths::Locations::data_folder()`: `%LOCALAPPDATA%\GrainyRS`, macOS
+  `~/Library/Application Support/GrainyRS` (never the Python Grainy's `.../Grainy`, which `is_oracle_folder`
+  compares without case and Unicode composition there). Library, settings, crash marker, MCP bridges (`mcp/`),
+  sign-in and install scripts (`ai-login/`, `ai-install/`) all live in it; the log goes to standard error.
+* **Trash**: `grainy_platform::recycle` (`updater::recycle`): the recycle bin, on macOS the Trash through
+  `NSFileManager` (no Finder automation, no permission prompt). Nothing is deleted for good.
+* **Opening**: `system_open`: folders in Explorer / Finder, files and addresses with their default program
+  (`rundll32` / `/usr/bin/open`); the menu words follow the system (탐색기에서 열기 / Finder에서 열기).
+* **File dialogs**: `dialogs::native`: one pattern for every `rfd` dialog: start it on the window's thread, wait for
+  its answer on a helper thread (`await_answer`). macOS shows panels only from the main thread, as a sheet answered
+  through the main run loop, so the window thread never blocks on one.
+* **Monitor profile**: `display::watch_window`: Windows asks for the device name of the window's monitor, macOS for
+  the CoreGraphics display under the window (egui's place × zoom = the system's points), named `'Name (id)'`;
+  the profile itself is the system's file (Windows) or ICC data (macOS) through `grainy_platform::monitor`.
+* **Menus, keys**: eframe/winit give macOS its application menu (About, Services, Hide, Hide Others, Show All,
+  Quit ⌘Q, named after the bundle). Quit ends the event loop, which runs `on_exit` exactly as closing the window
+  does. Shortcuts match `Modifiers::command` (⌘ on macOS) and their texts are written with ⌘ there
+  (`grainy_i18n::keys`). A trackpad scroll pans the photo on macOS (`view::trackpad_pan`), pinching zooms.
+* **Fonts**: Malgun Gothic (Windows) or Apple SD Gothic Neo by weight (macOS, `fonts::face_weights`); the AI
+  contact sheets' captions use Pillow's font search and, where nothing is found (macOS), Pillow's built-in font.
 
 ## Tests
 

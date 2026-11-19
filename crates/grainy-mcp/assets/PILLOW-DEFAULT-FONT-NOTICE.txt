@@ -1,0 +1,31 @@
+pillow-default-font.ttf
+
+The caption font of the contact sheets when the system has none of the fonts the Python Grainy looks for (on macOS,
+usually): Pillow's built-in font, which `ImageFont.load_default(size)` decodes in Pillow 12.3.0
+(`PIL/ImageFont.py`). The bytes are copied unchanged from there (12,676 bytes, SHA-256
+69853909b940023570964e29cffe30da95aea8de3627736b5cd15ab30143169f; tools/golden/gen_mcp_builtin_font.py checks
+them against the installed Pillow).
+
+The font is a subset of Aileron Regular by Sora Sagano, <http://www.dotcolon.net>, version 1.102. Its copyright
+notice reads "No Rights Reserved." (Aileron is published as public domain, Creative Commons CC0 1.0 Universal,
+<https://creativecommons.org/publicdomain/zero/1.0/>).
+
+The subset is distributed with Pillow, which is licensed under the MIT-CMU licence:
+
+    The Python Imaging Library (PIL) is
+        Copyright © 1997-2011 by Secret Labs AB
+        Copyright © 1995-2011 by Fredrik Lundh and contributors
+    Pillow is the friendly PIL fork. It is
+        Copyright © 2010 by Jeffrey 'Alex' Clark and contributors
+
+    Permission to use, copy, modify and distribute this software and its documentation for any purpose and
+    without fee is hereby granted, provided that the above copyright notice appears in all copies, and that both
+    that copyright notice and this permission notice appear in supporting documentation, and that the name of
+    Secret Labs AB or the author not be used in advertising or publicity pertaining to distribution of the
+    software without specific, written prior permission.
+
+    SECRET LABS AB AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING ALL IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL SECRET LABS AB OR THE AUTHOR BE LIABLE FOR ANY
+    SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+    PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+    CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.

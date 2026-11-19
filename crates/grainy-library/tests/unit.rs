@@ -68,8 +68,10 @@ fn identity_survives_a_rename_and_files_have_none() {
     std::fs::write(dir.path().join("f.txt"), b"x").unwrap();
     let before = directory_identity(&folder).expect("a folder has an identity");
     assert!(before[0] != 0 || before[1] != 0);
-    if cfg!(any(windows, target_os = "macos")) {
+    if cfg!(windows) {
         assert!(before[2] > 0, "creation time in ns");
+    } else {
+        assert_eq!(before[2], 0, "the oracle has no st_birthtime_ns outside Windows");
     }
     let renamed = dir.path().join("b");
     std::fs::rename(&folder, &renamed).unwrap();

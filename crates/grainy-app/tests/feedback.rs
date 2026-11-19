@@ -220,7 +220,7 @@ fn the_feedback_window_follows_the_oracle() {
         let texts = &run["texts"];
         assert_eq!(model.system(), text(&texts["system"]));
         let labels = texts["labels"].as_array().unwrap();
-        // The Rust build names itself in what it sends (`rs-0.1.0`); otherwise the oracle's note.
+        // The Rust build names itself in what it sends (`rs-0.2.0`); otherwise the oracle's note.
         let note = text(&labels[1]).replace(grainy_platform::APP_VERSION, grainy_platform::BUILD_VERSION);
         assert_eq!(model.note(), note);
         assert_eq!(grainy_i18n::tr("피드백 보내기"), text(&texts["title"]));

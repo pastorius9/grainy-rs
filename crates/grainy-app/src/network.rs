@@ -6,8 +6,10 @@
 //! * [`http_opener`] (`commands::settings::UpdateOpener`): one GET of the Rust build's own release feed
 //!   (`updater::RS_FEED`, repository `pastorius9/grainy-rs`; the Python Grainy's feed is never read).
 //! * [`NetworkBackend`] (`dialogs::update::Backend`): the download of a release, checked against its size and
-//!   SHA-256, unpacked, and the start of the new version's installer step. It refuses any release that is not
-//!   this Rust build's ([`updater::RUST_MARKER`]), so a Python Grainy installer is never downloaded or started.
+//!   SHA-256, staged (Windows: the zip unpacked; macOS: the disk image attached read-only and its `Grainy RS.app`
+//!   checked and copied, `updater::stage_disk_image`), and the start of the new version's installer step. It
+//!   refuses any release that is not this Rust build's file for this system ([`updater::RUST_MARKER`]), so a Python
+//!   Grainy installer is never downloaded or started.
 //!
 //! **The switch.** `--offline` or `GRAINY_OFFLINE=1` (any value except empty and `0`) switches every network use
 //! of the program off: [`install`] then installs nothing (the package 31 defaults answer "not available"), and
@@ -15,8 +17,8 @@
 //! ([`crate::GrainyApp::from_arguments`]) calls [`install`]; tests never do, so a test can reach the network only
 //! by building one of these types itself, and while the switch is on even that opens nothing.
 //!
-//! `--finish-update` ([`run_finish`]): the new version, started from its staged folder, replaces the old one
-//! after it closed (luma/updater.py `run_finish`, without its progress window).
+//! `--finish-update` ([`run_finish`]): the new version, started from its staged folder (on macOS its staged
+//! bundle), replaces the old one after it closed (luma/updater.py `run_finish`, without its progress window).
 
 use std::io::Read;
 use std::path::{Path, PathBuf};
@@ -100,8 +102,8 @@ pub type Download = Arc<dyn Fn(&str) -> std::io::Result<Box<dyn Read>> + Send + 
 pub type Launcher = Arc<dyn Fn(&Path, &Path, &[String]) -> std::io::Result<()> + Send + Sync>;
 
 /// The update download and hand-over: `download` + `stage` + `launch` of luma/updater.py on the platform port,
-/// with the address reader and the launcher given (tests give fakes; [`NetworkBackend::real`] is HTTPS and the
-/// real launch).
+/// with the address reader, the launcher and the macOS disk image tools given (tests give fakes;
+/// [`NetworkBackend::real`] is HTTPS, `hdiutil`/`ditto` and the real launch).
 pub struct NetworkBackend {
     /// Opens the release's address.
     pub open: Download,
@@ -109,6 +111,8 @@ pub struct NetworkBackend {
     pub launcher: Launcher,
     /// The machine.
     pub layout: Layout,
+    /// Attaches, copies from and detaches the macOS disk image.
+    pub disk_image: Arc<dyn updater::DiskImageTools>,
 }
 
 impl NetworkBackend {
@@ -122,6 +126,7 @@ impl NetworkBackend {
                 updater::launch_for(staged, app, arguments, &launch_layout, &updater::RS_PACKAGE)
             }),
             layout,
+            disk_image: Arc::new(updater::SystemTools),
         }
     }
 }
@@ -147,10 +152,9 @@ impl Backend for NetworkBackend {
         progress: &mut dyn FnMut(u64, u64),
         cancel: &AtomicBool,
     ) -> Result<Option<PathBuf>, String> {
-        // Only this Rust build's own files: never a Python Grainy installer, whatever reached this point.
-        // The Rust build's release zip is defined for Windows only (`updater::RS_PACKAGE`); nothing else is
-        // opened.
-        if !updater::is_rust_release(release, &self.layout) || self.layout.system.is_mac() {
+        // Only this Rust build's own file for this system (the Windows zip, the macOS disk image): never a Python
+        // Grainy installer, whatever reached this point.
+        if !updater::is_rust_release(release, &self.layout) {
             return Err(tr("업데이트 파일의 구조가 올바르지 않습니다."));
         }
         let open = |url: &str| (self.open)(url);
@@ -158,9 +162,9 @@ impl Backend for NetworkBackend {
             .map_err(|e| reason_of(&e))?;
         match archive {
             None => Ok(None),
-            Some(archive) => {
-                updater::stage_package(&archive, work, &updater::RS_PACKAGE).map(Some).map_err(|e| reason_of(&e))
-            }
+            Some(archive) => updater::stage_rust(&archive, work, &self.layout, self.disk_image.as_ref())
+                .map(Some)
+                .map_err(|e| reason_of(&e)),
         }
     }
 
@@ -208,9 +212,10 @@ pub fn finish_arguments(args: &[String]) -> Option<(PathBuf, i64, Vec<String>)> 
 }
 
 /// Port of `run_finish` (main.py `--finish-update`), run by the new version from its staged folder: replaces the
-/// old version's files once it has closed ([`updater::finish_logged_for`] with [`updater::RS_PACKAGE`]: only the
-/// release's own files of the program folder are swapped; the log `update.log` in the work folder),
-/// then starts the program in the app folder again with its arguments. Returns the exit code, or none when the
+/// old version once it has closed ([`updater::finish_logged_for`] with [`updater::RS_PACKAGE`]: on Windows only the
+/// release's own files of the program folder are swapped, on macOS the whole `Grainy RS.app`; the log `update.log`
+/// in the work folder), then starts the program in the app folder again with its arguments (macOS: through
+/// `/usr/bin/open -n`, so it starts as an app of its own). Returns the exit code, or none when the
 /// command line is not `--finish-update`. The oracle's progress window and failure box are left out: the reason
 /// goes to the log, the error stream and `update.log`.
 pub fn run_finish(args: &[String]) -> Option<i32> {
@@ -232,7 +237,7 @@ pub fn run_finish(args: &[String]) -> Option<i32> {
         );
     }
     let started = if layout.system.is_mac() {
-        let program = app.join(updater::PROGRAM);
+        let program = app.join(updater::RS_PACKAGE.mac.program);
         program.is_file().then(|| {
             let mut command = std::process::Command::new("/usr/bin/open");
             command.arg("-n").arg(&app);

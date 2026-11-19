@@ -150,6 +150,91 @@ fn a_late_answer_for_the_old_monitor_is_dropped() {
     assert_eq!((state.screen.as_str(), state.path.as_str()), (SECOND, SECOND_PROFILE));
 }
 
+/// macOS as the tests see it: the system hands over each display's profile data (`mac_profile_data`), never a file.
+struct MacDisplays {
+    second: Vec<u8>,
+    asked: Mutex<Vec<String>>,
+}
+
+impl SystemProfiles for MacDisplays {
+    fn is_mac(&self) -> bool {
+        true
+    }
+
+    fn windows_profile_path(&self, _screen: &str) -> Result<Option<String>, String> {
+        panic!("macOS never asks for a Windows profile path");
+    }
+
+    fn mac_profile_data(&self, screen: &str) -> Result<Option<Vec<u8>>, String> {
+        self.asked.lock().unwrap().push(screen.to_owned());
+        Ok((grainy_platform::monitor::display_number(screen) == Some(7)).then(|| self.second.clone()))
+    }
+}
+
+/// The macOS screen names of grainy-platform: the window's display gets the profile the system gives it, named
+/// after the display (`resolve`'s `screen.rsplit(' (', 1)[0]`).
+#[test]
+fn a_window_on_a_macos_display_gets_the_profile_data_of_that_display() {
+    let _turn = common::language_lock();
+    grainy_i18n::set_language(Language::Korean);
+    let displays = [
+        grainy_platform::monitor::DisplayBounds { id: 1, x: 0.0, y: 0.0, width: 1512.0, height: 982.0, builtin: true },
+        grainy_platform::monitor::DisplayBounds {
+            id: 7,
+            x: 1512.0,
+            y: -200.0,
+            width: 2560.0,
+            height: 1440.0,
+            builtin: false,
+        },
+    ];
+    let second = std::fs::read(SECOND_PROFILE).unwrap();
+    let mac = Arc::new(MacDisplays { second: second.clone(), asked: Mutex::default() });
+    let mut cx = context();
+    cx.state::<DisplayState>().set_system(mac.clone());
+    let screen_of = |window: [f64; 4], monitor: [f64; 2]| {
+        let id = grainy_platform::monitor::display_of_window(&displays, window, Some(monitor)).unwrap();
+        grainy_platform::monitor::mac_screen_name(displays.iter().find(|d| d.id == id).unwrap())
+    };
+    let built_in = screen_of([100.0, 100.0, 900.0, 700.0], [1512.0, 982.0]);
+    assert!(cx.state::<DisplayState>().screen_seen(&built_in));
+    display::settle(&mut cx);
+    let first = cx.state::<DisplayState>().target().clone();
+    assert_eq!((first.screen.as_str(), first.digest.as_str()), ("Built-in Display (1)", "srgb"));
+    assert_eq!(first.message, "macOS 기본 색상(sRGB)을 사용합니다.");
+    let external = screen_of([1600.0, 0.0, 3000.0, 900.0], [2560.0, 1440.0]);
+    assert!(cx.state::<DisplayState>().screen_seen(&external));
+    display::settle(&mut cx);
+    let state = cx.state::<DisplayState>().target().clone();
+    assert_eq!(
+        (state.screen.as_str(), state.description.as_str(), state.path.as_str()),
+        ("Display (7)", "Display", "")
+    );
+    assert_eq!(state.message, "macOS가 현재 모니터에 제공한 프로파일입니다.");
+    assert_eq!(display::monitor(&cx).map(|p| p.bytes().to_vec()), Some(second));
+    assert_eq!(mac.asked.lock().unwrap().clone(), vec![built_in, external]);
+}
+
+/// egui's points times the zoom factor are the system's points the macOS lookup works in.
+#[test]
+fn the_window_place_is_read_in_the_systems_points() {
+    let ctx = egui::Context::default();
+    assert_eq!(display::system_place(&ctx), None, "no place before the toolkit tells it");
+    ctx.set_zoom_factor(1.25);
+    let mut input = egui::RawInput::default();
+    let info = input.viewports.entry(egui::ViewportId::ROOT).or_default();
+    info.outer_rect = Some(egui::Rect::from_min_max(egui::pos2(80.0, 40.0), egui::pos2(880.0, 640.0)));
+    info.monitor_size = Some(egui::vec2(1209.6, 785.6));
+    for _ in 0..2 {
+        // The textures of a pass must be handled: none are wanted here.
+        ctx.run_ui(input.clone(), |_| {}).textures_delta.clear();
+    }
+    let (window, monitor) = display::system_place(&ctx).unwrap();
+    assert_eq!(window, [100.0, 50.0, 1100.0, 800.0]);
+    let monitor = monitor.unwrap();
+    assert!((monitor[0] - 1512.0).abs() < 1e-3 && (monitor[1] - 982.0).abs() < 1e-3, "{monitor:?}");
+}
+
 // ---- the window ----------------------------------------------------------------------------------------------------
 
 fn builder() -> HarnessBuilder<GrainyApp> {

@@ -1,6 +1,7 @@
 //! The real network of feedback and updates (HANDOFF2 A): the switch that turns it off, what a feedback post
 //! carries, the Rust build's update rule on a feed shaped like today's, and the download, verification and
-//! hand-over of `network::NetworkBackend` with a fake address reader and a fake launcher.
+//! hand-over of `network::NetworkBackend` with a fake address reader and a fake launcher: on Windows the whole
+//! update of a 0.1.0 program folder to 0.2.0, on every system the macOS disk image with fake `hdiutil`/`ditto`.
 //!
 //! **Nothing leaves the machine and no installer starts.** Every test switches the network off first
 //! (`common::offline`); the release "downloads" come from memory and the launcher only records its arguments.
@@ -10,7 +11,7 @@ mod common;
 use std::collections::BTreeMap;
 use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
-use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
@@ -197,18 +198,18 @@ fn a_feedback_post_carries_the_oracles_fields_and_the_rust_version() {
     assert_eq!(
         request.headers,
         vec![
-            ("User-Agent".to_string(), "Grainy/rs-0.1.0".to_string()),
+            ("User-Agent".to_string(), "Grainy/rs-0.2.0".to_string()),
             ("Content-Type".to_string(), "application/x-www-form-urlencoded".to_string()),
         ]
     );
     let fields = form(&request.body);
     let keys: Vec<&str> = fields.keys().map(String::as_str).collect();
     assert_eq!(keys, ["entry.1045781291", "entry.1065046570", "entry.839337160"], "exactly the oracle's three fields");
-    assert_eq!(fields["entry.1045781291"], "rs-0.1.0", "the version field names the Rust build");
+    assert_eq!(fields["entry.1045781291"], "rs-0.2.0", "the version field names the Rust build");
     assert_eq!(fields["entry.1065046570"], "미리보기가 늦어요");
     let system = &fields["entry.839337160"];
     assert!(system.starts_with("Windows 11 (10.0.26200) · AMD64 · GPU Example GPU · #"), "{system}");
-    assert!(model.note().contains("Grainy rs-0.1.0"), "the window says what is sent: {}", model.note());
+    assert!(model.note().contains("Grainy rs-0.2.0"), "the window says what is sent: {}", model.note());
     grainy_i18n::set_language(Language::Korean);
 }
 
@@ -282,10 +283,11 @@ fn a_check_of_todays_feed_ends_up_to_date() {
     assert!(cx.state::<UpdateState>().release.is_none(), "no release qualifies");
     let prefs = grainy_platform::preferences::Preferences::new(folder.join("settings.json"));
     assert!(prefs.values.contains_key("update_checked"), "the check succeeded (a failure records nothing)");
-    assert_eq!(settings::latest_box().text, "최신 버전을 쓰고 있습니다 (0.1.0).");
+    assert_eq!(settings::latest_box().text, "최신 버전을 쓰고 있습니다 (0.2.0).");
     grainy_i18n::set_language(Language::Korean);
 }
 
+#[cfg(windows)]
 /// A Rust release zip (`updater::RS_PACKAGE`): one folder `GrainyRS/` with the program and its files.
 fn release_zip() -> Vec<u8> {
     let mut buffer = std::io::Cursor::new(Vec::new());
@@ -320,11 +322,13 @@ fn fake_backend(served: Vec<u8>, opened: Arc<Mutex<Vec<String>>>, launched: Laun
             Ok(())
         }),
         layout: Layout::current(),
+        disk_image: Arc::new(updater::SystemTools),
     }
 }
 
+#[cfg(windows)]
 fn rust_release(bytes: &[u8]) -> Release {
-    let tail = updater::asset_pattern(&Layout::current()).tail().to_string();
+    let tail = updater::rust_asset_pattern(&Layout::current()).tail().to_string();
     let name = format!("{}0.7.0{tail}", updater::RUST_MARKER);
     Release {
         version: "0.7.0".into(),
@@ -336,6 +340,7 @@ fn rust_release(bytes: &[u8]) -> Release {
     }
 }
 
+#[cfg(windows)]
 struct Install {
     outcome: Option<Outcome>,
     opened: Vec<String>,
@@ -343,6 +348,7 @@ struct Install {
     app: PathBuf,
 }
 
+#[cfg(windows)]
 fn run_install(name: &str, served: Vec<u8>, release: Release) -> Install {
     let (mut cx, folder) = with_data(name);
     let app = folder.join("app");
@@ -456,6 +462,335 @@ fn a_python_release_is_never_downloaded_or_started() {
     assert!(got.opened.is_empty(), "the Python installer's address is never opened");
     assert!(got.launched.is_empty(), "nothing starts");
     assert!(!got.app.join(".update").exists(), "nothing is written");
+    grainy_i18n::set_language(Language::Korean);
+}
+
+// ---- 0.2.0: the update from 0.1.0 (Windows) and the disk image (macOS) ------------------------------------------
+
+#[cfg(windows)]
+/// The files of 0.1.0's program folder (its `updater::RS_ITEMS`: no `vcomp140.dll`).
+const ITEMS_0_1_0: [&str; 5] = ["GrainyRS.exe", "grainy-cli.exe", "LICENSE", "THIRD_PARTY_NOTICES.txt", "README.txt"];
+
+#[cfg(windows)]
+fn content(name: &str, version: &str) -> Vec<u8> {
+    format!("{name} of Grainy RS {version}").into_bytes()
+}
+
+#[cfg(windows)]
+/// The 0.2.0 release zip: `GrainyRS/` with its six items.
+fn zip_0_2_0() -> Vec<u8> {
+    let mut buffer = std::io::Cursor::new(Vec::new());
+    {
+        let mut zip = zip::ZipWriter::new(&mut buffer);
+        for name in updater::RS_ITEMS {
+            zip.start_file(format!("GrainyRS/{name}"), zip::write::SimpleFileOptions::default()).unwrap();
+            zip.write_all(&content(name, "0.2.0")).unwrap();
+        }
+        zip.finish().unwrap();
+    }
+    buffer.into_inner()
+}
+
+/// The feed of release v0.2.0: the Rust build's Windows zip and macOS disk image beside Python Grainy files.
+fn feed_0_2_0(zip: &[u8], dmg: &[u8]) -> String {
+    let asset = |name: &str, bytes: &[u8]| {
+        format!(
+            r#"{{"name": "{name}", "size": {}, "digest": "sha256:{}", "browser_download_url": "{}v0.2.0/{name}"}}"#,
+            bytes.len(),
+            hex(bytes),
+            updater::RS_DOWNLOADS
+        )
+    };
+    format!(
+        r#"{{"tag_name": "v0.2.0", "draft": false, "prerelease": false, "body": "Grainy RS 0.2.0", "assets": [{}, {}, {}, {}]}}"#,
+        asset("Grainy-0.6.8-windows-x64.zip", b"python"),
+        asset("Grainy-0.6.8-macos-arm64.zip", b"python mac"),
+        asset("GrainyRS-0.2.0-macos-universal.dmg", dmg),
+        asset("GrainyRS-0.2.0-windows-x64.zip", zip),
+    )
+}
+
+#[cfg(windows)]
+/// Every file and folder of the program folder except the work folder `.update`, with its bytes.
+fn files(app: &Path) -> BTreeMap<String, Option<Vec<u8>>> {
+    fn walk(root: &Path, dir: &Path, out: &mut BTreeMap<String, Option<Vec<u8>>>) {
+        for entry in std::fs::read_dir(dir).unwrap().flatten() {
+            let path = entry.path();
+            let rel = path.strip_prefix(root).unwrap().to_string_lossy().replace('\\', "/");
+            if rel == ".update" {
+                continue;
+            }
+            if path.is_dir() {
+                out.insert(rel, None);
+                walk(root, &path, out);
+            } else {
+                out.insert(rel, Some(std::fs::read(&path).unwrap()));
+            }
+        }
+    }
+    let mut out = BTreeMap::new();
+    walk(app, app, &mut out);
+    out
+}
+
+/// The whole update of a 0.1.0 program folder to 0.2.0 with fakes only: the check reads the feed through a fake
+/// reader, the release zip "downloads" from memory, its size and digest are checked, it is staged, the launcher
+/// only records, and the finishing step (what the staged 0.2.0 program runs) is called directly.
+#[cfg(windows)]
+#[test]
+fn an_update_from_0_1_0_to_0_2_0() {
+    let _turn = turn();
+    set_language("ko");
+    let (mut cx, folder) = with_data("network-from-0-1-0");
+    let app = folder.join("Grainy RS");
+    for name in ITEMS_0_1_0 {
+        std::fs::create_dir_all(&app).unwrap();
+        std::fs::write(app.join(name), content(name, "0.1.0")).unwrap();
+    }
+    std::fs::create_dir_all(app.join("presets")).unwrap();
+    std::fs::write(app.join("presets").join("warm.json"), b"{\"exposure\": 0.3}").unwrap();
+    std::fs::write(app.join("my notes.txt"), b"the person's own file").unwrap();
+    let before = files(&app);
+
+    // The check: one read of the Rust build's feed; the release is newer than 0.1.0 (this build is 0.2.0 itself,
+    // so it compares with the version a 0.1.0 build has).
+    let zip = zip_0_2_0();
+    let feed = feed_0_2_0(&zip, b"a disk image");
+    let asked = Mutex::new(Vec::new());
+    let open = |url: &str| -> std::io::Result<Box<dyn Read>> {
+        asked.lock().unwrap().push(url.to_string());
+        Ok(Box::new(std::io::Cursor::new(feed.clone().into_bytes())))
+    };
+    let release = updater::latest_rust(&open, None, &Layout::current()).unwrap().expect("the 0.2.0 zip qualifies");
+    assert_eq!(*asked.lock().unwrap(), [updater::RS_FEED]);
+    assert_eq!(release.name, "GrainyRS-0.2.0-windows-x64.zip");
+    assert_eq!((release.size, release.sha256.clone()), (zip.len() as u64, hex(&zip)));
+    assert!(updater::newer(&release.version, "0.1.0"));
+    assert!(!updater::newer(&release.version, grainy_platform::RS_VERSION), "0.2.0 does not offer itself");
+
+    // 지금 업데이트: download, digest check, staging, hand-over.
+    let opened = Arc::new(Mutex::new(Vec::new()));
+    let launched: Launched = Arc::new(Mutex::new(Vec::new()));
+    {
+        let env = cx.state::<UpdateEnv>();
+        env.backend = Some(Arc::new(fake_backend(zip.clone(), opened.clone(), launched.clone())));
+        env.executable = Some(app.join("GrainyRS.exe"));
+        env.arguments = Some(vec!["--memory".into()]);
+        env.supported = Some(true);
+    }
+    update::install(&mut cx, release.clone());
+    drain(&mut cx);
+    assert_eq!(cx.state::<UpdateEnv>().outcome, Some(Outcome::Handover));
+    assert_eq!(*opened.lock().unwrap(), vec![release.url.clone()], "one download of the release's own address");
+    let work = app.join(".update");
+    let staged = work.join("new");
+    assert_eq!(*launched.lock().unwrap(), [(staged.clone(), app.clone(), vec!["--memory".to_string()])]);
+    assert_eq!(std::fs::read(work.join("download").join(&release.name)).unwrap(), zip, "the verified zip");
+    for name in updater::RS_ITEMS {
+        assert_eq!(std::fs::read(staged.join(name)).unwrap(), content(name, "0.2.0"), "staged {name}");
+    }
+    assert_eq!(files(&app), before, "nothing of the program folder changed before the finishing step");
+    // What the real launcher starts, and what the started program reads from it.
+    let (program, command, _) = updater::launch_command_for(
+        &staged,
+        &app,
+        &["--memory".into()],
+        4242,
+        &Layout::current(),
+        &updater::RS_PACKAGE,
+    );
+    assert_eq!(program, staged.join("GrainyRS.exe"));
+    assert_eq!(network::finish_arguments(&command), Some((app.clone(), 4242, vec!["--memory".to_string()])));
+
+    // The finishing step of the staged 0.2.0 program (`network::run_finish` without the restart).
+    let error = updater::finish_logged_for(&app, &staged, 0, &Layout::current(), &updater::RS_PACKAGE);
+    assert_eq!(error, "");
+    for name in updater::RS_ITEMS {
+        assert_eq!(std::fs::read(app.join(name)).unwrap(), content(name, "0.2.0"), "new {name}");
+    }
+    let previous: Vec<PathBuf> = std::fs::read_dir(&work)
+        .unwrap()
+        .flatten()
+        .map(|e| e.path())
+        .filter(|p| p.file_name().unwrap().to_string_lossy().starts_with("previous-"))
+        .collect();
+    assert_eq!(previous.len(), 1);
+    let mut kept: Vec<String> = std::fs::read_dir(&previous[0])
+        .unwrap()
+        .map(|e| e.unwrap().file_name().to_string_lossy().into_owned())
+        .collect();
+    kept.sort();
+    let mut old: Vec<String> = ITEMS_0_1_0.iter().map(|s| s.to_string()).collect();
+    old.sort();
+    assert_eq!(kept, old, "the five 0.1.0 items are kept, nothing else");
+    for name in ITEMS_0_1_0 {
+        assert_eq!(std::fs::read(previous[0].join(name)).unwrap(), content(name, "0.1.0"));
+    }
+    let after = files(&app);
+    for (path, bytes) in &before {
+        if !ITEMS_0_1_0.contains(&path.as_str()) {
+            assert_eq!(after.get(path), Some(bytes), "{path} is the person's own and unchanged");
+        }
+    }
+    let added: Vec<&String> = after.keys().filter(|k| !before.contains_key(*k)).collect();
+    assert_eq!(added, ["vcomp140.dll"]);
+    let log = std::fs::read_to_string(work.join("update.log")).unwrap();
+    assert!(log.contains("new version copied: ['GrainyRS.exe', 'grainy-cli.exe', 'vcomp140.dll',"), "{log}");
+    grainy_i18n::set_language(Language::Korean);
+}
+
+/// Fake `hdiutil` and `ditto` for a Mac layout on any system: attaching copies `volume` into the mount folder,
+/// detaching empties it; the calls are recorded.
+struct FakeImage {
+    volume: PathBuf,
+    calls: Mutex<Vec<String>>,
+    attached: Mutex<Option<PathBuf>>,
+}
+
+impl updater::DiskImageTools for FakeImage {
+    fn attach(&self, image: &Path, mount: &Path) -> std::io::Result<()> {
+        self.calls.lock().unwrap().push(format!("attach {}", image.file_name().unwrap().to_string_lossy()));
+        updater::copy_tree(&self.volume.join(updater::RS_BUNDLE), &mount.join(updater::RS_BUNDLE))?;
+        *self.attached.lock().unwrap() = Some(mount.to_path_buf());
+        Ok(())
+    }
+
+    fn detach(&self, mount: &Path, force: bool) -> std::io::Result<()> {
+        self.calls.lock().unwrap().push(if force { "detach -force" } else { "detach" }.into());
+        std::fs::remove_dir_all(mount.join(updater::RS_BUNDLE))?;
+        *self.attached.lock().unwrap() = None;
+        Ok(())
+    }
+
+    fn copy(&self, source: &Path, target: &Path) -> std::io::Result<()> {
+        self.calls.lock().unwrap().push("copy".into());
+        updater::copy_tree(source, target)
+    }
+
+    fn mounted(&self, mount: &Path) -> bool {
+        self.attached.lock().unwrap().as_deref() == Some(mount)
+    }
+}
+
+fn info_plist(identifier: &str) -> String {
+    format!(
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\"><dict><key>CFBundleExecutable</key><string>GrainyRS</string><key>CFBundleIdentifier</key><string>{identifier}</string></dict></plist>\n"
+    )
+}
+
+fn mac_backend(
+    root: &Path,
+    identifier: &str,
+    served: Vec<u8>,
+    opened: Arc<Mutex<Vec<String>>>,
+) -> (NetworkBackend, Arc<FakeImage>) {
+    let bundle = root.join("volume").join(updater::RS_BUNDLE);
+    std::fs::create_dir_all(bundle.join("Contents").join("MacOS")).unwrap();
+    std::fs::write(bundle.join(updater::RS_PROGRAM), b"GrainyRS 0.2.0").unwrap();
+    std::fs::write(bundle.join("Contents").join("Info.plist"), info_plist(identifier)).unwrap();
+    let tools =
+        Arc::new(FakeImage { volume: root.join("volume"), calls: Mutex::new(Vec::new()), attached: Mutex::new(None) });
+    let mut backend = fake_backend(served, opened, Arc::new(Mutex::new(Vec::new())));
+    backend.layout = Layout {
+        system: System::MacOs,
+        machine: "arm64".into(),
+        env: grainy_platform::Environment { system: System::MacOs, local_app_data: None, home: root.to_path_buf() },
+    };
+    backend.disk_image = tools.clone();
+    (backend, tools)
+}
+
+fn dmg_release(bytes: &[u8]) -> Release {
+    let name = "GrainyRS-0.2.0-macos-universal.dmg".to_string();
+    Release {
+        version: "0.2.0".into(),
+        url: format!("{}v0.2.0/{name}", updater::RS_DOWNLOADS),
+        name,
+        size: bytes.len() as u64,
+        sha256: hex(bytes),
+        notes: String::new(),
+    }
+}
+
+#[test]
+fn a_mac_release_is_downloaded_verified_and_staged_from_its_disk_image() {
+    use grainy_app::dialogs::update::Backend;
+    let _turn = turn();
+    set_language("ko");
+    let root = common::temp_dir("network-mac-image");
+    let image = b"a universal disk image".to_vec();
+    let opened = Arc::new(Mutex::new(Vec::new()));
+    let (backend, tools) = mac_backend(&root, updater::RS_BUNDLE_ID, image.clone(), opened.clone());
+    // The Mac's check takes the disk image from the 0.2.0 feed.
+    let feed = feed_0_2_0(b"zip", &image);
+    let open =
+        |_: &str| -> std::io::Result<Box<dyn Read>> { Ok(Box::new(std::io::Cursor::new(feed.clone().into_bytes()))) };
+    let release = updater::latest_rust(&open, None, &backend.layout).unwrap().unwrap();
+    assert_eq!(release, Release { notes: "Grainy RS 0.2.0".into(), ..dmg_release(&image) });
+    let app = PathBuf::from("/Applications/Grainy RS.app");
+    let work = updater::work_folder_for(&app, &backend.layout, &updater::RS_PACKAGE);
+    assert_eq!(work, root.join("Library").join("Application Support").join("GrainyRS").join("Update"));
+    let mut seen = Vec::new();
+    let staged = backend
+        .download_and_stage(&release, &work, &mut |done, total| seen.push((done, total)), &AtomicBool::new(false))
+        .unwrap()
+        .unwrap();
+    assert_eq!(staged, work.join("new").join("Grainy RS.app"));
+    assert_eq!(std::fs::read(staged.join(updater::RS_PROGRAM)).unwrap(), b"GrainyRS 0.2.0");
+    assert_eq!(*opened.lock().unwrap(), vec![release.url.clone()]);
+    assert_eq!(seen.last(), Some(&(image.len() as u64, image.len() as u64)));
+    assert_eq!(std::fs::read(work.join("download").join(&release.name)).unwrap(), image, "the verified image");
+    assert_eq!(*tools.calls.lock().unwrap(), ["attach GrainyRS-0.2.0-macos-universal.dmg", "copy", "detach"]);
+    // The staged bundle's own program finishes the update, from the folder that holds the bundle.
+    let (program, command, cwd) =
+        updater::launch_command_for(&staged, &app, &[], 7, &backend.layout, &updater::RS_PACKAGE);
+    assert_eq!((program, cwd), (staged.join("Contents/MacOS/GrainyRS"), work.join("new")));
+    assert_eq!(network::finish_arguments(&command), Some((app, 7, Vec::new())));
+    grainy_i18n::set_language(Language::Korean);
+}
+
+#[test]
+fn a_mac_refuses_other_files_and_other_bundles() {
+    use grainy_app::dialogs::update::Backend;
+    let _turn = turn();
+    set_language("ko");
+    let bad = "업데이트 파일의 구조가 올바르지 않습니다.";
+    let image = b"a universal disk image".to_vec();
+    let stage = |name: &str, identifier: &str, release: Release| {
+        let root = common::temp_dir(name);
+        let opened = Arc::new(Mutex::new(Vec::new()));
+        let (backend, tools) = mac_backend(&root, identifier, image.clone(), opened.clone());
+        let work = root.join("Update");
+        let result = backend.download_and_stage(&release, &work, &mut |_, _| {}, &AtomicBool::new(false));
+        let calls = tools.calls.lock().unwrap().clone();
+        let opened = opened.lock().unwrap().clone();
+        (result, opened, calls, work)
+    };
+    // The Python Grainy's macOS zip, and the Rust build's Windows zip, on a Mac: nothing is downloaded.
+    for name in ["Grainy-0.2.0-macos-arm64.zip", "GrainyRS-0.2.0-windows-x64.zip", "GrainyRS-0.2.0-macos-arm64.zip"] {
+        let release = Release {
+            name: name.into(),
+            url: format!("{}v0.2.0/{name}", updater::RS_DOWNLOADS),
+            ..dmg_release(&image)
+        };
+        let (result, opened, calls, work) = stage("network-mac-other-file", updater::RS_BUNDLE_ID, release);
+        assert_eq!(result, Err(bad.to_string()), "{name}");
+        assert!(opened.is_empty() && calls.is_empty(), "{name}");
+        assert!(!work.exists(), "{name}: nothing written");
+    }
+    // A download that differs from GitHub's digest is never attached.
+    let mut release = dmg_release(&image);
+    release.sha256 = hex(b"other bytes");
+    let (result, opened, calls, work) = stage("network-mac-digest", updater::RS_BUNDLE_ID, release);
+    assert_eq!(result, Err("내려받은 파일이 깃헙에 올라간 파일과 다릅니다.".to_string()));
+    assert_eq!(opened.len(), 1);
+    assert!(calls.is_empty(), "not attached");
+    assert_eq!(std::fs::read_dir(work.join("download")).unwrap().count(), 0, "nothing unverified is left");
+    // A disk image whose bundle carries the Python Grainy's identifier: attached, refused, detached.
+    let (result, _, calls, work) = stage("network-mac-identifier", "io.github.pastorius9.grainy", dmg_release(&image));
+    assert_eq!(result, Err(bad.to_string()));
+    assert_eq!(calls, ["attach GrainyRS-0.2.0-macos-universal.dmg", "detach"]);
+    assert!(!work.join("new").exists());
     grainy_i18n::set_language(Language::Korean);
 }
 

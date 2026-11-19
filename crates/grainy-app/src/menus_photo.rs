@@ -315,8 +315,7 @@ pub fn menu(cx: &mut AppContext) -> Vec<Node> {
     m.push(Node::Sub(Sub { key: "", title: "파일 관리", enabled: true, children: files }));
 
     m.push(Node::Separator);
-    let folder = if cfg!(target_os = "macos") { "Finder에서 폴더 열기" } else { "탐색기에서 폴더 열기" };
-    b.item(&mut m, folder, "show-folder", "photo.show_folder", true);
+    b.item(&mut m, crate::system_open::SHOW_FOLDER_IN_FILE_MANAGER, "show-folder", "photo.show_folder", true);
 
     let mut remove = Vec::new();
     b.item(&mut remove, "카탈로그에서만 제거…", "remove", "file.remove", true);

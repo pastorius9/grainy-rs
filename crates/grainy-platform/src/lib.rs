@@ -10,6 +10,7 @@ pub mod json;
 pub mod monitor;
 pub mod net;
 pub mod preferences;
+pub mod recycle;
 pub mod safe_start;
 pub mod updater;
 pub mod user_paths;
@@ -39,6 +40,6 @@ mod tests {
     #[test]
     fn the_build_version_is_the_rust_version_marked() {
         assert_eq!(super::BUILD_VERSION, format!("rs-{}", super::RS_VERSION));
-        assert_eq!(super::RS_VERSION, "0.1.0");
+        assert_eq!(super::RS_VERSION, "0.2.0");
     }
 }

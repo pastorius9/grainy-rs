@@ -285,14 +285,7 @@ pub fn launch(target: &str) {
     if crate::network::offline() && target.contains("://") {
         return;
     }
-    let result = if cfg!(windows) {
-        std::process::Command::new("rundll32").args(["url.dll,FileProtocolHandler", target]).spawn()
-    } else if cfg!(target_os = "macos") {
-        std::process::Command::new("open").arg(target).spawn()
-    } else {
-        std::process::Command::new("xdg-open").arg(target).spawn()
-    };
-    if let Err(error) = result {
+    if let Err(error) = crate::system_open::open(crate::system_open::Target::Document, target) {
         log::warn!("cannot open {target}: {error}");
     }
 }

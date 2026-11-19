@@ -1,6 +1,7 @@
 """Write THIRD_PARTY_NOTICES.txt for the release build of grainy-app and grainy-cli on Windows.
 
-    python tools/release/notices.py [-o OUTPUT] [--target x86_64-pc-windows-msvc]
+    python tools/release/notices.py [-o OUTPUT] [--target x86_64-pc-windows-msvc] [--vcomp-version 14.44.35112]
+    python tools/release/notices.py --target aarch64-apple-darwin --target x86_64-apple-darwin -o notices.txt
 
 Sources: `cargo tree` (normal dependencies of grainy-app and grainy-cli for the target: what is linked into the
 two programs) and `cargo metadata` (licence expressions and each crate's own licence files in the local cargo
@@ -22,6 +23,9 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import layout  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
 PROGRAMS = ['grainy-app', 'grainy-cli']
@@ -104,15 +108,16 @@ def cargo(*args) -> str:
     return result.stdout
 
 
-def linked_crates(target: str):
-    args = ['tree', '-e', 'normal', '--target', target, '--prefix', 'none', '-f', '{p}']
-    for program in PROGRAMS:
-        args += ['-p', program]
+def linked_crates(targets):
     out = set()
-    for line in cargo(*args).splitlines():
-        m = re.match(r'(\S+) v(\S+)', line.strip())
-        if m and '(proc-macro)' not in line:
-            out.add((m.group(1), m.group(2)))
+    for target in targets:
+        args = ['tree', '-e', 'normal', '--target', target, '--prefix', 'none', '-f', '{p}']
+        for program in PROGRAMS:
+            args += ['-p', program]
+        for line in cargo(*args).splitlines():
+            m = re.match(r'(\S+) v(\S+)', line.strip())
+            if m and '(proc-macro)' not in line:
+                out.add((m.group(1), m.group(2)))
     return out
 
 
@@ -175,8 +180,8 @@ VENDORED = [
         'crates/grainy-raw/vendor/LibRaw-0.22.1/ of the repository https://github.com/pastorius9/grainy-rs',
         '(both upstream licence files, LICENSE.CDDL and LICENSE.LGPL, are kept there). The rest of Grainy RS is',
         'a separate work under the MIT licence (CDDL section 3.6 allows distributing the larger work under',
-        'other terms). The MSVC OpenMP runtime (vcomp140.dll of the Microsoft Visual C++ Redistributable) is',
-        'used by LibRaw\'s parallel decoders; it is part of Windows\' Visual C++ runtime and not shipped here.',
+        'other terms).',
+        '{libraw_openmp}',
     ], ['crates/grainy-raw/vendor/LibRaw-0.22.1/LICENSE.CDDL']),
     ('Little CMS 2.19 (colour management; compiled into the program)', [
         'Copyright (c) 1998-2023 Marti Maria Saguer. Source: https://github.com/mm2/Little-CMS/tree/lcms2.19',
@@ -195,6 +200,30 @@ VENDORED = [
         '(unmodified). Licence: zlib, reproduced below.',
     ], ['crates/grainy-raw/vendor/zlib-1.3.1/LICENSE']),
 ]
+
+LIBRAW_OPENMP = {
+    'windows': 'The MSVC OpenMP runtime (vcomp140.dll) is used by LibRaw\'s parallel decoders and ships beside the\n'
+               'program: see the next section.',
+    'windows-no-vcomp': 'The MSVC OpenMP runtime (vcomp140.dll of the Microsoft Visual C++ Redistributable) is used by\n'
+                        'LibRaw\'s parallel decoders; it is not shipped here.',
+    'macos': 'On macOS LibRaw is built without OpenMP (the serial code path, same pixels).',
+}
+
+
+def vcomp_section(version: str):
+    """The notice for the app-local `vcomp140.dll` (Windows only)."""
+    return ('Microsoft Visual C++ OpenMP runtime, vcomp140.dll (shipped beside the program; Windows only)', [
+        'vcomp140.dll is Microsoft\'s OpenMP runtime for Visual C++ (copyright Microsoft Corporation). LibRaw\'s',
+        'parallel decoders need it; OpenMP has no static form. It is NOT covered by the MIT licence of Grainy RS.',
+        'It is redistributed app-locally (beside the program, unmodified) as the Microsoft Visual Studio licence',
+        'terms allow for the redistributable files of Visual C++ (the files listed in REDIST.TXT of the Visual',
+        'Studio installation); it is subject to those terms.',
+        f'Source: the Visual Studio redistributable folder VC/Redist/MSVC/{version}/x64/Microsoft.VC143.OpenMP/',
+        f'(redistributable version {version}), copied without changes.',
+        'The C runtime and the C++ standard library are linked statically into the program; no other Microsoft',
+        'runtime file is shipped.',
+    ], [])
+
 
 PORTED = [
     ('NumPy (random number generator and numeric conventions, ported to Rust)', [
@@ -253,12 +282,22 @@ def section(out, title, lines, files):
         out.append(repo_text(rel))
 
 
-def build(target: str):
-    metadata = json.loads(cargo('metadata', '--format-version', '1', '--filter-platform', target))
+def build(target, vcomp_version: str | None = None):
+    """(text, crate rows, flags) for one target triple or a list of them (the crates of all, one text).
+
+    `vcomp_version`: the Visual Studio redistributable version of the `vcomp140.dll` shipped beside the Windows
+    program (None: none is shipped). Targets of macOS (`*-apple-darwin`) get the macOS wording and no
+    Windows-only sections."""
+    targets = [target] if isinstance(target, str) else list(target)
+    macos = all(t.endswith('-apple-darwin') for t in targets)
+    metadata_args = ['metadata', '--format-version', '1']
+    for t in targets:
+        metadata_args += ['--filter-platform', t]
+    metadata = json.loads(cargo(*metadata_args))
     packages = {(p['name'], p['version']): p for p in metadata['packages']}
     workspace = set(metadata['workspace_members'])
     crates = []
-    for key in sorted(linked_crates(target)):
+    for key in sorted(linked_crates(targets)):
         p = packages.get(key)
         if p is None or p['id'] in workspace or p.get('source') is None:
             continue
@@ -294,16 +333,24 @@ def build(target: str):
                 flags.append((label, 'no licence file found in the crate package'))
 
     out = []
-    out.append('Grainy RS 0.1.0: third-party notices\n')
+    programs = '(GrainyRS, grainy-cli)' if macos else '(GrainyRS.exe, grainy-cli.exe)'
+    openmp = LIBRAW_OPENMP['macos' if macos else 'windows' if vcomp_version else 'windows-no-vcomp']
+    with_vcomp = bool(vcomp_version) and not macos
+    out.append(f'Grainy RS {layout.version()}: third-party notices\n')
     out.append('=' * WIDTH + '\n')
-    out.append('Grainy RS (GrainyRS.exe, grainy-cli.exe) is MIT licensed, copyright (c) 2026 pastorius9 (see LICENSE).\n'
+    out.append(f'Grainy RS {programs} is MIT licensed, copyright (c) 2026 pastorius9 (see LICENSE).\n'
                'It includes the third-party software and data below, each under its own licence. Generated by\n'
-               'tools/release/notices.py from the release build of grainy-app and grainy-cli for ' + target + '.\n'
-               'Sections: 1. libraries in C/C++ compiled into the program; 2. code ported from other projects;\n'
+               'tools/release/notices.py from the release build of grainy-app and grainy-cli for '
+               + ', '.join(targets) + '.\n'
+               'Sections: 1. libraries in C/C++ compiled into the program'
+               + (' and the Microsoft OpenMP runtime shipped beside it' if with_vcomp else '')
+               + '; 2. code ported from other projects;\n'
                '3. data; 4. Rust crates (list, copyright lines, licence texts).\n')
-    out.append(rule('1. C/C++ libraries compiled into the program'))
+    out.append(rule('1. C/C++ libraries compiled into the program' + (' and shipped beside it' if with_vcomp else '')))
     for title, lines, files in VENDORED:
-        section(out, title, lines, files)
+        section(out, title, [line.replace('{libraw_openmp}', openmp) for line in lines], files)
+    if with_vcomp:
+        section(out, *vcomp_section(vcomp_version))
     out.append(rule('2. Code ported from other projects'))
     for title, lines, files in PORTED:
         section(out, title, lines, files)
@@ -345,12 +392,18 @@ def build(target: str):
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('-o', '--output', default=str(REPO / 'target' / 'release' / 'THIRD_PARTY_NOTICES.txt'))
-    parser.add_argument('--target', default='x86_64-pc-windows-msvc')
+    parser.add_argument('--target', action='append',
+                        help='target triple (repeatable: the crates of all, one text); default '
+                             'x86_64-pc-windows-msvc; for macOS: aarch64-apple-darwin and x86_64-apple-darwin')
+    parser.add_argument('--vcomp-version', help='Windows: the Visual Studio redistributable version of the '
+                                                'vcomp140.dll shipped beside the program (adds its notice)')
     args = parser.parse_args(argv)
-    text, rows, flags = build(args.target)
+    targets = args.target or ['x86_64-pc-windows-msvc']
+    text, rows, flags = build(targets, vcomp_version=args.vcomp_version)
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_bytes(text.replace('\n', '\r\n').encode('utf-8'))
+    macos = all(t.endswith('-apple-darwin') for t in targets)
+    output.write_bytes((text if macos else text.replace('\n', '\r\n')).encode('utf-8'))
     print(f'{output.name}: {len(rows)} Rust crates, {len(text.encode()) / 1024:.0f} KiB')
     if flags:
         print(f'{len(flags)} flagged:')

@@ -1585,7 +1585,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-adobe"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "base64",
  "chrono",
@@ -1599,7 +1599,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-app"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "base64",
  "chrono",
@@ -1647,7 +1647,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-catalog"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "base64",
  "chrono",
@@ -1667,7 +1667,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-cli"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "flate2",
  "grainy-codecs",
@@ -1680,7 +1680,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-cms"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "cc",
  "grainy-color",
@@ -1695,7 +1695,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-codecs"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "flate2",
  "grainy-color",
@@ -1718,7 +1718,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-color"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-core",
  "grainy-imgproc",
@@ -1730,7 +1730,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-colorgrade"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-color",
  "grainy-core",
@@ -1744,7 +1744,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-core"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-testkit",
  "ndarray",
@@ -1755,7 +1755,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-detail"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-color",
  "grainy-core",
@@ -1771,7 +1771,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-dust"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "flate2",
  "grainy-catalog",
@@ -1789,7 +1789,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-effects"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-core",
  "grainy-imgproc",
@@ -1801,7 +1801,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-engine"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-cms",
  "grainy-codecs",
@@ -1828,7 +1828,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-film"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-color",
  "grainy-core",
@@ -1842,7 +1842,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-geometry"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-color",
  "grainy-core",
@@ -1856,7 +1856,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-gpu"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "bytemuck",
  "grainy-colorgrade",
@@ -1875,7 +1875,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-i18n"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-testkit",
  "serde_json",
@@ -1883,7 +1883,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-imgproc"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-core",
  "grainy-testkit",
@@ -1895,7 +1895,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-jpeg-sys"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "cc",
  "grainy-testkit",
@@ -1904,7 +1904,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-lens"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-core",
  "grainy-engine",
@@ -1921,7 +1921,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-library"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "chrono",
  "file-id",
@@ -1943,7 +1943,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-local"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-color",
  "grainy-colorgrade",
@@ -1959,7 +1959,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-mcp"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ab_glyph",
  "chrono",
@@ -1985,13 +1985,14 @@ dependencies = [
 
 [[package]]
 name = "grainy-platform"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "chrono",
  "fs4",
  "grainy-i18n",
  "grainy-testkit",
  "native-tls",
+ "roxmltree",
  "serde",
  "serde_json",
  "sha2",
@@ -2005,7 +2006,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-raw"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "base64",
  "cc",
@@ -2027,7 +2028,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-service"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "chrono",
  "grainy-catalog",
@@ -2045,7 +2046,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-sky"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-core",
  "grainy-imgproc",
@@ -2058,7 +2059,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-testkit"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ndarray",
  "ndarray-npy",
@@ -2067,7 +2068,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-tone"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "grainy-color",
  "grainy-core",

@@ -595,7 +595,9 @@ pub fn lock_library(args: &crate::paths::Arguments) -> Result<(), String> {
     Ok(())
 }
 
-/// Shows `message` in a box titled Grainy (`QMessageBox.information(None, 'Grainy', ...)`).
+/// Shows `message` in a box titled Grainy (`QMessageBox.information(None, 'Grainy', ...)`). Called by `main` on the
+/// main thread before the window exists, the one place where rfd's blocking box is right on every system (macOS
+/// shows it from the main thread; there is no window to keep drawing).
 pub fn show_refusal(message: &str) {
     rfd::MessageDialog::new().set_title("Grainy").set_description(message).set_level(rfd::MessageLevel::Info).show();
 }
