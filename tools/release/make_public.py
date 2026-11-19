@@ -1,6 +1,9 @@
-"""Make the clean public copy of the repository: one fresh commit, no private history, no internal files.
+"""Make the clean public copy of the repository: no private history, no internal files.
 
-    python tools/release/make_public.py [--rev main] [--out FOLDER] [--names FILE]
+    python tools/release/make_public.py [--rev main] [--out FOLDER] [--names FILE]            # fresh history
+    python tools/release/make_public.py --update [--rev main] [--message TEXT] [--out FOLDER] # one new commit
+
+Fresh (without `--update`):
 
 1. `--out` (default `grainy-rs-public` beside the repository, tools/release/layout.py) must not exist, or must be a
    previous output of this script (its `.git` holds the marker `grainy-make-public`); only then is it deleted and
@@ -11,7 +14,12 @@
 4. tools/release/scan_public.py scans the folder. `docs/REVIEW-2026-11.md` is kept only when it has no real hit;
    any other real hit, or a file over 50 MB, stops here (exit 1, nothing committed).
 5. `git init`, local identity `pastorius9 <177642243+pastorius9@users.noreply.github.com>`,
-   `core.autocrlf false`, one commit `Grainy RS 0.1.0`.
+   `core.autocrlf false`, one commit `Grainy RS <version>`.
+
+Update (`--update`): the folder must be a previous output of this script (marker in `.git`) with a clean
+`git status`. Everything in it except `.git` is deleted, steps 2-4 run, and the result is committed as one new
+commit on the branch that is checked out there (nothing when nothing changed). The history already published
+stays; the private history is still never copied.
 
 Nothing is pushed: the folder is only prepared.
 """
@@ -73,6 +81,25 @@ def prepare_folder(out: Path):
     (out / '.git' / MARKER).write_text('made by tools/release/make_public.py\n', encoding='ascii')
 
 
+def prepare_update(out: Path):
+    """`--update`: the previous output, clean, emptied except `.git`."""
+    out = out.resolve()
+    if out == REPO or REPO in out.parents or out in REPO.parents:
+        raise SystemExit(f'refused: {out} overlaps the repository')
+    if not (out / '.git' / MARKER).is_file():
+        raise SystemExit(f'refused: {out} is not an output of make_public.py (no .git/{MARKER})')
+    status = git('status', '--porcelain', cwd=out)
+    if status:
+        raise SystemExit(f'refused: {out} has uncommitted changes:\n{status}')
+    for entry in out.iterdir():
+        if entry.name == '.git':
+            continue
+        if entry.is_dir() and not entry.is_symlink():
+            shutil.rmtree(entry, onerror=on_rm_error)
+        else:
+            entry.unlink()
+
+
 def git(*args, cwd=REPO, capture=True, data=False):
     result = subprocess.run(['git', *args], cwd=cwd, capture_output=capture, check=False)
     if result.returncode != 0:
@@ -126,10 +153,15 @@ def main(argv=None) -> int:
     parser.add_argument('--out', default=str(layout.public_folder()))
     parser.add_argument('--names', default=str(scan_public.DEFAULT_NAMES))
     parser.add_argument('--message', default='Grainy RS ' + layout.version())
+    parser.add_argument('--update', action='store_true',
+                        help='add one commit to the existing public folder instead of starting a fresh history')
     args = parser.parse_args(argv)
     out = Path(args.out)
 
-    prepare_folder(out)
+    if args.update:
+        prepare_update(out)
+    else:
+        prepare_folder(out)
     commit = unpack(args.rev, out)
     print(f'unpacked {args.rev} ({commit[:12]}) into {out}')
     removed = remove_internal(out)
@@ -146,11 +178,15 @@ def main(argv=None) -> int:
         print('\nthe scan did not pass: nothing committed (fix the hits, then run this script again)')
         return 1
 
-    git('init', '-q', '-b', 'main', cwd=out)
+    if not args.update:
+        git('init', '-q', '-b', 'main', cwd=out)
     git('config', 'user.name', NAME, cwd=out)
     git('config', 'user.email', EMAIL, cwd=out)
     git('config', 'core.autocrlf', 'false', cwd=out)
     git('add', '-A', cwd=out)
+    if args.update and not git('status', '--porcelain', cwd=out):
+        print(f'\nnothing changed since the last commit in {out}; nothing committed')
+        return 0
     git('commit', '-q', '-m', args.message, cwd=out)
     status = git('status', '--porcelain', cwd=out)
     head = git('log', '-1', '--format=%H %an <%ae> %s', cwd=out)

@@ -3,6 +3,5 @@ target/
 *.pdb
 __pycache__/
 .venv/
-Cargo.lock
 BRIEF.md
 .scan-names.txt
