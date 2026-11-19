@@ -1,0 +1,151 @@
+{
+ "callback_mode": true,
+ "callbacks": {
+  "inputs": [
+   [
+    0,
+    "4156639003514241024"
+   ],
+   [
+    1,
+    "4156639003514241024"
+   ],
+   [
+    2,
+    "8546976459028168704"
+   ],
+   [
+    3,
+    "8546976459028168704"
+   ]
+  ],
+  "masks": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "points": []
+ },
+ "cb_mask_0_bits": "17294775677643390976",
+ "cb_mask_0_shape": [
+  160,
+  240
+ ],
+ "cb_mask_0_step": 4,
+ "cb_mask_1_bits": "2353039435777441792",
+ "cb_mask_1_shape": [
+  160,
+  240
+ ],
+ "cb_mask_1_step": 4,
+ "cb_mask_2_bits": "11251736503140745216",
+ "cb_mask_2_shape": [
+  160,
+  240
+ ],
+ "cb_mask_2_step": 4,
+ "cb_mask_3_bits": "1468776549376327680",
+ "cb_mask_3_shape": [
+  160,
+  240
+ ],
+ "cb_mask_3_step": 4,
+ "detail_version": 1,
+ "frame": "garden",
+ "layers": [
+  {
+   "adjustments": {
+    "exposure": 1
+   },
+   "components": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.25,
+       0.3
+      ],
+      [
+       0.7,
+       0.85
+      ]
+     ],
+     "type": "radial"
+    }
+   ],
+   "enabled": false
+  },
+  {
+   "adjustments": {
+    "contrast": 30
+   },
+   "components": [
+    {
+     "feather": 50,
+     "points": [
+      [
+       0.15,
+       0.2
+      ],
+      [
+       0.5,
+       0.4
+      ],
+      [
+       0.85,
+       0.25
+      ]
+     ],
+     "radius": 0.06,
+     "type": "brush"
+    }
+   ]
+  },
+  {
+   "adjustments": {
+    "saturation": 50
+   },
+   "components": [
+    {
+     "points": [
+      [
+       0.1,
+       0.9
+      ],
+      [
+       0.6,
+       0.3
+      ]
+     ],
+     "type": "linear"
+    }
+   ],
+   "enabled": false
+  },
+  {
+   "adjustments": {
+    "shadows": 40
+   },
+   "components": [
+    {
+     "range": [
+      0,
+      0.3
+     ],
+     "type": "luma"
+    }
+   ]
+  }
+ ],
+ "output_bits": "6615109703041024000",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "pixel_scale": 1.0,
+ "source_image": null,
+ "transform": "identity"
+}

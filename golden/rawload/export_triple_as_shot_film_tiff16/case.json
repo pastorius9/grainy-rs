@@ -1,0 +1,19 @@
+{
+ "bytes": 90816,
+ "extension": ".tif",
+ "file": "triple.dng",
+ "height": 100,
+ "lossless": true,
+ "options": {
+  "color_space": "sRGB",
+  "format": "TIFF 16-bit",
+  "longest": null,
+  "quality": 95
+ },
+ "settings": {
+  "film_look": "kodak-portra-400",
+  "film_strength": 70.0,
+  "raw_mode": "as_shot"
+ },
+ "width": 150
+}

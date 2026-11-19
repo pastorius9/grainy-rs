@@ -1,0 +1,68 @@
+{
+ "info": {
+  "Adobe RGB": {
+   "channels": 3,
+   "colorspace": "rgb",
+   "description": "Adobe RGB (compatible)",
+   "deviceclass": "display",
+   "pcs": "xyz",
+   "version": 2.1
+  },
+  "Display P3": {
+   "channels": 3,
+   "colorspace": "rgb",
+   "description": "RGB built-in",
+   "deviceclass": "display",
+   "pcs": "xyz",
+   "version": 4.4
+  },
+  "Gray sRGB": {
+   "channels": 1,
+   "colorspace": "gray",
+   "description": "gray built-in",
+   "deviceclass": "display",
+   "pcs": "xyz",
+   "version": 4.4
+  },
+  "Linear ProPhoto": {
+   "channels": 3,
+   "colorspace": "rgb",
+   "description": "RGB built-in",
+   "deviceclass": "display",
+   "pcs": "xyz",
+   "version": 4.4
+  },
+  "Linear sRGB": {
+   "channels": 3,
+   "colorspace": "rgb",
+   "description": "Linear RGB",
+   "deviceclass": "display",
+   "pcs": "xyz",
+   "version": 4.4
+  },
+  "Luma Wide": {
+   "channels": 3,
+   "colorspace": "rgb",
+   "description": "RGB built-in",
+   "deviceclass": "display",
+   "pcs": "xyz",
+   "version": 4.4
+  },
+  "ProPhoto RGB": {
+   "channels": 3,
+   "colorspace": "rgb",
+   "description": "RGB built-in",
+   "deviceclass": "display",
+   "pcs": "xyz",
+   "version": 4.4
+  },
+  "sRGB": {
+   "channels": 3,
+   "colorspace": "rgb",
+   "description": "sRGB built-in",
+   "deviceclass": "display",
+   "pcs": "xyz",
+   "version": 4.4
+  }
+ }
+}

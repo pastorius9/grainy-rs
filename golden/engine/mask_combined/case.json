@@ -1,0 +1,68 @@
+{
+ "mean": [
+  0.3601508244059126,
+  0.36430133747363774,
+  0.36243138918924767
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "masks": [
+   {
+    "adjustments": {
+     "clarity": 40.0,
+     "exposure": 0.6,
+     "texture": 30.0
+    },
+    "components": [
+     {
+      "points": [
+       [
+        0.2,
+        0.2
+       ],
+       [
+        0.8,
+        0.8
+       ]
+      ],
+      "type": "linear"
+     },
+     {
+      "angle": 25.0,
+      "feather": 60,
+      "operation": "subtract",
+      "points": [
+       [
+        0.3,
+        0.3
+       ],
+       [
+        0.7,
+        0.8
+       ]
+      ],
+      "type": "radial"
+     },
+     {
+      "operation": "intersect",
+      "range": [
+       0.3,
+       0.8
+      ],
+      "softness": 0.1,
+      "type": "luma"
+     }
+    ]
+   }
+  ]
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

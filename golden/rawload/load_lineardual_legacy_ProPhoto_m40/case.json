@@ -1,0 +1,33 @@
+{
+ "file": "lineardual.dng",
+ "max_size": 40,
+ "metadata": {
+  "camera": "Synthetic",
+  "decoder": "LibRaw",
+  "file_fingerprint": {
+   "size": 31776
+  },
+  "filename": "lineardual.dng",
+  "format": "DNG",
+  "height": 64,
+  "make": "Grainy",
+  "raw_native": false,
+  "size_mb": 0.03,
+  "source_orientation": 1,
+  "width": 80,
+  "working_space": "ProPhoto"
+ },
+ "mode": "legacy",
+ "native": false,
+ "settings": {
+  "raw_mode": "legacy"
+ },
+ "shape": [
+  32,
+  40,
+  3
+ ],
+ "stride": 1,
+ "type": "ndarray",
+ "working_space": "ProPhoto"
+}

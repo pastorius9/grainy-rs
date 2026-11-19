@@ -1,0 +1,34 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "masks": [
+   {
+    "adjustments": {
+     "exposure": 0.7
+    },
+    "components": [
+     {
+      "auto_mask": true,
+      "auto_tolerance": 0.25,
+      "feather": 40,
+      "points": [
+       [
+        0.3,
+        0.3
+       ],
+       [
+        0.6,
+        0.6
+       ]
+      ],
+      "radius": 0.2,
+      "type": "brush"
+     }
+    ]
+   }
+  ]
+ },
+ "source": "patches",
+ "use_crop": true
+}

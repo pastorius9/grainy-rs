@@ -1,0 +1,42 @@
+{
+ "changed": {},
+ "removed": [],
+ "report": {
+  "message": "밝기 차이가 거의 없어 자동톤을 적용하지 않았습니다.",
+  "status": "flat"
+ },
+ "settings": {
+  "contrast": 20.0,
+  "curve": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.25,
+    0.18
+   ],
+   [
+    0.5,
+    0.5
+   ],
+   [
+    0.75,
+    0.83
+   ],
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "exposure": 0.8,
+  "panels_off": [
+   "basic",
+   "curve",
+   "mixer"
+  ],
+  "raw_mode": "as_shot",
+  "saturation": 30.0
+ },
+ "source": "camera"
+}

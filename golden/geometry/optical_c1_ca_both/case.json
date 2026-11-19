@@ -1,0 +1,16 @@
+{
+ "changes": {
+  "ca_blue": 40.0,
+  "ca_red": 40.0
+ },
+ "error": null,
+ "function": "optical",
+ "input": {
+  "c": 1,
+  "h": 37,
+  "kind": "synth",
+  "seed": 8,
+  "w": 53
+ },
+ "use_crop": true
+}

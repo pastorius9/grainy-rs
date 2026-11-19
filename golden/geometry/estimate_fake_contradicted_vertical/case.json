@@ -1,0 +1,12 @@
+{
+ "detected": true,
+ "error": {
+  "message": "일관된 수평선을 찾지 못했습니다. 가이드를 사용해 주세요.",
+  "type": "AlignmentError"
+ },
+ "height": 400,
+ "lines_none": false,
+ "mode": "vertical",
+ "result": null,
+ "width": 600
+}

@@ -1,0 +1,12 @@
+{
+ "changes": {
+  "parametric": [
+   0,
+   25,
+   0,
+   -40
+  ]
+ },
+ "image": "std:wide",
+ "kind": "tools"
+}

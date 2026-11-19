@@ -1,0 +1,465 @@
+{
+ "installs": [
+  {
+   "closed": false,
+   "infos": [
+    {
+     "text": "가져오기·내보내기 같은 작업이 끝난 뒤 다시 시도해 주세요.",
+     "title": "업데이트"
+    }
+   ],
+   "language": "ko",
+   "launched": [],
+   "name": "busy",
+   "result": false,
+   "warnings": []
+  },
+  {
+   "closed": false,
+   "infos": [],
+   "language": "ko",
+   "launched": [],
+   "name": "fail",
+   "result": false,
+   "warnings": [
+    {
+     "text": "업데이트를 준비하지 못했습니다.\nboom",
+     "title": "업데이트"
+    }
+   ]
+  },
+  {
+   "closed": false,
+   "infos": [],
+   "language": "ko",
+   "launched": [],
+   "name": "cancel",
+   "result": false,
+   "warnings": []
+  },
+  {
+   "closed": true,
+   "infos": [],
+   "language": "ko",
+   "launched": [
+    {
+     "app": "app",
+     "args": [
+      "--probe"
+     ],
+     "staged": "new"
+    }
+   ],
+   "name": "ok",
+   "result": true,
+   "warnings": []
+  },
+  {
+   "closed": false,
+   "infos": [
+    {
+     "text": "Try again when the import or export in progress has finished.",
+     "title": "Update"
+    }
+   ],
+   "language": "en",
+   "launched": [],
+   "name": "busy",
+   "result": false,
+   "warnings": []
+  },
+  {
+   "closed": false,
+   "infos": [],
+   "language": "en",
+   "launched": [],
+   "name": "fail",
+   "result": false,
+   "warnings": [
+    {
+     "text": "The update could not be prepared.\nboom",
+     "title": "Update"
+    }
+   ]
+  },
+  {
+   "closed": false,
+   "infos": [],
+   "language": "en",
+   "launched": [],
+   "name": "cancel",
+   "result": false,
+   "warnings": []
+  },
+  {
+   "closed": true,
+   "infos": [],
+   "language": "en",
+   "launched": [
+    {
+     "app": "app",
+     "args": [
+      "--probe"
+     ],
+     "staged": "new"
+    }
+   ],
+   "name": "ok",
+   "result": true,
+   "warnings": []
+  }
+ ],
+ "interval": 86400,
+ "updates": [
+  {
+   "boxes": [
+    {
+     "buttons": [
+      "자동 확인 켜기",
+      "끄기"
+     ],
+     "detailed": "",
+     "informative": "켜 두면 Grainy를 시작할 때 하루에 한 번 GitHub에서 최신 버전 번호만 확인합니다. 사진이나 사용 정보는 보내지 않으며, 설정 메뉴에서 언제든 끌 수 있습니다.",
+     "text": "새 버전이 나오면 알려 드릴까요?",
+     "title": "업데이트"
+    }
+   ],
+   "fetch_calls": 1,
+   "infos": [],
+   "language": "ko",
+   "name": "first run yes",
+   "picked": 0,
+   "status": "",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [
+    {
+     "buttons": [
+      "자동 확인 켜기",
+      "끄기"
+     ],
+     "detailed": "",
+     "informative": "켜 두면 Grainy를 시작할 때 하루에 한 번 GitHub에서 최신 버전 번호만 확인합니다. 사진이나 사용 정보는 보내지 않으며, 설정 메뉴에서 언제든 끌 수 있습니다.",
+     "text": "새 버전이 나오면 알려 드릴까요?",
+     "title": "업데이트"
+    }
+   ],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "ko",
+   "name": "first run no",
+   "picked": 1,
+   "status": "",
+   "update_check": false,
+   "update_checked_saved": false
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 1,
+   "infos": [],
+   "language": "ko",
+   "name": "due never checked",
+   "picked": null,
+   "status": "",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 1,
+   "infos": [],
+   "language": "ko",
+   "name": "due long ago",
+   "picked": null,
+   "status": "",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "ko",
+   "name": "not due",
+   "picked": null,
+   "status": "",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "ko",
+   "name": "off",
+   "picked": null,
+   "status": "",
+   "update_check": false,
+   "update_checked_saved": false
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "ko",
+   "name": "not packaged",
+   "picked": null,
+   "status": "",
+   "update_check": null,
+   "update_checked_saved": false
+  },
+  {
+   "boxes": [
+    {
+     "buttons": [
+      "새 버전 확인",
+      "계속"
+     ],
+     "detailed": "",
+     "informative": "새 버전에서 고쳐졌을 수 있습니다. GitHub에서 최신 버전 번호를 확인할까요? 사진이나 사용 정보는 보내지 않습니다.",
+     "text": "지난번에 Grainy가 정상적으로 닫히지 않았습니다.",
+     "title": "업데이트"
+    }
+   ],
+   "fetch_calls": 1,
+   "infos": [
+    {
+     "text": "최신 버전을 쓰고 있습니다 (0.6.8).",
+     "title": "업데이트"
+    }
+   ],
+   "language": "ko",
+   "name": "crash asks, yes",
+   "picked": 0,
+   "status": "새 버전을 확인하는 중…",
+   "update_check": null,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [
+    {
+     "buttons": [
+      "새 버전 확인",
+      "계속"
+     ],
+     "detailed": "",
+     "informative": "새 버전에서 고쳐졌을 수 있습니다. GitHub에서 최신 버전 번호를 확인할까요? 사진이나 사용 정보는 보내지 않습니다.",
+     "text": "지난번에 Grainy가 정상적으로 닫히지 않았습니다.",
+     "title": "업데이트"
+    }
+   ],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "ko",
+   "name": "crash asks, continue",
+   "picked": 1,
+   "status": "지난번에 Grainy가 정상적으로 닫히지 않아 사진을 자동으로 열지 않았습니다.",
+   "update_check": null,
+   "update_checked_saved": false
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 1,
+   "infos": [
+    {
+     "text": "최신 버전을 쓰고 있습니다 (0.6.8).",
+     "title": "업데이트"
+    }
+   ],
+   "language": "ko",
+   "name": "crash checks at once",
+   "picked": null,
+   "status": "새 버전을 확인하는 중…",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "ko",
+   "name": "crash not packaged",
+   "picked": null,
+   "status": "지난번에 Grainy가 정상적으로 닫히지 않아 사진을 자동으로 열지 않았습니다.",
+   "update_check": null,
+   "update_checked_saved": false
+  },
+  {
+   "boxes": [
+    {
+     "buttons": [
+      "Turn On",
+      "Turn Off"
+     ],
+     "detailed": "",
+     "informative": "When on, Grainy asks GitHub for the latest version number once a day at start-up. No photos or usage information are sent, and you can turn it off in the Settings menu at any time.",
+     "text": "Would you like to be told about new versions?",
+     "title": "Update"
+    }
+   ],
+   "fetch_calls": 1,
+   "infos": [],
+   "language": "en",
+   "name": "first run yes",
+   "picked": 0,
+   "status": "",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [
+    {
+     "buttons": [
+      "Turn On",
+      "Turn Off"
+     ],
+     "detailed": "",
+     "informative": "When on, Grainy asks GitHub for the latest version number once a day at start-up. No photos or usage information are sent, and you can turn it off in the Settings menu at any time.",
+     "text": "Would you like to be told about new versions?",
+     "title": "Update"
+    }
+   ],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "en",
+   "name": "first run no",
+   "picked": 1,
+   "status": "",
+   "update_check": false,
+   "update_checked_saved": false
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 1,
+   "infos": [],
+   "language": "en",
+   "name": "due never checked",
+   "picked": null,
+   "status": "",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 1,
+   "infos": [],
+   "language": "en",
+   "name": "due long ago",
+   "picked": null,
+   "status": "",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "en",
+   "name": "not due",
+   "picked": null,
+   "status": "",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "en",
+   "name": "off",
+   "picked": null,
+   "status": "",
+   "update_check": false,
+   "update_checked_saved": false
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "en",
+   "name": "not packaged",
+   "picked": null,
+   "status": "",
+   "update_check": null,
+   "update_checked_saved": false
+  },
+  {
+   "boxes": [
+    {
+     "buttons": [
+      "Check for a new version",
+      "Continue"
+     ],
+     "detailed": "",
+     "informative": "A newer version may have fixed this. Check GitHub for the latest version number? No photos or usage data are sent.",
+     "text": "Grainy did not close normally last time.",
+     "title": "Update"
+    }
+   ],
+   "fetch_calls": 1,
+   "infos": [
+    {
+     "text": "You have the latest version (0.6.8).",
+     "title": "Update"
+    }
+   ],
+   "language": "en",
+   "name": "crash asks, yes",
+   "picked": 0,
+   "status": "Checking for a new version…",
+   "update_check": null,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [
+    {
+     "buttons": [
+      "Check for a new version",
+      "Continue"
+     ],
+     "detailed": "",
+     "informative": "A newer version may have fixed this. Check GitHub for the latest version number? No photos or usage data are sent.",
+     "text": "Grainy did not close normally last time.",
+     "title": "Update"
+    }
+   ],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "en",
+   "name": "crash asks, continue",
+   "picked": 1,
+   "status": "Grainy did not close normally last time, so no photo was opened automatically.",
+   "update_check": null,
+   "update_checked_saved": false
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 1,
+   "infos": [
+    {
+     "text": "You have the latest version (0.6.8).",
+     "title": "Update"
+    }
+   ],
+   "language": "en",
+   "name": "crash checks at once",
+   "picked": null,
+   "status": "Checking for a new version…",
+   "update_check": true,
+   "update_checked_saved": true
+  },
+  {
+   "boxes": [],
+   "fetch_calls": 0,
+   "infos": [],
+   "language": "en",
+   "name": "crash not packaged",
+   "picked": null,
+   "status": "Grainy did not close normally last time, so no photo was opened automatically.",
+   "update_check": null,
+   "update_checked_saved": false
+  }
+ ]
+}

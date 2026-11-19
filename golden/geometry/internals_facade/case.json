@@ -1,0 +1,109 @@
+{
+ "height": 240,
+ "results": {
+  "horizon_roll": {
+   "error": {
+    "message": "뚜렷한 수평 기준선을 찾지 못했습니다. 아래 수평 슬라이더로 조절해 주세요.",
+    "type": "AlignmentError"
+   },
+   "value": null
+  },
+  "level": {
+   "error": null,
+   "value": [
+    -2.454220830507939,
+    1.0,
+    "lines-plumb-wide-v3"
+   ]
+  },
+  "plumb_rolls": {
+   "error": null,
+   "value": [
+    {
+     "angle": -2.409142504143325,
+     "both": true,
+     "centred": true,
+     "count": 51,
+     "heights": 4.605573070420086,
+     "score": 1088.1981539700203,
+     "share": 1.0
+    },
+    {
+     "angle": -3.9305121269572396,
+     "both": false,
+     "centred": true,
+     "count": 12,
+     "heights": 1.0763311585401412,
+     "score": 162.17233489697844,
+     "share": 0.2337018959601408
+    },
+    {
+     "angle": -7.792915851975209,
+     "both": false,
+     "centred": true,
+     "count": 13,
+     "heights": 1.1639506281988246,
+     "score": 140.50529769639377,
+     "share": 0.2527265576730189
+    },
+    {
+     "angle": -5.11560979287367,
+     "both": false,
+     "centred": true,
+     "count": 12,
+     "heights": 1.088441756888696,
+     "score": 138.1588546345298,
+     "share": 0.23633144893072264
+    },
+    {
+     "angle": -6.623187280754848,
+     "both": false,
+     "centred": true,
+     "count": 11,
+     "heights": 0.9911069045696748,
+     "score": 131.54120701524218,
+     "share": 0.2151973032270821
+    }
+   ]
+  },
+  "roll": {
+   "error": null,
+   "value": [
+    -2.535494070857183,
+    0.6832359633780257
+   ]
+  },
+  "vanishing_h": {
+   "error": null,
+   "value": [
+    [
+     0.9989458138577054,
+     -0.04548304869930815,
+     -0.006209126925999894
+    ],
+    71,
+    1.0
+   ]
+  },
+  "vanishing_v": {
+   "error": null,
+   "value": [
+    [
+     0.04282692113655456,
+     0.9827161694974927,
+     -0.18009659917427334
+    ],
+    51,
+    1.0
+   ]
+  },
+  "wide_roll": {
+   "error": null,
+   "value": [
+    -2.499299156872553,
+    1.0
+   ]
+  }
+ },
+ "width": 320
+}

@@ -1,0 +1,7 @@
+{
+ "dtype": "uint8",
+ "op": "median",
+ "output_dtype": "uint8",
+ "size": 7,
+ "tolerance": 0.0
+}

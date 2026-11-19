@@ -1,0 +1,51 @@
+{
+ "callback_mode": "points",
+ "callbacks": {
+  "inputs": [
+   [
+    0,
+    "17871913759711166464"
+   ]
+  ],
+  "masks": [
+   0
+  ],
+  "points": []
+ },
+ "cb_mask_0_bits": "0",
+ "cb_mask_0_shape": [
+  64,
+  96
+ ],
+ "cb_mask_0_step": 3,
+ "detail_version": 1,
+ "frame": "patches",
+ "layers": [
+  {
+   "adjustments": {
+    "exposure": 1
+   },
+   "components": [
+    {
+     "points": [
+      [
+       4,
+       4
+      ]
+     ],
+     "type": "brush"
+    }
+   ]
+  }
+ ],
+ "output_bits": "17871913759711166464",
+ "output_shape": [
+  64,
+  96,
+  3
+ ],
+ "output_step": 3,
+ "pixel_scale": 1.0,
+ "source_image": null,
+ "transform": "identity"
+}

@@ -1,0 +1,535 @@
+{
+ "compatible": [
+  {
+   "camera": "Camera",
+   "ids": [
+    "a199c94eab9f04e838d8",
+    "f8e02a93c0bf75188d61",
+    "1deeb1d73e59eda2580a"
+   ],
+   "variant": ""
+  },
+  {
+   "camera": "Crop",
+   "ids": [
+    "a199c94eab9f04e838d8",
+    "0fd9114acf49984cfe70",
+    "f8e02a93c0bf75188d61",
+    "f7a6b365fb2afb2578f6",
+    "547ad06a91f64aebf06c",
+    "1deeb1d73e59eda2580a"
+   ],
+   "variant": ""
+  },
+  {
+   "camera": "Twin",
+   "ids": [
+    "a199c94eab9f04e838d8",
+    "f8e02a93c0bf75188d61",
+    "1deeb1d73e59eda2580a"
+   ],
+   "variant": "one"
+  },
+  {
+   "camera": "Twin",
+   "ids": [
+    "a199c94eab9f04e838d8",
+    "f8e02a93c0bf75188d61",
+    "1deeb1d73e59eda2580a"
+   ],
+   "variant": "two"
+  }
+ ],
+ "matches": [
+  {
+   "camera": "Camera",
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Camera",
+    "focal_length": 50,
+    "lens": "Near 50mm f/2",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "렌즈 후보를 확인해 주세요.",
+   "reason": "렌즈 후보를 확인해 주세요."
+  },
+  {
+   "camera": "Camera",
+   "candidates": [
+    "f8e02a93c0bf75188d61"
+   ],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Camera",
+    "focal_length": 50,
+    "lens": "Direct 50mm f/2",
+    "make": "Test"
+   },
+   "profile": {
+    "aperture": 2.0,
+    "camera": "Camera",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 1.0,
+    "database_file": "synthetic.xml",
+    "distance": 1000.0,
+    "focal": 50.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Test",
+    "name": "Direct 50mm f/2",
+    "orientation": 1,
+    "source": "Lensfun",
+    "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Direct 50mm f/2</model><mount>B</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Camera",
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Camera",
+    "focal_length": 50,
+    "lens": "Transitive 50mm f/2",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "렌즈 후보를 확인해 주세요.",
+   "reason": "렌즈 후보를 확인해 주세요."
+  },
+  {
+   "camera": "Camera",
+   "candidates": [
+    "1deeb1d73e59eda2580a"
+   ],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Camera",
+    "focal_length": 50,
+    "lens": "Tie 50mm f/2",
+    "make": "Test"
+   },
+   "profile": {
+    "aperture": 2.0,
+    "camera": "Camera",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 1.0,
+    "database_file": "synthetic.xml",
+    "distance": 1000.0,
+    "focal": 50.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Test",
+    "name": "Tie 50mm f/2",
+    "orientation": 1,
+    "source": "Lensfun",
+    "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Tie 50mm f/2</model><mount>A</mount><cropfactor>1.0008</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Camera",
+   "candidates": [
+    "a199c94eab9f04e838d8"
+   ],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Camera",
+    "focal_length": 50,
+    "lens": "Crop 50mm f/2",
+    "make": "Test"
+   },
+   "profile": {
+    "aperture": 2.0,
+    "camera": "Camera",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 1.0,
+    "database_file": "synthetic.xml",
+    "distance": 1000.0,
+    "focal": 50.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Test",
+    "name": "Crop 50mm f/2",
+    "orientation": 1,
+    "source": "Lensfun",
+    "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Crop 50mm f/2</model><mount>A</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Camera",
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Camera",
+    "focal_length": 50,
+    "lens": "No match",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "렌즈 후보를 확인해 주세요.",
+   "reason": "렌즈 후보를 확인해 주세요."
+  },
+  {
+   "camera": "Crop",
+   "candidates": [
+    "547ad06a91f64aebf06c",
+    "f7a6b365fb2afb2578f6"
+   ],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Crop",
+    "focal_length": 50,
+    "lens": "Near 50mm f/2",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "렌즈 후보를 확인해 주세요.",
+   "reason": "렌즈 후보를 확인해 주세요."
+  },
+  {
+   "camera": "Crop",
+   "candidates": [
+    "f8e02a93c0bf75188d61"
+   ],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Crop",
+    "focal_length": 50,
+    "lens": "Direct 50mm f/2",
+    "make": "Test"
+   },
+   "profile": {
+    "aperture": 2.0,
+    "camera": "Crop",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 1.5,
+    "database_file": "synthetic.xml",
+    "distance": 1000.0,
+    "focal": 50.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Test",
+    "name": "Direct 50mm f/2",
+    "orientation": 1,
+    "source": "Lensfun",
+    "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Direct 50mm f/2</model><mount>B</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Crop",
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Crop",
+    "focal_length": 50,
+    "lens": "Transitive 50mm f/2",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "렌즈 후보를 확인해 주세요.",
+   "reason": "렌즈 후보를 확인해 주세요."
+  },
+  {
+   "camera": "Crop",
+   "candidates": [
+    "1deeb1d73e59eda2580a"
+   ],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Crop",
+    "focal_length": 50,
+    "lens": "Tie 50mm f/2",
+    "make": "Test"
+   },
+   "profile": {
+    "aperture": 2.0,
+    "camera": "Crop",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 1.5,
+    "database_file": "synthetic.xml",
+    "distance": 1000.0,
+    "focal": 50.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Test",
+    "name": "Tie 50mm f/2",
+    "orientation": 1,
+    "source": "Lensfun",
+    "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Tie 50mm f/2</model><mount>A</mount><cropfactor>1.0008</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Crop",
+   "candidates": [
+    "0fd9114acf49984cfe70"
+   ],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Crop",
+    "focal_length": 50,
+    "lens": "Crop 50mm f/2",
+    "make": "Test"
+   },
+   "profile": {
+    "aperture": 2.0,
+    "camera": "Crop",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 1.5,
+    "database_file": "synthetic.xml",
+    "distance": 1000.0,
+    "focal": 50.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Test",
+    "name": "Crop 50mm f/2",
+    "orientation": 1,
+    "source": "Lensfun",
+    "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Crop 50mm f/2</model><mount>A</mount><cropfactor>1.5</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Crop",
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Crop",
+    "focal_length": 50,
+    "lens": "No match",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "렌즈 후보를 확인해 주세요.",
+   "reason": "렌즈 후보를 확인해 주세요."
+  },
+  {
+   "camera": null,
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Twin",
+    "focal_length": 50,
+    "lens": "Near 50mm f/2",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  },
+  {
+   "camera": null,
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Twin",
+    "focal_length": 50,
+    "lens": "Direct 50mm f/2",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  },
+  {
+   "camera": null,
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Twin",
+    "focal_length": 50,
+    "lens": "Transitive 50mm f/2",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  },
+  {
+   "camera": null,
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Twin",
+    "focal_length": 50,
+    "lens": "Tie 50mm f/2",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  },
+  {
+   "camera": null,
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Twin",
+    "focal_length": 50,
+    "lens": "Crop 50mm f/2",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  },
+  {
+   "camera": null,
+   "candidates": [],
+   "metadata": {
+    "aperture": 2,
+    "camera": "Twin",
+    "focal_length": 50,
+    "lens": "No match",
+    "make": "Test"
+   },
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  }
+ ],
+ "records": [
+  {
+   "crop": 1.0,
+   "file": "synthetic.xml",
+   "id": "a199c94eab9f04e838d8",
+   "maker": "Test",
+   "model": "Crop 50mm f/2",
+   "mounts": [
+    "A"
+   ],
+   "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Crop 50mm f/2</model><mount>A</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+  },
+  {
+   "crop": 1.5,
+   "file": "synthetic.xml",
+   "id": "0fd9114acf49984cfe70",
+   "maker": "Test",
+   "model": "Crop 50mm f/2",
+   "mounts": [
+    "A"
+   ],
+   "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Crop 50mm f/2</model><mount>A</mount><cropfactor>1.5</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+  },
+  {
+   "crop": 1.0,
+   "file": "synthetic.xml",
+   "id": "f8e02a93c0bf75188d61",
+   "maker": "Test",
+   "model": "Direct 50mm f/2",
+   "mounts": [
+    "B"
+   ],
+   "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Direct 50mm f/2</model><mount>B</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+  },
+  {
+   "crop": 1.04166,
+   "file": "synthetic.xml",
+   "id": "f7a6b365fb2afb2578f6",
+   "maker": "Test",
+   "model": "Near 50mm f/2",
+   "mounts": [
+    "A"
+   ],
+   "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Near 50mm f/2</model><mount>A</mount><cropfactor>1.04166</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+  },
+  {
+   "crop": 1.04167,
+   "file": "synthetic.xml",
+   "id": "547ad06a91f64aebf06c",
+   "maker": "Test",
+   "model": "Near 50mm f/2",
+   "mounts": [
+    "A"
+   ],
+   "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Near 50mm f/2</model><mount>A</mount><cropfactor>1.04167</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+  },
+  {
+   "crop": 1.0,
+   "file": "synthetic.xml",
+   "id": "95b5bf01608941abbd36",
+   "maker": "Test",
+   "model": "Tie 50mm f/2",
+   "mounts": [
+    "A"
+   ],
+   "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Tie 50mm f/2</model><mount>A</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+  },
+  {
+   "crop": 1.0008,
+   "file": "synthetic.xml",
+   "id": "1deeb1d73e59eda2580a",
+   "maker": "Test",
+   "model": "Tie 50mm f/2",
+   "mounts": [
+    "A"
+   ],
+   "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Tie 50mm f/2</model><mount>A</mount><cropfactor>1.0008</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+  },
+  {
+   "crop": 1.0,
+   "file": "synthetic.xml",
+   "id": "94d9f9a3de2b42024eab",
+   "maker": "Test",
+   "model": "Transitive 50mm f/2",
+   "mounts": [
+    "C"
+   ],
+   "xml": "<lensdatabase version=\"1\"><lens><maker>Test</maker><model>Transitive 50mm f/2</model><mount>C</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\" /></calibration></lens></lensdatabase>"
+  }
+ ],
+ "xml": "<lensdatabase version=\"1\"><mount><name>A</name><compat>B</compat></mount><mount><name>B</name><compat>C</compat></mount><mount><name>C</name></mount><camera><maker>Test</maker><model>Camera</model><variant></variant><mount>A</mount><cropfactor>1</cropfactor></camera><camera><maker>Test</maker><model>Crop</model><variant></variant><mount>A</mount><cropfactor>1.5</cropfactor></camera><camera><maker>Test</maker><model>Twin</model><variant>one</variant><mount>A</mount><cropfactor>1</cropfactor></camera><camera><maker>Test</maker><model>Twin</model><variant>two</variant><mount>A</mount><cropfactor>1</cropfactor></camera><lens><maker>Test</maker><model>Near 50mm f/2</model><mount>A</mount><cropfactor>1.04166</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\"/></calibration></lens><lens><maker>Test</maker><model>Near 50mm f/2</model><mount>A</mount><cropfactor>1.04167</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\"/></calibration></lens><lens><maker>Test</maker><model>Direct 50mm f/2</model><mount>B</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\"/></calibration></lens><lens><maker>Test</maker><model>Transitive 50mm f/2</model><mount>C</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\"/></calibration></lens><lens><maker>Test</maker><model>Tie 50mm f/2</model><mount>A</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\"/></calibration></lens><lens><maker>Test</maker><model>Tie 50mm f/2</model><mount>A</mount><cropfactor>1.0008</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\"/></calibration></lens><lens><maker>Test</maker><model>Crop 50mm f/2</model><mount>A</mount><cropfactor>1</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\"/></calibration></lens><lens><maker>Test</maker><model>Crop 50mm f/2</model><mount>A</mount><cropfactor>1.5</cropfactor><calibration><distortion model=\"poly3\" focal=\"50\" k1=\".01\"/></calibration></lens></lensdatabase>"
+}

@@ -1,0 +1,33 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "masks": [
+   {
+    "adjustments": {
+     "contrast": 30.0,
+     "saturation": -80.0
+    },
+    "components": [
+     {
+      "angle": 25.0,
+      "feather": 60,
+      "points": [
+       [
+        0.3,
+        0.3
+       ],
+       [
+        0.7,
+        0.8
+       ]
+      ],
+      "type": "radial"
+     }
+    ]
+   }
+  ]
+ },
+ "source": "colours",
+ "use_crop": true
+}

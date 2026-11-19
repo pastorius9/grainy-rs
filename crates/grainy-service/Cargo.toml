@@ -1,0 +1,26 @@
+[package]
+name = "grainy-service"
+description = "Grainy's photo operations shared by the batch commands and the AI connection: edits, batches, undo, labels, export plans"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-geometry = { path = "../grainy-geometry" }
+grainy-core.workspace = true
+grainy-catalog = { path = "../grainy-catalog" }
+grainy-film = { path = "../grainy-film" }
+serde_json = { workspace = true, features = ["preserve_order", "float_roundtrip"] }
+thiserror.workspace = true
+chrono.workspace = true
+unicode-normalization = "0.1"
+unicode-casefold = "0.2"
+
+[dev-dependencies]
+sha2.workspace = true
+grainy-testkit.workspace = true
+grainy-i18n = { path = "../grainy-i18n" }
+
+[lints]
+workspace = true

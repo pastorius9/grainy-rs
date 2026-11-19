@@ -1,0 +1,28 @@
+[package]
+name = "grainy-cms"
+description = "Grainy's colour management: built-in ICC profiles and LittleCMS 2.19 transforms (the oracle's colorio/native_color)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license = "MIT"
+build = "build.rs"
+links = "lcms2"
+
+[dependencies]
+grainy-core.workspace = true
+grainy-color = { path = "../grainy-color" }
+ndarray.workspace = true
+rayon.workspace = true
+thiserror.workspace = true
+sha2 = "0.10"
+
+[build-dependencies]
+cc = "1.2"
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+serde_json.workspace = true
+
+# The workspace denies `unsafe_code`; lib.rs allows it on the FFI module `sys` only.
+[lints]
+workspace = true

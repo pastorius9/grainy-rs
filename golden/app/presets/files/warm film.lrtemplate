@@ -1,0 +1,1 @@
+s = { id = "x", title = "T", type = "Develop", version = 0, value = { settings = { Exposure2012 = 0.25, Contrast2012 = 15, Highlights2012 = -20, Saturation = -8, Dehaze = 12, GrainAmount = 20 } } }

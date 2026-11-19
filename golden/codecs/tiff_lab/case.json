@@ -1,0 +1,18 @@
+{
+ "cms_calls": 1,
+ "file": "input.tif",
+ "max_size": null,
+ "metadata": {
+  "bit_depth": 8,
+  "decoder": "TIFF 8-bit",
+  "filename": "input.tif",
+  "format": "TIF",
+  "height": 19,
+  "size_mb": 0.0,
+  "source_orientation": 1,
+  "width": 31,
+  "working_space": "sRGB"
+ },
+ "read_metadata": {},
+ "working": "sRGB"
+}

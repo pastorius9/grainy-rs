@@ -1,0 +1,8 @@
+{
+ "error": {
+  "kind": "AlignmentError",
+  "message": "사진이 너무 작아 자동 정렬을 계산할 수 없습니다."
+ },
+ "mode": "full",
+ "source": "scene_tiny"
+}

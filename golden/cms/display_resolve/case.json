@@ -1,0 +1,164 @@
+{
+ "resolved": {
+  "auto_mac_garbage": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": true,
+   "message": "cmsOpenProfileFromMem returned NULL\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요.",
+   "mode": "auto",
+   "path": "",
+   "screen": "Studio Display (2)"
+  },
+  "auto_mac_noname": {
+   "data_sha256": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "description": "RGB built-in",
+   "digest": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "error": false,
+   "message": "macOS가 현재 모니터에 제공한 프로파일입니다.",
+   "mode": "auto",
+   "path": "",
+   "screen": " (2)"
+  },
+  "auto_mac_none": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": false,
+   "message": "macOS 기본 색상(sRGB)을 사용합니다.",
+   "mode": "auto",
+   "path": "",
+   "screen": "Studio Display (2)"
+  },
+  "auto_mac_p3": {
+   "data_sha256": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "description": "Studio Display",
+   "digest": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "error": false,
+   "message": "macOS가 현재 모니터에 제공한 프로파일입니다.",
+   "mode": "auto",
+   "path": "",
+   "screen": "Studio Display (2)"
+  },
+  "auto_windows_error": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": true,
+   "message": "Windows 모니터 이름을 확인할 수 없습니다.\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요.",
+   "mode": "auto",
+   "path": "",
+   "screen": "bad"
+  },
+  "auto_windows_none": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": false,
+   "message": "Windows 기본 색상(sRGB)을 사용합니다.",
+   "mode": "auto",
+   "path": "",
+   "screen": ""
+  },
+  "auto_windows_p3": {
+   "data_sha256": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "description": "RGB built-in",
+   "digest": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "error": false,
+   "message": "Windows가 현재 모니터에 제공한 프로파일입니다.",
+   "mode": "auto",
+   "path": "p3.icc",
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  "bogus_mode": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": true,
+   "message": "화면 색상 모드를 확인하세요.\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요.",
+   "mode": "bogus",
+   "path": "",
+   "screen": "S1"
+  },
+  "manual_garbage": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": true,
+   "message": "cmsOpenProfileFromMem returned NULL\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요.",
+   "mode": "manual",
+   "path": "garbage.icc",
+   "screen": "S1"
+  },
+  "manual_gray": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": true,
+   "message": "화면용 RGB ICC 프로파일을 선택하세요.\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요.",
+   "mode": "manual",
+   "path": "gray.icc",
+   "screen": "S1"
+  },
+  "manual_lut": {
+   "data_sha256": "8715279cb11c073ea155b37bbd9f212aa7b9165096e60b2663c09151403a441a",
+   "description": "Grainy test LUT RGB",
+   "digest": "8715279cb11c073ea155b37bbd9f212aa7b9165096e60b2663c09151403a441a",
+   "error": false,
+   "message": "직접 선택한 화면 프로파일입니다.",
+   "mode": "manual",
+   "path": "lut.icc",
+   "screen": "S1"
+  },
+  "manual_mac_p3": {
+   "data_sha256": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "description": "RGB built-in",
+   "digest": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "error": false,
+   "message": "직접 선택한 화면 프로파일입니다.",
+   "mode": "manual",
+   "path": "p3.icc",
+   "screen": "Studio Display (2)"
+  },
+  "manual_none": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": true,
+   "message": "ICC 프로파일 파일을 선택하세요.\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요.",
+   "mode": "manual",
+   "path": "",
+   "screen": "S1"
+  },
+  "manual_p3": {
+   "data_sha256": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "description": "RGB built-in",
+   "digest": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1",
+   "error": false,
+   "message": "직접 선택한 화면 프로파일입니다.",
+   "mode": "manual",
+   "path": "p3.icc",
+   "screen": "S1"
+  },
+  "off": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": false,
+   "message": "앱의 화면 색상 보정이 꺼져 있습니다.",
+   "mode": "off",
+   "path": "",
+   "screen": "S1"
+  },
+  "off_mac": {
+   "data_sha256": null,
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": false,
+   "message": "앱의 화면 색상 보정이 꺼져 있습니다.",
+   "mode": "off",
+   "path": "",
+   "screen": "Studio Display (2)"
+  }
+ }
+}

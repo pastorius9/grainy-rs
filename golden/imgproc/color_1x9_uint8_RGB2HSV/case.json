@@ -1,0 +1,7 @@
+{
+ "code": "RGB2HSV",
+ "dtype": "uint8",
+ "op": "color",
+ "output_dtype": "uint8",
+ "tolerance": 1.0
+}

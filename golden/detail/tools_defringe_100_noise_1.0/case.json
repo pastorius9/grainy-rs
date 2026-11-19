@@ -1,0 +1,13 @@
+{
+ "bits_sum": "12629670629809848320",
+ "image": "noise",
+ "pixel_scale": 1.0,
+ "settings": {
+  "defringe": 100.0,
+  "detail_version": 3
+ },
+ "step": [
+  3,
+  3
+ ]
+}

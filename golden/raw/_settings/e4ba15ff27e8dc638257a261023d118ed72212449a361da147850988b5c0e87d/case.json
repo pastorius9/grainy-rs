@@ -1,0 +1,17 @@
+{
+ "dcp_profile": {
+  "camera": "",
+  "copyright": "",
+  "data": "SUlSQwgAAAACACHGDAAJAAAAJgAAAFrGAwABAAAAFQAAAAAAAACPwvUoXI/qP3sUrkfherS/exSuR+F6pL/sUbgehevBv+xRuB6F6/E/exSuR+F6tD+4HoXrUbievwrXo3A9Crc/uB6F61G45j8=",
+  "name": "DCP",
+  "sha256": "7135574994ee33db240d13bef474e1e01c96d8f9c7a3b691795fde3f044c9486"
+ },
+ "raw_kelvin": 4300.0,
+ "raw_mode": "as_shot",
+ "raw_neutral": [
+  0.5,
+  1,
+  0.7
+ ],
+ "raw_tint": -18.0
+}

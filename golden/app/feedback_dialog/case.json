@@ -1,0 +1,555 @@
+{
+ "facts": {
+  "adapter": "Test GPU",
+  "gpu_enabled": true,
+  "mac_version": "",
+  "machine": "AMD64",
+  "system": "windows",
+  "windows_release": "11",
+  "windows_version": "10.0.26200"
+ },
+ "limit": 4000,
+ "ref_order": [
+  "AAAAA",
+  "BBBBB",
+  "CCCCC",
+  "DDDDD",
+  "EEEEE"
+ ],
+ "runs": [
+  {
+   "language": "ko",
+   "steps": [
+    {
+     "calls": [],
+     "message": "",
+     "name": "opened",
+     "send_enabled": true,
+     "sent": [],
+     "status": ""
+    },
+    {
+     "calls": [],
+     "message": "   ",
+     "name": "empty",
+     "send_enabled": true,
+     "sent": [],
+     "status": "내용을 입력해 주세요."
+    },
+    {
+     "calls": null,
+     "message": "  첫 번째 의견  ",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [],
+     "status": "보내는 중…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ]
+     ],
+     "message": "  첫 번째 의견  ",
+     "name": "failed",
+     "send_enabled": true,
+     "sent": [],
+     "status": "보내지 못했습니다 (boom). 인터넷 연결을 확인하고 다시 시도해 주세요."
+    },
+    {
+     "calls": null,
+     "message": "  첫 번째 의견  ",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [],
+     "status": "보내는 중…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ]
+     ],
+     "message": "",
+     "name": "sent",
+     "send_enabled": true,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "보냈습니다. 고맙습니다. 접수 번호는 #AAAAA입니다. 반영되면 업데이트한 뒤 Grainy가 알려 드립니다."
+    },
+    {
+     "calls": null,
+     "message": "둘째 의견",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "보내는 중…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "둘째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #BBBBB"
+      ]
+     ],
+     "message": "",
+     "name": "second",
+     "send_enabled": true,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "보냈습니다. 고맙습니다. 접수 번호는 #BBBBB입니다. 반영되면 업데이트한 뒤 Grainy가 알려 드립니다."
+    },
+    {
+     "calls": null,
+     "message": "x",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "보내는 중…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "둘째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #BBBBB"
+      ],
+      [
+       "x",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #CCCCC"
+      ]
+     ],
+     "message": "x",
+     "name": "failed x",
+     "send_enabled": true,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "보내지 못했습니다 (boom). 인터넷 연결을 확인하고 다시 시도해 주세요."
+    },
+    {
+     "calls": null,
+     "message": "y",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "보내는 중…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "둘째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #BBBBB"
+      ],
+      [
+       "x",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #CCCCC"
+      ],
+      [
+       "y",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #DDDDD"
+      ]
+     ],
+     "message": "",
+     "name": "sent y",
+     "send_enabled": true,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "DDDDD",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "보냈습니다. 고맙습니다. 접수 번호는 #DDDDD입니다. 반영되면 업데이트한 뒤 Grainy가 알려 드립니다."
+    }
+   ],
+   "texts": {
+    "close": "닫기",
+    "labels": [
+     "문제점이나 개선 아이디어를 자유롭게 적어 주세요. 사진, 파일 이름과 경로는 보내지 않습니다.",
+     "함께 보내는 정보: Grainy 0.6.8 · Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · 보낼 때 정하는 무작위 접수 번호",
+     ""
+    ],
+    "placeholder": "어떤 상황에서 무슨 일이 있었는지, 무엇이 있으면 좋을지 적어 주세요.",
+    "send": "보내기",
+    "size": [
+     520,
+     380
+    ],
+    "system": "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU",
+    "title": "피드백 보내기"
+   }
+  },
+  {
+   "language": "en",
+   "steps": [
+    {
+     "calls": [],
+     "message": "",
+     "name": "opened",
+     "send_enabled": true,
+     "sent": [],
+     "status": ""
+    },
+    {
+     "calls": [],
+     "message": "   ",
+     "name": "empty",
+     "send_enabled": true,
+     "sent": [],
+     "status": "Please enter a message."
+    },
+    {
+     "calls": null,
+     "message": "  첫 번째 의견  ",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [],
+     "status": "Sending…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ]
+     ],
+     "message": "  첫 번째 의견  ",
+     "name": "failed",
+     "send_enabled": true,
+     "sent": [],
+     "status": "Could not send (boom). Check the internet connection and try again."
+    },
+    {
+     "calls": null,
+     "message": "  첫 번째 의견  ",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [],
+     "status": "Sending…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ]
+     ],
+     "message": "",
+     "name": "sent",
+     "send_enabled": true,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "Sent. Thank you. Your reference number is #AAAAA. Once it is addressed, Grainy will tell you after an update."
+    },
+    {
+     "calls": null,
+     "message": "둘째 의견",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "Sending…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "둘째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #BBBBB"
+      ]
+     ],
+     "message": "",
+     "name": "second",
+     "send_enabled": true,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "Sent. Thank you. Your reference number is #BBBBB. Once it is addressed, Grainy will tell you after an update."
+    },
+    {
+     "calls": null,
+     "message": "x",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "Sending…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "둘째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #BBBBB"
+      ],
+      [
+       "x",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #CCCCC"
+      ]
+     ],
+     "message": "x",
+     "name": "failed x",
+     "send_enabled": true,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "Could not send (boom). Check the internet connection and try again."
+    },
+    {
+     "calls": null,
+     "message": "y",
+     "name": "sending",
+     "send_enabled": false,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "Sending…"
+    },
+    {
+     "calls": [
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "첫 번째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #AAAAA"
+      ],
+      [
+       "둘째 의견",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #BBBBB"
+      ],
+      [
+       "x",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #CCCCC"
+      ],
+      [
+       "y",
+       "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · #DDDDD"
+      ]
+     ],
+     "message": "",
+     "name": "sent y",
+     "send_enabled": true,
+     "sent": [
+      {
+       "date": true,
+       "ref": "AAAAA",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "BBBBB",
+       "version": "0.6.8"
+      },
+      {
+       "date": true,
+       "ref": "DDDDD",
+       "version": "0.6.8"
+      }
+     ],
+     "status": "Sent. Thank you. Your reference number is #DDDDD. Once it is addressed, Grainy will tell you after an update."
+    }
+   ],
+   "texts": {
+    "close": "Close",
+    "labels": [
+     "Tell us about a problem or an idea in your own words. Photos, file names and paths are not sent.",
+     "Sent with it: Grainy 0.6.8 · Windows 11 (10.0.26200) · AMD64 · GPU Test GPU · a random reference number, picked when you send",
+     ""
+    ],
+    "placeholder": "Describe what happened, or what you would like to see.",
+    "send": "Send",
+    "size": [
+     520,
+     380
+    ],
+    "system": "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU",
+    "title": "Send Feedback"
+   }
+  }
+ ],
+ "system_lines": [
+  {
+   "adapter": "Test GPU",
+   "enabled": true,
+   "line": "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU",
+   "system": "windows"
+  },
+  {
+   "adapter": "Test GPU",
+   "enabled": false,
+   "line": "Windows 11 (10.0.26200) · AMD64 · GPU Test GPU (off)",
+   "system": "windows"
+  },
+  {
+   "adapter": "",
+   "enabled": false,
+   "line": "Windows 11 (10.0.26200) · AMD64",
+   "system": "windows"
+  },
+  {
+   "adapter": "Apple M2",
+   "enabled": true,
+   "line": "macOS 14.5 · AMD64 · GPU Apple M2",
+   "system": "mac"
+  }
+ ]
+}

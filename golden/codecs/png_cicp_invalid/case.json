@@ -1,0 +1,6 @@
+{
+ "error": "ValueError: 이 PNG의 cICP HDR/영상 색공간은 아직 지원하지 않습니다.",
+ "file": "input.png",
+ "max_size": null,
+ "working": "sRGB"
+}

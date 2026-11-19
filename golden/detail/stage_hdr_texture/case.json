@@ -1,0 +1,9 @@
+{
+ "pixel_scale": 1.0,
+ "settings": {
+  "dehaze": 20.0,
+  "detail_version": 3,
+  "hdr": true,
+  "texture": 60.0
+ }
+}

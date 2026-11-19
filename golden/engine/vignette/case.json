@@ -1,0 +1,13 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "vignette": -60.0,
+  "vignette_feather": 70.0,
+  "vignette_highlights": 50.0,
+  "vignette_midpoint": 30.0,
+  "vignette_roundness": -40.0
+ },
+ "source": "colours",
+ "use_crop": true
+}

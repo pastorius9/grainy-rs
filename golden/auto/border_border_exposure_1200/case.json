@@ -1,0 +1,14 @@
+{
+ "crop": [
+  0.07778,
+  0.08696,
+  0.92222,
+  0.91304
+ ],
+ "longest": 1200,
+ "settings": {
+  "contrast": 15.0,
+  "exposure": 1.2
+ },
+ "source": "border"
+}

@@ -1,0 +1,77 @@
+// zlib 1.3.1 external symbols and the shared JPEG namespace.
+// Compiler-forced include; retained upstream sources are unmodified.
+#ifndef GRAINY_RAW_NATIVE_SYMBOLS_H
+#define GRAINY_RAW_NATIVE_SYMBOLS_H
+#define _dist_code grainy_raw__dist_code
+#define _length_code grainy_raw__length_code
+#define _tr_align grainy_raw__tr_align
+#define _tr_flush_bits grainy_raw__tr_flush_bits
+#define _tr_flush_block grainy_raw__tr_flush_block
+#define _tr_init grainy_raw__tr_init
+#define _tr_stored_block grainy_raw__tr_stored_block
+#define _tr_tally grainy_raw__tr_tally
+#define adler32 grainy_raw_adler32
+#define adler32_combine grainy_raw_adler32_combine
+#define adler32_combine64 grainy_raw_adler32_combine64
+#define adler32_z grainy_raw_adler32_z
+#define compress grainy_raw_compress
+#define compress2 grainy_raw_compress2
+#define compressBound grainy_raw_compressBound
+#define crc32 grainy_raw_crc32
+#define crc32_combine grainy_raw_crc32_combine
+#define crc32_combine64 grainy_raw_crc32_combine64
+#define crc32_combine_gen grainy_raw_crc32_combine_gen
+#define crc32_combine_gen64 grainy_raw_crc32_combine_gen64
+#define crc32_combine_op grainy_raw_crc32_combine_op
+#define crc32_z grainy_raw_crc32_z
+#define deflate grainy_raw_deflate
+#define deflateBound grainy_raw_deflateBound
+#define deflateCopy grainy_raw_deflateCopy
+#define deflateEnd grainy_raw_deflateEnd
+#define deflateGetDictionary grainy_raw_deflateGetDictionary
+#define deflateInit2_ grainy_raw_deflateInit2_
+#define deflateInit_ grainy_raw_deflateInit_
+#define deflateParams grainy_raw_deflateParams
+#define deflatePending grainy_raw_deflatePending
+#define deflatePrime grainy_raw_deflatePrime
+#define deflateReset grainy_raw_deflateReset
+#define deflateResetKeep grainy_raw_deflateResetKeep
+#define deflateSetDictionary grainy_raw_deflateSetDictionary
+#define deflateSetHeader grainy_raw_deflateSetHeader
+#define deflateTune grainy_raw_deflateTune
+#define deflate_copyright grainy_raw_deflate_copyright
+#define get_crc_table grainy_raw_get_crc_table
+#define inflate grainy_raw_inflate
+#define inflateBack grainy_raw_inflateBack
+#define inflateBackEnd grainy_raw_inflateBackEnd
+#define inflateBackInit_ grainy_raw_inflateBackInit_
+#define inflateCodesUsed grainy_raw_inflateCodesUsed
+#define inflateCopy grainy_raw_inflateCopy
+#define inflateEnd grainy_raw_inflateEnd
+#define inflateGetDictionary grainy_raw_inflateGetDictionary
+#define inflateGetHeader grainy_raw_inflateGetHeader
+#define inflateInit2_ grainy_raw_inflateInit2_
+#define inflateInit_ grainy_raw_inflateInit_
+#define inflateMark grainy_raw_inflateMark
+#define inflatePrime grainy_raw_inflatePrime
+#define inflateReset grainy_raw_inflateReset
+#define inflateReset2 grainy_raw_inflateReset2
+#define inflateResetKeep grainy_raw_inflateResetKeep
+#define inflateSetDictionary grainy_raw_inflateSetDictionary
+#define inflateSync grainy_raw_inflateSync
+#define inflateSyncPoint grainy_raw_inflateSyncPoint
+#define inflateUndermine grainy_raw_inflateUndermine
+#define inflateValidate grainy_raw_inflateValidate
+#define inflate_copyright grainy_raw_inflate_copyright
+#define inflate_fast grainy_raw_inflate_fast
+#define inflate_table grainy_raw_inflate_table
+#define uncompress grainy_raw_uncompress
+#define uncompress2 grainy_raw_uncompress2
+#define zError grainy_raw_zError
+#define z_errmsg grainy_raw_z_errmsg
+#define zcalloc grainy_raw_zcalloc
+#define zcfree grainy_raw_zcfree
+#define zlibCompileFlags grainy_raw_zlibCompileFlags
+#define zlibVersion grainy_raw_zlibVersion
+#include "grainy_jpeg_symbols.h"
+#endif

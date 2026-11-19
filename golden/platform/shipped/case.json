@@ -1,0 +1,3618 @@
+{
+ "cases": [
+  {
+   "done": {
+    "1.2.10": [
+     "DDDDD",
+     "EEEEE"
+    ],
+    "1.2.8": [
+     "AAAAA"
+    ],
+    "1.2.9": [
+     "BBBBB",
+     "#ccccc"
+    ],
+    "1.3": [
+     "FFFFF"
+    ],
+    "1.4": [
+     5,
+     null,
+     "##gg"
+    ],
+    "2.0": "not a list",
+    "notes": "x"
+   },
+   "done_text": "{\"1.2.8\": [\"AAAAA\"], \"1.2.9\": [\"BBBBB\", \"#ccccc\"], \"1.2.10\": [\"DDDDD\", \"EEEEE\"], \"1.3\": [\"FFFFF\"], \"notes\": \"x\", \"2.0\": \"not a list\", \"1.4\": [5, null, \"##gg\"]}",
+   "label": "synthetic",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": [
+      "BBBBB",
+      "CCCCC",
+      "DDDDD",
+      "EEEEE"
+     ]
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": [
+      "DDDDD",
+      "EEEEE"
+     ]
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": [
+      "AAAAA"
+     ]
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": [
+      "BBBBB",
+      "CCCCC"
+     ]
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": [
+      "AAAAA",
+      "BBBBB",
+      "CCCCC",
+      "DDDDD",
+      "EEEEE"
+     ]
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": [
+      "CCCCC",
+      "EEEEE"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": [
+      "EEEEE"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": [
+      "EEEEE"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": [
+      "EEEEE"
+     ]
+    }
+   ],
+   "thanked": null,
+   "thanked_present": false,
+   "thanked_text": "null"
+  },
+  {
+   "done": {
+    "1.2.10": [
+     "DDDDD",
+     "EEEEE"
+    ],
+    "1.2.8": [
+     "AAAAA"
+    ],
+    "1.2.9": [
+     "BBBBB",
+     "#ccccc"
+    ],
+    "1.3": [
+     "FFFFF"
+    ],
+    "1.4": [
+     5,
+     null,
+     "##gg"
+    ],
+    "2.0": "not a list",
+    "notes": "x"
+   },
+   "done_text": "{\"1.2.8\": [\"AAAAA\"], \"1.2.9\": [\"BBBBB\", \"#ccccc\"], \"1.2.10\": [\"DDDDD\", \"EEEEE\"], \"1.3\": [\"FFFFF\"], \"notes\": \"x\", \"2.0\": \"not a list\", \"1.4\": [5, null, \"##gg\"]}",
+   "label": "synthetic",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": [
+      "BBBBB",
+      "CCCCC",
+      "DDDDD"
+     ]
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": [
+      "DDDDD"
+     ]
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": [
+      "AAAAA"
+     ]
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": [
+      "BBBBB",
+      "CCCCC"
+     ]
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": [
+      "AAAAA",
+      "BBBBB",
+      "CCCCC",
+      "DDDDD"
+     ]
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": [
+      "CCCCC"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": [
+    "ZZZZZ",
+    "EEEEE"
+   ],
+   "thanked_present": true,
+   "thanked_text": "[\"ZZZZZ\", \"EEEEE\"]"
+  },
+  {
+   "done": {
+    "1.2.10": [
+     "DDDDD",
+     "EEEEE"
+    ],
+    "1.2.8": [
+     "AAAAA"
+    ],
+    "1.2.9": [
+     "BBBBB",
+     "#ccccc"
+    ],
+    "1.3": [
+     "FFFFF"
+    ],
+    "1.4": [
+     5,
+     null,
+     "##gg"
+    ],
+    "2.0": "not a list",
+    "notes": "x"
+   },
+   "done_text": "{\"1.2.8\": [\"AAAAA\"], \"1.2.9\": [\"BBBBB\", \"#ccccc\"], \"1.2.10\": [\"DDDDD\", \"EEEEE\"], \"1.3\": [\"FFFFF\"], \"notes\": \"x\", \"2.0\": \"not a list\", \"1.4\": [5, null, \"##gg\"]}",
+   "label": "synthetic",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": [
+      "BBBBB",
+      "CCCCC",
+      "DDDDD",
+      "EEEEE"
+     ]
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": [
+      "DDDDD",
+      "EEEEE"
+     ]
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": [
+      "AAAAA"
+     ]
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": [
+      "BBBBB",
+      "CCCCC"
+     ]
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": [
+      "AAAAA",
+      "BBBBB",
+      "CCCCC",
+      "DDDDD",
+      "EEEEE"
+     ]
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": [
+      "CCCCC",
+      "EEEEE"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": [
+      "EEEEE"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": [
+      "EEEEE"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": [
+      "EEEEE"
+     ]
+    }
+   ],
+   "thanked": [],
+   "thanked_present": true,
+   "thanked_text": "[]"
+  },
+  {
+   "done": {
+    "1.2.10": [
+     "DDDDD",
+     "EEEEE"
+    ],
+    "1.2.8": [
+     "AAAAA"
+    ],
+    "1.2.9": [
+     "BBBBB",
+     "#ccccc"
+    ],
+    "1.3": [
+     "FFFFF"
+    ],
+    "1.4": [
+     5,
+     null,
+     "##gg"
+    ],
+    "2.0": "not a list",
+    "notes": "x"
+   },
+   "done_text": "{\"1.2.8\": [\"AAAAA\"], \"1.2.9\": [\"BBBBB\", \"#ccccc\"], \"1.2.10\": [\"DDDDD\", \"EEEEE\"], \"1.3\": [\"FFFFF\"], \"notes\": \"x\", \"2.0\": \"not a list\", \"1.4\": [5, null, \"##gg\"]}",
+   "label": "synthetic",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": [
+      "BBBBB",
+      "CCCCC",
+      "DDDDD",
+      "EEEEE"
+     ]
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": [
+      "DDDDD",
+      "EEEEE"
+     ]
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": [
+      "AAAAA"
+     ]
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": [
+      "BBBBB",
+      "CCCCC"
+     ]
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": [
+      "AAAAA",
+      "BBBBB",
+      "CCCCC",
+      "DDDDD",
+      "EEEEE"
+     ]
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": [
+      "CCCCC",
+      "EEEEE"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": [
+      "EEEEE"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": [
+      "EEEEE"
+     ]
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": [
+      "EEEEE"
+     ]
+    }
+   ],
+   "thanked": "not a list",
+   "thanked_present": true,
+   "thanked_text": "\"not a list\""
+  },
+  {
+   "done": {
+    "0.5.96": [
+     "UMJ92"
+    ],
+    "0.6.0": [
+     "BATFX"
+    ],
+    "0.6.6": [
+     "NGYZP"
+    ]
+   },
+   "done_text": null,
+   "label": "real",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": [
+      "UMJ92",
+      "BATFX",
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": [
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": [
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": [
+      "BATFX"
+     ]
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": [
+      "BATFX"
+     ]
+    }
+   ],
+   "root_kind": "real",
+   "sent": [
+    {
+     "ref": "UMJ92",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BATFX",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "NGYZP",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "ZZZZZ",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "NOPE1"
+    }
+   ],
+   "sent_text": "[{\"ref\": \"UMJ92\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BATFX\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"NGYZP\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"ZZZZZ\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"NOPE1\"}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": null,
+   "thanked_present": false,
+   "thanked_text": "null"
+  },
+  {
+   "done": {
+    "0.5.96": [
+     "UMJ92"
+    ],
+    "0.6.0": [
+     "BATFX"
+    ],
+    "0.6.6": [
+     "NGYZP"
+    ]
+   },
+   "done_text": null,
+   "label": "real",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": [
+      "UMJ92",
+      "BATFX",
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": [
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": [
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": [
+      "BATFX"
+     ]
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": [
+      "BATFX"
+     ]
+    }
+   ],
+   "root_kind": "real",
+   "sent": [
+    {
+     "ref": "UMJ92",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BATFX",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "NGYZP",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "ZZZZZ",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "NOPE1"
+    }
+   ],
+   "sent_text": "[{\"ref\": \"UMJ92\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BATFX\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"NGYZP\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"ZZZZZ\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"NOPE1\"}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"ZZZZZ\",\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"ZZZZZ\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"ZZZZZ\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"ZZZZZ\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": [
+    "ZZZZZ",
+    "EEEEE"
+   ],
+   "thanked_present": true,
+   "thanked_text": "[\"ZZZZZ\", \"EEEEE\"]"
+  },
+  {
+   "done": {
+    "0.5.96": [
+     "UMJ92"
+    ],
+    "0.6.0": [
+     "BATFX"
+    ],
+    "0.6.6": [
+     "NGYZP"
+    ]
+   },
+   "done_text": null,
+   "label": "real",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": [
+      "UMJ92",
+      "BATFX",
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": [
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": [
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": [
+      "BATFX"
+     ]
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": [
+      "BATFX"
+     ]
+    }
+   ],
+   "root_kind": "real",
+   "sent": [
+    {
+     "ref": "UMJ92",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BATFX",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "NGYZP",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "ZZZZZ",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "NOPE1"
+    }
+   ],
+   "sent_text": "[{\"ref\": \"UMJ92\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BATFX\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"NGYZP\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"ZZZZZ\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"NOPE1\"}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": [],
+   "thanked_present": true,
+   "thanked_text": "[]"
+  },
+  {
+   "done": {
+    "0.5.96": [
+     "UMJ92"
+    ],
+    "0.6.0": [
+     "BATFX"
+    ],
+    "0.6.6": [
+     "NGYZP"
+    ]
+   },
+   "done_text": null,
+   "label": "real",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": [
+      "UMJ92",
+      "BATFX",
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": [
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": [
+      "NGYZP"
+     ]
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": [
+      "BATFX"
+     ]
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": [
+      "BATFX"
+     ]
+    }
+   ],
+   "root_kind": "real",
+   "sent": [
+    {
+     "ref": "UMJ92",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BATFX",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "NGYZP",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "ZZZZZ",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "NOPE1"
+    }
+   ],
+   "sent_text": "[{\"ref\": \"UMJ92\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BATFX\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"NGYZP\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"ZZZZZ\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"NOPE1\"}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"UMJ92\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BATFX\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NGYZP\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"ZZZZZ\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"NOPE1\"\n    }\n  ],\n  \"feedback_thanked\": [\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": "not a list",
+   "thanked_present": true,
+   "thanked_text": "\"not a list\""
+  },
+  {
+   "done": {},
+   "done_text": "[",
+   "label": "damaged",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": null,
+   "thanked_present": false,
+   "thanked_text": "null"
+  },
+  {
+   "done": {},
+   "done_text": "[",
+   "label": "damaged",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": [
+    "ZZZZZ",
+    "EEEEE"
+   ],
+   "thanked_present": true,
+   "thanked_text": "[\"ZZZZZ\", \"EEEEE\"]"
+  },
+  {
+   "done": {},
+   "done_text": "[",
+   "label": "damaged",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": [],
+   "thanked_present": true,
+   "thanked_text": "[]"
+  },
+  {
+   "done": {},
+   "done_text": "[",
+   "label": "damaged",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": "not a list",
+   "thanked_present": true,
+   "thanked_text": "\"not a list\""
+  },
+  {
+   "done": {},
+   "done_text": "[1]",
+   "label": "list",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": null,
+   "thanked_present": false,
+   "thanked_text": "null"
+  },
+  {
+   "done": {},
+   "done_text": "[1]",
+   "label": "list",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": [
+    "ZZZZZ",
+    "EEEEE"
+   ],
+   "thanked_present": true,
+   "thanked_text": "[\"ZZZZZ\", \"EEEEE\"]"
+  },
+  {
+   "done": {},
+   "done_text": "[1]",
+   "label": "list",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": [],
+   "thanked_present": true,
+   "thanked_text": "[]"
+  },
+  {
+   "done": {},
+   "done_text": "[1]",
+   "label": "list",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "synthetic",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": "not a list",
+   "thanked_present": true,
+   "thanked_text": "\"not a list\""
+  },
+  {
+   "done": {},
+   "done_text": null,
+   "label": "missing",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "missing",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": null,
+   "thanked_present": false,
+   "thanked_text": "null"
+  },
+  {
+   "done": {},
+   "done_text": null,
+   "label": "missing",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "missing",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"EEEEE\",\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": [
+    "ZZZZZ",
+    "EEEEE"
+   ],
+   "thanked_present": true,
+   "thanked_text": "[\"ZZZZZ\", \"EEEEE\"]"
+  },
+  {
+   "done": {},
+   "done_text": null,
+   "label": "missing",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "missing",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": [],
+   "thanked_present": true,
+   "thanked_text": "[]"
+  },
+  {
+   "done": {},
+   "done_text": null,
+   "label": "missing",
+   "results": [
+    {
+     "current": "1.2.10",
+     "previous": "1.2.8",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.9",
+     "shipped": []
+    },
+    {
+     "current": "1.2.8",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.2.10",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "1.2.9",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.3",
+     "previous": "1.2.10",
+     "shipped": []
+    },
+    {
+     "current": "2.0",
+     "previous": "1.0",
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "1.4",
+     "previous": "1.3",
+     "shipped": []
+    },
+    {
+     "current": "1.0",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.5.90",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": "0.6.5",
+     "shipped": []
+    },
+    {
+     "current": "0.6.6",
+     "previous": null,
+     "shipped": []
+    },
+    {
+     "current": "0.6.8",
+     "previous": "0.6.6",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "0.5.96",
+     "shipped": []
+    },
+    {
+     "current": "0.6.0",
+     "previous": "",
+     "shipped": []
+    }
+   ],
+   "root_kind": "missing",
+   "sent": [
+    {
+     "ref": "AAAAA",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "BBBBB",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "CCCCC",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "DDDDD",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "EEEEE",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    {
+     "ref": "GGGGG",
+     "sent": "2026-10-16",
+     "version": "0.5.94"
+    },
+    "damaged",
+    {
+     "ref": 5
+    }
+   ],
+   "sent_text": "[{\"ref\": \"AAAAA\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"BBBBB\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"CCCCC\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"DDDDD\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"EEEEE\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, {\"ref\": \"GGGGG\", \"version\": \"0.5.94\", \"sent\": \"2026-10-16\"}, \"damaged\", {\"ref\": 5}]",
+   "thank_steps": [
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\"\n  ]\n}",
+     "refs": [
+      "BBBBB",
+      "DDDDD"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [
+      "CCCCC"
+     ],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\"\n  ]\n}",
+     "refs": [],
+     "shipped_after": []
+    },
+    {
+     "file": "{\n  \"feedback_sent\": [\n    {\n      \"ref\": \"AAAAA\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"BBBBB\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"CCCCC\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"DDDDD\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"EEEEE\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    {\n      \"ref\": \"GGGGG\",\n      \"version\": \"0.5.94\",\n      \"sent\": \"2026-10-16\"\n    },\n    \"damaged\",\n    {\n      \"ref\": 5\n    }\n  ],\n  \"feedback_thanked\": [\n    \"BBBBB\",\n    \"DDDDD\",\n    \"CCCCC\",\n    \"AAAAA\"\n  ]\n}",
+     "refs": [
+      "AAAAA"
+     ],
+     "shipped_after": []
+    }
+   ],
+   "thanked": "not a list",
+   "thanked_present": true,
+   "thanked_text": "\"not a list\""
+  }
+ ],
+ "real_refs": [
+  "UMJ92",
+  "BATFX",
+  "NGYZP"
+ ],
+ "thanks": {
+  "en": [
+   {
+    "refs": [
+     "K7Q2M"
+    ],
+    "text": "Your feedback (#K7Q2M) made it into this update. Thank you."
+   },
+   {
+    "refs": [
+     "K7Q2M",
+     "A3BC4"
+    ],
+    "text": "Your feedback (#K7Q2M, #A3BC4) made it into this update. Thank you."
+   },
+   {
+    "refs": [],
+    "text": "Your feedback () made it into this update. Thank you."
+   }
+  ],
+  "ko": [
+   {
+    "refs": [
+     "K7Q2M"
+    ],
+    "text": "보내 주신 피드백(#K7Q2M)이 이번 업데이트에 반영되었습니다. 고맙습니다."
+   },
+   {
+    "refs": [
+     "K7Q2M",
+     "A3BC4"
+    ],
+    "text": "보내 주신 피드백(#K7Q2M, #A3BC4)이 이번 업데이트에 반영되었습니다. 고맙습니다."
+   },
+   {
+    "refs": [],
+    "text": "보내 주신 피드백()이 이번 업데이트에 반영되었습니다. 고맙습니다."
+   }
+  ]
+ }
+}

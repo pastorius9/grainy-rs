@@ -1,0 +1,50 @@
+{
+ "checked": {
+  "Adobe RGB": {
+   "description": "Adobe RGB (compatible)",
+   "digest": "562283a79afd97b68ca0739b2ad28ad202233dc4e8783ce517e6f522a1fe4d94"
+  },
+  "Display P3": {
+   "description": "RGB built-in",
+   "digest": "7e423a9ad61a5dbcea1c50f03378d38831cc0d2d82d856fb21f98717c41f43c1"
+  },
+  "Gray sRGB": {
+   "error": [
+    "ValueError",
+    "화면용 RGB ICC 프로파일을 선택하세요."
+   ]
+  },
+  "Linear ProPhoto": {
+   "description": "RGB built-in",
+   "digest": "70b39712e2211ba6813a8c4a20e97a2b63497aa029ac5d44ce94a85932e2362e"
+  },
+  "Linear sRGB": {
+   "description": "Linear RGB",
+   "digest": "b3d7c7465fa4e26f6e78553c91c544e5e25c266a01bbfc5eb89060f22a1a67ce"
+  },
+  "Luma Wide": {
+   "description": "RGB built-in",
+   "digest": "0ed02cbfe8e5de1ad4bbcd5cc4e4bfe6d7e8ce4aa4ef8e62fd2b030e7fff7eb5"
+  },
+  "ProPhoto RGB": {
+   "description": "RGB built-in",
+   "digest": "a664a761bec6863e2de347e587c4e2950a0bbafcb0e84223e4305eb90e049030"
+  },
+  "lut_clut17": {
+   "description": "Grainy test LUT RGB",
+   "digest": "8715279cb11c073ea155b37bbd9f212aa7b9165096e60b2663c09151403a441a"
+  },
+  "matrix_gamma24": {
+   "description": "RGB built-in",
+   "digest": "804911c8185579376e903c101485e1bcf180e6edbc18c8fc1aca9613115bea67"
+  },
+  "sRGB": {
+   "description": "sRGB built-in",
+   "digest": "5805099eda86057ddfea001f9c45ad15ecb5a97d6102c882467cd759df417f97"
+  },
+  "table_curves": {
+   "description": "RGB built-in",
+   "digest": "41ff01296165c7685141cd0cca55ad3b944237c2acda76f90df8421de766fc12"
+  }
+ }
+}

@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_gainmap/profile.dcp",
+ "message": "추가 RGB/공간 게인 테이블을 사용하는 DCP는 아직 지원하지 않습니다."
+}

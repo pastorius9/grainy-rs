@@ -1,0 +1,25 @@
+{
+ "bytes": 1856,
+ "exact": true,
+ "extension": ".avif",
+ "found": {
+  "icc": "f4f4435c18ff"
+ },
+ "height": 40,
+ "lossless": false,
+ "options": {
+  "color_space": "Adobe RGB",
+  "dither": false,
+  "format": "AVIF",
+  "grayscale": false,
+  "keep_metadata": false,
+  "keywords": "",
+  "longest": null,
+  "quality": 70,
+  "user_metadata": null
+ },
+ "settings": {},
+ "settings_key": "default",
+ "source": "png8.png",
+ "width": 60
+}

@@ -1,0 +1,32 @@
+{
+ "changes": {
+  "guides": [
+   [
+    0.05,
+    0.1
+   ],
+   [
+    0.9,
+    0.02
+   ],
+   [
+    0.97,
+    0.95
+   ],
+   [
+    0.02,
+    0.9
+   ]
+  ]
+ },
+ "error": null,
+ "function": "optical",
+ "input": {
+  "c": 3,
+  "h": 37,
+  "kind": "synth",
+  "seed": 8,
+  "w": 53
+ },
+ "use_crop": true
+}

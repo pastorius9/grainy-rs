@@ -1,0 +1,10 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "film_look": "kodak-portra-400",
+  "film_strength": 0.0
+ },
+ "source": "colours",
+ "use_crop": true
+}

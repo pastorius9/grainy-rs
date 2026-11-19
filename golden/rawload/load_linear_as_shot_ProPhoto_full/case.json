@@ -1,0 +1,124 @@
+{
+ "file": "linear.dng",
+ "max_size": null,
+ "metadata": {
+  "camera": "Synthetic",
+  "decoder": "LibRaw",
+  "file_fingerprint": {
+   "size": 31264
+  },
+  "filename": "linear.dng",
+  "format": "DNG",
+  "height": 64,
+  "make": "Grainy",
+  "raw_as_shot_kelvin": 7174,
+  "raw_as_shot_tint": 95.17,
+  "raw_info": {
+   "base_profile": {
+    "camera": "Grainy Synthetic",
+    "cm1": [
+     [
+      0.83,
+      -0.08,
+      -0.04
+     ],
+     [
+      -0.14,
+      1.12,
+      0.08
+     ],
+     [
+      -0.03,
+      0.09,
+      0.71
+     ]
+    ],
+    "cm2": null,
+    "cm3": null,
+    "copyright": "",
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "custom_illuminants": false,
+    "exposure": 0,
+    "fm1": null,
+    "fm2": null,
+    "fm3": null,
+    "hs1": null,
+    "hs2": null,
+    "hs3": null,
+    "hs_encoding": 0,
+    "look": null,
+    "look_encoding": 0,
+    "name": "DCP",
+    "policy": 0,
+    "signature": "",
+    "t1": 6504.0,
+    "t2": null,
+    "t3": null,
+    "xy1": [
+     0.3127,
+     0.329
+    ],
+    "xy2": null,
+    "xy3": null
+   },
+   "camera": "Synthetic",
+   "daylight_neutral": [
+    0.6194708290196248,
+    1.0,
+    0.7770238562233581
+   ],
+   "format": "DNG",
+   "make": "Grainy",
+   "neutral": [
+    0.5,
+    1.0,
+    0.6666666666666666
+   ],
+   "unique_camera": "Grainy Synthetic",
+   "xyz_to_camera": [
+    [
+     0.83,
+     -0.08,
+     -0.04
+    ],
+    [
+     -0.14,
+     1.12,
+     0.08
+    ],
+    [
+     -0.03,
+     0.09,
+     0.71
+    ]
+   ]
+  },
+  "raw_native": true,
+  "size_mb": 0.03,
+  "source_orientation": 1,
+  "width": 80,
+  "working_space": "ProPhoto"
+ },
+ "mode": "as_shot",
+ "native": true,
+ "settings": {
+  "raw_mode": "as_shot"
+ },
+ "shape": [
+  64,
+  80,
+  3
+ ],
+ "stride": 2,
+ "type": "CameraSource",
+ "working_space": "ProPhoto"
+}

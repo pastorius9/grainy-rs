@@ -1,0 +1,14 @@
+{
+ "cmyk_as_lab": [
+  "CmsError",
+  "cmsCreateTransform returned NULL"
+ ],
+ "gray_as_rgb": [
+  "CmsError",
+  "cmsCreateTransform returned NULL"
+ ],
+ "rgb_as_gray": [
+  "CmsError",
+  "cmsCreateTransform returned NULL"
+ ]
+}

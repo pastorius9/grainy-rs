@@ -1,0 +1,31 @@
+{
+ "estimate": {
+  "algorithm": "lines-plumb-wide-v3",
+  "confidence": 1.0,
+  "crop_scale": 1.0916327920970506,
+  "inliers": 0,
+  "lines": 101,
+  "matrix": [
+   [
+    0.9975706024254576,
+    -0.05219243796403113,
+    0.02731091776928677
+   ],
+   [
+    0.09298077203931601,
+    0.9975706024254576,
+    -0.0452756872323868
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "mode": "level",
+  "requested_mode": "level",
+  "rotation": -3.9946146372849256
+ },
+ "mode": "level",
+ "source": "scene_building"
+}

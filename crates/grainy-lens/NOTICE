@@ -1,0 +1,31 @@
+Lensfun calibration database extracts
+====================================
+
+The XML data in tests/data/ and the corresponding saved XML and calibration
+entries in ../../golden/lens/ are extracts of the Lensfun database.
+Copyright: Lensfun contributors and the calibration contributors named in the
+retained XML comments. Original project: https://lensfun.github.io/
+Database project: https://github.com/lensfun/lensfun/tree/master/data/db
+
+License: Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0).
+License text and terms: https://creativecommons.org/licenses/by-sa/3.0/legalcode
+The XML extracts and adapted database data remain under that license, separately
+from the Rust crate's MIT license. Attribution does not imply endorsement.
+
+Source: the XML DATA ONLY in lensfunpy/db_files/ shipped with the oracle's
+Python environment, measured with lensfun version 0.3.4.0 on 2026-11-13.
+Original filenames: 6x6.xml, compact-canon.xml, mil-canon.xml, mil-sony.xml,
+mounts.xml, slr-canon.xml, and slr-nikon.xml.
+Changes: selected a small subset of lenses/cameras and the required mount
+definitions; serialized the selected XML nodes; no calibration values edited.
+tools/golden/gen_lens.py reproduces the selection and derived reference cases.
+
+The complete, unmodified database (all 55 XML files of the same folder, Lensfun 0.3.4.0, 4.3 MB) is kept in
+data/lensfun/ with its own NOTICE and is embedded in the program (Database::builtin), so the application finds
+a lens database with no setup. A user's newer lensfun folder takes precedence. Runtime Rust code requires neither
+Python nor the lensfun native library. The CC BY-SA notice and attribution are shown in the About box and in
+THIRD_PARTY_NOTICES.md.
+
+The Rust implementation was independently written using public mathematical/API
+documentation and numeric black-box measurements. No lensfun C/C++ source or
+lensfunpy binding source was read, copied, translated, linked, or bundled here.

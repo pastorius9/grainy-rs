@@ -1,0 +1,15 @@
+{
+ "changes": {
+  "distortion_k3": -15.0
+ },
+ "error": null,
+ "function": "optical",
+ "input": {
+  "c": 1,
+  "h": 37,
+  "kind": "synth",
+  "seed": 8,
+  "w": 53
+ },
+ "use_crop": true
+}

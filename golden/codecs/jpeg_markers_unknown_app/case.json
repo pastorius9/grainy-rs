@@ -1,0 +1,42 @@
+{
+ "file": "input.jpg",
+ "jpeg_drafts": [
+  {
+   "array": "jpeg_pixels_0",
+   "height": 19,
+   "max_size": null,
+   "width": 31
+  },
+  {
+   "array": "jpeg_pixels_1",
+   "height": 3,
+   "max_size": 1,
+   "width": 4
+  },
+  {
+   "array": "jpeg_pixels_2",
+   "height": 5,
+   "max_size": 2,
+   "width": 8
+  },
+  {
+   "array": "jpeg_pixels_3",
+   "height": 10,
+   "max_size": 4,
+   "width": 16
+  },
+  {
+   "array": "jpeg_pixels_4",
+   "height": 19,
+   "max_size": 9,
+   "width": 31
+  }
+ ],
+ "jpeg_full_size": [
+  31,
+  19
+ ],
+ "marker_only": true,
+ "orientation": 1,
+ "profile": false
+}

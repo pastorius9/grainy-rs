@@ -1,0 +1,333 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "src/a.jpg": {
+     "fill": [
+      1,
+      100
+     ]
+    },
+    "src/a.xmp": {
+     "fill": [
+      9,
+      20
+     ]
+    },
+    "src/b.jpg": {
+     "fill": [
+      2,
+      5000000
+     ]
+    },
+    "src/c.NEF": {
+     "fill": [
+      3,
+      7
+     ]
+    },
+    "src/d.jpg": {
+     "fill": [
+      4,
+      9
+     ]
+    },
+    "dest/2026/a.jpg": {
+     "fill": [
+      7,
+      3
+     ]
+    },
+    "dest/2026/a-1.jpg": {
+     "fill": [
+      7,
+      3
+     ]
+    },
+    "dest/2026/a.xmp": {
+     "fill": [
+      8,
+      3
+     ]
+    },
+    "back/2026/c.nef": {
+     "fill": [
+      6,
+      1
+     ]
+    }
+   }
+  },
+  "calls": [
+   {
+    "fn": "free",
+    "args": {
+     "path": "$ROOT/dest/2026/a.jpg"
+    }
+   },
+   {
+    "fn": "free",
+    "args": {
+     "path": "$ROOT/dest/2026/new.jpg"
+    }
+   },
+   {
+    "fn": "free",
+    "args": {
+     "path": "$ROOT/dest/2026/.x"
+    }
+   },
+   {
+    "fn": "execute",
+    "args": {
+     "planned": [
+      [
+       "$ROOT/src/a.jpg",
+       "2026/a.jpg"
+      ],
+      [
+       "$ROOT/src/b.jpg",
+       "2026/2026-11-13/b.jpg"
+      ],
+      [
+       "$ROOT/src/missing.jpg",
+       "2026/m.jpg"
+      ],
+      [
+       "$ROOT/src/c.NEF",
+       "2026/c.nef"
+      ],
+      [
+       "$ROOT/src/d.jpg",
+       "2026/d.jpg"
+      ]
+     ],
+     "destination": "$ROOT/dest",
+     "backup": "$ROOT/back"
+    }
+   },
+   {
+    "fn": "execute",
+    "args": {
+     "planned": [
+      [
+       "$ROOT/src/a.jpg",
+       "2026/a.jpg"
+      ],
+      [
+       "$ROOT/src/b.jpg",
+       "2026/2026-11-13/b.jpg"
+      ]
+     ],
+     "destination": "$ROOT/dest2",
+     "cancel_after": 1
+    }
+   },
+   {
+    "fn": "execute",
+    "args": {
+     "planned": [],
+     "destination": "$ROOT/dest3"
+    }
+   },
+   {
+    "fn": "execute",
+    "args": {
+     "planned": [
+      [
+       "$ROOT/src/c.NEF",
+       "2026/c.nef"
+      ],
+      [
+       "$ROOT/src/d.jpg",
+       "2026/d.jpg"
+      ]
+     ],
+     "destination": "$ROOT/dest4",
+     "backup": "$ROOT/dest4"
+    }
+   }
+  ],
+  "name": "import_execute"
+ },
+ "results": [
+  {
+   "ok": "$ROOT\\dest\\2026\\a-2.jpg"
+  },
+  {
+   "ok": "$ROOT\\dest\\2026\\new.jpg"
+  },
+  {
+   "ok": "$ROOT\\dest\\2026\\.x"
+  },
+  {
+   "ok": {
+    "copied": [
+     "$ROOT\\dest\\2026\\a-2.jpg",
+     "$ROOT\\dest\\2026\\2026-11-13\\b.jpg",
+     "$ROOT\\dest\\2026\\c.nef",
+     "$ROOT\\dest\\2026\\d.jpg"
+    ],
+    "errors": [
+     "missing.jpg: [Errno 2] No such file or directory: '$ROOT\\\\src\\\\missing.jpg'"
+    ],
+    "progress": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   }
+  },
+  {
+   "ok": {
+    "copied": [
+     "$ROOT\\dest2\\2026\\a.jpg"
+    ],
+    "errors": [],
+    "progress": [
+     1
+    ]
+   }
+  },
+  {
+   "ok": {
+    "copied": [],
+    "errors": [],
+    "progress": []
+   }
+  },
+  {
+   "ok": {
+    "copied": [
+     "$ROOT\\dest4\\2026\\c.nef",
+     "$ROOT\\dest4\\2026\\d.jpg"
+    ],
+    "errors": [],
+    "progress": [
+     1,
+     2
+    ]
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "back/2026/2026-11-13/b.jpg": {
+    "size": 5000000,
+    "sha256": "acad88e3470eb1bf7f3a4cf4e2b47d53b0fc7506901fe92357d6e0a003943ac6"
+   },
+   "back/2026/a-2.jpg": {
+    "size": 100,
+    "sha256": "80f93e8c7d0e1e083e6aab0b073011d858d092951eb4bb2d595cd43173e04704"
+   },
+   "back/2026/c-1.nef": {
+    "size": 7,
+    "sha256": "da4a51839ac39aec93a9000e4ac50b7441655d1569772703e4ecf90d46c4dac5"
+   },
+   "back/2026/c.nef": {
+    "size": 1,
+    "sha256": "67586e98fad27da0b9968bc039a1ef34c939b9b8e523a8bef89d478608c5ecf6"
+   },
+   "back/2026/d.jpg": {
+    "size": 9,
+    "sha256": "9ff0831a56f6e859386f3ea828686ffa4e6a24e9912a41daae629eb27d893331"
+   },
+   "dest/2026/2026-11-13/b.jpg": {
+    "size": 5000000,
+    "sha256": "acad88e3470eb1bf7f3a4cf4e2b47d53b0fc7506901fe92357d6e0a003943ac6"
+   },
+   "dest/2026/a-1.jpg": {
+    "size": 3,
+    "sha256": "6a7dc6f4267242f01f6636a45c31da51c036da1e9879abce7e1d0aaa76aad876"
+   },
+   "dest/2026/a-2.jpg": {
+    "size": 100,
+    "sha256": "80f93e8c7d0e1e083e6aab0b073011d858d092951eb4bb2d595cd43173e04704"
+   },
+   "dest/2026/a-2.xmp": {
+    "size": 20,
+    "sha256": "2c5a0eeb650a9a68888325d2a9dca35b32c7cd0a0ad280b6e58675d3924f8116"
+   },
+   "dest/2026/a.jpg": {
+    "size": 3,
+    "sha256": "6a7dc6f4267242f01f6636a45c31da51c036da1e9879abce7e1d0aaa76aad876"
+   },
+   "dest/2026/a.xmp": {
+    "size": 3,
+    "sha256": "79d95b7f2e0c9f6bd91827e6a281f67e21e07fa4a025c7ccf9c93025f3156c04"
+   },
+   "dest/2026/c.nef": {
+    "size": 7,
+    "sha256": "da4a51839ac39aec93a9000e4ac50b7441655d1569772703e4ecf90d46c4dac5"
+   },
+   "dest/2026/d.jpg": {
+    "size": 9,
+    "sha256": "9ff0831a56f6e859386f3ea828686ffa4e6a24e9912a41daae629eb27d893331"
+   },
+   "dest2/2026/a.jpg": {
+    "size": 100,
+    "sha256": "80f93e8c7d0e1e083e6aab0b073011d858d092951eb4bb2d595cd43173e04704"
+   },
+   "dest2/2026/a.xmp": {
+    "size": 20,
+    "sha256": "2c5a0eeb650a9a68888325d2a9dca35b32c7cd0a0ad280b6e58675d3924f8116"
+   },
+   "dest4/2026/c-1.nef": {
+    "size": 7,
+    "sha256": "da4a51839ac39aec93a9000e4ac50b7441655d1569772703e4ecf90d46c4dac5"
+   },
+   "dest4/2026/c.nef": {
+    "size": 7,
+    "sha256": "da4a51839ac39aec93a9000e4ac50b7441655d1569772703e4ecf90d46c4dac5"
+   },
+   "dest4/2026/d-1.jpg": {
+    "size": 9,
+    "sha256": "9ff0831a56f6e859386f3ea828686ffa4e6a24e9912a41daae629eb27d893331"
+   },
+   "dest4/2026/d.jpg": {
+    "size": 9,
+    "sha256": "9ff0831a56f6e859386f3ea828686ffa4e6a24e9912a41daae629eb27d893331"
+   },
+   "src/a.jpg": {
+    "size": 100,
+    "sha256": "80f93e8c7d0e1e083e6aab0b073011d858d092951eb4bb2d595cd43173e04704"
+   },
+   "src/a.xmp": {
+    "size": 20,
+    "sha256": "2c5a0eeb650a9a68888325d2a9dca35b32c7cd0a0ad280b6e58675d3924f8116"
+   },
+   "src/b.jpg": {
+    "size": 5000000,
+    "sha256": "acad88e3470eb1bf7f3a4cf4e2b47d53b0fc7506901fe92357d6e0a003943ac6"
+   },
+   "src/c.NEF": {
+    "size": 7,
+    "sha256": "da4a51839ac39aec93a9000e4ac50b7441655d1569772703e4ecf90d46c4dac5"
+   },
+   "src/d.jpg": {
+    "size": 9,
+    "sha256": "9ff0831a56f6e859386f3ea828686ffa4e6a24e9912a41daae629eb27d893331"
+   }
+  },
+  "dirs": [
+   "back",
+   "back/2026",
+   "back/2026/2026-11-13",
+   "dest",
+   "dest/2026",
+   "dest/2026/2026-11-13",
+   "dest2",
+   "dest2/2026",
+   "dest4",
+   "dest4/2026",
+   "src"
+  ]
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

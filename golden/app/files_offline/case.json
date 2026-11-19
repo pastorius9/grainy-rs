@@ -1,0 +1,24 @@
+{
+ "dtype": "float16",
+ "height": 30,
+ "keys": [
+  "bit_depth",
+  "decoder",
+  "file_fingerprint",
+  "filename",
+  "format",
+  "height",
+  "input_profile",
+  "size_mb",
+  "source_orientation",
+  "width",
+  "working_space"
+ ],
+ "shape": [
+  30,
+  20,
+  3
+ ],
+ "width": 20,
+ "working_space": "sRGB"
+}

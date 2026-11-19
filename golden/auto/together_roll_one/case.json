@@ -1,0 +1,27 @@
+{
+ "converted": [
+  {
+   "negative": true,
+   "negative_base": [
+    1.4249697923660278,
+    1.1173261404037476,
+    0.6647487282752991
+   ],
+   "negative_density": 1.5,
+   "negative_peak": [
+    0.10652035474777222,
+    0.06792885065078735,
+    0.03628731518983841
+   ]
+  }
+ ],
+ "members": [
+  {
+   "settings": {
+    "distortion": -8.0,
+    "perspective_v": 15.0
+   },
+   "source": "negative"
+  }
+ ]
+}

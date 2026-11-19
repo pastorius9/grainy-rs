@@ -1,0 +1,13 @@
+{
+ "border": "reflect101",
+ "dtype": "float32",
+ "interpolation": "nearest",
+ "inverse": false,
+ "op": "warp_perspective",
+ "output_dtype": "float32",
+ "size": [
+  37,
+  17
+ ],
+ "tolerance": 2e-06
+}

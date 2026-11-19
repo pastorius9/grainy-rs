@@ -1,0 +1,197 @@
+{
+ "spec": {
+  "fake_images": true,
+  "setup": {
+   "files": {
+    "lib/new/a.jpg": {
+     "text": "{\"seed\": 1, \"w\": 96, \"h\": 64}"
+    },
+    "lib/new/b.jpg": {
+     "text": "{\"seed\": 2, \"w\": 96, \"h\": 64}"
+    },
+    "lib/new/sub/c.jpg": {
+     "text": "{\"seed\": 3, \"w\": 96, \"h\": 64}"
+    },
+    "lib/new/sub/d.jpg": {
+     "text": "{\"seed\": 4, \"w\": 96, \"h\": 64}"
+    }
+   },
+   "mtimes": {
+    "lib/new/a.jpg": 1800000010000000000,
+    "lib/new/b.jpg": 1800000011000000000,
+    "lib/new/sub/c.jpg": 1800000012000000000,
+    "lib/new/sub/d.jpg": 1800000013000000000
+   },
+   "photos": [
+    {
+     "path": "$ROOT/lib/old1/a.jpg",
+     "metadata": {
+      "file_fingerprint": {
+       "size": 29,
+       "mtime_ns": 1800000010000000000
+      }
+     }
+    },
+    {
+     "path": "$ROOT/lib/old1/b.jpg",
+     "metadata": {
+      "file_fingerprint": {
+       "size": 29,
+       "mtime_ns": 1800000011000000000
+      }
+     }
+    },
+    {
+     "path": "$ROOT/lib/old1/sub/c.jpg",
+     "metadata": {
+      "file_fingerprint": {
+       "size": 29,
+       "mtime_ns": 1800000012000000000
+      }
+     }
+    },
+    {
+     "path": "$ROOT/lib/old1/sub/d.jpg"
+    },
+    {
+     "path": "$ROOT/lib/old2/a.jpg",
+     "metadata": {
+      "file_fingerprint": {
+       "size": 29,
+       "mtime_ns": 1800000010000000000
+      }
+     }
+    },
+    {
+     "path": "$ROOT/lib/old2/b.jpg",
+     "metadata": {
+      "file_fingerprint": {
+       "size": 29,
+       "mtime_ns": 1800000011000000000
+      }
+     }
+    },
+    {
+     "path": "$ROOT/lib/old2/sub/c.jpg",
+     "metadata": {
+      "file_fingerprint": {
+       "size": 29,
+       "mtime_ns": 1800000012000000000
+      }
+     }
+    },
+    {
+     "path": "$ROOT/lib/old2/sub/d.jpg"
+    }
+   ]
+  },
+  "calls": [
+   {
+    "fn": "recover"
+   }
+  ],
+  "name": "recover_same_destination"
+ },
+ "results": [
+  {
+   "ok": {
+    "plans": [],
+    "unresolved": [
+     {
+      "source": "$ROOT\\lib\\old1",
+      "reason": "ambiguous"
+     },
+     {
+      "source": "$ROOT\\lib\\old2",
+      "reason": "ambiguous"
+     }
+    ],
+    "total": 2,
+    "incomplete": false,
+    "cancelled": false
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "lib/new/a.jpg": {
+    "size": 29,
+    "sha256": "629685bc307cf01c7e7d71aff88ec2e0ed5367de2d8d9d429009b95df97a947a"
+   },
+   "lib/new/b.jpg": {
+    "size": 29,
+    "sha256": "5e718f4e0c78f1722eeb4173670eae2d8c467b565277277e2d03b2ea59595b34"
+   },
+   "lib/new/sub/c.jpg": {
+    "size": 29,
+    "sha256": "15386c61040497652630184a86cd565c08b25e95d97571725a4551fd013e0d98"
+   },
+   "lib/new/sub/d.jpg": {
+    "size": 29,
+    "sha256": "78c96e85e29869fd8d5c4be4ed03a34ce5f921302f7a8a2c610c2e8574c81a1f"
+   }
+  },
+  "dirs": [
+   "lib",
+   "lib/new",
+   "lib/new/sub"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\lib\\old1\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\lib\\old1\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\lib\\old1\\sub\\c.jpg",
+    "name": "c.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 4,
+    "path": "$ROOT\\lib\\old1\\sub\\d.jpg",
+    "name": "d.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 5,
+    "path": "$ROOT\\lib\\old2\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 6,
+    "path": "$ROOT\\lib\\old2\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 7,
+    "path": "$ROOT\\lib\\old2\\sub\\c.jpg",
+    "name": "c.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 8,
+    "path": "$ROOT\\lib\\old2\\sub\\d.jpg",
+    "name": "d.jpg",
+    "virtual_source": null
+   }
+  ],
+  "folder_roots": [
+   "$ROOT\\lib\\old1",
+   "$ROOT\\lib\\old2"
+  ],
+  "preferences": {}
+ }
+}

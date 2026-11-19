@@ -1,0 +1,393 @@
+{
+ "changes": {},
+ "info": {
+  "aperture": 2,
+  "camera": "NIKON D7000",
+  "focal_length": 35,
+  "make": "NIKON CORPORATION"
+ },
+ "profiles": [
+  {
+   "aperture": 2.0,
+   "camera": "Nikon D7000",
+   "capabilities": [
+    "distortion",
+    "tca"
+   ],
+   "crop": 1.523,
+   "database_file": "slr-nikon.xml",
+   "distance": 1000.0,
+   "focal": 35.0,
+   "library_version": [
+    0,
+    3,
+    4,
+    0
+   ],
+   "license": "CC BY-SA 3.0",
+   "maker": "Nikon",
+   "name": "Nikon AF-S DX Nikkor 35mm f/1.8G",
+   "orientation": 1,
+   "source": "Lensfun",
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Nikon</maker>\n        <model>Nikon AF-S DX Nikkor 35mm f/1.8G</model>\n        <model lang=\"en\">Nikkor AF-S 35mm f/1.8G DX</model>\n        <mount>Nikon F AF</mount>\n        <cropfactor>1</cropfactor>\n        <calibration>\n            <!-- Taken with Nikon D3 -->\n            <distortion model=\"ptlens\" focal=\"35\" a=\"0.01504\" b=\"-0.05387\" c=\"0.03379\" />\n            <tca model=\"poly3\" focal=\"35\" vr=\"1.0002896\" vb=\"1.0003004\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  }
+ ],
+ "script": [
+  [
+   "auto",
+   [
+    [
+     "cancel"
+    ]
+   ]
+  ],
+  [
+   "auto",
+   [
+    [
+     "lens",
+     "Nikkor"
+    ],
+    [
+     "apply"
+    ]
+   ]
+  ],
+  [
+   "switch",
+   "lensfun_tca",
+   false
+  ]
+ ],
+ "states": [
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": false,
+     "opened": {
+      "aperture": [
+       2.0,
+       0.0,
+       128.0
+      ],
+      "camera": 6,
+      "camera_text": "Nikon D7000",
+      "cameras": 8,
+      "crop": [
+       1.523,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       1000.0,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       35.0,
+       0.1,
+       5000.0
+      ],
+      "lens": 0,
+      "lens_text": "사용한 렌즈를 선택하세요",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528"
+      ],
+      "result": null,
+      "status": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요."
+     },
+     "script": [
+      [
+       "cancel"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        2.0,
+        0.0,
+        128.0
+       ],
+       "camera": 6,
+       "camera_text": "Nikon D7000",
+       "cameras": 8,
+       "crop": [
+        1.523,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        35.0,
+        0.1,
+        5000.0
+       ],
+       "lens": 0,
+       "lens_text": "사용한 렌즈를 선택하세요",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528"
+       ],
+       "result": null,
+       "status": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요."
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Nikon AF-S DX Nikkor 35mm f/1.8G\n35mm · f/2 · 센서 배율 1.52\n왜곡 · 색수차",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": true,
+     "opened": {
+      "aperture": [
+       2.0,
+       0.0,
+       128.0
+      ],
+      "camera": 6,
+      "camera_text": "Nikon D7000",
+      "cameras": 8,
+      "crop": [
+       1.523,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       1000.0,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       35.0,
+       0.1,
+       5000.0
+      ],
+      "lens": 0,
+      "lens_text": "사용한 렌즈를 선택하세요",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528"
+      ],
+      "result": null,
+      "status": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요."
+     },
+     "script": [
+      [
+       "lens",
+       "Nikkor"
+      ],
+      [
+       "apply"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        2.0,
+        0.0,
+        128.0
+       ],
+       "camera": 6,
+       "camera_text": "Nikon D7000",
+       "cameras": 8,
+       "crop": [
+        1.523,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        35.0,
+        35.0,
+        35.0
+       ],
+       "lens": 1,
+       "lens_text": "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 색수차"
+      },
+      {
+       "aperture": [
+        2.0,
+        0.0,
+        128.0
+       ],
+       "camera": 6,
+       "camera_text": "Nikon D7000",
+       "cameras": 8,
+       "crop": [
+        1.523,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        35.0,
+        35.0,
+        35.0
+       ],
+       "lens": 1,
+       "lens_text": "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528"
+       ],
+       "result": 0,
+       "status": "프로파일 제공 항목: 왜곡 · 색수차"
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 0,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     true
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Nikon AF-S DX Nikkor 35mm f/1.8G\n35mm · f/2 · 센서 배율 1.52\n왜곡 · 색수차",
+   "boxes": [],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정",
+    "보정 변경"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 0,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     false,
+     true
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  }
+ ]
+}

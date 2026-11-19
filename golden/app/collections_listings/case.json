@@ -1,0 +1,793 @@
+{
+ "listings": [
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    6,
+    4,
+    5,
+    7,
+    8
+   ],
+   "name": "none",
+   "options": {
+    "rules": {}
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2
+   ],
+   "name": "name",
+   "options": {
+    "rules": {
+     "name": "GARDEN"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    3,
+    6,
+    7,
+    8
+   ],
+   "name": "name_png",
+   "options": {
+    "rules": {
+     "name": ".png"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    4
+   ],
+   "name": "keywords",
+   "options": {
+    "rules": {
+     "keywords": "sunset"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    4
+   ],
+   "name": "keywords_utf8",
+   "options": {
+    "rules": {
+     "keywords": "바다"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2
+   ],
+   "name": "keywords_studio",
+   "options": {
+    "rules": {
+     "keywords": "studio"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    6,
+    4,
+    5,
+    7
+   ],
+   "name": "folder",
+   "options": {
+    "rules": {
+     "folder": "roll 2"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    7
+   ],
+   "name": "folder_sub",
+   "options": {
+    "rules": {
+     "folder": "sub"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [],
+   "name": "camera",
+   "options": {
+    "rules": {
+     "camera": "canon"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [],
+   "name": "lens",
+   "options": {
+    "rules": {
+     "lens": "50mm"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    3,
+    6,
+    7,
+    8
+   ],
+   "name": "extension_png",
+   "options": {
+    "rules": {
+     "extension": "png"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2,
+    4,
+    5
+   ],
+   "name": "extension_jpg",
+   "options": {
+    "rules": {
+     "extension": "JPG"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    6,
+    4,
+    5,
+    8
+   ],
+   "name": "rating_min",
+   "options": {
+    "rules": {
+     "rating_min": 4
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    3,
+    7
+   ],
+   "name": "rating_max",
+   "options": {
+    "rules": {
+     "rating_max": 2
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    4,
+    8
+   ],
+   "name": "rating_range",
+   "options": {
+    "rules": {
+     "rating_max": 4,
+     "rating_min": 2
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    5,
+    8
+   ],
+   "name": "flag_pick",
+   "options": {
+    "rules": {
+     "flag": 1
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    7
+   ],
+   "name": "flag_reject",
+   "options": {
+    "rules": {
+     "flag": -1
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2,
+    3,
+    6,
+    4
+   ],
+   "name": "flag_none",
+   "options": {
+    "rules": {
+     "flag": 0
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2,
+    3
+   ],
+   "name": "label",
+   "options": {
+    "rules": {
+     "label": "빨강"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    6
+   ],
+   "name": "label_blue",
+   "options": {
+    "rules": {
+     "label": "파랑"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [],
+   "name": "iso_min",
+   "options": {
+    "rules": {
+     "iso_min": 100
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    6,
+    4,
+    5,
+    7,
+    8
+   ],
+   "name": "iso_max",
+   "options": {
+    "rules": {
+     "iso_max": 800
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    6,
+    5,
+    7,
+    8
+   ],
+   "name": "date_from",
+   "options": {
+    "rules": {
+     "date_from": "2024-01-01"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2,
+    4,
+    7
+   ],
+   "name": "date_to",
+   "options": {
+    "rules": {
+     "date_to": "2024-12-31"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    6,
+    7,
+    8
+   ],
+   "name": "date_range",
+   "options": {
+    "rules": {
+     "date_from": "2024-01-01",
+     "date_to": "2025-06-01"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    3,
+    6,
+    5,
+    8
+   ],
+   "name": "date_unpadded",
+   "options": {
+    "rules": {
+     "date_from": "2024-1-2"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    6,
+    4,
+    5,
+    7,
+    8
+   ],
+   "name": "missing",
+   "options": {
+    "rules": {
+     "missing": true
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [],
+   "name": "present",
+   "options": {
+    "rules": {
+     "missing": false
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    8
+   ],
+   "name": "virtual",
+   "options": {
+    "rules": {
+     "virtual": true
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    6,
+    4,
+    5,
+    7
+   ],
+   "name": "not_virtual",
+   "options": {
+    "rules": {
+     "virtual": false
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    6,
+    4,
+    5,
+    7,
+    8
+   ],
+   "name": "orientation_landscape",
+   "options": {
+    "rules": {
+     "orientation": "landscape"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [],
+   "name": "orientation_portrait",
+   "options": {
+    "rules": {
+     "orientation": "portrait"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [],
+   "name": "orientation_square",
+   "options": {
+    "rules": {
+     "orientation": "square"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [],
+   "name": "dialog_everything",
+   "options": {
+    "rules": {
+     "date_from": "2020-01-01",
+     "date_to": "2026-12-31",
+     "extension": "png",
+     "flag": 1,
+     "name": "a",
+     "rating_max": 5,
+     "rating_min": 1,
+     "virtual": false
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2,
+    4,
+    5
+   ],
+   "name": "text_and_number",
+   "options": {
+    "rules": {
+     "extension": "jpg",
+     "rating_min": 4
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    6,
+    5
+   ],
+   "name": "any",
+   "options": {
+    "rules": {
+     "any": [
+      {
+       "rating_min": 5
+      },
+      {
+       "label": "파랑"
+      }
+     ]
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    6,
+    8
+   ],
+   "name": "all",
+   "options": {
+    "rules": {
+     "all": [
+      {
+       "rating_min": 4
+      },
+      {
+       "extension": "png"
+      }
+     ]
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    6,
+    4,
+    5,
+    8
+   ],
+   "name": "smart_rating",
+   "options": {
+    "rules": {
+     "_adobe_smart": {
+      "criteria": "rating",
+      "operation": ">=",
+      "value": 4
+     }
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    6,
+    4,
+    5,
+    8
+   ],
+   "name": "smart_combined",
+   "options": {
+    "rules": {
+     "_adobe_smart": {
+      "children": [
+       {
+        "criteria": "rating",
+        "operation": ">=",
+        "value": 3
+       },
+       {
+        "criteria": "labelColor",
+        "operation": "!=",
+        "value": 3
+       }
+      ],
+      "combine": "intersect"
+     }
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    3,
+    5,
+    8
+   ],
+   "name": "smart_dates",
+   "options": {
+    "rules": {
+     "_adobe_smart": {
+      "criteria": "captureTime",
+      "operation": ">",
+      "value": "2025-01-01"
+     }
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    5,
+    8
+   ],
+   "name": "smart_plus_fields",
+   "options": {
+    "rules": {
+     "_adobe_smart": {
+      "criteria": "pick",
+      "operation": "==",
+      "value": 1
+     },
+     "rating_min": 4
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    4
+   ],
+   "name": "smart_keyword",
+   "options": {
+    "rules": {
+     "_adobe_smart": {
+      "criteria": "keywords",
+      "operation": "any",
+      "value": "sunset 스튜디오"
+     }
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    6,
+    4,
+    5,
+    7,
+    8
+   ],
+   "name": "empty_values_ignored",
+   "options": {
+    "rules": {
+     "camera": [],
+     "keywords": null,
+     "lens": {},
+     "name": ""
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    5,
+    8
+   ],
+   "name": "mode_picked",
+   "options": {
+    "mode": "picked",
+    "rules": {
+     "rating_min": 4
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    6,
+    8
+   ],
+   "name": "mode_rated_extension",
+   "options": {
+    "mode": "rated",
+    "rules": {
+     "extension": "png"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2,
+    6
+   ],
+   "name": "search_and_rules",
+   "options": {
+    "rules": {
+     "rating_min": 4
+    },
+    "search": "a"
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2,
+    6,
+    4
+   ],
+   "name": "collection_plain_and_rules",
+   "options": {
+    "collection": 1,
+    "rules": {
+     "rating_min": 4
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    2,
+    4,
+    5
+   ],
+   "name": "collection_smart_and_rules",
+   "options": {
+    "collection": 2,
+    "rules": {
+     "extension": "jpg"
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    6,
+    5
+   ],
+   "name": "folder_and_rules",
+   "options": {
+    "folder": "Z:\\GrainyGolden\\photos\\roll 2",
+    "rules": {
+     "rating_min": 5
+    }
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    6,
+    4,
+    5,
+    1,
+    8,
+    2,
+    3
+   ],
+   "name": "sorted_by_name",
+   "options": {
+    "rules": {
+     "rating_min": 1
+    },
+    "sort": "name"
+   },
+   "total": 8
+  },
+  {
+   "ids": [
+    1,
+    2,
+    3,
+    6,
+    8
+   ],
+   "name": "collapsed",
+   "options": {
+    "collapsed": true,
+    "rules": {
+     "rating_min": 1
+    }
+   },
+   "total": 8
+  }
+ ]
+}

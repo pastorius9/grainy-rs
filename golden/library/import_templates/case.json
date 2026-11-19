@@ -1,0 +1,874 @@
+{
+ "spec": {
+  "calls": [
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{date}_{time}_{n:04d}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{camera}-{stem}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem[0]}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem!s:>10}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{n:x}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:.3}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{n:+d}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{n:#06x}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{n:,}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem!r}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{{stem}}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:*^12}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{date:>12}{time}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": ""
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "   "
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{foo}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{0}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "a}b"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "x{"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}{{"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}/x"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}."
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": " {stem}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem!x}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{n:s}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:d}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem.upper}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem[a]}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{n[0]}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem[9]}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem!}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem!rr}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem{x}}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{n:{stem}}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:=10}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:+}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:#}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:,}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:010}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{n:.2}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:é}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}:{n}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}?"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}\""
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}|"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}<"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem}\\"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{camera}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{date}{time}{n}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem:{n}}"
+    }
+   },
+   {
+    "fn": "check_template",
+    "args": {
+     "template": "{stem[}"
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "date": "2026:11:13 10:00:00",
+      "filename": "IMG_1.JPG"
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": 12.345
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": "1.005"
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": 0
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": -0.0
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {}
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": null
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": "abc"
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": [
+       1
+      ]
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "date": "",
+      "size_mb": 3
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "date": 20261113
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "filename": "",
+      "size_mb": 2.5
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": 2.675
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": 1e-05
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "size_mb": true
+     }
+    }
+   },
+   {
+    "fn": "duplicate_key",
+    "args": {
+     "path": "C:/x/Photo.JPG",
+     "metadata": {
+      "filename": "D/E/f.NEF",
+      "date": "x"
+     }
+    }
+   }
+  ],
+  "name": "import_templates"
+ },
+ "results": [
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙에는 {stem}, {date}, {time}, {n}, {camera}만 쓸 수 있습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙에는 {stem}, {date}, {time}, {n}, {camera}만 쓸 수 있습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙에는 {stem}, {date}, {time}, {n}, {camera}만 쓸 수 있습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙에는 {stem}, {date}, {time}, {n}, {camera}만 쓸 수 있습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙에는 {stem}, {date}, {time}, {n}, {camera}만 쓸 수 있습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "expected '}' before end of string"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Single '}' encountered in format string"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Single '{' encountered in format string"
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "unmatched '{' in format spec"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Unknown conversion specifier x"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Unknown format code 's' for object of type 'int'"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Unknown format code 'd' for object of type 'str'"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "TypeError",
+    "message": null
+   }
+  },
+  {
+   "err": {
+    "type": "TypeError",
+    "message": null
+   }
+  },
+  {
+   "err": {
+    "type": "IndexError",
+    "message": null
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "unmatched '{' in format spec"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "expected ':' after conversion specifier"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "unexpected '{' in field name"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Invalid format specifier 'photo' for object of type 'int'"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "'=' alignment not allowed in string format specifier"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Sign not allowed in string format specifier"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Alternate form (#) not allowed in string format specifier"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Cannot specify ',' with 's'."
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Precision not allowed in integer format specifier"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "Unknown format code '\\xe9' for object of type 'str'"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙이 올바른 파일 이름을 만들지 않습니다."
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "expected '}' before end of string"
+   }
+  },
+  {
+   "ok": [
+    "img_1.jpg",
+    "2026:11:13 10:00:00"
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    12.35
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    1.0
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    0.0
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    -0.0
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    0.0
+   ]
+  },
+  {
+   "err": {
+    "type": "TypeError",
+    "message": null
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "could not convert string to float: 'abc'"
+   }
+  },
+  {
+   "err": {
+    "type": "TypeError",
+    "message": null
+   }
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    3.0
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    "20261113"
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    2.5
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    2.67
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    0.0
+   ]
+  },
+  {
+   "ok": [
+    "photo.jpg",
+    1.0
+   ]
+  },
+  {
+   "ok": [
+    "f.nef",
+    "x"
+   ]
+  }
+ ],
+ "tree": {
+  "files": {},
+  "dirs": []
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

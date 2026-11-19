@@ -1,0 +1,14 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "blacks": -20.0,
+  "contrast": 25.0,
+  "exposure": 0.8,
+  "highlights": -60.0,
+  "shadows": 45.0,
+  "whites": 15.0
+ },
+ "source": "wide",
+ "use_crop": true
+}

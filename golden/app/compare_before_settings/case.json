@@ -1,0 +1,139 @@
+{
+ "cases": [
+  {
+   "before": {},
+   "changes": {}
+  },
+  {
+   "before": {},
+   "changes": {
+    "contrast": 30,
+    "exposure": 1.2,
+    "film_look": "Portra 400",
+    "grain": 20,
+    "temperature": 12
+   }
+  },
+  {
+   "before": {
+    "crop": [
+     0.1,
+     0.05,
+     0.8,
+     0.9
+    ],
+    "flip": true,
+    "rotation": 1,
+    "straighten": -2.5
+   },
+   "changes": {
+    "crop": [
+     0.1,
+     0.05,
+     0.8,
+     0.9
+    ],
+    "exposure": -0.5,
+    "flip": true,
+    "rotation": 1,
+    "straighten": -2.5
+   }
+  },
+  {
+   "before": {
+    "aspect_scale": 4,
+    "ca_red": 1.5,
+    "defringe": 30,
+    "distortion": 12,
+    "lens_vignette": 20,
+    "perspective_h": 7,
+    "perspective_v": -18,
+    "shift_x": 3,
+    "transform_scale": 95,
+    "upright": "auto"
+   },
+   "changes": {
+    "aspect_scale": 4,
+    "ca_red": 1.5,
+    "defringe": 30,
+    "distortion": 12,
+    "lens_vignette": 20,
+    "masks": [
+     {
+      "adjustments": {
+       "exposure": 1
+      },
+      "enabled": true,
+      "end": [
+       0.8,
+       0.8
+      ],
+      "invert": false,
+      "name": "m",
+      "start": [
+       0.2,
+       0.2
+      ],
+      "type": "linear"
+     }
+    ],
+    "perspective_h": 7,
+    "perspective_v": -18,
+    "saturation": 40,
+    "shift_x": 3,
+    "transform_scale": 95,
+    "upright": "auto"
+   }
+  },
+  {
+   "before": {
+    "guides": [
+     [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ]
+    ],
+    "lensfun_distortion": false,
+    "lensfun_enabled": true,
+    "working_space": "ProPhoto"
+   },
+   "changes": {
+    "curve": [
+     [
+      0,
+      0
+     ],
+     [
+      0.5,
+      0.6
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "guides": [
+     [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ]
+    ],
+    "lensfun_distortion": false,
+    "lensfun_enabled": true,
+    "monochrome": true,
+    "retouch": [
+     {
+      "radius": 0.02,
+      "x": 0.5,
+      "y": 0.5
+     }
+    ],
+    "working_space": "ProPhoto"
+   }
+  }
+ ]
+}

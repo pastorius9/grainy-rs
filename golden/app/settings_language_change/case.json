@@ -1,0 +1,50 @@
+{
+ "steps": [
+  {
+   "calls": [],
+   "language": "ko",
+   "name": "same",
+   "result": true,
+   "status": "준비됨  ·  사진을 가져오면 시작할 수 있습니다.",
+   "stored_language": null
+  },
+  {
+   "calls": [],
+   "language": "ko",
+   "name": "busy export",
+   "result": false,
+   "status": "작업이 끝난 뒤 언어를 변경해 주세요.",
+   "stored_language": null
+  },
+  {
+   "calls": [],
+   "language": "ko",
+   "name": "busy import",
+   "result": false,
+   "status": "작업이 끝난 뒤 언어를 변경해 주세요.",
+   "stored_language": null
+  },
+  {
+   "calls": [],
+   "language": "ko",
+   "name": "busy command",
+   "result": false,
+   "status": "작업이 끝난 뒤 언어를 변경해 주세요.",
+   "stored_language": null
+  },
+  {
+   "calls": [
+    {
+     "geometry": true,
+     "mode": 0,
+     "photo": null
+    }
+   ],
+   "language": "en",
+   "name": "change",
+   "result": true,
+   "status": "",
+   "stored_language": "en"
+  }
+ ]
+}

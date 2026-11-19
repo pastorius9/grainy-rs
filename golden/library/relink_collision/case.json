@@ -1,0 +1,72 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "n/a.jpg": {
+     "fill": [
+      1,
+      1
+     ]
+    }
+   },
+   "photos": [
+    {
+     "path": "$ROOT/o/a.jpg"
+    },
+    {
+     "path": "$ROOT/n/a.jpg"
+    }
+   ]
+  },
+  "calls": [
+   {
+    "fn": "relink_plan",
+    "args": {
+     "source": "$ROOT/o",
+     "destination": "$ROOT/n"
+    }
+   }
+  ],
+  "name": "relink_collision"
+ },
+ "results": [
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "새 위치의 사진이 이미 라이브러리에 있습니다. 중복 연결은 적용하지 않았습니다."
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "n/a.jpg": {
+    "size": 1,
+    "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+   }
+  },
+  "dirs": [
+   "n"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\o\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\n\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   }
+  ],
+  "folder_roots": [
+   "$ROOT\\n",
+   "$ROOT\\o"
+  ],
+  "preferences": {}
+ }
+}

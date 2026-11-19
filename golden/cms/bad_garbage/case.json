@@ -1,0 +1,28 @@
+{
+ "errors": {
+  "checked": [
+   "CmsError",
+   "cmsOpenProfileFromMem returned NULL"
+  ],
+  "convert_from": [
+   "ValueError",
+   "Invalid ICC profile"
+  ],
+  "convert_to": [
+   "ValueError",
+   "Invalid ICC profile"
+  ],
+  "convert_u8": [
+   "CmsError",
+   "cmsOpenProfileFromMem returned NULL"
+  ],
+  "planar8": [
+   "ValueError",
+   "Invalid ICC profile"
+  ],
+  "profile_path": [
+   "CmsError",
+   "cmsOpenProfileFromMem returned NULL"
+  ]
+ }
+}

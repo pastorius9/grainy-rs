@@ -1,0 +1,193 @@
+{
+ "current": 1,
+ "photos": [
+  {
+   "id": 1,
+   "name": "photo-1.png",
+   "path": "Z:/compare/photo-1.png",
+   "settings": {
+    "crop": [
+     0.1,
+     0.1,
+     0.7,
+     0.8
+    ],
+    "distortion": 10,
+    "exposure": 1.0,
+    "rotation": 1
+   }
+  }
+ ],
+ "steps": [
+  {
+   "state": {
+    "checked": true,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": null,
+    "renders": 1,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "rotation": 1
+     },
+     "size": 1800
+    },
+    "status": "비교할 다른 사진이 없어 보정 전·후로 표시합니다.",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "start",
+    "photos"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": null,
+    "renders": 2,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "rotation": 1
+     },
+     "size": 1800
+    },
+    "status": "비교할 다른 사진이 없어 보정 전·후로 표시합니다.",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "mode",
+    "photos"
+   ]
+  },
+  {
+   "state": {
+    "checked": false,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": false,
+    "other_caption": "",
+    "other_id": null,
+    "previous_id": null,
+    "renders": 2,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "rotation": 1
+     },
+     "size": 1800
+    },
+    "status": "비교할 다른 사진이 없어 보정 전·후로 표시합니다.",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "toggle"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": null,
+    "renders": 3,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "rotation": 1
+     },
+     "size": 1800
+    },
+    "status": "비교할 다른 사진이 없어 보정 전·후로 표시합니다.",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "toggle"
+   ]
+  }
+ ]
+}

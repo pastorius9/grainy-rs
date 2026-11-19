@@ -1,0 +1,13 @@
+{
+ "border": "reflect101",
+ "dtype": "float32",
+ "op": "gaussian",
+ "output_dtype": "float32",
+ "sigma_x": 1.5,
+ "sigma_y": 0.0,
+ "size": [
+  13,
+  13
+ ],
+ "tolerance": 3e-06
+}

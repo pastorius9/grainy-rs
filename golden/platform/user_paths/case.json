@@ -1,0 +1,196 @@
+{
+ "cases": [
+  {
+   "expected": "C:/Users/someone/Grainy",
+   "fallback": null,
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": null,
+   "mac": false
+  },
+  {
+   "expected": "C:/Users/someone/Luma",
+   "fallback": null,
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": null,
+   "mac": false
+  },
+  {
+   "expected": "E:/fallback/Grainy",
+   "fallback": "E:/fallback",
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": null,
+   "mac": false
+  },
+  {
+   "expected": "E:/fallback/Luma",
+   "fallback": "E:/fallback",
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": null,
+   "mac": false
+  },
+  {
+   "expected": "D:/Apps/Local/Grainy",
+   "fallback": null,
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": "D:/Apps/Local",
+   "mac": false
+  },
+  {
+   "expected": "D:/Apps/Local/Luma",
+   "fallback": null,
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": "D:/Apps/Local",
+   "mac": false
+  },
+  {
+   "expected": "D:/Apps/Local/Grainy",
+   "fallback": "E:/fallback",
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": "D:/Apps/Local",
+   "mac": false
+  },
+  {
+   "expected": "D:/Apps/Local/Luma",
+   "fallback": "E:/fallback",
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": "D:/Apps/Local",
+   "mac": false
+  },
+  {
+   "expected": "Grainy",
+   "fallback": null,
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": "",
+   "mac": false
+  },
+  {
+   "expected": "Luma",
+   "fallback": null,
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": "",
+   "mac": false
+  },
+  {
+   "expected": "Grainy",
+   "fallback": "E:/fallback",
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": "",
+   "mac": false
+  },
+  {
+   "expected": "Luma",
+   "fallback": "E:/fallback",
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": "",
+   "mac": false
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": null,
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": null,
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": null,
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": null,
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": "E:/fallback",
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": null,
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": "E:/fallback",
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": null,
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": null,
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": "D:/Apps/Local",
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": null,
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": "D:/Apps/Local",
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": "E:/fallback",
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": "D:/Apps/Local",
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": "E:/fallback",
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": "D:/Apps/Local",
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": null,
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": "",
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": null,
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": "",
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": "E:/fallback",
+   "folder": "Grainy",
+   "home": "C:/Users/someone",
+   "local_app_data": "",
+   "mac": true
+  },
+  {
+   "expected": "C:/Users/someone/Library/Application Support/Grainy",
+   "fallback": "E:/fallback",
+   "folder": "Luma",
+   "home": "C:/Users/someone",
+   "local_app_data": "",
+   "mac": true
+  }
+ ]
+}

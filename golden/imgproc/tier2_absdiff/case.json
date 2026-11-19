@@ -1,0 +1,225 @@
+{
+ "op": "absdiff",
+ "variants": [
+  {
+   "dtype": "float32",
+   "label": "ramp",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "ramp",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "ramp",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "ramp",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "wide",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "wide",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "wide",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "wide",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "colours",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "colours",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "colours",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "colours",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "patches",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "patches",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "patches",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "patches",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "noise",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "noise",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "noise",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "noise",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "edges",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "edges",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "edges",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "edges",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "garden",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "garden",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "garden",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "garden",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "constant",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "constant",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "constant",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "constant",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "zero",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "zero",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "zero",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "zero",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "signed",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "signed",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "signed",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "signed",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "tiny",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "tiny",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "float32",
+   "label": "tiny",
+   "tolerance": 0.0
+  },
+  {
+   "dtype": "uint8",
+   "label": "tiny",
+   "tolerance": 0.0
+  }
+ ]
+}

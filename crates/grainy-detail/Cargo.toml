@@ -1,0 +1,24 @@
+[package]
+name = "grainy-detail"
+description = "Grainy's detail stage: noise reduction, dehaze, texture, defringe, clarity, sharpening, vignette and grain"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-imgproc = { path = "../grainy-imgproc" }
+grainy-core.workspace = true
+grainy-color = { path = "../grainy-color" }
+grainy-effects = { path = "../grainy-effects" }
+grainy-tone = { path = "../grainy-tone" }
+ndarray.workspace = true
+rayon.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

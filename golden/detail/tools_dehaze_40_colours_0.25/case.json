@@ -1,0 +1,13 @@
+{
+ "bits_sum": "5996369627146354688",
+ "image": "colours",
+ "pixel_scale": 0.25,
+ "settings": {
+  "dehaze": 40.0,
+  "detail_version": 3
+ },
+ "step": [
+  3,
+  3
+ ]
+}

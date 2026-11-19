@@ -1,0 +1,1652 @@
+{
+ "changes": {},
+ "info": {
+  "format": "jpg"
+ },
+ "profiles": [
+  {
+   "aperture": 0.0,
+   "camera": "NEX-5",
+   "capabilities": [
+    "distortion",
+    "tca"
+   ],
+   "crop": 1.534,
+   "database_file": "mil-sony.xml",
+   "distance": 1000.0,
+   "focal": 24.0,
+   "library_version": [
+    0,
+    3,
+    4,
+    0
+   ],
+   "license": "CC BY-SA 3.0",
+   "maker": "Sony",
+   "name": "E 24mm f/1.8 ZA",
+   "orientation": 1,
+   "source": "Lensfun",
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Sony</maker>\n        <model>E 24mm f/1.8 ZA</model>\n        <mount>Sony E</mount>\n        <cropfactor>1.534</cropfactor>\n        <calibration>\n            <!-- Taken with Sony NEX-C3 -->\n            <distortion model=\"ptlens\" focal=\"24\" a=\"0.00641\" b=\"-0.0083\" c=\"0.00228\" />\n            <tca model=\"linear\" focal=\"24\" kr=\"1.0004\" kb=\"1.0002\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  {
+   "aperture": 5.68,
+   "camera": "Canon EOS 5D Mark II",
+   "capabilities": [
+    "distortion"
+   ],
+   "crop": 1.234,
+   "database_file": "slr-canon.xml",
+   "distance": 0.01,
+   "focal": 135.12,
+   "library_version": [
+    0,
+    3,
+    4,
+    0
+   ],
+   "license": "CC BY-SA 3.0",
+   "maker": "Canon",
+   "name": "Canon EF 70-200mm f/2.8L IS USM",
+   "orientation": 1,
+   "source": "Lensfun",
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Canon</maker>\n        <model>Canon EF 70-200mm f/2.8L IS USM</model>\n        <mount>Canon EF</mount>\n        <cropfactor>1</cropfactor>\n        <calibration>\n            <distortion model=\"poly3\" focal=\"70\" k1=\"-0.009135\" />\n            <distortion model=\"poly3\" focal=\"73\" k1=\"-0.008769\" />\n            <distortion model=\"poly3\" focal=\"78\" k1=\"-0.006965\" />\n            <distortion model=\"poly3\" focal=\"80\" k1=\"-0.005047\" />\n            <distortion model=\"poly3\" focal=\"90\" k1=\"-0.000959\" />\n            <distortion model=\"poly3\" focal=\"100\" k1=\"0.00029\" />\n            <distortion model=\"poly3\" focal=\"115\" k1=\"0.002667\" />\n            <distortion model=\"poly3\" focal=\"130\" k1=\"0.004312\" />\n            <distortion model=\"poly3\" focal=\"145\" k1=\"0.004809\" />\n            <distortion model=\"poly3\" focal=\"160\" k1=\"0.005218\" />\n            <distortion model=\"poly3\" focal=\"170\" k1=\"0.006153\" />\n            <distortion model=\"poly3\" focal=\"185\" k1=\"0.006109\" />\n            <distortion model=\"poly3\" focal=\"200\" k1=\"0.008631\" />\n            <!-- Taken with 5D III upload 514b8f #317 -->\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"10\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"1000\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"10\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"1000\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"10\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"1000\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"10\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"1000\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"10\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"1000\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"10\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"1000\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"10\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"10\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"1000\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"10\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"1000\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"10\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"1000\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"10\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"1000\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"10\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"10\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"1000\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"10\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"1000\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"10\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"1000\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"10\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"1000\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"10\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"1000\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"10\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"1000\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"10\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"1000\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  {
+   "aperture": 8.0,
+   "camera": "",
+   "capabilities": [
+    "distortion"
+   ],
+   "crop": 0.51,
+   "database_file": "6x6.xml",
+   "distance": 0.01,
+   "focal": 80.0,
+   "library_version": [
+    0,
+    3,
+    4,
+    0
+   ],
+   "license": "CC BY-SA 3.0",
+   "maker": "Schneider",
+   "name": "Schneider 80mm Xenotar f/2.8",
+   "orientation": 1,
+   "source": "Lensfun",
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Schneider</maker>\n        <model>Schneider 80mm Xenotar f/2.8</model>\n        <mount>Rollei 6x6</mount>\n        <cropfactor>0.510</cropfactor>\n        <aspect-ratio>1:1</aspect-ratio>\n        <calibration>\n            <distortion model=\"poly3\" focal=\"80\" k1=\"-0.009721\" />\n        </calibration>\n    </lens>\n</lensdatabase>"
+  }
+ ],
+ "script": [
+  [
+   "choose",
+   [
+    [
+     "apply"
+    ],
+    [
+     "lens",
+     "Xenotar"
+    ],
+    [
+     "camera_text",
+     "Nik"
+    ],
+    [
+     "apply"
+    ],
+    [
+     "camera",
+     "NEX-5"
+    ],
+    [
+     "apply"
+    ],
+    [
+     "lens",
+     "E 24mm"
+    ],
+    [
+     "set",
+     "focal",
+     30
+    ],
+    [
+     "set",
+     "aperture",
+     0
+    ],
+    [
+     "apply"
+    ]
+   ]
+  ],
+  [
+   "choose",
+   [
+    [
+     "camera",
+     "Canon EOS 5D Mark II"
+    ],
+    [
+     "lens",
+     "70-200"
+    ],
+    [
+     "set",
+     "focal",
+     10
+    ],
+    [
+     "set",
+     "focal",
+     135.123
+    ],
+    [
+     "set",
+     "aperture",
+     5.678
+    ],
+    [
+     "set",
+     "distance",
+     0.001
+    ],
+    [
+     "set",
+     "crop",
+     1.2345
+    ],
+    [
+     "apply"
+    ]
+   ]
+  ],
+  [
+   "choose",
+   [
+    [
+     "lens",
+     "Schneider"
+    ],
+    [
+     "set",
+     "focal",
+     80
+    ],
+    [
+     "set",
+     "aperture",
+     8
+    ],
+    [
+     "cancel"
+    ]
+   ]
+  ],
+  [
+   "choose",
+   [
+    [
+     "lens",
+     "Schneider"
+    ],
+    [
+     "set",
+     "focal",
+     80
+    ],
+    [
+     "set",
+     "aperture",
+     8
+    ],
+    [
+     "apply"
+    ]
+   ]
+  ]
+ ],
+ "states": [
+  {
+   "auto_label": "E 24mm f/1.8 ZA\n24mm · f/0 · 센서 배율 1.53\n왜곡 · 색수차\n조리개 정보 없음: 주변광량 보정 제외",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": true,
+     "opened": {
+      "aperture": [
+       0.0,
+       0.0,
+       128.0
+      ],
+      "camera": 0,
+      "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+      "cameras": 8,
+      "crop": [
+       1.0,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       1000.0,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       50.0,
+       0.1,
+       5000.0
+      ],
+      "lens": 0,
+      "lens_text": "사용한 렌즈를 선택하세요",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+       "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+       "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+       "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+       "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "E 24mm f/1.8 ZA  ·  배율 1.534"
+      ],
+      "result": null,
+      "status": "카메라를 선택해 주세요."
+     },
+     "script": [
+      [
+       "apply"
+      ],
+      [
+       "lens",
+       "Xenotar"
+      ],
+      [
+       "camera_text",
+       "Nik"
+      ],
+      [
+       "apply"
+      ],
+      [
+       "camera",
+       "NEX-5"
+      ],
+      [
+       "apply"
+      ],
+      [
+       "lens",
+       "E 24mm"
+      ],
+      [
+       "set",
+       "focal",
+       30
+      ],
+      [
+       "set",
+       "aperture",
+       0
+      ],
+      [
+       "apply"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        50.0,
+        0.1,
+        5000.0
+       ],
+       "lens": 0,
+       "lens_text": "사용한 렌즈를 선택하세요",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "검색 결과에서 실제 렌즈 항목을 선택해 주세요."
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡"
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "Nik",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡"
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "Nik",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "검색 결과에서 카메라를 선택하거나 직접 입력 항목을 선택해 주세요."
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 7,
+       "camera_text": "NEX-5",
+       "cameras": 8,
+       "crop": [
+        1.534,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        0.1,
+        5000.0
+       ],
+       "lens": 0,
+       "lens_text": "사용한 렌즈를 선택하세요",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "검색 결과에서 카메라를 선택하거나 직접 입력 항목을 선택해 주세요."
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 7,
+       "camera_text": "NEX-5",
+       "cameras": 8,
+       "crop": [
+        1.534,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        0.1,
+        5000.0
+       ],
+       "lens": 0,
+       "lens_text": "사용한 렌즈를 선택하세요",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "검색 결과에서 실제 렌즈 항목을 선택해 주세요."
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 7,
+       "camera_text": "NEX-5",
+       "cameras": 8,
+       "crop": [
+        1.534,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        24.0,
+        24.0,
+        24.0
+       ],
+       "lens": 1,
+       "lens_text": "E 24mm f/1.8 ZA  ·  배율 1.534",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 색수차"
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 7,
+       "camera_text": "NEX-5",
+       "cameras": 8,
+       "crop": [
+        1.534,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        24.0,
+        24.0,
+        24.0
+       ],
+       "lens": 1,
+       "lens_text": "E 24mm f/1.8 ZA  ·  배율 1.534",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 색수차"
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 7,
+       "camera_text": "NEX-5",
+       "cameras": 8,
+       "crop": [
+        1.534,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        24.0,
+        24.0,
+        24.0
+       ],
+       "lens": 1,
+       "lens_text": "E 24mm f/1.8 ZA  ·  배율 1.534",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 색수차"
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 7,
+       "camera_text": "NEX-5",
+       "cameras": 8,
+       "crop": [
+        1.534,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        24.0,
+        24.0,
+        24.0
+       ],
+       "lens": 1,
+       "lens_text": "E 24mm f/1.8 ZA  ·  배율 1.534",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": 0,
+       "status": "프로파일 제공 항목: 왜곡 · 색수차"
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 0,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     true
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Canon EF 70-200mm f/2.8L IS USM\n135.12mm · f/5.68 · 센서 배율 1.23\n왜곡",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": true,
+     "opened": {
+      "aperture": [
+       0.0,
+       0.0,
+       128.0
+      ],
+      "camera": 0,
+      "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+      "cameras": 8,
+      "crop": [
+       1.534,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       1000.0,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       24.0,
+       24.0,
+       24.0
+      ],
+      "lens": 9,
+      "lens_text": "E 24mm f/1.8 ZA  ·  배율 1.534",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+       "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+       "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+       "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+       "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "E 24mm f/1.8 ZA  ·  배율 1.534"
+      ],
+      "result": null,
+      "status": "카메라를 선택해 주세요."
+     },
+     "script": [
+      [
+       "camera",
+       "Canon EOS 5D Mark II"
+      ],
+      [
+       "lens",
+       "70-200"
+      ],
+      [
+       "set",
+       "focal",
+       10
+      ],
+      [
+       "set",
+       "focal",
+       135.123
+      ],
+      [
+       "set",
+       "aperture",
+       5.678
+      ],
+      [
+       "set",
+       "distance",
+       0.001
+      ],
+      [
+       "set",
+       "crop",
+       1.2345
+      ],
+      [
+       "apply"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        24.0,
+        0.1,
+        5000.0
+       ],
+       "lens": 0,
+       "lens_text": "사용한 렌즈를 선택하세요",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": null,
+       "status": "카메라를 선택해 주세요."
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        70.0,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 주변광량"
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        70.0,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 주변광량"
+      },
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        135.12,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 주변광량"
+      },
+      {
+       "aperture": [
+        5.68,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        135.12,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 주변광량"
+      },
+      {
+       "aperture": [
+        5.68,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        135.12,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 주변광량"
+      },
+      {
+       "aperture": [
+        5.68,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.234,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        135.12,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 주변광량"
+      },
+      {
+       "aperture": [
+        5.68,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.234,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        135.12,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": 1,
+       "status": "프로파일 제공 항목: 왜곡 · 주변광량"
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정",
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 1,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Canon EF 70-200mm f/2.8L IS USM\n135.12mm · f/5.68 · 센서 배율 1.23\n왜곡",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": false,
+     "opened": {
+      "aperture": [
+       5.68,
+       0.0,
+       128.0
+      ],
+      "camera": 0,
+      "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+      "cameras": 8,
+      "crop": [
+       1.234,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       0.01,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       135.12,
+       70.0,
+       200.0
+      ],
+      "lens": 1,
+      "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+       "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+       "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+       "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+       "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "E 24mm f/1.8 ZA  ·  배율 1.534"
+      ],
+      "result": null,
+      "status": "카메라를 선택해 주세요."
+     },
+     "script": [
+      [
+       "lens",
+       "Schneider"
+      ],
+      [
+       "set",
+       "focal",
+       80
+      ],
+      [
+       "set",
+       "aperture",
+       8
+      ],
+      [
+       "cancel"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        5.68,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡"
+      },
+      {
+       "aperture": [
+        5.68,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡"
+      },
+      {
+       "aperture": [
+        8.0,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡"
+      },
+      {
+       "aperture": [
+        8.0,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡"
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정",
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 1,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Schneider 80mm Xenotar f/2.8\n80mm · f/8 · 센서 배율 0.51\n왜곡",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": true,
+     "opened": {
+      "aperture": [
+       5.68,
+       0.0,
+       128.0
+      ],
+      "camera": 0,
+      "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+      "cameras": 8,
+      "crop": [
+       1.234,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       0.01,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       135.12,
+       70.0,
+       200.0
+      ],
+      "lens": 1,
+      "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+       "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+       "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+       "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+       "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "E 24mm f/1.8 ZA  ·  배율 1.534"
+      ],
+      "result": null,
+      "status": "카메라를 선택해 주세요."
+     },
+     "script": [
+      [
+       "lens",
+       "Schneider"
+      ],
+      [
+       "set",
+       "focal",
+       80
+      ],
+      [
+       "set",
+       "aperture",
+       8
+      ],
+      [
+       "apply"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        5.68,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡"
+      },
+      {
+       "aperture": [
+        5.68,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡"
+      },
+      {
+       "aperture": [
+        8.0,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡"
+      },
+      {
+       "aperture": [
+        8.0,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        0.51,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        0.01,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": 2,
+       "status": "프로파일 제공 항목: 왜곡"
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정",
+    "렌즈 자동 보정",
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 2,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  }
+ ]
+}

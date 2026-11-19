@@ -1,0 +1,31 @@
+{
+ "estimate": {
+  "algorithm": "lines-horizon-v2",
+  "confidence": 1.0,
+  "crop_scale": 1.0695750892227514,
+  "inliers": 0,
+  "lines": 1,
+  "matrix": [
+   [
+    0.998628238016641,
+    0.039229485184442046,
+    -0.018928861600541535
+   ],
+   [
+    -0.06988728561919447,
+    0.998628238016641,
+    0.03562952380127672
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "mode": "level",
+  "requested_mode": "level",
+  "rotation": 3.001419292991457
+ },
+ "mode": "level",
+ "source": "scene_horizon"
+}

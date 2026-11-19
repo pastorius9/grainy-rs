@@ -1,0 +1,25 @@
+{
+ "changes": {
+  "grading": [
+   [
+    200.0,
+    40.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0
+   ]
+  ],
+  "hdr": true,
+  "saturation": 40.0
+ },
+ "image": "std:wide",
+ "kind": "stage"
+}

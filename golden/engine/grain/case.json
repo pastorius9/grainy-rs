@@ -1,0 +1,9 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "grain": 45.0
+ },
+ "source": "ramp",
+ "use_crop": true
+}

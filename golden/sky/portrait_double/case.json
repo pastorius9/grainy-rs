@@ -1,0 +1,689 @@
+{
+ "components": [
+  {},
+  {
+   "enabled": true,
+   "feather": 30,
+   "invert": false,
+   "operation": "add",
+   "sensitivity": 50,
+   "type": "sky"
+  },
+  {
+   "sensitivity": 0
+  },
+  {
+   "sensitivity": 20
+  },
+  {
+   "sensitivity": 80
+  },
+  {
+   "sensitivity": 100
+  },
+  {
+   "feather": 0
+  },
+  {
+   "feather": 70
+  },
+  {
+   "feather": 100
+  },
+  {
+   "feather": 12.25,
+   "sensitivity": 65.5
+  },
+  {
+   "feather": 140,
+   "sensitivity": -20
+  }
+ ],
+ "gain": 1.6,
+ "scene": "portrait",
+ "sensitivities": [
+  50,
+  0,
+  20,
+  80,
+  100,
+  65.5,
+  -20
+ ],
+ "shape": [
+  648,
+  432
+ ],
+ "size": "double",
+ "t_none_c0_any": true,
+ "t_none_c0_coef_bits": "14700093061904465920",
+ "t_none_c0_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c0_coef_stride": 59,
+ "t_none_c0_eps": 0.0010000000474974513,
+ "t_none_c0_guide_bits": "184755074331836416",
+ "t_none_c0_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c0_guide_stride": 59,
+ "t_none_c0_mask_bits": "12906471191748804608",
+ "t_none_c0_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c0_mask_stride": 38,
+ "t_none_c0_p_bits": "6778939651609591808",
+ "t_none_c0_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c0_p_stride": 59,
+ "t_none_c0_r": 2,
+ "t_none_c0_reach_bits": "4084496474887421952",
+ "t_none_c0_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c0_reach_stride": 59,
+ "t_none_c10_any": true,
+ "t_none_c10_coef_bits": "340929279128764416",
+ "t_none_c10_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c10_coef_stride": 59,
+ "t_none_c10_eps": 0.003100000089034438,
+ "t_none_c10_guide_bits": "184755074331836416",
+ "t_none_c10_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c10_guide_stride": 59,
+ "t_none_c10_mask_bits": "16941095983326953472",
+ "t_none_c10_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c10_mask_stride": 38,
+ "t_none_c10_p_bits": "2734506794868015104",
+ "t_none_c10_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c10_p_stride": 59,
+ "t_none_c10_r": 6,
+ "t_none_c10_reach_bits": "3303863958489792512",
+ "t_none_c10_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c10_reach_stride": 59,
+ "t_none_c1_any": true,
+ "t_none_c1_coef_bits": "14700093061904465920",
+ "t_none_c1_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c1_coef_stride": 59,
+ "t_none_c1_eps": 0.0010000000474974513,
+ "t_none_c1_guide_bits": "184755074331836416",
+ "t_none_c1_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c1_guide_stride": 59,
+ "t_none_c1_mask_bits": "12906471191748804608",
+ "t_none_c1_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c1_mask_stride": 38,
+ "t_none_c1_p_bits": "6778939651609591808",
+ "t_none_c1_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c1_p_stride": 59,
+ "t_none_c1_r": 2,
+ "t_none_c1_reach_bits": "4084496474887421952",
+ "t_none_c1_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c1_reach_stride": 59,
+ "t_none_c2_any": true,
+ "t_none_c2_coef_bits": "16437543533528743936",
+ "t_none_c2_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c2_coef_stride": 59,
+ "t_none_c2_eps": 0.0010000000474974513,
+ "t_none_c2_guide_bits": "184755074331836416",
+ "t_none_c2_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c2_guide_stride": 59,
+ "t_none_c2_mask_bits": "10313673264030810112",
+ "t_none_c2_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c2_mask_stride": 38,
+ "t_none_c2_p_bits": "2734506794868015104",
+ "t_none_c2_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c2_p_stride": 59,
+ "t_none_c2_r": 2,
+ "t_none_c2_reach_bits": "91221604968693760",
+ "t_none_c2_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c2_reach_stride": 59,
+ "t_none_c3_any": true,
+ "t_none_c3_coef_bits": "1147493907190251520",
+ "t_none_c3_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c3_coef_stride": 59,
+ "t_none_c3_eps": 0.0010000000474974513,
+ "t_none_c3_guide_bits": "184755074331836416",
+ "t_none_c3_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c3_guide_stride": 59,
+ "t_none_c3_mask_bits": "15584651895174594560",
+ "t_none_c3_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c3_mask_stride": 38,
+ "t_none_c3_p_bits": "16088059380699758592",
+ "t_none_c3_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c3_p_stride": 59,
+ "t_none_c3_r": 2,
+ "t_none_c3_reach_bits": "17907152354688368640",
+ "t_none_c3_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c3_reach_stride": 59,
+ "t_none_c4_any": true,
+ "t_none_c4_coef_bits": "2744355782479839232",
+ "t_none_c4_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c4_coef_stride": 59,
+ "t_none_c4_eps": 0.0010000000474974513,
+ "t_none_c4_guide_bits": "184755074331836416",
+ "t_none_c4_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c4_guide_stride": 59,
+ "t_none_c4_mask_bits": "6753488154302349312",
+ "t_none_c4_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c4_mask_stride": 38,
+ "t_none_c4_p_bits": "1791767331194535936",
+ "t_none_c4_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c4_p_stride": 59,
+ "t_none_c4_r": 2,
+ "t_none_c4_reach_bits": "3620849546562633728",
+ "t_none_c4_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c4_reach_stride": 59,
+ "t_none_c5_any": true,
+ "t_none_c5_coef_bits": "11327272184243552256",
+ "t_none_c5_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c5_coef_stride": 59,
+ "t_none_c5_eps": 0.0010000000474974513,
+ "t_none_c5_guide_bits": "184755074331836416",
+ "t_none_c5_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c5_guide_stride": 59,
+ "t_none_c5_mask_bits": "15992112494587936768",
+ "t_none_c5_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c5_mask_stride": 38,
+ "t_none_c5_p_bits": "6361476007328743424",
+ "t_none_c5_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c5_p_stride": 59,
+ "t_none_c5_r": 2,
+ "t_none_c5_reach_bits": "17509166818739093504",
+ "t_none_c5_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c5_reach_stride": 59,
+ "t_none_c6_any": true,
+ "t_none_c6_coef_bits": "820227968612696064",
+ "t_none_c6_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c6_coef_stride": 59,
+ "t_none_c6_eps": 9.999999747378752e-05,
+ "t_none_c6_guide_bits": "184755074331836416",
+ "t_none_c6_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c6_guide_stride": 59,
+ "t_none_c6_mask_bits": "15836116344102715392",
+ "t_none_c6_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c6_mask_stride": 38,
+ "t_none_c6_p_bits": "6778939651609591808",
+ "t_none_c6_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c6_p_stride": 59,
+ "t_none_c6_r": 1,
+ "t_none_c6_reach_bits": "5819079615607472128",
+ "t_none_c6_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c6_reach_stride": 59,
+ "t_none_c7_any": true,
+ "t_none_c7_coef_bits": "3377396305784471552",
+ "t_none_c7_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c7_coef_stride": 59,
+ "t_none_c7_eps": 0.002199999988079071,
+ "t_none_c7_guide_bits": "184755074331836416",
+ "t_none_c7_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c7_guide_stride": 59,
+ "t_none_c7_mask_bits": "15033964380473524224",
+ "t_none_c7_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c7_mask_stride": 38,
+ "t_none_c7_p_bits": "6778939651609591808",
+ "t_none_c7_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c7_p_stride": 59,
+ "t_none_c7_r": 4,
+ "t_none_c7_reach_bits": "12343060816759619584",
+ "t_none_c7_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c7_reach_stride": 59,
+ "t_none_c8_any": true,
+ "t_none_c8_coef_bits": "7769433052224159744",
+ "t_none_c8_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c8_coef_stride": 59,
+ "t_none_c8_eps": 0.003100000089034438,
+ "t_none_c8_guide_bits": "184755074331836416",
+ "t_none_c8_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c8_guide_stride": 59,
+ "t_none_c8_mask_bits": "5012281989328273408",
+ "t_none_c8_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c8_mask_stride": 38,
+ "t_none_c8_p_bits": "6778939651609591808",
+ "t_none_c8_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c8_p_stride": 59,
+ "t_none_c8_r": 6,
+ "t_none_c8_reach_bits": "2906314889465167872",
+ "t_none_c8_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c8_reach_stride": 59,
+ "t_none_c9_any": true,
+ "t_none_c9_coef_bits": "18019092139937366016",
+ "t_none_c9_coef_shape": [
+  320,
+  213,
+  4
+ ],
+ "t_none_c9_coef_stride": 59,
+ "t_none_c9_eps": 0.0004675000091083348,
+ "t_none_c9_guide_bits": "184755074331836416",
+ "t_none_c9_guide_shape": [
+  320,
+  213,
+  3
+ ],
+ "t_none_c9_guide_stride": 59,
+ "t_none_c9_mask_bits": "4122426154101506048",
+ "t_none_c9_mask_shape": [
+  648,
+  432
+ ],
+ "t_none_c9_mask_stride": 38,
+ "t_none_c9_p_bits": "2038811391191678976",
+ "t_none_c9_p_shape": [
+  320,
+  213
+ ],
+ "t_none_c9_p_stride": 59,
+ "t_none_c9_r": 2,
+ "t_none_c9_reach_bits": "17710040464024928256",
+ "t_none_c9_reach_shape": [
+  320,
+  213
+ ],
+ "t_none_c9_reach_stride": 59,
+ "t_none_candidates": [
+  122693,
+  7562842292
+ ],
+ "t_none_detect-20": [
+  122273,
+  7511411276
+ ],
+ "t_none_detect0": [
+  122273,
+  7511411276
+ ],
+ "t_none_detect100": [
+  122982,
+  7598633819
+ ],
+ "t_none_detect20": [
+  122472,
+  7535828435
+ ],
+ "t_none_detect50": [
+  122693,
+  7562842292
+ ],
+ "t_none_detect65.5": [
+  122796,
+  7575630099
+ ],
+ "t_none_detect80": [
+  122892,
+  7587442798
+ ],
+ "t_none_f-20_L_bits": "15843087952734322688",
+ "t_none_f-20_L_shape": [
+  640,
+  427
+ ],
+ "t_none_f-20_L_stride": 59,
+ "t_none_f-20_blue_bits": "17010268274706874368",
+ "t_none_f-20_blue_shape": [
+  640,
+  427
+ ],
+ "t_none_f-20_blue_stride": 59,
+ "t_none_f-20_edges": [
+  53254,
+  10370950126
+ ],
+ "t_none_f-20_score_bits": "17010268274706874368",
+ "t_none_f-20_score_shape": [
+  640,
+  427
+ ],
+ "t_none_f-20_score_stride": 59,
+ "t_none_f-20_texture_bits": "17267320316099559424",
+ "t_none_f-20_texture_shape": [
+  640,
+  427
+ ],
+ "t_none_f-20_texture_stride": 59,
+ "t_none_f0_L_bits": "15843087952734322688",
+ "t_none_f0_L_shape": [
+  640,
+  427
+ ],
+ "t_none_f0_L_stride": 59,
+ "t_none_f0_blue_bits": "17010268274706874368",
+ "t_none_f0_blue_shape": [
+  640,
+  427
+ ],
+ "t_none_f0_blue_stride": 59,
+ "t_none_f0_edges": [
+  53254,
+  10370950126
+ ],
+ "t_none_f0_score_bits": "17010268274706874368",
+ "t_none_f0_score_shape": [
+  640,
+  427
+ ],
+ "t_none_f0_score_stride": 59,
+ "t_none_f0_texture_bits": "17267320316099559424",
+ "t_none_f0_texture_shape": [
+  640,
+  427
+ ],
+ "t_none_f0_texture_stride": 59,
+ "t_none_f100_L_bits": "15843087952734322688",
+ "t_none_f100_L_shape": [
+  640,
+  427
+ ],
+ "t_none_f100_L_stride": 59,
+ "t_none_f100_blue_bits": "10170387249993089024",
+ "t_none_f100_blue_shape": [
+  640,
+  427
+ ],
+ "t_none_f100_blue_stride": 59,
+ "t_none_f100_edges": [
+  3364,
+  459244415
+ ],
+ "t_none_f100_score_bits": "13481738421495922688",
+ "t_none_f100_score_shape": [
+  640,
+  427
+ ],
+ "t_none_f100_score_stride": 59,
+ "t_none_f100_texture_bits": "17267320316099559424",
+ "t_none_f100_texture_shape": [
+  640,
+  427
+ ],
+ "t_none_f100_texture_stride": 59,
+ "t_none_f20_L_bits": "15843087952734322688",
+ "t_none_f20_L_shape": [
+  640,
+  427
+ ],
+ "t_none_f20_L_stride": 59,
+ "t_none_f20_blue_bits": "650633389027622912",
+ "t_none_f20_blue_shape": [
+  640,
+  427
+ ],
+ "t_none_f20_blue_stride": 59,
+ "t_none_f20_edges": [
+  28963,
+  5533709357
+ ],
+ "t_none_f20_score_bits": "650633389027622912",
+ "t_none_f20_score_shape": [
+  640,
+  427
+ ],
+ "t_none_f20_score_stride": 59,
+ "t_none_f20_texture_bits": "17267320316099559424",
+ "t_none_f20_texture_shape": [
+  640,
+  427
+ ],
+ "t_none_f20_texture_stride": 59,
+ "t_none_f50_L_bits": "15843087952734322688",
+ "t_none_f50_L_shape": [
+  640,
+  427
+ ],
+ "t_none_f50_L_stride": 59,
+ "t_none_f50_blue_bits": "4711708496180019200",
+ "t_none_f50_blue_shape": [
+  640,
+  427
+ ],
+ "t_none_f50_blue_stride": 59,
+ "t_none_f50_edges": [
+  10341,
+  1838873836
+ ],
+ "t_none_f50_score_bits": "4711708496180019200",
+ "t_none_f50_score_shape": [
+  640,
+  427
+ ],
+ "t_none_f50_score_stride": 59,
+ "t_none_f50_texture_bits": "17267320316099559424",
+ "t_none_f50_texture_shape": [
+  640,
+  427
+ ],
+ "t_none_f50_texture_stride": 59,
+ "t_none_f65.5_L_bits": "15843087952734322688",
+ "t_none_f65.5_L_shape": [
+  640,
+  427
+ ],
+ "t_none_f65.5_L_stride": 59,
+ "t_none_f65.5_blue_bits": "14709636355218997248",
+ "t_none_f65.5_blue_shape": [
+  640,
+  427
+ ],
+ "t_none_f65.5_blue_stride": 59,
+ "t_none_f65.5_edges": [
+  6340,
+  1044980777
+ ],
+ "t_none_f65.5_score_bits": "14709636355218997248",
+ "t_none_f65.5_score_shape": [
+  640,
+  427
+ ],
+ "t_none_f65.5_score_stride": 59,
+ "t_none_f65.5_texture_bits": "17267320316099559424",
+ "t_none_f65.5_texture_shape": [
+  640,
+  427
+ ],
+ "t_none_f65.5_texture_stride": 59,
+ "t_none_f80_L_bits": "15843087952734322688",
+ "t_none_f80_L_shape": [
+  640,
+  427
+ ],
+ "t_none_f80_L_stride": 59,
+ "t_none_f80_blue_bits": "3583793577513189376",
+ "t_none_f80_blue_shape": [
+  640,
+  427
+ ],
+ "t_none_f80_blue_stride": 59,
+ "t_none_f80_edges": [
+  4540,
+  688444218
+ ],
+ "t_none_f80_score_bits": "3583793577513189376",
+ "t_none_f80_score_shape": [
+  640,
+  427
+ ],
+ "t_none_f80_score_stride": 59,
+ "t_none_f80_texture_bits": "17267320316099559424",
+ "t_none_f80_texture_shape": [
+  640,
+  427
+ ],
+ "t_none_f80_texture_stride": 59,
+ "t_none_horizon": null,
+ "t_none_small_bits": "10916775781686312960",
+ "t_none_small_shape": [
+  640,
+  427,
+  3
+ ],
+ "t_none_small_stride": 59,
+ "t_none_view": [
+  0,
+  0,
+  432,
+  648,
+  0
+ ],
+ "transforms": [
+  "none"
+ ]
+}

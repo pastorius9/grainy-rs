@@ -1,0 +1,236 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "a.jpg": {
+     "fill": [
+      65,
+      10
+     ]
+    },
+    "b.jpg": {
+     "fill": [
+      65,
+      10
+     ]
+    },
+    "c.jpg": {
+     "fill": [
+      66,
+      10
+     ]
+    },
+    "d.jpg": {
+     "fill": [
+      65,
+      10
+     ]
+    },
+    "e.jpg": {
+     "fill": [
+      65,
+      11
+     ]
+    },
+    "sub/f.jpg": {
+     "fill": [
+      66,
+      10
+     ]
+    },
+    "solo.jpg": {
+     "fill": [
+      1,
+      3
+     ]
+    }
+   },
+   "photos": [
+    {
+     "path": "$ROOT/a.jpg"
+    },
+    {
+     "path": "$ROOT/b.jpg"
+    },
+    {
+     "path": "$ROOT/c.jpg"
+    },
+    {
+     "path": "$ROOT/d.jpg"
+    },
+    {
+     "path": "$ROOT/e.jpg"
+    },
+    {
+     "path": "$ROOT/sub/f.jpg"
+    },
+    {
+     "path": "$ROOT/missing.jpg"
+    },
+    {
+     "path": "$ROOT/solo.jpg"
+    },
+    {
+     "virtual_of": 1
+    }
+   ],
+   "db": [
+    [
+     "INSERT INTO photos(path,name,edits,metadata,imported) VALUES(?,?,?,?,?)",
+     [
+      "$ROOT/A.JPG",
+      "A.JPG",
+      "{}",
+      "{}",
+      "x"
+     ]
+    ]
+   ]
+  },
+  "calls": [
+   {
+    "fn": "duplicate_groups"
+   },
+   {
+    "fn": "file_digest",
+    "args": {
+     "path": "$ROOT/a.jpg"
+    }
+   },
+   {
+    "fn": "file_digest",
+    "args": {
+     "path": "$ROOT/missing.jpg"
+    }
+   }
+  ],
+  "name": "duplicates"
+ },
+ "results": [
+  {
+   "ok": [
+    [
+     1,
+     2,
+     4
+    ],
+    [
+     3,
+     6
+    ]
+   ]
+  },
+  {
+   "ok": "1d65bf29403e4fb1767522a107c827b8884d16640cf0e3b18c4c1dd107e0d49d"
+  },
+  {
+   "err": {
+    "type": "OSError",
+    "message": null
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "a.jpg": {
+    "size": 10,
+    "sha256": "1d65bf29403e4fb1767522a107c827b8884d16640cf0e3b18c4c1dd107e0d49d"
+   },
+   "b.jpg": {
+    "size": 10,
+    "sha256": "1d65bf29403e4fb1767522a107c827b8884d16640cf0e3b18c4c1dd107e0d49d"
+   },
+   "c.jpg": {
+    "size": 10,
+    "sha256": "4e5d54f50370b936533dfcb2f3540a242b5df12fc0631cde1c290492f7bd9bfe"
+   },
+   "d.jpg": {
+    "size": 10,
+    "sha256": "1d65bf29403e4fb1767522a107c827b8884d16640cf0e3b18c4c1dd107e0d49d"
+   },
+   "e.jpg": {
+    "size": 11,
+    "sha256": "dd20088919031875b7bcca29995545dd40ca994be0558183f9b942b51b3b2249"
+   },
+   "solo.jpg": {
+    "size": 3,
+    "sha256": "75c8fd04ad916aec3e3d5cb76a452b116b3d4d0912a0a485e9fb8e3d240e210c"
+   },
+   "sub/f.jpg": {
+    "size": 10,
+    "sha256": "4e5d54f50370b936533dfcb2f3540a242b5df12fc0631cde1c290492f7bd9bfe"
+   }
+  },
+  "dirs": [
+   "sub"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\c.jpg",
+    "name": "c.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 4,
+    "path": "$ROOT\\d.jpg",
+    "name": "d.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 5,
+    "path": "$ROOT\\e.jpg",
+    "name": "e.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 6,
+    "path": "$ROOT\\sub\\f.jpg",
+    "name": "f.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 7,
+    "path": "$ROOT\\missing.jpg",
+    "name": "missing.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 8,
+    "path": "$ROOT\\solo.jpg",
+    "name": "solo.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 9,
+    "path": "$ROOT\\a.jpg",
+    "name": "a.jpg · 사본",
+    "virtual_source": 1
+   },
+   {
+    "id": 10,
+    "path": "$ROOT\\A.JPG",
+    "name": "A.JPG",
+    "virtual_source": null
+   }
+  ],
+  "folder_roots": [
+   "$ROOT"
+  ],
+  "preferences": {}
+ }
+}

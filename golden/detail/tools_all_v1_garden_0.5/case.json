@@ -1,0 +1,12 @@
+{
+ "image": "garden",
+ "pixel_scale": 0.5,
+ "settings": {
+  "defringe": 40.0,
+  "dehaze": -20.0,
+  "detail_version": 1,
+  "noise_color": 30.0,
+  "noise_luma": 50.0,
+  "texture": -35.0
+ }
+}

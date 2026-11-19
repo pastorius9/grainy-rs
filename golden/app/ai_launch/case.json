@@ -1,0 +1,371 @@
+{
+ "errors": [
+  "ValueError: Program is not installed",
+  "OSError: No supported sign-in terminal",
+  "OSError: No supported installation terminal"
+ ],
+ "install": [
+  {
+   "calls": [
+    {
+     "argv": [
+      "powershell.exe",
+      "-NoProfile",
+      "-Command",
+      "try { & powershell.exe -NoProfile -EncodedCommand aQByAG0AIABoAHQAdABwAHMAOgAvAC8AYwBsAGEAdQBkAGUALgBhAGkALwBpAG4AcwB0AGEAbABsAC4AcABzADEAIAB8ACAAaQBlAHgA } finally { Write-Host '\n결과를 확인한 뒤 아무 키나 누르면 이 설치 실행을 마칩니다.'; $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') }"
+     ],
+     "cwd": "<ROOT>\\settings\\ai-install",
+     "flags": 16,
+     "path": "<ROOT>\\empty-path;<ROOT>\\home\\.local\\bin;<ROOT>\\local\\Programs\\OpenAI\\Codex\\bin;<ROOT>\\roaming\\npm;<ROOT>\\programs\\nodejs;<ROOT>\\local\\Programs\\nodejs;<ROOT>\\local\\Microsoft\\WindowsApps"
+    }
+   ],
+   "done": false,
+   "installer": {
+    "command": "irm https://claude.ai/install.ps1 | iex",
+    "name": "Claude Code",
+    "needs_node": false,
+    "shell": "powershell",
+    "source": "https://code.claude.com/docs/en/setup",
+    "vendor": "Anthropic"
+   },
+   "key": "claude",
+   "language": "ko"
+  },
+  {
+   "calls": [
+    {
+     "argv": [
+      "powershell.exe",
+      "-NoProfile",
+      "-Command",
+      "try { & powershell.exe -NoProfile -EncodedCommand cABvAHcAZQByAHMAaABlAGwAbAAgAC0ARQB4AGUAYwB1AHQAaQBvAG4AUABvAGwAaQBjAHkAIABCAHkAUABhAHMAcwAgAC0AYwAgACIAaQByAG0AIABoAHQAdABwAHMAOgAvAC8AYwBoAGEAdABnAHAAdAAuAGMAbwBtAC8AYwBvAGQAZQB4AC8AaQBuAHMAdABhAGwAbAAuAHAAcwAxACAAfAAgAGkAZQB4ACIA } finally { Write-Host '\n결과를 확인한 뒤 아무 키나 누르면 이 설치 실행을 마칩니다.'; $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') }"
+     ],
+     "cwd": "<ROOT>\\settings\\ai-install",
+     "flags": 16,
+     "path": "<ROOT>\\empty-path;<ROOT>\\home\\.local\\bin;<ROOT>\\local\\Programs\\OpenAI\\Codex\\bin;<ROOT>\\roaming\\npm;<ROOT>\\programs\\nodejs;<ROOT>\\local\\Programs\\nodejs;<ROOT>\\local\\Microsoft\\WindowsApps"
+    }
+   ],
+   "done": false,
+   "installer": {
+    "command": "powershell -ExecutionPolicy ByPass -c \"irm https://chatgpt.com/codex/install.ps1 | iex\"",
+    "name": "Codex",
+    "needs_node": false,
+    "shell": "powershell",
+    "source": "https://github.com/openai/codex#installing-and-running-codex-cli",
+    "vendor": "OpenAI"
+   },
+   "key": "codex",
+   "language": "ko"
+  },
+  {
+   "calls": [
+    {
+     "argv": [
+      "powershell.exe",
+      "-NoProfile",
+      "-Command",
+      "try { & cmd.exe /d /c 'npm install -g @google/gemini-cli' } finally { Write-Host '\n결과를 확인한 뒤 아무 키나 누르면 이 설치 실행을 마칩니다.'; $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') }"
+     ],
+     "cwd": "<ROOT>\\settings\\ai-install",
+     "flags": 16,
+     "path": "<ROOT>\\empty-path;<ROOT>\\home\\.local\\bin;<ROOT>\\local\\Programs\\OpenAI\\Codex\\bin;<ROOT>\\roaming\\npm;<ROOT>\\programs\\nodejs;<ROOT>\\local\\Programs\\nodejs;<ROOT>\\local\\Microsoft\\WindowsApps"
+    }
+   ],
+   "done": false,
+   "installer": {
+    "command": "npm install -g @google/gemini-cli",
+    "name": "Gemini CLI",
+    "needs_node": true,
+    "shell": "cmd",
+    "source": "https://github.com/google-gemini/gemini-cli#installation",
+    "vendor": "Google (npm)"
+   },
+   "key": "gemini",
+   "language": "ko"
+  },
+  {
+   "calls": [
+    {
+     "argv": [
+      "powershell.exe",
+      "-NoProfile",
+      "-Command",
+      "try { & cmd.exe /d /c 'winget install OpenJS.NodeJS.LTS' } finally { Write-Host '\n결과를 확인한 뒤 아무 키나 누르면 이 설치 실행을 마칩니다.'; $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') }"
+     ],
+     "cwd": "<ROOT>\\settings\\ai-install",
+     "flags": 16,
+     "path": "<ROOT>\\empty-path;<ROOT>\\home\\.local\\bin;<ROOT>\\local\\Programs\\OpenAI\\Codex\\bin;<ROOT>\\roaming\\npm;<ROOT>\\programs\\nodejs;<ROOT>\\local\\Programs\\nodejs;<ROOT>\\local\\Microsoft\\WindowsApps"
+    }
+   ],
+   "done": false,
+   "installer": {
+    "command": "winget install OpenJS.NodeJS.LTS",
+    "name": "Node.js LTS",
+    "needs_node": false,
+    "shell": "cmd",
+    "source": "https://nodejs.org/en/download",
+    "vendor": "OpenJS Foundation (winget)"
+   },
+   "key": "node",
+   "language": "ko"
+  },
+  {
+   "calls": [
+    {
+     "argv": [
+      "powershell.exe",
+      "-NoProfile",
+      "-Command",
+      "try { & powershell.exe -NoProfile -EncodedCommand aQByAG0AIABoAHQAdABwAHMAOgAvAC8AYwBsAGEAdQBkAGUALgBhAGkALwBpAG4AcwB0AGEAbABsAC4AcABzADEAIAB8ACAAaQBlAHgA } finally { Write-Host '\nRead the result, then press any key to finish this installation session.'; $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') }"
+     ],
+     "cwd": "<ROOT>\\settings\\ai-install",
+     "flags": 16,
+     "path": "<ROOT>\\empty-path;<ROOT>\\home\\.local\\bin;<ROOT>\\local\\Programs\\OpenAI\\Codex\\bin;<ROOT>\\roaming\\npm;<ROOT>\\programs\\nodejs;<ROOT>\\local\\Programs\\nodejs;<ROOT>\\local\\Microsoft\\WindowsApps"
+    }
+   ],
+   "done": false,
+   "installer": {
+    "command": "irm https://claude.ai/install.ps1 | iex",
+    "name": "Claude Code",
+    "needs_node": false,
+    "shell": "powershell",
+    "source": "https://code.claude.com/docs/en/setup",
+    "vendor": "Anthropic"
+   },
+   "key": "claude",
+   "language": "en"
+  },
+  {
+   "calls": [
+    {
+     "argv": [
+      "powershell.exe",
+      "-NoProfile",
+      "-Command",
+      "try { & powershell.exe -NoProfile -EncodedCommand cABvAHcAZQByAHMAaABlAGwAbAAgAC0ARQB4AGUAYwB1AHQAaQBvAG4AUABvAGwAaQBjAHkAIABCAHkAUABhAHMAcwAgAC0AYwAgACIAaQByAG0AIABoAHQAdABwAHMAOgAvAC8AYwBoAGEAdABnAHAAdAAuAGMAbwBtAC8AYwBvAGQAZQB4AC8AaQBuAHMAdABhAGwAbAAuAHAAcwAxACAAfAAgAGkAZQB4ACIA } finally { Write-Host '\nRead the result, then press any key to finish this installation session.'; $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') }"
+     ],
+     "cwd": "<ROOT>\\settings\\ai-install",
+     "flags": 16,
+     "path": "<ROOT>\\empty-path;<ROOT>\\home\\.local\\bin;<ROOT>\\local\\Programs\\OpenAI\\Codex\\bin;<ROOT>\\roaming\\npm;<ROOT>\\programs\\nodejs;<ROOT>\\local\\Programs\\nodejs;<ROOT>\\local\\Microsoft\\WindowsApps"
+    }
+   ],
+   "done": false,
+   "installer": {
+    "command": "powershell -ExecutionPolicy ByPass -c \"irm https://chatgpt.com/codex/install.ps1 | iex\"",
+    "name": "Codex",
+    "needs_node": false,
+    "shell": "powershell",
+    "source": "https://github.com/openai/codex#installing-and-running-codex-cli",
+    "vendor": "OpenAI"
+   },
+   "key": "codex",
+   "language": "en"
+  },
+  {
+   "calls": [
+    {
+     "argv": [
+      "powershell.exe",
+      "-NoProfile",
+      "-Command",
+      "try { & cmd.exe /d /c 'npm install -g @google/gemini-cli' } finally { Write-Host '\nRead the result, then press any key to finish this installation session.'; $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') }"
+     ],
+     "cwd": "<ROOT>\\settings\\ai-install",
+     "flags": 16,
+     "path": "<ROOT>\\empty-path;<ROOT>\\home\\.local\\bin;<ROOT>\\local\\Programs\\OpenAI\\Codex\\bin;<ROOT>\\roaming\\npm;<ROOT>\\programs\\nodejs;<ROOT>\\local\\Programs\\nodejs;<ROOT>\\local\\Microsoft\\WindowsApps"
+    }
+   ],
+   "done": false,
+   "installer": {
+    "command": "npm install -g @google/gemini-cli",
+    "name": "Gemini CLI",
+    "needs_node": true,
+    "shell": "cmd",
+    "source": "https://github.com/google-gemini/gemini-cli#installation",
+    "vendor": "Google (npm)"
+   },
+   "key": "gemini",
+   "language": "en"
+  },
+  {
+   "calls": [
+    {
+     "argv": [
+      "powershell.exe",
+      "-NoProfile",
+      "-Command",
+      "try { & cmd.exe /d /c 'winget install OpenJS.NodeJS.LTS' } finally { Write-Host '\nRead the result, then press any key to finish this installation session.'; $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') }"
+     ],
+     "cwd": "<ROOT>\\settings\\ai-install",
+     "flags": 16,
+     "path": "<ROOT>\\empty-path;<ROOT>\\home\\.local\\bin;<ROOT>\\local\\Programs\\OpenAI\\Codex\\bin;<ROOT>\\roaming\\npm;<ROOT>\\programs\\nodejs;<ROOT>\\local\\Programs\\nodejs;<ROOT>\\local\\Microsoft\\WindowsApps"
+    }
+   ],
+   "done": false,
+   "installer": {
+    "command": "winget install OpenJS.NodeJS.LTS",
+    "name": "Node.js LTS",
+    "needs_node": false,
+    "shell": "cmd",
+    "source": "https://nodejs.org/en/download",
+    "vendor": "OpenJS Foundation (winget)"
+   },
+   "key": "node",
+   "language": "en"
+  }
+ ],
+ "installers": {
+  "claude": {
+   "darwin": {
+    "command": "curl -fsSL https://claude.ai/install.sh | bash",
+    "name": "Claude Code",
+    "needs_node": false,
+    "shell": "powershell",
+    "source": "https://code.claude.com/docs/en/setup",
+    "vendor": "Anthropic"
+   },
+   "win32": {
+    "command": "irm https://claude.ai/install.ps1 | iex",
+    "name": "Claude Code",
+    "needs_node": false,
+    "shell": "powershell",
+    "source": "https://code.claude.com/docs/en/setup",
+    "vendor": "Anthropic"
+   }
+  },
+  "codex": {
+   "darwin": {
+    "command": "curl -fsSL https://chatgpt.com/codex/install.sh | sh",
+    "name": "Codex",
+    "needs_node": false,
+    "shell": "powershell",
+    "source": "https://github.com/openai/codex#installing-and-running-codex-cli",
+    "vendor": "OpenAI"
+   },
+   "win32": {
+    "command": "powershell -ExecutionPolicy ByPass -c \"irm https://chatgpt.com/codex/install.ps1 | iex\"",
+    "name": "Codex",
+    "needs_node": false,
+    "shell": "powershell",
+    "source": "https://github.com/openai/codex#installing-and-running-codex-cli",
+    "vendor": "OpenAI"
+   }
+  },
+  "gemini": {
+   "darwin": {
+    "command": "npm install -g @google/gemini-cli",
+    "name": "Gemini CLI",
+    "needs_node": true,
+    "shell": "cmd",
+    "source": "https://github.com/google-gemini/gemini-cli#installation",
+    "vendor": "Google (npm)"
+   },
+   "win32": {
+    "command": "npm install -g @google/gemini-cli",
+    "name": "Gemini CLI",
+    "needs_node": true,
+    "shell": "cmd",
+    "source": "https://github.com/google-gemini/gemini-cli#installation",
+    "vendor": "Google (npm)"
+   }
+  }
+ },
+ "node_windows": {
+  "command": "winget install OpenJS.NodeJS.LTS",
+  "name": "Node.js LTS",
+  "needs_node": false,
+  "shell": "cmd",
+  "source": "https://nodejs.org/en/download",
+  "vendor": "OpenJS Foundation (winget)"
+ },
+ "profiles": [
+  {
+   "auth_exit_codes": [],
+   "key": "claude",
+   "login_args": [
+    "auth",
+    "login"
+   ],
+   "name": "Claude Code",
+   "persistent": true,
+   "resume": "its own session (--resume)",
+   "status_args": [
+    "auth",
+    "status",
+    "--json"
+   ]
+  },
+  {
+   "auth_exit_codes": [],
+   "key": "codex",
+   "login_args": [
+    "login"
+   ],
+   "name": "Codex",
+   "persistent": false,
+   "resume": "in-memory context (--ephemeral)",
+   "status_args": [
+    "login",
+    "status"
+   ]
+  },
+  {
+   "auth_exit_codes": [
+    41
+   ],
+   "key": "gemini",
+   "login_args": [],
+   "name": "Gemini CLI",
+   "persistent": true,
+   "resume": "--resume <session id>",
+   "status_args": null
+  }
+ ],
+ "sign_in": [
+  {
+   "calls": [
+    {
+     "argv": [
+      "C:\\p\\claude.exe",
+      "auth",
+      "login"
+     ],
+     "cwd": "<ROOT>\\home",
+     "flags": 16,
+     "path": null
+    }
+   ],
+   "key": "claude"
+  },
+  {
+   "calls": [
+    {
+     "argv": [
+      "C:\\p\\codex.exe",
+      "login"
+     ],
+     "cwd": "<ROOT>\\home",
+     "flags": 16,
+     "path": null
+    }
+   ],
+   "key": "codex"
+  },
+  {
+   "calls": [
+    {
+     "argv": [
+      "C:\\p\\gemini.exe"
+     ],
+     "cwd": "<ROOT>\\home",
+     "flags": 16,
+     "path": null
+    }
+   ],
+   "key": "gemini"
+  }
+ ],
+ "urls": {
+  "node": "https://nodejs.org/en/download"
+ }
+}

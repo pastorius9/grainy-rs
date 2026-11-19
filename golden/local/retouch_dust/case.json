@@ -1,0 +1,65 @@
+{
+ "error": null,
+ "frame": "garden",
+ "operations": [
+  {
+   "spots": [
+    {
+     "rx": 0.02,
+     "ry": 0.03,
+     "x": 0.3,
+     "y": 0.4
+    },
+    {
+     "rx": 0.015,
+     "ry": 0.01,
+     "scale": 150,
+     "x": 0.7,
+     "y": 0.6
+    }
+   ],
+   "type": "dust"
+  }
+ ],
+ "output_bits": "12065012344019746816",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "recorded": {
+  "distance": [],
+  "dust": [
+   {
+    "input_bits": "11866650031610134528",
+    "method": "smooth",
+    "output_bits": "12065012344019746816",
+    "spots": [
+     {
+      "rx": 0.02,
+      "ry": 0.03,
+      "x": 0.3,
+      "y": 0.4
+     },
+     {
+      "rx": 0.015,
+      "ry": 0.01,
+      "scale": 150,
+      "x": 0.7,
+      "y": 0.6
+     }
+    ],
+    "window": [
+     59,
+     98,
+     67,
+     173
+    ]
+   }
+  ],
+  "inpaint": 0,
+  "sky": []
+ },
+ "shift": 0
+}

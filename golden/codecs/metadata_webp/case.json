@@ -1,0 +1,19 @@
+{
+ "cms_calls": 1,
+ "file": "input.webp",
+ "max_size": null,
+ "metadata": {
+  "bit_depth": 8,
+  "decoder": "WEBP · 8-bit",
+  "filename": "input.webp",
+  "format": "WEBP",
+  "height": 19,
+  "input_profile": "sRGB built-in",
+  "size_mb": 0.0,
+  "source_orientation": 1,
+  "width": 31,
+  "working_space": "sRGB"
+ },
+ "read_metadata": {},
+ "working": "sRGB"
+}

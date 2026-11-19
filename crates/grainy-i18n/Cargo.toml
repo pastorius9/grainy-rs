@@ -1,0 +1,16 @@
+[package]
+name = "grainy-i18n"
+description = "Grainy's interface translation (Korean source, English table), shortcut table and edit fields"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde_json.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

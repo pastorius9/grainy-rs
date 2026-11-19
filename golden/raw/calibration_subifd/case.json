@@ -1,0 +1,118 @@
+{
+ "after": {
+  "base_profile": {
+   "camera": "",
+   "cm1": [
+    [
+     0.91,
+     -0.16,
+     -0.08
+    ],
+    [
+     -0.21,
+     1.19,
+     0.05
+    ],
+    [
+     -0.02,
+     0.06,
+     0.63
+    ]
+   ],
+   "cm2": null,
+   "cm3": null,
+   "copyright": "",
+   "curve": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     1.0,
+     1.0
+    ]
+   ],
+   "custom_illuminants": false,
+   "exposure": 0,
+   "fm1": null,
+   "fm2": null,
+   "fm3": null,
+   "hs1": null,
+   "hs2": null,
+   "hs3": null,
+   "hs_encoding": 0,
+   "look": null,
+   "look_encoding": 0,
+   "name": "DCP",
+   "policy": 0,
+   "signature": "",
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "xy1": null,
+   "xy2": null,
+   "xy3": null
+  },
+  "camera": "Generated",
+  "daylight_neutral": [
+   1,
+   1,
+   1
+  ],
+  "neutral": [
+   0.5,
+   1.0,
+   0.6666666666666666
+  ],
+  "unique_camera": "Generated",
+  "xyz_to_camera": [
+   [
+    0.91,
+    -0.16,
+    -0.08
+   ],
+   [
+    -0.21,
+    1.19,
+    0.05
+   ],
+   [
+    -0.02,
+    0.06,
+    0.63
+   ]
+  ]
+ },
+ "before": {
+  "camera": "Generated",
+  "daylight_neutral": [
+   1,
+   1,
+   1
+  ],
+  "neutral": [
+   1,
+   1,
+   1
+  ],
+  "xyz_to_camera": [
+   [
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ]
+ },
+ "file": "_files/calibration_subifd/input.dng",
+ "linear_raw": false
+}

@@ -1,0 +1,33 @@
+{
+ "grain_100_dtype": "float32",
+ "grain_30_dtype": "float32",
+ "key_100": [
+  [
+   64,
+   96
+  ],
+  100.0,
+  35.0,
+  65.0,
+  0.5
+ ],
+ "key_30": [
+  [
+   64,
+   96
+  ],
+  30.0,
+  35.0,
+  65.0,
+  0.5
+ ],
+ "large": false,
+ "pattern_dtype": "float32",
+ "pixel_scale": 0.5,
+ "roughness": 65.0,
+ "shape": [
+  64,
+  96
+ ],
+ "size": 35.0
+}

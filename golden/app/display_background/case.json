@@ -1,0 +1,313 @@
+{
+ "colours": {
+  "black": "#101215",
+  "dark_grey": "#2b2e33",
+  "mid_grey": "#808080",
+  "white": "#ffffff"
+ },
+ "default": "#101215",
+ "keys": [
+  "black",
+  "dark_grey",
+  "mid_grey",
+  "white"
+ ],
+ "menus": {
+  "en": [
+   {
+    "checkable": true,
+    "checked": false,
+    "text": "Black"
+   },
+   {
+    "checkable": true,
+    "checked": true,
+    "text": "Dark grey"
+   },
+   {
+    "checkable": true,
+    "checked": false,
+    "text": "Mid grey"
+   },
+   {
+    "checkable": true,
+    "checked": false,
+    "text": "White"
+   }
+  ],
+  "ko": [
+   {
+    "checkable": true,
+    "checked": false,
+    "text": "검정"
+   },
+   {
+    "checkable": true,
+    "checked": true,
+    "text": "어두운 회색"
+   },
+   {
+    "checkable": true,
+    "checked": false,
+    "text": "중간 회색"
+   },
+   {
+    "checkable": true,
+    "checked": false,
+    "text": "흰색"
+   }
+  ]
+ },
+ "steps": [
+  {
+   "compare": [],
+   "context_checked": [
+    true,
+    false,
+    false,
+    false
+   ],
+   "menu_checked": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "saved": [],
+   "step": "built, nothing chosen",
+   "view": []
+  },
+  {
+   "compare": [
+    "#ffffff"
+   ],
+   "context_checked": [
+    false,
+    false,
+    false,
+    true
+   ],
+   "menu_checked": [
+    false,
+    false,
+    false,
+    true
+   ],
+   "saved": [
+    [
+     "view_background",
+     "white"
+    ]
+   ],
+   "step": "white",
+   "view": [
+    "#ffffff"
+   ]
+  },
+  {
+   "compare": [
+    "#ffffff",
+    "#ffffff"
+   ],
+   "context_checked": [
+    false,
+    false,
+    false,
+    true
+   ],
+   "menu_checked": [
+    false,
+    false,
+    false,
+    true
+   ],
+   "saved": [
+    [
+     "view_background",
+     "white"
+    ]
+   ],
+   "step": "white again",
+   "view": [
+    "#ffffff",
+    "#ffffff"
+   ]
+  },
+  {
+   "compare": [
+    "#ffffff",
+    "#ffffff",
+    "#808080"
+   ],
+   "context_checked": [
+    false,
+    false,
+    true,
+    false
+   ],
+   "menu_checked": [
+    false,
+    false,
+    true,
+    false
+   ],
+   "saved": [
+    [
+     "view_background",
+     "white"
+    ],
+    [
+     "view_background",
+     "mid_grey"
+    ]
+   ],
+   "step": "mid grey",
+   "view": [
+    "#ffffff",
+    "#ffffff",
+    "#808080"
+   ]
+  },
+  {
+   "compare": [
+    "#ffffff",
+    "#ffffff",
+    "#808080",
+    "#101215"
+   ],
+   "context_checked": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "menu_checked": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "saved": [
+    [
+     "view_background",
+     "white"
+    ],
+    [
+     "view_background",
+     "mid_grey"
+    ],
+    [
+     "view_background",
+     "bogus"
+    ]
+   ],
+   "step": "unknown key",
+   "view": [
+    "#ffffff",
+    "#ffffff",
+    "#808080",
+    "#101215"
+   ]
+  },
+  {
+   "compare": [
+    "#ffffff",
+    "#ffffff",
+    "#808080",
+    "#101215",
+    "#101215"
+   ],
+   "context_checked": [
+    true,
+    false,
+    false,
+    false
+   ],
+   "menu_checked": [
+    true,
+    false,
+    false,
+    false
+   ],
+   "saved": [
+    [
+     "view_background",
+     "white"
+    ],
+    [
+     "view_background",
+     "mid_grey"
+    ],
+    [
+     "view_background",
+     "bogus"
+    ],
+    [
+     "view_background",
+     "black"
+    ]
+   ],
+   "step": "black",
+   "view": [
+    "#ffffff",
+    "#ffffff",
+    "#808080",
+    "#101215",
+    "#101215"
+   ]
+  },
+  {
+   "compare": [
+    "#ffffff",
+    "#ffffff",
+    "#808080",
+    "#101215",
+    "#101215",
+    "#2b2e33"
+   ],
+   "context_checked": [
+    false,
+    true,
+    false,
+    false
+   ],
+   "menu_checked": [
+    false,
+    true,
+    false,
+    false
+   ],
+   "saved": [
+    [
+     "view_background",
+     "white"
+    ],
+    [
+     "view_background",
+     "mid_grey"
+    ],
+    [
+     "view_background",
+     "bogus"
+    ],
+    [
+     "view_background",
+     "black"
+    ],
+    [
+     "view_background",
+     "dark_grey"
+    ]
+   ],
+   "step": "dark grey",
+   "view": [
+    "#ffffff",
+    "#ffffff",
+    "#808080",
+    "#101215",
+    "#101215",
+    "#2b2e33"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+ "mean": [
+  0.34933199742711923,
+  0.3533890962166091,
+  0.3513935053201082
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "crop": [
+   0.1,
+   0.2,
+   0.8,
+   0.9
+  ],
+  "masks": [
+   {
+    "adjustments": {
+     "exposure": 1.0
+    },
+    "components": [
+     {
+      "angle": 25.0,
+      "feather": 60,
+      "points": [
+       [
+        0.3,
+        0.3
+       ],
+       [
+        0.7,
+        0.8
+       ]
+      ],
+      "type": "radial"
+     }
+    ]
+   }
+  ]
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": false
+}

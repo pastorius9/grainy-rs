@@ -1,0 +1,15 @@
+{
+ "anchor": [
+  0,
+  0
+ ],
+ "dtype": null,
+ "kind": "ellipse",
+ "op": "structuring",
+ "output_dtype": "uint8",
+ "size": [
+  7,
+  1
+ ],
+ "tolerance": 0.0
+}

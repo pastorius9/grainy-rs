@@ -1,0 +1,13 @@
+{
+ "highlights": [
+  true,
+  true,
+  true
+ ],
+ "shadows": [
+  false,
+  false,
+  true
+ ],
+ "step": 2
+}

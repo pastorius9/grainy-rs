@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_duplicate/profile.dcp",
+ "message": "DCP 태그가 중복되었습니다."
+}

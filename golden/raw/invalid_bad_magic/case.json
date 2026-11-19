@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_bad_magic/profile.dcp",
+ "message": "DCP/TIFF 카메라 프로파일이 아닙니다."
+}

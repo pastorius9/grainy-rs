@@ -1,0 +1,8 @@
+{
+ "error": {
+  "kind": "ValueError",
+  "message": "알 수 없는 자동 정렬 모드입니다."
+ },
+ "mode": "bogus",
+ "source": "colours"
+}

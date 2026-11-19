@@ -1,0 +1,488 @@
+{
+ "cases": [
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ]
+   ],
+   "listing": {
+    "new": null,
+    "new/Grainy.exe": "exe 9.9.9",
+    "new/LICENSE.txt": "MIT",
+    "new/_internal": null,
+    "new/_internal/lib.dll": "lib 9.9.9"
+   },
+   "name": "ok",
+   "result": {
+    "ok": true,
+    "value": "work/new"
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/",
+     ""
+    ],
+    [
+     "Grainy/_internal/",
+     ""
+    ],
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ]
+   ],
+   "listing": {
+    "new": null,
+    "new/Grainy.exe": "exe 9.9.9",
+    "new/LICENSE.txt": "MIT",
+    "new/_internal": null,
+    "new/_internal/lib.dll": "lib 9.9.9"
+   },
+   "name": "with_directory_entries",
+   "result": {
+    "ok": true,
+    "value": "work/new"
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy\\Grainy.exe",
+     "x"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "y"
+    ]
+   ],
+   "listing": {
+    "new": null,
+    "new/Grainy.exe": "x",
+    "new/_internal": null,
+    "new/_internal/lib.dll": "y"
+   },
+   "name": "backslash_names",
+   "result": {
+    "ok": true,
+    "value": "work/new"
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "../evil.txt",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "parent_escape",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "Other/x.txt",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "other_top_folder",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "Grainy/../../evil.txt",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "nested_escape",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "Grainy\\..\\..\\evil.txt",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "backslash_escape",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "/abs.txt",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "absolute",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "\\abs.txt",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "backslash_absolute",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "C:/evil.txt",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "drive",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "Grainy/a:b.txt",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "colon_in_name",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/./Grainy.exe",
+     "x"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "y"
+    ],
+    [
+     "Grainy/Grainy.exe",
+     "z"
+    ]
+   ],
+   "listing": {
+    "new": null,
+    "new/Grainy.exe": "z",
+    "new/_internal": null,
+    "new/_internal/lib.dll": "y"
+   },
+   "name": "dot_part_ok",
+   "result": {
+    "ok": true,
+    "value": "work/new"
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/readme.txt",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "no_program",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "x"
+    ]
+   ],
+   "listing": {},
+   "name": "no_internal",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "x"
+    ],
+    [
+     "Grainy/_internal",
+     "y"
+    ]
+   ],
+   "listing": {},
+   "name": "internal_as_file",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [],
+   "listing": {},
+   "name": "empty",
+   "result": {
+    "error": "ValueError",
+    "message": "업데이트 파일의 구조가 올바르지 않습니다.",
+    "ok": false
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "Grainy/we?ird*name.txt",
+     "x"
+    ]
+   ],
+   "listing": {
+    "new": null,
+    "new/Grainy.exe": "exe 9.9.9",
+    "new/LICENSE.txt": "MIT",
+    "new/_internal": null,
+    "new/_internal/lib.dll": "lib 9.9.9",
+    "new/we_ird_name.txt": "x"
+   },
+   "name": "illegal_characters",
+   "result": {
+    "ok": true,
+    "value": "work/new"
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "Grainy/link",
+     "../../outside"
+    ]
+   ],
+   "listing": {
+    "new": null,
+    "new/Grainy.exe": "exe 9.9.9",
+    "new/LICENSE.txt": "MIT",
+    "new/_internal": null,
+    "new/_internal/lib.dll": "lib 9.9.9",
+    "new/link": "../../outside"
+   },
+   "name": "symlink_like_text",
+   "result": {
+    "ok": true,
+    "value": "work/new"
+   }
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ]
+   ],
+   "listing": {
+    "new": null,
+    "new/Grainy.exe": "exe 9.9.9",
+    "new/LICENSE.txt": "MIT",
+    "new/_internal": null,
+    "new/_internal/lib.dll": "lib 9.9.9"
+   },
+   "name": "second_stage",
+   "result": {
+    "error": "OSError",
+    "message": "이전 업데이트가 정리되지 않았습니다. Grainy를 다시 시작한 뒤 시도해 주세요.",
+    "ok": false
+   }
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+[package]
+name = "grainy-raw"
+description = "LibRaw decoding, DNG camera colour, DCP profiles and RAW import rules"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+grainy-core.workspace = true
+grainy-color = { path = "../grainy-color" }
+grainy-cms = { path = "../grainy-cms" }
+grainy-jpeg-sys = { path = "../grainy-jpeg-sys" }
+ndarray.workspace = true
+rayon.workspace = true
+serde = { workspace = true }
+serde_json = { workspace = true, features = ["float_roundtrip"] }
+thiserror.workspace = true
+base64 = "0.22"
+sha2 = "0.10"
+unicode-normalization = "=0.1.23"
+kamadak-exif = "0.6.2"
+
+[build-dependencies]
+cc = { version = "1", features = ["parallel"] }
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+ndarray-npy.workspace = true
+rayon.workspace = true
+
+[lints]
+workspace = true

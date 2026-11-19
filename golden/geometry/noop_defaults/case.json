@@ -1,0 +1,11 @@
+{
+ "changes": {},
+ "error": null,
+ "function": "geometry",
+ "input": {
+  "channels": 3,
+  "kind": "standard",
+  "name": "edges"
+ },
+ "use_crop": true
+}

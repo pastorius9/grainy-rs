@@ -1,0 +1,18 @@
+{
+ "image": "garden_full",
+ "pixel_scale": 1.0,
+ "settings": {
+  "clarity": 25.0,
+  "defringe": 40.0,
+  "dehaze": 10.0,
+  "detail_version": 3,
+  "grain": 25.0,
+  "noise_color": 20.0,
+  "noise_luma": 30.0,
+  "sharpen": 50.0,
+  "sharpen_mask": 10.0,
+  "texture": 25.0,
+  "vignette": -30.0,
+  "vignette_highlights": 40.0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "crop": [
+  0.03409,
+  0.03167,
+  1.0,
+  1.0
+ ],
+ "longest": 1200,
+ "settings": {},
+ "source": "border_big"
+}

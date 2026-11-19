@@ -1,0 +1,30 @@
+{
+ "amount": 1.0,
+ "changed": {},
+ "removed": [],
+ "report": {
+  "casts": [
+   [
+    -0.0021,
+    0.0006,
+    -0.0002
+   ],
+   [
+    -0.0029,
+    0.0012,
+    -0.0034
+   ],
+   [
+    -0.001,
+    0.0,
+    0.0027
+   ]
+  ],
+  "status": "neutral"
+ },
+ "settings": {
+  "saturation": 20.0,
+  "working_space": "ProPhoto"
+ },
+ "source": "garden"
+}

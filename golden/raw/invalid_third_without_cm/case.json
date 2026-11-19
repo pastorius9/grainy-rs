@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_third_without_cm/profile.dcp",
+ "message": "DCP 세 번째 광원의 ColorMatrix가 없습니다."
+}

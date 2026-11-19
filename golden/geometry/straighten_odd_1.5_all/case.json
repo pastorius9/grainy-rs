@@ -1,0 +1,15 @@
+{
+ "changes": {
+  "straighten": 1.5
+ },
+ "error": null,
+ "function": "geometry",
+ "input": {
+  "c": 3,
+  "h": 123,
+  "kind": "synth",
+  "seed": 5,
+  "w": 77
+ },
+ "use_crop": "all"
+}

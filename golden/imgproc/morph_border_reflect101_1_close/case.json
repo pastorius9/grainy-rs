@@ -1,0 +1,18 @@
+{
+ "anchor": [
+  0,
+  0
+ ],
+ "border": "reflect101",
+ "border_value": [
+  0.2,
+  0.3,
+  0.4
+ ],
+ "dtype": "float32",
+ "iterations": 1,
+ "op": "morph",
+ "operation": "close",
+ "output_dtype": "float32",
+ "tolerance": 0.0
+}

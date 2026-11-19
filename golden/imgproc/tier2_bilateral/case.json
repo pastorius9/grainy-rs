@@ -1,0 +1,467 @@
+{
+ "op": "bilateral",
+ "variants": [
+  {
+   "d": 1,
+   "label": "ramp",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "ramp",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "ramp",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "ramp",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "ramp",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "ramp",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "wide",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "wide",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "wide",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "wide",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "wide",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "wide",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "colours",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "colours",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "colours",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "colours",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "colours",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "colours",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "patches",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "patches",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "patches",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "patches",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "patches",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "patches",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "noise",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "noise",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "noise",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "noise",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "noise",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "noise",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "edges",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "edges",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "edges",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "edges",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "edges",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "edges",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "garden",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "garden",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "garden",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "garden",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "garden",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "garden",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "constant",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "constant",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "constant",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "constant",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "constant",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "constant",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "zero",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "zero",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "zero",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "zero",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "zero",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "zero",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "signed",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "signed",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "signed",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "signed",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "signed",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "signed",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 1,
+   "label": "tiny",
+   "sc": 2.0,
+   "ss": 0.05,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "tiny",
+   "sc": 2.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 7,
+   "label": "tiny",
+   "sc": 10.0,
+   "ss": 2.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 13,
+   "label": "tiny",
+   "sc": 18.0,
+   "ss": 4.0,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 0,
+   "label": "tiny",
+   "sc": 2.0,
+   "ss": 1.5,
+   "tolerance": 0.0002
+  },
+  {
+   "d": 3,
+   "label": "tiny",
+   "sc": 0.0,
+   "ss": 1.0,
+   "tolerance": 0.0002
+  }
+ ]
+}

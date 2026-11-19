@@ -1,0 +1,12 @@
+{
+ "amount": 1.0,
+ "changed": {},
+ "removed": [],
+ "report": {
+  "status": "monochrome"
+ },
+ "settings": {
+  "monochrome": true
+ },
+ "source": "garden"
+}

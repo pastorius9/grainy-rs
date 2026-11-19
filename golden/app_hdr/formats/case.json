@@ -1,0 +1,114 @@
+{
+ "listed": [
+  "JPEG",
+  "AVIF",
+  "JPEG XL",
+  "PNG",
+  "PNG 16-bit",
+  "TIFF 16-bit",
+  "TIFF 8-bit",
+  "TIFF HDR 32-bit",
+  "Original"
+ ],
+ "rows": [
+  {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "format": "JPEG"
+  },
+  {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "format": "AVIF"
+  },
+  {
+   "enabled": {
+    "color_space": false,
+    "dither": false,
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "format": "JPEG XL"
+  },
+  {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": false
+   },
+   "format": "PNG"
+  },
+  {
+   "enabled": {
+    "color_space": true,
+    "dither": false,
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": false
+   },
+   "format": "PNG 16-bit"
+  },
+  {
+   "enabled": {
+    "color_space": true,
+    "dither": false,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": false
+   },
+   "format": "TIFF 16-bit"
+  },
+  {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": false
+   },
+   "format": "TIFF 8-bit"
+  },
+  {
+   "enabled": {
+    "color_space": false,
+    "dither": false,
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": false
+   },
+   "format": "TIFF HDR 32-bit"
+  },
+  {
+   "enabled": {
+    "color_space": false,
+    "dither": false,
+    "grayscale": false,
+    "keep_metadata": false,
+    "longest": false,
+    "quality": false
+   },
+   "format": "Original"
+  }
+ ]
+}

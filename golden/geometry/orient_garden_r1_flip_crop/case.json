@@ -1,0 +1,20 @@
+{
+ "changes": {
+  "crop": [
+   0.2,
+   0.1,
+   0.7,
+   0.6
+  ],
+  "flip": true,
+  "rotation": 1
+ },
+ "error": null,
+ "function": "geometry",
+ "input": {
+  "channels": 3,
+  "kind": "standard",
+  "name": "garden"
+ },
+ "use_crop": true
+}

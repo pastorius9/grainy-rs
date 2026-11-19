@@ -1,0 +1,9 @@
+{
+ "amount": 1.0,
+ "curves": null,
+ "image": "cg:clipped",
+ "kind": "auto",
+ "report": {
+  "status": "flat"
+ }
+}

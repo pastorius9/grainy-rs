@@ -1,0 +1,2561 @@
+{
+ "notice": "이 창에서 보내기를 누르면 선택한 AI 프로그램이 실행됩니다. AI는 사진 목록·파일 이름과 경로·사진 정보(GPS 제외)·보정값·미리보기와 밀착 이미지를 읽고, 읽은 내용을 자신의 AI 서비스로 보냅니다. 보정·분류 변경, 가져오기·내보내기, 스냅샷·가상 사본·밀착 이미지 저장도 할 수 있습니다. 프로그램의 기존 계정과 구독·사용 한도가 적용됩니다.",
+ "sessions": [
+  {
+   "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+   "language": "ko",
+   "log": [
+    {
+     "auth": {
+      "claude": "Claude Code: 확인할 수 없음",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인할 수 없음"
+     },
+     "checks": [],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "opened",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": true,
+     "preferences": null,
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "명령을 입력해 주세요.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인할 수 없음",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인할 수 없음"
+     },
+     "checks": [],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "send before the notice",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": true,
+     "preferences": null,
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "명령을 입력해 주세요.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인할 수 없음",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인할 수 없음"
+     },
+     "checks": [],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "notice acknowledged",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "명령을 입력해 주세요.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 로그인됨 (Claude)",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 응답 없음"
+     },
+     "checks": [],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "statuses",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "명령을 입력해 주세요.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 로그인됨 (Claude)",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 응답 없음"
+     },
+     "checks": [],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "empty request",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "명령을 입력해 주세요.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 로그인됨 (Claude)",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 응답 없음"
+     },
+     "checks": [],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "sent",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": false,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "AI가 작업 중입니다…",
+     "stop": true,
+     "transcript": "나: 이 사진들 밝게 해 줘\n",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 로그인됨 (Claude)",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 응답 없음"
+     },
+     "checks": [],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "events",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": false,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "AI가 작업 중입니다…",
+     "stop": true,
+     "transcript": "나: 이 사진들 밝게 해 줘\n밝게 하겠습니다.\n\nlist_photos\n\n\napply_edits · 대상 2장\n\nAI 프로그램 오류가 발생했습니다. 다시 시도해 주세요.",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 로그인됨 (Claude)",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 응답 없음"
+     },
+     "checks": [],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "finished",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "완료",
+     "stop": false,
+     "transcript": "나: 이 사진들 밝게 해 줘\n밝게 하겠습니다.\n\nlist_photos\n\n\napply_edits · 대상 2장\n\nAI 프로그램 오류가 발생했습니다. 다시 시도해 주세요.\n\n완료\n",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 응답 없음"
+     },
+     "checks": [
+      "claude"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "model changed (new conversation)",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "새 대화를 시작합니다.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 응답 없음"
+     },
+     "checks": [
+      "claude"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "too long",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "요청이 너무 깁니다. 8,000자 이내로 줄여 주세요.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 응답 없음"
+     },
+     "checks": [
+      "claude"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "auth required",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "로그인이 필요합니다.",
+     "stop": false,
+     "transcript": "나: 다시\n\n로그인이 필요합니다. '로그인…'을 눌러 Claude Code에 다시 로그인하세요.\n\n로그인이 필요합니다.\n",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인 중…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "gemini chosen",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "새 대화를 시작합니다.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인 중…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "second turn",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "실패 · 프로그램의 로그인과 사용 한도를 확인해 주세요.",
+     "stop": false,
+     "transcript": "나: 세 번째 요청\n\n\n중지됨 · 이미 적용한 작업은 유지됩니다.\n\n나: 네 번째\n\nAI 프로그램이 종료되었습니다. 터미널에서 해당 프로그램의 설치·로그인·사용 한도를 확인해 주세요.\n\n실패 · 프로그램의 로그인과 사용 한도를 확인해 주세요.\n",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인 중…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "other results",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "실패",
+     "stop": false,
+     "transcript": "나: 세 번째 요청\n\n\n중지됨 · 이미 적용한 작업은 유지됩니다.\n\n나: 네 번째\n\nAI 프로그램이 종료되었습니다. 터미널에서 해당 프로그램의 설치·로그인·사용 한도를 확인해 주세요.\n\n실패 · 프로그램의 로그인과 사용 한도를 확인해 주세요.\n\n\n시간 초과 · 프로그램을 중지했습니다.\n\n\n실패\n",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인 중…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "bridges missing",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "AI 중계 파일을 준비하지 못했습니다. AI 연결 설정을 확인해 주세요.",
+     "stop": false,
+     "transcript": "나: 세 번째 요청\n\n\n중지됨 · 이미 적용한 작업은 유지됩니다.\n\n나: 네 번째\n\nAI 프로그램이 종료되었습니다. 터미널에서 해당 프로그램의 설치·로그인·사용 한도를 확인해 주세요.\n\n실패 · 프로그램의 로그인과 사용 한도를 확인해 주세요.\n\n\n시간 초과 · 프로그램을 중지했습니다.\n\n\n실패\n",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인 중…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "launch failed",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "AI 프로그램을 시작하지 못했습니다. 설치와 계정 로그인을 확인해 주세요.",
+     "stop": false,
+     "transcript": "나: 세 번째 요청\n\n\n중지됨 · 이미 적용한 작업은 유지됩니다.\n\n나: 네 번째\n\nAI 프로그램이 종료되었습니다. 터미널에서 해당 프로그램의 설치·로그인·사용 한도를 확인해 주세요.\n\n실패 · 프로그램의 로그인과 사용 한도를 확인해 주세요.\n\n\n시간 초과 · 프로그램을 중지했습니다.\n\n\n실패\n",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인 중…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "AI 연결이 꺼져 있습니다. 켠 뒤 보내 주세요.",
+     "enable_visible": true,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "connection off",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini",
+      "mcp_enabled": false
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "AI 프로그램을 시작하지 못했습니다. 설치와 계정 로그인을 확인해 주세요.",
+     "stop": false,
+     "transcript": "나: 세 번째 요청\n\n\n중지됨 · 이미 적용한 작업은 유지됩니다.\n\n나: 네 번째\n\nAI 프로그램이 종료되었습니다. 터미널에서 해당 프로그램의 설치·로그인·사용 한도를 확인해 주세요.\n\n실패 · 프로그램의 로그인과 사용 한도를 확인해 주세요.\n\n\n시간 초과 · 프로그램을 중지했습니다.\n\n\n실패\n",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인 중…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "connection on again",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini",
+      "mcp_enabled": true
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "AI 프로그램을 시작하지 못했습니다. 설치와 계정 로그인을 확인해 주세요.",
+     "stop": false,
+     "transcript": "나: 세 번째 요청\n\n\n중지됨 · 이미 적용한 작업은 유지됩니다.\n\n나: 네 번째\n\nAI 프로그램이 종료되었습니다. 터미널에서 해당 프로그램의 설치·로그인·사용 한도를 확인해 주세요.\n\n실패 · 프로그램의 로그인과 사용 한도를 확인해 주세요.\n\n\n시간 초과 · 프로그램을 중지했습니다.\n\n\n실패\n",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인 중…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "new conversation",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini",
+      "mcp_enabled": true
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "새 대화를 시작합니다.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: 확인 중…",
+      "codex": "Codex: 설치되지 않음",
+      "gemini": "Gemini CLI: 확인 중…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "Grainy 도구로 사진을 읽고 작업합니다.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "프로그램이 없으면 설치…를 누르세요. 실행 전에 공식 설치 명령을 보여 줍니다.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "codex detected again (still missing)",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini",
+      "mcp_enabled": true
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "새 대화를 시작합니다.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "되돌릴 AI 작업이 없습니다."
+    }
+   ],
+   "started": [
+    {
+     "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+     "executable": [
+      "C:\\p\\claude.exe"
+     ],
+     "key": "claude",
+     "language": "ko",
+     "model": "",
+     "prompt": "이 사진들 밝게 해 줘",
+     "secrets": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "server": {
+      "args": [
+       "-NoProfile",
+       "-ExecutionPolicy",
+       "Bypass",
+       "-File",
+       "<ROOT>\\mcp\\grainy-mcp-bridge.ps1"
+      ],
+      "command": "powershell"
+     },
+     "session_id": "",
+     "workspace": "<ROOT>\\ai-workspace\\claude\\<RUN1>"
+    },
+    {
+     "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+     "executable": [
+      "C:\\p\\claude.exe"
+     ],
+     "key": "claude",
+     "language": "ko",
+     "model": "opus",
+     "prompt": "다시",
+     "secrets": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "server": {
+      "args": [
+       "-NoProfile",
+       "-ExecutionPolicy",
+       "Bypass",
+       "-File",
+       "<ROOT>\\mcp\\grainy-mcp-bridge.ps1"
+      ],
+      "command": "powershell"
+     },
+     "session_id": "",
+     "workspace": "<ROOT>\\ai-workspace\\claude\\<RUN2>"
+    },
+    {
+     "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+     "executable": [
+      "node",
+      "C:\\g\\index.js"
+     ],
+     "key": "gemini",
+     "language": "ko",
+     "model": "opus",
+     "prompt": "세 번째 요청",
+     "secrets": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "server": {
+      "args": [
+       "-NoProfile",
+       "-ExecutionPolicy",
+       "Bypass",
+       "-File",
+       "<ROOT>\\mcp\\grainy-mcp-bridge.ps1"
+      ],
+      "command": "powershell"
+     },
+     "session_id": "",
+     "workspace": "<ROOT>\\ai-workspace\\gemini\\<RUN3>"
+    },
+    {
+     "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+     "executable": [
+      "node",
+      "C:\\g\\index.js"
+     ],
+     "key": "gemini",
+     "language": "ko",
+     "model": "opus",
+     "prompt": "네 번째",
+     "secrets": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "server": {
+      "args": [
+       "-NoProfile",
+       "-ExecutionPolicy",
+       "Bypass",
+       "-File",
+       "<ROOT>\\mcp\\grainy-mcp-bridge.ps1"
+      ],
+      "command": "powershell"
+     },
+     "session_id": "",
+     "workspace": "<ROOT>\\ai-workspace\\gemini\\<RUN3>"
+    }
+   ]
+  },
+  {
+   "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+   "language": "en",
+   "log": [
+    {
+     "auth": {
+      "claude": "Claude Code: Unknown",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Unknown"
+     },
+     "checks": [],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "opened",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": true,
+     "preferences": null,
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "Enter a request.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Unknown",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Unknown"
+     },
+     "checks": [],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "send before the notice",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": true,
+     "preferences": null,
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "Enter a request.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Unknown",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Unknown"
+     },
+     "checks": [],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "notice acknowledged",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Enter a request.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Signed in (Claude)",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: No response"
+     },
+     "checks": [],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "statuses",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Enter a request.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Signed in (Claude)",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: No response"
+     },
+     "checks": [],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "empty request",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Enter a request.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Signed in (Claude)",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: No response"
+     },
+     "checks": [],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "sent",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": false,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "The AI is working…",
+     "stop": true,
+     "transcript": "You: 이 사진들 밝게 해 줘\n",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Signed in (Claude)",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: No response"
+     },
+     "checks": [],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "events",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": false,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "The AI is working…",
+     "stop": true,
+     "transcript": "You: 이 사진들 밝게 해 줘\n밝게 하겠습니다.\n\nlist_photos\n\n\napply_edits · 2 photos requested\n\nThe AI program encountered an error. Please try again.",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Signed in (Claude)",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: No response"
+     },
+     "checks": [],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "finished",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Done",
+     "stop": false,
+     "transcript": "You: 이 사진들 밝게 해 줘\n밝게 하겠습니다.\n\nlist_photos\n\n\napply_edits · 2 photos requested\n\nThe AI program encountered an error. Please try again.\n\nDone\n",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: No response"
+     },
+     "checks": [
+      "claude"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "model changed (new conversation)",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Starting a new conversation.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: No response"
+     },
+     "checks": [
+      "claude"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "too long",
+     "login_bold": {
+      "claude": false,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "The request is too long. Shorten it to at most 8,000 characters.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: No response"
+     },
+     "checks": [
+      "claude"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "auth required",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "claude"
+     },
+     "program": 0,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Sign-in is required.",
+     "stop": false,
+     "transcript": "You: 다시\n\nSign-in is required. Click 'Sign in…' to sign in to Claude Code again.\n\nSign-in is required.\n",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Checking…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "gemini chosen",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Starting a new conversation.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Checking…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "second turn",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Failed · Check the program's sign-in and usage limits.",
+     "stop": false,
+     "transcript": "You: 세 번째 요청\n\n\nStopped · Changes already applied are kept.\n\nYou: 네 번째\n\nThe AI program exited. Check its installation, sign-in and usage limits in a terminal.\n\nFailed · Check the program's sign-in and usage limits.\n",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Checking…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "other results",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Failed",
+     "stop": false,
+     "transcript": "You: 세 번째 요청\n\n\nStopped · Changes already applied are kept.\n\nYou: 네 번째\n\nThe AI program exited. Check its installation, sign-in and usage limits in a terminal.\n\nFailed · Check the program's sign-in and usage limits.\n\n\nTimed out · The program was stopped.\n\n\nFailed\n",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Checking…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "bridges missing",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Could not prepare the AI bridge files. Check AI Connection settings.",
+     "stop": false,
+     "transcript": "You: 세 번째 요청\n\n\nStopped · Changes already applied are kept.\n\nYou: 네 번째\n\nThe AI program exited. Check its installation, sign-in and usage limits in a terminal.\n\nFailed · Check the program's sign-in and usage limits.\n\n\nTimed out · The program was stopped.\n\n\nFailed\n",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Checking…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "launch failed",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini"
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Could not start the AI program. Check its installation and account sign-in.",
+     "stop": false,
+     "transcript": "You: 세 번째 요청\n\n\nStopped · Changes already applied are kept.\n\nYou: 네 번째\n\nThe AI program exited. Check its installation, sign-in and usage limits in a terminal.\n\nFailed · Check the program's sign-in and usage limits.\n\n\nTimed out · The program was stopped.\n\n\nFailed\n",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Checking…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "The AI connection is off. Turn it on before sending.",
+     "enable_visible": true,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "connection off",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini",
+      "mcp_enabled": false
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": false,
+     "status": "Could not start the AI program. Check its installation and account sign-in.",
+     "stop": false,
+     "transcript": "You: 세 번째 요청\n\n\nStopped · Changes already applied are kept.\n\nYou: 네 번째\n\nThe AI program exited. Check its installation, sign-in and usage limits in a terminal.\n\nFailed · Check the program's sign-in and usage limits.\n\n\nTimed out · The program was stopped.\n\n\nFailed\n",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Checking…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "connection on again",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini",
+      "mcp_enabled": true
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Could not start the AI program. Check its installation and account sign-in.",
+     "stop": false,
+     "transcript": "You: 세 번째 요청\n\n\nStopped · Changes already applied are kept.\n\nYou: 네 번째\n\nThe AI program exited. Check its installation, sign-in and usage limits in a terminal.\n\nFailed · Check the program's sign-in and usage limits.\n\n\nTimed out · The program was stopped.\n\n\nFailed\n",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Checking…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "new conversation",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini",
+      "mcp_enabled": true
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Starting a new conversation.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    },
+    {
+     "auth": {
+      "claude": "Claude Code: Checking…",
+      "codex": "Codex: Not installed",
+      "gemini": "Gemini CLI: Checking…"
+     },
+     "checks": [
+      "claude",
+      "gemini"
+     ],
+     "connection": "The AI reads and works on photos using Grainy's tools.",
+     "enable_visible": false,
+     "hints": true,
+     "hints_text": "If a program is missing, click Install… to review its official installation command before running it.",
+     "install_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "install_visible": {
+      "claude": false,
+      "codex": true,
+      "gemini": false
+     },
+     "label": "codex detected again (still missing)",
+     "login_bold": {
+      "claude": true,
+      "codex": false,
+      "gemini": false
+     },
+     "login_enabled": {
+      "claude": true,
+      "codex": true,
+      "gemini": true
+     },
+     "login_help": null,
+     "login_visible": {
+      "claude": true,
+      "codex": false,
+      "gemini": true
+     },
+     "new": true,
+     "notice": false,
+     "preferences": {
+      "ai_notice_seen": true,
+      "ai_program": "gemini",
+      "mcp_enabled": true
+     },
+     "program": 2,
+     "programs": [
+      "Claude Code",
+      "Codex",
+      "Gemini CLI"
+     ],
+     "send": true,
+     "status": "Starting a new conversation.",
+     "stop": false,
+     "transcript": "",
+     "undo_enabled": false,
+     "undo_label": "There is no AI task to undo."
+    }
+   ],
+   "started": [
+    {
+     "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+     "executable": [
+      "C:\\p\\claude.exe"
+     ],
+     "key": "claude",
+     "language": "en",
+     "model": "",
+     "prompt": "이 사진들 밝게 해 줘",
+     "secrets": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "server": {
+      "args": [
+       "-NoProfile",
+       "-ExecutionPolicy",
+       "Bypass",
+       "-File",
+       "<ROOT>\\mcp\\grainy-mcp-bridge.ps1"
+      ],
+      "command": "powershell"
+     },
+     "session_id": "",
+     "workspace": "<ROOT>\\ai-workspace\\claude\\<RUN1>"
+    },
+    {
+     "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+     "executable": [
+      "C:\\p\\claude.exe"
+     ],
+     "key": "claude",
+     "language": "en",
+     "model": "opus",
+     "prompt": "다시",
+     "secrets": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "server": {
+      "args": [
+       "-NoProfile",
+       "-ExecutionPolicy",
+       "Bypass",
+       "-File",
+       "<ROOT>\\mcp\\grainy-mcp-bridge.ps1"
+      ],
+      "command": "powershell"
+     },
+     "session_id": "",
+     "workspace": "<ROOT>\\ai-workspace\\claude\\<RUN2>"
+    },
+    {
+     "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+     "executable": [
+      "node",
+      "C:\\g\\index.js"
+     ],
+     "key": "gemini",
+     "language": "en",
+     "model": "opus",
+     "prompt": "세 번째 요청",
+     "secrets": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "server": {
+      "args": [
+       "-NoProfile",
+       "-ExecutionPolicy",
+       "Bypass",
+       "-File",
+       "<ROOT>\\mcp\\grainy-mcp-bridge.ps1"
+      ],
+      "command": "powershell"
+     },
+     "session_id": "",
+     "workspace": "<ROOT>\\ai-workspace\\gemini\\<RUN3>"
+    },
+    {
+     "context": "What the person sees in Grainy right now (read \"this folder\", \"these photos\", \"this photo\" with it): The folder open in Grainy is \"D:\\\\Photos\\\\여름\" (list_photos with where folder=\"D:\\\\Photos\\\\여름\", recursive true); it shows 3 photos. 2 photos are selected (scope 'selection'; ids 7, 8). The photo open in the editor is id 7, \"garden \\\"1\\\".png\" (scope 'current').",
+     "executable": [
+      "node",
+      "C:\\g\\index.js"
+     ],
+     "key": "gemini",
+     "language": "en",
+     "model": "opus",
+     "prompt": "네 번째",
+     "secrets": [
+      "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+     ],
+     "server": {
+      "args": [
+       "-NoProfile",
+       "-ExecutionPolicy",
+       "Bypass",
+       "-File",
+       "<ROOT>\\mcp\\grainy-mcp-bridge.ps1"
+      ],
+      "command": "powershell"
+     },
+     "session_id": "",
+     "workspace": "<ROOT>\\ai-workspace\\gemini\\<RUN3>"
+    }
+   ]
+  }
+ ]
+}

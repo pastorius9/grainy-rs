@@ -1,0 +1,111 @@
+{
+ "callback_mode": null,
+ "callbacks": {
+  "inputs": [],
+  "masks": [],
+  "points": []
+ },
+ "detail_version": 1,
+ "frame": "garden",
+ "layers": [
+  {
+   "adjustments": {
+    "dehaze": 25,
+    "highlights": -60,
+    "hsl": [
+     [
+      20,
+      -30,
+      10
+     ],
+     [
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0
+     ],
+     [
+      -40,
+      50,
+      -20
+     ],
+     [
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      30
+     ],
+     [
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0
+     ]
+    ],
+    "local_curves": [
+     [
+      [
+       0,
+       0
+      ],
+      [
+       0.25,
+       0.18
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.82
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    ],
+    "temperature": -20,
+    "tint": 10
+   },
+   "components": [
+    {
+     "points": [
+      [
+       0.1,
+       0.9
+      ],
+      [
+       0.6,
+       0.3
+      ]
+     ],
+     "type": "linear"
+    }
+   ]
+  }
+ ],
+ "output_bits": "11961863262145871872",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "pixel_scale": 0.25,
+ "source_image": null,
+ "transform": "identity"
+}

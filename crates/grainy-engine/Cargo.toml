@@ -1,0 +1,38 @@
+[package]
+name = "grainy-engine"
+description = "Grainy's develop pipeline: the stages in the oracle's order (engine.develop)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[features]
+gpu = ["dep:grainy-gpu"]
+
+[dependencies]
+grainy-gpu = { path = "../grainy-gpu", optional = true }
+grainy-core.workspace = true
+grainy-color = { path = "../grainy-color" }
+grainy-tone = { path = "../grainy-tone" }
+grainy-film = { path = "../grainy-film" }
+grainy-colorgrade = { path = "../grainy-colorgrade" }
+grainy-detail = { path = "../grainy-detail" }
+grainy-cms = { path = "../grainy-cms" }
+grainy-raw = { path = "../grainy-raw" }
+grainy-geometry = { path = "../grainy-geometry" }
+grainy-local = { path = "../grainy-local" }
+grainy-dust = { path = "../grainy-dust" }
+grainy-sky = { path = "../grainy-sky" }
+grainy-lens = { path = "../grainy-lens" }
+grainy-imgproc = { path = "../grainy-imgproc" }
+grainy-codecs = { path = "../grainy-codecs" }
+ndarray.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+serde.workspace = true
+
+[lints]
+workspace = true

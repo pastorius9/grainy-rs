@@ -1,0 +1,9 @@
+{
+ "anchor": null,
+ "border": "replicate",
+ "delta": 0.125,
+ "dtype": "float32",
+ "op": "sep",
+ "output_dtype": "float32",
+ "tolerance": 2e-06
+}

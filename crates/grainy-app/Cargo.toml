@@ -1,0 +1,63 @@
+[package]
+name = "grainy-app"
+description = "Grainy's application: the egui window (menus, header, library column, photo view, Develop column) on the engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-core.workspace = true
+grainy-i18n = { path = "../grainy-i18n" }
+grainy-engine = { path = "../grainy-engine", features = ["gpu"] }
+grainy-gpu = { path = "../grainy-gpu" }
+grainy-film = { path = "../grainy-film" }
+grainy-codecs = { path = "../grainy-codecs" }
+grainy-service = { path = "../grainy-service" }
+grainy-catalog = { path = "../grainy-catalog" }
+grainy-geometry = { path = "../grainy-geometry" }
+grainy-imgproc = { path = "../grainy-imgproc" }
+grainy-local = { path = "../grainy-local" }
+# `http`: the real network of feedback and updates (ureq with the system TLS; see grainy_platform::net).
+grainy-platform = { path = "../grainy-platform", features = ["http"] }
+grainy-library = { path = "../grainy-library" }
+grainy-raw = { path = "../grainy-raw" }
+grainy-adobe = { path = "../grainy-adobe" }
+grainy-lens = { path = "../grainy-lens" }
+grainy-tone = { path = "../grainy-tone" }
+grainy-colorgrade = { path = "../grainy-colorgrade" }
+grainy-color = { path = "../grainy-color" }
+grainy-sky = { path = "../grainy-sky" }
+grainy-detail = { path = "../grainy-detail" }
+grainy-dust = { path = "../grainy-dust" }
+grainy-cms = { path = "../grainy-cms" }
+grainy-mcp = { path = "../grainy-mcp" }
+chrono.workspace = true
+rusqlite.workspace = true
+sha2.workspace = true
+sysinfo.workspace = true
+image = { version = "0.25.10", default-features = false, features = ["jpeg"] }
+serde_json.workspace = true
+rayon.workspace = true
+ndarray.workspace = true
+eframe = { version = "0.37", default-features = false, features = ["wgpu", "accesskit", "default_fonts"] }
+log = "0.4"
+rfd = "0.15"
+# Already used by grainy-library (MIT/Apache-2.0): the oracle's regular expressions of the AI programs' output.
+regex-lite = "0.1"
+pollster = "0.4"
+# Already in the workspace (grainy-catalog, grainy-adobe; MIT/Apache-2.0): the Lightroom import's digests and the
+# base64 of archived blobs, byte for byte as the oracle's hashlib and base64.
+base64.workspace = true
+# Already in the tree through eframe/winit (MIT/Apache-2.0/Zlib): the window handle the monitor is looked up by.
+raw-window-handle = "0.6"
+
+[dev-dependencies]
+egui_kittest = { version = "0.37", features = ["wgpu", "snapshot", "eframe"] }
+image = { version = "0.25.10", default-features = false, features = ["png", "tiff", "jpeg"] }
+grainy-testkit.workspace = true
+# Release zips of the network tests (crates/grainy-app/tests/network.rs).
+zip.workspace = true
+
+[lints]
+workspace = true

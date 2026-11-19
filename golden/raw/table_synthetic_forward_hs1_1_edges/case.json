@@ -1,0 +1,9 @@
+{
+ "arrays": {
+  "input": "d228e68a9c47065a6f2b608c7035863ed53d57e366c64abfdfb7934ec947d3a2",
+  "output": "9537624484f30853b9ea6627c6f5ebe7738810771ae82c61de0db86f07f6fe33"
+ },
+ "encoding": 1,
+ "kind": "hs1",
+ "profile": "synthetic_forward"
+}

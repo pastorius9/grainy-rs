@@ -1,0 +1,356 @@
+{
+ "release": {
+  "name": "Grainy-9.9.9.zip",
+  "notes": "새 기능\n- 하나\n- 둘",
+  "sha256": "abababababababababababababababababababababababababababababababab",
+  "size": 1234,
+  "url": "https://example.invalid/x.zip",
+  "version": "9.9.9"
+ },
+ "results": [
+  {
+   "button_hidden": true,
+   "button_text": "",
+   "language": "ko",
+   "manual": true,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "새 버전 자동 확인"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "업데이트 확인…"
+    }
+   ],
+   "name": "error manual",
+   "shown": [
+    {
+     "kind": "information",
+     "text": "새 버전을 확인하지 못했습니다 (boom). 인터넷 연결을 확인해 주세요.",
+     "title": "업데이트"
+    }
+   ],
+   "status": "새 버전을 확인하는 중…",
+   "update_checked_saved": false
+  },
+  {
+   "button_hidden": true,
+   "button_text": "",
+   "language": "ko",
+   "manual": false,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "새 버전 자동 확인"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "업데이트 확인…"
+    }
+   ],
+   "name": "error auto",
+   "shown": [],
+   "status": "",
+   "update_checked_saved": false
+  },
+  {
+   "button_hidden": true,
+   "button_text": "",
+   "language": "ko",
+   "manual": true,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "새 버전 자동 확인"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "업데이트 확인…"
+    }
+   ],
+   "name": "same manual",
+   "shown": [
+    {
+     "kind": "information",
+     "text": "최신 버전을 쓰고 있습니다 (0.6.8).",
+     "title": "업데이트"
+    }
+   ],
+   "status": "새 버전을 확인하는 중…",
+   "update_checked_saved": true
+  },
+  {
+   "button_hidden": true,
+   "button_text": "",
+   "language": "ko",
+   "manual": true,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "새 버전 자동 확인"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "업데이트 확인…"
+    }
+   ],
+   "name": "none manual",
+   "shown": [
+    {
+     "kind": "information",
+     "text": "최신 버전을 쓰고 있습니다 (0.6.8).",
+     "title": "업데이트"
+    }
+   ],
+   "status": "새 버전을 확인하는 중…",
+   "update_checked_saved": true
+  },
+  {
+   "button_hidden": false,
+   "button_text": "새 버전 9.9.9",
+   "language": "ko",
+   "manual": true,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "새 버전 자동 확인"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "업데이트 확인…"
+    }
+   ],
+   "name": "newer manual",
+   "shown": [
+    {
+     "buttons": [
+      "나중에",
+      "Show Details...",
+      "내려받기 페이지 열기"
+     ],
+     "detailed": "새 기능\n- 하나\n- 둘",
+     "informative": "소스에서 실행 중이라 직접 업데이트할 수 없습니다.\n",
+     "kind": "offer",
+     "text": "새 버전 9.9.9이 있습니다. (지금 버전 0.6.8)",
+     "title": "업데이트"
+    }
+   ],
+   "status": "새 버전을 확인하는 중…",
+   "update_checked_saved": true
+  },
+  {
+   "button_hidden": false,
+   "button_text": "새 버전 9.9.9",
+   "language": "ko",
+   "manual": false,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "새 버전 자동 확인"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "업데이트 확인…"
+    }
+   ],
+   "name": "newer auto",
+   "shown": [],
+   "status": "새 버전 9.9.9이 있습니다. 위쪽의 버튼을 누르면 업데이트합니다.",
+   "update_checked_saved": true
+  },
+  {
+   "button_hidden": true,
+   "button_text": "",
+   "language": "en",
+   "manual": true,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "Check for new versions automatically"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "Check for Updates…"
+    }
+   ],
+   "name": "error manual",
+   "shown": [
+    {
+     "kind": "information",
+     "text": "Could not check for a new version (boom). Check the internet connection.",
+     "title": "Update"
+    }
+   ],
+   "status": "Checking for a new version…",
+   "update_checked_saved": false
+  },
+  {
+   "button_hidden": true,
+   "button_text": "",
+   "language": "en",
+   "manual": false,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "Check for new versions automatically"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "Check for Updates…"
+    }
+   ],
+   "name": "error auto",
+   "shown": [],
+   "status": "",
+   "update_checked_saved": false
+  },
+  {
+   "button_hidden": true,
+   "button_text": "",
+   "language": "en",
+   "manual": true,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "Check for new versions automatically"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "Check for Updates…"
+    }
+   ],
+   "name": "same manual",
+   "shown": [
+    {
+     "kind": "information",
+     "text": "You have the latest version (0.6.8).",
+     "title": "Update"
+    }
+   ],
+   "status": "Checking for a new version…",
+   "update_checked_saved": true
+  },
+  {
+   "button_hidden": true,
+   "button_text": "",
+   "language": "en",
+   "manual": true,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "Check for new versions automatically"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "Check for Updates…"
+    }
+   ],
+   "name": "none manual",
+   "shown": [
+    {
+     "kind": "information",
+     "text": "You have the latest version (0.6.8).",
+     "title": "Update"
+    }
+   ],
+   "status": "Checking for a new version…",
+   "update_checked_saved": true
+  },
+  {
+   "button_hidden": false,
+   "button_text": "New version 9.9.9",
+   "language": "en",
+   "manual": true,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "Check for new versions automatically"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "Check for Updates…"
+    }
+   ],
+   "name": "newer manual",
+   "shown": [
+    {
+     "buttons": [
+      "Later",
+      "Show Details...",
+      "Open Download Page"
+     ],
+     "detailed": "새 기능\n- 하나\n- 둘",
+     "informative": "Running from source, so it cannot update itself.\n",
+     "kind": "offer",
+     "text": "Version 9.9.9 is available. (You have 0.6.8)",
+     "title": "Update"
+    }
+   ],
+   "status": "Checking for a new version…",
+   "update_checked_saved": true
+  },
+  {
+   "button_hidden": false,
+   "button_text": "New version 9.9.9",
+   "language": "en",
+   "manual": false,
+   "menu": [
+    {
+     "checkable": true,
+     "checked": false,
+     "shortcut": "",
+     "text": "Check for new versions automatically"
+    },
+    {
+     "checkable": false,
+     "shortcut": "",
+     "text": "Check for Updates…"
+    }
+   ],
+   "name": "newer auto",
+   "shown": [],
+   "status": "Version 9.9.9 is available. Press the button at the top to update.",
+   "update_checked_saved": true
+  }
+ ],
+ "toggles": [
+  true,
+  false,
+  true
+ ],
+ "version": "0.6.8"
+}

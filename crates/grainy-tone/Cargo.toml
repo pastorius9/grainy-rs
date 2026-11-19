@@ -1,0 +1,22 @@
+[package]
+name = "grainy-tone"
+description = "Grainy's tone stage: exposure, white balance, roll-off, DRT, process 3 Highlights/Shadows, endpoints, curve"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-imgproc = { path = "../grainy-imgproc" }
+grainy-color = { path = "../grainy-color" }
+grainy-core.workspace = true
+ndarray.workspace = true
+rayon.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

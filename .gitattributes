@@ -1,0 +1,6 @@
+crates/grainy-app/** text=auto eol=lf
+crates/grainy-app/tests/snapshots/*.png binary
+tools/golden/*.py text eol=lf
+docs/*.md text eol=lf
+
+crates/grainy-lens/data/lensfun/*.xml -text

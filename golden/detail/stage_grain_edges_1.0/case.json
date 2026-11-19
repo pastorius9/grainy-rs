@@ -1,0 +1,11 @@
+{
+ "image": "edges",
+ "pixel_scale": 1.0,
+ "settings": {
+  "detail_version": 3,
+  "grain": 40.0,
+  "grain_roughness": 60.0,
+  "grain_size": 30.0,
+  "texture": 30.0
+ }
+}

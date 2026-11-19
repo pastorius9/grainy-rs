@@ -1,0 +1,8 @@
+{
+ "error": {
+  "kind": "AlignmentError",
+  "message": "수평·수직 기준선이 부족합니다. 네 모서리 가이드를 사용해 주세요."
+ },
+ "mode": "vertical",
+ "source": "colours"
+}

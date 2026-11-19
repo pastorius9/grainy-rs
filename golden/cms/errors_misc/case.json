@@ -1,0 +1,22 @@
+{
+ "native_dtype": [
+  "ValueError",
+  "Float32 RGB buffer required"
+ ],
+ "native_not_bytes": [
+  "TypeError",
+  "ICC bytes required"
+ ],
+ "native_shape": [
+  "ValueError",
+  "Float32 RGB buffer required"
+ ],
+ "planar8_dtype": [
+  "ValueError",
+  "8-bit RGB buffer required"
+ ],
+ "profile_missing": [
+  "FileNotFoundError",
+  "[Errno 2] No such file or directory: '<tmp>\\\\missing.icc'"
+ ]
+}

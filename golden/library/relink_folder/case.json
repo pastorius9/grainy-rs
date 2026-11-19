@@ -1,0 +1,305 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "new/a.jpg": {
+     "fill": [
+      1,
+      1
+     ]
+    },
+    "new/sub/b.jpg": {
+     "fill": [
+      2,
+      1
+     ]
+    },
+    "keep/k.jpg": {
+     "fill": [
+      3,
+      1
+     ]
+    },
+    "new2/a.jpg": {
+     "fill": [
+      4,
+      1
+     ]
+    }
+   },
+   "photos": [
+    {
+     "path": "$ROOT/old/a.jpg"
+    },
+    {
+     "path": "$ROOT/old/sub/b.jpg"
+    },
+    {
+     "path": "$ROOT/old/sub/gone.jpg"
+    },
+    {
+     "path": "$ROOT/keep/k.jpg"
+    },
+    {
+     "virtual_of": 1
+    }
+   ],
+   "prefs": {
+    "folder_panel": {
+     "selected": "$ROOT/old/sub",
+     "expanded": [
+      "$ROOT/old",
+      "$ROOT/keep",
+      "$ROOT/old/sub"
+     ],
+     "width": 3
+    },
+    "watch_folders": [
+     "$ROOT/old/sub",
+     "$ROOT/keep"
+    ],
+    "folder_identities": {
+     "$KEY:$ROOT/old/sub": {
+      "path": "$ROOT/old/sub",
+      "id": [
+       1,
+       2,
+       3
+      ]
+     },
+     "$KEY:$ROOT/keep": {
+      "path": "$ROOT/keep",
+      "id": [
+       4,
+       5,
+       6
+      ]
+     }
+    },
+    "removed_folders": [
+     "$ROOT/old/sub/cache",
+     "$ROOT/trash"
+    ]
+   }
+  },
+  "calls": [
+   {
+    "fn": "relink_plan",
+    "args": {
+     "source": "$ROOT/old",
+     "destination": "$ROOT/new"
+    }
+   },
+   {
+    "fn": "relink_folder",
+    "args": {
+     "source": "$ROOT/old",
+     "destination": "$ROOT/new"
+    }
+   },
+   {
+    "fn": "relink_folder",
+    "args": {
+     "source": "$ROOT/new",
+     "destination": "$ROOT/new"
+    }
+   },
+   {
+    "fn": "relink_folder",
+    "args": {
+     "source": "$ROOT/new",
+     "destination": "$ROOT/NEW"
+    }
+   },
+   {
+    "fn": "relink_folder",
+    "args": {
+     "source": "$ROOT/new",
+     "destination": "$ROOT/new/sub"
+    }
+   },
+   {
+    "fn": "relink_folder",
+    "args": {
+     "source": "$ROOT/new/sub",
+     "destination": "$ROOT/new"
+    }
+   },
+   {
+    "fn": "relink_folder",
+    "args": {
+     "source": "$ROOT/new",
+     "destination": "$ROOT/not-there"
+    }
+   },
+   {
+    "fn": "relink_folder",
+    "args": {
+     "source": "$ANCHOR",
+     "destination": "$ROOT/new2"
+    }
+   },
+   {
+    "fn": "relink_folder",
+    "args": {
+     "source": "$ROOT/new",
+     "destination": "$ROOT/keep"
+    }
+   },
+   {
+    "fn": "relink_folder",
+    "args": {
+     "source": "$ROOT/new",
+     "destination": "$ROOT/new2"
+    }
+   }
+  ],
+  "name": "relink_folder"
+ },
+ "results": [
+  {
+   "ok": {
+    "source": "$ROOT\\old",
+    "destination": "$ROOT\\new",
+    "updates": [
+     [
+      "$ROOT\\new\\a.jpg",
+      1
+     ],
+     [
+      "$ROOT\\new\\sub\\b.jpg",
+      2
+     ],
+     [
+      "$ROOT\\new\\sub\\gone.jpg",
+      3
+     ],
+     [
+      "$ROOT\\new\\a.jpg",
+      5
+     ]
+    ],
+    "found": 3,
+    "missing": 1
+   }
+  },
+  {
+   "ok": 4
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "기존 위치와 다른 폴더를 선택하세요."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "기존 위치와 다른 폴더를 선택하세요."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "기존 폴더의 상위·하위 폴더로 다시 연결할 수 없습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "기존 폴더의 상위·하위 폴더로 다시 연결할 수 없습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "다시 연결할 폴더가 없습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "드라이브 전체를 다시 연결할 수 없습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "선택한 폴더에서 기존 사진을 찾지 못했습니다. 파일 이름과 하위 폴더 구조를 확인하세요."
+   }
+  },
+  {
+   "ok": 4
+  }
+ ],
+ "tree": {
+  "files": {
+   "keep/k.jpg": {
+    "size": 1,
+    "sha256": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+   },
+   "new/a.jpg": {
+    "size": 1,
+    "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+   },
+   "new/sub/b.jpg": {
+    "size": 1,
+    "sha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+   },
+   "new2/a.jpg": {
+    "size": 1,
+    "sha256": "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+   }
+  },
+  "dirs": [
+   "keep",
+   "new",
+   "new/sub",
+   "new2"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\new2\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\new2\\sub\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\new2\\sub\\gone.jpg",
+    "name": "gone.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 4,
+    "path": "$ROOT\\keep\\k.jpg",
+    "name": "k.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 5,
+    "path": "$ROOT\\new2\\a.jpg",
+    "name": "a.jpg · 사본",
+    "virtual_source": 1
+   }
+  ],
+  "folder_roots": [
+   "$ROOT\\keep",
+   "$ROOT\\new2"
+  ],
+  "preferences": {
+   "folder_identities": "{\"$root\\\\keep\": {\"path\": \"$ROOT\\\\keep\", \"id\": [4, 5, 6]}}",
+   "folder_panel": "{\"selected\": \"$ROOT\\\\new2\\\\sub\", \"expanded\": [\"$ROOT\\\\new2\", \"$ROOT\\\\keep\", \"$ROOT\\\\new2\\\\sub\"], \"width\": 3}",
+   "removed_folders": "[\"$ROOT\\\\new2\\\\sub\\\\cache\", \"$ROOT\\\\trash\"]",
+   "watch_folders": "[\"$ROOT\\\\new2\\\\sub\", \"$ROOT\\\\keep\"]"
+  }
+ }
+}

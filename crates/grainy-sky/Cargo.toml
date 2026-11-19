@@ -1,0 +1,21 @@
+[package]
+name = "grainy-sky"
+description = "Grainy's Select Sky: a deterministic sky mask for local adjustments (port of luma/sky_mask.py)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-core.workspace = true
+grainy-imgproc = { path = "../grainy-imgproc" }
+ndarray.workspace = true
+rayon.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

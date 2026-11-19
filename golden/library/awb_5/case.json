@@ -1,0 +1,27 @@
+{
+ "gains": [
+  1.1,
+  1.0,
+  0.95
+ ],
+ "input": "ramp",
+ "result": {
+  "kelvin_enabled": false,
+  "keys": [
+   "exposure",
+   "temperature",
+   "tint",
+   "kelvin_enabled",
+   "contrast"
+  ],
+  "temperature": -19.036453247070312,
+  "tint": -4.885785102844238
+ },
+ "settings": {
+  "contrast": 7,
+  "exposure": 0.25,
+  "kelvin_enabled": true,
+  "temperature": 3.0,
+  "tint": -2.0
+ }
+}

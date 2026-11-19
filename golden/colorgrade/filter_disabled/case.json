@@ -1,0 +1,8 @@
+{
+ "changes": {
+  "photo_filter": "red",
+  "photo_filter_density": 100.0
+ },
+ "image": "cg:wheel",
+ "kind": "photo_filter"
+}

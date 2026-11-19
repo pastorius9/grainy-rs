@@ -1,0 +1,19 @@
+Grainy bitmap codecs
+===================
+
+The Rust implementation follows the workspace MIT license. JPEG now uses
+the shared grainy-jpeg-sys native library (libjpeg-turbo 2.1.5.1), whose
+IJG / BSD-3-Clause / zlib notices and retained source are provided in
+../grainy-jpeg-sys/NOTICE and ../grainy-jpeg-sys/vendor/libjpeg-turbo-2.1.5.1/.
+This software is based in part on the work of the Independent JPEG Group.
+
+The other enabled codec dependencies retain their existing licenses:
+png, image, image-webp, flate2, weezl: MIT OR Apache-2.0.
+tiff: MIT. ravif: BSD-3-Clause; rav1e: BSD-2-Clause.
+zune-core, zune-jpegxl and tiff's transitive zune-jpeg: MIT OR Apache-2.0 OR Zlib.
+Workspace ndarray, rayon, serde_json, thiserror and grainy crates are unchanged.
+
+jpeg-decoder and direct zune-jpeg bitmap decoding were removed. zune-jpeg
+is still used internally by the tiff dependency for JPEG-compressed TIFF
+strips/tiles; this does not decode standalone JPEG files. zune-core remains
+needed by the JPEG XL encoder.

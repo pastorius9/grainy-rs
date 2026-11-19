@@ -1,0 +1,63 @@
+{
+ "cases": [
+  {
+   "present": [
+    "new",
+    "download",
+    "failed-1",
+    "failed-20260101-000000",
+    "extract-abc",
+    "previous-20260101-000000",
+    "previous-20260201-000000",
+    "previous-20260301-000000",
+    "unrelated"
+   ],
+   "trashed": [
+    "download",
+    "extract-abc",
+    "failed-1",
+    "failed-20260101-000000",
+    "new",
+    "previous-20260101-000000",
+    "previous-20260201-000000"
+   ]
+  },
+  {
+   "present": [
+    "new",
+    "download",
+    "failed-1"
+   ],
+   "trashed": [
+    "download",
+    "failed-1",
+    "new"
+   ]
+  },
+  {
+   "present": [
+    "previous-20260201-000000"
+   ],
+   "trashed": []
+  },
+  {
+   "present": [
+    "previous-20260101-000000",
+    "previous-20260201-000000"
+   ],
+   "trashed": [
+    "previous-20260101-000000"
+   ]
+  },
+  {
+   "present": [],
+   "trashed": []
+  },
+  {
+   "present": [
+    "unrelated"
+   ],
+   "trashed": []
+  }
+ ]
+}

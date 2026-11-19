@@ -1,0 +1,214 @@
+{
+ "cases": [
+  {
+   "arguments_json": "{\"job\": \"j1\"}",
+   "extra_json": "{\"content\": [{\"type\": \"text\", \"text\": \"{\\\"ok\\\":1}\"}, {\"type\": \"image\", \"data\": \"AA==\", \"mimeType\": \"image/jpeg\"}]}",
+   "outcome": "ok",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"{\\\"ok\\\":1}\"},{\"type\":\"image\",\"data\":\"AA==\",\"mimeType\":\"image/jpeg\"}],\"isError\":false}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"{\\\"ok\\\":1}\"}, {\"type\": \"image\", \"data\": \"AA==\", \"mimeType\": \"image/jpeg\"}], \"isError\": false}",
+   "tool": "get_job"
+  },
+  {
+   "arguments_json": "{}",
+   "extra_json": "{\"content\": []}",
+   "outcome": "ok",
+   "ran": true,
+   "result_bytes": "{\"content\":[],\"isError\":false}",
+   "result_json": "{\"content\": [], \"isError\": false}",
+   "tool": "list_photos"
+  },
+  {
+   "arguments_json": "{\"job\": \"j1\"}",
+   "extra_json": "{\"text\": \"no such job: j1\"}",
+   "outcome": "service",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"no such job: j1\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"no such job: j1\"}], \"isError\": true}",
+   "tool": "get_job"
+  },
+  {
+   "arguments_json": "{\"job\": \"j1\"}",
+   "extra_json": "{\"text\": \"\\ud55c\\uae00 \\\"q\\\"\"}",
+   "outcome": "service",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"\\ud55c\\uae00 \\\"q\\\"\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"\\ud55c\\uae00 \\\"q\\\"\"}], \"isError\": true}",
+   "tool": "get_job"
+  },
+  {
+   "arguments_json": "{\"job\": \"j1\"}",
+   "extra_json": "{\"text\": \"the photo list is still loading\"}",
+   "outcome": "busy",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"Grainy is busy: the photo list is still loading. Nothing was changed; try again in a moment.\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"Grainy is busy: the photo list is still loading. Nothing was changed; try again in a moment.\"}], \"isError\": true}",
+   "tool": "get_job"
+  },
+  {
+   "arguments_json": "{\"job\": \"j1\"}",
+   "extra_json": "{}",
+   "outcome": "unfinished",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"Grainy started this call but did not finish it within the time limit; it may still take effect. Check the photos (get_photo) before repeating it, or undo it with undo_last_batch.\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"Grainy started this call but did not finish it within the time limit; it may still take effect. Check the photos (get_photo) before repeating it, or undo it with undo_last_batch.\"}], \"isError\": true}",
+   "tool": "get_job"
+  },
+  {
+   "arguments_json": "{\"ids\": [1]}",
+   "extra_json": "{\"message\": \"job j7 failed: disk full\", \"view\": {\"id\": \"j7\", \"state\": \"failed\", \"done\": 2, \"total\": 5, \"note\": \"\\ud55c\\uae00\"}}",
+   "outcome": "job",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"job j7 failed: disk full\"},{\"type\":\"text\",\"text\":\"{\\\"id\\\":\\\"j7\\\",\\\"state\\\":\\\"failed\\\",\\\"done\\\":2,\\\"total\\\":5,\\\"note\\\":\\\"\\ud55c\\uae00\\\"}\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"job j7 failed: disk full\"}, {\"type\": \"text\", \"text\": \"{\\\"id\\\":\\\"j7\\\",\\\"state\\\":\\\"failed\\\",\\\"done\\\":2,\\\"total\\\":5,\\\"note\\\":\\\"\\ud55c\\uae00\\\"}\"}], \"isError\": true}",
+   "tool": "export_photos"
+  },
+  {
+   "arguments_json": "{\"ids\": [1]}",
+   "extra_json": "{\"message\": \"job j8 cancelled: no reason given\", \"view\": {\"id\": \"j8\", \"state\": \"cancelled\"}}",
+   "outcome": "job",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"job j8 cancelled: no reason given\"},{\"type\":\"text\",\"text\":\"{\\\"id\\\":\\\"j8\\\",\\\"state\\\":\\\"cancelled\\\"}\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"job j8 cancelled: no reason given\"}, {\"type\": \"text\", \"text\": \"{\\\"id\\\":\\\"j8\\\",\\\"state\\\":\\\"cancelled\\\"}\"}], \"isError\": true}",
+   "tool": "export_photos"
+  },
+  {
+   "arguments_json": "{\"ids\": [1]}",
+   "extra_json": "{\"last\": \"permission denied\", \"kind\": \"PermissionDenied\"}",
+   "outcome": "other",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"Grainy could not finish this call: permission denied\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"Grainy could not finish this call: permission denied\"}], \"isError\": true}",
+   "tool": "auto_tone"
+  },
+  {
+   "arguments_json": "{\"ids\": [1]}",
+   "extra_json": "{\"last\": \"file or folder not found\", \"kind\": \"NotFound\"}",
+   "outcome": "other",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"Grainy could not finish this call: file or folder not found\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"Grainy could not finish this call: file or folder not found\"}], \"isError\": true}",
+   "tool": "auto_tone"
+  },
+  {
+   "arguments_json": "{\"ids\": [1]}",
+   "extra_json": "{\"last\": \"output already exists; try again for a new name\", \"kind\": \"AlreadyExists\"}",
+   "outcome": "other",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"Grainy could not finish this call: output already exists; try again for a new name\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"Grainy could not finish this call: output already exists; try again for a new name\"}], \"isError\": true}",
+   "tool": "auto_tone"
+  },
+  {
+   "arguments_json": "{\"ids\": [1]}",
+   "extra_json": "{\"last\": \"file system operation failed\", \"kind\": \"Io\"}",
+   "outcome": "other",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"Grainy could not finish this call: file system operation failed\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"Grainy could not finish this call: file system operation failed\"}], \"isError\": true}",
+   "tool": "auto_tone"
+  },
+  {
+   "arguments_json": "{\"ids\": [1]}",
+   "extra_json": "{\"last\": \"operation failed (RuntimeError)\", \"kind\": \"Named:RuntimeError\"}",
+   "outcome": "other",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"Grainy could not finish this call: operation failed (RuntimeError)\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"Grainy could not finish this call: operation failed (RuntimeError)\"}], \"isError\": true}",
+   "tool": "auto_tone"
+  },
+  {
+   "arguments_json": "{\"ids\": [1]}",
+   "extra_json": "{\"last\": \"operation failed (KeyError)\", \"kind\": \"Named:KeyError\"}",
+   "outcome": "other",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"Grainy could not finish this call: operation failed (KeyError)\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"Grainy could not finish this call: operation failed (KeyError)\"}], \"isError\": true}",
+   "tool": "auto_tone"
+  },
+  {
+   "arguments_json": "{}",
+   "extra_json": "{}",
+   "outcome": "invalid",
+   "ran": false,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"arguments.job is required\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"arguments.job is required\"}], \"isError\": true}",
+   "tool": "get_job"
+  },
+  {
+   "arguments_json": "{\"job\": \"x\"}",
+   "extra_json": "{}",
+   "outcome": "invalid",
+   "ran": false,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"arguments.job does not have the expected form\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"arguments.job does not have the expected form\"}], \"isError\": true}",
+   "tool": "get_job"
+  },
+  {
+   "arguments_json": "{\"job\": \"j1\", \"extra\": 1}",
+   "extra_json": "{}",
+   "outcome": "invalid",
+   "ran": false,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"arguments.extra is not a known argument\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"arguments.extra is not a known argument\"}], \"isError\": true}",
+   "tool": "get_job"
+  },
+  {
+   "arguments_json": "{\"job\": 5}",
+   "extra_json": "{}",
+   "outcome": "invalid",
+   "ran": false,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"arguments.job must be a string\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"arguments.job must be a string\"}], \"isError\": true}",
+   "tool": "get_job"
+  },
+  {
+   "arguments_json": "{\"edits\": [{\"ids\": [1, 1], \"set\": {\"exposure\": 1}}]}",
+   "extra_json": "{}",
+   "outcome": "invalid",
+   "ran": false,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"arguments.edits[0].ids must not repeat items\"}],\"isError\":true}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"arguments.edits[0].ids must not repeat items\"}], \"isError\": true}",
+   "tool": "apply_edits"
+  },
+  {
+   "arguments_json": "{\"edits\": [{\"ids\": [1], \"set\": {\"exposure\": 1}}]}",
+   "extra_json": "{\"content\": [{\"type\": \"text\", \"text\": \"{\\\"ok\\\":1}\"}, {\"type\": \"image\", \"data\": \"AA==\", \"mimeType\": \"image/jpeg\"}]}",
+   "outcome": "ok",
+   "ran": true,
+   "result_bytes": "{\"content\":[{\"type\":\"text\",\"text\":\"{\\\"ok\\\":1}\"},{\"type\":\"image\",\"data\":\"AA==\",\"mimeType\":\"image/jpeg\"}],\"isError\":false}",
+   "result_json": "{\"content\": [{\"type\": \"text\", \"text\": \"{\\\"ok\\\":1}\"}, {\"type\": \"image\", \"data\": \"AA==\", \"mimeType\": \"image/jpeg\"}], \"isError\": false}",
+   "tool": "apply_edits"
+  }
+ ],
+ "english": [
+  [
+   "PermissionDenied",
+   "permission denied"
+  ],
+  [
+   "NotFound",
+   "file or folder not found"
+  ],
+  [
+   "AlreadyExists",
+   "output already exists; try again for a new name"
+  ],
+  [
+   "Io",
+   "file system operation failed"
+  ],
+  [
+   "Named:ValueError",
+   "operation failed (ValueError)"
+  ],
+  [
+   "Named:ZeroDivisionError",
+   "operation failed (ZeroDivisionError)"
+  ],
+  [
+   "Internal",
+   "operation failed (internal error)"
+  ]
+ ]
+}

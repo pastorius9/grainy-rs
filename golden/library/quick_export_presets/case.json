@@ -1,0 +1,895 @@
+{
+ "spec": {
+  "calls": [
+   {
+    "fn": "preset",
+    "args": {
+     "kind": "small"
+    }
+   },
+   {
+    "fn": "preset",
+    "args": {
+     "kind": "large"
+    }
+   },
+   {
+    "fn": "preset",
+    "args": {
+     "kind": "original"
+    }
+   },
+   {
+    "fn": "preset",
+    "args": {
+     "kind": "huge"
+    }
+   },
+   {
+    "fn": "preset",
+    "args": {
+     "kind": ""
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}",
+      "grayscale": false,
+      "dither": false
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 39,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 100.0,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": true,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "GIF",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "TIFF HDR 32-bit",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 30001,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": -1,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "XYZ",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": 1,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{foo}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "a/b"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}{n:d}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "   "
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}",
+      "grayscale": "yes"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}?"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "."
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": 5
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": [
+      1,
+      2
+     ]
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": "text"
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": null
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": ".."
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "JPEG",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": " x "
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": false
+    }
+   },
+   {
+    "fn": "pref",
+    "args": {
+     "key": "previous_photo_export",
+     "value": {
+      "folder": "D:/out",
+      "format": "TIFF HDR 32-bit",
+      "quality": 90,
+      "longest": 2048,
+      "color_space": "sRGB",
+      "keep_metadata": true,
+      "naming": "{stem}_{n}"
+     }
+    }
+   },
+   {
+    "fn": "previous",
+    "args": {
+     "hdr": true
+    }
+   }
+  ],
+  "name": "quick_export_presets"
+ },
+ "results": [
+  {
+   "ok": {
+    "format": "JPEG",
+    "quality": 80,
+    "longest": 2048,
+    "color_space": "sRGB",
+    "keep_metadata": false,
+    "naming": "{stem}",
+    "grayscale": true,
+    "dither": true
+   }
+  },
+  {
+   "ok": {
+    "format": "JPEG",
+    "quality": 100,
+    "longest": 0,
+    "color_space": "sRGB",
+    "keep_metadata": false,
+    "naming": "{stem}",
+    "grayscale": true,
+    "dither": true
+   }
+  },
+  {
+   "ok": {
+    "format": "Original",
+    "quality": 100,
+    "longest": 0,
+    "color_space": "sRGB",
+    "keep_metadata": false,
+    "naming": "{stem}",
+    "grayscale": true,
+    "dither": true
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "huge"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": ""
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "folder": "D:/out",
+    "format": "JPEG",
+    "quality": 90,
+    "longest": 2048,
+    "color_space": "sRGB",
+    "keep_metadata": true,
+    "naming": "{stem}_{n}",
+    "grayscale": true,
+    "dither": true
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "folder": "D:/out",
+    "format": "JPEG",
+    "quality": 90,
+    "longest": 2048,
+    "color_space": "sRGB",
+    "keep_metadata": true,
+    "naming": "{stem}_{n}",
+    "grayscale": false,
+    "dither": false
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "folder": "D:/out",
+    "format": "JPEG",
+    "quality": 90,
+    "longest": 2048,
+    "color_space": "sRGB",
+    "keep_metadata": true,
+    "naming": "{stem}{n:d}",
+    "grayscale": true,
+    "dither": true
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "folder": "D:/out",
+    "format": "JPEG",
+    "quality": 90,
+    "longest": 2048,
+    "color_space": "sRGB",
+    "keep_metadata": true,
+    "naming": "..",
+    "grayscale": true,
+    "dither": true
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "folder": "D:/out",
+    "format": "JPEG",
+    "quality": 90,
+    "longest": 2048,
+    "color_space": "sRGB",
+    "keep_metadata": true,
+    "naming": " x ",
+    "grayscale": true,
+    "dither": true
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "folder": "D:/out",
+    "format": "TIFF HDR 32-bit",
+    "quality": 90,
+    "longest": 2048,
+    "color_space": "sRGB",
+    "keep_metadata": true,
+    "naming": "{stem}_{n}",
+    "grayscale": true,
+    "dither": true
+   }
+  }
+ ],
+ "tree": {
+  "files": {},
+  "dirs": []
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {
+   "previous_photo_export": "{\"folder\": \"D:/out\", \"format\": \"TIFF HDR 32-bit\", \"quality\": 90, \"longest\": 2048, \"color_space\": \"sRGB\", \"keep_metadata\": true, \"naming\": \"{stem}_{n}\"}"
+  }
+ }
+}

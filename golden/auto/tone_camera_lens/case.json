@@ -1,0 +1,50 @@
+{
+ "changed": {
+  "curve": [
+   [
+    0.0,
+    0.03
+   ],
+   [
+    0.25,
+    0.265
+   ],
+   [
+    0.5,
+    0.5
+   ],
+   [
+    0.75,
+    0.735
+   ],
+   [
+    1.0,
+    0.97
+   ]
+  ],
+  "exposure": 2.5602570540705036,
+  "tone_version": 3,
+  "whites": 19.399257688445047
+ },
+ "removed": [],
+ "report": {
+  "black_point": 0.0,
+  "exposure": 2.5602570540705036,
+  "high_percentile": 99.9,
+  "input_black": 0.0,
+  "input_white": 108.9,
+  "low_percentile": 0.1,
+  "margin_percent": 3.0,
+  "output_black": 7.6499999999999995,
+  "output_white": 247.35,
+  "status": "applied",
+  "white_gain": 1.1439250873376277
+ },
+ "settings": {
+  "distortion": 10.0,
+  "lens_vignette": 40.0,
+  "perspective_v": 12.0,
+  "raw_mode": "as_shot"
+ },
+ "source": "camera"
+}

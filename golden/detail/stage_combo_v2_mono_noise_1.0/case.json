@@ -1,0 +1,13 @@
+{
+ "image": "noise",
+ "pixel_scale": 1.0,
+ "settings": {
+  "clarity": -30.0,
+  "detail_version": 2,
+  "monochrome": true,
+  "noise_luma": 40.0,
+  "sharpen": 60.0,
+  "sharpen_mask": 30.0,
+  "texture": -20.0
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "error": null,
+ "frame": "garden",
+ "operations": [
+  {
+   "points": [
+    [
+     0.2,
+     0.2
+    ]
+   ],
+   "radius": 0.04,
+   "source": [
+    0.25,
+    0.3
+   ],
+   "type": "clone"
+  },
+  {
+   "points": [
+    [
+     0.22,
+     0.22
+    ],
+    [
+     0.3,
+     0.25
+    ]
+   ],
+   "radius": 0.02,
+   "source": [
+    0.5,
+    0.6
+   ],
+   "type": "heal"
+  },
+  {
+   "points": [
+    [
+     0.6,
+     0.6
+    ]
+   ],
+   "radius": 0.03,
+   "source": [
+    0.65,
+    0.7
+   ],
+   "type": "heal",
+   "version": 2
+  },
+  {
+   "points": [
+    [
+     0.6,
+     0.6
+    ]
+   ],
+   "radius": 0.05,
+   "type": "red_eye"
+  },
+  {
+   "points": [
+    [
+     0.2,
+     0.2
+    ]
+   ],
+   "radius": 0.02,
+   "type": "inpaint"
+  },
+  {
+   "points": [
+    [
+     0.8,
+     0.3
+    ]
+   ],
+   "radius": 0.025,
+   "type": "heal",
+   "version": 2
+  }
+ ],
+ "output_bits": "11747292756236566528",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "recorded": {
+  "distance": [
+   {
+    "max": 3.819999933242798,
+    "shape": [
+     160,
+     240
+    ]
+   }
+  ],
+  "dust": [],
+  "inpaint": 9,
+  "sky": []
+ },
+ "shift": 0
+}

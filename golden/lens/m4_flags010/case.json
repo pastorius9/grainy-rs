@@ -1,0 +1,72 @@
+{
+ "color_changed": true,
+ "height": 64,
+ "kind": "maps",
+ "model": {
+  "focal": 7.188000202178955,
+  "model": "ptlens",
+  "terms": [
+   0.013088000006973743,
+   -0.03638700023293495,
+   0.0
+  ]
+ },
+ "settings": {
+  "lensfun": {
+   "aperture": 4,
+   "camera": "",
+   "crop": 4.843,
+   "distance": 1000,
+   "focal": 7.188000202178955,
+   "maker": "Canon",
+   "name": "Canon PowerShot G3 & compatibles (Standard)",
+   "orientation": 1,
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Canon</maker>\n        <model>Canon PowerShot G3 &amp; compatibles (Standard)</model>\n        <model lang=\"en\">fixed lens</model>\n        <model lang=\"de\">festes Objektiv</model>\n        <mount>canonG3</mount>\n        <cropfactor>4.843</cropfactor>\n        <aspect-ratio>4:3</aspect-ratio>\n        <calibration>\n            <distortion model=\"ptlens\" focal=\"7.188\" a=\"0.013088\" b=\"-0.036387\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"8\" a=\"0.013092\" b=\"-0.031149\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"9.094\" a=\"0.009637\" b=\"-0.019881\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"10.188\" a=\"0.00983\" b=\"-0.017385\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"11.188\" a=\"0.005089\" b=\"-0.006514\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"14.406\" a=\"0.001788\" b=\"0.00205\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"17.594\" a=\"0.001189\" b=\"0.002614\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"20.688\" a=\"0.000468\" b=\"0.003817\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"23\" a=\"0.000298\" b=\"0.00272\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"25.094\" a=\"0.00274\" b=\"-0.002048\" c=\"0\" />\n            <distortion model=\"ptlens\" focal=\"28.813\" a=\"-8.6e-05\" b=\"0.005193\" c=\"0\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"2.1\" distance=\"10\" k1=\"-0.6006\" k2=\"0.6441\" k3=\"-0.4877\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"2.1\" distance=\"1000\" k1=\"-0.6006\" k2=\"0.6441\" k3=\"-0.4877\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"2.8\" distance=\"10\" k1=\"-0.1840\" k2=\"0.0559\" k3=\"-0.0745\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.1840\" k2=\"0.0559\" k3=\"-0.0745\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"4\" distance=\"10\" k1=\"-0.1569\" k2=\"-0.0417\" k3=\"0.0214\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"4\" distance=\"1000\" k1=\"-0.1569\" k2=\"-0.0417\" k3=\"0.0214\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"5.6\" distance=\"10\" k1=\"-0.1526\" k2=\"-0.0567\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.1526\" k2=\"-0.0567\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"8\" distance=\"10\" k1=\"-0.1457\" k2=\"-0.0669\" k3=\"0.0358\" />\n            <vignetting model=\"pa\" focal=\"7.2\" aperture=\"8\" distance=\"1000\" k1=\"-0.1457\" k2=\"-0.0669\" k3=\"0.0358\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"2.2\" distance=\"10\" k1=\"-0.5785\" k2=\"0.6503\" k3=\"-0.4309\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"2.2\" distance=\"1000\" k1=\"-0.5785\" k2=\"0.6503\" k3=\"-0.4309\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"2.8\" distance=\"10\" k1=\"-0.1286\" k2=\"0.0111\" k3=\"-0.0407\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.1286\" k2=\"0.0111\" k3=\"-0.0407\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"4\" distance=\"10\" k1=\"-0.1170\" k2=\"-0.0419\" k3=\"0.0236\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"4\" distance=\"1000\" k1=\"-0.1170\" k2=\"-0.0419\" k3=\"0.0236\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"5.6\" distance=\"10\" k1=\"-0.1157\" k2=\"-0.0395\" k3=\"0.0212\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.1157\" k2=\"-0.0395\" k3=\"0.0212\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"8\" distance=\"10\" k1=\"-0.1135\" k2=\"-0.0441\" k3=\"0.0223\" />\n            <vignetting model=\"pa\" focal=\"9.1\" aperture=\"8\" distance=\"1000\" k1=\"-0.1135\" k2=\"-0.0441\" k3=\"0.0223\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"2.2\" distance=\"10\" k1=\"-0.5068\" k2=\"0.5177\" k3=\"-0.3084\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"2.2\" distance=\"1000\" k1=\"-0.5068\" k2=\"0.5177\" k3=\"-0.3084\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"2.8\" distance=\"10\" k1=\"-0.0759\" k2=\"-0.0812\" k3=\"0.0158\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.0759\" k2=\"-0.0812\" k3=\"0.0158\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"4\" distance=\"10\" k1=\"-0.0903\" k2=\"-0.0420\" k3=\"0.0301\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"4\" distance=\"1000\" k1=\"-0.0903\" k2=\"-0.0420\" k3=\"0.0301\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"5.6\" distance=\"10\" k1=\"-0.0905\" k2=\"-0.0384\" k3=\"0.0262\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.0905\" k2=\"-0.0384\" k3=\"0.0262\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"8\" distance=\"10\" k1=\"-0.0905\" k2=\"-0.0322\" k3=\"0.0179\" />\n            <vignetting model=\"pa\" focal=\"11.2\" aperture=\"8\" distance=\"1000\" k1=\"-0.0905\" k2=\"-0.0322\" k3=\"0.0179\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"2.5\" distance=\"10\" k1=\"-0.5166\" k2=\"0.5726\" k3=\"-0.2825\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"2.5\" distance=\"1000\" k1=\"-0.5166\" k2=\"0.5726\" k3=\"-0.2825\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"2.8\" distance=\"10\" k1=\"-0.0425\" k2=\"-0.2407\" k3=\"0.1378\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.0425\" k2=\"-0.2407\" k3=\"0.1378\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"4\" distance=\"10\" k1=\"-0.0721\" k2=\"-0.0052\" k3=\"0.0048\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"4\" distance=\"1000\" k1=\"-0.0721\" k2=\"-0.0052\" k3=\"0.0048\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"5.6\" distance=\"10\" k1=\"-0.0631\" k2=\"-0.0252\" k3=\"0.0152\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.0631\" k2=\"-0.0252\" k3=\"0.0152\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"8\" distance=\"10\" k1=\"-0.0618\" k2=\"-0.0225\" k3=\"0.0123\" />\n            <vignetting model=\"pa\" focal=\"14.4\" aperture=\"8\" distance=\"1000\" k1=\"-0.0618\" k2=\"-0.0225\" k3=\"0.0123\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"2.6\" distance=\"10\" k1=\"-0.3533\" k2=\"0.3135\" k3=\"-0.1397\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"2.6\" distance=\"1000\" k1=\"-0.3533\" k2=\"0.3135\" k3=\"-0.1397\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"2.8\" distance=\"10\" k1=\"-0.3623\" k2=\"0.3079\" k3=\"-0.1290\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.3623\" k2=\"0.3079\" k3=\"-0.1290\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"4\" distance=\"10\" k1=\"-0.0517\" k2=\"0.0046\" k3=\"-0.0067\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"4\" distance=\"1000\" k1=\"-0.0517\" k2=\"0.0046\" k3=\"-0.0067\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"5.6\" distance=\"10\" k1=\"-0.0418\" k2=\"-0.0111\" k3=\"0.0010\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.0418\" k2=\"-0.0111\" k3=\"0.0010\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"8\" distance=\"10\" k1=\"-0.0374\" k2=\"-0.0232\" k3=\"0.0116\" />\n            <vignetting model=\"pa\" focal=\"17.6\" aperture=\"8\" distance=\"1000\" k1=\"-0.0374\" k2=\"-0.0232\" k3=\"0.0116\" />\n            <vignetting model=\"pa\" focal=\"23\" aperture=\"2.9\" distance=\"10\" k1=\"-0.2349\" k2=\"0.1656\" k3=\"-0.0639\" />\n            <vignetting model=\"pa\" focal=\"23\" aperture=\"2.9\" distance=\"1000\" k1=\"-0.2349\" k2=\"0.1656\" k3=\"-0.0639\" />\n            <vignetting model=\"pa\" focal=\"23\" aperture=\"4\" distance=\"10\" k1=\"-0.0204\" k2=\"-0.0113\" k3=\"-0.0092\" />\n            <vignetting model=\"pa\" focal=\"23\" aperture=\"4\" distance=\"1000\" k1=\"-0.0204\" k2=\"-0.0113\" k3=\"-0.0092\" />\n            <vignetting model=\"pa\" focal=\"23\" aperture=\"5.6\" distance=\"10\" k1=\"-0.0120\" k2=\"-0.0280\" k3=\"0.0031\" />\n            <vignetting model=\"pa\" focal=\"23\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.0120\" k2=\"-0.0280\" k3=\"0.0031\" />\n            <vignetting model=\"pa\" focal=\"23\" aperture=\"8\" distance=\"10\" k1=\"-0.0106\" k2=\"-0.0314\" k3=\"0.0089\" />\n            <vignetting model=\"pa\" focal=\"23\" aperture=\"8\" distance=\"1000\" k1=\"-0.0106\" k2=\"-0.0314\" k3=\"0.0089\" />\n            <vignetting model=\"pa\" focal=\"25.1\" aperture=\"3\" distance=\"10\" k1=\"-0.2287\" k2=\"0.2431\" k3=\"-0.1595\" />\n            <vignetting model=\"pa\" focal=\"25.1\" aperture=\"3\" distance=\"1000\" k1=\"-0.2287\" k2=\"0.2431\" k3=\"-0.1595\" />\n            <vignetting model=\"pa\" focal=\"25.1\" aperture=\"4\" distance=\"10\" k1=\"-0.0579\" k2=\"0.1425\" k3=\"-0.1538\" />\n            <vignetting model=\"pa\" focal=\"25.1\" aperture=\"4\" distance=\"1000\" k1=\"-0.0579\" k2=\"0.1425\" k3=\"-0.1538\" />\n            <vignetting model=\"pa\" focal=\"25.1\" aperture=\"5.6\" distance=\"10\" k1=\"-0.0061\" k2=\"-0.0323\" k3=\"0.0025\" />\n            <vignetting model=\"pa\" focal=\"25.1\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.0061\" k2=\"-0.0323\" k3=\"0.0025\" />\n            <vignetting model=\"pa\" focal=\"25.1\" aperture=\"8\" distance=\"10\" k1=\"-0.0117\" k2=\"-0.0144\" k3=\"-0.0067\" />\n            <vignetting model=\"pa\" focal=\"25.1\" aperture=\"8\" distance=\"1000\" k1=\"-0.0117\" k2=\"-0.0144\" k3=\"-0.0067\" />\n            <vignetting model=\"pa\" focal=\"28.8\" aperture=\"3.2\" distance=\"10\" k1=\"-0.2551\" k2=\"0.3908\" k3=\"-0.3442\" />\n            <vignetting model=\"pa\" focal=\"28.8\" aperture=\"3.2\" distance=\"1000\" k1=\"-0.2551\" k2=\"0.3908\" k3=\"-0.3442\" />\n            <vignetting model=\"pa\" focal=\"28.8\" aperture=\"4\" distance=\"10\" k1=\"-0.1426\" k2=\"0.4409\" k3=\"-0.4791\" />\n            <vignetting model=\"pa\" focal=\"28.8\" aperture=\"4\" distance=\"1000\" k1=\"-0.1426\" k2=\"0.4409\" k3=\"-0.4791\" />\n            <vignetting model=\"pa\" focal=\"28.8\" aperture=\"5.6\" distance=\"10\" k1=\"-0.0624\" k2=\"0.1261\" k3=\"-0.1605\" />\n            <vignetting model=\"pa\" focal=\"28.8\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.0624\" k2=\"0.1261\" k3=\"-0.1605\" />\n            <vignetting model=\"pa\" focal=\"28.8\" aperture=\"8\" distance=\"10\" k1=\"-0.0048\" k2=\"-0.0636\" k3=\"0.0103\" />\n            <vignetting model=\"pa\" focal=\"28.8\" aperture=\"8\" distance=\"1000\" k1=\"-0.0048\" k2=\"-0.0636\" k3=\"0.0103\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  "lensfun_distortion": false,
+  "lensfun_enabled": true,
+  "lensfun_scale": false,
+  "lensfun_tca": true,
+  "lensfun_vignette": true
+ },
+ "tca": null,
+ "vignetting": {
+  "aperture": 4.0,
+  "distance": 1000.0,
+  "focal": 7.188000202178955,
+  "model": "pa",
+  "terms": [
+   -0.15690000355243683,
+   -0.04169999808073044,
+   0.021400000900030136
+  ]
+ },
+ "width": 96,
+ "xs": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  24,
+  48,
+  72,
+  91,
+  92,
+  93,
+  94,
+  95
+ ],
+ "ys": [
+  0,
+  1,
+  2,
+  16,
+  32,
+  48,
+  61,
+  62,
+  63
+ ]
+}

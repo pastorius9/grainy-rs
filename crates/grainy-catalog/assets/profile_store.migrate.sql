@@ -1,0 +1,2 @@
+CREATE TABLE IF NOT EXISTS profile_assets (
+        sha256 TEXT PRIMARY KEY, data BLOB NOT NULL, size INTEGER NOT NULL)

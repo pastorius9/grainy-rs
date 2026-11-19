@@ -1,0 +1,90 @@
+{
+ "name": "running.json",
+ "restores": [
+  {
+   "ensure_current": true,
+   "restore_photo_id": 7,
+   "safe": false,
+   "saved": 7
+  },
+  {
+   "ensure_current": true,
+   "restore_photo_id": null,
+   "safe": false,
+   "saved": null
+  },
+  {
+   "ensure_current": false,
+   "restore_photo_id": null,
+   "safe": true,
+   "saved": 7
+  },
+  {
+   "ensure_current": false,
+   "restore_photo_id": null,
+   "safe": true,
+   "saved": null
+  }
+ ],
+ "steps": [
+  {
+   "marker": {
+    "pid_is_own": true,
+    "started_is_number": true,
+    "version": "0.6.8"
+   },
+   "name": "begin on an empty folder",
+   "result": false
+  },
+  {
+   "marker": {
+    "pid_is_own": true,
+    "started_is_number": true,
+    "version": "0.6.8"
+   },
+   "name": "begin again: the run before did not close",
+   "result": true
+  },
+  {
+   "marker": null,
+   "name": "end removes our marker",
+   "result": null
+  },
+  {
+   "marker": {
+    "pid_is_own": true,
+    "started_is_number": true,
+    "version": "0.6.8"
+   },
+   "name": "begin after a clean end",
+   "result": false
+  },
+  {
+   "marker": {
+    "pid_is_own": true,
+    "started_is_number": true,
+    "version": "0.6.8"
+   },
+   "name": "begin over a dead run (the previous version)",
+   "result": "0.0.1"
+  },
+  {
+   "marker": {
+    "pid_is_own": false,
+    "started_is_number": true,
+    "version": "0.0.2"
+   },
+   "name": "end leaves a marker of another run",
+   "result": null
+  },
+  {
+   "marker": {
+    "pid_is_own": true,
+    "started_is_number": true,
+    "version": "0.6.8"
+   },
+   "name": "begin over a damaged marker",
+   "result": false
+  }
+ ]
+}

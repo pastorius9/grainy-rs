@@ -1,0 +1,11 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "ca_blue": -20.0,
+  "ca_red": 30.0,
+  "distortion_k2": 4.0
+ },
+ "source": "edges",
+ "use_crop": true
+}

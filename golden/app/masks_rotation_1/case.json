@@ -1,0 +1,6763 @@
+{
+ "changes": {
+  "rotation": 1
+ },
+ "height": 65,
+ "steps": [
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "linear",
+   "step": "create_linear"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "linear",
+   "step": "draw_linear"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "radial",
+   "step": "extend_radial_subtract"
+  },
+  {
+   "angle": 0.0,
+   "component": 1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.36597938145290004,
+         0.05230769247594513
+        ],
+        [
+         0.634020618566302,
+         0.9476923075240566
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "radial",
+   "step": "draw_radial"
+  },
+  {
+   "angle": 0.0,
+   "component": 1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.36597938145290004,
+         0.05230769247594513
+        ],
+        [
+         0.634020618566302,
+         0.9476923075240566
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "radial",
+   "step": "extend_radial_intersect"
+  },
+  {
+   "angle": 0.0,
+   "component": 2,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.36597938145290004,
+         0.05230769247594513
+        ],
+        [
+         0.634020618566302,
+         0.9476923075240566
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "radial",
+   "step": "draw_radial_off_photo"
+  },
+  {
+   "angle": 0.0,
+   "component": 2,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.36597938145290004,
+         0.05230769247594513
+        ],
+        [
+         0.634020618566302,
+         0.9476923075240566
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "linear",
+   "step": "extend_linear_add"
+  },
+  {
+   "angle": 0.0,
+   "component": 3,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.36597938145290004,
+         0.05230769247594513
+        ],
+        [
+         0.634020618566302,
+         0.9476923075240566
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "linear",
+   "step": "draw_linear_off_photo"
+  },
+  {
+   "angle": 0.0,
+   "component": 4,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.36597938145290004,
+         0.05230769247594513
+        ],
+        [
+         0.634020618566302,
+         0.9476923075240566
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "linear",
+   "step": "draw_linear_click"
+  },
+  {
+   "angle": 0.0,
+   "component": 4,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.36597938145290004,
+         0.05230769247594513
+        ],
+        [
+         0.634020618566302,
+         0.9476923075240566
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "",
+   "step": "end_tool"
+  },
+  {
+   "angle": 7.429275179486774e-15,
+   "component": 1,
+   "handles": [
+    [
+     0.3,
+     0.19999999999999996
+    ],
+    [
+     0.7,
+     0.8
+    ]
+   ],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.36597938145290004,
+         0.05230769247594513
+        ],
+        [
+         0.634020618566302,
+         0.9476923075240566
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "edit_component",
+   "step": "select_radial"
+  },
+  {
+   "angle": 7.429275179486776e-15,
+   "component": 1,
+   "handles": [
+    [
+     0.2499999999999999,
+     0.09999999999999998
+    ],
+    [
+     0.6999999999999998,
+     0.8
+    ]
+   ],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.29922680415210345,
+         0.002692307888602641
+        ],
+        [
+         0.6007731959046806,
+         1.0473076921113993
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "edit_component",
+   "step": "drag_radial_corner"
+  },
+  {
+   "angle": 7.429275179486776e-15,
+   "component": 1,
+   "handles": [
+    [
+     0.29999999999999993,
+     0.02000000000000013
+    ],
+    [
+     0.7499999999999999,
+     0.72
+    ]
+   ],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.21922680418216908,
+         -0.04730769211139707
+        ],
+        [
+         0.5207731959347462,
+         0.9973076921113992
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "edit_component",
+   "step": "drag_radial_centre"
+  },
+  {
+   "angle": 30.00039388405092,
+   "component": 1,
+   "handles": [
+    [
+     0.5926533601351889,
+     -0.00811456822696699
+    ],
+    [
+     0.45734663986481094,
+     0.7481145682269672
+    ]
+   ],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.2194197309597664,
+         -0.047982068458422344
+        ],
+        [
+         0.5205802691571491,
+         0.9979820684584245
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "edit_component",
+   "step": "turn_radial"
+  },
+  {
+   "angle": 30.00039388405092,
+   "component": 1,
+   "handles": [
+    [
+     0.5926533601351889,
+     -0.00811456822696699
+    ],
+    [
+     0.45734663986481094,
+     0.7481145682269672
+    ]
+   ],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.2194197309597664,
+         -0.047982068458422344
+        ],
+        [
+         0.5205802691571491,
+         0.9979820684584245
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "edit_component",
+   "step": "select_turned_radial"
+  },
+  {
+   "angle": 30.000393884050922,
+   "component": 1,
+   "handles": [
+    [
+     0.5926583585345735,
+     -0.008120339789796482
+    ],
+    [
+     0.7999950016006159,
+     0.8500057715628293
+    ]
+   ],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "edit_component",
+   "step": "drag_turned_corner"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [
+    [
+     0.203125,
+     0.3020833333333333
+    ],
+    [
+     0.796875,
+     0.6041666666666666
+    ]
+   ],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.6041666865348816,
+         0.203125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "edit_component",
+   "step": "select_linear"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [
+    [
+     0.203125,
+     0.3020833333333333
+    ],
+    [
+     0.90625,
+     0.19791666666666666
+    ]
+   ],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3020833432674408,
+         0.796875
+        ],
+        [
+         0.1979166716337204,
+         0.09375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "edit_component",
+   "step": "drag_linear_end"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [
+    [
+     0.15625,
+     0.3541666666666667
+    ],
+    [
+     0.859375,
+     0.25
+    ]
+   ],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "edit_component",
+   "step": "drag_linear_centre"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 1
+    }
+   ],
+   "mode": "",
+   "step": "end_edit"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "opacity"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "invert"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "local_exposure"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "local_saturation"
+  },
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 1,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1 사본",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "duplicate_layer"
+  },
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 1,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "rename_layer"
+  },
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "move_layer_up"
+  },
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "move_layer_up_again"
+  },
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "hide_layer"
+  },
+  {
+   "angle": 0.0,
+   "component": 2,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "select_component_2"
+  },
+  {
+   "angle": 0.0,
+   "component": 5,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "duplicate_component"
+  },
+  {
+   "angle": 0.0,
+   "component": 4,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "move_component_up"
+  },
+  {
+   "angle": 0.0,
+   "component": 5,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "move_component_down"
+  },
+  {
+   "angle": 0.0,
+   "component": 4,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 0,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "remove_component"
+  },
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 2,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {},
+     "components": [],
+     "enabled": true,
+     "name": "마스크 3",
+     "opacity": 1
+    }
+   ],
+   "mode": "radial",
+   "step": "create_radial_then_end"
+  },
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 1,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    }
+   ],
+   "mode": "",
+   "step": "drop_fresh"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "하늘 선택"
+   ],
+   "layer": 2,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 30.0,
+       "operation": "add",
+       "sensitivity": 50.0,
+       "type": "sky"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 3",
+     "opacity": 1
+    }
+   ],
+   "mode": "",
+   "step": "create_sky"
+  },
+  {
+   "angle": 0.0,
+   "component": 1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "하늘 선택",
+    "하늘 선택"
+   ],
+   "layer": 2,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 30.0,
+       "operation": "add",
+       "sensitivity": 50.0,
+       "type": "sky"
+      },
+      {
+       "feather": 30.0,
+       "operation": "subtract",
+       "sensitivity": 50.0,
+       "type": "sky"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 3",
+     "opacity": 1
+    }
+   ],
+   "mode": "",
+   "step": "extend_sky_subtract"
+  },
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "하늘 선택",
+    "하늘 선택"
+   ],
+   "layer": 3,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 30.0,
+       "operation": "add",
+       "sensitivity": 50.0,
+       "type": "sky"
+      },
+      {
+       "feather": 30.0,
+       "operation": "subtract",
+       "sensitivity": 50.0,
+       "type": "sky"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 3",
+     "opacity": 1
+    },
+    {
+     "adjustments": {},
+     "components": [],
+     "enabled": true,
+     "name": "마스크 4",
+     "opacity": 1
+    }
+   ],
+   "mode": "brush",
+   "step": "create_brush_mode"
+  },
+  {
+   "angle": 0.0,
+   "component": -1,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "하늘 선택",
+    "하늘 선택"
+   ],
+   "layer": 3,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 30.0,
+       "operation": "add",
+       "sensitivity": 50.0,
+       "type": "sky"
+      },
+      {
+       "feather": 30.0,
+       "operation": "subtract",
+       "sensitivity": 50.0,
+       "type": "sky"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 3",
+     "opacity": 1
+    },
+    {
+     "adjustments": {},
+     "components": [],
+     "enabled": true,
+     "name": "마스크 4",
+     "opacity": 1
+    }
+   ],
+   "mode": "linear",
+   "step": "reuse_fresh"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "하늘 선택",
+    "하늘 선택",
+    "부분 보정"
+   ],
+   "layer": 3,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 30.0,
+       "operation": "add",
+       "sensitivity": 50.0,
+       "type": "sky"
+      },
+      {
+       "feather": 30.0,
+       "operation": "subtract",
+       "sensitivity": 50.0,
+       "type": "sky"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 3",
+     "opacity": 1
+    },
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.8958333134651184,
+         0.90625
+        ],
+        [
+         0.6979166865348816,
+         0.703125
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 4",
+     "opacity": 1
+    }
+   ],
+   "mode": "linear",
+   "step": "draw_in_fresh"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "하늘 선택",
+    "하늘 선택",
+    "부분 보정",
+    "보정 변경"
+   ],
+   "layer": 2,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": false,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 30.0,
+       "operation": "add",
+       "sensitivity": 50.0,
+       "type": "sky"
+      },
+      {
+       "feather": 30.0,
+       "operation": "subtract",
+       "sensitivity": 50.0,
+       "type": "sky"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 3",
+     "opacity": 1
+    }
+   ],
+   "mode": "linear",
+   "step": "remove_layer"
+  },
+  {
+   "angle": 0.0,
+   "component": 0,
+   "handles": [],
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "하늘 선택",
+    "하늘 선택",
+    "부분 보정",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "layer": 2,
+   "masks": [
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "하늘 쪽",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {
+      "exposure": 0.75,
+      "saturation": -40.0
+     },
+     "components": [
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.3541666567325592,
+         0.84375
+        ],
+        [
+         0.25,
+         0.140625
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "angle": -60.127,
+       "feather": 70,
+       "operation": "subtract",
+       "points": [
+        [
+         0.14549449181217294,
+         -0.1999059023050157
+        ],
+        [
+         0.6963909400394845,
+         0.8072525421698286
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "angle": -90.0,
+       "feather": 70,
+       "operation": "intersect",
+       "points": [
+        [
+         0.5989690720618034,
+         0.2030769233012597
+        ],
+        [
+         1.001030927731906,
+         1.3969230766987413
+        ]
+       ],
+       "radius": 0.025,
+       "type": "radial"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         -0.09999999976490664,
+         -0.1999999999999984
+        ],
+        [
+         0.5,
+         0.59375
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      },
+      {
+       "feather": 70,
+       "operation": "add",
+       "points": [
+        [
+         0.5,
+         0.5
+        ],
+        [
+         0.5,
+         0.5
+        ]
+       ],
+       "radius": 0.025,
+       "type": "linear"
+      }
+     ],
+     "enabled": true,
+     "invert": true,
+     "name": "마스크 1",
+     "opacity": 0.5
+    },
+    {
+     "adjustments": {},
+     "components": [
+      {
+       "feather": 30.0,
+       "operation": "add",
+       "sensitivity": 50.0,
+       "type": "sky"
+      },
+      {
+       "feather": 30.0,
+       "operation": "subtract",
+       "sensitivity": 50.0,
+       "type": "sky"
+      }
+     ],
+     "enabled": true,
+     "name": "마스크 3",
+     "opacity": 1
+    }
+   ],
+   "mode": "linear",
+   "step": "show_layer"
+  }
+ ],
+ "width": 97
+}

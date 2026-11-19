@@ -1,0 +1,54 @@
+{
+ "component": {
+  "feather": 40,
+  "sensitivity": 60,
+  "type": "sky"
+ },
+ "frame_bits": "8368268742672515072",
+ "frame_shape": [
+  160,
+  240
+ ],
+ "frame_step": 4,
+ "recorded": {
+  "distance": [],
+  "dust": [],
+  "inpaint": 0,
+  "sky": [
+   {
+    "component": {
+     "feather": 40,
+     "sensitivity": 60,
+     "type": "sky"
+    },
+    "input_bits": "4156639003514241024",
+    "input_shape": [
+     160,
+     240,
+     3
+    ],
+    "transformed": false
+   },
+   {
+    "component": {
+     "feather": 40,
+     "sensitivity": 60,
+     "type": "sky"
+    },
+    "input_bits": "4156639003514241024",
+    "input_shape": [
+     160,
+     240,
+     3
+    ],
+    "transformed": true
+   }
+  ]
+ },
+ "source_bits": "8368268742672515072",
+ "source_shape": [
+  160,
+  240
+ ],
+ "source_step": 4
+}

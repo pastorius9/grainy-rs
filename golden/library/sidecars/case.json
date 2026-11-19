@@ -1,0 +1,937 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "foreign.xmp": {
+     "text": "<?xpacket begin=\"﻿\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 5.6-c140\">\n  <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n    <!-- a comment that ElementTree drops -->\n    <rdf:Description rdf:about=\"\" xmlns:crs=\"http://ns.adobe.com/camera-raw-settings/1.0/\" crs:Exposure2012=\"+0.50\" crs:HasCrop=\"False\">\n      <crs:ToneCurve><rdf:Seq><rdf:li>0, 0</rdf:li><rdf:li>255, 255</rdf:li></rdf:Seq></crs:ToneCurve>\n    </rdf:Description>\n    <rdf:Description rdf:about=\"\" xmlns:luma=\"https://luma.local/ns/1.0/\" luma:Settings=\"{}\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmp:Rating=\"1\"/>\n  </rdf:RDF>\n</x:xmpmeta>\n<?xpacket end=\"w\"?>"
+    },
+    "nordf.xmp": {
+     "text": "<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><other>keep &amp; me</other></x:xmpmeta>"
+    },
+    "read1.xmp": {
+     "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:lr=\"http://ns.adobe.com/lightroom/1.0/\" xmlns:luma=\"https://luma.local/ns/1.0/\">\n<rdf:RDF><rdf:Description xmp:Rating=\"9\" xmp:Label=\"Red &amp; &#10;Blue\" luma:Settings='{\"exposure\": 1.5, \"negative\": true}' luma:Metadata='{\"caption\": \"눈\"}'>\n<dc:subject><rdf:Bag><rdf:li>plain</rdf:li></rdf:Bag></dc:subject>\n<lr:hierarchicalSubject><rdf:Bag><rdf:li>a|b</rdf:li><rdf:li>c</rdf:li><rdf:li>a|b</rdf:li><rdf:li/></rdf:Bag></lr:hierarchicalSubject>\n</rdf:Description></rdf:RDF></x:xmpmeta>"
+    },
+    "read2.xmp": {
+     "text": "<x:xmpmeta xmlns:x=\"adobe:ns:meta/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n<rdf:RDF><rdf:Description xmp:Rating=\"-3\"><dc:subject><rdf:Bag><rdf:li>one</rdf:li><rdf:li>two</rdf:li></rdf:Bag></dc:subject></rdf:Description>\n<rdf:Description xmp:Label=\"Second\"/></rdf:RDF></x:xmpmeta>"
+    },
+    "badrating.xmp": {
+     "text": "<x:xmpmeta xmlns:x=\"adobe:ns:meta/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"><rdf:RDF><rdf:Description xmp:Rating=\"x\"/></rdf:RDF></x:xmpmeta>"
+    },
+    "doctype.xmp": {
+     "text": "<?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY x \"y\">]><x:xmpmeta xmlns:x=\"adobe:ns:meta/\"/>"
+    },
+    "broken.xmp": {
+     "text": "<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><oops></x:xmpmeta>"
+    },
+    "utf16.xmp": {
+     "text16": "<x:xmpmeta xmlns:x=\"adobe:ns:meta/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n<rdf:RDF><rdf:Description xmp:Rating=\"-3\"><dc:subject><rdf:Bag><rdf:li>one</rdf:li><rdf:li>two</rdf:li></rdf:Bag></dc:subject></rdf:Description>\n<rdf:Description xmp:Label=\"Second\"/></rdf:RDF></x:xmpmeta>"
+    },
+    "old.xmp": {
+     "text": "<?xml version='1.0' encoding='utf-8'?>\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\" />"
+    }
+   }
+  },
+  "calls": [
+   {
+    "fn": "write_sidecar",
+    "args": {
+     "record": {
+      "rating": 4,
+      "label": "Red\nline\tTab & <x> \"q\"",
+      "settings": {
+       "exposure": 0.5,
+       "film_look": "Portra 400",
+       "note": "한글 \"quote\" <tag> & more"
+      },
+      "user_metadata": {
+       "caption": "눈 ☃"
+      },
+      "keywords": "sky, 한글 , ,Straße & co,<tag>"
+     },
+     "path": "$ROOT/new.xmp"
+    }
+   },
+   {
+    "fn": "read_file",
+    "args": {
+     "path": "$ROOT/new.xmp"
+    }
+   },
+   {
+    "fn": "write_sidecar",
+    "args": {
+     "record": {
+      "rating": 4,
+      "label": "Red\nline\tTab & <x> \"q\"",
+      "settings": {
+       "exposure": 0.5,
+       "film_look": "Portra 400",
+       "note": "한글 \"quote\" <tag> & more"
+      },
+      "user_metadata": {
+       "caption": "눈 ☃"
+      },
+      "keywords": "sky, 한글 , ,Straße & co,<tag>"
+     },
+     "path": "$ROOT/new.xmp"
+    }
+   },
+   {
+    "fn": "read_file",
+    "args": {
+     "path": "$ROOT/new.xmp"
+    }
+   },
+   {
+    "fn": "read_sidecar",
+    "args": {
+     "path": "$ROOT/new.xmp"
+    }
+   },
+   {
+    "fn": "write_sidecar",
+    "args": {
+     "record": {
+      "rating": 0,
+      "settings": {},
+      "keywords": ""
+     },
+     "path": "$ROOT/empty.xmp"
+    }
+   },
+   {
+    "fn": "read_file",
+    "args": {
+     "path": "$ROOT/empty.xmp"
+    }
+   },
+   {
+    "fn": "write_sidecar",
+    "args": {
+     "record": {
+      "rating": 4,
+      "label": "Red\nline\tTab & <x> \"q\"",
+      "settings": {
+       "exposure": 0.5,
+       "film_look": "Portra 400",
+       "note": "한글 \"quote\" <tag> & more"
+      },
+      "user_metadata": {
+       "caption": "눈 ☃"
+      },
+      "keywords": "sky, 한글 , ,Straße & co,<tag>"
+     },
+     "path": "$ROOT/foreign.xmp"
+    }
+   },
+   {
+    "fn": "read_file",
+    "args": {
+     "path": "$ROOT/foreign.xmp"
+    }
+   },
+   {
+    "fn": "write_sidecar",
+    "args": {
+     "record": {
+      "rating": 0,
+      "settings": {},
+      "keywords": ""
+     },
+     "path": "$ROOT/nordf.xmp"
+    }
+   },
+   {
+    "fn": "read_file",
+    "args": {
+     "path": "$ROOT/nordf.xmp"
+    }
+   },
+   {
+    "fn": "write_sidecar",
+    "args": {
+     "record": {
+      "rating": 4,
+      "label": "Red\nline\tTab & <x> \"q\"",
+      "settings": {
+       "exposure": 0.5,
+       "film_look": "Portra 400",
+       "note": "한글 \"quote\" <tag> & more"
+      },
+      "user_metadata": {
+       "caption": "눈 ☃"
+      },
+      "keywords": "sky, 한글 , ,Straße & co,<tag>"
+     },
+     "path": "$ROOT/old.xmp"
+    }
+   },
+   {
+    "fn": "read_file",
+    "args": {
+     "path": "$ROOT/old.xmp"
+    }
+   },
+   {
+    "fn": "write_sidecar",
+    "args": {
+     "record": {
+      "rating": 4,
+      "label": "Red\nline\tTab & <x> \"q\"",
+      "settings": {
+       "exposure": 0.5,
+       "film_look": "Portra 400",
+       "note": "한글 \"quote\" <tag> & more"
+      },
+      "user_metadata": {
+       "caption": "눈 ☃"
+      },
+      "keywords": "sky, 한글 , ,Straße & co,<tag>"
+     },
+     "path": "$ROOT/broken.xmp"
+    }
+   },
+   {
+    "fn": "read_sidecar",
+    "args": {
+     "path": "$ROOT/read1.xmp"
+    }
+   },
+   {
+    "fn": "read_sidecar",
+    "args": {
+     "path": "$ROOT/read2.xmp"
+    }
+   },
+   {
+    "fn": "read_sidecar",
+    "args": {
+     "path": "$ROOT/utf16.xmp"
+    }
+   },
+   {
+    "fn": "read_sidecar",
+    "args": {
+     "path": "$ROOT/badrating.xmp"
+    }
+   },
+   {
+    "fn": "read_sidecar",
+    "args": {
+     "path": "$ROOT/doctype.xmp"
+    }
+   },
+   {
+    "fn": "read_sidecar",
+    "args": {
+     "path": "$ROOT/broken.xmp"
+    }
+   },
+   {
+    "fn": "read_sidecar",
+    "args": {
+     "path": "$ROOT/none.xmp"
+    }
+   }
+  ],
+  "name": "sidecars"
+ },
+ "results": [
+  {
+   "ok": null
+  },
+  {
+   "ok": "3c3f786d6c2076657273696f6e3d27312e302720656e636f64696e673d277574662d38273f3e0d0a3c783a786d706d65746120786d6c6e733a64633d22687474703a2f2f7075726c2e6f72672f64632f656c656d656e74732f312e312f2220786d6c6e733a6c723d22687474703a2f2f6e732e61646f62652e636f6d2f6c69676874726f6f6d2f312e302f2220786d6c6e733a6c756d613d2268747470733a2f2f6c756d612e6c6f63616c2f6e732f312e302f2220786d6c6e733a7264663d22687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e73232220786d6c6e733a783d2261646f62653a6e733a6d6574612f2220786d6c6e733a786d703d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f223e3c7264663a5244463e3c7264663a4465736372697074696f6e20786d703a526174696e673d22342220786d703a4c6162656c3d22526564262331303b6c696e65262330393b5461622026616d703b20266c743b782667743b202671756f743b712671756f743b22206c756d613a53657474696e67733d227b2671756f743b6578706f737572652671756f743b3a20302e352c202671756f743b66696c6d5f6c6f6f6b2671756f743b3a202671756f743b506f72747261203430302671756f743b2c202671756f743b6e6f74652671756f743b3a202671756f743bed959ceab880205c2671756f743b71756f74655c2671756f743b20266c743b7461672667743b2026616d703b206d6f72652671756f743b7d22206c756d613a4d657461646174613d227b2671756f743b63617074696f6e2671756f743b3a202671756f743beb888820e298832671756f743b7d223e3c64633a7375626a6563743e3c7264663a4261673e3c7264663a6c693e736b793c2f7264663a6c693e3c7264663a6c693eed959ceab8803c2f7264663a6c693e3c7264663a6c693e53747261c39f652026616d703b20636f3c2f7264663a6c693e3c7264663a6c693e266c743b7461672667743b3c2f7264663a6c693e3c2f7264663a4261673e3c2f64633a7375626a6563743e3c6c723a68696572617263686963616c5375626a6563743e3c7264663a4261673e3c7264663a6c693e736b793c2f7264663a6c693e3c7264663a6c693eed959ceab8803c2f7264663a6c693e3c7264663a6c693e53747261c39f652026616d703b20636f3c2f7264663a6c693e3c7264663a6c693e266c743b7461672667743b3c2f7264663a6c693e3c2f7264663a4261673e3c2f6c723a68696572617263686963616c5375626a6563743e3c2f7264663a4465736372697074696f6e3e3c2f7264663a5244463e3c2f783a786d706d6574613e"
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": "3c3f786d6c2076657273696f6e3d27312e302720656e636f64696e673d277574662d38273f3e0d0a3c783a786d706d65746120786d6c6e733a64633d22687474703a2f2f7075726c2e6f72672f64632f656c656d656e74732f312e312f2220786d6c6e733a6c723d22687474703a2f2f6e732e61646f62652e636f6d2f6c69676874726f6f6d2f312e302f2220786d6c6e733a6c756d613d2268747470733a2f2f6c756d612e6c6f63616c2f6e732f312e302f2220786d6c6e733a7264663d22687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e73232220786d6c6e733a783d2261646f62653a6e733a6d6574612f2220786d6c6e733a786d703d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f223e3c7264663a5244463e3c7264663a4465736372697074696f6e20786d703a526174696e673d22342220786d703a4c6162656c3d22526564262331303b6c696e65262330393b5461622026616d703b20266c743b782667743b202671756f743b712671756f743b22206c756d613a53657474696e67733d227b2671756f743b6578706f737572652671756f743b3a20302e352c202671756f743b66696c6d5f6c6f6f6b2671756f743b3a202671756f743b506f72747261203430302671756f743b2c202671756f743b6e6f74652671756f743b3a202671756f743bed959ceab880205c2671756f743b71756f74655c2671756f743b20266c743b7461672667743b2026616d703b206d6f72652671756f743b7d22206c756d613a4d657461646174613d227b2671756f743b63617074696f6e2671756f743b3a202671756f743beb888820e298832671756f743b7d223e3c64633a7375626a6563743e3c7264663a4261673e3c7264663a6c693e736b793c2f7264663a6c693e3c7264663a6c693eed959ceab8803c2f7264663a6c693e3c7264663a6c693e53747261c39f652026616d703b20636f3c2f7264663a6c693e3c7264663a6c693e266c743b7461672667743b3c2f7264663a6c693e3c2f7264663a4261673e3c2f64633a7375626a6563743e3c6c723a68696572617263686963616c5375626a6563743e3c7264663a4261673e3c7264663a6c693e736b793c2f7264663a6c693e3c7264663a6c693eed959ceab8803c2f7264663a6c693e3c7264663a6c693e53747261c39f652026616d703b20636f3c2f7264663a6c693e3c7264663a6c693e266c743b7461672667743b3c2f7264663a6c693e3c2f7264663a4261673e3c2f6c723a68696572617263686963616c5375626a6563743e3c2f7264663a4465736372697074696f6e3e3c2f7264663a5244463e3c2f783a786d706d6574613e"
+  },
+  {
+   "ok": {
+    "rating": 4,
+    "label": "Red\nline\tTab & <x> \"q\"",
+    "settings": {
+     "exposure": 0.5,
+     "contrast": 0.0,
+     "highlights": 0.0,
+     "shadows": 0.0,
+     "whites": 0.0,
+     "blacks": 0.0,
+     "temperature": 0.0,
+     "tint": 0.0,
+     "saturation": 0.0,
+     "vibrance": 0.0,
+     "clarity": 0.0,
+     "sharpen": 0.0,
+     "vignette": 0.0,
+     "grain": 0.0,
+     "vignette_midpoint": 50.0,
+     "vignette_roundness": 0.0,
+     "vignette_feather": 50.0,
+     "vignette_highlights": 0.0,
+     "grain_size": 25.0,
+     "grain_roughness": 50.0,
+     "rotation": 0,
+     "straighten": 0.0,
+     "flip": false,
+     "crop": null,
+     "curve": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     "hsl": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "monochrome": false,
+     "video_color": null,
+     "video_time": 0.0,
+     "hdr": false,
+     "hdr_limit": 4.0,
+     "hdr_brightness": 0.0,
+     "sdr_exposure": 0.0,
+     "sdr_compression": 75.0,
+     "photo_filter": "warming85",
+     "photo_filter_enabled": false,
+     "photo_filter_density": 25.0,
+     "photo_filter_luminosity": true,
+     "tone_version": 1,
+     "detail_version": 3,
+     "rgb_curves": [
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ],
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ],
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ]
+     ],
+     "parametric": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "mixer_mode": "hsv",
+     "kelvin": 6500.0,
+     "wb_reference": 6500.0,
+     "kelvin_enabled": false,
+     "grading": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "grading_balance": 0.0,
+     "calibration": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ],
+     "point_colors": [],
+     "texture": 0.0,
+     "dehaze": 0.0,
+     "noise_luma": 0.0,
+     "noise_color": 0.0,
+     "sharpen_radius": 0.8,
+     "sharpen_detail": 50.0,
+     "sharpen_mask": 0.0,
+     "distortion": 0.0,
+     "distortion_k2": 0.0,
+     "distortion_k3": 0.0,
+     "lens_vignette": 0.0,
+     "ca_red": 0.0,
+     "ca_blue": 0.0,
+     "defringe": 0.0,
+     "perspective_v": 0.0,
+     "perspective_h": 0.0,
+     "aspect_scale": 0.0,
+     "shift_x": 0.0,
+     "shift_y": 0.0,
+     "transform_scale": 100.0,
+     "guides": null,
+     "lens_profile": "",
+     "camera_matrix": null,
+     "lensfun": null,
+     "lensfun_enabled": false,
+     "lensfun_distortion": true,
+     "lensfun_tca": true,
+     "lensfun_vignette": true,
+     "lensfun_scale": true,
+     "upright": null,
+     "upright_crop": true,
+     "masks": [],
+     "retouch": [],
+     "working_space": "sRGB",
+     "raw_mode": "legacy",
+     "raw_kelvin": 6500.0,
+     "raw_tint": 0.0,
+     "raw_neutral": null,
+     "dcp_profile": null,
+     "dcp_huesat": true,
+     "dcp_look": true,
+     "dcp_tone": true,
+     "dcp_exposure": true,
+     "negative": false,
+     "negative_base": null,
+     "negative_peak": null,
+     "negative_range": 6.5,
+     "negative_density": 0.0,
+     "film_look": "Portra 400",
+     "film_strength": 100.0,
+     "tone_mapping": "classic",
+     "drt_contrast": 0.0,
+     "drt_toe": 0.0,
+     "drt_shoulder": 0.0,
+     "drt_white": 0.0,
+     "panels_off": []
+    },
+    "user_metadata": {
+     "caption": "눈 ☃"
+    },
+    "keywords": "sky, 한글, Straße & co, <tag>"
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": "3c3f786d6c2076657273696f6e3d27312e302720656e636f64696e673d277574662d38273f3e0d0a3c783a786d706d65746120786d6c6e733a64633d22687474703a2f2f7075726c2e6f72672f64632f656c656d656e74732f312e312f2220786d6c6e733a6c723d22687474703a2f2f6e732e61646f62652e636f6d2f6c69676874726f6f6d2f312e302f2220786d6c6e733a6c756d613d2268747470733a2f2f6c756d612e6c6f63616c2f6e732f312e302f2220786d6c6e733a7264663d22687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e73232220786d6c6e733a783d2261646f62653a6e733a6d6574612f2220786d6c6e733a786d703d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f223e3c7264663a5244463e3c7264663a4465736372697074696f6e20786d703a526174696e673d22302220786d703a4c6162656c3d2222206c756d613a53657474696e67733d227b7d22206c756d613a4d657461646174613d227b7d223e3c64633a7375626a6563743e3c7264663a426167202f3e3c2f64633a7375626a6563743e3c6c723a68696572617263686963616c5375626a6563743e3c7264663a426167202f3e3c2f6c723a68696572617263686963616c5375626a6563743e3c2f7264663a4465736372697074696f6e3e3c2f7264663a5244463e3c2f783a786d706d6574613e"
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": "3c3f786d6c2076657273696f6e3d27312e302720656e636f64696e673d277574662d38273f3e0d0a3c783a786d706d65746120786d6c6e733a64633d22687474703a2f2f7075726c2e6f72672f64632f656c656d656e74732f312e312f2220786d6c6e733a6c723d22687474703a2f2f6e732e61646f62652e636f6d2f6c69676874726f6f6d2f312e302f2220786d6c6e733a6c756d613d2268747470733a2f2f6c756d612e6c6f63616c2f6e732f312e302f2220786d6c6e733a6e73323d22687474703a2f2f6e732e61646f62652e636f6d2f63616d6572612d7261772d73657474696e67732f312e302f2220786d6c6e733a7264663d22687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e73232220786d6c6e733a783d2261646f62653a6e733a6d6574612f2220786d6c6e733a786d703d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f2220783a786d70746b3d2241646f626520584d5020436f726520352e362d63313430223e0d0a20203c7264663a5244463e0d0a202020200d0a202020203c7264663a4465736372697074696f6e207264663a61626f75743d2222206e73323a4578706f73757265323031323d222b302e353022206e73323a48617343726f703d2246616c7365223e0d0a2020202020203c6e73323a546f6e6543757276653e3c7264663a5365713e3c7264663a6c693e302c20303c2f7264663a6c693e3c7264663a6c693e3235352c203235353c2f7264663a6c693e3c2f7264663a5365713e3c2f6e73323a546f6e6543757276653e0d0a202020203c2f7264663a4465736372697074696f6e3e0d0a202020203c7264663a4465736372697074696f6e20786d703a526174696e673d22342220786d703a4c6162656c3d22526564262331303b6c696e65262330393b5461622026616d703b20266c743b782667743b202671756f743b712671756f743b22206c756d613a53657474696e67733d227b2671756f743b6578706f737572652671756f743b3a20302e352c202671756f743b66696c6d5f6c6f6f6b2671756f743b3a202671756f743b506f72747261203430302671756f743b2c202671756f743b6e6f74652671756f743b3a202671756f743bed959ceab880205c2671756f743b71756f74655c2671756f743b20266c743b7461672667743b2026616d703b206d6f72652671756f743b7d22206c756d613a4d657461646174613d227b2671756f743b63617074696f6e2671756f743b3a202671756f743beb888820e298832671756f743b7d223e3c64633a7375626a6563743e3c7264663a4261673e3c7264663a6c693e736b793c2f7264663a6c693e3c7264663a6c693eed959ceab8803c2f7264663a6c693e3c7264663a6c693e53747261c39f652026616d703b20636f3c2f7264663a6c693e3c7264663a6c693e266c743b7461672667743b3c2f7264663a6c693e3c2f7264663a4261673e3c2f64633a7375626a6563743e3c6c723a68696572617263686963616c5375626a6563743e3c7264663a4261673e3c7264663a6c693e736b793c2f7264663a6c693e3c7264663a6c693eed959ceab8803c2f7264663a6c693e3c7264663a6c693e53747261c39f652026616d703b20636f3c2f7264663a6c693e3c7264663a6c693e266c743b7461672667743b3c2f7264663a6c693e3c2f7264663a4261673e3c2f6c723a68696572617263686963616c5375626a6563743e3c2f7264663a4465736372697074696f6e3e3c2f7264663a5244463e0d0a3c2f783a786d706d6574613e"
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": "3c3f786d6c2076657273696f6e3d27312e302720656e636f64696e673d277574662d38273f3e0d0a3c783a786d706d65746120786d6c6e733a64633d22687474703a2f2f7075726c2e6f72672f64632f656c656d656e74732f312e312f2220786d6c6e733a6c723d22687474703a2f2f6e732e61646f62652e636f6d2f6c69676874726f6f6d2f312e302f2220786d6c6e733a6c756d613d2268747470733a2f2f6c756d612e6c6f63616c2f6e732f312e302f2220786d6c6e733a7264663d22687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e73232220786d6c6e733a783d2261646f62653a6e733a6d6574612f2220786d6c6e733a786d703d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f223e3c6f746865723e6b6565702026616d703b206d653c2f6f746865723e3c7264663a5244463e3c7264663a4465736372697074696f6e20786d703a526174696e673d22302220786d703a4c6162656c3d2222206c756d613a53657474696e67733d227b7d22206c756d613a4d657461646174613d227b7d223e3c64633a7375626a6563743e3c7264663a426167202f3e3c2f64633a7375626a6563743e3c6c723a68696572617263686963616c5375626a6563743e3c7264663a426167202f3e3c2f6c723a68696572617263686963616c5375626a6563743e3c2f7264663a4465736372697074696f6e3e3c2f7264663a5244463e3c2f783a786d706d6574613e"
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": "3c3f786d6c2076657273696f6e3d27312e302720656e636f64696e673d277574662d38273f3e0d0a3c783a786d706d65746120786d6c6e733a64633d22687474703a2f2f7075726c2e6f72672f64632f656c656d656e74732f312e312f2220786d6c6e733a6c723d22687474703a2f2f6e732e61646f62652e636f6d2f6c69676874726f6f6d2f312e302f2220786d6c6e733a6c756d613d2268747470733a2f2f6c756d612e6c6f63616c2f6e732f312e302f2220786d6c6e733a7264663d22687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e73232220786d6c6e733a783d2261646f62653a6e733a6d6574612f2220786d6c6e733a786d703d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f223e3c7264663a5244463e3c7264663a4465736372697074696f6e20786d703a526174696e673d22342220786d703a4c6162656c3d22526564262331303b6c696e65262330393b5461622026616d703b20266c743b782667743b202671756f743b712671756f743b22206c756d613a53657474696e67733d227b2671756f743b6578706f737572652671756f743b3a20302e352c202671756f743b66696c6d5f6c6f6f6b2671756f743b3a202671756f743b506f72747261203430302671756f743b2c202671756f743b6e6f74652671756f743b3a202671756f743bed959ceab880205c2671756f743b71756f74655c2671756f743b20266c743b7461672667743b2026616d703b206d6f72652671756f743b7d22206c756d613a4d657461646174613d227b2671756f743b63617074696f6e2671756f743b3a202671756f743beb888820e298832671756f743b7d223e3c64633a7375626a6563743e3c7264663a4261673e3c7264663a6c693e736b793c2f7264663a6c693e3c7264663a6c693eed959ceab8803c2f7264663a6c693e3c7264663a6c693e53747261c39f652026616d703b20636f3c2f7264663a6c693e3c7264663a6c693e266c743b7461672667743b3c2f7264663a6c693e3c2f7264663a4261673e3c2f64633a7375626a6563743e3c6c723a68696572617263686963616c5375626a6563743e3c7264663a4261673e3c7264663a6c693e736b793c2f7264663a6c693e3c7264663a6c693eed959ceab8803c2f7264663a6c693e3c7264663a6c693e53747261c39f652026616d703b20636f3c2f7264663a6c693e3c7264663a6c693e266c743b7461672667743b3c2f7264663a6c693e3c2f7264663a4261673e3c2f6c723a68696572617263686963616c5375626a6563743e3c2f7264663a4465736372697074696f6e3e3c2f7264663a5244463e3c2f783a786d706d6574613e"
+  },
+  {
+   "err": {
+    "type": "ParseError",
+    "message": null
+   }
+  },
+  {
+   "ok": {
+    "rating": 5,
+    "label": "Red & \nBlue",
+    "settings": {
+     "exposure": 1.5,
+     "contrast": 0.0,
+     "highlights": 0.0,
+     "shadows": 0.0,
+     "whites": 0.0,
+     "blacks": 0.0,
+     "temperature": 0.0,
+     "tint": 0.0,
+     "saturation": 0.0,
+     "vibrance": 0.0,
+     "clarity": 0.0,
+     "sharpen": 0.0,
+     "vignette": 0.0,
+     "grain": 0.0,
+     "vignette_midpoint": 50.0,
+     "vignette_roundness": 0.0,
+     "vignette_feather": 50.0,
+     "vignette_highlights": 0.0,
+     "grain_size": 25.0,
+     "grain_roughness": 50.0,
+     "rotation": 0,
+     "straighten": 0.0,
+     "flip": false,
+     "crop": null,
+     "curve": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     "hsl": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "monochrome": false,
+     "video_color": null,
+     "video_time": 0.0,
+     "hdr": false,
+     "hdr_limit": 4.0,
+     "hdr_brightness": 0.0,
+     "sdr_exposure": 0.0,
+     "sdr_compression": 75.0,
+     "photo_filter": "warming85",
+     "photo_filter_enabled": false,
+     "photo_filter_density": 25.0,
+     "photo_filter_luminosity": true,
+     "tone_version": 1,
+     "detail_version": 3,
+     "rgb_curves": [
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ],
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ],
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ]
+     ],
+     "parametric": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "mixer_mode": "hsv",
+     "kelvin": 6500.0,
+     "wb_reference": 6500.0,
+     "kelvin_enabled": false,
+     "grading": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "grading_balance": 0.0,
+     "calibration": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ],
+     "point_colors": [],
+     "texture": 0.0,
+     "dehaze": 0.0,
+     "noise_luma": 0.0,
+     "noise_color": 0.0,
+     "sharpen_radius": 0.8,
+     "sharpen_detail": 50.0,
+     "sharpen_mask": 0.0,
+     "distortion": 0.0,
+     "distortion_k2": 0.0,
+     "distortion_k3": 0.0,
+     "lens_vignette": 0.0,
+     "ca_red": 0.0,
+     "ca_blue": 0.0,
+     "defringe": 0.0,
+     "perspective_v": 0.0,
+     "perspective_h": 0.0,
+     "aspect_scale": 0.0,
+     "shift_x": 0.0,
+     "shift_y": 0.0,
+     "transform_scale": 100.0,
+     "guides": null,
+     "lens_profile": "",
+     "camera_matrix": null,
+     "lensfun": null,
+     "lensfun_enabled": false,
+     "lensfun_distortion": true,
+     "lensfun_tca": true,
+     "lensfun_vignette": true,
+     "lensfun_scale": true,
+     "upright": null,
+     "upright_crop": true,
+     "masks": [],
+     "retouch": [],
+     "working_space": "sRGB",
+     "raw_mode": "legacy",
+     "raw_kelvin": 6500.0,
+     "raw_tint": 0.0,
+     "raw_neutral": null,
+     "dcp_profile": null,
+     "dcp_huesat": true,
+     "dcp_look": true,
+     "dcp_tone": true,
+     "dcp_exposure": true,
+     "negative": true,
+     "negative_base": null,
+     "negative_peak": null,
+     "negative_range": 6.5,
+     "negative_density": 0.0,
+     "film_look": "",
+     "film_strength": 100.0,
+     "tone_mapping": "classic",
+     "drt_contrast": 0.0,
+     "drt_toe": 0.0,
+     "drt_shoulder": 0.0,
+     "drt_white": 0.0,
+     "panels_off": []
+    },
+    "user_metadata": {
+     "caption": "눈"
+    },
+    "keywords": "a|b, c"
+   }
+  },
+  {
+   "ok": {
+    "rating": 0,
+    "label": "Second",
+    "keywords": "one, two"
+   }
+  },
+  {
+   "ok": {
+    "rating": 0,
+    "label": "Second",
+    "keywords": "one, two"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "invalid literal for int() with base 10: 'x'"
+   }
+  },
+  {
+   "err": {
+    "type": "DataError",
+    "message": "외부 정의가 포함된 XMP는 읽지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "DataError",
+    "message": "XMP 문서 구문을 읽지 못했습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "OSError",
+    "message": null
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "badrating.xmp": {
+    "size": 197,
+    "sha256": "2c52033339757a829b655cb5e4053136a4581563339456e98b53bdedf38d4a46"
+   },
+   "broken.xmp": {
+    "size": 54,
+    "sha256": "ba17fb058c2bb273a39b6cb558a40e6db5ccd09efad57e69afc4d64277f5d521"
+   },
+   "doctype.xmp": {
+    "size": 90,
+    "sha256": "3418b08c919641558eaa19abf6f94ccd097a1afd970e45bb7974f8f111ec325b"
+   },
+   "empty.xmp": {
+    "size": 531,
+    "sha256": "b55e0d321a2234b9bd6926a1536f99749c7edf17477ce762d306dba8e04263ed"
+   },
+   "foreign.xmp": {
+    "size": 1316,
+    "sha256": "30e444ee0796ec6c9a3b103851866db909e880ef11bcbe6b561927bf1be2c013"
+   },
+   "new.xmp": {
+    "size": 998,
+    "sha256": "6d93dc8074f9814d59eebc1902ec57cdec8fac34187608c8228708c5d6f5db29"
+   },
+   "nordf.xmp": {
+    "size": 559,
+    "sha256": "08e04498a71dd16f63eda97efb5e4d23191eb8e60d9fc2694972bc732f317d44"
+   },
+   "old.xmp": {
+    "size": 998,
+    "sha256": "6d93dc8074f9814d59eebc1902ec57cdec8fac34187608c8228708c5d6f5db29"
+   },
+   "read1.xmp": {
+    "size": 707,
+    "sha256": "636d0af05ee07147b4724cef6c3114cc22ba554abe909dabb25fecff8cfa7090"
+   },
+   "read2.xmp": {
+    "size": 382,
+    "sha256": "27ff92df66337ed4d301c4adfea173c2e221fb4024c6e1334dd36fea9545e841"
+   },
+   "utf16.xmp": {
+    "size": 766,
+    "sha256": "1239a0ce79b4d2c699d9e2c88c39cd8fea3865126e73e9d94b8f45aac14b8710"
+   }
+  },
+  "dirs": []
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

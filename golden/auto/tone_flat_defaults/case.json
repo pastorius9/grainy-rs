@@ -1,0 +1,10 @@
+{
+ "changed": {},
+ "removed": [],
+ "report": {
+  "message": "밝기 차이가 거의 없어 자동톤을 적용하지 않았습니다.",
+  "status": "flat"
+ },
+ "settings": {},
+ "source": "flat"
+}

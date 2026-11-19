@@ -1,0 +1,65 @@
+{
+ "height": 400,
+ "results": {
+  "horizon_roll": {
+   "error": null,
+   "value": [
+    0.9757478424775741,
+    0.4068402439167215
+   ]
+  },
+  "level": {
+   "error": null,
+   "value": [
+    1.0490591395418818,
+    1.0,
+    "lines-plumb-horizon-v3"
+   ]
+  },
+  "plumb_rolls": {
+   "error": null,
+   "value": [
+    {
+     "angle": 1.1223704366061895,
+     "both": true,
+     "centred": true,
+     "count": 6,
+     "heights": 2.995449337747782,
+     "score": 903.7137908347189,
+     "share": 1.0
+    }
+   ]
+  },
+  "roll": {
+   "error": null,
+   "value": [
+    1.1027290182680645,
+    1.0
+   ]
+  },
+  "vanishing_h": {
+   "error": {
+    "message": "원근을 계산할 기준선이 부족합니다.",
+    "type": "AlignmentError"
+   },
+   "value": null
+  },
+  "vanishing_v": {
+   "error": null,
+   "value": [
+    [
+     -0.020132402051431082,
+     0.9997888874508697,
+     0.004106935279773238
+    ],
+    6,
+    1.0
+   ]
+  },
+  "wide_roll": {
+   "error": null,
+   "value": null
+  }
+ },
+ "width": 600
+}

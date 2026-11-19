@@ -1,0 +1,1564 @@
+{
+ "nothing": [
+  [
+   "information",
+   "Lightroom 가져오기",
+   "저장된 가져오기 결과가 없습니다."
+  ]
+ ],
+ "recipe": [
+  [
+   "insert",
+   "Adobe_variablesTable",
+   {
+    "id_global": "fixture-0001",
+    "id_local": 1,
+    "name": "Adobe_storeProviderID",
+    "type": "string",
+    "value": "fixture-catalog-1"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryRootFolder",
+   {
+    "absolutePath": "C:\\Grainy Lightroom Test\\Photos",
+    "id_global": "fixture-0002",
+    "id_local": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFolder",
+   {
+    "id_global": "fixture-0003",
+    "id_local": 2,
+    "pathFromRoot": "",
+    "rootFolder": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFile",
+   {
+    "baseName": "photo0",
+    "extension": "jpg",
+    "folder": 2,
+    "id_global": "fixture-0004",
+    "id_local": 10
+   }
+  ],
+  [
+   "insert",
+   "Adobe_images",
+   {
+    "captureTime": "2026-09-20T11:22:33",
+    "colorLabels": "Red",
+    "id_global": "fixture-0005",
+    "id_local": 100,
+    "pick": 1,
+    "rating": 4,
+    "rootFile": 10
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFile",
+   {
+    "baseName": "photo1",
+    "extension": "jpg",
+    "folder": 2,
+    "id_global": "fixture-0006",
+    "id_local": 11
+   }
+  ],
+  [
+   "insert",
+   "Adobe_images",
+   {
+    "captureTime": "2026-09-20T11:22:33",
+    "colorLabels": "Red",
+    "id_global": "fixture-0007",
+    "id_local": 101,
+    "pick": 0,
+    "rating": 3,
+    "rootFile": 11
+   }
+  ],
+  [
+   "insert",
+   "Adobe_images",
+   {
+    "copyName": "흑백 대안",
+    "id_global": "fixture-0008",
+    "id_local": 99,
+    "masterImage": 100,
+    "pick": -1,
+    "rating": 2,
+    "rootFile": 10
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryKeyword",
+   {
+    "id_global": "fixture-0009",
+    "id_local": 1,
+    "name": "여행"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryKeyword",
+   {
+    "id_global": "fixture-0010",
+    "id_local": 2,
+    "name": "서울",
+    "parent": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryKeywordImage",
+   {
+    "id_local": 1,
+    "image": 100,
+    "tag": 2
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryKeywordImage",
+   {
+    "id_local": 2,
+    "image": 99,
+    "tag": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryIPTC",
+   {
+    "caption": "사진 설명",
+    "copyright": "저작권",
+    "id_local": 1,
+    "image": 100
+   }
+  ],
+  [
+   "insert",
+   "AgInternedIptcCreator",
+   {
+    "id_local": 1,
+    "value": "촬영자"
+   }
+  ],
+  [
+   "insert",
+   "AgHarvestedIptcMetadata",
+   {
+    "creatorRef": 1,
+    "id_local": 1,
+    "image": 100
+   }
+  ],
+  [
+   "insert",
+   "AgHarvestedExifMetadata",
+   {
+    "gpsLatitude": 0.0,
+    "gpsLongitude": 127.0,
+    "hasGPS": 1,
+    "id_local": 1,
+    "image": 100
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "creationId": "com.adobe.ag.library.group",
+    "id_local": 1,
+    "name": "여행 모음"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "creationId": "com.adobe.ag.library.collection",
+    "id_local": 2,
+    "name": "서울",
+    "parent": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "creationId": "com.adobe.ag.library.smart_collection",
+    "id_local": 3,
+    "name": "별 다섯",
+    "parent": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "id_local": 4,
+    "name": "quick collection",
+    "systemOnly": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollectionImage",
+   {
+    "collection": 2,
+    "id_local": 1,
+    "image": 99
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollectionContent",
+   {
+    "collection": 3,
+    "content": "s = { { criteria = \"rating\", operation = \">=\", value = 5 }, combine = \"intersect\" }",
+    "id_local": 1,
+    "owningModule": "ag.library.smart_collection"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFolderStack",
+   {
+    "id_global": "fixture-0011",
+    "id_local": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFolderStackImage",
+   {
+    "id_local": 1,
+    "image": 100,
+    "position": 1,
+    "stack": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFolderStackImage",
+   {
+    "id_local": 2,
+    "image": 101,
+    "position": 2,
+    "stack": 1
+   }
+  ],
+  [
+   "insert",
+   "Adobe_imageDevelopSettings",
+   {
+    "id_local": 1,
+    "image": 100,
+    "text": "s = { Exposure2012 = 1.25 }"
+   }
+  ],
+  [
+   "insert",
+   "Adobe_libraryImageDevelopHistoryStep",
+   {
+    "id_global": "fixture-0012",
+    "id_local": 1,
+    "image": 100,
+    "name": "Exposure",
+    "text": "never_execute()"
+   }
+  ],
+  [
+   "insert",
+   "Adobe_libraryImageDevelopSnapshot",
+   {
+    "id_global": "fixture-0013",
+    "id_local": 1,
+    "image": 99,
+    "name": "대안",
+    "text": "snapshot source text"
+   }
+  ],
+  [
+   "sql",
+   "DELETE FROM Adobe_libraryImageDevelopHistoryStep",
+   []
+  ],
+  [
+   "sql",
+   "UPDATE Adobe_imageDevelopSettings SET text=?",
+   [
+    "s={Exposure2012=1.25,Blacks2012=-20,CameraProfile=\"Adobe Color\"}"
+   ]
+  ],
+  [
+   "insert",
+   "Adobe_libraryImageDevelopHistoryStep",
+   {
+    "dateCreated": 100,
+    "id_global": "fixture-0014",
+    "id_local": 10,
+    "image": 100,
+    "name": "노출 0",
+    "text": "s={Exposure2012=0,Blacks2012=-20,CameraProfile=\"Adobe Color\"}"
+   }
+  ],
+  [
+   "insert",
+   "Adobe_libraryImageDevelopHistoryStep",
+   {
+    "dateCreated": 101,
+    "id_global": "fixture-0015",
+    "id_local": 11,
+    "image": 100,
+    "name": "노출 0.5",
+    "text": "s={Exposure2012=0.5,Blacks2012=-20,CameraProfile=\"Adobe Color\"}"
+   }
+  ],
+  [
+   "insert",
+   "Adobe_libraryImageDevelopHistoryStep",
+   {
+    "dateCreated": 102,
+    "id_global": "fixture-0016",
+    "id_local": 12,
+    "image": 100,
+    "name": "노출 1.25",
+    "text": "s={Exposure2012=1.25,Blacks2012=-20,CameraProfile=\"Adobe Color\"}"
+   }
+  ],
+  [
+   "insert",
+   "Adobe_libraryImageDevelopHistoryStep",
+   {
+    "dateCreated": 50.5,
+    "id_global": "fixture-0017",
+    "id_local": 20,
+    "image": 101,
+    "text": "s={Contrast2012=30}"
+   }
+  ],
+  [
+   "sql",
+   "UPDATE Adobe_libraryImageDevelopSnapshot SET text=?",
+   [
+    "s={Exposure2012=-.25,ConvertToGrayscale=true}"
+   ]
+  ],
+  [
+   "insert",
+   "Adobe_libraryImageDevelopSnapshot",
+   {
+    "id_global": "fixture-0018",
+    "id_local": 2,
+    "image": 100,
+    "name": "이미 반영",
+    "text": "s={AlreadyApplied=true}"
+   }
+  ],
+  [
+   "insert",
+   "Adobe_imageDevelopSettings",
+   {
+    "id_local": 2,
+    "image": 101,
+    "text": "s={Saturation=-100,Vibrance=20}"
+   }
+  ]
+ ],
+ "refusal": "진행 중인 사진 처리 작업이 끝난 뒤 가져오기를 시작하세요.",
+ "report": [
+  [
+   "information",
+   "최근 Lightroom 가져오기 결과",
+   "추가 3장 · 이미 가져온 사진 0장 · 제외 0장\n추가한 컬렉션 4개 · 동적 스마트 컬렉션 1개\n기존 Luma 사진의 보정과 분류는 유지했습니다.\n사진 원본과 Lightroom 카탈로그는 수정하지 않았습니다.\n\n확인이 필요한 항목:\n• Adobe 현상값 보관 (Luma 보정으로 변환하지 않음): 2개\n• Adobe 보정 이력 보관 (실행 취소 이력으로 변환하지 않음): 4개\n• Adobe 스냅샷 보관 (Luma 스냅샷으로 변환하지 않음): 2개\n\n안전 백업: <ROOT>\\flow\\luma\\backups\\before-lightroom-00000000000000000000000000000002.sqlite"
+  ]
+ ],
+ "stamp": "2026-11-19T01:02:03.456789+00:00",
+ "steps": [
+  {
+   "answer": {
+    "convert": false,
+    "import": false
+   },
+   "finished": true,
+   "last": null,
+   "reviews": [
+    {
+     "check": "지원하는 보정값·이력·스냅샷도 변환 (Adobe와 결과가 다를 수 있음)",
+     "checked": false,
+     "default_no": true,
+     "label": "Lightroom 카탈로그 확인 중…",
+     "no": "취소",
+     "note": "사진과 분류를 가져옵니다. 기존 Luma 사진은 별도 사본으로 보존합니다.\n지원하는 스마트 규칙을 연결하고, 보정값·이력 변환 여부를 다음 화면에서 선택합니다.",
+     "running": true,
+     "text": "사진과 가상 사본 3개를 확인했습니다.\n\n별점·선택 표시·색 라벨·계층 키워드·IPTC·컬렉션과 폴더 스택을 가져옵니다.\n기존 Luma 보정과 분류를 덮어쓰지 않으며, 변경된 Lightroom 기록은 새 사본으로 가져옵니다.\n\n지원하는 스마트 컬렉션은 사진의 현재 분류·메타데이터로 검색합니다. 지원하지 않는 조건이 포함되면 전체 규칙을 보관하고 일반 컬렉션으로 가져옵니다.\n\n아래 선택을 켜면 지원하는 보정값·이력·스냅샷도 변환합니다. Luma와 Adobe의 현상 방식이 달라 같은 모습은 보장되지 않습니다. 변환하지 못한 항목은 결과에 표시하고 원문을 보관합니다.\n\n누락된 원본은 참조 경로로 등록됩니다. 가져오기를 진행할까요?",
+     "title": "Lightroom 가져오기 범위",
+     "window": "Lightroom 가져오기",
+     "yes": "가져오기"
+    }
+   ],
+   "running": false,
+   "shown": [],
+   "step": "decline",
+   "table_names": [
+    "browser_dirty",
+    "browser_index",
+    "collection_members",
+    "collections",
+    "dust_entries",
+    "dust_sessions",
+    "folder_roots",
+    "history",
+    "photos",
+    "preferences",
+    "presets",
+    "preview_state",
+    "profile_assets",
+    "snapshots"
+   ],
+   "tables": {
+    "browser_dirty": [],
+    "browser_index": [],
+    "collection_members": [],
+    "collections": [],
+    "dust_entries": [],
+    "dust_sessions": [],
+    "folder_roots": [],
+    "history": [],
+    "photos": [],
+    "preferences": [],
+    "presets": [],
+    "preview_state": [],
+    "profile_assets": [],
+    "snapshots": []
+   },
+   "timer": true
+  },
+  {
+   "answer": {
+    "cancel": true,
+    "convert": true,
+    "import": true
+   },
+   "finished": true,
+   "last": null,
+   "reviews": [
+    {
+     "check": "지원하는 보정값·이력·스냅샷도 변환 (Adobe와 결과가 다를 수 있음)",
+     "checked": false,
+     "default_no": true,
+     "label": "Lightroom 카탈로그 확인 중…",
+     "no": "취소",
+     "note": "사진과 분류를 가져옵니다. 기존 Luma 사진은 별도 사본으로 보존합니다.\n지원하는 스마트 규칙을 연결하고, 보정값·이력 변환 여부를 다음 화면에서 선택합니다.",
+     "running": true,
+     "text": "사진과 가상 사본 3개를 확인했습니다.\n\n별점·선택 표시·색 라벨·계층 키워드·IPTC·컬렉션과 폴더 스택을 가져옵니다.\n기존 Luma 보정과 분류를 덮어쓰지 않으며, 변경된 Lightroom 기록은 새 사본으로 가져옵니다.\n\n지원하는 스마트 컬렉션은 사진의 현재 분류·메타데이터로 검색합니다. 지원하지 않는 조건이 포함되면 전체 규칙을 보관하고 일반 컬렉션으로 가져옵니다.\n\n아래 선택을 켜면 지원하는 보정값·이력·스냅샷도 변환합니다. Luma와 Adobe의 현상 방식이 달라 같은 모습은 보장되지 않습니다. 변환하지 못한 항목은 결과에 표시하고 원문을 보관합니다.\n\n누락된 원본은 참조 경로로 등록됩니다. 가져오기를 진행할까요?",
+     "title": "Lightroom 가져오기 범위",
+     "window": "Lightroom 가져오기",
+     "yes": "가져오기"
+    }
+   ],
+   "running": false,
+   "shown": [],
+   "step": "cancel in review",
+   "table_names": [
+    "browser_dirty",
+    "browser_index",
+    "collection_members",
+    "collections",
+    "dust_entries",
+    "dust_sessions",
+    "folder_roots",
+    "history",
+    "photos",
+    "preferences",
+    "presets",
+    "preview_state",
+    "profile_assets",
+    "snapshots"
+   ],
+   "tables": {},
+   "timer": true
+  },
+  {
+   "answer": {
+    "convert": true,
+    "import": true
+   },
+   "finished": true,
+   "last": {
+    "backup": "<ROOT>\\flow\\luma\\backups\\before-lightroom-00000000000000000000000000000001.sqlite",
+    "cancelled": false,
+    "collection_root": 1,
+    "collections": 4,
+    "convert_edits": true,
+    "converted_history": 4,
+    "converted_photos": 2,
+    "converted_smart": 1,
+    "converted_snapshots": 1,
+    "copies": 1,
+    "imported": 3,
+    "reused": 0,
+    "run_id": "00000000000000000000000000000001",
+    "skipped": 0,
+    "source_counts": {
+     "Adobe_imageDevelopSettings": 2,
+     "Adobe_imageProofSettings": 0,
+     "Adobe_images": 3,
+     "Adobe_libraryImageDevelopHistoryStep": 4,
+     "Adobe_libraryImageDevelopSnapshot": 2,
+     "AgHarvestedExifMetadata": 1,
+     "AgHarvestedIptcMetadata": 1,
+     "AgInternedExifCameraModel": 0,
+     "AgInternedExifCameraSN": 0,
+     "AgInternedExifLens": 0,
+     "AgInternedIptcCity": 0,
+     "AgInternedIptcCountry": 0,
+     "AgInternedIptcCreator": 1,
+     "AgInternedIptcJobIdentifier": 0,
+     "AgInternedIptcLocation": 0,
+     "AgInternedIptcState": 0,
+     "AgLibraryCollection": 4,
+     "AgLibraryCollectionContent": 1,
+     "AgLibraryCollectionImage": 1,
+     "AgLibraryCollectionStack": 0,
+     "AgLibraryCollectionStackImage": 0,
+     "AgLibraryFile": 2,
+     "AgLibraryFolder": 1,
+     "AgLibraryFolderStack": 1,
+     "AgLibraryFolderStackImage": 2,
+     "AgLibraryIPTC": 1,
+     "AgLibraryKeyword": 2,
+     "AgLibraryKeywordImage": 2,
+     "AgLibraryKeywordSynonym": 0,
+     "AgLibraryRootFolder": 1
+    },
+    "source_key": "catalog:fixture-catalog-1",
+    "source_path": "<ROOT>\\flow\\fixture.lrcat",
+    "warnings": {
+     "develop_empty": 1,
+     "develop_field:AlreadyApplied": 1,
+     "develop_field:CameraProfile": 4
+    }
+   },
+   "reviews": [
+    {
+     "check": "지원하는 보정값·이력·스냅샷도 변환 (Adobe와 결과가 다를 수 있음)",
+     "checked": false,
+     "default_no": true,
+     "label": "Lightroom 카탈로그 확인 중…",
+     "no": "취소",
+     "note": "사진과 분류를 가져옵니다. 기존 Luma 사진은 별도 사본으로 보존합니다.\n지원하는 스마트 규칙을 연결하고, 보정값·이력 변환 여부를 다음 화면에서 선택합니다.",
+     "running": true,
+     "text": "사진과 가상 사본 3개를 확인했습니다.\n\n별점·선택 표시·색 라벨·계층 키워드·IPTC·컬렉션과 폴더 스택을 가져옵니다.\n기존 Luma 보정과 분류를 덮어쓰지 않으며, 변경된 Lightroom 기록은 새 사본으로 가져옵니다.\n\n지원하는 스마트 컬렉션은 사진의 현재 분류·메타데이터로 검색합니다. 지원하지 않는 조건이 포함되면 전체 규칙을 보관하고 일반 컬렉션으로 가져옵니다.\n\n아래 선택을 켜면 지원하는 보정값·이력·스냅샷도 변환합니다. Luma와 Adobe의 현상 방식이 달라 같은 모습은 보장되지 않습니다. 변환하지 못한 항목은 결과에 표시하고 원문을 보관합니다.\n\n누락된 원본은 참조 경로로 등록됩니다. 가져오기를 진행할까요?",
+     "title": "Lightroom 가져오기 범위",
+     "window": "Lightroom 가져오기",
+     "yes": "가져오기"
+    }
+   ],
+   "running": false,
+   "shown": [
+    [
+     "refresh_collections"
+    ],
+    [
+     "refresh_lists"
+    ],
+    [
+     "information",
+     "Lightroom 가져오기 결과",
+     "추가 3장 · 이미 가져온 사진 0장 · 제외 0장\n추가한 컬렉션 4개 · 동적 스마트 컬렉션 1개\n기존 Luma 사진의 보정과 분류는 유지했습니다.\n사진 원본과 Lightroom 카탈로그는 수정하지 않았습니다.\n보정 변환 2장 · 이력 4개 · 스냅샷 1개\n보정값은 Luma의 현상 방식으로 적용하므로 Adobe 결과와 색·명암·효과 강도가 다를 수 있습니다.\n\n확인이 필요한 항목:\n• 미변환 보정: CameraProfile: 4개\n• 미변환 보정: AlreadyApplied: 1개\n• 변환 가능한 보정 항목이 없는 상태 (원문만 보관): 1개\n\n안전 백업: <ROOT>\\flow\\luma\\backups\\before-lightroom-00000000000000000000000000000001.sqlite"
+    ]
+   ],
+   "step": "import",
+   "table_names": [
+    "browser_dirty",
+    "browser_index",
+    "collection_members",
+    "collections",
+    "dust_entries",
+    "dust_sessions",
+    "folder_roots",
+    "history",
+    "lightroom_archive",
+    "lightroom_import_items",
+    "lightroom_import_runs",
+    "lightroom_import_sets",
+    "photos",
+    "preferences",
+    "presets",
+    "preview_state",
+    "profile_assets",
+    "snapshots"
+   ],
+   "tables": {
+    "browser_dirty": [
+     {
+      "id": 1
+     },
+     {
+      "id": 2
+     },
+     {
+      "id": 3
+     }
+    ],
+    "collection_members": [
+     {
+      "collection_id": 1,
+      "photo_id": 1
+     },
+     {
+      "collection_id": 1,
+      "photo_id": 2
+     },
+     {
+      "collection_id": 1,
+      "photo_id": 3
+     },
+     {
+      "collection_id": 3,
+      "photo_id": 3
+     }
+    ],
+    "collections": [
+     {
+      "id": 1,
+      "name": "Lightroom · fixture · 11/19 01:02",
+      "parent_id": null,
+      "rules": null
+     },
+     {
+      "id": 2,
+      "name": "여행 모음",
+      "parent_id": 1,
+      "rules": null
+     },
+     {
+      "id": 3,
+      "name": "서울",
+      "parent_id": 2,
+      "rules": null
+     },
+     {
+      "id": 4,
+      "name": "별 다섯",
+      "parent_id": 2,
+      "rules": "{\"_adobe_smart\":{\"children\":[{\"criteria\":\"rating\",\"operation\":\">=\",\"value\":5}],\"combine\":\"intersect\"}}"
+     }
+    ],
+    "folder_roots": [
+     {
+      "path": "C:\\Grainy Lightroom Test\\Photos"
+     }
+    ],
+    "history": [
+     {
+      "created": "2001-01-01T00:00:50.500000+00:00",
+      "edits": {
+       "head": "{\"exposure\": 0.0, \"contrast\": 30.0, \"highlights\": 0.0, \"shadows\": 0.0, \"whites\":",
+       "sha256": "c355a0ed5cc50df9f15d0a52b84e236088f49c67f98e2668d6d23c6362cb9d23"
+      },
+      "id": 4,
+      "label": "Lightroom 상태 · 이름 없는 상태",
+      "photo_id": 2
+     },
+     {
+      "created": "2001-01-01T00:01:40+00:00",
+      "edits": {
+       "head": "{\"exposure\": 0.0, \"contrast\": 0.0, \"highlights\": 0.0, \"shadows\": 0.0, \"whites\": ",
+       "sha256": "359b4d1171f2b06a4ae20957af5386fad6eda1ce47b3dd2a92e5b9a7a01b6eb5"
+      },
+      "id": 1,
+      "label": "Lightroom 상태 · 노출 0 · 일부 항목 변환",
+      "photo_id": 1
+     },
+     {
+      "created": "2001-01-01T00:01:41+00:00",
+      "edits": {
+       "head": "{\"exposure\": 0.5, \"contrast\": 0.0, \"highlights\": 0.0, \"shadows\": 0.0, \"whites\": ",
+       "sha256": "73e8cdb3629aaf425c06f08d71ba21bbf55f59a385534775df759c55759a6701"
+      },
+      "id": 2,
+      "label": "Lightroom 상태 · 노출 0.5 · 일부 항목 변환",
+      "photo_id": 1
+     },
+     {
+      "created": "2001-01-01T00:01:42+00:00",
+      "edits": {
+       "head": "{\"exposure\": 1.25, \"contrast\": 0.0, \"highlights\": 0.0, \"shadows\": 0.0, \"whites\":",
+       "sha256": "f89ebb6cb27d877b2b09a57465845ba740ffaddcc0ef3162497606e9e93b8876"
+      },
+      "id": 3,
+      "label": "Lightroom 상태 · 노출 1.25 · 일부 항목 변환",
+      "photo_id": 1
+     }
+    ],
+    "lightroom_archive": [
+     {
+      "digest": "02fbcaf18717b10fa588cae79ea68a93b9e6fcf75ea2ea1ceacc3e01240b0636",
+      "kind": "AgLibraryKeywordImage",
+      "payload": "{\"id_local\":2,\"image\":99,\"tag\":1}",
+      "source_id": "2",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "0c64abe401ef087d200b1ebe4fd2ac35ee34a6a9f149aeb1ade281d02d5d413d",
+      "kind": "AgLibraryCollectionContent",
+      "payload": {
+       "head": "{\"collection\":3,\"content\":\"s = { { criteria = \\\"rating\\\", operation = \\\">=\\\", va",
+       "sha256": "0c64abe401ef087d200b1ebe4fd2ac35ee34a6a9f149aeb1ade281d02d5d413d"
+      },
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "0cc8085ebb97640cd62122a3142058025b8588076935e4cca498b3b3cd6ad4e8",
+      "kind": "AgLibraryFile",
+      "payload": {
+       "head": "{\"baseName\":\"photo0\",\"errorMessage\":null,\"errorTime\":null,\"extension\":\"jpg\",\"ext",
+       "sha256": "0cc8085ebb97640cd62122a3142058025b8588076935e4cca498b3b3cd6ad4e8"
+      },
+      "source_id": "10",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "140a822236e558f2bd53b9e55dd74a23b8888caceb534da0f3532fd37edc576c",
+      "kind": "Adobe_libraryImageDevelopSnapshot",
+      "payload": {
+       "head": "{\"additionalInfo\":null,\"digest\":null,\"hasBigData\":0,\"hasDevelopAdjustments\":null",
+       "sha256": "140a822236e558f2bd53b9e55dd74a23b8888caceb534da0f3532fd37edc576c"
+      },
+      "source_id": "2",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "1835a9c8a281c8f0f9c2eabafee5920b868f11f43750aec656590e2a4ab18277",
+      "kind": "Adobe_images",
+      "payload": {
+       "head": "{\"aspectRatioCache\":-1,\"bitDepth\":0,\"captureTime\":null,\"colorChannels\":0,\"colorL",
+       "sha256": "1835a9c8a281c8f0f9c2eabafee5920b868f11f43750aec656590e2a4ab18277"
+      },
+      "source_id": "99",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "2c9fe5fcffd530857d0a64da3b3a8a6816d380a58a4dc05df8a86fa6691360f2",
+      "kind": "AgLibraryKeywordImage",
+      "payload": "{\"id_local\":1,\"image\":100,\"tag\":2}",
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "316802dcaf028902ae4d18c46c007ca269475cc15ef7d05b9e4f10ef6709dd45",
+      "kind": "AgHarvestedExifMetadata",
+      "payload": {
+       "head": "{\"aperture\":null,\"cameraModelRef\":null,\"cameraSNRef\":null,\"dateDay\":null,\"dateMo",
+       "sha256": "316802dcaf028902ae4d18c46c007ca269475cc15ef7d05b9e4f10ef6709dd45"
+      },
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "329c9812613e1d7b3709bdc2aea3a38ad6d129e3bb477b8696910e39c46a6c6b",
+      "kind": "AgLibraryFolder",
+      "payload": "{\"id_global\":\"fixture-0003\",\"id_local\":2,\"parentId\":null,\"pathFromRoot\":\"\",\"rootFolder\":1,\"visibility\":null}",
+      "source_id": "2",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "34da8ded61b270e6de6d912117e86c8f109aff1354d917d5ff988f99e0fd2731",
+      "kind": "AgLibraryRootFolder",
+      "payload": "{\"absolutePath\":\"C:\\\\Grainy Lightroom Test\\\\Photos\",\"id_global\":\"fixture-0002\",\"id_local\":1,\"name\":\"\",\"relativePathFromCatalog\":null}",
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "368b2e3d235bafac021ab3c29572237f2d1666b9988384127f2b2a87a02e3921",
+      "kind": "AgHarvestedIptcMetadata",
+      "payload": {
+       "head": "{\"cityRef\":null,\"copyrightState\":null,\"countryRef\":null,\"creatorRef\":1,\"id_local",
+       "sha256": "368b2e3d235bafac021ab3c29572237f2d1666b9988384127f2b2a87a02e3921"
+      },
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "40d2fb6ddb7d973ea8a280d1e34c64cfe00ccfea685dc479e5a761edec749507",
+      "kind": "AgLibraryCollection",
+      "payload": "{\"creationId\":\"com.adobe.ag.library.group\",\"genealogy\":\"\",\"id_local\":1,\"imageCount\":null,\"name\":\"여행 모음\",\"parent\":null,\"systemOnly\":\"\"}",
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "4819cce22f8402e3657098e596e3a631955403e4258779e03d5b9dbf9390e8e1",
+      "kind": "AgLibraryCollection",
+      "payload": "{\"creationId\":\"\",\"genealogy\":\"\",\"id_local\":4,\"imageCount\":null,\"name\":\"quick collection\",\"parent\":null,\"systemOnly\":1}",
+      "source_id": "4",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "49e83015ef7811164db6a58408b4c640c9424e85351a093317b51b0bf1ddfe21",
+      "kind": "Adobe_libraryImageDevelopHistoryStep",
+      "payload": {
+       "head": "{\"dateCreated\":102,\"digest\":null,\"hasBigData\":0,\"hasDevelopAdjustments\":null,\"id",
+       "sha256": "49e83015ef7811164db6a58408b4c640c9424e85351a093317b51b0bf1ddfe21"
+      },
+      "source_id": "12",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "4dacb364205d00e658613f492cb77838bd69fe25c67fa30349036e7e9ad43935",
+      "kind": "AgInternedIptcCreator",
+      "payload": "{\"id_local\":1,\"searchIndex\":null,\"value\":\"촬영자\"}",
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "57de9e57aa02bf6106f79ef1481f95b062302d181063e7612981623ec63da2db",
+      "kind": "Adobe_images",
+      "payload": {
+       "head": "{\"aspectRatioCache\":-1,\"bitDepth\":0,\"captureTime\":\"2026-09-20T11:22:33\",\"colorCh",
+       "sha256": "57de9e57aa02bf6106f79ef1481f95b062302d181063e7612981623ec63da2db"
+      },
+      "source_id": "101",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "631216962cf55da4d9d7f716422c83bed62a5e50852ee01a7ae13d88eaf5817c",
+      "kind": "AgLibraryKeyword",
+      "payload": {
+       "head": "{\"dateCreated\":\"\",\"genealogy\":\"\",\"id_global\":\"fixture-0010\",\"id_local\":2,\"imageC",
+       "sha256": "631216962cf55da4d9d7f716422c83bed62a5e50852ee01a7ae13d88eaf5817c"
+      },
+      "source_id": "2",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "77db794a8d75498174cf17569c1e3bd8e352f1e3e28782139202914610352280",
+      "kind": "AgLibraryCollection",
+      "payload": "{\"creationId\":\"com.adobe.ag.library.collection\",\"genealogy\":\"\",\"id_local\":2,\"imageCount\":null,\"name\":\"서울\",\"parent\":1,\"systemOnly\":\"\"}",
+      "source_id": "2",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "78d4f56b948483f1e546f3adb6f0f5732d3e4941823a009dc658135cac7f37e2",
+      "kind": "Adobe_images",
+      "payload": {
+       "head": "{\"aspectRatioCache\":-1,\"bitDepth\":0,\"captureTime\":\"2026-09-20T11:22:33\",\"colorCh",
+       "sha256": "78d4f56b948483f1e546f3adb6f0f5732d3e4941823a009dc658135cac7f37e2"
+      },
+      "source_id": "100",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "7b96dac227e899ed6c5f5a88f95bb68cbeaa72002de37ba8276c5347867e7313",
+      "kind": "Adobe_imageDevelopSettings",
+      "payload": {
+       "head": "{\"aiEditStatus\":null,\"aiUpdateRequiredStatus\":null,\"allowFastRender\":null,\"befor",
+       "sha256": "7b96dac227e899ed6c5f5a88f95bb68cbeaa72002de37ba8276c5347867e7313"
+      },
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "7cb25bdd47b847165ceb6e2c1162594051857b7a809d3d671f7e6e9d56056ca6",
+      "kind": "AgLibraryCollection",
+      "payload": "{\"creationId\":\"com.adobe.ag.library.smart_collection\",\"genealogy\":\"\",\"id_local\":3,\"imageCount\":null,\"name\":\"별 다섯\",\"parent\":1,\"systemOnly\":\"\"}",
+      "source_id": "3",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "80b53b8a80c6d65327faea89111b54ce7e6326ee561cdc4138885cfb62a9b952",
+      "kind": "AgLibraryCollectionImage",
+      "payload": "{\"collection\":2,\"id_local\":1,\"image\":99,\"pick\":0,\"positionInCollection\":null}",
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "9e25b917d42dfe58b9d126c59912565690fa3c843fa19772d6d5c1ba8aac1f7c",
+      "kind": "Adobe_imageDevelopSettings",
+      "payload": {
+       "head": "{\"aiEditStatus\":null,\"aiUpdateRequiredStatus\":null,\"allowFastRender\":null,\"befor",
+       "sha256": "9e25b917d42dfe58b9d126c59912565690fa3c843fa19772d6d5c1ba8aac1f7c"
+      },
+      "source_id": "2",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "9ebd1d08139dcea052ebc8ad1074f0a5b42f05983acb66967aa61183847d9598",
+      "kind": "AgLibraryKeyword",
+      "payload": {
+       "head": "{\"dateCreated\":\"\",\"genealogy\":\"\",\"id_global\":\"fixture-0009\",\"id_local\":1,\"imageC",
+       "sha256": "9ebd1d08139dcea052ebc8ad1074f0a5b42f05983acb66967aa61183847d9598"
+      },
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "a852ee877890b559a73b7d27b98c7932260b51204c86b300ec0b2683ac42862d",
+      "kind": "Adobe_libraryImageDevelopHistoryStep",
+      "payload": {
+       "head": "{\"dateCreated\":101,\"digest\":null,\"hasBigData\":0,\"hasDevelopAdjustments\":null,\"id",
+       "sha256": "a852ee877890b559a73b7d27b98c7932260b51204c86b300ec0b2683ac42862d"
+      },
+      "source_id": "11",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "b39a3c34ca9ef44ffb470a1cccbd75f07d159b342dccc918263475dfbaae592c",
+      "kind": "AgLibraryIPTC",
+      "payload": "{\"altTextAccessibility\":null,\"caption\":\"사진 설명\",\"copyright\":\"저작권\",\"extDescrAccessibility\":null,\"id_local\":1,\"image\":100}",
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "b8fe26483914243f32841971f9709980514f1b976119f502dffa452112f0be3f",
+      "kind": "AgLibraryFile",
+      "payload": {
+       "head": "{\"baseName\":\"photo1\",\"errorMessage\":null,\"errorTime\":null,\"extension\":\"jpg\",\"ext",
+       "sha256": "b8fe26483914243f32841971f9709980514f1b976119f502dffa452112f0be3f"
+      },
+      "source_id": "11",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "c93ab0b26cc96075f61a26052de4f9d201316994bdad0c2f705b3cb8ce93e078",
+      "kind": "AgLibraryFolderStackImage",
+      "payload": "{\"collapsed\":0,\"id_local\":2,\"image\":101,\"position\":2,\"stack\":1}",
+      "source_id": "2",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "da2f8f15214d0defe1a2a8d48defd75ba73a3eb7f62c5a371ce0c4f62a73c6d9",
+      "kind": "AgLibraryFolderStack",
+      "payload": "{\"collapsed\":0,\"id_global\":\"fixture-0011\",\"id_local\":1,\"text\":\"\"}",
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "e803eaf677ef5d180730eb00cc22a8a9bfec37949a49516eb605b75b33fc8a90",
+      "kind": "AgLibraryFolderStackImage",
+      "payload": "{\"collapsed\":0,\"id_local\":1,\"image\":100,\"position\":1,\"stack\":1}",
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "eb5d8144c33db723ca2159a278fd142dbda58eda4463a3f61a2f774e2ad49e36",
+      "kind": "Adobe_libraryImageDevelopSnapshot",
+      "payload": {
+       "head": "{\"additionalInfo\":null,\"digest\":null,\"hasBigData\":0,\"hasDevelopAdjustments\":null",
+       "sha256": "eb5d8144c33db723ca2159a278fd142dbda58eda4463a3f61a2f774e2ad49e36"
+      },
+      "source_id": "1",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "ebe6adac8a16f5bac1bbc7f417d32a2f60e0f61485faeb972c3c4f22200e502a",
+      "kind": "Adobe_libraryImageDevelopHistoryStep",
+      "payload": {
+       "head": "{\"dateCreated\":50.5,\"digest\":null,\"hasBigData\":0,\"hasDevelopAdjustments\":null,\"i",
+       "sha256": "ebe6adac8a16f5bac1bbc7f417d32a2f60e0f61485faeb972c3c4f22200e502a"
+      },
+      "source_id": "20",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "f3f1c36712de37491afe0875bf93f25dd53310be7ed36ee76ae7d35c8c8fb153",
+      "kind": "Adobe_libraryImageDevelopHistoryStep",
+      "payload": {
+       "head": "{\"dateCreated\":100,\"digest\":null,\"hasBigData\":0,\"hasDevelopAdjustments\":null,\"id",
+       "sha256": "f3f1c36712de37491afe0875bf93f25dd53310be7ed36ee76ae7d35c8c8fb153"
+      },
+      "source_id": "10",
+      "source_key": "catalog:fixture-catalog-1"
+     }
+    ],
+    "lightroom_import_items": [
+     {
+      "digest": "94c98f5209009bdb89df3170009b93d2fcfdb5a0e1beda4e3bf46d7b2b933b35",
+      "photo_id": 1,
+      "source_id": "100",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "b8766e1956144faa1e160013083acf405869e34080723a5c9f39103cadd5532b",
+      "photo_id": 3,
+      "source_id": "99",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "c3c4c439383b408dc84c9b95abccd65ee2daf4446fb90e80ad41cb5ecc7e5c52",
+      "photo_id": 2,
+      "source_id": "101",
+      "source_key": "catalog:fixture-catalog-1"
+     }
+    ],
+    "lightroom_import_runs": [
+     {
+      "created": "2026-11-19T01:02:08.456789+00:00",
+      "id": "00000000000000000000000000000001",
+      "source_key": "catalog:fixture-catalog-1",
+      "source_path": "<ROOT>\\flow\\fixture.lrcat",
+      "summary": {
+       "head": "{\"backup\":\"<ROOT>\\\\flow\\\\luma\\\\backups\\\\before-lightroom-00000000000000000000000",
+       "sha256": "65c68b7cfbb66edf3e29796a1b9aaf998e1406c62c28e2bb84194ae3d2caae03"
+      }
+     }
+    ],
+    "lightroom_import_sets": [
+     {
+      "collection_id": 1,
+      "digest": "b7b2dc7c301d159767414057507dc165b334fd802aae4165e9fcedd1b4461cc0",
+      "source_key": "catalog:fixture-catalog-1"
+     }
+    ],
+    "photos": [
+     {
+      "edits": {
+       "head": "{\"aspect_scale\":0.0,\"blacks\":-20.0,\"ca_blue\":0.0,\"ca_red\":0.0,\"calibration\":[[0.",
+       "sha256": "7d3f858ca053f7a61f843119e006184a5e858811d1eaa733318f2e5a041710cf"
+      },
+      "extras": {
+       "head": "{\"DateTimeOriginal\":\"2026:09:20 11:22:33\",\"_last_edit_time\":\"2001-01-01T00:00:00",
+       "sha256": "73d11fc7096ea0e60f67e75a14872e80cd67af95bcacd630184b9bfdfd4dbfb9"
+      },
+      "flag": 1,
+      "id": 1,
+      "imported": "2026-11-19T01:02:03.456789+00:00",
+      "keywords": "여행|서울",
+      "label": "빨강",
+      "metadata": "{}",
+      "name": "photo0.jpg",
+      "path": "C:\\Grainy Lightroom Test\\Photos\\photo0.jpg",
+      "rating": 4,
+      "stack_id": 1,
+      "virtual_source": null
+     },
+     {
+      "edits": {
+       "head": "{\"aspect_scale\":0.0,\"blacks\":0.0,\"ca_blue\":0.0,\"ca_red\":0.0,\"calibration\":[[0.0,",
+       "sha256": "7d1bc54fa6d27cf5a731fbd130369315d48e8259776b42276f62888e4b7d19af"
+      },
+      "extras": "{\"DateTimeOriginal\":\"2026:09:20 11:22:33\",\"_last_edit_time\":\"2001-01-01T00:00:00+00:00\"}",
+      "flag": 0,
+      "id": 2,
+      "imported": "2026-11-19T01:02:04.456789+00:00",
+      "keywords": "",
+      "label": "빨강",
+      "metadata": "{}",
+      "name": "photo1.jpg",
+      "path": "C:\\Grainy Lightroom Test\\Photos\\photo1.jpg",
+      "rating": 3,
+      "stack_id": 1,
+      "virtual_source": null
+     },
+     {
+      "edits": {
+       "head": "{\"aspect_scale\":0.0,\"blacks\":0.0,\"ca_blue\":0.0,\"ca_red\":0.0,\"calibration\":[[0.0,",
+       "sha256": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b"
+      },
+      "extras": "{\"_copy_name\":\"흑백 대안\",\"_last_edit_time\":\"2001-01-01T00:00:00+00:00\"}",
+      "flag": -1,
+      "id": 3,
+      "imported": "2026-11-19T01:02:05.456789+00:00",
+      "keywords": "여행",
+      "label": "",
+      "metadata": "{}",
+      "name": "photo0.jpg · 흑백 대안",
+      "path": "C:\\Grainy Lightroom Test\\Photos\\photo0.jpg",
+      "rating": 2,
+      "stack_id": null,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": [
+     {
+      "key": "undo:1",
+      "value": {
+       "head": "{\"undo\": [{\"exposure\": 0.0, \"contrast\": 0.0, \"highlights\": 0.0, \"shadows\": 0.0, ",
+       "sha256": "448817fd8bcfd9717e04171d58a1f6b10947b18d4544fd91a67c9671ad601e43"
+      }
+     },
+     {
+      "key": "undo:2",
+      "value": {
+       "head": "{\"undo\": [{\"exposure\": 0.0, \"contrast\": 30.0, \"highlights\": 0.0, \"shadows\": 0.0,",
+       "sha256": "4e932d696047cf5bebe20dfbd0ba0addabb6611f658cae8ad427e8f300e2d73e"
+      }
+     }
+    ],
+    "preview_state": [
+     {
+      "photo_id": 1,
+      "token": "<token>"
+     },
+     {
+      "photo_id": 2,
+      "token": "<token>"
+     },
+     {
+      "photo_id": 3,
+      "token": "<token>"
+     }
+    ],
+    "snapshots": [
+     {
+      "created": "2026-11-19T01:02:06.456789+00:00",
+      "edits": {
+       "head": "{\"exposure\": -0.25, \"contrast\": 0.0, \"highlights\": 0.0, \"shadows\": 0.0, \"whites\"",
+       "sha256": "b9ad84f80594833d1f3ec5e729343e752635eefc6e68a38c023383b6d139be94"
+      },
+      "id": 1,
+      "name": "Lightroom · 대안",
+      "photo_id": 3
+     }
+    ]
+   },
+   "timer": true
+  },
+  {
+   "answer": {
+    "convert": false,
+    "import": true
+   },
+   "finished": true,
+   "last": {
+    "backup": "<ROOT>\\flow\\luma\\backups\\before-lightroom-00000000000000000000000000000002.sqlite",
+    "cancelled": false,
+    "collection_root": 5,
+    "collections": 4,
+    "convert_edits": false,
+    "converted_history": 0,
+    "converted_photos": 0,
+    "converted_smart": 1,
+    "converted_snapshots": 0,
+    "copies": 3,
+    "imported": 3,
+    "reused": 0,
+    "run_id": "00000000000000000000000000000002",
+    "skipped": 0,
+    "source_counts": {
+     "Adobe_imageDevelopSettings": 2,
+     "Adobe_imageProofSettings": 0,
+     "Adobe_images": 3,
+     "Adobe_libraryImageDevelopHistoryStep": 4,
+     "Adobe_libraryImageDevelopSnapshot": 2,
+     "AgHarvestedExifMetadata": 1,
+     "AgHarvestedIptcMetadata": 1,
+     "AgInternedExifCameraModel": 0,
+     "AgInternedExifCameraSN": 0,
+     "AgInternedExifLens": 0,
+     "AgInternedIptcCity": 0,
+     "AgInternedIptcCountry": 0,
+     "AgInternedIptcCreator": 1,
+     "AgInternedIptcJobIdentifier": 0,
+     "AgInternedIptcLocation": 0,
+     "AgInternedIptcState": 0,
+     "AgLibraryCollection": 4,
+     "AgLibraryCollectionContent": 1,
+     "AgLibraryCollectionImage": 1,
+     "AgLibraryCollectionStack": 0,
+     "AgLibraryCollectionStackImage": 0,
+     "AgLibraryFile": 2,
+     "AgLibraryFolder": 1,
+     "AgLibraryFolderStack": 1,
+     "AgLibraryFolderStackImage": 2,
+     "AgLibraryIPTC": 1,
+     "AgLibraryKeyword": 2,
+     "AgLibraryKeywordImage": 2,
+     "AgLibraryKeywordSynonym": 0,
+     "AgLibraryRootFolder": 1
+    },
+    "source_key": "catalog:fixture-catalog-1",
+    "source_path": "<ROOT>\\flow\\fixture.lrcat",
+    "warnings": {
+     "Adobe_imageDevelopSettings": 2,
+     "Adobe_libraryImageDevelopHistoryStep": 4,
+     "Adobe_libraryImageDevelopSnapshot": 2
+    }
+   },
+   "reviews": [
+    {
+     "check": "지원하는 보정값·이력·스냅샷도 변환 (Adobe와 결과가 다를 수 있음)",
+     "checked": false,
+     "default_no": true,
+     "label": "Lightroom 카탈로그 확인 중…",
+     "no": "취소",
+     "note": "사진과 분류를 가져옵니다. 기존 Luma 사진은 별도 사본으로 보존합니다.\n지원하는 스마트 규칙을 연결하고, 보정값·이력 변환 여부를 다음 화면에서 선택합니다.",
+     "running": true,
+     "text": "사진과 가상 사본 3개를 확인했습니다.\n\n별점·선택 표시·색 라벨·계층 키워드·IPTC·컬렉션과 폴더 스택을 가져옵니다.\n기존 Luma 보정과 분류를 덮어쓰지 않으며, 변경된 Lightroom 기록은 새 사본으로 가져옵니다.\n\n지원하는 스마트 컬렉션은 사진의 현재 분류·메타데이터로 검색합니다. 지원하지 않는 조건이 포함되면 전체 규칙을 보관하고 일반 컬렉션으로 가져옵니다.\n\n아래 선택을 켜면 지원하는 보정값·이력·스냅샷도 변환합니다. Luma와 Adobe의 현상 방식이 달라 같은 모습은 보장되지 않습니다. 변환하지 못한 항목은 결과에 표시하고 원문을 보관합니다.\n\n누락된 원본은 참조 경로로 등록됩니다. 가져오기를 진행할까요?",
+     "title": "Lightroom 가져오기 범위",
+     "window": "Lightroom 가져오기",
+     "yes": "가져오기"
+    }
+   ],
+   "running": false,
+   "shown": [
+    [
+     "refresh_collections"
+    ],
+    [
+     "refresh_lists"
+    ],
+    [
+     "information",
+     "Lightroom 가져오기 결과",
+     "추가 3장 · 이미 가져온 사진 0장 · 제외 0장\n추가한 컬렉션 4개 · 동적 스마트 컬렉션 1개\n기존 Luma 사진의 보정과 분류는 유지했습니다.\n사진 원본과 Lightroom 카탈로그는 수정하지 않았습니다.\n\n확인이 필요한 항목:\n• Adobe 현상값 보관 (Luma 보정으로 변환하지 않음): 2개\n• Adobe 보정 이력 보관 (실행 취소 이력으로 변환하지 않음): 4개\n• Adobe 스냅샷 보관 (Luma 스냅샷으로 변환하지 않음): 2개\n\n안전 백업: <ROOT>\\flow\\luma\\backups\\before-lightroom-00000000000000000000000000000002.sqlite"
+    ]
+   ],
+   "step": "again",
+   "table_names": [
+    "browser_dirty",
+    "browser_index",
+    "collection_members",
+    "collections",
+    "dust_entries",
+    "dust_sessions",
+    "folder_roots",
+    "history",
+    "lightroom_archive",
+    "lightroom_import_items",
+    "lightroom_import_runs",
+    "lightroom_import_sets",
+    "photos",
+    "preferences",
+    "presets",
+    "preview_state",
+    "profile_assets",
+    "snapshots"
+   ],
+   "tables": {
+    "browser_dirty": [
+     {
+      "id": 1
+     },
+     {
+      "id": 2
+     },
+     {
+      "id": 3
+     },
+     {
+      "id": 4
+     },
+     {
+      "id": 5
+     },
+     {
+      "id": 6
+     }
+    ],
+    "collection_members": [
+     {
+      "collection_id": 1,
+      "photo_id": 1
+     },
+     {
+      "collection_id": 1,
+      "photo_id": 2
+     },
+     {
+      "collection_id": 1,
+      "photo_id": 3
+     },
+     {
+      "collection_id": 3,
+      "photo_id": 3
+     },
+     {
+      "collection_id": 5,
+      "photo_id": 4
+     },
+     {
+      "collection_id": 5,
+      "photo_id": 5
+     },
+     {
+      "collection_id": 5,
+      "photo_id": 6
+     },
+     {
+      "collection_id": 7,
+      "photo_id": 6
+     }
+    ],
+    "collections": [
+     {
+      "id": 1,
+      "name": "Lightroom · fixture · 11/19 01:02",
+      "parent_id": null,
+      "rules": null
+     },
+     {
+      "id": 2,
+      "name": "여행 모음",
+      "parent_id": 1,
+      "rules": null
+     },
+     {
+      "id": 3,
+      "name": "서울",
+      "parent_id": 2,
+      "rules": null
+     },
+     {
+      "id": 4,
+      "name": "별 다섯",
+      "parent_id": 2,
+      "rules": "{\"_adobe_smart\":{\"children\":[{\"criteria\":\"rating\",\"operation\":\">=\",\"value\":5}],\"combine\":\"intersect\"}}"
+     },
+     {
+      "id": 5,
+      "name": "Lightroom · fixture · 11/19 01:02",
+      "parent_id": null,
+      "rules": null
+     },
+     {
+      "id": 6,
+      "name": "여행 모음",
+      "parent_id": 5,
+      "rules": null
+     },
+     {
+      "id": 7,
+      "name": "서울",
+      "parent_id": 6,
+      "rules": null
+     },
+     {
+      "id": 8,
+      "name": "별 다섯",
+      "parent_id": 6,
+      "rules": "{\"_adobe_smart\":{\"children\":[{\"criteria\":\"rating\",\"operation\":\">=\",\"value\":5}],\"combine\":\"intersect\"}}"
+     }
+    ],
+    "lightroom_import_items": [
+     {
+      "digest": "17a565d74a8175477f9881cbe331db7b208ac77f27e8a4ced9e4e29d6e04fd3d",
+      "photo_id": 6,
+      "source_id": "99",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "43b2f5f00609155bd9a91fcf5ac67efeaeefe9e8b30589ea124cc7b2740b7280",
+      "photo_id": 5,
+      "source_id": "101",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "94c98f5209009bdb89df3170009b93d2fcfdb5a0e1beda4e3bf46d7b2b933b35",
+      "photo_id": 1,
+      "source_id": "100",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "b8766e1956144faa1e160013083acf405869e34080723a5c9f39103cadd5532b",
+      "photo_id": 3,
+      "source_id": "99",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "bee5deb8ed0fb22e795c5debf08b4f0eeee30c21461eff48ccf1e8f542632c3a",
+      "photo_id": 4,
+      "source_id": "100",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "digest": "c3c4c439383b408dc84c9b95abccd65ee2daf4446fb90e80ad41cb5ecc7e5c52",
+      "photo_id": 2,
+      "source_id": "101",
+      "source_key": "catalog:fixture-catalog-1"
+     }
+    ],
+    "lightroom_import_runs": [
+     {
+      "created": "2026-11-19T01:02:08.456789+00:00",
+      "id": "00000000000000000000000000000001",
+      "source_key": "catalog:fixture-catalog-1",
+      "source_path": "<ROOT>\\flow\\fixture.lrcat",
+      "summary": {
+       "head": "{\"backup\":\"<ROOT>\\\\flow\\\\luma\\\\backups\\\\before-lightroom-00000000000000000000000",
+       "sha256": "65c68b7cfbb66edf3e29796a1b9aaf998e1406c62c28e2bb84194ae3d2caae03"
+      }
+     },
+     {
+      "created": "2026-11-19T01:02:13.456789+00:00",
+      "id": "00000000000000000000000000000002",
+      "source_key": "catalog:fixture-catalog-1",
+      "source_path": "<ROOT>\\flow\\fixture.lrcat",
+      "summary": {
+       "head": "{\"backup\":\"<ROOT>\\\\flow\\\\luma\\\\backups\\\\before-lightroom-00000000000000000000000",
+       "sha256": "69b8146dc7d9f764e959574a169eef6de3748862cb7a44c92c50958e9b6dd44d"
+      }
+     }
+    ],
+    "lightroom_import_sets": [
+     {
+      "collection_id": 1,
+      "digest": "b7b2dc7c301d159767414057507dc165b334fd802aae4165e9fcedd1b4461cc0",
+      "source_key": "catalog:fixture-catalog-1"
+     },
+     {
+      "collection_id": 5,
+      "digest": "395ef837be4b3ac3acb5f5d434a995ae51923c4818c6a06b711d344fb81a7e6e",
+      "source_key": "catalog:fixture-catalog-1"
+     }
+    ],
+    "photos": [
+     {
+      "edits": {
+       "head": "{\"aspect_scale\":0.0,\"blacks\":-20.0,\"ca_blue\":0.0,\"ca_red\":0.0,\"calibration\":[[0.",
+       "sha256": "7d3f858ca053f7a61f843119e006184a5e858811d1eaa733318f2e5a041710cf"
+      },
+      "extras": {
+       "head": "{\"DateTimeOriginal\":\"2026:09:20 11:22:33\",\"_last_edit_time\":\"2001-01-01T00:00:00",
+       "sha256": "73d11fc7096ea0e60f67e75a14872e80cd67af95bcacd630184b9bfdfd4dbfb9"
+      },
+      "flag": 1,
+      "id": 1,
+      "imported": "2026-11-19T01:02:03.456789+00:00",
+      "keywords": "여행|서울",
+      "label": "빨강",
+      "metadata": "{}",
+      "name": "photo0.jpg",
+      "path": "C:\\Grainy Lightroom Test\\Photos\\photo0.jpg",
+      "rating": 4,
+      "stack_id": 1,
+      "virtual_source": null
+     },
+     {
+      "edits": {
+       "head": "{\"aspect_scale\":0.0,\"blacks\":0.0,\"ca_blue\":0.0,\"ca_red\":0.0,\"calibration\":[[0.0,",
+       "sha256": "7d1bc54fa6d27cf5a731fbd130369315d48e8259776b42276f62888e4b7d19af"
+      },
+      "extras": "{\"DateTimeOriginal\":\"2026:09:20 11:22:33\",\"_last_edit_time\":\"2001-01-01T00:00:00+00:00\"}",
+      "flag": 0,
+      "id": 2,
+      "imported": "2026-11-19T01:02:04.456789+00:00",
+      "keywords": "",
+      "label": "빨강",
+      "metadata": "{}",
+      "name": "photo1.jpg",
+      "path": "C:\\Grainy Lightroom Test\\Photos\\photo1.jpg",
+      "rating": 3,
+      "stack_id": 1,
+      "virtual_source": null
+     },
+     {
+      "edits": {
+       "head": "{\"aspect_scale\":0.0,\"blacks\":0.0,\"ca_blue\":0.0,\"ca_red\":0.0,\"calibration\":[[0.0,",
+       "sha256": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b"
+      },
+      "extras": "{\"DateTimeOriginal\":\"2026:09:20 11:22:33\",\"_last_edit_time\":\"2001-01-01T00:00:00+00:00\"}",
+      "flag": 0,
+      "id": 5,
+      "imported": "2026-11-19T01:02:10.456789+00:00",
+      "keywords": "",
+      "label": "빨강",
+      "metadata": "{}",
+      "name": "photo1.jpg · Lightroom 사본",
+      "path": "C:\\Grainy Lightroom Test\\Photos\\photo1.jpg",
+      "rating": 3,
+      "stack_id": 4,
+      "virtual_source": 2
+     },
+     {
+      "edits": {
+       "head": "{\"aspect_scale\":0.0,\"blacks\":0.0,\"ca_blue\":0.0,\"ca_red\":0.0,\"calibration\":[[0.0,",
+       "sha256": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b"
+      },
+      "extras": "{\"_copy_name\":\"흑백 대안\",\"_last_edit_time\":\"2001-01-01T00:00:00+00:00\"}",
+      "flag": -1,
+      "id": 3,
+      "imported": "2026-11-19T01:02:05.456789+00:00",
+      "keywords": "여행",
+      "label": "",
+      "metadata": "{}",
+      "name": "photo0.jpg · 흑백 대안",
+      "path": "C:\\Grainy Lightroom Test\\Photos\\photo0.jpg",
+      "rating": 2,
+      "stack_id": null,
+      "virtual_source": 1
+     },
+     {
+      "edits": {
+       "head": "{\"aspect_scale\":0.0,\"blacks\":0.0,\"ca_blue\":0.0,\"ca_red\":0.0,\"calibration\":[[0.0,",
+       "sha256": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b"
+      },
+      "extras": "{\"_copy_name\":\"흑백 대안\",\"_last_edit_time\":\"2001-01-01T00:00:00+00:00\"}",
+      "flag": -1,
+      "id": 6,
+      "imported": "2026-11-19T01:02:11.456789+00:00",
+      "keywords": "여행",
+      "label": "",
+      "metadata": "{}",
+      "name": "photo0.jpg · 흑백 대안",
+      "path": "C:\\Grainy Lightroom Test\\Photos\\photo0.jpg",
+      "rating": 2,
+      "stack_id": null,
+      "virtual_source": 1
+     },
+     {
+      "edits": {
+       "head": "{\"aspect_scale\":0.0,\"blacks\":0.0,\"ca_blue\":0.0,\"ca_red\":0.0,\"calibration\":[[0.0,",
+       "sha256": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b"
+      },
+      "extras": {
+       "head": "{\"DateTimeOriginal\":\"2026:09:20 11:22:33\",\"_last_edit_time\":\"2001-01-01T00:00:00",
+       "sha256": "73d11fc7096ea0e60f67e75a14872e80cd67af95bcacd630184b9bfdfd4dbfb9"
+      },
+      "flag": 1,
+      "id": 4,
+      "imported": "2026-11-19T01:02:09.456789+00:00",
+      "keywords": "여행|서울",
+      "label": "빨강",
+      "metadata": "{}",
+      "name": "photo0.jpg · Lightroom 사본",
+      "path": "C:\\Grainy Lightroom Test\\Photos\\photo0.jpg",
+      "rating": 4,
+      "stack_id": 4,
+      "virtual_source": 1
+     }
+    ],
+    "preview_state": [
+     {
+      "photo_id": 1,
+      "token": "<token>"
+     },
+     {
+      "photo_id": 2,
+      "token": "<token>"
+     },
+     {
+      "photo_id": 3,
+      "token": "<token>"
+     },
+     {
+      "photo_id": 4,
+      "token": "<token>"
+     },
+     {
+      "photo_id": 5,
+      "token": "<token>"
+     },
+     {
+      "photo_id": 6,
+      "token": "<token>"
+     }
+    ]
+   },
+   "timer": true
+  }
+ ]
+}

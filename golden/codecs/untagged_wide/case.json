@@ -1,0 +1,19 @@
+{
+ "cms_calls": 1,
+ "file": "input.png",
+ "max_size": null,
+ "metadata": {
+  "bit_depth": 8,
+  "decoder": "PNG 8-bit",
+  "filename": "input.png",
+  "format": "PNG",
+  "height": 19,
+  "input_profile": "태그 없는 sRGB",
+  "size_mb": 0.0,
+  "source_orientation": 1,
+  "width": 31,
+  "working_space": "ProPhoto"
+ },
+ "read_metadata": {},
+ "working": "ProPhoto"
+}

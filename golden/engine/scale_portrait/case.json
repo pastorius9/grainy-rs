@@ -1,0 +1,13 @@
+{
+ "original_size": [
+  192,
+  288
+ ],
+ "output": "sRGB",
+ "settings": {
+  "sharpen": 50.0,
+  "texture": 40.0
+ },
+ "source": "edges",
+ "use_crop": true
+}

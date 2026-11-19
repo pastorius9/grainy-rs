@@ -1,0 +1,99 @@
+{
+ "cache": {
+  "cacheScope": "private",
+  "ttlMs": 600000
+ },
+ "color_spaces": [
+  "sRGB",
+  "Adobe RGB",
+  "Display P3",
+  "ProPhoto RGB"
+ ],
+ "copy_groups": [
+  "working_space",
+  "light",
+  "white_balance",
+  "raw_profile",
+  "color",
+  "film",
+  "color_filter",
+  "curves",
+  "detail",
+  "effects",
+  "negative",
+  "lens",
+  "crop",
+  "masks",
+  "retouch"
+ ],
+ "curve_points": 16,
+ "deadline_seconds": 45,
+ "export_formats": [
+  "JPEG",
+  "TIFF 16-bit",
+  "TIFF 8-bit",
+  "PNG",
+  "PNG 16-bit",
+  "AVIF",
+  "JPEG XL"
+ ],
+ "fields_json": "[[\"exposure\", -5, 5], [\"contrast\", -100, 100], [\"highlights\", -100, 100], [\"shadows\", -100, 100], [\"whites\", -200, 200], [\"blacks\", -200, 200], [\"temperature\", -100, 100], [\"tint\", -100, 100], [\"saturation\", -100, 100], [\"vibrance\", -100, 100], [\"clarity\", -100, 100], [\"sharpen\", 0, 150], [\"vignette\", 0, 100], [\"grain\", 0, 100], [\"vignette_midpoint\", 0, 100], [\"vignette_roundness\", -100, 100], [\"vignette_feather\", 0, 100], [\"vignette_highlights\", 0, 100], [\"grain_size\", 0, 100], [\"grain_roughness\", 0, 100], [\"straighten\", -45, 45], [\"monochrome\", 0, 1], [\"negative_density\", -3, 3], [\"negative_range\", 3, 10], [\"film_strength\", 0, 100], [\"film_look\", 0, 0], [\"rotation\", 0, 270], [\"flip\", 0, 1]]",
+ "film_types": [
+  "all",
+  "color",
+  "bw",
+  "slide",
+  "cine",
+  "presets"
+ ],
+ "flags": [
+  "picked",
+  "rejected",
+  "unflagged"
+ ],
+ "instructions": "Grainy is a photo editor running on this computer; these tools drive its open window and catalog. Edits are non-destructive: original files are never written, and every editing call is one batch that undo_last_batch reverts, including set_labels (imports, saved files and virtual copies are outside undo). Work in few calls: target many photos at once (ids, a where filter, or scope 'selection'/'current'), give different values per photo in one apply_edits call, and prefer relative add values (no need to read values first). Look at many photos with contact_sheet before using get_preview. Calls that take long return a job id; poll it with get_job. If a call says Grainy is busy, nothing was changed: wait briefly and retry or ask the person. After updating Grainy, start a new AI session: an existing session keeps its old tool list.",
+ "labels": [
+  "red",
+  "yellow",
+  "green",
+  "blue",
+  "purple"
+ ],
+ "legacy": [
+  "2025-11-25",
+  "2025-06-18",
+  "2025-03-26",
+  "2024-11-05"
+ ],
+ "max_id": 9007199254740991,
+ "max_targets": 500,
+ "meta_capabilities": "io.modelcontextprotocol/clientCapabilities",
+ "meta_server": "io.modelcontextprotocol/serverInfo",
+ "meta_version": "io.modelcontextprotocol/protocolVersion",
+ "modern": [
+  "2026-07-28"
+ ],
+ "modern_enabled": false,
+ "offline_error": "Grainy is not running, or its AI connection is off. Start Grainy, or turn its AI connection on (Grainy: Settings > AI Connection (MCP)…). / Grainy가 실행 중이 아니거나 AI 연결이 꺼져 있습니다. Grainy를 실행하거나 Grainy의 설정 › AI 연결 (MCP)…에서 AI 연결을 켜세요.",
+ "offline_note": " When this session started Grainy did not answer (it was not running, or its AI connection was off); the tools work as soon as it runs with the connection on, without restarting this program.",
+ "offline_text": "Grainy did not answer: it is not running on this computer, its AI connection is off, or it is still starting or busy. Ask the person to start Grainy or, if it is already running, to open Settings > AI Connection (MCP)… in Grainy, tick 'Turn on the AI connection' and look at the status shown there. Then try again; this AI program does not need to be restarted. If you had asked for a change, check the photos before repeating it.\nGrainy가 응답하지 않았습니다. 이 컴퓨터에서 Grainy가 실행 중이 아니거나, AI 연결이 꺼져 있거나, 아직 시작 중이거나 바쁩니다. Grainy를 실행하세요. 이미 실행 중이면 Grainy의 설정 › AI 연결 (MCP)…에서 'AI 연결 켜기'를 켜고 그 창의 상태를 확인하세요. 그런 다음 다시 시도하면 되며, AI 프로그램은 다시 시작하지 않아도 됩니다.",
+ "offline_version": "2025-03-26",
+ "server_info_json": "{\"name\": \"grainy\", \"title\": \"Grainy\", \"version\": \"0.6.8\"}",
+ "sheet_cells": 36,
+ "sorts": [
+  "imported",
+  "name",
+  "capture",
+  "rating"
+ ],
+ "supported": [
+  "2026-07-28",
+  "2025-11-25",
+  "2025-06-18",
+  "2025-03-26",
+  "2024-11-05"
+ ],
+ "target_text": "Target: one of ids, where (list_photos filters) or scope ('selection' or 'current').",
+ "unfinished": "Grainy started this call but did not finish it within the time limit; it may still take effect. Check the photos (get_photo) before repeating it, or undo it with undo_last_batch.",
+ "version": "0.6.8"
+}

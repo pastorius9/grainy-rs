@@ -1,0 +1,23 @@
+{
+ "arrays": {
+  "output": "93e092e371cdfa30aa0104ce43f0dc041c4c4de006cd50e3749856ddcac58525"
+ },
+ "settings": {
+  "shared_settings": "7889f42abbbcf9c5ed8d03c686d6bd54bcaeba2fab4fa1430665c387fb2b790e"
+ },
+ "source": "triple_asset",
+ "white": [
+  [
+   0.871358,
+   1.0,
+   0.617045
+  ],
+  4200.003900658818,
+  8.00004134810782,
+  [
+   0.9887325399980808,
+   1.0,
+   0.6584584679253666
+  ]
+ ]
+}

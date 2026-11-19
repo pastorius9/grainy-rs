@@ -1,0 +1,104 @@
+{
+ "cases": [
+  {
+   "files": [
+    "download/Grainy-9.9.9-windows-x64.zip"
+   ],
+   "length": 1280000,
+   "name": "ok",
+   "progress": [
+    [
+     1048576,
+     1280000
+    ],
+    [
+     1280000,
+     1280000
+    ]
+   ],
+   "release_sha256_is_real": true,
+   "release_size": 1280000,
+   "result": {
+    "ok": true,
+    "value": "work/download/Grainy-9.9.9-windows-x64.zip"
+   }
+  },
+  {
+   "files": [],
+   "length": 1280000,
+   "name": "wrong_digest",
+   "progress": [
+    [
+     1048576,
+     1280000
+    ],
+    [
+     1280000,
+     1280000
+    ]
+   ],
+   "release_sha256_is_real": false,
+   "release_size": 1280000,
+   "result": {
+    "error": "ValueError",
+    "message": "내려받은 파일이 깃헙에 올라간 파일과 다릅니다.",
+    "ok": false
+   }
+  },
+  {
+   "files": [],
+   "length": 1280000,
+   "name": "size_too_small",
+   "progress": [
+    [
+     1048576,
+     1279999
+    ]
+   ],
+   "release_sha256_is_real": true,
+   "release_size": 1279999,
+   "result": {
+    "error": "ValueError",
+    "message": "내려받은 파일이 깃헙에 올라간 파일과 다릅니다.",
+    "ok": false
+   }
+  },
+  {
+   "files": [],
+   "length": 1280000,
+   "name": "size_too_big",
+   "progress": [
+    [
+     1048576,
+     1280001
+    ],
+    [
+     1280000,
+     1280001
+    ]
+   ],
+   "release_sha256_is_real": true,
+   "release_size": 1280001,
+   "result": {
+    "error": "ValueError",
+    "message": "내려받은 파일이 깃헙에 올라간 파일과 다릅니다.",
+    "ok": false
+   }
+  },
+  {
+   "files": [
+    "download/Grainy-9.9.9-windows-x64.zip"
+   ],
+   "length": 0,
+   "name": "empty_file",
+   "progress": [],
+   "release_sha256_is_real": true,
+   "release_size": 0,
+   "result": {
+    "ok": true,
+    "value": "work/download/Grainy-9.9.9-windows-x64.zip"
+   }
+  }
+ ],
+ "pattern_length": 1280000
+}

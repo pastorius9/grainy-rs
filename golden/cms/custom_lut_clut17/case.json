@@ -1,0 +1,24 @@
+{
+ "info": {
+  "channels": 3,
+  "colorspace": "rgb",
+  "copyright": null,
+  "datetime": "2026-11-13T03:02:50",
+  "description": "Grainy test LUT RGB",
+  "deviceclass": "display",
+  "gamma": null,
+  "ismatrixshaper": false,
+  "manufacturer": null,
+  "model": null,
+  "pcs": "lab",
+  "primaries": null,
+  "renderingintent": "perceptual",
+  "version": 2.1,
+  "whitepoint": [
+   0.345703,
+   0.358538,
+   1.0
+  ]
+ },
+ "size": 59464
+}

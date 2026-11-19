@@ -1,0 +1,248 @@
+{
+ "changes": {
+  "straighten": 7.5
+ },
+ "height": 65,
+ "script": [
+  [
+   "shortcut"
+  ],
+  [
+   "click",
+   [
+    0.0,
+    0.0
+   ],
+   false
+  ],
+  [
+   "press",
+   [
+    0.5,
+    0.5
+   ],
+   false
+  ],
+  [
+   "move",
+   [
+    0.0,
+    0.02
+   ]
+  ],
+  [
+   "release",
+   [
+    0.01,
+    0.0
+   ]
+  ],
+  [
+   "button",
+   "apply"
+  ]
+ ],
+ "states": [
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "변형 후 생긴 빈 가장자리 대신 사진 안쪽을 선택하세요.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.5,
+      0.5
+     ]
+    ],
+    "radius": 0.015,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "변형 후 생긴 빈 가장자리 대신 사진 안쪽을 선택하세요.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.5,
+      0.5
+     ]
+    ],
+    "radius": 0.015,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.0,
+     0.02
+    ]
+   ],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "변형 후 생긴 빈 가장자리 대신 사진 안쪽을 선택하세요.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.5,
+       0.5
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "변형 후 생긴 빈 가장자리 대신 사진 안쪽을 선택하세요.",
+   "waiting": "실행 대기: 1개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [
+    "힐링 1개 실행"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.5,
+       0.5
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "표시한 1곳에 힐링을 적용했습니다. 한 번의 실행 취소로 되돌릴 수 있습니다.",
+   "waiting": "실행 대기: 0개"
+  }
+ ],
+ "width": 97
+}

@@ -1,0 +1,70 @@
+{
+ "blend_all_bits": "17372028837784715264",
+ "blend_all_shape": [
+  40,
+  60,
+  3
+ ],
+ "blend_all_step": 3,
+ "blend_none_bits": "17372028837784715264",
+ "blend_none_shape": [
+  40,
+  60,
+  3
+ ],
+ "blend_none_step": 3,
+ "blend_speck_bits": "7103026305070792704",
+ "blend_speck_shape": [
+  40,
+  60,
+  3
+ ],
+ "blend_speck_step": 3,
+ "blend_stroke_bits": "5552269211486650368",
+ "blend_stroke_shape": [
+  40,
+  60,
+  3
+ ],
+ "blend_stroke_step": 3,
+ "inpaint_all_bits": "7118456015883862016",
+ "inpaint_all_shape": [
+  40,
+  60,
+  3
+ ],
+ "inpaint_all_step": 3,
+ "inpaint_none_bits": "7118456015883862016",
+ "inpaint_none_shape": [
+  40,
+  60,
+  3
+ ],
+ "inpaint_none_step": 3,
+ "inpaint_speck_bits": "7101703712304791552",
+ "inpaint_speck_shape": [
+  40,
+  60,
+  3
+ ],
+ "inpaint_speck_step": 3,
+ "inpaint_stroke_bits": "6949556715805212672",
+ "inpaint_stroke_shape": [
+  40,
+  60,
+  3
+ ],
+ "inpaint_stroke_step": 3,
+ "recorded": {
+  "distance": [],
+  "dust": [],
+  "inpaint": 15,
+  "sky": []
+ },
+ "weights": [
+  "stroke",
+  "none",
+  "all",
+  "speck"
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "info": {
+  "channels": 1,
+  "colorspace": "gray",
+  "description": "gray built-in",
+  "deviceclass": "display",
+  "pcs": "xyz",
+  "version": 4.4
+ },
+ "kind": "gray",
+ "size": 8536,
+ "transfer": "srgb"
+}

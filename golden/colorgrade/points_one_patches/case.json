@@ -1,0 +1,19 @@
+{
+ "changes": {
+  "point_colors": [
+   {
+    "hue": 40.0,
+    "lightness": 20.0,
+    "rgb": [
+     0.8,
+     0.3,
+     0.2
+    ],
+    "saturation": -30.0,
+    "version": 2
+   }
+  ]
+ },
+ "image": "std:patches",
+ "kind": "tools"
+}

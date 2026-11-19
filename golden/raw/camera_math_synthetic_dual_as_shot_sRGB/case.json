@@ -1,0 +1,41 @@
+{
+ "arrays": {
+  "input": "3e7fc709a9d5e7d98e80b2fdff867b55d6b6d86a0f9285ff47774127f8d55ab4",
+  "output": "a20475a03235c84a4aee93f72225326b613868e9158fe72a3f52aa60f28d1018"
+ },
+ "info": {
+  "camera": "Grainy Synthetic",
+  "daylight_neutral": [
+   0.6,
+   1.0,
+   0.8
+  ],
+  "format": "DNG",
+  "make": "Grainy",
+  "neutral": [
+   0.5,
+   1.0,
+   0.7
+  ],
+  "xyz_to_camera": [
+   [
+    0.83,
+    -0.08,
+    -0.04
+   ],
+   [
+    -0.14,
+    1.12,
+    0.08
+   ],
+   [
+    -0.03,
+    0.09,
+    0.71
+   ]
+  ]
+ },
+ "settings": {
+  "shared_settings": "db06a1021964d56f0d24d4d57c27a13eae2b6bb7a6a98cbb795df69f6d690e18"
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "height": 400,
+ "results": {
+  "horizon_roll": {
+   "error": null,
+   "value": [
+    -1.9999987244287922,
+    0.7707695480429919
+   ]
+  },
+  "level": {
+   "error": null,
+   "value": [
+    -1.9999987244287922,
+    0.7707695480429919,
+    "lines-horizon-v2"
+   ]
+  },
+  "plumb_rolls": {
+   "error": null,
+   "value": []
+  },
+  "roll": {
+   "error": {
+    "message": "수평·수직 기준선이 부족합니다. 네 모서리 가이드를 사용해 주세요.",
+    "type": "AlignmentError"
+   },
+   "value": null
+  },
+  "vanishing_h": {
+   "error": {
+    "message": "같은 방향으로 모이는 직선을 찾지 못했습니다.",
+    "type": "AlignmentError"
+   },
+   "value": null
+  },
+  "vanishing_v": {
+   "error": {
+    "message": "원근을 계산할 기준선이 부족합니다.",
+    "type": "AlignmentError"
+   },
+   "value": null
+  },
+  "wide_roll": {
+   "error": null,
+   "value": null
+  }
+ },
+ "width": 600
+}

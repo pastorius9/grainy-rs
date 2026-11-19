@@ -1,0 +1,42 @@
+{
+ "mean": [
+  0.32899537788855016,
+  0.3326455389733868,
+  0.3303723737917183
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "rotation": 1,
+  "upright": {
+   "crop_scale": 1.12,
+   "matrix": [
+    [
+     1.02,
+     0.04,
+     -0.01
+    ],
+    [
+     -0.03,
+     1.01,
+     0.005
+    ],
+    [
+     0.02,
+     -0.015,
+     1.0
+    ]
+   ],
+   "mode": "full"
+  },
+  "upright_crop": false
+ },
+ "shape": [
+  240,
+  160,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

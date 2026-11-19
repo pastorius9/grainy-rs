@@ -1,0 +1,14 @@
+{
+ "amount": 150.0,
+ "bits_sum": "17720461603557605376",
+ "detail": 25.0,
+ "image": "garden",
+ "luminance": false,
+ "masking": 0.0,
+ "pixel_scale": 0.25,
+ "radius": 0.5,
+ "step": [
+  3,
+  3
+ ]
+}

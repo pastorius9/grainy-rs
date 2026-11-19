@@ -1,0 +1,8 @@
+{
+ "error": {
+  "kind": "AlignmentError",
+  "message": "원근을 계산할 기준선이 부족합니다."
+ },
+ "mode": "full",
+ "source": "edges"
+}

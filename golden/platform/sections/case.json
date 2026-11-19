@@ -1,0 +1,77 @@
+{
+ "expected": {
+  "crlf": [
+   [
+    "2.0.0",
+    "Two\r",
+    "- two\r\n\r\n## 1.0.0\r\n\r\n- one"
+   ],
+   [
+    "0.9.0",
+    "Nine\r",
+    "- nine"
+   ]
+  ],
+  "duplicate": [
+   [
+    "1.0",
+    "a",
+    "x"
+   ],
+   [
+    "1.0",
+    "b",
+    "y"
+   ]
+  ],
+  "empty": [],
+  "log": [
+   [
+    "1.2.10",
+    "Ten",
+    "- ten"
+   ],
+   [
+    "1.2.9",
+    "Nine",
+    "- nine"
+   ],
+   [
+    "1.2.8",
+    "",
+    "- eight"
+   ]
+  ],
+  "no_headings": [],
+  "odd": [
+   [
+    "3.0",
+    "Spaced title",
+    "body 3"
+   ],
+   [
+    "2.1.1",
+    "no spaces",
+    "line\n\n##  1.0.0 not a heading\n## 1.0 no dash"
+   ],
+   [
+    "1.0.0.0",
+    "four parts",
+    "nbsp body  \n### 0.9 deeper\n## 0.8."
+   ],
+   [
+    "0.7.1",
+    "title — more — dashes",
+    "tail text"
+   ]
+  ]
+ },
+ "texts": {
+  "crlf": "# Log\r\n\r\n## 2.0.0 — Two\r\n\r\n- two\r\n\r\n## 1.0.0\r\n\r\n- one\r\n\r\n## 0.9.0 — Nine\r\n\r\n- nine\r\n",
+  "duplicate": "## 1.0 — a\n\nx\n\n## 1.0 — b\n\ny\n",
+  "empty": "",
+  "log": "# Log\n\n## 1.2.10 — Ten\n\n- ten\n\n## 1.2.9 — Nine\n\n- nine\n\n## 1.2.8\n\n- eight\n",
+  "no_headings": "just text\n",
+  "odd": "# x\n\n## 3.0 —  \tSpaced title \t \n\nbody 3\n\n\n## 2.1.1—no spaces\nline\n\n##  1.0.0 not a heading\n## 1.0 no dash\n## 1.0.0.0 — four parts\n   nbsp body  \n### 0.9 deeper\n## 0.8.\n## 0.7.1 — title — more — dashes\ntail text\n"
+ }
+}

@@ -1,0 +1,28 @@
+[package]
+name = "grainy-catalog"
+description = "Interoperable Grainy SQLite catalog and preview packet storage"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+grainy-core.workspace = true
+rusqlite.workspace = true
+serde_json = { workspace = true, features = ["preserve_order"] }
+thiserror.workspace = true
+sha2 = "0.10"
+base64 = "0.22"
+unicode-normalization = "0.1"
+unicode-casefold = "0.2"
+chrono = "0.4"
+image = { version = "0.25", default-features = false, features = ["jpeg"] }
+zip = { version = "2", default-features = false, features = ["deflate"] }
+half = "2"
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

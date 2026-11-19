@@ -1,0 +1,15 @@
+{
+ "as_shot": {
+  "error_class": "LibRawFileUnsupportedError",
+  "loaded": false,
+  "message": "b'Unsupported file format or not RAW file'",
+  "reason": "이 압축 방식은 지원하지 않습니다. 니콘의 고효율(HE) RAW라면 카메라에서 \"무손실 압축\"으로 찍거나 DNG로 변환해 주세요."
+ },
+ "file": "junk.nef",
+ "legacy": {
+  "error_class": "LibRawFileUnsupportedError",
+  "loaded": false,
+  "message": "b'Unsupported file format or not RAW file'",
+  "reason": "이 압축 방식은 지원하지 않습니다. 니콘의 고효율(HE) RAW라면 카메라에서 \"무손실 압축\"으로 찍거나 DNG로 변환해 주세요."
+ }
+}

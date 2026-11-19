@@ -1,0 +1,2614 @@
+{
+ "rows": [
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl",
+   "text": "Ctrl"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+",
+   "text": "Ctrl+"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Z",
+   "text": "Ctrl+Z"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+Z",
+   "text": "Ctrl+Shift+Z"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Alt+V / Ctrl+Y",
+   "text": "Ctrl+Alt+V / Ctrl+Y"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Ctrl+",
+   "text": "Ctrl+Ctrl+"
+  },
+  {
+   "platform": "windows",
+   "result": "ctrl+z",
+   "text": "ctrl+z"
+  },
+  {
+   "platform": "windows",
+   "result": "No Control here",
+   "text": "No Control here"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+/ Ctrl+[ Ctrl+]",
+   "text": "Ctrl+/ Ctrl+[ Ctrl+]"
+  },
+  {
+   "platform": "windows",
+   "result": "Press Ctrl++",
+   "text": "Press Ctrl++"
+  },
+  {
+   "platform": "windows",
+   "result": "단축키 Ctrl+E 를 누르세요",
+   "text": "단축키 Ctrl+E 를 누르세요"
+  },
+  {
+   "platform": "windows",
+   "result": "CtrlCtrl",
+   "text": "CtrlCtrl"
+  },
+  {
+   "platform": "windows",
+   "result": "Shift+/",
+   "text": "Shift+/"
+  },
+  {
+   "platform": "windows",
+   "result": "\\",
+   "text": "\\"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "\\",
+   "text": "\\"
+  },
+  {
+   "platform": "windows",
+   "result": "원본 비교",
+   "text": "원본 비교"
+  },
+  {
+   "platform": "windows",
+   "result": "C",
+   "text": "C"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "C",
+   "text": "C"
+  },
+  {
+   "platform": "windows",
+   "result": "비교 보기",
+   "text": "비교 보기"
+  },
+  {
+   "platform": "windows",
+   "result": "D",
+   "text": "D"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "D",
+   "text": "D"
+  },
+  {
+   "platform": "windows",
+   "result": "현상으로 이동",
+   "text": "현상으로 이동"
+  },
+  {
+   "platform": "windows",
+   "result": "G",
+   "text": "G"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "G",
+   "text": "G"
+  },
+  {
+   "platform": "windows",
+   "result": "라이브러리로 이동",
+   "text": "라이브러리로 이동"
+  },
+  {
+   "platform": "windows",
+   "result": "J",
+   "text": "J"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "J",
+   "text": "J"
+  },
+  {
+   "platform": "windows",
+   "result": "클리핑 표시 켜기·끄기",
+   "text": "클리핑 표시 켜기·끄기"
+  },
+  {
+   "platform": "windows",
+   "result": "Z",
+   "text": "Z"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Z",
+   "text": "Z"
+  },
+  {
+   "platform": "windows",
+   "result": "1:1과 화면 맞춤 번갈아 보기",
+   "text": "1:1과 화면 맞춤 번갈아 보기"
+  },
+  {
+   "platform": "windows",
+   "result": "F",
+   "text": "F"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "F",
+   "text": "F"
+  },
+  {
+   "platform": "windows",
+   "result": "전체 화면 켜기·끄기 (Esc로 나옴)",
+   "text": "전체 화면 켜기·끄기 (Esc로 나옴)"
+  },
+  {
+   "platform": "windows",
+   "result": "Tab",
+   "text": "Tab"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Tab",
+   "text": "Tab"
+  },
+  {
+   "platform": "windows",
+   "result": "양옆 패널 숨기기·보이기",
+   "text": "양옆 패널 숨기기·보이기"
+  },
+  {
+   "platform": "windows",
+   "result": "Shift+Tab",
+   "text": "Shift+Tab"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Shift+Tab",
+   "text": "Shift+Tab"
+  },
+  {
+   "platform": "windows",
+   "result": "모든 패널 숨기기·보이기",
+   "text": "모든 패널 숨기기·보이기"
+  },
+  {
+   "platform": "windows",
+   "result": "L",
+   "text": "L"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "L",
+   "text": "L"
+  },
+  {
+   "platform": "windows",
+   "result": "조명 끄기: 사진만 보기 (Esc로 나옴)",
+   "text": "조명 끄기: 사진만 보기 (Esc로 나옴)"
+  },
+  {
+   "platform": "windows",
+   "result": "Shift+/",
+   "text": "Shift+/"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+/",
+   "text": "Ctrl+/"
+  },
+  {
+   "platform": "windows",
+   "result": "? / Ctrl+/",
+   "text": "? / Ctrl+/"
+  },
+  {
+   "platform": "windows",
+   "result": "Shift+/ / Ctrl+/",
+   "text": "Shift+/ / Ctrl+/"
+  },
+  {
+   "platform": "windows",
+   "result": "단축키 목록",
+   "text": "단축키 목록"
+  },
+  {
+   "platform": "windows",
+   "result": "R",
+   "text": "R"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "R",
+   "text": "R"
+  },
+  {
+   "platform": "windows",
+   "result": "크롭",
+   "text": "크롭"
+  },
+  {
+   "platform": "windows",
+   "result": "W",
+   "text": "W"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "W",
+   "text": "W"
+  },
+  {
+   "platform": "windows",
+   "result": "화이트 밸런스 스포이드 · 드래그하면 영역 평균",
+   "text": "화이트 밸런스 스포이드 · 드래그하면 영역 평균"
+  },
+  {
+   "platform": "windows",
+   "result": "Q",
+   "text": "Q"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Q",
+   "text": "Q"
+  },
+  {
+   "platform": "windows",
+   "result": "힐링 브러시",
+   "text": "힐링 브러시"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Z",
+   "text": "Ctrl+Z"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Z",
+   "text": "Ctrl+Z"
+  },
+  {
+   "platform": "windows",
+   "result": "실행 취소",
+   "text": "실행 취소"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+Z",
+   "text": "Ctrl+Shift+Z"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Y",
+   "text": "Ctrl+Y"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+Z / Ctrl+Y",
+   "text": "Ctrl+Shift+Z / Ctrl+Y"
+  },
+  {
+   "platform": "windows",
+   "result": "다시 실행",
+   "text": "다시 실행"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+U",
+   "text": "Ctrl+U"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+U",
+   "text": "Ctrl+U"
+  },
+  {
+   "platform": "windows",
+   "result": "자동 톤",
+   "text": "자동 톤"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+U",
+   "text": "Ctrl+Shift+U"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+U",
+   "text": "Ctrl+Shift+U"
+  },
+  {
+   "platform": "windows",
+   "result": "자동 색",
+   "text": "자동 색"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+[",
+   "text": "Ctrl+["
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+]",
+   "text": "Ctrl+]"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+[ / Ctrl+]",
+   "text": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+[ / Ctrl+]",
+   "text": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "platform": "windows",
+   "result": "90° 회전 (왼쪽 · 오른쪽)",
+   "text": "90° 회전 (왼쪽 · 오른쪽)"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+C",
+   "text": "Ctrl+Shift+C"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+C",
+   "text": "Ctrl+Shift+C"
+  },
+  {
+   "platform": "windows",
+   "result": "보정 복사",
+   "text": "보정 복사"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+V",
+   "text": "Ctrl+Shift+V"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+V",
+   "text": "Ctrl+Shift+V"
+  },
+  {
+   "platform": "windows",
+   "result": "보정 붙여넣기",
+   "text": "보정 붙여넣기"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Alt+V",
+   "text": "Ctrl+Alt+V"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Alt+V",
+   "text": "Ctrl+Alt+V"
+  },
+  {
+   "platform": "windows",
+   "result": "이전 사진 보정 붙이기",
+   "text": "이전 사진 보정 붙이기"
+  },
+  {
+   "platform": "windows",
+   "result": "K",
+   "text": "K"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "K",
+   "text": "K"
+  },
+  {
+   "platform": "windows",
+   "result": "새 브러시 마스크",
+   "text": "새 브러시 마스크"
+  },
+  {
+   "platform": "windows",
+   "result": "M",
+   "text": "M"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "M",
+   "text": "M"
+  },
+  {
+   "platform": "windows",
+   "result": "새 선형 그레이디언트 마스크",
+   "text": "새 선형 그레이디언트 마스크"
+  },
+  {
+   "platform": "windows",
+   "result": "Shift+M",
+   "text": "Shift+M"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Shift+M",
+   "text": "Shift+M"
+  },
+  {
+   "platform": "windows",
+   "result": "새 방사형 그레이디언트 마스크",
+   "text": "새 방사형 그레이디언트 마스크"
+  },
+  {
+   "platform": "windows",
+   "result": "O",
+   "text": "O"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "O",
+   "text": "O"
+  },
+  {
+   "platform": "windows",
+   "result": "마스크 오버레이 켜기·끄기",
+   "text": "마스크 오버레이 켜기·끄기"
+  },
+  {
+   "platform": "windows",
+   "result": "[",
+   "text": "["
+  },
+  {
+   "platform": "windows",
+   "result": "]",
+   "text": "]"
+  },
+  {
+   "platform": "windows",
+   "result": "[ / ]",
+   "text": "[ / ]"
+  },
+  {
+   "platform": "windows",
+   "result": "[ / ]",
+   "text": "[ / ]"
+  },
+  {
+   "platform": "windows",
+   "result": "브러시 크기 줄이기 · 키우기",
+   "text": "브러시 크기 줄이기 · 키우기"
+  },
+  {
+   "platform": "windows",
+   "result": "P",
+   "text": "P"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "P",
+   "text": "P"
+  },
+  {
+   "platform": "windows",
+   "result": "선택 표시",
+   "text": "선택 표시"
+  },
+  {
+   "platform": "windows",
+   "result": "X",
+   "text": "X"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "X",
+   "text": "X"
+  },
+  {
+   "platform": "windows",
+   "result": "제외 표시",
+   "text": "제외 표시"
+  },
+  {
+   "platform": "windows",
+   "result": "U",
+   "text": "U"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "U",
+   "text": "U"
+  },
+  {
+   "platform": "windows",
+   "result": "표시 해제",
+   "text": "표시 해제"
+  },
+  {
+   "platform": "windows",
+   "result": "0",
+   "text": "0"
+  },
+  {
+   "platform": "windows",
+   "result": "1",
+   "text": "1"
+  },
+  {
+   "platform": "windows",
+   "result": "2",
+   "text": "2"
+  },
+  {
+   "platform": "windows",
+   "result": "3",
+   "text": "3"
+  },
+  {
+   "platform": "windows",
+   "result": "4",
+   "text": "4"
+  },
+  {
+   "platform": "windows",
+   "result": "5",
+   "text": "5"
+  },
+  {
+   "platform": "windows",
+   "result": "0 – 5",
+   "text": "0 – 5"
+  },
+  {
+   "platform": "windows",
+   "result": "0 / 1 / 2 / 3 / 4 / 5",
+   "text": "0 / 1 / 2 / 3 / 4 / 5"
+  },
+  {
+   "platform": "windows",
+   "result": "별점 0–5",
+   "text": "별점 0–5"
+  },
+  {
+   "platform": "windows",
+   "result": "6",
+   "text": "6"
+  },
+  {
+   "platform": "windows",
+   "result": "7",
+   "text": "7"
+  },
+  {
+   "platform": "windows",
+   "result": "8",
+   "text": "8"
+  },
+  {
+   "platform": "windows",
+   "result": "9",
+   "text": "9"
+  },
+  {
+   "platform": "windows",
+   "result": "6 – 9",
+   "text": "6 – 9"
+  },
+  {
+   "platform": "windows",
+   "result": "6 / 7 / 8 / 9",
+   "text": "6 / 7 / 8 / 9"
+  },
+  {
+   "platform": "windows",
+   "result": "색 라벨: 빨강 · 노랑 · 초록 · 파랑 (같은 키를 한 번 더 누르면 해제)",
+   "text": "색 라벨: 빨강 · 노랑 · 초록 · 파랑 (같은 키를 한 번 더 누르면 해제)"
+  },
+  {
+   "platform": "windows",
+   "result": "B",
+   "text": "B"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "B",
+   "text": "B"
+  },
+  {
+   "platform": "windows",
+   "result": "빠른 컬렉션에 추가·제외",
+   "text": "빠른 컬렉션에 추가·제외"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+'",
+   "text": "Ctrl+'"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+'",
+   "text": "Ctrl+'"
+  },
+  {
+   "platform": "windows",
+   "result": "가상 사본 만들기",
+   "text": "가상 사본 만들기"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+O",
+   "text": "Ctrl+O"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+O",
+   "text": "Ctrl+O"
+  },
+  {
+   "platform": "windows",
+   "result": "사진 가져오기",
+   "text": "사진 가져오기"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+E",
+   "text": "Ctrl+Shift+E"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+Shift+E",
+   "text": "Ctrl+Shift+E"
+  },
+  {
+   "platform": "windows",
+   "result": "내보내기…",
+   "text": "내보내기…"
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+E",
+   "text": "Ctrl+E"
+  },
+  {
+   "platform": "windows",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "windows",
+   "result": "Ctrl+E",
+   "text": "Ctrl+E"
+  },
+  {
+   "platform": "windows",
+   "result": "이전 설정으로 내보내기",
+   "text": "이전 설정으로 내보내기"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘",
+   "text": "Ctrl"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘",
+   "text": "Ctrl+"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Z",
+   "text": "Ctrl+Z"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+Z",
+   "text": "Ctrl+Shift+Z"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Alt+V / ⌘Y",
+   "text": "Ctrl+Alt+V / Ctrl+Y"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘⌘",
+   "text": "Ctrl+Ctrl+"
+  },
+  {
+   "platform": "macos",
+   "result": "ctrl+z",
+   "text": "ctrl+z"
+  },
+  {
+   "platform": "macos",
+   "result": "No Control here",
+   "text": "No Control here"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘/ ⌘[ ⌘]",
+   "text": "Ctrl+/ Ctrl+[ Ctrl+]"
+  },
+  {
+   "platform": "macos",
+   "result": "Press ⌘+",
+   "text": "Press Ctrl++"
+  },
+  {
+   "platform": "macos",
+   "result": "단축키 ⌘E 를 누르세요",
+   "text": "단축키 Ctrl+E 를 누르세요"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘⌘",
+   "text": "CtrlCtrl"
+  },
+  {
+   "platform": "macos",
+   "result": "Shift+/",
+   "text": "Shift+/"
+  },
+  {
+   "platform": "macos",
+   "result": "\\",
+   "text": "\\"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "\\",
+   "text": "\\"
+  },
+  {
+   "platform": "macos",
+   "result": "원본 비교",
+   "text": "원본 비교"
+  },
+  {
+   "platform": "macos",
+   "result": "C",
+   "text": "C"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "C",
+   "text": "C"
+  },
+  {
+   "platform": "macos",
+   "result": "비교 보기",
+   "text": "비교 보기"
+  },
+  {
+   "platform": "macos",
+   "result": "D",
+   "text": "D"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "D",
+   "text": "D"
+  },
+  {
+   "platform": "macos",
+   "result": "현상으로 이동",
+   "text": "현상으로 이동"
+  },
+  {
+   "platform": "macos",
+   "result": "G",
+   "text": "G"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "G",
+   "text": "G"
+  },
+  {
+   "platform": "macos",
+   "result": "라이브러리로 이동",
+   "text": "라이브러리로 이동"
+  },
+  {
+   "platform": "macos",
+   "result": "J",
+   "text": "J"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "J",
+   "text": "J"
+  },
+  {
+   "platform": "macos",
+   "result": "클리핑 표시 켜기·끄기",
+   "text": "클리핑 표시 켜기·끄기"
+  },
+  {
+   "platform": "macos",
+   "result": "Z",
+   "text": "Z"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "Z",
+   "text": "Z"
+  },
+  {
+   "platform": "macos",
+   "result": "1:1과 화면 맞춤 번갈아 보기",
+   "text": "1:1과 화면 맞춤 번갈아 보기"
+  },
+  {
+   "platform": "macos",
+   "result": "F",
+   "text": "F"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "F",
+   "text": "F"
+  },
+  {
+   "platform": "macos",
+   "result": "전체 화면 켜기·끄기 (Esc로 나옴)",
+   "text": "전체 화면 켜기·끄기 (Esc로 나옴)"
+  },
+  {
+   "platform": "macos",
+   "result": "Tab",
+   "text": "Tab"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "Tab",
+   "text": "Tab"
+  },
+  {
+   "platform": "macos",
+   "result": "양옆 패널 숨기기·보이기",
+   "text": "양옆 패널 숨기기·보이기"
+  },
+  {
+   "platform": "macos",
+   "result": "Shift+Tab",
+   "text": "Shift+Tab"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "Shift+Tab",
+   "text": "Shift+Tab"
+  },
+  {
+   "platform": "macos",
+   "result": "모든 패널 숨기기·보이기",
+   "text": "모든 패널 숨기기·보이기"
+  },
+  {
+   "platform": "macos",
+   "result": "L",
+   "text": "L"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "L",
+   "text": "L"
+  },
+  {
+   "platform": "macos",
+   "result": "조명 끄기: 사진만 보기 (Esc로 나옴)",
+   "text": "조명 끄기: 사진만 보기 (Esc로 나옴)"
+  },
+  {
+   "platform": "macos",
+   "result": "Shift+/",
+   "text": "Shift+/"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘/",
+   "text": "Ctrl+/"
+  },
+  {
+   "platform": "macos",
+   "result": "? / ⌘/",
+   "text": "? / Ctrl+/"
+  },
+  {
+   "platform": "macos",
+   "result": "Shift+/ / ⌘/",
+   "text": "Shift+/ / Ctrl+/"
+  },
+  {
+   "platform": "macos",
+   "result": "단축키 목록",
+   "text": "단축키 목록"
+  },
+  {
+   "platform": "macos",
+   "result": "R",
+   "text": "R"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "R",
+   "text": "R"
+  },
+  {
+   "platform": "macos",
+   "result": "크롭",
+   "text": "크롭"
+  },
+  {
+   "platform": "macos",
+   "result": "W",
+   "text": "W"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "W",
+   "text": "W"
+  },
+  {
+   "platform": "macos",
+   "result": "화이트 밸런스 스포이드 · 드래그하면 영역 평균",
+   "text": "화이트 밸런스 스포이드 · 드래그하면 영역 평균"
+  },
+  {
+   "platform": "macos",
+   "result": "Q",
+   "text": "Q"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "Q",
+   "text": "Q"
+  },
+  {
+   "platform": "macos",
+   "result": "힐링 브러시",
+   "text": "힐링 브러시"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Z",
+   "text": "Ctrl+Z"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Z",
+   "text": "Ctrl+Z"
+  },
+  {
+   "platform": "macos",
+   "result": "실행 취소",
+   "text": "실행 취소"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+Z",
+   "text": "Ctrl+Shift+Z"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Y",
+   "text": "Ctrl+Y"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+Z / ⌘Y",
+   "text": "Ctrl+Shift+Z / Ctrl+Y"
+  },
+  {
+   "platform": "macos",
+   "result": "다시 실행",
+   "text": "다시 실행"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘U",
+   "text": "Ctrl+U"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘U",
+   "text": "Ctrl+U"
+  },
+  {
+   "platform": "macos",
+   "result": "자동 톤",
+   "text": "자동 톤"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+U",
+   "text": "Ctrl+Shift+U"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+U",
+   "text": "Ctrl+Shift+U"
+  },
+  {
+   "platform": "macos",
+   "result": "자동 색",
+   "text": "자동 색"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘[",
+   "text": "Ctrl+["
+  },
+  {
+   "platform": "macos",
+   "result": "⌘]",
+   "text": "Ctrl+]"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘[ / ⌘]",
+   "text": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘[ / ⌘]",
+   "text": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "platform": "macos",
+   "result": "90° 회전 (왼쪽 · 오른쪽)",
+   "text": "90° 회전 (왼쪽 · 오른쪽)"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+C",
+   "text": "Ctrl+Shift+C"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+C",
+   "text": "Ctrl+Shift+C"
+  },
+  {
+   "platform": "macos",
+   "result": "보정 복사",
+   "text": "보정 복사"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+V",
+   "text": "Ctrl+Shift+V"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+V",
+   "text": "Ctrl+Shift+V"
+  },
+  {
+   "platform": "macos",
+   "result": "보정 붙여넣기",
+   "text": "보정 붙여넣기"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Alt+V",
+   "text": "Ctrl+Alt+V"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Alt+V",
+   "text": "Ctrl+Alt+V"
+  },
+  {
+   "platform": "macos",
+   "result": "이전 사진 보정 붙이기",
+   "text": "이전 사진 보정 붙이기"
+  },
+  {
+   "platform": "macos",
+   "result": "K",
+   "text": "K"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "K",
+   "text": "K"
+  },
+  {
+   "platform": "macos",
+   "result": "새 브러시 마스크",
+   "text": "새 브러시 마스크"
+  },
+  {
+   "platform": "macos",
+   "result": "M",
+   "text": "M"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "M",
+   "text": "M"
+  },
+  {
+   "platform": "macos",
+   "result": "새 선형 그레이디언트 마스크",
+   "text": "새 선형 그레이디언트 마스크"
+  },
+  {
+   "platform": "macos",
+   "result": "Shift+M",
+   "text": "Shift+M"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "Shift+M",
+   "text": "Shift+M"
+  },
+  {
+   "platform": "macos",
+   "result": "새 방사형 그레이디언트 마스크",
+   "text": "새 방사형 그레이디언트 마스크"
+  },
+  {
+   "platform": "macos",
+   "result": "O",
+   "text": "O"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "O",
+   "text": "O"
+  },
+  {
+   "platform": "macos",
+   "result": "마스크 오버레이 켜기·끄기",
+   "text": "마스크 오버레이 켜기·끄기"
+  },
+  {
+   "platform": "macos",
+   "result": "[",
+   "text": "["
+  },
+  {
+   "platform": "macos",
+   "result": "]",
+   "text": "]"
+  },
+  {
+   "platform": "macos",
+   "result": "[ / ]",
+   "text": "[ / ]"
+  },
+  {
+   "platform": "macos",
+   "result": "[ / ]",
+   "text": "[ / ]"
+  },
+  {
+   "platform": "macos",
+   "result": "브러시 크기 줄이기 · 키우기",
+   "text": "브러시 크기 줄이기 · 키우기"
+  },
+  {
+   "platform": "macos",
+   "result": "P",
+   "text": "P"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "P",
+   "text": "P"
+  },
+  {
+   "platform": "macos",
+   "result": "선택 표시",
+   "text": "선택 표시"
+  },
+  {
+   "platform": "macos",
+   "result": "X",
+   "text": "X"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "X",
+   "text": "X"
+  },
+  {
+   "platform": "macos",
+   "result": "제외 표시",
+   "text": "제외 표시"
+  },
+  {
+   "platform": "macos",
+   "result": "U",
+   "text": "U"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "U",
+   "text": "U"
+  },
+  {
+   "platform": "macos",
+   "result": "표시 해제",
+   "text": "표시 해제"
+  },
+  {
+   "platform": "macos",
+   "result": "0",
+   "text": "0"
+  },
+  {
+   "platform": "macos",
+   "result": "1",
+   "text": "1"
+  },
+  {
+   "platform": "macos",
+   "result": "2",
+   "text": "2"
+  },
+  {
+   "platform": "macos",
+   "result": "3",
+   "text": "3"
+  },
+  {
+   "platform": "macos",
+   "result": "4",
+   "text": "4"
+  },
+  {
+   "platform": "macos",
+   "result": "5",
+   "text": "5"
+  },
+  {
+   "platform": "macos",
+   "result": "0 – 5",
+   "text": "0 – 5"
+  },
+  {
+   "platform": "macos",
+   "result": "0 / 1 / 2 / 3 / 4 / 5",
+   "text": "0 / 1 / 2 / 3 / 4 / 5"
+  },
+  {
+   "platform": "macos",
+   "result": "별점 0–5",
+   "text": "별점 0–5"
+  },
+  {
+   "platform": "macos",
+   "result": "6",
+   "text": "6"
+  },
+  {
+   "platform": "macos",
+   "result": "7",
+   "text": "7"
+  },
+  {
+   "platform": "macos",
+   "result": "8",
+   "text": "8"
+  },
+  {
+   "platform": "macos",
+   "result": "9",
+   "text": "9"
+  },
+  {
+   "platform": "macos",
+   "result": "6 – 9",
+   "text": "6 – 9"
+  },
+  {
+   "platform": "macos",
+   "result": "6 / 7 / 8 / 9",
+   "text": "6 / 7 / 8 / 9"
+  },
+  {
+   "platform": "macos",
+   "result": "색 라벨: 빨강 · 노랑 · 초록 · 파랑 (같은 키를 한 번 더 누르면 해제)",
+   "text": "색 라벨: 빨강 · 노랑 · 초록 · 파랑 (같은 키를 한 번 더 누르면 해제)"
+  },
+  {
+   "platform": "macos",
+   "result": "B",
+   "text": "B"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "B",
+   "text": "B"
+  },
+  {
+   "platform": "macos",
+   "result": "빠른 컬렉션에 추가·제외",
+   "text": "빠른 컬렉션에 추가·제외"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘'",
+   "text": "Ctrl+'"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘'",
+   "text": "Ctrl+'"
+  },
+  {
+   "platform": "macos",
+   "result": "가상 사본 만들기",
+   "text": "가상 사본 만들기"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘O",
+   "text": "Ctrl+O"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘O",
+   "text": "Ctrl+O"
+  },
+  {
+   "platform": "macos",
+   "result": "사진 가져오기",
+   "text": "사진 가져오기"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+E",
+   "text": "Ctrl+Shift+E"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘Shift+E",
+   "text": "Ctrl+Shift+E"
+  },
+  {
+   "platform": "macos",
+   "result": "내보내기…",
+   "text": "내보내기…"
+  },
+  {
+   "platform": "macos",
+   "result": "⌘E",
+   "text": "Ctrl+E"
+  },
+  {
+   "platform": "macos",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "macos",
+   "result": "⌘E",
+   "text": "Ctrl+E"
+  },
+  {
+   "platform": "macos",
+   "result": "이전 설정으로 내보내기",
+   "text": "이전 설정으로 내보내기"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl",
+   "text": "Ctrl"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+",
+   "text": "Ctrl+"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Z",
+   "text": "Ctrl+Z"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+Z",
+   "text": "Ctrl+Shift+Z"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Alt+V / Ctrl+Y",
+   "text": "Ctrl+Alt+V / Ctrl+Y"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Ctrl+",
+   "text": "Ctrl+Ctrl+"
+  },
+  {
+   "platform": "linux",
+   "result": "ctrl+z",
+   "text": "ctrl+z"
+  },
+  {
+   "platform": "linux",
+   "result": "No Control here",
+   "text": "No Control here"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+/ Ctrl+[ Ctrl+]",
+   "text": "Ctrl+/ Ctrl+[ Ctrl+]"
+  },
+  {
+   "platform": "linux",
+   "result": "Press Ctrl++",
+   "text": "Press Ctrl++"
+  },
+  {
+   "platform": "linux",
+   "result": "단축키 Ctrl+E 를 누르세요",
+   "text": "단축키 Ctrl+E 를 누르세요"
+  },
+  {
+   "platform": "linux",
+   "result": "CtrlCtrl",
+   "text": "CtrlCtrl"
+  },
+  {
+   "platform": "linux",
+   "result": "Shift+/",
+   "text": "Shift+/"
+  },
+  {
+   "platform": "linux",
+   "result": "\\",
+   "text": "\\"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "\\",
+   "text": "\\"
+  },
+  {
+   "platform": "linux",
+   "result": "원본 비교",
+   "text": "원본 비교"
+  },
+  {
+   "platform": "linux",
+   "result": "C",
+   "text": "C"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "C",
+   "text": "C"
+  },
+  {
+   "platform": "linux",
+   "result": "비교 보기",
+   "text": "비교 보기"
+  },
+  {
+   "platform": "linux",
+   "result": "D",
+   "text": "D"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "D",
+   "text": "D"
+  },
+  {
+   "platform": "linux",
+   "result": "현상으로 이동",
+   "text": "현상으로 이동"
+  },
+  {
+   "platform": "linux",
+   "result": "G",
+   "text": "G"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "G",
+   "text": "G"
+  },
+  {
+   "platform": "linux",
+   "result": "라이브러리로 이동",
+   "text": "라이브러리로 이동"
+  },
+  {
+   "platform": "linux",
+   "result": "J",
+   "text": "J"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "J",
+   "text": "J"
+  },
+  {
+   "platform": "linux",
+   "result": "클리핑 표시 켜기·끄기",
+   "text": "클리핑 표시 켜기·끄기"
+  },
+  {
+   "platform": "linux",
+   "result": "Z",
+   "text": "Z"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Z",
+   "text": "Z"
+  },
+  {
+   "platform": "linux",
+   "result": "1:1과 화면 맞춤 번갈아 보기",
+   "text": "1:1과 화면 맞춤 번갈아 보기"
+  },
+  {
+   "platform": "linux",
+   "result": "F",
+   "text": "F"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "F",
+   "text": "F"
+  },
+  {
+   "platform": "linux",
+   "result": "전체 화면 켜기·끄기 (Esc로 나옴)",
+   "text": "전체 화면 켜기·끄기 (Esc로 나옴)"
+  },
+  {
+   "platform": "linux",
+   "result": "Tab",
+   "text": "Tab"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Tab",
+   "text": "Tab"
+  },
+  {
+   "platform": "linux",
+   "result": "양옆 패널 숨기기·보이기",
+   "text": "양옆 패널 숨기기·보이기"
+  },
+  {
+   "platform": "linux",
+   "result": "Shift+Tab",
+   "text": "Shift+Tab"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Shift+Tab",
+   "text": "Shift+Tab"
+  },
+  {
+   "platform": "linux",
+   "result": "모든 패널 숨기기·보이기",
+   "text": "모든 패널 숨기기·보이기"
+  },
+  {
+   "platform": "linux",
+   "result": "L",
+   "text": "L"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "L",
+   "text": "L"
+  },
+  {
+   "platform": "linux",
+   "result": "조명 끄기: 사진만 보기 (Esc로 나옴)",
+   "text": "조명 끄기: 사진만 보기 (Esc로 나옴)"
+  },
+  {
+   "platform": "linux",
+   "result": "Shift+/",
+   "text": "Shift+/"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+/",
+   "text": "Ctrl+/"
+  },
+  {
+   "platform": "linux",
+   "result": "? / Ctrl+/",
+   "text": "? / Ctrl+/"
+  },
+  {
+   "platform": "linux",
+   "result": "Shift+/ / Ctrl+/",
+   "text": "Shift+/ / Ctrl+/"
+  },
+  {
+   "platform": "linux",
+   "result": "단축키 목록",
+   "text": "단축키 목록"
+  },
+  {
+   "platform": "linux",
+   "result": "R",
+   "text": "R"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "R",
+   "text": "R"
+  },
+  {
+   "platform": "linux",
+   "result": "크롭",
+   "text": "크롭"
+  },
+  {
+   "platform": "linux",
+   "result": "W",
+   "text": "W"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "W",
+   "text": "W"
+  },
+  {
+   "platform": "linux",
+   "result": "화이트 밸런스 스포이드 · 드래그하면 영역 평균",
+   "text": "화이트 밸런스 스포이드 · 드래그하면 영역 평균"
+  },
+  {
+   "platform": "linux",
+   "result": "Q",
+   "text": "Q"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Q",
+   "text": "Q"
+  },
+  {
+   "platform": "linux",
+   "result": "힐링 브러시",
+   "text": "힐링 브러시"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Z",
+   "text": "Ctrl+Z"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Z",
+   "text": "Ctrl+Z"
+  },
+  {
+   "platform": "linux",
+   "result": "실행 취소",
+   "text": "실행 취소"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+Z",
+   "text": "Ctrl+Shift+Z"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Y",
+   "text": "Ctrl+Y"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+Z / Ctrl+Y",
+   "text": "Ctrl+Shift+Z / Ctrl+Y"
+  },
+  {
+   "platform": "linux",
+   "result": "다시 실행",
+   "text": "다시 실행"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+U",
+   "text": "Ctrl+U"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+U",
+   "text": "Ctrl+U"
+  },
+  {
+   "platform": "linux",
+   "result": "자동 톤",
+   "text": "자동 톤"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+U",
+   "text": "Ctrl+Shift+U"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+U",
+   "text": "Ctrl+Shift+U"
+  },
+  {
+   "platform": "linux",
+   "result": "자동 색",
+   "text": "자동 색"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+[",
+   "text": "Ctrl+["
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+]",
+   "text": "Ctrl+]"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+[ / Ctrl+]",
+   "text": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+[ / Ctrl+]",
+   "text": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "platform": "linux",
+   "result": "90° 회전 (왼쪽 · 오른쪽)",
+   "text": "90° 회전 (왼쪽 · 오른쪽)"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+C",
+   "text": "Ctrl+Shift+C"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+C",
+   "text": "Ctrl+Shift+C"
+  },
+  {
+   "platform": "linux",
+   "result": "보정 복사",
+   "text": "보정 복사"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+V",
+   "text": "Ctrl+Shift+V"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+V",
+   "text": "Ctrl+Shift+V"
+  },
+  {
+   "platform": "linux",
+   "result": "보정 붙여넣기",
+   "text": "보정 붙여넣기"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Alt+V",
+   "text": "Ctrl+Alt+V"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Alt+V",
+   "text": "Ctrl+Alt+V"
+  },
+  {
+   "platform": "linux",
+   "result": "이전 사진 보정 붙이기",
+   "text": "이전 사진 보정 붙이기"
+  },
+  {
+   "platform": "linux",
+   "result": "K",
+   "text": "K"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "K",
+   "text": "K"
+  },
+  {
+   "platform": "linux",
+   "result": "새 브러시 마스크",
+   "text": "새 브러시 마스크"
+  },
+  {
+   "platform": "linux",
+   "result": "M",
+   "text": "M"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "M",
+   "text": "M"
+  },
+  {
+   "platform": "linux",
+   "result": "새 선형 그레이디언트 마스크",
+   "text": "새 선형 그레이디언트 마스크"
+  },
+  {
+   "platform": "linux",
+   "result": "Shift+M",
+   "text": "Shift+M"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Shift+M",
+   "text": "Shift+M"
+  },
+  {
+   "platform": "linux",
+   "result": "새 방사형 그레이디언트 마스크",
+   "text": "새 방사형 그레이디언트 마스크"
+  },
+  {
+   "platform": "linux",
+   "result": "O",
+   "text": "O"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "O",
+   "text": "O"
+  },
+  {
+   "platform": "linux",
+   "result": "마스크 오버레이 켜기·끄기",
+   "text": "마스크 오버레이 켜기·끄기"
+  },
+  {
+   "platform": "linux",
+   "result": "[",
+   "text": "["
+  },
+  {
+   "platform": "linux",
+   "result": "]",
+   "text": "]"
+  },
+  {
+   "platform": "linux",
+   "result": "[ / ]",
+   "text": "[ / ]"
+  },
+  {
+   "platform": "linux",
+   "result": "[ / ]",
+   "text": "[ / ]"
+  },
+  {
+   "platform": "linux",
+   "result": "브러시 크기 줄이기 · 키우기",
+   "text": "브러시 크기 줄이기 · 키우기"
+  },
+  {
+   "platform": "linux",
+   "result": "P",
+   "text": "P"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "P",
+   "text": "P"
+  },
+  {
+   "platform": "linux",
+   "result": "선택 표시",
+   "text": "선택 표시"
+  },
+  {
+   "platform": "linux",
+   "result": "X",
+   "text": "X"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "X",
+   "text": "X"
+  },
+  {
+   "platform": "linux",
+   "result": "제외 표시",
+   "text": "제외 표시"
+  },
+  {
+   "platform": "linux",
+   "result": "U",
+   "text": "U"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "U",
+   "text": "U"
+  },
+  {
+   "platform": "linux",
+   "result": "표시 해제",
+   "text": "표시 해제"
+  },
+  {
+   "platform": "linux",
+   "result": "0",
+   "text": "0"
+  },
+  {
+   "platform": "linux",
+   "result": "1",
+   "text": "1"
+  },
+  {
+   "platform": "linux",
+   "result": "2",
+   "text": "2"
+  },
+  {
+   "platform": "linux",
+   "result": "3",
+   "text": "3"
+  },
+  {
+   "platform": "linux",
+   "result": "4",
+   "text": "4"
+  },
+  {
+   "platform": "linux",
+   "result": "5",
+   "text": "5"
+  },
+  {
+   "platform": "linux",
+   "result": "0 – 5",
+   "text": "0 – 5"
+  },
+  {
+   "platform": "linux",
+   "result": "0 / 1 / 2 / 3 / 4 / 5",
+   "text": "0 / 1 / 2 / 3 / 4 / 5"
+  },
+  {
+   "platform": "linux",
+   "result": "별점 0–5",
+   "text": "별점 0–5"
+  },
+  {
+   "platform": "linux",
+   "result": "6",
+   "text": "6"
+  },
+  {
+   "platform": "linux",
+   "result": "7",
+   "text": "7"
+  },
+  {
+   "platform": "linux",
+   "result": "8",
+   "text": "8"
+  },
+  {
+   "platform": "linux",
+   "result": "9",
+   "text": "9"
+  },
+  {
+   "platform": "linux",
+   "result": "6 – 9",
+   "text": "6 – 9"
+  },
+  {
+   "platform": "linux",
+   "result": "6 / 7 / 8 / 9",
+   "text": "6 / 7 / 8 / 9"
+  },
+  {
+   "platform": "linux",
+   "result": "색 라벨: 빨강 · 노랑 · 초록 · 파랑 (같은 키를 한 번 더 누르면 해제)",
+   "text": "색 라벨: 빨강 · 노랑 · 초록 · 파랑 (같은 키를 한 번 더 누르면 해제)"
+  },
+  {
+   "platform": "linux",
+   "result": "B",
+   "text": "B"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "B",
+   "text": "B"
+  },
+  {
+   "platform": "linux",
+   "result": "빠른 컬렉션에 추가·제외",
+   "text": "빠른 컬렉션에 추가·제외"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+'",
+   "text": "Ctrl+'"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+'",
+   "text": "Ctrl+'"
+  },
+  {
+   "platform": "linux",
+   "result": "가상 사본 만들기",
+   "text": "가상 사본 만들기"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+O",
+   "text": "Ctrl+O"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+O",
+   "text": "Ctrl+O"
+  },
+  {
+   "platform": "linux",
+   "result": "사진 가져오기",
+   "text": "사진 가져오기"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+E",
+   "text": "Ctrl+Shift+E"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+Shift+E",
+   "text": "Ctrl+Shift+E"
+  },
+  {
+   "platform": "linux",
+   "result": "내보내기…",
+   "text": "내보내기…"
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+E",
+   "text": "Ctrl+E"
+  },
+  {
+   "platform": "linux",
+   "result": "",
+   "text": ""
+  },
+  {
+   "platform": "linux",
+   "result": "Ctrl+E",
+   "text": "Ctrl+E"
+  },
+  {
+   "platform": "linux",
+   "result": "이전 설정으로 내보내기",
+   "text": "이전 설정으로 내보내기"
+  }
+ ]
+}

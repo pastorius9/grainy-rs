@@ -1,0 +1,15 @@
+{
+ "extra": {
+  "ca_red": 5.0,
+  "defringe": 20.0,
+  "distortion": 10.0,
+  "lens_vignette": 30.0
+ },
+ "info": {
+  "aperture": 0,
+  "camera": "NEX-5",
+  "focal_length": 24,
+  "lens": "E 24mm f/1.8 ZA",
+  "make": "Sony"
+ }
+}

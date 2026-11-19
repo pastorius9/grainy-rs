@@ -1,0 +1,48 @@
+{
+ "mean": [
+  0.3447035163008453,
+  0.3402062531981695,
+  0.33048866656537257
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "masks": [
+   {
+    "adjustments": {
+     "exposure": -0.8,
+     "temperature": 40.0
+    },
+    "components": [
+     {
+      "feather": 50,
+      "points": [
+       [
+        0.2,
+        0.5
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.8,
+        0.6
+       ]
+      ],
+      "radius": 0.08,
+      "type": "brush"
+     }
+    ]
+   }
+  ]
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

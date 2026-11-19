@@ -1,0 +1,211 @@
+{
+ "cases": [
+  {
+   "blocks": [
+    [
+     0,
+     0
+    ]
+   ],
+   "checksum": "117ab2de5f77fd3e1d2f1e1b97a67e2a916bd5df5747cee65c0d6a7213a9e1fe",
+   "fallback": 16,
+   "stats": {
+    "fallback_pixels": 16,
+    "tiles": 1,
+    "transferred_pixels": 0
+   },
+   "transferred": 0
+  },
+  {
+   "blocks": [],
+   "checksum": "a64e0263f20f03e19ec1ecb5f93d48600ad925ea5f7eb28c272c67800bc98bfe",
+   "fallback": 0,
+   "stats": {
+    "fallback_pixels": 0,
+    "tiles": 0,
+    "transferred_pixels": 0
+   },
+   "transferred": 0
+  },
+  {
+   "blocks": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "checksum": "9d04d2d02f8dde1afd7070fca9c21959578ea3175b03dc712061042b22ea0885",
+   "fallback": 1920,
+   "stats": {
+    "fallback_pixels": 1920,
+    "tiles": 30,
+    "transferred_pixels": 0
+   },
+   "transferred": 0
+  },
+  {
+   "blocks": [
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "checksum": "7cb4831c2ac3c10b157969ca42549581f5ccc16d8de891fd60e94af87b83c45e",
+   "fallback": 0,
+   "stats": {
+    "fallback_pixels": 0,
+    "tiles": 4,
+    "transferred_pixels": 16
+   },
+   "transferred": 16
+  },
+  {
+   "blocks": [
+    [
+     0,
+     0
+    ],
+    [
+     7,
+     9
+    ]
+   ],
+   "checksum": "bd3a8400635782d6783c2569108853d9c819d8b9f76b653cadd0c1881d300bea",
+   "fallback": 0,
+   "stats": {
+    "fallback_pixels": 0,
+    "tiles": 2,
+    "transferred_pixels": 30
+   },
+   "transferred": 30
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+[package]
+name = "grainy-film"
+description = "Grainy's film looks (spectral film stock simulation) and film negative conversion"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-color = { path = "../grainy-color" }
+grainy-imgproc = { path = "../grainy-imgproc" }
+grainy-core.workspace = true
+ndarray.workspace = true
+rayon.workspace = true
+serde_json = { workspace = true, features = ["float_roundtrip"] }
+thiserror.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

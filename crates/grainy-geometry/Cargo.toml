@@ -1,0 +1,22 @@
+[package]
+name = "grainy-geometry"
+description = "Grainy's geometry stage: lens and manual transforms, quarter turns, flip, straighten (Pillow bicubic), upright, crop, scan borders"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-core.workspace = true
+grainy-color = { path = "../grainy-color" }
+grainy-imgproc = { path = "../grainy-imgproc" }
+ndarray.workspace = true
+rayon.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

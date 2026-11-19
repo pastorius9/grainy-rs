@@ -1,0 +1,36 @@
+[package]
+name = "grainy-mcp"
+description = "Grainy's AI connection: the MCP/JSON-RPC protocol, the 17 tools working on the catalogue and engine, jobs, previews and contact sheets, the GUI-call queue, a headless host and the stdio and HTTP servers"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-core.workspace = true
+grainy-catalog = { path = "../grainy-catalog" }
+grainy-service = { path = "../grainy-service" }
+grainy-engine = { path = "../grainy-engine" }
+grainy-codecs = { path = "../grainy-codecs" }
+grainy-cms = { path = "../grainy-cms" }
+grainy-raw = { path = "../grainy-raw" }
+grainy-film = { path = "../grainy-film" }
+grainy-i18n = { path = "../grainy-i18n" }
+grainy-library = { path = "../grainy-library" }
+grainy-jpeg-sys = { path = "../grainy-jpeg-sys" }
+ndarray.workspace = true
+# preserve_order: Python dicts keep insertion order and `dumps` does not sort, so the bytes depend on it.
+serde_json = { workspace = true, features = ["preserve_order"] }
+thiserror.workspace = true
+chrono.workspace = true
+unicode-casefold = "0.2"
+# Caption text of the contact sheets (Apache-2.0, pure Rust).
+ab_glyph = "0.2"
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+ndarray-npy.workspace = true
+sha2.workspace = true
+
+[lints]
+workspace = true

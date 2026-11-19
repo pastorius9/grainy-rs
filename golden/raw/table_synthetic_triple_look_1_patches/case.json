@@ -1,0 +1,9 @@
+{
+ "arrays": {
+  "input": "5cde779ee73af4eed316229e5fce4a9338667846896978673f2b250aa32cf252",
+  "output": "1418cbfec78dffdd8df2327a43046105439ef91bcb8b10c6f9ad7cb175d3d2b4"
+ },
+ "encoding": 1,
+ "kind": "look",
+ "profile": "synthetic_triple"
+}

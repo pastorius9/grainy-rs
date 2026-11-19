@@ -1,0 +1,23 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "exposure": 0.3,
+  "negative": true,
+  "negative_base": [
+   1.5479137897491455,
+   1.2492680549621582,
+   0.7447492480278015
+  ],
+  "negative_density": 1.5,
+  "negative_peak": [
+   0.10268495231866837,
+   0.0654924288392067,
+   0.03575357422232628
+  ],
+  "negative_range": 5.0,
+  "saturation": 20.0
+ },
+ "source": "negative",
+ "use_crop": true
+}

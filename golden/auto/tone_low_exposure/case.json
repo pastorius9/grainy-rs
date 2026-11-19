@@ -1,0 +1,46 @@
+{
+ "changed": {
+  "blacks": -200.0,
+  "contrast": 0.0,
+  "curve": [
+   [
+    0.0,
+    0.03
+   ],
+   [
+    0.3306421247326528,
+    0.03
+   ],
+   [
+    0.6653210623663264,
+    0.5
+   ],
+   [
+    1.0,
+    0.97
+   ]
+  ],
+  "exposure": 1.2043774699665184,
+  "tone_version": 3,
+  "whites": 127.5647809936376
+ },
+ "removed": [],
+ "report": {
+  "black_point": 0.8,
+  "exposure": 1.2043774699665184,
+  "high_percentile": 99.9,
+  "input_black": 149.1,
+  "input_white": 167.8,
+  "low_percentile": 0.1,
+  "margin_percent": 3.0,
+  "output_black": 7.6499999999999995,
+  "output_white": 247.35,
+  "status": "applied",
+  "white_gain": 2.421075063999809
+ },
+ "settings": {
+  "contrast": 15.0,
+  "exposure": 1.2
+ },
+ "source": "low"
+}

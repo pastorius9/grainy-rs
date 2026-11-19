@@ -1,0 +1,13 @@
+{
+ "bits_sum": "4828741705157050368",
+ "image": "colours",
+ "pixel_scale": 0.25,
+ "settings": {
+  "defringe": 60.0,
+  "detail_version": 3
+ },
+ "step": [
+  3,
+  3
+ ]
+}

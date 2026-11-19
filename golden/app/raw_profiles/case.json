@@ -1,0 +1,1329 @@
+{
+ "cancelled": {
+  "cancelled": true,
+  "errors": 0,
+  "files": 0,
+  "parsed": 0,
+  "profiles": [],
+  "truncated": false
+ },
+ "capped": {
+  "cancelled": false,
+  "errors": 0,
+  "files": 3,
+  "parsed": 3,
+  "profiles": [
+   {
+    "camera": "",
+    "copyright": "",
+    "error": false,
+    "name": "generic",
+    "path": "<T>\\lib\\camera-profiles\\generic.dcp",
+    "paths": [
+     "<T>\\lib\\camera-profiles\\generic.dcp"
+    ],
+    "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+   },
+   {
+    "camera": "",
+    "copyright": "",
+    "error": true,
+    "name": "hdr",
+    "path": "<T>\\lib\\camera-profiles\\hdr.dcp",
+    "paths": [
+     "<T>\\lib\\camera-profiles\\hdr.dcp"
+    ],
+    "sha256": "b80b1f2895b4746f014dc3ab8d12fe6ee6040faeecf5c8022fc40669daf51875"
+   },
+   {
+    "camera": "Test Camera",
+    "copyright": "Luma test data",
+    "error": false,
+    "name": "Luma test",
+    "path": "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "paths": [
+     "<T>\\lib\\camera-profiles\\Luma Test.dcp"
+    ],
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   }
+  ],
+  "truncated": true
+ },
+ "capped_index": [
+  {
+   "path": "<t>\\lib\\camera-profiles\\generic.dcp",
+   "stamp": "3:236",
+   "summary": {
+    "camera": "",
+    "copyright": "",
+    "error": false,
+    "name": "generic",
+    "path": "<T>\\lib\\camera-profiles\\generic.dcp",
+    "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+   }
+  },
+  {
+   "path": "<t>\\lib\\camera-profiles\\hdr.dcp",
+   "stamp": "3:118",
+   "summary": {
+    "camera": "",
+    "copyright": "",
+    "error": true,
+    "name": "hdr",
+    "path": "<T>\\lib\\camera-profiles\\hdr.dcp",
+    "sha256": "b80b1f2895b4746f014dc3ab8d12fe6ee6040faeecf5c8022fc40669daf51875"
+   }
+  },
+  {
+   "path": "<t>\\lib\\camera-profiles\\luma test.dcp",
+   "stamp": "3:279",
+   "summary": {
+    "camera": "Test Camera",
+    "copyright": "Luma test data",
+    "error": false,
+    "name": "Luma test",
+    "path": "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   }
+  }
+ ],
+ "changed": [
+  "extra/single.dcp",
+  "raw/_files/profile_synthetic_big_endian/profile.dcp"
+ ],
+ "compatible": [
+  {
+   "metadata": "test",
+   "names": [
+    "<T>\\lib\\camera-profiles\\generic.dcp",
+    "<T>\\lib\\camera-profiles\\hdr.dcp",
+    "<T>\\extra\\short.dcp",
+    "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+   ],
+   "only": false,
+   "search": ""
+  },
+  {
+   "metadata": "test",
+   "names": [],
+   "only": true,
+   "search": ""
+  },
+  {
+   "metadata": "test",
+   "names": [
+    "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+   ],
+   "only": false,
+   "search": "luma"
+  },
+  {
+   "metadata": "test",
+   "names": [],
+   "only": true,
+   "search": "luma"
+  },
+  {
+   "metadata": "test",
+   "names": [
+    "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+   ],
+   "only": false,
+   "search": "LUMA  test"
+  },
+  {
+   "metadata": "test",
+   "names": [],
+   "only": true,
+   "search": "LUMA  test"
+  },
+  {
+   "metadata": "test",
+   "names": [],
+   "only": false,
+   "search": "xyz"
+  },
+  {
+   "metadata": "test",
+   "names": [],
+   "only": true,
+   "search": "xyz"
+  },
+  {
+   "metadata": "test",
+   "names": [],
+   "only": false,
+   "search": "synthetic dual"
+  },
+  {
+   "metadata": "test",
+   "names": [],
+   "only": true,
+   "search": "synthetic dual"
+  },
+  {
+   "metadata": "test",
+   "names": [
+    "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+   ],
+   "only": false,
+   "search": "Camera"
+  },
+  {
+   "metadata": "test",
+   "names": [],
+   "only": true,
+   "search": "Camera"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [
+    "<T>\\lib\\camera-profiles\\generic.dcp",
+    "<T>\\lib\\camera-profiles\\hdr.dcp",
+    "<T>\\extra\\short.dcp",
+    "<T>\\extra\\single.dcp",
+    "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp",
+    "<T>\\extra\\synth triple.dcp"
+   ],
+   "only": false,
+   "search": ""
+  },
+  {
+   "metadata": "synthetic",
+   "names": [
+    "<T>\\extra\\synth triple.dcp"
+   ],
+   "only": true,
+   "search": ""
+  },
+  {
+   "metadata": "synthetic",
+   "names": [],
+   "only": false,
+   "search": "luma"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [],
+   "only": true,
+   "search": "luma"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [],
+   "only": false,
+   "search": "LUMA  test"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [],
+   "only": true,
+   "search": "LUMA  test"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [],
+   "only": false,
+   "search": "xyz"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [],
+   "only": true,
+   "search": "xyz"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [
+    "<T>\\extra\\single.dcp",
+    "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp"
+   ],
+   "only": false,
+   "search": "synthetic dual"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [],
+   "only": true,
+   "search": "synthetic dual"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [],
+   "only": false,
+   "search": "Camera"
+  },
+  {
+   "metadata": "synthetic",
+   "names": [],
+   "only": true,
+   "search": "Camera"
+  },
+  {
+   "metadata": "other",
+   "names": [
+    "<T>\\lib\\camera-profiles\\generic.dcp",
+    "<T>\\lib\\camera-profiles\\hdr.dcp",
+    "<T>\\extra\\short.dcp"
+   ],
+   "only": false,
+   "search": ""
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": true,
+   "search": ""
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": false,
+   "search": "luma"
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": true,
+   "search": "luma"
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": false,
+   "search": "LUMA  test"
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": true,
+   "search": "LUMA  test"
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": false,
+   "search": "xyz"
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": true,
+   "search": "xyz"
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": false,
+   "search": "synthetic dual"
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": true,
+   "search": "synthetic dual"
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": false,
+   "search": "Camera"
+  },
+  {
+   "metadata": "other",
+   "names": [],
+   "only": true,
+   "search": "Camera"
+  },
+  {
+   "metadata": "unique",
+   "names": [
+    "<T>\\lib\\camera-profiles\\generic.dcp",
+    "<T>\\lib\\camera-profiles\\hdr.dcp",
+    "<T>\\extra\\short.dcp",
+    "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+   ],
+   "only": false,
+   "search": ""
+  },
+  {
+   "metadata": "unique",
+   "names": [],
+   "only": true,
+   "search": ""
+  },
+  {
+   "metadata": "unique",
+   "names": [
+    "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+   ],
+   "only": false,
+   "search": "luma"
+  },
+  {
+   "metadata": "unique",
+   "names": [],
+   "only": true,
+   "search": "luma"
+  },
+  {
+   "metadata": "unique",
+   "names": [
+    "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+   ],
+   "only": false,
+   "search": "LUMA  test"
+  },
+  {
+   "metadata": "unique",
+   "names": [],
+   "only": true,
+   "search": "LUMA  test"
+  },
+  {
+   "metadata": "unique",
+   "names": [],
+   "only": false,
+   "search": "xyz"
+  },
+  {
+   "metadata": "unique",
+   "names": [],
+   "only": true,
+   "search": "xyz"
+  },
+  {
+   "metadata": "unique",
+   "names": [],
+   "only": false,
+   "search": "synthetic dual"
+  },
+  {
+   "metadata": "unique",
+   "names": [],
+   "only": true,
+   "search": "synthetic dual"
+  },
+  {
+   "metadata": "unique",
+   "names": [
+    "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+   ],
+   "only": false,
+   "search": "Camera"
+  },
+  {
+   "metadata": "unique",
+   "names": [],
+   "only": true,
+   "search": "Camera"
+  }
+ ],
+ "dialog": [
+  [
+   "open",
+   {
+    "apply": false,
+    "current": -1,
+    "detail": "설치된 프로파일을 찾고 있습니다…",
+    "favorite": true,
+    "favorites": [],
+    "items": [],
+    "status": ""
+   }
+  ],
+  [
+   "refresh",
+   {
+    "apply": true,
+    "current": 0,
+    "detail": "generic · 공용\n\n<T>\\lib\\camera-profiles\\generic.dcp",
+    "favorite": true,
+    "favorites": [],
+    "items": [
+     "generic",
+     "hdr · 지원 안 됨",
+     "Luma test",
+     "Luma test",
+     "short · 지원 안 됨"
+    ],
+    "status": "9개 파일 확인 · 9개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "select 1",
+   {
+    "apply": false,
+    "current": 1,
+    "detail": "hdr · 공용\n\nHDR DCP는 아직 지원하지 않습니다.",
+    "favorite": true,
+    "favorites": [],
+    "items": [
+     "generic",
+     "hdr · 지원 안 됨",
+     "Luma test",
+     "Luma test",
+     "short · 지원 안 됨"
+    ],
+    "status": "9개 파일 확인 · 9개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "favorite",
+   {
+    "apply": false,
+    "current": 0,
+    "detail": "hdr · 공용\n\nHDR DCP는 아직 지원하지 않습니다.",
+    "favorite": true,
+    "favorites": [
+     "b80b1f2895b4746f014dc3ab8d12fe6ee6040faeecf5c8022fc40669daf51875"
+    ],
+    "items": [
+     "★ hdr · 지원 안 됨",
+     "generic",
+     "Luma test",
+     "Luma test",
+     "short · 지원 안 됨"
+    ],
+    "status": "9개 파일 확인 · 9개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "search luma",
+   {
+    "apply": true,
+    "current": 0,
+    "detail": "Luma test · Test Camera\nLuma test data\n<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "favorite": true,
+    "favorites": [
+     "b80b1f2895b4746f014dc3ab8d12fe6ee6040faeecf5c8022fc40669daf51875"
+    ],
+    "items": [
+     "Luma test",
+     "Luma test"
+    ],
+    "status": "9개 파일 확인 · 9개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "favorites only",
+   {
+    "apply": false,
+    "current": 0,
+    "detail": "hdr · 공용\n\nHDR DCP는 아직 지원하지 않습니다.",
+    "favorite": true,
+    "favorites": [
+     "b80b1f2895b4746f014dc3ab8d12fe6ee6040faeecf5c8022fc40669daf51875"
+    ],
+    "items": [
+     "★ hdr · 지원 안 됨"
+    ],
+    "status": "9개 파일 확인 · 9개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "unfavorite",
+   {
+    "apply": false,
+    "current": 1,
+    "detail": "hdr · 공용\n\nHDR DCP는 아직 지원하지 않습니다.",
+    "favorite": true,
+    "favorites": [],
+    "items": [
+     "generic",
+     "hdr · 지원 안 됨",
+     "Luma test",
+     "Luma test",
+     "short · 지원 안 됨"
+    ],
+    "status": "9개 파일 확인 · 9개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "search zzz",
+   {
+    "apply": false,
+    "current": -1,
+    "detail": "일치하는 프로파일이 없습니다. 검색어를 지우거나 DCP 폴더를 추가하세요.",
+    "favorite": false,
+    "favorites": [],
+    "items": [],
+    "status": "9개 파일 확인 · 9개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "select last",
+   {
+    "apply": false,
+    "current": 4,
+    "detail": "short · 공용\n\nDCP 파일 크기가 잘못되었거나 4MB를 초과합니다.",
+    "favorite": true,
+    "favorites": [],
+    "items": [
+     "generic",
+     "hdr · 지원 안 됨",
+     "Luma test",
+     "Luma test",
+     "short · 지원 안 됨"
+    ],
+    "status": "9개 파일 확인 · 9개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "choose disabled",
+   {
+    "record": null,
+    "warnings": []
+   }
+  ],
+  [
+   "choose",
+   {
+    "record": {
+     "camera": "Test Camera",
+     "name": "Luma test",
+     "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+    },
+    "warnings": []
+   }
+  ],
+  [
+   "synthetic",
+   {
+    "apply": true,
+    "current": 0,
+    "detail": "generic · 공용\n\n<T>\\lib\\camera-profiles\\generic.dcp",
+    "favorite": true,
+    "favorites": [],
+    "items": [
+     "generic",
+     "hdr · 지원 안 됨",
+     "short · 지원 안 됨",
+     "Synthetic dual",
+     "Synthetic dual",
+     "Synthetic triple"
+    ],
+    "status": "9개 파일 확인 · 0개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "synthetic select 0",
+   {
+    "apply": true,
+    "current": 0,
+    "detail": "generic · 공용\n\n<T>\\lib\\camera-profiles\\generic.dcp",
+    "favorite": true,
+    "favorites": [],
+    "items": [
+     "generic",
+     "hdr · 지원 안 됨",
+     "short · 지원 안 됨",
+     "Synthetic dual",
+     "Synthetic dual",
+     "Synthetic triple"
+    ],
+    "status": "9개 파일 확인 · 0개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "remove folder",
+   {
+    "apply": true,
+    "current": 0,
+    "detail": "generic · 공용\n\n<T>\\lib\\camera-profiles\\generic.dcp",
+    "favorite": true,
+    "favorites": [],
+    "items": [
+     "generic",
+     "hdr · 지원 안 됨",
+     "Synthetic dual"
+    ],
+    "status": "6개 파일 확인 · 0개 갱신 · 미지원/읽기 오류 1개"
+   }
+  ],
+  [
+   "remove folder again",
+   {
+    "apply": true,
+    "current": 0,
+    "detail": "generic · 공용\n\n<T>\\lib\\camera-profiles\\generic.dcp",
+    "favorite": true,
+    "favorites": [],
+    "items": [
+     "generic",
+     "hdr · 지원 안 됨",
+     "Synthetic dual"
+    ],
+    "status": "추가한 폴더가 없습니다."
+   }
+  ],
+  [
+   "add folder",
+   {
+    "apply": true,
+    "current": 0,
+    "detail": "generic · 공용\n\n<T>\\lib\\camera-profiles\\generic.dcp",
+    "favorite": true,
+    "favorites": [],
+    "items": [
+     "generic",
+     "hdr · 지원 안 됨",
+     "short · 지원 안 됨",
+     "Synthetic dual",
+     "Synthetic dual",
+     "Synthetic triple"
+    ],
+    "status": "9개 파일 확인 · 0개 갱신 · 미지원/읽기 오류 2개"
+   }
+  ],
+  [
+   "synthetic choose",
+   {
+    "record": {
+     "camera": "",
+     "name": "DCP",
+     "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+    },
+    "warnings": []
+   }
+  ]
+ ],
+ "dialog_favorites": [],
+ "environment": {
+  "APPDATA": "<T>\\appdata",
+  "LOCALAPPDATA": "<T>\\localappdata",
+  "PROGRAMDATA": "<T>\\programdata"
+ },
+ "extra": "<T>\\extra",
+ "favorites": [
+  "32a24ddd77ff1be597bf63a6b4c8d2a287421392d30c01803f37317eebf73723"
+ ],
+ "files": [
+  [
+   "lib/camera-profiles/Luma Test.dcp",
+   "raw/_files/profile_test-camera/profile.dcp"
+  ],
+  [
+   "lib/camera-profiles/dual.dcp",
+   "raw/_files/profile_synthetic_dual/profile.dcp"
+  ],
+  [
+   "lib/camera-profiles/generic.dcp",
+   "raw/_files/profile_synthetic_custom/profile.dcp"
+  ],
+  [
+   "lib/camera-profiles/hdr.dcp",
+   "raw/_files/invalid_hdr/profile.dcp"
+  ],
+  [
+   "lib/camera-profiles/notes.txt",
+   null
+  ],
+  [
+   "lib/camera-profiles/sub/copy.DCP",
+   "raw/_files/profile_test-camera/profile.dcp"
+  ],
+  [
+   "programdata/Adobe/CameraRaw/CameraProfiles/triple.dcp",
+   "raw/_files/profile_test-triple-illuminant/profile.dcp"
+  ],
+  [
+   "localappdata/Luma/CameraProfiles/forward.dcp",
+   "raw/_files/profile_synthetic_forward/profile.dcp"
+  ],
+  [
+   "extra/synth triple.dcp",
+   "raw/_files/profile_synthetic_triple/profile.dcp"
+  ],
+  [
+   "extra/single.dcp",
+   "raw/_files/profile_synthetic_single/profile.dcp"
+  ],
+  [
+   "extra/short.dcp",
+   "raw/_files/invalid_short/profile.dcp"
+  ]
+ ],
+ "folders_after_add": [
+  "<T>\\extra"
+ ],
+ "folders_after_remove": [],
+ "index": [
+  {
+   "path": "<t>\\extra\\short.dcp",
+   "stamp": "3:2",
+   "summary": {
+    "camera": "",
+    "copyright": "",
+    "error": true,
+    "name": "short",
+    "path": "<T>\\extra\\short.dcp",
+    "sha256": "2e561ff2355c06484efc416619b5b7f7fc055acdb4e5b6db7a4bc0a5016b19e3"
+   }
+  },
+  {
+   "path": "<t>\\extra\\single.dcp",
+   "stamp": "3:3077",
+   "summary": {
+    "camera": "Grainy Synthetic",
+    "copyright": "",
+    "error": false,
+    "name": "Synthetic dual",
+    "path": "<T>\\extra\\single.dcp",
+    "sha256": "e969019734cb79b94dc95af4cd5871a6848082d79fbea228c592b61e9868b832"
+   }
+  },
+  {
+   "path": "<t>\\extra\\synth triple.dcp",
+   "stamp": "3:4051",
+   "summary": {
+    "camera": "Grainy Synthetic",
+    "copyright": "",
+    "error": false,
+    "name": "Synthetic triple",
+    "path": "<T>\\extra\\synth triple.dcp",
+    "sha256": "32a24ddd77ff1be597bf63a6b4c8d2a287421392d30c01803f37317eebf73723"
+   }
+  },
+  {
+   "path": "<t>\\lib\\camera-profiles\\generic.dcp",
+   "stamp": "3:236",
+   "summary": {
+    "camera": "",
+    "copyright": "",
+    "error": false,
+    "name": "generic",
+    "path": "<T>\\lib\\camera-profiles\\generic.dcp",
+    "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+   }
+  },
+  {
+   "path": "<t>\\lib\\camera-profiles\\hdr.dcp",
+   "stamp": "3:118",
+   "summary": {
+    "camera": "",
+    "copyright": "",
+    "error": true,
+    "name": "hdr",
+    "path": "<T>\\lib\\camera-profiles\\hdr.dcp",
+    "sha256": "b80b1f2895b4746f014dc3ab8d12fe6ee6040faeecf5c8022fc40669daf51875"
+   }
+  },
+  {
+   "path": "<t>\\lib\\camera-profiles\\luma test.dcp",
+   "stamp": "3:279",
+   "summary": {
+    "camera": "Test Camera",
+    "copyright": "Luma test data",
+    "error": false,
+    "name": "Luma test",
+    "path": "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   }
+  },
+  {
+   "path": "<t>\\lib\\camera-profiles\\sub\\copy.dcp",
+   "stamp": "3:279",
+   "summary": {
+    "camera": "Test Camera",
+    "copyright": "Luma test data",
+    "error": false,
+    "name": "Luma test",
+    "path": "<T>\\lib\\camera-profiles\\sub\\copy.DCP",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   }
+  },
+  {
+   "path": "<t>\\localappdata\\luma\\cameraprofiles\\forward.dcp",
+   "stamp": "3:3245",
+   "summary": {
+    "camera": "Grainy Synthetic",
+    "copyright": "",
+    "error": false,
+    "name": "Synthetic dual",
+    "path": "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp",
+    "sha256": "32042310c353525aa60b7181ae02c12ddfae6271430519976e049c0016b503df"
+   }
+  },
+  {
+   "path": "<t>\\programdata\\adobe\\cameraraw\\cameraprofiles\\triple.dcp",
+   "stamp": "3:462",
+   "summary": {
+    "camera": "Test Camera",
+    "copyright": "Luma test data",
+    "error": false,
+    "name": "Luma test",
+    "path": "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp",
+    "sha256": "b1c11df0a8d0cef47175b6bd9a4af4e276a0825968641e3d0ed3dd66ef17e93c"
+   }
+  }
+ ],
+ "loads": [
+  {
+   "metadata": "test",
+   "path": "<T>\\lib\\camera-profiles\\generic.dcp",
+   "record": {
+    "camera": "",
+    "name": "DCP",
+    "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+   }
+  },
+  {
+   "metadata": "synthetic",
+   "path": "<T>\\lib\\camera-profiles\\generic.dcp",
+   "record": {
+    "camera": "",
+    "name": "DCP",
+    "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+   }
+  },
+  {
+   "error": "프로파일을 읽을 수 없습니다. HDR DCP는 아직 지원하지 않습니다.",
+   "metadata": "test",
+   "path": "<T>\\lib\\camera-profiles\\hdr.dcp"
+  },
+  {
+   "error": "프로파일을 읽을 수 없습니다. HDR DCP는 아직 지원하지 않습니다.",
+   "metadata": "synthetic",
+   "path": "<T>\\lib\\camera-profiles\\hdr.dcp"
+  },
+  {
+   "error": "프로파일을 읽을 수 없습니다. DCP 파일 크기가 잘못되었거나 4MB를 초과합니다.",
+   "metadata": "test",
+   "path": "<T>\\extra\\short.dcp"
+  },
+  {
+   "error": "프로파일을 읽을 수 없습니다. DCP 파일 크기가 잘못되었거나 4MB를 초과합니다.",
+   "metadata": "synthetic",
+   "path": "<T>\\extra\\short.dcp"
+  },
+  {
+   "error": "프로파일을 읽을 수 없습니다. 현재 카메라와 다른 프로파일입니다.",
+   "metadata": "test",
+   "path": "<T>\\extra\\single.dcp"
+  },
+  {
+   "metadata": "synthetic",
+   "path": "<T>\\extra\\single.dcp",
+   "record": {
+    "camera": "Grainy Synthetic",
+    "name": "Synthetic dual",
+    "sha256": "e969019734cb79b94dc95af4cd5871a6848082d79fbea228c592b61e9868b832"
+   }
+  },
+  {
+   "error": "프로파일을 읽을 수 없습니다. 현재 카메라와 다른 프로파일입니다.",
+   "metadata": "test",
+   "path": "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp"
+  },
+  {
+   "metadata": "synthetic",
+   "path": "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp",
+   "record": {
+    "camera": "Grainy Synthetic",
+    "name": "Synthetic dual",
+    "sha256": "32042310c353525aa60b7181ae02c12ddfae6271430519976e049c0016b503df"
+   }
+  },
+  {
+   "error": "프로파일을 읽을 수 없습니다. 현재 카메라와 다른 프로파일입니다.",
+   "metadata": "test",
+   "path": "<T>\\extra\\synth triple.dcp"
+  },
+  {
+   "metadata": "synthetic",
+   "path": "<T>\\extra\\synth triple.dcp",
+   "record": {
+    "camera": "Grainy Synthetic",
+    "name": "Synthetic triple",
+    "sha256": "32a24ddd77ff1be597bf63a6b4c8d2a287421392d30c01803f37317eebf73723"
+   }
+  },
+  {
+   "metadata": "test",
+   "path": "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+   "record": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   }
+  },
+  {
+   "error": "프로파일을 읽을 수 없습니다. 현재 카메라와 다른 프로파일입니다.",
+   "metadata": "synthetic",
+   "path": "<T>\\lib\\camera-profiles\\Luma Test.dcp"
+  },
+  {
+   "metadata": "test",
+   "path": "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp",
+   "record": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "b1c11df0a8d0cef47175b6bd9a4af4e276a0825968641e3d0ed3dd66ef17e93c"
+   }
+  },
+  {
+   "error": "프로파일을 읽을 수 없습니다. 현재 카메라와 다른 프로파일입니다.",
+   "metadata": "synthetic",
+   "path": "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+  }
+ ],
+ "metadata": {
+  "other": {
+   "camera": "Nothing",
+   "format": "NEF",
+   "make": "Other"
+  },
+  "synthetic": {
+   "camera": "Synthetic",
+   "format": "DNG",
+   "make": "Grainy"
+  },
+  "test": {
+   "camera": "Test Camera",
+   "format": "DNG",
+   "make": "Test"
+  },
+  "unique": {
+   "camera": "Y",
+   "make": "X",
+   "unique_camera": "Test Camera"
+  }
+ },
+ "removed": "lib/camera-profiles/dual.dcp",
+ "roots": [
+  "<T>\\lib\\camera-profiles",
+  "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles",
+  "<T>\\appdata\\Adobe\\CameraRaw\\CameraProfiles",
+  "<T>\\localappdata\\Luma\\CameraProfiles",
+  "<T>\\extra"
+ ],
+ "scans": [
+  {
+   "cancelled": false,
+   "errors": 0,
+   "files": 10,
+   "parsed": 10,
+   "profiles": [
+    {
+     "camera": "",
+     "copyright": "",
+     "error": false,
+     "name": "generic",
+     "path": "<T>\\lib\\camera-profiles\\generic.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\generic.dcp"
+     ],
+     "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+    },
+    {
+     "camera": "",
+     "copyright": "",
+     "error": true,
+     "name": "hdr",
+     "path": "<T>\\lib\\camera-profiles\\hdr.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\hdr.dcp"
+     ],
+     "sha256": "b80b1f2895b4746f014dc3ab8d12fe6ee6040faeecf5c8022fc40669daf51875"
+    },
+    {
+     "camera": "",
+     "copyright": "",
+     "error": true,
+     "name": "short",
+     "path": "<T>\\extra\\short.dcp",
+     "paths": [
+      "<T>\\extra\\short.dcp"
+     ],
+     "sha256": "2e561ff2355c06484efc416619b5b7f7fc055acdb4e5b6db7a4bc0a5016b19e3"
+    },
+    {
+     "camera": "",
+     "copyright": "",
+     "error": false,
+     "name": "single",
+     "path": "<T>\\extra\\single.dcp",
+     "paths": [
+      "<T>\\extra\\single.dcp"
+     ],
+     "sha256": "7135574994ee33db240d13bef474e1e01c96d8f9c7a3b691795fde3f044c9486"
+    },
+    {
+     "camera": "Grainy Synthetic",
+     "copyright": "",
+     "error": false,
+     "name": "Synthetic dual",
+     "path": "<T>\\lib\\camera-profiles\\dual.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\dual.dcp"
+     ],
+     "sha256": "ebf7ed48d4f714eaf53fdd2bb0a21d8d7d52d3bb6e37186c773445ab640955f0"
+    },
+    {
+     "camera": "Grainy Synthetic",
+     "copyright": "",
+     "error": false,
+     "name": "Synthetic dual",
+     "path": "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp",
+     "paths": [
+      "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp"
+     ],
+     "sha256": "32042310c353525aa60b7181ae02c12ddfae6271430519976e049c0016b503df"
+    },
+    {
+     "camera": "Grainy Synthetic",
+     "copyright": "",
+     "error": false,
+     "name": "Synthetic triple",
+     "path": "<T>\\extra\\synth triple.dcp",
+     "paths": [
+      "<T>\\extra\\synth triple.dcp"
+     ],
+     "sha256": "32a24ddd77ff1be597bf63a6b4c8d2a287421392d30c01803f37317eebf73723"
+    },
+    {
+     "camera": "Test Camera",
+     "copyright": "Luma test data",
+     "error": false,
+     "name": "Luma test",
+     "path": "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+      "<T>\\lib\\camera-profiles\\sub\\copy.DCP"
+     ],
+     "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+    },
+    {
+     "camera": "Test Camera",
+     "copyright": "Luma test data",
+     "error": false,
+     "name": "Luma test",
+     "path": "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp",
+     "paths": [
+      "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+     ],
+     "sha256": "b1c11df0a8d0cef47175b6bd9a4af4e276a0825968641e3d0ed3dd66ef17e93c"
+    }
+   ],
+   "truncated": false
+  },
+  {
+   "cancelled": false,
+   "errors": 0,
+   "files": 10,
+   "parsed": 0,
+   "profiles": [
+    {
+     "camera": "",
+     "copyright": "",
+     "error": false,
+     "name": "generic",
+     "path": "<T>\\lib\\camera-profiles\\generic.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\generic.dcp"
+     ],
+     "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+    },
+    {
+     "camera": "",
+     "copyright": "",
+     "error": true,
+     "name": "hdr",
+     "path": "<T>\\lib\\camera-profiles\\hdr.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\hdr.dcp"
+     ],
+     "sha256": "b80b1f2895b4746f014dc3ab8d12fe6ee6040faeecf5c8022fc40669daf51875"
+    },
+    {
+     "camera": "",
+     "copyright": "",
+     "error": true,
+     "name": "short",
+     "path": "<T>\\extra\\short.dcp",
+     "paths": [
+      "<T>\\extra\\short.dcp"
+     ],
+     "sha256": "2e561ff2355c06484efc416619b5b7f7fc055acdb4e5b6db7a4bc0a5016b19e3"
+    },
+    {
+     "camera": "",
+     "copyright": "",
+     "error": false,
+     "name": "single",
+     "path": "<T>\\extra\\single.dcp",
+     "paths": [
+      "<T>\\extra\\single.dcp"
+     ],
+     "sha256": "7135574994ee33db240d13bef474e1e01c96d8f9c7a3b691795fde3f044c9486"
+    },
+    {
+     "camera": "Grainy Synthetic",
+     "copyright": "",
+     "error": false,
+     "name": "Synthetic dual",
+     "path": "<T>\\lib\\camera-profiles\\dual.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\dual.dcp"
+     ],
+     "sha256": "ebf7ed48d4f714eaf53fdd2bb0a21d8d7d52d3bb6e37186c773445ab640955f0"
+    },
+    {
+     "camera": "Grainy Synthetic",
+     "copyright": "",
+     "error": false,
+     "name": "Synthetic dual",
+     "path": "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp",
+     "paths": [
+      "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp"
+     ],
+     "sha256": "32042310c353525aa60b7181ae02c12ddfae6271430519976e049c0016b503df"
+    },
+    {
+     "camera": "Grainy Synthetic",
+     "copyright": "",
+     "error": false,
+     "name": "Synthetic triple",
+     "path": "<T>\\extra\\synth triple.dcp",
+     "paths": [
+      "<T>\\extra\\synth triple.dcp"
+     ],
+     "sha256": "32a24ddd77ff1be597bf63a6b4c8d2a287421392d30c01803f37317eebf73723"
+    },
+    {
+     "camera": "Test Camera",
+     "copyright": "Luma test data",
+     "error": false,
+     "name": "Luma test",
+     "path": "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+      "<T>\\lib\\camera-profiles\\sub\\copy.DCP"
+     ],
+     "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+    },
+    {
+     "camera": "Test Camera",
+     "copyright": "Luma test data",
+     "error": false,
+     "name": "Luma test",
+     "path": "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp",
+     "paths": [
+      "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+     ],
+     "sha256": "b1c11df0a8d0cef47175b6bd9a4af4e276a0825968641e3d0ed3dd66ef17e93c"
+    }
+   ],
+   "truncated": false
+  },
+  {
+   "cancelled": false,
+   "errors": 0,
+   "files": 9,
+   "parsed": 1,
+   "profiles": [
+    {
+     "camera": "",
+     "copyright": "",
+     "error": false,
+     "name": "generic",
+     "path": "<T>\\lib\\camera-profiles\\generic.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\generic.dcp"
+     ],
+     "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+    },
+    {
+     "camera": "",
+     "copyright": "",
+     "error": true,
+     "name": "hdr",
+     "path": "<T>\\lib\\camera-profiles\\hdr.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\hdr.dcp"
+     ],
+     "sha256": "b80b1f2895b4746f014dc3ab8d12fe6ee6040faeecf5c8022fc40669daf51875"
+    },
+    {
+     "camera": "",
+     "copyright": "",
+     "error": true,
+     "name": "short",
+     "path": "<T>\\extra\\short.dcp",
+     "paths": [
+      "<T>\\extra\\short.dcp"
+     ],
+     "sha256": "2e561ff2355c06484efc416619b5b7f7fc055acdb4e5b6db7a4bc0a5016b19e3"
+    },
+    {
+     "camera": "Grainy Synthetic",
+     "copyright": "",
+     "error": false,
+     "name": "Synthetic dual",
+     "path": "<T>\\extra\\single.dcp",
+     "paths": [
+      "<T>\\extra\\single.dcp"
+     ],
+     "sha256": "e969019734cb79b94dc95af4cd5871a6848082d79fbea228c592b61e9868b832"
+    },
+    {
+     "camera": "Grainy Synthetic",
+     "copyright": "",
+     "error": false,
+     "name": "Synthetic dual",
+     "path": "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp",
+     "paths": [
+      "<T>\\localappdata\\Luma\\CameraProfiles\\forward.dcp"
+     ],
+     "sha256": "32042310c353525aa60b7181ae02c12ddfae6271430519976e049c0016b503df"
+    },
+    {
+     "camera": "Grainy Synthetic",
+     "copyright": "",
+     "error": false,
+     "name": "Synthetic triple",
+     "path": "<T>\\extra\\synth triple.dcp",
+     "paths": [
+      "<T>\\extra\\synth triple.dcp"
+     ],
+     "sha256": "32a24ddd77ff1be597bf63a6b4c8d2a287421392d30c01803f37317eebf73723"
+    },
+    {
+     "camera": "Test Camera",
+     "copyright": "Luma test data",
+     "error": false,
+     "name": "Luma test",
+     "path": "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+     "paths": [
+      "<T>\\lib\\camera-profiles\\Luma Test.dcp",
+      "<T>\\lib\\camera-profiles\\sub\\copy.DCP"
+     ],
+     "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+    },
+    {
+     "camera": "Test Camera",
+     "copyright": "Luma test data",
+     "error": false,
+     "name": "Luma test",
+     "path": "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp",
+     "paths": [
+      "<T>\\programdata\\Adobe\\CameraRaw\\CameraProfiles\\triple.dcp"
+     ],
+     "sha256": "b1c11df0a8d0cef47175b6bd9a4af4e276a0825968641e3d0ed3dd66ef17e93c"
+    }
+   ],
+   "truncated": false
+  }
+ ],
+ "stale": "프로파일을 읽을 수 없습니다. 프로파일이 변경되었습니다. 목록을 다시 검색하세요.",
+ "time": 1700000000
+}

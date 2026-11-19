@@ -1,0 +1,105 @@
+{
+ "callback_mode": null,
+ "callbacks": {
+  "inputs": [],
+  "masks": [],
+  "points": []
+ },
+ "detail_version": 1,
+ "frame": "garden",
+ "layers": [
+  {
+   "adjustments": {
+    "exposure": 1
+   },
+   "components": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.25,
+       0.3
+      ],
+      [
+       0.7,
+       0.85
+      ]
+     ],
+     "type": "radial"
+    }
+   ],
+   "enabled": false
+  },
+  {
+   "adjustments": {
+    "contrast": 30
+   },
+   "components": [
+    {
+     "feather": 50,
+     "points": [
+      [
+       0.15,
+       0.2
+      ],
+      [
+       0.5,
+       0.4
+      ],
+      [
+       0.85,
+       0.25
+      ]
+     ],
+     "radius": 0.06,
+     "type": "brush"
+    }
+   ]
+  },
+  {
+   "adjustments": {
+    "saturation": 50
+   },
+   "components": [
+    {
+     "points": [
+      [
+       0.1,
+       0.9
+      ],
+      [
+       0.6,
+       0.3
+      ]
+     ],
+     "type": "linear"
+    }
+   ],
+   "enabled": false
+  },
+  {
+   "adjustments": {
+    "shadows": 40
+   },
+   "components": [
+    {
+     "range": [
+      0,
+      0.3
+     ],
+     "type": "luma"
+    }
+   ]
+  }
+ ],
+ "output_bits": "6615109703041024000",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "pixel_scale": 1.0,
+ "source_image": null,
+ "transform": "identity"
+}

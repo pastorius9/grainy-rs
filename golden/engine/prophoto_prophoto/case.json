@@ -1,0 +1,11 @@
+{
+ "original_size": null,
+ "output": "ProPhoto RGB",
+ "settings": {
+  "exposure": 0.4,
+  "saturation": 30.0,
+  "working_space": "ProPhoto"
+ },
+ "source": "colours",
+ "use_crop": true
+}

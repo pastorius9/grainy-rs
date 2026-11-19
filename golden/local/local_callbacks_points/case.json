@@ -1,0 +1,257 @@
+{
+ "callback_mode": "points",
+ "callbacks": {
+  "inputs": [
+   [
+    0,
+    "15752938223963209728"
+   ],
+   [
+    1,
+    "15544662014637899776"
+   ],
+   [
+    2,
+    "7641287649918976000"
+   ]
+  ],
+  "masks": [
+   0,
+   1,
+   2
+  ],
+  "points": [
+   {
+    "frame": [
+     64,
+     96
+    ],
+    "image": "16645016437940813824",
+    "image_shape": [
+     45,
+     74,
+     3
+    ],
+    "layer": 0,
+    "mask": "12129051606704455680",
+    "mask_shape": [
+     45,
+     74
+    ],
+    "origin": [
+     11,
+     9
+    ],
+    "point": 0
+   },
+   {
+    "frame": [
+     64,
+     96
+    ],
+    "image": "16813184728143233024",
+    "image_shape": [
+     45,
+     74,
+     3
+    ],
+    "layer": 0,
+    "mask": "12129051606704455680",
+    "mask_shape": [
+     45,
+     74
+    ],
+    "origin": [
+     11,
+     9
+    ],
+    "point": 1
+   },
+   {
+    "frame": [
+     64,
+     96
+    ],
+    "image": "16252043051516559360",
+    "image_shape": [
+     45,
+     74,
+     3
+    ],
+    "layer": 0,
+    "mask": "12129051606704455680",
+    "mask_shape": [
+     45,
+     74
+    ],
+    "origin": [
+     11,
+     9
+    ],
+    "point": 2
+   },
+   {
+    "frame": [
+     64,
+     96
+    ],
+    "image": "15953108404608696320",
+    "image_shape": [
+     64,
+     96,
+     3
+    ],
+    "layer": 1,
+    "mask": "1610003061634236416",
+    "mask_shape": [
+     64,
+     96
+    ],
+    "origin": [
+     0,
+     0
+    ],
+    "point": 0
+   }
+  ]
+ },
+ "cb_mask_0_bits": "12129051606704455680",
+ "cb_mask_0_shape": [
+  64,
+  96
+ ],
+ "cb_mask_0_step": 3,
+ "cb_mask_1_bits": "1610003061634236416",
+ "cb_mask_1_shape": [
+  64,
+  96
+ ],
+ "cb_mask_1_step": 3,
+ "cb_mask_2_bits": "487451855429828608",
+ "cb_mask_2_shape": [
+  64,
+  96
+ ],
+ "cb_mask_2_step": 3,
+ "detail_version": 1,
+ "frame": "colours",
+ "layers": [
+  {
+   "adjustments": {
+    "point_colors": [
+     {
+      "hue": 20,
+      "lightness": 10,
+      "rgb": [
+       0.8,
+       0.3,
+       0.2
+      ],
+      "saturation": -30
+     },
+     {
+      "hue": -40,
+      "lightness": -15,
+      "lightness_range": 0.6,
+      "range": 0.2,
+      "rgb": [
+       0.2,
+       0.5,
+       0.7
+      ],
+      "saturation": 30,
+      "saturation_range": 0.5,
+      "version": 2
+     }
+    ]
+   },
+   "components": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.25,
+       0.3
+      ],
+      [
+       0.7,
+       0.85
+      ]
+     ],
+     "type": "radial"
+    },
+    {
+     "feather": 50,
+     "points": [
+      [
+       0.15,
+       0.2
+      ],
+      [
+       0.5,
+       0.4
+      ],
+      [
+       0.85,
+       0.25
+      ]
+     ],
+     "radius": 0.06,
+     "type": "brush"
+    }
+   ]
+  },
+  {
+   "adjustments": {
+    "exposure": 0.5
+   },
+   "components": [
+    {
+     "points": [
+      [
+       0.1,
+       0.9
+      ],
+      [
+       0.6,
+       0.3
+      ]
+     ],
+     "type": "linear"
+    }
+   ]
+  },
+  {
+   "adjustments": {
+    "hue": 20
+   },
+   "components": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.25,
+       0.3
+      ],
+      [
+       0.7,
+       0.85
+      ]
+     ],
+     "type": "radial"
+    }
+   ],
+   "enabled": false
+  }
+ ],
+ "output_bits": "7641287649918976000",
+ "output_shape": [
+  64,
+  96,
+  3
+ ],
+ "output_step": 3,
+ "pixel_scale": 1.0,
+ "source_image": null,
+ "transform": "identity"
+}

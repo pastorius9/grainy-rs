@@ -1,0 +1,471 @@
+{
+ "explain": "Grainy가 실행 중이면 이 컴퓨터의 AI 프로그램(Claude Code, Codex, Gemini CLI, Claude 데스크톱)이 Grainy를 쓸 수 있습니다. AI에게 시키기 창에서 요청하거나, 그 프로그램에 아래 방법으로 Grainy의 MCP를 설치하고 일을 시켰을 때만, 그 프로그램이 사진 목록과 사진 정보, 보정값, 미리보기 이미지(최대 1568픽셀)를 읽고, 보정값과 별점·선택 표시·색 라벨을 바꾸고, 가상 사본과 스냅샷을 만들고, 그 프로그램이 정한 폴더의 사진을 보관함으로 가져오고, 그 프로그램이 정한 폴더로 사진을 내보내고 밀착 이미지 JPEG(최대 4000픽셀)를 저장합니다. 사진 정보는 파일 이름과 폴더 경로, 파일 형식과 픽셀 크기, 키워드, 별점, 선택·제외 표시, 색 라벨, 카메라와 렌즈, 노출 정보(ISO, 셔터 속도, 조리개, 초점 거리), 촬영 날짜이며 위치 정보는 보내지 않습니다. AI가 읽은 내용은 그 AI 서비스로 전송되고 그 프로그램에도 남을 수 있습니다. Grainy 자체는 사진을 인터넷으로 보내지 않으며, 연결은 이 컴퓨터 안에서만 열립니다. 원본 사진 파일은 바뀌지 않고, AI가 한 보정과 별점·선택 표시·색 라벨 변경은 최근 작업부터 차례로 되돌릴 수 있습니다.",
+ "local_offset_note": "undo times are local: tests compare with the same zone",
+ "regen": "새 연결 키를 만들까요? HTTP로 직접 연결한 프로그램은 새 키로 다시 설정해야 합니다. 위 설치 방법으로 설치한 AI 프로그램은 그대로 쓸 수 있습니다.",
+ "views": [
+  {
+   "activity": [],
+   "advanced": false,
+   "enabled": false,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "HTTP로 직접 연결하는 프로그램용입니다. 주소 http://127.0.0.1:47821/mcp, 요청 헤더 Authorization: Bearer <연결 키>. 새 키를 만들거나 포트를 바꾸면 그 프로그램은 다시 설정해야 합니다. 위 설치 방법으로 설치했다면 필요 없습니다.",
+   "key": "",
+   "key_enabled": false,
+   "key_shown": false,
+   "language": "ko",
+   "name": "off",
+   "port_button": false,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 이미 있다고 나오면 먼저 claude mcp remove grainy --scope user를 실행하세요.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "Claude 데스크톱에서 설정 › 개발자 › 구성 편집을 눌러 claude_desktop_config.json을 열고, \"mcpServers\" 안에 아래 \"grainy\" 항목을 넣은 뒤(파일이 비어 있으면 아래 내용을 그대로 붙여 넣으세요) Claude 데스크톱을 다시 시작하세요.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "보기",
+   "status": "꺼짐",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude 데스크톱"
+   ],
+   "title": "AI 연결 (MCP)",
+   "undo_enabled": false,
+   "undo_label": "되돌릴 AI 작업이 없습니다."
+  },
+  {
+   "activity": [
+    "10:02:00 · auto_tone · 작업 j1 완료",
+    "10:01:00 · apply_edits · 성공",
+    "10:00:00 · AI 연결 · 시작함"
+   ],
+   "advanced": false,
+   "enabled": true,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "HTTP로 직접 연결하는 프로그램용입니다. 주소 http://127.0.0.1:47821/mcp, 요청 헤더 Authorization: Bearer <연결 키>. 새 키를 만들거나 포트를 바꾸면 그 프로그램은 다시 설정해야 합니다. 위 설치 방법으로 설치했다면 필요 없습니다.",
+   "key": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "key_enabled": true,
+   "key_shown": false,
+   "language": "ko",
+   "name": "on",
+   "port_button": true,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 이미 있다고 나오면 먼저 claude mcp remove grainy --scope user를 실행하세요.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "Claude 데스크톱에서 설정 › 개발자 › 구성 편집을 눌러 claude_desktop_config.json을 열고, \"mcpServers\" 안에 아래 \"grainy\" 항목을 넣은 뒤(파일이 비어 있으면 아래 내용을 그대로 붙여 넣으세요) Claude 데스크톱을 다시 시작하세요.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "보기",
+   "status": "켜짐 · 포트 47821",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude 데스크톱"
+   ],
+   "title": "AI 연결 (MCP)",
+   "undo_enabled": true,
+   "undo_label": "AI 자동 톤 · 1,234장 · 01:02"
+  },
+  {
+   "activity": [],
+   "advanced": false,
+   "enabled": true,
+   "export_folder": "D:\\AI out",
+   "http": "HTTP로 직접 연결하는 프로그램용입니다. 주소 http://127.0.0.1:41234/mcp, 요청 헤더 Authorization: Bearer <연결 키>. 새 키를 만들거나 포트를 바꾸면 그 프로그램은 다시 설정해야 합니다. 위 설치 방법으로 설치했다면 필요 없습니다.",
+   "key": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "key_enabled": true,
+   "key_shown": true,
+   "language": "ko",
+   "name": "on, key shown",
+   "port_button": true,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 이미 있다고 나오면 먼저 claude mcp remove grainy --scope user를 실행하세요.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "Claude 데스크톱에서 설정 › 개발자 › 구성 편집을 눌러 claude_desktop_config.json을 열고, \"mcpServers\" 안에 아래 \"grainy\" 항목을 넣은 뒤(파일이 비어 있으면 아래 내용을 그대로 붙여 넣으세요) Claude 데스크톱을 다시 시작하세요.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "숨기기",
+   "status": "켜짐 · 포트 41234",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude 데스크톱"
+   ],
+   "title": "AI 연결 (MCP)",
+   "undo_enabled": true,
+   "undo_label": "AI 보정 · 2장 · "
+  },
+  {
+   "activity": [],
+   "advanced": true,
+   "enabled": true,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "HTTP로 직접 연결하는 프로그램용입니다. 주소 http://127.0.0.1:47821/mcp, 요청 헤더 Authorization: Bearer <연결 키>. 새 키를 만들거나 포트를 바꾸면 그 프로그램은 다시 설정해야 합니다. 위 설치 방법으로 설치했다면 필요 없습니다.",
+   "key": "",
+   "key_enabled": false,
+   "key_shown": false,
+   "language": "ko",
+   "name": "port taken",
+   "port_button": true,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 이미 있다고 나오면 먼저 claude mcp remove grainy --scope user를 실행하세요.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "Claude 데스크톱에서 설정 › 개발자 › 구성 편집을 눌러 claude_desktop_config.json을 열고, \"mcpServers\" 안에 아래 \"grainy\" 항목을 넣은 뒤(파일이 비어 있으면 아래 내용을 그대로 붙여 넣으세요) Claude 데스크톱을 다시 시작하세요.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "보기",
+   "status": "포트 47821을(를) 쓸 수 없습니다: address in use",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude 데스크톱"
+   ],
+   "title": "AI 연결 (MCP)",
+   "undo_enabled": false,
+   "undo_label": "되돌릴 AI 작업이 없습니다."
+  },
+  {
+   "activity": [],
+   "advanced": false,
+   "enabled": true,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "HTTP로 직접 연결하는 프로그램용입니다. 주소 http://127.0.0.1:47821/mcp, 요청 헤더 Authorization: Bearer <연결 키>. 새 키를 만들거나 포트를 바꾸면 그 프로그램은 다시 설정해야 합니다. 위 설치 방법으로 설치했다면 필요 없습니다.",
+   "key": "",
+   "key_enabled": false,
+   "key_shown": false,
+   "language": "ko",
+   "name": "elsewhere",
+   "port_button": false,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 이미 있다고 나오면 먼저 claude mcp remove grainy --scope user를 실행하세요.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "Claude 데스크톱에서 설정 › 개발자 › 구성 편집을 눌러 claude_desktop_config.json을 열고, \"mcpServers\" 안에 아래 \"grainy\" 항목을 넣은 뒤(파일이 비어 있으면 아래 내용을 그대로 붙여 넣으세요) Claude 데스크톱을 다시 시작하세요.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "보기",
+   "status": "이 컴퓨터에서 실행 중인 다른 Grainy가 AI 연결을 쓰고 있습니다.",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude 데스크톱"
+   ],
+   "title": "AI 연결 (MCP)",
+   "undo_enabled": false,
+   "undo_label": "되돌릴 AI 작업이 없습니다."
+  },
+  {
+   "activity": [],
+   "advanced": false,
+   "enabled": true,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "HTTP로 직접 연결하는 프로그램용입니다. 주소 http://127.0.0.1:47821/mcp, 요청 헤더 Authorization: Bearer <연결 키>. 새 키를 만들거나 포트를 바꾸면 그 프로그램은 다시 설정해야 합니다. 위 설치 방법으로 설치했다면 필요 없습니다.",
+   "key": "",
+   "key_enabled": true,
+   "key_shown": false,
+   "language": "ko",
+   "name": "job running",
+   "port_button": true,
+   "port_note": true,
+   "setups": {
+    "claude_code": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 이미 있다고 나오면 먼저 claude mcp remove grainy --scope user를 실행하세요.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "Claude 데스크톱에서 설정 › 개발자 › 구성 편집을 눌러 claude_desktop_config.json을 열고, \"mcpServers\" 안에 아래 \"grainy\" 항목을 넣은 뒤(파일이 비어 있으면 아래 내용을 그대로 붙여 넣으세요) Claude 데스크톱을 다시 시작하세요.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "PowerShell에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "보기",
+   "status": "켜짐 · 포트 47821",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude 데스크톱"
+   ],
+   "title": "AI 연결 (MCP)",
+   "undo_enabled": false,
+   "undo_label": "AI 라벨 · 3장 · 12:04"
+  },
+  {
+   "activity": [],
+   "advanced": false,
+   "enabled": false,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "For programs that connect over HTTP directly: address http://127.0.0.1:47821/mcp, request header Authorization: Bearer <connection key>. After a new key or another port, set such a program up again. Not needed if you installed as shown above.",
+   "key": "",
+   "key_enabled": false,
+   "key_shown": false,
+   "language": "en",
+   "name": "off",
+   "port_button": false,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "Run the line below once in PowerShell, then restart Claude Code. Check with claude mcp list. If it says grainy already exists, first run claude mcp remove grainy --scope user.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "In Claude Desktop, choose Settings › Developer › Edit Config to open claude_desktop_config.json, put the \"grainy\" entry below inside \"mcpServers\" (if the file is empty, paste all of it) and restart Claude Desktop.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "Run the line below once in PowerShell, then restart Codex. Check with codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "Show",
+   "status": "Off",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude Desktop"
+   ],
+   "title": "AI Connection (MCP)",
+   "undo_enabled": false,
+   "undo_label": "There is no AI task to undo."
+  },
+  {
+   "activity": [
+    "10:02:00 · auto_tone · Job j1 done",
+    "10:01:00 · apply_edits · OK",
+    "10:00:00 · AI connection · Started"
+   ],
+   "advanced": false,
+   "enabled": true,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "For programs that connect over HTTP directly: address http://127.0.0.1:47821/mcp, request header Authorization: Bearer <connection key>. After a new key or another port, set such a program up again. Not needed if you installed as shown above.",
+   "key": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "key_enabled": true,
+   "key_shown": false,
+   "language": "en",
+   "name": "on",
+   "port_button": true,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "Run the line below once in PowerShell, then restart Claude Code. Check with claude mcp list. If it says grainy already exists, first run claude mcp remove grainy --scope user.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "In Claude Desktop, choose Settings › Developer › Edit Config to open claude_desktop_config.json, put the \"grainy\" entry below inside \"mcpServers\" (if the file is empty, paste all of it) and restart Claude Desktop.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "Run the line below once in PowerShell, then restart Codex. Check with codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "Show",
+   "status": "On · port 47821",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude Desktop"
+   ],
+   "title": "AI Connection (MCP)",
+   "undo_enabled": true,
+   "undo_label": "AI 자동 톤 · 1,234 photos · 01:02"
+  },
+  {
+   "activity": [],
+   "advanced": false,
+   "enabled": true,
+   "export_folder": "D:\\AI out",
+   "http": "For programs that connect over HTTP directly: address http://127.0.0.1:41234/mcp, request header Authorization: Bearer <connection key>. After a new key or another port, set such a program up again. Not needed if you installed as shown above.",
+   "key": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+   "key_enabled": true,
+   "key_shown": true,
+   "language": "en",
+   "name": "on, key shown",
+   "port_button": true,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "Run the line below once in PowerShell, then restart Claude Code. Check with claude mcp list. If it says grainy already exists, first run claude mcp remove grainy --scope user.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "In Claude Desktop, choose Settings › Developer › Edit Config to open claude_desktop_config.json, put the \"grainy\" entry below inside \"mcpServers\" (if the file is empty, paste all of it) and restart Claude Desktop.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "Run the line below once in PowerShell, then restart Codex. Check with codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "Hide",
+   "status": "On · port 41234",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude Desktop"
+   ],
+   "title": "AI Connection (MCP)",
+   "undo_enabled": true,
+   "undo_label": "AI edit · 2 photos · "
+  },
+  {
+   "activity": [],
+   "advanced": true,
+   "enabled": true,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "For programs that connect over HTTP directly: address http://127.0.0.1:47821/mcp, request header Authorization: Bearer <connection key>. After a new key or another port, set such a program up again. Not needed if you installed as shown above.",
+   "key": "",
+   "key_enabled": false,
+   "key_shown": false,
+   "language": "en",
+   "name": "port taken",
+   "port_button": true,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "Run the line below once in PowerShell, then restart Claude Code. Check with claude mcp list. If it says grainy already exists, first run claude mcp remove grainy --scope user.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "In Claude Desktop, choose Settings › Developer › Edit Config to open claude_desktop_config.json, put the \"grainy\" entry below inside \"mcpServers\" (if the file is empty, paste all of it) and restart Claude Desktop.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "Run the line below once in PowerShell, then restart Codex. Check with codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "Show",
+   "status": "포트 47821을(를) 쓸 수 없습니다: address in use",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude Desktop"
+   ],
+   "title": "AI Connection (MCP)",
+   "undo_enabled": false,
+   "undo_label": "There is no AI task to undo."
+  },
+  {
+   "activity": [],
+   "advanced": false,
+   "enabled": true,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "For programs that connect over HTTP directly: address http://127.0.0.1:47821/mcp, request header Authorization: Bearer <connection key>. After a new key or another port, set such a program up again. Not needed if you installed as shown above.",
+   "key": "",
+   "key_enabled": false,
+   "key_shown": false,
+   "language": "en",
+   "name": "elsewhere",
+   "port_button": false,
+   "port_note": false,
+   "setups": {
+    "claude_code": [
+     "Run the line below once in PowerShell, then restart Claude Code. Check with claude mcp list. If it says grainy already exists, first run claude mcp remove grainy --scope user.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "In Claude Desktop, choose Settings › Developer › Edit Config to open claude_desktop_config.json, put the \"grainy\" entry below inside \"mcpServers\" (if the file is empty, paste all of it) and restart Claude Desktop.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "Run the line below once in PowerShell, then restart Codex. Check with codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "Show",
+   "status": "이 컴퓨터에서 실행 중인 다른 Grainy가 AI 연결을 쓰고 있습니다.",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude Desktop"
+   ],
+   "title": "AI Connection (MCP)",
+   "undo_enabled": false,
+   "undo_label": "There is no AI task to undo."
+  },
+  {
+   "activity": [],
+   "advanced": false,
+   "enabled": true,
+   "export_folder": "P:\\Pictures\\Grainy",
+   "http": "For programs that connect over HTTP directly: address http://127.0.0.1:47821/mcp, request header Authorization: Bearer <connection key>. After a new key or another port, set such a program up again. Not needed if you installed as shown above.",
+   "key": "",
+   "key_enabled": true,
+   "key_shown": false,
+   "language": "en",
+   "name": "job running",
+   "port_button": true,
+   "port_note": true,
+   "setups": {
+    "claude_code": [
+     "Run the line below once in PowerShell, then restart Claude Code. Check with claude mcp list. If it says grainy already exists, first run claude mcp remove grainy --scope user.",
+     "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ],
+    "claude_desktop_json": [
+     "In Claude Desktop, choose Settings › Developer › Edit Config to open claude_desktop_config.json, put the \"grainy\" entry below inside \"mcpServers\" (if the file is empty, paste all of it) and restart Claude Desktop.",
+     "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"<ROOT_JSON>\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}"
+    ],
+    "codex": [
+     "Run the line below once in PowerShell, then restart Codex. Check with codex mcp list.",
+     "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '<ROOT>\\mcp\\grainy-mcp-bridge.ps1'"
+    ]
+   },
+   "show_key": "Show",
+   "status": "On · port 47821",
+   "tabs": [
+    "Claude Code",
+    "Codex",
+    "Claude Desktop"
+   ],
+   "title": "AI Connection (MCP)",
+   "undo_enabled": false,
+   "undo_label": "AI 라벨 · 3 photos · 12:04"
+  }
+ ]
+}

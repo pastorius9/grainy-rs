@@ -1,0 +1,40 @@
+{
+ "error": null,
+ "frame": "edges",
+ "operations": [
+  {
+   "feather": 10,
+   "points": [
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "radius": 0.45,
+   "type": "heal",
+   "version": 2
+  }
+ ],
+ "output_bits": "14638082623121915904",
+ "output_shape": [
+  64,
+  96,
+  3
+ ],
+ "output_step": 3,
+ "recorded": {
+  "distance": [
+   {
+    "max": 27.38600730895996,
+    "shape": [
+     64,
+     96
+    ]
+   }
+  ],
+  "dust": [],
+  "inpaint": 3,
+  "sky": []
+ },
+ "shift": 0
+}

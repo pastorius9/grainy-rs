@@ -1,0 +1,449 @@
+{
+ "spec": {
+  "calls": [
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 16,
+     "memory": 34359738368
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 4,
+     "memory": 34359738368
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 8,
+     "memory": 34359738368
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 16,
+     "memory": 34359738368
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 24,
+     "memory": 68719476736
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 9000,
+        "height": 9000
+       }
+      },
+      {
+       "info": {
+        "width": 9000,
+        "height": 9000
+       }
+      },
+      {
+       "info": {
+        "width": 9000,
+        "height": 9000
+       }
+      }
+     ],
+     "cpus": 24,
+     "memory": 8589934592
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 9000,
+        "height": 9000
+       }
+      },
+      {
+       "info": {
+        "width": 9000,
+        "height": 9000
+       }
+      },
+      {
+       "info": {
+        "width": 9000,
+        "height": 9000
+       }
+      }
+     ],
+     "cpus": 24,
+     "memory": 1073741824
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 0,
+        "height": 0
+       }
+      },
+      {
+       "info": {
+        "width": 0,
+        "height": 0
+       }
+      }
+     ],
+     "cpus": 24,
+     "memory": 4294967296
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 24,
+     "memory": null
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 24,
+     "memory": 0
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": "4000",
+        "height": 3000.9
+       }
+      },
+      {
+       "info": {
+        "width": "4000",
+        "height": 3000.9
+       }
+      }
+     ],
+     "cpus": 24,
+     "memory": 17179869184
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {}
+      },
+      {
+       "info": {}
+      }
+     ],
+     "cpus": 12,
+     "memory": 17179869184
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 48,
+     "memory": 274877906944
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 7,
+     "memory": 274877906944
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      },
+      {
+       "info": {
+        "width": 4000,
+        "height": 3000
+       }
+      }
+     ],
+     "cpus": 8,
+     "memory": 17179869184
+    }
+   },
+   {
+    "fn": "export_concurrency",
+    "args": {
+     "records": [
+      {},
+      {}
+     ],
+     "cpus": 24,
+     "memory": 1073741824
+    }
+   }
+  ],
+  "name": "quick_export_concurrency"
+ },
+ "results": [
+  {
+   "ok": 1
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 2
+  },
+  {
+   "ok": 4
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 3
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 4
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 1
+  },
+  {
+   "err": {
+    "type": "KeyError",
+    "message": null
+   }
+  }
+ ],
+ "tree": {
+  "files": {},
+  "dirs": []
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

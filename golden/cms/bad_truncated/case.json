@@ -1,0 +1,25 @@
+{
+ "errors": {
+  "checked": [
+   "ValueError",
+   "Cannot create ICC color transform"
+  ],
+  "convert_from": [
+   "ValueError",
+   "Cannot create ICC color transform"
+  ],
+  "convert_to": [
+   "ValueError",
+   "Cannot create ICC color transform"
+  ],
+  "convert_u8": [
+   "CmsError",
+   "cmsCreateTransform returned NULL"
+  ],
+  "planar8": [
+   "ValueError",
+   "Cannot create ICC color transform"
+  ],
+  "profile_path": null
+ }
+}

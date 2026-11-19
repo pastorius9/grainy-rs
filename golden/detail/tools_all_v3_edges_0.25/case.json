@@ -1,0 +1,17 @@
+{
+ "bits_sum": "3264280294886211584",
+ "image": "edges",
+ "pixel_scale": 0.25,
+ "settings": {
+  "defringe": 70.0,
+  "dehaze": 25.0,
+  "detail_version": 3,
+  "noise_color": 30.0,
+  "noise_luma": 50.0,
+  "texture": 35.0
+ },
+ "step": [
+  3,
+  3
+ ]
+}

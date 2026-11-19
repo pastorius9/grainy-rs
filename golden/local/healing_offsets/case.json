@@ -1,0 +1,201 @@
+{
+ "cases": [
+  {
+   "error": null,
+   "frame": "garden",
+   "name": "centre",
+   "offset": [
+    -42.0,
+    42.0
+   ],
+   "points": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.55,
+     0.52
+    ]
+   ],
+   "radius": 0.03
+  },
+  {
+   "error": null,
+   "frame": "garden",
+   "name": "corner",
+   "offset": [
+    16.0,
+    0.0
+   ],
+   "points": [
+    [
+     0.01,
+     0.02
+    ]
+   ],
+   "radius": 0.05
+  },
+  {
+   "error": null,
+   "frame": "garden",
+   "name": "edge",
+   "offset": [
+    0.0,
+    -11.0
+   ],
+   "points": [
+    [
+     0.5,
+     0.99
+    ]
+   ],
+   "radius": 0.04
+  },
+  {
+   "error": null,
+   "frame": "garden",
+   "name": "big",
+   "offset": null,
+   "points": [
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "radius": 0.4
+  },
+  {
+   "error": "ValueError: Maximum allowed dimension exceeded",
+   "frame": "garden",
+   "name": "all",
+   "offset": null,
+   "points": [
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "radius": 2.0
+  },
+  {
+   "error": null,
+   "frame": "garden",
+   "name": "long",
+   "offset": [
+    -11.0,
+    6.0
+   ],
+   "points": [
+    [
+     0.1,
+     0.5
+    ],
+    [
+     0.9,
+     0.5
+    ]
+   ],
+   "radius": 0.02
+  },
+  {
+   "error": null,
+   "frame": "big",
+   "name": "tiled",
+   "offset": [
+    -26.71875,
+    46.417582417582416
+   ],
+   "points": [
+    [
+     0.3,
+     0.6
+    ],
+    [
+     0.32,
+     0.61
+    ]
+   ],
+   "radius": 0.01
+  },
+  {
+   "error": null,
+   "frame": "noise",
+   "name": "noise",
+   "offset": [
+    -22.0,
+    22.0
+   ],
+   "points": [
+    [
+     0.4,
+     0.4
+    ]
+   ],
+   "radius": 0.05
+  }
+ ],
+ "recorded": {
+  "distance": [
+   {
+    "max": 4.775000095367432,
+    "shape": [
+     160,
+     240
+    ]
+   },
+   {
+    "max": 9.550000190734863,
+    "shape": [
+     160,
+     240
+    ]
+   },
+   {
+    "max": 5.730000019073486,
+    "shape": [
+     160,
+     240
+    ]
+   },
+   {
+    "max": 61.12005615234375,
+    "shape": [
+     160,
+     240
+    ]
+   },
+   {
+    "max": 3.4028234663852886e+38,
+    "shape": [
+     160,
+     240
+    ]
+   },
+   {
+    "max": 2.865000009536743,
+    "shape": [
+     160,
+     240
+    ]
+   },
+   {
+    "max": 5.477200031280518,
+    "shape": [
+     455,
+     512
+    ]
+   },
+   {
+    "max": 2.865000009536743,
+    "shape": [
+     64,
+     96
+    ]
+   }
+  ],
+  "dust": [],
+  "inpaint": 0,
+  "sky": []
+ }
+}

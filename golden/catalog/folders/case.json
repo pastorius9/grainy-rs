@@ -1,0 +1,2185 @@
+{
+ "scenarios": [
+  {
+   "items": [
+    {
+     "key": "c:\\é\\a.jpg",
+     "path": "C:\\Photos\\..\\É\\a.jpg",
+     "stored": "C:\\Photos\\..\\É\\a.jpg"
+    },
+    {
+     "key": "c:\\é\\b.jpg",
+     "path": "c:/É//nested/../b.jpg",
+     "stored": "c:/É//nested/../b.jpg"
+    },
+    {
+     "key": "\\\\server\\share\\한글\\a.jpg",
+     "path": "\\\\server\\share\\한글\\a.jpg",
+     "stored": "\\\\server\\share\\한글\\a.jpg"
+    },
+    {
+     "key": "d:\\else\\a.jpg",
+     "path": "D:\\Else\\a.jpg",
+     "stored": "D:\\Else\\a.jpg"
+    },
+    {
+     "key": "c:\\",
+     "path": "C:\\",
+     "stored": "C:\\"
+    },
+    {
+     "key": "c:relative\\x",
+     "path": "C:relative\\x",
+     "stored": "C:relative\\x"
+    },
+    {
+     "key": "bar",
+     "path": ".\\foo\\..\\bar",
+     "stored": ".\\foo\\..\\bar"
+    },
+    {
+     "key": ".",
+     "path": ".",
+     "stored": "."
+    }
+   ],
+   "left_out": [
+    {
+     "expected": true,
+     "path": "C:\\Photos\\..\\É",
+     "registered": [],
+     "removed": [
+      "C:\\Photos\\..\\É"
+     ]
+    },
+    {
+     "expected": false,
+     "path": "C:\\Photos\\..\\É",
+     "registered": [
+      "C:\\Photos\\..\\É"
+     ],
+     "removed": [
+      "C:\\Photos\\..\\É"
+     ]
+    }
+   ],
+   "nodes": [
+    {
+     "direct": 1,
+     "drive": true,
+     "key": "c:\\",
+     "name": "C:",
+     "parent": null,
+     "path": "C:\\",
+     "total": 4
+    },
+    {
+     "direct": 0,
+     "drive": false,
+     "key": "c:\\photos",
+     "name": "Photos",
+     "parent": "c:\\",
+     "path": "C:\\Photos",
+     "total": 0
+    },
+    {
+     "direct": 2,
+     "drive": false,
+     "key": "c:\\é",
+     "name": "É",
+     "parent": "c:\\",
+     "path": "C:\\Photos\\..\\É",
+     "total": 3
+    },
+    {
+     "direct": 1,
+     "drive": false,
+     "key": "c:\\é\\nested",
+     "name": "nested",
+     "parent": "c:\\é",
+     "path": "C:\\Photos\\..\\É\\nested",
+     "total": 1
+    }
+   ],
+   "photos": [
+    {
+     "count": 2,
+     "path": "C:\\Photos\\..\\É\\one.jpg"
+    },
+    {
+     "path": "C:\\Photos\\..\\É\\nested\\two.jpg"
+    },
+    {
+     "path": "C:\\three.jpg"
+    }
+   ],
+   "platform": "windows",
+   "relations": [
+    {
+     "a": "C:\\Photos\\..\\É\\a.jpg",
+     "b": "C:\\Photos\\..\\É\\a.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\Photos\\..\\É\\a.jpg",
+     "b": "c:/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\Photos\\..\\É\\a.jpg",
+     "b": "\\\\server\\share\\한글\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\Photos\\..\\É\\a.jpg",
+     "b": "D:\\Else\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\Photos\\..\\É\\a.jpg",
+     "b": "C:\\",
+     "below": "Photos\\..\\É\\a.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "C:\\Photos\\..\\É\\a.jpg",
+     "b": "C:relative\\x",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\Photos\\..\\É\\a.jpg",
+     "b": ".\\foo\\..\\bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\Photos\\..\\É\\a.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "c:/É//nested/../b.jpg",
+     "b": "C:\\Photos\\..\\É\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "c:/É//nested/../b.jpg",
+     "b": "c:/É//nested/../b.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "c:/É//nested/../b.jpg",
+     "b": "\\\\server\\share\\한글\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "c:/É//nested/../b.jpg",
+     "b": "D:\\Else\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "c:/É//nested/../b.jpg",
+     "b": "C:\\",
+     "below": "É\\nested\\..\\b.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "c:/É//nested/../b.jpg",
+     "b": "C:relative\\x",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "c:/É//nested/../b.jpg",
+     "b": ".\\foo\\..\\bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "c:/É//nested/../b.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "\\\\server\\share\\한글\\a.jpg",
+     "b": "C:\\Photos\\..\\É\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "\\\\server\\share\\한글\\a.jpg",
+     "b": "c:/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "\\\\server\\share\\한글\\a.jpg",
+     "b": "\\\\server\\share\\한글\\a.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "\\\\server\\share\\한글\\a.jpg",
+     "b": "D:\\Else\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "\\\\server\\share\\한글\\a.jpg",
+     "b": "C:\\",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "\\\\server\\share\\한글\\a.jpg",
+     "b": "C:relative\\x",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "\\\\server\\share\\한글\\a.jpg",
+     "b": ".\\foo\\..\\bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "\\\\server\\share\\한글\\a.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "D:\\Else\\a.jpg",
+     "b": "C:\\Photos\\..\\É\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "D:\\Else\\a.jpg",
+     "b": "c:/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "D:\\Else\\a.jpg",
+     "b": "\\\\server\\share\\한글\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "D:\\Else\\a.jpg",
+     "b": "D:\\Else\\a.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "D:\\Else\\a.jpg",
+     "b": "C:\\",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "D:\\Else\\a.jpg",
+     "b": "C:relative\\x",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "D:\\Else\\a.jpg",
+     "b": ".\\foo\\..\\bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "D:\\Else\\a.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\",
+     "b": "C:\\Photos\\..\\É\\a.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\",
+     "b": "c:/É//nested/../b.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\",
+     "b": "\\\\server\\share\\한글\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\",
+     "b": "D:\\Else\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\",
+     "b": "C:\\",
+     "below": ".",
+     "contains": true,
+     "direct": true,
+     "in": true
+    },
+    {
+     "a": "C:\\",
+     "b": "C:relative\\x",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\",
+     "b": ".\\foo\\..\\bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:\\",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:relative\\x",
+     "b": "C:\\Photos\\..\\É\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:relative\\x",
+     "b": "c:/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:relative\\x",
+     "b": "\\\\server\\share\\한글\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:relative\\x",
+     "b": "D:\\Else\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:relative\\x",
+     "b": "C:\\",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:relative\\x",
+     "b": "C:relative\\x",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:relative\\x",
+     "b": ".\\foo\\..\\bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "C:relative\\x",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".\\foo\\..\\bar",
+     "b": "C:\\Photos\\..\\É\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".\\foo\\..\\bar",
+     "b": "c:/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".\\foo\\..\\bar",
+     "b": "\\\\server\\share\\한글\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".\\foo\\..\\bar",
+     "b": "D:\\Else\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".\\foo\\..\\bar",
+     "b": "C:\\",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".\\foo\\..\\bar",
+     "b": "C:relative\\x",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".\\foo\\..\\bar",
+     "b": ".\\foo\\..\\bar",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".\\foo\\..\\bar",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": true,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "C:\\Photos\\..\\É\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "c:/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "\\\\server\\share\\한글\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "D:\\Else\\a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "C:\\",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "C:relative\\x",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": ".\\foo\\..\\bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": true,
+     "in": false
+    }
+   ],
+   "roots": [
+    "C:\\Photos\\..\\É",
+    "C:\\Photos\\..\\É\\nested"
+   ]
+  },
+  {
+   "items": [
+    {
+     "key": "/é/a.jpg",
+     "path": "/Photos/../É/a.jpg",
+     "stored": "/Photos/../É/a.jpg"
+    },
+    {
+     "key": "/é/b.jpg",
+     "path": "/É//nested/../b.jpg",
+     "stored": "/É//nested/../b.jpg"
+    },
+    {
+     "key": "/한글/a.jpg",
+     "path": "/한글/A.jpg",
+     "stored": "/한글/A.jpg"
+    },
+    {
+     "key": "/한글/a.jpg",
+     "path": "/한글/a.jpg",
+     "stored": "/한글/a.jpg"
+    },
+    {
+     "key": "/",
+     "path": "/",
+     "stored": "/"
+    },
+    {
+     "key": "bar",
+     "path": "./foo/../bar",
+     "stored": "./foo/../bar"
+    },
+    {
+     "key": ".",
+     "path": ".",
+     "stored": "."
+    },
+    {
+     "key": "//server/share/file",
+     "path": "//server/share/file",
+     "stored": "//server/share/file"
+    },
+    {
+     "key": "/server/share/file",
+     "path": "///server/share/file",
+     "stored": "///server/share/file"
+    }
+   ],
+   "left_out": [
+    {
+     "expected": true,
+     "path": "/Photos/../É",
+     "registered": [],
+     "removed": [
+      "/Photos/../É"
+     ]
+    },
+    {
+     "expected": false,
+     "path": "/Photos/../É",
+     "registered": [
+      "/Photos/../É"
+     ],
+     "removed": [
+      "/Photos/../É"
+     ]
+    }
+   ],
+   "nodes": [
+    {
+     "direct": 1,
+     "drive": true,
+     "key": "/",
+     "name": "",
+     "parent": null,
+     "path": "/",
+     "total": 4
+    },
+    {
+     "direct": 0,
+     "drive": false,
+     "key": "/photos",
+     "name": "Photos",
+     "parent": "/",
+     "path": "/Photos",
+     "total": 0
+    },
+    {
+     "direct": 2,
+     "drive": false,
+     "key": "/é",
+     "name": "É",
+     "parent": "/",
+     "path": "/Photos/../É",
+     "total": 3
+    },
+    {
+     "direct": 1,
+     "drive": false,
+     "key": "/é/nested",
+     "name": "nested",
+     "parent": "/é",
+     "path": "/Photos/../É/nested",
+     "total": 1
+    }
+   ],
+   "photos": [
+    {
+     "count": 2,
+     "path": "/Photos/../É/one.jpg"
+    },
+    {
+     "path": "/Photos/../É/nested/two.jpg"
+    },
+    {
+     "path": "/three.jpg"
+    }
+   ],
+   "platform": "mac",
+   "relations": [
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/Photos/../É/a.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/",
+     "below": "Photos/../É/a.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/É//nested/../b.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/",
+     "below": "É/nested/../b.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/한글/A.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/한글/a.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/",
+     "below": "한글/A.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/한글/A.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/한글/a.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/",
+     "below": "한글/a.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/",
+     "below": ".",
+     "contains": true,
+     "direct": true,
+     "in": true
+    },
+    {
+     "a": "/",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "./foo/../bar",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": true,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": true,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/",
+     "below": "server/share/file",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "//server/share/file",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "///server/share/file",
+     "below": ".",
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/",
+     "below": "server/share/file",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "///server/share/file",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "///server/share/file",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    }
+   ],
+   "roots": [
+    "/Photos/../É",
+    "/Photos/../É/nested"
+   ]
+  },
+  {
+   "items": [
+    {
+     "key": "/É/a.jpg",
+     "path": "/Photos/../É/a.jpg",
+     "stored": "/Photos/../É/a.jpg"
+    },
+    {
+     "key": "/É/b.jpg",
+     "path": "/É//nested/../b.jpg",
+     "stored": "/É//nested/../b.jpg"
+    },
+    {
+     "key": "/한글/A.jpg",
+     "path": "/한글/A.jpg",
+     "stored": "/한글/A.jpg"
+    },
+    {
+     "key": "/한글/a.jpg",
+     "path": "/한글/a.jpg",
+     "stored": "/한글/a.jpg"
+    },
+    {
+     "key": "/",
+     "path": "/",
+     "stored": "/"
+    },
+    {
+     "key": "bar",
+     "path": "./foo/../bar",
+     "stored": "./foo/../bar"
+    },
+    {
+     "key": ".",
+     "path": ".",
+     "stored": "."
+    },
+    {
+     "key": "//server/share/file",
+     "path": "//server/share/file",
+     "stored": "//server/share/file"
+    },
+    {
+     "key": "/server/share/file",
+     "path": "///server/share/file",
+     "stored": "///server/share/file"
+    }
+   ],
+   "left_out": [
+    {
+     "expected": true,
+     "path": "/Photos/../É",
+     "registered": [],
+     "removed": [
+      "/Photos/../É"
+     ]
+    },
+    {
+     "expected": false,
+     "path": "/Photos/../É",
+     "registered": [
+      "/Photos/../É"
+     ],
+     "removed": [
+      "/Photos/../É"
+     ]
+    }
+   ],
+   "nodes": [
+    {
+     "direct": 1,
+     "drive": true,
+     "key": "/",
+     "name": "",
+     "parent": null,
+     "path": "/",
+     "total": 4
+    },
+    {
+     "direct": 0,
+     "drive": false,
+     "key": "/Photos",
+     "name": "Photos",
+     "parent": "/",
+     "path": "/Photos",
+     "total": 0
+    },
+    {
+     "direct": 2,
+     "drive": false,
+     "key": "/É",
+     "name": "É",
+     "parent": "/",
+     "path": "/Photos/../É",
+     "total": 3
+    },
+    {
+     "direct": 1,
+     "drive": false,
+     "key": "/É/nested",
+     "name": "nested",
+     "parent": "/É",
+     "path": "/Photos/../É/nested",
+     "total": 1
+    }
+   ],
+   "photos": [
+    {
+     "count": 2,
+     "path": "/Photos/../É/one.jpg"
+    },
+    {
+     "path": "/Photos/../É/nested/two.jpg"
+    },
+    {
+     "path": "/three.jpg"
+    }
+   ],
+   "platform": "posix",
+   "relations": [
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/Photos/../É/a.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "/",
+     "below": "Photos/../É/a.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/Photos/../É/a.jpg",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/É//nested/../b.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "/",
+     "below": "É/nested/../b.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/É//nested/../b.jpg",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/한글/A.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "/",
+     "below": "한글/A.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/A.jpg",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/한글/a.jpg",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "/",
+     "below": "한글/a.jpg",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/한글/a.jpg",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "/",
+     "below": ".",
+     "contains": true,
+     "direct": true,
+     "in": true
+    },
+    {
+     "a": "/",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "/",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "/",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "./foo/../bar",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": true,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "./foo/../bar",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "/",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": true,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": ".",
+     "b": "///server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "/",
+     "below": "server/share/file",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "//server/share/file",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "//server/share/file",
+     "b": "///server/share/file",
+     "below": ".",
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/Photos/../É/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/É//nested/../b.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/한글/A.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/한글/a.jpg",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "/",
+     "below": "server/share/file",
+     "contains": false,
+     "direct": false,
+     "in": true
+    },
+    {
+     "a": "///server/share/file",
+     "b": "./foo/../bar",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": ".",
+     "below": null,
+     "contains": false,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "//server/share/file",
+     "below": null,
+     "contains": true,
+     "direct": false,
+     "in": false
+    },
+    {
+     "a": "///server/share/file",
+     "b": "///server/share/file",
+     "below": ".",
+     "contains": true,
+     "direct": false,
+     "in": false
+    }
+   ],
+   "roots": [
+    "/Photos/../É",
+    "/Photos/../É/nested"
+   ]
+  }
+ ]
+}

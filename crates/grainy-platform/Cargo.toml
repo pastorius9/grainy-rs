@@ -1,0 +1,36 @@
+[package]
+name = "grainy-platform"
+description = "Grainy's data folders, settings file, what's-new notes, update logic, crash-safe start and feedback records"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-i18n = { path = "../grainy-i18n" }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+sha2.workspace = true
+zip.workspace = true
+trash.workspace = true
+sysinfo.workspace = true
+fs4.workspace = true
+chrono.workspace = true
+# The HTTP client of feedback and updates (feature `http`, the application turns it on): ureq with the operating
+# system's TLS (native-tls: SChannel on Windows, Security.framework on macOS), MIT/Apache-2.0 throughout.
+ureq = { version = "2.12", default-features = false, features = ["native-tls"], optional = true }
+native-tls = { version = "0.2", optional = true }
+
+[features]
+http = ["dep:ureq", "dep:native-tls"]
+
+# The monitor's colour profile (src/monitor.rs, the crate's only `unsafe` module): already in the tree through winit.
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Graphics_Gdi", "Win32_UI_ColorSystem"] }
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

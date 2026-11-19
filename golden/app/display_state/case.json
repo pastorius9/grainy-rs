@@ -1,0 +1,391 @@
+{
+ "dialog": [
+  {
+   "choose_enabled": true,
+   "mode": "manual",
+   "path": "<dir>\\adobe.icc",
+   "path_enabled": true,
+   "status": "모니터: 기본 화면\n적용 프로파일: Adobe RGB (compatible)\n<dir>\\adobe.icc\n직접 선택한 화면 프로파일입니다.",
+   "step": "opened on a manual choice"
+  },
+  {
+   "choose_enabled": false,
+   "mode": "auto",
+   "path": "<dir>\\adobe.icc",
+   "path_enabled": false,
+   "status": "모니터: 기본 화면\n적용 프로파일: Adobe RGB (compatible)\n<dir>\\adobe.icc\n직접 선택한 화면 프로파일입니다.",
+   "step": "mode set to auto"
+  },
+  {
+   "choose_enabled": true,
+   "mode": "manual",
+   "path": "",
+   "path_enabled": true,
+   "status": "먼저 화면용 RGB ICC 파일을 선택하세요.",
+   "step": "apply manual without a file"
+  },
+  {
+   "choose_enabled": true,
+   "mode": "manual",
+   "path": "<dir>\\p3.icc",
+   "path_enabled": true,
+   "status": "화면 프로파일을 확인하고 있습니다…",
+   "step": "apply manual with a file (spaces stripped)"
+  },
+  {
+   "choose_enabled": true,
+   "mode": "manual",
+   "path": "<dir>\\p3.icc",
+   "path_enabled": true,
+   "status": "모니터: 기본 화면\n적용 프로파일: RGB built-in\n<dir>\\p3.icc\n직접 선택한 화면 프로파일입니다.",
+   "step": "resolved"
+  },
+  {
+   "choose_enabled": false,
+   "mode": "off",
+   "path": "",
+   "path_enabled": false,
+   "status": "모니터: 기본 화면\n적용 프로파일: RGB built-in\n<dir>\\p3.icc\n직접 선택한 화면 프로파일입니다.",
+   "step": "a menu item turned it off"
+  },
+  {
+   "choose_enabled": false,
+   "mode": "off",
+   "path": "",
+   "path_enabled": false,
+   "status": "모니터: 기본 화면\n적용 프로파일: sRGB\n앱의 화면 색상 보정이 꺼져 있습니다.",
+   "step": "resolved off"
+  }
+ ],
+ "final": {
+  "button": "색상 · 해제",
+  "mode": "off",
+  "path": "",
+  "render_version": 7,
+  "renders": 7,
+  "revision": 6,
+  "state": {
+   "description": "sRGB",
+   "digest": "srgb",
+   "error": false,
+   "has_profile": false,
+   "message": "앱의 화면 색상 보정이 꺼져 있습니다.",
+   "mode": "off",
+   "path": "",
+   "screen": ""
+  },
+  "step": "after the dialog",
+  "stored": {
+   "display_color": {
+    "mode": "off",
+    "path": ""
+   },
+   "monitor_icc": null
+  },
+  "thumbnails_invalidated": 7,
+  "tooltip": "sRGB\n앱의 화면 색상 보정이 꺼져 있습니다."
+ },
+ "legacy": [
+  {
+   "mode": "auto",
+   "path": "",
+   "stored": "unset"
+  },
+  {
+   "mode": "manual",
+   "path": "adobe.icc",
+   "stored": "a path"
+  },
+  {
+   "mode": "off",
+   "path": "",
+   "stored": "empty"
+  },
+  {
+   "mode": "off",
+   "path": "",
+   "stored": "null"
+  },
+  {
+   "mode": "auto",
+   "path": "p",
+   "stored": "a broken mode"
+  },
+  {
+   "mode": "off",
+   "path": "",
+   "stored": "the new choice wins"
+  }
+ ],
+ "refusal": "지원하지 않는 화면 색상 모드입니다.",
+ "steps": [
+  {
+   "button": "색상 · 자동",
+   "mode": "auto",
+   "path": "",
+   "render_version": 0,
+   "renders": 0,
+   "revision": 0,
+   "state": {
+    "description": "sRGB",
+    "digest": "srgb",
+    "error": false,
+    "has_profile": false,
+    "message": "",
+    "mode": "auto",
+    "path": "",
+    "screen": ""
+   },
+   "step": "initial",
+   "stored": {
+    "display_color": "__unset__",
+    "monitor_icc": "__unset__"
+   },
+   "thumbnails_invalidated": 0,
+   "tooltip": ""
+  },
+  {
+   "button": "색상 · 자동",
+   "mode": "auto",
+   "path": "",
+   "render_version": 1,
+   "renders": 1,
+   "revision": 0,
+   "state": {
+    "description": "sRGB",
+    "digest": "srgb",
+    "error": false,
+    "has_profile": false,
+    "message": "Windows 기본 색상(sRGB)을 사용합니다.",
+    "mode": "auto",
+    "path": "",
+    "screen": ""
+   },
+   "step": "first resolve: Windows default",
+   "stored": {
+    "display_color": "__unset__",
+    "monitor_icc": "__unset__"
+   },
+   "thumbnails_invalidated": 1,
+   "tooltip": "sRGB\nWindows 기본 색상(sRGB)을 사용합니다."
+  },
+  {
+   "button": "색상 · 자동",
+   "mode": "auto",
+   "path": "",
+   "render_version": 2,
+   "renders": 2,
+   "revision": 1,
+   "state": {
+    "description": "RGB built-in",
+    "digest": "ff561b99e1461e9e6951ab33b8bdd3f0b73936a31b48472354dc134685f94896",
+    "error": false,
+    "has_profile": true,
+    "message": "Windows가 현재 모니터에 제공한 프로파일입니다.",
+    "mode": "auto",
+    "path": "<dir>\\p3.icc",
+    "screen": ""
+   },
+   "step": "auto with a profile from the system",
+   "stored": {
+    "display_color": "__unset__",
+    "monitor_icc": "__unset__"
+   },
+   "thumbnails_invalidated": 2,
+   "tooltip": "RGB built-in\n<dir>\\p3.icc\nWindows가 현재 모니터에 제공한 프로파일입니다."
+  },
+  {
+   "button": "색상 · 자동",
+   "mode": "auto",
+   "path": "",
+   "render_version": 2,
+   "renders": 2,
+   "revision": 1,
+   "state": {
+    "description": "RGB built-in",
+    "digest": "ff561b99e1461e9e6951ab33b8bdd3f0b73936a31b48472354dc134685f94896",
+    "error": false,
+    "has_profile": true,
+    "message": "Windows가 현재 모니터에 제공한 프로파일입니다.",
+    "mode": "auto",
+    "path": "<dir>\\p3.icc",
+    "screen": ""
+   },
+   "step": "the same again",
+   "stored": {
+    "display_color": "__unset__",
+    "monitor_icc": "__unset__"
+   },
+   "thumbnails_invalidated": 2,
+   "tooltip": "RGB built-in\n<dir>\\p3.icc\nWindows가 현재 모니터에 제공한 프로파일입니다."
+  },
+  {
+   "button": "색상 · 수동",
+   "mode": "manual",
+   "path": "<dir>\\adobe.icc",
+   "render_version": 3,
+   "renders": 3,
+   "revision": 2,
+   "state": {
+    "description": "Adobe RGB (compatible)",
+    "digest": "db35207f1d2a9b9d7ec320f8f459f8fb1ad1764309782612910215c06af6357a",
+    "error": false,
+    "has_profile": true,
+    "message": "직접 선택한 화면 프로파일입니다.",
+    "mode": "manual",
+    "path": "<dir>\\adobe.icc",
+    "screen": ""
+   },
+   "step": "manual profile",
+   "stored": {
+    "display_color": {
+     "mode": "manual",
+     "path": "<dir>\\adobe.icc"
+    },
+    "monitor_icc": "<dir>\\adobe.icc"
+   },
+   "thumbnails_invalidated": 3,
+   "tooltip": "Adobe RGB (compatible)\n<dir>\\adobe.icc\n직접 선택한 화면 프로파일입니다."
+  },
+  {
+   "button": "색상 · 확인 필요",
+   "mode": "manual",
+   "path": "",
+   "render_version": 4,
+   "renders": 4,
+   "revision": 3,
+   "state": {
+    "description": "sRGB",
+    "digest": "srgb",
+    "error": true,
+    "has_profile": false,
+    "message": "ICC 프로파일 파일을 선택하세요.\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요.",
+    "mode": "manual",
+    "path": "",
+    "screen": ""
+   },
+   "step": "manual without a file",
+   "stored": {
+    "display_color": {
+     "mode": "manual",
+     "path": ""
+    },
+    "monitor_icc": ""
+   },
+   "thumbnails_invalidated": 4,
+   "tooltip": "sRGB\nICC 프로파일 파일을 선택하세요.\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요."
+  },
+  {
+   "button": "색상 · 확인 필요",
+   "mode": "manual",
+   "path": "<dir>\\notes.icc",
+   "render_version": 4,
+   "renders": 4,
+   "revision": 3,
+   "state": {
+    "description": "sRGB",
+    "digest": "srgb",
+    "error": true,
+    "has_profile": false,
+    "message": "cmsOpenProfileFromMem returned NULL\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요.",
+    "mode": "manual",
+    "path": "<dir>\\notes.icc",
+    "screen": ""
+   },
+   "step": "manual with a file that is not a profile",
+   "stored": {
+    "display_color": {
+     "mode": "manual",
+     "path": "<dir>\\notes.icc"
+    },
+    "monitor_icc": "<dir>\\notes.icc"
+   },
+   "thumbnails_invalidated": 4,
+   "tooltip": "sRGB\n<dir>\\notes.icc\ncmsOpenProfileFromMem returned NULL\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요."
+  },
+  {
+   "button": "색상 · 해제",
+   "mode": "off",
+   "path": "",
+   "render_version": 4,
+   "renders": 4,
+   "revision": 3,
+   "state": {
+    "description": "sRGB",
+    "digest": "srgb",
+    "error": false,
+    "has_profile": false,
+    "message": "앱의 화면 색상 보정이 꺼져 있습니다.",
+    "mode": "off",
+    "path": "",
+    "screen": ""
+   },
+   "step": "off",
+   "stored": {
+    "display_color": {
+     "mode": "off",
+     "path": ""
+    },
+    "monitor_icc": null
+   },
+   "thumbnails_invalidated": 4,
+   "tooltip": "sRGB\n앱의 화면 색상 보정이 꺼져 있습니다."
+  },
+  {
+   "button": "색상 · 자동",
+   "mode": "auto",
+   "path": "",
+   "render_version": 4,
+   "renders": 4,
+   "revision": 3,
+   "state": {
+    "description": "sRGB",
+    "digest": "srgb",
+    "error": false,
+    "has_profile": false,
+    "message": "Windows 기본 색상(sRGB)을 사용합니다.",
+    "mode": "auto",
+    "path": "",
+    "screen": ""
+   },
+   "step": "auto, Windows default again",
+   "stored": {
+    "display_color": {
+     "mode": "auto",
+     "path": ""
+    },
+    "monitor_icc": null
+   },
+   "thumbnails_invalidated": 4,
+   "tooltip": "sRGB\nWindows 기본 색상(sRGB)을 사용합니다."
+  },
+  {
+   "button": "색상 · 자동",
+   "mode": "auto",
+   "path": "",
+   "render_version": 4,
+   "renders": 4,
+   "revision": 3,
+   "state": {
+    "description": "sRGB",
+    "digest": "srgb",
+    "error": false,
+    "has_profile": false,
+    "message": "Windows 기본 색상(sRGB)을 사용합니다.",
+    "mode": "auto",
+    "path": "",
+    "screen": ""
+   },
+   "step": "after an unsupported mode",
+   "stored": {
+    "display_color": {
+     "mode": "auto",
+     "path": ""
+    },
+    "monitor_icc": null
+   },
+   "thumbnails_invalidated": 4,
+   "tooltip": "sRGB\nWindows 기본 색상(sRGB)을 사용합니다."
+  }
+ ]
+}

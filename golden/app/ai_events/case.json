@@ -1,0 +1,924 @@
+{
+ "authentication": [
+  [
+   "HTTP 401 from server",
+   true
+  ],
+  [
+   "Unauthenticated",
+   true
+  ],
+  [
+   "authentication_failed",
+   true
+  ],
+  [
+   "Authentication required",
+   true
+  ],
+  [
+   "failed to authenticate.",
+   true
+  ],
+  [
+   "You are not logged in",
+   true
+  ],
+  [
+   "sign-in is required",
+   true
+  ],
+  [
+   "login required",
+   true
+  ],
+  [
+   "OAuth access token is invalid",
+   true
+  ],
+  [
+   "invalid_grant",
+   true
+  ],
+  [
+   "invalid api key",
+   true
+  ],
+  [
+   "API_KEY_INVALID",
+   true
+  ],
+  [
+   "API key not valid. Please pass a valid API key.",
+   true
+  ],
+  [
+   "refresh token has expired",
+   true
+  ],
+  [
+   "access token was revoked",
+   true
+  ],
+  [
+   "missing credentials",
+   true
+  ],
+  [
+   "could not load the api_key",
+   true
+  ],
+  [
+   "Please log in again",
+   true
+  ],
+  [
+   "Please set an Auth method",
+   true
+  ],
+  [
+   "failed to refresh",
+   true
+  ],
+  [
+   "no authentication is configured",
+   true
+  ],
+  [
+   "re-authenticate",
+   true
+  ],
+  [
+   "rate limit 429",
+   false
+  ],
+  [
+   "all good",
+   false
+  ],
+  [
+   "4010 items",
+   false
+  ],
+  [
+   "",
+   false
+  ],
+  [
+   "please sign in",
+   true
+  ],
+  [
+   {
+    "error": {
+     "type": "authentication_error"
+    }
+   },
+   true
+  ]
+ ],
+ "gemini": [
+  {
+   "environ": {
+    "GEMINI_API_KEY": "x"
+   },
+   "home": "none",
+   "kind": "API key",
+   "state": "signed_in"
+  },
+  {
+   "environ": {
+    "GOOGLE_API_KEY": "y"
+   },
+   "home": "with",
+   "kind": "API key",
+   "state": "signed_in"
+  },
+  {
+   "environ": {},
+   "home": "with",
+   "kind": "Google",
+   "state": "signed_in"
+  },
+  {
+   "environ": {},
+   "home": "none",
+   "kind": "",
+   "state": "unknown"
+  },
+  {
+   "environ": {
+    "GEMINI_CLI_HOME": "<ROOT>\\cli"
+   },
+   "home": "none",
+   "kind": "Google",
+   "state": "signed_in"
+  },
+  {
+   "environ": {
+    "GEMINI_API_KEY": ""
+   },
+   "home": "none",
+   "kind": "",
+   "state": "unknown"
+  }
+ ],
+ "redactions": [
+  {
+   "out": "Authorization: [redacted]",
+   "secrets": [],
+   "text": "Authorization: Bearer abc.def"
+  },
+  {
+   "out": "key [redacted] and [redacted]",
+   "secrets": [],
+   "text": "key sk-ant-api03-XYZ_1 and sk-proj-2"
+  },
+  {
+   "out": "token [redacted] end",
+   "secrets": [],
+   "text": "token 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef end"
+  },
+  {
+   "out": "my [redacted] value here",
+   "secrets": [
+    "secret"
+   ],
+   "text": "my secret value here"
+  },
+  {
+   "out": "nothing to hide",
+   "secrets": [
+    "",
+    "zzz"
+   ],
+   "text": "nothing to hide"
+  },
+  {
+   "out": "[redacted]",
+   "secrets": [],
+   "text": "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"
+  },
+  {
+   "out": "[redacted] y",
+   "secrets": [],
+   "text": "BEARER   x y"
+  }
+ ],
+ "statuses": [
+  {
+   "code": 0,
+   "key": "claude",
+   "kind": "Claude",
+   "state": "signed_in",
+   "stderr": "",
+   "stdout": "{\"loggedIn\": true, \"authMethod\": \"claude.ai\"}"
+  },
+  {
+   "code": 0,
+   "key": "claude",
+   "kind": "API key",
+   "state": "signed_in",
+   "stderr": "",
+   "stdout": "{\"loggedIn\": true, \"authMethod\": \"api_key_helper\"}"
+  },
+  {
+   "code": 0,
+   "key": "claude",
+   "kind": "Cloud",
+   "state": "signed_in",
+   "stderr": "",
+   "stdout": "{\"loggedIn\": true, \"authMethod\": \"third_party\"}"
+  },
+  {
+   "code": 0,
+   "key": "claude",
+   "kind": "",
+   "state": "signed_in",
+   "stderr": "",
+   "stdout": "{\"loggedIn\": true, \"authMethod\": \"new\"}"
+  },
+  {
+   "code": 1,
+   "key": "claude",
+   "kind": "",
+   "state": "unknown",
+   "stderr": "",
+   "stdout": "{\"loggedIn\": true}"
+  },
+  {
+   "code": 1,
+   "key": "claude",
+   "kind": "",
+   "state": "signed_out",
+   "stderr": "",
+   "stdout": "{\"loggedIn\": false}"
+  },
+  {
+   "code": 2,
+   "key": "claude",
+   "kind": "",
+   "state": "unknown",
+   "stderr": "",
+   "stdout": "{\"loggedIn\": false}"
+  },
+  {
+   "code": 0,
+   "key": "claude",
+   "kind": "",
+   "state": "unknown",
+   "stderr": "",
+   "stdout": "not json"
+  },
+  {
+   "code": 0,
+   "key": "claude",
+   "kind": "",
+   "state": "unknown",
+   "stderr": "",
+   "stdout": "[1]"
+  },
+  {
+   "code": 0,
+   "key": "codex",
+   "kind": "ChatGPT",
+   "state": "signed_in",
+   "stderr": "Logged in using ChatGPT\n",
+   "stdout": ""
+  },
+  {
+   "code": 0,
+   "key": "codex",
+   "kind": "API key",
+   "state": "signed_in",
+   "stderr": "",
+   "stdout": "logged in using an API key - sk-..."
+  },
+  {
+   "code": 1,
+   "key": "codex",
+   "kind": "",
+   "state": "signed_out",
+   "stderr": "",
+   "stdout": "Not logged in"
+  },
+  {
+   "code": 1,
+   "key": "codex",
+   "kind": "",
+   "state": "unknown",
+   "stderr": "",
+   "stdout": "Logged in using ChatGPT"
+  },
+  {
+   "code": 0,
+   "key": "codex",
+   "kind": "",
+   "state": "unknown",
+   "stderr": "",
+   "stdout": "something else"
+  },
+  {
+   "code": 0,
+   "key": "gemini",
+   "kind": "",
+   "state": "unknown",
+   "stderr": "",
+   "stdout": "x"
+  }
+ ],
+ "streams": {
+  "claude": {
+   "events": [
+    [
+     [
+      "session",
+      "sess-1",
+      null
+     ]
+    ],
+    [],
+    [
+     [
+      "text",
+      "사진을 ",
+      null
+     ]
+    ],
+    [
+     [
+      "text",
+      "봅니다.",
+      null
+     ]
+    ],
+    [
+     [
+      "tool",
+      "list_photos",
+      null
+     ]
+    ],
+    [
+     [
+      "tool",
+      "apply_edits",
+      3
+     ]
+    ],
+    [
+     [
+      "text",
+      "끝났습니다.",
+      null
+     ]
+    ],
+    [
+     [
+      "error",
+      "Unexpected tool outside Grainy",
+      null
+     ]
+    ],
+    [
+     [
+      "error",
+      "",
+      null
+     ]
+    ],
+    [
+     [
+      "error",
+      "",
+      null
+     ]
+    ],
+    []
+   ],
+   "failed": true,
+   "lines": [
+    {
+     "session_id": "sess-1",
+     "subtype": "init",
+     "type": "system"
+    },
+    {
+     "event": {
+      "type": "message_start"
+     },
+     "type": "stream_event"
+    },
+    {
+     "event": {
+      "delta": {
+       "text": "사진을 ",
+       "type": "text_delta"
+      },
+      "type": "content_block_delta"
+     },
+     "type": "stream_event"
+    },
+    {
+     "event": {
+      "delta": {
+       "text": "봅니다.",
+       "type": "text_delta"
+      },
+      "type": "content_block_delta"
+     },
+     "type": "stream_event"
+    },
+    {
+     "message": {
+      "content": [
+       {
+        "text": "사진을 봅니다.",
+        "type": "text"
+       },
+       {
+        "id": "t1",
+        "input": {
+         "limit": 5
+        },
+        "name": "mcp__grainy__list_photos",
+        "type": "tool_use"
+       }
+      ]
+     },
+     "type": "assistant"
+    },
+    {
+     "message": {
+      "content": [
+       {
+        "id": "t1",
+        "input": {
+         "limit": 5
+        },
+        "name": "mcp__grainy__list_photos",
+        "type": "tool_use"
+       },
+       {
+        "id": "t2",
+        "input": {
+         "edits": [
+          {
+           "ids": [
+            1,
+            2
+           ],
+           "set": {}
+          },
+          {
+           "ids": [
+            2,
+            3,
+            "x"
+           ]
+          }
+         ]
+        },
+        "name": "mcp__grainy__apply_edits",
+        "type": "tool_use"
+       }
+      ]
+     },
+     "type": "assistant"
+    },
+    {
+     "message": {
+      "content": [
+       {
+        "text": "끝났습니다.",
+        "type": "text"
+       }
+      ]
+     },
+     "type": "assistant"
+    },
+    {
+     "message": {
+      "content": [
+       {
+        "id": "t3",
+        "input": {},
+        "name": "Bash",
+        "type": "tool_use"
+       }
+      ]
+     },
+     "type": "assistant"
+    },
+    {
+     "event": {
+      "error": {
+       "message": "overloaded"
+      },
+      "type": "error"
+     },
+     "type": "stream_event"
+    },
+    {
+     "is_error": false,
+     "type": "result"
+    },
+    {
+     "type": "user"
+    }
+   ],
+   "partial": false,
+   "succeeded": false
+  },
+  "claude_fail": {
+   "events": [
+    [
+     [
+      "auth_error",
+      "",
+      null
+     ]
+    ],
+    [
+     [
+      "error",
+      "",
+      null
+     ]
+    ]
+   ],
+   "failed": true,
+   "lines": [
+    {
+     "error": "authentication_failed",
+     "message": {
+      "content": []
+     },
+     "type": "assistant"
+    },
+    {
+     "is_error": true,
+     "result": "Please run /login",
+     "type": "result"
+    }
+   ],
+   "partial": false,
+   "succeeded": false
+  },
+  "codex": {
+   "events": [
+    [
+     [
+      "session",
+      "th-9",
+      null
+     ]
+    ],
+    [],
+    [
+     [
+      "tool",
+      "get_photo",
+      2
+     ]
+    ],
+    [],
+    [
+     [
+      "text",
+      "Done\n",
+      null
+     ]
+    ],
+    [],
+    [
+     [
+      "error",
+      "Unexpected MCP server outside Grainy",
+      null
+     ]
+    ],
+    []
+   ],
+   "failed": false,
+   "lines": [
+    {
+     "thread_id": "th-9",
+     "type": "thread.started"
+    },
+    {
+     "type": "turn.started"
+    },
+    {
+     "item": {
+      "arguments": {
+       "ids": [
+        4,
+        5
+       ]
+      },
+      "id": "i1",
+      "server": "grainy",
+      "tool": "get_photo",
+      "type": "mcp_tool_call"
+     },
+     "type": "item.started"
+    },
+    {
+     "item": {
+      "arguments": {
+       "ids": [
+        4,
+        5
+       ]
+      },
+      "id": "i1",
+      "server": "grainy",
+      "tool": "get_photo",
+      "type": "mcp_tool_call"
+     },
+     "type": "item.completed"
+    },
+    {
+     "item": {
+      "id": "i2",
+      "text": "Done",
+      "type": "agent_message"
+     },
+     "type": "item.completed"
+    },
+    {
+     "item": {
+      "id": "i2",
+      "text": "Done",
+      "type": "agent_message"
+     },
+     "type": "item.completed"
+    },
+    {
+     "item": {
+      "id": "i3",
+      "server": "other",
+      "tool": "x",
+      "type": "mcp_tool_call"
+     },
+     "type": "item.started"
+    },
+    {
+     "type": "turn.completed"
+    }
+   ],
+   "partial": false,
+   "succeeded": true
+  },
+  "codex_fail": {
+   "events": [
+    [
+     [
+      "session",
+      "th-2",
+      null
+     ]
+    ],
+    [
+     [
+      "auth_error",
+      "",
+      null
+     ]
+    ]
+   ],
+   "failed": true,
+   "lines": [
+    {
+     "thread_id": "th-2",
+     "type": "thread.started"
+    },
+    {
+     "error": {
+      "message": "401 Unauthorized"
+     },
+     "type": "turn.failed"
+    }
+   ],
+   "partial": false,
+   "succeeded": false
+  },
+  "gemini": {
+   "events": [
+    [
+     [
+      "session",
+      "g-1",
+      null
+     ]
+    ],
+    [],
+    [
+     [
+      "text",
+      "Hello ",
+      null
+     ]
+    ],
+    [
+     [
+      "tool",
+      "set_labels",
+      1
+     ]
+    ],
+    [],
+    [
+     [
+      "tool",
+      "contact_sheet",
+      null
+     ]
+    ],
+    []
+   ],
+   "failed": false,
+   "lines": [
+    {
+     "session_id": "g-1",
+     "type": "init"
+    },
+    {
+     "content": "hi",
+     "role": "user",
+     "type": "message"
+    },
+    {
+     "content": "Hello ",
+     "role": "assistant",
+     "type": "message"
+    },
+    {
+     "parameters": {
+      "ids": [
+       9
+      ]
+     },
+     "tool_id": "a",
+     "tool_name": "grainy__set_labels",
+     "type": "tool_use"
+    },
+    {
+     "parameters": {
+      "ids": [
+       9
+      ]
+     },
+     "tool_id": "a",
+     "tool_name": "grainy__set_labels",
+     "type": "tool_use"
+    },
+    {
+     "parameters": null,
+     "tool_id": "b",
+     "tool_name": "contact_sheet",
+     "type": "tool_use"
+    },
+    {
+     "status": "success",
+     "type": "result"
+    }
+   ],
+   "partial": false,
+   "succeeded": true
+  },
+  "gemini_fail": {
+   "events": [
+    [
+     [
+      "error",
+      "",
+      null
+     ]
+    ],
+    [
+     [
+      "error",
+      "",
+      null
+     ]
+    ]
+   ],
+   "failed": true,
+   "lines": [
+    {
+     "message": "quota",
+     "type": "error"
+    },
+    {
+     "status": "error",
+     "type": "result"
+    }
+   ],
+   "partial": false,
+   "succeeded": false
+  }
+ },
+ "tools": [
+  {
+   "arguments": {
+    "ids": [
+     1,
+     2,
+     3
+    ]
+   },
+   "event": [
+    "tool",
+    "get_preview",
+    3
+   ],
+   "name": "mcp__grainy__get_preview"
+  },
+  {
+   "arguments": null,
+   "event": [
+    "tool",
+    "list_photos",
+    null
+   ],
+   "name": "grainy__list_photos"
+  },
+  {
+   "arguments": {
+    "edits": [
+     {
+      "ids": [
+       1
+      ]
+     },
+     {
+      "ids": [
+       1,
+       2
+      ]
+     }
+    ],
+    "ids": [
+     7
+    ]
+   },
+   "event": [
+    "tool",
+    "apply_edits",
+    2
+   ],
+   "name": "apply_edits"
+  },
+  {
+   "arguments": {
+    "edits": [
+     {
+      "ids": [
+       1
+      ]
+     },
+     {
+      "x": 1
+     }
+    ]
+   },
+   "event": [
+    "tool",
+    "apply_edits",
+    null
+   ],
+   "name": "apply_edits"
+  },
+  {
+   "arguments": {},
+   "event": [
+    "error",
+    "Unexpected tool outside Grainy",
+    null
+   ],
+   "name": "rm"
+  },
+  {
+   "arguments": {
+    "ids": "all"
+   },
+   "event": [
+    "tool",
+    "export_photos",
+    null
+   ],
+   "name": "export_photos"
+  },
+  {
+   "arguments": {},
+   "event": [
+    "error",
+    "Unexpected tool outside Grainy",
+    null
+   ],
+   "name": "mcp__grainy__mcp__grainy__x"
+  }
+ ]
+}

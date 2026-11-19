@@ -1,0 +1,54 @@
+{
+ "mean": [
+  0.27239836873502477,
+  0.2764570035870333,
+  0.2666626604678597
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "crop": [
+   0.1,
+   0.2,
+   0.8,
+   0.9
+  ],
+  "exposure": 0.4,
+  "masks": [
+   {
+    "adjustments": {
+     "exposure": -1.0
+    },
+    "components": [
+     {
+      "type": "sky"
+     },
+     {
+      "operation": "intersect",
+      "points": [
+       [
+        0.2,
+        0.2
+       ],
+       [
+        0.8,
+        0.8
+       ]
+      ],
+      "type": "linear"
+     }
+    ]
+   }
+  ],
+  "rotation": 1,
+  "straighten": 2.5
+ },
+ "shape": [
+  168,
+  112,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

@@ -1,0 +1,11 @@
+{
+ "info": {
+  "channels": 4,
+  "colorspace": "cmyk",
+  "description": "Grainy test CMYK CLUT9",
+  "deviceclass": "output",
+  "pcs": "lab",
+  "version": 2.1
+ },
+ "size": 79192
+}

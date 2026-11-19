@@ -1,0 +1,216 @@
+{
+ "file": "triple.dng",
+ "max_size": 16,
+ "metadata": {
+  "camera": "Test Camera",
+  "decoder": "LibRaw",
+  "file_fingerprint": {
+   "size": 31040
+  },
+  "filename": "triple.dng",
+  "format": "DNG",
+  "height": 100,
+  "make": "Test",
+  "raw_as_shot_kelvin": 4200,
+  "raw_as_shot_tint": 8.0,
+  "raw_info": {
+   "base_profile": {
+    "camera": "Test Camera",
+    "cm1": [
+     [
+      0.9,
+      0.03,
+      0.01
+     ],
+     [
+      0.02,
+      1.0,
+      0.02
+     ],
+     [
+      0.01,
+      0.03,
+      0.9
+     ]
+    ],
+    "cm2": [
+     [
+      0.85,
+      0.04,
+      0.02
+     ],
+     [
+      0.01,
+      1.02,
+      0.01
+     ],
+     [
+      0.01,
+      0.01,
+      0.95
+     ]
+    ],
+    "cm3": [
+     [
+      0.87,
+      0.03,
+      0.015
+     ],
+     [
+      0.01,
+      1.01,
+      0.02
+     ],
+     [
+      0.01,
+      0.02,
+      0.91
+     ]
+    ],
+    "copyright": "",
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "custom_illuminants": true,
+    "exposure": 0,
+    "fm1": null,
+    "fm2": null,
+    "fm3": null,
+    "hs1": null,
+    "hs2": null,
+    "hs3": null,
+    "hs_encoding": 0,
+    "look": null,
+    "look_encoding": 0,
+    "name": "DCP",
+    "policy": 0,
+    "signature": "Luma fixture",
+    "t1": 2856.0,
+    "t2": 6504.0,
+    "t3": 5454.027643227172,
+    "xy1": [
+     0.4476,
+     0.4074
+    ],
+    "xy2": [
+     0.3127,
+     0.329
+    ],
+    "xy3": [
+     0.3333333333333333,
+     0.3333333333333333
+    ]
+   },
+   "calibration": [
+    [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    [
+     [
+      1.0,
+      0.01,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.015
+     ],
+     [
+      0.01,
+      0.0,
+      1.0
+     ]
+    ]
+   ],
+   "calibration_signature": "Luma fixture",
+   "camera": "Test Camera",
+   "daylight_neutral": [
+    0.8359110705540487,
+    1.0,
+    1.0129759678126045
+   ],
+   "format": "DNG",
+   "make": "Test",
+   "neutral": [
+    0.871358,
+    1.0,
+    0.617045
+   ],
+   "unique_camera": "Test Camera",
+   "xyz_to_camera": [
+    [
+     0.9,
+     0.03,
+     0.01
+    ],
+    [
+     0.02,
+     1.0,
+     0.02
+    ],
+    [
+     0.01,
+     0.03,
+     0.9
+    ]
+   ]
+  },
+  "raw_native": true,
+  "size_mb": 0.03,
+  "source_orientation": 1,
+  "width": 150,
+  "working_space": "sRGB"
+ },
+ "mode": "as_shot",
+ "native": true,
+ "settings": {
+  "raw_mode": "as_shot"
+ },
+ "shape": [
+  11,
+  16,
+  3
+ ],
+ "stride": 1,
+ "type": "CameraSource",
+ "working_space": "sRGB"
+}

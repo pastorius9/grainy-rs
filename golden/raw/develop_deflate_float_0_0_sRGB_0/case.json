@@ -1,0 +1,23 @@
+{
+ "arrays": {
+  "output": "dc40eda3d2e92cf1af1d5926d99623fcad2ebabee8e1eb49ce6a75461bfd9c54"
+ },
+ "settings": {
+  "shared_settings": "628521d604b0f9a1ba02fa7e5563dc35c5dfd4128d2abd05d57c8e9ab22fb6ad"
+ },
+ "source": "deflate_float",
+ "white": [
+  [
+   0.5,
+   1.0,
+   0.6666666666666666
+  ],
+  7173.520894603218,
+  95.17118834144767,
+  [
+   0.7325235498264749,
+   0.9235043794414145,
+   0.8528549000165263
+  ]
+ ]
+}

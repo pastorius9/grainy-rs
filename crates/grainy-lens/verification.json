@@ -1,0 +1,99 @@
+{
+  "oracle_library_version": [
+    0,
+    3,
+    4,
+    0
+  ],
+  "map_cases": 110,
+  "golden_bytes": 8171856,
+  "models": {
+    "ptlens": {
+      "cases": 46,
+      "pixel_cases": 7,
+      "maximum": {
+        "geometry": 0.00012207031,
+        "subpixel": 0.00012207031,
+        "gain": 1.5497208e-06,
+        "shading": 8.3446503e-07,
+        "remap": 1.7881393e-07,
+        "develop": 1.0021031e-06
+      }
+    },
+    "poly3": {
+      "cases": 46,
+      "pixel_cases": 5,
+      "maximum": {
+        "geometry": 6.1035156e-05,
+        "subpixel": 0.00012207031,
+        "gain": 1.013279e-05,
+        "shading": 1.013279e-05,
+        "remap": 1.4901161e-07,
+        "develop": 2.5629997e-06
+      }
+    },
+    "poly5": {
+      "cases": 18,
+      "pixel_cases": 3,
+      "maximum": {
+        "geometry": 0.00012207031,
+        "subpixel": 0.00012207031,
+        "gain": 0,
+        "shading": 0,
+        "remap": 1.3411045e-07,
+        "develop": 2.9802322e-07
+      }
+    }
+  },
+  "misses_against_brief_targets": {},
+  "calibration_interpolation_maximum": 4.7683716e-07,
+  "database_profile_json_maximum": 0,
+  "radius_estimator_maximum": 0.0,
+  "exact_noops_and_thread_independence": true,
+  "profile_scales": {
+    "cases": 310,
+    "maximum": 1.1920929e-07,
+    "maximum_ulps": 1,
+    "tolerance_ulps": 1
+  },
+  "strict_map_audit": {
+    "cases": 940,
+    "failures": 62,
+    "maximum": 0.0253753662109375,
+    "profiles": {
+      "cases": 310,
+      "failures": 0,
+      "maximum": 0.0001220703125,
+      "explicit_scale_control_maximum": 0.0001220703125
+    },
+    "stress": {
+      "cases": 630,
+      "failures": 62,
+      "maximum": 0.0253753662109375,
+      "explicit_scale_control_maximum": 9.059906005859375e-05
+    }
+  },
+  "engine_before": {
+    "lens_vignette": 0.0,
+    "lens_all": 0.0004207,
+    "lens_distortion_only": 0.000329,
+    "lens_no_scale": 4.053e-06,
+    "lens_vignette_only": 8.345e-07,
+    "lens_portrait": 3.517e-06,
+    "lens_edits_masks": 0.001552,
+    "lens_panel_off": 0.0,
+    "lens_disabled": 0.0
+  },
+  "engine_after": {
+    "lens_vignette": 0.0,
+    "lens_all": 4.202e-06,
+    "lens_distortion_only": 3.844e-06,
+    "lens_no_scale": 9.179e-06,
+    "lens_vignette_only": 8.345e-07,
+    "lens_portrait": 3.338e-06,
+    "lens_edits_masks": 9.984e-06,
+    "lens_panel_off": 0.0,
+    "lens_disabled": 0.0
+  },
+  "unresolved": "The strict automatic-scale target is not recovered for every synthetic profile; scale-audit.json records failures without raising regression tolerances."
+}

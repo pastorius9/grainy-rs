@@ -1,0 +1,6 @@
+{
+ "dtype": "uint8",
+ "op": "integral_u8",
+ "output_dtype": "int32",
+ "tolerance": 0.0
+}

@@ -1,0 +1,12 @@
+{
+ "border": "reflect101",
+ "delta": 0.125,
+ "dtype": "float32",
+ "dx": 1,
+ "dy": 0,
+ "op": "sobel",
+ "output_dtype": "float32",
+ "scale": 1.0,
+ "size": 3,
+ "tolerance": 2e-05
+}

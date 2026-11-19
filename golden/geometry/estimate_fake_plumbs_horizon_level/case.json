@@ -1,0 +1,35 @@
+{
+ "detected": true,
+ "error": null,
+ "height": 400,
+ "lines_none": false,
+ "mode": "level",
+ "result": {
+  "algorithm": "lines-plumb-horizon-v3",
+  "confidence": 1.0,
+  "crop_scale": 1.0283402613168582,
+  "inliers": 0,
+  "lines": 8,
+  "matrix": [
+   [
+    0.9998323851277925,
+    0.012195486982038895,
+    -0.006013936054915636
+   ],
+   [
+    -0.027485712556092848,
+    0.9998323851277924,
+    0.013826663714150233
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "mode": "level",
+  "requested_mode": "level",
+  "rotation": 1.0490591395418818
+ },
+ "width": 600
+}

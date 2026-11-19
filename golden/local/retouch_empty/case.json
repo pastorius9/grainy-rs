@@ -1,0 +1,19 @@
+{
+ "error": null,
+ "frame": "noise",
+ "operations": [],
+ "output_bits": "5629722146126168064",
+ "output_shape": [
+  64,
+  96,
+  3
+ ],
+ "output_step": 3,
+ "recorded": {
+  "distance": [],
+  "dust": [],
+  "inpaint": 0,
+  "sky": []
+ },
+ "shift": 0
+}

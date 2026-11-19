@@ -1,0 +1,18 @@
+{
+ "dcp_profile": {
+  "camera": "",
+  "copyright": "",
+  "data": "SUlSQwgAAAADACHGDAAJAAAAMgAAAPnGBAADAAAAegAAAPrGCwAGAAAAhgAAAAAAAACPwvUoXI/qP3sUrkfherS/exSuR+F6pL/sUbgehevBv+xRuB6F6/E/exSuR+F6tD+4HoXrUbievwrXo3A9Crc/uB6F61G45j8BAAAAAgAAAAEAAAAAAAAAAACAPwAAgD8AAPBBAAAAP5qZmT8=",
+  "name": "DCP",
+  "sha256": "257b7273a765c4c8a1a5be4f212a18a0b763b0ddf30ebb68530a508256656d3e"
+ },
+ "raw_kelvin": 4300.0,
+ "raw_mode": "daylight",
+ "raw_neutral": [
+  0.5,
+  1,
+  0.7
+ ],
+ "raw_tint": -18.0,
+ "working_space": "ProPhoto"
+}

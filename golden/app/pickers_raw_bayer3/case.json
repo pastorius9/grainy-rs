@@ -1,0 +1,1180 @@
+{
+ "file": "bayer3.dng",
+ "initial": {
+  "kelvin_enabled": false,
+  "negative": false,
+  "negative_base": null,
+  "negative_peak": null,
+  "raw_kelvin": 6500.0,
+  "raw_mode": "as_shot",
+  "raw_neutral": null,
+  "raw_tint": 0.0,
+  "temperature": 0.0,
+  "tint": 0.0
+ },
+ "live": [
+  80,
+  64
+ ],
+ "pixels_case": "pickers_raw_bayer2_crop",
+ "results": [
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "as_shot",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5005.958750770715,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6663262844085693,
+       1.0,
+       0.6062361598014832
+      ],
+      "raw_tint": 1.1869665350554945,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5005.958750770715,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6663262844085693,
+     1.0,
+     0.6062361598014832
+    ],
+    "raw_tint": 1.1869665350554945,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5005.958750770715,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6663262844085693,
+     1.0,
+     0.6062361598014832
+    ],
+    "raw_tint": 1.1869665350554945,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5020.486167145348,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.759247362613678,
+       1.0,
+       0.7793868780136108
+      ],
+      "raw_tint": -62.24174970567248,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5020.486167145348,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.759247362613678,
+     1.0,
+     0.7793868780136108
+    ],
+    "raw_tint": -62.24174970567248,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5020.486167145348,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.759247362613678,
+     1.0,
+     0.7793868780136108
+    ],
+    "raw_tint": -62.24174970567248,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5902.510900553999,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.7061648368835449,
+       1.0,
+       0.8102795481681824
+      ],
+      "raw_tint": -46.74621652224616,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5902.510900553999,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.7061648368835449,
+     1.0,
+     0.8102795481681824
+    ],
+    "raw_tint": -46.74621652224616,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5902.510900553999,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.7061648368835449,
+     1.0,
+     0.8102795481681824
+    ],
+    "raw_tint": -46.74621652224616,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5902.510900553999,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.7061648368835449,
+     1.0,
+     0.8102795481681824
+    ],
+    "raw_tint": -46.74621652224616,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5902.510900553999,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.7061648368835449,
+     1.0,
+     0.8102795481681824
+    ],
+    "raw_tint": -46.74621652224616,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5902.510900553999,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.7061648368835449,
+     1.0,
+     0.8102795481681824
+    ],
+    "raw_tint": -46.74621652224616,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5902.510900553999,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.7061648368835449,
+     1.0,
+     0.8102795481681824
+    ],
+    "raw_tint": -46.74621652224616,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5603.240052439253,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6620641946792603,
+       1.0,
+       0.7002507448196411
+      ],
+      "raw_tint": -12.826906177880316,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5603.240052439253,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6620641946792603,
+     1.0,
+     0.7002507448196411
+    ],
+    "raw_tint": -12.826906177880316,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5603.240052439253,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6620641946792603,
+     1.0,
+     0.7002507448196411
+    ],
+    "raw_tint": -12.826906177880316,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5046.186429162992,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.669313371181488,
+       1.0,
+       0.6195300817489624
+      ],
+      "raw_tint": -2.2609326097076456,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5046.186429162992,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.669313371181488,
+     1.0,
+     0.6195300817489624
+    ],
+    "raw_tint": -2.2609326097076456,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5046.186429162992,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.669313371181488,
+     1.0,
+     0.6195300817489624
+    ],
+    "raw_tint": -2.2609326097076456,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5584.836833631121,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6431331054701093,
+       1.0,
+       0.6664174522273101
+      ],
+      "raw_tint": 0.3463522431314717,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5584.836833631121,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6431331054701093,
+     1.0,
+     0.6664174522273101
+    ],
+    "raw_tint": 0.3463522431314717,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5584.836833631121,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6431331054701093,
+     1.0,
+     0.6664174522273101
+    ],
+    "raw_tint": 0.3463522431314717,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5011.360135523059,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6578325288358084,
+       1.0,
+       0.5917037096350272
+      ],
+      "raw_tint": 7.12237883689717,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5011.360135523059,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6578325288358084,
+     1.0,
+     0.5917037096350272
+    ],
+    "raw_tint": 7.12237883689717,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5011.360135523059,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6578325288358084,
+     1.0,
+     0.5917037096350272
+    ],
+    "raw_tint": 7.12237883689717,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5088.59705406133,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6657888832974967,
+       1.0,
+       0.6212023559658942
+      ],
+      "raw_tint": -1.117825417976874,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5088.59705406133,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6657888832974967,
+     1.0,
+     0.6212023559658942
+    ],
+    "raw_tint": -1.117825417976874,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5088.59705406133,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6657888832974967,
+     1.0,
+     0.6212023559658942
+    ],
+    "raw_tint": -1.117825417976874,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5814.440380268896,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6394749775433441,
+       1.0,
+       0.6940975705764735
+      ],
+      "raw_tint": -2.5927142564486014,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5814.440380268896,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6394749775433441,
+     1.0,
+     0.6940975705764735
+    ],
+    "raw_tint": -2.5927142564486014,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5814.440380268896,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6394749775433441,
+     1.0,
+     0.6940975705764735
+    ],
+    "raw_tint": -2.5927142564486014,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5507.415996388498,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6674120756383027,
+       1.0,
+       0.6948313654399506
+      ],
+      "raw_tint": -14.025437493165336,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5507.415996388498,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6674120756383027,
+     1.0,
+     0.6948313654399506
+    ],
+    "raw_tint": -14.025437493165336,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5507.415996388498,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6674120756383027,
+     1.0,
+     0.6948313654399506
+    ],
+    "raw_tint": -14.025437493165336,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 4971.092431308829,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6666667108182566,
+       1.0,
+       0.6000000397364309
+      ],
+      "raw_tint": 2.219391846344184,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 4971.092431308829,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6666667108182566,
+     1.0,
+     0.6000000397364309
+    ],
+    "raw_tint": 2.219391846344184,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 4971.092431308829,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6666667108182566,
+     1.0,
+     0.6000000397364309
+    ],
+    "raw_tint": 2.219391846344184,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5161.260227827713,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6827781516095816,
+       1.0,
+       0.6648922201965266
+      ],
+      "raw_tint": -15.153824029914533,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5161.260227827713,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6827781516095816,
+     1.0,
+     0.6648922201965266
+    ],
+    "raw_tint": -15.153824029914533,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5161.260227827713,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6827781516095816,
+     1.0,
+     0.6648922201965266
+    ],
+    "raw_tint": -15.153824029914533,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5161.260227827713,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6827781516095816,
+     1.0,
+     0.6648922201965266
+    ],
+    "raw_tint": -15.153824029914533,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진에서 중성 회색이나 흰색 부분을 클릭하거나, 드래그해 영역을 고르세요."
+   ],
+   "wb_checked": true
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "RAW 화이트밸런스 스포이드",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": false,
+      "negative_base": null,
+      "negative_peak": null,
+      "raw_kelvin": 5005.958750770715,
+      "raw_mode": "sample",
+      "raw_neutral": [
+       0.6663262844085693,
+       1.0,
+       0.6062361598014832
+      ],
+      "raw_tint": 1.1869665350554945,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": null,
+    "negative_peak": null,
+    "raw_kelvin": 5005.958750770715,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6663262844085693,
+     1.0,
+     0.6062361598014832
+    ],
+    "raw_tint": 1.1869665350554945,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  }
+ ],
+ "settings": {
+  "raw_mode": "as_shot",
+  "straighten": -4.0
+ },
+ "steps": [
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "click",
+   0.5,
+   0.5
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "click",
+   0.1,
+   0.1
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "click",
+   0.9,
+   0.85
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "click",
+   0.0,
+   0.0
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "click",
+   1.0,
+   1.0
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "click",
+   0.31,
+   0.77
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "click",
+   0.15,
+   0.58
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "area",
+   0.12,
+   0.12,
+   0.22,
+   0.22
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "area",
+   0.12,
+   0.52,
+   0.22,
+   0.64
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "area",
+   0.3,
+   0.3,
+   0.7,
+   0.7
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "area",
+   0.0,
+   0.0,
+   1.0,
+   1.0
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "area",
+   0.05,
+   0.6,
+   0.4,
+   0.95
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "area",
+   0.5,
+   0.5,
+   0.5,
+   0.5
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "area",
+   0.2,
+   0.2,
+   0.2001,
+   0.9
+  ],
+  [
+   "toggle_wb",
+   false
+  ],
+  [
+   "toggle_wb",
+   true
+  ],
+  [
+   "click",
+   0.5,
+   0.5
+  ]
+ ]
+}

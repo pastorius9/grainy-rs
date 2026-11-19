@@ -1,0 +1,32 @@
+{
+ "bytes": 6120,
+ "exact": true,
+ "extension": ".png",
+ "found": {
+  "exif": true,
+  "icc": "43cbfe47eb7c",
+  "xmp": true
+ },
+ "height": 40,
+ "lossless": true,
+ "options": {
+  "color_space": "sRGB",
+  "dither": false,
+  "format": "PNG",
+  "grayscale": false,
+  "keep_metadata": true,
+  "keywords": "",
+  "longest": null,
+  "quality": 95,
+  "user_metadata": {
+   "creator": "Only Creator"
+  }
+ },
+ "read_metadata": {
+  "creator": "Only Creator"
+ },
+ "settings": {},
+ "settings_key": "default",
+ "source": "png8.png",
+ "width": 60
+}

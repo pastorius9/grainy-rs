@@ -1,0 +1,185 @@
+{
+ "op": "components",
+ "variants": [
+  {
+   "connectivity": 4,
+   "count": 1,
+   "label": "empty",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 1,
+   "label": "empty",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 2,
+   "label": "full",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 2,
+   "label": "full",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 2,
+   "label": "pixel",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 2,
+   "label": "pixel",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 2,
+   "label": "hole",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 2,
+   "label": "hole",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 3,
+   "label": "border",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 3,
+   "label": "border",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 3,
+   "label": "nested",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 3,
+   "label": "nested",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 193,
+   "label": "many",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 193,
+   "label": "many",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 357,
+   "label": "ties",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 2,
+   "label": "ties",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 75,
+   "label": "random",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 21,
+   "label": "random",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 2,
+   "label": "single",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 2,
+   "label": "single",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 4,
+   "label": "row",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 4,
+   "label": "row",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 4,
+   "label": "column",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 4,
+   "label": "column",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 2,
+   "label": "tiny_corner",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 2,
+   "label": "tiny_corner",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 2,
+   "label": "only_known",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 2,
+   "label": "only_known",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 4,
+   "count": 3000,
+   "label": "parallel_many",
+   "tolerance": 0.0
+  },
+  {
+   "connectivity": 8,
+   "count": 1333,
+   "label": "parallel_many",
+   "tolerance": 0.0
+  }
+ ]
+}

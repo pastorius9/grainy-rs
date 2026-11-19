@@ -1,0 +1,227 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "a.jpg": {
+     "fill": [
+      65,
+      9
+     ]
+    },
+    "out/taken.jpg": {
+     "fill": [
+      1,
+      1
+     ]
+    },
+    "out/half.xmp": {
+     "fill": [
+      2,
+      1
+     ]
+    }
+   },
+   "dirs": [
+    "out"
+   ]
+  },
+  "calls": [
+   {
+    "fn": "copy_original",
+    "args": {
+     "record": {
+      "path": "$ROOT/a.jpg",
+      "rating": 2,
+      "label": "Green",
+      "settings": {
+       "exposure": 1
+      },
+      "user_metadata": {},
+      "keywords": "k1, k2",
+      "info": {
+       "width": 10,
+       "height": 20
+      }
+     },
+     "destination": "$ROOT/out/a_copy.jpg"
+    }
+   },
+   {
+    "fn": "copy_original",
+    "args": {
+     "record": {
+      "path": "$ROOT/a.jpg",
+      "rating": 2,
+      "label": "Green",
+      "settings": {
+       "exposure": 1
+      },
+      "user_metadata": {},
+      "keywords": "k1, k2",
+      "info": {
+       "width": 10,
+       "height": 20
+      }
+     },
+     "destination": "$ROOT/out/a_copy.jpg"
+    }
+   },
+   {
+    "fn": "copy_original",
+    "args": {
+     "record": {
+      "path": "$ROOT/a.jpg",
+      "rating": 2,
+      "label": "Green",
+      "settings": {
+       "exposure": 1
+      },
+      "user_metadata": {},
+      "keywords": "k1, k2",
+      "info": {
+       "width": 10,
+       "height": 20
+      }
+     },
+     "destination": "$ROOT/out/taken.jpg"
+    }
+   },
+   {
+    "fn": "copy_original",
+    "args": {
+     "record": {
+      "path": "$ROOT/a.jpg",
+      "rating": 2,
+      "label": "Green",
+      "settings": {
+       "exposure": 1
+      },
+      "user_metadata": {},
+      "keywords": "k1, k2",
+      "info": {
+       "width": 10,
+       "height": 20
+      }
+     },
+     "destination": "$ROOT/out/half.jpg"
+    }
+   },
+   {
+    "fn": "copy_original",
+    "args": {
+     "record": {
+      "path": "$ROOT/none.jpg",
+      "rating": 2,
+      "label": "Green",
+      "settings": {
+       "exposure": 1
+      },
+      "user_metadata": {},
+      "keywords": "k1, k2",
+      "info": {
+       "width": 10,
+       "height": 20
+      }
+     },
+     "destination": "$ROOT/out/none.jpg"
+    }
+   },
+   {
+    "fn": "copy_original",
+    "args": {
+     "record": {
+      "path": "$ROOT/a.jpg",
+      "rating": 2,
+      "label": "Green",
+      "settings": {
+       "exposure": 1
+      },
+      "user_metadata": {},
+      "keywords": "k1, k2",
+      "info": {}
+     },
+     "destination": "$ROOT/out/noinfo.jpg"
+    }
+   }
+  ],
+  "name": "quick_export_copy"
+ },
+ "results": [
+  {
+   "ok": [
+    10,
+    20
+   ]
+  },
+  {
+   "err": {
+    "type": "OSError",
+    "message": null
+   }
+  },
+  {
+   "err": {
+    "type": "OSError",
+    "message": null
+   }
+  },
+  {
+   "err": {
+    "type": "OSError",
+    "message": null
+   }
+  },
+  {
+   "err": {
+    "type": "OSError",
+    "message": null
+   }
+  },
+  {
+   "ok": [
+    0,
+    0
+   ]
+  }
+ ],
+ "tree": {
+  "files": {
+   "a.jpg": {
+    "size": 9,
+    "sha256": "e5f9176ecd90317cf2d4673926c9db65475b0b58e7f468586ddaef280a98cdbd"
+   },
+   "out/a_copy.jpg": {
+    "size": 9,
+    "sha256": "e5f9176ecd90317cf2d4673926c9db65475b0b58e7f468586ddaef280a98cdbd"
+   },
+   "out/a_copy.xmp": {
+    "size": 651,
+    "sha256": "6f7d4116c87bf3c4b6a452dfef454e80764a3211105d4b342256786f9bb673d2"
+   },
+   "out/half.xmp": {
+    "size": 1,
+    "sha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+   },
+   "out/noinfo.jpg": {
+    "size": 9,
+    "sha256": "e5f9176ecd90317cf2d4673926c9db65475b0b58e7f468586ddaef280a98cdbd"
+   },
+   "out/noinfo.xmp": {
+    "size": 651,
+    "sha256": "6f7d4116c87bf3c4b6a452dfef454e80764a3211105d4b342256786f9bb673d2"
+   },
+   "out/taken.jpg": {
+    "size": 1,
+    "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+   }
+  },
+  "dirs": [
+   "out"
+  ]
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

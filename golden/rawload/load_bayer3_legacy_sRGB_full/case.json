@@ -1,0 +1,33 @@
+{
+ "file": "bayer3.dng",
+ "max_size": null,
+ "metadata": {
+  "camera": "Synthetic",
+  "decoder": "LibRaw",
+  "file_fingerprint": {
+   "size": 11312
+  },
+  "filename": "bayer3.dng",
+  "format": "DNG",
+  "height": 80,
+  "make": "Grainy",
+  "raw_native": false,
+  "size_mb": 0.01,
+  "source_orientation": 8,
+  "width": 64,
+  "working_space": "sRGB"
+ },
+ "mode": "legacy",
+ "native": false,
+ "settings": {
+  "raw_mode": "legacy"
+ },
+ "shape": [
+  80,
+  64,
+  3
+ ],
+ "stride": 2,
+ "type": "ndarray",
+ "working_space": "sRGB"
+}

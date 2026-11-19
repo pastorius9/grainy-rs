@@ -1,0 +1,16 @@
+{
+ "bits_sum": "14444123274424090624",
+ "image": "noise",
+ "pixel_scale": 1.0,
+ "settings": {
+  "clarity": 20.0,
+  "detail_version": 3,
+  "vignette": -40.0,
+  "vignette_feather": 70.0,
+  "vignette_roundness": 30.0
+ },
+ "step": [
+  3,
+  3
+ ]
+}

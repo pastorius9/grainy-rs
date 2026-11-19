@@ -1,0 +1,33 @@
+{
+ "changed": {},
+ "removed": [],
+ "report": {
+  "message": "밝기 차이가 거의 없어 자동톤을 적용하지 않았습니다.",
+  "status": "flat"
+ },
+ "settings": {
+  "raw_mode": "as_shot",
+  "upright": {
+   "crop_scale": 1.12,
+   "matrix": [
+    [
+     1.02,
+     0.04,
+     -0.01
+    ],
+    [
+     -0.03,
+     1.01,
+     0.005
+    ],
+    [
+     0.02,
+     -0.015,
+     1.0
+    ]
+   ],
+   "mode": "full"
+  }
+ },
+ "source": "camera"
+}

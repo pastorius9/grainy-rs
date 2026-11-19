@@ -1,0 +1,26 @@
+{
+ "bytes": 3532,
+ "exact": true,
+ "extension": ".png",
+ "found": {
+  "icc": "43cbfe47eb7c"
+ },
+ "height": 40,
+ "lossless": true,
+ "options": {
+  "color_space": "sRGB",
+  "dither": false,
+  "format": "PNG 16-bit",
+  "grayscale": false,
+  "keep_metadata": false,
+  "keywords": "",
+  "longest": null,
+  "quality": 95,
+  "user_metadata": null
+ },
+ "read_metadata": {},
+ "settings": {},
+ "settings_key": "default",
+ "source": "gray16.tif",
+ "width": 60
+}

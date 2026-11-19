@@ -1,0 +1,10 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "flip": true,
+  "lens_vignette": 40.0
+ },
+ "source": "patches",
+ "use_crop": true
+}

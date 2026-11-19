@@ -1,0 +1,35 @@
+{
+ "detected": true,
+ "error": null,
+ "height": 400,
+ "lines_none": false,
+ "mode": "vertical",
+ "result": {
+  "algorithm": "lines-v1",
+  "confidence": 1.0,
+  "crop_scale": 1.033631572225131,
+  "inliers": 8,
+  "lines": 16,
+  "matrix": [
+   [
+    0.9998785723972213,
+    0.010380425801625045,
+    -0.00512949909942311
+   ],
+   [
+    -0.023022459455412633,
+    0.990178183381846,
+    0.01642213803678328
+   ],
+   [
+    0.0004511545931241927,
+    -0.019403810279664254,
+    1.0094763278432701
+   ]
+  ],
+  "mode": "vertical",
+  "requested_mode": "vertical",
+  "rotation": 0.8873038147574448
+ },
+ "width": 600
+}

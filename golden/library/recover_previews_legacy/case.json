@@ -1,0 +1,250 @@
+{
+ "spec": {
+  "fake_images": true,
+  "setup": {
+   "files": {
+    "lib/new/a.jpg": {
+     "text": "{\"seed\": 1, \"w\": 96, \"h\": 64}"
+    },
+    "lib/new/b.jpg": {
+     "text": "{\"seed\": 2, \"w\": 96, \"h\": 64}"
+    },
+    "lib/new/sub/c.jpg": {
+     "text": "{\"seed\": 3, \"w\": 96, \"h\": 64}"
+    },
+    "lib/new/sub/d.jpg": {
+     "text": "{\"seed\": 4, \"w\": 96, \"h\": 64}"
+    },
+    "lib/decoy/a.jpg": {
+     "text": "{\"seed\": 5, \"w\": 96, \"h\": 64}"
+    },
+    "lib/decoy/b.jpg": {
+     "text": "{\"seed\": 6, \"w\": 96, \"h\": 64}"
+    },
+    "lib/decoy/sub/c.jpg": {
+     "text": "{\"seed\": 7, \"w\": 96, \"h\": 64}"
+    },
+    "lib/decoy/sub/d.jpg": {
+     "text": "{\"seed\": 0, \"w\": 96, \"h\": 64}"
+    }
+   },
+   "mtimes": {
+    "lib/new/a.jpg": 1800000010000000000,
+    "lib/new/b.jpg": 1800000011000000000,
+    "lib/new/sub/c.jpg": 1800000012000000000,
+    "lib/new/sub/d.jpg": 1800000013000000000,
+    "lib/decoy/a.jpg": 1800000010000000000,
+    "lib/decoy/b.jpg": 1800000011000000000,
+    "lib/decoy/sub/c.jpg": 1800000012000000000,
+    "lib/decoy/sub/d.jpg": 1800000013000000000
+   },
+   "photos": [
+    {
+     "path": "$ROOT/lib/old/a.jpg"
+    },
+    {
+     "path": "$ROOT/lib/old/b.jpg"
+    },
+    {
+     "path": "$ROOT/lib/old/sub/c.jpg"
+    },
+    {
+     "path": "$ROOT/lib/old/sub/d.jpg"
+    }
+   ]
+  },
+  "calls": [
+   {
+    "fn": "write_previews",
+    "args": {
+     "items": [
+      {
+       "id": 1,
+       "seed": 1,
+       "legacy": true
+      },
+      {
+       "id": 2,
+       "seed": 2,
+       "legacy": true
+      },
+      {
+       "id": 3,
+       "seed": 3,
+       "legacy": true
+      },
+      {
+       "id": 4,
+       "seed": 4,
+       "legacy": true
+      }
+     ]
+    }
+   },
+   {
+    "fn": "recover"
+   }
+  ],
+  "name": "recover_previews_legacy"
+ },
+ "results": [
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "plans": [
+     {
+      "source": "$ROOT\\lib\\old",
+      "destination": "$ROOT\\lib\\new",
+      "updates": [
+       [
+        "$ROOT\\lib\\new\\a.jpg",
+        1
+       ],
+       [
+        "$ROOT\\lib\\new\\b.jpg",
+        2
+       ],
+       [
+        "$ROOT\\lib\\new\\sub\\c.jpg",
+        3
+       ],
+       [
+        "$ROOT\\lib\\new\\sub\\d.jpg",
+        4
+       ]
+      ],
+      "found": 4,
+      "missing": 0,
+      "physical": 4,
+      "proof": "saved_previews",
+      "anchors": [
+       1,
+       2,
+       3
+      ],
+      "collision": false,
+      "expected_paths": {
+       "1": "$ROOT\\lib\\old\\a.jpg",
+       "2": "$ROOT\\lib\\old\\b.jpg",
+       "3": "$ROOT\\lib\\old\\sub\\c.jpg",
+       "4": "$ROOT\\lib\\old\\sub\\d.jpg"
+      },
+      "guards": [
+       [
+        "$ROOT\\lib\\new\\a.jpg",
+        {
+         "size": 29,
+         "mtime_ns": 1800000010000000000
+        }
+       ],
+       [
+        "$ROOT\\lib\\new\\b.jpg",
+        {
+         "size": 29,
+         "mtime_ns": 1800000011000000000
+        }
+       ],
+       [
+        "$ROOT\\lib\\new\\sub\\c.jpg",
+        {
+         "size": 29,
+         "mtime_ns": 1800000012000000000
+        }
+       ],
+       [
+        "$ROOT\\lib\\new\\sub\\d.jpg",
+        {
+         "size": 29,
+         "mtime_ns": 1800000013000000000
+        }
+       ]
+      ],
+      "identity_ok": true,
+      "parent_mtime_ok": true
+     }
+    ],
+    "unresolved": [],
+    "total": 1,
+    "incomplete": false,
+    "cancelled": false
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "lib/decoy/a.jpg": {
+    "size": 29,
+    "sha256": "2c5871fad2c51aaf4bf738107f91b105a83b41aecf1397fd6922cbc146887b17"
+   },
+   "lib/decoy/b.jpg": {
+    "size": 29,
+    "sha256": "31cc87966131b7bf0cf9293cd93bb4aa616439b310de55a011ac11799ff96dd5"
+   },
+   "lib/decoy/sub/c.jpg": {
+    "size": 29,
+    "sha256": "b68be445c5bbffcf0365aa78fed94c0d4ef63a8ff8a7a7f3379f994f9d51dfa0"
+   },
+   "lib/decoy/sub/d.jpg": {
+    "size": 29,
+    "sha256": "2122668bbb945a840abf88219d131ce7f2aa5bab4581bc44f1a13bd8e0497718"
+   },
+   "lib/new/a.jpg": {
+    "size": 29,
+    "sha256": "629685bc307cf01c7e7d71aff88ec2e0ed5367de2d8d9d429009b95df97a947a"
+   },
+   "lib/new/b.jpg": {
+    "size": 29,
+    "sha256": "5e718f4e0c78f1722eeb4173670eae2d8c467b565277277e2d03b2ea59595b34"
+   },
+   "lib/new/sub/c.jpg": {
+    "size": 29,
+    "sha256": "15386c61040497652630184a86cd565c08b25e95d97571725a4551fd013e0d98"
+   },
+   "lib/new/sub/d.jpg": {
+    "size": 29,
+    "sha256": "78c96e85e29869fd8d5c4be4ed03a34ce5f921302f7a8a2c610c2e8574c81a1f"
+   }
+  },
+  "dirs": [
+   "lib",
+   "lib/decoy",
+   "lib/decoy/sub",
+   "lib/new",
+   "lib/new/sub"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\lib\\old\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\lib\\old\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\lib\\old\\sub\\c.jpg",
+    "name": "c.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 4,
+    "path": "$ROOT\\lib\\old\\sub\\d.jpg",
+    "name": "d.jpg",
+    "virtual_source": null
+   }
+  ],
+  "folder_roots": [
+   "$ROOT\\lib\\old"
+  ],
+  "preferences": {}
+ }
+}

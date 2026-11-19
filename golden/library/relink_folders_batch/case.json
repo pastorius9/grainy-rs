@@ -1,0 +1,124 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "n1/a.jpg": {
+     "fill": [
+      1,
+      1
+     ]
+    },
+    "n2/b.jpg": {
+     "fill": [
+      2,
+      1
+     ]
+    },
+    "n2/deep/c.jpg": {
+     "fill": [
+      3,
+      1
+     ]
+    }
+   },
+   "photos": [
+    {
+     "path": "$ROOT/o1/a.jpg"
+    },
+    {
+     "path": "$ROOT/o2/b.jpg"
+    },
+    {
+     "path": "$ROOT/o2/deep/c.jpg"
+    }
+   ],
+   "prefs": {
+    "folder_panel": {
+     "expanded": [
+      "$ROOT/o2"
+     ]
+    },
+    "removed_folders": [
+     "$ROOT/o1/x",
+     "$ROOT/o2/deep"
+    ]
+   }
+  },
+  "calls": [
+   {
+    "fn": "apply_relinks",
+    "args": {
+     "pairs": [
+      [
+       "$ROOT/o1",
+       "$ROOT/n1"
+      ],
+      [
+       "$ROOT/o2",
+       "$ROOT/n2"
+      ]
+     ]
+    }
+   }
+  ],
+  "name": "relink_folders_batch"
+ },
+ "results": [
+  {
+   "ok": 3
+  }
+ ],
+ "tree": {
+  "files": {
+   "n1/a.jpg": {
+    "size": 1,
+    "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+   },
+   "n2/b.jpg": {
+    "size": 1,
+    "sha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+   },
+   "n2/deep/c.jpg": {
+    "size": 1,
+    "sha256": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+   }
+  },
+  "dirs": [
+   "n1",
+   "n2",
+   "n2/deep"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\n1\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\n2\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\n2\\deep\\c.jpg",
+    "name": "c.jpg",
+    "virtual_source": null
+   }
+  ],
+  "folder_roots": [
+   "$ROOT\\n1",
+   "$ROOT\\n2"
+  ],
+  "preferences": {
+   "folder_identities": "{}",
+   "folder_panel": "{\"expanded\": [\"$ROOT\\\\n2\"]}",
+   "removed_folders": "[\"$ROOT\\\\n1\\\\x\", \"$ROOT\\\\n2\\\\deep\"]",
+   "watch_folders": "[]"
+  }
+ }
+}

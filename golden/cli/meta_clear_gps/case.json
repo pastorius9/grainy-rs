@@ -1,0 +1,44 @@
+{
+ "bytes": 9194,
+ "exact": true,
+ "extension": ".tif",
+ "found": {
+  "icc": "43cbfe47eb7c",
+  "iptc": true,
+  "xmp": true
+ },
+ "height": 60,
+ "lossless": true,
+ "options": {
+  "color_space": "sRGB",
+  "dither": false,
+  "format": "TIFF 8-bit",
+  "grayscale": false,
+  "keep_metadata": true,
+  "keywords": "",
+  "longest": null,
+  "quality": 95,
+  "user_metadata": {
+   "latitude": null,
+   "longitude": " "
+  }
+ },
+ "read_metadata": {
+  "aperture": 2.8,
+  "camera": "Model 42",
+  "copyright": "Old copyright",
+  "creator": "Old Author",
+  "date": "2020:01:02 03:04:05",
+  "focal_length": 50.0,
+  "iso": 400.0,
+  "lens": "Lens 50",
+  "make": "Camera Co",
+  "serial": "SERIAL42",
+  "shutter": "1/125",
+  "subject_distance": 1.5
+ },
+ "settings": {},
+ "settings_key": "default",
+ "source": "png8_exif.png",
+ "width": 40
+}

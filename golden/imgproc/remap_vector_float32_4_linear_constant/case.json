@@ -1,0 +1,14 @@
+{
+ "border": "constant",
+ "border_value": [
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "dtype": "float32",
+ "interpolation": "linear",
+ "op": "remap",
+ "output_dtype": "float32",
+ "tolerance": 1e-06
+}

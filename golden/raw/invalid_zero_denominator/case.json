@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_zero_denominator/profile.dcp",
+ "message": "DCP 분모가 0입니다."
+}

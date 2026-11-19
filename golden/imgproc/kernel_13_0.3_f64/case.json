@@ -1,0 +1,9 @@
+{
+ "dtype": null,
+ "op": "kernel",
+ "output_dtype": "float64",
+ "precision": "f64",
+ "sigma": 0.3,
+ "size": 13,
+ "tolerance": 1e-15
+}

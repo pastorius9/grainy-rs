@@ -1,0 +1,27 @@
+Grainy shared JPEG library
+==========================
+
+The Rust wrapper, C ABI shim and build/test tools are MIT licensed.
+They port the libjpeg API calls made by Pillow 12.3.0 for the Python Grainy;
+no Pillow implementation source is bundled.
+
+libjpeg-turbo 2.1.5.1
+  Copyright the libjpeg-turbo contributors and the Independent JPEG Group;
+  see the individual source notices and vendor/libjpeg-turbo-2.1.5.1/LICENSE.md.
+  The applicable licenses are IJG / BSD-3-Clause / zlib. All license texts,
+  README.ijg and retained upstream source bytes are unchanged from the copy
+  previously vendored by grainy-raw. This software is based in part on the
+  work of the Independent JPEG Group.
+  Source: https://github.com/libjpeg-turbo/libjpeg-turbo/tree/2.1.5.1
+  Original archive SHA256 (provenance from grainy-raw/NOTICE):
+    61846251941e5791005fb7face196eec24541fce04f12570c308557529e92c75
+  No sources were downloaded for this move.
+
+Only retained scalar source files are compiled (no NASM, external DLLs,
+CMake or package-manager native libraries). src/native_symbols.h namespaces
+all library symbols without editing upstream sources. Configuration headers
+and public header copies are generated in Cargo's OUT_DIR. grainy-raw and
+grainy-codecs link this single library through links = "grainy_jpeg".
+
+cc (build dependency): MIT OR Apache-2.0.
+grainy-testkit and ndarray are test-only workspace dependencies.

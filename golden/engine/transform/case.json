@@ -1,0 +1,25 @@
+{
+ "mean": [
+  0.3098404189582652,
+  0.3130469361393625,
+  0.310354548426476
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "aspect_scale": -5.0,
+  "distortion": 8.0,
+  "perspective_h": -10.0,
+  "perspective_v": 20.0,
+  "shift_x": 3.0,
+  "transform_scale": 110.0
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

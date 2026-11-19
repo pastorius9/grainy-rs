@@ -1,0 +1,149 @@
+{
+ "root": "Z:\\GrainyGolden",
+ "steps": [
+  {
+   "current": 6,
+   "expanded": [
+    "z:\\grainygolden\\photos",
+    "z:\\grainygolden\\photos\\roll 2"
+   ],
+   "folder": "Z:\\GrainyGolden\\photos\\roll 2",
+   "step": "select_folder",
+   "values": {
+    "browser_view": null,
+    "develop_panels": null,
+    "folder_panel": {
+     "current_photo": 6,
+     "expanded": [
+      "z:\\grainygolden\\photos",
+      "z:\\grainygolden\\photos\\roll 2"
+     ],
+     "include_subfolders": true,
+     "selected": "Z:\\GrainyGolden\\photos\\roll 2"
+    }
+   }
+  },
+  {
+   "step": "subfolders_off",
+   "values": {
+    "browser_view": null,
+    "develop_panels": null,
+    "folder_panel": {
+     "current_photo": 6,
+     "expanded": [
+      "z:\\grainygolden\\photos",
+      "z:\\grainygolden\\photos\\roll 2"
+     ],
+     "include_subfolders": false,
+     "selected": "Z:\\GrainyGolden\\photos\\roll 2"
+    }
+   }
+  },
+  {
+   "descending": true,
+   "sort": "name",
+   "step": "sort_name_descending",
+   "values": {
+    "browser_view": {
+     "descending": true,
+     "sort": "name"
+    },
+    "develop_panels": null,
+    "folder_panel": {
+     "current_photo": 6,
+     "expanded": [
+      "z:\\grainygolden\\photos",
+      "z:\\grainygolden\\photos\\roll 2"
+     ],
+     "include_subfolders": false,
+     "selected": "Z:\\GrainyGolden\\photos\\roll 2"
+    }
+   }
+  },
+  {
+   "expanded": [
+    "basic",
+    "curve"
+   ],
+   "solo": false,
+   "step": "panels_curve_open",
+   "values": {
+    "browser_view": {
+     "descending": true,
+     "sort": "name"
+    },
+    "develop_panels": {
+     "expanded": [
+      "basic",
+      "curve"
+     ],
+     "solo": false
+    },
+    "folder_panel": {
+     "current_photo": 6,
+     "expanded": [
+      "z:\\grainygolden\\photos",
+      "z:\\grainygolden\\photos\\roll 2"
+     ],
+     "include_subfolders": false,
+     "selected": "Z:\\GrainyGolden\\photos\\roll 2"
+    }
+   }
+  },
+  {
+   "current": 3,
+   "expanded": [
+    "z:\\grainygolden\\photos"
+   ],
+   "step": "all_photos",
+   "values": {
+    "browser_view": {
+     "descending": true,
+     "sort": "name"
+    },
+    "develop_panels": {
+     "expanded": [
+      "basic",
+      "curve"
+     ],
+     "solo": false
+    },
+    "folder_panel": {
+     "current_photo": 3,
+     "expanded": [
+      "z:\\grainygolden\\photos"
+     ],
+     "include_subfolders": false,
+     "selected": null
+    }
+   }
+  },
+  {
+   "expanded": [
+    "curve"
+   ],
+   "solo": true,
+   "step": "panels_solo_curve_only",
+   "values": {
+    "browser_view": {
+     "descending": true,
+     "sort": "name"
+    },
+    "develop_panels": {
+     "expanded": [
+      "curve"
+     ],
+     "solo": true
+    },
+    "folder_panel": {
+     "current_photo": 3,
+     "expanded": [
+      "z:\\grainygolden\\photos"
+     ],
+     "include_subfolders": false,
+     "selected": null
+    }
+   }
+  }
+ ]
+}

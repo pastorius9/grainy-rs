@@ -1,0 +1,26 @@
+{
+ "mean": [
+  0.3112075530507279,
+  0.31452103663291764,
+  0.3099744179157163
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "crop": [
+   0.05,
+   0.08,
+   0.95,
+   0.92
+  ],
+  "straighten": 3.5
+ },
+ "shape": [
+  134,
+  216,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

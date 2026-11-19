@@ -1,0 +1,33 @@
+{
+ "file": "bayer2.dng",
+ "max_size": 40,
+ "metadata": {
+  "camera": "Synthetic",
+  "decoder": "LibRaw",
+  "file_fingerprint": {
+   "size": 8240
+  },
+  "filename": "bayer2.dng",
+  "format": "DNG",
+  "height": 80,
+  "make": "Grainy",
+  "raw_native": false,
+  "size_mb": 0.01,
+  "source_orientation": 6,
+  "width": 64,
+  "working_space": "ProPhoto"
+ },
+ "mode": "legacy",
+ "native": false,
+ "settings": {
+  "raw_mode": "legacy"
+ },
+ "shape": [
+  40,
+  32,
+  3
+ ],
+ "stride": 1,
+ "type": "ndarray",
+ "working_space": "ProPhoto"
+}

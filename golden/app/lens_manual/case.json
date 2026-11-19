@@ -1,0 +1,1557 @@
+{
+ "changes": {
+  "ca_red": -2.0,
+  "defringe": 30,
+  "distortion": 7.0
+ },
+ "info": {
+  "format": "jpg"
+ },
+ "profiles": [],
+ "script": [
+  [
+   "save",
+   "lens.luma-lens.json"
+  ],
+  [
+   "save",
+   "Some lens.json"
+  ],
+  [
+   "load",
+   "a.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "b.json",
+   {
+    "name": "",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "c.json",
+   {
+    "name": null,
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "d.json",
+   {
+    "name": 5,
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "e.json",
+   {
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "something"
+   }
+  ],
+  [
+   "load",
+   "f.json",
+   {
+    "type": "luma-lens"
+   }
+  ],
+  [
+   "load",
+   "g.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 101,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "h.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": "abc",
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "i.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": true,
+     "defringe": "12.5",
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "j.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": null,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "k.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "distortion": -100
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "m.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": [
+      1
+     ],
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "n.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": " 3 ",
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "o.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": "it's"
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "load",
+   "p.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ],
+  [
+   "set",
+   "distortion",
+   1.0
+  ],
+  [
+   "commit"
+  ],
+  [
+   "load",
+   "q.json",
+   {
+    "name": "Wide fix",
+    "settings": {
+     "ca_blue": -1.25,
+     "ca_red": 1.25,
+     "defringe": 20,
+     "distortion": 12.5,
+     "distortion_k2": -3,
+     "distortion_k3": 0,
+     "lens_vignette": 40
+    },
+    "type": "luma-lens",
+    "version": 1
+   }
+  ]
+ ],
+ "states": [
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [],
+   "exposure": 0.0,
+   "file": "{\r\n  \"type\": \"luma-lens\",\r\n  \"version\": 1,\r\n  \"name\": \"lens.luma-lens\",\r\n  \"settings\": {\r\n    \"distortion\": 7.0,\r\n    \"distortion_k2\": 0.0,\r\n    \"distortion_k3\": 0.0,\r\n    \"lens_vignette\": 0.0,\r\n    \"ca_red\": -2.0,\r\n    \"ca_blue\": 0.0,\r\n    \"defringe\": 30\r\n  }\r\n}",
+   "history": [],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": -2.0,
+    "defringe": 30,
+    "distortion": 7.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [],
+   "exposure": 0.0,
+   "file": "{\r\n  \"type\": \"luma-lens\",\r\n  \"version\": 1,\r\n  \"name\": \"Some lens\",\r\n  \"settings\": {\r\n    \"distortion\": 7.0,\r\n    \"distortion_k2\": 0.0,\r\n    \"distortion_k3\": 0.0,\r\n    \"lens_vignette\": 0.0,\r\n    \"ca_red\": -2.0,\r\n    \"ca_blue\": 0.0,\r\n    \"defringe\": 30\r\n  }\r\n}",
+   "history": [],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": -2.0,
+    "defringe": 30,
+    "distortion": 7.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "b",
+   "lens_profile": "b",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "c",
+   "lens_profile": "c",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "5",
+   "lens_profile": "5",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "5",
+   "lens_profile": "5",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "5",
+   "lens_profile": "5",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "5",
+   "lens_profile": "5",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "5",
+   "lens_profile": "5",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.0,
+    "defringe": 12.5,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'NoneType'"
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.0,
+    "defringe": 12.5,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'NoneType'"
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": -100.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'NoneType'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'list'"
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": -100.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'NoneType'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'list'"
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 3.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'NoneType'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'list'"
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: \"it's\""
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 3.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'NoneType'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'list'"
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: \"it's\""
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'NoneType'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'list'"
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: \"it's\""
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 1.0,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'NoneType'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'list'"
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: \"it's\""
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "보정 변경"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 1.0,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  },
+  {
+   "auto_label": "자동 렌즈 프로파일 없음",
+   "boxes": [
+    [
+     "프로파일",
+     "Luma 렌즈 프로파일이 아닙니다."
+    ],
+    [
+     "프로파일",
+     "'settings'"
+    ],
+    [
+     "프로파일",
+     "프로파일 보정값이 범위를 벗어났습니다."
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: 'abc'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'NoneType'"
+    ],
+    [
+     "프로파일",
+     "float() argument must be a string or a real number, not 'list'"
+    ],
+    [
+     "프로파일",
+     "could not convert string to float: \"it's\""
+    ]
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "렌즈 프로파일",
+    "보정 변경",
+    "렌즈 프로파일"
+   ],
+   "lens_label": "Wide fix",
+   "lens_profile": "Wide fix",
+   "lensfun": null,
+   "lensfun_enabled": false,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     false
+    ],
+    "lensfun_enabled": [
+     false,
+     false
+    ],
+    "lensfun_scale": [
+     true,
+     false
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": -1.25,
+    "ca_red": 1.25,
+    "defringe": 20.0,
+    "distortion": 12.5,
+    "distortion_k2": -3.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 40.0
+   }
+  }
+ ]
+}

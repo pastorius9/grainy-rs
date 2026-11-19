@@ -1,0 +1,4555 @@
+{
+ "existing": [
+  [
+   "lib/existing/IMG_0003.png",
+   {
+    "date": "2026:09:26 08:00:00",
+    "height": 30,
+    "width": 20
+   }
+  ]
+ ],
+ "files": [
+  [
+   "card/DCIM/100/IMG_0001.png",
+   "one"
+  ],
+  [
+   "card/DCIM/100/IMG_0002.png",
+   "two"
+  ],
+  [
+   "card/DCIM/100/IMG_0002.xmp",
+   "sidecar"
+  ],
+  [
+   "card/DCIM/101/IMG_0003.png",
+   "three"
+  ],
+  [
+   "card/DCIM/101/IMG_0004.png",
+   "four"
+  ],
+  [
+   "card/DCIM/101/notes.txt",
+   "notes"
+  ],
+  [
+   "card/DCIM/102/IMG_0001.png",
+   "five"
+  ],
+  [
+   "photos/2026/2026-09-25/IMG_0002.png",
+   "blocker"
+  ],
+  [
+   "lib/existing/IMG_0003.png",
+   "three"
+  ],
+  [
+   "inbox/in1.png",
+   "inbox"
+  ],
+  [
+   "inbox/sub/in2.png",
+   "four"
+  ]
+ ],
+ "old": 1785585600.0,
+ "preset": [
+  "따뜻하게",
+  {
+   "contrast": 12,
+   "crop": [
+    0.1,
+    0.1,
+    0.9,
+    0.9
+   ],
+   "exposure": 0.3,
+   "rotation": 1
+  }
+ ],
+ "script": "[[\"copy\", [{\"source\": \"<ROOT>\\\\card\", \"destination\": \"<ROOT>\\\\photos\", \"subfolders\": \"year/date\", \"template\": \"{name}\", \"use_backup\": false, \"backup\": \"\", \"keywords\": \"\", \"preset\": \"\", \"skip\": true, \"accept\": true}, {\"source\": \"<ROOT>\\\\card\", \"destination\": \"<ROOT>\\\\photos\", \"subfolders\": \"year/date\", \"template\": \"{stem}/x\", \"use_backup\": false, \"backup\": \"\", \"keywords\": \"\", \"preset\": \"\", \"skip\": true, \"accept\": true}, {\"source\": \"<ROOT>\\\\nowhere\", \"destination\": \"<ROOT>\\\\photos\", \"subfolders\": \"year/date\", \"template\": \"{stem}\", \"use_backup\": false, \"backup\": \"\", \"keywords\": \"\", \"preset\": \"\", \"skip\": true, \"accept\": true}, {\"source\": \"<ROOT>\\\\card\", \"destination\": \"  \", \"subfolders\": \"year/date\", \"template\": \"{stem}\", \"use_backup\": false, \"backup\": \"\", \"keywords\": \"\", \"preset\": \"\", \"skip\": true, \"accept\": true}, {\"source\": \"<ROOT>\\\\card\", \"destination\": \"<ROOT>\\\\card\\\\DCIM\\\\out\", \"subfolders\": \"year/date\", \"template\": \"{stem}\", \"use_backup\": false, \"backup\": \"\", \"keywords\": \"\", \"preset\": \"\", \"skip\": true, \"accept\": true}, {\"source\": \"<ROOT>\\\\card\", \"destination\": \"<ROOT>\\\\photos\", \"subfolders\": \"year/date\", \"template\": \"{stem}\", \"use_backup\": true, \"backup\": \"\", \"keywords\": \"\", \"preset\": \"\", \"skip\": true, \"accept\": true}, {\"source\": \"<ROOT>\\\\card\", \"destination\": \"<ROOT>\\\\photos\", \"subfolders\": \"year/date\", \"template\": \"{stem}\", \"use_backup\": true, \"backup\": \"<ROOT>\\\\photos\", \"keywords\": \"\", \"preset\": \"\", \"skip\": true, \"accept\": true}, {\"source\": \"<ROOT>\\\\card\", \"destination\": \"<ROOT>\\\\photos\", \"subfolders\": \"year/date\", \"template\": \"{stem}\", \"use_backup\": true, \"backup\": \"<ROOT>\\\\backup\", \"keywords\": \"trip, card , trip\", \"preset\": \"따뜻하게\", \"skip\": true, \"accept\": true}]], [\"copy\", [{\"source\": \"<ROOT>\\\\card\", \"destination\": \"<ROOT>\\\\photos\", \"subfolders\": \"year/date\", \"template\": \"{stem}\", \"use_backup\": false, \"backup\": \"\", \"keywords\": \"\", \"preset\": \"\", \"skip\": true, \"accept\": false}]], [\"copy\", [{\"source\": \"<ROOT>\\\\card\\\\DCIM\\\\100\", \"destination\": \"<ROOT>\\\\photos\", \"subfolders\": \"date\", \"template\": \"{date}_{time}_{camera}_{n:02d}\", \"use_backup\": false, \"backup\": \"\", \"keywords\": \"\", \"preset\": \"\", \"skip\": false, \"accept\": true}]], [\"copy\", [{\"source\": \"<ROOT>\\\\card\", \"destination\": \"<ROOT>\\\\photos\", \"subfolders\": \"none\", \"template\": \"{stem}\", \"use_backup\": false, \"backup\": \"\", \"keywords\": \"again\", \"preset\": \"\", \"skip\": true, \"accept\": true}]], [\"remove\", \"IMG_0004.png\"], [\"write\", \"photos/2026/2026-10-02/late.png\", \"late\"], [\"sync\"], [\"sync\"], [\"folder\", \"<ROOT>\\\\inbox\"], [\"watch\", null], [\"watch\", null], [\"write\", \"inbox/sub/in3.png\", \"one\"], [\"watch_scan\"], [\"folder\", null], [\"watch\", \"<ROOT>\\\\photos\"], [\"unwatch\"]]",
+ "stamp": "2026-11-13T01:02:03.456789+00:00",
+ "steps": [
+  {
+   "auto": [],
+   "boxes": [
+    {
+     "text": "이름 규칙에는 {stem}, {date}, {time}, {n}, {camera}만 쓸 수 있습니다.",
+     "title": "사진 복사해서 가져오기"
+    },
+    {
+     "text": "이름 규칙이 올바른 파일 이름을 만들지 않습니다.",
+     "title": "사진 복사해서 가져오기"
+    },
+    {
+     "text": "가져올 폴더를 선택하세요.",
+     "title": "사진 복사해서 가져오기"
+    },
+    {
+     "text": "복사할 폴더를 선택하세요.",
+     "title": "사진 복사해서 가져오기"
+    },
+    {
+     "text": "복사할 곳은 가져올 폴더 밖이어야 합니다.",
+     "title": "사진 복사해서 가져오기"
+    },
+    {
+     "text": "백업 위치는 복사할 곳과 다른 폴더여야 합니다.",
+     "title": "사진 복사해서 가져오기"
+    },
+    {
+     "text": "백업 위치는 복사할 곳과 다른 폴더여야 합니다.",
+     "title": "사진 복사해서 가져오기"
+    }
+   ],
+   "errors": [],
+   "excluded": [],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ]
+   ],
+   "messages": [
+    "가져오는 중: IMG_0004.png  ·  남은 사진 3장",
+    "4장 복사 · 중복으로 건너뜀 1장",
+    "가져오는 중: IMG_0001-1.png  ·  남은 사진 2장",
+    "가져오는 중: IMG_0001.png  ·  남은 사진 1장",
+    "가져오는 중: IMG_0002-1.png  ·  남은 사진 0장",
+    "사진 가져오기 완료"
+   ],
+   "opened": [
+    {
+     "backup": "",
+     "destination": "",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "",
+     "subfolders": "year/date",
+     "template": "{stem}",
+     "use_backup": false
+    },
+    {
+     "backup": "",
+     "destination": "<ROOT>\\photos",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "<ROOT>\\card",
+     "subfolders": "year/date",
+     "template": "{name}",
+     "use_backup": false
+    },
+    {
+     "backup": "",
+     "destination": "<ROOT>\\photos",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "<ROOT>\\card",
+     "subfolders": "year/date",
+     "template": "{stem}/x",
+     "use_backup": false
+    },
+    {
+     "backup": "",
+     "destination": "<ROOT>\\photos",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "<ROOT>\\nowhere",
+     "subfolders": "year/date",
+     "template": "{stem}",
+     "use_backup": false
+    },
+    {
+     "backup": "",
+     "destination": "  ",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "<ROOT>\\card",
+     "subfolders": "year/date",
+     "template": "{stem}",
+     "use_backup": false
+    },
+    {
+     "backup": "",
+     "destination": "<ROOT>\\card\\DCIM\\out",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "<ROOT>\\card",
+     "subfolders": "year/date",
+     "template": "{stem}",
+     "use_backup": false
+    },
+    {
+     "backup": "",
+     "destination": "<ROOT>\\photos",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "<ROOT>\\card",
+     "subfolders": "year/date",
+     "template": "{stem}",
+     "use_backup": true
+    },
+    {
+     "backup": "<ROOT>\\photos",
+     "destination": "<ROOT>\\photos",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "<ROOT>\\card",
+     "subfolders": "year/date",
+     "template": "{stem}",
+     "use_backup": true
+    }
+   ],
+   "step": [
+    "copy",
+    [
+     {
+      "accept": true,
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "keywords": "",
+      "preset": "",
+      "skip": true,
+      "source": "<ROOT>\\card",
+      "subfolders": "year/date",
+      "template": "{name}",
+      "use_backup": false
+     },
+     {
+      "accept": true,
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "keywords": "",
+      "preset": "",
+      "skip": true,
+      "source": "<ROOT>\\card",
+      "subfolders": "year/date",
+      "template": "{stem}/x",
+      "use_backup": false
+     },
+     {
+      "accept": true,
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "keywords": "",
+      "preset": "",
+      "skip": true,
+      "source": "<ROOT>\\nowhere",
+      "subfolders": "year/date",
+      "template": "{stem}",
+      "use_backup": false
+     },
+     {
+      "accept": true,
+      "backup": "",
+      "destination": "  ",
+      "keywords": "",
+      "preset": "",
+      "skip": true,
+      "source": "<ROOT>\\card",
+      "subfolders": "year/date",
+      "template": "{stem}",
+      "use_backup": false
+     },
+     {
+      "accept": true,
+      "backup": "",
+      "destination": "<ROOT>\\card\\DCIM\\out",
+      "keywords": "",
+      "preset": "",
+      "skip": true,
+      "source": "<ROOT>\\card",
+      "subfolders": "year/date",
+      "template": "{stem}",
+      "use_backup": false
+     },
+     {
+      "accept": true,
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "keywords": "",
+      "preset": "",
+      "skip": true,
+      "source": "<ROOT>\\card",
+      "subfolders": "year/date",
+      "template": "{stem}",
+      "use_backup": true
+     },
+     {
+      "accept": true,
+      "backup": "<ROOT>\\photos",
+      "destination": "<ROOT>\\photos",
+      "keywords": "",
+      "preset": "",
+      "skip": true,
+      "source": "<ROOT>\\card",
+      "subfolders": "year/date",
+      "template": "{stem}",
+      "use_backup": true
+     },
+     {
+      "accept": true,
+      "backup": "<ROOT>\\backup",
+      "destination": "<ROOT>\\photos",
+      "keywords": "trip, card , trip",
+      "preset": "따뜻하게",
+      "skip": true,
+      "source": "<ROOT>\\card",
+      "subfolders": "year/date",
+      "template": "{stem}",
+      "use_backup": true
+     }
+    ]
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 2,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0004.png",
+      "path": "<ROOT>\\photos\\2026\\2026-08-01\\IMG_0004.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "<ROOT>\\backup",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "year/date",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "watch_paths": []
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ]
+   ],
+   "messages": [],
+   "opened": [
+    {
+     "backup": "<ROOT>\\backup",
+     "destination": "<ROOT>\\photos",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "",
+     "subfolders": "year/date",
+     "template": "{stem}",
+     "use_backup": false
+    }
+   ],
+   "step": [
+    "copy",
+    [
+     {
+      "accept": false,
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "keywords": "",
+      "preset": "",
+      "skip": true,
+      "source": "<ROOT>\\card",
+      "subfolders": "year/date",
+      "template": "{stem}",
+      "use_backup": false
+     }
+    ]
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 2,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0004.png",
+      "path": "<ROOT>\\photos\\2026\\2026-08-01\\IMG_0004.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "<ROOT>\\backup",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "year/date",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "watch_paths": []
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ]
+   ],
+   "messages": [
+    "가져오는 중: 20260925_090000_CamOne_01.png  ·  남은 사진 1장",
+    "2장 복사 · 중복으로 건너뜀 0장",
+    "가져오는 중: 20260925_100000_CamOne_02.png  ·  남은 사진 0장",
+    "사진 가져오기 완료"
+   ],
+   "opened": [
+    {
+     "backup": "<ROOT>\\backup",
+     "destination": "<ROOT>\\photos",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "",
+     "subfolders": "year/date",
+     "template": "{stem}",
+     "use_backup": false
+    }
+   ],
+   "step": [
+    "copy",
+    [
+     {
+      "accept": true,
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "keywords": "",
+      "preset": "",
+      "skip": false,
+      "source": "<ROOT>\\card\\DCIM\\100",
+      "subfolders": "date",
+      "template": "{date}_{time}_{camera}_{n:02d}",
+      "use_backup": false
+     }
+    ]
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 2,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0004.png",
+      "path": "<ROOT>\\photos\\2026\\2026-08-01\\IMG_0004.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "date",
+      "template": "{date}_{time}_{camera}_{n:02d}"
+     },
+     "removed_folders": null,
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "watch_paths": []
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [
+    "가져오는 중: IMG_0002.png  ·  남은 사진 0장",
+    "1장 복사 · 중복으로 건너뜀 4장",
+    "사진 가져오기 완료"
+   ],
+   "opened": [
+    {
+     "backup": "",
+     "destination": "<ROOT>\\photos",
+     "keywords": "",
+     "preset": "",
+     "skip": true,
+     "source": "",
+     "subfolders": "date",
+     "template": "{date}_{time}_{camera}_{n:02d}",
+     "use_backup": false
+    }
+   ],
+   "step": [
+    "copy",
+    [
+     {
+      "accept": true,
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "keywords": "again",
+      "preset": "",
+      "skip": true,
+      "source": "<ROOT>\\card",
+      "subfolders": "none",
+      "template": "{stem}",
+      "use_backup": false
+     }
+    ]
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 2,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0004.png",
+      "path": "<ROOT>\\photos\\2026\\2026-08-01\\IMG_0004.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "watch_paths": []
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [],
+   "opened": [],
+   "step": [
+    "remove",
+    "IMG_0004.png"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": null
+    }
+   },
+   "watch_paths": []
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [],
+   "opened": [],
+   "step": [
+    "write",
+    "photos/2026/2026-10-02/late.png",
+    "late"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": null
+    }
+   },
+   "watch_paths": []
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [
+    "등록한 폴더에서 새 사진 2장을 찾았습니다.",
+    "가져오는 중: IMG_0002.png  ·  남은 사진 1장",
+    "가져오는 중: late.png  ·  남은 사진 0장",
+    "사진 가져오기 완료"
+   ],
+   "opened": [],
+   "step": [
+    "sync"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": null
+    }
+   },
+   "watch_paths": []
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [],
+   "opened": [],
+   "step": [
+    "sync"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": null
+    }
+   },
+   "watch_paths": []
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [],
+   "opened": [],
+   "step": [
+    "folder",
+    "<ROOT>\\inbox"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": null
+    }
+   },
+   "watch_paths": []
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [
+    "가져오는 중: in1.png  ·  남은 사진 1장",
+    "가져오는 중: in2.png  ·  남은 사진 0장",
+    "사진 가져오기 완료"
+   ],
+   "opened": [],
+   "step": [
+    "watch",
+    null
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\inbox",
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 11,
+      "keywords": "",
+      "name": "in1.png",
+      "path": "<ROOT>\\inbox\\in1.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 12,
+      "keywords": "",
+      "name": "in2.png",
+      "path": "<ROOT>\\inbox\\sub\\in2.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": [
+      "<ROOT>\\inbox"
+     ]
+    }
+   },
+   "watch_paths": [
+    "<ROOT>\\inbox"
+   ]
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [],
+   "opened": [],
+   "step": [
+    "watch",
+    null
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\inbox",
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 11,
+      "keywords": "",
+      "name": "in1.png",
+      "path": "<ROOT>\\inbox\\in1.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 12,
+      "keywords": "",
+      "name": "in2.png",
+      "path": "<ROOT>\\inbox\\sub\\in2.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": [
+      "<ROOT>\\inbox"
+     ]
+    }
+   },
+   "watch_paths": [
+    "<ROOT>\\inbox"
+   ]
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "inbox/sub/in3.png",
+     "one"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [],
+   "opened": [],
+   "step": [
+    "write",
+    "inbox/sub/in3.png",
+    "one"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\inbox",
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 11,
+      "keywords": "",
+      "name": "in1.png",
+      "path": "<ROOT>\\inbox\\in1.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 12,
+      "keywords": "",
+      "name": "in2.png",
+      "path": "<ROOT>\\inbox\\sub\\in2.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": [
+      "<ROOT>\\inbox"
+     ]
+    }
+   },
+   "watch_paths": [
+    "<ROOT>\\inbox"
+   ]
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "inbox/sub/in3.png",
+     "one"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [
+    "가져오는 중: in3.png  ·  남은 사진 0장",
+    "사진 가져오기 완료"
+   ],
+   "opened": [],
+   "step": [
+    "watch_scan"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\inbox",
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 11,
+      "keywords": "",
+      "name": "in1.png",
+      "path": "<ROOT>\\inbox\\in1.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 12,
+      "keywords": "",
+      "name": "in2.png",
+      "path": "<ROOT>\\inbox\\sub\\in2.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 13,
+      "keywords": "",
+      "name": "in3.png",
+      "path": "<ROOT>\\inbox\\sub\\in3.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": [
+      "<ROOT>\\inbox"
+     ]
+    }
+   },
+   "watch_paths": [
+    "<ROOT>\\inbox"
+   ]
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [
+    "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+   ],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "inbox/sub/in3.png",
+     "one"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [],
+   "opened": [],
+   "step": [
+    "folder",
+    null
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\inbox",
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 11,
+      "keywords": "",
+      "name": "in1.png",
+      "path": "<ROOT>\\inbox\\in1.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 12,
+      "keywords": "",
+      "name": "in2.png",
+      "path": "<ROOT>\\inbox\\sub\\in2.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 13,
+      "keywords": "",
+      "name": "in3.png",
+      "path": "<ROOT>\\inbox\\sub\\in3.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [
+      "<root>\\photos\\2026\\2026-08-01\\img_0004.png"
+     ],
+     "watch_folders": [
+      "<ROOT>\\inbox"
+     ]
+    }
+   },
+   "watch_paths": [
+    "<ROOT>\\inbox"
+   ]
+  },
+  {
+   "auto": [],
+   "boxes": [
+    {
+     "folder": "자동으로 새 사진을 가져올 폴더"
+    }
+   ],
+   "errors": [],
+   "excluded": [],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "inbox/sub/in3.png",
+     "one"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [
+    "가져오는 중: IMG_0004.png  ·  남은 사진 0장",
+    "사진 가져오기 완료"
+   ],
+   "opened": [],
+   "step": [
+    "watch",
+    "<ROOT>\\photos"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\inbox",
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 11,
+      "keywords": "",
+      "name": "in1.png",
+      "path": "<ROOT>\\inbox\\in1.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 12,
+      "keywords": "",
+      "name": "in2.png",
+      "path": "<ROOT>\\inbox\\sub\\in2.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 13,
+      "keywords": "",
+      "name": "in3.png",
+      "path": "<ROOT>\\inbox\\sub\\in3.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 14,
+      "keywords": "",
+      "name": "IMG_0004.png",
+      "path": "<ROOT>\\photos\\2026\\2026-08-01\\IMG_0004.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [],
+     "watch_folders": [
+      "<ROOT>\\inbox",
+      "<ROOT>\\photos"
+     ]
+    }
+   },
+   "watch_paths": [
+    "<ROOT>\\inbox",
+    "<ROOT>\\photos"
+   ]
+  },
+  {
+   "auto": [],
+   "boxes": [],
+   "errors": [],
+   "excluded": [],
+   "files": [
+    [
+     "backup/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "backup/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0001.png",
+     "one"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.png",
+     "two"
+    ],
+    [
+     "card/DCIM/100/IMG_0002.xmp",
+     "sidecar"
+    ],
+    [
+     "card/DCIM/101/IMG_0003.png",
+     "three"
+    ],
+    [
+     "card/DCIM/101/IMG_0004.png",
+     "four"
+    ],
+    [
+     "card/DCIM/101/notes.txt",
+     "notes"
+    ],
+    [
+     "card/DCIM/102/IMG_0001.png",
+     "five"
+    ],
+    [
+     "inbox/in1.png",
+     "inbox"
+    ],
+    [
+     "inbox/sub/in2.png",
+     "four"
+    ],
+    [
+     "inbox/sub/in3.png",
+     "one"
+    ],
+    [
+     "lib/existing/IMG_0003.png",
+     "three"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.png",
+     "two"
+    ],
+    [
+     "photos/2026-09-25/20260925_090000_CamOne_01.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026-09-25/20260925_100000_CamOne_02.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-08-01/IMG_0004.png",
+     "four"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001-1.png",
+     "five"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0001.png",
+     "one"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.png",
+     "two"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002-1.xmp",
+     "sidecar"
+    ],
+    [
+     "photos/2026/2026-09-25/IMG_0002.png",
+     "blocker"
+    ],
+    [
+     "photos/2026/2026-10-02/late.png",
+     "late"
+    ],
+    [
+     "photos/IMG_0002.png",
+     "two"
+    ],
+    [
+     "photos/IMG_0002.xmp",
+     "sidecar"
+    ]
+   ],
+   "messages": [],
+   "opened": [],
+   "step": [
+    "unwatch"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\inbox",
+     "<ROOT>\\lib\\existing",
+     "<ROOT>\\photos",
+     "<ROOT>\\photos\\2026-09-25",
+     "<ROOT>\\photos\\2026\\2026-08-01",
+     "<ROOT>\\photos\\2026\\2026-09-25"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "date": "2026:09:26 08:00:00",
+      "id": 1,
+      "keywords": "",
+      "name": "IMG_0003.png",
+      "path": "<ROOT>\\lib\\existing\\IMG_0003.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": null,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 3,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 4,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0001.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0001.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 5,
+      "keywords": "trip, card, trip",
+      "name": "IMG_0002-1.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002-1.png",
+      "rating": 0,
+      "settings": {
+       "contrast": 12,
+       "exposure": 0.3,
+       "tone_version": 1
+      },
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 6,
+      "keywords": "",
+      "name": "20260925_090000_CamOne_01.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_090000_CamOne_01.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 7,
+      "keywords": "",
+      "name": "20260925_100000_CamOne_02.png",
+      "path": "<ROOT>\\photos\\2026-09-25\\20260925_100000_CamOne_02.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 09:00:00",
+      "id": 8,
+      "keywords": "again",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 9,
+      "keywords": "",
+      "name": "IMG_0002.png",
+      "path": "<ROOT>\\photos\\2026\\2026-09-25\\IMG_0002.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:10:02 07:30:00",
+      "id": 10,
+      "keywords": "",
+      "name": "late.png",
+      "path": "<ROOT>\\photos\\2026\\2026-10-02\\late.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 11,
+      "keywords": "",
+      "name": "in1.png",
+      "path": "<ROOT>\\inbox\\in1.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 12,
+      "keywords": "",
+      "name": "in2.png",
+      "path": "<ROOT>\\inbox\\sub\\in2.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": "2026:09:25 10:00:00",
+      "id": 13,
+      "keywords": "",
+      "name": "in3.png",
+      "path": "<ROOT>\\inbox\\sub\\in3.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     },
+     {
+      "date": null,
+      "id": 14,
+      "keywords": "",
+      "name": "IMG_0004.png",
+      "path": "<ROOT>\\photos\\2026\\2026-08-01\\IMG_0004.png",
+      "rating": 0,
+      "settings": {},
+      "size_mb": 0.0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "auto_sync_folders": null,
+     "import_copy": {
+      "backup": "",
+      "destination": "<ROOT>\\photos",
+      "subfolders": "none",
+      "template": "{stem}"
+     },
+     "removed_folders": null,
+     "sync_excluded": [],
+     "watch_folders": []
+    }
+   },
+   "watch_paths": []
+  }
+ ]
+}

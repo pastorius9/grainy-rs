@@ -1,0 +1,13 @@
+{
+ "border": "reflect",
+ "border_value": [
+  0.25,
+  0.5,
+  0.75
+ ],
+ "dtype": "float32",
+ "interpolation": "linear",
+ "op": "remap",
+ "output_dtype": "float32",
+ "tolerance": 1e-06
+}

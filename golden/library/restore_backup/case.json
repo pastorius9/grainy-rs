@@ -1,0 +1,142 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "a.jpg": {
+     "fill": [
+      1,
+      1
+     ]
+    }
+   },
+   "photos": [
+    {
+     "path": "$ROOT/a.jpg"
+    }
+   ],
+   "prefs": {
+    "mine": {
+     "x": 1
+    }
+   },
+   "other": {
+    "good": {
+     "photos": [
+      {
+       "path": "$ROOT/b.jpg"
+      },
+      {
+       "path": "$ROOT/c.jpg"
+      },
+      {
+       "path": "$ROOT/한글.jpg"
+      }
+     ],
+     "prefs": {
+      "theirs": [
+       "한글",
+       2
+      ]
+     }
+    },
+    "dangling": {
+     "photos": [
+      {
+       "path": "$ROOT/d.jpg"
+      }
+     ],
+     "db": [
+      [
+       "UPDATE photos SET edits=? WHERE id=1",
+       [
+        "{\"dcp_profile\": {\"name\": \"x\", \"sha256\": \"abababababababababababababababababababababababababababababababab\", \"data_ref\": \"abababababababababababababababababababababababababababababababab\"}}"
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  "dump_tables": [
+   "history"
+  ],
+  "calls": [
+   {
+    "fn": "restore_backup",
+    "args": {
+     "name": "dangling.sqlite"
+    }
+   },
+   {
+    "fn": "restore_backup",
+    "args": {
+     "path": "$ROOT/a.jpg"
+    }
+   },
+   {
+    "fn": "restore_backup",
+    "args": {
+     "name": "good.sqlite"
+    }
+   }
+  ],
+  "name": "restore_backup"
+ },
+ "results": [
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "카탈로그의 카메라 프로파일 원본이 누락되었습니다: abababababab"
+   }
+  },
+  {
+   "err": {
+    "type": "sqlite3.Error",
+    "message": null
+   }
+  },
+  {
+   "ok": null
+  }
+ ],
+ "tree": {
+  "files": {
+   "a.jpg": {
+    "size": 1,
+    "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+   }
+  },
+  "dirs": []
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\c.jpg",
+    "name": "c.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\한글.jpg",
+    "name": "한글.jpg",
+    "virtual_source": null
+   }
+  ],
+  "folder_roots": [
+   "$ROOT"
+  ],
+  "preferences": {
+   "theirs": "[\"\\ud55c\\uae00\", 2]"
+  },
+  "history": [],
+  "backup_names": [
+   "before-restore-<stamp>.sqlite"
+  ]
+ }
+}

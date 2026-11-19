@@ -1,0 +1,69 @@
+{
+ "converted": [
+  {
+   "negative": true,
+   "negative_base": [
+    2.021692991256714,
+    1.5947400331497192,
+    0.9208595752716064
+   ],
+   "negative_density": 1.05,
+   "negative_peak": [
+    0.10180269181728363,
+    0.06435910612344742,
+    0.03504428267478943
+   ]
+  },
+  {
+   "negative": true,
+   "negative_base": [
+    2.021692991256714,
+    1.5947400331497192,
+    0.9208595752716064
+   ],
+   "negative_density": 1.9,
+   "negative_peak": [
+    0.10180269181728363,
+    0.06435910612344742,
+    0.03504428267478943
+   ]
+  },
+  {
+   "negative": true,
+   "negative_base": [
+    2.021692991256714,
+    1.5947400331497192,
+    0.9208595752716064
+   ],
+   "negative_density": 1.05,
+   "negative_peak": [
+    0.10180269181728363,
+    0.06435910612344742,
+    0.03504428267478943
+   ]
+  }
+ ],
+ "members": [
+  {
+   "settings": {},
+   "source": "negative"
+  },
+  {
+   "settings": {
+    "crop": [
+     0.1,
+     0.05,
+     0.9,
+     0.8
+    ]
+   },
+   "source": "negative_bright"
+  },
+  {
+   "settings": {
+    "straighten": -3.0
+   },
+   "source": "negative"
+  }
+ ]
+}

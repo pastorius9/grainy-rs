@@ -1,0 +1,100 @@
+{
+ "dialogs": [
+  {
+   "cancel": "Cancel / 취소",
+   "current": "ko",
+   "first_run": true,
+   "index": 0,
+   "items": [
+    [
+     "한국어",
+     "ko"
+    ],
+    [
+     "English",
+     "en"
+    ]
+   ],
+   "labels": [
+    "Welcome to grainy / 그레이니에 오신 것을 환영합니다",
+    "You can change this in Settings → Language.\n설정 → 언어에서 언제든 변경할 수 있습니다."
+   ],
+   "minimum_width": 440,
+   "ok": "Continue / 시작",
+   "selected": "ko",
+   "title": "Grainy · Language / 언어"
+  },
+  {
+   "cancel": "Cancel / 취소",
+   "current": "en",
+   "first_run": true,
+   "index": 1,
+   "items": [
+    [
+     "한국어",
+     "ko"
+    ],
+    [
+     "English",
+     "en"
+    ]
+   ],
+   "labels": [
+    "Welcome to grainy / 그레이니에 오신 것을 환영합니다",
+    "You can change this in Settings → Language.\n설정 → 언어에서 언제든 변경할 수 있습니다."
+   ],
+   "minimum_width": 440,
+   "ok": "Continue / 시작",
+   "selected": "en",
+   "title": "Grainy · Language / 언어"
+  },
+  {
+   "cancel": "Cancel / 취소",
+   "current": "ko",
+   "first_run": false,
+   "index": 0,
+   "items": [
+    [
+     "한국어",
+     "ko"
+    ],
+    [
+     "English",
+     "en"
+    ]
+   ],
+   "labels": [
+    "Interface language / 화면 언어",
+    "Your edits will be saved and the workspace will reopen.\n보정을 저장한 뒤 선택한 언어로 작업 화면을 다시 엽니다."
+   ],
+   "minimum_width": 440,
+   "ok": "Apply / 적용",
+   "selected": "ko",
+   "title": "Grainy · Language / 언어"
+  },
+  {
+   "cancel": "Cancel / 취소",
+   "current": "en",
+   "first_run": false,
+   "index": 1,
+   "items": [
+    [
+     "한국어",
+     "ko"
+    ],
+    [
+     "English",
+     "en"
+    ]
+   ],
+   "labels": [
+    "Interface language / 화면 언어",
+    "Your edits will be saved and the workspace will reopen.\n보정을 저장한 뒤 선택한 언어로 작업 화면을 다시 엽니다."
+   ],
+   "minimum_width": 440,
+   "ok": "Apply / 적용",
+   "selected": "en",
+   "title": "Grainy · Language / 언어"
+  }
+ ]
+}

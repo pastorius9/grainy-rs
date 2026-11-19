@@ -1,0 +1,8 @@
+{
+ "image": "wide",
+ "pixel_scale": 0.5,
+ "settings": {
+  "detail_version": 2,
+  "noise_luma": 60.0
+ }
+}

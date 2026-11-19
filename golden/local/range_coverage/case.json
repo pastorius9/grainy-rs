@@ -1,0 +1,124 @@
+{
+ "cases": [
+  {
+   "frame": "garden",
+   "name": "one",
+   "samples": [
+    [
+     0.3,
+     0.4,
+     0.2
+    ]
+   ],
+   "tolerance": 0.15
+  },
+  {
+   "frame": "colours",
+   "name": "three",
+   "samples": [
+    [
+     0.2,
+     0.2,
+     0.8
+    ],
+    [
+     0.9,
+     0.5,
+     0.1
+    ],
+    [
+     0.5,
+     0.5,
+     0.5
+    ]
+   ],
+   "tolerance": 0.3
+  },
+  {
+   "frame": "patches",
+   "name": "five",
+   "samples": [
+    [
+     0.1,
+     0.2,
+     0.3
+    ],
+    [
+     0.4,
+     0.5,
+     0.6
+    ],
+    [
+     0.7,
+     0.8,
+     0.9
+    ],
+    [
+     0.2,
+     0.9,
+     0.1
+    ],
+    [
+     1,
+     0,
+     0
+    ]
+   ],
+   "tolerance": 0.05
+  },
+  {
+   "frame": "patches",
+   "name": "tiny_tol",
+   "samples": [
+    [
+     0.4,
+     0.4,
+     0.4
+    ]
+   ],
+   "tolerance": 0.001
+  },
+  {
+   "frame": "wide",
+   "name": "wide",
+   "samples": [
+    [
+     1.5,
+     1.5,
+     1.5
+    ]
+   ],
+   "tolerance": 1
+  }
+ ],
+ "five_bits": "0",
+ "five_shape": [
+  64,
+  96
+ ],
+ "five_step": 3,
+ "one_bits": "2136614490765000704",
+ "one_shape": [
+  160,
+  240
+ ],
+ "one_step": 4,
+ "three_bits": "16293535268663721984",
+ "three_shape": [
+  64,
+  96
+ ],
+ "three_step": 3,
+ "tiny_tol_bits": "0",
+ "tiny_tol_shape": [
+  64,
+  96
+ ],
+ "tiny_tol_step": 3,
+ "wide_bits": "4239025037731954688",
+ "wide_shape": [
+  64,
+  96
+ ],
+ "wide_step": 3
+}

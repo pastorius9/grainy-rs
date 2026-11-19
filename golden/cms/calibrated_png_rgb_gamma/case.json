@@ -1,0 +1,13 @@
+{
+ "info": {
+  "channels": 3,
+  "colorspace": "rgb",
+  "description": "RGB built-in",
+  "deviceclass": "display",
+  "pcs": "xyz",
+  "version": 4.4
+ },
+ "kind": "rgb",
+ "size": 600,
+ "transfer": null
+}

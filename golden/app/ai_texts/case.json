@@ -1,0 +1,1412 @@
+{
+ "activity": {
+  "en": [
+   [
+    "server",
+    "started",
+    "AI connection · Started"
+   ],
+   [
+    "server",
+    "stopped",
+    "AI connection · Stopped"
+   ],
+   [
+    "server",
+    "could not start",
+    "AI connection · Could not start"
+   ],
+   [
+    "server",
+    "port not saved",
+    "AI connection · Port not saved"
+   ],
+   [
+    "server",
+    "on in another Grainy",
+    "AI connection · On in another Grainy"
+   ],
+   [
+    "server",
+    "new key",
+    "AI connection · New key made"
+   ],
+   [
+    "server",
+    "could not write the bridge files",
+    "AI connection · Could not be written (installed AI programs cannot connect)"
+   ],
+   [
+    "server",
+    "refused 401",
+    "AI connection · Refused: missing or wrong connection key"
+   ],
+   [
+    "server",
+    "refused 403",
+    "AI connection · Refused: a request from an address or web page that is not allowed"
+   ],
+   [
+    "server",
+    "ok",
+    "AI connection · OK"
+   ],
+   [
+    "server",
+    "error",
+    "AI connection · Error"
+   ],
+   [
+    "server",
+    "undone in Grainy",
+    "AI connection · Undone in Grainy"
+   ],
+   [
+    "server",
+    "job j1 done",
+    "AI connection · Job j1 done"
+   ],
+   [
+    "server",
+    "job j12 failed",
+    "AI connection · Job j12 failed"
+   ],
+   [
+    "server",
+    "job j3 cancelled",
+    "AI connection · Job j3 cancelled"
+   ],
+   [
+    "server",
+    "job j4 stopped in Grainy",
+    "AI connection · Job j4 stopped in Grainy"
+   ],
+   [
+    "server",
+    "job x done",
+    "AI connection · job x done"
+   ],
+   [
+    "server",
+    "refused -32602",
+    "AI connection · Refused (-32602)"
+   ],
+   [
+    "server",
+    "error -32603",
+    "AI connection · Error -32603"
+   ],
+   [
+    "server",
+    "error 7",
+    "AI connection · Error 7"
+   ],
+   [
+    "server",
+    "error: bad thing",
+    "AI connection · Error: bad thing"
+   ],
+   [
+    "server",
+    "failed: it broke\nbadly",
+    "AI connection · Failed: it broke\nbadly"
+   ],
+   [
+    "server",
+    "something new",
+    "AI connection · something new"
+   ],
+   [
+    "files",
+    "started",
+    "Bridge files · Started"
+   ],
+   [
+    "files",
+    "stopped",
+    "Bridge files · Stopped"
+   ],
+   [
+    "files",
+    "could not start",
+    "Bridge files · Could not start"
+   ],
+   [
+    "files",
+    "port not saved",
+    "Bridge files · Port not saved"
+   ],
+   [
+    "files",
+    "on in another Grainy",
+    "Bridge files · On in another Grainy"
+   ],
+   [
+    "files",
+    "new key",
+    "Bridge files · New key made"
+   ],
+   [
+    "files",
+    "could not write the bridge files",
+    "Bridge files · Could not be written (installed AI programs cannot connect)"
+   ],
+   [
+    "files",
+    "refused 401",
+    "Bridge files · Refused: missing or wrong connection key"
+   ],
+   [
+    "files",
+    "refused 403",
+    "Bridge files · Refused: a request from an address or web page that is not allowed"
+   ],
+   [
+    "files",
+    "ok",
+    "Bridge files · OK"
+   ],
+   [
+    "files",
+    "error",
+    "Bridge files · Error"
+   ],
+   [
+    "files",
+    "undone in Grainy",
+    "Bridge files · Undone in Grainy"
+   ],
+   [
+    "files",
+    "job j1 done",
+    "Bridge files · Job j1 done"
+   ],
+   [
+    "files",
+    "job j12 failed",
+    "Bridge files · Job j12 failed"
+   ],
+   [
+    "files",
+    "job j3 cancelled",
+    "Bridge files · Job j3 cancelled"
+   ],
+   [
+    "files",
+    "job j4 stopped in Grainy",
+    "Bridge files · Job j4 stopped in Grainy"
+   ],
+   [
+    "files",
+    "job x done",
+    "Bridge files · job x done"
+   ],
+   [
+    "files",
+    "refused -32602",
+    "Bridge files · Refused (-32602)"
+   ],
+   [
+    "files",
+    "error -32603",
+    "Bridge files · Error -32603"
+   ],
+   [
+    "files",
+    "error 7",
+    "Bridge files · Error 7"
+   ],
+   [
+    "files",
+    "error: bad thing",
+    "Bridge files · Error: bad thing"
+   ],
+   [
+    "files",
+    "failed: it broke\nbadly",
+    "Bridge files · Failed: it broke\nbadly"
+   ],
+   [
+    "files",
+    "something new",
+    "Bridge files · something new"
+   ],
+   [
+    "key",
+    "started",
+    "Connection key · Started"
+   ],
+   [
+    "key",
+    "stopped",
+    "Connection key · Stopped"
+   ],
+   [
+    "key",
+    "could not start",
+    "Connection key · Could not start"
+   ],
+   [
+    "key",
+    "port not saved",
+    "Connection key · Port not saved"
+   ],
+   [
+    "key",
+    "on in another Grainy",
+    "Connection key · On in another Grainy"
+   ],
+   [
+    "key",
+    "new key",
+    "Connection key · New key made"
+   ],
+   [
+    "key",
+    "could not write the bridge files",
+    "Connection key · Could not be written (installed AI programs cannot connect)"
+   ],
+   [
+    "key",
+    "refused 401",
+    "Connection key · Refused: missing or wrong connection key"
+   ],
+   [
+    "key",
+    "refused 403",
+    "Connection key · Refused: a request from an address or web page that is not allowed"
+   ],
+   [
+    "key",
+    "ok",
+    "Connection key · OK"
+   ],
+   [
+    "key",
+    "error",
+    "Connection key · Error"
+   ],
+   [
+    "key",
+    "undone in Grainy",
+    "Connection key · Undone in Grainy"
+   ],
+   [
+    "key",
+    "job j1 done",
+    "Connection key · Job j1 done"
+   ],
+   [
+    "key",
+    "job j12 failed",
+    "Connection key · Job j12 failed"
+   ],
+   [
+    "key",
+    "job j3 cancelled",
+    "Connection key · Job j3 cancelled"
+   ],
+   [
+    "key",
+    "job j4 stopped in Grainy",
+    "Connection key · Job j4 stopped in Grainy"
+   ],
+   [
+    "key",
+    "job x done",
+    "Connection key · job x done"
+   ],
+   [
+    "key",
+    "refused -32602",
+    "Connection key · Refused (-32602)"
+   ],
+   [
+    "key",
+    "error -32603",
+    "Connection key · Error -32603"
+   ],
+   [
+    "key",
+    "error 7",
+    "Connection key · Error 7"
+   ],
+   [
+    "key",
+    "error: bad thing",
+    "Connection key · Error: bad thing"
+   ],
+   [
+    "key",
+    "failed: it broke\nbadly",
+    "Connection key · Failed: it broke\nbadly"
+   ],
+   [
+    "key",
+    "something new",
+    "Connection key · something new"
+   ],
+   [
+    "apply_edits",
+    "started",
+    "apply_edits · Started"
+   ],
+   [
+    "apply_edits",
+    "stopped",
+    "apply_edits · Stopped"
+   ],
+   [
+    "apply_edits",
+    "could not start",
+    "apply_edits · Could not start"
+   ],
+   [
+    "apply_edits",
+    "port not saved",
+    "apply_edits · Port not saved"
+   ],
+   [
+    "apply_edits",
+    "on in another Grainy",
+    "apply_edits · On in another Grainy"
+   ],
+   [
+    "apply_edits",
+    "new key",
+    "apply_edits · New key made"
+   ],
+   [
+    "apply_edits",
+    "could not write the bridge files",
+    "apply_edits · Could not be written (installed AI programs cannot connect)"
+   ],
+   [
+    "apply_edits",
+    "refused 401",
+    "apply_edits · Refused: missing or wrong connection key"
+   ],
+   [
+    "apply_edits",
+    "refused 403",
+    "apply_edits · Refused: a request from an address or web page that is not allowed"
+   ],
+   [
+    "apply_edits",
+    "ok",
+    "apply_edits · OK"
+   ],
+   [
+    "apply_edits",
+    "error",
+    "apply_edits · Error"
+   ],
+   [
+    "apply_edits",
+    "undone in Grainy",
+    "apply_edits · Undone in Grainy"
+   ],
+   [
+    "apply_edits",
+    "job j1 done",
+    "apply_edits · Job j1 done"
+   ],
+   [
+    "apply_edits",
+    "job j12 failed",
+    "apply_edits · Job j12 failed"
+   ],
+   [
+    "apply_edits",
+    "job j3 cancelled",
+    "apply_edits · Job j3 cancelled"
+   ],
+   [
+    "apply_edits",
+    "job j4 stopped in Grainy",
+    "apply_edits · Job j4 stopped in Grainy"
+   ],
+   [
+    "apply_edits",
+    "job x done",
+    "apply_edits · job x done"
+   ],
+   [
+    "apply_edits",
+    "refused -32602",
+    "apply_edits · Refused (-32602)"
+   ],
+   [
+    "apply_edits",
+    "error -32603",
+    "apply_edits · Error -32603"
+   ],
+   [
+    "apply_edits",
+    "error 7",
+    "apply_edits · Error 7"
+   ],
+   [
+    "apply_edits",
+    "error: bad thing",
+    "apply_edits · Error: bad thing"
+   ],
+   [
+    "apply_edits",
+    "failed: it broke\nbadly",
+    "apply_edits · Failed: it broke\nbadly"
+   ],
+   [
+    "apply_edits",
+    "something new",
+    "apply_edits · something new"
+   ],
+   [
+    "tools/list",
+    "started",
+    "tools/list · Started"
+   ],
+   [
+    "tools/list",
+    "stopped",
+    "tools/list · Stopped"
+   ],
+   [
+    "tools/list",
+    "could not start",
+    "tools/list · Could not start"
+   ],
+   [
+    "tools/list",
+    "port not saved",
+    "tools/list · Port not saved"
+   ],
+   [
+    "tools/list",
+    "on in another Grainy",
+    "tools/list · On in another Grainy"
+   ],
+   [
+    "tools/list",
+    "new key",
+    "tools/list · New key made"
+   ],
+   [
+    "tools/list",
+    "could not write the bridge files",
+    "tools/list · Could not be written (installed AI programs cannot connect)"
+   ],
+   [
+    "tools/list",
+    "refused 401",
+    "tools/list · Refused: missing or wrong connection key"
+   ],
+   [
+    "tools/list",
+    "refused 403",
+    "tools/list · Refused: a request from an address or web page that is not allowed"
+   ],
+   [
+    "tools/list",
+    "ok",
+    "tools/list · OK"
+   ],
+   [
+    "tools/list",
+    "error",
+    "tools/list · Error"
+   ],
+   [
+    "tools/list",
+    "undone in Grainy",
+    "tools/list · Undone in Grainy"
+   ],
+   [
+    "tools/list",
+    "job j1 done",
+    "tools/list · Job j1 done"
+   ],
+   [
+    "tools/list",
+    "job j12 failed",
+    "tools/list · Job j12 failed"
+   ],
+   [
+    "tools/list",
+    "job j3 cancelled",
+    "tools/list · Job j3 cancelled"
+   ],
+   [
+    "tools/list",
+    "job j4 stopped in Grainy",
+    "tools/list · Job j4 stopped in Grainy"
+   ],
+   [
+    "tools/list",
+    "job x done",
+    "tools/list · job x done"
+   ],
+   [
+    "tools/list",
+    "refused -32602",
+    "tools/list · Refused (-32602)"
+   ],
+   [
+    "tools/list",
+    "error -32603",
+    "tools/list · Error -32603"
+   ],
+   [
+    "tools/list",
+    "error 7",
+    "tools/list · Error 7"
+   ],
+   [
+    "tools/list",
+    "error: bad thing",
+    "tools/list · Error: bad thing"
+   ],
+   [
+    "tools/list",
+    "failed: it broke\nbadly",
+    "tools/list · Failed: it broke\nbadly"
+   ],
+   [
+    "tools/list",
+    "something new",
+    "tools/list · something new"
+   ]
+  ],
+  "ko": [
+   [
+    "server",
+    "started",
+    "AI 연결 · 시작함"
+   ],
+   [
+    "server",
+    "stopped",
+    "AI 연결 · 멈춤"
+   ],
+   [
+    "server",
+    "could not start",
+    "AI 연결 · 시작하지 못함"
+   ],
+   [
+    "server",
+    "port not saved",
+    "AI 연결 · 포트를 저장하지 못함"
+   ],
+   [
+    "server",
+    "on in another Grainy",
+    "AI 연결 · 다른 Grainy에서 켜져 있음"
+   ],
+   [
+    "server",
+    "new key",
+    "AI 연결 · 새 키를 만듦"
+   ],
+   [
+    "server",
+    "could not write the bridge files",
+    "AI 연결 · 쓰지 못함 (설치한 AI 프로그램이 연결할 수 없음)"
+   ],
+   [
+    "server",
+    "refused 401",
+    "AI 연결 · 거부함: 연결 키가 없거나 맞지 않음"
+   ],
+   [
+    "server",
+    "refused 403",
+    "AI 연결 · 거부함: 허용되지 않은 주소나 웹 페이지에서 온 요청"
+   ],
+   [
+    "server",
+    "ok",
+    "AI 연결 · 성공"
+   ],
+   [
+    "server",
+    "error",
+    "AI 연결 · 오류"
+   ],
+   [
+    "server",
+    "undone in Grainy",
+    "AI 연결 · Grainy에서 되돌림"
+   ],
+   [
+    "server",
+    "job j1 done",
+    "AI 연결 · 작업 j1 완료"
+   ],
+   [
+    "server",
+    "job j12 failed",
+    "AI 연결 · 작업 j12 실패"
+   ],
+   [
+    "server",
+    "job j3 cancelled",
+    "AI 연결 · 작업 j3 취소됨"
+   ],
+   [
+    "server",
+    "job j4 stopped in Grainy",
+    "AI 연결 · 작업 j4을(를) Grainy에서 멈춤"
+   ],
+   [
+    "server",
+    "job x done",
+    "AI 연결 · job x done"
+   ],
+   [
+    "server",
+    "refused -32602",
+    "AI 연결 · 거부함 (-32602)"
+   ],
+   [
+    "server",
+    "error -32603",
+    "AI 연결 · 오류 -32603"
+   ],
+   [
+    "server",
+    "error 7",
+    "AI 연결 · 오류 7"
+   ],
+   [
+    "server",
+    "error: bad thing",
+    "AI 연결 · 오류: bad thing"
+   ],
+   [
+    "server",
+    "failed: it broke\nbadly",
+    "AI 연결 · 실패: it broke\nbadly"
+   ],
+   [
+    "server",
+    "something new",
+    "AI 연결 · something new"
+   ],
+   [
+    "files",
+    "started",
+    "중계 파일 · 시작함"
+   ],
+   [
+    "files",
+    "stopped",
+    "중계 파일 · 멈춤"
+   ],
+   [
+    "files",
+    "could not start",
+    "중계 파일 · 시작하지 못함"
+   ],
+   [
+    "files",
+    "port not saved",
+    "중계 파일 · 포트를 저장하지 못함"
+   ],
+   [
+    "files",
+    "on in another Grainy",
+    "중계 파일 · 다른 Grainy에서 켜져 있음"
+   ],
+   [
+    "files",
+    "new key",
+    "중계 파일 · 새 키를 만듦"
+   ],
+   [
+    "files",
+    "could not write the bridge files",
+    "중계 파일 · 쓰지 못함 (설치한 AI 프로그램이 연결할 수 없음)"
+   ],
+   [
+    "files",
+    "refused 401",
+    "중계 파일 · 거부함: 연결 키가 없거나 맞지 않음"
+   ],
+   [
+    "files",
+    "refused 403",
+    "중계 파일 · 거부함: 허용되지 않은 주소나 웹 페이지에서 온 요청"
+   ],
+   [
+    "files",
+    "ok",
+    "중계 파일 · 성공"
+   ],
+   [
+    "files",
+    "error",
+    "중계 파일 · 오류"
+   ],
+   [
+    "files",
+    "undone in Grainy",
+    "중계 파일 · Grainy에서 되돌림"
+   ],
+   [
+    "files",
+    "job j1 done",
+    "중계 파일 · 작업 j1 완료"
+   ],
+   [
+    "files",
+    "job j12 failed",
+    "중계 파일 · 작업 j12 실패"
+   ],
+   [
+    "files",
+    "job j3 cancelled",
+    "중계 파일 · 작업 j3 취소됨"
+   ],
+   [
+    "files",
+    "job j4 stopped in Grainy",
+    "중계 파일 · 작업 j4을(를) Grainy에서 멈춤"
+   ],
+   [
+    "files",
+    "job x done",
+    "중계 파일 · job x done"
+   ],
+   [
+    "files",
+    "refused -32602",
+    "중계 파일 · 거부함 (-32602)"
+   ],
+   [
+    "files",
+    "error -32603",
+    "중계 파일 · 오류 -32603"
+   ],
+   [
+    "files",
+    "error 7",
+    "중계 파일 · 오류 7"
+   ],
+   [
+    "files",
+    "error: bad thing",
+    "중계 파일 · 오류: bad thing"
+   ],
+   [
+    "files",
+    "failed: it broke\nbadly",
+    "중계 파일 · 실패: it broke\nbadly"
+   ],
+   [
+    "files",
+    "something new",
+    "중계 파일 · something new"
+   ],
+   [
+    "key",
+    "started",
+    "연결 키 · 시작함"
+   ],
+   [
+    "key",
+    "stopped",
+    "연결 키 · 멈춤"
+   ],
+   [
+    "key",
+    "could not start",
+    "연결 키 · 시작하지 못함"
+   ],
+   [
+    "key",
+    "port not saved",
+    "연결 키 · 포트를 저장하지 못함"
+   ],
+   [
+    "key",
+    "on in another Grainy",
+    "연결 키 · 다른 Grainy에서 켜져 있음"
+   ],
+   [
+    "key",
+    "new key",
+    "연결 키 · 새 키를 만듦"
+   ],
+   [
+    "key",
+    "could not write the bridge files",
+    "연결 키 · 쓰지 못함 (설치한 AI 프로그램이 연결할 수 없음)"
+   ],
+   [
+    "key",
+    "refused 401",
+    "연결 키 · 거부함: 연결 키가 없거나 맞지 않음"
+   ],
+   [
+    "key",
+    "refused 403",
+    "연결 키 · 거부함: 허용되지 않은 주소나 웹 페이지에서 온 요청"
+   ],
+   [
+    "key",
+    "ok",
+    "연결 키 · 성공"
+   ],
+   [
+    "key",
+    "error",
+    "연결 키 · 오류"
+   ],
+   [
+    "key",
+    "undone in Grainy",
+    "연결 키 · Grainy에서 되돌림"
+   ],
+   [
+    "key",
+    "job j1 done",
+    "연결 키 · 작업 j1 완료"
+   ],
+   [
+    "key",
+    "job j12 failed",
+    "연결 키 · 작업 j12 실패"
+   ],
+   [
+    "key",
+    "job j3 cancelled",
+    "연결 키 · 작업 j3 취소됨"
+   ],
+   [
+    "key",
+    "job j4 stopped in Grainy",
+    "연결 키 · 작업 j4을(를) Grainy에서 멈춤"
+   ],
+   [
+    "key",
+    "job x done",
+    "연결 키 · job x done"
+   ],
+   [
+    "key",
+    "refused -32602",
+    "연결 키 · 거부함 (-32602)"
+   ],
+   [
+    "key",
+    "error -32603",
+    "연결 키 · 오류 -32603"
+   ],
+   [
+    "key",
+    "error 7",
+    "연결 키 · 오류 7"
+   ],
+   [
+    "key",
+    "error: bad thing",
+    "연결 키 · 오류: bad thing"
+   ],
+   [
+    "key",
+    "failed: it broke\nbadly",
+    "연결 키 · 실패: it broke\nbadly"
+   ],
+   [
+    "key",
+    "something new",
+    "연결 키 · something new"
+   ],
+   [
+    "apply_edits",
+    "started",
+    "apply_edits · 시작함"
+   ],
+   [
+    "apply_edits",
+    "stopped",
+    "apply_edits · 멈춤"
+   ],
+   [
+    "apply_edits",
+    "could not start",
+    "apply_edits · 시작하지 못함"
+   ],
+   [
+    "apply_edits",
+    "port not saved",
+    "apply_edits · 포트를 저장하지 못함"
+   ],
+   [
+    "apply_edits",
+    "on in another Grainy",
+    "apply_edits · 다른 Grainy에서 켜져 있음"
+   ],
+   [
+    "apply_edits",
+    "new key",
+    "apply_edits · 새 키를 만듦"
+   ],
+   [
+    "apply_edits",
+    "could not write the bridge files",
+    "apply_edits · 쓰지 못함 (설치한 AI 프로그램이 연결할 수 없음)"
+   ],
+   [
+    "apply_edits",
+    "refused 401",
+    "apply_edits · 거부함: 연결 키가 없거나 맞지 않음"
+   ],
+   [
+    "apply_edits",
+    "refused 403",
+    "apply_edits · 거부함: 허용되지 않은 주소나 웹 페이지에서 온 요청"
+   ],
+   [
+    "apply_edits",
+    "ok",
+    "apply_edits · 성공"
+   ],
+   [
+    "apply_edits",
+    "error",
+    "apply_edits · 오류"
+   ],
+   [
+    "apply_edits",
+    "undone in Grainy",
+    "apply_edits · Grainy에서 되돌림"
+   ],
+   [
+    "apply_edits",
+    "job j1 done",
+    "apply_edits · 작업 j1 완료"
+   ],
+   [
+    "apply_edits",
+    "job j12 failed",
+    "apply_edits · 작업 j12 실패"
+   ],
+   [
+    "apply_edits",
+    "job j3 cancelled",
+    "apply_edits · 작업 j3 취소됨"
+   ],
+   [
+    "apply_edits",
+    "job j4 stopped in Grainy",
+    "apply_edits · 작업 j4을(를) Grainy에서 멈춤"
+   ],
+   [
+    "apply_edits",
+    "job x done",
+    "apply_edits · job x done"
+   ],
+   [
+    "apply_edits",
+    "refused -32602",
+    "apply_edits · 거부함 (-32602)"
+   ],
+   [
+    "apply_edits",
+    "error -32603",
+    "apply_edits · 오류 -32603"
+   ],
+   [
+    "apply_edits",
+    "error 7",
+    "apply_edits · 오류 7"
+   ],
+   [
+    "apply_edits",
+    "error: bad thing",
+    "apply_edits · 오류: bad thing"
+   ],
+   [
+    "apply_edits",
+    "failed: it broke\nbadly",
+    "apply_edits · 실패: it broke\nbadly"
+   ],
+   [
+    "apply_edits",
+    "something new",
+    "apply_edits · something new"
+   ],
+   [
+    "tools/list",
+    "started",
+    "tools/list · 시작함"
+   ],
+   [
+    "tools/list",
+    "stopped",
+    "tools/list · 멈춤"
+   ],
+   [
+    "tools/list",
+    "could not start",
+    "tools/list · 시작하지 못함"
+   ],
+   [
+    "tools/list",
+    "port not saved",
+    "tools/list · 포트를 저장하지 못함"
+   ],
+   [
+    "tools/list",
+    "on in another Grainy",
+    "tools/list · 다른 Grainy에서 켜져 있음"
+   ],
+   [
+    "tools/list",
+    "new key",
+    "tools/list · 새 키를 만듦"
+   ],
+   [
+    "tools/list",
+    "could not write the bridge files",
+    "tools/list · 쓰지 못함 (설치한 AI 프로그램이 연결할 수 없음)"
+   ],
+   [
+    "tools/list",
+    "refused 401",
+    "tools/list · 거부함: 연결 키가 없거나 맞지 않음"
+   ],
+   [
+    "tools/list",
+    "refused 403",
+    "tools/list · 거부함: 허용되지 않은 주소나 웹 페이지에서 온 요청"
+   ],
+   [
+    "tools/list",
+    "ok",
+    "tools/list · 성공"
+   ],
+   [
+    "tools/list",
+    "error",
+    "tools/list · 오류"
+   ],
+   [
+    "tools/list",
+    "undone in Grainy",
+    "tools/list · Grainy에서 되돌림"
+   ],
+   [
+    "tools/list",
+    "job j1 done",
+    "tools/list · 작업 j1 완료"
+   ],
+   [
+    "tools/list",
+    "job j12 failed",
+    "tools/list · 작업 j12 실패"
+   ],
+   [
+    "tools/list",
+    "job j3 cancelled",
+    "tools/list · 작업 j3 취소됨"
+   ],
+   [
+    "tools/list",
+    "job j4 stopped in Grainy",
+    "tools/list · 작업 j4을(를) Grainy에서 멈춤"
+   ],
+   [
+    "tools/list",
+    "job x done",
+    "tools/list · job x done"
+   ],
+   [
+    "tools/list",
+    "refused -32602",
+    "tools/list · 거부함 (-32602)"
+   ],
+   [
+    "tools/list",
+    "error -32603",
+    "tools/list · 오류 -32603"
+   ],
+   [
+    "tools/list",
+    "error 7",
+    "tools/list · 오류 7"
+   ],
+   [
+    "tools/list",
+    "error: bad thing",
+    "tools/list · 오류: bad thing"
+   ],
+   [
+    "tools/list",
+    "failed: it broke\nbadly",
+    "tools/list · 실패: it broke\nbadly"
+   ],
+   [
+    "tools/list",
+    "something new",
+    "tools/list · something new"
+   ]
+  ]
+ },
+ "installs": [
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\"",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "& (Join-Path $env:LOCALAPPDATA 'Grainy\\mcp\\grainy-mcp-bridge.ps1')"
+       ],
+       "command": "powershell"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\""
+   },
+   "folder": null,
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\"",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-Command\",\n        \"& (Join-Path $env:LOCALAPPDATA 'Grainy\\\\mcp\\\\grainy-mcp-bridge.ps1')\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\""
+   },
+   "windows": true
+  },
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\"",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "& (Join-Path $env:LOCALAPPDATA 'Grainy\\mcp\\grainy-mcp-bridge.ps1')"
+       ],
+       "command": "powershell"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\""
+   },
+   "folder": "<ROOT>\\local\\Grainy\\mcp",
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\"",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-Command\",\n        \"& (Join-Path $env:LOCALAPPDATA 'Grainy\\\\mcp\\\\grainy-mcp-bridge.ps1')\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\""
+   },
+   "windows": true
+  },
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\"",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "& (Join-Path $env:LOCALAPPDATA 'Grainy\\mcp\\grainy-mcp-bridge.ps1')"
+       ],
+       "command": "powershell"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\""
+   },
+   "folder": "<ROOT>\\local\\GRAINY\\MCP",
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\"",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-Command\",\n        \"& (Join-Path $env:LOCALAPPDATA 'Grainy\\\\mcp\\\\grainy-mcp-bridge.ps1')\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:LOCALAPPDATA\\Grainy\\mcp\\grainy-mcp-bridge.ps1\""
+   },
+   "windows": true
+  },
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File 'Z:\\Temp\\it''s lib\\mcp\\grainy-mcp-bridge.ps1'",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "Z:\\Temp\\it's lib\\mcp\\grainy-mcp-bridge.ps1"
+       ],
+       "command": "powershell"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File 'Z:\\Temp\\it''s lib\\mcp\\grainy-mcp-bridge.ps1'"
+   },
+   "folder": "Z:\\Temp\\it's lib\\mcp",
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File 'Z:\\Temp\\it''s lib\\mcp\\grainy-mcp-bridge.ps1'",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"Z:\\\\Temp\\\\it's lib\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File 'Z:\\Temp\\it''s lib\\mcp\\grainy-mcp-bridge.ps1'"
+   },
+   "windows": true
+  },
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '\\tmp\\it''s\\mcp\\grainy-mcp-bridge.ps1'",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "\\tmp\\it's\\mcp\\grainy-mcp-bridge.ps1"
+       ],
+       "command": "powershell"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '\\tmp\\it''s\\mcp\\grainy-mcp-bridge.ps1'"
+   },
+   "folder": "/tmp/it's/mcp",
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '\\tmp\\it''s\\mcp\\grainy-mcp-bridge.ps1'",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"\\\\tmp\\\\it's\\\\mcp\\\\grainy-mcp-bridge.ps1\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy '--' powershell -NoProfile -ExecutionPolicy Bypass -File '\\tmp\\it''s\\mcp\\grainy-mcp-bridge.ps1'"
+   },
+   "windows": true
+  },
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy -- sh \"$HOME/Library/Application Support/Grainy/mcp/grainy-mcp-bridge.sh\"",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "-c",
+        "exec /bin/sh \"$HOME/Library/Application Support/Grainy/mcp/grainy-mcp-bridge.sh\""
+       ],
+       "command": "/bin/sh"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy -- sh \"$HOME/Library/Application Support/Grainy/mcp/grainy-mcp-bridge.sh\""
+   },
+   "folder": null,
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy -- sh \"$HOME/Library/Application Support/Grainy/mcp/grainy-mcp-bridge.sh\"",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"/bin/sh\",\n      \"args\": [\n        \"-c\",\n        \"exec /bin/sh \\\"$HOME/Library/Application Support/Grainy/mcp/grainy-mcp-bridge.sh\\\"\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy -- sh \"$HOME/Library/Application Support/Grainy/mcp/grainy-mcp-bridge.sh\""
+   },
+   "windows": false
+  },
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy -- sh '<ROOT>\\local\\Grainy\\mcp\\grainy-mcp-bridge.sh'",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "<ROOT>\\local\\Grainy\\mcp\\grainy-mcp-bridge.sh"
+       ],
+       "command": "/bin/sh"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy -- sh '<ROOT>\\local\\Grainy\\mcp\\grainy-mcp-bridge.sh'"
+   },
+   "folder": "<ROOT>\\local\\Grainy\\mcp",
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy -- sh '<ROOT>\\local\\Grainy\\mcp\\grainy-mcp-bridge.sh'",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"/bin/sh\",\n      \"args\": [\n        \"<ROOT_JSON>\\\\local\\\\Grainy\\\\mcp\\\\grainy-mcp-bridge.sh\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy -- sh '<ROOT>\\local\\Grainy\\mcp\\grainy-mcp-bridge.sh'"
+   },
+   "windows": false
+  },
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy -- sh '<ROOT>\\local\\GRAINY\\MCP\\grainy-mcp-bridge.sh'",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "<ROOT>\\local\\GRAINY\\MCP\\grainy-mcp-bridge.sh"
+       ],
+       "command": "/bin/sh"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy -- sh '<ROOT>\\local\\GRAINY\\MCP\\grainy-mcp-bridge.sh'"
+   },
+   "folder": "<ROOT>\\local\\GRAINY\\MCP",
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy -- sh '<ROOT>\\local\\GRAINY\\MCP\\grainy-mcp-bridge.sh'",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"/bin/sh\",\n      \"args\": [\n        \"<ROOT_JSON>\\\\local\\\\GRAINY\\\\MCP\\\\grainy-mcp-bridge.sh\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy -- sh '<ROOT>\\local\\GRAINY\\MCP\\grainy-mcp-bridge.sh'"
+   },
+   "windows": false
+  },
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy -- sh 'Z:\\Temp\\it'\\''s lib\\mcp\\grainy-mcp-bridge.sh'",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "Z:\\Temp\\it's lib\\mcp\\grainy-mcp-bridge.sh"
+       ],
+       "command": "/bin/sh"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy -- sh 'Z:\\Temp\\it'\\''s lib\\mcp\\grainy-mcp-bridge.sh'"
+   },
+   "folder": "Z:\\Temp\\it's lib\\mcp",
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy -- sh 'Z:\\Temp\\it'\\''s lib\\mcp\\grainy-mcp-bridge.sh'",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"/bin/sh\",\n      \"args\": [\n        \"Z:\\\\Temp\\\\it's lib\\\\mcp\\\\grainy-mcp-bridge.sh\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy -- sh 'Z:\\Temp\\it'\\''s lib\\mcp\\grainy-mcp-bridge.sh'"
+   },
+   "windows": false
+  },
+  {
+   "commands": {
+    "claude_code": "claude mcp add --scope user grainy -- sh '\\tmp\\it'\\''s\\mcp\\grainy-mcp-bridge.sh'",
+    "claude_desktop_json": {
+     "mcpServers": {
+      "grainy": {
+       "args": [
+        "\\tmp\\it's\\mcp\\grainy-mcp-bridge.sh"
+       ],
+       "command": "/bin/sh"
+      }
+     }
+    },
+    "codex": "codex mcp add grainy -- sh '\\tmp\\it'\\''s\\mcp\\grainy-mcp-bridge.sh'"
+   },
+   "folder": "/tmp/it's/mcp",
+   "texts": {
+    "claude_code": "claude mcp add --scope user grainy -- sh '\\tmp\\it'\\''s\\mcp\\grainy-mcp-bridge.sh'",
+    "claude_desktop_json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"/bin/sh\",\n      \"args\": [\n        \"\\\\tmp\\\\it's\\\\mcp\\\\grainy-mcp-bridge.sh\"\n      ]\n    }\n  }\n}",
+    "codex": "codex mcp add grainy -- sh '\\tmp\\it'\\''s\\mcp\\grainy-mcp-bridge.sh'"
+   },
+   "windows": false
+  }
+ ],
+ "standard": "<ROOT>\\local\\Grainy\\mcp"
+}

@@ -1,0 +1,27 @@
+{
+ "gains": [
+  1.2,
+  1.0,
+  0.9
+ ],
+ "input": "patches",
+ "result": {
+  "kelvin_enabled": false,
+  "keys": [
+   "exposure",
+   "temperature",
+   "tint",
+   "kelvin_enabled",
+   "contrast"
+  ],
+  "temperature": 13.17461109161377,
+  "tint": 24.4415283203125
+ },
+ "settings": {
+  "contrast": 7,
+  "exposure": 0.25,
+  "kelvin_enabled": true,
+  "temperature": 3.0,
+  "tint": -2.0
+ }
+}

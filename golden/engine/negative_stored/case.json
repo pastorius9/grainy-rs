@@ -1,0 +1,20 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "contrast": 15.0,
+  "negative": true,
+  "negative_base": [
+   0.8,
+   0.5,
+   0.25
+  ],
+  "negative_peak": [
+   0.02,
+   0.012,
+   0.009
+  ]
+ },
+ "source": "negative",
+ "use_crop": true
+}

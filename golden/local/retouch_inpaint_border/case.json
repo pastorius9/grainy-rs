@@ -1,0 +1,30 @@
+{
+ "error": null,
+ "frame": "noise",
+ "operations": [
+  {
+   "points": [
+    [
+     0,
+     1
+    ]
+   ],
+   "radius": 0.08,
+   "type": "inpaint"
+  }
+ ],
+ "output_bits": "6271258483035734016",
+ "output_shape": [
+  64,
+  96,
+  3
+ ],
+ "output_step": 3,
+ "recorded": {
+  "distance": [],
+  "dust": [],
+  "inpaint": 3,
+  "sky": []
+ },
+ "shift": 0
+}

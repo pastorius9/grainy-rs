@@ -1,0 +1,16 @@
+{
+ "changes": {
+  "perspective_h": 150.0,
+  "perspective_v": 120.0
+ },
+ "error": null,
+ "function": "optical",
+ "input": {
+  "c": 3,
+  "h": 37,
+  "kind": "synth",
+  "seed": 8,
+  "w": 53
+ },
+ "use_crop": true
+}

@@ -1,0 +1,165 @@
+{
+ "op": "distance",
+ "variants": [
+  {
+   "label": "empty",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "empty",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "full",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "full",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "pixel",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "pixel",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "hole",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "hole",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "border",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "border",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "nested",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "nested",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "many",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "many",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "ties",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "ties",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "random",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "random",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "single",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "single",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "row",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "row",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "column",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "column",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "tiny_corner",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "tiny_corner",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "only_known",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "only_known",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "large_center",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "large_center",
+   "size": 5,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "large_corner",
+   "size": 3,
+   "tolerance": 0.0002
+  },
+  {
+   "label": "large_corner",
+   "size": 5,
+   "tolerance": 0.0002
+  }
+ ]
+}

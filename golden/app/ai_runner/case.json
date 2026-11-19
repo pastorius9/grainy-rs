@@ -1,0 +1,444 @@
+{
+ "env": {
+  "MY_API_KEY": "supersecretvalue",
+  "OTHER": "notsecretvalue",
+  "SHORT_TOKEN": "abc"
+ },
+ "scenarios": [
+  {
+   "code": 0,
+   "diagnostic": "",
+   "events": [
+    [
+     "session",
+     "sess-1",
+     null
+    ],
+    [
+     "text",
+     "사진을 ",
+     null
+    ],
+    [
+     "text",
+     "봅니다.",
+     null
+    ],
+    [
+     "tool",
+     "list_photos",
+     null
+    ],
+    [
+     "tool",
+     "apply_edits",
+     3
+    ],
+    [
+     "text",
+     "끝났습니다.",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "claude",
+   "name": "done",
+   "result": "done",
+   "secrets": [],
+   "session": "sess-1",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\done",
+     "env": {
+      "CLAUDE_CODE_DEBUG_LOGS_DIR": "<ROOT>\\w\\done\\claude-log",
+      "MCP_CONNECTION_NONBLOCKING": "0",
+      "MCP_CONNECT_TIMEOUT_MS": "30000"
+     }
+    }
+   ],
+   "stderr": "",
+   "stdout": "{\"type\": \"system\", \"subtype\": \"init\", \"session_id\": \"sess-1\"}\n{\"type\": \"stream_event\", \"event\": {\"type\": \"message_start\"}}\n{\"type\": \"stream_event\", \"event\": {\"type\": \"content_block_delta\", \"delta\": {\"type\": \"text_delta\", \"text\": \"사진을 \"}}}\n{\"type\": \"stream_event\", \"event\": {\"type\": \"content_block_delta\", \"delta\": {\"type\": \"text_delta\", \"text\": \"봅니다.\"}}}\n{\"type\": \"assistant\", \"message\": {\"content\": [{\"type\": \"text\", \"text\": \"사진을 봅니다.\"}, {\"type\": \"tool_use\", \"id\": \"t1\", \"name\": \"mcp__grainy__list_photos\", \"input\": {\"limit\": 5}}]}}\n{\"type\": \"assistant\", \"message\": {\"content\": [{\"type\": \"tool_use\", \"id\": \"t1\", \"name\": \"mcp__grainy__list_photos\", \"input\": {\"limit\": 5}}, {\"type\": \"tool_use\", \"id\": \"t2\", \"name\": \"mcp__grainy__apply_edits\", \"input\": {\"edits\": [{\"ids\": [1, 2], \"set\": {}}, {\"ids\": [2, 3, \"x\"]}]}}]}}\n{\"type\": \"assistant\", \"message\": {\"content\": [{\"type\": \"text\", \"text\": \"끝났습니다.\"}]}}\n{\"type\": \"result\", \"is_error\": false}\n"
+  },
+  {
+   "code": 0,
+   "diagnostic": "",
+   "events": [
+    [
+     "text",
+     "key [redacted] and [redacted] and [redacted] and [redacted]",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "claude",
+   "name": "secret",
+   "result": "done",
+   "secrets": [
+    "the-token-x"
+   ],
+   "session": "",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\secret",
+     "env": {
+      "CLAUDE_CODE_DEBUG_LOGS_DIR": "<ROOT>\\w\\secret\\claude-log",
+      "MCP_CONNECTION_NONBLOCKING": "0",
+      "MCP_CONNECT_TIMEOUT_MS": "30000"
+     }
+    }
+   ],
+   "stderr": "",
+   "stdout": "{\"type\": \"assistant\", \"message\": {\"content\": [{\"type\": \"text\", \"text\": \"key fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210 and supersecretvalue and the-token-x and Bearer zz\"}]}}\n{\"type\": \"result\", \"is_error\": false}\n"
+  },
+  {
+   "code": 1,
+   "diagnostic": "authentication required",
+   "events": [
+    [
+     "auth_error",
+     "",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "claude",
+   "name": "auth-stderr",
+   "result": "auth_required",
+   "secrets": [],
+   "session": "",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\auth-stderr",
+     "env": {
+      "CLAUDE_CODE_DEBUG_LOGS_DIR": "<ROOT>\\w\\auth-stderr\\claude-log",
+      "MCP_CONNECTION_NONBLOCKING": "0",
+      "MCP_CONNECT_TIMEOUT_MS": "30000"
+     }
+    }
+   ],
+   "stderr": "Error: not logged in\n",
+   "stdout": "{\"type\": \"result\", \"is_error\": true}\n"
+  },
+  {
+   "code": 0,
+   "diagnostic": "authentication required",
+   "events": [
+    [
+     "auth_error",
+     "",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "claude",
+   "name": "auth-line",
+   "result": "auth_required",
+   "secrets": [],
+   "session": "",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\auth-line",
+     "env": {
+      "CLAUDE_CODE_DEBUG_LOGS_DIR": "<ROOT>\\w\\auth-line\\claude-log",
+      "MCP_CONNECTION_NONBLOCKING": "0",
+      "MCP_CONNECT_TIMEOUT_MS": "30000"
+     }
+    }
+   ],
+   "stderr": "",
+   "stdout": "not json: please log in\n"
+  },
+  {
+   "code": 3,
+   "diagnostic": "program failed",
+   "events": [
+    [
+     "text",
+     "hi",
+     null
+    ],
+    [
+     "exit",
+     "3",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "claude",
+   "name": "exit",
+   "result": "failed",
+   "secrets": [],
+   "session": "",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\exit",
+     "env": {
+      "CLAUDE_CODE_DEBUG_LOGS_DIR": "<ROOT>\\w\\exit\\claude-log",
+      "MCP_CONNECTION_NONBLOCKING": "0",
+      "MCP_CONNECT_TIMEOUT_MS": "30000"
+     }
+    }
+   ],
+   "stderr": "boom",
+   "stdout": "{\"type\": \"assistant\", \"message\": {\"content\": [{\"type\": \"text\", \"text\": \"hi\"}]}}\n"
+  },
+  {
+   "code": 0,
+   "diagnostic": "program failed",
+   "events": [
+    [
+     "session",
+     "s",
+     null
+    ],
+    [
+     "exit",
+     "0",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "claude",
+   "name": "no-result",
+   "result": "failed",
+   "secrets": [],
+   "session": "s",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\no-result",
+     "env": {
+      "CLAUDE_CODE_DEBUG_LOGS_DIR": "<ROOT>\\w\\no-result\\claude-log",
+      "MCP_CONNECTION_NONBLOCKING": "0",
+      "MCP_CONNECT_TIMEOUT_MS": "30000"
+     }
+    }
+   ],
+   "stderr": "",
+   "stdout": "{\"type\": \"system\", \"session_id\": \"s\"}\n"
+  },
+  {
+   "code": 0,
+   "diagnostic": "program failed",
+   "events": [
+    [
+     "session",
+     "th-9",
+     null
+    ],
+    [
+     "tool",
+     "get_photo",
+     2
+    ],
+    [
+     "text",
+     "Done\n",
+     null
+    ],
+    [
+     "exit",
+     "0",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "codex",
+   "name": "done",
+   "result": "failed",
+   "secrets": [],
+   "session": "th-9",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\done",
+     "env": {}
+    }
+   ],
+   "stderr": "",
+   "stdout": "{\"type\": \"thread.started\", \"thread_id\": \"th-9\"}\n{\"type\": \"turn.started\"}\n{\"type\": \"item.started\", \"item\": {\"id\": \"i1\", \"type\": \"mcp_tool_call\", \"server\": \"grainy\", \"tool\": \"get_photo\", \"arguments\": {\"ids\": [4, 5]}}}\n{\"type\": \"item.completed\", \"item\": {\"id\": \"i1\", \"type\": \"mcp_tool_call\", \"server\": \"grainy\", \"tool\": \"get_photo\", \"arguments\": {\"ids\": [4, 5]}}}\n{\"type\": \"item.completed\", \"item\": {\"id\": \"i2\", \"type\": \"agent_message\", \"text\": \"Done\"}}\n{\"type\": \"item.completed\", \"item\": {\"id\": \"i2\", \"type\": \"agent_message\", \"text\": \"Done\"}}\n{\"type\": \"item.started\", \"item\": {\"id\": \"i3\", \"type\": \"mcp_tool_call\", \"server\": \"other\", \"tool\": \"x\"}}\n{\"type\": \"turn.completed\"}\n"
+  },
+  {
+   "code": 0,
+   "diagnostic": "program failed",
+   "events": [
+    [
+     "exit",
+     "0",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "codex",
+   "name": "error-event",
+   "result": "failed",
+   "secrets": [],
+   "session": "",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\error-event",
+     "env": {}
+    }
+   ],
+   "stderr": "",
+   "stdout": "{\"type\": \"error\", \"message\": \"quota exceeded\"}\n{\"type\": \"turn.completed\"}\n"
+  },
+  {
+   "code": 41,
+   "diagnostic": "authentication required",
+   "events": [
+    [
+     "session",
+     "g",
+     null
+    ],
+    [
+     "auth_error",
+     "",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "gemini",
+   "name": "auth-code",
+   "result": "auth_required",
+   "secrets": [],
+   "session": "g",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\auth-code",
+     "env": {
+      "GEMINI_CLI_SYSTEM_SETTINGS_PATH": "<ROOT>\\w\\auth-code\\.gemini\\settings.json"
+     }
+    }
+   ],
+   "stderr": "",
+   "stdout": "{\"type\": \"init\", \"session_id\": \"g\"}\n"
+  },
+  {
+   "code": 0,
+   "diagnostic": "",
+   "events": [
+    [
+     "session",
+     "g-1",
+     null
+    ],
+    [
+     "text",
+     "Hello ",
+     null
+    ],
+    [
+     "tool",
+     "set_labels",
+     1
+    ],
+    [
+     "tool",
+     "contact_sheet",
+     null
+    ]
+   ],
+   "fail": false,
+   "key": "gemini",
+   "name": "done",
+   "result": "done",
+   "secrets": [],
+   "session": "g-1",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\done",
+     "env": {
+      "GEMINI_CLI_SYSTEM_SETTINGS_PATH": "<ROOT>\\w\\done\\.gemini\\settings.json"
+     }
+    }
+   ],
+   "stderr": "",
+   "stdout": "{\"type\": \"init\", \"session_id\": \"g-1\"}\n{\"type\": \"message\", \"role\": \"user\", \"content\": \"hi\"}\n{\"type\": \"message\", \"role\": \"assistant\", \"content\": \"Hello \"}\n{\"type\": \"tool_use\", \"tool_id\": \"a\", \"tool_name\": \"grainy__set_labels\", \"parameters\": {\"ids\": [9]}}\n{\"type\": \"tool_use\", \"tool_id\": \"a\", \"tool_name\": \"grainy__set_labels\", \"parameters\": {\"ids\": [9]}}\n{\"type\": \"tool_use\", \"tool_id\": \"b\", \"tool_name\": \"contact_sheet\", \"parameters\": null}\n{\"type\": \"result\", \"status\": \"success\"}\n"
+  },
+  {
+   "code": 0,
+   "diagnostic": "",
+   "events": [],
+   "fail": false,
+   "key": "gemini",
+   "name": "list-and-junk",
+   "result": "done",
+   "secrets": [],
+   "session": "",
+   "started": [
+    {
+     "argv": [
+      "prog",
+      "p"
+     ],
+     "cwd": "<ROOT>\\w\\list-and-junk",
+     "env": {
+      "GEMINI_CLI_SYSTEM_SETTINGS_PATH": "<ROOT>\\w\\list-and-junk\\.gemini\\settings.json"
+     }
+    }
+   ],
+   "stderr": "",
+   "stdout": "[1,2]\n\n{bad\n{\"type\": \"result\", \"status\": \"success\"}\n"
+  },
+  {
+   "code": 0,
+   "diagnostic": "",
+   "events": [
+    [
+     "launch_error",
+     "",
+     null
+    ]
+   ],
+   "fail": true,
+   "key": "codex",
+   "name": "launch",
+   "result": "failed",
+   "secrets": [],
+   "session": "",
+   "started": [],
+   "stderr": "",
+   "stdout": ""
+  }
+ ]
+}

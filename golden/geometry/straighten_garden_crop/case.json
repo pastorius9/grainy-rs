@@ -1,0 +1,19 @@
+{
+ "changes": {
+  "crop": [
+   0.25,
+   0.2,
+   0.75,
+   0.7
+  ],
+  "straighten": 4.0
+ },
+ "error": null,
+ "function": "geometry",
+ "input": {
+  "channels": 3,
+  "kind": "standard",
+  "name": "garden"
+ },
+ "use_crop": true
+}

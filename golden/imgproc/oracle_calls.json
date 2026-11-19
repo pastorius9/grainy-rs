@@ -1,0 +1,650 @@
+[
+ {
+  "call": "cv2.cvtColor(np.ascontiguousarray(a),cv2.COLOR_RGB2HSV)",
+  "file": "luma/dcp.py",
+  "function": "cvtColor",
+  "line": 251
+ },
+ {
+  "call": "cv2.cvtColor(hsv,cv2.COLOR_HSV2RGB)",
+  "file": "luma/dcp.py",
+  "function": "cvtColor",
+  "line": 263
+ },
+ {
+  "call": "cv2.matchTemplate(image[top:bottom,left:right],template,cv2.TM_CCOEFF_NORMED)",
+  "file": "luma/dust.py",
+  "function": "matchTemplate",
+  "line": 116
+ },
+ {
+  "call": "cv2.absdiff(gray,cv2.GaussianBlur(gray,(0,0),1.5))",
+  "file": "luma/dust.py",
+  "function": "absdiff",
+  "line": 310
+ },
+ {
+  "call": "cv2.connectedComponents(peaks,8)",
+  "file": "luma/dust.py",
+  "function": "connectedComponents",
+  "line": 123
+ },
+ {
+  "call": "cv2.getStructuringElement(cv2.MORPH_RECT,(size,size))",
+  "file": "luma/dust.py",
+  "function": "getStructuringElement",
+  "line": 158
+ },
+ {
+  "call": "cv2.GaussianBlur(gray,(0,0),1.5)",
+  "file": "luma/dust.py",
+  "function": "GaussianBlur",
+  "line": 310
+ },
+ {
+  "call": "cv2.dilate(correlation,_PEAK_KERNEL)",
+  "file": "luma/dust.py",
+  "function": "dilate",
+  "line": 126
+ },
+ {
+  "call": "cv2.GaussianBlur(part,(0,0),.65)",
+  "file": "luma/dust.py",
+  "function": "GaussianBlur",
+  "line": 171
+ },
+ {
+  "call": "cv2.inpaint(np.ascontiguousarray(patch[...,channel]),mask,3,cv2.INPAINT_NS)",
+  "file": "luma/dust.py",
+  "function": "inpaint",
+  "line": 355
+ },
+ {
+  "call": "cv2.morphologyEx(smooth,operation,kernel)",
+  "file": "luma/dust.py",
+  "function": "morphologyEx",
+  "line": 180
+ },
+ {
+  "call": "cv2.connectedComponentsWithStats(np.uint8(response>level),8)",
+  "file": "luma/dust.py",
+  "function": "connectedComponentsWithStats",
+  "line": 184
+ },
+ {
+  "call": "cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)",
+  "file": "luma/dust_dialog.py",
+  "function": "cvtColor",
+  "line": 33
+ },
+ {
+  "call": "cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)",
+  "file": "luma/dust_dialog.py",
+  "function": "cvtColor",
+  "line": 480
+ },
+ {
+  "call": "cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(diameter,diameter))",
+  "file": "luma/dust_scratches.py",
+  "function": "getStructuringElement",
+  "line": 39
+ },
+ {
+  "call": "cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)",
+  "file": "luma/dust_scratches.py",
+  "function": "findContours",
+  "line": 63
+ },
+ {
+  "call": "cv2.GaussianBlur(part,(0,0),.65)",
+  "file": "luma/dust_scratches.py",
+  "function": "GaussianBlur",
+  "line": 47
+ },
+ {
+  "call": "cv2.boundingRect(contour)",
+  "file": "luma/dust_scratches.py",
+  "function": "boundingRect",
+  "line": 66
+ },
+ {
+  "call": "cv2.arcLength(contour,True)",
+  "file": "luma/dust_scratches.py",
+  "function": "arcLength",
+  "line": 68
+ },
+ {
+  "call": "cv2.drawContours(polygon,[contour-(x,y)],-1,1,-1)",
+  "file": "luma/dust_scratches.py",
+  "function": "drawContours",
+  "line": 71
+ },
+ {
+  "call": "cv2.moments(component,True)",
+  "file": "luma/dust_scratches.py",
+  "function": "moments",
+  "line": 77
+ },
+ {
+  "call": "cv2.dilate(local,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(maximum*3+1,)*2))",
+  "file": "luma/dust_scratches.py",
+  "function": "dilate",
+  "line": 94
+ },
+ {
+  "call": "cv2.dilate(local,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(maximum+1,)*2))",
+  "file": "luma/dust_scratches.py",
+  "function": "dilate",
+  "line": 95
+ },
+ {
+  "call": "cv2.GaussianBlur(np.abs(part-smooth),(0,0),3)",
+  "file": "luma/dust_scratches.py",
+  "function": "GaussianBlur",
+  "line": 48
+ },
+ {
+  "call": "cv2.morphologyEx(smooth,cv2.MORPH_BLACKHAT if kind=='dark' else cv2.MORPH_TOPHAT,kernel)",
+  "file": "luma/dust_scratches.py",
+  "function": "morphologyEx",
+  "line": 53
+ },
+ {
+  "call": "cv2.contourArea(contour)",
+  "file": "luma/dust_scratches.py",
+  "function": "contourArea",
+  "line": 81
+ },
+ {
+  "call": "cv2.contourArea(cv2.convexHull(contour))",
+  "file": "luma/dust_scratches.py",
+  "function": "contourArea",
+  "line": 81
+ },
+ {
+  "call": "cv2.distanceTransform(np.pad(component,1),(cv2.DIST_L2),5)",
+  "file": "luma/dust_scratches.py",
+  "function": "distanceTransform",
+  "line": 86
+ },
+ {
+  "call": "cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(maximum*3+1,)*2)",
+  "file": "luma/dust_scratches.py",
+  "function": "getStructuringElement",
+  "line": 94
+ },
+ {
+  "call": "cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(maximum+1,)*2)",
+  "file": "luma/dust_scratches.py",
+  "function": "getStructuringElement",
+  "line": 95
+ },
+ {
+  "call": "cv2.connectedComponents(support,8)",
+  "file": "luma/dust_scratches.py",
+  "function": "connectedComponents",
+  "line": 108
+ },
+ {
+  "call": "cv2.convexHull(contour)",
+  "file": "luma/dust_scratches.py",
+  "function": "convexHull",
+  "line": 81
+ },
+ {
+  "call": "cv2.findContours(component,cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)",
+  "file": "luma/dust_scratches.py",
+  "function": "findContours",
+  "line": 83
+ },
+ {
+  "call": "cv2.distanceTransform(np.pad(support,1),cv2.DIST_L2,5)",
+  "file": "luma/dust_scratches.py",
+  "function": "distanceTransform",
+  "line": 111
+ },
+ {
+  "call": "cv2.contourArea(c)",
+  "file": "luma/dust_scratches.py",
+  "function": "contourArea",
+  "line": 84
+ },
+ {
+  "call": "cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(2*max(1,round(s))+1,)*2)",
+  "file": "luma/dust_soft.py",
+  "function": "getStructuringElement",
+  "line": 19
+ },
+ {
+  "call": "cv2.GaussianBlur(part,(0,0),sigma)",
+  "file": "luma/dust_soft.py",
+  "function": "GaussianBlur",
+  "line": 36
+ },
+ {
+  "call": "cv2.GaussianBlur(part,(0,0),sigma*1.6)",
+  "file": "luma/dust_soft.py",
+  "function": "GaussianBlur",
+  "line": 37
+ },
+ {
+  "call": "cv2.GaussianBlur(np.abs(difference),(0,0),sigma*4)",
+  "file": "luma/dust_soft.py",
+  "function": "GaussianBlur",
+  "line": 38
+ },
+ {
+  "call": "cv2.dilate(response,kernel)",
+  "file": "luma/dust_soft.py",
+  "function": "dilate",
+  "line": 43
+ },
+ {
+  "call": "cv2.GaussianBlur(local,(HALO*2+1,HALO*2+1),1.5)",
+  "file": "luma/dust_texture.py",
+  "function": "GaussianBlur",
+  "line": 57
+ },
+ {
+  "call": "cv2.integral(occupied,sdepth=cv2.CV_32S)",
+  "file": "luma/dust_texture.py",
+  "function": "integral",
+  "line": 71
+ },
+ {
+  "call": "cv2.GaussianBlur(source,(HALO*2+1,HALO*2+1),1.5)",
+  "file": "luma/dust_texture.py",
+  "function": "GaussianBlur",
+  "line": 55
+ },
+ {
+  "call": "cv2.matchTemplate(source_low,target_low,cv2.TM_SQDIFF)",
+  "file": "luma/dust_texture.py",
+  "function": "matchTemplate",
+  "line": 61
+ },
+ {
+  "call": "cv2.boxFilter(source_low,-1,(tw,th),anchor=(0,0),normalize=True)",
+  "file": "luma/dust_texture.py",
+  "function": "boxFilter",
+  "line": 62
+ },
+ {
+  "call": "cv2.GaussianBlur(np.asarray(field, np.float32), (0, 0), sigma, borderType=cv2.BORDER_REFLECT_101)",
+  "file": "luma/engine.py",
+  "function": "GaussianBlur",
+  "line": 625
+ },
+ {
+  "call": "cv2.resize(a, (max(1, round(width*scale)), max(1, round(height*scale))), interpolation=cv2.INTER_AREA)",
+  "file": "luma/engine.py",
+  "function": "resize",
+  "line": 455
+ },
+ {
+  "call": "cv2.GaussianBlur(bright, (0, 0), sigma)",
+  "file": "luma/film_look.py",
+  "function": "GaussianBlur",
+  "line": 465
+ },
+ {
+  "call": "cv2.GaussianBlur(x,(5,5),.8)",
+  "file": "luma/folder_recovery.py",
+  "function": "GaussianBlur",
+  "line": 41
+ },
+ {
+  "call": "cv2.GaussianBlur(y,(5,5),.8)",
+  "file": "luma/folder_recovery.py",
+  "function": "GaussianBlur",
+  "line": 41
+ },
+ {
+  "call": "cv2.resize(image,size,interpolation=cv2.INTER_AREA)",
+  "file": "luma/healing.py",
+  "function": "resize",
+  "line": 17
+ },
+ {
+  "call": "cv2.resize(np.float32(mask>0),size,interpolation=cv2.INTER_AREA)",
+  "file": "luma/healing.py",
+  "function": "resize",
+  "line": 19
+ },
+ {
+  "call": "cv2.inpaint(known,binary,3,cv2.INPAINT_NS)",
+  "file": "luma/healing.py",
+  "function": "inpaint",
+  "line": 64
+ },
+ {
+  "call": "cv2.dilate(np.uint8(marked),np.ones((margin*2+1,margin*2+1),np.uint8))",
+  "file": "luma/healing.py",
+  "function": "dilate",
+  "line": 25
+ },
+ {
+  "call": "cv2.inpaint(np.ascontiguousarray(target[...,c]),binary,3,cv2.INPAINT_NS)",
+  "file": "luma/healing.py",
+  "function": "inpaint",
+  "line": 71
+ },
+ {
+  "call": "cv2.distanceTransform(np.uint8(marked),cv2.DIST_L2,3)",
+  "file": "luma/healing.py",
+  "function": "distanceTransform",
+  "line": 23
+ },
+ {
+  "call": "cv2.getGaussianKernel(size,sigma,cv2.CV_32F)",
+  "file": "luma/native_gpu.py",
+  "function": "getGaussianKernel",
+  "line": 418
+ },
+ {
+  "call": "cv2.remap(sensor,coords,None,cv2.INTER_LINEAR,borderMode=cv2.BORDER_CONSTANT)",
+  "file": "luma/optics.py",
+  "function": "remap",
+  "line": 215
+ },
+ {
+  "call": "cv2.remap(sensor,coords,None,cv2.INTER_LINEAR,borderMode=cv2.BORDER_CONSTANT)",
+  "file": "luma/optics.py",
+  "function": "remap",
+  "line": 234
+ },
+ {
+  "call": "cv2.remap(np.ascontiguousarray(sensor[...,c]),coords[:,:,c,0],coords[:,:,c,1],cv2.INTER_LINEAR,borderMode=cv2.BORDER_CONSTANT)",
+  "file": "luma/optics.py",
+  "function": "remap",
+  "line": 213
+ },
+ {
+  "call": "cv2.remap(plane,coords[:,:,c,0],coords[:,:,c,1],cv2.INTER_LINEAR,borderMode=cv2.BORDER_CONSTANT)",
+  "file": "luma/optics.py",
+  "function": "remap",
+  "line": 229
+ },
+ {
+  "call": "cv2.GaussianBlur(np.ascontiguousarray(a), (0,0), max(.05,float(sigma)),borderType=cv2.BORDER_REFLECT_101)",
+  "file": "luma/processing.py",
+  "function": "GaussianBlur",
+  "line": 24
+ },
+ {
+  "call": "cv2.cvtColor(np.ascontiguousarray(np.clip(a,0,1),dtype=np.float32),cv2.COLOR_RGB2HLS)",
+  "file": "luma/processing.py",
+  "function": "cvtColor",
+  "line": 45
+ },
+ {
+  "call": "cv2.cvtColor(np.stack([(h%1)*360,np.clip(l,0,1),np.clip(s,0,1)],axis=-1).astype(np.float32),cv2.COLOR_HLS2RGB)",
+  "file": "luma/processing.py",
+  "function": "cvtColor",
+  "line": 50
+ },
+ {
+  "call": "cv2.boxFilter(np.ascontiguousarray(a),-1,(2*r+1,2*r+1),borderType=cv2.BORDER_REFLECT_101)",
+  "file": "luma/processing.py",
+  "function": "boxFilter",
+  "line": 146
+ },
+ {
+  "call": "cv2.sepFilter2D(x,-1,k,k,borderType=cv2.BORDER_REFLECT_101)",
+  "file": "luma/processing.py",
+  "function": "sepFilter2D",
+  "line": 205
+ },
+ {
+  "call": "cv2.bilateralFilter(np.ascontiguousarray(L),diameter,2+strength*16,(1+strength*3)*pixel_scale)",
+  "file": "luma/processing.py",
+  "function": "bilateralFilter",
+  "line": 258
+ },
+ {
+  "call": "cv2.boxFilter(d*d,-1,(5,5),borderType=cv2.BORDER_REFLECT_101)",
+  "file": "luma/processing.py",
+  "function": "boxFilter",
+  "line": 250
+ },
+ {
+  "call": "cv2.erode(a.min(axis=-1),np.ones((diameter,diameter),np.uint8))",
+  "file": "luma/processing.py",
+  "function": "erode",
+  "line": 276
+ },
+ {
+  "call": "cv2.remap(a if c is None else a[...,c],mx,my,cv2.INTER_LINEAR,borderMode=cv2.BORDER_CONSTANT)",
+  "file": "luma/processing.py",
+  "function": "remap",
+  "line": 341
+ },
+ {
+  "call": "cv2.getPerspectiveTransform(corners.astype(np.float32),np.array([[0,0],[w-1,0],[w-1,h-1],[0,h-1]],np.float32))",
+  "file": "luma/processing.py",
+  "function": "getPerspectiveTransform",
+  "line": 318
+ },
+ {
+  "call": "cv2.warpPerspective(a,matrix,(w,h),flags=cv2.INTER_LINEAR,borderMode=cv2.BORDER_CONSTANT)",
+  "file": "luma/processing.py",
+  "function": "warpPerspective",
+  "line": 319
+ },
+ {
+  "call": "cv2.Laplacian(maximum,cv2.CV_32F)",
+  "file": "luma/processing.py",
+  "function": "Laplacian",
+  "line": 284
+ },
+ {
+  "call": "cv2.Sobel(gray,cv2.CV_32F,1,0)",
+  "file": "luma/processing.py",
+  "function": "Sobel",
+  "line": 301
+ },
+ {
+  "call": "cv2.Sobel(gray,cv2.CV_32F,0,1)",
+  "file": "luma/processing.py",
+  "function": "Sobel",
+  "line": 301
+ },
+ {
+  "call": "cv2.medianBlur(np.ascontiguousarray(lab[...,c]),5)",
+  "file": "luma/processing.py",
+  "function": "medianBlur",
+  "line": 169
+ },
+ {
+  "call": "cv2.remap(a,xx+float(donor[0])*w,yy+float(donor[1])*h,cv2.INTER_LINEAR,borderMode=cv2.BORDER_REFLECT_101)",
+  "file": "luma/processing.py",
+  "function": "remap",
+  "line": 646
+ },
+ {
+  "call": "cv2.inpaint(part[...,c].copy(),binary,3,cv2.INPAINT_NS)",
+  "file": "luma/processing.py",
+  "function": "inpaint",
+  "line": 632
+ },
+ {
+  "call": "cv2.remap(a,xx+float(offset[0]),yy+float(offset[1]),cv2.INTER_LINEAR,borderMode=cv2.BORDER_REFLECT_101)",
+  "file": "luma/processing.py",
+  "function": "remap",
+  "line": 641
+ },
+ {
+  "call": "cv2.medianBlur(np.ascontiguousarray(part[...,c]-green),3)",
+  "file": "luma/rawcolor.py",
+  "function": "medianBlur",
+  "line": 252
+ },
+ {
+  "call": "cv2.boxFilter(np.ascontiguousarray(a),-1,(2*r+1,2*r+1),borderType=cv2.BORDER_REFLECT_101)",
+  "file": "luma/sky_mask.py",
+  "function": "boxFilter",
+  "line": 18
+ },
+ {
+  "call": "cv2.cvtColor(n,cv2.COLOR_RGB2HSV)",
+  "file": "luma/sky_mask.py",
+  "function": "cvtColor",
+  "line": 56
+ },
+ {
+  "call": "cv2.GaussianBlur(L,(0,0),max(.5,unit))",
+  "file": "luma/sky_mask.py",
+  "function": "GaussianBlur",
+  "line": 81
+ },
+ {
+  "call": "cv2.HoughLinesP(edge,1,np.pi/720,max(20,round(.12*w)),minLineLength=.25*w,maxLineGap=max(2,round(.01*w)))",
+  "file": "luma/sky_mask.py",
+  "function": "HoughLinesP",
+  "line": 84
+ },
+ {
+  "call": "cv2.connectedComponentsWithStats(candidates,connectivity=4)",
+  "file": "luma/sky_mask.py",
+  "function": "connectedComponentsWithStats",
+  "line": 112
+ },
+ {
+  "call": "cv2.connectedComponentsWithStats((~sky).astype(np.uint8),connectivity=4)",
+  "file": "luma/sky_mask.py",
+  "function": "connectedComponentsWithStats",
+  "line": 145
+ },
+ {
+  "call": "cv2.resize(small,size,interpolation=cv2.INTER_AREA)",
+  "file": "luma/sky_mask.py",
+  "function": "resize",
+  "line": 203
+ },
+ {
+  "call": "cv2.resize(sky.astype(np.float32),size,interpolation=cv2.INTER_AREA)",
+  "file": "luma/sky_mask.py",
+  "function": "resize",
+  "line": 203
+ },
+ {
+  "call": "cv2.GaussianBlur(L,(0,0),sigma)",
+  "file": "luma/sky_mask.py",
+  "function": "GaussianBlur",
+  "line": 62
+ },
+ {
+  "call": "cv2.floodFill(outside,None,(0,0),2)",
+  "file": "luma/sky_mask.py",
+  "function": "floodFill",
+  "line": 127
+ },
+ {
+  "call": "cv2.connectedComponents(reach,connectivity=4)",
+  "file": "luma/sky_mask.py",
+  "function": "connectedComponents",
+  "line": 141
+ },
+ {
+  "call": "cv2.remap(coefficients,mx,my,cv2.INTER_LINEAR,borderMode=cv2.BORDER_REPLICATE)",
+  "file": "luma/sky_mask.py",
+  "function": "remap",
+  "line": 178
+ },
+ {
+  "call": "cv2.resize(region,(max(1,round(rw*factor)),max(1,round(rh*factor))),interpolation=cv2.INTER_AREA)",
+  "file": "luma/sky_mask.py",
+  "function": "resize",
+  "line": 189
+ },
+ {
+  "call": "cv2.dilate(p,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(2*grow+1,2*grow+1)))",
+  "file": "luma/sky_mask.py",
+  "function": "dilate",
+  "line": 208
+ },
+ {
+  "call": "cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(2*grow+1,2*grow+1))",
+  "file": "luma/sky_mask.py",
+  "function": "getStructuringElement",
+  "line": 208
+ },
+ {
+  "call": "cv2.magnitude(gx,gy)",
+  "file": "luma/sky_mask.py",
+  "function": "magnitude",
+  "line": 61
+ },
+ {
+  "call": "cv2.GaussianBlur(n,(0,0),sigma)",
+  "file": "luma/sky_mask.py",
+  "function": "GaussianBlur",
+  "line": 65
+ },
+ {
+  "call": "cv2.Sobel(a,cv2.CV_32F,dx,1-dx,ksize=3,scale=scale)",
+  "file": "luma/sky_mask.py",
+  "function": "Sobel",
+  "line": 60
+ },
+ {
+  "call": "cv2.dilate(candidates,np.ones((2*k+1,1),np.uint8))",
+  "file": "luma/sky_mask.py",
+  "function": "dilate",
+  "line": 83
+ },
+ {
+  "call": "cv2.remap(mask,np.float32(coords[...,0]*(w-1)),np.float32(coords[...,1]*(h-1)),cv2.INTER_LINEAR)",
+  "file": "luma/studio.py",
+  "function": "remap",
+  "line": 484
+ },
+ {
+  "call": "cv2.isContourConvex(pts.reshape(-1,1,2))",
+  "file": "luma/studio.py",
+  "function": "isContourConvex",
+  "line": 593
+ },
+ {
+  "call": "cv2.contourArea(pts)",
+  "file": "luma/studio.py",
+  "function": "contourArea",
+  "line": 593
+ },
+ {
+  "call": "cv2.boxFilter(a, -1, (2*r+1, 2*r+1), borderType=cv2.BORDER_REFLECT_101)",
+  "file": "luma/tone_response.py",
+  "function": "boxFilter",
+  "line": 61
+ },
+ {
+  "call": "cv2.resize(band, (width, count), interpolation=cv2.INTER_LINEAR)",
+  "file": "luma/tone_response.py",
+  "function": "resize",
+  "line": 87
+ },
+ {
+  "call": "cv2.getRotationMatrix2D(center,angle,1)",
+  "file": "luma/upright.py",
+  "function": "getRotationMatrix2D",
+  "line": 238
+ },
+ {
+  "call": "cv2.warpPerspective(image,crop@matrix,(w,h),flags=cv2.INTER_LINEAR,borderMode=cv2.BORDER_CONSTANT)",
+  "file": "luma/upright.py",
+  "function": "warpPerspective",
+  "line": 309
+ },
+ {
+  "call": "cv2.createLineSegmentDetector(cv2.LSD_REFINE_STD).detect(gray)",
+  "file": "luma/upright.py",
+  "function": "createLineSegmentDetector.detect",
+  "line": 222
+ },
+ {
+  "call": "cv2.createLineSegmentDetector(cv2.LSD_REFINE_STD)",
+  "file": "luma/upright.py",
+  "function": "createLineSegmentDetector",
+  "line": 222
+ }
+]

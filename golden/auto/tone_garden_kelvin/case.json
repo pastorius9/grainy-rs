@@ -1,0 +1,51 @@
+{
+ "changed": {
+  "blacks": -23.538086580112576,
+  "curve": [
+   [
+    0.0,
+    0.03
+   ],
+   [
+    0.25,
+    0.265
+   ],
+   [
+    0.5,
+    0.5
+   ],
+   [
+    0.75,
+    0.735
+   ],
+   [
+    1.0,
+    0.97
+   ]
+  ],
+  "exposure": 0.009202638638220866,
+  "tone_version": 3,
+  "whites": 14.56111104262527
+ },
+ "removed": [],
+ "report": {
+  "black_point": 0.0941523463204503,
+  "exposure": 0.009202638638220866,
+  "high_percentile": 99.9,
+  "input_black": 23.9,
+  "input_white": 242.5,
+  "low_percentile": 0.1,
+  "margin_percent": 3.0,
+  "output_black": 7.6499999999999995,
+  "output_white": 247.35,
+  "status": "applied",
+  "white_gain": 1.1061991283940793
+ },
+ "settings": {
+  "kelvin": 3800.0,
+  "kelvin_enabled": true,
+  "tint": 6.0,
+  "wb_reference": 5600.0
+ },
+ "source": "garden"
+}

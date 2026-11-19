@@ -1,0 +1,34 @@
+{
+ "error": null,
+ "frame": "garden",
+ "operations": [
+  {
+   "points": [
+    [
+     0.6,
+     0.3
+    ],
+    [
+     0.65,
+     0.35
+    ]
+   ],
+   "radius": 0.03,
+   "type": "inpaint"
+  }
+ ],
+ "output_bits": "11919390722471493632",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "recorded": {
+  "distance": [],
+  "dust": [],
+  "inpaint": 3,
+  "sky": []
+ },
+ "shift": 0
+}

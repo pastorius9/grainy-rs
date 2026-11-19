@@ -1,0 +1,16 @@
+{
+ "bits_sum": "14854420174676688896",
+ "image": "edges",
+ "pixel_scale": 1.0,
+ "settings": {
+  "detail_version": 1,
+  "sharpen": 70.0,
+  "sharpen_detail": 30.0,
+  "sharpen_mask": 20.0,
+  "sharpen_radius": 1.1
+ },
+ "step": [
+  3,
+  3
+ ]
+}

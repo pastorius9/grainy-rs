@@ -1,0 +1,21 @@
+{
+ "callback_mode": null,
+ "callbacks": {
+  "inputs": [],
+  "masks": [],
+  "points": []
+ },
+ "detail_version": 1,
+ "frame": "patches",
+ "layers": [],
+ "output_bits": "17871913759711166464",
+ "output_shape": [
+  64,
+  96,
+  3
+ ],
+ "output_step": 3,
+ "pixel_scale": 1.0,
+ "source_image": null,
+ "transform": "identity"
+}

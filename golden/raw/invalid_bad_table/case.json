@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_bad_table/profile.dcp",
+ "message": "DCP 중성색의 밝기 배율이 1이 아닙니다."
+}

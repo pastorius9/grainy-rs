@@ -1,0 +1,35 @@
+{
+ "detected": true,
+ "error": null,
+ "height": 400,
+ "lines_none": false,
+ "mode": "level",
+ "result": {
+  "algorithm": "lines-plumb-v3",
+  "confidence": 1.0,
+  "crop_scale": 1.0517130672624333,
+  "inliers": 0,
+  "lines": 26,
+  "matrix": [
+   [
+    0.9994171108538897,
+    0.02274001567685399,
+    -0.011078563265371806
+   ],
+   [
+    -0.051250559763260824,
+    0.9994171108538896,
+    0.0259167244546856
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "mode": "level",
+  "requested_mode": "level",
+  "rotation": 1.9563732329758068
+ },
+ "width": 600
+}

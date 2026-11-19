@@ -1,0 +1,35 @@
+{
+ "key": "contrast",
+ "settings": {
+  "blacks": -10.0,
+  "contrast": 30.0,
+  "curve": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.25,
+    0.18
+   ],
+   [
+    0.5,
+    0.5
+   ],
+   [
+    0.75,
+    0.83
+   ],
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "highlights": -40.0,
+  "shadows": 30.0,
+  "tone_version": 2,
+  "whites": 20.0
+ },
+ "source": "garden",
+ "value": null
+}

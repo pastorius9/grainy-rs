@@ -1,0 +1,33 @@
+{
+ "file": "합성 사진 №1.dng",
+ "max_size": 16,
+ "metadata": {
+  "camera": "Synthetic",
+  "decoder": "LibRaw",
+  "file_fingerprint": {
+   "size": 10800
+  },
+  "filename": "합성 사진 №1.dng",
+  "format": "DNG",
+  "height": 64,
+  "make": "Grainy",
+  "raw_native": false,
+  "size_mb": 0.01,
+  "source_orientation": 1,
+  "width": 80,
+  "working_space": "ProPhoto"
+ },
+ "mode": "legacy",
+ "native": false,
+ "settings": {
+  "raw_mode": "legacy"
+ },
+ "shape": [
+  13,
+  16,
+  3
+ ],
+ "stride": 1,
+ "type": "ndarray",
+ "working_space": "ProPhoto"
+}

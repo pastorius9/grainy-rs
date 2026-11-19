@@ -1,0 +1,6 @@
+{
+ "error": "ValueError: 내장 ICC 프로파일을 작업 색공간으로 변환하지 못했습니다.",
+ "file": "input.png",
+ "max_size": null,
+ "working": "sRGB"
+}

@@ -1,0 +1,3281 @@
+{
+ "now": "2026-11-13T01:02:03.456789",
+ "photo": {
+  "extras": "{\"_copy_name\": \"Copy 1\", \"_last_edit_time\": \"2026-11-13T01:02:03.456789\"}",
+  "flag": -1,
+  "id": 3,
+  "imported": "2026-11-13T01:02:03.456789+00:00",
+  "keywords": "street,한글,red apple",
+  "label": "빨강",
+  "metadata": "{\"width\": 20, \"height\": 40, \"DateTimeOriginal\": \"2026:11:12 23:00:00\", \"iso\": \"400\", \"camera\": \"Stra\\u00dfe\", \"serial\": \"SN123\", \"lens\": \"Prime\", \"title\": \"Red apple\", \"caption\": \"  \", \"country\": \"Korea\", \"state\": \"Seoul\", \"city\": \"Seoul\", \"location\": \"Park\", \"creator\": \"Artist\", \"job\": \"Trip\", \"latitude\": 37, \"longitude\": 127}",
+  "name": "Renamed",
+  "path": "Z:\\Generated\\Straße portrait.NEF",
+  "rating": 4,
+  "stack_id": 3,
+  "virtual_source": 1
+ },
+ "rules": [
+  {
+   "expected": true,
+   "rule": {}
+  },
+  {
+   "expected": true,
+   "rule": {
+    "any": [
+     {
+      "rating": 1
+     },
+     {
+      "flag": -1
+     }
+    ]
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "all": [
+     {
+      "rating_min": 4
+     },
+     {
+      "rating_max": 4
+     }
+    ]
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "all": [
+     {
+      "rating": 4
+     },
+     {
+      "flag": 1
+     }
+    ]
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "virtual": false
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "virtual": true
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "date_from": "2027-01-01"
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "date_to": "2020-01-01"
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "orientation": "landscape"
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "orientation": "square"
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "orientation": "portrait"
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "rating_min": "bad"
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "label": "빨강"
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "folder": "GENERATED"
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "extension": "nef"
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "caption": ""
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "rating": 4.0
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "flag": -1.0
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "rating": true
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "rating",
+     "operation": "==",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "rating",
+     "operation": "!=",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "rating",
+     "operation": ">",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "rating",
+     "operation": "<",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "rating",
+     "operation": ">=",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "rating",
+     "operation": "<=",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "rating",
+     "operation": "in",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "pick",
+     "operation": "==",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "pick",
+     "operation": "!=",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "pick",
+     "operation": ">",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "pick",
+     "operation": "<",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "pick",
+     "operation": ">=",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "pick",
+     "operation": "<=",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "pick",
+     "operation": "in",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "isoSpeedRating",
+     "operation": "==",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "isoSpeedRating",
+     "operation": "!=",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "isoSpeedRating",
+     "operation": ">",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "isoSpeedRating",
+     "operation": "<",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "isoSpeedRating",
+     "operation": ">=",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "isoSpeedRating",
+     "operation": "<=",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "isoSpeedRating",
+     "operation": "in",
+     "value": 4,
+     "value2": 400
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "filename",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "copyname",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "folder",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "any",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "all",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "words",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "noneOf",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "beginsWith",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "endsWith",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "empty",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "notEmpty",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "==",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelText",
+     "operation": "!=",
+     "value": "red"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "any",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "all",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "words",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "noneOf",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "beginsWith",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "endsWith",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "empty",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "notEmpty",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "==",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "title",
+     "operation": "!=",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "caption",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "any",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "all",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "words",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "noneOf",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "beginsWith",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "endsWith",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "empty",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "notEmpty",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "==",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "keywords",
+     "operation": "!=",
+     "value": "red apple"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "camera",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "cameraSN",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "lens",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "country",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "state",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "city",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "location",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "creator",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "any",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "all",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "words",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "noneOf",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "beginsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "endsWith",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "empty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "notEmpty",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "==",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "jobIdentifier",
+     "operation": "!=",
+     "value": "strasse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "==",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "!=",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": ">",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "<",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "in",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "today",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "yesterday",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "thisWeek",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "thisMonth",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "thisYear",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "captureTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "==",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "!=",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": ">",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "<",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "in",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "today",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "yesterday",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "thisWeek",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "thisMonth",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "thisYear",
+     "value": "2026-11-12",
+     "value2": "2026-11-13"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 0,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 1,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "inLast",
+     "value": 10000,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "hours"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "days"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "weeks"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "months"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 0,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 1,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "touchTime",
+     "operation": "notInLast",
+     "value": 10000,
+     "value_units": "years"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "==",
+     "value": 1
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "!=",
+     "value": 1
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "==",
+     "value": 2
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "!=",
+     "value": 2
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "==",
+     "value": 3
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "!=",
+     "value": 3
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "==",
+     "value": 4
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "!=",
+     "value": 4
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "==",
+     "value": 5
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "!=",
+     "value": 5
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "==",
+     "value": "none"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "!=",
+     "value": "none"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "==",
+     "value": "custom"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "labelColor",
+     "operation": "!=",
+     "value": "custom"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "DNG"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "DNG"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "RAW"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "RAW"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "JPG"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "JPG"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "TIFF"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "TIFF"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "PNG"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "PNG"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "PSD"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "PSD"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "VIDEO"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "VIDEO"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "PSB"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "PSB"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "AVIF"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "AVIF"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "==",
+     "value": "JXL"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "fileFormat",
+     "operation": "!=",
+     "value": "JXL"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "hasGPSData",
+     "operation": "isTrue"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "criteria": "hasGPSData",
+     "operation": "isFalse"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "children": [
+      {
+       "criteria": "rating",
+       "operation": "==",
+       "value": 4
+      },
+      {
+       "criteria": "filename",
+       "operation": "words",
+       "value": "portrait"
+      }
+     ],
+     "combine": "union"
+    }
+   }
+  },
+  {
+   "expected": true,
+   "rule": {
+    "_adobe_smart": {
+     "children": [
+      {
+       "criteria": "rating",
+       "operation": "==",
+       "value": 4
+      },
+      {
+       "criteria": "filename",
+       "operation": "words",
+       "value": "portrait"
+      }
+     ],
+     "combine": "intersect"
+    }
+   }
+  },
+  {
+   "expected": false,
+   "rule": {
+    "_adobe_smart": {
+     "children": [
+      {
+       "criteria": "rating",
+       "operation": "==",
+       "value": 4
+      },
+      {
+       "criteria": "filename",
+       "operation": "words",
+       "value": "portrait"
+      }
+     ],
+     "combine": "exclude"
+    }
+   }
+  }
+ ]
+}

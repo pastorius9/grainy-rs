@@ -1,0 +1,76 @@
+{
+ "color_changed": false,
+ "height": 64,
+ "input_name": null,
+ "kind": "maps",
+ "model": {
+  "focal": 24.0,
+  "model": "ptlens",
+  "terms": [
+   0.006409999914467335,
+   -0.008299999870359898,
+   0.0022799998987466097
+  ]
+ },
+ "orientation": 1,
+ "pixels": true,
+ "settings": {
+  "lensfun": {
+   "aperture": 4,
+   "camera": "",
+   "crop": 1.534,
+   "distance": 1000,
+   "focal": 24.0,
+   "maker": "Sony",
+   "name": "E 24mm f/1.8 ZA",
+   "orientation": 1,
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Sony</maker>\n        <model>E 24mm f/1.8 ZA</model>\n        <mount>Sony E</mount>\n        <cropfactor>1.534</cropfactor>\n        <calibration>\n            <!-- Taken with Sony NEX-C3 -->\n            <distortion model=\"ptlens\" focal=\"24\" a=\"0.00641\" b=\"-0.0083\" c=\"0.00228\" />\n            <tca model=\"linear\" focal=\"24\" kr=\"1.0004\" kb=\"1.0002\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  "lensfun_distortion": true,
+  "lensfun_enabled": true,
+  "lensfun_scale": true,
+  "lensfun_tca": true,
+  "lensfun_vignette": true
+ },
+ "tca": {
+  "focal": 24.0,
+  "model": "linear",
+  "terms": [
+   1.0003999471664429,
+   1.0002000331878662,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "vignetting": null,
+ "width": 96,
+ "xs": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  24,
+  48,
+  72,
+  91,
+  92,
+  93,
+  94,
+  95
+ ],
+ "ys": [
+  0,
+  1,
+  2,
+  16,
+  32,
+  48,
+  61,
+  62,
+  63
+ ]
+}

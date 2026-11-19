@@ -1,0 +1,11 @@
+{
+ "errors": {
+  "auto_shape": "ValueError: Brush colour source dimensions do not match",
+  "samples0": "ValueError: 색상 범위에는 유효한 색 1–5개가 필요합니다.",
+  "samples6": "ValueError: 색상 범위에는 유효한 색 1–5개가 필요합니다.",
+  "samples_inf": "ValueError: 색상 범위에는 유효한 색 1–5개가 필요합니다.",
+  "samples_shape": "ValueError: 색상 범위에는 유효한 색 1–5개가 필요합니다.",
+  "tolerance0": "ValueError: 색상 범위 허용량이 올바르지 않습니다.",
+  "tolerance_neg": "ValueError: 색상 범위 허용량이 올바르지 않습니다."
+ }
+}

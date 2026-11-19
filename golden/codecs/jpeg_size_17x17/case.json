@@ -1,0 +1,54 @@
+{
+ "file": "input.jpg",
+ "jpeg_drafts": [
+  {
+   "array": "jpeg_pixels_0",
+   "height": 17,
+   "max_size": null,
+   "width": 17
+  },
+  {
+   "array": "jpeg_pixels_1",
+   "height": 3,
+   "max_size": 1,
+   "width": 3
+  },
+  {
+   "array": "jpeg_pixels_2",
+   "height": 5,
+   "max_size": 2,
+   "width": 5
+  },
+  {
+   "array": "jpeg_pixels_3",
+   "height": 9,
+   "max_size": 4,
+   "width": 9
+  },
+  {
+   "array": "jpeg_pixels_4",
+   "height": 17,
+   "max_size": 8,
+   "width": 17
+  }
+ ],
+ "jpeg_full_size": [
+  17,
+  17
+ ],
+ "max_size": null,
+ "metadata": {
+  "bit_depth": 8,
+  "decoder": "JPG · 8-bit",
+  "filename": "input.jpg",
+  "format": "JPG",
+  "height": 17,
+  "input_profile": "태그 없는 sRGB",
+  "size_mb": 0.0,
+  "source_orientation": 1,
+  "width": 17,
+  "working_space": "sRGB"
+ },
+ "read_metadata": {},
+ "working": "sRGB"
+}

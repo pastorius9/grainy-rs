@@ -1,0 +1,6 @@
+{
+ "decoder": "TIFF 16-bit",
+ "file": "source.tif",
+ "input_profile_prophoto": "RGB built-in",
+ "input_profile_srgb": "RGB built-in"
+}

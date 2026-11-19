@@ -1,0 +1,10 @@
+{
+ "anchor": null,
+ "border": null,
+ "dtype": "float32",
+ "iterations": 1,
+ "op": "morph",
+ "operation": "open",
+ "output_dtype": "float32",
+ "tolerance": 0.0
+}

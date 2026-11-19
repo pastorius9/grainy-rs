@@ -1,0 +1,7 @@
+{
+ "code": "HLS2RGB",
+ "dtype": "float32",
+ "op": "color",
+ "output_dtype": "float32",
+ "tolerance": 3e-06
+}

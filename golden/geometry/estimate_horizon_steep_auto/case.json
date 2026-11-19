@@ -1,0 +1,35 @@
+{
+ "detected": true,
+ "error": null,
+ "height": 240,
+ "lines_none": false,
+ "mode": "auto",
+ "result": {
+  "algorithm": "lines-horizon-v2",
+  "confidence": 1.0,
+  "crop_scale": 1.1977618114557116,
+  "inliers": 0,
+  "lines": 1,
+  "matrix": [
+   [
+    0.9876762933261635,
+    0.11726022502787668,
+    -0.05246825917702012
+   ],
+   [
+    -0.2088989646375546,
+    0.9876762933261636,
+    0.11061133565569552
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "mode": "level",
+  "requested_mode": "auto",
+  "rotation": 9.004411367636934
+ },
+ "width": 320
+}

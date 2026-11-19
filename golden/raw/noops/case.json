@@ -1,0 +1,45 @@
+{
+ "arrays": {
+  "0": "3e7fc709a9d5e7d98e80b2fdff867b55d6b6d86a0f9285ff47774127f8d55ab4",
+  "1": "3e7fc709a9d5e7d98e80b2fdff867b55d6b6d86a0f9285ff47774127f8d55ab4",
+  "2": "3e7fc709a9d5e7d98e80b2fdff867b55d6b6d86a0f9285ff47774127f8d55ab4",
+  "3": "3e7fc709a9d5e7d98e80b2fdff867b55d6b6d86a0f9285ff47774127f8d55ab4",
+  "4": "3e7fc709a9d5e7d98e80b2fdff867b55d6b6d86a0f9285ff47774127f8d55ab4",
+  "input": "3e7fc709a9d5e7d98e80b2fdff867b55d6b6d86a0f9285ff47774127f8d55ab4"
+ },
+ "values": [
+  {
+   "enabled": false,
+   "settings": {}
+  },
+  {
+   "enabled": false,
+   "settings": {
+    "raw_mode": "legacy"
+   }
+  },
+  {
+   "enabled": true,
+   "settings": {
+    "raw_mode": "as_shot"
+   }
+  },
+  {
+   "enabled": true,
+   "settings": {
+    "negative": true
+   }
+  },
+  {
+   "enabled": true,
+   "settings": {
+    "negative": true,
+    "negative_base": [
+     0.8,
+     0.7,
+     0.6
+    ]
+   }
+  }
+ ]
+}

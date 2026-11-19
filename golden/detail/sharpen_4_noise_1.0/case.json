@@ -1,0 +1,14 @@
+{
+ "amount": 80.0,
+ "bits_sum": "9134414763340595200",
+ "detail": 0.0,
+ "image": "noise",
+ "luminance": false,
+ "masking": 40.0,
+ "pixel_scale": 1.0,
+ "radius": 1.2,
+ "step": [
+  3,
+  3
+ ]
+}

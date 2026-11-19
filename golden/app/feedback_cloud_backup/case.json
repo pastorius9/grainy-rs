@@ -1,0 +1,969 @@
+{
+ "dialogs": [
+  {
+   "drive": false,
+   "files": [],
+   "final": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "Google Drive 데스크톱 앱을 찾지 못했습니다. 설치하고 로그인하면 내 드라이브 폴더를 고를 수 있습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "language": "ko",
+   "name": "plain",
+   "opened": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "Google Drive 데스크톱 앱을 찾지 못했습니다. 설치하고 로그인하면 내 드라이브 폴더를 고를 수 있습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash_is_hex": false,
+    "last_is_iso": false
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": true,
+   "files": [],
+   "final": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     "<folder>\\My Drive\\Grainy 백업"
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "language": "ko",
+   "name": "drive",
+   "opened": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     "<folder>\\My Drive\\Grainy 백업"
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash_is_hex": false,
+    "last_is_iso": false
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": true,
+   "files": [],
+   "final": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     true
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "백업 폴더",
+     "마지막 백업: <time>\n최근 오류: boom",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     "<folder>\\out"
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "language": "ko",
+   "name": "saved",
+   "opened": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     true
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "백업 폴더",
+     "마지막 백업: <time>\n최근 오류: boom",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     "<folder>\\out"
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "settings": {
+    "enabled": true,
+    "error": "boom",
+    "folder": "<folder>\\out",
+    "hash_is_hex": false,
+    "last_is_iso": true
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": true,
+   "files": [
+    "Grainy-catalog-<stamp>.sqlite"
+   ],
+   "final": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     "<folder>\\My Drive\\Grainy 백업"
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "language": "ko",
+   "name": "enable and accept",
+   "opened": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     "<folder>\\My Drive\\Grainy 백업"
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "settings": {
+    "enabled": true,
+    "error": "",
+    "folder": "<folder>\\out",
+    "hash_is_hex": true,
+    "last_is_iso": true
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": false,
+   "files": [],
+   "final": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "Google Drive 데스크톱 앱을 찾지 못했습니다. 설치하고 로그인하면 내 드라이브 폴더를 고를 수 있습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "language": "ko",
+   "name": "enable without a folder",
+   "opened": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "Google Drive 데스크톱 앱을 찾지 못했습니다. 설치하고 로그인하면 내 드라이브 폴더를 고를 수 있습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash_is_hex": false,
+    "last_is_iso": false
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": false,
+   "files": [],
+   "final": {
+    "status": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "Google Drive 데스크톱 앱을 찾지 못했습니다. 설치하고 로그인하면 내 드라이브 폴더를 고를 수 있습니다.",
+     "백업 폴더",
+     "백업 폴더를 선택하세요.",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ]
+   },
+   "language": "ko",
+   "name": "now without a folder",
+   "opened": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "Google Drive 데스크톱 앱을 찾지 못했습니다. 설치하고 로그인하면 내 드라이브 폴더를 고를 수 있습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash_is_hex": false,
+    "last_is_iso": false
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": false,
+   "files": [
+    "Grainy-catalog-<stamp>.sqlite"
+   ],
+   "final": {
+    "now_enabled": true,
+    "status": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "Google Drive 데스크톱 앱을 찾지 못했습니다. 설치하고 로그인하면 내 드라이브 폴더를 고를 수 있습니다.",
+     "백업 폴더",
+     "백업했습니다: <folder>\\out\\Grainy-catalog-<stamp>.sqlite\n마지막 백업: <time>",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ]
+   },
+   "language": "ko",
+   "name": "now with a folder",
+   "opened": {
+    "buttons": [
+     "폴더 선택",
+     "지금 백업",
+     "폴더 열기",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "자동 백업 (30분마다 바뀐 내용이 있으면, 그리고 종료할 때)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "보정값·편집 이력·별점·키워드·컬렉션·프리셋이 담긴 카탈로그를 백업합니다. 원본 사진은 올리지 않습니다.",
+     "Google Drive 데스크톱 앱을 찾지 못했습니다. 설치하고 로그인하면 내 드라이브 폴더를 고를 수 있습니다.",
+     "백업 폴더",
+     "마지막 백업: 없음",
+     "최근 20개는 모두, 그보다 오래된 것은 달마다 1개씩 남기고 나머지는 휴지통으로 옮깁니다. 복원: 파일 관리 › 카탈로그 복원"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "구글 드라이브 백업"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "<folder>\\out",
+    "hash_is_hex": true,
+    "last_is_iso": true
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": false,
+   "files": [],
+   "final": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Google Drive for desktop was not found. Install it and sign in to choose your My Drive folder.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "Google Drive Backup"
+   },
+   "language": "en",
+   "name": "plain",
+   "opened": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Google Drive for desktop was not found. Install it and sign in to choose your My Drive folder.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "Google Drive Backup"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash_is_hex": false,
+    "last_is_iso": false
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": true,
+   "files": [],
+   "final": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     "<folder>\\My Drive\\Grainy 백업"
+    ],
+    "title": "Google Drive Backup"
+   },
+   "language": "en",
+   "name": "drive",
+   "opened": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     "<folder>\\My Drive\\Grainy 백업"
+    ],
+    "title": "Google Drive Backup"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash_is_hex": false,
+    "last_is_iso": false
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": true,
+   "files": [],
+   "final": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     true
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Backup folder",
+     "Last backup: <time>\nLast error: boom",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     "<folder>\\out"
+    ],
+    "title": "Google Drive Backup"
+   },
+   "language": "en",
+   "name": "saved",
+   "opened": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     true
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Backup folder",
+     "Last backup: <time>\nLast error: boom",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     "<folder>\\out"
+    ],
+    "title": "Google Drive Backup"
+   },
+   "settings": {
+    "enabled": true,
+    "error": "boom",
+    "folder": "<folder>\\out",
+    "hash_is_hex": false,
+    "last_is_iso": true
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": true,
+   "files": [
+    "Grainy-catalog-<stamp>.sqlite"
+   ],
+   "final": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     "<folder>\\My Drive\\Grainy 백업"
+    ],
+    "title": "Google Drive Backup"
+   },
+   "language": "en",
+   "name": "enable and accept",
+   "opened": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     "<folder>\\My Drive\\Grainy 백업"
+    ],
+    "title": "Google Drive Backup"
+   },
+   "settings": {
+    "enabled": true,
+    "error": "",
+    "folder": "<folder>\\out",
+    "hash_is_hex": true,
+    "last_is_iso": true
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": false,
+   "files": [],
+   "final": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Google Drive for desktop was not found. Install it and sign in to choose your My Drive folder.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "Google Drive Backup"
+   },
+   "language": "en",
+   "name": "enable without a folder",
+   "opened": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Google Drive for desktop was not found. Install it and sign in to choose your My Drive folder.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "Google Drive Backup"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash_is_hex": false,
+    "last_is_iso": false
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": false,
+   "files": [],
+   "final": {
+    "status": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Google Drive for desktop was not found. Install it and sign in to choose your My Drive folder.",
+     "Backup folder",
+     "Choose a backup folder.",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ]
+   },
+   "language": "en",
+   "name": "now without a folder",
+   "opened": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Google Drive for desktop was not found. Install it and sign in to choose your My Drive folder.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "Google Drive Backup"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash_is_hex": false,
+    "last_is_iso": false
+   },
+   "status_bar": ""
+  },
+  {
+   "drive": false,
+   "files": [
+    "Grainy-catalog-<stamp>.sqlite"
+   ],
+   "final": {
+    "now_enabled": true,
+    "status": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Google Drive for desktop was not found. Install it and sign in to choose your My Drive folder.",
+     "Backup folder",
+     "Backed up: <folder>\\out\\Grainy-catalog-<stamp>.sqlite\nLast backup: <time>",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ]
+   },
+   "language": "en",
+   "name": "now with a folder",
+   "opened": {
+    "buttons": [
+     "Choose folder",
+     "Back Up Now",
+     "Open Folder",
+     "OK",
+     "Cancel"
+    ],
+    "checkbox": [
+     "Back up automatically (every 30 minutes when something changed, and on exit)"
+    ],
+    "checked": [
+     false
+    ],
+    "labels": [
+     "Backs up the catalog with edits, edit history, ratings, keywords, collections and presets. Original photos are not uploaded.",
+     "Google Drive for desktop was not found. Install it and sign in to choose your My Drive folder.",
+     "Backup folder",
+     "Last backup: None",
+     "Keeps the latest 20 backups and one per month before that; the rest go to the Recycle Bin. To restore: File management › Restore catalog"
+    ],
+    "line": [
+     ""
+    ],
+    "title": "Google Drive Backup"
+   },
+   "settings": {
+    "enabled": false,
+    "error": "",
+    "folder": "<folder>\\out",
+    "hash_is_hex": true,
+    "last_is_iso": true
+   },
+   "status_bar": ""
+  }
+ ],
+ "finish": [
+  {
+   "auto_skipped_status": "",
+   "defaults": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash": "",
+    "last": ""
+   },
+   "error": {
+    "settings_error": "boom",
+    "status": "구글 드라이브 백업 실패: boom"
+   },
+   "language": "ko",
+   "manual_skipped_status": "바뀐 내용이 없어 백업을 건너뛰었습니다.",
+   "skipped": {
+    "last_empty": true,
+    "notes": [
+     "바뀐 내용이 없어 백업을 건너뛰었습니다."
+    ],
+    "settings": {
+     "enabled": false,
+     "error": "",
+     "folder": "",
+     "hash": "h1"
+    }
+   },
+   "target": {
+    "error": "",
+    "hash": "h2",
+    "last_is_iso": true,
+    "notes": [
+     "백업했습니다: X\\Grainy-catalog-<stamp>.sqlite"
+    ]
+   }
+  },
+  {
+   "auto_skipped_status": "",
+   "defaults": {
+    "enabled": false,
+    "error": "",
+    "folder": "",
+    "hash": "",
+    "last": ""
+   },
+   "error": {
+    "settings_error": "boom",
+    "status": "Google Drive backup failed: boom"
+   },
+   "language": "en",
+   "manual_skipped_status": "Nothing changed, so the backup was skipped.",
+   "skipped": {
+    "last_empty": true,
+    "notes": [
+     "Nothing changed, so the backup was skipped."
+    ],
+    "settings": {
+     "enabled": false,
+     "error": "",
+     "folder": "",
+     "hash": "h1"
+    }
+   },
+   "target": {
+    "error": "",
+    "hash": "h2",
+    "last_is_iso": true,
+    "notes": [
+     "Backed up: X\\Grainy-catalog-<stamp>.sqlite"
+    ]
+   }
+  }
+ ],
+ "start": [
+  {
+   "manual": true,
+   "name": "no folder",
+   "started": false
+  },
+  {
+   "manual": false,
+   "name": "automatic but off",
+   "started": false
+  },
+  {
+   "error": "",
+   "files": [
+    "Grainy-catalog-<stamp>.sqlite"
+   ],
+   "hash_is_hex": true,
+   "last_is_iso": true,
+   "manual": true,
+   "name": "manual",
+   "notes": [
+    "백업했습니다: <folder>\\Grainy-catalog-<stamp>.sqlite"
+   ],
+   "staging_left": 0,
+   "started": true
+  },
+  {
+   "manual": false,
+   "name": "automatic",
+   "started": true
+  },
+  {
+   "manual": true,
+   "name": "closing",
+   "started": false
+  }
+ ]
+}

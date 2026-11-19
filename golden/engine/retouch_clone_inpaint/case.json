@@ -1,0 +1,70 @@
+{
+ "mean": [
+  0.340972921125552,
+  0.34493666941920914,
+  0.3432503723318223
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "retouch": [
+   {
+    "feather": 30,
+    "points": [
+     [
+      0.25,
+      0.7
+     ]
+    ],
+    "radius": 0.05,
+    "source": [
+     0.6,
+     0.2
+    ],
+    "type": "clone"
+   },
+   {
+    "points": [
+     [
+      0.7,
+      0.7
+     ],
+     [
+      0.75,
+      0.72
+     ]
+    ],
+    "radius": 0.02,
+    "type": "inpaint"
+   },
+   {
+    "enabled": false,
+    "feather": 60,
+    "points": [
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.55,
+      0.52
+     ]
+    ],
+    "radius": 0.03,
+    "source": [
+     0.3,
+     0.3
+    ],
+    "type": "heal"
+   }
+  ]
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

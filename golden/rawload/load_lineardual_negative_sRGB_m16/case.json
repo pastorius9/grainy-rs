@@ -1,0 +1,245 @@
+{
+ "file": "lineardual.dng",
+ "max_size": 16,
+ "metadata": {
+  "camera": "Synthetic",
+  "decoder": "LibRaw",
+  "file_fingerprint": {
+   "size": 31776
+  },
+  "filename": "lineardual.dng",
+  "format": "DNG",
+  "height": 64,
+  "make": "Grainy",
+  "raw_as_shot_kelvin": 7262,
+  "raw_as_shot_tint": 68.98,
+  "raw_info": {
+   "analog": [
+    1.02,
+    0.99,
+    1.01
+   ],
+   "base_profile": {
+    "camera": "Grainy Synthetic",
+    "cm1": [
+     [
+      0.83,
+      -0.08,
+      -0.04
+     ],
+     [
+      -0.14,
+      1.12,
+      0.08
+     ],
+     [
+      -0.03,
+      0.09,
+      0.71
+     ]
+    ],
+    "cm2": [
+     [
+      0.91,
+      -0.16,
+      -0.08
+     ],
+     [
+      -0.21,
+      1.19,
+      0.05
+     ],
+     [
+      -0.02,
+      0.06,
+      0.63
+     ]
+    ],
+    "cm3": null,
+    "copyright": "",
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "custom_illuminants": false,
+    "exposure": 0,
+    "fm1": [
+     [
+      0.62,
+      0.24,
+      0.1043
+     ],
+     [
+      0.25,
+      0.68,
+      0.07
+     ],
+     [
+      0.04,
+      0.13,
+      0.6551
+     ]
+    ],
+    "fm2": [
+     [
+      0.65,
+      0.2,
+      0.1143
+     ],
+     [
+      0.24,
+      0.69,
+      0.07
+     ],
+     [
+      0.03,
+      0.14,
+      0.6551
+     ]
+    ],
+    "fm3": null,
+    "hs1": null,
+    "hs2": null,
+    "hs3": null,
+    "hs_encoding": 0,
+    "look": null,
+    "look_encoding": 0,
+    "name": "DCP",
+    "policy": 0,
+    "signature": "grainy",
+    "t1": 2856.0,
+    "t2": 6504.0,
+    "t3": null,
+    "xy1": [
+     0.4476,
+     0.4074
+    ],
+    "xy2": [
+     0.3127,
+     0.329
+    ],
+    "xy3": null
+   },
+   "calibration": [
+    [
+     [
+      1.02,
+      0.01,
+      0.0
+     ],
+     [
+      0.0,
+      0.99,
+      0.01
+     ],
+     [
+      0.0,
+      0.0,
+      1.01
+     ]
+    ],
+    [
+     [
+      0.99,
+      0.0,
+      0.01
+     ],
+     [
+      0.01,
+      1.01,
+      0.0
+     ],
+     [
+      0.0,
+      0.01,
+      1.02
+     ]
+    ],
+    [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ]
+   ],
+   "calibration_signature": "grainy",
+   "camera": "Synthetic",
+   "daylight_neutral": [
+    0.6007403057625653,
+    1.0,
+    0.7227071513835743
+   ],
+   "format": "DNG",
+   "make": "Grainy",
+   "neutral": [
+    0.5,
+    1.0,
+    0.6666666666666666
+   ],
+   "unique_camera": "Grainy Synthetic",
+   "xyz_to_camera": [
+    [
+     0.83,
+     -0.08,
+     -0.04
+    ],
+    [
+     -0.14,
+     1.12,
+     0.08
+    ],
+    [
+     -0.03,
+     0.09,
+     0.71
+    ]
+   ]
+  },
+  "raw_native": true,
+  "size_mb": 0.03,
+  "source_orientation": 1,
+  "width": 80,
+  "working_space": "sRGB"
+ },
+ "mode": "negative",
+ "native": true,
+ "settings": {
+  "negative": true,
+  "negative_base": [
+   0.8,
+   0.7,
+   0.6
+  ],
+  "negative_peak": [
+   0.02,
+   0.03,
+   0.01
+  ],
+  "raw_mode": "legacy"
+ },
+ "shape": [
+  13,
+  16,
+  3
+ ],
+ "stride": 1,
+ "type": "CameraSource",
+ "working_space": "sRGB"
+}

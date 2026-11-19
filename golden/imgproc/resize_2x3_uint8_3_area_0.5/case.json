@@ -1,0 +1,11 @@
+{
+ "dtype": "uint8",
+ "interpolation": "area",
+ "op": "resize",
+ "output_dtype": "uint8",
+ "size": [
+  2,
+  1
+ ],
+ "tolerance": 1.0
+}

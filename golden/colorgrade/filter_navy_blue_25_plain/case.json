@@ -1,0 +1,10 @@
+{
+ "changes": {
+  "photo_filter": "navy_blue",
+  "photo_filter_density": 25.0,
+  "photo_filter_enabled": true,
+  "photo_filter_luminosity": false
+ },
+ "image": "cg:wheel",
+ "kind": "photo_filter"
+}

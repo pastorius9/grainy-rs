@@ -1,0 +1,74 @@
+{
+ "converted": [
+  {
+   "blacks": 0.0,
+   "exposure": 0.0,
+   "negative": true,
+   "negative_base": [
+    1.956678867340088,
+    1.548154592514038,
+    0.8881996870040894
+   ],
+   "negative_density": 1.05,
+   "negative_peak": [
+    0.10704454779624939,
+    0.06761321425437927,
+    0.036987777799367905
+   ]
+  },
+  {
+   "negative": true,
+   "negative_base": [
+    1.956678867340088,
+    1.548154592514038,
+    0.8881996870040894
+   ],
+   "negative_density": -1.0,
+   "negative_peak": [
+    0.10704454779624939,
+    0.06761321425437927,
+    0.036987777799367905
+   ]
+  },
+  {
+   "negative": true,
+   "negative_base": [
+    1.956678867340088,
+    1.548154592514038,
+    0.8881996870040894
+   ],
+   "negative_density": 1.85,
+   "negative_peak": [
+    0.10704454779624939,
+    0.06761321425437927,
+    0.036987777799367905
+   ]
+  }
+ ],
+ "members": [
+  {
+   "settings": {
+    "blacks": -30.0,
+    "exposure": 1.5
+   },
+   "source": "negative"
+  },
+  {
+   "settings": {},
+   "source": "camera"
+  },
+  {
+   "settings": {
+    "crop": [
+     0.2,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "flip": true,
+    "rotation": 3
+   },
+   "source": "negative_bright"
+  }
+ ]
+}

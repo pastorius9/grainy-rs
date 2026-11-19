@@ -1,0 +1,2500 @@
+{
+ "groups": [
+  "화면 보기",
+  "현상",
+  "마스크",
+  "분류",
+  "파일"
+ ],
+ "hints": [
+  {
+   "key": "\\",
+   "platform": "windows",
+   "result": "\\"
+  },
+  {
+   "key": "C",
+   "platform": "windows",
+   "result": "C"
+  },
+  {
+   "key": "D",
+   "platform": "windows",
+   "result": "D"
+  },
+  {
+   "key": "G",
+   "platform": "windows",
+   "result": "G"
+  },
+  {
+   "key": "J",
+   "platform": "windows",
+   "result": "J"
+  },
+  {
+   "key": "Z",
+   "platform": "windows",
+   "result": "Z"
+  },
+  {
+   "key": "F",
+   "platform": "windows",
+   "result": "F"
+  },
+  {
+   "key": "Tab",
+   "platform": "windows",
+   "result": "Tab"
+  },
+  {
+   "key": "Shift+Tab",
+   "platform": "windows",
+   "result": "Shift+Tab"
+  },
+  {
+   "key": "L",
+   "platform": "windows",
+   "result": "L"
+  },
+  {
+   "key": "Shift+/",
+   "platform": "windows",
+   "result": "? / Ctrl+/"
+  },
+  {
+   "key": "Ctrl+/",
+   "platform": "windows",
+   "result": "? / Ctrl+/"
+  },
+  {
+   "key": "R",
+   "platform": "windows",
+   "result": "R"
+  },
+  {
+   "key": "W",
+   "platform": "windows",
+   "result": "W"
+  },
+  {
+   "key": "Q",
+   "platform": "windows",
+   "result": "Q"
+  },
+  {
+   "key": "Ctrl+Z",
+   "platform": "windows",
+   "result": "Ctrl+Z"
+  },
+  {
+   "key": "Ctrl+Shift+Z",
+   "platform": "windows",
+   "result": "Ctrl+Shift+Z"
+  },
+  {
+   "key": "Ctrl+Y",
+   "platform": "windows",
+   "result": "Ctrl+Y"
+  },
+  {
+   "key": "Ctrl+U",
+   "platform": "windows",
+   "result": "Ctrl+U"
+  },
+  {
+   "key": "Ctrl+Shift+U",
+   "platform": "windows",
+   "result": "Ctrl+Shift+U"
+  },
+  {
+   "key": "Ctrl+[",
+   "platform": "windows",
+   "result": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "key": "Ctrl+]",
+   "platform": "windows",
+   "result": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "key": "Ctrl+Shift+C",
+   "platform": "windows",
+   "result": "Ctrl+Shift+C"
+  },
+  {
+   "key": "Ctrl+Shift+V",
+   "platform": "windows",
+   "result": "Ctrl+Shift+V"
+  },
+  {
+   "key": "Ctrl+Alt+V",
+   "platform": "windows",
+   "result": "Ctrl+Alt+V"
+  },
+  {
+   "key": "K",
+   "platform": "windows",
+   "result": "K"
+  },
+  {
+   "key": "M",
+   "platform": "windows",
+   "result": "M"
+  },
+  {
+   "key": "Shift+M",
+   "platform": "windows",
+   "result": "Shift+M"
+  },
+  {
+   "key": "O",
+   "platform": "windows",
+   "result": "O"
+  },
+  {
+   "key": "[",
+   "platform": "windows",
+   "result": "[ / ]"
+  },
+  {
+   "key": "]",
+   "platform": "windows",
+   "result": "[ / ]"
+  },
+  {
+   "key": "P",
+   "platform": "windows",
+   "result": "P"
+  },
+  {
+   "key": "X",
+   "platform": "windows",
+   "result": "X"
+  },
+  {
+   "key": "U",
+   "platform": "windows",
+   "result": "U"
+  },
+  {
+   "key": "0",
+   "platform": "windows",
+   "result": "0 – 5"
+  },
+  {
+   "key": "1",
+   "platform": "windows",
+   "result": "0 – 5"
+  },
+  {
+   "key": "2",
+   "platform": "windows",
+   "result": "0 – 5"
+  },
+  {
+   "key": "3",
+   "platform": "windows",
+   "result": "0 – 5"
+  },
+  {
+   "key": "4",
+   "platform": "windows",
+   "result": "0 – 5"
+  },
+  {
+   "key": "5",
+   "platform": "windows",
+   "result": "0 – 5"
+  },
+  {
+   "key": "6",
+   "platform": "windows",
+   "result": "6 – 9"
+  },
+  {
+   "key": "7",
+   "platform": "windows",
+   "result": "6 – 9"
+  },
+  {
+   "key": "8",
+   "platform": "windows",
+   "result": "6 – 9"
+  },
+  {
+   "key": "9",
+   "platform": "windows",
+   "result": "6 – 9"
+  },
+  {
+   "key": "B",
+   "platform": "windows",
+   "result": "B"
+  },
+  {
+   "key": "Ctrl+'",
+   "platform": "windows",
+   "result": "Ctrl+'"
+  },
+  {
+   "key": "Ctrl+O",
+   "platform": "windows",
+   "result": "Ctrl+O"
+  },
+  {
+   "key": "Ctrl+Shift+E",
+   "platform": "windows",
+   "result": "Ctrl+Shift+E"
+  },
+  {
+   "key": "Ctrl+E",
+   "platform": "windows",
+   "result": "Ctrl+E"
+  },
+  {
+   "key": "\\",
+   "platform": "macos",
+   "result": "\\"
+  },
+  {
+   "key": "C",
+   "platform": "macos",
+   "result": "C"
+  },
+  {
+   "key": "D",
+   "platform": "macos",
+   "result": "D"
+  },
+  {
+   "key": "G",
+   "platform": "macos",
+   "result": "G"
+  },
+  {
+   "key": "J",
+   "platform": "macos",
+   "result": "J"
+  },
+  {
+   "key": "Z",
+   "platform": "macos",
+   "result": "Z"
+  },
+  {
+   "key": "F",
+   "platform": "macos",
+   "result": "F"
+  },
+  {
+   "key": "Tab",
+   "platform": "macos",
+   "result": "Tab"
+  },
+  {
+   "key": "Shift+Tab",
+   "platform": "macos",
+   "result": "Shift+Tab"
+  },
+  {
+   "key": "L",
+   "platform": "macos",
+   "result": "L"
+  },
+  {
+   "key": "Shift+/",
+   "platform": "macos",
+   "result": "? / ⌘/"
+  },
+  {
+   "key": "Ctrl+/",
+   "platform": "macos",
+   "result": "? / ⌘/"
+  },
+  {
+   "key": "R",
+   "platform": "macos",
+   "result": "R"
+  },
+  {
+   "key": "W",
+   "platform": "macos",
+   "result": "W"
+  },
+  {
+   "key": "Q",
+   "platform": "macos",
+   "result": "Q"
+  },
+  {
+   "key": "Ctrl+Z",
+   "platform": "macos",
+   "result": "⌘Z"
+  },
+  {
+   "key": "Ctrl+Shift+Z",
+   "platform": "macos",
+   "result": "⌘Shift+Z"
+  },
+  {
+   "key": "Ctrl+Y",
+   "platform": "macos",
+   "result": "⌘Y"
+  },
+  {
+   "key": "Ctrl+U",
+   "platform": "macos",
+   "result": "⌘U"
+  },
+  {
+   "key": "Ctrl+Shift+U",
+   "platform": "macos",
+   "result": "⌘Shift+U"
+  },
+  {
+   "key": "Ctrl+[",
+   "platform": "macos",
+   "result": "⌘[ / ⌘]"
+  },
+  {
+   "key": "Ctrl+]",
+   "platform": "macos",
+   "result": "⌘[ / ⌘]"
+  },
+  {
+   "key": "Ctrl+Shift+C",
+   "platform": "macos",
+   "result": "⌘Shift+C"
+  },
+  {
+   "key": "Ctrl+Shift+V",
+   "platform": "macos",
+   "result": "⌘Shift+V"
+  },
+  {
+   "key": "Ctrl+Alt+V",
+   "platform": "macos",
+   "result": "⌘Alt+V"
+  },
+  {
+   "key": "K",
+   "platform": "macos",
+   "result": "K"
+  },
+  {
+   "key": "M",
+   "platform": "macos",
+   "result": "M"
+  },
+  {
+   "key": "Shift+M",
+   "platform": "macos",
+   "result": "Shift+M"
+  },
+  {
+   "key": "O",
+   "platform": "macos",
+   "result": "O"
+  },
+  {
+   "key": "[",
+   "platform": "macos",
+   "result": "[ / ]"
+  },
+  {
+   "key": "]",
+   "platform": "macos",
+   "result": "[ / ]"
+  },
+  {
+   "key": "P",
+   "platform": "macos",
+   "result": "P"
+  },
+  {
+   "key": "X",
+   "platform": "macos",
+   "result": "X"
+  },
+  {
+   "key": "U",
+   "platform": "macos",
+   "result": "U"
+  },
+  {
+   "key": "0",
+   "platform": "macos",
+   "result": "0 – 5"
+  },
+  {
+   "key": "1",
+   "platform": "macos",
+   "result": "0 – 5"
+  },
+  {
+   "key": "2",
+   "platform": "macos",
+   "result": "0 – 5"
+  },
+  {
+   "key": "3",
+   "platform": "macos",
+   "result": "0 – 5"
+  },
+  {
+   "key": "4",
+   "platform": "macos",
+   "result": "0 – 5"
+  },
+  {
+   "key": "5",
+   "platform": "macos",
+   "result": "0 – 5"
+  },
+  {
+   "key": "6",
+   "platform": "macos",
+   "result": "6 – 9"
+  },
+  {
+   "key": "7",
+   "platform": "macos",
+   "result": "6 – 9"
+  },
+  {
+   "key": "8",
+   "platform": "macos",
+   "result": "6 – 9"
+  },
+  {
+   "key": "9",
+   "platform": "macos",
+   "result": "6 – 9"
+  },
+  {
+   "key": "B",
+   "platform": "macos",
+   "result": "B"
+  },
+  {
+   "key": "Ctrl+'",
+   "platform": "macos",
+   "result": "⌘'"
+  },
+  {
+   "key": "Ctrl+O",
+   "platform": "macos",
+   "result": "⌘O"
+  },
+  {
+   "key": "Ctrl+Shift+E",
+   "platform": "macos",
+   "result": "⌘Shift+E"
+  },
+  {
+   "key": "Ctrl+E",
+   "platform": "macos",
+   "result": "⌘E"
+  },
+  {
+   "key": "\\",
+   "platform": "linux",
+   "result": "\\"
+  },
+  {
+   "key": "C",
+   "platform": "linux",
+   "result": "C"
+  },
+  {
+   "key": "D",
+   "platform": "linux",
+   "result": "D"
+  },
+  {
+   "key": "G",
+   "platform": "linux",
+   "result": "G"
+  },
+  {
+   "key": "J",
+   "platform": "linux",
+   "result": "J"
+  },
+  {
+   "key": "Z",
+   "platform": "linux",
+   "result": "Z"
+  },
+  {
+   "key": "F",
+   "platform": "linux",
+   "result": "F"
+  },
+  {
+   "key": "Tab",
+   "platform": "linux",
+   "result": "Tab"
+  },
+  {
+   "key": "Shift+Tab",
+   "platform": "linux",
+   "result": "Shift+Tab"
+  },
+  {
+   "key": "L",
+   "platform": "linux",
+   "result": "L"
+  },
+  {
+   "key": "Shift+/",
+   "platform": "linux",
+   "result": "? / Ctrl+/"
+  },
+  {
+   "key": "Ctrl+/",
+   "platform": "linux",
+   "result": "? / Ctrl+/"
+  },
+  {
+   "key": "R",
+   "platform": "linux",
+   "result": "R"
+  },
+  {
+   "key": "W",
+   "platform": "linux",
+   "result": "W"
+  },
+  {
+   "key": "Q",
+   "platform": "linux",
+   "result": "Q"
+  },
+  {
+   "key": "Ctrl+Z",
+   "platform": "linux",
+   "result": "Ctrl+Z"
+  },
+  {
+   "key": "Ctrl+Shift+Z",
+   "platform": "linux",
+   "result": "Ctrl+Shift+Z"
+  },
+  {
+   "key": "Ctrl+Y",
+   "platform": "linux",
+   "result": "Ctrl+Y"
+  },
+  {
+   "key": "Ctrl+U",
+   "platform": "linux",
+   "result": "Ctrl+U"
+  },
+  {
+   "key": "Ctrl+Shift+U",
+   "platform": "linux",
+   "result": "Ctrl+Shift+U"
+  },
+  {
+   "key": "Ctrl+[",
+   "platform": "linux",
+   "result": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "key": "Ctrl+]",
+   "platform": "linux",
+   "result": "Ctrl+[ / Ctrl+]"
+  },
+  {
+   "key": "Ctrl+Shift+C",
+   "platform": "linux",
+   "result": "Ctrl+Shift+C"
+  },
+  {
+   "key": "Ctrl+Shift+V",
+   "platform": "linux",
+   "result": "Ctrl+Shift+V"
+  },
+  {
+   "key": "Ctrl+Alt+V",
+   "platform": "linux",
+   "result": "Ctrl+Alt+V"
+  },
+  {
+   "key": "K",
+   "platform": "linux",
+   "result": "K"
+  },
+  {
+   "key": "M",
+   "platform": "linux",
+   "result": "M"
+  },
+  {
+   "key": "Shift+M",
+   "platform": "linux",
+   "result": "Shift+M"
+  },
+  {
+   "key": "O",
+   "platform": "linux",
+   "result": "O"
+  },
+  {
+   "key": "[",
+   "platform": "linux",
+   "result": "[ / ]"
+  },
+  {
+   "key": "]",
+   "platform": "linux",
+   "result": "[ / ]"
+  },
+  {
+   "key": "P",
+   "platform": "linux",
+   "result": "P"
+  },
+  {
+   "key": "X",
+   "platform": "linux",
+   "result": "X"
+  },
+  {
+   "key": "U",
+   "platform": "linux",
+   "result": "U"
+  },
+  {
+   "key": "0",
+   "platform": "linux",
+   "result": "0 – 5"
+  },
+  {
+   "key": "1",
+   "platform": "linux",
+   "result": "0 – 5"
+  },
+  {
+   "key": "2",
+   "platform": "linux",
+   "result": "0 – 5"
+  },
+  {
+   "key": "3",
+   "platform": "linux",
+   "result": "0 – 5"
+  },
+  {
+   "key": "4",
+   "platform": "linux",
+   "result": "0 – 5"
+  },
+  {
+   "key": "5",
+   "platform": "linux",
+   "result": "0 – 5"
+  },
+  {
+   "key": "6",
+   "platform": "linux",
+   "result": "6 – 9"
+  },
+  {
+   "key": "7",
+   "platform": "linux",
+   "result": "6 – 9"
+  },
+  {
+   "key": "8",
+   "platform": "linux",
+   "result": "6 – 9"
+  },
+  {
+   "key": "9",
+   "platform": "linux",
+   "result": "6 – 9"
+  },
+  {
+   "key": "B",
+   "platform": "linux",
+   "result": "B"
+  },
+  {
+   "key": "Ctrl+'",
+   "platform": "linux",
+   "result": "Ctrl+'"
+  },
+  {
+   "key": "Ctrl+O",
+   "platform": "linux",
+   "result": "Ctrl+O"
+  },
+  {
+   "key": "Ctrl+Shift+E",
+   "platform": "linux",
+   "result": "Ctrl+Shift+E"
+  },
+  {
+   "key": "Ctrl+E",
+   "platform": "linux",
+   "result": "Ctrl+E"
+  }
+ ],
+ "labels": [
+  [
+   "6",
+   "빨강"
+  ],
+  [
+   "7",
+   "노랑"
+  ],
+  [
+   "8",
+   "초록"
+  ],
+  [
+   "9",
+   "파랑"
+  ]
+ ],
+ "masks": [
+  [
+   "brush",
+   "K",
+   "새 브러시 마스크"
+  ],
+  [
+   "linear",
+   "M",
+   "새 선형 그레이디언트 마스크"
+  ],
+  [
+   "radial",
+   "Shift+M",
+   "새 방사형 그레이디언트 마스크"
+  ]
+ ],
+ "missing_hint": "StopIteration",
+ "table": [
+  {
+   "focus": false,
+   "group": "화면 보기",
+   "keys": [
+    "\\"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "원본 비교"
+  },
+  {
+   "focus": false,
+   "group": "화면 보기",
+   "keys": [
+    "C"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "비교 보기"
+  },
+  {
+   "focus": false,
+   "group": "화면 보기",
+   "keys": [
+    "D"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "현상으로 이동"
+  },
+  {
+   "focus": false,
+   "group": "화면 보기",
+   "keys": [
+    "G"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "라이브러리로 이동"
+  },
+  {
+   "focus": false,
+   "group": "화면 보기",
+   "keys": [
+    "J"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "클리핑 표시 켜기·끄기"
+  },
+  {
+   "focus": false,
+   "group": "화면 보기",
+   "keys": [
+    "Z"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "1:1과 화면 맞춤 번갈아 보기"
+  },
+  {
+   "focus": false,
+   "group": "화면 보기",
+   "keys": [
+    "F"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "전체 화면 켜기·끄기 (Esc로 나옴)"
+  },
+  {
+   "focus": true,
+   "group": "화면 보기",
+   "keys": [
+    "Tab"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "양옆 패널 숨기기·보이기"
+  },
+  {
+   "focus": true,
+   "group": "화면 보기",
+   "keys": [
+    "Shift+Tab"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "모든 패널 숨기기·보이기"
+  },
+  {
+   "focus": false,
+   "group": "화면 보기",
+   "keys": [
+    "L"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "조명 끄기: 사진만 보기 (Esc로 나옴)"
+  },
+  {
+   "focus": false,
+   "group": "화면 보기",
+   "keys": [
+    "Shift+/",
+    "Ctrl+/"
+   ],
+   "label": "? / Ctrl+/",
+   "repeat": false,
+   "text": "단축키 목록"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "R"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "크롭"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "W"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "화이트 밸런스 스포이드 · 드래그하면 영역 평균"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "Q"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "힐링 브러시"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "Ctrl+Z"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "실행 취소"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "Ctrl+Shift+Z",
+    "Ctrl+Y"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "다시 실행"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "Ctrl+U"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "자동 톤"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "Ctrl+Shift+U"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "자동 색"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "Ctrl+[",
+    "Ctrl+]"
+   ],
+   "label": "Ctrl+[ / Ctrl+]",
+   "repeat": true,
+   "text": "90° 회전 (왼쪽 · 오른쪽)"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "Ctrl+Shift+C"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "보정 복사"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "Ctrl+Shift+V"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "보정 붙여넣기"
+  },
+  {
+   "focus": false,
+   "group": "현상",
+   "keys": [
+    "Ctrl+Alt+V"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "이전 사진 보정 붙이기"
+  },
+  {
+   "focus": false,
+   "group": "마스크",
+   "keys": [
+    "K"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "새 브러시 마스크"
+  },
+  {
+   "focus": false,
+   "group": "마스크",
+   "keys": [
+    "M"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "새 선형 그레이디언트 마스크"
+  },
+  {
+   "focus": false,
+   "group": "마스크",
+   "keys": [
+    "Shift+M"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "새 방사형 그레이디언트 마스크"
+  },
+  {
+   "focus": false,
+   "group": "마스크",
+   "keys": [
+    "O"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "마스크 오버레이 켜기·끄기"
+  },
+  {
+   "focus": false,
+   "group": "마스크",
+   "keys": [
+    "[",
+    "]"
+   ],
+   "label": "[ / ]",
+   "repeat": true,
+   "text": "브러시 크기 줄이기 · 키우기"
+  },
+  {
+   "focus": false,
+   "group": "분류",
+   "keys": [
+    "P"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "선택 표시"
+  },
+  {
+   "focus": false,
+   "group": "분류",
+   "keys": [
+    "X"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "제외 표시"
+  },
+  {
+   "focus": false,
+   "group": "분류",
+   "keys": [
+    "U"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "표시 해제"
+  },
+  {
+   "focus": false,
+   "group": "분류",
+   "keys": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "label": "0 – 5",
+   "repeat": true,
+   "text": "별점 0–5"
+  },
+  {
+   "focus": false,
+   "group": "분류",
+   "keys": [
+    "6",
+    "7",
+    "8",
+    "9"
+   ],
+   "label": "6 – 9",
+   "repeat": false,
+   "text": "색 라벨: 빨강 · 노랑 · 초록 · 파랑 (같은 키를 한 번 더 누르면 해제)"
+  },
+  {
+   "focus": false,
+   "group": "분류",
+   "keys": [
+    "B"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "빠른 컬렉션에 추가·제외"
+  },
+  {
+   "focus": false,
+   "group": "분류",
+   "keys": [
+    "Ctrl+'"
+   ],
+   "label": "",
+   "repeat": false,
+   "text": "가상 사본 만들기"
+  },
+  {
+   "focus": false,
+   "group": "파일",
+   "keys": [
+    "Ctrl+O"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "사진 가져오기"
+  },
+  {
+   "focus": false,
+   "group": "파일",
+   "keys": [
+    "Ctrl+Shift+E"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "내보내기…"
+  },
+  {
+   "focus": false,
+   "group": "파일",
+   "keys": [
+    "Ctrl+E"
+   ],
+   "label": "",
+   "repeat": true,
+   "text": "이전 설정으로 내보내기"
+  }
+ ],
+ "written": [
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "\\",
+   "row": 0
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "\\",
+   "row": 0
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "C",
+   "row": 1
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "C",
+   "row": 1
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "D",
+   "row": 2
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "D",
+   "row": 2
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "G",
+   "row": 3
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "G",
+   "row": 3
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "J",
+   "row": 4
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "J",
+   "row": 4
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Z",
+   "row": 5
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Z",
+   "row": 5
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "F",
+   "row": 6
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "F",
+   "row": 6
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Tab",
+   "row": 7
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Tab",
+   "row": 7
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Shift+Tab",
+   "row": 8
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Shift+Tab",
+   "row": 8
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "L",
+   "row": 9
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "L",
+   "row": 9
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "? / Ctrl+/",
+   "row": 10
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "? / Ctrl+/",
+   "row": 10
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "R",
+   "row": 11
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "R",
+   "row": 11
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "W",
+   "row": 12
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "W",
+   "row": 12
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Q",
+   "row": 13
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Q",
+   "row": 13
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+Z",
+   "row": 14
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+Z",
+   "row": 14
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+Shift+Z / Ctrl+Y",
+   "row": 15
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+Shift+Z / Ctrl+Y",
+   "row": 15
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+U",
+   "row": 16
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+U",
+   "row": 16
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+Shift+U",
+   "row": 17
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+Shift+U",
+   "row": 17
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+[ / Ctrl+]",
+   "row": 18
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+[ / Ctrl+]",
+   "row": 18
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+Shift+C",
+   "row": 19
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+Shift+C",
+   "row": 19
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+Shift+V",
+   "row": 20
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+Shift+V",
+   "row": 20
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+Alt+V",
+   "row": 21
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+Alt+V",
+   "row": 21
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "K",
+   "row": 22
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "K",
+   "row": 22
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "M",
+   "row": 23
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "M",
+   "row": 23
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Shift+M",
+   "row": 24
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Shift+M",
+   "row": 24
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "O",
+   "row": 25
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "O",
+   "row": 25
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "[ / ]",
+   "row": 26
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "[ / ]",
+   "row": 26
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "P",
+   "row": 27
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "P",
+   "row": 27
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "X",
+   "row": 28
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "X",
+   "row": 28
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "U",
+   "row": 29
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "U",
+   "row": 29
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "0 – 5",
+   "row": 30
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "0 – 5",
+   "row": 30
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "6 – 9",
+   "row": 31
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "6 – 9",
+   "row": 31
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "B",
+   "row": 32
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "B",
+   "row": 32
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+'",
+   "row": 33
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+'",
+   "row": 33
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+O",
+   "row": 34
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+O",
+   "row": 34
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+Shift+E",
+   "row": 35
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+Shift+E",
+   "row": 35
+  },
+  {
+   "language": "ko",
+   "platform": "windows",
+   "result": "Ctrl+E",
+   "row": 36
+  },
+  {
+   "language": "en",
+   "platform": "windows",
+   "result": "Ctrl+E",
+   "row": 36
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "\\",
+   "row": 0
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "\\",
+   "row": 0
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "C",
+   "row": 1
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "C",
+   "row": 1
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "D",
+   "row": 2
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "D",
+   "row": 2
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "G",
+   "row": 3
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "G",
+   "row": 3
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "J",
+   "row": 4
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "J",
+   "row": 4
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "Z",
+   "row": 5
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "Z",
+   "row": 5
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "F",
+   "row": 6
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "F",
+   "row": 6
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "Tab",
+   "row": 7
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "Tab",
+   "row": 7
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "Shift+Tab",
+   "row": 8
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "Shift+Tab",
+   "row": 8
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "L",
+   "row": 9
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "L",
+   "row": 9
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "? / ⌘/",
+   "row": 10
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "? / ⌘/",
+   "row": 10
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "R",
+   "row": 11
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "R",
+   "row": 11
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "W",
+   "row": 12
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "W",
+   "row": 12
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "Q",
+   "row": 13
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "Q",
+   "row": 13
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘Z",
+   "row": 14
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘Z",
+   "row": 14
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘Shift+Z / ⌘Y",
+   "row": 15
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘Shift+Z / ⌘Y",
+   "row": 15
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘U",
+   "row": 16
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘U",
+   "row": 16
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘Shift+U",
+   "row": 17
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘Shift+U",
+   "row": 17
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘[ / ⌘]",
+   "row": 18
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘[ / ⌘]",
+   "row": 18
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘Shift+C",
+   "row": 19
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘Shift+C",
+   "row": 19
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘Shift+V",
+   "row": 20
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘Shift+V",
+   "row": 20
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘Alt+V",
+   "row": 21
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘Alt+V",
+   "row": 21
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "K",
+   "row": 22
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "K",
+   "row": 22
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "M",
+   "row": 23
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "M",
+   "row": 23
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "Shift+M",
+   "row": 24
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "Shift+M",
+   "row": 24
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "O",
+   "row": 25
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "O",
+   "row": 25
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "[ / ]",
+   "row": 26
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "[ / ]",
+   "row": 26
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "P",
+   "row": 27
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "P",
+   "row": 27
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "X",
+   "row": 28
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "X",
+   "row": 28
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "U",
+   "row": 29
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "U",
+   "row": 29
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "0 – 5",
+   "row": 30
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "0 – 5",
+   "row": 30
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "6 – 9",
+   "row": 31
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "6 – 9",
+   "row": 31
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "B",
+   "row": 32
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "B",
+   "row": 32
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘'",
+   "row": 33
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘'",
+   "row": 33
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘O",
+   "row": 34
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘O",
+   "row": 34
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘Shift+E",
+   "row": 35
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘Shift+E",
+   "row": 35
+  },
+  {
+   "language": "ko",
+   "platform": "macos",
+   "result": "⌘E",
+   "row": 36
+  },
+  {
+   "language": "en",
+   "platform": "macos",
+   "result": "⌘E",
+   "row": 36
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "\\",
+   "row": 0
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "\\",
+   "row": 0
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "C",
+   "row": 1
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "C",
+   "row": 1
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "D",
+   "row": 2
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "D",
+   "row": 2
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "G",
+   "row": 3
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "G",
+   "row": 3
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "J",
+   "row": 4
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "J",
+   "row": 4
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Z",
+   "row": 5
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Z",
+   "row": 5
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "F",
+   "row": 6
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "F",
+   "row": 6
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Tab",
+   "row": 7
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Tab",
+   "row": 7
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Shift+Tab",
+   "row": 8
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Shift+Tab",
+   "row": 8
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "L",
+   "row": 9
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "L",
+   "row": 9
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "? / Ctrl+/",
+   "row": 10
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "? / Ctrl+/",
+   "row": 10
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "R",
+   "row": 11
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "R",
+   "row": 11
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "W",
+   "row": 12
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "W",
+   "row": 12
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Q",
+   "row": 13
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Q",
+   "row": 13
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+Z",
+   "row": 14
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+Z",
+   "row": 14
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+Shift+Z / Ctrl+Y",
+   "row": 15
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+Shift+Z / Ctrl+Y",
+   "row": 15
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+U",
+   "row": 16
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+U",
+   "row": 16
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+Shift+U",
+   "row": 17
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+Shift+U",
+   "row": 17
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+[ / Ctrl+]",
+   "row": 18
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+[ / Ctrl+]",
+   "row": 18
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+Shift+C",
+   "row": 19
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+Shift+C",
+   "row": 19
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+Shift+V",
+   "row": 20
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+Shift+V",
+   "row": 20
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+Alt+V",
+   "row": 21
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+Alt+V",
+   "row": 21
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "K",
+   "row": 22
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "K",
+   "row": 22
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "M",
+   "row": 23
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "M",
+   "row": 23
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Shift+M",
+   "row": 24
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Shift+M",
+   "row": 24
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "O",
+   "row": 25
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "O",
+   "row": 25
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "[ / ]",
+   "row": 26
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "[ / ]",
+   "row": 26
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "P",
+   "row": 27
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "P",
+   "row": 27
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "X",
+   "row": 28
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "X",
+   "row": 28
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "U",
+   "row": 29
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "U",
+   "row": 29
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "0 – 5",
+   "row": 30
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "0 – 5",
+   "row": 30
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "6 – 9",
+   "row": 31
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "6 – 9",
+   "row": 31
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "B",
+   "row": 32
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "B",
+   "row": 32
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+'",
+   "row": 33
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+'",
+   "row": 33
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+O",
+   "row": 34
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+O",
+   "row": 34
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+Shift+E",
+   "row": 35
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+Shift+E",
+   "row": 35
+  },
+  {
+   "language": "ko",
+   "platform": "linux",
+   "result": "Ctrl+E",
+   "row": 36
+  },
+  {
+   "language": "en",
+   "platform": "linux",
+   "result": "Ctrl+E",
+   "row": 36
+  }
+ ]
+}

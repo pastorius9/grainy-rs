@@ -1,0 +1,30 @@
+{
+    "branch":  "port/jpeg",
+    "vendor_libjpeg_turbo":  "2.1.5.1",
+    "pillow_libjpeg_turbo":  "3.1.4.1",
+    "downloaded_sources":  false,
+    "golden_cases":  261,
+    "golden_bytes":  7157024,
+    "readable_jpeg_files":  60,
+    "jpeg_decode_checks":  291,
+    "jpeg_decode_max_error":  0,
+    "jpeg_linear_max_error":  0,
+    "direct_byte_identical_encodes":  45,
+    "byte_identical_exports":  24,
+    "independent_pillow_identical_jpegs":  11,
+    "refused_12bit_files":  1,
+    "raw_goldens_changed":  false,
+    "raw_decode_bit_exact":  true,
+    "test_counts":  {
+                        "grainy-cli":  10,
+                        "grainy-codecs":  7,
+                        "grainy-engine":  5,
+                        "grainy-jpeg-sys":  3,
+                        "grainy-raw":  17
+                    },
+    "fmt":  "cargo fmt --all -- --check: passed",
+    "clippy":  "cargo clippy --offline -p grainy-jpeg-sys -p grainy-codecs -p grainy-raw -p grainy-engine -p grainy-cli --all-targets -- -D warnings: passed",
+    "tests":  "cargo test --offline -p grainy-jpeg-sys -p grainy-codecs -p grainy-raw -p grainy-engine -p grainy-cli: passed; final CLI/codecs assertion changes re-tested",
+    "generator":  "oracle interpreter -B tools/golden/gen_codecs.py: passed",
+    "independent_check":  "oracle interpreter -B tools/golden/gen_codecs.py --check crates/grainy-codecs/test-output/exports: passed"
+}

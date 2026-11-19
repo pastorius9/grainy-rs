@@ -1,0 +1,12 @@
+{
+ "angle": 90.0,
+ "center": [
+  1.0,
+  2.0
+ ],
+ "dtype": null,
+ "op": "rotation",
+ "output_dtype": "float64",
+ "scale": 0.0,
+ "tolerance": 1e-12
+}

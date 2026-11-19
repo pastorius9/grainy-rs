@@ -1,0 +1,8 @@
+{
+ "image": "colours",
+ "pixel_scale": 0.25,
+ "settings": {
+  "detail_version": 1,
+  "noise_luma": 60.0
+ }
+}

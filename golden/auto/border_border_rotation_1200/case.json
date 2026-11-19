@@ -1,0 +1,14 @@
+{
+ "crop": [
+  0.08696,
+  0.07778,
+  0.91304,
+  0.92222
+ ],
+ "longest": 1200,
+ "settings": {
+  "flip": true,
+  "rotation": 1
+ },
+ "source": "border"
+}

@@ -1,0 +1,3043 @@
+{
+ "defaults_order": [
+  "exposure",
+  "contrast",
+  "highlights",
+  "shadows",
+  "whites",
+  "blacks",
+  "temperature",
+  "tint",
+  "saturation",
+  "vibrance",
+  "clarity",
+  "sharpen",
+  "vignette",
+  "grain",
+  "vignette_midpoint",
+  "vignette_roundness",
+  "vignette_feather",
+  "vignette_highlights",
+  "grain_size",
+  "grain_roughness",
+  "rotation",
+  "straighten",
+  "flip",
+  "crop",
+  "curve",
+  "hsl",
+  "monochrome",
+  "video_color",
+  "video_time",
+  "hdr",
+  "hdr_limit",
+  "hdr_brightness",
+  "sdr_exposure",
+  "sdr_compression",
+  "photo_filter",
+  "photo_filter_enabled",
+  "photo_filter_density",
+  "photo_filter_luminosity",
+  "tone_version",
+  "detail_version",
+  "rgb_curves",
+  "parametric",
+  "mixer_mode",
+  "kelvin",
+  "wb_reference",
+  "kelvin_enabled",
+  "grading",
+  "grading_balance",
+  "calibration",
+  "point_colors",
+  "texture",
+  "dehaze",
+  "noise_luma",
+  "noise_color",
+  "sharpen_radius",
+  "sharpen_detail",
+  "sharpen_mask",
+  "distortion",
+  "distortion_k2",
+  "distortion_k3",
+  "lens_vignette",
+  "ca_red",
+  "ca_blue",
+  "defringe",
+  "perspective_v",
+  "perspective_h",
+  "aspect_scale",
+  "shift_x",
+  "shift_y",
+  "transform_scale",
+  "guides",
+  "lens_profile",
+  "camera_matrix",
+  "lensfun",
+  "lensfun_enabled",
+  "lensfun_distortion",
+  "lensfun_tca",
+  "lensfun_vignette",
+  "lensfun_scale",
+  "upright",
+  "upright_crop",
+  "masks",
+  "retouch",
+  "working_space",
+  "raw_mode",
+  "raw_kelvin",
+  "raw_tint",
+  "raw_neutral",
+  "dcp_profile",
+  "dcp_huesat",
+  "dcp_look",
+  "dcp_tone",
+  "dcp_exposure",
+  "negative",
+  "negative_base",
+  "negative_peak",
+  "negative_range",
+  "negative_density",
+  "film_look",
+  "film_strength",
+  "tone_mapping",
+  "drt_contrast",
+  "drt_toe",
+  "drt_shoulder",
+  "drt_white",
+  "panels_off"
+ ],
+ "dialog_formats": {
+  "initial": {
+   "color_space": "sRGB",
+   "dither": true,
+   "folder": "",
+   "format": "JPEG",
+   "format_text": "JPEG",
+   "grayscale": true,
+   "keep_metadata": false,
+   "longest": 0,
+   "naming": "{stem}_grainy",
+   "quality": 95
+  },
+  "listed": [
+   [
+    "JPEG",
+    "JPEG"
+   ],
+   [
+    "AVIF",
+    "AVIF"
+   ],
+   [
+    "JPEG XL",
+    "JPEG XL"
+   ],
+   [
+    "PNG",
+    "PNG"
+   ],
+   [
+    "PNG 16-bit",
+    "PNG 16-bit"
+   ],
+   [
+    "TIFF 16-bit",
+    "TIFF 16-bit"
+   ],
+   [
+    "TIFF 8-bit",
+    "TIFF 8-bit"
+   ],
+   [
+    "Original",
+    "원본 + 설정"
+   ]
+  ],
+  "maximum_longest": 30000,
+  "minimum_quality": 40,
+  "rows": [
+   {
+    "color_space": "Adobe RGB",
+    "enabled": {
+     "color_space": true,
+     "dither": true,
+     "grayscale": true,
+     "keep_metadata": true,
+     "longest": true,
+     "quality": true
+    },
+    "format": "JPEG"
+   },
+   {
+    "color_space": "Adobe RGB",
+    "enabled": {
+     "color_space": true,
+     "dither": true,
+     "grayscale": false,
+     "keep_metadata": true,
+     "longest": true,
+     "quality": true
+    },
+    "format": "AVIF"
+   },
+   {
+    "color_space": "sRGB",
+    "enabled": {
+     "color_space": false,
+     "dither": false,
+     "grayscale": false,
+     "keep_metadata": true,
+     "longest": true,
+     "quality": true
+    },
+    "format": "JPEG XL"
+   },
+   {
+    "color_space": "Adobe RGB",
+    "enabled": {
+     "color_space": true,
+     "dither": true,
+     "grayscale": true,
+     "keep_metadata": true,
+     "longest": true,
+     "quality": false
+    },
+    "format": "PNG"
+   },
+   {
+    "color_space": "Adobe RGB",
+    "enabled": {
+     "color_space": true,
+     "dither": false,
+     "grayscale": false,
+     "keep_metadata": true,
+     "longest": true,
+     "quality": false
+    },
+    "format": "PNG 16-bit"
+   },
+   {
+    "color_space": "Adobe RGB",
+    "enabled": {
+     "color_space": true,
+     "dither": false,
+     "grayscale": true,
+     "keep_metadata": true,
+     "longest": true,
+     "quality": false
+    },
+    "format": "TIFF 16-bit"
+   },
+   {
+    "color_space": "Adobe RGB",
+    "enabled": {
+     "color_space": true,
+     "dither": true,
+     "grayscale": true,
+     "keep_metadata": true,
+     "longest": true,
+     "quality": false
+    },
+    "format": "TIFF 8-bit"
+   },
+   {
+    "color_space": "Adobe RGB",
+    "enabled": {
+     "color_space": false,
+     "dither": false,
+     "grayscale": false,
+     "keep_metadata": false,
+     "longest": false,
+     "quality": false
+    },
+    "format": "Original"
+   }
+  ]
+ },
+ "dialog_previous": {
+  "bad_flag": {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "saved": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "D:/Exports",
+    "format": "JPEG",
+    "grayscale": 1,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}",
+    "quality": 90
+   },
+   "state": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "",
+    "format": "JPEG",
+    "format_text": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}_grainy",
+    "quality": 95
+   }
+  },
+  "bad_naming": {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "saved": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "D:/Exports",
+    "format": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "a/b",
+    "quality": 90
+   },
+   "state": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "",
+    "format": "JPEG",
+    "format_text": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}_grainy",
+    "quality": 95
+   }
+  },
+  "bad_quality": {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "saved": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "D:/Exports",
+    "format": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}",
+    "quality": 10
+   },
+   "state": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "",
+    "format": "JPEG",
+    "format_text": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}_grainy",
+    "quality": 95
+   }
+  },
+  "full": {
+   "enabled": {
+    "color_space": true,
+    "dither": false,
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": false
+   },
+   "saved": {
+    "color_space": "Display P3",
+    "dither": false,
+    "folder": "D:/Exports",
+    "format": "PNG 16-bit",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 1200,
+    "naming": "{stem}_{n:03d}",
+    "quality": 70
+   },
+   "state": {
+    "color_space": "Display P3",
+    "dither": false,
+    "folder": "D:/Exports",
+    "format": "PNG 16-bit",
+    "format_text": "PNG 16-bit",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 1200,
+    "naming": "{stem}_{n:03d}",
+    "quality": 70
+   }
+  },
+  "hdr": {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "saved": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "D:/Exports",
+    "format": "TIFF HDR 32-bit",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}",
+    "quality": 95
+   },
+   "state": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "",
+    "format": "JPEG",
+    "format_text": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}_grainy",
+    "quality": 95
+   }
+  },
+  "jxl_space": {
+   "enabled": {
+    "color_space": false,
+    "dither": false,
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "D:/Exports",
+    "format": "JPEG XL",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}",
+    "quality": 88
+   },
+   "state": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "D:/Exports",
+    "format": "JPEG XL",
+    "format_text": "JPEG XL",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}",
+    "quality": 88
+   }
+  },
+  "legacy": {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "saved": {
+    "color_space": "sRGB",
+    "folder": "D:/Exports",
+    "format": "AVIF",
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}",
+    "quality": 60
+   },
+   "state": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "D:/Exports",
+    "format": "AVIF",
+    "format_text": "AVIF",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}",
+    "quality": 60
+   }
+  },
+  "no_folder": {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "saved": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "",
+    "format": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}",
+    "quality": 90
+   },
+   "state": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "",
+    "format": "JPEG",
+    "format_text": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}_grainy",
+    "quality": 95
+   }
+  },
+  "none": {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "saved": null,
+   "state": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "",
+    "format": "JPEG",
+    "format_text": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}_grainy",
+    "quality": 95
+   }
+  },
+  "not_a_dict": {
+   "enabled": {
+    "color_space": true,
+    "dither": true,
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": true,
+    "quality": true
+   },
+   "saved": [
+    1,
+    2
+   ],
+   "state": {
+    "color_space": "sRGB",
+    "dither": true,
+    "folder": "",
+    "format": "JPEG",
+    "format_text": "JPEG",
+    "grayscale": true,
+    "keep_metadata": false,
+    "longest": 0,
+    "naming": "{stem}_grainy",
+    "quality": 95
+   }
+  },
+  "original": {
+   "enabled": {
+    "color_space": false,
+    "dither": false,
+    "grayscale": false,
+    "keep_metadata": false,
+    "longest": false,
+    "quality": false
+   },
+   "saved": {
+    "color_space": "ProPhoto RGB",
+    "dither": true,
+    "folder": "D:/Exports",
+    "format": "Original",
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": 500,
+    "naming": "{stem}",
+    "quality": 95
+   },
+   "state": {
+    "color_space": "ProPhoto RGB",
+    "dither": true,
+    "folder": "D:/Exports",
+    "format": "Original",
+    "format_text": "원본 + 설정",
+    "grayscale": true,
+    "keep_metadata": true,
+    "longest": 500,
+    "naming": "{stem}",
+    "quality": 95
+   }
+  }
+ },
+ "dialog_validate": [
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "저장 위치",
+    "저장할 폴더를 선택해 주세요."
+   ],
+   "folder": "empty",
+   "naming": "{stem}_grainy"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "저장 위치",
+    "저장할 폴더를 선택해 주세요."
+   ],
+   "folder": "blank",
+   "naming": "{stem}_grainy"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "저장 위치",
+    "저장할 폴더를 선택해 주세요."
+   ],
+   "folder": "missing",
+   "naming": "{stem}_grainy"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{stem}_grainy"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{stem}"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{stem}_{n:03d}"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{n:03d}"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{n}"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": ""
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": " "
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "{stem}/x"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "{stem}\\x"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "a:b"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "x*"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "{film}"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "{stem"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "{}"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "{stem}_{n:03d"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{stem!r}"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "x."
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{stem:>8}"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{n:5d}"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{n:x}"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "a?b"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{stem}{{x}}"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "photo name"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "あ{stem}"
+  },
+  {
+   "accepted": true,
+   "box": null,
+   "folder": "dir",
+   "naming": "{n:03}"
+  },
+  {
+   "accepted": false,
+   "box": [
+    "information",
+    "이름 규칙",
+    "{stem}, {n:03d}와 유효한 파일 이름만 사용하세요."
+   ],
+   "folder": "dir",
+   "naming": "{0}"
+  }
+ ],
+ "formats": [
+  "JPEG",
+  "AVIF",
+  "JPEG XL",
+  "PNG",
+  "PNG 16-bit",
+  "TIFF 16-bit",
+  "TIFF 8-bit",
+  "TIFF HDR 32-bit",
+  "Original"
+ ],
+ "history": {
+  "after_edit": [
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": true,
+    "path": "<out>/a_mix.jpg",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": true,
+    "path": "<out>/a_2.png",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+    "edited_since": false,
+    "path": "<out>/c.png",
+    "photo_id": 3
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": true,
+    "path": "<out>/a.png",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "edited_since": false,
+    "path": "<out>/b_grainy.avif",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": true,
+    "path": "<out>/a.tif",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+    "edited_since": false,
+    "path": "<out>/d_002.png",
+    "photo_id": 4
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+    "edited_since": false,
+    "path": "<out>/c_001.png",
+    "photo_id": 3
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "edited_since": false,
+    "path": "<out>/b_grainy_2.jpg",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": true,
+    "path": "<out>/a_grainy_2.jpg",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "edited_since": false,
+    "path": "<out>/b_grainy.jpg",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": true,
+    "path": "<out>/a_grainy.jpg",
+    "photo_id": 1
+   }
+  ],
+  "after_reset_1_3": [
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "path": "<out>/b_grainy.jpg",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "path": "<out>/b_grainy_2.jpg",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+    "path": "<out>/d_002.png",
+    "photo_id": 4
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "path": "<out>/b_grainy.avif",
+    "photo_id": 2
+   }
+  ],
+  "after_reset_none": [
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "path": "<out>/b_grainy.jpg",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "path": "<out>/b_grainy_2.jpg",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+    "path": "<out>/d_002.png",
+    "photo_id": 4
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "path": "<out>/b_grainy.avif",
+    "photo_id": 2
+   }
+  ],
+  "all": [
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a_mix.jpg",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a_2.png",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+    "edited_since": false,
+    "path": "<out>/c.png",
+    "photo_id": 3
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a.png",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "edited_since": false,
+    "path": "<out>/b_grainy.avif",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a.tif",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+    "edited_since": false,
+    "path": "<out>/d_002.png",
+    "photo_id": 4
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+    "edited_since": false,
+    "path": "<out>/c_001.png",
+    "photo_id": 3
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "edited_since": false,
+    "path": "<out>/b_grainy_2.jpg",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a_grainy_2.jpg",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+    "edited_since": false,
+    "path": "<out>/b_grainy.jpg",
+    "photo_id": 2
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a_grainy.jpg",
+    "photo_id": 1
+   }
+  ],
+  "dialog_all": {
+   "headers": [
+    "사진",
+    "저장 시각",
+    "상태",
+    "파일"
+   ],
+   "rows": [
+    [
+     "a.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "내보낸 뒤 보정 변경",
+     "<out>/a_mix.jpg"
+    ],
+    [
+     "a.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "내보낸 뒤 보정 변경",
+     "<out>/a_2.png"
+    ],
+    [
+     "c.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "현재 보정과 일치",
+     "<out>/c.png"
+    ],
+    [
+     "a.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "내보낸 뒤 보정 변경",
+     "<out>/a.png"
+    ],
+    [
+     "b.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "출력 파일 없음 · 현재 보정과 일치",
+     "<out>/b_grainy.avif"
+    ],
+    [
+     "a.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "내보낸 뒤 보정 변경",
+     "<out>/a.tif"
+    ],
+    [
+     "d.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "현재 보정과 일치",
+     "<out>/d_002.png"
+    ],
+    [
+     "c.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "현재 보정과 일치",
+     "<out>/c_001.png"
+    ],
+    [
+     "b.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "현재 보정과 일치",
+     "<out>/b_grainy_2.jpg"
+    ],
+    [
+     "a.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "내보낸 뒤 보정 변경",
+     "<out>/a_grainy_2.jpg"
+    ],
+    [
+     "b.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "현재 보정과 일치",
+     "<out>/b_grainy.jpg"
+    ],
+    [
+     "a.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "내보낸 뒤 보정 변경",
+     "<out>/a_grainy.jpg"
+    ]
+   ],
+   "title": "내보내기 기록"
+  },
+  "dialog_none": {
+   "headers": [
+    "사진",
+    "저장 시각",
+    "상태",
+    "파일"
+   ],
+   "rows": [],
+   "title": "내보내기 기록"
+  },
+  "dialog_one": {
+   "headers": [
+    "사진",
+    "저장 시각",
+    "상태",
+    "파일"
+   ],
+   "rows": [
+    [
+     "b.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "출력 파일 없음 · 현재 보정과 일치",
+     "<out>/b_grainy.avif"
+    ],
+    [
+     "b.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "현재 보정과 일치",
+     "<out>/b_grainy_2.jpg"
+    ],
+    [
+     "b.png",
+     "2026-11-13T01:02:03.456789+00:00",
+     "현재 보정과 일치",
+     "<out>/b_grainy.jpg"
+    ]
+   ],
+   "title": "내보내기 기록"
+  },
+  "none": [],
+  "one": [
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a_mix.jpg",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a_2.png",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a.png",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a.tif",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a_grainy_2.jpg",
+    "photo_id": 1
+   },
+   {
+    "created": "2026-11-13T01:02:03.456789+00:00",
+    "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+    "edited_since": false,
+    "path": "<out>/a_grainy.jpg",
+    "photo_id": 1
+   }
+  ]
+ },
+ "quick": [
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     ""
+    ]
+   ],
+   "kind": "small",
+   "name": "small_no_saved_answer",
+   "running": false,
+   "saved": null,
+   "selection": [
+    1,
+    2
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      1,
+      2
+     ],
+     "options": {
+      "color_space": "sRGB",
+      "dither": true,
+      "format": "JPEG",
+      "grayscale": true,
+      "keep_metadata": false,
+      "longest": 2048,
+      "naming": "{stem}",
+      "quality": 80
+     }
+    }
+   ]
+  },
+  {
+   "answer": "",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     ""
+    ]
+   ],
+   "kind": "small",
+   "name": "small_no_saved_cancel",
+   "running": false,
+   "saved": null,
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     "<out>"
+    ]
+   ],
+   "kind": "small",
+   "name": "small_saved_answer",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      1,
+      2
+     ],
+     "options": {
+      "color_space": "sRGB",
+      "dither": true,
+      "format": "JPEG",
+      "grayscale": true,
+      "keep_metadata": false,
+      "longest": 2048,
+      "naming": "{stem}",
+      "quality": 80
+     }
+    }
+   ]
+  },
+  {
+   "answer": "",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     "<out>"
+    ]
+   ],
+   "kind": "small",
+   "name": "small_saved_cancel",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     ""
+    ]
+   ],
+   "kind": "large",
+   "name": "large_no_saved_answer",
+   "running": false,
+   "saved": null,
+   "selection": [
+    1,
+    2
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      1,
+      2
+     ],
+     "options": {
+      "color_space": "sRGB",
+      "dither": true,
+      "format": "JPEG",
+      "grayscale": true,
+      "keep_metadata": false,
+      "longest": 0,
+      "naming": "{stem}",
+      "quality": 100
+     }
+    }
+   ]
+  },
+  {
+   "answer": "",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     ""
+    ]
+   ],
+   "kind": "large",
+   "name": "large_no_saved_cancel",
+   "running": false,
+   "saved": null,
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     "<out>"
+    ]
+   ],
+   "kind": "large",
+   "name": "large_saved_answer",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      1,
+      2
+     ],
+     "options": {
+      "color_space": "sRGB",
+      "dither": true,
+      "format": "JPEG",
+      "grayscale": true,
+      "keep_metadata": false,
+      "longest": 0,
+      "naming": "{stem}",
+      "quality": 100
+     }
+    }
+   ]
+  },
+  {
+   "answer": "",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     "<out>"
+    ]
+   ],
+   "kind": "large",
+   "name": "large_saved_cancel",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     ""
+    ]
+   ],
+   "kind": "original",
+   "name": "original_no_saved_answer",
+   "running": false,
+   "saved": null,
+   "selection": [
+    1,
+    2
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      1,
+      2
+     ],
+     "options": {
+      "color_space": "sRGB",
+      "dither": true,
+      "format": "Original",
+      "grayscale": true,
+      "keep_metadata": false,
+      "longest": 0,
+      "naming": "{stem}",
+      "quality": 100
+     }
+    }
+   ]
+  },
+  {
+   "answer": "",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     ""
+    ]
+   ],
+   "kind": "original",
+   "name": "original_no_saved_cancel",
+   "running": false,
+   "saved": null,
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     "<out>"
+    ]
+   ],
+   "kind": "original",
+   "name": "original_saved_answer",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      1,
+      2
+     ],
+     "options": {
+      "color_space": "sRGB",
+      "dither": true,
+      "format": "Original",
+      "grayscale": true,
+      "keep_metadata": false,
+      "longest": 0,
+      "naming": "{stem}",
+      "quality": 100
+     }
+    }
+   ]
+  },
+  {
+   "answer": "",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     "<out>"
+    ]
+   ],
+   "kind": "original",
+   "name": "original_saved_cancel",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 1,
+   "folder_dialogs": [],
+   "kind": "previous",
+   "name": "previous_none",
+   "running": false,
+   "saved": null,
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [],
+   "kind": "previous",
+   "name": "previous_ok",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      1,
+      2
+     ],
+     "options": {
+      "color_space": "Adobe RGB",
+      "dither": true,
+      "format": "PNG",
+      "grayscale": false,
+      "keep_metadata": true,
+      "longest": 900,
+      "naming": "{stem}_x",
+      "quality": 85
+     }
+    }
+   ]
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "이전 저장 위치가 없습니다. 내보낼 폴더 선택",
+     "<missing>"
+    ]
+   ],
+   "kind": "previous",
+   "name": "previous_missing_answer",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<missing>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      1,
+      2
+     ],
+     "options": {
+      "color_space": "Adobe RGB",
+      "dither": true,
+      "format": "PNG",
+      "grayscale": false,
+      "keep_metadata": true,
+      "longest": 900,
+      "naming": "{stem}_x",
+      "quality": 85
+     }
+    }
+   ]
+  },
+  {
+   "answer": "",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "이전 저장 위치가 없습니다. 내보낼 폴더 선택",
+     "<missing>"
+    ]
+   ],
+   "kind": "previous",
+   "name": "previous_missing_cancel",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<missing>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [],
+   "kind": "previous",
+   "name": "previous_legacy",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "folder": "<out>",
+    "format": "PNG",
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      1,
+      2
+     ],
+     "options": {
+      "color_space": "Adobe RGB",
+      "dither": true,
+      "format": "PNG",
+      "grayscale": true,
+      "keep_metadata": true,
+      "longest": 900,
+      "naming": "{stem}_x",
+      "quality": 85
+     }
+    }
+   ]
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 1,
+   "folder_dialogs": [],
+   "kind": "previous",
+   "name": "previous_invalid",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 5
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [],
+   "kind": "small",
+   "name": "no_selection",
+   "running": false,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [],
+   "started": []
+  },
+  {
+   "answer": "",
+   "committed": 0,
+   "dialog_opened": 0,
+   "folder_dialogs": [],
+   "kind": "previous",
+   "name": "running",
+   "running": true,
+   "saved": {
+    "color_space": "Adobe RGB",
+    "dither": true,
+    "folder": "<out>",
+    "format": "PNG",
+    "grayscale": false,
+    "keep_metadata": true,
+    "longest": 900,
+    "naming": "{stem}_x",
+    "quality": 85
+   },
+   "selection": [
+    1,
+    2
+   ],
+   "started": []
+  },
+  {
+   "answer": "<out>",
+   "committed": 1,
+   "dialog_opened": 0,
+   "folder_dialogs": [
+    [
+     "내보낼 폴더 선택",
+     ""
+    ]
+   ],
+   "kind": "large",
+   "name": "one_photo",
+   "running": false,
+   "saved": null,
+   "selection": [
+    3
+   ],
+   "started": [
+    {
+     "folder": "<out>",
+     "ids": [
+      3
+     ],
+     "options": {
+      "color_space": "sRGB",
+      "dither": true,
+      "format": "JPEG",
+      "grayscale": true,
+      "keep_metadata": false,
+      "longest": 0,
+      "naming": "{stem}",
+      "quality": 100
+     }
+    }
+   ]
+  }
+ ],
+ "runs": {
+  "copies_equal_original": {
+   "a.png": true,
+   "c.png": true
+  },
+  "files": [
+   "a.png",
+   "a.tif",
+   "a.xmp",
+   "a_2.png",
+   "a_2.xmp",
+   "a_grainy.jpg",
+   "a_grainy_2.jpg",
+   "a_mix.jpg",
+   "b_grainy.avif",
+   "b_grainy.jpg",
+   "b_grainy_2.jpg",
+   "c.png",
+   "c.xmp",
+   "c_001.png",
+   "d_002.png"
+  ],
+  "runs": [
+   {
+    "box": [],
+    "errors": [],
+    "failure_count": 0,
+    "failures": [],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     }
+    ],
+    "ids": [
+     1,
+     2
+    ],
+    "messages": [
+     "사진 2장 내보내는 중…",
+     "내보내기 완료: 2장  ·  실패: 0장"
+    ],
+    "name": "jpeg_two",
+    "new_files": [
+     "a_grainy.jpg",
+     "b_grainy.jpg"
+    ],
+    "options": {
+     "color_space": "sRGB",
+     "dither": true,
+     "format": "JPEG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 24,
+     "naming": "{stem}_grainy",
+     "quality": 95
+    },
+    "outputs": [
+     {
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1,
+      "size": [
+       24,
+       16
+      ]
+     },
+     {
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2,
+      "size": [
+       16,
+       24
+      ]
+     }
+    ],
+    "previous": {
+     "color_space": "sRGB",
+     "dither": true,
+     "folder": "<out>",
+     "format": "JPEG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 24,
+     "naming": "{stem}_grainy",
+     "quality": 95
+    },
+    "started": true
+   },
+   {
+    "box": [],
+    "errors": [],
+    "failure_count": 0,
+    "failures": [],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2
+     }
+    ],
+    "ids": [
+     1,
+     2
+    ],
+    "messages": [
+     "사진 2장 내보내는 중…",
+     "내보내기 완료: 2장  ·  실패: 0장"
+    ],
+    "name": "jpeg_again_numbers",
+    "new_files": [
+     "a_grainy_2.jpg",
+     "b_grainy_2.jpg"
+    ],
+    "options": {
+     "color_space": "sRGB",
+     "dither": true,
+     "format": "JPEG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 24,
+     "naming": "{stem}_grainy",
+     "quality": 95
+    },
+    "outputs": [
+     {
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1,
+      "size": [
+       24,
+       16
+      ]
+     },
+     {
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2,
+      "size": [
+       16,
+       24
+      ]
+     }
+    ],
+    "previous": {
+     "color_space": "sRGB",
+     "dither": true,
+     "folder": "<out>",
+     "format": "JPEG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 24,
+     "naming": "{stem}_grainy",
+     "quality": 95
+    },
+    "started": true
+   },
+   {
+    "box": [],
+    "errors": [],
+    "failure_count": 0,
+    "failures": [],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c_001.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+      "path": "<out>/d_002.png",
+      "photo_id": 4
+     }
+    ],
+    "ids": [
+     3,
+     4
+    ],
+    "messages": [
+     "사진 2장 내보내는 중…",
+     "내보내기 완료: 2장  ·  실패: 0장"
+    ],
+    "name": "png16_numbered",
+    "new_files": [
+     "c_001.png",
+     "d_002.png"
+    ],
+    "options": {
+     "color_space": "Display P3",
+     "dither": true,
+     "format": "PNG 16-bit",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_{n:03d}",
+     "quality": 95
+    },
+    "outputs": [
+     {
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c_001.png",
+      "photo_id": 3,
+      "size": [
+       48,
+       32
+      ]
+     },
+     {
+      "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+      "path": "<out>/d_002.png",
+      "photo_id": 4,
+      "size": [
+       48,
+       32
+      ]
+     }
+    ],
+    "previous": {
+     "color_space": "Display P3",
+     "dither": true,
+     "folder": "<out>",
+     "format": "PNG 16-bit",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_{n:03d}",
+     "quality": 95
+    },
+    "started": true
+   },
+   {
+    "box": [],
+    "errors": [],
+    "failure_count": 0,
+    "failures": [],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c_001.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+      "path": "<out>/d_002.png",
+      "photo_id": 4
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.tif",
+      "photo_id": 1
+     }
+    ],
+    "ids": [
+     1
+    ],
+    "messages": [
+     "사진 1장 내보내는 중…",
+     "내보내기 완료: 1장  ·  실패: 0장"
+    ],
+    "name": "tiff8_dither_off",
+    "new_files": [
+     "a.tif"
+    ],
+    "options": {
+     "color_space": "sRGB",
+     "dither": false,
+     "format": "TIFF 8-bit",
+     "grayscale": false,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}",
+     "quality": 95
+    },
+    "outputs": [
+     {
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.tif",
+      "photo_id": 1,
+      "size": [
+       48,
+       32
+      ]
+     }
+    ],
+    "previous": {
+     "color_space": "sRGB",
+     "dither": false,
+     "folder": "<out>",
+     "format": "TIFF 8-bit",
+     "grayscale": false,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}",
+     "quality": 95
+    },
+    "started": true
+   },
+   {
+    "box": [],
+    "errors": [],
+    "failure_count": 0,
+    "failures": [],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c_001.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+      "path": "<out>/d_002.png",
+      "photo_id": 4
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.tif",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.avif",
+      "photo_id": 2
+     }
+    ],
+    "ids": [
+     2
+    ],
+    "messages": [
+     "사진 1장 내보내는 중…",
+     "내보내기 완료: 1장  ·  실패: 0장"
+    ],
+    "name": "avif",
+    "new_files": [
+     "b_grainy.avif"
+    ],
+    "options": {
+     "color_space": "sRGB",
+     "dither": true,
+     "format": "AVIF",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_grainy",
+     "quality": 60
+    },
+    "outputs": [
+     {
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.avif",
+      "photo_id": 2,
+      "size": [
+       32,
+       48
+      ]
+     }
+    ],
+    "previous": {
+     "color_space": "sRGB",
+     "dither": true,
+     "folder": "<out>",
+     "format": "AVIF",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_grainy",
+     "quality": 60
+    },
+    "started": true
+   },
+   {
+    "box": [],
+    "errors": [],
+    "failure_count": 0,
+    "failures": [],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c_001.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+      "path": "<out>/d_002.png",
+      "photo_id": 4
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.tif",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.avif",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.png",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c.png",
+      "photo_id": 3
+     }
+    ],
+    "ids": [
+     1,
+     3
+    ],
+    "messages": [
+     "사진 2장 내보내는 중…",
+     "내보내기 완료: 2장  ·  실패: 0장"
+    ],
+    "name": "original_pair",
+    "new_files": [
+     "a.png",
+     "a.xmp",
+     "c.png",
+     "c.xmp"
+    ],
+    "options": {
+     "color_space": "sRGB",
+     "dither": true,
+     "format": "Original",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}",
+     "quality": 95
+    },
+    "outputs": [
+     {
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.png",
+      "photo_id": 1,
+      "size": [
+       48,
+       32
+      ]
+     },
+     {
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c.png",
+      "photo_id": 3,
+      "size": [
+       48,
+       32
+      ]
+     }
+    ],
+    "previous": {
+     "color_space": "sRGB",
+     "dither": true,
+     "folder": "<out>",
+     "format": "Original",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}",
+     "quality": 95
+    },
+    "started": true
+   },
+   {
+    "box": [],
+    "errors": [],
+    "failure_count": 0,
+    "failures": [],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c_001.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+      "path": "<out>/d_002.png",
+      "photo_id": 4
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.tif",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.avif",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.png",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_2.png",
+      "photo_id": 1
+     }
+    ],
+    "ids": [
+     1
+    ],
+    "messages": [
+     "사진 1장 내보내는 중…",
+     "내보내기 완료: 1장  ·  실패: 0장"
+    ],
+    "name": "original_again",
+    "new_files": [
+     "a_2.png",
+     "a_2.xmp"
+    ],
+    "options": {
+     "color_space": "sRGB",
+     "dither": true,
+     "format": "Original",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}",
+     "quality": 95
+    },
+    "outputs": [
+     {
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_2.png",
+      "photo_id": 1,
+      "size": [
+       48,
+       32
+      ]
+     }
+    ],
+    "previous": {
+     "color_space": "sRGB",
+     "dither": true,
+     "folder": "<out>",
+     "format": "Original",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}",
+     "quality": 95
+    },
+    "started": true
+   },
+   {
+    "box": [
+     [
+      "warning",
+      "일부 파일 내보내기 실패",
+      1
+     ]
+    ],
+    "errors": [],
+    "failure_count": 1,
+    "failures": [
+     "gone.png"
+    ],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c_001.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+      "path": "<out>/d_002.png",
+      "photo_id": 4
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.tif",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.avif",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.png",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_2.png",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_mix.jpg",
+      "photo_id": 1
+     }
+    ],
+    "ids": [
+     5,
+     1
+    ],
+    "messages": [
+     "사진 2장 내보내는 중…",
+     "내보내기 완료: 1장  ·  실패: 1장"
+    ],
+    "name": "one_fails",
+    "new_files": [
+     "a_mix.jpg"
+    ],
+    "options": {
+     "color_space": "sRGB",
+     "dither": true,
+     "format": "JPEG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_mix",
+     "quality": 95
+    },
+    "outputs": [
+     {
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_mix.jpg",
+      "photo_id": 1,
+      "size": [
+       48,
+       32
+      ]
+     }
+    ],
+    "previous": {
+     "color_space": "sRGB",
+     "dither": true,
+     "folder": "<out>",
+     "format": "JPEG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_mix",
+     "quality": 95
+    },
+    "started": true
+   },
+   {
+    "box": [
+     [
+      "warning",
+      "일부 파일 내보내기 실패",
+      1
+     ]
+    ],
+    "errors": [],
+    "failure_count": 1,
+    "failures": [
+     "gone.png"
+    ],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c_001.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+      "path": "<out>/d_002.png",
+      "photo_id": 4
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.tif",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.avif",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.png",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_2.png",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_mix.jpg",
+      "photo_id": 1
+     }
+    ],
+    "ids": [
+     5
+    ],
+    "messages": [
+     "사진 1장 내보내는 중…",
+     "내보내기 완료: 0장  ·  실패: 1장"
+    ],
+    "name": "all_fail",
+    "new_files": [],
+    "options": {
+     "color_space": "sRGB",
+     "dither": true,
+     "format": "PNG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_none",
+     "quality": 95
+    },
+    "outputs": [],
+    "previous": {
+     "color_space": "sRGB",
+     "dither": true,
+     "folder": "<out>",
+     "format": "JPEG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_mix",
+     "quality": 95
+    },
+    "started": true
+   },
+   {
+    "name": "no_folder",
+    "raised": "저장할 폴더를 선택해 주세요."
+   },
+   {
+    "box": [],
+    "errors": [],
+    "failure_count": null,
+    "failures": [],
+    "folder": "<out>",
+    "history": [
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_grainy_2.jpg",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy_2.jpg",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c_001.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "9c8ff931c26e000dff7b8ecfb9cb5b13e72fefc9ae615670565b15055f23df5b",
+      "path": "<out>/d_002.png",
+      "photo_id": 4
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.tif",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "e98026fe3ed37cf81ed43b2bbbea11ca38df7b094bc23162a77d2da78daeb54a",
+      "path": "<out>/b_grainy.avif",
+      "photo_id": 2
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a.png",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "6abfce3854eb82cd030cdc744fb8aa3ca481ea99b94dc658fe7f64e9dffcac7f",
+      "path": "<out>/c.png",
+      "photo_id": 3
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_2.png",
+      "photo_id": 1
+     },
+     {
+      "created": "2026-11-13T01:02:03.456789+00:00",
+      "edit_signature": "b0e105cfdcc92ed5e721c688c2e159a5ffe998a838c92598f3c2b2fb50b01f82",
+      "path": "<out>/a_mix.jpg",
+      "photo_id": 1
+     }
+    ],
+    "ids": [],
+    "messages": [],
+    "name": "nothing_selected",
+    "new_files": [],
+    "options": {
+     "color_space": "sRGB",
+     "dither": true,
+     "format": "JPEG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_grainy",
+     "quality": 95
+    },
+    "outputs": [],
+    "previous": {
+     "color_space": "sRGB",
+     "dither": true,
+     "folder": "<out>",
+     "format": "JPEG",
+     "grayscale": true,
+     "keep_metadata": false,
+     "longest": 0,
+     "naming": "{stem}_mix",
+     "quality": 95
+    },
+    "started": false
+   }
+  ],
+  "sidecars": {
+   "a.xmp": "<?xml version='1.0' encoding='utf-8'?>\r\n<x:xmpmeta xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:lr=\"http://ns.adobe.com/lightroom/1.0/\" xmlns:luma=\"https://luma.local/ns/1.0/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:x=\"adobe:ns:meta/\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"><rdf:RDF><rdf:Description xmp:Rating=\"0\" xmp:Label=\"\" luma:Settings=\"{&quot;exposure&quot;: 0.4, &quot;contrast&quot;: 0.0, &quot;highlights&quot;: 0.0, &quot;shadows&quot;: 0.0, &quot;whites&quot;: 0.0, &quot;blacks&quot;: 0.0, &quot;temperature&quot;: 0.0, &quot;tint&quot;: 0.0, &quot;saturation&quot;: 0.0, &quot;vibrance&quot;: 0.0, &quot;clarity&quot;: 0.0, &quot;sharpen&quot;: 0.0, &quot;vignette&quot;: 0.0, &quot;grain&quot;: 0.0, &quot;vignette_midpoint&quot;: 50.0, &quot;vignette_roundness&quot;: 0.0, &quot;vignette_feather&quot;: 50.0, &quot;vignette_highlights&quot;: 0.0, &quot;grain_size&quot;: 25.0, &quot;grain_roughness&quot;: 50.0, &quot;rotation&quot;: 0, &quot;straighten&quot;: 0.0, &quot;flip&quot;: false, &quot;crop&quot;: null, &quot;curve&quot;: [[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]], &quot;hsl&quot;: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]], &quot;monochrome&quot;: false, &quot;video_color&quot;: null, &quot;video_time&quot;: 0.0, &quot;hdr&quot;: false, &quot;hdr_limit&quot;: 4.0, &quot;hdr_brightness&quot;: 0.0, &quot;sdr_exposure&quot;: 0.0, &quot;sdr_compression&quot;: 75.0, &quot;photo_filter&quot;: &quot;warming85&quot;, &quot;photo_filter_enabled&quot;: false, &quot;photo_filter_density&quot;: 25.0, &quot;photo_filter_luminosity&quot;: true, &quot;tone_version&quot;: 1, &quot;detail_version&quot;: 3, &quot;rgb_curves&quot;: [[[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]], [[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]], [[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]]], &quot;parametric&quot;: [0.0, 0.0, 0.0, 0.0], &quot;mixer_mode&quot;: &quot;hsv&quot;, &quot;kelvin&quot;: 6500.0, &quot;wb_reference&quot;: 6500.0, &quot;kelvin_enabled&quot;: false, &quot;grading&quot;: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]], &quot;grading_balance&quot;: 0.0, &quot;calibration&quot;: [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0]], &quot;point_colors&quot;: [], &quot;texture&quot;: 0.0, &quot;dehaze&quot;: 0.0, &quot;noise_luma&quot;: 0.0, &quot;noise_color&quot;: 0.0, &quot;sharpen_radius&quot;: 0.8, &quot;sharpen_detail&quot;: 50.0, &quot;sharpen_mask&quot;: 0.0, &quot;distortion&quot;: 0.0, &quot;distortion_k2&quot;: 0.0, &quot;distortion_k3&quot;: 0.0, &quot;lens_vignette&quot;: 0.0, &quot;ca_red&quot;: 0.0, &quot;ca_blue&quot;: 0.0, &quot;defringe&quot;: 0.0, &quot;perspective_v&quot;: 0.0, &quot;perspective_h&quot;: 0.0, &quot;aspect_scale&quot;: 0.0, &quot;shift_x&quot;: 0.0, &quot;shift_y&quot;: 0.0, &quot;transform_scale&quot;: 100.0, &quot;guides&quot;: null, &quot;lens_profile&quot;: &quot;&quot;, &quot;camera_matrix&quot;: null, &quot;lensfun&quot;: null, &quot;lensfun_enabled&quot;: false, &quot;lensfun_distortion&quot;: true, &quot;lensfun_tca&quot;: true, &quot;lensfun_vignette&quot;: true, &quot;lensfun_scale&quot;: true, &quot;upright&quot;: null, &quot;upright_crop&quot;: true, &quot;masks&quot;: [], &quot;retouch&quot;: [], &quot;working_space&quot;: &quot;sRGB&quot;, &quot;raw_mode&quot;: &quot;legacy&quot;, &quot;raw_kelvin&quot;: 6500.0, &quot;raw_tint&quot;: 0.0, &quot;raw_neutral&quot;: null, &quot;dcp_profile&quot;: null, &quot;dcp_huesat&quot;: true, &quot;dcp_look&quot;: true, &quot;dcp_tone&quot;: true, &quot;dcp_exposure&quot;: true, &quot;negative&quot;: false, &quot;negative_base&quot;: null, &quot;negative_peak&quot;: null, &quot;negative_range&quot;: 6.5, &quot;negative_density&quot;: 0.0, &quot;film_look&quot;: &quot;&quot;, &quot;film_strength&quot;: 100.0, &quot;tone_mapping&quot;: &quot;classic&quot;, &quot;drt_contrast&quot;: 0.0, &quot;drt_toe&quot;: 0.0, &quot;drt_shoulder&quot;: 0.0, &quot;drt_white&quot;: 0.0, &quot;panels_off&quot;: []}\" luma:Metadata=\"{}\"><dc:subject><rdf:Bag /></dc:subject><lr:hierarchicalSubject><rdf:Bag /></lr:hierarchicalSubject></rdf:Description></rdf:RDF></x:xmpmeta>",
+   "a_2.xmp": "<?xml version='1.0' encoding='utf-8'?>\r\n<x:xmpmeta xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:lr=\"http://ns.adobe.com/lightroom/1.0/\" xmlns:luma=\"https://luma.local/ns/1.0/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:x=\"adobe:ns:meta/\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"><rdf:RDF><rdf:Description xmp:Rating=\"0\" xmp:Label=\"\" luma:Settings=\"{&quot;exposure&quot;: 0.4, &quot;contrast&quot;: 0.0, &quot;highlights&quot;: 0.0, &quot;shadows&quot;: 0.0, &quot;whites&quot;: 0.0, &quot;blacks&quot;: 0.0, &quot;temperature&quot;: 0.0, &quot;tint&quot;: 0.0, &quot;saturation&quot;: 0.0, &quot;vibrance&quot;: 0.0, &quot;clarity&quot;: 0.0, &quot;sharpen&quot;: 0.0, &quot;vignette&quot;: 0.0, &quot;grain&quot;: 0.0, &quot;vignette_midpoint&quot;: 50.0, &quot;vignette_roundness&quot;: 0.0, &quot;vignette_feather&quot;: 50.0, &quot;vignette_highlights&quot;: 0.0, &quot;grain_size&quot;: 25.0, &quot;grain_roughness&quot;: 50.0, &quot;rotation&quot;: 0, &quot;straighten&quot;: 0.0, &quot;flip&quot;: false, &quot;crop&quot;: null, &quot;curve&quot;: [[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]], &quot;hsl&quot;: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]], &quot;monochrome&quot;: false, &quot;video_color&quot;: null, &quot;video_time&quot;: 0.0, &quot;hdr&quot;: false, &quot;hdr_limit&quot;: 4.0, &quot;hdr_brightness&quot;: 0.0, &quot;sdr_exposure&quot;: 0.0, &quot;sdr_compression&quot;: 75.0, &quot;photo_filter&quot;: &quot;warming85&quot;, &quot;photo_filter_enabled&quot;: false, &quot;photo_filter_density&quot;: 25.0, &quot;photo_filter_luminosity&quot;: true, &quot;tone_version&quot;: 1, &quot;detail_version&quot;: 3, &quot;rgb_curves&quot;: [[[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]], [[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]], [[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]]], &quot;parametric&quot;: [0.0, 0.0, 0.0, 0.0], &quot;mixer_mode&quot;: &quot;hsv&quot;, &quot;kelvin&quot;: 6500.0, &quot;wb_reference&quot;: 6500.0, &quot;kelvin_enabled&quot;: false, &quot;grading&quot;: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]], &quot;grading_balance&quot;: 0.0, &quot;calibration&quot;: [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0]], &quot;point_colors&quot;: [], &quot;texture&quot;: 0.0, &quot;dehaze&quot;: 0.0, &quot;noise_luma&quot;: 0.0, &quot;noise_color&quot;: 0.0, &quot;sharpen_radius&quot;: 0.8, &quot;sharpen_detail&quot;: 50.0, &quot;sharpen_mask&quot;: 0.0, &quot;distortion&quot;: 0.0, &quot;distortion_k2&quot;: 0.0, &quot;distortion_k3&quot;: 0.0, &quot;lens_vignette&quot;: 0.0, &quot;ca_red&quot;: 0.0, &quot;ca_blue&quot;: 0.0, &quot;defringe&quot;: 0.0, &quot;perspective_v&quot;: 0.0, &quot;perspective_h&quot;: 0.0, &quot;aspect_scale&quot;: 0.0, &quot;shift_x&quot;: 0.0, &quot;shift_y&quot;: 0.0, &quot;transform_scale&quot;: 100.0, &quot;guides&quot;: null, &quot;lens_profile&quot;: &quot;&quot;, &quot;camera_matrix&quot;: null, &quot;lensfun&quot;: null, &quot;lensfun_enabled&quot;: false, &quot;lensfun_distortion&quot;: true, &quot;lensfun_tca&quot;: true, &quot;lensfun_vignette&quot;: true, &quot;lensfun_scale&quot;: true, &quot;upright&quot;: null, &quot;upright_crop&quot;: true, &quot;masks&quot;: [], &quot;retouch&quot;: [], &quot;working_space&quot;: &quot;sRGB&quot;, &quot;raw_mode&quot;: &quot;legacy&quot;, &quot;raw_kelvin&quot;: 6500.0, &quot;raw_tint&quot;: 0.0, &quot;raw_neutral&quot;: null, &quot;dcp_profile&quot;: null, &quot;dcp_huesat&quot;: true, &quot;dcp_look&quot;: true, &quot;dcp_tone&quot;: true, &quot;dcp_exposure&quot;: true, &quot;negative&quot;: false, &quot;negative_base&quot;: null, &quot;negative_peak&quot;: null, &quot;negative_range&quot;: 6.5, &quot;negative_density&quot;: 0.0, &quot;film_look&quot;: &quot;&quot;, &quot;film_strength&quot;: 100.0, &quot;tone_mapping&quot;: &quot;classic&quot;, &quot;drt_contrast&quot;: 0.0, &quot;drt_toe&quot;: 0.0, &quot;drt_shoulder&quot;: 0.0, &quot;drt_white&quot;: 0.0, &quot;panels_off&quot;: []}\" luma:Metadata=\"{}\"><dc:subject><rdf:Bag /></dc:subject><lr:hierarchicalSubject><rdf:Bag /></lr:hierarchicalSubject></rdf:Description></rdf:RDF></x:xmpmeta>",
+   "c.xmp": "<?xml version='1.0' encoding='utf-8'?>\r\n<x:xmpmeta xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:lr=\"http://ns.adobe.com/lightroom/1.0/\" xmlns:luma=\"https://luma.local/ns/1.0/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:x=\"adobe:ns:meta/\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"><rdf:RDF><rdf:Description xmp:Rating=\"0\" xmp:Label=\"\" luma:Settings=\"{&quot;exposure&quot;: 0.0, &quot;contrast&quot;: 0.0, &quot;highlights&quot;: 0.0, &quot;shadows&quot;: 0.0, &quot;whites&quot;: 0.0, &quot;blacks&quot;: 0.0, &quot;temperature&quot;: 0.0, &quot;tint&quot;: 0.0, &quot;saturation&quot;: 0.0, &quot;vibrance&quot;: 0.0, &quot;clarity&quot;: 0.0, &quot;sharpen&quot;: 0.0, &quot;vignette&quot;: 0.0, &quot;grain&quot;: 0.0, &quot;vignette_midpoint&quot;: 50.0, &quot;vignette_roundness&quot;: 0.0, &quot;vignette_feather&quot;: 50.0, &quot;vignette_highlights&quot;: 0.0, &quot;grain_size&quot;: 25.0, &quot;grain_roughness&quot;: 50.0, &quot;rotation&quot;: 0, &quot;straighten&quot;: 0.0, &quot;flip&quot;: false, &quot;crop&quot;: null, &quot;curve&quot;: [[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]], &quot;hsl&quot;: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]], &quot;monochrome&quot;: true, &quot;video_color&quot;: null, &quot;video_time&quot;: 0.0, &quot;hdr&quot;: false, &quot;hdr_limit&quot;: 4.0, &quot;hdr_brightness&quot;: 0.0, &quot;sdr_exposure&quot;: 0.0, &quot;sdr_compression&quot;: 75.0, &quot;photo_filter&quot;: &quot;warming85&quot;, &quot;photo_filter_enabled&quot;: false, &quot;photo_filter_density&quot;: 25.0, &quot;photo_filter_luminosity&quot;: true, &quot;tone_version&quot;: 3, &quot;detail_version&quot;: 3, &quot;rgb_curves&quot;: [[[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]], [[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]], [[0.0, 0.0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]]], &quot;parametric&quot;: [0.0, 0.0, 0.0, 0.0], &quot;mixer_mode&quot;: &quot;hsv&quot;, &quot;kelvin&quot;: 6500.0, &quot;wb_reference&quot;: 6500.0, &quot;kelvin_enabled&quot;: false, &quot;grading&quot;: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]], &quot;grading_balance&quot;: 0.0, &quot;calibration&quot;: [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0]], &quot;point_colors&quot;: [], &quot;texture&quot;: 0.0, &quot;dehaze&quot;: 0.0, &quot;noise_luma&quot;: 0.0, &quot;noise_color&quot;: 0.0, &quot;sharpen_radius&quot;: 0.8, &quot;sharpen_detail&quot;: 50.0, &quot;sharpen_mask&quot;: 0.0, &quot;distortion&quot;: 0.0, &quot;distortion_k2&quot;: 0.0, &quot;distortion_k3&quot;: 0.0, &quot;lens_vignette&quot;: 0.0, &quot;ca_red&quot;: 0.0, &quot;ca_blue&quot;: 0.0, &quot;defringe&quot;: 0.0, &quot;perspective_v&quot;: 0.0, &quot;perspective_h&quot;: 0.0, &quot;aspect_scale&quot;: 0.0, &quot;shift_x&quot;: 0.0, &quot;shift_y&quot;: 0.0, &quot;transform_scale&quot;: 100.0, &quot;guides&quot;: null, &quot;lens_profile&quot;: &quot;&quot;, &quot;camera_matrix&quot;: null, &quot;lensfun&quot;: null, &quot;lensfun_enabled&quot;: false, &quot;lensfun_distortion&quot;: true, &quot;lensfun_tca&quot;: true, &quot;lensfun_vignette&quot;: true, &quot;lensfun_scale&quot;: true, &quot;upright&quot;: null, &quot;upright_crop&quot;: true, &quot;masks&quot;: [], &quot;retouch&quot;: [], &quot;working_space&quot;: &quot;sRGB&quot;, &quot;raw_mode&quot;: &quot;legacy&quot;, &quot;raw_kelvin&quot;: 6500.0, &quot;raw_tint&quot;: 0.0, &quot;raw_neutral&quot;: null, &quot;dcp_profile&quot;: null, &quot;dcp_huesat&quot;: true, &quot;dcp_look&quot;: true, &quot;dcp_tone&quot;: true, &quot;dcp_exposure&quot;: true, &quot;negative&quot;: false, &quot;negative_base&quot;: null, &quot;negative_peak&quot;: null, &quot;negative_range&quot;: 6.5, &quot;negative_density&quot;: 0.0, &quot;film_look&quot;: &quot;&quot;, &quot;film_strength&quot;: 100.0, &quot;tone_mapping&quot;: &quot;classic&quot;, &quot;drt_contrast&quot;: 0.0, &quot;drt_toe&quot;: 0.0, &quot;drt_shoulder&quot;: 0.0, &quot;drt_white&quot;: 0.0, &quot;panels_off&quot;: []}\" luma:Metadata=\"{}\"><dc:subject><rdf:Bag /></dc:subject><lr:hierarchicalSubject><rdf:Bag /></lr:hierarchicalSubject></rdf:Description></rdf:RDF></x:xmpmeta>"
+  }
+ },
+ "stamp": "2026-11-13T01:02:03.456789+00:00"
+}

@@ -1,0 +1,15 @@
+{
+ "image": "std:garden",
+ "kind": "weights",
+ "point": {
+  "hue": 40.0,
+  "lightness": 20.0,
+  "rgb": [
+   0.8,
+   0.3,
+   0.2
+  ],
+  "saturation": -30.0,
+  "version": 2
+ }
+}

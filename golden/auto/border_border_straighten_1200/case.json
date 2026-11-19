@@ -1,0 +1,13 @@
+{
+ "crop": [
+  0.05926,
+  0.04348,
+  0.94074,
+  1.0
+ ],
+ "longest": 1200,
+ "settings": {
+  "straighten": 4.5
+ },
+ "source": "border"
+}

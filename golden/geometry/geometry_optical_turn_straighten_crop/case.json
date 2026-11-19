@@ -1,0 +1,28 @@
+{
+ "changes": {
+  "ca_blue": 20.0,
+  "ca_red": -15.0,
+  "crop": [
+   0.1,
+   0.1,
+   0.9,
+   0.85
+  ],
+  "distortion": 6.0,
+  "flip": true,
+  "perspective_v": 25.0,
+  "rotation": 1,
+  "straighten": 2.5,
+  "transform_scale": 95.0
+ },
+ "error": null,
+ "function": "geometry",
+ "input": {
+  "c": 3,
+  "h": 37,
+  "kind": "synth",
+  "seed": 10,
+  "w": 53
+ },
+ "use_crop": true
+}

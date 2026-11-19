@@ -1,0 +1,382 @@
+{
+ "names": [
+  "Grainy-0.6.8-windows-x64.zip",
+  "Grainy-1.0-windows-x64.zip",
+  "Grainy-1-windows-x64.zip",
+  "Grainy-0.6.8-windows-x64.zip\n",
+  "Grainy-0.6.8-windows-x64.zip\n\n",
+  "grainy-0.6.8-windows-x64.zip",
+  "Grainy-0.6.8-windows-x86.zip",
+  "Grainy-0.6.8-windows-x64.zip.sig",
+  "Grainy-0.6.8-macos-arm64.zip",
+  "Grainy-0.6.8-macos-x64.zip",
+  "Grainy-0.6.8-macos-unknown.zip",
+  "Grainy-0.6.8-macos-arm64.dmg",
+  "Grainy-0.6.8.1-macos-arm64.zip",
+  "Grainy-0.6.8-mac.zip",
+  "Grainy-.6-windows-x64.zip",
+  "Grainy-0..6-windows-x64.zip",
+  "Grainy-0.6.-windows-x64.zip",
+  "XGrainy-0.6.8-windows-x64.zip",
+  "",
+  "Grainy-12.34.56-macos-x64.zip"
+ ],
+ "systems": [
+  {
+   "results": [
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip",
+     "version": "0.6.8"
+    },
+    {
+     "name": "Grainy-1.0-windows-x64.zip",
+     "version": "1.0"
+    },
+    {
+     "name": "Grainy-1-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip\n",
+     "version": "0.6.8"
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip\n\n",
+     "version": null
+    },
+    {
+     "name": "grainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x86.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip.sig",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-arm64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-unknown.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-arm64.dmg",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8.1-macos-arm64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-mac.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-.6-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0..6-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "XGrainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "",
+     "version": null
+    },
+    {
+     "name": "Grainy-12.34.56-macos-x64.zip",
+     "version": null
+    }
+   ],
+   "system": {
+    "mac": false,
+    "machine": "AMD64",
+    "name": "windows"
+   }
+  },
+  {
+   "results": [
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-1.0-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-1-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip\n",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip\n\n",
+     "version": null
+    },
+    {
+     "name": "grainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x86.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip.sig",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-arm64.zip",
+     "version": "0.6.8"
+    },
+    {
+     "name": "Grainy-0.6.8-macos-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-unknown.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-arm64.dmg",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8.1-macos-arm64.zip",
+     "version": "0.6.8.1"
+    },
+    {
+     "name": "Grainy-0.6.8-mac.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-.6-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0..6-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "XGrainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "",
+     "version": null
+    },
+    {
+     "name": "Grainy-12.34.56-macos-x64.zip",
+     "version": null
+    }
+   ],
+   "system": {
+    "mac": true,
+    "machine": "arm64",
+    "name": "mac_arm64"
+   }
+  },
+  {
+   "results": [
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-1.0-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-1-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip\n",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip\n\n",
+     "version": null
+    },
+    {
+     "name": "grainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x86.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip.sig",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-arm64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-x64.zip",
+     "version": "0.6.8"
+    },
+    {
+     "name": "Grainy-0.6.8-macos-unknown.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-arm64.dmg",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8.1-macos-arm64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-mac.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-.6-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0..6-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "XGrainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "",
+     "version": null
+    },
+    {
+     "name": "Grainy-12.34.56-macos-x64.zip",
+     "version": "12.34.56"
+    }
+   ],
+   "system": {
+    "mac": true,
+    "machine": "x86_64",
+    "name": "mac_x64"
+   }
+  },
+  {
+   "results": [
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-1.0-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-1-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip\n",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip\n\n",
+     "version": null
+    },
+    {
+     "name": "grainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x86.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-windows-x64.zip.sig",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-arm64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-macos-unknown.zip",
+     "version": "0.6.8"
+    },
+    {
+     "name": "Grainy-0.6.8-macos-arm64.dmg",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8.1-macos-arm64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.8-mac.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-.6-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0..6-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "Grainy-0.6.-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "XGrainy-0.6.8-windows-x64.zip",
+     "version": null
+    },
+    {
+     "name": "",
+     "version": null
+    },
+    {
+     "name": "Grainy-12.34.56-macos-x64.zip",
+     "version": null
+    }
+   ],
+   "system": {
+    "mac": true,
+    "machine": "ppc",
+    "name": "mac_other"
+   }
+  }
+ ]
+}

@@ -1,0 +1,186 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "a.jpg": {
+     "fill": [
+      1,
+      1
+     ]
+    }
+   },
+   "dirs": [
+    "sub"
+   ]
+  },
+  "calls": [
+   {
+    "fn": "access",
+    "args": {
+     "path": "$ROOT/a.jpg"
+    }
+   },
+   {
+    "fn": "access",
+    "args": {
+     "path": "$ROOT/sub"
+    }
+   },
+   {
+    "fn": "access",
+    "args": {
+     "path": "$ROOT/sub",
+     "folder": true
+    }
+   },
+   {
+    "fn": "access",
+    "args": {
+     "path": "$ROOT/a.jpg",
+     "folder": true
+    }
+   },
+   {
+    "fn": "access",
+    "args": {
+     "path": "$ROOT/missing.jpg"
+    }
+   },
+   {
+    "fn": "present",
+    "args": {
+     "path": "$ROOT/a.jpg"
+    }
+   },
+   {
+    "fn": "present",
+    "args": {
+     "path": "$ROOT/sub"
+    }
+   },
+   {
+    "fn": "unreadable_folders",
+    "args": {
+     "roots": [
+      "$ROOT/sub",
+      "$ROOT/missing"
+     ]
+    }
+   },
+   {
+    "fn": "directory_identity_shape",
+    "args": {
+     "path": "$ROOT/sub"
+    }
+   },
+   {
+    "fn": "directory_identity_shape",
+    "args": {
+     "path": "$ROOT/a.jpg"
+    }
+   },
+   {
+    "fn": "directory_identity_shape",
+    "args": {
+     "path": "$ROOT/missing"
+    }
+   },
+   {
+    "fn": "rebase",
+    "args": {
+     "path": "$ROOT/old/sub/x",
+     "source": "$ROOT/old",
+     "destination": "$ROOT/new"
+    }
+   },
+   {
+    "fn": "rebase",
+    "args": {
+     "path": "$ROOT/old",
+     "source": "$ROOT/old",
+     "destination": "$ROOT/new"
+    }
+   },
+   {
+    "fn": "rebase",
+    "args": {
+     "path": "$ROOT/OLD/Sub",
+     "source": "$ROOT/old",
+     "destination": "$ROOT/new"
+    }
+   },
+   {
+    "fn": "rebase",
+    "args": {
+     "path": "$ROOT/other/sub",
+     "source": "$ROOT/old",
+     "destination": "$ROOT/new"
+    }
+   }
+  ],
+  "name": "access"
+ },
+ "results": [
+  {
+   "ok": "present"
+  },
+  {
+   "ok": "missing"
+  },
+  {
+   "ok": "present"
+  },
+  {
+   "ok": "missing"
+  },
+  {
+   "ok": "missing"
+  },
+  {
+   "ok": true
+  },
+  {
+   "ok": false
+  },
+  {
+   "ok": []
+  },
+  {
+   "ok": 3
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": "$ROOT\\new\\sub\\x"
+  },
+  {
+   "ok": "$ROOT\\new"
+  },
+  {
+   "ok": "$ROOT\\new\\Sub"
+  },
+  {
+   "ok": "$ROOT\\other\\sub"
+  }
+ ],
+ "tree": {
+  "files": {
+   "a.jpg": {
+    "size": 1,
+    "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+   }
+  },
+  "dirs": [
+   "sub"
+  ]
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

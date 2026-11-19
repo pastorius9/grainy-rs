@@ -1,0 +1,18 @@
+{
+ "budget": null,
+ "calls": [],
+ "changes": {
+  "lensfun_enabled": true
+ },
+ "error": null,
+ "function": "lens_geometry",
+ "input": {
+  "c": 3,
+  "h": 37,
+  "kind": "synth",
+  "seed": 15,
+  "w": 53
+ },
+ "lensfun": null,
+ "unchanged": true
+}

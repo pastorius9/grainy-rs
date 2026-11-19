@@ -1,0 +1,20 @@
+{
+ "pairs": [
+  [
+   "sRGB",
+   "Display P3"
+  ],
+  [
+   "Luma Wide",
+   "sRGB"
+  ],
+  [
+   "Linear ProPhoto",
+   "Linear sRGB"
+  ],
+  [
+   "sRGB",
+   "sRGB"
+  ]
+ ]
+}

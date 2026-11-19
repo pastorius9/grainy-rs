@@ -1,0 +1,31 @@
+[package]
+name = "grainy-codecs"
+description = "Oracle-compatible bitmap loading, metadata and export"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-core.workspace = true
+grainy-color = { path = "../grainy-color" }
+grainy-jpeg-sys = { path = "../grainy-jpeg-sys" }
+ndarray.workspace = true
+rayon.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+png = "=0.18.1"
+tiff = { version = "=0.11.3", default-features = false, features = ["deflate", "lzw", "jpeg"] }
+image-webp = "=0.2.4"
+image = { version = "=0.25.10", default-features = false, features = ["bmp"] }
+zune-core = "=0.5.3"
+ravif = { version = "=0.13.0", default-features = false }
+zune-jpegxl = "=0.5.2"
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+weezl = "=0.1.12"
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

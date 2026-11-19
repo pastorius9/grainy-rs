@@ -1,0 +1,9 @@
+{
+ "error": "LibRawFileUnsupportedError",
+ "file": "_files/decode_deflate/합성 RAW.dng",
+ "linear_raw": false,
+ "message": "b'Unsupported file format or not RAW file'",
+ "options": {
+  "compression": "deflate"
+ }
+}

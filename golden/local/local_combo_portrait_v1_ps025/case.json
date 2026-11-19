@@ -1,0 +1,67 @@
+{
+ "callback_mode": null,
+ "callbacks": {
+  "inputs": [],
+  "masks": [],
+  "points": []
+ },
+ "detail_version": 1,
+ "frame": "garden",
+ "layers": [
+  {
+   "adjustments": {
+    "clarity": -30,
+    "contrast": 20,
+    "exposure": 0.4,
+    "noise_color": 20,
+    "saturation": -20,
+    "sharpen": 30
+   },
+   "components": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.25,
+       0.3
+      ],
+      [
+       0.7,
+       0.85
+      ]
+     ],
+     "type": "radial"
+    },
+    {
+     "feather": 50,
+     "points": [
+      [
+       0.15,
+       0.2
+      ],
+      [
+       0.5,
+       0.4
+      ],
+      [
+       0.85,
+       0.25
+      ]
+     ],
+     "radius": 0.06,
+     "type": "brush"
+    }
+   ]
+  }
+ ],
+ "output_bits": "4685723780830461952",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "pixel_scale": 0.25,
+ "source_image": null,
+ "transform": "identity"
+}

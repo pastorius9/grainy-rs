@@ -1,0 +1,83 @@
+{
+ "color_changed": true,
+ "height": 64,
+ "kind": "maps",
+ "model": {
+  "focal": 35.0,
+  "model": "ptlens",
+  "terms": [
+   0.003000000026077032,
+   -0.017000000923871994,
+   0.004999999888241291
+  ]
+ },
+ "settings": {
+  "lensfun": {
+   "aperture": 4,
+   "camera": "",
+   "crop": 1.528,
+   "distance": 1000,
+   "focal": 35.0,
+   "maker": "Nikon",
+   "name": "Nikon AF-S DX Nikkor 35mm f/1.8G",
+   "orientation": 1,
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Nikon</maker>\n        <model>Nikon AF-S DX Nikkor 35mm f/1.8G</model>\n        <model lang=\"en\">NIKKOR AF-S 35mm f/1.8G DX</model>\n        <mount>Nikon F AF</mount>\n        <!-- Average crop factor of Nikon APS-C cameras -->\n        <cropfactor>1.528</cropfactor>\n        <calibration>\n            <distortion model=\"ptlens\" focal=\"35\" a=\"0.003\" b=\"-0.017\" c=\"0.005\" />\n            <tca model=\"linear\" focal=\"35\" kr=\"1.0003\" kb=\"1.0003\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"1.8\" distance=\"10\" k1=\"-0.3298\" k2=\"-0.0595\" k3=\"0.0938\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"1.8\" distance=\"1000\" k1=\"-0.3298\" k2=\"-0.0595\" k3=\"0.0938\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"2.8\" distance=\"10\" k1=\"-0.1367\" k2=\"0.0656\" k3=\"-0.0502\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.1367\" k2=\"0.0656\" k3=\"-0.0502\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"4\" distance=\"10\" k1=\"-0.1170\" k2=\"0.0027\" k3=\"0.0072\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"4\" distance=\"1000\" k1=\"-0.1170\" k2=\"0.0027\" k3=\"0.0072\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"5\" distance=\"10\" k1=\"-0.1203\" k2=\"0.0086\" k3=\"0.0030\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"5\" distance=\"1000\" k1=\"-0.1203\" k2=\"0.0086\" k3=\"0.0030\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"22\" distance=\"10\" k1=\"-0.1143\" k2=\"-0.0162\" k3=\"0.0186\" />\n            <vignetting model=\"pa\" focal=\"35\" aperture=\"22\" distance=\"1000\" k1=\"-0.1143\" k2=\"-0.0162\" k3=\"0.0186\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  "lensfun_distortion": false,
+  "lensfun_enabled": true,
+  "lensfun_scale": true,
+  "lensfun_tca": true,
+  "lensfun_vignette": true
+ },
+ "tca": {
+  "focal": 35.0,
+  "model": "linear",
+  "terms": [
+   1.0003000497817993,
+   1.0003000497817993,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "vignetting": {
+  "aperture": 4.0,
+  "distance": 1000.0,
+  "focal": 35.0,
+  "model": "pa",
+  "terms": [
+   -0.11699999868869781,
+   0.0027000000700354576,
+   0.007199999876320362
+  ]
+ },
+ "width": 96,
+ "xs": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  24,
+  48,
+  72,
+  91,
+  92,
+  93,
+  94,
+  95
+ ],
+ "ys": [
+  0,
+  1,
+  2,
+  16,
+  32,
+  48,
+  61,
+  62,
+  63
+ ]
+}

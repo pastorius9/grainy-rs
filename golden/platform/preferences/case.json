@@ -1,0 +1,554 @@
+{
+ "cases": [
+  {
+   "initial": null,
+   "name": "fresh",
+   "reread_language": "en",
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"language\": \"ko\"\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "ko",
+     "op": [
+      "save",
+      "language",
+      "\"ko\""
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"language\": \"ko\",\r\n  \"zeta\": 1\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "ko",
+     "op": [
+      "save",
+      "zeta",
+      "1"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"language\": \"ko\",\r\n  \"zeta\": 1,\r\n  \"alpha\": {\r\n    \"z\": 1,\r\n    \"a\": [\r\n      1,\r\n      2.5,\r\n      null,\r\n      true\r\n    ],\r\n    \"m\": {}\r\n  }\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "ko",
+     "op": [
+      "save",
+      "alpha",
+      "{\"z\": 1, \"a\": [1, 2.5, null, true], \"m\": {}}"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"language\": \"en\",\r\n  \"zeta\": 1,\r\n  \"alpha\": {\r\n    \"z\": 1,\r\n    \"a\": [\r\n      1,\r\n      2.5,\r\n      null,\r\n      true\r\n    ],\r\n    \"m\": {}\r\n  }\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "en",
+     "op": [
+      "save",
+      "language",
+      "\"en\""
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": null,
+   "name": "unicode_and_floats",
+   "reread_language": null,
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"title\": \"한글 é 😀 \\\"q\\\" \\\\ \\n \\t \\u0001\"\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "title",
+      "\"한글 \\u00e9 \\ud83d\\ude00 \\\"q\\\" \\\\ \\n \\t \\u0001\""
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"title\": \"한글 é 😀 \\\"q\\\" \\\\ \\n \\t \\u0001\",\r\n  \"f\": [\r\n    0.1,\r\n    1e-05,\r\n    1e+16,\r\n    100.0,\r\n    -0.0,\r\n    12345678.9,\r\n    1.5e+300,\r\n    9223372036854775807,\r\n    18446744073709551615\r\n  ]\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "f",
+      "[0.1, 1e-05, 1e16, 100.0, -0.0, 12345678.9, 1.5e300, 9223372036854775807, 18446744073709551615]"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"title\": \"한글 é 😀 \\\"q\\\" \\\\ \\n \\t \\u0001\",\r\n  \"f\": [\r\n    0.1,\r\n    1e-05,\r\n    1e+16,\r\n    100.0,\r\n    -0.0,\r\n    12345678.9,\r\n    1.5e+300,\r\n    9223372036854775807,\r\n    18446744073709551615\r\n  ],\r\n  \"empty_list\": []\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "empty_list",
+      "[]"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"title\": \"한글 é 😀 \\\"q\\\" \\\\ \\n \\t \\u0001\",\r\n  \"f\": [\r\n    0.1,\r\n    1e-05,\r\n    1e+16,\r\n    100.0,\r\n    -0.0,\r\n    12345678.9,\r\n    1.5e+300,\r\n    9223372036854775807,\r\n    18446744073709551615\r\n  ],\r\n  \"empty_list\": [],\r\n  \"nested\": [\r\n    [],\r\n    [\r\n      []\r\n    ],\r\n    {},\r\n    {\r\n      \"a\": {}\r\n    }\r\n  ]\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "nested",
+      "[[], [[]], {}, {\"a\": {}}]"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": null,
+   "name": "language_and_gpu",
+   "reread_language": "ko",
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"language\": \"en\"\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "en",
+     "op": [
+      "language",
+      "en",
+      null
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"language\": \"en\"\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "en",
+     "op": [
+      "language",
+      "xx",
+      null
+     ],
+     "outcome": "error",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"language\": \"en\"\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "en",
+     "op": [
+      "language",
+      "",
+      null
+     ],
+     "outcome": "error",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"language\": \"en\",\r\n  \"use_gpu\": false\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "en",
+     "op": [
+      "gpu",
+      false,
+      null
+     ],
+     "outcome": "ok",
+     "use_gpu": false
+    },
+    {
+     "file": "{\r\n  \"language\": \"en\",\r\n  \"use_gpu\": true\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "en",
+     "op": [
+      "gpu",
+      true,
+      null
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"language\": \"ko\",\r\n  \"use_gpu\": true\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "ko",
+     "op": [
+      "language",
+      "ko",
+      null
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": "{\"z\": 1, \"a\": 2, \"language\": \"en\", \"list\": [1, {\"k\": \"v\", \"b\": 1}]}\n",
+   "name": "existing_order_kept",
+   "reread_language": "en",
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"z\": 1,\r\n  \"a\": 5,\r\n  \"language\": \"en\",\r\n  \"list\": [\r\n    1,\r\n    {\r\n      \"k\": \"v\",\r\n      \"b\": 1\r\n    }\r\n  ]\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "en",
+     "op": [
+      "save",
+      "a",
+      "5"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"z\": 1,\r\n  \"a\": 5,\r\n  \"language\": \"en\",\r\n  \"list\": [\r\n    1,\r\n    {\r\n      \"k\": \"v\",\r\n      \"b\": 1\r\n    }\r\n  ],\r\n  \"new\": \"x\"\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": "en",
+     "op": [
+      "save",
+      "new",
+      "\"x\""
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": "{\"a\": 1, \"b\": 2, \"a\": 3}",
+   "name": "duplicate_keys",
+   "reread_language": null,
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"a\": 3,\r\n  \"b\": 2,\r\n  \"c\": 1\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "c",
+      "1"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": "[1, 2, 3]",
+   "name": "not_an_object",
+   "reread_language": null,
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"a\": 1\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "a",
+      "1"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": "{\"a\": 1",
+   "name": "damaged_file",
+   "reread_language": null,
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"a\": 1\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "a",
+      "1"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": "",
+   "name": "empty_file",
+   "reread_language": null,
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"a\": 1\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "a",
+      "1"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": "﻿{\"a\": 1}",
+   "name": "bom_file",
+   "reread_language": null,
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"b\": 2\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "b",
+      "2"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": "{\"a\": 1}",
+   "name": "other_writer_between",
+   "reread_language": null,
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\r\n  \"a\": 1,\r\n  \"b\": 2\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "b",
+      "2"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\"a\": 1, \"b\": 2, \"from_other\": true, \"feedback_sent\": [{\"ref\": \"AAAAA\", \"version\": \"0.6.8\", \"sent\": \"2026-11-01\"}]}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "external",
+      null,
+      "{\"a\": 1, \"b\": 2, \"from_other\": true, \"feedback_sent\": [{\"ref\": \"AAAAA\", \"version\": \"0.6.8\", \"sent\": \"2026-11-01\"}]}"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"a\": 1,\r\n  \"b\": 2,\r\n  \"from_other\": true,\r\n  \"feedback_sent\": [\r\n    {\r\n      \"ref\": \"AAAAA\",\r\n      \"version\": \"0.6.8\",\r\n      \"sent\": \"2026-11-01\"\r\n    }\r\n  ],\r\n  \"c\": 3\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "c",
+      "3"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "garbage",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "external",
+      null,
+      "garbage"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\r\n  \"a\": 1,\r\n  \"b\": 2,\r\n  \"from_other\": true,\r\n  \"feedback_sent\": [\r\n    {\r\n      \"ref\": \"AAAAA\",\r\n      \"version\": \"0.6.8\",\r\n      \"sent\": \"2026-11-01\"\r\n    }\r\n  ],\r\n  \"c\": 3,\r\n  \"d\": 4\r\n}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "save",
+      "d",
+      "4"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  },
+  {
+   "initial": "{\"use_gpu\": 0}",
+   "name": "gpu_false_variants",
+   "reread_language": null,
+   "reread_use_gpu": true,
+   "steps": [
+    {
+     "file": "{\"use_gpu\": 0}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "probe",
+      null,
+      null
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\"use_gpu\": false}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "external",
+      null,
+      "{\"use_gpu\": false}"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\"use_gpu\": false}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "probe",
+      null,
+      null
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\"use_gpu\": null}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "external",
+      null,
+      "{\"use_gpu\": null}"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\"use_gpu\": null}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "probe",
+      null,
+      null
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\"language\": 5}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "external",
+      null,
+      "{\"language\": 5}"
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    },
+    {
+     "file": "{\"language\": 5}",
+     "folder": [
+      "settings.json"
+     ],
+     "language": null,
+     "op": [
+      "probe",
+      null,
+      null
+     ],
+     "outcome": "ok",
+     "use_gpu": true
+    }
+   ]
+  }
+ ]
+}

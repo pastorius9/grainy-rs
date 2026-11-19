@@ -1,0 +1,15 @@
+{
+ "crop": [
+  0.05833,
+  0.05,
+  0.925,
+  0.925
+ ],
+ "kinds": {
+  "bottom": "dark",
+  "left": "dark",
+  "right": "dark",
+  "top": "dark"
+ },
+ "seed_label": "all_sides"
+}

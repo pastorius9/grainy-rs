@@ -1,0 +1,60 @@
+{
+ "learn_url": "https://pastorius9.github.io/grainy/learn/",
+ "rows": [
+  {
+   "checkable": false,
+   "shortcut": "",
+   "text": "언어 / Language…"
+  },
+  {
+   "checkable": true,
+   "shortcut": "",
+   "text": "GPU 가속 사용"
+  },
+  {
+   "checkable": true,
+   "checked": true,
+   "shortcut": "",
+   "text": "등록한 폴더의 새 사진 자동으로 가져오기"
+  },
+  {
+   "checkable": false,
+   "shortcut": "? / Ctrl+/",
+   "text": "단축키 목록…"
+  },
+  {
+   "checkable": false,
+   "shortcut": "",
+   "text": "Grainy 배우기 (웹 튜토리얼)…"
+  },
+  {
+   "checkable": true,
+   "checked": false,
+   "shortcut": "",
+   "text": "새 버전 자동 확인"
+  },
+  {
+   "checkable": false,
+   "shortcut": "",
+   "text": "업데이트 확인…"
+  },
+  {
+   "checkable": false,
+   "shortcut": "",
+   "text": "AI 연결 (MCP)…"
+  },
+  {
+   "separator": true
+  },
+  {
+   "checkable": false,
+   "shortcut": "",
+   "text": "이번 버전의 달라진 점…"
+  },
+  {
+   "checkable": false,
+   "shortcut": "",
+   "text": "Grainy 정보…"
+  }
+ ]
+}

@@ -1,0 +1,304 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "a.jpg": {
+     "fill": [
+      1,
+      1
+     ]
+    },
+    "b.jpg": {
+     "fill": [
+      2,
+      1
+     ]
+    },
+    "c.jpg": {
+     "fill": [
+      3,
+      1
+     ]
+    }
+   },
+   "photos": [
+    {
+     "path": "$ROOT/a.jpg"
+    },
+    {
+     "path": "$ROOT/b.jpg"
+    },
+    {
+     "path": "$ROOT/c.jpg"
+    }
+   ],
+   "db": [
+    [
+     "UPDATE photos SET edits=? WHERE id=1",
+     [
+      "{\"exposure\": 1, \"dcp_profile\": {\"name\": \"one\", \"sha256\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\", \"data\": \"RENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkU=\"}}"
+     ]
+    ],
+    [
+     "UPDATE photos SET edits=? WHERE id=2",
+     [
+      "{\"exposure\": 1, \"dcp_profile\": {\"name\": \"one-again\", \"sha256\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\", \"data\": \"RENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkU=\"}}"
+     ]
+    ],
+    [
+     "UPDATE photos SET edits=? WHERE id=3",
+     [
+      "{\"exposure\": 1, \"dcp_profile\": {\"name\": \"two\", \"sha256\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\", \"data\": \"RENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXTw==\"}}"
+     ]
+    ],
+    [
+     "INSERT INTO history(photo_id,label,edits,created) VALUES(1,'h',?,'t')",
+     [
+      "{\"exposure\": 1, \"dcp_profile\": {\"name\": \"hist\", \"sha256\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\", \"data\": \"RENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXTw==\"}}"
+     ]
+    ],
+    [
+     "INSERT INTO presets(name,edits) VALUES('p',?)",
+     [
+      "[{\"dcp_profile\": {\"name\": \"preset\", \"sha256\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\", \"data\": \"RENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkU=\"}}]"
+     ]
+    ],
+    [
+     "INSERT INTO preferences VALUES('undo:1',?)",
+     [
+      "{\"undo\": [{\"dcp_profile\": {\"name\": \"u\", \"sha256\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\", \"data\": \"RENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXT0RDUC1UV09EQ1AtVFdPRENQLVRXTw==\"}}]}"
+     ]
+    ],
+    [
+     "INSERT INTO preferences VALUES('other',?)",
+     [
+      "{\"dcp_profile\": {\"name\": \"ignored\", \"sha256\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\", \"data\": \"RENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkU=\"}}"
+     ]
+    ],
+    [
+     "INSERT INTO profile_assets VALUES(?,?,?)",
+     [
+      "274617bb10b16f70bd05899ecb8652a7025e1834c101a5331061d6bc9a2971b7",
+      {
+       "blob_hex": "4443502d4f525048414e4443502d4f525048414e4443502d4f525048414e4443502d4f525048414e4443502d4f525048414e"
+      },
+      50
+     ]
+    ]
+   ]
+  },
+  "calls": [
+   {
+    "fn": "optimize",
+    "args": {
+     "batch_size": 1
+    }
+   }
+  ],
+  "name": "optimize_batches"
+ },
+ "results": [
+  {
+   "ok": {
+    "converted": 6,
+    "examined": 6,
+    "total": 6,
+    "removed_assets": 1,
+    "profiles": 2,
+    "cancelled": false,
+    "vacuumed": true,
+    "warnings": [],
+    "warning_count": 0,
+    "has_backup": true,
+    "integrity": "ok",
+    "stages": [
+     [
+      "안전 백업 중",
+      0,
+      0
+     ],
+     [
+      "중복 프로파일 정리 중",
+      1,
+      6
+     ],
+     [
+      "중복 프로파일 정리 중",
+      2,
+      6
+     ],
+     [
+      "중복 프로파일 정리 중",
+      3,
+      6
+     ],
+     [
+      "중복 프로파일 정리 중",
+      4,
+      6
+     ],
+     [
+      "중복 프로파일 정리 중",
+      5,
+      6
+     ],
+     [
+      "중복 프로파일 정리 중",
+      6,
+      6
+     ],
+     [
+      "프로파일 연결 검사 중",
+      6,
+      6
+     ],
+     [
+      "빈 공간 회수 중",
+      6,
+      6
+     ],
+     [
+      "무결성 확인 중",
+      6,
+      6
+     ]
+    ],
+    "checkpoint_len": 3,
+    "tables_equal": false,
+    "tables": {
+     "photos": [
+      [
+       1,
+       "$ROOT\\a.jpg",
+       "a.jpg",
+       0,
+       0,
+       "",
+       "{\"exposure\": 1, \"dcp_profile\": {\"name\": \"one\", \"sha256\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\", \"data_ref\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\"}}",
+       "{}",
+       "",
+       null,
+       null,
+       "{}"
+      ],
+      [
+       2,
+       "$ROOT\\b.jpg",
+       "b.jpg",
+       0,
+       0,
+       "",
+       "{\"exposure\": 1, \"dcp_profile\": {\"name\": \"one-again\", \"sha256\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\", \"data_ref\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\"}}",
+       "{}",
+       "",
+       null,
+       null,
+       "{}"
+      ],
+      [
+       3,
+       "$ROOT\\c.jpg",
+       "c.jpg",
+       0,
+       0,
+       "",
+       "{\"exposure\": 1, \"dcp_profile\": {\"name\": \"two\", \"sha256\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\", \"data_ref\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\"}}",
+       "{}",
+       "",
+       null,
+       null,
+       "{}"
+      ]
+     ],
+     "history": [
+      [
+       1,
+       1,
+       "h",
+       "{\"exposure\": 1, \"dcp_profile\": {\"name\": \"hist\", \"sha256\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\", \"data_ref\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\"}}",
+       "t"
+      ]
+     ],
+     "presets": [
+      [
+       "p",
+       "[{\"dcp_profile\": {\"name\": \"preset\", \"sha256\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\", \"data_ref\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\"}}]"
+      ]
+     ],
+     "snapshots": [],
+     "preferences": [
+      [
+       "other",
+       "{\"dcp_profile\": {\"name\": \"ignored\", \"sha256\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\", \"data\": \"RENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkU=\"}}"
+      ],
+      [
+       "undo:1",
+       "{\"undo\": [{\"dcp_profile\": {\"name\": \"u\", \"sha256\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\", \"data_ref\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\"}}]}"
+      ]
+     ],
+     "profile_assets": [
+      [
+       "056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d",
+       "4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f4443502d54574f",
+       217
+      ],
+      [
+       "896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49",
+       "4443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e454443502d4f4e45",
+       140
+      ]
+     ]
+    }
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "a.jpg": {
+    "size": 1,
+    "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+   },
+   "b.jpg": {
+    "size": 1,
+    "sha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+   },
+   "c.jpg": {
+    "size": 1,
+    "sha256": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+   }
+  },
+  "dirs": []
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\c.jpg",
+    "name": "c.jpg",
+    "virtual_source": null
+   }
+  ],
+  "folder_roots": [
+   "$ROOT"
+  ],
+  "preferences": {
+   "other": "{\"dcp_profile\": {\"name\": \"ignored\", \"sha256\": \"896ff0c7ffb1e268168ac20c43cade446ef4c5b5c0b5e1b93413e64a6743fd49\", \"data\": \"RENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkVEQ1AtT05FRENQLU9ORURDUC1PTkU=\"}}",
+   "undo:1": "{\"undo\": [{\"dcp_profile\": {\"name\": \"u\", \"sha256\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\", \"data_ref\": \"056e5935d1c02a28786a175b21b167685be009555a42cd9c7a25f898630c515d\"}}]}"
+  },
+  "backup_names": [
+   "before-optimize-<stamp>-<id>.sqlite"
+  ]
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "detected": true,
+ "error": {
+  "message": "긴 기준선들의 방향이 서로 다릅니다. 아래 수평 슬라이더로 조절해 주세요.",
+  "type": "AlignmentError"
+ },
+ "height": 400,
+ "lines_none": false,
+ "mode": "auto",
+ "result": null,
+ "width": 600
+}

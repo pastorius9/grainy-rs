@@ -1,0 +1,11 @@
+{
+ "info": {
+  "channels": 3,
+  "colorspace": "lab",
+  "description": "Lab identity built-in",
+  "deviceclass": "abstract",
+  "pcs": "lab",
+  "version": 4.4
+ },
+ "size": 428
+}

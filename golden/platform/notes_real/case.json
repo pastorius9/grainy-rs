@@ -1,0 +1,4026 @@
+{
+ "cases": [
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 476,
+   "markdown_sha256": "480bff2f4e7c3bdbff2d6c5c6a2b60b0514e7d3963dc64f6e14e5579fb9d961d",
+   "previous": null
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 476,
+   "markdown_sha256": "480bff2f4e7c3bdbff2d6c5c6a2b60b0514e7d3963dc64f6e14e5579fb9d961d",
+   "previous": ""
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 476,
+   "markdown_sha256": "480bff2f4e7c3bdbff2d6c5c6a2b60b0514e7d3963dc64f6e14e5579fb9d961d",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 1532,
+   "markdown_sha256": "ca54b7daaa7975f08da596164f032f0e320cc4879ea0ef3924a990d84778fa33",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 476,
+   "markdown_sha256": "480bff2f4e7c3bdbff2d6c5c6a2b60b0514e7d3963dc64f6e14e5579fb9d961d",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 476,
+   "markdown_sha256": "480bff2f4e7c3bdbff2d6c5c6a2b60b0514e7d3963dc64f6e14e5579fb9d961d",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 476,
+   "markdown_sha256": "480bff2f4e7c3bdbff2d6c5c6a2b60b0514e7d3963dc64f6e14e5579fb9d961d",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 1184,
+     "sha256": "d5912e8c850d6ef39570024ef73580c8b005336a13d392d061312531cf1063fb",
+     "title": "패널 켜기/끄기, 단축키, 하늘 선택, 부드러운 하이라이트, 따라 하는 튜토리얼",
+     "version": "0.6.0"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 1241,
+   "markdown_sha256": "1e1cf6f0f6894fae19d8497388ffe8dd2982d89c06962997d9c4b1c226ec1bee",
+   "previous": null
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 1184,
+     "sha256": "d5912e8c850d6ef39570024ef73580c8b005336a13d392d061312531cf1063fb",
+     "title": "패널 켜기/끄기, 단축키, 하늘 선택, 부드러운 하이라이트, 따라 하는 튜토리얼",
+     "version": "0.6.0"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 1241,
+   "markdown_sha256": "1e1cf6f0f6894fae19d8497388ffe8dd2982d89c06962997d9c4b1c226ec1bee",
+   "previous": ""
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 1184,
+     "sha256": "d5912e8c850d6ef39570024ef73580c8b005336a13d392d061312531cf1063fb",
+     "title": "패널 켜기/끄기, 단축키, 하늘 선택, 부드러운 하이라이트, 따라 하는 튜토리얼",
+     "version": "0.6.0"
+    },
+    {
+     "chars": 432,
+     "sha256": "35c54544266f3f8ab377a2f8b3b227622305b631a89ee35bd7e6162b839a65fa",
+     "title": "프리셋 패널에서 회사별로 필름 고르기",
+     "version": "0.5.99"
+    },
+    {
+     "chars": 1092,
+     "sha256": "3d6b6754ac74558db7ba9c20b036f90f751cbde1744799b9d99ee61f199b2dba",
+     "title": "필름 룩 82종",
+     "version": "0.5.98"
+    },
+    {
+     "chars": 870,
+     "sha256": "25338e28fbc66bab77eb8f4caace56c6eb23677b7e62ff78adfbcd5cb537abf4",
+     "title": "AI 프로그램에서 Grainy에게 일 시키기 (MCP)",
+     "version": "0.5.97"
+    },
+    {
+     "chars": 764,
+     "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+     "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 4551,
+   "markdown_sha256": "d0b83bb4ab8c291746747c246bb2738df134bd1f3f0ee7f1eeec0eaaa6037d86",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 1184,
+     "sha256": "d5912e8c850d6ef39570024ef73580c8b005336a13d392d061312531cf1063fb",
+     "title": "패널 켜기/끄기, 단축키, 하늘 선택, 부드러운 하이라이트, 따라 하는 튜토리얼",
+     "version": "0.6.0"
+    },
+    {
+     "chars": 432,
+     "sha256": "35c54544266f3f8ab377a2f8b3b227622305b631a89ee35bd7e6162b839a65fa",
+     "title": "프리셋 패널에서 회사별로 필름 고르기",
+     "version": "0.5.99"
+    },
+    {
+     "chars": 1092,
+     "sha256": "3d6b6754ac74558db7ba9c20b036f90f751cbde1744799b9d99ee61f199b2dba",
+     "title": "필름 룩 82종",
+     "version": "0.5.98"
+    },
+    {
+     "chars": 870,
+     "sha256": "25338e28fbc66bab77eb8f4caace56c6eb23677b7e62ff78adfbcd5cb537abf4",
+     "title": "AI 프로그램에서 Grainy에게 일 시키기 (MCP)",
+     "version": "0.5.97"
+    },
+    {
+     "chars": 764,
+     "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+     "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 4551,
+   "markdown_sha256": "d0b83bb4ab8c291746747c246bb2738df134bd1f3f0ee7f1eeec0eaaa6037d86",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 1184,
+     "sha256": "d5912e8c850d6ef39570024ef73580c8b005336a13d392d061312531cf1063fb",
+     "title": "패널 켜기/끄기, 단축키, 하늘 선택, 부드러운 하이라이트, 따라 하는 튜토리얼",
+     "version": "0.6.0"
+    },
+    {
+     "chars": 432,
+     "sha256": "35c54544266f3f8ab377a2f8b3b227622305b631a89ee35bd7e6162b839a65fa",
+     "title": "프리셋 패널에서 회사별로 필름 고르기",
+     "version": "0.5.99"
+    },
+    {
+     "chars": 1092,
+     "sha256": "3d6b6754ac74558db7ba9c20b036f90f751cbde1744799b9d99ee61f199b2dba",
+     "title": "필름 룩 82종",
+     "version": "0.5.98"
+    },
+    {
+     "chars": 870,
+     "sha256": "25338e28fbc66bab77eb8f4caace56c6eb23677b7e62ff78adfbcd5cb537abf4",
+     "title": "AI 프로그램에서 Grainy에게 일 시키기 (MCP)",
+     "version": "0.5.97"
+    },
+    {
+     "chars": 764,
+     "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+     "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 4551,
+   "markdown_sha256": "d0b83bb4ab8c291746747c246bb2738df134bd1f3f0ee7f1eeec0eaaa6037d86",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 1184,
+     "sha256": "d5912e8c850d6ef39570024ef73580c8b005336a13d392d061312531cf1063fb",
+     "title": "패널 켜기/끄기, 단축키, 하늘 선택, 부드러운 하이라이트, 따라 하는 튜토리얼",
+     "version": "0.6.0"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 1241,
+   "markdown_sha256": "1e1cf6f0f6894fae19d8497388ffe8dd2982d89c06962997d9c4b1c226ec1bee",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 1184,
+     "sha256": "d5912e8c850d6ef39570024ef73580c8b005336a13d392d061312531cf1063fb",
+     "title": "패널 켜기/끄기, 단축키, 하늘 선택, 부드러운 하이라이트, 따라 하는 튜토리얼",
+     "version": "0.6.0"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 1241,
+   "markdown_sha256": "1e1cf6f0f6894fae19d8497388ffe8dd2982d89c06962997d9c4b1c226ec1bee",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 459,
+   "markdown_sha256": "f4d4e79b28f9ba03f8518126b980bc48fe2945141661204a4ec6649774e9ada8",
+   "previous": null
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 459,
+   "markdown_sha256": "f4d4e79b28f9ba03f8518126b980bc48fe2945141661204a4ec6649774e9ada8",
+   "previous": ""
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 459,
+   "markdown_sha256": "f4d4e79b28f9ba03f8518126b980bc48fe2945141661204a4ec6649774e9ada8",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 581,
+     "sha256": "cf38d0db2f1dd065926961545f3e98ea7ec35635e1b17ac0e24c4127f4079749",
+     "title": "AI에게 시키기: Grainy 안에서 Claude Code·Codex·Gemini CLI에게 일 시키기",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 923,
+     "sha256": "831c8346950680203a80aa0e355f8200fa35588ac408b83648528d6eb3712745",
+     "title": "AI 연결: 크롭·자동 수평, 필름 비교 시트, 한 번에 고르기, 더 안전하게",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 3050,
+   "markdown_sha256": "bfd18c80c82e1882219ef2280c1af7b54445c6f98d061e067470a05be16c9fd9",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 581,
+     "sha256": "cf38d0db2f1dd065926961545f3e98ea7ec35635e1b17ac0e24c4127f4079749",
+     "title": "AI에게 시키기: Grainy 안에서 Claude Code·Codex·Gemini CLI에게 일 시키기",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 923,
+     "sha256": "831c8346950680203a80aa0e355f8200fa35588ac408b83648528d6eb3712745",
+     "title": "AI 연결: 크롭·자동 수평, 필름 비교 시트, 한 번에 고르기, 더 안전하게",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 3050,
+   "markdown_sha256": "bfd18c80c82e1882219ef2280c1af7b54445c6f98d061e067470a05be16c9fd9",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 581,
+     "sha256": "cf38d0db2f1dd065926961545f3e98ea7ec35635e1b17ac0e24c4127f4079749",
+     "title": "AI에게 시키기: Grainy 안에서 Claude Code·Codex·Gemini CLI에게 일 시키기",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 923,
+     "sha256": "831c8346950680203a80aa0e355f8200fa35588ac408b83648528d6eb3712745",
+     "title": "AI 연결: 크롭·자동 수평, 필름 비교 시트, 한 번에 고르기, 더 안전하게",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 3050,
+   "markdown_sha256": "bfd18c80c82e1882219ef2280c1af7b54445c6f98d061e067470a05be16c9fd9",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 581,
+     "sha256": "cf38d0db2f1dd065926961545f3e98ea7ec35635e1b17ac0e24c4127f4079749",
+     "title": "AI에게 시키기: Grainy 안에서 Claude Code·Codex·Gemini CLI에게 일 시키기",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 923,
+     "sha256": "831c8346950680203a80aa0e355f8200fa35588ac408b83648528d6eb3712745",
+     "title": "AI 연결: 크롭·자동 수평, 필름 비교 시트, 한 번에 고르기, 더 안전하게",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 3050,
+   "markdown_sha256": "bfd18c80c82e1882219ef2280c1af7b54445c6f98d061e067470a05be16c9fd9",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 459,
+   "markdown_sha256": "f4d4e79b28f9ba03f8518126b980bc48fe2945141661204a4ec6649774e9ada8",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 581,
+     "sha256": "cf38d0db2f1dd065926961545f3e98ea7ec35635e1b17ac0e24c4127f4079749",
+     "title": "AI에게 시키기: Grainy 안에서 Claude Code·Codex·Gemini CLI에게 일 시키기",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 923,
+     "sha256": "831c8346950680203a80aa0e355f8200fa35588ac408b83648528d6eb3712745",
+     "title": "AI 연결: 크롭·자동 수평, 필름 비교 시트, 한 번에 고르기, 더 안전하게",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 3050,
+   "markdown_sha256": "bfd18c80c82e1882219ef2280c1af7b54445c6f98d061e067470a05be16c9fd9",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 764,
+     "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+     "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 808,
+   "markdown_sha256": "55af62f6f3f1dfd4b7fbd2cb7cd26d7c993973e5e03dd72133494f0d548af6e6",
+   "previous": null
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 764,
+     "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+     "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 808,
+   "markdown_sha256": "55af62f6f3f1dfd4b7fbd2cb7cd26d7c993973e5e03dd72133494f0d548af6e6",
+   "previous": ""
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 764,
+     "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+     "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+     "version": "0.5.96"
+    },
+    {
+     "chars": 464,
+     "sha256": "b0d8783430ecadee0ab5aebfefe7fe6a64794b31060234da0298978a2d8f7657",
+     "title": "피드백 접수 번호와 반영 알림",
+     "version": "0.5.95"
+    },
+    {
+     "chars": 815,
+     "sha256": "125c43004de6090ec9ab72e2cd24a3bab05a1792d98cc4748eebd4f6780c9a5f",
+     "title": "방사형 그레이디언트 회전, 사진 배경색, 마스크 표시 자동 숨김",
+     "version": "0.5.94"
+    },
+    {
+     "chars": 555,
+     "sha256": "fa69751945331b72352262f289b2b59ae4e23942470ac8ea95cfb20701c38cb0",
+     "title": "브러시가 고른 밝기에만 작용",
+     "version": "0.5.93"
+    },
+    {
+     "chars": 462,
+     "sha256": "cb8d7748424de79a1e03f3d3c69714cbfbf79a7a44afa1860121f0a45aa67e21",
+     "title": "업데이트 뒤 달라진 점 안내, 숫자 칸 화살표",
+     "version": "0.5.92"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 3259,
+   "markdown_sha256": "b7be77145a30ffad6e60f9faf1ec3a327d6cbd129c5425a35bf7fc931abfb5c6",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 764,
+     "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+     "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+     "version": "0.5.96"
+    },
+    {
+     "chars": 464,
+     "sha256": "b0d8783430ecadee0ab5aebfefe7fe6a64794b31060234da0298978a2d8f7657",
+     "title": "피드백 접수 번호와 반영 알림",
+     "version": "0.5.95"
+    },
+    {
+     "chars": 815,
+     "sha256": "125c43004de6090ec9ab72e2cd24a3bab05a1792d98cc4748eebd4f6780c9a5f",
+     "title": "방사형 그레이디언트 회전, 사진 배경색, 마스크 표시 자동 숨김",
+     "version": "0.5.94"
+    },
+    {
+     "chars": 555,
+     "sha256": "fa69751945331b72352262f289b2b59ae4e23942470ac8ea95cfb20701c38cb0",
+     "title": "브러시가 고른 밝기에만 작용",
+     "version": "0.5.93"
+    },
+    {
+     "chars": 462,
+     "sha256": "cb8d7748424de79a1e03f3d3c69714cbfbf79a7a44afa1860121f0a45aa67e21",
+     "title": "업데이트 뒤 달라진 점 안내, 숫자 칸 화살표",
+     "version": "0.5.92"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 3259,
+   "markdown_sha256": "b7be77145a30ffad6e60f9faf1ec3a327d6cbd129c5425a35bf7fc931abfb5c6",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 764,
+     "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+     "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+     "version": "0.5.96"
+    },
+    {
+     "chars": 464,
+     "sha256": "b0d8783430ecadee0ab5aebfefe7fe6a64794b31060234da0298978a2d8f7657",
+     "title": "피드백 접수 번호와 반영 알림",
+     "version": "0.5.95"
+    },
+    {
+     "chars": 815,
+     "sha256": "125c43004de6090ec9ab72e2cd24a3bab05a1792d98cc4748eebd4f6780c9a5f",
+     "title": "방사형 그레이디언트 회전, 사진 배경색, 마스크 표시 자동 숨김",
+     "version": "0.5.94"
+    },
+    {
+     "chars": 555,
+     "sha256": "fa69751945331b72352262f289b2b59ae4e23942470ac8ea95cfb20701c38cb0",
+     "title": "브러시가 고른 밝기에만 작용",
+     "version": "0.5.93"
+    },
+    {
+     "chars": 462,
+     "sha256": "cb8d7748424de79a1e03f3d3c69714cbfbf79a7a44afa1860121f0a45aa67e21",
+     "title": "업데이트 뒤 달라진 점 안내, 숫자 칸 화살표",
+     "version": "0.5.92"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 3259,
+   "markdown_sha256": "b7be77145a30ffad6e60f9faf1ec3a327d6cbd129c5425a35bf7fc931abfb5c6",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 764,
+     "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+     "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 808,
+   "markdown_sha256": "55af62f6f3f1dfd4b7fbd2cb7cd26d7c993973e5e03dd72133494f0d548af6e6",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": null
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": ""
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 476,
+   "markdown_sha256": "480bff2f4e7c3bdbff2d6c5c6a2b60b0514e7d3963dc64f6e14e5579fb9d961d",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 1532,
+   "markdown_sha256": "ca54b7daaa7975f08da596164f032f0e320cc4879ea0ef3924a990d84778fa33",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.1"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "garbage"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 2489,
+   "markdown_sha256": "0100592b3541f22ccb09b79d648264ea8cfdfb647835bd090f25aa63e85665f4",
+   "previous": "0.6"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 476,
+   "markdown_sha256": "480bff2f4e7c3bdbff2d6c5c6a2b60b0514e7d3963dc64f6e14e5579fb9d961d",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "ko",
+   "markdown_chars": 476,
+   "markdown_sha256": "480bff2f4e7c3bdbff2d6c5c6a2b60b0514e7d3963dc64f6e14e5579fb9d961d",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": null
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": ""
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": null
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": ""
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.1"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "garbage"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "ko",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 450,
+   "markdown_sha256": "d1d30e2f829d5b50ca7d28472d8b2dad4b06a519e34c011b2a439c5e0859305a",
+   "previous": null
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 450,
+   "markdown_sha256": "d1d30e2f829d5b50ca7d28472d8b2dad4b06a519e34c011b2a439c5e0859305a",
+   "previous": ""
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 450,
+   "markdown_sha256": "d1d30e2f829d5b50ca7d28472d8b2dad4b06a519e34c011b2a439c5e0859305a",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 1668,
+   "markdown_sha256": "f34f8684e3efc3c497b994471b1d6602cefe4af40eec89b664675a0563cca5cd",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 450,
+   "markdown_sha256": "d1d30e2f829d5b50ca7d28472d8b2dad4b06a519e34c011b2a439c5e0859305a",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 450,
+   "markdown_sha256": "d1d30e2f829d5b50ca7d28472d8b2dad4b06a519e34c011b2a439c5e0859305a",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.6.8",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 450,
+   "markdown_sha256": "d1d30e2f829d5b50ca7d28472d8b2dad4b06a519e34c011b2a439c5e0859305a",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 790,
+     "sha256": "50f52c270f97cabe31101917f24b751de37eec67030228ebf86c0dfa195d954c",
+     "title": "Panel switches, more shortcuts, Select Sky, smooth highlights, a hands-on tutorial",
+     "version": "0.6.0"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 885,
+   "markdown_sha256": "8fefd6746e74a6ebf1266bee006e23c82a6d2a39a0cb0ce991fff246901f6289",
+   "previous": null
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 790,
+     "sha256": "50f52c270f97cabe31101917f24b751de37eec67030228ebf86c0dfa195d954c",
+     "title": "Panel switches, more shortcuts, Select Sky, smooth highlights, a hands-on tutorial",
+     "version": "0.6.0"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 885,
+   "markdown_sha256": "8fefd6746e74a6ebf1266bee006e23c82a6d2a39a0cb0ce991fff246901f6289",
+   "previous": ""
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 790,
+     "sha256": "50f52c270f97cabe31101917f24b751de37eec67030228ebf86c0dfa195d954c",
+     "title": "Panel switches, more shortcuts, Select Sky, smooth highlights, a hands-on tutorial",
+     "version": "0.6.0"
+    },
+    {
+     "chars": 367,
+     "sha256": "fd5904376b5bdcc4a72aa89dbf215bdeeae51f35c219d1817bcb977adba6c392",
+     "title": "Film looks in the Presets panel",
+     "version": "0.5.99"
+    },
+    {
+     "chars": 611,
+     "sha256": "3d3ac86e98050377096b0d7b0c7d33943c9b84e216d243f6bdd158e52d3f115f",
+     "title": "82 film looks",
+     "version": "0.5.98"
+    },
+    {
+     "chars": 701,
+     "sha256": "64fafd15a8a8d66434ecf6b001aad81b56f270a5eba7fb28f82a3d76af1488cc",
+     "title": "Let an AI program work in Grainy (MCP)",
+     "version": "0.5.97"
+    },
+    {
+     "chars": 681,
+     "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+     "title": "Photos no longer go offline after updating on macOS",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3442,
+   "markdown_sha256": "47cdb2ab06bbe55be5be114c1815b7797c8d979eb61d3c2aae71d86406ca5c3b",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 790,
+     "sha256": "50f52c270f97cabe31101917f24b751de37eec67030228ebf86c0dfa195d954c",
+     "title": "Panel switches, more shortcuts, Select Sky, smooth highlights, a hands-on tutorial",
+     "version": "0.6.0"
+    },
+    {
+     "chars": 367,
+     "sha256": "fd5904376b5bdcc4a72aa89dbf215bdeeae51f35c219d1817bcb977adba6c392",
+     "title": "Film looks in the Presets panel",
+     "version": "0.5.99"
+    },
+    {
+     "chars": 611,
+     "sha256": "3d3ac86e98050377096b0d7b0c7d33943c9b84e216d243f6bdd158e52d3f115f",
+     "title": "82 film looks",
+     "version": "0.5.98"
+    },
+    {
+     "chars": 701,
+     "sha256": "64fafd15a8a8d66434ecf6b001aad81b56f270a5eba7fb28f82a3d76af1488cc",
+     "title": "Let an AI program work in Grainy (MCP)",
+     "version": "0.5.97"
+    },
+    {
+     "chars": 681,
+     "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+     "title": "Photos no longer go offline after updating on macOS",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3442,
+   "markdown_sha256": "47cdb2ab06bbe55be5be114c1815b7797c8d979eb61d3c2aae71d86406ca5c3b",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 790,
+     "sha256": "50f52c270f97cabe31101917f24b751de37eec67030228ebf86c0dfa195d954c",
+     "title": "Panel switches, more shortcuts, Select Sky, smooth highlights, a hands-on tutorial",
+     "version": "0.6.0"
+    },
+    {
+     "chars": 367,
+     "sha256": "fd5904376b5bdcc4a72aa89dbf215bdeeae51f35c219d1817bcb977adba6c392",
+     "title": "Film looks in the Presets panel",
+     "version": "0.5.99"
+    },
+    {
+     "chars": 611,
+     "sha256": "3d3ac86e98050377096b0d7b0c7d33943c9b84e216d243f6bdd158e52d3f115f",
+     "title": "82 film looks",
+     "version": "0.5.98"
+    },
+    {
+     "chars": 701,
+     "sha256": "64fafd15a8a8d66434ecf6b001aad81b56f270a5eba7fb28f82a3d76af1488cc",
+     "title": "Let an AI program work in Grainy (MCP)",
+     "version": "0.5.97"
+    },
+    {
+     "chars": 681,
+     "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+     "title": "Photos no longer go offline after updating on macOS",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3442,
+   "markdown_sha256": "47cdb2ab06bbe55be5be114c1815b7797c8d979eb61d3c2aae71d86406ca5c3b",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 790,
+     "sha256": "50f52c270f97cabe31101917f24b751de37eec67030228ebf86c0dfa195d954c",
+     "title": "Panel switches, more shortcuts, Select Sky, smooth highlights, a hands-on tutorial",
+     "version": "0.6.0"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 885,
+   "markdown_sha256": "8fefd6746e74a6ebf1266bee006e23c82a6d2a39a0cb0ce991fff246901f6289",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [
+    {
+     "chars": 790,
+     "sha256": "50f52c270f97cabe31101917f24b751de37eec67030228ebf86c0dfa195d954c",
+     "title": "Panel switches, more shortcuts, Select Sky, smooth highlights, a hands-on tutorial",
+     "version": "0.6.0"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 885,
+   "markdown_sha256": "8fefd6746e74a6ebf1266bee006e23c82a6d2a39a0cb0ce991fff246901f6289",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.6.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 537,
+   "markdown_sha256": "bc330cecf9bc6af6ae4f81fd11879caa6040517c271f59390dd6d5b756a6f7ff",
+   "previous": null
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 537,
+   "markdown_sha256": "bc330cecf9bc6af6ae4f81fd11879caa6040517c271f59390dd6d5b756a6f7ff",
+   "previous": ""
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 537,
+   "markdown_sha256": "bc330cecf9bc6af6ae4f81fd11879caa6040517c271f59390dd6d5b756a6f7ff",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 605,
+     "sha256": "737b232a5704ddaa4b3a19a0518053d2e804281ab8753fb9a79c091049cd4d62",
+     "title": "Ask AI: give Claude Code, Codex or Gemini CLI a task from inside Grainy",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 821,
+     "sha256": "6a6a33e8a33ec5873a1f2fd492fe6b413cf67dc419879bc8d8cbb5180b440b5b",
+     "title": "AI connection: crop and straighten, look comparison sheets, culling in one call, safer",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3206,
+   "markdown_sha256": "7788c43d35283ead0f5b4bf68f4517bd8aa4d41bf35a96f3e91fdb550cce2435",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 605,
+     "sha256": "737b232a5704ddaa4b3a19a0518053d2e804281ab8753fb9a79c091049cd4d62",
+     "title": "Ask AI: give Claude Code, Codex or Gemini CLI a task from inside Grainy",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 821,
+     "sha256": "6a6a33e8a33ec5873a1f2fd492fe6b413cf67dc419879bc8d8cbb5180b440b5b",
+     "title": "AI connection: crop and straighten, look comparison sheets, culling in one call, safer",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3206,
+   "markdown_sha256": "7788c43d35283ead0f5b4bf68f4517bd8aa4d41bf35a96f3e91fdb550cce2435",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 605,
+     "sha256": "737b232a5704ddaa4b3a19a0518053d2e804281ab8753fb9a79c091049cd4d62",
+     "title": "Ask AI: give Claude Code, Codex or Gemini CLI a task from inside Grainy",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 821,
+     "sha256": "6a6a33e8a33ec5873a1f2fd492fe6b413cf67dc419879bc8d8cbb5180b440b5b",
+     "title": "AI connection: crop and straighten, look comparison sheets, culling in one call, safer",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3206,
+   "markdown_sha256": "7788c43d35283ead0f5b4bf68f4517bd8aa4d41bf35a96f3e91fdb550cce2435",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 605,
+     "sha256": "737b232a5704ddaa4b3a19a0518053d2e804281ab8753fb9a79c091049cd4d62",
+     "title": "Ask AI: give Claude Code, Codex or Gemini CLI a task from inside Grainy",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 821,
+     "sha256": "6a6a33e8a33ec5873a1f2fd492fe6b413cf67dc419879bc8d8cbb5180b440b5b",
+     "title": "AI connection: crop and straighten, look comparison sheets, culling in one call, safer",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3206,
+   "markdown_sha256": "7788c43d35283ead0f5b4bf68f4517bd8aa4d41bf35a96f3e91fdb550cce2435",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 537,
+   "markdown_sha256": "bc330cecf9bc6af6ae4f81fd11879caa6040517c271f59390dd6d5b756a6f7ff",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    },
+    {
+     "chars": 605,
+     "sha256": "737b232a5704ddaa4b3a19a0518053d2e804281ab8753fb9a79c091049cd4d62",
+     "title": "Ask AI: give Claude Code, Codex or Gemini CLI a task from inside Grainy",
+     "version": "0.6.3"
+    },
+    {
+     "chars": 821,
+     "sha256": "6a6a33e8a33ec5873a1f2fd492fe6b413cf67dc419879bc8d8cbb5180b440b5b",
+     "title": "AI connection: crop and straighten, look comparison sheets, culling in one call, safer",
+     "version": "0.6.2"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3206,
+   "markdown_sha256": "7788c43d35283ead0f5b4bf68f4517bd8aa4d41bf35a96f3e91fdb550cce2435",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.6.6",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 681,
+     "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+     "title": "Photos no longer go offline after updating on macOS",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 746,
+   "markdown_sha256": "a11fa7780fac7380f1a9e50bc443b6056335c3d4cb3735324d143dadfc209d97",
+   "previous": null
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 681,
+     "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+     "title": "Photos no longer go offline after updating on macOS",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 746,
+   "markdown_sha256": "a11fa7780fac7380f1a9e50bc443b6056335c3d4cb3735324d143dadfc209d97",
+   "previous": ""
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 681,
+     "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+     "title": "Photos no longer go offline after updating on macOS",
+     "version": "0.5.96"
+    },
+    {
+     "chars": 383,
+     "sha256": "6a93e2265a1be35b46aac384167ed1323a192f6ff93ad891bfa11b75fc11031e",
+     "title": "Feedback reference numbers",
+     "version": "0.5.95"
+    },
+    {
+     "chars": 734,
+     "sha256": "bf77da52278f280f2e0bc3b5c30ec7a7ff1bc9cd337f0e848c7bf41f64a72983",
+     "title": "Turned radial gradients, photo background, overlay that steps aside",
+     "version": "0.5.94"
+    },
+    {
+     "chars": 519,
+     "sha256": "401bb54e574da20ce5c61848e3c93b174836b7e7cf4def834244481ec58bfb1c",
+     "title": "A brush that acts on chosen tones only",
+     "version": "0.5.93"
+    },
+    {
+     "chars": 485,
+     "sha256": "f39e7757eb373d890548131b1bece1d8ede0d270e196d108bd3dcfef6f22c70e",
+     "title": "What's new after an update, spin box arrows",
+     "version": "0.5.92"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3105,
+   "markdown_sha256": "5d29e04815bb7c38bbcf7fdf40f16c9739c308652364e70d96cc3be2cdf91395",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 681,
+     "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+     "title": "Photos no longer go offline after updating on macOS",
+     "version": "0.5.96"
+    },
+    {
+     "chars": 383,
+     "sha256": "6a93e2265a1be35b46aac384167ed1323a192f6ff93ad891bfa11b75fc11031e",
+     "title": "Feedback reference numbers",
+     "version": "0.5.95"
+    },
+    {
+     "chars": 734,
+     "sha256": "bf77da52278f280f2e0bc3b5c30ec7a7ff1bc9cd337f0e848c7bf41f64a72983",
+     "title": "Turned radial gradients, photo background, overlay that steps aside",
+     "version": "0.5.94"
+    },
+    {
+     "chars": 519,
+     "sha256": "401bb54e574da20ce5c61848e3c93b174836b7e7cf4def834244481ec58bfb1c",
+     "title": "A brush that acts on chosen tones only",
+     "version": "0.5.93"
+    },
+    {
+     "chars": 485,
+     "sha256": "f39e7757eb373d890548131b1bece1d8ede0d270e196d108bd3dcfef6f22c70e",
+     "title": "What's new after an update, spin box arrows",
+     "version": "0.5.92"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3105,
+   "markdown_sha256": "5d29e04815bb7c38bbcf7fdf40f16c9739c308652364e70d96cc3be2cdf91395",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 681,
+     "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+     "title": "Photos no longer go offline after updating on macOS",
+     "version": "0.5.96"
+    },
+    {
+     "chars": 383,
+     "sha256": "6a93e2265a1be35b46aac384167ed1323a192f6ff93ad891bfa11b75fc11031e",
+     "title": "Feedback reference numbers",
+     "version": "0.5.95"
+    },
+    {
+     "chars": 734,
+     "sha256": "bf77da52278f280f2e0bc3b5c30ec7a7ff1bc9cd337f0e848c7bf41f64a72983",
+     "title": "Turned radial gradients, photo background, overlay that steps aside",
+     "version": "0.5.94"
+    },
+    {
+     "chars": 519,
+     "sha256": "401bb54e574da20ce5c61848e3c93b174836b7e7cf4def834244481ec58bfb1c",
+     "title": "A brush that acts on chosen tones only",
+     "version": "0.5.93"
+    },
+    {
+     "chars": 485,
+     "sha256": "f39e7757eb373d890548131b1bece1d8ede0d270e196d108bd3dcfef6f22c70e",
+     "title": "What's new after an update, spin box arrows",
+     "version": "0.5.92"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 3105,
+   "markdown_sha256": "5d29e04815bb7c38bbcf7fdf40f16c9739c308652364e70d96cc3be2cdf91395",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [
+    {
+     "chars": 681,
+     "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+     "title": "Photos no longer go offline after updating on macOS",
+     "version": "0.5.96"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 746,
+   "markdown_sha256": "a11fa7780fac7380f1a9e50bc443b6056335c3d4cb3735324d143dadfc209d97",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.5.96",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": null
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": ""
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 450,
+   "markdown_sha256": "d1d30e2f829d5b50ca7d28472d8b2dad4b06a519e34c011b2a439c5e0859305a",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 1668,
+   "markdown_sha256": "f34f8684e3efc3c497b994471b1d6602cefe4af40eec89b664675a0563cca5cd",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.1"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "1.0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "garbage"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 2724,
+   "markdown_sha256": "e1492d2ef5695f09b02a29275bca783acbf8abb1a0f70c012e765498b34e5f78",
+   "previous": "0.6"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 450,
+   "markdown_sha256": "d1d30e2f829d5b50ca7d28472d8b2dad4b06a519e34c011b2a439c5e0859305a",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "1.0",
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "lang": "en",
+   "markdown_chars": 450,
+   "markdown_sha256": "d1d30e2f829d5b50ca7d28472d8b2dad4b06a519e34c011b2a439c5e0859305a",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": null
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": ""
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.1"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "garbage"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0.0.1",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": null
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": ""
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.5"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.0"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.5.90"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.5.1"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.1"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.8"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.9"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "999"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "garbage"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "v0.6.7-beta"
+  },
+  {
+   "current": "0",
+   "entries": [],
+   "lang": "en",
+   "markdown_chars": 0,
+   "markdown_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "previous": "0.6.7.2.1"
+  }
+ ],
+ "real": {
+  "changelog": [
+   {
+    "chars": 429,
+    "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+    "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+    "version": "0.6.8"
+   },
+   {
+    "chars": 543,
+    "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+    "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+    "version": "0.6.7"
+   },
+   {
+    "chars": 419,
+    "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+    "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+    "version": "0.6.6"
+   },
+   {
+    "chars": 406,
+    "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+    "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+    "version": "0.6.5"
+   },
+   {
+    "chars": 447,
+    "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+    "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+    "version": "0.6.4"
+   },
+   {
+    "chars": 581,
+    "sha256": "cf38d0db2f1dd065926961545f3e98ea7ec35635e1b17ac0e24c4127f4079749",
+    "title": "AI에게 시키기: Grainy 안에서 Claude Code·Codex·Gemini CLI에게 일 시키기",
+    "version": "0.6.3"
+   },
+   {
+    "chars": 923,
+    "sha256": "831c8346950680203a80aa0e355f8200fa35588ac408b83648528d6eb3712745",
+    "title": "AI 연결: 크롭·자동 수평, 필름 비교 시트, 한 번에 고르기, 더 안전하게",
+    "version": "0.6.2"
+   },
+   {
+    "chars": 1033,
+    "sha256": "843620f7be203f974006d9b1cfacb29fcf26c2f836000c7658f2254529a653bf",
+    "title": "단축키 더, AI 연결로 회전·가상 사본·원하는 폴더로 내보내기·폴더 가져오기",
+    "version": "0.6.1"
+   },
+   {
+    "chars": 1184,
+    "sha256": "d5912e8c850d6ef39570024ef73580c8b005336a13d392d061312531cf1063fb",
+    "title": "패널 켜기/끄기, 단축키, 하늘 선택, 부드러운 하이라이트, 따라 하는 튜토리얼",
+    "version": "0.6.0"
+   },
+   {
+    "chars": 432,
+    "sha256": "35c54544266f3f8ab377a2f8b3b227622305b631a89ee35bd7e6162b839a65fa",
+    "title": "프리셋 패널에서 회사별로 필름 고르기",
+    "version": "0.5.99"
+   },
+   {
+    "chars": 1092,
+    "sha256": "3d6b6754ac74558db7ba9c20b036f90f751cbde1744799b9d99ee61f199b2dba",
+    "title": "필름 룩 82종",
+    "version": "0.5.98"
+   },
+   {
+    "chars": 870,
+    "sha256": "25338e28fbc66bab77eb8f4caace56c6eb23677b7e62ff78adfbcd5cb537abf4",
+    "title": "AI 프로그램에서 Grainy에게 일 시키기 (MCP)",
+    "version": "0.5.97"
+   },
+   {
+    "chars": 764,
+    "sha256": "349eed84db9599e48cac766c490d691adca58b248453a2b3d24b0e93260895cb",
+    "title": "macOS에서 업데이트 후 사진이 오프라인이 되던 문제",
+    "version": "0.5.96"
+   },
+   {
+    "chars": 464,
+    "sha256": "b0d8783430ecadee0ab5aebfefe7fe6a64794b31060234da0298978a2d8f7657",
+    "title": "피드백 접수 번호와 반영 알림",
+    "version": "0.5.95"
+   },
+   {
+    "chars": 815,
+    "sha256": "125c43004de6090ec9ab72e2cd24a3bab05a1792d98cc4748eebd4f6780c9a5f",
+    "title": "방사형 그레이디언트 회전, 사진 배경색, 마스크 표시 자동 숨김",
+    "version": "0.5.94"
+   },
+   {
+    "chars": 555,
+    "sha256": "fa69751945331b72352262f289b2b59ae4e23942470ac8ea95cfb20701c38cb0",
+    "title": "브러시가 고른 밝기에만 작용",
+    "version": "0.5.93"
+   },
+   {
+    "chars": 462,
+    "sha256": "cb8d7748424de79a1e03f3d3c69714cbfbf79a7a44afa1860121f0a45aa67e21",
+    "title": "업데이트 뒤 달라진 점 안내, 숫자 칸 화살표",
+    "version": "0.5.92"
+   },
+   {
+    "chars": 875,
+    "sha256": "a7d6e2bac1e1db785106e36981ec6dadfee4aa84d0265cd30dfb481988981685",
+    "title": "창 안에서 두 장 비교, 스포이드 돋보기",
+    "version": "0.5.91"
+   },
+   {
+    "chars": 512,
+    "sha256": "c0550537965dc0a7f8c860de53ff2aba69bf101846ac258c1d692ab39da7c3ba",
+    "title": "네거티브 한 롤을 같은 기준으로 반전",
+    "version": "0.5.90"
+   },
+   {
+    "chars": 193,
+    "sha256": "8891191c907bad1615f4d2925c984f43f2ee807f23b15356fefca6382fccf843",
+    "title": "피드백 버튼 위치",
+    "version": "0.5.89"
+   },
+   {
+    "chars": 1271,
+    "sha256": "a27a614409a2a2977f7516b57415171bc0aa736dc14779f4bef9823d53d29cef",
+    "title": "네거티브 반전 다듬기",
+    "version": "0.5.88"
+   },
+   {
+    "chars": 935,
+    "sha256": "966d33695289d8b0aab0e46298d055f34f2fcff1b85823159f13229a024d08e4",
+    "title": "네거티브 필름 반전",
+    "version": "0.5.87"
+   },
+   {
+    "chars": 1150,
+    "sha256": "ffc478c515bdacc985338348fd37181ed9cbe7151f1c8400f27182f7daee41df",
+    "title": "가져온 폴더를 카탈로그에서 제거",
+    "version": "0.5.86"
+   },
+   {
+    "chars": 1356,
+    "sha256": "607da4871111a3c44abdde9e9b1d43ca02463d33d1d04b39ee5b400e7a9970b6",
+    "title": "하이라이트·그림자 반응을 다시 설계",
+    "version": "0.5.85"
+   },
+   {
+    "chars": 1211,
+    "sha256": "25f80009f3f95ef497482dd38f253c2c855679beabac6b23d957caa031784868",
+    "title": "macOS(Apple Silicon) 첫 배포",
+    "version": "0.5.84"
+   },
+   {
+    "chars": 731,
+    "sha256": "1b3e959c8e5b48976f09187b6cca4bae569d73a22700cb9da8028eabef81400b",
+    "title": "여러 장 내보내기가 약 20% 빨라짐",
+    "version": "0.5.83"
+   },
+   {
+    "chars": 905,
+    "sha256": "2e09a5d9b7a9785a9103aa697853c7090a3a26f5ea8b0bbce31b4aab196fe5cf",
+    "title": "자동 수평 맞추기가 엉뚱하게 돌리던 문제, Enter로 크롭 적용",
+    "version": "0.5.82"
+   },
+   {
+    "chars": 822,
+    "sha256": "f83fabd9dfab85e193c5d916ba6d2e2608c43e2ee739ff53223746718e2fd61d",
+    "title": "수평 맞추기를 다시 만듦",
+    "version": "0.5.81"
+   },
+   {
+    "chars": 486,
+    "sha256": "364ffe401f974530642b55295f99eb6ec57a16436fa9fcd8c65cb5c4435e8061",
+    "title": "하이라이트·그림자 슬라이더 개선",
+    "version": "0.5.80"
+   },
+   {
+    "chars": 458,
+    "sha256": "50deea1fb04f9866665578707de87ce16c81bfccac1152255ec010db604f5553",
+    "title": "업데이트, 편집 메뉴",
+    "version": "0.5.79"
+   },
+   {
+    "chars": 560,
+    "sha256": "7f2d419d100cd77c7c3c14ea322099f688de79612e22f93ba04e6ed860ff63dd",
+    "title": "마스크 탭을 다시 만듦",
+    "version": "0.5.78"
+   },
+   {
+    "chars": 106,
+    "sha256": "f38167abdd2f6288c222c64ff36c25d5d934c7d2c7ab32db4f4b131485db9a2b",
+    "title": "화면 위 이름 표기",
+    "version": "0.5.77"
+   },
+   {
+    "chars": 257,
+    "sha256": "b044cea606644266303d281227ac348242fbb42f77b9eae3c41f97bc0fa93ba0",
+    "title": "피드백 보내기",
+    "version": "0.5.76"
+   },
+   {
+    "chars": 164,
+    "sha256": "a279c7373058fae317573dddff3284920f423e68afed9c0365a54d3d690dafcb",
+    "title": "공개 배포 준비",
+    "version": "0.5.75"
+   },
+   {
+    "chars": 339,
+    "sha256": "6090ec7abc97bb377187c1ad2fbd236ef8770c151fc66f68b999af7e35267e3e",
+    "title": "동영상 기능 제거, 배포 점검",
+    "version": "0.5.74"
+   },
+   {
+    "chars": 399,
+    "sha256": "5794b07b867f234f98da87c554628201e9684a699b78de7026e6cfb5cd742307",
+    "title": "HDR 편집 모드 끔",
+    "version": "0.5.73"
+   },
+   {
+    "chars": 390,
+    "sha256": "7c880c8a0023adb2a5d1c0de0c58fdf3f7e84f125400ac8b0a205d4e690189c6",
+    "title": "필름 색온도 변환 버튼",
+    "version": "0.5.72"
+   },
+   {
+    "chars": 721,
+    "sha256": "1266b97c9307d2af92037b4577956d8d82594656732882dc1fb60f22777413a7",
+    "title": "폴더 새 사진 자동 가져오기, 자동 색",
+    "version": "0.5.71"
+   },
+   {
+    "chars": 376,
+    "sha256": "97f46fd4177dc5bf24e6358867f738049fa1b44fa3c1a0249d9d8c7f4c1c85db",
+    "title": "구글 드라이브 백업",
+    "version": "0.5.70"
+   },
+   {
+    "chars": 512,
+    "sha256": "d1d4651b7aec7ff6f833b4d9b775c240805c176440e1b80c1dfb0f6511699521",
+    "title": "로고와 앱 아이콘",
+    "version": "0.5.69"
+   },
+   {
+    "chars": 612,
+    "sha256": "09f51cfa04c7ed9569d802bf81060db20487d5b3a77b1f0a5c5726426715e794",
+    "title": "슬라이더 반응 개선 (화면 기준 152 → 69ms)",
+    "version": "0.5.68"
+   },
+   {
+    "chars": 823,
+    "sha256": "135a065dea8f5d5daf643b66bde24a8da5ed332a5a43f49369e9fb5f8c031214",
+    "title": "복사해서 가져오기, AVIF·JPEG XL 내보내기",
+    "version": "0.5.67"
+   },
+   {
+    "chars": 553,
+    "sha256": "3e125247749ef3ca8618b3b3a7a9b8eb3df458d2fdc46d4940795f6b7e4caf9e",
+    "title": "화면 기준 속도 측정, 슬라이더 반응 개선",
+    "version": "0.5.66"
+   },
+   {
+    "chars": 588,
+    "sha256": "16e18d69869907007f095e587a23f1b1a3a9d9c5379575e776526f1528d079fa",
+    "title": "효과 패널: 비네팅 모양, 그레인 크기·거칠기",
+    "version": "0.5.65"
+   },
+   {
+    "chars": 586,
+    "sha256": "d8e5b8ec9a42ffbcf034cbaaad29e226c7aaabb142135f34f7850290589031c4",
+    "title": "사진에서 직접 조정, 슬라이더별 자동",
+    "version": "0.5.64"
+   },
+   {
+    "chars": 688,
+    "sha256": "21849457d97b4c6566bce3de0d95bdb4ddb0d42888f2636bb4976ccb24cf613f",
+    "title": "6개 카메라로 고감도 RAW 기본값을 다시 고름",
+    "version": "0.5.63"
+   },
+   {
+    "chars": 632,
+    "sha256": "02f8e7625b18e3e280191f60c2f2ff3fd410b782a887a925d43ca1df2002a7d7",
+    "title": "마스크도 새 처리 방식, 극고감도 RAW 기본값",
+    "version": "0.5.62"
+   },
+   {
+    "chars": 1138,
+    "sha256": "2a47a937352149963b095d40761540a19afa16a92525c4f65e4e127b1cbc39cb",
+    "title": "웨이블릿 밝기 노이즈 제거",
+    "version": "0.5.61"
+   },
+   {
+    "chars": 787,
+    "sha256": "e81051d986b30b19a5ffbcc06ebe9da8a602bbce5064d9ce5b7d0792b2fce173",
+    "title": "밝기만 샤픈, ISO별 RAW 기본 노이즈 제거",
+    "version": "0.5.60"
+   },
+   {
+    "chars": 1158,
+    "sha256": "ecd75a248156f900e7aba367d849f6f8b07bfb25db7726016c32dbfc4c469c7d",
+    "title": "고감도 RAW 색 노이즈 제거 개선",
+    "version": "0.5.59"
+   },
+   {
+    "chars": 1085,
+    "sha256": "18879ec72af51784060b22c72b9e0623b367aedcf6e9b7fa9cc88afd2ed1729d",
+    "title": "실제 카메라 RAW 개선: 가짜 색, 사진 정보, RAW 기본 현상",
+    "version": "0.5.58"
+   },
+   {
+    "chars": 590,
+    "sha256": "4d990db3035d25690c1743c3d58d85724fa3ee6022e4e30ba789ec9d64127995",
+    "title": "노이즈 제거·샤픈 측정, 샤픈 범위 0–150",
+    "version": "0.5.57"
+   },
+   {
+    "chars": 1076,
+    "sha256": "a408fcc5282ea43879b476834105986ba1e8cafd822b35b1b5ec08b43b2b4c8f",
+    "title": "하이라이트 롤오프, 내보내기 축소",
+    "version": "0.5.56"
+   },
+   {
+    "chars": 381,
+    "sha256": "a332f3be36720f101d6daa6f7aaa434d9418f5ff956fc4068465b536d3869f21",
+    "title": "선택한 사진 일괄 자동 톤·테두리 자르기",
+    "version": "0.5.55"
+   },
+   {
+    "chars": 572,
+    "sha256": "e8c085908b0670a3d9682ecb82e21335c39fd4a2af257849102ec8e637b54d58",
+    "title": "스캔 테두리 자동 자르기",
+    "version": "0.5.54"
+   },
+   {
+    "chars": 764,
+    "sha256": "ebb9ea1893b2cce2099d99e99853cef7f80a834d0b7081fe97aa3de9c3d4d4ac",
+    "title": "흑백 파일 저장, 8비트 디더링",
+    "version": "0.5.53"
+   },
+   {
+    "chars": 855,
+    "sha256": "3e3a7d08348d42fc9d07112a1898541b7d6ecfba854adf67ec192adac4a72461",
+    "title": "흑백·색 프로필 JPEG 읽기 가속",
+    "version": "0.5.52"
+   },
+   {
+    "chars": 828,
+    "sha256": "3c0f6479f918dbc836489f772bdd42e59c00206ce7a132463696eac0dfc0a698",
+    "title": "실제 라이브러리 기준: HDR·먼지/힐링 가속",
+    "version": "0.5.51"
+   },
+   {
+    "chars": 1072,
+    "sha256": "835788eaf9c95da403c3118ac434c15c85c9c0a032892f7796f0b97b23f3b3b8",
+    "title": "마스크·그레인까지 GPU에서, 화면 표시 가속",
+    "version": "0.5.50"
+   },
+   {
+    "chars": 1017,
+    "sha256": "764105ae7026073fcc0d9e215627d3082cad0c654d79cbad8cd4f6eda2c7ed2f",
+    "title": "GPU에 중간 결과 보관, TIFF·RAW 내보내기 속도",
+    "version": "0.5.49"
+   },
+   {
+    "chars": 1142,
+    "sha256": "56a3a524191a1daac284b78a6409bfd7ff4593ebf84641aa62a103e7b178f47d",
+    "title": "형태 보정·안개 제거·포인트 컬러 GPU",
+    "version": "0.5.48"
+   },
+   {
+    "chars": 615,
+    "sha256": "b5dec73ed1ee01b6938a9bd5194500faf5ac1905b2756b7f15f57835ff5fe5f8",
+    "title": "사진 넘기기와 형태 보정 속도",
+    "version": "0.5.47"
+   },
+   {
+    "chars": 1939,
+    "sha256": "3d169fe3a1c01e57726cf7e00fd1fdb2fbe0cc51f1cb46dbefc05980e3257410",
+    "title": "GPU 현상과 속도 개선",
+    "version": "0.5.46"
+   },
+   {
+    "chars": 731,
+    "sha256": "fd4133fb267b689f827ee8dadc2c68e77078dc1445bb2015540e347643b2f68e",
+    "title": "사진 작업 메뉴 연결",
+    "version": "0.5.45"
+   },
+   {
+    "chars": 407,
+    "sha256": "42654bccda376950073c640a971ad65c6fa8798647a345a66ae5b0a1f4ef21d9",
+    "title": "표시 후 한꺼번에 실행하는 힐링 브러시",
+    "version": "0.5.44"
+   },
+   {
+    "chars": 691,
+    "sha256": "815c1e82a12fc0b135942c82f384ac671519d677e320cacbd5e450b952c7219c",
+    "title": "HDR 표시와 SDR 미리보기 분리",
+    "version": "0.5.43"
+   },
+   {
+    "chars": 403,
+    "sha256": "2dcf0ab477650459c7a1819a929b492217a6ee2f4a4266c05011d0f95e4cc77d",
+    "title": "현상 오른쪽 패널 재구성",
+    "version": "0.5.42"
+   },
+   {
+    "chars": 373,
+    "sha256": "47a87c9f5486ba3bb03e444fdead14f0dd5c90c561f7ec122f640491947ab75b",
+    "title": "빠른 내보내기·컬러 필터·스포이드 커서",
+    "version": "0.5.41"
+   },
+   {
+    "chars": 402,
+    "sha256": "eae5ef2c1305d3721d0456db777a70ad9d4e2c9e39d5a016c307f567f85b065d",
+    "title": "이전부터 누락된 폴더 자동 찾기",
+    "version": "0.5.40"
+   },
+   {
+    "chars": 393,
+    "sha256": "32baaa53ad5b061da041828075f2a2460f2a01e7c8ef720809405b41936529cb",
+    "title": "실제 폴더 자동 갱신과 위치 복구",
+    "version": "0.5.39"
+   },
+   {
+    "chars": 80,
+    "sha256": "3b5d78ae8fafff9be668c91316a2378ea90ddfbe947856bd7ebce3606f0efeaa",
+    "title": "현상 사진 공간 확대",
+    "version": "0.5.38"
+   },
+   {
+    "chars": 326,
+    "sha256": "7f3e79ed99133fbd180dc4e391c6663a3979485980859c237a2134b534ed4427",
+    "title": "수동 힐링 브러시",
+    "version": "0.5.37"
+   },
+   {
+    "chars": 808,
+    "sha256": "92ad52d15b95f615c0a810b71adf44f79b776362f27e51c649fc60e3c74c9cfe",
+    "title": "Grainy, 한국어·영어, 직각 UI, 숫자 입력과 HDR",
+    "version": "0.5.36"
+   },
+   {
+    "chars": 675,
+    "sha256": "1585a59b3945ab19fb77fcf2f31e3c39354c5854839fe7376898c8cd6886f91e",
+    "title": "사진 탐색·우클릭 메뉴와 크롭 초기화",
+    "version": "0.5.35"
+   },
+   {
+    "chars": 513,
+    "sha256": "bbf2c8c692336dbae398694060d24bfdf6f00423492b8d4e9f4e13f921437cf1",
+    "title": "최근 사진 다시 열기 가속",
+    "version": "0.5.34"
+   },
+   {
+    "chars": 332,
+    "sha256": "7d64235289c6f9c20c49be7c5560f92be62e132bdfb37c31d11658143dfb212a",
+    "title": "마스크의 색상·밝기 범위 선택과 실시간 다듬기",
+    "version": "0.5.33"
+   },
+   {
+    "chars": 377,
+    "sha256": "f82404fd0386b018a2b419d74c226c2b08a1b957b5d026d4df7ee45ec1d40277",
+    "title": "부분 색상표와 선택 색상 범위",
+    "version": "0.5.32"
+   },
+   {
+    "chars": 353,
+    "sha256": "951c9eaf0291c63989c770f80f449429baa96d58e9a926b6547b607e7d0d803f",
+    "title": "먼지 복구의 주변 질감 보존",
+    "version": "0.5.31"
+   },
+   {
+    "chars": 415,
+    "sha256": "2d8f2c3a07b7a896ff6dc6641747ee4b9262fbb374051138ae5155ee888f67da",
+    "title": "긴 흠집 후보·드래그 표시",
+    "version": "0.5.30"
+   },
+   {
+    "chars": 278,
+    "sha256": "d807890049632d979b776846e9530622067142b85b79e74a035de1b63cb27ddf",
+    "title": "먼지 검색 계산 최적화",
+    "version": "0.5.29"
+   },
+   {
+    "chars": 395,
+    "sha256": "bef44912eafeb108222256d6310012334aee10f225e85c3a3fe38fe58538121a",
+    "title": "선택적 입자 후보 억제·작은 창 개선",
+    "version": "0.5.28"
+   },
+   {
+    "chars": 481,
+    "sha256": "b6d54ce6fce0143b64584183bc7c2fd73c4be1b296f7ac7f4a5dc25a8c1f5860",
+    "title": "먼지 검토 자동 저장·재실행 복원",
+    "version": "0.5.27"
+   },
+   {
+    "chars": 371,
+    "sha256": "db6bf0e42addd509ac15dedd12963cde01a766d87e762ba09ad7d6a3cb55db40",
+    "title": "입자 속 옅은 먼지 추가 검색",
+    "version": "0.5.26"
+   },
+   {
+    "chars": 462,
+    "sha256": "28d44780f8541b02360bbccc1bf1029cd97e2f5822f81dd900c55f316eea120c",
+    "title": "폴더·선택 사진의 먼지 검출과 개별 검토",
+    "version": "0.5.25"
+   },
+   {
+    "chars": 390,
+    "sha256": "2f590e5e48caa30374c8398f6a29c39a12f1d2324ea349ea505b69af417bfa98",
+    "title": "먼지 검색 계산 최적화와 후보 더 보기",
+    "version": "0.5.24"
+   },
+   {
+    "chars": 379,
+    "sha256": "d0bf8d00282c1c130a1a896c731497be20681f094332c8d776575923576ba9c9",
+    "title": "먼지 정밀 검색과 강조·수동 검토",
+    "version": "0.5.23"
+   },
+   {
+    "chars": 386,
+    "sha256": "0921b8e791b3e7020ab1dfa6fda5b01ac10a09cb123922a478ddaaf3ce3a73d9",
+    "title": "검은 점·흰 먼지 자동 감지와 후보 검토",
+    "version": "0.5.22"
+   },
+   {
+    "chars": 379,
+    "sha256": "0e3e8c1699bd9a172432f86f76fccf2ad02d4b0befe71f0e984bf75f38e34e30",
+    "title": "Codex 폴더·선택 사진 일괄 명령",
+    "version": "0.5.21"
+   },
+   {
+    "chars": 410,
+    "sha256": "f2aac98ff47aa6b7e35dcb3a6348660f03191dd94c8ec3290d4d3d0ee38ca52a",
+    "title": "원본 픽셀 기준 디테일 미리보기",
+    "version": "0.5.20"
+   },
+   {
+    "chars": 334,
+    "sha256": "682f9de3bff97e0e2b05f0141143dcd2bfc77419849ef1522e69f5d15decbb25",
+    "title": "칠하는 중 미리보기·색 경계·부분 커브",
+    "version": "0.5.19"
+   },
+   {
+    "chars": 281,
+    "sha256": "b94cef751614df790e992a6c3a55d0d9eaa4504231424e1d0176e413d469caf3",
+    "title": "수동 마스크 편집 확장",
+    "version": "0.5.18"
+   },
+   {
+    "chars": 334,
+    "sha256": "92bfb2b1e84bc6107c685da6559c1ada743f936aa681f9c29c25313be42e8f46",
+    "title": "픽셀 계산 병렬 처리",
+    "version": "0.5.17"
+   },
+   {
+    "chars": 307,
+    "sha256": "b8bc0e34f854422468b1d517f8a6b4ac7b295637ed5628db5e6da40f49e6c55e",
+    "title": "영상 색 관리·전체 프레임 보정·구간 출력",
+    "version": "0.5.16"
+   },
+   {
+    "chars": 386,
+    "sha256": "85c7edb43b568fa507ce18cf1f990e1be362a7c5b0420e2348b85edc51518387",
+    "title": "Adobe 보정·이력·프리셋과 동적 스마트 컬렉션",
+    "version": "0.5.15"
+   },
+   {
+    "chars": 203,
+    "sha256": "f260a515155f0525ffc98712a916513e8229785e18f8a63a035f95d6333f575b",
+    "title": "Lightroom 분류·컬렉션 가져오기",
+    "version": "0.5.14"
+   },
+   {
+    "chars": 9311,
+    "sha256": "2c18fdcd1ab58e0d83b289ed9e1b835debfce59dff22f195b6c9eb6af5d68042",
+    "title": "RAW 카메라 프로파일 반응 개선",
+    "version": "0.5.13"
+   }
+  ],
+  "english": [
+   {
+    "chars": 381,
+    "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+    "title": "Safe start: after a crash, update before any photo opens",
+    "version": "0.6.8"
+   },
+   {
+    "chars": 602,
+    "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+    "title": "macOS: no more quitting when an assistive app reads the window",
+    "version": "0.6.7"
+   },
+   {
+    "chars": 473,
+    "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+    "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+    "version": "0.6.6"
+   },
+   {
+    "chars": 436,
+    "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+    "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+    "version": "0.6.5"
+   },
+   {
+    "chars": 473,
+    "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+    "title": "Ask AI: sign-in status, official sign-in and install buttons",
+    "version": "0.6.4"
+   },
+   {
+    "chars": 605,
+    "sha256": "737b232a5704ddaa4b3a19a0518053d2e804281ab8753fb9a79c091049cd4d62",
+    "title": "Ask AI: give Claude Code, Codex or Gemini CLI a task from inside Grainy",
+    "version": "0.6.3"
+   },
+   {
+    "chars": 821,
+    "sha256": "6a6a33e8a33ec5873a1f2fd492fe6b413cf67dc419879bc8d8cbb5180b440b5b",
+    "title": "AI connection: crop and straighten, look comparison sheets, culling in one call, safer",
+    "version": "0.6.2"
+   },
+   {
+    "chars": 749,
+    "sha256": "82aed3a73b9639ab5f65c222fd550b0d4abe8aea0c2232df813586972096dbd8",
+    "title": "More shortcuts; the AI connection rotates, copies, imports and exports to any folder",
+    "version": "0.6.1"
+   },
+   {
+    "chars": 790,
+    "sha256": "50f52c270f97cabe31101917f24b751de37eec67030228ebf86c0dfa195d954c",
+    "title": "Panel switches, more shortcuts, Select Sky, smooth highlights, a hands-on tutorial",
+    "version": "0.6.0"
+   },
+   {
+    "chars": 367,
+    "sha256": "fd5904376b5bdcc4a72aa89dbf215bdeeae51f35c219d1817bcb977adba6c392",
+    "title": "Film looks in the Presets panel",
+    "version": "0.5.99"
+   },
+   {
+    "chars": 611,
+    "sha256": "3d3ac86e98050377096b0d7b0c7d33943c9b84e216d243f6bdd158e52d3f115f",
+    "title": "82 film looks",
+    "version": "0.5.98"
+   },
+   {
+    "chars": 701,
+    "sha256": "64fafd15a8a8d66434ecf6b001aad81b56f270a5eba7fb28f82a3d76af1488cc",
+    "title": "Let an AI program work in Grainy (MCP)",
+    "version": "0.5.97"
+   },
+   {
+    "chars": 681,
+    "sha256": "47de6deddffa15c5fe0595a0b4408afde09080699f7e8c9548ce36d223369a32",
+    "title": "Photos no longer go offline after updating on macOS",
+    "version": "0.5.96"
+   },
+   {
+    "chars": 383,
+    "sha256": "6a93e2265a1be35b46aac384167ed1323a192f6ff93ad891bfa11b75fc11031e",
+    "title": "Feedback reference numbers",
+    "version": "0.5.95"
+   },
+   {
+    "chars": 734,
+    "sha256": "bf77da52278f280f2e0bc3b5c30ec7a7ff1bc9cd337f0e848c7bf41f64a72983",
+    "title": "Turned radial gradients, photo background, overlay that steps aside",
+    "version": "0.5.94"
+   },
+   {
+    "chars": 519,
+    "sha256": "401bb54e574da20ce5c61848e3c93b174836b7e7cf4def834244481ec58bfb1c",
+    "title": "A brush that acts on chosen tones only",
+    "version": "0.5.93"
+   },
+   {
+    "chars": 485,
+    "sha256": "f39e7757eb373d890548131b1bece1d8ede0d270e196d108bd3dcfef6f22c70e",
+    "title": "What's new after an update, spin box arrows",
+    "version": "0.5.92"
+   }
+  ]
+ }
+}

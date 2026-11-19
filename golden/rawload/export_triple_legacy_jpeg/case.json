@@ -1,0 +1,18 @@
+{
+ "bytes": 1664,
+ "extension": ".jpg",
+ "file": "triple.dng",
+ "height": 100,
+ "lossless": false,
+ "options": {
+  "color_space": "sRGB",
+  "format": "JPEG",
+  "longest": null,
+  "quality": 90
+ },
+ "settings": {
+  "exposure": 0.3,
+  "raw_mode": "legacy"
+ },
+ "width": 150
+}

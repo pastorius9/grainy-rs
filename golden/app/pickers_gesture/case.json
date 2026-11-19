@@ -1,0 +1,589 @@
+{
+ "drag": 4,
+ "photo_rect": [
+  142.99999999999972,
+  77.99999999999984,
+  656.1034482758607,
+  420.06896551724054
+ ],
+ "scripts": [
+  {
+   "name": "click",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "click",
+       0.3059811827956989,
+       0.35665322580645165
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": true
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     300,
+     200
+    ],
+    [
+     "release",
+     300,
+     200
+    ]
+   ]
+  },
+  {
+   "name": "click_with_a_small_move",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "click",
+       0.3059811827956989,
+       0.35665322580645165
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": true
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     300,
+     200
+    ],
+    [
+     "move",
+     302,
+     202
+    ],
+    [
+     "release",
+     303,
+     202
+    ]
+   ]
+  },
+  {
+   "name": "drag_just_far_enough",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": [
+      0.3059811827956989,
+      0.35665322580645165,
+      0.3137768817204301,
+      0.35957661290322585
+     ],
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "area",
+       0.3059811827956989,
+       0.35665322580645165,
+       0.3137768817204301,
+       0.35957661290322585
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": true
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     300,
+     200
+    ],
+    [
+     "move",
+     303,
+     200
+    ],
+    [
+     "move",
+     304,
+     201
+    ],
+    [
+     "release",
+     304,
+     201
+    ]
+   ]
+  },
+  {
+   "name": "drag_a_rectangle",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": [
+      0.20853494623655916,
+      0.21048387096774196,
+      0.3059811827956989,
+      0.35665322580645165
+     ],
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": [
+      0.20853494623655916,
+      0.21048387096774196,
+      0.5398521505376344,
+      0.5320564516129033
+     ],
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "area",
+       0.20853494623655916,
+       0.21048387096774196,
+       0.5398521505376344,
+       0.5320564516129033
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": true
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     250,
+     150
+    ],
+    [
+     "move",
+     300,
+     200
+    ],
+    [
+     "move",
+     420,
+     260
+    ],
+    [
+     "release",
+     420,
+     260
+    ]
+   ]
+  },
+  {
+   "name": "drag_up_and_left",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": [
+      0.4618951612903226,
+      0.4443548387096774,
+      0.5398521505376344,
+      0.5320564516129033
+     ],
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "area",
+       0.22802419354838707,
+       0.2397177419354839,
+       0.5398521505376344,
+       0.5320564516129033
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": true
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     420,
+     260
+    ],
+    [
+     "move",
+     380,
+     230
+    ],
+    [
+     "release",
+     260,
+     160
+    ]
+   ]
+  },
+  {
+   "name": "drag_off_the_photo",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": [
+      0.6957661290322581,
+      0.648991935483871,
+      1.0,
+      1.0
+     ],
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "area",
+       0.6957661290322581,
+       0.648991935483871,
+       1.0,
+       1.0
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": true
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     500,
+     300
+    ],
+    [
+     "move",
+     900,
+     520
+    ],
+    [
+     "release",
+     900,
+     520
+    ]
+   ]
+  },
+  {
+   "name": "drag_off_the_top_left",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": [
+      0.0,
+      0.0,
+      0.11108870967741936,
+      0.12278225806451615
+     ],
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "area",
+       0.0,
+       0.0,
+       0.11108870967741936,
+       0.12278225806451615
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": true
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     200,
+     120
+    ],
+    [
+     "move",
+     5,
+     5
+    ],
+    [
+     "release",
+     5,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "press_off_the_photo",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": false,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": false,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": false,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "click",
+       0.3059811827956989,
+       0.35665322580645165
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": true
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     4,
+     4
+    ],
+    [
+     "move",
+     40,
+     40
+    ],
+    [
+     "release",
+     40,
+     40
+    ],
+    [
+     "press",
+     300,
+     200
+    ],
+    [
+     "release",
+     300,
+     200
+    ]
+   ]
+  },
+  {
+   "name": "escape",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "cancelled"
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": false
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": false,
+     "sample_mode": false
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": false,
+     "sample_mode": false
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": false,
+     "sample_mode": false
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     300,
+     200
+    ],
+    [
+     "key",
+     0,
+     0
+    ],
+    [
+     "release",
+     300,
+     200
+    ],
+    [
+     "press",
+     300,
+     200
+    ],
+    [
+     "release",
+     300,
+     200
+    ]
+   ]
+  },
+  {
+   "name": "escape_mid_drag",
+   "results": [
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": [
+      0.20853494623655916,
+      0.21048387096774196,
+      0.3644489247311828,
+      0.4151209677419355
+     ],
+     "emitted": [],
+     "pressed": true,
+     "sample_mode": true
+    },
+    {
+     "area": null,
+     "emitted": [
+      [
+       "cancelled"
+      ]
+     ],
+     "pressed": false,
+     "sample_mode": false
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": false,
+     "sample_mode": false
+    },
+    {
+     "area": null,
+     "emitted": [],
+     "pressed": false,
+     "sample_mode": false
+    }
+   ],
+   "steps": [
+    [
+     "press",
+     250,
+     150
+    ],
+    [
+     "move",
+     330,
+     220
+    ],
+    [
+     "key",
+     0,
+     0
+    ],
+    [
+     "move",
+     400,
+     250
+    ],
+    [
+     "release",
+     400,
+     250
+    ]
+   ]
+  }
+ ]
+}

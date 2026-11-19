@@ -1,0 +1,65 @@
+{
+ "after": {
+  "camera": "Generated",
+  "daylight_neutral": [
+   1,
+   1,
+   1
+  ],
+  "neutral": [
+   0.5,
+   1.0,
+   0.6666666666666666
+  ],
+  "unique_camera": "Generated",
+  "xyz_to_camera": [
+   [
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ]
+ },
+ "before": {
+  "camera": "Generated",
+  "daylight_neutral": [
+   1,
+   1,
+   1
+  ],
+  "neutral": [
+   1,
+   1,
+   1
+  ],
+  "xyz_to_camera": [
+   [
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ]
+ },
+ "file": "_files/calibration_no_matrix/input.dng",
+ "linear_raw": true
+}

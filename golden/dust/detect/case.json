@@ -1,0 +1,7268 @@
+{
+ "cases": [
+  {
+   "limit": 500,
+   "name": "smooth",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.39749,
+      "diameter": 9.6,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.040625,
+      "ry": 0.05078125,
+      "score": 31.6975,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21405,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 24.3237,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.42682,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 23.1965,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.14492,
+      "diameter": 7.6,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.031909695471649936,
+      "ry": 0.03988711933956242,
+      "score": 14.5213,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "pattern",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.26926,
+      "diameter": 7.4,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.031909695471649936,
+      "ry": 0.03988711933956242,
+      "score": 7.6887,
+      "x": 0.48427672955974843,
+      "y": 0.5118110236220472
+     }
+    ],
+    "total": 1,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "soft",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.0733,
+      "diameter": 33.9,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.08258928571428571,
+      "ry": 0.09635416666666667,
+      "score": 24.4323,
+      "x": 0.4260089686098655,
+      "y": 0.6544502617801047
+     },
+     {
+      "contrast": 0.06895,
+      "diameter": 21.6,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.05477825720655808,
+      "ry": 0.06390796674098442,
+      "score": 22.9838,
+      "x": 0.6053811659192825,
+      "y": 0.36649214659685864
+     },
+     {
+      "contrast": 0.05591,
+      "diameter": 7.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.022792639622607098,
+      "ry": 0.02659141289304161,
+      "score": 18.6361,
+      "x": 0.2242152466367713,
+      "y": 0.3403141361256545
+     }
+    ],
+    "total": 3,
+    "truncated": false,
+    "width": 224
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "hairs",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 240
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "seams",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "result": {
+    "height": 700,
+    "spots": [
+     {
+      "contrast": 0.40108,
+      "diameter": 13.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.009444444444444445,
+      "ry": 0.012142857142857143,
+      "score": 133.6948,
+      "x": 0.7196885428253615,
+      "y": 0.7296137339055794
+     },
+     {
+      "contrast": 0.33681,
+      "diameter": 12.0,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.008333333333333333,
+      "ry": 0.010714285714285714,
+      "score": 112.2685,
+      "x": 0.8731924360400445,
+      "y": 0.9298998569384835
+     },
+     {
+      "contrast": 0.33548,
+      "diameter": 9.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.007222222222222222,
+      "ry": 0.009285714285714286,
+      "score": 111.8269,
+      "x": 0.7085650723025584,
+      "y": 0.4434907010014306
+     },
+     {
+      "contrast": 0.30031,
+      "diameter": 7.9,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.006111111111111111,
+      "ry": 0.007857142857142858,
+      "score": 100.1027,
+      "x": 0.44493882091212456,
+      "y": 0.9113018597997139
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 900
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "edge",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.19585,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 65.2844,
+      "x": 0.5974842767295597,
+      "y": 0.33858267716535434
+     }
+    ],
+    "total": 1,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "constant",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 32,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 33
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "tiny",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 1,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 1
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "standard_ramp",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 64,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 96
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "standard_wide",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 64,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 96
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "standard_colours",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 64,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 96
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "standard_patches",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 64,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 96
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "standard_noise",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 64,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 96
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "standard_edges",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 64,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 96
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "standard_garden",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 160,
+    "spots": [
+     {
+      "contrast": 0.17994,
+      "diameter": 11.5,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04172788826234667,
+      "ry": 0.06668543488532923,
+      "score": 3.7985,
+      "x": 0.25313807531380755,
+      "y": 0.6666666666666666
+     },
+     {
+      "contrast": 0.18653,
+      "diameter": 4.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.01803511301977579,
+      "ry": 0.02263325214724777,
+      "score": 3.6533,
+      "x": 0.17573221757322174,
+      "y": 0.2861635220125786
+     },
+     {
+      "contrast": 0.06387,
+      "diameter": 3.7,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.017896187382811405,
+      "ry": 0.016362712429686843,
+      "score": 3.6163,
+      "x": 0.7217573221757322,
+      "y": 0.720125786163522
+     }
+    ],
+    "total": 3,
+    "truncated": false,
+    "width": 240
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 1,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.40007,
+      "diameter": 8.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 22.504,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.42547,
+      "diameter": 14.7,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.05444439094329987,
+      "ry": 0.06805548867912484,
+      "score": 18.3067,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.214,
+      "diameter": 5.2,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.023350424859373685,
+      "ry": 0.029188031074217108,
+      "score": 14.21,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.18946,
+      "diameter": 6.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 11.7531,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 100,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.32953,
+      "diameter": 9.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.040625,
+      "ry": 0.05078125,
+      "score": 16.9913,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.40988,
+      "diameter": 16.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.06370558755563596,
+      "ry": 0.0756370883007482,
+      "score": 16.4212,
+      "x": 0.7389937106918238,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.13082,
+      "diameter": 8.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03514441016011038,
+      "ry": 0.04393051270013797,
+      "score": 7.6105,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     },
+     {
+      "contrast": 0.09974,
+      "diameter": 6.9,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.029139235376052376,
+      "ry": 0.03642404422006547,
+      "score": 6.5649,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 2,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 12,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     }
+    ],
+    "total": 1,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 8,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.18591,
+      "diameter": 6.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.029139235376052376,
+      "ry": 0.03642404422006547,
+      "score": 11.7717,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 2,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 160,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [],
+    "total": 0,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "dark",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     }
+    ],
+    "total": 2,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "bright",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 2,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": true
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": true,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 2,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 40,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     1
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.6941,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.21126,
+      "diameter": 5.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.028125,
+      "ry": 0.03515625,
+      "score": 13.9375,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.14029,
+      "diameter": 7.9,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 8.0604,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "smooth",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.3253,
+      "diameter": 10.6,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 25.4137,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.41018,
+      "diameter": 16.4,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.05976411092686593,
+      "ry": 0.07470513865858242,
+      "score": 22.0528,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.10189,
+      "diameter": 6.9,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.029139235376052376,
+      "ry": 0.03642404422006547,
+      "score": 11.346,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.06996,
+      "diameter": 8.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 6.2467,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "smooth",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.3253,
+      "diameter": 10.6,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 25.4137,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.41018,
+      "diameter": 16.4,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.05976411092686593,
+      "ry": 0.07470513865858242,
+      "score": 22.0528,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.10189,
+      "diameter": 6.9,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.029139235376052376,
+      "ry": 0.03642404422006547,
+      "score": 11.346,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.06996,
+      "diameter": 8.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 6.2467,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "smooth",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": true
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.3253,
+      "diameter": 10.6,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 25.4137,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.41018,
+      "diameter": 16.4,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.05976411092686593,
+      "ry": 0.07470513865858242,
+      "score": 22.0528,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.10189,
+      "diameter": 6.9,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.029139235376052376,
+      "ry": 0.03642404422006547,
+      "score": 11.346,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     },
+     {
+      "contrast": 0.06996,
+      "diameter": 8.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 6.2467,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.41084,
+      "diameter": 16.4,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.05976411092686593,
+      "ry": 0.07470513865858242,
+      "score": 17.0281,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.2987,
+      "diameter": 10.7,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.0493945264839553,
+      "ry": 0.06174315810494413,
+      "score": 14.1235,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.13555,
+      "diameter": 8.0,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03514441016011038,
+      "ry": 0.04393051270013797,
+      "score": 7.886,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     },
+     {
+      "contrast": 0.10307,
+      "diameter": 6.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.029139235376052376,
+      "ry": 0.03642404422006547,
+      "score": 6.7838,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.41084,
+      "diameter": 16.4,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.05976411092686593,
+      "ry": 0.07470513865858242,
+      "score": 17.0281,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.2987,
+      "diameter": 10.7,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.0493945264839553,
+      "ry": 0.06174315810494413,
+      "score": 14.1235,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.13555,
+      "diameter": 8.0,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03514441016011038,
+      "ry": 0.04393051270013797,
+      "score": 7.886,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     },
+     {
+      "contrast": 0.10307,
+      "diameter": 6.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.029139235376052376,
+      "ry": 0.03642404422006547,
+      "score": 6.7838,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "grain",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": true
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.41084,
+      "diameter": 16.4,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.05976411092686593,
+      "ry": 0.07470513865858242,
+      "score": 17.0281,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.2987,
+      "diameter": 10.7,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.0493945264839553,
+      "ry": 0.06174315810494413,
+      "score": 14.1235,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     },
+     {
+      "contrast": 0.13555,
+      "diameter": 8.0,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03514441016011038,
+      "ry": 0.04393051270013797,
+      "score": 7.886,
+      "x": 0.389937106918239,
+      "y": 0.7244094488188977
+     },
+     {
+      "contrast": 0.10307,
+      "diameter": 6.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.029139235376052376,
+      "ry": 0.03642404422006547,
+      "score": 6.7838,
+      "x": 0.22012578616352202,
+      "y": 0.2755905511811024
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "pattern",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.24043,
+      "diameter": 8.0,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 6.8657,
+      "x": 0.48427672955974843,
+      "y": 0.5118110236220472
+     }
+    ],
+    "total": 1,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "pattern",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.24043,
+      "diameter": 8.0,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 6.8657,
+      "x": 0.48427672955974843,
+      "y": 0.5118110236220472
+     }
+    ],
+    "total": 1,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "pattern",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": true
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.24043,
+      "diameter": 8.0,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 6.8657,
+      "x": 0.48427672955974843,
+      "y": 0.5118110236220472
+     }
+    ],
+    "total": 1,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "soft",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.05127,
+      "diameter": 39.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.09508477621974701,
+      "ry": 0.11093223892303818,
+      "score": 17.0889,
+      "x": 0.4260089686098655,
+      "y": 0.6544502617801047
+     },
+     {
+      "contrast": 0.03153,
+      "diameter": 29.3,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.07169740972571892,
+      "ry": 0.08364697801333874,
+      "score": 10.5113,
+      "x": 0.6053811659192825,
+      "y": 0.36649214659685864
+     },
+     {
+      "contrast": 0.02376,
+      "diameter": 11.3,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.031950242185233846,
+      "ry": 0.03727528254943949,
+      "score": 7.9208,
+      "x": 0.2242152466367713,
+      "y": 0.3403141361256545
+     }
+    ],
+    "total": 3,
+    "truncated": false,
+    "width": 224
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "soft",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.05127,
+      "diameter": 39.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.09508477621974701,
+      "ry": 0.11093223892303818,
+      "score": 17.0889,
+      "x": 0.4260089686098655,
+      "y": 0.6544502617801047
+     },
+     {
+      "contrast": 0.03153,
+      "diameter": 29.3,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.07169740972571892,
+      "ry": 0.08364697801333874,
+      "score": 10.5113,
+      "x": 0.6053811659192825,
+      "y": 0.36649214659685864
+     },
+     {
+      "contrast": 0.02376,
+      "diameter": 11.3,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.031950242185233846,
+      "ry": 0.03727528254943949,
+      "score": 7.9208,
+      "x": 0.2242152466367713,
+      "y": 0.3403141361256545
+     }
+    ],
+    "total": 3,
+    "truncated": false,
+    "width": 224
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "soft",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": true
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.05127,
+      "diameter": 39.6,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.09508477621974701,
+      "ry": 0.11093223892303818,
+      "score": 17.0889,
+      "x": 0.4260089686098655,
+      "y": 0.6544502617801047
+     },
+     {
+      "contrast": 0.03153,
+      "diameter": 29.3,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.07169740972571892,
+      "ry": 0.08364697801333874,
+      "score": 10.5113,
+      "x": 0.6053811659192825,
+      "y": 0.36649214659685864
+     },
+     {
+      "contrast": 0.02376,
+      "diameter": 11.3,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.031950242185233846,
+      "ry": 0.03727528254943949,
+      "score": 7.9208,
+      "x": 0.2242152466367713,
+      "y": 0.3403141361256545
+     }
+    ],
+    "total": 3,
+    "truncated": false,
+    "width": 224
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "edge",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.09224,
+      "diameter": 8.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 30.7467,
+      "x": 0.5974842767295597,
+      "y": 0.33858267716535434
+     },
+     {
+      "contrast": 0.15248,
+      "diameter": 7.9,
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 58.7559,
+      "x": 0.49056603773584906,
+      "y": 0.5039370078740157
+     }
+    ],
+    "total": 2,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "edge",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.09224,
+      "diameter": 8.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 30.7467,
+      "x": 0.5974842767295597,
+      "y": 0.33858267716535434
+     },
+     {
+      "contrast": 0.15248,
+      "diameter": 7.9,
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 58.7559,
+      "x": 0.49056603773584906,
+      "y": 0.5039370078740157
+     }
+    ],
+    "total": 2,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "edge",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 85,
+    "soft": true,
+    "suppress_grain": true
+   },
+   "progress": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.09224,
+      "diameter": 8.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.03589150429449553,
+      "ry": 0.04486438036811941,
+      "score": 30.7467,
+      "x": 0.5974842767295597,
+      "y": 0.33858267716535434
+     },
+     {
+      "contrast": 0.15248,
+      "diameter": 7.9,
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.034375,
+      "ry": 0.04296875,
+      "score": 58.7559,
+      "x": 0.49056603773584906,
+      "y": 0.5039370078740157
+     }
+    ],
+    "total": 2,
+    "truncated": false,
+    "width": 160
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 500,
+   "name": "hairs",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 2,
+    "scratches": true,
+    "sensitivity": 80,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     12
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     3,
+     12
+    ],
+    [
+     4,
+     12
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     6,
+     12
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     8,
+     12
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     12
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 2.8,
+      "length": 63.2,
+      "parts": [
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6401673640167364,
+        "y": 0.41361256544502617
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5481171548117155,
+        "y": 0.4607329842931937
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7280334728033473,
+        "y": 0.36649214659685864
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7112970711297071,
+        "y": 0.3769633507853403
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.698744769874477,
+        "y": 0.38219895287958117
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.6778242677824268,
+        "y": 0.39267015706806285
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.6569037656903766,
+        "y": 0.4031413612565445
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.6192468619246861,
+        "y": 0.42408376963350786
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.606694560669456,
+        "y": 0.4293193717277487
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5857740585774058,
+        "y": 0.4397905759162304
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5648535564853556,
+        "y": 0.450261780104712
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5271966527196653,
+        "y": 0.4712041884816754
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5146443514644351,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.49372384937238495,
+        "y": 0.4869109947643979
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.6903765690376569,
+        "y": 0.39267015706806285
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.6694560669456067,
+        "y": 0.4031413612565445
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.5983263598326359,
+        "y": 0.4397905759162304
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.5774058577405857,
+        "y": 0.450261780104712
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.5062761506276151,
+        "y": 0.4869109947643979
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.4769874476987448,
+        "y": 0.49214659685863876
+       }
+      ],
+      "polarity": "bright",
+      "review": true,
+      "rx": 0.14375,
+      "ry": 0.0859375,
+      "score": 140.0,
+      "x": 0.602510460251046,
+      "y": 0.4293193717277487
+     },
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 2.8,
+      "length": 42.9,
+      "parts": [
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.36401673640167365,
+        "y": 0.5549738219895288
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.4351464435146444,
+        "y": 0.518324607329843
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.4225941422594142,
+        "y": 0.5235602094240838
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.401673640167364,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3807531380753138,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.34309623430962344,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3305439330543933,
+        "y": 0.5706806282722513
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.30962343096234307,
+        "y": 0.581151832460733
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.28870292887029286,
+        "y": 0.5916230366492147
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.2719665271966527,
+        "y": 0.6020942408376964
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.41422594142259417,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.39330543933054396,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.32217573221757323,
+        "y": 0.581151832460733
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.301255230125523,
+        "y": 0.5916230366492147
+       }
+      ],
+      "polarity": "bright",
+      "review": true,
+      "rx": 0.1,
+      "ry": 0.06510416666666667,
+      "score": 140.0,
+      "x": 0.35355648535564854,
+      "y": 0.5602094240837696
+     },
+     {
+      "contrast": 0.4,
+      "detail_kind": "scratch",
+      "diameter": 2.8,
+      "length": 154.3,
+      "parts": [
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.19246861924686193,
+        "y": 0.5130890052356021
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.1799163179916318,
+        "y": 0.5287958115183246
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.3179916317991632,
+        "y": 0.7853403141361257
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.27615062761506276,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.301255230125523,
+        "y": 0.4816753926701571
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1589958158995816,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1506276150627615,
+        "y": 0.5863874345549738
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14225941422594143,
+        "y": 0.6178010471204188
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.6387434554973822
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13389121338912133,
+        "y": 0.6701570680628273
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.7015706806282722
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.7225130890052356
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.34309623430962344,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14644351464435146,
+        "y": 0.7486910994764397
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3054393305439331,
+        "y": 0.8010471204188482
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20502092050209206,
+        "y": 0.8272251308900523
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.26778242677824265,
+        "y": 0.8272251308900523
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2217573221757322,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.22594142259414227,
+        "y": 0.4816753926701571
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3138075313807531,
+        "y": 0.49214659685863876
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.20920502092050208,
+        "y": 0.4973821989528796
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.32217573221757323,
+        "y": 0.5026178010471204
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.16736401673640167,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.33472803347280333,
+        "y": 0.7591623036649214
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.1506276150627615,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3263598326359833,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.1589958158995816,
+        "y": 0.7801047120418848
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.16736401673640167,
+        "y": 0.7905759162303665
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.17573221757322174,
+        "y": 0.8010471204188482
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.18410041841004185,
+        "y": 0.8115183246073299
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.28451882845188287,
+        "y": 0.8167539267015707
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.29707112970711297,
+        "y": 0.8167539267015707
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.12708333333333333,
+      "ry": 0.20572916666666666,
+      "score": 133.3333,
+      "x": 0.2384937238493724,
+      "y": 0.6544502617801047
+     }
+    ],
+    "total": 3,
+    "truncated": false,
+    "width": 240
+   },
+   "tile_size": 96
+  },
+  {
+   "limit": 500,
+   "name": "hairs",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 2,
+    "scratches": true,
+    "sensitivity": 80,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     12
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     3,
+     12
+    ],
+    [
+     4,
+     12
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     6,
+     12
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     8,
+     12
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     12
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.4,
+      "detail_kind": "scratch",
+      "diameter": 2.8,
+      "length": 154.3,
+      "parts": [
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.19246861924686193,
+        "y": 0.5130890052356021
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.1799163179916318,
+        "y": 0.5287958115183246
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.3179916317991632,
+        "y": 0.7853403141361257
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.27615062761506276,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.301255230125523,
+        "y": 0.4816753926701571
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1589958158995816,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1506276150627615,
+        "y": 0.5863874345549738
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14225941422594143,
+        "y": 0.6178010471204188
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.6387434554973822
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13389121338912133,
+        "y": 0.6701570680628273
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.7015706806282722
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.7225130890052356
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.34309623430962344,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14644351464435146,
+        "y": 0.7486910994764397
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3054393305439331,
+        "y": 0.8010471204188482
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20502092050209206,
+        "y": 0.8272251308900523
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.26778242677824265,
+        "y": 0.8272251308900523
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2217573221757322,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.22594142259414227,
+        "y": 0.4816753926701571
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3138075313807531,
+        "y": 0.49214659685863876
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.20920502092050208,
+        "y": 0.4973821989528796
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.32217573221757323,
+        "y": 0.5026178010471204
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.16736401673640167,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.33472803347280333,
+        "y": 0.7591623036649214
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.1506276150627615,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3263598326359833,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.1589958158995816,
+        "y": 0.7801047120418848
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.16736401673640167,
+        "y": 0.7905759162303665
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.17573221757322174,
+        "y": 0.8010471204188482
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.18410041841004185,
+        "y": 0.8115183246073299
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.28451882845188287,
+        "y": 0.8167539267015707
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.29707112970711297,
+        "y": 0.8167539267015707
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.12708333333333333,
+      "ry": 0.20572916666666666,
+      "score": 133.3333,
+      "x": 0.2384937238493724,
+      "y": 0.6544502617801047
+     }
+    ],
+    "total": 1,
+    "truncated": false,
+    "width": 240
+   },
+   "tile_size": 96
+  },
+  {
+   "limit": 500,
+   "name": "hairs",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": true,
+    "sensitivity": 80,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     12
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     3,
+     12
+    ],
+    [
+     4,
+     12
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     6,
+     12
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     8,
+     12
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     12
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 4.0,
+      "length": 134.0,
+      "parts": [
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.016736401673640166,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.03347280334728033,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.0502092050209205,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.06694560669456066,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.09205020920502092,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1087866108786611,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.12552301255230125,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14225941422594143,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1589958158995816,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.17573221757322174,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.19246861924686193,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20920502092050208,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.22594142259414227,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.27615062761506276,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2928870292887029,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.30962343096234307,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3263598326359833,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.34309623430962344,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3598326359832636,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.37656903765690375,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.39330543933054396,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4100418410041841,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.42677824267782427,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4435146443514644,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4602510460251046,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4769874476987448,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.49372384937238495,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5104602510460251,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5355648535564853,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5523012552301255,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5690376569037657,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5857740585774058,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.602510460251046,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6192468619246861,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6359832635983264,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6527196652719666,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6694560669456067,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6861924686192469,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.702928870292887,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7196652719665272,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7364016736401674,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7531380753138075,
+        "y": 0.13089005235602094
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.3854166666666667,
+      "ry": 0.041666666666666664,
+      "score": 140.0,
+      "x": 0.38493723849372385,
+      "y": 0.11780104712041885
+     },
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 4.4,
+      "length": 194.6,
+      "parts": [
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.3807531380753138,
+        "y": 0.2617801047120419
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.3891213389121339,
+        "y": 0.2879581151832461
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.39748953974895396,
+        "y": 0.31413612565445026
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.40585774058577406,
+        "y": 0.3403141361256545
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.41422594142259417,
+        "y": 0.3612565445026178
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.41841004184100417,
+        "y": 0.38219895287958117
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.42677824267782427,
+        "y": 0.4031413612565445
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4351464435146444,
+        "y": 0.4293193717277487
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4435146443514644,
+        "y": 0.450261780104712
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4476987447698745,
+        "y": 0.4712041884816754
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4560669456066946,
+        "y": 0.49214659685863876
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.46443514644351463,
+        "y": 0.518324607329843
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.47280334728033474,
+        "y": 0.5392670157068062
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4769874476987448,
+        "y": 0.5602094240837696
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.48535564853556484,
+        "y": 0.581151832460733
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.49372384937238495,
+        "y": 0.6073298429319371
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.502092050209205,
+        "y": 0.6282722513089005
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5062761506276151,
+        "y": 0.6492146596858639
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5146443514644351,
+        "y": 0.6701570680628273
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5230125523012552,
+        "y": 0.6963350785340314
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5313807531380753,
+        "y": 0.7172774869109948
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5397489539748954,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6401673640167364,
+        "y": 0.41361256544502617
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5481171548117155,
+        "y": 0.4607329842931937
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.36401673640167365,
+        "y": 0.5549738219895288
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7280334728033473,
+        "y": 0.36649214659685864
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7112970711297071,
+        "y": 0.3769633507853403
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.698744769874477,
+        "y": 0.38219895287958117
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.6778242677824268,
+        "y": 0.39267015706806285
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.6569037656903766,
+        "y": 0.4031413612565445
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.6192468619246861,
+        "y": 0.42408376963350786
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.606694560669456,
+        "y": 0.4293193717277487
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5857740585774058,
+        "y": 0.4397905759162304
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5648535564853556,
+        "y": 0.450261780104712
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5271966527196653,
+        "y": 0.4712041884816754
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5146443514644351,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.49372384937238495,
+        "y": 0.4869109947643979
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.47280334728033474,
+        "y": 0.4973821989528796
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.4435146443514644,
+        "y": 0.5130890052356021
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.4225941422594142,
+        "y": 0.5235602094240838
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.401673640167364,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3807531380753138,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.34309623430962344,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3305439330543933,
+        "y": 0.5706806282722513
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.30962343096234307,
+        "y": 0.581151832460733
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.28870292887029286,
+        "y": 0.5916230366492147
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.2719665271966527,
+        "y": 0.6020942408376964
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5439330543933054,
+        "y": 0.7643979057591623
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.37656903765690375,
+        "y": 0.24083769633507854
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.6903765690376569,
+        "y": 0.39267015706806285
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.6694560669456067,
+        "y": 0.4031413612565445
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.5983263598326359,
+        "y": 0.4397905759162304
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.5774058577405857,
+        "y": 0.450261780104712
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.5062761506276151,
+        "y": 0.4869109947643979
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.48535564853556484,
+        "y": 0.4973821989528796
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.4351464435146444,
+        "y": 0.5235602094240838
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.41422594142259417,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.39330543933054396,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.32217573221757323,
+        "y": 0.581151832460733
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.301255230125523,
+        "y": 0.5916230366492147
+       }
+      ],
+      "polarity": "bright",
+      "review": true,
+      "rx": 0.24583333333333332,
+      "ry": 0.2838541666666667,
+      "score": 140.0,
+      "x": 0.5,
+      "y": 0.5026178010471204
+     },
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 4.0,
+      "length": 117.0,
+      "parts": [
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.7447698744769874,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.803347280334728,
+        "y": 0.5287958115183246
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8200836820083682,
+        "y": 0.5287958115183246
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7824267782426778,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8410041841004184,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8577405857740585,
+        "y": 0.5392670157068062
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7656903765690377,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8702928870292888,
+        "y": 0.5497382198952879
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8870292887029289,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7322175732217573,
+        "y": 0.5863874345549738
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.899581589958159,
+        "y": 0.5863874345549738
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7238493723849372,
+        "y": 0.6020942408376964
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9079497907949791,
+        "y": 0.6020942408376964
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7196652719665272,
+        "y": 0.6230366492146597
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9121338912133892,
+        "y": 0.6230366492146597
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7154811715481172,
+        "y": 0.643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9163179916317992,
+        "y": 0.643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7154811715481172,
+        "y": 0.6649214659685864
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9163179916317992,
+        "y": 0.6649214659685864
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7196652719665272,
+        "y": 0.6858638743455497
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9121338912133892,
+        "y": 0.6858638743455497
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7238493723849372,
+        "y": 0.7068062827225131
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9079497907949791,
+        "y": 0.7068062827225131
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7322175732217573,
+        "y": 0.7225130890052356
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.899581589958159,
+        "y": 0.7225130890052356
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7447698744769874,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8870292887029289,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7615062761506276,
+        "y": 0.7591623036649214
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8702928870292888,
+        "y": 0.7591623036649214
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7740585774058577,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8577405857740585,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7907949790794979,
+        "y": 0.774869109947644
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8410041841004184,
+        "y": 0.774869109947644
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8075313807531381,
+        "y": 0.7801047120418848
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8242677824267782,
+        "y": 0.7801047120418848
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.12291666666666666,
+      "ry": 0.15364583333333334,
+      "score": 140.0,
+      "x": 0.8158995815899581,
+      "y": 0.6544502617801047
+     },
+     {
+      "contrast": 0.4,
+      "detail_kind": "scratch",
+      "diameter": 2.8,
+      "length": 160.4,
+      "parts": [
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.19665271966527198,
+        "y": 0.5078534031413613
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.18410041841004185,
+        "y": 0.5235602094240838
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.32217573221757323,
+        "y": 0.7801047120418848
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.30962343096234307,
+        "y": 0.7958115183246073
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.27615062761506276,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.301255230125523,
+        "y": 0.4816753926701571
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2217573221757322,
+        "y": 0.4869109947643979
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20920502092050208,
+        "y": 0.4973821989528796
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.17154811715481172,
+        "y": 0.5392670157068062
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1589958158995816,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1506276150627615,
+        "y": 0.5863874345549738
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14225941422594143,
+        "y": 0.6178010471204188
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.6387434554973822
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13389121338912133,
+        "y": 0.6701570680628273
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.7015706806282722
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.7225130890052356
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.34309623430962344,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14644351464435146,
+        "y": 0.7486910994764397
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2803347280334728,
+        "y": 0.8219895287958116
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20502092050209206,
+        "y": 0.8272251308900523
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2217573221757322,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3138075313807531,
+        "y": 0.49214659685863876
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.32217573221757323,
+        "y": 0.5026178010471204
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.33472803347280333,
+        "y": 0.7591623036649214
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.1506276150627615,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.1589958158995816,
+        "y": 0.7801047120418848
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.16736401673640167,
+        "y": 0.7905759162303665
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.17573221757322174,
+        "y": 0.8010471204188482
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.29707112970711297,
+        "y": 0.806282722513089
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.18410041841004185,
+        "y": 0.8115183246073299
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.12708333333333333,
+      "ry": 0.20572916666666666,
+      "score": 133.3333,
+      "x": 0.2384937238493724,
+      "y": 0.6544502617801047
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 240
+   },
+   "tile_size": 96
+  },
+  {
+   "limit": 500,
+   "name": "hairs",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 12,
+    "scratches": true,
+    "sensitivity": 80,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     12
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     3,
+     12
+    ],
+    [
+     4,
+     12
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     6,
+     12
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     8,
+     12
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     12
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 4.0,
+      "length": 134.0,
+      "parts": [
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.016736401673640166,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.03347280334728033,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.0502092050209205,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.06694560669456066,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.09205020920502092,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1087866108786611,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.12552301255230125,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14225941422594143,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1589958158995816,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.17573221757322174,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.19246861924686193,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20920502092050208,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.22594142259414227,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.27615062761506276,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2928870292887029,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.30962343096234307,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3263598326359833,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.34309623430962344,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3598326359832636,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.37656903765690375,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.39330543933054396,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4100418410041841,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.42677824267782427,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4435146443514644,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4602510460251046,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4769874476987448,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.49372384937238495,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5104602510460251,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5355648535564853,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5523012552301255,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5690376569037657,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5857740585774058,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.602510460251046,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6192468619246861,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6359832635983264,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6527196652719666,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6694560669456067,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6861924686192469,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.702928870292887,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7196652719665272,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7364016736401674,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7531380753138075,
+        "y": 0.13089005235602094
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.3854166666666667,
+      "ry": 0.041666666666666664,
+      "score": 140.0,
+      "x": 0.38493723849372385,
+      "y": 0.11780104712041885
+     },
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 4.4,
+      "length": 194.6,
+      "parts": [
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.3807531380753138,
+        "y": 0.2617801047120419
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.3891213389121339,
+        "y": 0.2879581151832461
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.39748953974895396,
+        "y": 0.31413612565445026
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.40585774058577406,
+        "y": 0.3403141361256545
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.41422594142259417,
+        "y": 0.3612565445026178
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.41841004184100417,
+        "y": 0.38219895287958117
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.42677824267782427,
+        "y": 0.4031413612565445
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4351464435146444,
+        "y": 0.4293193717277487
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4435146443514644,
+        "y": 0.450261780104712
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4476987447698745,
+        "y": 0.4712041884816754
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4560669456066946,
+        "y": 0.49214659685863876
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.46443514644351463,
+        "y": 0.518324607329843
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.47280334728033474,
+        "y": 0.5392670157068062
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.4769874476987448,
+        "y": 0.5602094240837696
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.48535564853556484,
+        "y": 0.581151832460733
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.49372384937238495,
+        "y": 0.6073298429319371
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.502092050209205,
+        "y": 0.6282722513089005
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5062761506276151,
+        "y": 0.6492146596858639
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5146443514644351,
+        "y": 0.6701570680628273
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5230125523012552,
+        "y": 0.6963350785340314
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5313807531380753,
+        "y": 0.7172774869109948
+       },
+       {
+        "rx": 0.01687499980131785,
+        "ry": 0.021093749751647312,
+        "x": 0.5397489539748954,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6401673640167364,
+        "y": 0.41361256544502617
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5481171548117155,
+        "y": 0.4607329842931937
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.36401673640167365,
+        "y": 0.5549738219895288
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7280334728033473,
+        "y": 0.36649214659685864
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7112970711297071,
+        "y": 0.3769633507853403
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.698744769874477,
+        "y": 0.38219895287958117
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.6778242677824268,
+        "y": 0.39267015706806285
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.6569037656903766,
+        "y": 0.4031413612565445
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.6192468619246861,
+        "y": 0.42408376963350786
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.606694560669456,
+        "y": 0.4293193717277487
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5857740585774058,
+        "y": 0.4397905759162304
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5648535564853556,
+        "y": 0.450261780104712
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5271966527196653,
+        "y": 0.4712041884816754
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5146443514644351,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.49372384937238495,
+        "y": 0.4869109947643979
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.47280334728033474,
+        "y": 0.4973821989528796
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.4435146443514644,
+        "y": 0.5130890052356021
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.4225941422594142,
+        "y": 0.5235602094240838
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.401673640167364,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3807531380753138,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.34309623430962344,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3305439330543933,
+        "y": 0.5706806282722513
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.30962343096234307,
+        "y": 0.581151832460733
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.28870292887029286,
+        "y": 0.5916230366492147
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.2719665271966527,
+        "y": 0.6020942408376964
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.5439330543933054,
+        "y": 0.7643979057591623
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.37656903765690375,
+        "y": 0.24083769633507854
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.6903765690376569,
+        "y": 0.39267015706806285
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.6694560669456067,
+        "y": 0.4031413612565445
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.5983263598326359,
+        "y": 0.4397905759162304
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.5774058577405857,
+        "y": 0.450261780104712
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.5062761506276151,
+        "y": 0.4869109947643979
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.48535564853556484,
+        "y": 0.4973821989528796
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.4351464435146444,
+        "y": 0.5235602094240838
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.41422594142259417,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.39330543933054396,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.32217573221757323,
+        "y": 0.581151832460733
+       },
+       {
+        "rx": 0.009375,
+        "ry": 0.01171875,
+        "x": 0.301255230125523,
+        "y": 0.5916230366492147
+       }
+      ],
+      "polarity": "bright",
+      "review": true,
+      "rx": 0.24583333333333332,
+      "ry": 0.2838541666666667,
+      "score": 140.0,
+      "x": 0.5,
+      "y": 0.5026178010471204
+     },
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 4.0,
+      "length": 117.0,
+      "parts": [
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.7447698744769874,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.803347280334728,
+        "y": 0.5287958115183246
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8200836820083682,
+        "y": 0.5287958115183246
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7824267782426778,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8410041841004184,
+        "y": 0.5340314136125655
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8577405857740585,
+        "y": 0.5392670157068062
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7656903765690377,
+        "y": 0.5445026178010471
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8702928870292888,
+        "y": 0.5497382198952879
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8870292887029289,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7322175732217573,
+        "y": 0.5863874345549738
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.899581589958159,
+        "y": 0.5863874345549738
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7238493723849372,
+        "y": 0.6020942408376964
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9079497907949791,
+        "y": 0.6020942408376964
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7196652719665272,
+        "y": 0.6230366492146597
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9121338912133892,
+        "y": 0.6230366492146597
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7154811715481172,
+        "y": 0.643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9163179916317992,
+        "y": 0.643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7154811715481172,
+        "y": 0.6649214659685864
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9163179916317992,
+        "y": 0.6649214659685864
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7196652719665272,
+        "y": 0.6858638743455497
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9121338912133892,
+        "y": 0.6858638743455497
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7238493723849372,
+        "y": 0.7068062827225131
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.9079497907949791,
+        "y": 0.7068062827225131
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7322175732217573,
+        "y": 0.7225130890052356
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.899581589958159,
+        "y": 0.7225130890052356
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7447698744769874,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8870292887029289,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7615062761506276,
+        "y": 0.7591623036649214
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8702928870292888,
+        "y": 0.7591623036649214
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7740585774058577,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8577405857740585,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7907949790794979,
+        "y": 0.774869109947644
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8410041841004184,
+        "y": 0.774869109947644
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8075313807531381,
+        "y": 0.7801047120418848
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.8242677824267782,
+        "y": 0.7801047120418848
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.12291666666666666,
+      "ry": 0.15364583333333334,
+      "score": 140.0,
+      "x": 0.8158995815899581,
+      "y": 0.6544502617801047
+     },
+     {
+      "contrast": 0.4,
+      "detail_kind": "scratch",
+      "diameter": 2.8,
+      "length": 160.4,
+      "parts": [
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.19665271966527198,
+        "y": 0.5078534031413613
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.18410041841004185,
+        "y": 0.5235602094240838
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.32217573221757323,
+        "y": 0.7801047120418848
+       },
+       {
+        "rx": 0.014362082878748576,
+        "ry": 0.01795260359843572,
+        "x": 0.30962343096234307,
+        "y": 0.7958115183246073
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.27615062761506276,
+        "y": 0.47643979057591623
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.301255230125523,
+        "y": 0.4816753926701571
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2217573221757322,
+        "y": 0.4869109947643979
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20920502092050208,
+        "y": 0.4973821989528796
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.17154811715481172,
+        "y": 0.5392670157068062
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1589958158995816,
+        "y": 0.5654450261780105
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1506276150627615,
+        "y": 0.5863874345549738
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14225941422594143,
+        "y": 0.6178010471204188
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.6387434554973822
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13389121338912133,
+        "y": 0.6701570680628273
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.7015706806282722
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.13807531380753138,
+        "y": 0.7225130890052356
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.34309623430962344,
+        "y": 0.743455497382199
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14644351464435146,
+        "y": 0.7486910994764397
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2803347280334728,
+        "y": 0.8219895287958116
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20502092050209206,
+        "y": 0.8272251308900523
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2217573221757322,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.8324607329842932
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.3138075313807531,
+        "y": 0.49214659685863876
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.32217573221757323,
+        "y": 0.5026178010471204
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.33472803347280333,
+        "y": 0.7591623036649214
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.1506276150627615,
+        "y": 0.7696335078534031
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.1589958158995816,
+        "y": 0.7801047120418848
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.16736401673640167,
+        "y": 0.7905759162303665
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.17573221757322174,
+        "y": 0.8010471204188482
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.29707112970711297,
+        "y": 0.806282722513089
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.18410041841004185,
+        "y": 0.8115183246073299
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.12708333333333333,
+      "ry": 0.20572916666666666,
+      "score": 133.3333,
+      "x": 0.2384937238493724,
+      "y": 0.6544502617801047
+     }
+    ],
+    "total": 4,
+    "truncated": false,
+    "width": 240
+   },
+   "tile_size": 96
+  },
+  {
+   "limit": 500,
+   "name": "hairs",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 40,
+    "scratches": true,
+    "sensitivity": 80,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     12
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     3,
+     12
+    ],
+    [
+     4,
+     12
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     6,
+     12
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     8,
+     12
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     12
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 4.0,
+      "length": 134.0,
+      "parts": [
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.016736401673640166,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.03347280334728033,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.0502092050209205,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.06694560669456066,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.09205020920502092,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1087866108786611,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.12552301255230125,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14225941422594143,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1589958158995816,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.17573221757322174,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.19246861924686193,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20920502092050208,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.22594142259414227,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.27615062761506276,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2928870292887029,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.30962343096234307,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3263598326359833,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.34309623430962344,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3598326359832636,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.37656903765690375,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.39330543933054396,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4100418410041841,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.42677824267782427,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4435146443514644,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4602510460251046,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4769874476987448,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.49372384937238495,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5104602510460251,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5355648535564853,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5523012552301255,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5690376569037657,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5857740585774058,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.602510460251046,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6192468619246861,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6359832635983264,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6527196652719666,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6694560669456067,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6861924686192469,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.702928870292887,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7196652719665272,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7364016736401674,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7531380753138075,
+        "y": 0.13089005235602094
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.3854166666666667,
+      "ry": 0.041666666666666664,
+      "score": 140.0,
+      "x": 0.38493723849372385,
+      "y": 0.11780104712041885
+     }
+    ],
+    "total": 1,
+    "truncated": false,
+    "width": 240
+   },
+   "tile_size": 96
+  },
+  {
+   "limit": 500,
+   "name": "hairs",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": true,
+    "scratch_width": 40,
+    "scratches": true,
+    "sensitivity": 80,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     12
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     3,
+     12
+    ],
+    [
+     4,
+     12
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     6,
+     12
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     8,
+     12
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     12
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.42,
+      "detail_kind": "scratch",
+      "diameter": 4.0,
+      "length": 134.0,
+      "parts": [
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.016736401673640166,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.03347280334728033,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.0502092050209205,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.06694560669456066,
+        "y": 0.10471204188481675
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.09205020920502092,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1087866108786611,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.12552301255230125,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.14225941422594143,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.1589958158995816,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.17573221757322174,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.19246861924686193,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.20920502092050208,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.22594142259414227,
+        "y": 0.1099476439790576
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.24267782426778242,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2594142259414226,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.27615062761506276,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.2928870292887029,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.30962343096234307,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3263598326359833,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.34309623430962344,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.3598326359832636,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.37656903765690375,
+        "y": 0.11518324607329843
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.39330543933054396,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4100418410041841,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.42677824267782427,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4435146443514644,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4602510460251046,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.4769874476987448,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.49372384937238495,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5104602510460251,
+        "y": 0.12041884816753927
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5355648535564853,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5523012552301255,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5690376569037657,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.5857740585774058,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.602510460251046,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6192468619246861,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6359832635983264,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6527196652719666,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6694560669456067,
+        "y": 0.1256544502617801
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.6861924686192469,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.702928870292887,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7196652719665272,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.013541666666666667,
+        "ry": 0.016927083333333332,
+        "x": 0.7364016736401674,
+        "y": 0.13089005235602094
+       },
+       {
+        "rx": 0.011041666567325591,
+        "ry": 0.01380208320915699,
+        "x": 0.7531380753138075,
+        "y": 0.13089005235602094
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.3854166666666667,
+      "ry": 0.041666666666666664,
+      "score": 140.0,
+      "x": 0.38493723849372385,
+      "y": 0.11780104712041885
+     }
+    ],
+    "total": 1,
+    "truncated": false,
+    "width": 240
+   },
+   "tile_size": 96
+  },
+  {
+   "limit": 1,
+   "name": "smooth",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 100,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     20
+    ],
+    [
+     2,
+     20
+    ],
+    [
+     3,
+     20
+    ],
+    [
+     4,
+     20
+    ],
+    [
+     5,
+     20
+    ],
+    [
+     6,
+     20
+    ],
+    [
+     7,
+     20
+    ],
+    [
+     8,
+     20
+    ],
+    [
+     9,
+     20
+    ],
+    [
+     10,
+     20
+    ],
+    [
+     11,
+     20
+    ],
+    [
+     12,
+     20
+    ],
+    [
+     13,
+     20
+    ],
+    [
+     14,
+     20
+    ],
+    [
+     15,
+     20
+    ],
+    [
+     16,
+     20
+    ],
+    [
+     17,
+     20
+    ],
+    [
+     18,
+     20
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     20
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.41005,
+      "diameter": 16.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.05976411092686593,
+      "ry": 0.07470513865858242,
+      "score": 22.0458,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     }
+    ],
+    "total": 4,
+    "truncated": true,
+    "width": 160
+   },
+   "tile_size": 32
+  },
+  {
+   "limit": 2,
+   "name": "grain",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": false,
+    "sensitivity": 50,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     12
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     3,
+     12
+    ],
+    [
+     4,
+     12
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     6,
+     12
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     8,
+     12
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     12
+    ]
+   ],
+   "result": {
+    "height": 128,
+    "spots": [
+     {
+      "contrast": 0.42373,
+      "diameter": 15.5,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.059375,
+      "ry": 0.07421875,
+      "score": 17.708,
+      "x": 0.7421383647798742,
+      "y": 0.6220472440944882
+     },
+     {
+      "contrast": 0.32793,
+      "diameter": 10.1,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.04124387195995491,
+      "ry": 0.051554839949943636,
+      "score": 16.5605,
+      "x": 0.5031446540880503,
+      "y": 0.2992125984251969
+     }
+    ],
+    "total": 4,
+    "truncated": true,
+    "width": 160
+   },
+   "tile_size": 48
+  },
+  {
+   "limit": 3,
+   "name": "seams",
+   "options": {
+    "detailed": false,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": true,
+    "sensitivity": 80,
+    "soft": false,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     8
+    ]
+   ],
+   "result": {
+    "height": 700,
+    "spots": [
+     {
+      "contrast": 0.35365,
+      "diameter": 14.7,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.009679002834364422,
+      "ry": 0.012444432215611399,
+      "score": 117.882,
+      "x": 0.7196885428253615,
+      "y": 0.7296137339055794
+     },
+     {
+      "contrast": 0.32177,
+      "diameter": 12.8,
+      "polarity": "bright",
+      "review": false,
+      "rx": 0.008781249152703166,
+      "ry": 0.011290177482046927,
+      "score": 107.2566,
+      "x": 0.8731924360400445,
+      "y": 0.9298998569384835
+     },
+     {
+      "contrast": 0.38,
+      "detail_kind": "scratch",
+      "diameter": 2.8,
+      "length": 114.3,
+      "parts": [
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6562847608453838,
+        "y": 0.8726752503576538
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6596218020022246,
+        "y": 0.8755364806866953
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6629588431590656,
+        "y": 0.876967095851216
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6651835372636262,
+        "y": 0.8798283261802575
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6685205784204672,
+        "y": 0.8812589413447782
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6718576195773082,
+        "y": 0.8841201716738197
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.675194660734149,
+        "y": 0.8869814020028612
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.67853170189099,
+        "y": 0.8884120171673819
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6807563959955506,
+        "y": 0.8912732474964234
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6840934371523916,
+        "y": 0.8927038626609443
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6874304783092324,
+        "y": 0.8955650929899857
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6907675194660734,
+        "y": 0.8984263233190272
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.6941045606229144,
+        "y": 0.899856938483548
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.696329254727475,
+        "y": 0.9027181688125894
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.699666295884316,
+        "y": 0.9041487839771102
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7030033370411568,
+        "y": 0.9070100143061517
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7063403781979978,
+        "y": 0.9098712446351931
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7096774193548387,
+        "y": 0.9113018597997139
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7119021134593994,
+        "y": 0.9141630901287554
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7152391546162402,
+        "y": 0.9155937052932761
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7185761957730812,
+        "y": 0.9184549356223176
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7219132369299222,
+        "y": 0.9213161659513591
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7252502780867631,
+        "y": 0.9227467811158798
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7274749721913237,
+        "y": 0.9256080114449213
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7308120133481646,
+        "y": 0.927038626609442
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7341490545050056,
+        "y": 0.9298998569384835
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7374860956618465,
+        "y": 0.932761087267525
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7408231368186874,
+        "y": 0.9341917024320457
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.743047830923248,
+        "y": 0.9370529327610873
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.746384872080089,
+        "y": 0.9384835479256081
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7497219132369299,
+        "y": 0.9413447782546495
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7530589543937709,
+        "y": 0.944206008583691
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7563959955506118,
+        "y": 0.9456366237482118
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7586206896551724,
+        "y": 0.9484978540772532
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7619577308120133,
+        "y": 0.949928469241774
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7652947719688543,
+        "y": 0.9527896995708155
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7686318131256952,
+        "y": 0.9556509298998569
+       },
+       {
+        "rx": 0.0029444444179534913,
+        "ry": 0.003785714251654489,
+        "x": 0.7719688542825361,
+        "y": 0.9570815450643777
+       }
+      ],
+      "polarity": "dark",
+      "review": true,
+      "rx": 0.06277777777777778,
+      "ry": 0.04857142857142857,
+      "score": 126.6667,
+      "x": 0.71412680756396,
+      "y": 0.9148783977110158
+     }
+    ],
+    "total": 5,
+    "truncated": true,
+    "width": 900
+   },
+   "tile_size": 640
+  },
+  {
+   "limit": 1,
+   "name": "soft",
+   "options": {
+    "detailed": true,
+    "maximum": 40,
+    "minimum": 3,
+    "polarity": "both",
+    "reduce_patterns": false,
+    "scratch_width": 12,
+    "scratches": true,
+    "sensitivity": 50,
+    "soft": true,
+    "suppress_grain": false
+   },
+   "progress": [
+    [
+     1,
+     18
+    ],
+    [
+     2,
+     18
+    ],
+    [
+     3,
+     18
+    ],
+    [
+     4,
+     18
+    ],
+    [
+     5,
+     18
+    ],
+    [
+     6,
+     18
+    ],
+    [
+     7,
+     18
+    ],
+    [
+     8,
+     18
+    ],
+    [
+     9,
+     18
+    ],
+    [
+     10,
+     18
+    ],
+    [
+     11,
+     18
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     13,
+     18
+    ],
+    [
+     14,
+     18
+    ],
+    [
+     15,
+     18
+    ],
+    [
+     16,
+     18
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     18
+    ]
+   ],
+   "result": {
+    "height": 192,
+    "spots": [
+     {
+      "contrast": 0.0733,
+      "diameter": 33.9,
+      "polarity": "dark",
+      "review": false,
+      "rx": 0.08258928571428571,
+      "ry": 0.09635416666666667,
+      "score": 24.4323,
+      "x": 0.4260089686098655,
+      "y": 0.6544502617801047
+     }
+    ],
+    "total": 3,
+    "truncated": true,
+    "width": 224
+   },
+   "tile_size": 96
+  }
+ ]
+}

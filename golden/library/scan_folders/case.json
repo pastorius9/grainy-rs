@@ -1,0 +1,346 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "lib/2024/x.jpg": {
+     "fill": [
+      1,
+      1
+     ]
+    },
+    "lib/2025/y.jpg": {
+     "fill": [
+      2,
+      1
+     ]
+    },
+    "lib/2025/raw/z.nef": {
+     "fill": [
+      3,
+      1
+     ]
+    },
+    "lib/readme.txt": {
+     "fill": [
+      4,
+      1
+     ]
+    }
+   }
+  },
+  "calls": [
+   {
+    "fn": "fs_snapshot_identities",
+    "args": {
+     "name": "snap",
+     "paths": [
+      "$ROOT/lib/2024",
+      "$ROOT/lib/2025",
+      "$ROOT/lib/2025/raw",
+      "$ROOT/lib"
+     ]
+    }
+   },
+   {
+    "fn": "scan_folders",
+    "args": {
+     "paths": [
+      "$ROOT/lib/2024",
+      "$ROOT/lib/2025/raw",
+      "$ROOT/lib/2025",
+      "$ROOT/gone/deep"
+     ],
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "expanded": [],
+     "identities": "snap"
+    }
+   },
+   {
+    "fn": "fs_rename",
+    "args": {
+     "from": "$ROOT/lib/2025",
+     "to": "$ROOT/lib/2025-renamed"
+    }
+   },
+   {
+    "fn": "scan_folders",
+    "args": {
+     "paths": [
+      "$ROOT/lib/2024",
+      "$ROOT/lib/2025/raw",
+      "$ROOT/lib/2025",
+      "$ROOT/gone/deep"
+     ],
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "expanded": [],
+     "identities": "snap"
+    }
+   },
+   {
+    "fn": "scan_folders",
+    "args": {
+     "paths": [
+      "$ROOT/lib/2024",
+      "$ROOT/lib/2025/raw",
+      "$ROOT/lib/2025",
+      "$ROOT/gone/deep"
+     ],
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "expanded": [],
+     "identities": "snap",
+     "cancel": true
+    }
+   },
+   {
+    "fn": "scan_folders",
+    "args": {
+     "paths": [
+      "$ROOT/lib/2024",
+      "$ROOT/lib/2025/raw",
+      "$ROOT/lib/2025",
+      "$ROOT/gone/deep"
+     ],
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "expanded": [],
+     "identities": "snap",
+     "clock": "expire"
+    }
+   },
+   {
+    "fn": "scan_folders",
+    "args": {
+     "paths": [
+      "$ROOT/lib/2024"
+     ],
+     "roots": [],
+     "expanded": [
+      "$ROOT/lib/2024"
+     ],
+     "identities": "snap"
+    }
+   },
+   {
+    "fn": "scan_folders",
+    "args": {
+     "paths": [
+      "$ROOT/lib/2024"
+     ],
+     "roots": [],
+     "expanded": [
+      "$ROOT/lib"
+     ],
+     "identities": "snap"
+    }
+   },
+   {
+    "fn": "fs_mkdir",
+    "args": {
+     "path": "$ROOT/lib/2025-renamed/twin"
+    }
+   },
+   {
+    "fn": "fs_rename",
+    "args": {
+     "from": "$ROOT/lib/2025-renamed",
+     "to": "$ROOT/lib/2026-again"
+    }
+   },
+   {
+    "fn": "scan_folders",
+    "args": {
+     "paths": [
+      "$ROOT/lib/2025"
+     ],
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "expanded": [],
+     "identities": "snap"
+    }
+   }
+  ],
+  "name": "scan_folders"
+ },
+ "results": [
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "identities": [
+     "$root",
+     "$root\\lib",
+     "$root\\lib\\2024",
+     "$root\\lib\\2025",
+     "$root\\lib\\2025\\raw"
+    ],
+    "missing": [
+     "$root\\gone",
+     "$root\\gone\\deep"
+    ],
+    "moves": [],
+    "children": [
+     "$ROOT\\lib\\2024",
+     "$ROOT\\lib\\2025"
+    ],
+    "scanned": [
+     "$root\\lib"
+    ],
+    "incomplete": false
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "identities": [
+     "$root",
+     "$root\\lib",
+     "$root\\lib\\2024"
+    ],
+    "missing": [
+     "$root\\gone",
+     "$root\\gone\\deep",
+     "$root\\lib\\2025",
+     "$root\\lib\\2025\\raw"
+    ],
+    "moves": [
+     [
+      "$ROOT\\lib\\2025",
+      "$ROOT\\lib\\2025-renamed"
+     ]
+    ],
+    "children": [
+     "$ROOT\\lib\\2024",
+     "$ROOT\\lib\\2025-renamed"
+    ],
+    "scanned": [
+     "$root\\lib"
+    ],
+    "incomplete": false
+   }
+  },
+  {
+   "ok": {
+    "identities": [],
+    "missing": [],
+    "moves": [],
+    "children": [],
+    "scanned": [],
+    "incomplete": true
+   }
+  },
+  {
+   "ok": {
+    "identities": [],
+    "missing": [],
+    "moves": [],
+    "children": [],
+    "scanned": [],
+    "incomplete": true
+   }
+  },
+  {
+   "ok": {
+    "identities": [
+     "$root",
+     "$root\\lib",
+     "$root\\lib\\2024"
+    ],
+    "missing": [],
+    "moves": [],
+    "children": [],
+    "scanned": [
+     "$root\\lib\\2024"
+    ],
+    "incomplete": false
+   }
+  },
+  {
+   "ok": {
+    "identities": [
+     "$root",
+     "$root\\lib",
+     "$root\\lib\\2024"
+    ],
+    "missing": [],
+    "moves": [],
+    "children": [],
+    "scanned": [],
+    "incomplete": false
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": {
+    "identities": [
+     "$root",
+     "$root\\lib"
+    ],
+    "missing": [
+     "$root\\lib\\2025"
+    ],
+    "moves": [
+     [
+      "$ROOT\\lib\\2025",
+      "$ROOT\\lib\\2026-again"
+     ]
+    ],
+    "children": [
+     "$ROOT\\lib\\2024",
+     "$ROOT\\lib\\2026-again"
+    ],
+    "scanned": [
+     "$root\\lib"
+    ],
+    "incomplete": false
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "lib/2024/x.jpg": {
+    "size": 1,
+    "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+   },
+   "lib/2026-again/raw/z.nef": {
+    "size": 1,
+    "sha256": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+   },
+   "lib/2026-again/y.jpg": {
+    "size": 1,
+    "sha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+   },
+   "lib/readme.txt": {
+    "size": 1,
+    "sha256": "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+   }
+  },
+  "dirs": [
+   "lib",
+   "lib/2024",
+   "lib/2026-again",
+   "lib/2026-again/raw",
+   "lib/2026-again/twin"
+  ]
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

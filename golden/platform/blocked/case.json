@@ -1,0 +1,92 @@
+{
+ "cases": [
+  {
+   "app_kind": null,
+   "expected": "소스에서 실행 중이라 직접 업데이트할 수 없습니다.",
+   "free": 0,
+   "mac": false,
+   "name": "no_app",
+   "size": 0
+  },
+  {
+   "app_kind": "missing",
+   "expected": "프로그램 폴더에 쓸 수 없습니다.",
+   "free": 1000000000000,
+   "mac": false,
+   "name": "missing_folder",
+   "size": 0
+  },
+  {
+   "app_kind": "exists",
+   "expected": "",
+   "free": 1000000000000,
+   "mac": false,
+   "name": "ok",
+   "size": 0
+  },
+  {
+   "app_kind": "missing",
+   "expected": "프로그램 폴더에 쓸 수 없습니다.",
+   "free": 1000000000000,
+   "mac": true,
+   "name": "mac_missing_parent",
+   "size": 0
+  },
+  {
+   "app_kind": "exists",
+   "expected": "",
+   "free": 1000000000000,
+   "mac": true,
+   "name": "mac_ok",
+   "size": 0
+  },
+  {
+   "app_kind": "exists",
+   "expected": "디스크 공간이 부족합니다.",
+   "free": 999999999,
+   "mac": false,
+   "name": "low_free",
+   "size": 0
+  },
+  {
+   "app_kind": "exists",
+   "expected": "디스크 공간이 부족합니다.",
+   "free": 1000000000,
+   "mac": false,
+   "name": "exact_free",
+   "size": 0
+  },
+  {
+   "app_kind": "exists",
+   "expected": "",
+   "free": 1073741824,
+   "mac": false,
+   "name": "gigabyte_free",
+   "size": 0
+  },
+  {
+   "app_kind": "exists",
+   "expected": "디스크 공간이 부족합니다.",
+   "free": 1073741823,
+   "mac": false,
+   "name": "below_gigabyte",
+   "size": 0
+  },
+  {
+   "app_kind": "exists",
+   "expected": "디스크 공간이 부족합니다.",
+   "free": 2147483648,
+   "mac": false,
+   "name": "big_release",
+   "size": 419430400
+  },
+  {
+   "app_kind": "exists",
+   "expected": "",
+   "free": 3221225472,
+   "mac": false,
+   "name": "big_release_fits",
+   "size": 419430400
+  }
+ ]
+}

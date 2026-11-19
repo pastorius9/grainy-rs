@@ -1,0 +1,9 @@
+{
+ "arrays": {
+  "input": "d9a5b44a9ddfaee8a212c336b2f537342c491d2380a5dfa865859ad35f629ac1",
+  "output": "6d0a53fd8df883a55bdcfaeb25cca3986bcd136e1f8f94172431b6694aafd170"
+ },
+ "encoding": 0,
+ "kind": "hs1",
+ "profile": "synthetic_hue_one"
+}

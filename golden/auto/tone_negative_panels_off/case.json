@@ -1,0 +1,89 @@
+{
+ "changed": {
+  "blacks": -22.895472083240747,
+  "contrast": 0.0,
+  "curve": [
+   [
+    0.0,
+    0.03
+   ],
+   [
+    0.25,
+    0.265
+   ],
+   [
+    0.5,
+    0.5
+   ],
+   [
+    0.75,
+    0.735
+   ],
+   [
+    1.0,
+    0.97
+   ]
+  ],
+  "exposure": -0.15200309344504995,
+  "tone_version": 3,
+  "whites": 7.382010563422351
+ },
+ "removed": [],
+ "report": {
+  "black_point": 0.09158188833296299,
+  "exposure": -0.15200309344504995,
+  "high_percentile": 99.9,
+  "input_black": 25.0,
+  "input_white": 255.0,
+  "low_percentile": 0.1,
+  "margin_percent": 3.0,
+  "output_black": 7.6499999999999995,
+  "output_white": 247.35,
+  "status": "applied",
+  "white_gain": 1.0524999068691205
+ },
+ "settings": {
+  "contrast": 20.0,
+  "curve": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.25,
+    0.18
+   ],
+   [
+    0.5,
+    0.5
+   ],
+   [
+    0.75,
+    0.83
+   ],
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "exposure": 0.8,
+  "negative": true,
+  "negative_base": [
+   1.5479137897491455,
+   1.2492680549621582,
+   0.7447492480278015
+  ],
+  "negative_peak": [
+   0.10268495231866837,
+   0.0654924288392067,
+   0.03575357422232628
+  ],
+  "panels_off": [
+   "basic",
+   "curve",
+   "mixer"
+  ],
+  "saturation": 30.0
+ },
+ "source": "negative"
+}

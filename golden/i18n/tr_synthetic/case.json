@@ -1,0 +1,4288 @@
+{
+ "cases": [
+  {
+   "language": "ko",
+   "ok": "",
+   "source": "",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "",
+   "source": "",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "",
+   "source": "",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "",
+   "source": "",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "",
+   "source": "",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "",
+   "source": "",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "",
+   "source": "",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "",
+   "source": "",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "",
+   "source": "",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "",
+   "source": "",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "",
+   "source": "",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "",
+   "source": "",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "평범한 문장",
+   "source": "평범한 문장",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0}",
+   "source": "{0}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가",
+   "source": "{0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12",
+   "source": "{0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0}",
+   "source": "{0}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가",
+   "source": "{0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12",
+   "source": "{0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0} / {1}",
+   "source": "{0} / {1}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{0} / {1}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x / y",
+   "source": "{0} / {1}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x / y",
+   "source": "{0} / {1}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가 / 나",
+   "source": "{0} / {1}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12 / 34",
+   "source": "{0} / {1}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0} / {1}",
+   "source": "{0} / {1}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{0} / {1}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x / y",
+   "source": "{0} / {1}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x / y",
+   "source": "{0} / {1}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가 / 나",
+   "source": "{0} / {1}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12 / 34",
+   "source": "{0} / {1}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0} {1} {2}",
+   "source": "{0} {1} {2}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{0} {1} {2}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{0} {1} {2}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x y z",
+   "source": "{0} {1} {2}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{0} {1} {2}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{0} {1} {2}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0} {1} {2}",
+   "source": "{0} {1} {2}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{0} {1} {2}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{0} {1} {2}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x y z",
+   "source": "{0} {1} {2}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{0} {1} {2}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{0} {1} {2}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{} {}",
+   "source": "{} {}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{} {}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x y",
+   "source": "{} {}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x y",
+   "source": "{} {}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가 나",
+   "source": "{} {}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12 34",
+   "source": "{} {}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{} {}",
+   "source": "{} {}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{} {}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x y",
+   "source": "{} {}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x y",
+   "source": "{} {}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가 나",
+   "source": "{} {}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12 34",
+   "source": "{} {}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{} {0}",
+   "source": "{} {0}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{} {0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{} {0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{} {0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{} {0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{} {0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{} {0}",
+   "source": "{} {0}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{} {0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{} {0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{} {0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{} {0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{} {0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0} {}",
+   "source": "{0} {}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0} {}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0} {}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0} {}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0} {}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0} {}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0} {}",
+   "source": "{0} {}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0} {}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0} {}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0} {}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0} {}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0} {}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0} {0}",
+   "source": "{0} {0}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "x x",
+   "source": "{0} {0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x x",
+   "source": "{0} {0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x x",
+   "source": "{0} {0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가 가",
+   "source": "{0} {0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12 12",
+   "source": "{0} {0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0} {0}",
+   "source": "{0} {0}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "x x",
+   "source": "{0} {0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x x",
+   "source": "{0} {0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x x",
+   "source": "{0} {0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가 가",
+   "source": "{0} {0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12 12",
+   "source": "{0} {0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{1}",
+   "source": "{1}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{1}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "y",
+   "source": "{1}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "y",
+   "source": "{1}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "나",
+   "source": "{1}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "34",
+   "source": "{1}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{1}",
+   "source": "{1}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{1}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "y",
+   "source": "{1}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "y",
+   "source": "{1}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "나",
+   "source": "{1}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "34",
+   "source": "{1}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{2} {0}",
+   "source": "{2} {0}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{2} {0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{2} {0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "z x",
+   "source": "{2} {0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{2} {0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{2} {0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{2} {0}",
+   "source": "{2} {0}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{2} {0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{2} {0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "z x",
+   "source": "{2} {0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{2} {0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{2} {0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{{문자 그대로}}",
+   "source": "{{문자 그대로}}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{{문자 그대로}}",
+   "source": "{{문자 그대로}}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{문자 그대로}",
+   "source": "{{문자 그대로}}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{{{0}}}",
+   "source": "{{{0}}}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "{x}",
+   "source": "{{{0}}}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{x}",
+   "source": "{{{0}}}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{x}",
+   "source": "{{{0}}}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{가}",
+   "source": "{{{0}}}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{12}",
+   "source": "{{{0}}}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{{{0}}}",
+   "source": "{{{0}}}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "{x}",
+   "source": "{{{0}}}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{x}",
+   "source": "{{{0}}}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{x}",
+   "source": "{{{0}}}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{가}",
+   "source": "{{{0}}}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{12}",
+   "source": "{{{0}}}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{",
+   "source": "{",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{",
+   "source": "{",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "}",
+   "source": "}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "}",
+   "source": "}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0",
+   "source": "{0",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0",
+   "source": "{0",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "0}",
+   "source": "0}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "0}",
+   "source": "0}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "a { b",
+   "source": "a { b",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a { b",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a { b",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a { b",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a { b",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a { b",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "a { b",
+   "source": "a { b",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a { b",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a { b",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a { b",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a { b",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a { b",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "a } b",
+   "source": "a } b",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a } b",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a } b",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a } b",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a } b",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "a } b",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "a } b",
+   "source": "a } b",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a } b",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a } b",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a } b",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a } b",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "a } b",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{{",
+   "source": "{{",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{{",
+   "source": "{{",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{",
+   "source": "{{",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "}}",
+   "source": "}}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "}}",
+   "source": "}}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "}",
+   "source": "}}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{ }",
+   "source": "{ }",
+   "values": []
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{ }",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{ }",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{ }",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{ }",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{ }",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{ }",
+   "source": "{ }",
+   "values": []
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{ }",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{ }",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{ }",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{ }",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{ }",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0:}",
+   "source": "{0:}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{0:}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{0:}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{0:}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가",
+   "source": "{0:}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12",
+   "source": "{0:}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0:}",
+   "source": "{0:}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{0:}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{0:}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{0:}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가",
+   "source": "{0:}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12",
+   "source": "{0:}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0!s}",
+   "source": "{0!s}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{0!s}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{0!s}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{0!s}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가",
+   "source": "{0!s}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12",
+   "source": "{0!s}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0!s}",
+   "source": "{0!s}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{0!s}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{0!s}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{0!s}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가",
+   "source": "{0!s}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12",
+   "source": "{0!s}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0!r}",
+   "source": "{0!r}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "'x'",
+   "source": "{0!r}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "'x'",
+   "source": "{0!r}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "'x'",
+   "source": "{0!r}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "'가'",
+   "source": "{0!r}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "'12'",
+   "source": "{0!r}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0!r}",
+   "source": "{0!r}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "'x'",
+   "source": "{0!r}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "'x'",
+   "source": "{0!r}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "'x'",
+   "source": "{0!r}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "'가'",
+   "source": "{0!r}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "'12'",
+   "source": "{0!r}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0:>5}",
+   "source": "{0:>5}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "    x",
+   "source": "{0:>5}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "    x",
+   "source": "{0:>5}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "    x",
+   "source": "{0:>5}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "    가",
+   "source": "{0:>5}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "   12",
+   "source": "{0:>5}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0:>5}",
+   "source": "{0:>5}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "    x",
+   "source": "{0:>5}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "    x",
+   "source": "{0:>5}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "    x",
+   "source": "{0:>5}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "    가",
+   "source": "{0:>5}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "   12",
+   "source": "{0:>5}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0:<5}",
+   "source": "{0:<5}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "x    ",
+   "source": "{0:<5}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x    ",
+   "source": "{0:<5}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x    ",
+   "source": "{0:<5}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가    ",
+   "source": "{0:<5}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12   ",
+   "source": "{0:<5}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0:<5}",
+   "source": "{0:<5}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "x    ",
+   "source": "{0:<5}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x    ",
+   "source": "{0:<5}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x    ",
+   "source": "{0:<5}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가    ",
+   "source": "{0:<5}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12   ",
+   "source": "{0:<5}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0:^6}",
+   "source": "{0:^6}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "  x   ",
+   "source": "{0:^6}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "  x   ",
+   "source": "{0:^6}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "  x   ",
+   "source": "{0:^6}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "  가   ",
+   "source": "{0:^6}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "  12  ",
+   "source": "{0:^6}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0:^6}",
+   "source": "{0:^6}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "  x   ",
+   "source": "{0:^6}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "  x   ",
+   "source": "{0:^6}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "  x   ",
+   "source": "{0:^6}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "  가   ",
+   "source": "{0:^6}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "  12  ",
+   "source": "{0:^6}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0:*^7}",
+   "source": "{0:*^7}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "***x***",
+   "source": "{0:*^7}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "***x***",
+   "source": "{0:*^7}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "***x***",
+   "source": "{0:*^7}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "***가***",
+   "source": "{0:*^7}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "**12***",
+   "source": "{0:*^7}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0:*^7}",
+   "source": "{0:*^7}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "***x***",
+   "source": "{0:*^7}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "***x***",
+   "source": "{0:*^7}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "***x***",
+   "source": "{0:*^7}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "***가***",
+   "source": "{0:*^7}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "**12***",
+   "source": "{0:*^7}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0:5}",
+   "source": "{0:5}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "x    ",
+   "source": "{0:5}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x    ",
+   "source": "{0:5}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x    ",
+   "source": "{0:5}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가    ",
+   "source": "{0:5}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12   ",
+   "source": "{0:5}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0:5}",
+   "source": "{0:5}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "x    ",
+   "source": "{0:5}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x    ",
+   "source": "{0:5}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x    ",
+   "source": "{0:5}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가    ",
+   "source": "{0:5}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12   ",
+   "source": "{0:5}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0:d}",
+   "source": "{0:d}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:d}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:d}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:d}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:d}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:d}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0:d}",
+   "source": "{0:d}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:d}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:d}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:d}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:d}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:d}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0:03d}",
+   "source": "{0:03d}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:03d}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:03d}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:03d}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:03d}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0:03d}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0:03d}",
+   "source": "{0:03d}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:03d}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:03d}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:03d}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:03d}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0:03d}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{stem}",
+   "source": "{stem}",
+   "values": []
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{stem}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{stem}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{stem}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{stem}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{stem}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{stem}",
+   "source": "{stem}",
+   "values": []
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{stem}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{stem}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{stem}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{stem}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{stem}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{n:03d}",
+   "source": "{n:03d}",
+   "values": []
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{n:03d}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{n:03d}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{n:03d}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{n:03d}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "{n:03d}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{n:03d}",
+   "source": "{n:03d}",
+   "values": []
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{n:03d}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{n:03d}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{n:03d}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{n:03d}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "{n:03d}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{00}",
+   "source": "{00}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{00}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{00}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x",
+   "source": "{00}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가",
+   "source": "{00}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12",
+   "source": "{00}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{00}",
+   "source": "{00}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{00}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{00}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x",
+   "source": "{00}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가",
+   "source": "{00}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12",
+   "source": "{00}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0!}",
+   "source": "{0!}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0!}",
+   "source": "{0!}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0!sx}",
+   "source": "{0!sx}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!sx}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!sx}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!sx}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!sx}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "ko",
+   "source": "{0!sx}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0!sx}",
+   "source": "{0!sx}",
+   "values": []
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!sx}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!sx}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!sx}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!sx}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "ValueError",
+   "language": "en",
+   "source": "{0!sx}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "JSON {\"a\": 1}",
+   "source": "JSON {\"a\": 1}",
+   "values": []
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "ko",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "JSON {\"a\": 1}",
+   "source": "JSON {\"a\": 1}",
+   "values": []
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "error": "KeyError",
+   "language": "en",
+   "source": "JSON {\"a\": 1}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "a{{b}}c{0}",
+   "source": "a{{b}}c{0}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "a{b}cx",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "a{b}cx",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "a{b}cx",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "a{b}c가",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "a{b}c12",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "a{{b}}c{0}",
+   "source": "a{{b}}c{0}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "a{b}cx",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "a{b}cx",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "a{b}cx",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "a{b}c가",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "a{b}c12",
+   "source": "a{{b}}c{0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "한글 {0}개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "한글 x개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "한글 x개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "한글 x개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "한글 가개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "한글 12개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "한글 {0}개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "한글 x개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "한글 x개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "한글 x개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "한글 가개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "한글 12개의 사진",
+   "source": "한글 {0}개의 사진",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "{0}\n{1}",
+   "source": "{0}\n{1}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "ko",
+   "source": "{0}\n{1}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x\ny",
+   "source": "{0}\n{1}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "x\ny",
+   "source": "{0}\n{1}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "가\n나",
+   "source": "{0}\n{1}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "12\n34",
+   "source": "{0}\n{1}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "{0}\n{1}",
+   "source": "{0}\n{1}",
+   "values": []
+  },
+  {
+   "error": "IndexError",
+   "language": "en",
+   "source": "{0}\n{1}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x\ny",
+   "source": "{0}\n{1}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "x\ny",
+   "source": "{0}\n{1}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "가\n나",
+   "source": "{0}\n{1}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "12\n34",
+   "source": "{0}\n{1}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "unknown string {0}",
+   "source": "unknown string {0}",
+   "values": []
+  },
+  {
+   "language": "ko",
+   "ok": "unknown string x",
+   "source": "unknown string {0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "unknown string x",
+   "source": "unknown string {0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "unknown string x",
+   "source": "unknown string {0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "unknown string 가",
+   "source": "unknown string {0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "ko",
+   "ok": "unknown string 12",
+   "source": "unknown string {0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "unknown string {0}",
+   "source": "unknown string {0}",
+   "values": []
+  },
+  {
+   "language": "en",
+   "ok": "unknown string x",
+   "source": "unknown string {0}",
+   "values": [
+    "x"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "unknown string x",
+   "source": "unknown string {0}",
+   "values": [
+    "x",
+    "y"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "unknown string x",
+   "source": "unknown string {0}",
+   "values": [
+    "x",
+    "y",
+    "z"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "unknown string 가",
+   "source": "unknown string {0}",
+   "values": [
+    "가",
+    "나"
+   ]
+  },
+  {
+   "language": "en",
+   "ok": "unknown string 12",
+   "source": "unknown string {0}",
+   "values": [
+    "12",
+    "34"
+   ]
+  }
+ ]
+}

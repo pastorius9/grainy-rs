@@ -1,0 +1,18 @@
+{
+ "file": "input.tif",
+ "max_size": null,
+ "metadata": {
+  "bit_depth": 16,
+  "decoder": "TIFF 16-bit",
+  "filename": "input.tif",
+  "format": "TIF",
+  "height": 19,
+  "input_profile": "태그 없는 sRGB",
+  "size_mb": 0.0,
+  "source_orientation": 1,
+  "width": 31,
+  "working_space": "sRGB"
+ },
+ "read_metadata": {},
+ "working": "sRGB"
+}

@@ -1,0 +1,12 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "sharpen": 80.0,
+  "sharpen_detail": 30.0,
+  "sharpen_mask": 40.0,
+  "sharpen_radius": 1.2
+ },
+ "source": "edges",
+ "use_crop": true
+}

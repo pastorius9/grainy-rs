@@ -1,0 +1,6 @@
+{
+ "dtype": "float32",
+ "op": "magnitude",
+ "output_dtype": "float32",
+ "tolerance": 1e-06
+}

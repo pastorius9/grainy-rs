@@ -1,0 +1,24 @@
+[package]
+name = "grainy-local"
+description = "Grainy's local adjustments (mask layers, range masks) and retouching (red eye, clone, heal)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-core.workspace = true
+grainy-color = { path = "../grainy-color" }
+grainy-colorgrade = { path = "../grainy-colorgrade" }
+grainy-detail = { path = "../grainy-detail" }
+grainy-imgproc = { path = "../grainy-imgproc" }
+grainy-tone = { path = "../grainy-tone" }
+ndarray.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

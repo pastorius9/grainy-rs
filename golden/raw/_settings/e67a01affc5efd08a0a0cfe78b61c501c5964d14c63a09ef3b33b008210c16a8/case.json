@@ -1,0 +1,18 @@
+{
+ "dcp_profile": {
+  "camera": "",
+  "copyright": "",
+  "data": "SUlSQwgAAAAFACHGDAAJAAAASgAAACLGDAAJAAAAkgAAAFrGAwABAAAA/wAAAFvGAwABAAAAFQAAADXNBwASAAAA2gAAAAAAAACPwvUoXI/qP3sUrkfherS/exSuR+F6pL/sUbgehevBv+xRuB6F6/E/exSuR+F6tD+4HoXrUbievwrXo3A9Crc/uB6F61G45j8fhetRuB7tP3sUrkfhesS/exSuR+F6tL/hehSuR+HKvwrXo3A9CvM/mpmZmZmZqT97FK5H4XqUv7gehetRuK4/KVyPwvUo5D8AACgAAABkAAAAJgAAAGQAAAA=",
+  "name": "DCP",
+  "sha256": "856d7a3cd6221ca796cc10b48a7c38750d1c6b96e23cba870e85a476fb186fe1"
+ },
+ "raw_kelvin": 4300.0,
+ "raw_mode": "sample",
+ "raw_neutral": [
+  0.5,
+  1,
+  0.7
+ ],
+ "raw_tint": -18.0,
+ "working_space": "ProPhoto"
+}

@@ -1,0 +1,36 @@
+{
+ "background_menu": [],
+ "box_buttons": [
+  "Close",
+  "Apply"
+ ],
+ "button_auto": "Color · Auto",
+ "button_error": "Color · Needs review",
+ "button_initial": "Color · Auto",
+ "button_off": "Color · Clear",
+ "buttons": [
+  "Choose file",
+  "Check again",
+  "Close",
+  "Apply"
+ ],
+ "items": [
+  "Auto · Use Windows monitor settings",
+  "Manual · ICC profile",
+  "Disable display color correction"
+ ],
+ "labels": [
+  "Display color management",
+  "모니터: 기본 화면\n적용 프로파일: sRGB",
+  "Applies to the editor, photo list and comparison views. Edits and exports are unchanged.\nAuto mode follows each window's monitor. Uses sRGB when Windows provides no separate profile."
+ ],
+ "placeholder": "ICC profile path",
+ "size": [
+  580,
+  420
+ ],
+ "status_applying": "Checking display profiles…",
+ "status_error": "모니터: 기본 화면\n적용 프로파일: sRGB\nICC 프로파일 파일을 선택하세요.\n현재 화면은 sRGB로 표시합니다. 파일을 다시 선택하거나 자동 모드를 사용하세요.",
+ "status_no_file": "Choose an RGB display ICC file first.",
+ "title": "Display color management — Grainy"
+}

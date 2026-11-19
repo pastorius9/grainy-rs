@@ -1,0 +1,10 @@
+{
+  "baseline_revision": "1ad2337",
+  "golden_cases": 1886,
+  "baseline_tests": 16,
+  "current_tests": 17,
+  "full_image_comparisons": 1971,
+  "identical_measured_errors": true,
+  "baseline_log_sha256": "8254c4c05a3aa978575aad2bf4dc68855ce068a1b009afb6099eb0bd1a7c8de3",
+  "native_log_sha256": "7a34828a121331f3d93c36fc77ff4aaa3ec27a756b198466d0bfee22fac17941"
+}

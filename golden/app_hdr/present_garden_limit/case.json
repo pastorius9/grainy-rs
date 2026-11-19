@@ -1,0 +1,23 @@
+{
+ "ceiling": 1.824796199798584,
+ "highlights": [
+  true,
+  true,
+  true
+ ],
+ "inside": false,
+ "outside": true,
+ "sdr_preview": false,
+ "settings": {
+  "exposure": 0.5,
+  "hdr": true,
+  "hdr_brightness": 30.0,
+  "hdr_limit": 2.0
+ },
+ "shadows": [
+  false,
+  false,
+  false
+ ],
+ "visualize": false
+}

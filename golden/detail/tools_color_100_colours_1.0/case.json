@@ -1,0 +1,13 @@
+{
+ "bits_sum": "5813983628857704448",
+ "image": "colours",
+ "pixel_scale": 1.0,
+ "settings": {
+  "detail_version": 3,
+  "noise_color": 100.0
+ },
+ "step": [
+  3,
+  3
+ ]
+}

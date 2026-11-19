@@ -1,0 +1,410 @@
+{
+ "info": {
+  "counts": {
+   "Adobe_imageDevelopSettings": 1,
+   "Adobe_imageProofSettings": 0,
+   "Adobe_images": 3,
+   "Adobe_libraryImageDevelopHistoryStep": 1,
+   "Adobe_libraryImageDevelopSnapshot": 1,
+   "AgHarvestedExifMetadata": 1,
+   "AgHarvestedIptcMetadata": 1,
+   "AgInternedExifCameraModel": 1,
+   "AgInternedExifCameraSN": 1,
+   "AgInternedExifLens": 1,
+   "AgInternedIptcCity": 1,
+   "AgInternedIptcCountry": 0,
+   "AgInternedIptcCreator": 1,
+   "AgInternedIptcJobIdentifier": 1,
+   "AgInternedIptcLocation": 0,
+   "AgInternedIptcState": 0,
+   "AgLibraryCollection": 6,
+   "AgLibraryCollectionContent": 2,
+   "AgLibraryCollectionImage": 2,
+   "AgLibraryCollectionStack": 0,
+   "AgLibraryCollectionStackImage": 0,
+   "AgLibraryFile": 2,
+   "AgLibraryFolder": 1,
+   "AgLibraryFolderStack": 1,
+   "AgLibraryFolderStackImage": 2,
+   "AgLibraryIPTC": 1,
+   "AgLibraryKeyword": 2,
+   "AgLibraryKeywordImage": 2,
+   "AgLibraryKeywordSynonym": 0,
+   "AgLibraryRootFolder": 1
+  },
+  "path": "<ROOT>\\inspect\\fixture.lrcat",
+  "source_key": "catalog:fixture-catalog-1"
+ },
+ "recipe": [
+  [
+   "insert",
+   "Adobe_variablesTable",
+   {
+    "id_global": "fixture-0001",
+    "id_local": 1,
+    "name": "Adobe_storeProviderID",
+    "type": "string",
+    "value": "fixture-catalog-1"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryRootFolder",
+   {
+    "absolutePath": "C:\\Grainy Lightroom Test\\Photos",
+    "id_global": "fixture-0002",
+    "id_local": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFolder",
+   {
+    "id_global": "fixture-0003",
+    "id_local": 2,
+    "pathFromRoot": "",
+    "rootFolder": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFile",
+   {
+    "baseName": "photo0",
+    "extension": "jpg",
+    "folder": 2,
+    "id_global": "fixture-0004",
+    "id_local": 10
+   }
+  ],
+  [
+   "insert",
+   "Adobe_images",
+   {
+    "captureTime": "2026-09-20T11:22:33",
+    "colorLabels": "Red",
+    "id_global": "fixture-0005",
+    "id_local": 100,
+    "pick": 1,
+    "rating": 4,
+    "rootFile": 10
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFile",
+   {
+    "baseName": "photo1",
+    "extension": "jpg",
+    "folder": 2,
+    "id_global": "fixture-0006",
+    "id_local": 11
+   }
+  ],
+  [
+   "insert",
+   "Adobe_images",
+   {
+    "captureTime": "2026-09-20T11:22:33",
+    "colorLabels": "Red",
+    "id_global": "fixture-0007",
+    "id_local": 101,
+    "pick": 0,
+    "rating": 3,
+    "rootFile": 11
+   }
+  ],
+  [
+   "insert",
+   "Adobe_images",
+   {
+    "copyName": "흑백 대안",
+    "id_global": "fixture-0008",
+    "id_local": 99,
+    "masterImage": 100,
+    "pick": -1,
+    "rating": 2,
+    "rootFile": 10
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryKeyword",
+   {
+    "id_global": "fixture-0009",
+    "id_local": 1,
+    "name": "여행"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryKeyword",
+   {
+    "id_global": "fixture-0010",
+    "id_local": 2,
+    "name": "서울",
+    "parent": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryKeywordImage",
+   {
+    "id_local": 1,
+    "image": 100,
+    "tag": 2
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryKeywordImage",
+   {
+    "id_local": 2,
+    "image": 99,
+    "tag": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryIPTC",
+   {
+    "caption": "사진 설명",
+    "copyright": "저작권",
+    "id_local": 1,
+    "image": 100
+   }
+  ],
+  [
+   "insert",
+   "AgInternedIptcCreator",
+   {
+    "id_local": 1,
+    "value": "촬영자"
+   }
+  ],
+  [
+   "insert",
+   "AgHarvestedIptcMetadata",
+   {
+    "creatorRef": 1,
+    "id_local": 1,
+    "image": 100
+   }
+  ],
+  [
+   "insert",
+   "AgHarvestedExifMetadata",
+   {
+    "gpsLatitude": 0.0,
+    "gpsLongitude": 127.0,
+    "hasGPS": 1,
+    "id_local": 1,
+    "image": 100
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "creationId": "com.adobe.ag.library.group",
+    "id_local": 1,
+    "name": "여행 모음"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "creationId": "com.adobe.ag.library.collection",
+    "id_local": 2,
+    "name": "서울",
+    "parent": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "creationId": "com.adobe.ag.library.smart_collection",
+    "id_local": 3,
+    "name": "별 다섯",
+    "parent": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "id_local": 4,
+    "name": "quick collection",
+    "systemOnly": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollectionImage",
+   {
+    "collection": 2,
+    "id_local": 1,
+    "image": 99
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollectionContent",
+   {
+    "collection": 3,
+    "content": "s = { { criteria = \"rating\", operation = \">=\", value = 5 }, combine = \"intersect\" }",
+    "id_local": 1,
+    "owningModule": "ag.library.smart_collection"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFolderStack",
+   {
+    "id_global": "fixture-0011",
+    "id_local": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFolderStackImage",
+   {
+    "id_local": 1,
+    "image": 100,
+    "position": 1,
+    "stack": 1
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryFolderStackImage",
+   {
+    "id_local": 2,
+    "image": 101,
+    "position": 2,
+    "stack": 1
+   }
+  ],
+  [
+   "insert",
+   "Adobe_imageDevelopSettings",
+   {
+    "id_local": 1,
+    "image": 100,
+    "text": "s = { Exposure2012 = 1.25 }"
+   }
+  ],
+  [
+   "insert",
+   "Adobe_libraryImageDevelopHistoryStep",
+   {
+    "id_global": "fixture-0012",
+    "id_local": 1,
+    "image": 100,
+    "name": "Exposure",
+    "text": "never_execute()"
+   }
+  ],
+  [
+   "insert",
+   "Adobe_libraryImageDevelopSnapshot",
+   {
+    "id_global": "fixture-0013",
+    "id_local": 1,
+    "image": 99,
+    "name": "대안",
+    "text": "snapshot source text"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "creationId": "com.adobe.ag.library.smart_collection",
+    "id_local": 5,
+    "name": "Unknown compound"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollectionContent",
+   {
+    "collection": 5,
+    "content": "s={{criteria=\"rating\",operation=\">=\",value=1},{criteria=\"unknown\",operation=\"==\",value=1}}",
+    "id_local": 5,
+    "owningModule": "ag.library.smart_collection"
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollectionImage",
+   {
+    "collection": 5,
+    "id_local": 5,
+    "image": 100
+   }
+  ],
+  [
+   "insert",
+   "AgLibraryCollection",
+   {
+    "creationId": "com.adobe.ag.library.smart_collection",
+    "id_local": 6,
+    "name": "No rules"
+   }
+  ],
+  [
+   "insert",
+   "AgInternedExifCameraModel",
+   {
+    "id_local": 1,
+    "value": "Nikon D3S"
+   }
+  ],
+  [
+   "insert",
+   "AgInternedExifCameraSN",
+   {
+    "id_local": 1,
+    "value": "TEST-123"
+   }
+  ],
+  [
+   "insert",
+   "AgInternedExifLens",
+   {
+    "id_local": 1,
+    "value": "50mm f/1.4"
+   }
+  ],
+  [
+   "insert",
+   "AgInternedIptcCity",
+   {
+    "id_local": 1,
+    "value": "서울"
+   }
+  ],
+  [
+   "insert",
+   "AgInternedIptcJobIdentifier",
+   {
+    "id_local": 1,
+    "value": "JOB-7"
+   }
+  ],
+  [
+   "sql",
+   "UPDATE AgHarvestedIptcMetadata SET cityRef=1,jobIdentifierRef=1",
+   []
+  ],
+  [
+   "sql",
+   "UPDATE AgHarvestedExifMetadata SET cameraModelRef=1,cameraSNRef=1,lensRef=1,isoSpeedRating=800",
+   []
+  ]
+ ],
+ "refused": "이 Lightroom 카탈로그 구조는 지원하지 않습니다: AgLibraryRootFolder"
+}

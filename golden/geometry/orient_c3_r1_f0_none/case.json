@@ -1,0 +1,17 @@
+{
+ "changes": {
+  "crop": null,
+  "flip": false,
+  "rotation": 1
+ },
+ "error": null,
+ "function": "geometry",
+ "input": {
+  "c": 3,
+  "h": 13,
+  "kind": "synth",
+  "seed": 1,
+  "w": 21
+ },
+ "use_crop": true
+}

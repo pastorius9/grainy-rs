@@ -1,0 +1,18 @@
+[package]
+name = "grainy-jpeg-sys"
+description = "Shared vendored libjpeg-turbo and Pillow-compatible JPEG operations"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license = "MIT AND IJG AND BSD-3-Clause AND Zlib"
+links = "grainy_jpeg"
+
+[build-dependencies]
+cc = { version = "1", features = ["parallel"] }
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+ndarray.workspace = true
+
+[lints]
+workspace = true

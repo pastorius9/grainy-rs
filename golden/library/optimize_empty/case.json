@@ -1,0 +1,76 @@
+{
+ "spec": {
+  "setup": {
+   "files": {},
+   "photos": []
+  },
+  "calls": [
+   {
+    "fn": "optimize",
+    "args": {}
+   }
+  ],
+  "name": "optimize_empty"
+ },
+ "results": [
+  {
+   "ok": {
+    "converted": 0,
+    "examined": 0,
+    "total": 0,
+    "removed_assets": 0,
+    "profiles": 0,
+    "cancelled": false,
+    "vacuumed": true,
+    "warnings": [],
+    "warning_count": 0,
+    "has_backup": true,
+    "integrity": "ok",
+    "stages": [
+     [
+      "안전 백업 중",
+      0,
+      0
+     ],
+     [
+      "프로파일 연결 검사 중",
+      0,
+      0
+     ],
+     [
+      "빈 공간 회수 중",
+      0,
+      0
+     ],
+     [
+      "무결성 확인 중",
+      0,
+      0
+     ]
+    ],
+    "checkpoint_len": 3,
+    "tables_equal": true,
+    "tables": {
+     "photos": [],
+     "history": [],
+     "presets": [],
+     "snapshots": [],
+     "preferences": [],
+     "profile_assets": []
+    }
+   }
+  }
+ ],
+ "tree": {
+  "files": {},
+  "dirs": []
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {},
+  "backup_names": [
+   "before-optimize-<stamp>-<id>.sqlite"
+  ]
+ }
+}

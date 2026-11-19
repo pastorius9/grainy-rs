@@ -1,0 +1,13 @@
+{
+ "border": "reflect101",
+ "dtype": "uint8",
+ "interpolation": "linear",
+ "inverse": false,
+ "op": "warp_affine",
+ "output_dtype": "uint8",
+ "size": [
+  37,
+  17
+ ],
+ "tolerance": 1.0
+}

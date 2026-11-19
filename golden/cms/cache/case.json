@@ -1,0 +1,250 @@
+{
+ "max_profile_bytes": 33554432,
+ "max_transforms": 16,
+ "pad": 10485760,
+ "steps": [
+  {
+   "destination": "sRGB",
+   "hits": 0,
+   "misses": 1,
+   "planar8": false,
+   "profile_bytes": 1176,
+   "source": "sRGB",
+   "transforms": 1
+  },
+  {
+   "destination": "Adobe RGB",
+   "hits": 0,
+   "misses": 2,
+   "planar8": false,
+   "profile_bytes": 2628,
+   "source": "sRGB",
+   "transforms": 2
+  },
+  {
+   "destination": "Display P3",
+   "hits": 0,
+   "misses": 3,
+   "planar8": false,
+   "profile_bytes": 28380,
+   "source": "sRGB",
+   "transforms": 3
+  },
+  {
+   "destination": "ProPhoto RGB",
+   "hits": 0,
+   "misses": 4,
+   "planar8": false,
+   "profile_bytes": 29568,
+   "source": "sRGB",
+   "transforms": 4
+  },
+  {
+   "destination": "Linear sRGB",
+   "hits": 0,
+   "misses": 5,
+   "planar8": false,
+   "profile_bytes": 30720,
+   "source": "sRGB",
+   "transforms": 5
+  },
+  {
+   "destination": "sRGB",
+   "hits": 0,
+   "misses": 6,
+   "planar8": false,
+   "profile_bytes": 32172,
+   "source": "Adobe RGB",
+   "transforms": 6
+  },
+  {
+   "destination": "Adobe RGB",
+   "hits": 0,
+   "misses": 7,
+   "planar8": false,
+   "profile_bytes": 33900,
+   "source": "Adobe RGB",
+   "transforms": 7
+  },
+  {
+   "destination": "Display P3",
+   "hits": 0,
+   "misses": 8,
+   "planar8": false,
+   "profile_bytes": 59928,
+   "source": "Adobe RGB",
+   "transforms": 8
+  },
+  {
+   "destination": "ProPhoto RGB",
+   "hits": 0,
+   "misses": 9,
+   "planar8": false,
+   "profile_bytes": 61392,
+   "source": "Adobe RGB",
+   "transforms": 9
+  },
+  {
+   "destination": "Linear sRGB",
+   "hits": 0,
+   "misses": 10,
+   "planar8": false,
+   "profile_bytes": 62820,
+   "source": "Adobe RGB",
+   "transforms": 10
+  },
+  {
+   "destination": "sRGB",
+   "hits": 0,
+   "misses": 11,
+   "planar8": false,
+   "profile_bytes": 88572,
+   "source": "Display P3",
+   "transforms": 11
+  },
+  {
+   "destination": "Adobe RGB",
+   "hits": 0,
+   "misses": 12,
+   "planar8": false,
+   "profile_bytes": 114600,
+   "source": "Display P3",
+   "transforms": 12
+  },
+  {
+   "destination": "Display P3",
+   "hits": 0,
+   "misses": 13,
+   "planar8": false,
+   "profile_bytes": 164928,
+   "source": "Display P3",
+   "transforms": 13
+  },
+  {
+   "destination": "ProPhoto RGB",
+   "hits": 0,
+   "misses": 14,
+   "planar8": false,
+   "profile_bytes": 190692,
+   "source": "Display P3",
+   "transforms": 14
+  },
+  {
+   "destination": "Linear sRGB",
+   "hits": 0,
+   "misses": 15,
+   "planar8": false,
+   "profile_bytes": 216420,
+   "source": "Display P3",
+   "transforms": 15
+  },
+  {
+   "destination": "sRGB",
+   "hits": 0,
+   "misses": 16,
+   "planar8": false,
+   "profile_bytes": 217608,
+   "source": "ProPhoto RGB",
+   "transforms": 16
+  },
+  {
+   "destination": "Adobe RGB",
+   "hits": 0,
+   "misses": 17,
+   "planar8": false,
+   "profile_bytes": 217896,
+   "source": "ProPhoto RGB",
+   "transforms": 16
+  },
+  {
+   "destination": "Display P3",
+   "hits": 0,
+   "misses": 18,
+   "planar8": false,
+   "profile_bytes": 242208,
+   "source": "ProPhoto RGB",
+   "transforms": 16
+  },
+  {
+   "destination": "ProPhoto RGB",
+   "hits": 0,
+   "misses": 19,
+   "planar8": false,
+   "profile_bytes": 217656,
+   "source": "ProPhoto RGB",
+   "transforms": 16
+  },
+  {
+   "destination": "Linear sRGB",
+   "hits": 0,
+   "misses": 20,
+   "planar8": false,
+   "profile_bytes": 217632,
+   "source": "ProPhoto RGB",
+   "transforms": 16
+  },
+  {
+   "destination": "Linear sRGB",
+   "hits": 1,
+   "misses": 20,
+   "planar8": false,
+   "profile_bytes": 217632,
+   "source": "ProPhoto RGB",
+   "transforms": 16
+  },
+  {
+   "destination": "sRGB",
+   "hits": 1,
+   "misses": 21,
+   "planar8": false,
+   "profile_bytes": 217656,
+   "source": "sRGB",
+   "transforms": 16
+  },
+  {
+   "destination": "Adobe RGB",
+   "hits": 1,
+   "misses": 22,
+   "planar8": true,
+   "profile_bytes": 217656,
+   "source": "sRGB",
+   "transforms": 16
+  },
+  {
+   "destination": "Adobe RGB",
+   "hits": 2,
+   "misses": 22,
+   "planar8": true,
+   "profile_bytes": 217656,
+   "source": "sRGB",
+   "transforms": 16
+  },
+  {
+   "destination": "pad1",
+   "hits": 2,
+   "misses": 23,
+   "planar8": false,
+   "profile_bytes": 21213200,
+   "source": "pad0",
+   "transforms": 16
+  },
+  {
+   "destination": "pad2",
+   "hits": 2,
+   "misses": 24,
+   "planar8": false,
+   "profile_bytes": 20997548,
+   "source": "pad1",
+   "transforms": 1
+  },
+  {
+   "destination": "pad1",
+   "hits": 2,
+   "misses": 25,
+   "planar8": false,
+   "profile_bytes": 20997272,
+   "source": "pad0",
+   "transforms": 1
+  }
+ ]
+}

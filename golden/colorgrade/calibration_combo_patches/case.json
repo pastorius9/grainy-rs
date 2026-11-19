@@ -1,0 +1,20 @@
+{
+ "changes": {
+  "calibration": [
+   [
+    20.0,
+    -30.0
+   ],
+   [
+    -50.0,
+    40.0
+   ],
+   [
+    70.0,
+    10.0
+   ]
+  ]
+ },
+ "image": "std:patches",
+ "kind": "tools"
+}

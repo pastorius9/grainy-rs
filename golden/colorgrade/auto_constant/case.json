@@ -1,0 +1,18 @@
+{
+ "amount": 1.0,
+ "curves": null,
+ "image": "cg:constant",
+ "kind": "auto",
+ "report": {
+  "casts": [
+   null,
+   [
+    0.0,
+    0.0,
+    0.0
+   ],
+   null
+  ],
+  "status": "neutral"
+ }
+}

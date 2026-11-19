@@ -1,0 +1,23 @@
+{
+ "mean": [
+  0.41138271347328553,
+  0.41549269113495635,
+  0.4116539535477447
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "exposure": 0.5,
+  "film_look": "kodak-portra-400",
+  "film_strength": 60.0,
+  "shadows": 30.0
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

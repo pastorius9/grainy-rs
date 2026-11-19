@@ -1,0 +1,849 @@
+{
+ "runs": [
+  {
+   "compare": false,
+   "develop": true,
+   "name": "develop",
+   "rows": [
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "start",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": true,
+     "step": "sides",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "sides",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": true,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": false,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": true,
+     "step": "sides",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": true,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": true,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": true,
+     "sides": true,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": true,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": true,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": false,
+     "result": true,
+     "sides": true,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": true,
+     "step": "sides",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": true,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": false,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": true,
+     "sides": false,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": false,
+     "sides": false,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    }
+   ]
+  },
+  {
+   "compare": false,
+   "develop": false,
+   "name": "library",
+   "rows": [
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "start",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": false,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": true,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": false,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": true,
+     "step": "sides",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": true,
+     "sides": true,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": true,
+      "library_column": false,
+      "library_toolbar": true,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": true,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": true,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": false,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": false,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": true,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": false,
+     "sides": false,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": false,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": true,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    }
+   ]
+  },
+  {
+   "compare": true,
+   "develop": true,
+   "name": "develop-compare",
+   "rows": [
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "start",
+     "visible": {
+      "compare_bar": true,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": true,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": true,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": false,
+     "result": true,
+     "sides": true,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "bars",
+     "visible": {
+      "compare_bar": true,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": true,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": true,
+     "step": "bars",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": false
+     }
+    }
+   ]
+  },
+  {
+   "compare": false,
+   "develop": true,
+   "name": "full-screen",
+   "rows": [
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "start",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": true,
+     "lights": false,
+     "result": null,
+     "sides": false,
+     "step": "full",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": true,
+     "sides": false,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": true,
+     "result": null,
+     "sides": false,
+     "step": "lights",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": true,
+     "lights": true,
+     "result": null,
+     "sides": false,
+     "step": "full",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": false,
+      "filmstrip": false,
+      "header_bar": false,
+      "library_column": false,
+      "library_toolbar": false,
+      "menu": false,
+      "status": false,
+      "view_bar": false
+     }
+    },
+    {
+     "bars": false,
+     "full": true,
+     "lights": false,
+     "result": true,
+     "sides": false,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": true,
+     "sides": false,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    },
+    {
+     "bars": false,
+     "full": false,
+     "lights": false,
+     "result": false,
+     "sides": false,
+     "step": "leave",
+     "visible": {
+      "compare_bar": false,
+      "edit_column": true,
+      "filmstrip": true,
+      "header_bar": true,
+      "library_column": true,
+      "library_toolbar": false,
+      "menu": true,
+      "status": true,
+      "view_bar": true
+     }
+    }
+   ]
+  }
+ ]
+}

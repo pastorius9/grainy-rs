@@ -1,0 +1,13 @@
+{
+ "bits_sum": "10995230111573213184",
+ "image": "wide",
+ "pixel_scale": 1.0,
+ "settings": {
+  "detail_version": 3,
+  "monochrome": true
+ },
+ "step": [
+  3,
+  3
+ ]
+}

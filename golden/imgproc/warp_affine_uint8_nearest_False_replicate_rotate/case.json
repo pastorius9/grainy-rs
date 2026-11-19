@@ -1,0 +1,18 @@
+{
+ "border": "replicate",
+ "border_value": [
+  90,
+  60,
+  30
+ ],
+ "dtype": "uint8",
+ "interpolation": "nearest",
+ "inverse": false,
+ "op": "warp_affine",
+ "output_dtype": "uint8",
+ "size": [
+  13,
+  9
+ ],
+ "tolerance": 1.0
+}

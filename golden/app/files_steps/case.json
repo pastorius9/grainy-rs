@@ -1,0 +1,3585 @@
+{
+ "files": [
+  [
+   "photos/A/a1.png",
+   "one"
+  ],
+  [
+   "photos/A/a2.png",
+   "two"
+  ],
+  [
+   "photos/A/sub/a3.png",
+   "three"
+  ],
+  [
+   "photos/B/b1.png",
+   "four"
+  ],
+  [
+   "photos/B/copy.png",
+   "one"
+  ],
+  [
+   "photos/C/c1.png",
+   "two"
+  ],
+  [
+   "spare/found.png",
+   "three"
+  ]
+ ],
+ "library": [
+  "photos/A/a1.png",
+  "photos/A/a2.png",
+  "photos/A/sub/a3.png",
+  "photos/B/b1.png",
+  "photos/B/copy.png",
+  "photos/C/c1.png"
+ ],
+ "optimize": {
+  "backups": {
+   "before-optimize": 1,
+   "before-restore": 1,
+   "folder-location": 1
+  },
+  "cancelled": false,
+  "converted": 0,
+  "examined": 3,
+  "integrity": "ok",
+  "profiles": 0,
+  "total": 3
+ },
+ "script": "[[\"open\", 1], [\"set\", \"exposure\", 0.25], [\"select\", [1, 2]], [\"rename\", \"{stem}_{n:03d}\"], [\"rename\", \"x/{stem}\"], [\"rename\", null], [\"open\", 5], [\"rename\", \"b1\"], [\"rename\", \"{name}\"], [\"open\", 6], [\"move\", \"<ROOT>\\\\photos\\\\B\"], [\"move\", null], [\"open\", 4], [\"move\", \"<ROOT>\\\\photos\\\\A\"], [\"move\", \"<ROOT>\\\\photos\\\\A\"], [\"folder\", null], [\"move_folder\", \"<ROOT>\\\\photos\\\\Z\"], [\"folder\", \"<ROOT>\\\\photos\\\\A\"], [\"move_folder\", \"<ROOT>\\\\photos\\\\A\\\\sub\\\\inner\"], [\"move_folder\", \"<ROOT>\\\\photos\\\\Renamed\"], [\"move_folder\", null], [\"open\", 3], [\"fs_move\", \"<ROOT>\\\\photos\\\\Renamed\\\\sub\\\\a3.png\", \"<ROOT>\\\\spare\\\\a3-moved.png\"], [\"relink\", \"<ROOT>\\\\spare\\\\a3-moved.png\"], [\"relink\", \"<ROOT>\\\\library\\\\catalog.sqlite\"], [\"duplicates\"], [\"integrity\"], [\"backup\", \"<ROOT>\\\\elsewhere\\\\saved.sqlite\"], [\"rating\", [1, 2, 3], 5], [\"restore\", \"<ROOT>\\\\elsewhere\\\\saved.sqlite\", false], [\"restore\", \"<ROOT>\\\\elsewhere\\\\saved.sqlite\", true], [\"restore\", \"<ROOT>\\\\library\\\\catalog.sqlite\", true], [\"fs_move\", \"<ROOT>\\\\photos\\\\B\", \"<ROOT>\\\\photos\\\\B2\"], [\"integrity\"], [\"folder\", null], [\"relink_folder\", null, null], [\"folder\", \"<ROOT>\\\\photos\\\\B\"], [\"relink_folder\", \"<ROOT>\\\\photos\\\\B2\", false], [\"locate\", \"<ROOT>\\\\photos\\\\B\", \"<ROOT>\\\\photos\\\\Renamed\", true], [\"locate\", \"<ROOT>\\\\photos\\\\B\", \"<ROOT>\\\\photos\\\\B2\", true], [\"folder\", null], [\"open\", 1], [\"select\", [1]], [\"trash\", false], [\"trash\", true], [\"open\", 2], [\"fs_move\", \"<ROOT>\\\\photos\\\\Renamed\\\\a2_002.png\", \"<ROOT>\\\\spare\\\\gone.png\"], [\"select\", [2, 5]], [\"trash\", true]]",
+ "stamp": "2026-11-13T01:02:03.456789+00:00",
+ "steps": [
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 1,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1.png",
+     "one"
+    ],
+    [
+     "photos/A/a2.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "open",
+    1
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\A",
+     "<ROOT>\\photos\\B",
+     "<ROOT>\\photos\\C"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 1,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1.png",
+      "path": "<ROOT>\\photos\\A\\a1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2.png",
+      "path": "<ROOT>\\photos\\A\\a2.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\photos\\A\\sub\\a3.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\B\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\C\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 7,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1.png · 사본",
+      "path": "<ROOT>\\photos\\A\\a1.png",
+      "rating": 0,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": {
+     "folder_identities": null,
+     "folder_panel": null,
+     "removed_folders": null,
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 1,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1.png",
+     "one"
+    ],
+    [
+     "photos/A/a2.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "set",
+    "exposure",
+    0.25
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 1,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1.png",
+     "one"
+    ],
+    [
+     "photos/A/a2.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "select",
+    [
+     1,
+     2
+    ]
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "text",
+     "label": "{stem}: 원래 이름 / {n:03d}: 연속 번호",
+     "text": "{stem}_{n:03d}",
+     "title": "파일 이름 변경"
+    }
+   ],
+   "current": 1,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "rename",
+    "{stem}_{n:03d}"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\A",
+     "<ROOT>\\photos\\B",
+     "<ROOT>\\photos\\C"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ],
+     [
+      2,
+      1,
+      "보정 변경"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 1,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png",
+      "path": "<ROOT>\\photos\\A\\a1_001.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2_002.png",
+      "path": "<ROOT>\\photos\\A\\a2_002.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\photos\\A\\sub\\a3.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\B\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\C\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 7,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png · 사본",
+      "path": "<ROOT>\\photos\\A\\a1_001.png",
+      "rating": 0,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": {
+     "folder_identities": null,
+     "folder_panel": null,
+     "removed_folders": null,
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "text",
+     "label": "{stem}: 원래 이름 / {n:03d}: 연속 번호",
+     "text": "{stem}_{n:03d}",
+     "title": "파일 이름 변경"
+    }
+   ],
+   "current": 1,
+   "duplicates": null,
+   "error": "파일 이름에 경로나 특수문자를 넣을 수 없습니다.",
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "rename",
+    "x/{stem}"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "text",
+     "label": "{stem}: 원래 이름 / {n:03d}: 연속 번호",
+     "text": "{stem}_{n:03d}",
+     "title": "파일 이름 변경"
+    }
+   ],
+   "current": 1,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "rename",
+    null
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 5,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "open",
+    5
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "text",
+     "label": "{stem}: 원래 이름 / {n:03d}: 연속 번호",
+     "text": "{stem}_{n:03d}",
+     "title": "파일 이름 변경"
+    }
+   ],
+   "current": 5,
+   "duplicates": null,
+   "error": "대상 파일이 이미 있습니다: b1.png",
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "rename",
+    "b1"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "text",
+     "label": "{stem}: 원래 이름 / {n:03d}: 연속 번호",
+     "text": "{stem}_{n:03d}",
+     "title": "파일 이름 변경"
+    }
+   ],
+   "current": 5,
+   "duplicates": null,
+   "error": "'name'",
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "rename",
+    "{name}"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 6,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/C/c1.png",
+     "two"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "open",
+    6
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "folder",
+     "title": "선택 사진을 이동할 폴더"
+    }
+   ],
+   "current": 6,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "move",
+    "<ROOT>\\photos\\B"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\A",
+     "<ROOT>\\photos\\B",
+     "<ROOT>\\photos\\C"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ],
+     [
+      2,
+      1,
+      "보정 변경"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 1,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png",
+      "path": "<ROOT>\\photos\\A\\a1_001.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2_002.png",
+      "path": "<ROOT>\\photos\\A\\a2_002.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\photos\\A\\sub\\a3.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\B\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\B\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 7,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png · 사본",
+      "path": "<ROOT>\\photos\\A\\a1_001.png",
+      "rating": 0,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": {
+     "folder_identities": null,
+     "folder_panel": null,
+     "removed_folders": null,
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "folder",
+     "title": "선택 사진을 이동할 폴더"
+    }
+   ],
+   "current": 6,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "move",
+    null
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 4,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/b1.png",
+     "four"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "open",
+    4
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "folder",
+     "title": "선택 사진을 이동할 폴더"
+    }
+   ],
+   "current": 4,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/b1.png",
+     "four"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "move",
+    "<ROOT>\\photos\\A"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\A",
+     "<ROOT>\\photos\\B",
+     "<ROOT>\\photos\\C"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ],
+     [
+      2,
+      1,
+      "보정 변경"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 1,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png",
+      "path": "<ROOT>\\photos\\A\\a1_001.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2_002.png",
+      "path": "<ROOT>\\photos\\A\\a2_002.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\photos\\A\\sub\\a3.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\A\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\B\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 7,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png · 사본",
+      "path": "<ROOT>\\photos\\A\\a1_001.png",
+      "rating": 0,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": {
+     "folder_identities": null,
+     "folder_panel": null,
+     "removed_folders": null,
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "folder",
+     "title": "선택 사진을 이동할 폴더"
+    }
+   ],
+   "current": 4,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/b1.png",
+     "four"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "move",
+    "<ROOT>\\photos\\A"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 4,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/b1.png",
+     "four"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "folder",
+    null
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 4,
+   "duplicates": null,
+   "error": "왼쪽에서 이동할 사진 폴더를 선택하세요.",
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/b1.png",
+     "four"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "move_folder",
+    "<ROOT>\\photos\\Z"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 4,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/b1.png",
+     "four"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\A",
+   "step": [
+    "folder",
+    "<ROOT>\\photos\\A"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "text",
+     "label": "새 폴더의 전체 경로",
+     "text": "<ROOT>\\photos\\A",
+     "title": "폴더 이름 변경·이동"
+    }
+   ],
+   "current": 4,
+   "duplicates": null,
+   "error": "폴더 안쪽이나 기존 폴더로 이동할 수 없습니다.",
+   "excluded": [],
+   "files": [
+    [
+     "photos/A/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/A/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/A/b1.png",
+     "four"
+    ],
+    [
+     "photos/A/sub/a3.png",
+     "three"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\A",
+   "step": [
+    "move_folder",
+    "<ROOT>\\photos\\A\\sub\\inner"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "text",
+     "label": "새 폴더의 전체 경로",
+     "text": "<ROOT>\\photos\\A",
+     "title": "폴더 이름 변경·이동"
+    }
+   ],
+   "current": 4,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "photos/Renamed/sub/a3.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "move_folder",
+    "<ROOT>\\photos\\Renamed"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\B",
+     "<ROOT>\\photos\\C",
+     "<ROOT>\\photos\\Renamed"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ],
+     [
+      2,
+      1,
+      "보정 변경"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 1,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2_002.png",
+      "path": "<ROOT>\\photos\\Renamed\\a2_002.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\photos\\Renamed\\sub\\a3.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\Renamed\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\B\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 7,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png · 사본",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 0,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": {
+     "folder_identities": null,
+     "folder_panel": null,
+     "removed_folders": [],
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "text",
+     "label": "새 폴더의 전체 경로",
+     "text": "<ROOT>\\photos\\Renamed",
+     "title": "폴더 이름 변경·이동"
+    }
+   ],
+   "current": 4,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "photos/Renamed/sub/a3.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "move_folder",
+    null
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 3,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "photos/Renamed/sub/a3.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "open",
+    3
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 3,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "fs_move",
+    "<ROOT>\\photos\\Renamed\\sub\\a3.png",
+    "<ROOT>\\spare\\a3-moved.png"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "open",
+     "title": "원본 사진 다시 연결"
+    }
+   ],
+   "current": 3,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "relink",
+    "<ROOT>\\spare\\a3-moved.png"
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\B",
+     "<ROOT>\\photos\\C",
+     "<ROOT>\\photos\\Renamed",
+     "<ROOT>\\spare"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ],
+     [
+      2,
+      1,
+      "보정 변경"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 1,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2_002.png",
+      "path": "<ROOT>\\photos\\Renamed\\a2_002.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\spare\\a3-moved.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\Renamed\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\B\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 7,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png · 사본",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 0,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": {
+     "folder_identities": null,
+     "folder_panel": null,
+     "removed_folders": [],
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "open",
+     "title": "원본 사진 다시 연결"
+    }
+   ],
+   "current": 3,
+   "duplicates": null,
+   "error": "지원하는 사진 파일을 선택해 주세요.",
+   "excluded": [],
+   "files": [
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "relink",
+    "<ROOT>\\library\\catalog.sqlite"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 3,
+   "duplicates": [
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     6
+    ]
+   ],
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "duplicates"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "information",
+     "text": "데이터베이스: ok\n사진 7장 / 누락된 원본 참조 0개",
+     "title": "카탈로그 검사"
+    }
+   ],
+   "current": 3,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "integrity"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "save",
+     "title": "카탈로그 백업"
+    },
+    {
+     "box": "information",
+     "text": "카탈로그·보정·컬렉션을 백업했습니다. 원본 사진은 별도로 보관하세요.",
+     "title": "백업"
+    }
+   ],
+   "current": 3,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "backup",
+    "<ROOT>\\elsewhere\\saved.sqlite"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [],
+   "current": 3,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "rating",
+    [
+     1,
+     2,
+     3
+    ],
+    5
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\B",
+     "<ROOT>\\photos\\C",
+     "<ROOT>\\photos\\Renamed",
+     "<ROOT>\\spare"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ],
+     [
+      2,
+      1,
+      "보정 변경"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 1,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 5,
+      "virtual_source": null
+     },
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2_002.png",
+      "path": "<ROOT>\\photos\\Renamed\\a2_002.png",
+      "rating": 5,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\spare\\a3-moved.png",
+      "rating": 5,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\Renamed\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\B\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 7,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png · 사본",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 0,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": {
+     "folder_identities": null,
+     "folder_panel": null,
+     "removed_folders": [],
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "trashed": []
+  },
+  {
+   "backups": {},
+   "boxes": [
+    {
+     "box": "open",
+     "title": "카탈로그 백업 복원"
+    },
+    {
+     "box": "question",
+     "text": "현재 카탈로그를 자동 백업한 뒤 선택한 백업으로 복원할까요?",
+     "title": "카탈로그 복원"
+    }
+   ],
+   "current": 3,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\Renamed",
+   "step": [
+    "restore",
+    "<ROOT>\\elsewhere\\saved.sqlite",
+    false
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1
+   },
+   "boxes": [
+    {
+     "box": "open",
+     "title": "카탈로그 백업 복원"
+    },
+    {
+     "box": "question",
+     "text": "현재 카탈로그를 자동 백업한 뒤 선택한 백업으로 복원할까요?",
+     "title": "카탈로그 복원"
+    }
+   ],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "restore",
+    "<ROOT>\\elsewhere\\saved.sqlite",
+    true
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\B",
+     "<ROOT>\\photos\\C",
+     "<ROOT>\\photos\\Renamed",
+     "<ROOT>\\spare"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ],
+     [
+      2,
+      1,
+      "보정 변경"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 1,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2_002.png",
+      "path": "<ROOT>\\photos\\Renamed\\a2_002.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\spare\\a3-moved.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\Renamed\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\B\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 7,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png · 사본",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 0,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": {
+     "folder_identities": null,
+     "folder_panel": null,
+     "removed_folders": [],
+     "sync_excluded": null,
+     "watch_folders": null
+    }
+   },
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1
+   },
+   "boxes": [
+    {
+     "box": "open",
+     "title": "카탈로그 백업 복원"
+    },
+    {
+     "box": "question",
+     "text": "현재 카탈로그를 자동 백업한 뒤 선택한 백업으로 복원할까요?",
+     "title": "카탈로그 복원"
+    }
+   ],
+   "current": null,
+   "duplicates": null,
+   "error": "현재 카탈로그와 같은 파일입니다.",
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B/c1.png",
+     "two"
+    ],
+    [
+     "photos/B/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "restore",
+    "<ROOT>\\library\\catalog.sqlite",
+    true
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1
+   },
+   "boxes": [],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "fs_move",
+    "<ROOT>\\photos\\B",
+    "<ROOT>\\photos\\B2"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1
+   },
+   "boxes": [
+    {
+     "box": "information",
+     "text": "데이터베이스: ok\n사진 7장 / 누락된 원본 참조 2개",
+     "title": "카탈로그 검사"
+    }
+   ],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "integrity"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1
+   },
+   "boxes": [],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "folder",
+    null
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1
+   },
+   "boxes": [],
+   "current": null,
+   "duplicates": null,
+   "error": "왼쪽에서 누락된 폴더를 선택하세요.",
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "relink_folder",
+    null,
+    null
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1
+   },
+   "boxes": [],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\B",
+   "step": [
+    "folder",
+    "<ROOT>\\photos\\B"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1
+   },
+   "boxes": [
+    {
+     "box": "folder",
+     "title": "이 폴더의 새 위치 선택"
+    },
+    {
+     "box": "question",
+     "text": "기존 위치: <ROOT>\\photos\\B\n새 위치: <ROOT>\\photos\\B2\n\n사진·가상 사본 2개를 다시 연결합니다. 찾은 원본 참조 2개, 찾지 못한 참조 0개.\n보정·별점·컬렉션은 유지하며 원본 파일을 이동하거나 삭제하지 않습니다. 변경 전 카탈로그를 자동 백업합니다.\n\n이 위치로 연결할까요?",
+     "title": "폴더 위치 다시 지정"
+    }
+   ],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\B",
+   "step": [
+    "relink_folder",
+    "<ROOT>\\photos\\B2",
+    false
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1
+   },
+   "boxes": [
+    {
+     "box": "folder",
+     "title": "이 폴더의 새 위치 선택"
+    }
+   ],
+   "current": null,
+   "duplicates": null,
+   "error": "선택한 폴더에서 기존 사진을 찾지 못했습니다. 파일 이름과 하위 폴더 구조를 확인하세요.",
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\B",
+   "step": [
+    "locate",
+    "<ROOT>\\photos\\B",
+    "<ROOT>\\photos\\Renamed",
+    true
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [
+    {
+     "box": "folder",
+     "title": "이 폴더의 새 위치 선택"
+    },
+    {
+     "box": "question",
+     "text": "기존 위치: <ROOT>\\photos\\B\n새 위치: <ROOT>\\photos\\B2\n\n사진·가상 사본 2개를 다시 연결합니다. 찾은 원본 참조 2개, 찾지 못한 참조 0개.\n보정·별점·컬렉션은 유지하며 원본 파일을 이동하거나 삭제하지 않습니다. 변경 전 카탈로그를 자동 백업합니다.\n\n이 위치로 연결할까요?",
+     "title": "폴더 위치 다시 지정"
+    }
+   ],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": "<ROOT>\\photos\\B2",
+   "step": [
+    "locate",
+    "<ROOT>\\photos\\B",
+    "<ROOT>\\photos\\B2",
+    true
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\B2",
+     "<ROOT>\\photos\\C",
+     "<ROOT>\\photos\\Renamed",
+     "<ROOT>\\spare"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ],
+     [
+      2,
+      1,
+      "보정 변경"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 1,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2_002.png",
+      "path": "<ROOT>\\photos\\Renamed\\a2_002.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\spare\\a3-moved.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\Renamed\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B2\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\B2\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 7,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a1_001.png · 사본",
+      "path": "<ROOT>\\photos\\Renamed\\a1_001.png",
+      "rating": 0,
+      "virtual_source": 1
+     }
+    ],
+    "preferences": {
+     "folder_identities": {},
+     "folder_panel": {
+      "expanded": []
+     },
+     "removed_folders": [],
+     "sync_excluded": null,
+     "watch_folders": []
+    }
+   },
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "folder",
+    null
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [],
+   "current": 1,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "open",
+    1
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [],
+   "current": 1,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "select",
+    [
+     1
+    ]
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [
+    {
+     "box": "question",
+     "text": "선택한 1장을 카탈로그에서 제거합니다.\n원본 파일은 휴지통으로 이동하며 같은 원본의 가상 사본도 제거됩니다.",
+     "title": "사진 제거"
+    }
+   ],
+   "current": 1,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a1_001.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "trash",
+    false
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [
+    {
+     "box": "question",
+     "text": "선택한 1장을 카탈로그에서 제거합니다.\n원본 파일은 휴지통으로 이동하며 같은 원본의 가상 사본도 제거됩니다.",
+     "title": "사진 제거"
+    }
+   ],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "bin/01-a1_001.png",
+     "one"
+    ],
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "trash",
+    true
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\B2",
+     "<ROOT>\\photos\\C",
+     "<ROOT>\\photos\\Renamed",
+     "<ROOT>\\spare"
+    ],
+    "history": [
+     [
+      1,
+      2,
+      "노출"
+     ]
+    ],
+    "photos": [
+     {
+      "id": 2,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a2_002.png",
+      "path": "<ROOT>\\photos\\Renamed\\a2_002.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\spare\\a3-moved.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\Renamed\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 5,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "copy.png",
+      "path": "<ROOT>\\photos\\B2\\copy.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\B2\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "folder_identities": {},
+     "folder_panel": {
+      "expanded": []
+     },
+     "removed_folders": [],
+     "sync_excluded": null,
+     "watch_folders": []
+    }
+   },
+   "trashed": [
+    "<ROOT>\\photos\\Renamed\\a1_001.png"
+   ]
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [],
+   "current": 2,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "bin/01-a1_001.png",
+     "one"
+    ],
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/a2_002.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "open",
+    2
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [],
+   "current": 2,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "bin/01-a1_001.png",
+     "one"
+    ],
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ],
+    [
+     "spare/gone.png",
+     "two"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "fs_move",
+    "<ROOT>\\photos\\Renamed\\a2_002.png",
+    "<ROOT>\\spare\\gone.png"
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [],
+   "current": 2,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "bin/01-a1_001.png",
+     "one"
+    ],
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/B2/copy.png",
+     "one"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ],
+    [
+     "spare/gone.png",
+     "two"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "select",
+    [
+     2,
+     5
+    ]
+   ],
+   "trashed": []
+  },
+  {
+   "backups": {
+    "before-restore": 1,
+    "folder-location": 1
+   },
+   "boxes": [
+    {
+     "box": "question",
+     "text": "선택한 2장을 카탈로그에서 제거합니다.\n원본 파일은 휴지통으로 이동하며 같은 원본의 가상 사본도 제거됩니다.",
+     "title": "사진 제거"
+    }
+   ],
+   "current": null,
+   "duplicates": null,
+   "error": null,
+   "excluded": [],
+   "files": [
+    [
+     "bin/01-a1_001.png",
+     "one"
+    ],
+    [
+     "bin/01-copy.png",
+     "one"
+    ],
+    [
+     "elsewhere/saved.sqlite",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-shm",
+     "other"
+    ],
+    [
+     "elsewhere/saved.sqlite-wal",
+     "other"
+    ],
+    [
+     "photos/B2/c1.png",
+     "two"
+    ],
+    [
+     "photos/Renamed/b1.png",
+     "four"
+    ],
+    [
+     "spare/a3-moved.png",
+     "three"
+    ],
+    [
+     "spare/found.png",
+     "three"
+    ],
+    [
+     "spare/gone.png",
+     "two"
+    ]
+   ],
+   "folder": null,
+   "step": [
+    "trash",
+    true
+   ],
+   "tables": {
+    "folder_roots": [
+     "<ROOT>\\photos\\B2",
+     "<ROOT>\\photos\\C",
+     "<ROOT>\\photos\\Renamed",
+     "<ROOT>\\spare"
+    ],
+    "history": [],
+    "photos": [
+     {
+      "id": 3,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "a3.png",
+      "path": "<ROOT>\\spare\\a3-moved.png",
+      "rating": 0,
+      "virtual_source": null
+     },
+     {
+      "id": 4,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "b1.png",
+      "path": "<ROOT>\\photos\\Renamed\\b1.png",
+      "rating": 3,
+      "virtual_source": null
+     },
+     {
+      "id": 6,
+      "imported": "2026-11-13T01:02:03.456789+00:00",
+      "name": "c1.png",
+      "path": "<ROOT>\\photos\\B2\\c1.png",
+      "rating": 0,
+      "virtual_source": null
+     }
+    ],
+    "preferences": {
+     "folder_identities": {},
+     "folder_panel": {
+      "expanded": []
+     },
+     "removed_folders": [],
+     "sync_excluded": null,
+     "watch_folders": []
+    }
+   },
+   "trashed": [
+    "<ROOT>\\photos\\B2\\copy.png"
+   ]
+  }
+ ]
+}

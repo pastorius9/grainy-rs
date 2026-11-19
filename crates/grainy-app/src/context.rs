@@ -1,0 +1,977 @@
+//! The application context: everything a feature can use. Commands, panels, tools, dialogs and jobs all work on
+//! an `&mut AppContext`:
+//!
+//! * `doc`: the [`Document`] (photo list, selection, the open photo's [`EditState`], commits);
+//! * `jobs`: background work with progress and cancel ([`Jobs`]); `renderer`: the preview and thumbnail lanes;
+//! * the view state (mode, zoom, pan, the selected tool, before/after, clipping), the Develop column's state
+//!   (expanded panels, fold-outs), the dialog stack, the status line;
+//! * helpers for controls: [`AppContext::apply_row`], [`AppContext::set_and_commit`], [`AppContext::run`]…
+//!
+//! Port of the state the oracle keeps on `MainWindow` (luma/app.py).
+
+use std::collections::{HashMap, HashSet};
+use std::path::PathBuf;
+use std::sync::mpsc::{channel, Receiver, Sender};
+use std::sync::Arc;
+
+use eframe::egui::{self, Vec2};
+use grainy_core::{normalized, Settings};
+use grainy_i18n::Language;
+
+use crate::commands::{self, Invocation};
+use crate::dialogs::native::{self, Chosen, Purpose};
+use crate::dialogs::Dialog;
+use crate::document::{Document, Kind};
+use crate::export::ExportOptions;
+use crate::fonts;
+use crate::histogram::Bins;
+use crate::jobs::Jobs;
+use crate::panels::Tool;
+use crate::render::{Frame, PreviewJob, Renderer, Reply, Resolution, ThumbnailJob, Waker};
+use crate::session::Session;
+use crate::state::EditState;
+use crate::text::{tr, tr_with};
+use crate::widgets::RowEvent;
+use crate::worker::PREVIEW_SIZE;
+
+/// Snapshot tests freeze the render time shown in the status bar, so their pictures do not change from run to run.
+/// While it is set the preview also runs on the CPU renderer only (`gpu_worker::Control`): GPU frames may differ
+/// from CPU frames by a rounding step between machines.
+pub static FROZEN_TIMING: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+
+/// The two screens (`stack` index 1 and 0).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Mode {
+    Library,
+    Develop,
+}
+
+/// The photo view's zoom.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum Zoom {
+    /// The whole photo in the view (화면 맞춤).
+    Fit,
+    /// One photo pixel per screen pixel.
+    Actual,
+    /// Ctrl+wheel: screen points per original pixel.
+    Scale(f32),
+}
+
+/// The library filters of the left column (`library_buttons`).
+pub const FILTERS: [(&str, &str); 4] = [
+    ("all", "모든 사진"),
+    ("picked", "선택 표시한 사진"),
+    ("rated", "별점 4개 이상"),
+    ("rejected", "제외 표시한 사진"),
+];
+
+/// A thumbnail on screen.
+pub(crate) struct Thumb {
+    pub key: u64,
+    pub texture: Option<egui::TextureHandle>,
+    pub size: Vec2,
+    pub error: Option<String>,
+    /// The cache's status (`thumb_status`: 오프라인, 원본 없음…), already Korean source text.
+    pub status: String,
+}
+
+/// What the last preview request asked for: a new one is sent when this changes.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+struct Wanted {
+    photo: u64,
+    version: u64,
+    before: bool,
+    resolution: Resolution,
+    crop: grainy_engine::Crop,
+    /// The monitor profile's revision (`display_color.main.revision`): a new profile makes the picture again.
+    display: u64,
+    /// The HDR viewing choices' revision (`crate::hdr::revision`).
+    hdr: u64,
+}
+
+/// The application context.
+pub struct AppContext {
+    /// The egui context (textures, viewport commands, repaints).
+    pub egui: egui::Context,
+    /// The photos.
+    pub doc: Box<dyn Document>,
+    /// Background jobs.
+    pub jobs: Jobs<AppContext>,
+    /// The preview and thumbnail lanes.
+    pub renderer: Box<dyn Renderer>,
+    pub(crate) waker: Option<Waker>,
+    wanted: Option<Wanted>,
+    requests: u64,
+    /// Changes even when the new catalogue reuses the old photo ids and edit versions.
+    pub(crate) document_generation: u64,
+    /// The newest request id answered (a frame or an error).
+    answered: u64,
+    pub(crate) frame: Option<Arc<Frame>>,
+    pub(crate) texture: Option<egui::TextureHandle>,
+    /// The clipping overlay texture and the (frame id, shadows, highlights) it shows.
+    pub(crate) clip_texture: Option<(egui::TextureHandle, (u64, bool, bool))>,
+    pub(crate) picture_size: Vec2,
+    pub(crate) bins: Option<Bins>,
+    pub(crate) thumbs: HashMap<u64, Thumb>,
+    /// Thumbnail keys asked for and not answered.
+    thumbs_asked: HashMap<u64, u64>,
+    /// Photos whose thumbnails were drawn this frame (only those are asked for).
+    pub(crate) thumbs_drawn: HashSet<u64>,
+    /// The photos whose thumbnails were drawn in the frame before the last request round (what `idle` waits for).
+    thumbs_shown: HashSet<u64>,
+    chosen_tx: Sender<Chosen>,
+    chosen_rx: Receiver<Chosen>,
+    /// Open dialogs, the last on top.
+    pub dialogs: Vec<Box<dyn Dialog>>,
+    pub(crate) export_options: ExportOptions,
+    pub(crate) mode: Mode,
+    pub(crate) tool: Tool,
+    /// Expanded panels (the oracle starts with Basic open, solo mode on).
+    pub(crate) expanded: Vec<&'static str>,
+    pub(crate) solo: bool,
+    /// Open fold-outs, by a stable name.
+    pub(crate) foldouts: HashSet<&'static str>,
+    /// Tab: the side columns are shown. Shift+Tab: the bars (header, view bar, filmstrip) too.
+    pub(crate) sides: bool,
+    pub(crate) bars: bool,
+    pub(crate) full_screen: bool,
+    pub(crate) zoom: Zoom,
+    pub(crate) pan: Vec2,
+    pub(crate) drt_advanced: bool,
+    /// Shows the RAW white balance as if a RAW file were open (tests of the shell).
+    pub(crate) raw_photo: bool,
+    pub(crate) before: bool,
+    pub(crate) compare: bool,
+    pub(crate) wb_picker: bool,
+    pub(crate) clip_shadows: bool,
+    pub(crate) clip_highlights: bool,
+    pub(crate) folder_search: String,
+    /// The library search field as typed.
+    pub(crate) search: String,
+    /// Columns of the library grid at its last drawing (Up/Down move by a row).
+    pub(crate) grid_columns: usize,
+    /// The filmstrip scrolls to the open photo on its next drawing.
+    pub(crate) scroll_to_current: bool,
+    /// Where the photo was drawn at the last frame (screen points).
+    pub(crate) photo_rect: Option<egui::Rect>,
+    pub(crate) debug_overlay: bool,
+    /// Status bar message (already translated).
+    pub(crate) status: String,
+    /// The note under the automatic buttons (`auto_tone_note`).
+    pub(crate) auto_note: String,
+    /// Indices of choice boxes that only show (curve channel...).
+    pub(crate) choices: HashMap<&'static str, usize>,
+    pub(crate) fonts: fonts::Loaded,
+    /// The Rust app's data folder (snapshots of read-only libraries).
+    pub(crate) data_folder: Option<PathBuf>,
+    /// State that features keep for themselves ([`AppContext::state`]), one value per type.
+    extensions: HashMap<std::any::TypeId, Box<dyn std::any::Any>>,
+}
+
+impl AppContext {
+    /// A context drawing with `renderer` on `doc`. Installs the font and the style in `egui`.
+    pub fn new(egui: &egui::Context, mut renderer: Box<dyn Renderer>, doc: Box<dyn Document>) -> Self {
+        let loaded = fonts::install(egui);
+        log::info!("{}", loaded.describe());
+        crate::theme::apply(egui);
+        let repaint = egui.clone();
+        let waker: Waker = Arc::new(move || repaint.request_repaint());
+        renderer.set_waker(waker.clone());
+        let mut jobs = Jobs::default();
+        jobs.set_waker(Some(waker.clone()));
+        let (chosen_tx, chosen_rx) = channel();
+        Self {
+            egui: egui.clone(),
+            doc,
+            jobs,
+            renderer,
+            waker: Some(waker),
+            wanted: None,
+            requests: 0,
+            document_generation: 0,
+            answered: 0,
+            frame: None,
+            texture: None,
+            clip_texture: None,
+            picture_size: Vec2::ZERO,
+            bins: None,
+            thumbs: HashMap::new(),
+            thumbs_asked: HashMap::new(),
+            thumbs_drawn: HashSet::new(),
+            thumbs_shown: HashSet::new(),
+            chosen_tx,
+            chosen_rx,
+            dialogs: Vec::new(),
+            export_options: ExportOptions::default(),
+            mode: Mode::Develop,
+            tool: Tool::Edit,
+            expanded: vec!["basic"],
+            solo: true,
+            foldouts: HashSet::new(),
+            sides: true,
+            bars: true,
+            full_screen: false,
+            zoom: Zoom::Fit,
+            pan: Vec2::ZERO,
+            drt_advanced: false,
+            raw_photo: false,
+            before: false,
+            compare: false,
+            wb_picker: false,
+            clip_shadows: false,
+            clip_highlights: false,
+            folder_search: String::new(),
+            search: String::new(),
+            grid_columns: 1,
+            scroll_to_current: false,
+            photo_rect: None,
+            debug_overlay: false,
+            status: tr("준비됨  ·  사진을 가져오면 시작할 수 있습니다."),
+            auto_note: tr("자동톤: 검정·흰색 양끝 3% 여유\n목표 밝기 약 8–247 / 255"),
+            choices: HashMap::new(),
+            fonts: loaded,
+            data_folder: None,
+            extensions: HashMap::new(),
+        }
+    }
+
+    /// A feature's own state, created on first use: a feature keeps what it needs in a type of its own file
+    /// (`cx.state::<CropDraft>()`) instead of adding fields here.
+    pub fn state<T: Default + 'static>(&mut self) -> &mut T {
+        self.extensions
+            .entry(std::any::TypeId::of::<T>())
+            .or_insert_with(|| Box::new(T::default()))
+            .downcast_mut::<T>()
+            .expect("one value per type")
+    }
+
+    /// A feature's own state if it was created.
+    pub fn state_ref<T: 'static>(&self) -> Option<&T> {
+        self.extensions.get(&std::any::TypeId::of::<T>()).and_then(|b| b.downcast_ref::<T>())
+    }
+
+    // ---- what tests and other features read ----------------------------------------------------------------
+
+    /// The open photo's edit state (settings, undo).
+    pub fn edit_state(&self) -> &EditState {
+        self.doc.edit()
+    }
+
+    /// Mutable edit state of the open photo.
+    pub fn edit_state_mut(&mut self) -> &mut EditState {
+        self.doc.edit_mut()
+    }
+
+    /// The open photo's settings.
+    pub fn settings(&self) -> &Settings {
+        self.doc.edit().settings()
+    }
+
+    /// The document.
+    pub fn document(&self) -> &dyn Document {
+        self.doc.as_ref()
+    }
+
+    /// The document, to change.
+    pub fn document_mut(&mut self) -> &mut dyn Document {
+        self.doc.as_mut()
+    }
+
+    /// Replaces the document (opening a library): the picture and the thumbnails start again.
+    pub fn set_document(&mut self, doc: Box<dyn Document>) {
+        if let Err(message) = self.doc.flush() {
+            log::warn!("cannot store the last edit: {message}");
+        }
+        self.doc = doc;
+        self.document_generation += 1;
+        self.requests += 1;
+        self.answered = self.requests;
+        self.thumbs.clear();
+        self.thumbs_asked.clear();
+        self.wanted = None;
+        self.photo_changed();
+    }
+
+    /// Whether the open document is the Python Grainy's library opened read-only (the "읽기 전용" badge).
+    pub fn read_only_library(&self) -> bool {
+        matches!(self.doc.kind(), Kind::Catalog { read_only: true, .. })
+    }
+
+    /// The interface font files that were loaded.
+    pub fn loaded_fonts(&self) -> &fonts::Loaded {
+        &self.fonts
+    }
+
+    /// The frame on screen.
+    pub fn frame(&self) -> Option<&Arc<Frame>> {
+        self.frame.as_ref()
+    }
+
+    /// Where the photo was drawn at the last frame, in screen points (tests compare it with the engine).
+    pub fn photo_rect(&self) -> Option<egui::Rect> {
+        self.photo_rect
+    }
+
+    /// The status bar text.
+    pub fn status(&self) -> &str {
+        &self.status
+    }
+
+    /// Sets the status bar text (already translated).
+    pub fn set_status(&mut self, text: impl Into<String>) {
+        self.status = text.into();
+    }
+
+    /// Hides or shows the debug overlay of changed settings (off by default; `--debug` or 설정 → 디버그 정보).
+    pub fn set_debug_overlay(&mut self, on: bool) {
+        self.debug_overlay = on;
+    }
+
+    /// Whether the debug overlay shows.
+    pub fn debug_overlay(&self) -> bool {
+        self.debug_overlay
+    }
+
+    /// Expands a panel as a click on its header would.
+    pub fn open_panel(&mut self, key: &'static str) {
+        self.toggle_panel(key, true);
+    }
+
+    /// Solo mode (`단일 패널 모드`): opening a panel closes the others.
+    pub fn set_solo(&mut self, solo: bool) {
+        self.solo = solo;
+    }
+
+    /// Whether the RAW controls show: a RAW file is open (or the shell's tests ask for them).
+    pub fn raw_view(&self) -> bool {
+        self.raw_photo || self.doc.current().is_some_and(|p| p.is_raw())
+    }
+
+    /// Opens a fold-out by name (`wb_detail`, `lens_manual`, `channel_curve`, `point_color`, `raw_profile`,
+    /// `camera_matrix`, `presets`, `history`, `collections`).
+    pub fn open_foldout(&mut self, name: &'static str) {
+        self.foldouts.insert(name);
+    }
+
+    /// Opens or closes a fold-out.
+    pub fn set_foldout(&mut self, name: &'static str, open: bool) {
+        if open {
+            self.foldouts.insert(name);
+        } else {
+            self.foldouts.remove(name);
+        }
+    }
+
+    /// Shows the controls of a RAW photo (the RAW white balance) as if one were open.
+    pub fn set_raw_photo(&mut self, raw: bool) {
+        self.raw_photo = raw;
+    }
+
+    /// Shows the DRT's Advanced sliders.
+    pub fn set_drt_advanced(&mut self, on: bool) {
+        self.drt_advanced = on;
+    }
+
+    /// The current screen.
+    pub fn mode(&self) -> Mode {
+        self.mode
+    }
+
+    /// Port of `set_mode`.
+    pub fn set_mode(&mut self, mode: Mode) {
+        self.mode = mode;
+    }
+
+    /// The tool selected in the strip.
+    pub fn tool(&self) -> Tool {
+        self.tool
+    }
+
+    /// The photo view's zoom.
+    pub fn zoom(&self) -> Zoom {
+        self.zoom
+    }
+
+    /// Sets the zoom (the Fit and 1:1 buttons).
+    pub fn set_zoom(&mut self, zoom: Zoom) {
+        self.zoom = zoom;
+        self.pan = Vec2::ZERO;
+    }
+
+    /// Shows the undeveloped photo (`\`) or the developed one.
+    pub fn set_before(&mut self, before: bool) {
+        self.before = before;
+    }
+
+    /// Whether the original is shown.
+    pub fn before(&self) -> bool {
+        self.before
+    }
+
+    /// The clipping overlay (J): shadows and highlights together.
+    pub fn set_clipping(&mut self, on: bool) {
+        self.clip_shadows = on;
+        self.clip_highlights = on;
+    }
+
+    /// Whether the side columns are shown.
+    pub fn sides_visible(&self) -> bool {
+        self.sides
+    }
+
+    /// Whether the header and the bars are shown.
+    pub fn bars_visible(&self) -> bool {
+        self.bars
+    }
+
+    /// Whether the shortcut list is open.
+    pub fn shortcut_list_open(&self) -> bool {
+        self.dialog_open("shortcuts")
+    }
+
+    /// Expanded panels.
+    pub fn expanded_panels(&self) -> &[&'static str] {
+        &self.expanded
+    }
+
+    /// Switches the interface language; takes effect on the next frame.
+    pub fn set_language(&mut self, language: Language) {
+        grainy_i18n::set_language(language);
+        log::info!("language: {}", language.code());
+    }
+
+    /// Whether nothing is loading, rendering or exporting and the screen shows the newest answers (tests wait
+    /// for this before taking a snapshot).
+    pub fn idle(&self) -> bool {
+        self.renderer.idle()
+            && self.jobs.jobs_idle()
+            && self.thumbs_asked.is_empty()
+            && self.thumbnails_current()
+            && self.answered == self.requests
+            && !self.doc.listing_pending()
+            && !self.doc.edit().has_journal()
+    }
+
+    // ---- commands, dialogs ----------------------------------------------------------------------------------
+
+    /// Runs command `id` (menus, buttons, keys).
+    pub fn run(&mut self, id: &str) -> bool {
+        commands::run(self, id, &Invocation::default())
+    }
+
+    /// Runs command `id` with a value.
+    pub fn run_with(&mut self, id: &str, invocation: &Invocation) -> bool {
+        commands::run(self, id, invocation)
+    }
+
+    /// Opens a dialog on top of the others (one per id).
+    pub fn open_dialog(&mut self, dialog: Box<dyn Dialog>) {
+        if !self.dialog_open(dialog.id()) {
+            self.dialogs.push(dialog);
+        }
+    }
+
+    /// Whether a dialog with this id is open.
+    pub fn dialog_open(&self, id: &str) -> bool {
+        self.dialogs.iter().any(|d| d.id() == id)
+    }
+
+    /// Closes the dialog with this id.
+    pub fn close_dialog(&mut self, id: &str) {
+        self.dialogs.retain(|d| d.id() != id);
+    }
+
+    /// Whether a modal dialog is open (shortcuts and arrow keys wait).
+    pub fn modal_open(&self) -> bool {
+        self.dialogs.iter().any(|d| d.modal())
+    }
+
+    /// Opens a native file dialog for `purpose`; the answer comes back on a later frame.
+    pub fn choose(&mut self, purpose: Purpose) {
+        let title = match purpose {
+            Purpose::ImportFiles => tr("사진 가져오기"),
+            Purpose::ImportFolder => tr("사진 폴더 가져오기 (하위 폴더 포함)"),
+            Purpose::ExportFolder => tr("내보낼 폴더 선택"),
+            Purpose::OpenLibrary => tr("라이브러리 폴더 열기"),
+        };
+        let start = match purpose {
+            Purpose::ExportFolder => Some(PathBuf::from(self.export_options.folder.trim())),
+            _ => self.doc.current().and_then(|p| p.path.parent().map(PathBuf::from)),
+        };
+        native::open(purpose, title, start, self.chosen_tx.clone(), self.waker.clone());
+    }
+
+    // ---- editing ---------------------------------------------------------------------------------------------
+
+    /// What changes when another photo opens.
+    pub(crate) fn photo_changed(&mut self) {
+        self.texture = None;
+        self.clip_texture = None;
+        self.frame = None;
+        self.bins = None;
+        self.picture_size = Vec2::ZERO;
+        self.pan = Vec2::ZERO;
+        self.before = false;
+        self.auto_note = tr("자동톤: 검정·흰색 양끝 3% 여유\n목표 밝기 약 8–247 / 255");
+    }
+
+    /// Opens photo `index` of the list (filmstrip click, arrow keys).
+    pub fn select_photo(&mut self, index: usize) {
+        let leaving = self.doc.current_id();
+        if self.doc.select(index) {
+            crate::views::compare::left(self, leaving);
+            self.photo_changed();
+        }
+        self.scroll_to_current = true;
+    }
+
+    /// Applies what a slider row did: a live value, then a commit (one undo step per drag).
+    pub(crate) fn apply_row(&mut self, key: &str, event: RowEvent) {
+        if let Some(value) = event.set {
+            self.doc.edit_mut().set(key, value);
+            self.before = false;
+        }
+        if event.commit {
+            self.doc.edit_mut().commit("보정 변경");
+        }
+    }
+
+    /// Sets a value and commits it as one undo step with `label` (buttons, check boxes, choices).
+    pub(crate) fn set_and_commit(&mut self, key: &str, value: impl Into<serde_json::Value>, label: &str) {
+        let edit = self.doc.edit_mut();
+        edit.commit("보정 변경");
+        edit.set(key, value);
+        edit.commit(label);
+    }
+
+    /// A button that is not wired yet: logs it.
+    pub(crate) fn stub(&mut self, what: &str) {
+        log::info!("not implemented yet: {what}");
+    }
+
+    /// Port of `copy_edits`.
+    pub fn copy_edits(&mut self) {
+        self.run("develop.copy_edits");
+    }
+
+    /// Port of `paste_edits` for the selected photos.
+    pub fn paste_edits(&mut self) {
+        self.run("develop.paste_edits");
+    }
+
+    /// Port of `rotate_photo` (clockwise) and of Ctrl+[ (counter-clockwise): the crop is cleared.
+    pub fn rotate(&mut self, clockwise: bool) {
+        if self.doc.current().is_none() {
+            return;
+        }
+        let edit = self.doc.edit_mut();
+        edit.commit("보정 변경");
+        let rotation = edit.settings().i64("rotation").rem_euclid(4);
+        edit.set("crop", serde_json::Value::Null);
+        edit.set("rotation", (rotation + if clockwise { 1 } else { 3 }) % 4);
+        edit.commit("보정 변경");
+        self.pan = Vec2::ZERO;
+    }
+
+    /// Port of `StudioTools.change_film`: the stock with its grain (`film_look.with_film`), one undo step.
+    pub fn change_film(&mut self, name: &str) {
+        let settings = self.settings().clone();
+        if settings.str("film_look") == name {
+            return;
+        }
+        let edit = self.doc.edit_mut();
+        edit.commit("보정 변경");
+        let film = grainy_film::with_film(&settings, name, &[]);
+        for (key, value) in &film.0 {
+            if !crate::state::py_eq(settings.value(key), value) {
+                edit.set(key, value.clone());
+            }
+        }
+        edit.commit("필름");
+    }
+
+    /// The largest centred crop with `ratio` (width / height) on the rotated photo (what `set_aspect` makes of a
+    /// full frame, without the interactive frame of a later run): one undo step.
+    pub fn crop_to_aspect(&mut self, ratio: f64) {
+        let Some((w, h)) = self.doc.current().and_then(|p| p.original) else { return };
+        let rotation = self.settings().i64("rotation").rem_euclid(4);
+        let (w, h) = if rotation % 2 == 1 { (f64::from(h), f64::from(w)) } else { (f64::from(w), f64::from(h)) };
+        if let Some(crop) = crate::panels::crop::centred_crop(w, h, ratio) {
+            self.set_and_commit("crop", serde_json::Value::from(crop.to_vec()), "보정 변경");
+        }
+    }
+
+    /// Port of `DevelopPanels.select_tool`: a second click on an open tool goes back to the panels.
+    pub(crate) fn select_tool(&mut self, tool: Tool) {
+        self.wb_picker = false;
+        self.tool = if tool == self.tool { Tool::Edit } else { tool };
+    }
+
+    /// A tool's key: opens the tool (`open_tool`), in the Develop screen.
+    pub fn open_tool(&mut self, tool: Tool) {
+        self.set_mode(Mode::Develop);
+        self.tool = tool;
+    }
+
+    /// Port of `DevelopPanels.toggle_panel`.
+    pub(crate) fn toggle_panel(&mut self, key: &'static str, expanded: bool) {
+        if crate::panels::TOOLS.contains(&key) {
+            if !expanded {
+                self.tool = Tool::Edit;
+            }
+            return;
+        }
+        if expanded {
+            self.tool = Tool::Edit;
+            if self.solo {
+                self.expanded.clear();
+            }
+            if !self.expanded.contains(&key) {
+                self.expanded.push(key);
+            }
+        } else {
+            self.expanded.retain(|k| *k != key);
+        }
+    }
+
+    // ---- opening and exporting -------------------------------------------------------------------------------
+
+    /// Opens files and folders (with their subfolders): into the session, or imported into the library (added in
+    /// place). The folders are read and the files added on a background job.
+    pub fn open_paths(&mut self, paths: Vec<PathBuf>) {
+        crate::commands::file::import_paths(self, paths);
+    }
+
+    /// Opens the export dialog (내보내기) for the selected photos.
+    pub fn open_export_dialog(&mut self) {
+        self.run("file.export");
+    }
+
+    /// Port of `start_export`: the selected photos with their settings, exported on a background job.
+    pub fn start_export(&mut self, options: ExportOptions) {
+        crate::commands::export::start_export(self, options);
+    }
+
+    /// Whether an export is running.
+    pub fn exporting(&self) -> bool {
+        self.jobs.running("export")
+    }
+
+    // ---- every frame -----------------------------------------------------------------------------------------
+
+    /// Finished jobs, the document's listing, file dialogs, dropped files.
+    pub(crate) fn poll_background(&mut self) {
+        crate::session_state::poll(self);
+        crate::folders::poll(self);
+        crate::commands::settings::poll(self);
+        crate::commands::collections::timed_refresh(self);
+        crate::display::poll(self);
+        crate::hdr::poll(self);
+        crate::folder_watch::poll(self);
+        for finished in self.jobs.poll() {
+            finished(self);
+        }
+        if let Some(job) = self.doc.listing_job() {
+            let generation = self.document_generation;
+            self.jobs.spawn(
+                "listing",
+                "",
+                move |_| job(),
+                move |cx: &mut AppContext, result| match result {
+                    _ if cx.document_generation != generation => {}
+                    Ok(listing) => {
+                        let had = cx.doc.current_id();
+                        cx.doc.apply_listing(listing);
+                        if cx.doc.current_id() != had {
+                            cx.photo_changed();
+                        }
+                    }
+                    Err(message) => {
+                        cx.status = tr_with("처리하지 못했습니다: {0}", &[&message]);
+                    }
+                },
+            );
+        }
+        while let Ok(chosen) = self.chosen_rx.try_recv() {
+            match chosen.purpose {
+                Purpose::ImportFiles | Purpose::ImportFolder => self.open_paths(chosen.paths),
+                Purpose::OpenLibrary => {
+                    if let Some(folder) = chosen.paths.into_iter().next() {
+                        crate::commands::file::open_library(self, &folder);
+                    }
+                }
+                Purpose::ExportFolder => {
+                    for dialog in &mut self.dialogs {
+                        dialog.receive(&chosen);
+                    }
+                }
+            }
+        }
+        let dropped: Vec<PathBuf> =
+            self.egui.input(|i| i.raw.dropped_files.iter().map(|f| f.path().to_path_buf()).collect());
+        if !dropped.is_empty() {
+            self.open_paths(dropped);
+        }
+        self.jobs.set_render_busy(!self.renderer.idle());
+    }
+
+    /// Stores the edits recorded this frame.
+    pub(crate) fn flush(&mut self) {
+        if let Err(message) = self.doc.flush() {
+            self.status = tr_with("처리하지 못했습니다: {0}", &[&message]);
+        }
+        crate::commands::sync::after_flush(self);
+    }
+
+    /// Collects the renderer's replies and sends the requests the screen needs now.
+    pub(crate) fn refresh_picture(&mut self) {
+        for reply in self.renderer.poll() {
+            match reply {
+                Reply::Frame(frame) => {
+                    self.answered = self.answered.max(frame.id);
+                    if frame.photo != self.doc.current_id() || frame.id != self.requests {
+                        continue;
+                    }
+                    self.doc.set_original(frame.photo, frame.original);
+                    self.status = if self.before {
+                        tr("원본 비교 중")
+                    } else {
+                        let source = match frame.resolution {
+                            Resolution::Fit => "미리보기 {0} × {1} · {2} ms",
+                            Resolution::Full => "원본 해상도 {0} × {1} · {2} ms",
+                        };
+                        let values = [
+                            frame.preview.width.to_string(),
+                            frame.preview.height.to_string(),
+                            if FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed) {
+                                "0".to_owned()
+                            } else {
+                                format!("{:.0}", frame.millis)
+                            },
+                        ];
+                        tr_with(source, &[&values[0], &values[1], &values[2]])
+                    };
+                    self.show_frame(frame);
+                }
+                Reply::Failed { id, photo, message } => {
+                    self.answered = self.answered.max(id);
+                    if photo == self.doc.current_id() && id == self.requests {
+                        // The last good frame stays on screen.
+                        self.status = tr_with("처리하지 못했습니다: {0}", &[&message]);
+                    }
+                }
+                Reply::Thumbnail(thumb) => {
+                    if self.thumbs_asked.get(&thumb.photo) != Some(&thumb.key) {
+                        continue;
+                    }
+                    self.thumbs_asked.remove(&thumb.photo);
+                    if let Some(original) = thumb.original {
+                        self.doc.set_original(thumb.photo, original);
+                    }
+                    let entry = match thumb.result {
+                        Ok(preview) => {
+                            let image = egui::ColorImage::from_rgba_unmultiplied(
+                                [preview.width, preview.height],
+                                &preview.rgba,
+                            );
+                            let name = format!("thumb-{}", thumb.photo);
+                            Thumb {
+                                key: thumb.key,
+                                texture: Some(self.egui.load_texture(name, image, egui::TextureOptions::LINEAR)),
+                                size: Vec2::new(preview.width as f32, preview.height as f32),
+                                error: None,
+                                status: thumb.status,
+                            }
+                        }
+                        Err(message) => Thumb {
+                            key: thumb.key,
+                            texture: None,
+                            size: Vec2::ZERO,
+                            error: Some(message),
+                            status: thumb.status,
+                        },
+                    };
+                    self.thumbs.insert(thumb.photo, entry);
+                }
+            }
+        }
+        self.request_preview();
+        self.request_thumbnails();
+    }
+
+    /// The resolution the view needs: the full-size source when zoomed in past the preview source, except while a
+    /// value is being dragged (the fit source keeps the drag fluid).
+    fn resolution(&self) -> Resolution {
+        let long = self.doc.current().and_then(|p| p.original).map_or(0, |(w, h)| w.max(h) as usize);
+        if self.zoom != Zoom::Fit && long > PREVIEW_SIZE && !self.doc.edit().dirty() {
+            Resolution::Full
+        } else {
+            Resolution::Fit
+        }
+    }
+
+    fn request_preview(&mut self) {
+        let crop = crate::tools::crop::preview_crop(self);
+        let Some(photo) = self.doc.current() else { return };
+        let wanted = Wanted {
+            crop,
+            photo: photo.id,
+            version: self.doc.edit().version(),
+            before: self.before,
+            resolution: self.resolution(),
+            display: crate::display::revision(self),
+            hdr: crate::hdr::revision(self),
+        };
+        if self.wanted == Some(wanted) {
+            return;
+        }
+        let path = photo.path.clone();
+        self.wanted = Some(wanted);
+        self.requests += 1;
+        let settings = if self.before { before_settings(self.settings()) } else { self.settings().clone() };
+        let job =
+            PreviewJob { id: self.requests, photo: wanted.photo, path, settings, resolution: wanted.resolution, crop };
+        self.renderer.preview(job);
+    }
+
+    /// Whether every thumbnail on screen shows the photo's current version from its current source. A stored
+    /// thumbnail replaces the first, freshly rendered one when the library reports it, and the two differ by the
+    /// JPEG's rounding, so a picture taken before that second request would differ from run to run.
+    fn thumbnails_current(&self) -> bool {
+        self.doc.photos().iter().enumerate().all(|(index, photo)| {
+            if !self.thumbs_shown.contains(&photo.id) {
+                return true;
+            }
+            let key = thumb_key(photo.id, self.doc.version_of(index), self.doc.thumb_cache(index).is_some())
+                ^ crate::display::thumb_salt(self)
+                ^ self.document_generation.wrapping_mul(0x1656_67b1_9e37_79f9);
+            self.thumbs.get(&photo.id).is_some_and(|t| t.key == key)
+        })
+    }
+
+    fn request_thumbnails(&mut self) {
+        let current = self.doc.current_index();
+        let dragging = self.doc.edit().dirty();
+        let drawn = std::mem::take(&mut self.thumbs_drawn);
+        self.thumbs_shown.clone_from(&drawn);
+        let mut jobs = Vec::new();
+        for (index, photo) in self.doc.photos().iter().enumerate() {
+            if !drawn.contains(&photo.id) || (current == Some(index) && dragging) {
+                continue;
+            }
+            let cache = self.doc.thumb_cache(index);
+            let key = thumb_key(photo.id, self.doc.version_of(index), cache.is_some())
+                ^ crate::display::thumb_salt(self)
+                ^ self.document_generation.wrapping_mul(0x1656_67b1_9e37_79f9);
+            if self.thumbs.get(&photo.id).is_some_and(|t| t.key == key)
+                || self.thumbs_asked.get(&photo.id) == Some(&key)
+            {
+                continue;
+            }
+            let settings =
+                if cache.is_some() { normalized(&serde_json::Map::new()) } else { self.doc.settings_of(index) };
+            jobs.push(ThumbnailJob { photo: photo.id, path: photo.path.clone(), settings, key, cache });
+        }
+        for job in jobs {
+            self.thumbs_asked.insert(job.photo, job.key);
+            self.renderer.thumbnail(job);
+        }
+    }
+
+    fn show_frame(&mut self, frame: Arc<Frame>) {
+        let preview = &frame.preview;
+        if preview.rgba.len() != preview.width * preview.height * 4 {
+            log::warn!("renderer returned a picture of the wrong size");
+            return;
+        }
+        let image = egui::ColorImage::from_rgba_unmultiplied([preview.width, preview.height], &preview.rgba);
+        let options = egui::TextureOptions::LINEAR;
+        match &mut self.texture {
+            Some(texture) => texture.set(image, options),
+            None => self.texture = Some(self.egui.load_texture("photo", image, options)),
+        }
+        let (w, h) = frame.logical_size();
+        self.picture_size = Vec2::new(w as f32, h as f32);
+        self.bins = Some(frame.bins);
+        self.clip_texture = None;
+        self.frame = Some(frame);
+    }
+}
+
+/// The settings of the undeveloped view (`\`): the defaults (the oracle's `toggle_before` renders `defaults()`;
+/// the compare view's `before_settings`, which keeps the geometry, is the compare work package's).
+fn before_settings(_settings: &Settings) -> Settings {
+    normalized(&serde_json::Map::new())
+}
+
+/// A thumbnail's key: the photo, its settings' version and where it comes from.
+fn thumb_key(id: u64, version: u64, cached: bool) -> u64 {
+    id.wrapping_mul(0x9e37_79b9_7f4a_7c15) ^ version.wrapping_mul(0xc2b2_ae3d_27d4_eb4f) ^ u64::from(cached)
+}
+
+/// The session document of the shell (`--memory`, tests).
+pub fn memory_document() -> Box<dyn Document> {
+    Box::new(Session::default())
+}
+
+#[cfg(test)]
+mod review_tests {
+    use super::*;
+    use crate::render::TestCard;
+
+    #[test]
+    fn switching_documents_rejects_queued_frames_and_thumbnails() {
+        let mut cx = AppContext::new(&egui::Context::default(), Box::<TestCard>::default(), memory_document());
+        cx.refresh_picture();
+        assert!(cx.frame.is_some());
+        cx.renderer.preview(PreviewJob {
+            id: 0,
+            photo: 0,
+            path: PathBuf::new(),
+            settings: cx.settings().clone(),
+            resolution: Resolution::Fit,
+            crop: grainy_engine::Crop::Cropped,
+        });
+        cx.renderer.thumbnail(ThumbnailJob {
+            photo: 0,
+            path: PathBuf::new(),
+            settings: cx.settings().clone(),
+            key: 7,
+            cache: None,
+        });
+        cx.set_document(memory_document());
+        cx.thumbs_asked.insert(0, 8);
+        cx.refresh_picture();
+        assert!(cx.frame.is_none(), "an old library's photo id can equal the new library's id");
+        assert!(cx.thumbs.is_empty());
+        assert_eq!(cx.thumbs_asked.get(&0), Some(&8));
+    }
+
+    #[test]
+    fn an_old_listing_cannot_replace_a_new_library() {
+        use crate::document::catalog::CatalogDocument;
+        use std::time::{Duration, Instant};
+        let root = std::env::temp_dir().join(format!("grainy-review-listing-{}", std::process::id()));
+        let old = grainy_catalog::Catalog::new(root.join("old")).unwrap();
+        old.add(root.join("generated.png").to_str().unwrap(), None, None, true).unwrap();
+        let doc = CatalogDocument::with_catalog(old).unwrap();
+        let mut cx = AppContext::new(&egui::Context::default(), Box::<TestCard>::default(), Box::new(doc));
+        cx.poll_background();
+        let start = Instant::now();
+        let finished = loop {
+            let finished = cx.jobs.poll();
+            if !finished.is_empty() {
+                break finished;
+            }
+            assert!(start.elapsed() < Duration::from_secs(30));
+            std::thread::sleep(Duration::from_millis(2));
+        };
+        cx.set_document(Box::new(CatalogDocument::open(&root.join("new")).unwrap()));
+        for done in finished {
+            done(&mut cx);
+        }
+        assert!(cx.doc.photos().is_empty());
+        drop(cx);
+        std::fs::remove_dir_all(root).unwrap();
+    }
+}

@@ -1,0 +1,30 @@
+[package]
+name = "grainy-library"
+description = "Library housekeeping: moving, finding, copying and relinking photo files and keeping the catalogue consistent with the disk"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-imgproc = { path = "../grainy-imgproc" }
+grainy-core.workspace = true
+grainy-catalog = { path = "../grainy-catalog" }
+grainy-i18n = { path = "../grainy-i18n" }
+ndarray.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+chrono.workspace = true
+roxmltree.workspace = true
+thiserror.workspace = true
+sysinfo.workspace = true
+tempfile = "3"
+file-id = "0.2"
+unicode-casefold = "0.2"
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+regex-lite = "0.1"
+
+[lints]
+workspace = true

@@ -1,0 +1,27 @@
+{
+ "bytes": 3762,
+ "exact": true,
+ "extension": ".avif",
+ "found": {
+  "exif": true,
+  "icc": "43cbfe47eb7c",
+  "xmp": true
+ },
+ "height": 60,
+ "lossless": false,
+ "options": {
+  "color_space": "sRGB",
+  "dither": false,
+  "format": "AVIF",
+  "grayscale": false,
+  "keep_metadata": true,
+  "keywords": "",
+  "longest": null,
+  "quality": 95,
+  "user_metadata": null
+ },
+ "settings": {},
+ "settings_key": "default",
+ "source": "png8_exif.png",
+ "width": 40
+}

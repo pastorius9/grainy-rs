@@ -1,0 +1,107 @@
+{
+ "mean": [
+  0.40328392945861086,
+  0.4061394158197552,
+  0.3886202355356205
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "blacks": -20.0,
+  "contrast": 25.0,
+  "crop": [
+   0.1,
+   0.2,
+   0.8,
+   0.9
+  ],
+  "exposure": 0.8,
+  "film_look": "kodak-portra-400",
+  "film_strength": 60.0,
+  "highlights": -60.0,
+  "masks": [
+   {
+    "adjustments": {
+     "exposure": 0.5
+    },
+    "components": [
+     {
+      "points": [
+       [
+        0.2,
+        0.2
+       ],
+       [
+        0.8,
+        0.8
+       ]
+      ],
+      "type": "linear"
+     }
+    ]
+   }
+  ],
+  "retouch": [
+   {
+    "feather": 60,
+    "points": [
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.55,
+      0.52
+     ]
+    ],
+    "radius": 0.03,
+    "source": [
+     0.3,
+     0.3
+    ],
+    "type": "heal"
+   },
+   {
+    "points": [
+     [
+      0.6,
+      0.4
+     ],
+     [
+      0.62,
+      0.45
+     ]
+    ],
+    "radius": 0.03,
+    "type": "heal",
+    "version": 2
+   },
+   {
+    "points": [
+     [
+      0.7,
+      0.7
+     ],
+     [
+      0.75,
+      0.72
+     ]
+    ],
+    "radius": 0.02,
+    "type": "inpaint"
+   }
+  ],
+  "rotation": 3,
+  "shadows": 45.0,
+  "straighten": 2.0,
+  "whites": 15.0
+ },
+ "shape": [
+  168,
+  112,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

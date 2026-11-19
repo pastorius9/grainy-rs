@@ -1,0 +1,41 @@
+{
+ "error": null,
+ "frame": "red",
+ "operations": [
+  {
+   "points": [
+    [
+     0.42105263157894735,
+     0.47619047619047616
+    ]
+   ],
+   "radius": 0.12,
+   "type": "red_eye"
+  },
+  {
+   "feather": 20,
+   "points": [
+    [
+     0.7368421052631579,
+     0.31746031746031744
+    ]
+   ],
+   "radius": 0.1,
+   "type": "red_eye"
+  }
+ ],
+ "output_bits": "17123211321903415296",
+ "output_shape": [
+  64,
+  96,
+  3
+ ],
+ "output_step": 3,
+ "recorded": {
+  "distance": [],
+  "dust": [],
+  "inpaint": 0,
+  "sky": []
+ },
+ "shift": 0
+}

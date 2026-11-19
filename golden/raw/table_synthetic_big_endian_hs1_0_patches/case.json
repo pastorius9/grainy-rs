@@ -1,0 +1,9 @@
+{
+ "arrays": {
+  "input": "5cde779ee73af4eed316229e5fce4a9338667846896978673f2b250aa32cf252",
+  "output": "a8f87b4a85cd49a01552546e40e5eabe1c54ade3368259fb23e88f2bd7201de8"
+ },
+ "encoding": 0,
+ "kind": "hs1",
+ "profile": "synthetic_big_endian"
+}

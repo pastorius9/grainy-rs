@@ -1,0 +1,15 @@
+{
+ "anchor": [
+  0,
+  0
+ ],
+ "dtype": null,
+ "kind": "cross",
+ "op": "structuring",
+ "output_dtype": "uint8",
+ "size": [
+  4,
+  6
+ ],
+ "tolerance": 0.0
+}

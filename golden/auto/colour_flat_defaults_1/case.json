@@ -1,0 +1,19 @@
+{
+ "amount": 1.0,
+ "changed": {},
+ "removed": [],
+ "report": {
+  "casts": [
+   null,
+   [
+    0.0,
+    0.0,
+    0.0
+   ],
+   null
+  ],
+  "status": "neutral"
+ },
+ "settings": {},
+ "source": "flat"
+}

@@ -1,0 +1,7 @@
+{
+ "code": "RGB2GRAY",
+ "dtype": "float32",
+ "op": "color",
+ "output_dtype": "float32",
+ "tolerance": 1e-06
+}

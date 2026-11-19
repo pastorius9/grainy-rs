@@ -1,0 +1,20 @@
+[package]
+name = "grainy-color"
+description = "Grainy colour maths: sRGB transfer, HSV/HSL/Lab, illuminants, output conversion"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+grainy-imgproc = { path = "../grainy-imgproc" }
+grainy-core.workspace = true
+ndarray.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+serde_json.workspace = true
+
+[lints]
+workspace = true

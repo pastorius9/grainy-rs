@@ -1,0 +1,53 @@
+{
+ "mean": [
+  0.38479795451799875,
+  0.3886417821100137,
+  0.38703068303875626
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "masks": [
+   {
+    "adjustments": {
+     "shadows": 60.0
+    },
+    "components": [
+     {
+      "range": [
+       0.3,
+       0.8
+      ],
+      "softness": 0.1,
+      "type": "luma"
+     }
+    ]
+   },
+   {
+    "adjustments": {
+     "hue": 30.0,
+     "saturation": 50.0
+    },
+    "components": [
+     {
+      "rgb": [
+       0.2,
+       0.5,
+       0.8
+      ],
+      "tolerance": 0.4,
+      "type": "color"
+     }
+    ]
+   }
+  ]
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

@@ -1,0 +1,12 @@
+{
+ "detected": true,
+ "error": {
+  "message": "사진에서 직선 기준을 찾지 못했습니다.",
+  "type": "AlignmentError"
+ },
+ "height": 120,
+ "lines_none": true,
+ "mode": "auto",
+ "result": null,
+ "width": 160
+}

@@ -1,0 +1,695 @@
+{
+ "disabled": [
+  "shell_tool",
+  "unified_exec",
+  "shell_snapshot",
+  "apply_patch_freeform",
+  "apps",
+  "connectors",
+  "plugins",
+  "remote_plugin",
+  "hooks",
+  "codex_hooks",
+  "plugin_hooks",
+  "multi_agent",
+  "collab",
+  "multi_agent_v2",
+  "js_repl",
+  "browser_use",
+  "computer_use",
+  "image_generation",
+  "imagegenext",
+  "view_image",
+  "memory_tool",
+  "memories",
+  "skill_search",
+  "request_permissions",
+  "request_permissions_tool",
+  "goals",
+  "tool_search",
+  "code_mode",
+  "code_mode_only",
+  "sleep_tool",
+  "stable_environment_tools",
+  "current_time_reminder",
+  "token_budget",
+  "deferred_executor",
+  "send_message_to_user_async",
+  "tool_suggest",
+  "recommended_plugins",
+  "skill_mcp_dependency_install"
+ ],
+ "instructions": [
+  {
+   "context": "",
+   "language": "ko",
+   "text": "You are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in Korean. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so."
+  },
+  {
+   "context": "",
+   "language": "en",
+   "text": "You are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in English. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so."
+  },
+  {
+   "context": "What the person sees: 2 photos.",
+   "language": "ko",
+   "text": "You are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in Korean. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so. What the person sees: 2 photos."
+  },
+  {
+   "context": "x",
+   "language": "fr",
+   "text": "You are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in English. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so. x"
+  }
+ ],
+ "runs": [
+  {
+   "argv": [
+    "C:\\Programs\\claude.exe",
+    "-p",
+    "사진 정리해 줘",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--include-partial-messages",
+    "--mcp-config",
+    "<ROOT>\\w\\claude1\\claude-mcp.json",
+    "--strict-mcp-config",
+    "--tools",
+    "",
+    "--allowedTools",
+    "mcp__grainy",
+    "--permission-mode",
+    "dontAsk",
+    "--append-system-prompt",
+    "You are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in Korean. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so.",
+    "--disable-slash-commands",
+    "--no-chrome",
+    "--setting-sources",
+    "",
+    "--settings",
+    "{\"disableAllHooks\":true,\"autoMemoryEnabled\":false}"
+   ],
+   "error": null,
+   "files": {
+    "claude-mcp.json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"C:\\\\x\\\\b.ps1\"\n      ]\n    }\n  }\n}"
+   },
+   "kind": "claude",
+   "name": "plain",
+   "request": {
+    "context": "",
+    "executable": [
+     "C:\\Programs\\claude.exe"
+    ],
+    "language": "ko",
+    "model": "",
+    "prompt": "사진 정리해 줘",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "",
+    "workspace": "<ROOT>\\w\\claude1"
+   }
+  },
+  {
+   "argv": [
+    "C:\\Programs\\claude.exe",
+    "-p",
+    "go \"on\"",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--include-partial-messages",
+    "--mcp-config",
+    "<ROOT>\\w\\claude2\\claude-mcp.json",
+    "--strict-mcp-config",
+    "--tools",
+    "",
+    "--allowedTools",
+    "mcp__grainy",
+    "--permission-mode",
+    "dontAsk",
+    "--append-system-prompt",
+    "You are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in English. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so. ctx",
+    "--disable-slash-commands",
+    "--no-chrome",
+    "--setting-sources",
+    "",
+    "--settings",
+    "{\"disableAllHooks\":true,\"autoMemoryEnabled\":false}",
+    "--resume",
+    "sess-1",
+    "--model",
+    "opus"
+   ],
+   "error": null,
+   "files": {
+    "claude-mcp.json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"C:\\\\x\\\\b.ps1\"\n      ]\n    }\n  }\n}"
+   },
+   "kind": "claude",
+   "name": "resume",
+   "request": {
+    "context": "ctx",
+    "executable": [
+     "C:\\Programs\\claude.exe"
+    ],
+    "language": "en",
+    "model": "opus",
+    "prompt": "go \"on\"",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "sess-1",
+    "workspace": "<ROOT>\\w\\claude2"
+   }
+  },
+  {
+   "argv": null,
+   "error": "ValueError: Codex needs its model cache or an explicit model",
+   "files": {},
+   "kind": "codex",
+   "name": "no-cache-no-model",
+   "request": {
+    "context": "",
+    "executable": [
+     "C:\\Programs\\codex.exe"
+    ],
+    "language": "ko",
+    "model": "",
+    "prompt": "x",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "",
+    "workspace": "<ROOT>\\w\\codex0"
+   }
+  },
+  {
+   "argv": [
+    "C:\\Programs\\codex.exe",
+    "exec",
+    "--json",
+    "--skip-git-repo-check",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--ephemeral",
+    "-C",
+    "<ROOT>\\w\\codex1",
+    "-s",
+    "read-only",
+    "-c",
+    "approval_policy=\"never\"",
+    "-c",
+    "web_search=\"disabled\"",
+    "-c",
+    "model_catalog_json=\"<ROOT_JSON>\\\\w\\\\codex1\\\\codex-models.json\"",
+    "-c",
+    "agents.enabled=false",
+    "-c",
+    "tools.experimental_request_user_input.enabled=false",
+    "-c",
+    "mcp_servers.grainy.command=\"powershell\"",
+    "-c",
+    "mcp_servers.grainy.args=[\"-NoProfile\", \"-ExecutionPolicy\", \"Bypass\", \"-File\", \"C:\\\\x\\\\b.ps1\"]",
+    "-c",
+    "mcp_servers.grainy.default_tools_approval_mode=\"approve\"",
+    "-c",
+    "mcp_servers.grainy.startup_timeout_sec=30",
+    "-c",
+    "developer_instructions=\"You are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in Korean. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so.\"",
+    "-c",
+    "project_doc_max_bytes=0",
+    "-c",
+    "features.skip_host_skill_discovery=true",
+    "-c",
+    "tools.update_plan.enabled=false",
+    "-c",
+    "history.persistence=\"none\"",
+    "-c",
+    "log_dir=\"<ROOT_JSON>\\\\w\\\\codex1\\\\codex-log\"",
+    "-c",
+    "sqlite_home=\"<ROOT_JSON>\\\\w\\\\codex1\\\\codex-state\"",
+    "-c",
+    "features.shell_tool=false",
+    "-c",
+    "features.unified_exec=false",
+    "-c",
+    "features.shell_snapshot=false",
+    "-c",
+    "features.apply_patch_freeform=false",
+    "-c",
+    "features.apps=false",
+    "-c",
+    "features.connectors=false",
+    "-c",
+    "features.plugins=false",
+    "-c",
+    "features.remote_plugin=false",
+    "-c",
+    "features.hooks=false",
+    "-c",
+    "features.codex_hooks=false",
+    "-c",
+    "features.plugin_hooks=false",
+    "-c",
+    "features.multi_agent=false",
+    "-c",
+    "features.collab=false",
+    "-c",
+    "features.multi_agent_v2=false",
+    "-c",
+    "features.js_repl=false",
+    "-c",
+    "features.browser_use=false",
+    "-c",
+    "features.computer_use=false",
+    "-c",
+    "features.image_generation=false",
+    "-c",
+    "features.imagegenext=false",
+    "-c",
+    "features.view_image=false",
+    "-c",
+    "features.memory_tool=false",
+    "-c",
+    "features.memories=false",
+    "-c",
+    "features.skill_search=false",
+    "-c",
+    "features.request_permissions=false",
+    "-c",
+    "features.request_permissions_tool=false",
+    "-c",
+    "features.goals=false",
+    "-c",
+    "features.tool_search=false",
+    "-c",
+    "features.code_mode=false",
+    "-c",
+    "features.code_mode_only=false",
+    "-c",
+    "features.sleep_tool=false",
+    "-c",
+    "features.stable_environment_tools=false",
+    "-c",
+    "features.current_time_reminder=false",
+    "-c",
+    "features.token_budget=false",
+    "-c",
+    "features.deferred_executor=false",
+    "-c",
+    "features.send_message_to_user_async=false",
+    "-c",
+    "features.tool_suggest=false",
+    "-c",
+    "features.recommended_plugins=false",
+    "-c",
+    "features.skill_mcp_dependency_install=false",
+    "-m",
+    "gpt-5",
+    "하나"
+   ],
+   "error": null,
+   "files": {
+    "codex-models.json": "{\n  \"models\": []\n}"
+   },
+   "kind": "codex",
+   "name": "model-only",
+   "request": {
+    "context": "",
+    "executable": [
+     "C:\\Programs\\codex.exe"
+    ],
+    "language": "ko",
+    "model": "gpt-5",
+    "prompt": "하나",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "",
+    "workspace": "<ROOT>\\w\\codex1"
+   }
+  },
+  {
+   "argv": [
+    "C:\\Programs\\codex.exe",
+    "exec",
+    "--json",
+    "--skip-git-repo-check",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--ephemeral",
+    "-C",
+    "<ROOT>\\w\\codex2",
+    "-s",
+    "read-only",
+    "-c",
+    "approval_policy=\"never\"",
+    "-c",
+    "web_search=\"disabled\"",
+    "-c",
+    "model_catalog_json=\"<ROOT_JSON>\\\\w\\\\codex2\\\\codex-models.json\"",
+    "-c",
+    "agents.enabled=false",
+    "-c",
+    "tools.experimental_request_user_input.enabled=false",
+    "-c",
+    "mcp_servers.grainy.command=\"powershell\"",
+    "-c",
+    "mcp_servers.grainy.args=[\"-NoProfile\", \"-ExecutionPolicy\", \"Bypass\", \"-File\", \"C:\\\\x\\\\b.ps1\"]",
+    "-c",
+    "mcp_servers.grainy.default_tools_approval_mode=\"approve\"",
+    "-c",
+    "mcp_servers.grainy.startup_timeout_sec=30",
+    "-c",
+    "developer_instructions=\"You are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in English. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so. Seen.\"",
+    "-c",
+    "project_doc_max_bytes=0",
+    "-c",
+    "features.skip_host_skill_discovery=true",
+    "-c",
+    "tools.update_plan.enabled=false",
+    "-c",
+    "history.persistence=\"none\"",
+    "-c",
+    "log_dir=\"<ROOT_JSON>\\\\w\\\\codex2\\\\codex-log\"",
+    "-c",
+    "sqlite_home=\"<ROOT_JSON>\\\\w\\\\codex2\\\\codex-state\"",
+    "-c",
+    "features.shell_tool=false",
+    "-c",
+    "features.unified_exec=false",
+    "-c",
+    "features.shell_snapshot=false",
+    "-c",
+    "features.apply_patch_freeform=false",
+    "-c",
+    "features.apps=false",
+    "-c",
+    "features.connectors=false",
+    "-c",
+    "features.plugins=false",
+    "-c",
+    "features.remote_plugin=false",
+    "-c",
+    "features.hooks=false",
+    "-c",
+    "features.codex_hooks=false",
+    "-c",
+    "features.plugin_hooks=false",
+    "-c",
+    "features.multi_agent=false",
+    "-c",
+    "features.collab=false",
+    "-c",
+    "features.multi_agent_v2=false",
+    "-c",
+    "features.js_repl=false",
+    "-c",
+    "features.browser_use=false",
+    "-c",
+    "features.computer_use=false",
+    "-c",
+    "features.image_generation=false",
+    "-c",
+    "features.imagegenext=false",
+    "-c",
+    "features.view_image=false",
+    "-c",
+    "features.memory_tool=false",
+    "-c",
+    "features.memories=false",
+    "-c",
+    "features.skill_search=false",
+    "-c",
+    "features.request_permissions=false",
+    "-c",
+    "features.request_permissions_tool=false",
+    "-c",
+    "features.goals=false",
+    "-c",
+    "features.tool_search=false",
+    "-c",
+    "features.code_mode=false",
+    "-c",
+    "features.code_mode_only=false",
+    "-c",
+    "features.sleep_tool=false",
+    "-c",
+    "features.stable_environment_tools=false",
+    "-c",
+    "features.current_time_reminder=false",
+    "-c",
+    "features.token_budget=false",
+    "-c",
+    "features.deferred_executor=false",
+    "-c",
+    "features.send_message_to_user_async=false",
+    "-c",
+    "features.tool_suggest=false",
+    "-c",
+    "features.recommended_plugins=false",
+    "-c",
+    "features.skill_mcp_dependency_install=false",
+    "둘 \"따옴표\""
+   ],
+   "error": null,
+   "files": {
+    "codex-models.json": "{\n  \"models\": [\n    {\n      \"slug\": \"gpt-5\",\n      \"apply_patch_tool_type\": null,\n      \"shell_type\": \"disabled\",\n      \"extra\": [\n        1,\n        2\n      ],\n      \"experimental_supported_tools\": [],\n      \"supports_search_tool\": false,\n      \"include_skills_usage_instructions\": false,\n      \"include_plugin_usage_instructions\": false,\n      \"include_apps_usage_instructions\": false,\n      \"tool_mode\": null,\n      \"multi_agent_version\": null\n    },\n    {\n      \"slug\": \"mini\",\n      \"tool_mode\": null,\n      \"apply_patch_tool_type\": null,\n      \"shell_type\": \"disabled\",\n      \"experimental_supported_tools\": [],\n      \"supports_search_tool\": false,\n      \"include_skills_usage_instructions\": false,\n      \"include_plugin_usage_instructions\": false,\n      \"include_apps_usage_instructions\": false,\n      \"multi_agent_version\": null\n    }\n  ]\n}"
+   },
+   "kind": "codex",
+   "name": "cache",
+   "request": {
+    "context": "Seen.",
+    "executable": [
+     "C:\\Programs\\codex.exe"
+    ],
+    "language": "en",
+    "model": "",
+    "prompt": "둘 \"따옴표\"",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "th-1",
+    "workspace": "<ROOT>\\w\\codex2"
+   }
+  },
+  {
+   "argv": null,
+   "error": "ValueError: Codex needs its model cache or an explicit model",
+   "files": {},
+   "kind": "codex",
+   "name": "bad-cache",
+   "request": {
+    "context": "",
+    "executable": [
+     "C:\\Programs\\codex.exe"
+    ],
+    "language": "ko",
+    "model": "",
+    "prompt": "x",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "",
+    "workspace": "<ROOT>\\w\\codex3"
+   }
+  },
+  {
+   "argv": null,
+   "error": "ValueError: Unsupported Gemini storage layout",
+   "files": {
+    ".gemini/settings.json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"C:\\\\x\\\\b.ps1\"\n      ],\n      \"trust\": true\n    }\n  },\n  \"mcp\": {\n    \"allowed\": [\n      \"grainy\"\n    ],\n    \"serverCommand\": \"\"\n  },\n  \"tools\": {\n    \"core\": [],\n    \"allowed\": [\n      \"grainy\"\n    ],\n    \"discoveryCommand\": \"\",\n    \"callCommand\": \"\"\n  },\n  \"hooksConfig\": {\n    \"enabled\": false\n  },\n  \"context\": {\n    \"fileName\": []\n  },\n  \"general\": {\n    \"enableAutoUpdate\": false\n  },\n  \"telemetry\": {\n    \"enabled\": false\n  },\n  \"experimental\": {\n    \"enableAgents\": false\n  },\n  \"agents\": {\n    \"overrides\": {\n      \"codebase_investigator\": {\n        \"enabled\": false\n      },\n      \"cli_help\": {\n        \"enabled\": false\n      }\n    }\n  },\n  \"security\": {\n    \"folderTrust\": {\n      \"enabled\": false\n    }\n  },\n  \"admin\": {\n    \"extensions\": {\n      \"enabled\": false\n    }\n  }\n}"
+   },
+   "kind": "gemini",
+   "name": "no-storage",
+   "request": {
+    "context": "",
+    "executable": [
+     "node",
+     "<ROOT>\\npm\\node_modules\\@google\\gemini-cli\\dist\\index.js"
+    ],
+    "language": "ko",
+    "model": "",
+    "prompt": "x",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "",
+    "workspace": "<ROOT>\\w\\gemini0"
+   }
+  },
+  {
+   "argv": [
+    "node",
+    "<ROOT>\\w\\gemini1\\gemini-entry.mjs",
+    "--allowed-mcp-server-names",
+    "grainy",
+    "--approval-mode",
+    "default",
+    "--extensions",
+    "none",
+    "--output-format",
+    "stream-json",
+    "-p",
+    "세 번째\n\nYou are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in Korean. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so."
+   ],
+   "error": null,
+   "files": {
+    ".gemini/settings.json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"C:\\\\x\\\\b.ps1\"\n      ],\n      \"trust\": true\n    }\n  },\n  \"mcp\": {\n    \"allowed\": [\n      \"grainy\"\n    ],\n    \"serverCommand\": \"\"\n  },\n  \"tools\": {\n    \"core\": [],\n    \"allowed\": [\n      \"grainy\"\n    ],\n    \"discoveryCommand\": \"\",\n    \"callCommand\": \"\"\n  },\n  \"hooksConfig\": {\n    \"enabled\": false\n  },\n  \"context\": {\n    \"fileName\": []\n  },\n  \"general\": {\n    \"enableAutoUpdate\": false\n  },\n  \"telemetry\": {\n    \"enabled\": false\n  },\n  \"experimental\": {\n    \"enableAgents\": false\n  },\n  \"agents\": {\n    \"overrides\": {\n      \"codebase_investigator\": {\n        \"enabled\": false\n      },\n      \"cli_help\": {\n        \"enabled\": false\n      }\n    }\n  },\n  \"security\": {\n    \"folderTrust\": {\n      \"enabled\": false\n    }\n  },\n  \"admin\": {\n    \"extensions\": {\n      \"enabled\": false\n    }\n  }\n}",
+    "gemini-entry.mjs": "import {Storage} from \"<ROOT_URI>/npm/node_modules/%40google/gemini-cli/node_modules/%40google/gemini-cli-core/dist/src/config/storage.js\";\nStorage.getGlobalTempDir = () => \"<ROOT_JSON>\\\\w\\\\gemini1\\\\gemini-state\";\nStorage.prototype.initialize = async function() { this.projectIdentifier = \"grainy\"; };\nStorage.prototype.getHistoryDir = function() { return \"<ROOT_JSON>\\\\w\\\\gemini1\\\\gemini-state/history\"; };\nprocess.argv[1] = \"<ROOT_JSON>\\\\npm\\\\node_modules\\\\@google\\\\gemini-cli\\\\dist\\\\index.js\";\nawait import(\"<ROOT_URI>/npm/node_modules/%40google/gemini-cli/dist/index.js\");\n"
+   },
+   "kind": "gemini",
+   "name": "plain",
+   "request": {
+    "context": "",
+    "executable": [
+     "node",
+     "<ROOT>\\npm\\node_modules\\@google\\gemini-cli\\dist\\index.js"
+    ],
+    "language": "ko",
+    "model": "",
+    "prompt": "세 번째",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "",
+    "workspace": "<ROOT>\\w\\gemini1"
+   }
+  },
+  {
+   "argv": [
+    "node",
+    "<ROOT>\\w\\gemini2\\gemini-entry.mjs",
+    "--allowed-mcp-server-names",
+    "grainy",
+    "--approval-mode",
+    "default",
+    "--extensions",
+    "none",
+    "--output-format",
+    "stream-json",
+    "-p",
+    "go\n\nYou are working inside Grainy, a photo editor, for the person using it. Use only the grainy MCP tools to inspect and change the photo library. Answer in English. Check tool results before reporting success. Do not execute commands, edit files, browse the web, or use other services. For a job, use get_job until it finishes. Never invent photo ids, names or results: if a tool is missing or fails, say so. c",
+    "--model",
+    "flash",
+    "--resume",
+    "g-1"
+   ],
+   "error": null,
+   "files": {
+    ".gemini/settings.json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"C:\\\\x\\\\b.ps1\"\n      ],\n      \"trust\": true\n    }\n  },\n  \"mcp\": {\n    \"allowed\": [\n      \"grainy\"\n    ],\n    \"serverCommand\": \"\"\n  },\n  \"tools\": {\n    \"core\": [],\n    \"allowed\": [\n      \"grainy\"\n    ],\n    \"discoveryCommand\": \"\",\n    \"callCommand\": \"\"\n  },\n  \"hooksConfig\": {\n    \"enabled\": false\n  },\n  \"context\": {\n    \"fileName\": []\n  },\n  \"general\": {\n    \"enableAutoUpdate\": false\n  },\n  \"telemetry\": {\n    \"enabled\": false\n  },\n  \"experimental\": {\n    \"enableAgents\": false\n  },\n  \"agents\": {\n    \"overrides\": {\n      \"codebase_investigator\": {\n        \"enabled\": false\n      },\n      \"cli_help\": {\n        \"enabled\": false\n      }\n    }\n  },\n  \"security\": {\n    \"folderTrust\": {\n      \"enabled\": false\n    }\n  },\n  \"admin\": {\n    \"extensions\": {\n      \"enabled\": false\n    }\n  }\n}",
+    "gemini-entry.mjs": "import {Storage} from \"<ROOT_URI>/npm/node_modules/%40google/gemini-cli/node_modules/%40google/gemini-cli-core/dist/src/config/storage.js\";\nStorage.getGlobalTempDir = () => \"<ROOT_JSON>\\\\w\\\\gemini2\\\\gemini-state\";\nStorage.prototype.initialize = async function() { this.projectIdentifier = \"grainy\"; };\nStorage.prototype.getHistoryDir = function() { return \"<ROOT_JSON>\\\\w\\\\gemini2\\\\gemini-state/history\"; };\nprocess.argv[1] = \"<ROOT_JSON>\\\\npm\\\\node_modules\\\\@google\\\\gemini-cli\\\\dist\\\\index.js\";\nawait import(\"<ROOT_URI>/npm/node_modules/%40google/gemini-cli/dist/index.js\");\n"
+   },
+   "kind": "gemini",
+   "name": "resume",
+   "request": {
+    "context": "c",
+    "executable": [
+     "node",
+     "<ROOT>\\npm\\node_modules\\@google\\gemini-cli\\dist\\index.js"
+    ],
+    "language": "en",
+    "model": "flash",
+    "prompt": "go",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "g-1",
+    "workspace": "<ROOT>\\w\\gemini2"
+   }
+  },
+  {
+   "argv": null,
+   "error": "ValueError: Gemini needs the supported npm installation",
+   "files": {
+    ".gemini/settings.json": "{\n  \"mcpServers\": {\n    \"grainy\": {\n      \"command\": \"powershell\",\n      \"args\": [\n        \"-NoProfile\",\n        \"-ExecutionPolicy\",\n        \"Bypass\",\n        \"-File\",\n        \"C:\\\\x\\\\b.ps1\"\n      ],\n      \"trust\": true\n    }\n  },\n  \"mcp\": {\n    \"allowed\": [\n      \"grainy\"\n    ],\n    \"serverCommand\": \"\"\n  },\n  \"tools\": {\n    \"core\": [],\n    \"allowed\": [\n      \"grainy\"\n    ],\n    \"discoveryCommand\": \"\",\n    \"callCommand\": \"\"\n  },\n  \"hooksConfig\": {\n    \"enabled\": false\n  },\n  \"context\": {\n    \"fileName\": []\n  },\n  \"general\": {\n    \"enableAutoUpdate\": false\n  },\n  \"telemetry\": {\n    \"enabled\": false\n  },\n  \"experimental\": {\n    \"enableAgents\": false\n  },\n  \"agents\": {\n    \"overrides\": {\n      \"codebase_investigator\": {\n        \"enabled\": false\n      },\n      \"cli_help\": {\n        \"enabled\": false\n      }\n    }\n  },\n  \"security\": {\n    \"folderTrust\": {\n      \"enabled\": false\n    }\n  },\n  \"admin\": {\n    \"extensions\": {\n      \"enabled\": false\n    }\n  }\n}"
+   },
+   "kind": "gemini",
+   "name": "not-js",
+   "request": {
+    "context": "",
+    "executable": [
+     "C:\\gemini.exe"
+    ],
+    "language": "en",
+    "model": "",
+    "prompt": "go",
+    "server": {
+     "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\x\\b.ps1"
+     ],
+     "command": "powershell"
+    },
+    "session_id": "",
+    "workspace": "<ROOT>\\w\\gemini3"
+   }
+  }
+ ]
+}

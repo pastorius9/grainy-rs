@@ -1,0 +1,865 @@
+{
+ "changes": {},
+ "script": [
+  [
+   "upright",
+   "full"
+  ],
+  [
+   "finish"
+  ],
+  [
+   "upright",
+   "level"
+  ],
+  [
+   "finish"
+  ],
+  [
+   "upright",
+   "vertical"
+  ],
+  [
+   "finish"
+  ],
+  [
+   "upright",
+   "auto"
+  ],
+  [
+   "finish"
+  ],
+  [
+   "clear"
+  ],
+  [
+   "set",
+   "upright_crop",
+   false
+  ],
+  [
+   "commit"
+  ],
+  [
+   "set",
+   "straighten",
+   3.0
+  ],
+  [
+   "commit"
+  ],
+  [
+   "upright",
+   "level"
+  ],
+  [
+   "set",
+   "exposure",
+   0.5
+  ],
+  [
+   "finish"
+  ],
+  [
+   "upright",
+   "auto"
+  ],
+  [
+   "upright",
+   "level"
+  ],
+  [
+   "finish"
+  ],
+  [
+   "finish"
+  ],
+  [
+   "clear"
+  ]
+ ],
+ "states": [
+  {
+   "enabled": false,
+   "history": [],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": 0.0,
+   "upright": null,
+   "upright_crop": true
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근"
+   ],
+   "label": "전체 원근 적용 · 회전 -4.02° · 가장자리 확대 1.09배",
+   "level_enabled": true,
+   "level_note": "자동 보정 -4.02° · 아래 슬라이더로 미세 조절할 수 있습니다.",
+   "outcome": {
+    "result": {
+     "algorithm": "lines-v1",
+     "confidence": 1.0,
+     "crop_scale": 1.0937736376593818,
+     "inliers": 101,
+     "lines": 101,
+     "matrix": [
+      [
+       0.9957282957364719,
+       -0.05206806317620323,
+       0.028169883719865646
+      ],
+      [
+       0.09160372722665042,
+       0.9974189621125875,
+       -0.04451134466961889
+      ],
+      [
+       -0.00373171454170466,
+       -0.00025249127087287587,
+       1.0019921029062888
+      ]
+     ],
+     "mode": "full",
+     "requested_mode": "full",
+     "rotation": -4.018020207489073
+    }
+   },
+   "status": null,
+   "straighten": 0,
+   "upright": {
+    "algorithm": "lines-v1",
+    "confidence": 1.0,
+    "crop_scale": 1.0937736376593818,
+    "inliers": 101,
+    "lines": 101,
+    "matrix": [
+     [
+      0.9957282957364719,
+      -0.05206806317620323,
+      0.028169883719865646
+     ],
+     [
+      0.09160372722665042,
+      0.9974189621125875,
+      -0.04451134466961889
+     ],
+     [
+      -0.00373171454170466,
+      -0.00025249127087287587,
+      1.0019921029062888
+     ]
+    ],
+    "mode": "full",
+    "requested_mode": "full",
+    "rotation": -4.018020207489073
+   },
+   "upright_crop": true
+  },
+  {
+   "enabled": false,
+   "history": [
+    "자동 수평·원근"
+   ],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": 0,
+   "upright": {
+    "algorithm": "lines-v1",
+    "confidence": 1.0,
+    "crop_scale": 1.0937736376593818,
+    "inliers": 101,
+    "lines": 101,
+    "matrix": [
+     [
+      0.9957282957364719,
+      -0.05206806317620323,
+      0.028169883719865646
+     ],
+     [
+      0.09160372722665042,
+      0.9974189621125875,
+      -0.04451134466961889
+     ],
+     [
+      -0.00373171454170466,
+      -0.00025249127087287587,
+      1.0019921029062888
+     ]
+    ],
+    "mode": "full",
+    "requested_mode": "full",
+    "rotation": -4.018020207489073
+   },
+   "upright_crop": true
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기"
+   ],
+   "label": "수평 적용 · 회전 -3.99° · 가장자리 확대 1.09배",
+   "level_enabled": true,
+   "level_note": "자동 보정 -3.99° · 아래 슬라이더로 미세 조절할 수 있습니다.",
+   "outcome": {
+    "result": {
+     "algorithm": "lines-plumb-wide-v3",
+     "confidence": 1.0,
+     "crop_scale": 1.0916327920970506,
+     "inliers": 0,
+     "lines": 101,
+     "matrix": [
+      [
+       0.9975706024254576,
+       -0.05219243796403113,
+       0.02731091776928677
+      ],
+      [
+       0.09298077203931601,
+       0.9975706024254576,
+       -0.0452756872323868
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "mode": "level",
+     "requested_mode": "level",
+     "rotation": -3.9946146372849256
+    }
+   },
+   "status": null,
+   "straighten": 0,
+   "upright": {
+    "algorithm": "lines-plumb-wide-v3",
+    "confidence": 1.0,
+    "crop_scale": 1.0916327920970506,
+    "inliers": 0,
+    "lines": 101,
+    "matrix": [
+     [
+      0.9975706024254576,
+      -0.05219243796403113,
+      0.02731091776928677
+     ],
+     [
+      0.09298077203931601,
+      0.9975706024254576,
+      -0.0452756872323868
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "mode": "level",
+    "requested_mode": "level",
+    "rotation": -3.9946146372849256
+   },
+   "upright_crop": true
+  },
+  {
+   "enabled": false,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기"
+   ],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": 0,
+   "upright": {
+    "algorithm": "lines-plumb-wide-v3",
+    "confidence": 1.0,
+    "crop_scale": 1.0916327920970506,
+    "inliers": 0,
+    "lines": 101,
+    "matrix": [
+     [
+      0.9975706024254576,
+      -0.05219243796403113,
+      0.02731091776928677
+     ],
+     [
+      0.09298077203931601,
+      0.9975706024254576,
+      -0.0452756872323868
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "mode": "level",
+    "requested_mode": "level",
+    "rotation": -3.9946146372849256
+   },
+   "upright_crop": true
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근"
+   ],
+   "label": "수직 적용 · 회전 -4.02° · 가장자리 확대 1.09배",
+   "level_enabled": true,
+   "level_note": "자동 보정 -4.02° · 아래 슬라이더로 미세 조절할 수 있습니다.",
+   "outcome": {
+    "result": {
+     "algorithm": "lines-v1",
+     "confidence": 1.0,
+     "crop_scale": 1.0924239246621728,
+     "inliers": 42,
+     "lines": 101,
+     "matrix": [
+      [
+       0.997573340155305,
+       -0.05216412925705257,
+       0.027295394550873812
+      ],
+      [
+       0.0935038390311691,
+       0.9973197515157265,
+       -0.04541179527344772
+      ],
+      [
+       -4.1685434395433705e-05,
+       -0.0004446203225861202,
+       1.0002431528784907
+      ]
+     ],
+     "mode": "vertical",
+     "requested_mode": "vertical",
+     "rotation": -4.018020207489073
+    }
+   },
+   "status": null,
+   "straighten": 0,
+   "upright": {
+    "algorithm": "lines-v1",
+    "confidence": 1.0,
+    "crop_scale": 1.0924239246621728,
+    "inliers": 42,
+    "lines": 101,
+    "matrix": [
+     [
+      0.997573340155305,
+      -0.05216412925705257,
+      0.027295394550873812
+     ],
+     [
+      0.0935038390311691,
+      0.9973197515157265,
+      -0.04541179527344772
+     ],
+     [
+      -4.1685434395433705e-05,
+      -0.0004446203225861202,
+      1.0002431528784907
+     ]
+    ],
+    "mode": "vertical",
+    "requested_mode": "vertical",
+    "rotation": -4.018020207489073
+   },
+   "upright_crop": true
+  },
+  {
+   "enabled": false,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근"
+   ],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": 0,
+   "upright": {
+    "algorithm": "lines-v1",
+    "confidence": 1.0,
+    "crop_scale": 1.0924239246621728,
+    "inliers": 42,
+    "lines": 101,
+    "matrix": [
+     [
+      0.997573340155305,
+      -0.05216412925705257,
+      0.027295394550873812
+     ],
+     [
+      0.0935038390311691,
+      0.9973197515157265,
+      -0.04541179527344772
+     ],
+     [
+      -4.1685434395433705e-05,
+      -0.0004446203225861202,
+      1.0002431528784907
+     ]
+    ],
+    "mode": "vertical",
+    "requested_mode": "vertical",
+    "rotation": -4.018020207489073
+   },
+   "upright_crop": true
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근"
+   ],
+   "label": "전체 원근 적용 · 회전 -4.02° · 가장자리 확대 1.09배",
+   "level_enabled": true,
+   "level_note": "자동 보정 -4.02° · 아래 슬라이더로 미세 조절할 수 있습니다.",
+   "outcome": {
+    "result": {
+     "algorithm": "lines-v1",
+     "confidence": 1.0,
+     "crop_scale": 1.0937736376593818,
+     "inliers": 101,
+     "lines": 101,
+     "matrix": [
+      [
+       0.9957282957364719,
+       -0.05206806317620323,
+       0.028169883719865646
+      ],
+      [
+       0.09160372722665042,
+       0.9974189621125875,
+       -0.04451134466961889
+      ],
+      [
+       -0.00373171454170466,
+       -0.00025249127087287587,
+       1.0019921029062888
+      ]
+     ],
+     "mode": "full",
+     "requested_mode": "auto",
+     "rotation": -4.018020207489073
+    }
+   },
+   "status": null,
+   "straighten": 0,
+   "upright": {
+    "algorithm": "lines-v1",
+    "confidence": 1.0,
+    "crop_scale": 1.0937736376593818,
+    "inliers": 101,
+    "lines": 101,
+    "matrix": [
+     [
+      0.9957282957364719,
+      -0.05206806317620323,
+      0.028169883719865646
+     ],
+     [
+      0.09160372722665042,
+      0.9974189621125875,
+      -0.04451134466961889
+     ],
+     [
+      -0.00373171454170466,
+      -0.00025249127087287587,
+      1.0019921029062888
+     ]
+    ],
+    "mode": "full",
+    "requested_mode": "auto",
+    "rotation": -4.018020207489073
+   },
+   "upright_crop": true
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경"
+   ],
+   "label": "자동 정렬 미적용",
+   "level_enabled": true,
+   "level_note": "직선이 보이는 사진에서 자동 보정한 뒤 아래 슬라이더로 미세 조절하세요.",
+   "outcome": null,
+   "status": null,
+   "straighten": 0,
+   "upright": null,
+   "upright_crop": true
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경"
+   ],
+   "label": "자동 정렬 미적용",
+   "level_enabled": true,
+   "level_note": "직선이 보이는 사진에서 자동 보정한 뒤 아래 슬라이더로 미세 조절하세요.",
+   "outcome": null,
+   "status": null,
+   "straighten": 0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "label": "자동 정렬 미적용",
+   "level_enabled": true,
+   "level_note": "직선이 보이는 사진에서 자동 보정한 뒤 아래 슬라이더로 미세 조절하세요.",
+   "outcome": null,
+   "status": null,
+   "straighten": 0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "label": "자동 정렬 미적용",
+   "level_enabled": true,
+   "level_note": "직선이 보이는 사진에서 자동 보정한 뒤 아래 슬라이더로 미세 조절하세요.",
+   "outcome": null,
+   "status": null,
+   "straighten": 3.0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "label": "자동 정렬 미적용",
+   "level_enabled": true,
+   "level_note": "직선이 보이는 사진에서 자동 보정한 뒤 아래 슬라이더로 미세 조절하세요.",
+   "outcome": null,
+   "status": null,
+   "straighten": 3.0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": false,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": 3.0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": false,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": 3.0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "label": "자동 정렬 미적용",
+   "level_enabled": true,
+   "level_note": "직선이 보이는 사진에서 자동 보정한 뒤 아래 슬라이더로 미세 조절하세요.",
+   "outcome": {
+    "result": {
+     "algorithm": "lines-plumb-wide-v3",
+     "confidence": 1.0,
+     "crop_scale": 1.0916327920970506,
+     "inliers": 0,
+     "lines": 101,
+     "matrix": [
+      [
+       0.9975706024254576,
+       -0.05219243796403113,
+       0.02731091776928677
+      ],
+      [
+       0.09298077203931601,
+       0.9975706024254576,
+       -0.0452756872323868
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "mode": "level",
+     "requested_mode": "level",
+     "rotation": -3.9946146372849256
+    }
+   },
+   "status": "분석 중 사진이나 설정이 바뀌어 결과를 적용하지 않았습니다.",
+   "straighten": 3.0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": false,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": "분석 중 사진이나 설정이 바뀌어 결과를 적용하지 않았습니다.",
+   "straighten": 3.0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": false,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": "분석 중 사진이나 설정이 바뀌어 결과를 적용하지 않았습니다.",
+   "straighten": 3.0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "label": "자동 정렬 미적용",
+   "level_enabled": true,
+   "level_note": "직선이 보이는 사진에서 자동 보정한 뒤 아래 슬라이더로 미세 조절하세요.",
+   "outcome": {
+    "result": {
+     "algorithm": "lines-v1",
+     "confidence": 1.0,
+     "crop_scale": 1.0937736376593818,
+     "inliers": 101,
+     "lines": 101,
+     "matrix": [
+      [
+       0.9957282957364719,
+       -0.05206806317620323,
+       0.028169883719865646
+      ],
+      [
+       0.09160372722665042,
+       0.9974189621125875,
+       -0.04451134466961889
+      ],
+      [
+       -0.00373171454170466,
+       -0.00025249127087287587,
+       1.0019921029062888
+      ]
+     ],
+     "mode": "full",
+     "requested_mode": "auto",
+     "rotation": -4.018020207489073
+    }
+   },
+   "status": "분석 중 사진이나 설정이 바뀌어 결과를 적용하지 않았습니다.",
+   "straighten": 3.0,
+   "upright": null,
+   "upright_crop": false
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "자동 수평 맞추기"
+   ],
+   "label": "수평 적용 · 회전 -3.99° · 가장자리 확대 1.09배",
+   "level_enabled": true,
+   "level_note": "자동 보정 -3.99° · 아래 슬라이더로 미세 조절할 수 있습니다.",
+   "outcome": {
+    "result": {
+     "algorithm": "lines-plumb-wide-v3",
+     "confidence": 1.0,
+     "crop_scale": 1.0916327920970506,
+     "inliers": 0,
+     "lines": 101,
+     "matrix": [
+      [
+       0.9975706024254576,
+       -0.05219243796403113,
+       0.02731091776928677
+      ],
+      [
+       0.09298077203931601,
+       0.9975706024254576,
+       -0.0452756872323868
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "mode": "level",
+     "requested_mode": "level",
+     "rotation": -3.9946146372849256
+    }
+   },
+   "status": "분석 중 사진이나 설정이 바뀌어 결과를 적용하지 않았습니다.",
+   "straighten": 0,
+   "upright": {
+    "algorithm": "lines-plumb-wide-v3",
+    "confidence": 1.0,
+    "crop_scale": 1.0916327920970506,
+    "inliers": 0,
+    "lines": 101,
+    "matrix": [
+     [
+      0.9975706024254576,
+      -0.05219243796403113,
+      0.02731091776928677
+     ],
+     [
+      0.09298077203931601,
+      0.9975706024254576,
+      -0.0452756872323868
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "mode": "level",
+    "requested_mode": "level",
+    "rotation": -3.9946146372849256
+   },
+   "upright_crop": false
+  },
+  {
+   "enabled": true,
+   "history": [
+    "자동 수평·원근",
+    "자동 수평 맞추기",
+    "자동 수평·원근",
+    "자동 수평·원근",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "보정 변경",
+    "자동 수평 맞추기",
+    "보정 변경"
+   ],
+   "label": "자동 정렬 미적용",
+   "level_enabled": true,
+   "level_note": "직선이 보이는 사진에서 자동 보정한 뒤 아래 슬라이더로 미세 조절하세요.",
+   "outcome": null,
+   "status": "분석 중 사진이나 설정이 바뀌어 결과를 적용하지 않았습니다.",
+   "straighten": 0,
+   "upright": null,
+   "upright_crop": false
+  }
+ ]
+}

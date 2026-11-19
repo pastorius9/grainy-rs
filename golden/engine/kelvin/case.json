@@ -1,0 +1,12 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "kelvin": 3400.0,
+  "kelvin_enabled": true,
+  "tint": 12.0,
+  "wb_reference": 5600.0
+ },
+ "source": "patches",
+ "use_crop": true
+}

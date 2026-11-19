@@ -1,0 +1,8 @@
+{
+ "error": "UnidentifiedImageError: cannot identify image file '<root>\\\\golden\\\\codecs\\\\jpeg_12bit_refused\\\\input.jpg'",
+ "file": "input.jpg",
+ "jpeg_decode_error": "UnidentifiedImageError: cannot identify image file '<root>\\\\golden\\\\codecs\\\\jpeg_12bit_refused\\\\input.jpg'",
+ "jpeg_drafts": [],
+ "max_size": null,
+ "working": "sRGB"
+}

@@ -1,0 +1,13 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "drt_contrast": -35.0,
+  "drt_shoulder": -40.0,
+  "drt_toe": -25.0,
+  "drt_white": 0.0,
+  "tone_mapping": "drt"
+ },
+ "source": "wide",
+ "use_crop": true
+}

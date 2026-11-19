@@ -1,0 +1,1837 @@
+{
+ "changes": {},
+ "height": 65,
+ "script": [
+  [
+   "shortcut"
+  ],
+  [
+   "press",
+   [
+    0.3,
+    0.3
+   ],
+   false
+  ],
+  [
+   "move",
+   [
+    0.35,
+    0.32
+   ]
+  ],
+  [
+   "move",
+   [
+    0.35,
+    0.32
+   ]
+  ],
+  [
+   "move",
+   [
+    0.4,
+    0.35
+   ]
+  ],
+  [
+   "release",
+   [
+    0.42,
+    0.36
+   ]
+  ],
+  [
+   "click",
+   [
+    0.7,
+    0.6
+   ],
+   false
+  ],
+  [
+   "key",
+   "]"
+  ],
+  [
+   "key",
+   "]"
+  ],
+  [
+   "key",
+   "["
+  ],
+  [
+   "press",
+   [
+    0.2,
+    0.75
+   ],
+   false
+  ],
+  [
+   "move",
+   [
+    0.25,
+    0.8
+   ]
+  ],
+  [
+   "key",
+   "Escape"
+  ],
+  [
+   "release",
+   [
+    0.3,
+    0.8
+   ]
+  ],
+  [
+   "press",
+   [
+    0.55,
+    0.2
+   ],
+   false
+  ],
+  [
+   "move",
+   [
+    0.6,
+    0.22
+   ]
+  ],
+  [
+   "release",
+   [
+    0.6,
+    0.22
+   ]
+  ],
+  [
+   "before",
+   true
+  ],
+  [
+   "before",
+   false
+  ],
+  [
+   "button",
+   "remove_mark"
+  ],
+  [
+   "key",
+   "Return"
+  ],
+  [
+   "click",
+   [
+    0.1,
+    0.1
+   ],
+   false
+  ],
+  [
+   "key",
+   "Escape"
+  ],
+  [
+   "key",
+   "Escape"
+  ],
+  [
+   "shortcut"
+  ],
+  [
+   "button",
+   "remove_last"
+  ],
+  [
+   "button",
+   "apply"
+  ]
+ ],
+ "states": [
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.3020833432674408,
+      0.296875
+     ]
+    ],
+    "radius": 0.015,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.3,
+     0.3
+    ]
+   ],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.3020833432674408,
+      0.296875
+     ],
+     [
+      0.3541666567325592,
+      0.3125
+     ]
+    ],
+    "radius": 0.015,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.3,
+     0.3
+    ],
+    [
+     0.35,
+     0.32
+    ]
+   ],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.3020833432674408,
+      0.296875
+     ],
+     [
+      0.3541666567325592,
+      0.3125
+     ]
+    ],
+    "radius": 0.015,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.3,
+     0.3
+    ],
+    [
+     0.35,
+     0.32
+    ]
+   ],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.3020833432674408,
+      0.296875
+     ],
+     [
+      0.3541666567325592,
+      0.3125
+     ],
+     [
+      0.3958333432674408,
+      0.34375
+     ]
+    ],
+    "radius": 0.015,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.3,
+     0.3
+    ],
+    [
+     0.35,
+     0.32
+    ],
+    [
+     0.4,
+     0.35
+    ]
+   ],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 1개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.022,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 22,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.1979166716337204,
+      0.75
+     ]
+    ],
+    "radius": 0.018,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.2,
+     0.75
+    ]
+   ],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.1979166716337204,
+      0.75
+     ],
+     [
+      0.25,
+      0.796875
+     ]
+    ],
+    "radius": 0.018,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.2,
+     0.75
+    ],
+    [
+     0.25,
+     0.8
+    ]
+   ],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.5520833134651184,
+      0.203125
+     ]
+    ],
+    "radius": 0.018,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.55,
+     0.2
+    ]
+   ],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": {
+    "feather": 60,
+    "points": [
+     [
+      0.5520833134651184,
+      0.203125
+     ],
+     [
+      0.6041666865348816,
+      0.21875
+     ]
+    ],
+    "radius": 0.018,
+    "source": null,
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.55,
+     0.2
+    ],
+    [
+     0.6,
+     0.22
+    ]
+   ],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.5520833134651184,
+       0.203125
+      ],
+      [
+       0.6041666865348816,
+       0.21875
+      ]
+     ],
+     "radius": 0.018,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 3개"
+  },
+  {
+   "apply": true,
+   "before": true,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.5520833134651184,
+       0.203125
+      ],
+      [
+       0.6041666865348816,
+       0.21875
+      ]
+     ],
+     "radius": 0.018,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 3개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.5520833134651184,
+       0.203125
+      ],
+      [
+       0.6041666865348816,
+       0.21875
+      ]
+     ],
+     "radius": 0.018,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 3개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": true,
+   "retouch": [],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 2개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [
+    "힐링 2개 실행"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "표시한 2곳에 힐링을 적용했습니다. 한 번의 실행 취소로 되돌릴 수 있습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": true,
+   "donor": null,
+   "feather": 60,
+   "history": [
+    "힐링 2개 실행"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": true,
+   "retouch": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "staged": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.1041666641831398,
+       0.09375
+      ]
+     ],
+     "radius": 0.018,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "표시한 2곳에 힐링을 적용했습니다. 한 번의 실행 취소로 되돌릴 수 있습니다.",
+   "waiting": "실행 대기: 1개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [
+    "힐링 2개 실행"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "표시한 2곳에 힐링을 적용했습니다. 한 번의 실행 취소로 되돌릴 수 있습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [
+    "힐링 2개 실행"
+   ],
+   "mode": "",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "표시한 2곳에 힐링을 적용했습니다. 한 번의 실행 취소로 되돌릴 수 있습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [
+    "힐링 2개 실행"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    },
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.6979166865348816,
+       0.59375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [
+    "힐링 2개 실행",
+    "보정 변경"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.018,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [
+    "힐링 2개 실행",
+    "보정 변경"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 18,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 60,
+     "points": [
+      [
+       0.3020833432674408,
+       0.296875
+      ],
+      [
+       0.3541666567325592,
+       0.3125
+      ],
+      [
+       0.3958333432674408,
+       0.34375
+      ],
+      [
+       0.4166666567325592,
+       0.359375
+      ]
+     ],
+     "radius": 0.015,
+     "source": null,
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  }
+ ],
+ "width": 97
+}

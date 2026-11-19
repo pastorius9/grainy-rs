@@ -1,0 +1,17 @@
+{
+ "bytes": 17724,
+ "extension": ".png",
+ "file": "bayer0.dng",
+ "height": 64,
+ "lossless": true,
+ "options": {
+  "color_space": "sRGB",
+  "format": "PNG 16-bit",
+  "longest": null,
+  "quality": 95
+ },
+ "settings": {
+  "raw_mode": "as_shot"
+ },
+ "width": 80
+}

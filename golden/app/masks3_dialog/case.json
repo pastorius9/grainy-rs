@@ -1,0 +1,1860 @@
+{
+ "cases": [
+  {
+   "component": {
+    "density": 100,
+    "feather": 70,
+    "flow": 100,
+    "operation": "add",
+    "paint_version": 2,
+    "points": [
+     [
+      0.2,
+      0.3
+     ],
+     [
+      0.4,
+      0.5
+     ]
+    ],
+    "radius": 0.025,
+    "type": "brush"
+   },
+   "edits": {},
+   "error": "",
+   "name": "brush_unchanged",
+   "others": {},
+   "result": {
+    "density": 100.0,
+    "enabled": true,
+    "feather": 70.0,
+    "flow": 100.0,
+    "invert": false,
+    "operation": "add",
+    "paint_version": 2,
+    "points": [
+     [
+      0.2,
+      0.3
+     ],
+     [
+      0.4,
+      0.5
+     ]
+    ],
+    "radius": 0.025,
+    "type": "brush"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "브러시"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 2,
+     "high": 25.0,
+     "label": "크기",
+     "low": 0.2,
+     "value": 2.5
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "칠하는 강도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 농도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "check": "시작점과 비슷한 색 안에서만",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "decimals": 2,
+     "high": 1.0,
+     "label": "색 경계 허용량",
+     "low": 0.02,
+     "value": 0.18
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 70.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "auto_tolerance": 0.18,
+    "density": 100.0,
+    "feather": 70.0,
+    "flow": 100.0,
+    "radius": 2.5
+   }
+  },
+  {
+   "component": {
+    "operation": "add",
+    "points": [
+     [
+      0.1,
+      0.1
+     ],
+     [
+      0.3,
+      0.2
+     ]
+    ],
+    "type": "brush"
+   },
+   "edits": {
+    "flow": 55.55,
+    "radius": 5.555
+   },
+   "error": "",
+   "name": "brush_legacy",
+   "others": {
+    "auto_mask": true
+   },
+   "result": {
+    "auto_mask": true,
+    "auto_tolerance": 0.18,
+    "density": 100.0,
+    "enabled": true,
+    "feather": 70.0,
+    "flow": 55.5,
+    "invert": false,
+    "operation": "add",
+    "paint_version": 2,
+    "points": [
+     [
+      0.1,
+      0.1
+     ],
+     [
+      0.3,
+      0.2
+     ]
+    ],
+    "radius": 0.0555,
+    "seed": [
+     0.1,
+     0.1
+    ],
+    "type": "brush"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "브러시"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 2,
+     "high": 25.0,
+     "label": "크기",
+     "low": 0.2,
+     "value": 4.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "칠하는 강도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 농도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "check": "시작점과 비슷한 색 안에서만",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "decimals": 2,
+     "high": 1.0,
+     "label": "색 경계 허용량",
+     "low": 0.02,
+     "value": 0.18
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 70.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "auto_tolerance": 0.18,
+    "density": 100.0,
+    "feather": 70.0,
+    "flow": 55.5,
+    "radius": 5.55
+   }
+  },
+  {
+   "component": {
+    "feather": 33.33,
+    "points": [
+     [
+      0.1,
+      0.1
+     ]
+    ],
+    "radius": 0.03333,
+    "type": "brush"
+   },
+   "edits": {},
+   "error": "",
+   "name": "brush_legacy_untouched",
+   "others": {},
+   "result": {
+    "density": 100.0,
+    "enabled": true,
+    "feather": 33.3,
+    "flow": 100.0,
+    "invert": false,
+    "operation": "add",
+    "points": [
+     [
+      0.1,
+      0.1
+     ]
+    ],
+    "radius": 0.0333,
+    "type": "brush"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "브러시"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 2,
+     "high": 25.0,
+     "label": "크기",
+     "low": 0.2,
+     "value": 3.33
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "칠하는 강도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 농도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "check": "시작점과 비슷한 색 안에서만",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "decimals": 2,
+     "high": 1.0,
+     "label": "색 경계 허용량",
+     "low": 0.02,
+     "value": 0.18
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 33.3
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "auto_tolerance": 0.18,
+    "density": 100.0,
+    "feather": 33.3,
+    "flow": 100.0,
+    "radius": 3.33
+   }
+  },
+  {
+   "component": {
+    "auto_mask": true,
+    "auto_tolerance": 0.3,
+    "density": 80,
+    "feather": 40,
+    "flow": 60,
+    "operation": "subtract",
+    "paint_version": 2,
+    "points": [
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.6,
+      0.6
+     ]
+    ],
+    "radius": 0.05,
+    "seed": [
+     0.55,
+     0.52
+    ],
+    "type": "brush"
+   },
+   "edits": {},
+   "error": "",
+   "name": "brush_auto_off",
+   "others": {
+    "auto_mask": false
+   },
+   "result": {
+    "auto_tolerance": 0.3,
+    "density": 80.0,
+    "enabled": true,
+    "feather": 40.0,
+    "flow": 60.0,
+    "invert": false,
+    "operation": "subtract",
+    "paint_version": 2,
+    "points": [
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.6,
+      0.6
+     ]
+    ],
+    "radius": 0.05,
+    "seed": [
+     0.55,
+     0.52
+    ],
+    "type": "brush"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "브러시"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "subtract",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 2,
+     "high": 25.0,
+     "label": "크기",
+     "low": 0.2,
+     "value": 5.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "칠하는 강도",
+     "low": 0.0,
+     "value": 60.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 농도",
+     "low": 0.0,
+     "value": 80.0
+    },
+    {
+     "check": "시작점과 비슷한 색 안에서만",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "decimals": 2,
+     "high": 1.0,
+     "label": "색 경계 허용량",
+     "low": 0.02,
+     "value": 0.3
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 40.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "auto_tolerance": 0.3,
+    "density": 80.0,
+    "feather": 40.0,
+    "flow": 60.0,
+    "radius": 5.0
+   }
+  },
+  {
+   "component": {
+    "auto_mask": true,
+    "auto_tolerance": 0.18,
+    "density": 100,
+    "flow": 100,
+    "points": [
+     [
+      0.2,
+      0.2
+     ]
+    ],
+    "radius": 0.02,
+    "seed": [
+     0.2,
+     0.2
+    ],
+    "type": "brush"
+   },
+   "edits": {
+    "auto_tolerance": 0.125,
+    "density": 12.35,
+    "feather": 0.05,
+    "flow": 70.25,
+    "radius": 2.125
+   },
+   "error": "",
+   "name": "brush_ties",
+   "others": {},
+   "result": {
+    "auto_mask": true,
+    "auto_tolerance": 0.13,
+    "density": 12.3,
+    "enabled": true,
+    "feather": 0.1,
+    "flow": 70.3,
+    "invert": false,
+    "operation": "add",
+    "paint_version": 2,
+    "points": [
+     [
+      0.2,
+      0.2
+     ]
+    ],
+    "radius": 0.0213,
+    "seed": [
+     0.2,
+     0.2
+    ],
+    "type": "brush"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "브러시"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 2,
+     "high": 25.0,
+     "label": "크기",
+     "low": 0.2,
+     "value": 2.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "칠하는 강도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 농도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "check": "시작점과 비슷한 색 안에서만",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "decimals": 2,
+     "high": 1.0,
+     "label": "색 경계 허용량",
+     "low": 0.02,
+     "value": 0.18
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 70.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "auto_tolerance": 0.13,
+    "density": 12.3,
+    "feather": 0.1,
+    "flow": 70.3,
+    "radius": 2.13
+   }
+  },
+  {
+   "component": {
+    "density": -3,
+    "feather": 120,
+    "flow": 150,
+    "points": [
+     [
+      0.2,
+      0.2
+     ]
+    ],
+    "radius": 0.5,
+    "type": "brush"
+   },
+   "edits": {
+    "auto_tolerance": 3.0
+   },
+   "error": "",
+   "name": "brush_clamped",
+   "others": {
+    "enabled": false,
+    "invert": true,
+    "operation": "intersect"
+   },
+   "result": {
+    "density": 0.0,
+    "enabled": false,
+    "feather": 100.0,
+    "flow": 100.0,
+    "invert": true,
+    "operation": "intersect",
+    "paint_version": 2,
+    "points": [
+     [
+      0.2,
+      0.2
+     ]
+    ],
+    "radius": 0.25,
+    "type": "brush"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "브러시"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 2,
+     "high": 25.0,
+     "label": "크기",
+     "low": 0.2,
+     "value": 25.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "칠하는 강도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 농도",
+     "low": 0.0,
+     "value": 0.0
+    },
+    {
+     "check": "시작점과 비슷한 색 안에서만",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "decimals": 2,
+     "high": 1.0,
+     "label": "색 경계 허용량",
+     "low": 0.02,
+     "value": 0.18
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 100.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "auto_tolerance": 1.0,
+    "density": 0.0,
+    "feather": 100.0,
+    "flow": 100.0,
+    "radius": 25.0
+   }
+  },
+  {
+   "component": {
+    "density": 100,
+    "flow": 100,
+    "points": [
+     [
+      0.2,
+      0.2
+     ]
+    ],
+    "radius": 0.001,
+    "type": "brush"
+   },
+   "edits": {
+    "flow": 100.04
+   },
+   "error": "",
+   "name": "brush_low_radius",
+   "others": {},
+   "result": {
+    "density": 100.0,
+    "enabled": true,
+    "feather": 70.0,
+    "flow": 100.0,
+    "invert": false,
+    "operation": "add",
+    "points": [
+     [
+      0.2,
+      0.2
+     ]
+    ],
+    "radius": 0.002,
+    "type": "brush"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "브러시"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 2,
+     "high": 25.0,
+     "label": "크기",
+     "low": 0.2,
+     "value": 0.2
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "칠하는 강도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 농도",
+     "low": 0.0,
+     "value": 100.0
+    },
+    {
+     "check": "시작점과 비슷한 색 안에서만",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "decimals": 2,
+     "high": 1.0,
+     "label": "색 경계 허용량",
+     "low": 0.02,
+     "value": 0.18
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 70.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "auto_tolerance": 0.18,
+    "density": 100.0,
+    "feather": 70.0,
+    "flow": 100.0,
+    "radius": 0.2
+   }
+  },
+  {
+   "component": {
+    "operation": "add",
+    "points": [
+     [
+      -0.5,
+      0.25
+     ],
+     [
+      1.7,
+      0.8
+     ]
+    ],
+    "type": "linear"
+   },
+   "edits": {
+    "x1": 350.0,
+    "y0": 12.345
+   },
+   "error": "",
+   "name": "linear",
+   "others": {
+    "enabled": false,
+    "invert": true,
+    "operation": "subtract"
+   },
+   "result": {
+    "enabled": false,
+    "invert": true,
+    "operation": "subtract",
+    "points": [
+     [
+      -0.5,
+      0.12300000000000001
+     ],
+     [
+      3.0,
+      0.8
+     ]
+    ],
+    "type": "linear"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "선형 그레이디언트"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "시작 X (%)",
+     "low": -200.0,
+     "value": -50.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "시작 Y (%)",
+     "low": -200.0,
+     "value": 25.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "끝 X (%)",
+     "low": -200.0,
+     "value": 170.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "끝 Y (%)",
+     "low": -200.0,
+     "value": 80.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "x0": -50.0,
+    "x1": 300.0,
+    "y0": 12.3,
+    "y1": 80.0
+   }
+  },
+  {
+   "component": {
+    "enabled": false,
+    "operation": "intersect",
+    "points": [
+     [
+      0.1,
+      0.2
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.9,
+      0.95
+     ]
+    ],
+    "type": "linear"
+   },
+   "edits": {},
+   "error": "",
+   "name": "linear_three_points",
+   "others": {
+    "enabled": true
+   },
+   "result": {
+    "enabled": true,
+    "invert": false,
+    "operation": "intersect",
+    "points": [
+     [
+      0.1,
+      0.2
+     ],
+     [
+      0.9,
+      0.95
+     ]
+    ],
+    "type": "linear"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "선형 그레이디언트"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "intersect",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "시작 X (%)",
+     "low": -200.0,
+     "value": 10.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "시작 Y (%)",
+     "low": -200.0,
+     "value": 20.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "끝 X (%)",
+     "low": -200.0,
+     "value": 90.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "끝 Y (%)",
+     "low": -200.0,
+     "value": 95.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "x0": 10.0,
+    "x1": 90.0,
+    "y0": 20.0,
+    "y1": 95.0
+   }
+  },
+  {
+   "component": {
+    "angle": 33.333,
+    "operation": "add",
+    "points": [
+     [
+      0.2,
+      0.3
+     ],
+     [
+      0.8,
+      0.9
+     ]
+    ],
+    "type": "radial"
+   },
+   "edits": {
+    "angle": -200.0,
+    "feather": 45.55
+   },
+   "error": "",
+   "name": "radial",
+   "others": {},
+   "result": {
+    "angle": -180.0,
+    "enabled": true,
+    "feather": 45.5,
+    "invert": false,
+    "operation": "add",
+    "points": [
+     [
+      0.2,
+      0.3
+     ],
+     [
+      0.8,
+      0.9
+     ]
+    ],
+    "type": "radial"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "방사형 그레이디언트"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 70.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "시작 X (%)",
+     "low": -200.0,
+     "value": 20.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "시작 Y (%)",
+     "low": -200.0,
+     "value": 30.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "끝 X (%)",
+     "low": -200.0,
+     "value": 80.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "끝 Y (%)",
+     "low": -200.0,
+     "value": 90.0
+    },
+    {
+     "decimals": 1,
+     "high": 180.0,
+     "label": "타원 회전",
+     "low": -180.0,
+     "value": 33.3
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "angle": -180.0,
+    "feather": 45.5,
+    "x0": 20.0,
+    "x1": 80.0,
+    "y0": 30.0,
+    "y1": 90.0
+   }
+  },
+  {
+   "component": {
+    "type": "radial"
+   },
+   "edits": {},
+   "error": "",
+   "name": "radial_defaults",
+   "others": {},
+   "result": {
+    "angle": 0.0,
+    "enabled": true,
+    "feather": 70.0,
+    "invert": false,
+    "operation": "add",
+    "points": [
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.75,
+      0.75
+     ]
+    ],
+    "type": "radial"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "방사형 그레이디언트"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 70.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "시작 X (%)",
+     "low": -200.0,
+     "value": 25.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "시작 Y (%)",
+     "low": -200.0,
+     "value": 25.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "끝 X (%)",
+     "low": -200.0,
+     "value": 75.0
+    },
+    {
+     "decimals": 1,
+     "high": 300.0,
+     "label": "끝 Y (%)",
+     "low": -200.0,
+     "value": 75.0
+    },
+    {
+     "decimals": 1,
+     "high": 180.0,
+     "label": "타원 회전",
+     "low": -180.0,
+     "value": 0.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "angle": 0.0,
+    "feather": 70.0,
+    "x0": 25.0,
+    "x1": 75.0,
+    "y0": 25.0,
+    "y1": 75.0
+   }
+  },
+  {
+   "component": {
+    "operation": "intersect",
+    "range": [
+     0.6,
+     0.2
+    ],
+    "softness": 0.25,
+    "type": "luma"
+   },
+   "edits": {},
+   "error": "",
+   "name": "luma",
+   "others": {},
+   "result": {
+    "enabled": true,
+    "invert": false,
+    "operation": "intersect",
+    "range": [
+     0.2,
+     0.6
+    ],
+    "softness": 0.25,
+    "type": "luma"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "광도 범위"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "intersect",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최소 밝기",
+     "low": 0.0,
+     "value": 60.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 밝기",
+     "low": 0.0,
+     "value": 20.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "범위 경계 흐림",
+     "low": 0.1,
+     "value": 25.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "high": 20.0,
+    "low": 60.0,
+    "softness": 25.0
+   }
+  },
+  {
+   "component": {
+    "invert": true,
+    "operation": "add",
+    "range": [
+     0.2,
+     0.6
+    ],
+    "softness": 0.25,
+    "type": "luma"
+   },
+   "edits": {
+    "high": 30.0,
+    "low": 80.0,
+    "softness": 0.0
+   },
+   "error": "",
+   "name": "luma_edited",
+   "others": {
+    "invert": false
+   },
+   "result": {
+    "enabled": true,
+    "invert": false,
+    "operation": "add",
+    "range": [
+     0.3,
+     0.8
+    ],
+    "softness": 0.001,
+    "type": "luma"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "광도 범위"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최소 밝기",
+     "low": 0.0,
+     "value": 20.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 밝기",
+     "low": 0.0,
+     "value": 60.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "범위 경계 흐림",
+     "low": 0.1,
+     "value": 25.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "high": 30.0,
+    "low": 80.0,
+    "softness": 0.1
+   }
+  },
+  {
+   "component": {
+    "brush_range": "shadows",
+    "type": "luma"
+   },
+   "edits": {
+    "softness": 55.55
+   },
+   "error": "",
+   "name": "luma_defaults",
+   "others": {},
+   "result": {
+    "brush_range": "shadows",
+    "enabled": true,
+    "invert": false,
+    "operation": "add",
+    "range": [
+     0.25,
+     0.75
+    ],
+    "softness": 0.555,
+    "type": "luma"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "광도 범위"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최소 밝기",
+     "low": 0.0,
+     "value": 25.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "최대 밝기",
+     "low": 0.0,
+     "value": 75.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "범위 경계 흐림",
+     "low": 0.1,
+     "value": 10.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "high": 75.0,
+    "low": 25.0,
+    "softness": 55.5
+   }
+  },
+  {
+   "component": {
+    "colors": [
+     [
+      0.5,
+      0.2,
+      0.1
+     ]
+    ],
+    "operation": "add",
+    "tolerance": 0.333,
+    "type": "color"
+   },
+   "edits": {},
+   "error": "",
+   "name": "color",
+   "others": {},
+   "result": {
+    "colors": [
+     [
+      0.5,
+      0.2,
+      0.1
+     ]
+    ],
+    "enabled": true,
+    "invert": false,
+    "operation": "add",
+    "tolerance": 0.33,
+    "type": "color"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "색상 범위"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 2,
+     "high": 1.7,
+     "label": "색상 범위 허용량",
+     "low": 0.02,
+     "value": 0.33
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "tolerance": 0.33
+   }
+  },
+  {
+   "component": {
+    "colors": [
+     [
+      0.5,
+      0.2,
+      0.1
+     ]
+    ],
+    "operation": "add",
+    "type": "color"
+   },
+   "edits": {
+    "tolerance": 2.0
+   },
+   "error": "",
+   "name": "color_edited",
+   "others": {
+    "operation": "subtract"
+   },
+   "result": {
+    "colors": [
+     [
+      0.5,
+      0.2,
+      0.1
+     ]
+    ],
+    "enabled": true,
+    "invert": false,
+    "operation": "subtract",
+    "tolerance": 1.7,
+    "type": "color"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "색상 범위"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 2,
+     "high": 1.7,
+     "label": "색상 범위 허용량",
+     "low": 0.02,
+     "value": 0.3
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "tolerance": 1.7
+   }
+  },
+  {
+   "component": {
+    "operation": "add",
+    "type": "sky"
+   },
+   "edits": {
+    "feather": 12.34
+   },
+   "error": "",
+   "name": "sky",
+   "others": {},
+   "result": {
+    "enabled": true,
+    "feather": 12.3,
+    "invert": false,
+    "operation": "add",
+    "sensitivity": 50.0,
+    "type": "sky"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "하늘"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "민감도",
+     "low": 0.0,
+     "value": 50.0
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 30.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "feather": 12.3,
+    "sensitivity": 50.0
+   }
+  },
+  {
+   "component": {
+    "feather": 10,
+    "operation": "add",
+    "sensitivity": 72.5,
+    "type": "sky"
+   },
+   "edits": {
+    "sensitivity": 101.0
+   },
+   "error": "",
+   "name": "sky_stored",
+   "others": {},
+   "result": {
+    "enabled": true,
+    "feather": 10.0,
+    "invert": false,
+    "operation": "add",
+    "sensitivity": 100.0,
+    "type": "sky"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "하늘"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "민감도",
+     "low": 0.0,
+     "value": 72.5
+    },
+    {
+     "decimals": 1,
+     "high": 100.0,
+     "label": "경계 흐림",
+     "low": 0.0,
+     "value": 10.0
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {
+    "feather": 10.0,
+    "sensitivity": 100.0
+   }
+  },
+  {
+   "component": {
+    "operation": "weird",
+    "type": "foo",
+    "value": 3
+   },
+   "edits": {},
+   "error": "",
+   "name": "unknown",
+   "others": {},
+   "result": {
+    "enabled": true,
+    "invert": false,
+    "operation": "add",
+    "type": "foo",
+    "value": 3
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "선택 영역"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {}
+  },
+  {
+   "component": {
+    "type": "foo"
+   },
+   "edits": {},
+   "error": "",
+   "name": "unknown_ops",
+   "others": {
+    "operation": "intersect"
+   },
+   "result": {
+    "enabled": true,
+    "invert": false,
+    "operation": "intersect",
+    "type": "foo"
+   },
+   "rows": [
+    {
+     "label": "종류",
+     "text": "선택 영역"
+    },
+    {
+     "check": "선택 영역 사용",
+     "checked": true,
+     "label": ""
+    },
+    {
+     "check": "이 선택 영역 반전",
+     "checked": false,
+     "label": ""
+    },
+    {
+     "choice": "add",
+     "items": [
+      "더하기",
+      "빼기",
+      "교차"
+     ],
+     "label": "결합"
+    }
+   ],
+   "title": "선택 영역 편집",
+   "values": {}
+  }
+ ]
+}

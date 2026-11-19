@@ -1,0 +1,12 @@
+{
+ "detected": false,
+ "error": {
+  "message": "사진이 너무 작아 자동 정렬을 계산할 수 없습니다.",
+  "type": "AlignmentError"
+ },
+ "height": 30,
+ "lines_none": false,
+ "mode": "auto",
+ "result": null,
+ "width": 50
+}

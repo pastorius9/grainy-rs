@@ -1,0 +1,11 @@
+{
+ "raw_kelvin": 4300.0,
+ "raw_mode": "as_shot",
+ "raw_neutral": [
+  0.5,
+  1,
+  0.7
+ ],
+ "raw_tint": -18.0,
+ "working_space": "ProPhoto"
+}

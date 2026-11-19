@@ -1,0 +1,1085 @@
+{
+ "current": 1,
+ "photos": [
+  {
+   "id": 1,
+   "name": "photo-1.png",
+   "path": "Z:/compare/photo-1.png",
+   "settings": {
+    "crop": [
+     0.1,
+     0.1,
+     0.7,
+     0.8
+    ],
+    "distortion": 10,
+    "exposure": 1.0,
+    "rotation": 1
+   }
+  },
+  {
+   "id": 2,
+   "name": "photo-2.png",
+   "path": "Z:/compare/photo-2.png",
+   "settings": {
+    "contrast": 20,
+    "flip": true
+   }
+  },
+  {
+   "id": 3,
+   "name": "photo-3.png",
+   "path": "Z:/compare/photo-3.png",
+   "settings": {}
+  },
+  {
+   "id": 4,
+   "name": "photo-4.png",
+   "path": "Z:/compare/photo-4.png",
+   "settings": {
+    "perspective_v": 12,
+    "saturation": -30
+   }
+  },
+  {
+   "id": 5,
+   "name": "photo-5.png",
+   "path": "Z:/compare/photo-5.png",
+   "settings": {
+    "straighten": 4.0,
+    "temperature": -10
+   }
+  }
+ ],
+ "steps": [
+  {
+   "state": {
+    "checked": true,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": null,
+    "renders": 1,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "rotation": 1
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "toggle"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": null,
+    "renders": 1,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "rotation": 1
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "set",
+    "exposure",
+    2.0
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": null,
+    "renders": 2,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "rotation": 1,
+      "straighten": 3.0
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "set",
+    "straighten",
+    3.0
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": true,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": null,
+    "renders": 2,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "rotation": 1,
+      "straighten": 3.0
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": true,
+    "vertical": false
+   },
+   "step": [
+    "swap"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": true,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": null,
+    "renders": 2,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "rotation": 1,
+      "straighten": 3.0
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": true,
+    "vertical": true
+   },
+   "step": [
+    "vertical",
+    true
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 1,
+    "full": false,
+    "main_caption": "photo-1.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-2.png",
+    "other_id": 2,
+    "previous_id": null,
+    "renders": 3,
+    "screen": 0,
+    "selection": [
+     1
+    ],
+    "shown": {
+     "id": 2,
+     "name": "photo-2.png",
+     "path": "Z:/compare/photo-2.png",
+     "settings": {
+      "contrast": 20,
+      "flip": true
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": true
+   },
+   "step": [
+    "mode",
+    "photos"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 2,
+    "full": false,
+    "main_caption": "photo-2.png",
+    "main_first": false,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-1.png",
+    "other_id": 1,
+    "previous_id": 1,
+    "renders": 4,
+    "screen": 0,
+    "selection": [
+     2
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "exposure": 2.0,
+      "rotation": 1,
+      "straighten": 3.0
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": true,
+    "vertical": true
+   },
+   "step": [
+    "activate_other"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 2,
+    "full": false,
+    "main_caption": "photo-2.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-1.png",
+    "other_id": 1,
+    "previous_id": 1,
+    "renders": 4,
+    "screen": 0,
+    "selection": [
+     2
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "exposure": 2.0,
+      "rotation": 1,
+      "straighten": 3.0
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": true
+   },
+   "step": [
+    "swap"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 2,
+    "full": false,
+    "main_caption": "photo-2.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-1.png",
+    "other_id": 1,
+    "previous_id": 1,
+    "renders": 4,
+    "screen": 0,
+    "selection": [
+     2
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "exposure": 2.0,
+      "rotation": 1,
+      "straighten": 3.0
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "vertical",
+    false
+   ]
+  },
+  {
+   "state": {
+    "checked": false,
+    "current_id": 2,
+    "full": false,
+    "main_caption": "",
+    "main_first": true,
+    "main_marked": false,
+    "mode": "photos",
+    "on": false,
+    "other_caption": "",
+    "other_id": 1,
+    "previous_id": 1,
+    "renders": 4,
+    "screen": 0,
+    "selection": [
+     2
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "exposure": 2.0,
+      "rotation": 1,
+      "straighten": 3.0
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "toggle"
+   ]
+  },
+  {
+   "state": {
+    "checked": false,
+    "current_id": 2,
+    "full": false,
+    "main_caption": "",
+    "main_first": true,
+    "main_marked": false,
+    "mode": "photos",
+    "on": false,
+    "other_caption": "",
+    "other_id": 1,
+    "previous_id": 1,
+    "renders": 4,
+    "screen": 0,
+    "selection": [
+     2,
+     4
+    ],
+    "shown": {
+     "id": 1,
+     "name": "photo-1.png",
+     "path": "Z:/compare/photo-1.png",
+     "settings": {
+      "crop": [
+       0.1,
+       0.1,
+       0.7,
+       0.8
+      ],
+      "distortion": 10,
+      "exposure": 2.0,
+      "rotation": 1,
+      "straighten": 3.0
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "select",
+    [
+     2,
+     4
+    ]
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 2,
+    "full": false,
+    "main_caption": "photo-2.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-4.png",
+    "other_id": 4,
+    "previous_id": 1,
+    "renders": 5,
+    "screen": 0,
+    "selection": [
+     2,
+     4
+    ],
+    "shown": {
+     "id": 4,
+     "name": "photo-4.png",
+     "path": "Z:/compare/photo-4.png",
+     "settings": {
+      "perspective_v": 12,
+      "saturation": -30
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "toggle"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 2,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": 4,
+    "previous_id": 1,
+    "renders": 6,
+    "screen": 0,
+    "selection": [
+     2,
+     4
+    ],
+    "shown": {
+     "id": 2,
+     "name": "photo-2.png",
+     "path": "Z:/compare/photo-2.png",
+     "settings": {
+      "flip": true
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "mode",
+    "before"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 2,
+    "full": false,
+    "main_caption": "photo-2.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-4.png",
+    "other_id": 4,
+    "previous_id": 1,
+    "renders": 7,
+    "screen": 0,
+    "selection": [
+     2,
+     4
+    ],
+    "shown": {
+     "id": 4,
+     "name": "photo-4.png",
+     "path": "Z:/compare/photo-4.png",
+     "settings": {
+      "perspective_v": 12,
+      "saturation": -30
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "mode",
+    "photos"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 2,
+    "full": true,
+    "main_caption": "photo-2.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-4.png",
+    "other_id": 4,
+    "previous_id": 1,
+    "renders": 8,
+    "screen": 0,
+    "selection": [
+     2,
+     4
+    ],
+    "shown": {
+     "id": 4,
+     "name": "photo-4.png",
+     "path": "Z:/compare/photo-4.png",
+     "settings": {
+      "perspective_v": 12,
+      "saturation": -30
+     },
+     "size": null
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "zoom"
+   ]
+  },
+  {
+   "state": {
+    "checked": false,
+    "current_id": 4,
+    "full": false,
+    "main_caption": "",
+    "main_first": true,
+    "main_marked": false,
+    "mode": "photos",
+    "on": false,
+    "other_caption": "",
+    "other_id": 4,
+    "previous_id": 2,
+    "renders": 8,
+    "screen": 0,
+    "selection": [
+     4
+    ],
+    "shown": {
+     "id": 4,
+     "name": "photo-4.png",
+     "path": "Z:/compare/photo-4.png",
+     "settings": {
+      "perspective_v": 12,
+      "saturation": -30
+     },
+     "size": null
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "stop",
+    true
+   ]
+  },
+  {
+   "state": {
+    "checked": false,
+    "current_id": 5,
+    "full": false,
+    "main_caption": "",
+    "main_first": true,
+    "main_marked": false,
+    "mode": "photos",
+    "on": false,
+    "other_caption": "",
+    "other_id": 4,
+    "previous_id": 4,
+    "renders": 8,
+    "screen": 0,
+    "selection": [
+     5
+    ],
+    "shown": {
+     "id": 4,
+     "name": "photo-4.png",
+     "path": "Z:/compare/photo-4.png",
+     "settings": {
+      "perspective_v": 12,
+      "saturation": -30
+     },
+     "size": null
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "activate",
+    5
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 5,
+    "full": false,
+    "main_caption": "photo-5.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-4.png",
+    "other_id": 4,
+    "previous_id": 4,
+    "renders": 9,
+    "screen": 0,
+    "selection": [
+     5
+    ],
+    "shown": {
+     "id": 4,
+     "name": "photo-4.png",
+     "path": "Z:/compare/photo-4.png",
+     "settings": {
+      "perspective_v": 12,
+      "saturation": -30
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "start",
+    "photos"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 5,
+    "full": false,
+    "main_caption": "photo-5.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-4.png",
+    "other_id": 4,
+    "previous_id": 4,
+    "renders": 9,
+    "screen": 0,
+    "selection": [
+     5
+    ],
+    "shown": {
+     "id": 4,
+     "name": "photo-4.png",
+     "path": "Z:/compare/photo-4.png",
+     "settings": {
+      "perspective_v": 12,
+      "saturation": -30
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "mode",
+    "photos"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 5,
+    "full": false,
+    "main_caption": "photo-5.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-4.png",
+    "other_id": 4,
+    "previous_id": 4,
+    "renders": 10,
+    "screen": 0,
+    "selection": [
+     5
+    ],
+    "shown": {
+     "id": 4,
+     "name": "photo-4.png",
+     "path": "Z:/compare/photo-4.png",
+     "settings": {
+      "perspective_v": 12,
+      "saturation": -30
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "start",
+    null
+   ]
+  },
+  {
+   "state": {
+    "checked": false,
+    "current_id": 5,
+    "full": false,
+    "main_caption": "",
+    "main_first": true,
+    "main_marked": false,
+    "mode": "photos",
+    "on": false,
+    "other_caption": "",
+    "other_id": 4,
+    "previous_id": 4,
+    "renders": 10,
+    "screen": 0,
+    "selection": [
+     5
+    ],
+    "shown": {
+     "id": 4,
+     "name": "photo-4.png",
+     "path": "Z:/compare/photo-4.png",
+     "settings": {
+      "perspective_v": 12,
+      "saturation": -30
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "stop",
+    false
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 5,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": 4,
+    "renders": 11,
+    "screen": 0,
+    "selection": [
+     5
+    ],
+    "shown": {
+     "id": 5,
+     "name": "photo-5.png",
+     "path": "Z:/compare/photo-5.png",
+     "settings": {
+      "straighten": 4.0
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "start",
+    "before"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 3,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": 5,
+    "renders": 12,
+    "screen": 0,
+    "selection": [
+     3
+    ],
+    "shown": {
+     "id": 3,
+     "name": "photo-3.png",
+     "path": "Z:/compare/photo-3.png",
+     "settings": {},
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "activate",
+    3
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 3,
+    "full": false,
+    "main_caption": "보정 후",
+    "main_first": false,
+    "main_marked": false,
+    "mode": "before",
+    "on": true,
+    "other_caption": "원본",
+    "other_id": null,
+    "previous_id": 5,
+    "renders": 12,
+    "screen": 0,
+    "selection": [
+     3
+    ],
+    "shown": {
+     "id": 3,
+     "name": "photo-3.png",
+     "path": "Z:/compare/photo-3.png",
+     "settings": {},
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "activate_other"
+   ]
+  },
+  {
+   "state": {
+    "checked": true,
+    "current_id": 3,
+    "full": false,
+    "main_caption": "photo-3.png",
+    "main_first": true,
+    "main_marked": true,
+    "mode": "photos",
+    "on": true,
+    "other_caption": "photo-5.png",
+    "other_id": 5,
+    "previous_id": 5,
+    "renders": 13,
+    "screen": 0,
+    "selection": [
+     3
+    ],
+    "shown": {
+     "id": 5,
+     "name": "photo-5.png",
+     "path": "Z:/compare/photo-5.png",
+     "settings": {
+      "straighten": 4.0,
+      "temperature": -10
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "start",
+    "photos"
+   ]
+  },
+  {
+   "state": {
+    "checked": false,
+    "current_id": 3,
+    "full": false,
+    "main_caption": "",
+    "main_first": true,
+    "main_marked": false,
+    "mode": "photos",
+    "on": false,
+    "other_caption": "",
+    "other_id": 5,
+    "previous_id": 5,
+    "renders": 13,
+    "screen": 0,
+    "selection": [
+     3
+    ],
+    "shown": {
+     "id": 5,
+     "name": "photo-5.png",
+     "path": "Z:/compare/photo-5.png",
+     "settings": {
+      "straighten": 4.0,
+      "temperature": -10
+     },
+     "size": 1800
+    },
+    "status": "",
+    "swapped": false,
+    "vertical": false
+   },
+   "step": [
+    "stop",
+    false
+   ]
+  }
+ ]
+}

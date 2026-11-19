@@ -1,0 +1,32 @@
+{
+ "changes": {
+  "upright": {
+   "crop_scale": 1,
+   "matrix": [
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ]
+  }
+ },
+ "error": {
+  "message": "자동 원근 보정 행렬이 올바르지 않습니다.",
+  "type": "ValueError"
+ },
+ "function": "geometry",
+ "input": {
+  "c": 3,
+  "h": 37,
+  "kind": "synth",
+  "seed": 12,
+  "w": 53
+ },
+ "use_crop": true
+}

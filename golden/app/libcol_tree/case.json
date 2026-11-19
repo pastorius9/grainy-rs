@@ -1,0 +1,271 @@
+{
+ "cases": [
+  {
+   "children": [],
+   "missing": [],
+   "name": "plain",
+   "nodes": [
+    {
+     "direct": 0,
+     "drive": true,
+     "key": "z:\\",
+     "missing": false,
+     "name": "Z:",
+     "parent": null,
+     "path": "Z:\\",
+     "total": 8,
+     "unscanned": false
+    },
+    {
+     "direct": 4,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos",
+     "missing": false,
+     "name": "photos",
+     "parent": "z:\\",
+     "path": "Z:\\GrainyGolden\\photos",
+     "total": 8,
+     "unscanned": true
+    },
+    {
+     "direct": 3,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\roll 2",
+     "missing": false,
+     "name": "roll 2",
+     "parent": "z:\\grainygolden\\photos",
+     "path": "Z:\\GrainyGolden\\photos\\roll 2",
+     "total": 4,
+     "unscanned": true
+    },
+    {
+     "direct": 1,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\roll 2\\sub",
+     "missing": false,
+     "name": "sub",
+     "parent": "z:\\grainygolden\\photos\\roll 2",
+     "path": "Z:\\GrainyGolden\\photos\\roll 2\\sub",
+     "total": 1,
+     "unscanned": true
+    }
+   ],
+   "removed": [],
+   "scanned": []
+  },
+  {
+   "children": [
+    "Z:\\GrainyGolden\\photos\\roll 2\\empty",
+    "Z:\\GrainyGolden\\photos\\roll 2\\sub",
+    "Z:\\GrainyGolden\\elsewhere\\x"
+   ],
+   "missing": [],
+   "name": "scanned_children",
+   "nodes": [
+    {
+     "direct": 0,
+     "drive": true,
+     "key": "z:\\",
+     "missing": false,
+     "name": "Z:",
+     "parent": null,
+     "path": "Z:\\",
+     "total": 8,
+     "unscanned": false
+    },
+    {
+     "direct": 4,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos",
+     "missing": false,
+     "name": "photos",
+     "parent": "z:\\",
+     "path": "Z:\\GrainyGolden\\photos",
+     "total": 8,
+     "unscanned": false
+    },
+    {
+     "direct": 3,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\roll 2",
+     "missing": false,
+     "name": "roll 2",
+     "parent": "z:\\grainygolden\\photos",
+     "path": "Z:\\GrainyGolden\\photos\\roll 2",
+     "total": 4,
+     "unscanned": false
+    },
+    {
+     "direct": 0,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\roll 2\\empty",
+     "missing": false,
+     "name": "empty",
+     "parent": "z:\\grainygolden\\photos\\roll 2",
+     "path": "Z:\\GrainyGolden\\photos\\roll 2\\empty",
+     "total": 0,
+     "unscanned": true
+    },
+    {
+     "direct": 1,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\roll 2\\sub",
+     "missing": false,
+     "name": "sub",
+     "parent": "z:\\grainygolden\\photos\\roll 2",
+     "path": "Z:\\GrainyGolden\\photos\\roll 2\\sub",
+     "total": 1,
+     "unscanned": true
+    }
+   ],
+   "removed": [],
+   "scanned": [
+    "z:\\grainygolden\\photos",
+    "z:\\grainygolden\\photos\\roll 2"
+   ]
+  },
+  {
+   "children": [],
+   "missing": [
+    "z:\\grainygolden\\photos\\roll 2"
+   ],
+   "name": "missing_folder",
+   "nodes": [
+    {
+     "direct": 0,
+     "drive": true,
+     "key": "z:\\",
+     "missing": false,
+     "name": "Z:",
+     "parent": null,
+     "path": "Z:\\",
+     "total": 8,
+     "unscanned": false
+    },
+    {
+     "direct": 4,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos",
+     "missing": false,
+     "name": "photos",
+     "parent": "z:\\",
+     "path": "Z:\\GrainyGolden\\photos",
+     "total": 8,
+     "unscanned": false
+    },
+    {
+     "direct": 3,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\roll 2",
+     "missing": true,
+     "name": "roll 2",
+     "parent": "z:\\grainygolden\\photos",
+     "path": "Z:\\GrainyGolden\\photos\\roll 2",
+     "total": 4,
+     "unscanned": true
+    },
+    {
+     "direct": 1,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\roll 2\\sub",
+     "missing": false,
+     "name": "sub",
+     "parent": "z:\\grainygolden\\photos\\roll 2",
+     "path": "Z:\\GrainyGolden\\photos\\roll 2\\sub",
+     "total": 1,
+     "unscanned": true
+    }
+   ],
+   "removed": [],
+   "scanned": [
+    "z:\\grainygolden\\photos"
+   ]
+  },
+  {
+   "children": [
+    "Z:\\GrainyGolden\\photos\\roll 2\\empty",
+    "Z:\\GrainyGolden\\photos\\other"
+   ],
+   "missing": [],
+   "name": "left_out",
+   "nodes": [
+    {
+     "direct": 0,
+     "drive": true,
+     "key": "z:\\",
+     "missing": false,
+     "name": "Z:",
+     "parent": null,
+     "path": "Z:\\",
+     "total": 8,
+     "unscanned": false
+    },
+    {
+     "direct": 4,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos",
+     "missing": false,
+     "name": "photos",
+     "parent": "z:\\",
+     "path": "Z:\\GrainyGolden\\photos",
+     "total": 8,
+     "unscanned": true
+    },
+    {
+     "direct": 0,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\other",
+     "missing": false,
+     "name": "other",
+     "parent": "z:\\grainygolden\\photos",
+     "path": "Z:\\GrainyGolden\\photos\\other",
+     "total": 0,
+     "unscanned": true
+    },
+    {
+     "direct": 3,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\roll 2",
+     "missing": false,
+     "name": "roll 2",
+     "parent": "z:\\grainygolden\\photos",
+     "path": "Z:\\GrainyGolden\\photos\\roll 2",
+     "total": 4,
+     "unscanned": true
+    },
+    {
+     "direct": 1,
+     "drive": false,
+     "key": "z:\\grainygolden\\photos\\roll 2\\sub",
+     "missing": false,
+     "name": "sub",
+     "parent": "z:\\grainygolden\\photos\\roll 2",
+     "path": "Z:\\GrainyGolden\\photos\\roll 2\\sub",
+     "total": 1,
+     "unscanned": true
+    }
+   ],
+   "removed": [
+    "Z:\\GrainyGolden\\photos\\roll 2"
+   ],
+   "scanned": []
+  }
+ ],
+ "roots": [
+  "Z:\\GrainyGolden\\photos"
+ ],
+ "rows": [
+  {
+   "count": 4,
+   "path": "Z:\\GrainyGolden\\photos\\__count__"
+  },
+  {
+   "count": 3,
+   "path": "Z:\\GrainyGolden\\photos\\roll 2\\__count__"
+  },
+  {
+   "count": 1,
+   "path": "Z:\\GrainyGolden\\photos\\roll 2\\sub\\__count__"
+  }
+ ]
+}

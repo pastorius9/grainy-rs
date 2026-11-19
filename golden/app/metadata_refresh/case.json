@@ -1,0 +1,58 @@
+{
+ "messages": [
+  "메타데이터 4장 갱신 · 읽을 수 없음 1장"
+ ],
+ "refreshes": 1,
+ "result": [
+  {
+   "metadata": "{\"width\": 8, \"height\": 6, \"format\": \"JPEG\", \"camera\": \"EOS R5\", \"extra\": \"kept\", \"iso\": 400.0, \"make\": \"Canon\", \"shutter\": \"1/250\", \"aperture\": 2.8, \"focal_length\": 50.0, \"date\": \"2025:06:01 10:00:00\", \"lens\": \"RF 24-70mm\", \"latitude\": -33.865, \"longitude\": 151.20999999999998}",
+   "name": "canon.jpg"
+  },
+  {
+   "metadata": "{\"width\": 8, \"height\": 6, \"format\": \"PNG\", \"make\": \"Sony\", \"camera\": \"ILCE-7M4\", \"shutter\": \"0.5\", \"aperture\": 1.8, \"iso\": 100.0, \"focal_length\": 35.0, \"date\": \"2024:01:02 03:04:05\", \"lens\": \"FE 35mm\"}",
+   "name": "sony.png"
+  },
+  {
+   "metadata": "{\"width\": 8, \"height\": 6, \"format\": \"JPEG\", \"date\": \"stays\"}",
+   "name": "plain.jpg"
+  },
+  {
+   "metadata": "{\"width\": 1}",
+   "name": "broken.jpg"
+  },
+  {
+   "metadata": "{\"width\": 2}",
+   "name": "clip.mp4"
+  },
+  {
+   "metadata": "{\"width\": 3}",
+   "name": "missing.jpg"
+  }
+ ],
+ "rows": [
+  {
+   "metadata": "{\"width\": 8, \"height\": 6, \"format\": \"JPEG\", \"camera\": \"OLD CAMERA\", \"extra\": \"kept\", \"iso\": 1.0}",
+   "name": "canon.jpg"
+  },
+  {
+   "metadata": "{\"width\": 8, \"height\": 6, \"format\": \"PNG\"}",
+   "name": "sony.png"
+  },
+  {
+   "metadata": "{\"width\": 8, \"height\": 6, \"format\": \"JPEG\", \"date\": \"stays\"}",
+   "name": "plain.jpg"
+  },
+  {
+   "metadata": "{\"width\": 1}",
+   "name": "broken.jpg"
+  },
+  {
+   "metadata": "{\"width\": 2}",
+   "name": "clip.mp4"
+  },
+  {
+   "metadata": "{\"width\": 3}",
+   "name": "missing.jpg"
+  }
+ ]
+}

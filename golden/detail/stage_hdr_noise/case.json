@@ -1,0 +1,10 @@
+{
+ "pixel_scale": 1.0,
+ "settings": {
+  "clarity": 30.0,
+  "detail_version": 2,
+  "hdr": true,
+  "noise_color": 40.0,
+  "noise_luma": 50.0
+ }
+}

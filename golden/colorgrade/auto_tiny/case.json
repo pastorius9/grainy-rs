@@ -1,0 +1,9 @@
+{
+ "amount": 1.0,
+ "curves": null,
+ "image": "cg:tiny",
+ "kind": "auto",
+ "report": {
+  "status": "flat"
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "changes": {
+  "ca_blue": 20.0,
+  "ca_red": -15.0,
+  "distortion": 6.0,
+  "perspective_v": 25.0,
+  "transform_scale": 95.0
+ },
+ "error": null,
+ "function": "optical",
+ "input": {
+  "c": 3,
+  "h": 37,
+  "kind": "synth",
+  "seed": 8,
+  "w": 53
+ },
+ "use_crop": true
+}

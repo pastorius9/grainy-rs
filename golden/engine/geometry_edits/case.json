@@ -1,0 +1,39 @@
+{
+ "mean": [
+  0.45604332282945675,
+  0.461828232771591,
+  0.44877059885924747
+ ],
+ "original_size": [
+  960,
+  640
+ ],
+ "output": "sRGB",
+ "settings": {
+  "blacks": -20.0,
+  "contrast": 25.0,
+  "crop": [
+   0.1,
+   0.2,
+   0.8,
+   0.9
+  ],
+  "exposure": 0.8,
+  "grain": 30.0,
+  "highlights": -60.0,
+  "rotation": 3,
+  "shadows": 45.0,
+  "sharpen": 50.0,
+  "straighten": -2.0,
+  "vignette": -30.0,
+  "whites": 15.0
+ },
+ "shape": [
+  168,
+  112,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

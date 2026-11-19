@@ -1,0 +1,39 @@
+{
+ "error": null,
+ "frame": "garden",
+ "operations": [
+  {
+   "points": [
+    [
+     0.4,
+     0.6
+    ],
+    [
+     0.45,
+     0.62
+    ]
+   ],
+   "radius": 0.03,
+   "source": [
+    0.7,
+    0.3
+   ],
+   "type": "heal",
+   "version": 2
+  }
+ ],
+ "output_bits": "11381187767703699456",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "recorded": {
+  "distance": [],
+  "dust": [],
+  "inpaint": 3,
+  "sky": []
+ },
+ "shift": 0
+}

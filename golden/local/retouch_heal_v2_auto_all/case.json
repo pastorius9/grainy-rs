@@ -1,0 +1,33 @@
+{
+ "error": "ValueError: Maximum allowed dimension exceeded",
+ "frame": "noise",
+ "operations": [
+  {
+   "feather": 0,
+   "points": [
+    [
+     0.5,
+     0.5
+    ]
+   ],
+   "radius": 2.0,
+   "type": "heal",
+   "version": 2
+  }
+ ],
+ "recorded": {
+  "distance": [
+   {
+    "max": 3.4028234663852886e+38,
+    "shape": [
+     64,
+     96
+    ]
+   }
+  ],
+  "dust": [],
+  "inpaint": 0,
+  "sky": []
+ },
+ "shift": 0
+}

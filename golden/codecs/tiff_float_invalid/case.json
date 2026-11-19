@@ -1,0 +1,6 @@
+{
+ "error": "ValueError: 이미지에 유효하지 않은 부동소수점 픽셀이 있습니다.",
+ "file": "input.tif",
+ "max_size": null,
+ "working": "sRGB"
+}

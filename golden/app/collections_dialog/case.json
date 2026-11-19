@@ -1,0 +1,2220 @@
+{
+ "cases": [
+  {
+   "edits": {},
+   "initial_text": "{}",
+   "name": "empty",
+   "rules": {},
+   "rules_text": "{}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {},
+   "initial_text": "null",
+   "name": "empty_default_title",
+   "rules": {},
+   "rules_text": "{}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "camera": "EOS",
+    "extension": "JPG",
+    "folder": "roll 2",
+    "keywords": "Travel|Seoul",
+    "lens": "50mm",
+    "name": "  garden "
+   },
+   "initial_text": "{}",
+   "name": "fill_text_fields",
+   "rules": {
+    "camera": "EOS",
+    "extension": "JPG",
+    "folder": "roll 2",
+    "keywords": "Travel|Seoul",
+    "lens": "50mm",
+    "name": "garden"
+   },
+   "rules_text": "{\"name\": \"garden\", \"keywords\": \"Travel|Seoul\", \"folder\": \"roll 2\", \"camera\": \"EOS\", \"lens\": \"50mm\", \"extension\": \"JPG\"}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "flag": "-1",
+    "iso_max": "1_600",
+    "iso_min": "+100",
+    "rating_max": " 5 ",
+    "rating_min": "3"
+   },
+   "initial_text": "{}",
+   "name": "numbers",
+   "rules": {
+    "flag": -1,
+    "iso_max": 1600,
+    "iso_min": 100,
+    "rating_max": 5,
+    "rating_min": 3
+   },
+   "rules_text": "{\"rating_min\": 3, \"rating_max\": 5, \"flag\": -1, \"iso_min\": 100, \"iso_max\": 1600}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_from": "2024-01-02",
+    "date_to": "2025-12-31"
+   },
+   "initial_text": "{}",
+   "name": "dates",
+   "rules": {
+    "date_from": "2024-01-02",
+    "date_to": "2025-12-31"
+   },
+   "rules_text": "{\"date_from\": \"2024-01-02\", \"date_to\": \"2025-12-31\"}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "스마트 컬렉션 규칙",
+    "virtual": false
+   },
+   "title": "스마트 컬렉션 규칙"
+  },
+  {
+   "edits": {
+    "date_from": "2024-1-2",
+    "date_to": "2024-2-29"
+   },
+   "initial_text": "{}",
+   "name": "dates_unpadded",
+   "rules": {
+    "date_from": "2024-1-2",
+    "date_to": "2024-2-29"
+   },
+   "rules_text": "{\"date_from\": \"2024-1-2\", \"date_to\": \"2024-2-29\"}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "missing": true,
+    "orientation": "portrait",
+    "virtual": true
+   },
+   "initial_text": "{}",
+   "name": "checks_and_orientation",
+   "rules": {
+    "missing": true,
+    "orientation": "portrait",
+    "virtual": true
+   },
+   "rules_text": "{\"missing\": true, \"virtual\": true, \"orientation\": \"portrait\"}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "orientation": "square"
+   },
+   "initial_text": "{}",
+   "name": "orientation_square",
+   "rules": {
+    "orientation": "square"
+   },
+   "rules_text": "{\"orientation\": \"square\"}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "orientation": "landscape"
+   },
+   "initial_text": "{}",
+   "name": "orientation_landscape",
+   "rules": {
+    "orientation": "landscape"
+   },
+   "rules_text": "{\"orientation\": \"landscape\"}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "camera": "d",
+    "date_from": "2020-01-01",
+    "date_to": "2026-11-13",
+    "extension": "f",
+    "flag": "1",
+    "folder": "c",
+    "iso_max": "800",
+    "iso_min": "50",
+    "keywords": "b",
+    "label": "빨강",
+    "lens": "e",
+    "missing": true,
+    "name": "a",
+    "orientation": "landscape",
+    "rating_max": "4",
+    "rating_min": "1",
+    "virtual": true
+   },
+   "initial_text": "{}",
+   "name": "everything",
+   "rules": {
+    "camera": "d",
+    "date_from": "2020-01-01",
+    "date_to": "2026-11-13",
+    "extension": "f",
+    "flag": 1,
+    "folder": "c",
+    "iso_max": 800,
+    "iso_min": 50,
+    "keywords": "b",
+    "label": "빨강",
+    "lens": "e",
+    "missing": true,
+    "name": "a",
+    "orientation": "landscape",
+    "rating_max": 4,
+    "rating_min": 1,
+    "virtual": true
+   },
+   "rules_text": "{\"name\": \"a\", \"keywords\": \"b\", \"folder\": \"c\", \"camera\": \"d\", \"lens\": \"e\", \"extension\": \"f\", \"rating_min\": 1, \"rating_max\": 4, \"flag\": 1, \"label\": \"\\ube68\\uac15\", \"iso_min\": 50, \"iso_max\": 800, \"date_from\": \"2020-01-01\", \"date_to\": \"2026-11-13\", \"missing\": true, \"virtual\": true, \"orientation\": \"landscape\"}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {},
+   "initial_text": "{\"rating_min\": 4, \"label\": \"\\ube68\\uac15\", \"virtual\": true, \"orientation\": \"portrait\", \"name\": \"x\"}",
+   "name": "existing",
+   "rules": {
+    "label": "빨강",
+    "name": "x",
+    "orientation": "portrait",
+    "rating_min": 4,
+    "virtual": true
+   },
+   "rules_text": "{\"name\": \"x\", \"rating_min\": 4, \"label\": \"\\ube68\\uac15\", \"virtual\": true, \"orientation\": \"portrait\"}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "빨강",
+     "lens": "",
+     "name": "x",
+     "rating_max": "",
+     "rating_min": "4"
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "portrait",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "스마트 컬렉션 규칙",
+    "virtual": true
+   },
+   "title": "스마트 컬렉션 규칙"
+  },
+  {
+   "edits": {
+    "label": "",
+    "rating_min": "2"
+   },
+   "initial_text": "{\"rating_min\": 4, \"label\": \"\\ube68\\uac15\"}",
+   "name": "existing_edit",
+   "rules": {
+    "rating_min": 2
+   },
+   "rules_text": "{\"rating_min\": 2}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "빨강",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": "4"
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "스마트 컬렉션 규칙",
+    "virtual": false
+   },
+   "title": "스마트 컬렉션 규칙"
+  },
+  {
+   "edits": {},
+   "initial_text": "{\"rating_max\": 3, \"iso_min\": 200, \"flag\": -1}",
+   "name": "existing_numbers_as_text",
+   "rules": {
+    "flag": -1,
+    "iso_min": 200,
+    "rating_max": 3
+   },
+   "rules_text": "{\"rating_max\": 3, \"flag\": -1, \"iso_min\": 200}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "-1",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "200",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "3",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {},
+   "error": "invalid literal for int() with base 10: '2.5'",
+   "initial_text": "{\"rating_min\": 2.5, \"missing\": false}",
+   "name": "existing_float",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": "2.5"
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {},
+   "initial_text": "{\"camera\": null, \"lens\": [\"a\", \"b\"]}",
+   "name": "existing_none_and_list",
+   "rules": {
+    "camera": "None",
+    "lens": "['a', 'b']"
+   },
+   "rules_text": "{\"camera\": \"None\", \"lens\": \"['a', 'b']\"}",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "None",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "['a', 'b']",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "name": "garden"
+   },
+   "initial_text": "{\"_adobe_smart\": {\"combine\": \"intersect\", \"children\": [{\"criteria\": \"rating\", \"operation\": \">=\", \"value\": 3.0}, {\"combine\": \"union\", \"children\": [{\"criteria\": \"labelColor\", \"operation\": \"==\", \"value\": 1}, {\"criteria\": \"captureTime\", \"operation\": \"inLast\", \"value\": 7, \"value_units\": \"days\"}]}]}}",
+   "name": "complex_kept",
+   "rules": {
+    "_adobe_smart": {
+     "children": [
+      {
+       "criteria": "rating",
+       "operation": ">=",
+       "value": 3.0
+      },
+      {
+       "children": [
+        {
+         "criteria": "labelColor",
+         "operation": "==",
+         "value": 1
+        },
+        {
+         "criteria": "captureTime",
+         "operation": "inLast",
+         "value": 7,
+         "value_units": "days"
+        }
+       ],
+       "combine": "union"
+      }
+     ],
+     "combine": "intersect"
+    },
+    "name": "garden"
+   },
+   "rules_text": "{\"_adobe_smart\": {\"combine\": \"intersect\", \"children\": [{\"criteria\": \"rating\", \"operation\": \">=\", \"value\": 3.0}, {\"combine\": \"union\", \"children\": [{\"criteria\": \"labelColor\", \"operation\": \"==\", \"value\": 1}, {\"criteria\": \"captureTime\", \"operation\": \"inLast\", \"value\": 7, \"value_units\": \"days\"}]}]}, \"name\": \"garden\"}",
+   "state": {
+    "details": "아래 조건 모두\n  별점 · >= · 3.0\n  아래 조건 중 하나\n    색 라벨 · == · 1\n    촬영일 · inLast · 7 days",
+    "extra": {
+     "_adobe_smart": {
+      "children": [
+       {
+        "criteria": "rating",
+        "operation": ">=",
+        "value": 3.0
+       },
+       {
+        "children": [
+         {
+          "criteria": "labelColor",
+          "operation": "==",
+          "value": 1
+         },
+         {
+          "criteria": "captureTime",
+          "operation": "inLast",
+          "value": 7,
+          "value_units": "days"
+         }
+        ],
+        "combine": "union"
+       }
+      ],
+      "combine": "intersect"
+     }
+    },
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": true,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "스마트 컬렉션 규칙",
+    "virtual": false
+   },
+   "title": "스마트 컬렉션 규칙"
+  },
+  {
+   "edits": {
+    "keep_complex": false,
+    "name": "garden"
+   },
+   "initial_text": "{\"_adobe_smart\": {\"combine\": \"intersect\", \"children\": [{\"criteria\": \"rating\", \"operation\": \">=\", \"value\": 3.0}, {\"combine\": \"union\", \"children\": [{\"criteria\": \"labelColor\", \"operation\": \"==\", \"value\": 1}, {\"criteria\": \"captureTime\", \"operation\": \"inLast\", \"value\": 7, \"value_units\": \"days\"}]}]}}",
+   "name": "complex_dropped",
+   "rules": {
+    "name": "garden"
+   },
+   "rules_text": "{\"name\": \"garden\"}",
+   "state": {
+    "details": "아래 조건 모두\n  별점 · >= · 3.0\n  아래 조건 중 하나\n    색 라벨 · == · 1\n    촬영일 · inLast · 7 days",
+    "extra": {
+     "_adobe_smart": {
+      "children": [
+       {
+        "criteria": "rating",
+        "operation": ">=",
+        "value": 3.0
+       },
+       {
+        "children": [
+         {
+          "criteria": "labelColor",
+          "operation": "==",
+          "value": 1
+         },
+         {
+          "criteria": "captureTime",
+          "operation": "inLast",
+          "value": 7,
+          "value_units": "days"
+         }
+        ],
+        "combine": "union"
+       }
+      ],
+      "combine": "intersect"
+     }
+    },
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": true,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "스마트 컬렉션 규칙",
+    "virtual": false
+   },
+   "title": "스마트 컬렉션 규칙"
+  },
+  {
+   "edits": {
+    "camera": "EOS"
+   },
+   "initial_text": "{\"_adobe_smart\": {\"combine\": \"intersect\", \"children\": [{\"criteria\": \"rating\", \"operation\": \">=\", \"value\": 3.0}, {\"combine\": \"union\", \"children\": [{\"criteria\": \"labelColor\", \"operation\": \"==\", \"value\": 1}, {\"criteria\": \"captureTime\", \"operation\": \"inLast\", \"value\": 7, \"value_units\": \"days\"}]}]}, \"rating_min\": 2, \"virtual\": true}",
+   "name": "complex_with_fields",
+   "rules": {
+    "_adobe_smart": {
+     "children": [
+      {
+       "criteria": "rating",
+       "operation": ">=",
+       "value": 3.0
+      },
+      {
+       "children": [
+        {
+         "criteria": "labelColor",
+         "operation": "==",
+         "value": 1
+        },
+        {
+         "criteria": "captureTime",
+         "operation": "inLast",
+         "value": 7,
+         "value_units": "days"
+        }
+       ],
+       "combine": "union"
+      }
+     ],
+     "combine": "intersect"
+    },
+    "camera": "EOS",
+    "rating_min": 2,
+    "virtual": true
+   },
+   "rules_text": "{\"_adobe_smart\": {\"combine\": \"intersect\", \"children\": [{\"criteria\": \"rating\", \"operation\": \">=\", \"value\": 3.0}, {\"combine\": \"union\", \"children\": [{\"criteria\": \"labelColor\", \"operation\": \"==\", \"value\": 1}, {\"criteria\": \"captureTime\", \"operation\": \"inLast\", \"value\": 7, \"value_units\": \"days\"}]}]}, \"camera\": \"EOS\", \"rating_min\": 2, \"virtual\": true}",
+   "state": {
+    "details": "아래 조건 모두\n  별점 · >= · 3.0\n  아래 조건 중 하나\n    색 라벨 · == · 1\n    촬영일 · inLast · 7 days",
+    "extra": {
+     "_adobe_smart": {
+      "children": [
+       {
+        "criteria": "rating",
+        "operation": ">=",
+        "value": 3.0
+       },
+       {
+        "children": [
+         {
+          "criteria": "labelColor",
+          "operation": "==",
+          "value": 1
+         },
+         {
+          "criteria": "captureTime",
+          "operation": "inLast",
+          "value": 7,
+          "value_units": "days"
+         }
+        ],
+        "combine": "union"
+       }
+      ],
+      "combine": "intersect"
+     }
+    },
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": "2"
+    },
+    "keep_complex": true,
+    "keep_complex_shown": true,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "스마트 컬렉션 규칙",
+    "virtual": true
+   },
+   "title": "스마트 컬렉션 규칙"
+  },
+  {
+   "edits": {},
+   "initial_text": "{\"any\": [{\"rating_min\": 4}, {\"label\": \"\\ud30c\\ub791\"}], \"rating_max\": 5}",
+   "name": "any_all_rules",
+   "rules": {
+    "any": [
+     {
+      "rating_min": 4
+     },
+     {
+      "label": "파랑"
+     }
+    ],
+    "rating_max": 5
+   },
+   "rules_text": "{\"any\": [{\"rating_min\": 4}, {\"label\": \"\\ud30c\\ub791\"}], \"rating_max\": 5}",
+   "state": {
+    "details": "{\n  \"any\": [\n    {\n      \"rating_min\": 4\n    },\n    {\n      \"label\": \"파랑\"\n    }\n  ]\n}",
+    "extra": {
+     "any": [
+      {
+       "rating_min": 4
+      },
+      {
+       "label": "파랑"
+      }
+     ]
+    },
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "5",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": true,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "name": "k"
+   },
+   "initial_text": "{\"foo\": 1, \"bar\": {\"x\": [1, 2]}}",
+   "name": "other_keys",
+   "rules": {
+    "bar": {
+     "x": [
+      1,
+      2
+     ]
+    },
+    "foo": 1,
+    "name": "k"
+   },
+   "rules_text": "{\"foo\": 1, \"bar\": {\"x\": [1, 2]}, \"name\": \"k\"}",
+   "state": {
+    "details": "{\n  \"foo\": 1,\n  \"bar\": {\n    \"x\": [\n      1,\n      2\n    ]\n  }\n}",
+    "extra": {
+     "bar": {
+      "x": [
+       1,
+       2
+      ]
+     },
+     "foo": 1
+    },
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": true,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "keep_complex": false
+   },
+   "initial_text": "{\"foo\": 1}",
+   "name": "other_keys_dropped",
+   "rules": {},
+   "rules_text": "{}",
+   "state": {
+    "details": "{\n  \"foo\": 1\n}",
+    "extra": {
+     "foo": 1
+    },
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": true,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "rating_min": "abc"
+   },
+   "error": "invalid literal for int() with base 10: 'abc'",
+   "initial_text": "{}",
+   "name": "error_int",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "iso_min": "1.5"
+   },
+   "error": "invalid literal for int() with base 10: '1.5'",
+   "initial_text": "{}",
+   "name": "error_int_float",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "flag": "1 2"
+   },
+   "error": "invalid literal for int() with base 10: '1 2'",
+   "initial_text": "{}",
+   "name": "error_int_blank_inside",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "rating_max": "0x10"
+   },
+   "error": "invalid literal for int() with base 10: '0x10'",
+   "initial_text": "{}",
+   "name": "error_int_hex",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "iso_max": "x'y",
+    "rating_min": "1"
+   },
+   "error": "invalid literal for int() with base 10: \"x'y\"",
+   "initial_text": "{}",
+   "name": "error_int_second",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_from": "2024/01/02"
+   },
+   "error": "time data '2024/01/02' does not match format '%Y-%m-%d'",
+   "initial_text": "{}",
+   "name": "error_date_format",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_from": "2024-01-02 10:00"
+   },
+   "error": "unconverted data remains:  10:00",
+   "initial_text": "{}",
+   "name": "error_date_trailing",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_to": "2024-01-021"
+   },
+   "error": "unconverted data remains: 1",
+   "initial_text": "{}",
+   "name": "error_date_trailing_digits",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_from": "2024-13-01"
+   },
+   "error": "time data '2024-13-01' does not match format '%Y-%m-%d'",
+   "initial_text": "{}",
+   "name": "error_date_month",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_to": "2023-02-30"
+   },
+   "error": "day is out of range for month",
+   "initial_text": "{}",
+   "name": "error_date_day",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_to": "2023-02-29"
+   },
+   "error": "day is out of range for month",
+   "initial_text": "{}",
+   "name": "error_date_leap",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_from": "0000-01-01"
+   },
+   "error": "year 0 is out of range",
+   "initial_text": "{}",
+   "name": "error_date_year_zero",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_from": "24-01-01"
+   },
+   "error": "time data '24-01-01' does not match format '%Y-%m-%d'",
+   "initial_text": "{}",
+   "name": "error_date_short_year",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_to": "tomorrow"
+   },
+   "error": "time data 'tomorrow' does not match format '%Y-%m-%d'",
+   "initial_text": "{}",
+   "name": "error_date_word",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "edits": {
+    "date_from": "x",
+    "flag": "y"
+   },
+   "error": "invalid literal for int() with base 10: 'y'",
+   "initial_text": "{}",
+   "name": "error_int_before_date",
+   "state": {
+    "details": null,
+    "extra": {},
+    "fields": {
+     "camera": "",
+     "date_from": "",
+     "date_to": "",
+     "extension": "",
+     "flag": "",
+     "folder": "",
+     "iso_max": "",
+     "iso_min": "",
+     "keywords": "",
+     "label": "",
+     "lens": "",
+     "name": "",
+     "rating_max": "",
+     "rating_min": ""
+    },
+    "keep_complex": true,
+    "keep_complex_shown": false,
+    "missing": false,
+    "orientation": "",
+    "orientation_items": [
+     [
+      "전체",
+      ""
+     ],
+     [
+      "가로",
+      "landscape"
+     ],
+     [
+      "세로",
+      "portrait"
+     ],
+     [
+      "정사각",
+      "square"
+     ]
+    ],
+    "title": "상세 필터",
+    "virtual": false
+   },
+   "title": "상세 필터"
+  },
+  {
+   "constructor_error": "'criteria'",
+   "edits": {},
+   "initial_text": "{\"_adobe_smart\": {\"combine\": \"intersect\", \"children\": [{\"operation\": \"==\"}]}}",
+   "name": "error_describe",
+   "title": "스마트 컬렉션 규칙"
+  },
+  {
+   "constructor_error": "argument of type 'int' is not iterable",
+   "edits": {},
+   "initial_text": "{\"_adobe_smart\": 5}",
+   "name": "error_describe_type",
+   "title": "스마트 컬렉션 규칙"
+  }
+ ],
+ "fields": [
+  "name",
+  "keywords",
+  "folder",
+  "camera",
+  "lens",
+  "extension",
+  "rating_min",
+  "rating_max",
+  "flag",
+  "label",
+  "iso_min",
+  "iso_max",
+  "date_from",
+  "date_to"
+ ]
+}

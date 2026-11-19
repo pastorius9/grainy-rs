@@ -1,0 +1,24 @@
+{
+ "cases": [
+  "tier2_inpaint",
+  "tier2_distance",
+  "tier2_components",
+  "tier2_flood",
+  "tier2_contours",
+  "tier2_polygon",
+  "tier2_hull",
+  "tier2_drawing",
+  "tier2_moments",
+  "tier2_absdiff",
+  "tier2_laplacian",
+  "tier2_bilateral",
+  "tier2_template",
+  "tier2_lines"
+ ],
+ "cpu_features": "SSE SSE2 SSE3 *SSE4.1 *SSE4.2 *AVX *FP16 *AVX2 *AVX512-SKX?",
+ "ipp": true,
+ "numpy": "2.5.3",
+ "opencl": false,
+ "opencv": "5.0.0",
+ "optimized": true
+}

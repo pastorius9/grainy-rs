@@ -1,0 +1,217 @@
+[
+ {
+  "exact_pixels": true,
+  "file": "export_color_Png.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_color_Png16.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_color_Tiff8.tif",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_color_Tiff16.tif",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_color_Jpeg.jpg",
+  "lossless": false,
+  "max_sample_error": 16.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_color_Avif.avif",
+  "lossless": false,
+  "max_sample_error": 14.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_color_JpegXl.jxl",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_gray_Png.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_gray_Png16.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_gray_Tiff8.tif",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_gray_Tiff16.tif",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_gray_Jpeg.jpg",
+  "lossless": false,
+  "max_sample_error": 7.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_gray_Avif.avif",
+  "lossless": false,
+  "max_sample_error": 6.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_gray_JpegXl.jxl",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_plain_Png.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_plain_Png16.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_plain_Tiff8.tif",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_plain_Tiff16.tif",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_plain_Jpeg.jpg",
+  "lossless": false,
+  "max_sample_error": 17.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_plain_Avif.avif",
+  "lossless": false,
+  "max_sample_error": 18.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_plain_JpegXl.jxl",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_cms_ProPhoto_sRGB.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_cms_sRGB_Adobe_RGB.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_cms_ProPhoto_Display_P3.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_resized.png",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": true,
+  "file": "export_hdr.tif",
+  "lossless": true,
+  "max_sample_error": 0.0
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_color_quality_0.jpg",
+  "lossless": false,
+  "max_sample_error": 248.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_color_quality_1.jpg",
+  "lossless": false,
+  "max_sample_error": 248.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_color_quality_50.jpg",
+  "lossless": false,
+  "max_sample_error": 203.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_color_quality_100.jpg",
+  "lossless": false,
+  "max_sample_error": 3.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_tiny_quality_0.jpg",
+  "lossless": false,
+  "max_sample_error": 26.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_tiny_quality_1.jpg",
+  "lossless": false,
+  "max_sample_error": 26.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_tiny_quality_50.jpg",
+  "lossless": false,
+  "max_sample_error": 2.0,
+  "pillow_file_identical": true
+ },
+ {
+  "exact_pixels": false,
+  "file": "export_tiny_quality_100.jpg",
+  "lossless": false,
+  "max_sample_error": 1.0,
+  "pillow_file_identical": true
+ }
+]

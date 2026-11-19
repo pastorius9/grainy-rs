@@ -1,0 +1,200 @@
+//! Port of `luma/engine.py develop(cache=...)` and `native_gpu.develop_resident`.
+//! CPU exports are unchanged. One preview worker owns this cache and its GPU. Source tokens have the same
+//! contract as `develop_cached`: change the token whenever source pixels or camera calibration change.
+
+use std::sync::Arc;
+
+use grainy_core::Image;
+use grainy_gpu::{CpuStage, Gpu, Resident, StageRuns};
+use serde_json::{Map, Value};
+
+use crate::{
+    pixel_scale, settings_key, stages, working_settings, DevelopmentCache, Externals, Frame, Options, Output, Source,
+    COLOR_KEYS, DETAIL_KEYS, GEOMETRY_KEYS, RAW_KEYS, TONE_KEYS,
+};
+
+#[cfg(test)]
+mod tests;
+
+/// Errors of the GPU branch of `engine.develop`; device errors let the worker retry this request on the CPU.
+#[derive(Debug, thiserror::Error)]
+pub enum Error {
+    /// A CPU prefix, fallback or output operation failed.
+    #[error(transparent)]
+    Engine(#[from] crate::Error),
+    /// GPU initialization, input, resource or device failure.
+    #[error(transparent)]
+    Gpu(#[from] grainy_gpu::Error),
+}
+
+/// Port of `engine.develop`'s worker-owned host cache and `native_gpu` resident slots.
+pub struct GpuCache {
+    cpu: DevelopmentCache,
+    resident: Option<(String, Resident)>,
+    fallback: Option<CpuStage>,
+}
+
+impl Default for GpuCache {
+    fn default() -> Self {
+        Self::new(DevelopmentCache::growing(256 << 20, 4.0, Some(1536 << 20)))
+    }
+}
+
+impl GpuCache {
+    /// Port of `DevelopmentCache` construction with an explicit host-memory budget.
+    pub fn new(cpu: DevelopmentCache) -> Self {
+        Self { cpu, resident: None, fallback: None }
+    }
+
+    /// Port of resident dispatch diagnostics (counts for the currently uploaded geometry).
+    pub fn runs(&self) -> StageRuns {
+        self.resident.as_ref().map_or(StageRuns::default(), |(_, r)| r.runs())
+    }
+
+    /// First CPU stage of the last successful `develop`, if a setting needs a fallback.
+    pub fn fallback(&self) -> Option<CpuStage> {
+        self.fallback
+    }
+
+    /// Host cache counters for the preview diagnostics of `engine.develop`.
+    pub fn host_cache(&self) -> &DevelopmentCache {
+        &self.cpu
+    }
+}
+
+/// Port of `engine.develop` with cached CPU geometry and resident GPU tone/colour/detail/grain.
+/// Unsupported stages and their successors use the CPU. Masks always follow detail/grain and precede clip.
+/// Callers retry with `develop_cached` on a GPU error; neither export nor the CPU reference is changed.
+pub fn develop_gpu_cached<'a>(
+    source: impl Into<Source<'a>>,
+    settings: &Map<String, Value>,
+    options: &Options<'_>,
+    gpu: &Gpu,
+    cache: &mut GpuCache,
+    token: u64,
+) -> Result<Image, Error> {
+    let source = source.into();
+    if source.pixels().dim().2 != 3 {
+        return Err(crate::Error::Shape(source.pixels().shape().to_vec()).into());
+    }
+    let s = working_settings(settings);
+    let scale = pixel_scale(source.pixels(), options.original_size)?;
+    cache.cpu.bind(token, source.pixels().len() * std::mem::size_of::<f32>());
+    // LittleCMS uses quantized tables: a GPU ULP can cross a table boundary and exceed the preview's
+    // 2e-5 tolerance after conversion. Keep a canonical CPU input for nonidentity output transforms.
+    let cms_output = !matches!(options.output, Output::Working)
+        && (s.str("working_space") == "ProPhoto" || !matches!(options.output, Output::Named("sRGB")));
+    // HDR needs the CPU colour/detail tail. Keep its extended-range result bit-exact throughout too.
+    if s.bool("hdr") || cms_output {
+        cache.resident = None;
+        cache.fallback = Some(CpuStage::Tone);
+        return Ok(crate::develop_cached(source, settings, options, &mut cache.cpu, token)?);
+    }
+    let profile_lens = if options.externals.lens.is_none() && s.bool("lensfun_enabled") && s.bool("lensfun") {
+        Some(grainy_lens::ProfileModel::from_settings(&s).map_err(crate::Error::from)?)
+    } else {
+        None
+    };
+    let externals = Externals {
+        lens: options.externals.lens.or(profile_lens.as_ref().map(|model| model as &dyn grainy_geometry::LensModel)),
+        ..options.externals
+    };
+    if let Some(missing) = stages::pending(&s, &externals) {
+        return Err(crate::Error::Pending(missing).into());
+    }
+    let usable = source.pixels().len() * 8 <= cache.cpu.max_bytes();
+    let version = cache.cpu.version();
+    let mut host = usable.then_some(&mut cache.cpu);
+    let (raw_key, camera_linear) = match source {
+        Source::Camera(camera) => {
+            let key = settings_key(&s, &RAW_KEYS);
+            let image = crate::stage(&mut host, "raw", &key, || Ok(grainy_raw::rawcolor::develop_camera(camera, &s)?))?;
+            (key, Frame::Stage(image))
+        }
+        Source::Linear(image) => ("-".to_owned(), Frame::Source(image)),
+    };
+    let negative_key =
+        s.bool("negative").then(|| format!("{raw_key}|{}", settings_key(&s, &grainy_film::negative::KEYS)));
+    let linear = match &negative_key {
+        Some(key) => Frame::Stage(crate::stage(&mut host, "negative", key, || {
+            Ok(grainy_film::negative::apply(&camera_linear, &s))
+        })?),
+        None => camera_linear,
+    };
+    let geometry_key = format!(
+        "{raw_key}|{}|{:?}|{}",
+        negative_key.as_deref().unwrap_or("-"),
+        options.use_crop,
+        settings_key(&s, &GEOMETRY_KEYS)
+    );
+    let moved = match host.as_deref_mut().and_then(|host| host.lookup("geometry", &geometry_key)) {
+        Some(image) => Some(image),
+        None => stages::geometry(&linear, &s, options.use_crop, &externals)?.map(|image| match host.as_deref_mut() {
+            Some(host) => host.store("geometry", &geometry_key, image),
+            None => Arc::new(image),
+        }),
+    };
+    let frame = moved.as_deref().unwrap_or(&linear);
+    let resident_key = format!("{token}|{version}|{:?}|{geometry_key}", frame.dim());
+    if cache.resident.as_ref().is_none_or(|(key, _)| *key != resident_key) {
+        match &mut cache.resident {
+            Some((key, resident)) => {
+                resident.replace(gpu, frame)?;
+                *key = resident_key;
+            }
+            slot @ None => *slot = Some((resident_key, Resident::new(gpu, frame)?)),
+        }
+    }
+    let masks = s.value("masks").as_array().is_some_and(|layers| !layers.is_empty());
+    let resident = &mut cache.resident.as_mut().ok_or_else(|| grainy_gpu::Error::Device("missing resident".into()))?.1;
+    let result = gpu.develop_resident_prefix(resident, &s, scale, !masks)?;
+    cache.fallback = result.fallback;
+    let tone_key = format!("gpu|{geometry_key}|{}", settings_key(&s, &TONE_KEYS));
+    let color_key = format!("{tone_key}|{}", settings_key(&s, &COLOR_KEYS));
+    let detail_key = format!("{color_key}|{scale}|{}", settings_key(&s, &DETAIL_KEYS));
+    // A CPU suffix gets the canonical CPU prefix too: nonlinear colour/detail operations can amplify an
+    // upstream GPU ULP (all_garden measured 1.12e-4). Cache that replay independently, retaining GPU slots
+    // for a later supported edit. Thus every unsupported path is bit-exact, not merely a CPU operation on
+    // slightly different input pixels. No GPU readback is needed at a fallback boundary.
+    let a = match result.fallback {
+        Some(_) => {
+            let toned = crate::stage(&mut host, "tone", &tone_key, || crate::tone(frame, &s))?;
+            let colored =
+                crate::stage(&mut host, "color", &color_key, || Ok(grainy_colorgrade::develop_color(&toned, &s)?))?;
+            crate::stage(&mut host, "detail", &detail_key, || Ok(grainy_detail::develop_detail(&colored, &s, scale)?))?
+        }
+        None => {
+            if let Some(host) = host.as_deref_mut() {
+                host.discard(&["tone", "color", "detail"]);
+            }
+            let readback = || -> Result<Image, Error> {
+                Ok(gpu.readback(
+                    result.frame.as_ref().ok_or_else(|| grainy_gpu::Error::Device("missing finish".into()))?,
+                )?)
+            };
+            // The oracle stores the unclipped detail/grain readback when resident_layers is unavailable.
+            // Changing only mask geometry or adjustments then needs neither a dispatch nor another readback.
+            match host.as_deref_mut().filter(|_| masks) {
+                Some(host) => host.evaluate("gpu-mask-detail", &detail_key, readback)?,
+                None => Arc::new(readback()?),
+            }
+        }
+    };
+    let a = Arc::try_unwrap(a).unwrap_or_else(|image| (*image).clone());
+    let colour_source = if stages::needs_colour_source(&s) {
+        let key = format!("{raw_key}|{}", negative_key.as_deref().unwrap_or("-"));
+        Some(crate::stage(&mut host, "mask-source", &key, || Ok(grainy_color::to_srgb(&linear)))?)
+    } else {
+        None
+    };
+    let (height, width, _) = source.pixels().dim();
+    let mut a = stages::local(a, (height, width), colour_source.as_deref(), &s, options.use_crop, scale, &externals)?;
+    grainy_color::clip01_in_place(&mut a);
+    let destination = match options.output {
+        Output::Working => return Ok(a),
+        Output::Named("sRGB") if s.str("working_space") != "ProPhoto" => return Ok(a),
+        Output::Named(name) => grainy_cms::Destination::Named(name),
+        Output::Icc(profile) => grainy_cms::Destination::Icc(profile),
+    };
+    Ok(grainy_cms::output_rgb(&a, s.str("working_space"), destination).map_err(crate::Error::from)?)
+}

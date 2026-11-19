@@ -1,0 +1,12 @@
+{
+ "imagecodecs": "2026.8.16",
+ "libjpeg_turbo": "3.1.4.1",
+ "numpy": "2.5.3",
+ "oracle_sources": {
+  "colorio.py": "ca4e6f628bf953dae27759a8c6e56deba85269f5aea6db81fedc6b6fcb9437e3",
+  "engine.py": "2a3b5f3d0c1070bc6044c5782a596fc6b33977e73f2c410ebc28957b1ca5f3fb",
+  "rasterio.py": "b7baa36e6ff748bca05b01302c2bffd833e1f12ea589d0915b50f77a8c3c33ad"
+ },
+ "pillow": "12.3.0",
+ "tifffile": "2026.9.15"
+}

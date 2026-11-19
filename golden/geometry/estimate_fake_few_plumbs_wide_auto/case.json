@@ -1,0 +1,35 @@
+{
+ "detected": true,
+ "error": null,
+ "height": 400,
+ "lines_none": false,
+ "mode": "auto",
+ "result": {
+  "algorithm": "lines-v1",
+  "confidence": 1.0,
+  "crop_scale": 1.0189426931529304,
+  "inliers": 0,
+  "lines": 8,
+  "matrix": [
+   [
+    0.9999281034549271,
+    0.007987433869835253,
+    -0.0039577686623811816
+   ],
+   [
+    -0.018001766697010438,
+    0.9999281034549271,
+    0.009036831621041665
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "mode": "level",
+  "requested_mode": "auto",
+  "rotation": 0.6870593321729856
+ },
+ "width": 600
+}

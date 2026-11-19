@@ -1,0 +1,14 @@
+{
+ "amount": 1.0,
+ "curves": null,
+ "image": "std:colours",
+ "kind": "auto",
+ "report": {
+  "casts": [
+   null,
+   null,
+   null
+  ],
+  "status": "flat"
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "height": 400,
+ "results": {
+  "horizon_roll": {
+   "error": {
+    "message": "뚜렷한 수평 기준선을 찾지 못했습니다. 아래 수평 슬라이더로 조절해 주세요.",
+    "type": "AlignmentError"
+   },
+   "value": null
+  },
+  "level": {
+   "error": {
+    "message": "믿을 만한 수평·수직 기준선을 찾지 못했습니다. 아래 수평 슬라이더로 조절해 주세요.",
+    "type": "AlignmentError"
+   },
+   "value": null
+  },
+  "plumb_rolls": {
+   "error": null,
+   "value": [
+    {
+     "angle": 1.1181300542221777,
+     "both": false,
+     "centred": false,
+     "count": 8,
+     "heights": 4.161423882157289,
+     "score": 648.2922710384474,
+     "share": 1.0
+    }
+   ]
+  },
+  "roll": {
+   "error": null,
+   "value": [
+    0.8873038147574448,
+    1.0
+   ]
+  },
+  "vanishing_h": {
+   "error": {
+    "message": "화면의 여러 위치에서 기준선이 필요합니다.",
+    "type": "AlignmentError"
+   },
+   "value": null
+  },
+  "vanishing_v": {
+   "error": null,
+   "value": [
+    [
+     0.030142213218847323,
+     -0.999439161939766,
+     -0.014587959535443118
+    ],
+    8,
+    1.0
+   ]
+  },
+  "wide_roll": {
+   "error": null,
+   "value": null
+  }
+ },
+ "width": 600
+}

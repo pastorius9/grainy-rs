@@ -1,0 +1,79 @@
+{
+ "cases": [
+  {
+   "array": "smooth_1",
+   "name": "smooth",
+   "strength": 1
+  },
+  {
+   "array": "smooth_50",
+   "name": "smooth",
+   "strength": 50
+  },
+  {
+   "array": "smooth_100",
+   "name": "smooth",
+   "strength": 100
+  },
+  {
+   "array": "grain_1",
+   "name": "grain",
+   "strength": 1
+  },
+  {
+   "array": "grain_50",
+   "name": "grain",
+   "strength": 50
+  },
+  {
+   "array": "grain_100",
+   "name": "grain",
+   "strength": 100
+  },
+  {
+   "array": "pattern_1",
+   "name": "pattern",
+   "strength": 1
+  },
+  {
+   "array": "pattern_50",
+   "name": "pattern",
+   "strength": 50
+  },
+  {
+   "array": "pattern_100",
+   "name": "pattern",
+   "strength": 100
+  },
+  {
+   "array": "constant_1",
+   "name": "constant",
+   "strength": 1
+  },
+  {
+   "array": "constant_50",
+   "name": "constant",
+   "strength": 50
+  },
+  {
+   "array": "constant_100",
+   "name": "constant",
+   "strength": 100
+  },
+  {
+   "array": "standard_wide_1",
+   "name": "standard_wide",
+   "strength": 1
+  },
+  {
+   "array": "standard_wide_50",
+   "name": "standard_wide",
+   "strength": 50
+  },
+  {
+   "array": "standard_wide_100",
+   "name": "standard_wide",
+   "strength": 100
+  }
+ ]
+}

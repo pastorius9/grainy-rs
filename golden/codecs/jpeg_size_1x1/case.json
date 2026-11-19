@@ -1,0 +1,36 @@
+{
+ "file": "input.jpg",
+ "jpeg_drafts": [
+  {
+   "array": "jpeg_pixels_0",
+   "height": 1,
+   "max_size": null,
+   "width": 1
+  },
+  {
+   "array": "jpeg_pixels_1",
+   "height": 1,
+   "max_size": 1,
+   "width": 1
+  }
+ ],
+ "jpeg_full_size": [
+  1,
+  1
+ ],
+ "max_size": null,
+ "metadata": {
+  "bit_depth": 8,
+  "decoder": "JPG · 8-bit",
+  "filename": "input.jpg",
+  "format": "JPG",
+  "height": 1,
+  "input_profile": "태그 없는 sRGB",
+  "size_mb": 0.0,
+  "source_orientation": 1,
+  "width": 1,
+  "working_space": "sRGB"
+ },
+ "read_metadata": {},
+ "working": "sRGB"
+}

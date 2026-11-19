@@ -1,0 +1,7 @@
+{
+ "dtype": "float32",
+ "op": "median",
+ "output_dtype": "float32",
+ "size": 3,
+ "tolerance": 0.0
+}

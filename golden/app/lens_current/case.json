@@ -1,0 +1,699 @@
+{
+ "changes": {},
+ "info": {
+  "aperture": 4,
+  "camera": "Canon EOS 5D Mark II",
+  "focal_length": 100,
+  "lens": "Canon EF 70-200mm f/2.8L IS USM",
+  "make": "Canon",
+  "source_orientation": 6,
+  "subject_distance": 3.5
+ },
+ "profiles": [
+  {
+   "aperture": 4.0,
+   "camera": "Canon EOS 5D Mark II",
+   "capabilities": [
+    "distortion",
+    "vignette"
+   ],
+   "crop": 1.0,
+   "database_file": "slr-canon.xml",
+   "distance": 3.5,
+   "focal": 100.0,
+   "library_version": [
+    0,
+    3,
+    4,
+    0
+   ],
+   "license": "CC BY-SA 3.0",
+   "maker": "Canon",
+   "name": "Canon EF 70-200mm f/2.8L IS USM",
+   "orientation": 6,
+   "source": "Lensfun",
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Canon</maker>\n        <model>Canon EF 70-200mm f/2.8L IS USM</model>\n        <mount>Canon EF</mount>\n        <cropfactor>1</cropfactor>\n        <calibration>\n            <distortion model=\"poly3\" focal=\"70\" k1=\"-0.009135\" />\n            <distortion model=\"poly3\" focal=\"73\" k1=\"-0.008769\" />\n            <distortion model=\"poly3\" focal=\"78\" k1=\"-0.006965\" />\n            <distortion model=\"poly3\" focal=\"80\" k1=\"-0.005047\" />\n            <distortion model=\"poly3\" focal=\"90\" k1=\"-0.000959\" />\n            <distortion model=\"poly3\" focal=\"100\" k1=\"0.00029\" />\n            <distortion model=\"poly3\" focal=\"115\" k1=\"0.002667\" />\n            <distortion model=\"poly3\" focal=\"130\" k1=\"0.004312\" />\n            <distortion model=\"poly3\" focal=\"145\" k1=\"0.004809\" />\n            <distortion model=\"poly3\" focal=\"160\" k1=\"0.005218\" />\n            <distortion model=\"poly3\" focal=\"170\" k1=\"0.006153\" />\n            <distortion model=\"poly3\" focal=\"185\" k1=\"0.006109\" />\n            <distortion model=\"poly3\" focal=\"200\" k1=\"0.008631\" />\n            <!-- Taken with 5D III upload 514b8f #317 -->\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"10\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"1000\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"10\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"1000\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"10\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"1000\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"10\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"1000\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"10\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"1000\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"10\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"1000\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"10\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"10\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"1000\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"10\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"1000\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"10\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"1000\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"10\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"1000\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"10\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"10\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"1000\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"10\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"1000\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"10\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"1000\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"10\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"1000\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"10\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"1000\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"10\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"1000\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"10\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"1000\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  {
+   "aperture": 2.8,
+   "camera": "Canon EOS 5D Mark II",
+   "capabilities": [
+    "distortion",
+    "vignette"
+   ],
+   "crop": 1.0,
+   "database_file": "slr-canon.xml",
+   "distance": 3.5,
+   "focal": 100.0,
+   "library_version": [
+    0,
+    3,
+    4,
+    0
+   ],
+   "license": "CC BY-SA 3.0",
+   "maker": "Canon",
+   "name": "Canon EF 70-200mm f/2.8L IS USM",
+   "orientation": 6,
+   "source": "Lensfun",
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Canon</maker>\n        <model>Canon EF 70-200mm f/2.8L IS USM</model>\n        <mount>Canon EF</mount>\n        <cropfactor>1</cropfactor>\n        <calibration>\n            <distortion model=\"poly3\" focal=\"70\" k1=\"-0.009135\" />\n            <distortion model=\"poly3\" focal=\"73\" k1=\"-0.008769\" />\n            <distortion model=\"poly3\" focal=\"78\" k1=\"-0.006965\" />\n            <distortion model=\"poly3\" focal=\"80\" k1=\"-0.005047\" />\n            <distortion model=\"poly3\" focal=\"90\" k1=\"-0.000959\" />\n            <distortion model=\"poly3\" focal=\"100\" k1=\"0.00029\" />\n            <distortion model=\"poly3\" focal=\"115\" k1=\"0.002667\" />\n            <distortion model=\"poly3\" focal=\"130\" k1=\"0.004312\" />\n            <distortion model=\"poly3\" focal=\"145\" k1=\"0.004809\" />\n            <distortion model=\"poly3\" focal=\"160\" k1=\"0.005218\" />\n            <distortion model=\"poly3\" focal=\"170\" k1=\"0.006153\" />\n            <distortion model=\"poly3\" focal=\"185\" k1=\"0.006109\" />\n            <distortion model=\"poly3\" focal=\"200\" k1=\"0.008631\" />\n            <!-- Taken with 5D III upload 514b8f #317 -->\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"10\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"1000\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"10\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"1000\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"10\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"1000\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"10\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"1000\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"10\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"1000\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"10\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"1000\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"10\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"10\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"1000\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"10\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"1000\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"10\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"1000\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"10\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"1000\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"10\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"10\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"1000\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"10\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"1000\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"10\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"1000\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"10\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"1000\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"10\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"1000\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"10\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"1000\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"10\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"1000\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  {
+   "aperture": 4.0,
+   "camera": "Canon EOS 5D Mark II",
+   "capabilities": [
+    "distortion",
+    "vignette"
+   ],
+   "crop": 1.0,
+   "database_file": "slr-canon.xml",
+   "distance": 3.5,
+   "focal": 100.0,
+   "library_version": [
+    0,
+    3,
+    4,
+    0
+   ],
+   "license": "CC BY-SA 3.0",
+   "maker": "Canon",
+   "name": "Canon EF 70-200mm f/2.8L IS USM (saved)",
+   "orientation": 1,
+   "source": "Lensfun",
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Canon</maker>\n        <model>Canon EF 70-200mm f/2.8L IS USM (saved)</model>\n        <mount>Canon EF</mount>\n        <cropfactor>1</cropfactor>\n        <calibration>\n            <distortion model=\"poly3\" focal=\"70\" k1=\"-0.009135\" />\n            <distortion model=\"poly3\" focal=\"73\" k1=\"-0.008769\" />\n            <distortion model=\"poly3\" focal=\"78\" k1=\"-0.006965\" />\n            <distortion model=\"poly3\" focal=\"80\" k1=\"-0.005047\" />\n            <distortion model=\"poly3\" focal=\"90\" k1=\"-0.000959\" />\n            <distortion model=\"poly3\" focal=\"100\" k1=\"0.00029\" />\n            <distortion model=\"poly3\" focal=\"115\" k1=\"0.002667\" />\n            <distortion model=\"poly3\" focal=\"130\" k1=\"0.004312\" />\n            <distortion model=\"poly3\" focal=\"145\" k1=\"0.004809\" />\n            <distortion model=\"poly3\" focal=\"160\" k1=\"0.005218\" />\n            <distortion model=\"poly3\" focal=\"170\" k1=\"0.006153\" />\n            <distortion model=\"poly3\" focal=\"185\" k1=\"0.006109\" />\n            <distortion model=\"poly3\" focal=\"200\" k1=\"0.008631\" />\n            <!-- Taken with 5D III upload 514b8f #317 -->\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"10\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"1000\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"10\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"1000\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"10\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"1000\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"10\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"1000\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"10\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"1000\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"10\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"1000\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"10\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"10\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"1000\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"10\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"1000\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"10\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"1000\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"10\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"1000\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"10\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"10\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"1000\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"10\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"1000\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"10\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"1000\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"10\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"1000\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"10\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"1000\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"10\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"1000\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"10\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"1000\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  {
+   "aperture": 4.0,
+   "camera": "Canon EOS 5D Mark II",
+   "capabilities": [
+    "distortion",
+    "vignette"
+   ],
+   "crop": 1.0,
+   "database_file": "slr-canon.xml",
+   "distance": 3.5,
+   "focal": 100.0,
+   "library_version": [
+    0,
+    3,
+    4,
+    0
+   ],
+   "license": "CC BY-SA 3.0",
+   "maker": "Canon",
+   "name": "Canon EF 70-200mm f/2.8L IS USM (saved)",
+   "orientation": 6,
+   "source": "Lensfun",
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Canon</maker>\n        <model>Canon EF 70-200mm f/2.8L IS USM (saved)</model>\n        <mount>Canon EF</mount>\n        <cropfactor>1</cropfactor>\n        <calibration>\n            <distortion model=\"poly3\" focal=\"70\" k1=\"-0.009135\" />\n            <distortion model=\"poly3\" focal=\"73\" k1=\"-0.008769\" />\n            <distortion model=\"poly3\" focal=\"78\" k1=\"-0.006965\" />\n            <distortion model=\"poly3\" focal=\"80\" k1=\"-0.005047\" />\n            <distortion model=\"poly3\" focal=\"90\" k1=\"-0.000959\" />\n            <distortion model=\"poly3\" focal=\"100\" k1=\"0.00029\" />\n            <distortion model=\"poly3\" focal=\"115\" k1=\"0.002667\" />\n            <distortion model=\"poly3\" focal=\"130\" k1=\"0.004312\" />\n            <distortion model=\"poly3\" focal=\"145\" k1=\"0.004809\" />\n            <distortion model=\"poly3\" focal=\"160\" k1=\"0.005218\" />\n            <distortion model=\"poly3\" focal=\"170\" k1=\"0.006153\" />\n            <distortion model=\"poly3\" focal=\"185\" k1=\"0.006109\" />\n            <distortion model=\"poly3\" focal=\"200\" k1=\"0.008631\" />\n            <!-- Taken with 5D III upload 514b8f #317 -->\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4832\" k2=\"-0.0322\" k3=\"-0.0327\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"10\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"4\" distance=\"1000\" k1=\"-0.0712\" k2=\"-0.1774\" k3=\"-0.0917\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2610\" k2=\"0.3755\" k3=\"-0.3360\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"10\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"8\" distance=\"1000\" k1=\"-0.1759\" k2=\"0.0064\" k3=\"0.0340\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"10\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"70\" aperture=\"32\" distance=\"1000\" k1=\"-0.1925\" k2=\"0.0263\" k3=\"0.0318\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4242\" k2=\"0.0019\" k3=\"-0.0992\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"10\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"4\" distance=\"1000\" k1=\"-0.2084\" k2=\"0.3142\" k3=\"-0.4273\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2544\" k2=\"0.3641\" k3=\"-0.3045\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"10\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"8\" distance=\"1000\" k1=\"-0.1675\" k2=\"0.0019\" k3=\"0.0375\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"10\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"90\" aperture=\"32\" distance=\"1000\" k1=\"-0.1897\" k2=\"0.0354\" k3=\"0.0271\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"10\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.2295\" k2=\"-0.6539\" k3=\"0.3006\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"10\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"4\" distance=\"1000\" k1=\"0.0006\" k2=\"-0.3509\" k3=\"-0.0461\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"10\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.2542\" k2=\"0.5030\" k3=\"-0.5407\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"10\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"8\" distance=\"1000\" k1=\"-0.2430\" k2=\"0.3191\" k3=\"-0.2517\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"10\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"110\" aperture=\"32\" distance=\"1000\" k1=\"-0.1837\" k2=\"0.0294\" k3=\"0.0323\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"10\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"2.8\" distance=\"1000\" k1=\"-0.4508\" k2=\"-0.6247\" k3=\"0.4719\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"10\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"4\" distance=\"1000\" k1=\"0.1558\" k2=\"-1.1718\" k3=\"0.5969\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"10\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"5.6\" distance=\"1000\" k1=\"-0.1087\" k2=\"0.0619\" k3=\"-0.2818\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"10\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"8\" distance=\"1000\" k1=\"-0.2525\" k2=\"0.4318\" k3=\"-0.3930\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"10\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"148\" aperture=\"32\" distance=\"1000\" k1=\"-0.1855\" k2=\"0.0513\" k3=\"0.0160\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"10\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"2.8\" distance=\"1000\" k1=\"-1.2917\" k2=\"1.2372\" k3=\"-0.5701\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"10\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"4\" distance=\"1000\" k1=\"-0.1056\" k2=\"-0.9720\" k3=\"0.6555\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"10\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"5.6\" distance=\"1000\" k1=\"0.0508\" k2=\"-0.5327\" k3=\"0.1674\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"10\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"8\" distance=\"1000\" k1=\"-0.1856\" k2=\"0.2665\" k3=\"-0.2813\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"10\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n            <vignetting model=\"pa\" focal=\"200\" aperture=\"32\" distance=\"1000\" k1=\"-0.1852\" k2=\"0.0765\" k3=\"-0.0067\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  }
+ ],
+ "script": [
+  [
+   "auto"
+  ],
+  [
+   "choose",
+   [
+    [
+     "set",
+     "aperture",
+     2.8
+    ],
+    [
+     "apply"
+    ]
+   ]
+  ],
+  [
+   "set_profile",
+   "unknown_lens"
+  ],
+  [
+   "choose",
+   [
+    [
+     "apply"
+    ]
+   ]
+  ],
+  [
+   "choose",
+   [
+    [
+     "lens",
+     "Canon EF 70-200"
+    ],
+    [
+     "apply"
+    ]
+   ]
+  ]
+ ],
+ "states": [
+  {
+   "auto_label": "Canon EF 70-200mm f/2.8L IS USM\n100mm · f/4 · 센서 배율 1\n왜곡 · 주변광량",
+   "boxes": [],
+   "dialogs": [],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 0,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     true
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Canon EF 70-200mm f/2.8L IS USM\n100mm · f/2.8 · 센서 배율 1\n왜곡 · 주변광량",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": true,
+     "opened": {
+      "aperture": [
+       4.0,
+       0.0,
+       128.0
+      ],
+      "camera": 1,
+      "camera_text": "Canon EOS 5D Mark II",
+      "cameras": 8,
+      "crop": [
+       1.0,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       3.5,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       100.0,
+       70.0,
+       200.0
+      ],
+      "lens": 1,
+      "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+      ],
+      "result": null,
+      "status": "사용할 프로파일과 촬영 조건을 확인하세요."
+     },
+     "script": [
+      [
+       "set",
+       "aperture",
+       2.8
+      ],
+      [
+       "apply"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        2.8,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        3.5,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        100.0,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": null,
+       "status": "사용할 프로파일과 촬영 조건을 확인하세요."
+      },
+      {
+       "aperture": [
+        2.8,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        3.5,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        100.0,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1"
+       ],
+       "result": 1,
+       "status": "사용할 프로파일과 촬영 조건을 확인하세요."
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정",
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 1,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     true
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Canon EF 70-200mm f/2.8L IS USM (saved)\n100mm · f/4 · 센서 배율 1\n왜곡 · 주변광량",
+   "boxes": [],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정",
+    "렌즈 자동 보정",
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 2,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     true
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Canon EF 70-200mm f/2.8L IS USM (saved)\n100mm · f/4 · 센서 배율 1\n왜곡 · 주변광량",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": true,
+     "opened": {
+      "aperture": [
+       4.0,
+       0.0,
+       128.0
+      ],
+      "camera": 1,
+      "camera_text": "Canon EOS 5D Mark II",
+      "cameras": 8,
+      "crop": [
+       1.0,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       3.5,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       100.0,
+       70.0,
+       200.0
+      ],
+      "lens": 2,
+      "lens_text": "Canon EF 70-200mm f/2.8L IS USM (saved) · 저장된 프로파일",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "Canon EF 70-200mm f/2.8L IS USM (saved) · 저장된 프로파일"
+      ],
+      "result": null,
+      "status": "사용할 프로파일과 촬영 조건을 확인하세요."
+     },
+     "script": [
+      [
+       "apply"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        4.0,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        3.5,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        100.0,
+        70.0,
+        200.0
+       ],
+       "lens": 2,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM (saved) · 저장된 프로파일",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM (saved) · 저장된 프로파일"
+       ],
+       "result": 3,
+       "status": "사용할 프로파일과 촬영 조건을 확인하세요."
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정",
+    "렌즈 자동 보정",
+    "렌즈 자동 보정",
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 3,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     true
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Canon EF 70-200mm f/2.8L IS USM\n100mm · f/4 · 센서 배율 1\n왜곡 · 주변광량",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": true,
+     "opened": {
+      "aperture": [
+       4.0,
+       0.0,
+       128.0
+      ],
+      "camera": 1,
+      "camera_text": "Canon EOS 5D Mark II",
+      "cameras": 8,
+      "crop": [
+       1.0,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       3.5,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       100.0,
+       70.0,
+       200.0
+      ],
+      "lens": 2,
+      "lens_text": "Canon EF 70-200mm f/2.8L IS USM (saved) · 저장된 프로파일",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "Canon EF 70-200mm f/2.8L IS USM (saved) · 저장된 프로파일"
+      ],
+      "result": null,
+      "status": "사용할 프로파일과 촬영 조건을 확인하세요."
+     },
+     "script": [
+      [
+       "lens",
+       "Canon EF 70-200"
+      ],
+      [
+       "apply"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        4.0,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        3.5,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        100.0,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM (saved) · 저장된 프로파일"
+       ],
+       "result": null,
+       "status": "프로파일 제공 항목: 왜곡 · 주변광량"
+      },
+      {
+       "aperture": [
+        4.0,
+        0.0,
+        128.0
+       ],
+       "camera": 1,
+       "camera_text": "Canon EOS 5D Mark II",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        3.5,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        100.0,
+        70.0,
+        200.0
+       ],
+       "lens": 1,
+       "lens_text": "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM (saved) · 저장된 프로파일"
+       ],
+       "result": 0,
+       "status": "프로파일 제공 항목: 왜곡 · 주변광량"
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정",
+    "렌즈 자동 보정",
+    "렌즈 자동 보정",
+    "렌즈 자동 보정",
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 0,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     true
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  }
+ ]
+}

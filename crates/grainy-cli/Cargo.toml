@@ -1,0 +1,26 @@
+[package]
+name = "grainy-cli"
+description = "Grainy on the command line: render a photo with the same pixels as the Python Grainy's export"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "grainy-cli"
+path = "src/main.rs"
+
+[dependencies]
+grainy-core.workspace = true
+grainy-engine = { path = "../grainy-engine" }
+grainy-codecs = { path = "../grainy-codecs" }
+serde_json.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+ndarray.workspace = true
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+serde_json.workspace = true
+
+[lints]
+workspace = true

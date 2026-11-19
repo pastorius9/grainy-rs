@@ -1,0 +1,125 @@
+{
+ "changes": {
+  "straighten": -2.0
+ },
+ "script": [
+  [
+   "upright",
+   "full"
+  ],
+  [
+   "finish"
+  ],
+  [
+   "upright",
+   "level"
+  ],
+  [
+   "finish"
+  ],
+  [
+   "upright",
+   "auto"
+  ],
+  [
+   "set",
+   "exposure",
+   0.5
+  ],
+  [
+   "finish"
+  ]
+ ],
+ "states": [
+  {
+   "enabled": false,
+   "history": [],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": -2.0,
+   "upright": null,
+   "upright_crop": true
+  },
+  {
+   "enabled": true,
+   "history": [],
+   "label": "사진에서 직선 기준을 찾지 못했습니다.",
+   "level_enabled": true,
+   "level_note": "사진에서 직선 기준을 찾지 못했습니다.",
+   "outcome": {
+    "error": "luma.upright.AlignmentError: 사진에서 직선 기준을 찾지 못했습니다."
+   },
+   "status": null,
+   "straighten": -2.0,
+   "upright": null,
+   "upright_crop": true
+  },
+  {
+   "enabled": false,
+   "history": [],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": -2.0,
+   "upright": null,
+   "upright_crop": true
+  },
+  {
+   "enabled": true,
+   "history": [],
+   "label": "사진에서 직선 기준을 찾지 못했습니다.",
+   "level_enabled": true,
+   "level_note": "사진에서 직선 기준을 찾지 못했습니다.",
+   "outcome": {
+    "error": "luma.upright.AlignmentError: 사진에서 직선 기준을 찾지 못했습니다."
+   },
+   "status": null,
+   "straighten": -2.0,
+   "upright": null,
+   "upright_crop": true
+  },
+  {
+   "enabled": false,
+   "history": [],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": -2.0,
+   "upright": null,
+   "upright_crop": true
+  },
+  {
+   "enabled": false,
+   "history": [],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": false,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": null,
+   "status": null,
+   "straighten": -2.0,
+   "upright": null,
+   "upright_crop": true
+  },
+  {
+   "enabled": true,
+   "history": [],
+   "label": "사진의 직선과 소실점을 분석하고 있습니다…",
+   "level_enabled": true,
+   "level_note": "사진의 기준선을 분석하고 있습니다…",
+   "outcome": {
+    "error": "luma.upright.AlignmentError: 사진에서 직선 기준을 찾지 못했습니다."
+   },
+   "status": null,
+   "straighten": -2.0,
+   "upright": null,
+   "upright_crop": true
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+{
+ "dtype": "float32",
+ "op": "integral",
+ "output_dtype": "float64",
+ "tolerance": 1e-12
+}

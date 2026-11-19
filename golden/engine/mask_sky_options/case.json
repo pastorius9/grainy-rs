@@ -1,0 +1,44 @@
+{
+ "mean": [
+  0.38508959486964156,
+  0.3885311624966562,
+  0.3862756851660864
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "masks": [
+   {
+    "adjustments": {
+     "exposure": -0.7
+    },
+    "components": [
+     {
+      "feather": 20,
+      "sensitivity": 75,
+      "type": "sky"
+     }
+    ]
+   },
+   {
+    "adjustments": {
+     "shadows": 40.0
+    },
+    "components": [
+     {
+      "invert": true,
+      "type": "sky"
+     }
+    ]
+   }
+  ]
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

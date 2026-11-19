@@ -1,0 +1,10 @@
+{
+ "anchor": null,
+ "border": null,
+ "dtype": "uint8",
+ "iterations": 1,
+ "op": "morph",
+ "operation": "dilate",
+ "output_dtype": "uint8",
+ "tolerance": 0.0
+}

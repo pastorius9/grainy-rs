@@ -1,0 +1,2213 @@
+{
+ "changes": {
+  "crop": [
+   0.1,
+   0.05,
+   0.9,
+   0.95
+  ],
+  "rotation": 1
+ },
+ "height": 65,
+ "script": [
+  [
+   "strip"
+  ],
+  [
+   "mode",
+   "clone"
+  ],
+  [
+   "click",
+   [
+    0.5,
+    0.5
+   ],
+   false
+  ],
+  [
+   "click",
+   [
+    0.2,
+    0.3
+   ],
+   true
+  ],
+  [
+   "feather",
+   25
+  ],
+  [
+   "radius",
+   40
+  ],
+  [
+   "press",
+   [
+    0.6,
+    0.6
+   ],
+   false
+  ],
+  [
+   "move",
+   [
+    0.65,
+    0.62
+   ]
+  ],
+  [
+   "move",
+   [
+    0.7,
+    0.66
+   ]
+  ],
+  [
+   "release",
+   [
+    0.7,
+    0.66
+   ]
+  ],
+  [
+   "press",
+   [
+    0.3,
+    0.6
+   ],
+   false
+  ],
+  [
+   "move",
+   [
+    0.35,
+    0.6
+   ]
+  ],
+  [
+   "key",
+   "Escape"
+  ],
+  [
+   "release",
+   [
+    0.4,
+    0.6
+   ]
+  ],
+  [
+   "button",
+   "automatic"
+  ],
+  [
+   "mode",
+   "inpaint"
+  ],
+  [
+   "press",
+   [
+    0.4,
+    0.4
+   ],
+   false
+  ],
+  [
+   "move",
+   [
+    0.45,
+    0.42
+   ]
+  ],
+  [
+   "release",
+   [
+    0.45,
+    0.42
+   ]
+  ],
+  [
+   "mode",
+   "red_eye"
+  ],
+  [
+   "key",
+   "["
+  ],
+  [
+   "click",
+   [
+    0.8,
+    0.2
+   ],
+   false
+  ],
+  [
+   "mode",
+   "heal"
+  ],
+  [
+   "click",
+   [
+    0.15,
+    0.85
+   ],
+   true
+  ],
+  [
+   "press",
+   [
+    0.5,
+    0.8
+   ],
+   false
+  ],
+  [
+   "move",
+   [
+    0.55,
+    0.85
+   ]
+  ],
+  [
+   "release",
+   [
+    0.55,
+    0.85
+   ]
+  ],
+  [
+   "key",
+   "Escape"
+  ],
+  [
+   "key",
+   "Escape"
+  ],
+  [
+   "mode",
+   "heal"
+  ],
+  [
+   "button",
+   "remove_last"
+  ],
+  [
+   "button",
+   "finish"
+  ]
+ ],
+ "states": [
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "clone",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "사진에서 드래그하세요. Alt+클릭: 복구 원본 지정",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": false,
+   "donor": null,
+   "feather": 60,
+   "history": [],
+   "mode": "clone",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "Alt+클릭으로 복구 원본 위치부터 지정하세요.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 60,
+   "brush_radius": 0.015,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 60,
+   "history": [],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.015,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 15,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 40,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": {
+    "feather": 25,
+    "points": [
+     [
+      0.59375,
+      0.421875
+     ]
+    ],
+    "radius": 0.04,
+    "source": [
+     0.3229166567325592,
+     0.75
+    ],
+    "type": "clone",
+    "version": 2
+   },
+   "pending_staged": false,
+   "points": [
+    [
+     0.6,
+     0.6
+    ]
+   ],
+   "radius": 40,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": {
+    "feather": 25,
+    "points": [
+     [
+      0.59375,
+      0.421875
+     ],
+     [
+      0.6041666865348816,
+      0.390625
+     ]
+    ],
+    "radius": 0.04,
+    "source": [
+     0.3229166567325592,
+     0.75
+    ],
+    "type": "clone",
+    "version": 2
+   },
+   "pending_staged": false,
+   "points": [
+    [
+     0.6,
+     0.6
+    ],
+    [
+     0.65,
+     0.62
+    ]
+   ],
+   "radius": 40,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": {
+    "feather": 25,
+    "points": [
+     [
+      0.59375,
+      0.421875
+     ],
+     [
+      0.6041666865348816,
+      0.390625
+     ],
+     [
+      0.6458333134651184,
+      0.34375
+     ]
+    ],
+    "radius": 0.04,
+    "source": [
+     0.3229166567325592,
+     0.75
+    ],
+    "type": "clone",
+    "version": 2
+   },
+   "pending_staged": false,
+   "points": [
+    [
+     0.6,
+     0.6
+    ],
+    [
+     0.65,
+     0.62
+    ],
+    [
+     0.7,
+     0.66
+    ]
+   ],
+   "radius": 40,
+   "remove": false,
+   "retouch": [],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정"
+   ],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정"
+   ],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": {
+    "feather": 25,
+    "points": [
+     [
+      0.59375,
+      0.671875
+     ]
+    ],
+    "radius": 0.04,
+    "source": [
+     0.3229166567325592,
+     0.75
+    ],
+    "type": "clone",
+    "version": 2
+   },
+   "pending_staged": false,
+   "points": [
+    [
+     0.3,
+     0.6
+    ]
+   ],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정"
+   ],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": {
+    "feather": 25,
+    "points": [
+     [
+      0.59375,
+      0.671875
+     ],
+     [
+      0.59375,
+      0.625
+     ]
+    ],
+    "radius": 0.04,
+    "source": [
+     0.3229166567325592,
+     0.75
+    ],
+    "type": "clone",
+    "version": 2
+   },
+   "pending_staged": false,
+   "points": [
+    [
+     0.3,
+     0.6
+    ],
+    [
+     0.35,
+     0.6
+    ]
+   ],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정"
+   ],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": [
+    0.3229166567325592,
+    0.75
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정"
+   ],
+   "mode": "clone",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": null,
+   "feather": 25,
+   "history": [
+    "부분 보정"
+   ],
+   "mode": "clone",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": null,
+   "feather": 25,
+   "history": [
+    "부분 보정"
+   ],
+   "mode": "inpaint",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "사진에서 드래그하세요. Alt+클릭: 복구 원본 지정",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": null,
+   "feather": 25,
+   "history": [
+    "부분 보정"
+   ],
+   "mode": "inpaint",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": {
+    "feather": 25,
+    "points": [
+     [
+      0.40625,
+      0.59375
+     ]
+    ],
+    "radius": 0.04,
+    "source": null,
+    "type": "inpaint",
+    "version": 2
+   },
+   "pending_staged": false,
+   "points": [
+    [
+     0.4,
+     0.4
+    ]
+   ],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "사진에서 드래그하세요. Alt+클릭: 복구 원본 지정",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": null,
+   "feather": 25,
+   "history": [
+    "부분 보정"
+   ],
+   "mode": "inpaint",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": {
+    "feather": 25,
+    "points": [
+     [
+      0.40625,
+      0.59375
+     ],
+     [
+      0.4270833432674408,
+      0.546875
+     ]
+    ],
+    "radius": 0.04,
+    "source": null,
+    "type": "inpaint",
+    "version": 2
+   },
+   "pending_staged": false,
+   "points": [
+    [
+     0.4,
+     0.4
+    ],
+    [
+     0.45,
+     0.42
+    ]
+   ],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "사진에서 드래그하세요. Alt+클릭: 복구 원본 지정",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": null,
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "inpaint",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "사진에서 드래그하세요. Alt+클릭: 복구 원본 지정",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.04,
+   "clear": false,
+   "donor": null,
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "red_eye",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 40,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "사진에서 드래그하세요. Alt+클릭: 복구 원본 지정",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": false,
+   "donor": null,
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "red_eye",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "사진에서 드래그하세요. Alt+클릭: 복구 원본 지정",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": false,
+   "donor": null,
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "red_eye",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.2291666716337204,
+       0.265625
+      ]
+     ],
+     "radius": 0.033,
+     "source": null,
+     "type": "red_eye",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "사진에서 드래그하세요. Alt+클릭: 복구 원본 지정",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": false,
+   "donor": null,
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 자동 선택",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.2291666716337204,
+       0.265625
+      ]
+     ],
+     "radius": 0.033,
+     "source": null,
+     "type": "red_eye",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": false,
+   "donor": [
+    0.8125,
+    0.78125
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.2291666716337204,
+       0.265625
+      ]
+     ],
+     "radius": 0.033,
+     "source": null,
+     "type": "red_eye",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": true,
+   "donor": [
+    0.8125,
+    0.78125
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": true,
+   "pending": {
+    "feather": 25,
+    "points": [
+     [
+      0.7708333134651184,
+      0.5
+     ]
+    ],
+    "radius": 0.033,
+    "source": [
+     0.8125,
+     0.78125
+    ],
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.5,
+     0.8
+    ]
+   ],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.2291666716337204,
+       0.265625
+      ]
+     ],
+     "radius": 0.033,
+     "source": null,
+     "type": "red_eye",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": true,
+   "donor": [
+    0.8125,
+    0.78125
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": true,
+   "pending": {
+    "feather": 25,
+    "points": [
+     [
+      0.7708333134651184,
+      0.5
+     ],
+     [
+      0.8125,
+      0.46875
+     ]
+    ],
+    "radius": 0.033,
+    "source": [
+     0.8125,
+     0.78125
+    ],
+    "type": "heal",
+    "version": 2
+   },
+   "pending_staged": true,
+   "points": [
+    [
+     0.5,
+     0.8
+    ],
+    [
+     0.55,
+     0.85
+    ]
+   ],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.2291666716337204,
+       0.265625
+      ]
+     ],
+     "radius": 0.033,
+     "source": null,
+     "type": "red_eye",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": true,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": true,
+   "donor": [
+    0.8125,
+    0.78125
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": true,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": true,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.2291666716337204,
+       0.265625
+      ]
+     ],
+     "radius": 0.033,
+     "source": null,
+     "type": "red_eye",
+     "version": 2
+    }
+   ],
+   "staged": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.7708333134651184,
+       0.5
+      ],
+      [
+       0.8125,
+       0.46875
+      ]
+     ],
+     "radius": 0.033,
+     "source": [
+      0.8125,
+      0.78125
+     ],
+     "type": "heal",
+     "version": 2
+    }
+   ],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 1개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": false,
+   "donor": [
+    0.8125,
+    0.78125
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.2291666716337204,
+       0.265625
+      ]
+     ],
+     "radius": 0.033,
+     "source": null,
+     "type": "red_eye",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": false,
+   "donor": [
+    0.8125,
+    0.78125
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.2291666716337204,
+       0.265625
+      ]
+     ],
+     "radius": 0.033,
+     "source": null,
+     "type": "red_eye",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "복구 원본 위치를 지정했습니다.",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": false,
+   "donor": [
+    0.8125,
+    0.78125
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.2291666716337204,
+       0.265625
+      ]
+     ],
+     "radius": 0.033,
+     "source": null,
+     "type": "red_eye",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 25,
+   "brush_radius": 0.033,
+   "clear": false,
+   "donor": [
+    0.8125,
+    0.78125
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경"
+   ],
+   "mode": "heal",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "여러 곳을 칠한 뒤 실행 또는 Enter를 누르세요. Alt+클릭: 원본 지정 · [ / ]: 크기",
+   "waiting": "실행 대기: 0개"
+  },
+  {
+   "apply": false,
+   "before": false,
+   "brush_feather": 70,
+   "brush_radius": 0.025,
+   "clear": false,
+   "donor": [
+    0.8125,
+    0.78125
+   ],
+   "feather": 25,
+   "history": [
+    "부분 보정",
+    "부분 보정",
+    "부분 보정",
+    "보정 변경"
+   ],
+   "mode": "",
+   "note": "힐링 원본: 직접 지정 (Alt+클릭)",
+   "overlay": false,
+   "pending": null,
+   "pending_staged": false,
+   "points": [],
+   "radius": 33,
+   "remove": false,
+   "retouch": [
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.59375,
+       0.421875
+      ],
+      [
+       0.6041666865348816,
+       0.390625
+      ],
+      [
+       0.6458333134651184,
+       0.34375
+      ]
+     ],
+     "radius": 0.04,
+     "source": [
+      0.3229166567325592,
+      0.75
+     ],
+     "type": "clone",
+     "version": 2
+    },
+    {
+     "feather": 25,
+     "points": [
+      [
+       0.40625,
+       0.59375
+      ],
+      [
+       0.4270833432674408,
+       0.546875
+      ]
+     ],
+     "radius": 0.04,
+     "source": null,
+     "type": "inpaint",
+     "version": 2
+    }
+   ],
+   "staged": [],
+   "status": "도구를 종료했습니다.",
+   "waiting": "실행 대기: 0개"
+  }
+ ],
+ "width": 97
+}

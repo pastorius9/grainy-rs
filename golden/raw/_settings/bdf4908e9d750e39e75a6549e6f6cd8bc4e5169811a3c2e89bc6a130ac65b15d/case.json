@@ -1,0 +1,15 @@
+{
+ "negative": true,
+ "negative_base": [
+  0.8,
+  0.7,
+  0.6
+ ],
+ "negative_density": 2.5,
+ "negative_peak": [
+  0.02,
+  0.03,
+  0.01
+ ],
+ "negative_range": 12.0
+}

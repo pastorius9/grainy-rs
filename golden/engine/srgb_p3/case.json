@@ -1,0 +1,9 @@
+{
+ "original_size": null,
+ "output": "Display P3",
+ "settings": {
+  "saturation": 50.0
+ },
+ "source": "patches",
+ "use_crop": true
+}

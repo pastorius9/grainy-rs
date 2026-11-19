@@ -1,0 +1,8 @@
+{
+ "changes": {
+  "photo_filter": "sepia",
+  "photo_filter_enabled": true
+ },
+ "image": "cg:wheel",
+ "kind": "photo_filter"
+}

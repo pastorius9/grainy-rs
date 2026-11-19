@@ -1,0 +1,6 @@
+{
+ "error": "ValueError: 지원하지 않는 사진 픽셀 형식입니다: int16",
+ "file": "input.tif",
+ "max_size": null,
+ "working": "sRGB"
+}

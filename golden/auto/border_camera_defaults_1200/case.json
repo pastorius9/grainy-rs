@@ -1,0 +1,8 @@
+{
+ "crop": null,
+ "longest": 1200,
+ "settings": {
+  "raw_mode": "as_shot"
+ },
+ "source": "camera"
+}

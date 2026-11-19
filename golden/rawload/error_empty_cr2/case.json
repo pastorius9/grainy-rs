@@ -1,0 +1,15 @@
+{
+ "as_shot": {
+  "error_class": "LibRawIOError",
+  "loaded": false,
+  "message": "b'Input/output error'",
+  "reason": "rawpy._rawpy.LibRawIOError: b'Input/output error'"
+ },
+ "file": "junk.cr2",
+ "legacy": {
+  "error_class": "LibRawIOError",
+  "loaded": false,
+  "message": "b'Input/output error'",
+  "reason": "rawpy._rawpy.LibRawIOError: b'Input/output error'"
+ }
+}

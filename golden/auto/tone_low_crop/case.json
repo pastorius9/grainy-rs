@@ -1,0 +1,48 @@
+{
+ "changed": {
+  "blacks": -200.0,
+  "curve": [
+   [
+    0.0,
+    0.03
+   ],
+   [
+    0.5523557040396023,
+    0.03
+   ],
+   [
+    0.7761778520198012,
+    0.5
+   ],
+   [
+    1.0,
+    0.97
+   ]
+  ],
+  "exposure": 1.3182060059315837,
+  "whites": 130.6251022562069
+ },
+ "removed": [],
+ "report": {
+  "black_point": 0.8,
+  "exposure": 1.3182060059315837,
+  "high_percentile": 99.9,
+  "input_black": 149.1,
+  "input_white": 161.9,
+  "low_percentile": 0.1,
+  "margin_percent": 3.0,
+  "output_black": 7.6499999999999995,
+  "output_white": 247.35,
+  "status": "applied",
+  "white_gain": 2.4729807721366255
+ },
+ "settings": {
+  "crop": [
+   0.1,
+   0.15,
+   0.85,
+   0.9
+  ]
+ },
+ "source": "low"
+}

@@ -1,0 +1,10 @@
+{
+ "anchor": null,
+ "border": null,
+ "dtype": "uint8",
+ "iterations": 1,
+ "op": "morph",
+ "operation": "tophat",
+ "output_dtype": "uint8",
+ "tolerance": 0.0
+}

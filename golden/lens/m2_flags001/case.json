@@ -1,0 +1,73 @@
+{
+ "color_changed": false,
+ "height": 64,
+ "kind": "maps",
+ "model": {
+  "focal": 6.099999904632568,
+  "model": "poly5",
+  "terms": [
+   -0.030571632087230682,
+   0.0046585481613874435,
+   0.0
+  ]
+ },
+ "settings": {
+  "lensfun": {
+   "aperture": 4,
+   "camera": "",
+   "crop": 4.63,
+   "distance": 1000,
+   "focal": 6.099999904632568,
+   "maker": "Canon",
+   "name": "Canon PowerShot G12 & compatibles (Standard)",
+   "orientation": 1,
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Canon</maker>\n        <model>Canon PowerShot G12 &amp; compatibles (Standard)</model>\n        <model lang=\"en\">fixed lens</model>\n        <model lang=\"de\">festes Objektiv</model>\n        <mount>canonG12</mount>\n        <cropfactor>4.63</cropfactor>\n        <aspect-ratio>4:3</aspect-ratio>\n        <calibration>\n            <distortion model=\"poly5\" focal=\"6.1\" k1=\"-0.030571633\" k2=\"0.004658548\" />\n            <distortion model=\"poly5\" focal=\"8.108\" k1=\"-0.015375784\" k2=\"0.001669650\" />\n            <distortion model=\"poly5\" focal=\"12.074\" k1=\"-0.010041248\" k2=\"-0.001118356\" />\n            <distortion model=\"poly5\" focal=\"18.098\" k1=\"-0.002054377\" k2=\"0.000011075\" />\n            <distortion model=\"poly5\" focal=\"30.5\" k1=\"-0.000323237\" k2=\"-0.000346917\" />\n            <tca model=\"poly3\" focal=\"6.1\" br=\"-0.0002616\" vr=\"1.0007448\" bb=\"-0.0000455\" vb=\"1.0003314\" />\n            <tca model=\"poly3\" focal=\"10.8\" br=\"-0.0000003\" vr=\"1.0004612\" bb=\"0.0000253\" vb=\"1.0001464\" />\n            <tca model=\"poly3\" focal=\"30.5\" br=\"0.0000326\" vr=\"0.9996400\" bb=\"-0.0003242\" vb=\"1.0008367\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  "lensfun_distortion": false,
+  "lensfun_enabled": true,
+  "lensfun_scale": true,
+  "lensfun_tca": false,
+  "lensfun_vignette": true
+ },
+ "tca": {
+  "focal": 6.099999904632568,
+  "model": "poly3",
+  "terms": [
+   1.0007448196411133,
+   1.0003314018249512,
+   0.0,
+   0.0,
+   -0.00026160001289099455,
+   -4.5500000851461664e-05
+  ]
+ },
+ "vignetting": null,
+ "width": 96,
+ "xs": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  24,
+  48,
+  72,
+  91,
+  92,
+  93,
+  94,
+  95
+ ],
+ "ys": [
+  0,
+  1,
+  2,
+  16,
+  32,
+  48,
+  61,
+  62,
+  63
+ ]
+}

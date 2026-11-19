@@ -1,0 +1,124 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "a.jpg": {
+     "fill": [
+      1,
+      1
+     ]
+    },
+    "b.jpg": {
+     "fill": [
+      2,
+      1
+     ]
+    }
+   },
+   "photos": [
+    {
+     "path": "$ROOT/a.jpg",
+     "metadata": {
+      "date": "2026:11:13 10:00:00",
+      "filename": "IMG_A.JPG",
+      "size_mb": 1
+     }
+    },
+    {
+     "path": "$ROOT/b.jpg",
+     "metadata": {
+      "size_mb": 2.346
+     }
+    },
+    {
+     "path": "$ROOT/c.jpg",
+     "metadata": {}
+    },
+    {
+     "path": "$ROOT/d.jpg",
+     "metadata": {
+      "size_mb": "abc"
+     }
+    },
+    {
+     "virtual_of": 1
+    }
+   ]
+  },
+  "calls": [
+   {
+    "fn": "known_keys"
+   }
+  ],
+  "name": "import_known_keys"
+ },
+ "results": [
+  {
+   "ok": [
+    [
+     "b.jpg",
+     2.35
+    ],
+    [
+     "c.jpg",
+     0.0
+    ],
+    [
+     "img_a.jpg",
+     "2026:11:13 10:00:00"
+    ]
+   ]
+  }
+ ],
+ "tree": {
+  "files": {
+   "a.jpg": {
+    "size": 1,
+    "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+   },
+   "b.jpg": {
+    "size": 1,
+    "sha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+   }
+  },
+  "dirs": []
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\c.jpg",
+    "name": "c.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 4,
+    "path": "$ROOT\\d.jpg",
+    "name": "d.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 5,
+    "path": "$ROOT\\a.jpg",
+    "name": "a.jpg · 사본",
+    "virtual_source": 1
+   }
+  ],
+  "folder_roots": [
+   "$ROOT"
+  ],
+  "preferences": {}
+ }
+}

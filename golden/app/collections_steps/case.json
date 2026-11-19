@@ -1,0 +1,4882 @@
+{
+ "folder_root": "Z:\\GrainyGolden\\photos",
+ "scripts": {
+  "main": "[[\"select\", [2, 4]], [\"create\", \"  \\ucd9c\\uc0ac  \", null], [\"select\", [6]], [\"create\", \"\\ud558\\uc704\", null], [\"create\", \"\\ubcc4 \\ub2e4\\uc12f\", {\"rating_min\": 5}], [\"create\", \"\\ucde8\\uc18c\\ud560 \\uaddc\\uce59\", \"cancel\"], [\"create\", \"   \", null], [\"create_cancelled_name\"], [\"select\", [1, 3]], [\"add_to\", 0], [\"add_to\", 1], [\"add_to\", null], [\"pick\", 1], [\"select\", [2]], [\"remove_from\"], [\"edit\", \"\\uc5ec\\ud589 2023\"], [\"pick\", 2], [\"edit\", \"\\uc88b\\uc740 \\ubcc4\", {\"rating_min\": 3, \"label\": \"\\ube68\\uac15\"}], [\"edit\", null], [\"pick\", 2], [\"pick_nothing\"], [\"search\", \"a\"], [\"filter\", {\"extension\": \"png\", \"rating_max\": 3}], [\"filter\", null], [\"filter\", {}], [\"select\", [1, 2]], [\"quick_toggle\"], [\"quick_toggle\"], [\"select\", [1, 3]], [\"quick_toggle\"], [\"select\", [3, 5]], [\"quick_toggle\"], [\"select\", []], [\"open\", 3], [\"quick_toggle\"], [\"folder\", \"{root}\"], [\"mode\", \"picked\"], [\"quick_show\"], [\"open\", 2], [\"containing\", 0], [\"open\", 7], [\"containing\"], [\"open\", 3], [\"containing\", null], [\"pick\", 3], [\"remove_collection\"], [\"remove_collection\"], [\"edit\", \"nothing\"], [\"remove_from\"], [\"pick\", 1], [\"filter\", {\"rating_min\": 2}], [\"clear_filter\"]]",
+  "no_plain": "[[\"pick\", 1], [\"remove_collection\"], [\"select\", [1]], [\"add_to\", 0], [\"quick_toggle\"], [\"quick_show\"], [\"add_to\", 0], [\"create\", \"Top\", null], [\"create\", \"Zed\", null], [\"create\", \"Alpha\", {\"extension\": \"png\"}], [\"pick\", 4], [\"create\", \"Child of Zed\", {}]]"
+ },
+ "sessions": [
+  {
+   "name": "main",
+   "steps": [
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "select",
+      [
+       2,
+       4
+      ]
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "컬렉션"
+      }
+     ],
+     "collection": 3,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create",
+      "  출사  ",
+      null
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      }
+     ],
+     "tree_current": 3
+    },
+    {
+     "boxes": [],
+     "collection": 3,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "select",
+      [
+       6
+      ]
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      }
+     ],
+     "tree_current": 3
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "컬렉션"
+      }
+     ],
+     "collection": 4,
+     "error": null,
+     "folder": null,
+     "ids": [
+      6
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create",
+      "하위",
+      null
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      }
+     ],
+     "tree_current": 4
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "스마트 컬렉션"
+      },
+      {
+       "box": "filter",
+       "rules": null,
+       "title": "스마트 컬렉션 규칙"
+      }
+     ],
+     "collection": 5,
+     "error": null,
+     "folder": null,
+     "ids": [
+      6,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create",
+      "별 다섯",
+      {
+       "rating_min": 5
+      }
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "스마트 컬렉션"
+      },
+      {
+       "box": "filter",
+       "rules": null,
+       "title": "스마트 컬렉션 규칙"
+      }
+     ],
+     "collection": 5,
+     "error": null,
+     "folder": null,
+     "ids": [
+      6,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create",
+      "취소할 규칙",
+      "cancel"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "컬렉션"
+      }
+     ],
+     "collection": 5,
+     "error": null,
+     "folder": null,
+     "ids": [
+      6,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create",
+      "   ",
+      null
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "컬렉션"
+      }
+     ],
+     "collection": 5,
+     "error": null,
+     "folder": null,
+     "ids": [
+      6,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create_cancelled_name"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [],
+     "collection": 5,
+     "error": null,
+     "folder": null,
+     "ids": [
+      6,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "select",
+      [
+       1,
+       3
+      ]
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [
+      {
+       "box": "item",
+       "editable": false,
+       "items": [
+        "1 · 여행",
+        "3 · 출사",
+        "4 · 하위"
+       ],
+       "label": "선택한 사진을 추가할 컬렉션",
+       "title": "컬렉션에 추가"
+      }
+     ],
+     "collection": 5,
+     "error": null,
+     "folder": null,
+     "ids": [
+      6,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "add_to",
+      0
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [
+      {
+       "box": "item",
+       "editable": false,
+       "items": [
+        "1 · 여행",
+        "3 · 출사",
+        "4 · 하위"
+       ],
+       "label": "선택한 사진을 추가할 컬렉션",
+       "title": "컬렉션에 추가"
+      }
+     ],
+     "collection": 5,
+     "error": null,
+     "folder": null,
+     "ids": [
+      6,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "add_to",
+      1
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [
+      {
+       "box": "item",
+       "editable": false,
+       "items": [
+        "1 · 여행",
+        "3 · 출사",
+        "4 · 하위"
+       ],
+       "label": "선택한 사진을 추가할 컬렉션",
+       "title": "컬렉션에 추가"
+      }
+     ],
+     "collection": 5,
+     "error": null,
+     "folder": null,
+     "ids": [
+      6,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "add_to",
+      null
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [],
+     "collection": 1,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "pick",
+      1
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [],
+     "collection": 1,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "select",
+      [
+       2
+      ]
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [],
+     "collection": 1,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      3,
+      6,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "remove_from"
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "여행",
+       "title": "컬렉션 편집"
+      }
+     ],
+     "collection": 1,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      3,
+      6,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "edit",
+      "여행 2023"
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행 2023",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 1
+    },
+    {
+     "boxes": [],
+     "collection": 2,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      6,
+      4,
+      5,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "pick",
+      2
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 1
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "좋은 사진",
+       "title": "컬렉션 편집"
+      },
+      {
+       "box": "filter",
+       "rules": {
+        "rating_min": 4
+       },
+       "title": "스마트 컬렉션 규칙"
+      }
+     ],
+     "collection": 2,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "edit",
+      "좋은 별",
+      {
+       "label": "빨강",
+       "rating_min": 3
+      }
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행 2023",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 별",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 3, \"label\": \"\\ube68\\uac15\"}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "좋은 별",
+       "title": "컬렉션 편집"
+      }
+     ],
+     "collection": 2,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "edit",
+      null
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": 2,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "pick",
+      2
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "pick_nothing"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "search",
+      "a"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [
+      {
+       "box": "filter",
+       "rules": {},
+       "title": "상세 필터"
+      }
+     ],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      3
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {
+      "extension": "png",
+      "rating_max": 3
+     },
+     "search": "a",
+     "step": [
+      "filter",
+      {
+       "extension": "png",
+       "rating_max": 3
+      }
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [
+      {
+       "box": "filter",
+       "rules": {
+        "extension": "png",
+        "rating_max": 3
+       },
+       "title": "상세 필터"
+      }
+     ],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      3
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {
+      "extension": "png",
+      "rating_max": 3
+     },
+     "search": "a",
+     "step": [
+      "filter",
+      null
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [
+      {
+       "box": "filter",
+       "rules": {
+        "extension": "png",
+        "rating_max": 3
+       },
+       "title": "상세 필터"
+      }
+     ],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "filter",
+      {}
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "select",
+      [
+       1,
+       2
+      ]
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [
+      "빠른 컬렉션에 2장 추가"
+     ],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "quick_toggle"
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 2
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행 2023",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 별",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 3, \"label\": \"\\ube68\\uac15\"}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       },
+       {
+        "id": 6,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "6"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [
+      "빠른 컬렉션에서 2장 제외"
+     ],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "quick_toggle"
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행 2023",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 별",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 3, \"label\": \"\\ube68\\uac15\"}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       },
+       {
+        "id": 6,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "6"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "select",
+      [
+       1,
+       3
+      ]
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [
+      "빠른 컬렉션에 2장 추가"
+     ],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "quick_toggle"
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 3
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행 2023",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 별",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 3, \"label\": \"\\ube68\\uac15\"}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       },
+       {
+        "id": 6,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "6"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "select",
+      [
+       3,
+       5
+      ]
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [
+      "빠른 컬렉션에 2장 추가"
+     ],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "quick_toggle"
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 5
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행 2023",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 별",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 3, \"label\": \"\\ube68\\uac15\"}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       },
+       {
+        "id": 6,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "6"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "select",
+      []
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "open",
+      3
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [
+      "빠른 컬렉션에서 1장 제외"
+     ],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "quick_toggle"
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 3,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 5
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행 2023",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 별",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 3, \"label\": \"\\ube68\\uac15\"}"
+       },
+       {
+        "id": 3,
+        "name": "출사",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       },
+       {
+        "id": 6,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "6"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": "Z:\\GrainyGolden\\photos",
+     "ids": [
+      2,
+      3,
+      6
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "folder",
+      "{root}"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": "Z:\\GrainyGolden\\photos",
+     "ids": [],
+     "messages": [],
+     "mode": "picked",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "a",
+     "step": [
+      "mode",
+      "picked"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": 6,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "quick_show"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 6
+    },
+    {
+     "boxes": [],
+     "collection": 6,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      5
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "open",
+      2
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 6
+    },
+    {
+     "boxes": [
+      {
+       "box": "item",
+       "editable": false,
+       "items": [
+        "2 · 좋은 별",
+        "3 · 출사"
+       ],
+       "label": "이동할 컬렉션",
+       "title": "소속 컬렉션"
+      }
+     ],
+     "collection": 2,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "containing",
+      0
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": 2,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "open",
+      7
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": 2,
+     "error": "이 사진이 속한 컬렉션이 없습니다.",
+     "folder": null,
+     "ids": [
+      2
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "containing"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": 2,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "open",
+      3
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [
+      {
+       "box": "item",
+       "editable": false,
+       "items": [
+        "1 · 여행 2023",
+        "3 · 출사"
+       ],
+       "label": "이동할 컬렉션",
+       "title": "소속 컬렉션"
+      }
+     ],
+     "collection": 2,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "containing",
+      null
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": 3,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "pick",
+      3
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "출사"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": 2
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "remove_collection"
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 3
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 6
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 6,
+        "photo_id": 5
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행 2023",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 별",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 3, \"label\": \"\\ube68\\uac15\"}"
+       },
+       {
+        "id": 4,
+        "name": "하위",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "별 다섯",
+        "parent_id": 4,
+        "rules": "{\"rating_min\": 5}"
+       },
+       {
+        "id": 6,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "6"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 1,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "remove_collection"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 1,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "edit",
+      "nothing"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 1,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "remove_from"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 1,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": 1,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      3,
+      6,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "pick",
+      1
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 1,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [
+      {
+       "box": "filter",
+       "rules": {},
+       "title": "상세 필터"
+      }
+     ],
+     "collection": 1,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      3,
+      6,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {
+      "rating_min": 2
+     },
+     "search": "",
+     "step": [
+      "filter",
+      {
+       "rating_min": 2
+      }
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 1,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "clear_filter"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 6,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행 2023"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 별"
+      },
+      {
+       "depth": 0,
+       "id": 4,
+       "text": "하위"
+      },
+      {
+       "depth": 1,
+       "id": 5,
+       "text": "◈ 별 다섯"
+      }
+     ],
+     "tree_current": null
+    }
+   ]
+  },
+  {
+   "name": "no_plain",
+   "steps": [
+    {
+     "boxes": [],
+     "collection": 1,
+     "error": null,
+     "folder": null,
+     "ids": [
+      2,
+      6,
+      4
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "pick",
+      1
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 1,
+        "photo_id": 2
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 4
+       },
+       {
+        "collection_id": 1,
+        "photo_id": 6
+       }
+      ],
+      "collections": [
+       {
+        "id": 1,
+        "name": "여행",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 1,
+       "text": "여행"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "remove_collection"
+     ],
+     "tables": {
+      "collection_members": [],
+      "collections": [
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       }
+      ],
+      "preferences": []
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "select",
+      [
+       1
+      ]
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": "일반 컬렉션을 먼저 만들어 주세요.",
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [],
+     "rules": {},
+     "search": "",
+     "step": [
+      "add_to",
+      0
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": null,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [
+      "빠른 컬렉션에 1장 추가"
+     ],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "quick_toggle"
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       }
+      ],
+      "collections": [
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "3"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": null
+    },
+    {
+     "boxes": [],
+     "collection": 3,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "quick_show"
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": 3
+    },
+    {
+     "boxes": [
+      {
+       "box": "item",
+       "editable": false,
+       "items": [
+        "3 · 빠른 컬렉션"
+       ],
+       "label": "선택한 사진을 추가할 컬렉션",
+       "title": "컬렉션에 추가"
+      }
+     ],
+     "collection": 3,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      false
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "add_to",
+      0
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": 3
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "컬렉션"
+      }
+     ],
+     "collection": 4,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create",
+      "Top",
+      null
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 1
+       }
+      ],
+      "collections": [
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "Top",
+        "parent_id": 3,
+        "rules": null
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "3"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "Top"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": 4
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "컬렉션"
+      }
+     ],
+     "collection": 5,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create",
+      "Zed",
+      null
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 5,
+        "photo_id": 1
+       }
+      ],
+      "collections": [
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "Top",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "Zed",
+        "parent_id": 4,
+        "rules": null
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "3"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "Top"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "Zed"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": 5
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "스마트 컬렉션"
+      },
+      {
+       "box": "filter",
+       "rules": null,
+       "title": "스마트 컬렉션 규칙"
+      }
+     ],
+     "collection": 6,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      3,
+      6,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create",
+      "Alpha",
+      {
+       "extension": "png"
+      }
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 5,
+        "photo_id": 1
+       }
+      ],
+      "collections": [
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "Top",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "Zed",
+        "parent_id": 4,
+        "rules": null
+       },
+       {
+        "id": 6,
+        "name": "Alpha",
+        "parent_id": 5,
+        "rules": "{\"extension\": \"png\"}"
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "3"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "Top"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "Zed"
+      },
+      {
+       "depth": 3,
+       "id": 6,
+       "text": "◈ Alpha"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": 6
+    },
+    {
+     "boxes": [],
+     "collection": 4,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [
+      1
+     ],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "pick",
+      4
+     ],
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "Top"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "Zed"
+      },
+      {
+       "depth": 3,
+       "id": 6,
+       "text": "◈ Alpha"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": 6
+    },
+    {
+     "boxes": [
+      {
+       "box": "text",
+       "label": "이름",
+       "text": "",
+       "title": "스마트 컬렉션"
+      },
+      {
+       "box": "filter",
+       "rules": null,
+       "title": "스마트 컬렉션 규칙"
+      }
+     ],
+     "collection": 7,
+     "error": null,
+     "folder": null,
+     "ids": [
+      1,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7,
+      8
+     ],
+     "messages": [],
+     "mode": "all",
+     "modes": [],
+     "refreshes": [
+      true
+     ],
+     "rules": {},
+     "search": "",
+     "step": [
+      "create",
+      "Child of Zed",
+      {}
+     ],
+     "tables": {
+      "collection_members": [
+       {
+        "collection_id": 3,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 4,
+        "photo_id": 1
+       },
+       {
+        "collection_id": 5,
+        "photo_id": 1
+       }
+      ],
+      "collections": [
+       {
+        "id": 2,
+        "name": "좋은 사진",
+        "parent_id": null,
+        "rules": "{\"rating_min\": 4}"
+       },
+       {
+        "id": 3,
+        "name": "빠른 컬렉션",
+        "parent_id": null,
+        "rules": null
+       },
+       {
+        "id": 4,
+        "name": "Top",
+        "parent_id": 3,
+        "rules": null
+       },
+       {
+        "id": 5,
+        "name": "Zed",
+        "parent_id": 4,
+        "rules": null
+       },
+       {
+        "id": 6,
+        "name": "Alpha",
+        "parent_id": 5,
+        "rules": "{\"extension\": \"png\"}"
+       },
+       {
+        "id": 7,
+        "name": "Child of Zed",
+        "parent_id": 4,
+        "rules": "{}"
+       }
+      ],
+      "preferences": [
+       {
+        "key": "quick_collection",
+        "value": "3"
+       }
+      ]
+     },
+     "total": 8,
+     "tree": [
+      {
+       "depth": 0,
+       "id": 3,
+       "text": "빠른 컬렉션"
+      },
+      {
+       "depth": 1,
+       "id": 4,
+       "text": "Top"
+      },
+      {
+       "depth": 2,
+       "id": 7,
+       "text": "◈ Child of Zed"
+      },
+      {
+       "depth": 2,
+       "id": 5,
+       "text": "Zed"
+      },
+      {
+       "depth": 3,
+       "id": 6,
+       "text": "◈ Alpha"
+      },
+      {
+       "depth": 0,
+       "id": 2,
+       "text": "◈ 좋은 사진"
+      }
+     ],
+     "tree_current": 7
+    }
+   ]
+  }
+ ]
+}

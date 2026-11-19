@@ -1,0 +1,24 @@
+{
+ "mean": [
+  0.2908972345544316,
+  0.29438088866333906,
+  0.29324391739535105
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "drt_contrast": 40.0,
+  "drt_shoulder": 30.0,
+  "drt_toe": 30.0,
+  "drt_white": 0.0,
+  "tone_mapping": "drt"
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

@@ -1,0 +1,20 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "retouch": [
+   {
+    "points": [
+     [
+      0.2,
+      0.3
+     ]
+    ],
+    "radius": 0.04,
+    "type": "red_eye"
+   }
+  ]
+ },
+ "source": "patches",
+ "use_crop": true
+}

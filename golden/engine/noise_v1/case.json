@@ -1,0 +1,11 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "detail_version": 1,
+  "noise_luma": 35.0,
+  "sharpen": 40.0
+ },
+ "source": "noise",
+ "use_crop": true
+}

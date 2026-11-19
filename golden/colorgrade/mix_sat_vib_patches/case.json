@@ -1,0 +1,8 @@
+{
+ "changes": {
+  "saturation": 30.0,
+  "vibrance": -40.0
+ },
+ "image": "std:patches",
+ "kind": "mix"
+}

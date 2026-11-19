@@ -1,0 +1,6 @@
+{
+ "decoder": "TIFF 32-bit float",
+ "file": "source.tif",
+ "input_profile_prophoto": "태그 없는 선형 RGB",
+ "input_profile_srgb": "태그 없는 선형 RGB"
+}

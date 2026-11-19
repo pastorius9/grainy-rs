@@ -1,0 +1,22 @@
+{
+ "ceiling": 3.2944159507751465,
+ "highlights": [
+  false,
+  false,
+  false
+ ],
+ "inside": false,
+ "outside": true,
+ "sdr_preview": false,
+ "settings": {
+  "hdr": true,
+  "hdr_brightness": -40.0,
+  "working_space": "ProPhoto"
+ },
+ "shadows": [
+  true,
+  true,
+  true
+ ],
+ "visualize": false
+}

@@ -1,0 +1,386 @@
+{
+ "cases": [
+  {
+   "created": false,
+   "deleted": false,
+   "name": "no screen",
+   "path": null,
+   "queries": 0,
+   "screen": ""
+  },
+  {
+   "created": false,
+   "deleted": false,
+   "error": "Windows 모니터 이름을 확인할 수 없습니다.",
+   "name": "not a device name",
+   "queries": 0,
+   "screen": "HDMI-1"
+  },
+  {
+   "created": false,
+   "deleted": false,
+   "error": "Windows 모니터 이름을 확인할 수 없습니다.",
+   "name": "no number",
+   "queries": 0,
+   "screen": "\\\\.\\DISPLAY"
+  },
+  {
+   "created": false,
+   "deleted": false,
+   "error": "Windows 모니터 이름을 확인할 수 없습니다.",
+   "name": "trailing text",
+   "queries": 0,
+   "screen": "\\\\.\\DISPLAY1x"
+  },
+  {
+   "created": false,
+   "deleted": false,
+   "error": "Windows 모니터 이름을 확인할 수 없습니다.",
+   "name": "other prefix",
+   "queries": 0,
+   "screen": "\\\\?\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 52
+    },
+    {
+     "ok": 1,
+     "size": 52,
+     "value": "C:\\Windows\\System32\\spool\\drivers\\color\\Monitor.icm"
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "lower case",
+   "path": "C:\\Windows\\System32\\spool\\drivers\\color\\Monitor.icm",
+   "queries": 2,
+   "screen": "\\\\.\\display12"
+  },
+  {
+   "create": 0,
+   "create_error": 1801,
+   "created": true,
+   "deleted": false,
+   "error": "[Errno 1801] 모니터 정보를 읽을 수 없습니다.",
+   "name": "CreateDC fails",
+   "queries": 0,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "ok": 1,
+     "size": 0
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "no profile, success",
+   "path": null,
+   "queries": 1,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "ok": 0,
+     "size": 0
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "no profile, code 0",
+   "path": null,
+   "queries": 1,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 2,
+     "ok": 0,
+     "size": 0
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "no profile, code 2",
+   "path": null,
+   "queries": 1,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 1168,
+     "ok": 0,
+     "size": 0
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "no profile, code 1168",
+   "path": null,
+   "queries": 1,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 2015,
+     "ok": 0,
+     "size": 0
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "no profile, code 2015",
+   "path": null,
+   "queries": 1,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 5,
+     "ok": 0,
+     "size": 0
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "error": "[Errno 5] Windows 색상 프로파일을 읽을 수 없습니다.",
+   "name": "size query fails",
+   "queries": 1,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 32769
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "error": "모니터 프로파일 경로가 너무 깁니다.",
+   "name": "path too long",
+   "queries": 1,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 32768
+    },
+    {
+     "ok": 1,
+     "size": 32768,
+     "value": "C:\\Windows\\System32\\spool\\drivers\\color\\Monitor.icm"
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "longest path size",
+   "path": "C:\\Windows\\System32\\spool\\drivers\\color\\Monitor.icm",
+   "queries": 2,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 60
+    },
+    {
+     "ok": 1,
+     "size": 60,
+     "value": "C:\\Windows\\System32\\spool\\drivers\\color\\Monitor.icm"
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "a profile",
+   "path": "C:\\Windows\\System32\\spool\\drivers\\color\\Monitor.icm",
+   "queries": 2,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 60
+    },
+    {
+     "ok": 1,
+     "size": 60,
+     "value": ""
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "an empty path",
+   "path": null,
+   "queries": 2,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 10
+    },
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 60
+    },
+    {
+     "ok": 1,
+     "size": 60,
+     "value": "C:\\Windows\\System32\\spool\\drivers\\color\\Monitor.icm"
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "grown once",
+   "path": "C:\\Windows\\System32\\spool\\drivers\\color\\Monitor.icm",
+   "queries": 3,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 10
+    },
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 20
+    },
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 60
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "error": "Windows 색상 프로파일이 변경 중입니다. 다시 확인해 주세요.",
+   "name": "grown twice",
+   "queries": 3,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 60
+    },
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 60
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "error": "[Errno 122] Windows 색상 프로파일을 읽을 수 없습니다.",
+   "name": "not grown",
+   "queries": 2,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 60
+    },
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 40000
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "error": "[Errno 122] Windows 색상 프로파일을 읽을 수 없습니다.",
+   "name": "grown too far",
+   "queries": 2,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 60
+    },
+    {
+     "error": 5,
+     "ok": 0,
+     "size": 80
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "error": "[Errno 5] Windows 색상 프로파일을 읽을 수 없습니다.",
+   "name": "other error",
+   "queries": 2,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 5,
+     "ok": 0,
+     "size": 60
+    },
+    {
+     "ok": 0,
+     "size": 80
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "error": "[Errno 5] Windows 색상 프로파일을 읽을 수 없습니다.",
+   "name": "stale error code",
+   "queries": 2,
+   "screen": "\\\\.\\DISPLAY1"
+  },
+  {
+   "answers": [
+    {
+     "error": 122,
+     "ok": 0,
+     "size": 40
+    },
+    {
+     "ok": 1,
+     "size": 40,
+     "value": "D:\\프로파일\\모니터.icc"
+    }
+   ],
+   "created": true,
+   "deleted": true,
+   "name": "a path with Korean letters",
+   "path": "D:\\프로파일\\모니터.icc",
+   "queries": 2,
+   "screen": "\\\\.\\DISPLAY3"
+  }
+ ]
+}

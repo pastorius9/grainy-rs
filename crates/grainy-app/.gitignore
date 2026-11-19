@@ -1,0 +1,2 @@
+# Pictures a failed snapshot comparison writes next to the committed ones (tests/common/snapshot.rs).
+tests/snapshots/*.new.png

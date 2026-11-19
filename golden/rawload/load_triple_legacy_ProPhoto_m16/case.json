@@ -1,0 +1,33 @@
+{
+ "file": "triple.dng",
+ "max_size": 16,
+ "metadata": {
+  "camera": "Test Camera",
+  "decoder": "LibRaw",
+  "file_fingerprint": {
+   "size": 31040
+  },
+  "filename": "triple.dng",
+  "format": "DNG",
+  "height": 100,
+  "make": "Test",
+  "raw_native": false,
+  "size_mb": 0.03,
+  "source_orientation": 1,
+  "width": 150,
+  "working_space": "ProPhoto"
+ },
+ "mode": "legacy",
+ "native": false,
+ "settings": {
+  "raw_mode": "legacy"
+ },
+ "shape": [
+  11,
+  16,
+  3
+ ],
+ "stride": 1,
+ "type": "ndarray",
+ "working_space": "ProPhoto"
+}

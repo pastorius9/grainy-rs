@@ -1,0 +1,876 @@
+{
+ "backups": [
+  "before-profile-assets-v1.sqlite"
+ ],
+ "readers": {
+  "collection_ids": {},
+  "collections": [],
+  "folder_roots": [
+   "Z:\\Generated\\가",
+   "Z:\\Generated\\나"
+  ],
+  "histories": {
+   "1": [],
+   "2": []
+  },
+  "missing_preference": {
+   "fallback": true
+  },
+  "paths": [
+   "Z:\\Generated\\가\\old.jpg",
+   "Z:\\Generated\\나\\older.jpg"
+  ],
+  "photo": {
+   "1": {
+    "edits": "{\"exposure\": 2, \"sharpen\": 20}",
+    "extras": "{}",
+    "flag": 0,
+    "id": 1,
+    "imported": "2026-11-13T01:02:03.456789+00:00",
+    "info": {},
+    "keywords": "",
+    "label": "",
+    "metadata": "{}",
+    "name": "old.jpg",
+    "path": "Z:\\Generated\\가\\old.jpg",
+    "rating": 0,
+    "settings": {
+     "aspect_scale": 0.0,
+     "blacks": 0.0,
+     "ca_blue": 0.0,
+     "ca_red": 0.0,
+     "calibration": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ],
+     "camera_matrix": null,
+     "clarity": 0.0,
+     "contrast": 0.0,
+     "crop": null,
+     "curve": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     "dcp_exposure": true,
+     "dcp_huesat": true,
+     "dcp_look": true,
+     "dcp_profile": null,
+     "dcp_tone": true,
+     "defringe": 0.0,
+     "dehaze": 0.0,
+     "detail_version": 1,
+     "distortion": 0.0,
+     "distortion_k2": 0.0,
+     "distortion_k3": 0.0,
+     "drt_contrast": 0.0,
+     "drt_shoulder": 0.0,
+     "drt_toe": 0.0,
+     "drt_white": 0.0,
+     "exposure": 2,
+     "film_look": "",
+     "film_strength": 100.0,
+     "flip": false,
+     "grading": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "grading_balance": 0.0,
+     "grain": 0.0,
+     "grain_roughness": 50.0,
+     "grain_size": 25.0,
+     "guides": null,
+     "hdr": false,
+     "hdr_brightness": 0.0,
+     "hdr_limit": 4.0,
+     "highlights": 0.0,
+     "hsl": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "kelvin": 6500.0,
+     "kelvin_enabled": false,
+     "lens_profile": "",
+     "lens_vignette": 0.0,
+     "lensfun": null,
+     "lensfun_distortion": true,
+     "lensfun_enabled": false,
+     "lensfun_scale": true,
+     "lensfun_tca": true,
+     "lensfun_vignette": true,
+     "masks": [],
+     "mixer_mode": "hsv",
+     "monochrome": false,
+     "negative": false,
+     "negative_base": null,
+     "negative_density": 0.0,
+     "negative_peak": null,
+     "negative_range": 6.5,
+     "noise_color": 0.0,
+     "noise_luma": 0.0,
+     "panels_off": [],
+     "parametric": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "perspective_h": 0.0,
+     "perspective_v": 0.0,
+     "photo_filter": "warming85",
+     "photo_filter_density": 25.0,
+     "photo_filter_enabled": false,
+     "photo_filter_luminosity": true,
+     "point_colors": [],
+     "raw_kelvin": 6500.0,
+     "raw_mode": "legacy",
+     "raw_neutral": null,
+     "raw_tint": 0.0,
+     "retouch": [],
+     "rgb_curves": [
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ],
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ],
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ]
+     ],
+     "rotation": 0,
+     "saturation": 0.0,
+     "sdr_compression": 75.0,
+     "sdr_exposure": 0.0,
+     "shadows": 0.0,
+     "sharpen": 20,
+     "sharpen_detail": 50.0,
+     "sharpen_mask": 0.0,
+     "sharpen_radius": 0.8,
+     "shift_x": 0.0,
+     "shift_y": 0.0,
+     "straighten": 0.0,
+     "temperature": 0.0,
+     "texture": 0.0,
+     "tint": 0.0,
+     "tone_mapping": "classic",
+     "tone_version": 1,
+     "transform_scale": 100.0,
+     "upright": null,
+     "upright_crop": true,
+     "vibrance": 0.0,
+     "video_color": null,
+     "video_time": 0.0,
+     "vignette": 0.0,
+     "vignette_feather": 50.0,
+     "vignette_highlights": 0.0,
+     "vignette_midpoint": 50.0,
+     "vignette_roundness": 0.0,
+     "wb_reference": 6500.0,
+     "whites": 0.0,
+     "working_space": "sRGB"
+    },
+    "stack_id": null,
+    "user_metadata": {},
+    "virtual_source": null
+   },
+   "2": {
+    "edits": "{\"noise_luma\": 10, \"tone_version\": 2, \"shadows\": 20}",
+    "extras": "{}",
+    "flag": 0,
+    "id": 2,
+    "imported": "2026-11-13T01:02:03.456789+00:00",
+    "info": {},
+    "keywords": "",
+    "label": "",
+    "metadata": "{}",
+    "name": "older.jpg",
+    "path": "Z:\\Generated\\나\\older.jpg",
+    "rating": 0,
+    "settings": {
+     "aspect_scale": 0.0,
+     "blacks": 0.0,
+     "ca_blue": 0.0,
+     "ca_red": 0.0,
+     "calibration": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ],
+     "camera_matrix": null,
+     "clarity": 0.0,
+     "contrast": 0.0,
+     "crop": null,
+     "curve": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     "dcp_exposure": true,
+     "dcp_huesat": true,
+     "dcp_look": true,
+     "dcp_profile": null,
+     "dcp_tone": true,
+     "defringe": 0.0,
+     "dehaze": 0.0,
+     "detail_version": 2,
+     "distortion": 0.0,
+     "distortion_k2": 0.0,
+     "distortion_k3": 0.0,
+     "drt_contrast": 0.0,
+     "drt_shoulder": 0.0,
+     "drt_toe": 0.0,
+     "drt_white": 0.0,
+     "exposure": 0.0,
+     "film_look": "",
+     "film_strength": 100.0,
+     "flip": false,
+     "grading": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "grading_balance": 0.0,
+     "grain": 0.0,
+     "grain_roughness": 50.0,
+     "grain_size": 25.0,
+     "guides": null,
+     "hdr": false,
+     "hdr_brightness": 0.0,
+     "hdr_limit": 4.0,
+     "highlights": 0.0,
+     "hsl": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "kelvin": 6500.0,
+     "kelvin_enabled": false,
+     "lens_profile": "",
+     "lens_vignette": 0.0,
+     "lensfun": null,
+     "lensfun_distortion": true,
+     "lensfun_enabled": false,
+     "lensfun_scale": true,
+     "lensfun_tca": true,
+     "lensfun_vignette": true,
+     "masks": [],
+     "mixer_mode": "hsv",
+     "monochrome": false,
+     "negative": false,
+     "negative_base": null,
+     "negative_density": 0.0,
+     "negative_peak": null,
+     "negative_range": 6.5,
+     "noise_color": 0.0,
+     "noise_luma": 10,
+     "panels_off": [],
+     "parametric": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "perspective_h": 0.0,
+     "perspective_v": 0.0,
+     "photo_filter": "warming85",
+     "photo_filter_density": 25.0,
+     "photo_filter_enabled": false,
+     "photo_filter_luminosity": true,
+     "point_colors": [],
+     "raw_kelvin": 6500.0,
+     "raw_mode": "legacy",
+     "raw_neutral": null,
+     "raw_tint": 0.0,
+     "retouch": [],
+     "rgb_curves": [
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ],
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ],
+      [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.75
+       ],
+       [
+        1.0,
+        1.0
+       ]
+      ]
+     ],
+     "rotation": 0,
+     "saturation": 0.0,
+     "sdr_compression": 75.0,
+     "sdr_exposure": 0.0,
+     "shadows": 20,
+     "sharpen": 0.0,
+     "sharpen_detail": 50.0,
+     "sharpen_mask": 0.0,
+     "sharpen_radius": 0.8,
+     "shift_x": 0.0,
+     "shift_y": 0.0,
+     "straighten": 0.0,
+     "temperature": 0.0,
+     "texture": 0.0,
+     "tint": 0.0,
+     "tone_mapping": "classic",
+     "tone_version": 2,
+     "transform_scale": 100.0,
+     "upright": null,
+     "upright_crop": true,
+     "vibrance": 0.0,
+     "video_color": null,
+     "video_time": 0.0,
+     "vignette": 0.0,
+     "vignette_feather": 50.0,
+     "vignette_highlights": 0.0,
+     "vignette_midpoint": 50.0,
+     "vignette_roundness": 0.0,
+     "wb_reference": 6500.0,
+     "whites": 0.0,
+     "working_space": "sRGB"
+    },
+    "stack_id": null,
+    "user_metadata": {},
+    "virtual_source": null
+   },
+   "99999": null
+  },
+  "photos": [
+   {
+    "edits": "{\"exposure\": 2, \"sharpen\": 20}",
+    "extras": "{}",
+    "flag": 0,
+    "id": 1,
+    "imported": "2026-11-13T01:02:03.456789+00:00",
+    "keywords": "",
+    "label": "",
+    "metadata": "{}",
+    "name": "old.jpg",
+    "path": "Z:\\Generated\\가\\old.jpg",
+    "rating": 0,
+    "stack_id": null,
+    "virtual_source": null
+   },
+   {
+    "edits": "{\"noise_luma\": 10, \"tone_version\": 2, \"shadows\": 20}",
+    "extras": "{}",
+    "flag": 0,
+    "id": 2,
+    "imported": "2026-11-13T01:02:03.456789+00:00",
+    "keywords": "",
+    "label": "",
+    "metadata": "{}",
+    "name": "older.jpg",
+    "path": "Z:\\Generated\\나\\older.jpg",
+    "rating": 0,
+    "stack_id": null,
+    "virtual_source": null
+   }
+  ],
+  "preferences": {},
+  "presets": {},
+  "removed_folders": [],
+  "snapshots": {
+   "1": [],
+   "2": []
+  }
+ },
+ "schema": [
+  [
+   "index",
+   "browser_capture",
+   "browser_index",
+   "CREATE INDEX browser_capture ON browser_index(capture_key,id)"
+  ],
+  [
+   "index",
+   "browser_folder",
+   "browser_index",
+   "CREATE INDEX browser_folder ON browser_index(folder_key COLLATE NOCASE)"
+  ],
+  [
+   "index",
+   "browser_name",
+   "browser_index",
+   "CREATE INDEX browser_name ON browser_index(name_key,id)"
+  ],
+  [
+   "index",
+   "photos_flag",
+   "photos",
+   "CREATE INDEX photos_flag ON photos(flag,id)"
+  ],
+  [
+   "index",
+   "photos_path",
+   "photos",
+   "CREATE INDEX photos_path ON photos(path COLLATE NOCASE)"
+  ],
+  [
+   "index",
+   "photos_rating",
+   "photos",
+   "CREATE INDEX photos_rating ON photos(rating,id)"
+  ],
+  [
+   "index",
+   "photos_stack",
+   "photos",
+   "CREATE INDEX photos_stack ON photos(stack_id)"
+  ],
+  [
+   "table",
+   "browser_dirty",
+   "browser_dirty",
+   "CREATE TABLE browser_dirty (id INTEGER PRIMARY KEY)"
+  ],
+  [
+   "table",
+   "browser_index",
+   "browser_index",
+   "CREATE TABLE browser_index (\n                id INTEGER PRIMARY KEY,folder TEXT NOT NULL,folder_key TEXT NOT NULL,\n                name_key TEXT NOT NULL,keywords_key TEXT NOT NULL,capture_key TEXT NOT NULL)"
+  ],
+  [
+   "table",
+   "collection_members",
+   "collection_members",
+   "CREATE TABLE collection_members (collection_id INTEGER,photo_id INTEGER,PRIMARY KEY(collection_id,photo_id))"
+  ],
+  [
+   "table",
+   "collections",
+   "collections",
+   "CREATE TABLE collections (id INTEGER PRIMARY KEY,name TEXT NOT NULL,parent_id INTEGER,rules TEXT)"
+  ],
+  [
+   "table",
+   "dust_entries",
+   "dust_entries",
+   "CREATE TABLE dust_entries (\n            session_id TEXT NOT NULL,ordinal INTEGER NOT NULL,photo_id INTEGER NOT NULL,\n            path TEXT NOT NULL,state TEXT NOT NULL,payload BLOB NOT NULL,\n            PRIMARY KEY(session_id,ordinal))"
+  ],
+  [
+   "table",
+   "dust_sessions",
+   "dust_sessions",
+   "CREATE TABLE dust_sessions (\n            id TEXT PRIMARY KEY,version INTEGER NOT NULL,target_key TEXT NOT NULL,\n            scope TEXT NOT NULL,snapshot TEXT NOT NULL,options TEXT NOT NULL,\n            created TEXT NOT NULL,updated TEXT NOT NULL,current_index INTEGER NOT NULL,\n            revision INTEGER NOT NULL)"
+  ],
+  [
+   "table",
+   "folder_roots",
+   "folder_roots",
+   "CREATE TABLE folder_roots (path TEXT PRIMARY KEY COLLATE NOCASE)"
+  ],
+  [
+   "table",
+   "history",
+   "history",
+   "CREATE TABLE history (\n                id INTEGER PRIMARY KEY, photo_id INTEGER NOT NULL,\n                label TEXT NOT NULL, edits TEXT NOT NULL, created TEXT NOT NULL\n            )"
+  ],
+  [
+   "table",
+   "photos",
+   "photos",
+   "CREATE TABLE \"photos\" (\n                id INTEGER PRIMARY KEY,path TEXT NOT NULL,name TEXT NOT NULL,\n                rating INTEGER NOT NULL DEFAULT 0,flag INTEGER NOT NULL DEFAULT 0,\n                keywords TEXT NOT NULL DEFAULT '',edits TEXT NOT NULL,metadata TEXT NOT NULL DEFAULT '{}',\n                imported TEXT NOT NULL,label TEXT NOT NULL DEFAULT '',stack_id INTEGER,\n                virtual_source INTEGER,extras TEXT NOT NULL DEFAULT '{}')"
+  ],
+  [
+   "table",
+   "preferences",
+   "preferences",
+   "CREATE TABLE preferences (key TEXT PRIMARY KEY, value TEXT NOT NULL)"
+  ],
+  [
+   "table",
+   "presets",
+   "presets",
+   "CREATE TABLE presets (name TEXT PRIMARY KEY, edits TEXT NOT NULL)"
+  ],
+  [
+   "table",
+   "preview_state",
+   "preview_state",
+   "CREATE TABLE preview_state(photo_id INTEGER PRIMARY KEY,token TEXT NOT NULL)"
+  ],
+  [
+   "table",
+   "profile_assets",
+   "profile_assets",
+   "CREATE TABLE profile_assets (\n        sha256 TEXT PRIMARY KEY, data BLOB NOT NULL, size INTEGER NOT NULL)"
+  ],
+  [
+   "table",
+   "snapshots",
+   "snapshots",
+   "CREATE TABLE snapshots (id INTEGER PRIMARY KEY,photo_id INTEGER,name TEXT,edits TEXT,created TEXT)"
+  ],
+  [
+   "trigger",
+   "browser_added",
+   "photos",
+   "CREATE TRIGGER browser_added AFTER INSERT ON photos BEGIN\n                INSERT OR IGNORE INTO browser_dirty VALUES(NEW.id); END"
+  ],
+  [
+   "trigger",
+   "browser_changed",
+   "photos",
+   "CREATE TRIGGER browser_changed AFTER UPDATE OF path,name,keywords,metadata,extras ON photos BEGIN\n                INSERT OR IGNORE INTO browser_dirty VALUES(NEW.id); END"
+  ],
+  [
+   "trigger",
+   "browser_removed",
+   "photos",
+   "CREATE TRIGGER browser_removed AFTER DELETE ON photos BEGIN\n                DELETE FROM browser_index WHERE id=OLD.id;\n                DELETE FROM browser_dirty WHERE id=OLD.id; END"
+  ],
+  [
+   "trigger",
+   "preview_added",
+   "photos",
+   "CREATE TRIGGER preview_added AFTER INSERT ON photos BEGIN\n            INSERT OR REPLACE INTO preview_state VALUES(NEW.id,lower(hex(randomblob(16)))); END"
+  ],
+  [
+   "trigger",
+   "preview_changed",
+   "photos",
+   "CREATE TRIGGER preview_changed AFTER UPDATE OF edits,path ON photos\n            WHEN OLD.edits != NEW.edits OR OLD.path != NEW.path BEGIN\n            INSERT OR REPLACE INTO preview_state VALUES(NEW.id,lower(hex(randomblob(16)))); END"
+  ],
+  [
+   "trigger",
+   "preview_removed",
+   "photos",
+   "CREATE TRIGGER preview_removed AFTER DELETE ON photos BEGIN\n            DELETE FROM preview_state WHERE photo_id=OLD.id; END"
+  ]
+ ],
+ "tables": {
+  "browser_dirty": [
+   {
+    "id": 1
+   },
+   {
+    "id": 2
+   }
+  ],
+  "browser_index": [],
+  "collection_members": [],
+  "collections": [],
+  "dust_entries": [],
+  "dust_sessions": [],
+  "folder_roots": [
+   {
+    "path": "Z:\\Generated\\가"
+   },
+   {
+    "path": "Z:\\Generated\\나"
+   }
+  ],
+  "history": [],
+  "photos": [
+   {
+    "edits": "{\"exposure\": 2, \"sharpen\": 20}",
+    "extras": "{}",
+    "flag": 0,
+    "id": 1,
+    "imported": "2026-11-13T01:02:03.456789+00:00",
+    "keywords": "",
+    "label": "",
+    "metadata": "{}",
+    "name": "old.jpg",
+    "path": "Z:\\Generated\\가\\old.jpg",
+    "rating": 0,
+    "stack_id": null,
+    "virtual_source": null
+   },
+   {
+    "edits": "{\"noise_luma\": 10, \"tone_version\": 2, \"shadows\": 20}",
+    "extras": "{}",
+    "flag": 0,
+    "id": 2,
+    "imported": "2026-11-13T01:02:03.456789+00:00",
+    "keywords": "",
+    "label": "",
+    "metadata": "{}",
+    "name": "older.jpg",
+    "path": "Z:\\Generated\\나\\older.jpg",
+    "rating": 0,
+    "stack_id": null,
+    "virtual_source": null
+   }
+  ],
+  "preferences": [],
+  "presets": [],
+  "preview_state": [
+   {
+    "photo_id": 1,
+    "token": "0123456789abcdef0123456789abcdef"
+   },
+   {
+    "photo_id": 2,
+    "token": "0123456789abcdef0123456789abcdef"
+   }
+  ],
+  "profile_assets": [],
+  "snapshots": []
+ }
+}

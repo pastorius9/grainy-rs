@@ -1,0 +1,11 @@
+{
+ "dtype": "float32",
+ "interpolation": "linear",
+ "op": "resize",
+ "output_dtype": "float32",
+ "size": [
+  22,
+  7
+ ],
+ "tolerance": 2e-06
+}

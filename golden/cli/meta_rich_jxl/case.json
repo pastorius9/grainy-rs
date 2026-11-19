@@ -1,0 +1,49 @@
+{
+ "bytes": 4114,
+ "exact": true,
+ "extension": ".jxl",
+ "found": {},
+ "height": 60,
+ "lossless": false,
+ "options": {
+  "color_space": "sRGB",
+  "dither": false,
+  "format": "JPEG XL",
+  "grayscale": false,
+  "keep_metadata": true,
+  "keywords": " travel, film|tokyo, ,a&b ",
+  "longest": null,
+  "quality": 95,
+  "user_metadata": {
+   "DateTimeOriginal": "2024:02:03 04:05:06",
+   "caption": "Line 1\nLine 2 & <3>",
+   "city": "Seoul",
+   "copyright": "(c) 2026",
+   "country": "KR",
+   "creator": "Zoe Writer",
+   "latitude": -33.8587,
+   "location": "Rooftop",
+   "longitude": 151.214,
+   "title": "A & B <film>"
+  }
+ },
+ "settings": {
+  "blacks": -10.0,
+  "clarity": 20.0,
+  "contrast": 20.0,
+  "exposure": 0.4,
+  "highlights": -40.0,
+  "saturation": 15.0,
+  "shadows": 30.0,
+  "sharpen": 40.0,
+  "temperature": 8.0,
+  "texture": 15.0,
+  "tint": -4.0,
+  "vibrance": 20.0,
+  "vignette": -20.0,
+  "whites": 10.0
+ },
+ "settings_key": "mix",
+ "source": "png8_exif.png",
+ "width": 40
+}

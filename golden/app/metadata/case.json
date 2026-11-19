@@ -1,0 +1,2727 @@
+{
+ "fields": [
+  "title",
+  "caption",
+  "creator",
+  "copyright",
+  "location",
+  "city",
+  "country",
+  "DateTimeOriginal",
+  "latitude",
+  "longitude"
+ ],
+ "final": [
+  {
+   "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+   "flag": 0,
+   "id": 1,
+   "keywords": "여행|일본, 필름, new",
+   "label": "",
+   "metadata": "{\"width\": 6000, \"height\": 4000, \"format\": \"JPEG\", \"size_mb\": 12.5, \"camera\": \"Canon EOS R5\", \"date\": \"2025:06:01 10:00:00\"}",
+   "name": "a.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\a.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+   "flag": 0,
+   "id": 2,
+   "keywords": "여행|한국",
+   "label": "",
+   "metadata": "{\"width\": 300, \"height\": 200, \"format\": \"JPEG\", \"size_mb\": 0.05, \"date\": \"2024:12:31 23:30:00\"}",
+   "name": "b.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\b.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"location\": \"서울 · 성수\", \"country\": \"KR\"}",
+   "flag": 0,
+   "id": 3,
+   "keywords": "여행|한국",
+   "label": "",
+   "metadata": "{\"width\": 96, \"height\": 64, \"format\": \"PNG\", \"size_mb\": 0.01}",
+   "name": "c.png",
+   "path": "Z:\\GrainyGolden\\meta\\c.png",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+   "flag": 0,
+   "id": 4,
+   "keywords": "풍경, 여행|일본",
+   "label": "",
+   "metadata": "{\"width\": 96, \"height\": 64, \"format\": \"JPEG\", \"size_mb\": 0.02, \"date\": \"2023:03:04 05:06:07\"}",
+   "name": "d.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\d.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+   "flag": 0,
+   "id": 5,
+   "keywords": "여행|한국|서울, 여행|일본",
+   "label": "",
+   "metadata": "{\"date\": \"\"}",
+   "name": "e.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\e.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+   "flag": 0,
+   "id": 6,
+   "keywords": "풍경, 여행|일본",
+   "label": "",
+   "metadata": "{\"date\": \"2020:02:29 12:00:00\"}",
+   "name": "f.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\f.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+   "flag": 0,
+   "id": 7,
+   "keywords": " 가 , ,나|다 ",
+   "label": "",
+   "metadata": "{}",
+   "name": "g.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\g.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+   "flag": 0,
+   "id": 8,
+   "keywords": "",
+   "label": "",
+   "metadata": "{}",
+   "name": "h.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\h.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  }
+ ],
+ "final_tree": {
+  "clicks": [
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "new",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "new"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "가",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "가"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "나",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "나"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "나|다",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "나|다"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "여행",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "여행"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "여행|일본",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "여행|일본"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "여행|한국",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "여행|한국"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "여행|한국|서울",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "여행|한국|서울"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "풍경",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "풍경"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "필름",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "필름"
+    }
+   }
+  ],
+  "footer": [
+   "더블클릭으로 사진 필터 · 사진 관리 → 메타데이터 편집에서 키워드 수정"
+  ],
+  "header": [
+   "키워드",
+   "사진"
+  ],
+  "rows": [
+   [
+    0,
+    "new",
+    "1",
+    "new"
+   ],
+   [
+    0,
+    "가",
+    "1",
+    "가"
+   ],
+   [
+    0,
+    "나",
+    "1",
+    "나"
+   ],
+   [
+    1,
+    "다",
+    "1",
+    "나|다"
+   ],
+   [
+    0,
+    "여행",
+    "6",
+    "여행"
+   ],
+   [
+    1,
+    "일본",
+    "4",
+    "여행|일본"
+   ],
+   [
+    1,
+    "한국",
+    "3",
+    "여행|한국"
+   ],
+   [
+    2,
+    "서울",
+    "1",
+    "여행|한국|서울"
+   ],
+   [
+    0,
+    "풍경",
+    "2",
+    "풍경"
+   ],
+   [
+    0,
+    "필름",
+    "1",
+    "필름"
+   ]
+  ],
+  "title": "계층형 키워드"
+ },
+ "root": "Z:\\GrainyGolden\\meta",
+ "rows": [
+  {
+   "extras": "{\"title\": \"Garden\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\"}",
+   "keywords": "여행|일본, 필름",
+   "metadata": "{\"width\": 6000, \"height\": 4000, \"format\": \"JPEG\", \"size_mb\": 12.5, \"camera\": \"Canon EOS R5\", \"date\": \"2025:06:01 10:00:00\"}",
+   "name": "a.jpg"
+  },
+  {
+   "extras": "{\"caption\": \"dusk\"}",
+   "keywords": "여행|일본|도쿄, Sunset",
+   "metadata": "{\"width\": 300, \"height\": 200, \"format\": \"JPEG\", \"size_mb\": 0.05, \"date\": \"2024:12:31 23:30:00\"}",
+   "name": "b.jpg"
+  },
+  {
+   "extras": "{}",
+   "keywords": "",
+   "metadata": "{\"width\": 96, \"height\": 64, \"format\": \"PNG\", \"size_mb\": 0.01}",
+   "name": "c.png"
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"W\"}",
+   "keywords": "인물",
+   "metadata": "{\"width\": 96, \"height\": 64, \"format\": \"JPEG\", \"size_mb\": 0.02, \"date\": \"2023:03:04 05:06:07\"}",
+   "name": "d.jpg"
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"\"}",
+   "keywords": "여행|한국|서울, 여행|일본",
+   "metadata": "{\"date\": \"\"}",
+   "name": "e.jpg"
+  },
+  {
+   "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"]}",
+   "keywords": "Sunset",
+   "metadata": "{\"date\": \"2020:02:29 12:00:00\"}",
+   "name": "f.jpg"
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+   "keywords": " 가 , ,나|다 ",
+   "metadata": "{}",
+   "name": "g.jpg"
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+   "keywords": "",
+   "metadata": "{}",
+   "name": "h.jpg"
+  }
+ ],
+ "start": [
+  {
+   "extras": "{\"title\": \"Garden\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\"}",
+   "flag": 0,
+   "id": 1,
+   "keywords": "여행|일본, 필름",
+   "label": "",
+   "metadata": "{\"width\": 6000, \"height\": 4000, \"format\": \"JPEG\", \"size_mb\": 12.5, \"camera\": \"Canon EOS R5\", \"date\": \"2025:06:01 10:00:00\"}",
+   "name": "a.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\a.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"caption\": \"dusk\"}",
+   "flag": 0,
+   "id": 2,
+   "keywords": "여행|일본|도쿄, Sunset",
+   "label": "",
+   "metadata": "{\"width\": 300, \"height\": 200, \"format\": \"JPEG\", \"size_mb\": 0.05, \"date\": \"2024:12:31 23:30:00\"}",
+   "name": "b.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\b.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{}",
+   "flag": 0,
+   "id": 3,
+   "keywords": "",
+   "label": "",
+   "metadata": "{\"width\": 96, \"height\": 64, \"format\": \"PNG\", \"size_mb\": 0.01}",
+   "name": "c.png",
+   "path": "Z:\\GrainyGolden\\meta\\c.png",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"W\"}",
+   "flag": 0,
+   "id": 4,
+   "keywords": "인물",
+   "label": "",
+   "metadata": "{\"width\": 96, \"height\": 64, \"format\": \"JPEG\", \"size_mb\": 0.02, \"date\": \"2023:03:04 05:06:07\"}",
+   "name": "d.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\d.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"\"}",
+   "flag": 0,
+   "id": 5,
+   "keywords": "여행|한국|서울, 여행|일본",
+   "label": "",
+   "metadata": "{\"date\": \"\"}",
+   "name": "e.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\e.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"]}",
+   "flag": 0,
+   "id": 6,
+   "keywords": "Sunset",
+   "label": "",
+   "metadata": "{\"date\": \"2020:02:29 12:00:00\"}",
+   "name": "f.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\f.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+   "flag": 0,
+   "id": 7,
+   "keywords": " 가 , ,나|다 ",
+   "label": "",
+   "metadata": "{}",
+   "name": "g.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\g.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  },
+  {
+   "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+   "flag": 0,
+   "id": 8,
+   "keywords": "",
+   "label": "",
+   "metadata": "{}",
+   "name": "h.jpg",
+   "path": "Z:\\GrainyGolden\\meta\\h.jpg",
+   "rating": 0,
+   "stack_id": null,
+   "virtual_source": null
+  }
+ ],
+ "start_tree": {
+  "clicks": [
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "Sunset",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "Sunset"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "가",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "가"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "나",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "나"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "나|다",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "나|다"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "여행",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "여행"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "여행|일본",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "여행|일본"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "여행|일본|도쿄",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "여행|일본|도쿄"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "여행|한국",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "여행|한국"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "여행|한국|서울",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "여행|한국|서울"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "인물",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "인물"
+    }
+   },
+   {
+    "collection": null,
+    "folder_filter": null,
+    "modes": [
+     1
+    ],
+    "path": "필름",
+    "refreshes": [
+     {
+      "ensure_current": true
+     }
+    ],
+    "rules": {
+     "keywords": "필름"
+    }
+   }
+  ],
+  "footer": [
+   "더블클릭으로 사진 필터 · 사진 관리 → 메타데이터 편집에서 키워드 수정"
+  ],
+  "header": [
+   "키워드",
+   "사진"
+  ],
+  "rows": [
+   [
+    0,
+    "Sunset",
+    "2",
+    "Sunset"
+   ],
+   [
+    0,
+    "가",
+    "1",
+    "가"
+   ],
+   [
+    0,
+    "나",
+    "1",
+    "나"
+   ],
+   [
+    1,
+    "다",
+    "1",
+    "나|다"
+   ],
+   [
+    0,
+    "여행",
+    "3",
+    "여행"
+   ],
+   [
+    1,
+    "일본",
+    "3",
+    "여행|일본"
+   ],
+   [
+    2,
+    "도쿄",
+    "1",
+    "여행|일본|도쿄"
+   ],
+   [
+    1,
+    "한국",
+    "1",
+    "여행|한국"
+   ],
+   [
+    2,
+    "서울",
+    "1",
+    "여행|한국|서울"
+   ],
+   [
+    0,
+    "인물",
+    "1",
+    "인물"
+   ],
+   [
+    0,
+    "필름",
+    "1",
+    "필름"
+   ]
+  ],
+  "title": "계층형 키워드"
+ },
+ "steps": [
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\"}",
+     "id": 2,
+     "keywords": "여행|일본|도쿄, Sunset"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"W\"}",
+     "id": 4,
+     "keywords": "인물"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"]}",
+     "id": 6,
+     "keywords": "Sunset"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "open",
+    1
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\"}",
+     "id": 2,
+     "keywords": "여행|일본|도쿄, Sunset"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"W\"}",
+     "id": 4,
+     "keywords": "인물"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"]}",
+     "id": 6,
+     "keywords": "Sunset"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "keywords",
+    1,
+    "여행|일본, 필름, new"
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\"}",
+     "id": 2,
+     "keywords": "여행|일본|도쿄, Sunset"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"W\"}",
+     "id": 4,
+     "keywords": "인물"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"]}",
+     "id": 6,
+     "keywords": "Sunset"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     1
+    ]
+   ]
+  },
+  {
+   "error": null,
+   "initial": [
+    "Garden",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "2025:06:01 10:05:00",
+    "37.5",
+    "127.0",
+    "여행|일본, 필름, new"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\"}",
+     "id": 2,
+     "keywords": "여행|일본|도쿄, Sunset"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"W\"}",
+     "id": 4,
+     "keywords": "인물"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"]}",
+     "id": 6,
+     "keywords": "Sunset"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "city": "Tokyo",
+     "title": "Garden 2"
+    },
+    null
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\"}",
+     "id": 2,
+     "keywords": "여행|일본|도쿄, Sunset"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"W\"}",
+     "id": 4,
+     "keywords": "인물"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"]}",
+     "id": 6,
+     "keywords": "Sunset"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     2,
+     4,
+     6
+    ]
+   ]
+  },
+  {
+   "error": null,
+   "initial": [
+    "",
+    "dusk",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "여행|일본|도쿄, Sunset"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "creator": "Kim",
+     "latitude": "35.68",
+     "longitude": "139.69"
+    },
+    "풍경, 여행|일본"
+   ]
+  },
+  {
+   "error": "ValueError: GPS 좌표 범위를 확인하세요.",
+   "initial": [
+    "",
+    "dusk",
+    "Kim",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "35.68",
+    "139.69",
+    "풍경, 여행|일본"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "latitude": "91"
+    },
+    null
+   ]
+  },
+  {
+   "error": "ValueError: GPS 좌표 범위를 확인하세요.",
+   "initial": [
+    "",
+    "dusk",
+    "Kim",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "35.68",
+    "139.69",
+    "풍경, 여행|일본"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "longitude": "-180.5"
+    },
+    null
+   ]
+  },
+  {
+   "error": "ValueError: could not convert string to float: 'abc'",
+   "initial": [
+    "",
+    "dusk",
+    "Kim",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "35.68",
+    "139.69",
+    "풍경, 여행|일본"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "longitude": "abc"
+    },
+    null
+   ]
+  },
+  {
+   "error": "ValueError: time data '2025-06-01' does not match format '%Y:%m:%d %H:%M:%S'",
+   "initial": [
+    "",
+    "dusk",
+    "Kim",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "35.68",
+    "139.69",
+    "풍경, 여행|일본"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2023:03:04 05:07:08\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "DateTimeOriginal": "2025-06-01"
+    },
+    null
+   ]
+  },
+  {
+   "error": null,
+   "initial": [
+    "",
+    "dusk",
+    "Kim",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "35.68",
+    "139.69",
+    "풍경, 여행|일본"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 08:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 08:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 08:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "DateTimeOriginal": "2025:07:04 08:09:10"
+    },
+    null
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 10:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 08:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 08:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 08:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 19:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 17:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 17:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 17:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [
+    "4장 촬영 시각을 변경했습니다."
+   ],
+   "step": [
+    "shift",
+    540
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [
+    "4장 촬영 시각을 변경했습니다."
+   ],
+   "step": [
+    "shift",
+    -60
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [
+    "4장 촬영 시각을 변경했습니다."
+   ],
+   "step": [
+    "shift",
+    0
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"Garden 2\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     1,
+     4
+    ]
+   ]
+  },
+  {
+   "error": null,
+   "initial": [
+    "Garden 2",
+    "",
+    "",
+    "",
+    "",
+    "Tokyo",
+    "",
+    "2025:06:01 18:05:00",
+    "37.5",
+    "127.0",
+    "여행|일본, 필름, new"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "title": ""
+    },
+    null
+   ]
+  },
+  {
+   "error": null,
+   "initial": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "Tokyo",
+    "",
+    "2025:06:01 18:05:00",
+    "37.5",
+    "127.0",
+    "여행|일본, 필름, new"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {},
+    null
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     5
+    ]
+   ]
+  },
+  {
+   "error": null,
+   "initial": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "여행|한국|서울, 여행|일본"
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2024:02:29 23:59:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "DateTimeOriginal": "2024:02:29 23:59:59"
+    },
+    null
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2024:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [
+    "1장 촬영 시각을 변경했습니다."
+   ],
+   "step": [
+    "shift",
+    1
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [
+    "1장 촬영 시각을 변경했습니다."
+   ],
+   "step": [
+    "shift",
+    525600
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     6
+    ]
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [
+    "1장 촬영 시각을 변경했습니다."
+   ],
+   "step": [
+    "shift",
+    -525600
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     7
+    ]
+   ]
+  },
+  {
+   "error": "OverflowError: date value out of range",
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "shift",
+    1
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     8,
+     1
+    ]
+   ]
+  },
+  {
+   "error": "ValueError: time data 'garbage' does not match format '%Y:%m:%d %H:%M:%S'",
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "shift",
+    5
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{}",
+     "id": 3,
+     "keywords": ""
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     3
+    ]
+   ]
+  },
+  {
+   "error": null,
+   "initial": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"location\": \"서울 · 성수\", \"country\": \"KR\"}",
+     "id": 3,
+     "keywords": "풍경"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {
+     "country": "KR",
+     "location": "서울 · 성수"
+    },
+    "풍경"
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"location\": \"서울 · 성수\", \"country\": \"KR\"}",
+     "id": 3,
+     "keywords": "풍경"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "open",
+    2
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "  a ,, b|c "
+    },
+    {
+     "extras": "{\"location\": \"서울 · 성수\", \"country\": \"KR\"}",
+     "id": 3,
+     "keywords": "풍경"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "keywords",
+    2,
+    "  a ,, b|c "
+   ]
+  },
+  {
+   "error": null,
+   "initial": null,
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "  a ,, b|c "
+    },
+    {
+     "extras": "{\"location\": \"서울 · 성수\", \"country\": \"KR\"}",
+     "id": 3,
+     "keywords": "풍경"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "select",
+    [
+     2,
+     3
+    ]
+   ]
+  },
+  {
+   "error": null,
+   "initial": [
+    "",
+    "dusk",
+    "Kim",
+    "",
+    "",
+    "",
+    "",
+    "2025:07:04 16:09:10",
+    "35.68",
+    "139.69",
+    "  a ,, b|c "
+   ],
+   "rows": [
+    {
+     "extras": "{\"title\": \"\", \"DateTimeOriginal\": \"2025:06:01 18:05:00\", \"latitude\": 37.5, \"longitude\": \"127.0\", \"workflow_note\": \"keep me\", \"city\": \"Tokyo\"}",
+     "id": 1,
+     "keywords": "여행|일본, 필름, new"
+    },
+    {
+     "extras": "{\"caption\": \"dusk\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2025:07:04 16:09:10\"}",
+     "id": 2,
+     "keywords": "여행|한국"
+    },
+    {
+     "extras": "{\"location\": \"서울 · 성수\", \"country\": \"KR\"}",
+     "id": 3,
+     "keywords": "여행|한국"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:07:04 16:09:10\", \"copyright\": \"(c) W\", \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"title\": \"\"}",
+     "id": 4,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"2025:03:01 00:00:59\"}",
+     "id": 5,
+     "keywords": "여행|한국|서울, 여행|일본"
+    },
+    {
+     "extras": "{\"title\": 5, \"altitude\": 12.25, \"tags\": [\"x\", \"y\"], \"creator\": \"Kim\", \"latitude\": \"35.68\", \"longitude\": \"139.69\", \"DateTimeOriginal\": \"2024:07:04 16:09:10\"}",
+     "id": 6,
+     "keywords": "풍경, 여행|일본"
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"9999:12:31 23:59:59\"}",
+     "id": 7,
+     "keywords": " 가 , ,나|다 "
+    },
+    {
+     "extras": "{\"DateTimeOriginal\": \"garbage\"}",
+     "id": 8,
+     "keywords": ""
+    }
+   ],
+   "status": [],
+   "step": [
+    "metadata",
+    {},
+    "여행|한국"
+   ]
+  }
+ ]
+}

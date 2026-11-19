@@ -1,0 +1,62 @@
+{
+ "color_changed": false,
+ "height": 200,
+ "kind": "maps",
+ "model": {
+  "focal": 80.0,
+  "model": "poly3",
+  "terms": [
+   -0.009720999747514725,
+   0.0,
+   0.0
+  ]
+ },
+ "settings": {
+  "lensfun": {
+   "aperture": 3.5,
+   "camera": "",
+   "crop": 0.561,
+   "distance": 20,
+   "focal": 64.0,
+   "maker": "Schneider",
+   "name": "Schneider 80mm Xenotar f/2.8",
+   "orientation": 1,
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Schneider</maker>\n        <model>Schneider 80mm Xenotar f/2.8</model>\n        <mount>Rollei 6x6</mount>\n        <cropfactor>0.510</cropfactor>\n        <aspect-ratio>1:1</aspect-ratio>\n        <calibration>\n            <distortion model=\"poly3\" focal=\"80\" k1=\"-0.009721\" />\n        </calibration>\n    </lens>\n</lensdatabase>"
+  },
+  "lensfun_distortion": true,
+  "lensfun_enabled": true,
+  "lensfun_scale": true,
+  "lensfun_tca": true,
+  "lensfun_vignette": true
+ },
+ "tca": null,
+ "vignetting": null,
+ "width": 301,
+ "xs": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  75,
+  150,
+  225,
+  296,
+  297,
+  298,
+  299,
+  300
+ ],
+ "ys": [
+  0,
+  1,
+  2,
+  50,
+  100,
+  150,
+  197,
+  198,
+  199
+ ]
+}

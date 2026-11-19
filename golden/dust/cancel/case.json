@@ -1,0 +1,101 @@
+{
+ "cases": [
+  {
+   "after": 1,
+   "calls": 1,
+   "cancelled": true,
+   "progress": []
+  },
+  {
+   "after": 2,
+   "calls": 2,
+   "cancelled": true,
+   "progress": []
+  },
+  {
+   "after": 5,
+   "calls": 5,
+   "cancelled": true,
+   "progress": []
+  },
+  {
+   "after": 15,
+   "calls": 15,
+   "cancelled": true,
+   "progress": []
+  },
+  {
+   "after": 35,
+   "calls": 35,
+   "cancelled": true,
+   "progress": [
+    [
+     1,
+     36
+    ]
+   ]
+  },
+  {
+   "after": 100,
+   "calls": 100,
+   "cancelled": true,
+   "progress": [
+    [
+     1,
+     36
+    ],
+    [
+     2,
+     36
+    ],
+    [
+     3,
+     36
+    ]
+   ]
+  },
+  {
+   "after": 250,
+   "calls": 250,
+   "cancelled": true,
+   "progress": [
+    [
+     1,
+     36
+    ],
+    [
+     2,
+     36
+    ],
+    [
+     3,
+     36
+    ],
+    [
+     4,
+     36
+    ],
+    [
+     5,
+     36
+    ],
+    [
+     6,
+     36
+    ],
+    [
+     7,
+     36
+    ],
+    [
+     8,
+     36
+    ],
+    [
+     9,
+     36
+    ]
+   ]
+  }
+ ]
+}

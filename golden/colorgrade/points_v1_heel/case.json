@@ -1,0 +1,19 @@
+{
+ "changes": {
+  "point_colors": [
+   {
+    "hue": -30.0,
+    "lightness": 10.0,
+    "range": 0.08,
+    "rgb": [
+     0.9,
+     0.6,
+     0.1
+    ],
+    "saturation": 40.0
+   }
+  ]
+ },
+ "image": "cg:wheel",
+ "kind": "tools"
+}

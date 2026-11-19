@@ -1,0 +1,15 @@
+{
+ "as_shot": {
+  "error_class": "LibRawFileUnsupportedError",
+  "loaded": false,
+  "message": "b'Unsupported file format or not RAW file'",
+  "reason": "지원하지 않는 RAW 형식입니다."
+ },
+ "file": "junk.dng",
+ "legacy": {
+  "error_class": "LibRawFileUnsupportedError",
+  "loaded": false,
+  "message": "b'Unsupported file format or not RAW file'",
+  "reason": "지원하지 않는 RAW 형식입니다."
+ }
+}

@@ -1,0 +1,279 @@
+{
+ "markers": [
+  {
+   "id": 1,
+   "tip": "p01.jpg\n37.500000, 127.000000",
+   "x": 127.0,
+   "y": -37.5
+  },
+  {
+   "id": 2,
+   "tip": "p02.jpg\n-33.868800, 151.209300",
+   "x": 151.2093,
+   "y": 33.8688
+  },
+  {
+   "id": 3,
+   "tip": "p03.jpg\n48.856600, 2.352200",
+   "x": 2.3522,
+   "y": -48.8566
+  },
+  {
+   "id": 6,
+   "tip": "p06.jpg\n-90.000000, 180.000000",
+   "x": 180.0,
+   "y": 90.0
+  },
+  {
+   "id": 9,
+   "tip": "p09.jpg\n1.000000, 0.000000",
+   "x": 0.0,
+   "y": -1.0
+  },
+  {
+   "id": 10,
+   "tip": "p10.jpg\n10.000000, 20.000000",
+   "x": 20.0,
+   "y": -10.0
+  },
+  {
+   "id": 14,
+   "tip": "p14.jpg\n10.000000, 0.500000",
+   "x": 0.5,
+   "y": -10.0
+  },
+  {
+   "id": 15,
+   "tip": "p15 한글.jpg\n35.123457, 139.700000",
+   "x": 139.7000004,
+   "y": -35.123456789
+  },
+  {
+   "id": 17,
+   "tip": "p17.jpg\n5.000000, -0.000000",
+   "x": -0.0,
+   "y": -5.0
+  },
+  {
+   "id": 21,
+   "tip": "p21.jpg\n1.500000, 2.500000",
+   "x": 2.5,
+   "y": -1.5
+  },
+  {
+   "id": 22,
+   "tip": "p22.jpg\n7.250000, -7.750000",
+   "x": -7.75,
+   "y": -7.25
+  },
+  {
+   "id": 24,
+   "tip": "p24.jpg\n0.000000, -0.000000",
+   "x": -1e-07,
+   "y": -1e-07
+  }
+ ],
+ "photos": [
+  {
+   "extras": {},
+   "info": {
+    "latitude": 37.5,
+    "longitude": 127.0
+   },
+   "name": "p01.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "-33.8688",
+    "longitude": " 151.2093 "
+   },
+   "name": "p02.jpg"
+  },
+  {
+   "extras": {
+    "latitude": "48.8566",
+    "longitude": 2.3522
+   },
+   "info": {
+    "latitude": 10,
+    "longitude": 10
+   },
+   "name": "p03.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": 91,
+    "longitude": 0
+   },
+   "name": "p04.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": 0,
+    "longitude": -180.5
+   },
+   "name": "p05.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": -90,
+    "longitude": 180
+   },
+   "name": "p06.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": 12.5
+   },
+   "name": "p07.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "abc",
+    "longitude": "def"
+   },
+   "name": "p08.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": true,
+    "longitude": false
+   },
+   "name": "p09.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "1_0",
+    "longitude": "2_0"
+   },
+   "name": "p10.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "inf",
+    "longitude": "nan"
+   },
+   "name": "p11.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": null,
+    "longitude": null
+   },
+   "name": "p12.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": [
+     1
+    ],
+    "longitude": [
+     2
+    ]
+   },
+   "name": "p13.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "1e1",
+    "longitude": ".5"
+   },
+   "name": "p14.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": 35.123456789,
+    "longitude": 139.7000004
+   },
+   "name": "p15 한글.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "",
+    "longitude": ""
+   },
+   "name": "p16.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "+5",
+    "longitude": "-0"
+   },
+   "name": "p17.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "0x10",
+    "longitude": "1__0"
+   },
+   "name": "p18.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "_1",
+    "longitude": "1_"
+   },
+   "name": "p19.jpg"
+  },
+  {
+   "extras": {
+    "latitude": null
+   },
+   "info": {
+    "latitude": "45",
+    "longitude": "90"
+   },
+   "name": "p20.jpg"
+  },
+  {
+   "extras": {
+    "latitude": 1.5,
+    "longitude": 2.5
+   },
+   "info": {},
+   "name": "p21.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "  \t7.25\n",
+    "longitude": "-7.75"
+   },
+   "name": "p22.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": "Infinity",
+    "longitude": "0"
+   },
+   "name": "p23.jpg"
+  },
+  {
+   "extras": {},
+   "info": {
+    "latitude": 1e-07,
+    "longitude": -1e-07
+   },
+   "name": "p24.jpg"
+  }
+ ],
+ "polygons": 288
+}

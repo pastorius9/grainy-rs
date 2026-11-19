@@ -1,0 +1,27 @@
+{
+ "gains": [
+  1.35,
+  1.0,
+  0.7
+ ],
+ "input": "garden",
+ "result": {
+  "kelvin_enabled": false,
+  "keys": [
+   "exposure",
+   "temperature",
+   "tint",
+   "kelvin_enabled",
+   "contrast"
+  ],
+  "temperature": -59.616302490234375,
+  "tint": 1.6785331964492798
+ },
+ "settings": {
+  "contrast": 7,
+  "exposure": 0.25,
+  "kelvin_enabled": true,
+  "temperature": 3.0,
+  "tint": -2.0
+ }
+}

@@ -1,0 +1,324 @@
+{
+ "changes": {},
+ "info": {
+  "format": "jpg"
+ },
+ "profiles": [
+  {
+   "aperture": 0.0,
+   "camera": "",
+   "capabilities": [
+    "distortion"
+   ],
+   "crop": 1.0,
+   "database_file": "6x6.xml",
+   "distance": 1000.0,
+   "focal": 80.0,
+   "library_version": [
+    0,
+    3,
+    4,
+    0
+   ],
+   "license": "CC BY-SA 3.0",
+   "maker": "Schneider",
+   "name": "Schneider 80mm Xenotar f/2.8",
+   "orientation": 1,
+   "source": "Lensfun",
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Schneider</maker>\n        <model>Schneider 80mm Xenotar f/2.8</model>\n        <mount>Rollei 6x6</mount>\n        <cropfactor>0.510</cropfactor>\n        <aspect-ratio>1:1</aspect-ratio>\n        <calibration>\n            <distortion model=\"poly3\" focal=\"80\" k1=\"-0.009721\" />\n        </calibration>\n    </lens>\n</lensdatabase>"
+  }
+ ],
+ "script": [
+  [
+   "set_profile",
+   "film"
+  ],
+  [
+   "choose",
+   [
+    [
+     "apply"
+    ]
+   ]
+  ],
+  [
+   "auto"
+  ]
+ ],
+ "states": [
+  {
+   "auto_label": "Schneider 80mm Xenotar f/2.8\n80mm · f/0 · 센서 배율 1\n왜곡\n조리개 정보 없음: 주변광량 보정 제외",
+   "boxes": [],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 0,
+   "lensfun_enabled": true,
+   "status": null,
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Schneider 80mm Xenotar f/2.8\n80mm · f/0 · 센서 배율 1\n왜곡\n조리개 정보 없음: 주변광량 보정 제외",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": true,
+     "opened": {
+      "aperture": [
+       0.0,
+       0.0,
+       128.0
+      ],
+      "camera": 0,
+      "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+      "cameras": 8,
+      "crop": [
+       1.0,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       1000.0,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       80.0,
+       80.0,
+       80.0
+      ],
+      "lens": 8,
+      "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+       "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+       "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+       "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+       "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "E 24mm f/1.8 ZA  ·  배율 1.534"
+      ],
+      "result": null,
+      "status": "카메라를 선택해 주세요."
+     },
+     "script": [
+      [
+       "apply"
+      ]
+     ],
+     "states": [
+      {
+       "aperture": [
+        0.0,
+        0.0,
+        128.0
+       ],
+       "camera": 0,
+       "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+       "cameras": 8,
+       "crop": [
+        1.0,
+        0.1,
+        20.0
+       ],
+       "distance": [
+        1000.0,
+        0.01,
+        100000.0
+       ],
+       "focal": [
+        80.0,
+        80.0,
+        80.0
+       ],
+       "lens": 8,
+       "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "lenses": [
+        "사용한 렌즈를 선택하세요",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+        "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+        "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+        "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+        "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+        "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+        "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+        "E 24mm f/1.8 ZA  ·  배율 1.534"
+       ],
+       "result": 0,
+       "status": "카메라를 선택해 주세요."
+      }
+     ]
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 0,
+   "lensfun_enabled": true,
+   "status": "렌즈 보정을 적용했습니다. 실행 취소로 되돌릴 수 있습니다.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  },
+  {
+   "auto_label": "Schneider 80mm Xenotar f/2.8\n80mm · f/0 · 센서 배율 1\n왜곡\n조리개 정보 없음: 주변광량 보정 제외",
+   "boxes": [],
+   "dialogs": [
+    {
+     "accepted": false,
+     "opened": {
+      "aperture": [
+       0.0,
+       0.0,
+       128.0
+      ],
+      "camera": 0,
+      "camera_text": "카메라 직접 선택 · 센서 배율 입력",
+      "cameras": 8,
+      "crop": [
+       1.0,
+       0.1,
+       20.0
+      ],
+      "distance": [
+       1000.0,
+       0.01,
+       100000.0
+      ],
+      "focal": [
+       80.0,
+       80.0,
+       80.0
+      ],
+      "lens": 8,
+      "lens_text": "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+      "lenses": [
+       "사용한 렌즈를 선택하세요",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1",
+       "Canon EF 70-200mm f/2.8L IS USM  ·  배율 1.62",
+       "Canon EF-M 22mm f/2 STM  ·  배율 1.613",
+       "Canon PowerShot G12 & compatibles (Standard)  ·  배율 4.63",
+       "Canon PowerShot G3 & compatibles (Standard)  ·  배율 4.843",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1",
+       "Nikon AF-S DX Nikkor 35mm f/1.8G  ·  배율 1.528",
+       "Schneider 80mm Xenotar f/2.8  ·  배율 0.51",
+       "E 24mm f/1.8 ZA  ·  배율 1.534"
+      ],
+      "result": null,
+      "status": "카메라를 선택해 주세요."
+     },
+     "script": [],
+     "states": []
+    }
+   ],
+   "exposure": 0.0,
+   "history": [
+    "렌즈 자동 보정"
+   ],
+   "lens_label": "렌즈 프로파일 없음",
+   "lens_profile": "",
+   "lensfun": 0,
+   "lensfun_enabled": true,
+   "status": "카메라를 선택해 주세요.",
+   "switches": {
+    "lensfun_distortion": [
+     true,
+     true
+    ],
+    "lensfun_enabled": [
+     true,
+     true
+    ],
+    "lensfun_scale": [
+     true,
+     true
+    ],
+    "lensfun_tca": [
+     true,
+     false
+    ],
+    "lensfun_vignette": [
+     true,
+     false
+    ]
+   },
+   "values": {
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "defringe": 0.0,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "lens_vignette": 0.0
+   }
+  }
+ ]
+}

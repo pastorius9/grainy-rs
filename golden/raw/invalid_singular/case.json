@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_singular/profile.dcp",
+ "message": "DCP 색상 행렬이 유효하지 않습니다."
+}

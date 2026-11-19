@@ -1,0 +1,18 @@
+{
+ "anchor": [
+  0,
+  0
+ ],
+ "border": "constant",
+ "border_value": [
+  0.2,
+  0.3,
+  0.4
+ ],
+ "dtype": "float32",
+ "iterations": 2,
+ "op": "morph",
+ "operation": "tophat",
+ "output_dtype": "float32",
+ "tolerance": 0.0
+}

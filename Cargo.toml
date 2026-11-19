@@ -1,0 +1,39 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.90"
+license = "MIT"
+repository = "https://github.com/pastorius9/grainy"
+
+[workspace.dependencies]
+grainy-core = { path = "crates/grainy-core" }
+grainy-testkit = { path = "crates/grainy-testkit" }
+ndarray = { version = "0.17", features = ["rayon"] }
+ndarray-npy = { version = "0.10", default-features = false }
+rayon = "1.12"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip", "preserve_order"] }   # exact floats and insertion-ordered maps, as Python reads and writes JSON
+thiserror = "2"
+rusqlite = { version = "0.38", features = ["bundled", "backup", "hooks"] }
+roxmltree = "0.21"
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+base64 = "0.22"
+sha2 = "0.10"
+zip = { version = "9", default-features = false, features = ["deflate"] }
+trash = "5"
+sysinfo = { version = "0.40", default-features = false, features = ["system"] }
+fs4 = "1"
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+
+[profile.dev]
+opt-level = 1          # goldens run on images; unoptimised float loops are needlessly slow
+
+[profile.release]
+lto = "thin"
+codegen-units = 4

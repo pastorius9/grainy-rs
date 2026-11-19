@@ -1,0 +1,13 @@
+{
+ "border": "wrap",
+ "border_value": [
+  32,
+  64,
+  128
+ ],
+ "dtype": "uint8",
+ "interpolation": "linear",
+ "op": "remap",
+ "output_dtype": "uint8",
+ "tolerance": 1.0
+}

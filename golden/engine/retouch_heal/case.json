@@ -1,0 +1,40 @@
+{
+ "mean": [
+  0.3415563030410946,
+  0.34542691668185094,
+  0.34377016228584883
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "retouch": [
+   {
+    "feather": 60,
+    "points": [
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.55,
+      0.52
+     ]
+    ],
+    "radius": 0.03,
+    "source": [
+     0.3,
+     0.3
+    ],
+    "type": "heal"
+   }
+  ]
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

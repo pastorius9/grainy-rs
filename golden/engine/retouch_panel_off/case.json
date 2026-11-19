@@ -1,0 +1,58 @@
+{
+ "mean": [
+  0.3415526987474489,
+  0.34541922379673146,
+  0.3437723679060582
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "panels_off": [
+   "healing"
+  ],
+  "retouch": [
+   {
+    "feather": 60,
+    "points": [
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.55,
+      0.52
+     ]
+    ],
+    "radius": 0.03,
+    "source": [
+     0.3,
+     0.3
+    ],
+    "type": "heal"
+   },
+   {
+    "feather": 30,
+    "points": [
+     [
+      0.25,
+      0.7
+     ]
+    ],
+    "radius": 0.05,
+    "source": [
+     0.6,
+     0.2
+    ],
+    "type": "clone"
+   }
+  ]
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

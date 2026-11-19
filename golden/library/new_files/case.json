@@ -1,0 +1,308 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "lib/a.jpg": {
+     "fill": [
+      1,
+      2
+     ]
+    },
+    "lib/B.NEF": {
+     "fill": [
+      2,
+      2
+     ]
+    },
+    "lib/c.txt": {
+     "fill": [
+      3,
+      2
+     ]
+    },
+    "lib/sub/d.png": {
+     "fill": [
+      4,
+      2
+     ]
+    },
+    "lib/sub/e.tiff": {
+     "fill": [
+      5,
+      2
+     ]
+    },
+    "lib/cache/f.jpg": {
+     "fill": [
+      6,
+      2
+     ]
+    },
+    "lib/.hidden.jpg": {
+     "fill": [
+      7,
+      2
+     ]
+    },
+    "lib/noext": {
+     "fill": [
+      8,
+      2
+     ]
+    },
+    "lib/sub/UPPER.JPG": {
+     "fill": [
+      9,
+      2
+     ]
+    },
+    "lib/fresh.jpg": {
+     "fill": [
+      10,
+      2
+     ]
+    }
+   },
+   "mtimes": {
+    "lib/a.jpg": 1800000000000000000,
+    "lib/B.NEF": 1800000010000000000,
+    "lib/sub/d.png": 1800000020000000000,
+    "lib/sub/e.tiff": 1800000030000000000,
+    "lib/cache/f.jpg": 1800000040000000000,
+    "lib/sub/UPPER.JPG": 1800000020000000000,
+    "lib/fresh.jpg": 1800000100000000000,
+    "lib/.hidden.jpg": 1800000000000000000,
+    "lib/noext": 1800000000000000000,
+    "lib/c.txt": 1800000000000000000
+   }
+  },
+  "calls": [
+   {
+    "fn": "new_files",
+    "args": {
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "now": 1800000102
+    }
+   },
+   {
+    "fn": "new_files",
+    "args": {
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "now": 1800000102,
+     "known": [
+      "$ROOT/lib/a.jpg"
+     ],
+     "removed": [
+      "$ROOT/lib/cache"
+     ]
+    }
+   },
+   {
+    "fn": "new_files",
+    "args": {
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "now": 1800000102,
+     "skipped": [
+      "$ROOT/lib/sub/e.tiff"
+     ],
+     "settle": 1
+    }
+   },
+   {
+    "fn": "fs_utime",
+    "args": {
+     "path": "$ROOT/lib/sub/e.tiff",
+     "ns": 1800000035000000000
+    }
+   },
+   {
+    "fn": "new_files",
+    "args": {
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "now": 1800000102,
+     "skipped": [
+      "$ROOT/lib/sub/e.tiff"
+     ],
+     "settle": 1
+    }
+   },
+   {
+    "fn": "new_files",
+    "args": {
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "now": 1800000102,
+     "settle": 1000
+    }
+   },
+   {
+    "fn": "new_files",
+    "args": {
+     "roots": [
+      "$ROOT/lib/cache"
+     ],
+     "now": 1800000102,
+     "removed": [
+      "$ROOT/lib/cache"
+     ]
+    }
+   },
+   {
+    "fn": "new_files",
+    "args": {
+     "roots": [
+      "$ROOT/lib",
+      "$ROOT/nothing",
+      "$ROOT/lib/sub"
+     ],
+     "now": 1800000102,
+     "settle": 0
+    }
+   },
+   {
+    "fn": "new_files",
+    "args": {
+     "roots": [
+      "$ROOT/lib"
+     ],
+     "now": 1800000102,
+     "cancel": true
+    }
+   }
+  ],
+  "name": "new_files"
+ },
+ "results": [
+  {
+   "ok": [
+    "$ROOT\\lib\\.hidden.jpg",
+    "$ROOT\\lib\\a.jpg",
+    "$ROOT\\lib\\B.NEF",
+    "$ROOT\\lib\\sub\\UPPER.JPG",
+    "$ROOT\\lib\\sub\\d.png",
+    "$ROOT\\lib\\sub\\e.tiff",
+    "$ROOT\\lib\\cache\\f.jpg"
+   ]
+  },
+  {
+   "ok": [
+    "$ROOT\\lib\\.hidden.jpg",
+    "$ROOT\\lib\\B.NEF",
+    "$ROOT\\lib\\sub\\UPPER.JPG",
+    "$ROOT\\lib\\sub\\d.png",
+    "$ROOT\\lib\\sub\\e.tiff"
+   ]
+  },
+  {
+   "ok": [
+    "$ROOT\\lib\\.hidden.jpg",
+    "$ROOT\\lib\\a.jpg",
+    "$ROOT\\lib\\B.NEF",
+    "$ROOT\\lib\\sub\\UPPER.JPG",
+    "$ROOT\\lib\\sub\\d.png",
+    "$ROOT\\lib\\cache\\f.jpg",
+    "$ROOT\\lib\\fresh.jpg"
+   ]
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": [
+    "$ROOT\\lib\\.hidden.jpg",
+    "$ROOT\\lib\\a.jpg",
+    "$ROOT\\lib\\B.NEF",
+    "$ROOT\\lib\\sub\\UPPER.JPG",
+    "$ROOT\\lib\\sub\\d.png",
+    "$ROOT\\lib\\cache\\f.jpg",
+    "$ROOT\\lib\\fresh.jpg"
+   ]
+  },
+  {
+   "ok": []
+  },
+  {
+   "ok": [
+    "$ROOT\\lib\\cache\\f.jpg"
+   ]
+  },
+  {
+   "ok": [
+    "$ROOT\\lib\\.hidden.jpg",
+    "$ROOT\\lib\\a.jpg",
+    "$ROOT\\lib\\B.NEF",
+    "$ROOT\\lib\\sub\\UPPER.JPG",
+    "$ROOT\\lib\\sub\\d.png",
+    "$ROOT\\lib\\sub\\e.tiff",
+    "$ROOT\\lib\\cache\\f.jpg",
+    "$ROOT\\lib\\fresh.jpg"
+   ]
+  },
+  {
+   "ok": []
+  }
+ ],
+ "tree": {
+  "files": {
+   "lib/.hidden.jpg": {
+    "size": 2,
+    "sha256": "c7b99f1c681eaad2096f54c0380b8f950fa5cbe47cb3695ed590167c0dfff315"
+   },
+   "lib/a.jpg": {
+    "size": 2,
+    "sha256": "9dcf97a184f32623d11a73124ceb99a5709b083721e878a16d78f596718ba7b2"
+   },
+   "lib/B.NEF": {
+    "size": 2,
+    "sha256": "50cff72c8e550546d661ec235431888fb2f9f7bada40c17020d47f6ccc117aae"
+   },
+   "lib/c.txt": {
+    "size": 2,
+    "sha256": "8655173af1ec080de2dae0c6d0a7a2da5ade8b2cf8117645da18b90aaefd0ee2"
+   },
+   "lib/cache/f.jpg": {
+    "size": 2,
+    "sha256": "53bd9133146631a2a2a89188f7d799e4ab85b473b7e927dd8b7782d91fe4ee0c"
+   },
+   "lib/fresh.jpg": {
+    "size": 2,
+    "sha256": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070"
+   },
+   "lib/noext": {
+    "size": 2,
+    "sha256": "0b57459772db2f3f6986a135824545af8690c536a865454c3c664767dc2b73f0"
+   },
+   "lib/sub/d.png": {
+    "size": 2,
+    "sha256": "b4cc09a903fa62a167ff8ad0e48085c54509806d3d259a89c43d2d3d16da6eb0"
+   },
+   "lib/sub/e.tiff": {
+    "size": 2,
+    "sha256": "4a35ad75f928b2364bae7003666ba0abff28135cb574fb49eeed9e68a1c418e6"
+   },
+   "lib/sub/UPPER.JPG": {
+    "size": 2,
+    "sha256": "31609426297325bdb28c86ab3ceeed4a3c438966733fd61b8aea00ee8b23b7bc"
+   }
+  },
+  "dirs": [
+   "lib",
+   "lib/cache",
+   "lib/sub"
+  ]
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

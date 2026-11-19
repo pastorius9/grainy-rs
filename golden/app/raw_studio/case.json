@@ -1,0 +1,1459 @@
+{
+ "info": {
+  "camera": "Test Camera",
+  "format": "DNG",
+  "make": "Test"
+ },
+ "matrices": [
+  [
+   "good.json",
+   {
+    "matrix": [
+     [
+      1.1,
+      0.1,
+      -0.2
+     ],
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0.05,
+      -0.1,
+      1.05
+     ]
+    ]
+   }
+  ],
+  [
+   "shape.json",
+   {
+    "matrix": [
+     [
+      1,
+      0
+     ],
+     [
+      0,
+      1
+     ]
+    ]
+   }
+  ],
+  [
+   "large.json",
+   {
+    "matrix": [
+     [
+      11,
+      0,
+      0
+     ],
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   }
+  ],
+  [
+   "nan.json",
+   {
+    "matrix": [
+     [
+      null,
+      0,
+      0
+     ],
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   }
+  ],
+  [
+   "missing.json",
+   {
+    "values": [
+     [
+      1,
+      0,
+      0
+     ],
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ]
+    ]
+   }
+  ],
+  [
+   "flags.json",
+   {
+    "matrix": [
+     [
+      true,
+      0,
+      0
+     ],
+     [
+      0,
+      "1",
+      0
+     ],
+     [
+      0,
+      0,
+      1.5
+     ]
+    ]
+   }
+  ]
+ ],
+ "script": [
+  [
+   "working",
+   "ProPhoto"
+  ],
+  [
+   "working",
+   "sRGB"
+  ],
+  [
+   "dcp",
+   [
+    "test-camera",
+    2
+   ]
+  ],
+  [
+   "dcp",
+   [
+    "synthetic_dual",
+    1
+   ]
+  ],
+  [
+   "dcp",
+   [
+    "test-camera",
+    1
+   ]
+  ],
+  [
+   "display"
+  ],
+  [
+   "mode",
+   "custom"
+  ],
+  [
+   "display"
+  ],
+  [
+   "temperature",
+   [
+    5000,
+    12.3
+   ]
+  ],
+  [
+   "mode",
+   "daylight"
+  ],
+  [
+   "display"
+  ],
+  [
+   "neutral",
+   [
+    0.6,
+    1,
+    0.8
+   ]
+  ],
+  [
+   "mode",
+   "sample"
+  ],
+  [
+   "display"
+  ],
+  [
+   "mode",
+   "custom"
+  ],
+  [
+   "mode",
+   "as_shot"
+  ],
+  [
+   "mode",
+   "legacy"
+  ],
+  [
+   "display"
+  ],
+  [
+   "mode",
+   "custom"
+  ],
+  [
+   "mode",
+   "legacy"
+  ],
+  [
+   "dcp",
+   [
+    "test-triple-illuminant",
+    1
+   ]
+  ],
+  [
+   "display"
+  ],
+  [
+   "mode",
+   "custom"
+  ],
+  [
+   "display"
+  ],
+  [
+   "clear"
+  ],
+  [
+   "mode",
+   "daylight"
+  ],
+  [
+   "display"
+  ],
+  [
+   "mode",
+   "custom"
+  ],
+  [
+   "matrix",
+   "good.json"
+  ],
+  [
+   "matrix",
+   "shape.json"
+  ],
+  [
+   "matrix",
+   "large.json"
+  ],
+  [
+   "matrix",
+   "nan.json"
+  ],
+  [
+   "matrix",
+   "missing.json"
+  ],
+  [
+   "matrix",
+   "flags.json"
+  ]
+ ],
+ "steps": [
+  {
+   "commits": [
+    "작업 색공간"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "working_space": "ProPhoto"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "working_space": "sRGB"
+   },
+   "warnings": [
+    [
+     "DCP 프로파일",
+     "DCP는 RAW 사진에 적용합니다."
+    ]
+   ]
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "working_space": "sRGB"
+   },
+   "warnings": [
+    [
+     "DCP 프로파일",
+     "프로파일의 카메라 모델이 선택한 RAW와 다릅니다."
+    ]
+   ]
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "as_shot",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": [
+    4983.0,
+    64.1
+   ],
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "as_shot",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 4983.394599459937,
+    "raw_mode": "custom",
+    "raw_neutral": null,
+    "raw_tint": 64.07609800108145,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 4983.394599459937,
+    "raw_mode": "custom",
+    "raw_neutral": null,
+    "raw_tint": 64.07609800108145,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "custom",
+    "raw_neutral": null,
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "daylight",
+    "raw_neutral": null,
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": [
+    7297.0,
+    70.8
+   ],
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "daylight",
+    "raw_neutral": null,
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "daylight",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": [
+    8367.0,
+    150.0
+   ],
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "sample",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "23b76a1fc209265b830fc08f1802d4bc731c236b0d91ce0182640f4e04b3be7c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "as_shot",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "legacy",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "legacy",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "legacy",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "b1c11df0a8d0cef47175b6bd9a4af4e276a0825968641e3d0ed3dd66ef17e93c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "as_shot",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "b1c11df0a8d0cef47175b6bd9a4af4e276a0825968641e3d0ed3dd66ef17e93c"
+   },
+   "shown": [
+    4200.0,
+    8.0
+   ],
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 5000.0,
+    "raw_mode": "as_shot",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 12.3,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "b1c11df0a8d0cef47175b6bd9a4af4e276a0825968641e3d0ed3dd66ef17e93c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 4200.003900658818,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 8.00004134810782,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": {
+    "camera": "Test Camera",
+    "name": "Luma test",
+    "sha256": "b1c11df0a8d0cef47175b6bd9a4af4e276a0825968641e3d0ed3dd66ef17e93c"
+   },
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 4200.003900658818,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 8.00004134810782,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 4200.003900658818,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 8.00004134810782,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 4200.003900658818,
+    "raw_mode": "daylight",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 8.00004134810782,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": null,
+   "shown": [
+    6502.0,
+    9.8
+   ],
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 4200.003900658818,
+    "raw_mode": "daylight",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 8.00004134810782,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": null,
+    "raw_kelvin": 6502.082543306006,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 9.766701057674574,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "보정 변경"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": [
+     [
+      1.100000023841858,
+      0.10000000149011612,
+      -0.20000000298023224
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.05000000074505806,
+      -0.10000000149011612,
+      1.0499999523162842
+     ]
+    ],
+    "raw_kelvin": 6502.082543306006,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 9.766701057674574,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "보정 변경"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": [
+     [
+      1.100000023841858,
+      0.10000000149011612,
+      -0.20000000298023224
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.05000000074505806,
+      -0.10000000149011612,
+      1.0499999523162842
+     ]
+    ],
+    "raw_kelvin": 6502.082543306006,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 9.766701057674574,
+    "working_space": "sRGB"
+   },
+   "warnings": [
+    [
+     "프로파일",
+     "3×3 유한 행렬이 필요합니다."
+    ]
+   ]
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "보정 변경"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": [
+     [
+      1.100000023841858,
+      0.10000000149011612,
+      -0.20000000298023224
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.05000000074505806,
+      -0.10000000149011612,
+      1.0499999523162842
+     ]
+    ],
+    "raw_kelvin": 6502.082543306006,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 9.766701057674574,
+    "working_space": "sRGB"
+   },
+   "warnings": [
+    [
+     "프로파일",
+     "3×3 유한 행렬이 필요합니다."
+    ]
+   ]
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "보정 변경"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": [
+     [
+      1.100000023841858,
+      0.10000000149011612,
+      -0.20000000298023224
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.05000000074505806,
+      -0.10000000149011612,
+      1.0499999523162842
+     ]
+    ],
+    "raw_kelvin": 6502.082543306006,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 9.766701057674574,
+    "working_space": "sRGB"
+   },
+   "warnings": [
+    [
+     "프로파일",
+     "3×3 유한 행렬이 필요합니다."
+    ]
+   ]
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "보정 변경"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": [
+     [
+      1.100000023841858,
+      0.10000000149011612,
+      -0.20000000298023224
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.05000000074505806,
+      -0.10000000149011612,
+      1.0499999523162842
+     ]
+    ],
+    "raw_kelvin": 6502.082543306006,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 9.766701057674574,
+    "working_space": "sRGB"
+   },
+   "warnings": [
+    [
+     "프로파일",
+     "'matrix'"
+    ]
+   ]
+  },
+  {
+   "commits": [
+    "작업 색공간",
+    "작업 색공간",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "DCP 프로파일",
+    "RAW 화이트밸런스",
+    "DCP 해제",
+    "RAW 화이트밸런스",
+    "RAW 화이트밸런스",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "dcp": null,
+   "shown": null,
+   "values": {
+    "camera_matrix": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.5
+     ]
+    ],
+    "raw_kelvin": 6502.082543306006,
+    "raw_mode": "custom",
+    "raw_neutral": [
+     0.6,
+     1,
+     0.8
+    ],
+    "raw_tint": 9.766701057674574,
+    "working_space": "sRGB"
+   },
+   "warnings": []
+  }
+ ]
+}

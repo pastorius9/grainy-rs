@@ -1,0 +1,101 @@
+{
+ "mean": [
+  0.32770118106284885,
+  0.33376719992089904,
+  0.32410051044453647
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "crop": [
+   0.1,
+   0.2,
+   0.8,
+   0.9
+  ],
+  "flip": true,
+  "masks": [
+   {
+    "adjustments": {
+     "exposure": 1.0
+    },
+    "components": [
+     {
+      "points": [
+       [
+        0.2,
+        0.2
+       ],
+       [
+        0.8,
+        0.8
+       ]
+      ],
+      "type": "linear"
+     }
+    ]
+   },
+   {
+    "adjustments": {
+     "saturation": 60.0
+    },
+    "components": [
+     {
+      "feather": 50,
+      "points": [
+       [
+        0.2,
+        0.5
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.8,
+        0.6
+       ]
+      ],
+      "radius": 0.08,
+      "type": "brush"
+     }
+    ]
+   },
+   {
+    "adjustments": {
+     "exposure": -0.5
+    },
+    "components": [
+     {
+      "auto_mask": true,
+      "auto_tolerance": 0.25,
+      "feather": 40,
+      "points": [
+       [
+        0.3,
+        0.3
+       ],
+       [
+        0.6,
+        0.6
+       ]
+      ],
+      "radius": 0.2,
+      "type": "brush"
+     }
+    ]
+   }
+  ],
+  "perspective_v": 15.0,
+  "rotation": 1,
+  "straighten": 3.0
+ },
+ "shape": [
+  168,
+  112,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

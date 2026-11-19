@@ -1,0 +1,9 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "defringe": 60.0
+ },
+ "source": "edges",
+ "use_crop": true
+}

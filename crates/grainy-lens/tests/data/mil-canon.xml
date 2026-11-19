@@ -1,0 +1,45 @@
+<lensdatabase version="1">
+<camera>
+        <maker>Canon</maker>
+        <model>Canon EOS M</model>
+        <model lang="en">EOS M</model>
+        <mount>Canon EF-M</mount>
+        <cropfactor>1.613</cropfactor>
+    </camera>
+    <lens>
+        <maker>Canon</maker>
+        <model>Canon EF-M 22mm f/2 STM</model>
+        <mount>Canon EF-M</mount>
+        <cropfactor>1.613</cropfactor>
+        <calibration>
+            <distortion model="poly3" focal="22" k1="-0.00018" />
+            <tca model="poly3" focal="22" br="-0.0000678" vr="1.0002505" bb="0.0000624" vb="1.0000225" />
+            <vignetting model="pa" focal="22" aperture="2" distance="10" k1="-1.7852" k2="1.6007" k3="-0.6249" />
+            <vignetting model="pa" focal="22" aperture="2" distance="1000" k1="-1.7852" k2="1.6007" k3="-0.6249" />
+            <vignetting model="pa" focal="22" aperture="2.2" distance="10" k1="-0.7930" k2="-0.3929" k3="0.4473" />
+            <vignetting model="pa" focal="22" aperture="2.2" distance="1000" k1="-0.7930" k2="-0.3929" k3="0.4473" />
+            <vignetting model="pa" focal="22" aperture="2.5" distance="10" k1="-0.7636" k2="-0.2093" k3="0.2587" />
+            <vignetting model="pa" focal="22" aperture="2.5" distance="1000" k1="-0.7636" k2="-0.2093" k3="0.2587" />
+            <vignetting model="pa" focal="22" aperture="3.2" distance="10" k1="-0.8930" k2="0.3786" k3="-0.1146" />
+            <vignetting model="pa" focal="22" aperture="3.2" distance="1000" k1="-0.8930" k2="0.3786" k3="-0.1146" />
+            <vignetting model="pa" focal="22" aperture="4" distance="10" k1="-0.8868" k2="0.3302" k3="-0.0361" />
+            <vignetting model="pa" focal="22" aperture="4" distance="1000" k1="-0.8868" k2="0.3302" k3="-0.0361" />
+            <vignetting model="pa" focal="22" aperture="5" distance="10" k1="-0.8820" k2="0.3159" k3="-0.0204" />
+            <vignetting model="pa" focal="22" aperture="5" distance="1000" k1="-0.8820" k2="0.3159" k3="-0.0204" />
+            <vignetting model="pa" focal="22" aperture="6.3" distance="10" k1="-0.8804" k2="0.3111" k3="-0.0150" />
+            <vignetting model="pa" focal="22" aperture="6.3" distance="1000" k1="-0.8804" k2="0.3111" k3="-0.0150" />
+            <vignetting model="pa" focal="22" aperture="8" distance="10" k1="-0.8788" k2="0.3072" k3="-0.0121" />
+            <vignetting model="pa" focal="22" aperture="8" distance="1000" k1="-0.8788" k2="0.3072" k3="-0.0121" />
+            <vignetting model="pa" focal="22" aperture="10" distance="10" k1="-0.8842" k2="0.3173" k3="-0.0168" />
+            <vignetting model="pa" focal="22" aperture="10" distance="1000" k1="-0.8842" k2="0.3173" k3="-0.0168" />
+            <vignetting model="pa" focal="22" aperture="13" distance="10" k1="-0.8957" k2="0.3596" k3="-0.0484" />
+            <vignetting model="pa" focal="22" aperture="13" distance="1000" k1="-0.8957" k2="0.3596" k3="-0.0484" />
+            <vignetting model="pa" focal="22" aperture="16" distance="10" k1="-0.8819" k2="0.3147" k3="-0.0177" />
+            <vignetting model="pa" focal="22" aperture="16" distance="1000" k1="-0.8819" k2="0.3147" k3="-0.0177" />
+            <vignetting model="pa" focal="22" aperture="20" distance="10" k1="-0.8851" k2="0.3189" k3="-0.0201" />
+            <vignetting model="pa" focal="22" aperture="20" distance="1000" k1="-0.8851" k2="0.3189" k3="-0.0201" />
+            <vignetting model="pa" focal="22" aperture="22" distance="10" k1="-0.8954" k2="0.3316" k3="-0.0229" />
+            <vignetting model="pa" focal="22" aperture="22" distance="1000" k1="-0.8954" k2="0.3316" k3="-0.0229" />
+        </calibration>
+    </lens>
+    </lensdatabase>

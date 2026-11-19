@@ -1,0 +1,20 @@
+{
+ "flags": {
+  "6BY9RPI": true,
+  "DEMOSAIC_PACK_GPL2": false,
+  "DEMOSAIC_PACK_GPL3": false,
+  "DNGDEFLATECODEC": true,
+  "DNGLOSSYCODEC": true,
+  "LCMS": true,
+  "OPENMP": true,
+  "RAWSPEED": false,
+  "REDCINECODEC": true,
+  "X3FTOOLS": true
+ },
+ "libraw": [
+  0,
+  22,
+  1
+ ],
+ "rawpy": "0.27.1"
+}

@@ -1,0 +1,10 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "photo_filter_density": 80.0,
+  "photo_filter_enabled": false
+ },
+ "source": "colours",
+ "use_crop": true
+}

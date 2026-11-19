@@ -1,0 +1,17 @@
+{
+ "bytes": 1955,
+ "extension": ".png",
+ "file": "bayer3.dng",
+ "height": 48,
+ "lossless": true,
+ "options": {
+  "color_space": "sRGB",
+  "format": "PNG",
+  "longest": 48,
+  "quality": 95
+ },
+ "settings": {
+  "raw_mode": "legacy"
+ },
+ "width": 38
+}

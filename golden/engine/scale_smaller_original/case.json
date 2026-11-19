@@ -1,0 +1,12 @@
+{
+ "original_size": [
+  48,
+  32
+ ],
+ "output": "sRGB",
+ "settings": {
+  "sharpen": 50.0
+ },
+ "source": "edges",
+ "use_crop": true
+}

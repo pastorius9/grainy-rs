@@ -1,0 +1,19 @@
+[package]
+name = "grainy-core"
+description = "Grainy's shared types: settings (the oracle's JSON map), images, row parallelism"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+ndarray.workspace = true
+rayon.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+grainy-testkit.workspace = true
+
+[lints]
+workspace = true

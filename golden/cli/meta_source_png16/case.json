@@ -1,0 +1,43 @@
+{
+ "bytes": 8553,
+ "exact": true,
+ "extension": ".png",
+ "found": {
+  "exif": true,
+  "icc": "43cbfe47eb7c",
+  "xmp": true
+ },
+ "height": 60,
+ "lossless": true,
+ "options": {
+  "color_space": "sRGB",
+  "dither": false,
+  "format": "PNG 16-bit",
+  "grayscale": false,
+  "keep_metadata": true,
+  "keywords": "",
+  "longest": null,
+  "quality": 95,
+  "user_metadata": null
+ },
+ "read_metadata": {
+  "aperture": 2.8,
+  "camera": "Model 42",
+  "copyright": "Old copyright",
+  "creator": "Old Author",
+  "date": "2020:01:02 03:04:05",
+  "focal_length": 50.0,
+  "iso": 400.0,
+  "latitude": 37.55833333333333,
+  "lens": "Lens 50",
+  "longitude": -122.40416666666667,
+  "make": "Camera Co",
+  "serial": "SERIAL42",
+  "shutter": "0.008",
+  "subject_distance": 1.5
+ },
+ "settings": {},
+ "settings_key": "default",
+ "source": "png8_exif.png",
+ "width": 40
+}

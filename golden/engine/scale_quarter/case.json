@@ -1,0 +1,27 @@
+{
+ "mean": [
+  0.3415655437014842,
+  0.3454316070842712,
+  0.34379136602704724
+ ],
+ "original_size": [
+  960,
+  640
+ ],
+ "output": "sRGB",
+ "settings": {
+  "clarity": 30.0,
+  "grain": 40.0,
+  "grain_size": 60.0,
+  "noise_luma": 40.0,
+  "sharpen": 70.0
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

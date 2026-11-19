@@ -1,0 +1,1223 @@
+{
+ "initial": {
+  "kelvin_enabled": false,
+  "negative": true,
+  "negative_base": [
+   0.8,
+   0.55,
+   0.35
+  ],
+  "negative_peak": [
+   0.03,
+   0.02,
+   0.01
+  ],
+  "raw_kelvin": 6500.0,
+  "raw_mode": "legacy",
+  "raw_neutral": null,
+  "raw_tint": 0.0,
+  "temperature": 0.0,
+  "tint": 0.0
+ },
+ "live": [
+  80,
+  120
+ ],
+ "results": [
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.8,
+     0.55,
+     0.35
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.7333122491836548,
+       0.5041521787643433,
+       0.3208240866661072
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.7333122491836548,
+     0.5041521787643433,
+     0.3208240866661072
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.7333122491836548,
+     0.5041521787643433,
+     0.3208240866661072
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.6180996894836426,
+       0.4249435365200043,
+       0.27041861414909363
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6180996894836426,
+     0.4249435365200043,
+     0.27041861414909363
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6180996894836426,
+     0.4249435365200043,
+     0.27041861414909363
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.6821293830871582,
+       0.46896395087242126,
+       0.2984316051006317
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6821293830871582,
+     0.46896395087242126,
+     0.2984316051006317
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6821293830871582,
+     0.46896395087242126,
+     0.2984316051006317
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.6943296790122986,
+       0.47735166549682617,
+       0.30376923084259033
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6943296790122986,
+     0.47735166549682617,
+     0.30376923084259033
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6943296790122986,
+     0.47735166549682617,
+     0.30376923084259033
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.4727737605571747,
+       0.32503196597099304,
+       0.20683850347995758
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.4727737605571747,
+     0.32503196597099304,
+     0.20683850347995758
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.4727737605571747,
+     0.32503196597099304,
+     0.20683850347995758
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.7199999690055847,
+       0.49769657850265503,
+       0.3167160153388977
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.7199999690055847,
+     0.49769657850265503,
+     0.3167160153388977
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.7199999690055847,
+     0.49769657850265503,
+     0.3167160153388977
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.5918903350830078,
+       0.40692460536956787,
+       0.2589520215988159
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.5918903350830078,
+     0.40692460536956787,
+     0.2589520215988159
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.5918903350830078,
+     0.40692460536956787,
+     0.2589520215988159
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.6843252182006836,
+       0.47047358751296997,
+       0.2993922829627991
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6843252182006836,
+     0.47047358751296997,
+     0.2993922829627991
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6843252182006836,
+     0.47047358751296997,
+     0.2993922829627991
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.6147924661636353,
+       0.42266982793807983,
+       0.26897168159484863
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6147924661636353,
+     0.42266982793807983,
+     0.26897168159484863
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6147924661636353,
+     0.42266982793807983,
+     0.26897168159484863
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [
+    {
+     "label": "필름 베이스 지정",
+     "values": {
+      "kelvin_enabled": false,
+      "negative": true,
+      "negative_base": [
+       0.6770766377449036,
+       0.4654901921749115,
+       0.2962210178375244
+      ],
+      "negative_peak": [
+       0.03,
+       0.02,
+       0.01
+      ],
+      "raw_kelvin": 6500.0,
+      "raw_mode": "legacy",
+      "raw_neutral": null,
+      "raw_tint": 0.0,
+      "temperature": 0.0,
+      "tint": 0.0
+     }
+    }
+   ],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": [
+     0.03,
+     0.02,
+     0.01
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": [
+     0.9,
+     0.7,
+     0.5
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": [
+     0.9,
+     0.7,
+     0.5
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": [
+     0.9,
+     0.7,
+     0.5
+    ],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "빈 필름으로 보기에는 너무 어두운 곳입니다. 촬영되지 않은 가장 밝은 부분을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": true,
+   "commits": [],
+   "sample_mode": true,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "사진 가장자리의 촬영되지 않은 빈 필름을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": true,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [
+    "빈 필름으로 보기에는 너무 어두운 곳입니다. 촬영되지 않은 가장 밝은 부분을 클릭하세요."
+   ],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  },
+  {
+   "base_checked": false,
+   "commits": [],
+   "sample_mode": false,
+   "settings": {
+    "kelvin_enabled": false,
+    "negative": false,
+    "negative_base": [
+     0.6770766377449036,
+     0.4654901921749115,
+     0.2962210178375244
+    ],
+    "negative_peak": null,
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "temperature": 0.0,
+    "tint": 0.0
+   },
+   "status": [],
+   "wb_checked": false
+  }
+ ],
+ "settings": {
+  "crop": [
+   0.1,
+   0.1,
+   0.9,
+   0.95
+  ],
+  "negative": true,
+  "negative_base": [
+   0.8,
+   0.55,
+   0.35
+  ],
+  "negative_peak": [
+   0.03,
+   0.02,
+   0.01
+  ],
+  "rotation": 1
+ },
+ "steps": [
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "click",
+   0.03,
+   0.5
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "click",
+   0.5,
+   0.03
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "click",
+   0.5,
+   0.5
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "click",
+   0.9,
+   0.9
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "click",
+   0.0,
+   0.0
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "area",
+   0.0,
+   0.0,
+   0.08,
+   1.0
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "area",
+   0.2,
+   0.0,
+   0.9,
+   0.08
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "area",
+   0.3,
+   0.3,
+   0.7,
+   0.7
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "area",
+   0.85,
+   0.75,
+   0.97,
+   0.9
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "area",
+   0.4,
+   0.4,
+   0.4,
+   0.4
+  ],
+  [
+   "set",
+   "negative_peak",
+   [
+    0.9,
+    0.7,
+    0.5
+   ]
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "click",
+   0.03,
+   0.5
+  ],
+  [
+   "set",
+   "negative_peak",
+   null
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "click",
+   0.03,
+   0.5
+  ],
+  [
+   "set",
+   "negative",
+   false
+  ],
+  [
+   "toggle_base",
+   true
+  ],
+  [
+   "click",
+   0.03,
+   0.5
+  ]
+ ]
+}

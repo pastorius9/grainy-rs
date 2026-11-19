@@ -1,0 +1,27 @@
+{
+ "gains": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "input": "wide",
+ "result": {
+  "kelvin_enabled": false,
+  "keys": [
+   "exposure",
+   "temperature",
+   "tint",
+   "kelvin_enabled",
+   "contrast"
+  ],
+  "temperature": 0.0,
+  "tint": 0.0
+ },
+ "settings": {
+  "contrast": 7,
+  "exposure": 0.25,
+  "kelvin_enabled": true,
+  "temperature": 3.0,
+  "tint": -2.0
+ }
+}

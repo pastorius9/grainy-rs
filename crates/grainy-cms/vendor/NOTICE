@@ -1,0 +1,9 @@
+grainy-cms bundles Little CMS 2.19.0 (LittleCMS), unmodified.
+
+  Source:  https://codeload.github.com/mm2/Little-CMS/zip/refs/tags/lcms2.19
+  Licence: MIT, see lcms2-2.19/LICENSE (Copyright (c) 2023 Marti Maria Saguer)
+  Files:   lcms2-2.19/include, lcms2-2.19/src and the notices; SHA-256 of every retained file in
+           lcms2-2.19/SOURCE.json (the same copy as the Python Grainy's vendor/lcms2-2.19).
+
+It is compiled into grainy-cms by build.rs (cc crate, MSVC /O2 /fp:precise), as the Python Grainy builds
+its luma_lcms2 library, so both produce the same pixels. Releases must ship the LittleCMS licence text.

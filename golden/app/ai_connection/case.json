@@ -1,0 +1,759 @@
+{
+ "bridges": {
+  "grainy-mcp-bridge.ps1": 5196,
+  "grainy-mcp-bridge.sh": 4502
+ },
+ "broken": [
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ]
+   ],
+   "error": "AI 연결 설정을 저장하지 못했습니다.",
+   "returned": false,
+   "running": false,
+   "step": "start without a key"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ]
+   ],
+   "error": "AI 연결 설정을 저장하지 못했습니다.",
+   "returned": true,
+   "running": false,
+   "step": "switch off"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ]
+   ],
+   "error": "AI 연결 설정을 저장하지 못했습니다.",
+   "returned": false,
+   "running": false,
+   "step": "switch on"
+  }
+ ],
+ "ports_used": [
+  40001,
+  47821,
+  40002
+ ],
+ "steps": [
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ]
+   ],
+   "bound": [
+    47821,
+    40001
+   ],
+   "bound_port": 40001,
+   "elsewhere": false,
+   "enabled": true,
+   "error": null,
+   "files": {
+    "auth-header": "Authorization: Bearer aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "endpoint": "http://127.0.0.1:40001/mcp/stdio",
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": true,
+   "port": 40001,
+   "port_changed": false,
+   "preferences": {
+    "mcp_port": 40001,
+    "mcp_token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+   },
+   "returned": null,
+   "running": true,
+   "step": "first start (default port taken)",
+   "token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ]
+   ],
+   "bound": [],
+   "bound_port": 40001,
+   "elsewhere": false,
+   "enabled": true,
+   "error": null,
+   "files": {
+    "auth-header": "Authorization: Bearer aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "endpoint": "http://127.0.0.1:40001/mcp/stdio",
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": true,
+   "port": 40001,
+   "port_changed": false,
+   "preferences": {
+    "mcp_port": 40001,
+    "mcp_token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+   },
+   "returned": true,
+   "running": true,
+   "step": "start again (running)",
+   "token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ]
+   ],
+   "bound": [],
+   "bound_port": null,
+   "elsewhere": false,
+   "enabled": true,
+   "error": null,
+   "files": {
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": false,
+   "port": 40001,
+   "port_changed": false,
+   "preferences": {
+    "mcp_port": 40001,
+    "mcp_token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+   },
+   "returned": null,
+   "running": false,
+   "step": "stop",
+   "token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ]
+   ],
+   "bound": [
+    40001
+   ],
+   "bound_port": 40001,
+   "elsewhere": false,
+   "enabled": true,
+   "error": null,
+   "files": {
+    "auth-header": "Authorization: Bearer aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "endpoint": "http://127.0.0.1:40001/mcp/stdio",
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": true,
+   "port": 40001,
+   "port_changed": false,
+   "preferences": {
+    "mcp_port": 40001,
+    "mcp_token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+   },
+   "returned": true,
+   "running": true,
+   "step": "start with the saved port",
+   "token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "key",
+     "new key"
+    ]
+   ],
+   "bound": [],
+   "bound_port": 40001,
+   "elsewhere": false,
+   "enabled": true,
+   "error": null,
+   "files": {
+    "auth-header": "Authorization: Bearer bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "endpoint": "http://127.0.0.1:40001/mcp/stdio",
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": true,
+   "port": 40001,
+   "port_changed": false,
+   "preferences": {
+    "mcp_port": 40001,
+    "mcp_token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+   },
+   "returned": null,
+   "running": true,
+   "step": "new key",
+   "token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "key",
+     "new key"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ]
+   ],
+   "bound": [
+    47821,
+    40002
+   ],
+   "bound_port": 40002,
+   "elsewhere": false,
+   "enabled": true,
+   "error": null,
+   "files": {
+    "auth-header": "Authorization: Bearer bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "endpoint": "http://127.0.0.1:40002/mcp/stdio",
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": true,
+   "port": 40002,
+   "port_changed": true,
+   "preferences": {
+    "mcp_port": 40002,
+    "mcp_token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+   },
+   "returned": true,
+   "running": true,
+   "step": "other port (first candidate is the old port)",
+   "token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "key",
+     "new key"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ]
+   ],
+   "bound": [],
+   "bound_port": null,
+   "elsewhere": false,
+   "enabled": false,
+   "error": null,
+   "files": {
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": false,
+   "port": 40002,
+   "port_changed": true,
+   "preferences": {
+    "mcp_enabled": false,
+    "mcp_port": 40002,
+    "mcp_token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+   },
+   "returned": true,
+   "running": false,
+   "step": "switch off",
+   "token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "key",
+     "new key"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ]
+   ],
+   "bound": [],
+   "bound_port": null,
+   "elsewhere": false,
+   "enabled": false,
+   "error": null,
+   "files": {
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": false,
+   "port": 40002,
+   "port_changed": true,
+   "preferences": {
+    "mcp_enabled": false,
+    "mcp_port": 40002,
+    "mcp_token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+   },
+   "returned": null,
+   "running": false,
+   "step": "start at launch while switched off (stale files go)",
+   "token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "key",
+     "new key"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ]
+   ],
+   "bound": [
+    40002
+   ],
+   "bound_port": 40002,
+   "elsewhere": false,
+   "enabled": true,
+   "error": null,
+   "files": {
+    "auth-header": "Authorization: Bearer bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "endpoint": "http://127.0.0.1:40002/mcp/stdio",
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": true,
+   "port": 40002,
+   "port_changed": true,
+   "preferences": {
+    "mcp_enabled": true,
+    "mcp_port": 40002,
+    "mcp_token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+   },
+   "returned": true,
+   "running": true,
+   "step": "switch on",
+   "token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "on in another Grainy"
+    ]
+   ],
+   "bound": [],
+   "bound_port": null,
+   "elsewhere": true,
+   "enabled": true,
+   "error": "이 컴퓨터에서 실행 중인 다른 Grainy가 AI 연결을 쓰고 있습니다.",
+   "files": {
+    "auth-header": "Authorization: Bearer bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "endpoint": "http://127.0.0.1:40002/mcp/stdio",
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": false,
+   "port": 40002,
+   "port_changed": false,
+   "preferences": {
+    "mcp_enabled": true,
+    "mcp_port": 40002,
+    "mcp_token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+   },
+   "returned": false,
+   "running": false,
+   "step": "another Grainy on the same settings",
+   "token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "key",
+     "new key"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ]
+   ],
+   "bound": [
+    40002
+   ],
+   "bound_port": null,
+   "elsewhere": false,
+   "enabled": true,
+   "error": "포트 40002을(를) 쓸 수 없습니다: address in use",
+   "files": {
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": false,
+   "port": 40002,
+   "port_changed": true,
+   "preferences": {
+    "mcp_enabled": true,
+    "mcp_port": 40002,
+    "mcp_token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+   },
+   "returned": false,
+   "running": false,
+   "step": "saved port taken",
+   "token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+   "activity": [
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "key",
+     "new key"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "started"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "stopped"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ],
+    [
+     "12:00:00",
+     "server",
+     "could not start"
+    ]
+   ],
+   "bound": [
+    40002
+   ],
+   "bound_port": null,
+   "elsewhere": false,
+   "enabled": true,
+   "error": "Port 40002 cannot be used: address in use",
+   "files": {
+    "grainy-mcp-bridge.ps1": 5196,
+    "grainy-mcp-bridge.sh": 4502,
+    "offline-call.json": "template",
+    "offline-initialize.json": "template",
+    "offline-tools.json": "template",
+    "owner.lock": 0
+   },
+   "owner": false,
+   "port": 40002,
+   "port_changed": true,
+   "preferences": {
+    "mcp_enabled": true,
+    "mcp_port": 40002,
+    "mcp_token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+   },
+   "returned": false,
+   "running": false,
+   "step": "saved port taken (English)",
+   "token": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  }
+ ]
+}

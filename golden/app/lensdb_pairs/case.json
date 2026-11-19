@@ -1,0 +1,3676 @@
+{
+ "cameras": 948,
+ "cases": [
+  {
+   "camera": null,
+   "camera_variant": null,
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {
+    "aperture": 1.6,
+    "camera": "iPhone 12 Pro",
+    "focal_length": 4.2,
+    "lens": "iPhone 12 Pro back triple camera 4.2mm f/1.6",
+    "make": "Apple",
+    "source_orientation": 1
+   },
+   "origin": "sample:Apple_iPhone-12-Pro_IMG_1361.DNG",
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  },
+  {
+   "camera": "Canon EOS 5D Mark IV",
+   "camera_variant": "",
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {
+    "aperture": 2.8,
+    "camera": "Canon EOS 5D Mark IV",
+    "focal_length": 40.0,
+    "lens": "24-70mm",
+    "make": "Canon",
+    "source_orientation": 1
+   },
+   "origin": "sample:Canon_EOS-5D-Mark-IV_B13A0733.CR2",
+   "profile": null,
+   "profile_reason": "렌즈 후보를 확인해 주세요.",
+   "reason": "렌즈 후보를 확인해 주세요."
+  },
+  {
+   "camera": "Canon EOS 5D Mark IV",
+   "camera_variant": "",
+   "candidates": [
+    "a70f6a80e4f9a8f8bd34"
+   ],
+   "description": "Canon EF 100-200mm f/4.5A\n141.4mm · f/4 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon EOS 5D Mark IV",
+    "focal_length": 141.4,
+    "lens": "Canon EF 100-200mm f/4.5A",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Canon_EOS-5D-Mark-IV_B13A0733.CR2",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon EOS 5D Mark IV",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "slr-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0028114623855799437,
+      0.003645064076408744,
+      0.002124692779034376
+     ]
+    },
+    "focal": 141.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon EF 100-200mm f/4.5A",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999911189079285,
+      0.9998208284378052,
+      0.0,
+      0.0,
+      -3.078847294091247e-05,
+      3.141990237054415e-05
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.6761704087257385,
+      0.15395334362983704,
+      -0.06208593770861626
+     ]
+    },
+    "xml_length": 21195,
+    "xml_sha256": "a70f6a80e4f9a8f8bd345b69b7f7d6b4cb838a9c87dba98937f4212cf839e277"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon EOS R6",
+   "camera_variant": "",
+   "candidates": [
+    "9cad1ed9fdab16c2b08f"
+   ],
+   "description": "Canon RF 70-200mm F2.8L IS USM\n200mm · f/25 · 센서 배율 1\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 25.0,
+    "camera": "Canon EOS R6",
+    "focal_length": 200.0,
+    "lens": "RF70-200mm F2.8 L IS USM",
+    "make": "Canon",
+    "source_orientation": 1
+   },
+   "origin": "sample:Canon_EOS-R6_Canon_EOS_R6_CRAW_ISO_100_nocrop_nodual.CR3",
+   "profile": {
+    "aperture": 25.0,
+    "camera": "Canon EOS R6",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 1.0,
+    "database_file": "mil-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0021440000273287296,
+      0.0013559999642893672,
+      0.00380200007930398
+     ]
+    },
+    "focal": 200.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon RF 70-200mm F2.8L IS USM",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999572038650513,
+      0.9999815821647644,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 956,
+    "xml_sha256": "9cad1ed9fdab16c2b08f5b80e01de6413f50d7f73c36194584fba113a6179c4f"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon EOS R6",
+   "camera_variant": "",
+   "candidates": [
+    "a70f6a80e4f9a8f8bd34"
+   ],
+   "description": "Canon EF 100-200mm f/4.5A\n141.4mm · f/4 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon EOS R6",
+    "focal_length": 141.4,
+    "lens": "Canon EF 100-200mm f/4.5A",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Canon_EOS-R6_Canon_EOS_R6_CRAW_ISO_100_nocrop_nodual.CR3",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon EOS R6",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "slr-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0028114623855799437,
+      0.003645064076408744,
+      0.002124692779034376
+     ]
+    },
+    "focal": 141.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon EF 100-200mm f/4.5A",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999911189079285,
+      0.9998208284378052,
+      0.0,
+      0.0,
+      -3.078847294091247e-05,
+      3.141990237054415e-05
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.6761704087257385,
+      0.15395334362983704,
+      -0.06208593770861626
+     ]
+    },
+    "xml_length": 21195,
+    "xml_sha256": "a70f6a80e4f9a8f8bd345b69b7f7d6b4cb838a9c87dba98937f4212cf839e277"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon EOS R6",
+   "camera_variant": "",
+   "candidates": [
+    "9cad1ed9fdab16c2b08f"
+   ],
+   "description": "Canon RF 70-200mm F2.8L IS USM\n200mm · f/25 · 센서 배율 1\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 25.0,
+    "camera": "Canon EOS R6",
+    "focal_length": 200.0,
+    "lens": "RF70-200mm F2.8 L IS USM",
+    "make": "Canon",
+    "source_orientation": 1
+   },
+   "origin": "sample:Canon_EOS-R6_Canon_EOS_R6_RAW_ISO_100_nocrop_nodual.CR3",
+   "profile": {
+    "aperture": 25.0,
+    "camera": "Canon EOS R6",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 1.0,
+    "database_file": "mil-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0021440000273287296,
+      0.0013559999642893672,
+      0.00380200007930398
+     ]
+    },
+    "focal": 200.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon RF 70-200mm F2.8L IS USM",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999572038650513,
+      0.9999815821647644,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 956,
+    "xml_sha256": "9cad1ed9fdab16c2b08f5b80e01de6413f50d7f73c36194584fba113a6179c4f"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon EOS R6",
+   "camera_variant": "",
+   "candidates": [
+    "a70f6a80e4f9a8f8bd34"
+   ],
+   "description": "Canon EF 100-200mm f/4.5A\n141.4mm · f/4 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon EOS R6",
+    "focal_length": 141.4,
+    "lens": "Canon EF 100-200mm f/4.5A",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Canon_EOS-R6_Canon_EOS_R6_RAW_ISO_100_nocrop_nodual.CR3",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon EOS R6",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "slr-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0028114623855799437,
+      0.003645064076408744,
+      0.002124692779034376
+     ]
+    },
+    "focal": 141.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon EF 100-200mm f/4.5A",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999911189079285,
+      0.9998208284378052,
+      0.0,
+      0.0,
+      -3.078847294091247e-05,
+      3.141990237054415e-05
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.6761704087257385,
+      0.15395334362983704,
+      -0.06208593770861626
+     ]
+    },
+    "xml_length": 21195,
+    "xml_sha256": "a70f6a80e4f9a8f8bd345b69b7f7d6b4cb838a9c87dba98937f4212cf839e277"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "X-T3",
+   "camera_variant": "",
+   "candidates": [
+    "cfe14356988d8dbeabdd"
+   ],
+   "description": "XF35mmF2 R WR\n35mm · f/3.6 · 센서 배율 1.53\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 3.6,
+    "camera": "X-T3",
+    "focal_length": 35.0,
+    "lens": "XF35mmF2 R WR",
+    "make": "FUJIFILM",
+    "source_orientation": 1
+   },
+   "origin": "sample:Fujifilm_X-T3_AFXT2721.RAF",
+   "profile": {
+    "aperture": 3.6,
+    "camera": "X-T3",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.534000039100647,
+    "database_file": "mil-fujifilm.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.009560000151395798,
+      -0.07056999951601028,
+      0.07333999872207642
+     ]
+    },
+    "focal": 35.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Fujifilm",
+    "name": "XF35mmF2 R WR",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0000773668289185,
+      0.999972403049469,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.33344942331314087,
+      0.7616633772850037,
+      -0.7841453552246094
+     ]
+    },
+    "xml_length": 2405,
+    "xml_sha256": "cfe14356988d8dbeabdd9eb09ce531861304dbcc4b7e66005b4aaa5f4f40fa10"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "X-T3",
+   "camera_variant": "",
+   "candidates": [
+    "db9a078514bca3c1f0c8"
+   ],
+   "description": "XC15-45mmF3.5-5.6 OIS PZ\n26mm · f/4 · 센서 배율 1.53\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "X-T3",
+    "focal_length": 26.0,
+    "lens": "XC15-45mmF3.5-5.6 OIS PZ",
+    "make": "Fujifilm",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Fujifilm_X-T3_AFXT2721.RAF",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "X-T3",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.534000039100647,
+    "database_file": "mil-fujifilm.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0013423984637483954,
+      0.005687889643013477,
+      -0.021335966885089874
+     ]
+    },
+    "focal": 26.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Fujifilm",
+    "name": "XC15-45mmF3.5-5.6 OIS PZ",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.000432014465332,
+      1.0002083778381348,
+      0.0,
+      0.0,
+      -0.00017040806415025145,
+      0.00012364679423626512
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.4587106704711914,
+      -0.16962823271751404,
+      0.169956773519516
+     ]
+    },
+    "xml_length": 9813,
+    "xml_sha256": "db9a078514bca3c1f0c84964484217c6ced7cafd27d88e32d6cf6dfa90ca4e32"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Nikon D750",
+   "camera_variant": "",
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {
+    "aperture": 1.8,
+    "camera": "NIKON D750",
+    "focal_length": 35.0,
+    "make": "NIKON CORPORATION",
+    "source_orientation": 1
+   },
+   "origin": "sample:Nikon_D750_lossless_compressed_14_bit.NEF",
+   "profile": null,
+   "profile_reason": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요.",
+   "reason": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요."
+  },
+  {
+   "camera": "Nikon D750",
+   "camera_variant": "",
+   "candidates": [
+    "31cef2c7655456eb320a"
+   ],
+   "description": "Nikkor AI-S 85mm f/2.0\n85mm · f/4 · 센서 배율 1\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Nikon D750",
+    "focal_length": 85.0,
+    "lens": "Nikkor AI-S 85mm f/2.0",
+    "make": "Nikon Corporation",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Nikon_D750_lossless_compressed_14_bit.NEF",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Nikon D750",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 1.0,
+    "database_file": "slr-nikon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.005619999952614307,
+      0.020150000229477882,
+      -0.015039999969303608
+     ]
+    },
+    "focal": 85.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Nikon",
+    "name": "Nikkor AI-S 85mm f/2.0",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.000003695487976,
+      0.9998670220375061,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 462,
+    "xml_sha256": "31cef2c7655456eb320adb2c551bd6b412a018c5844d522f22a9dd88e92b1e98"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Nikon Z 6",
+   "camera_variant": "",
+   "candidates": [
+    "4a1208c73cdc8faf6456"
+   ],
+   "description": "NIKKOR Z 24-70mm f/4 S\n52mm · f/6.7 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 6.7,
+    "camera": "NIKON Z 6",
+    "focal_length": 52.0,
+    "lens": "NIKKOR Z 24-70mm f/4 S",
+    "make": "NIKON CORPORATION",
+    "source_orientation": 1
+   },
+   "origin": "sample:Nikon_Z-6_DSC_0754.NEF",
+   "profile": {
+    "aperture": 6.7,
+    "camera": "Nikon Z 6",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "mil-nikon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.02308168262243271,
+      -0.06303413212299347,
+      0.09196024388074875
+     ]
+    },
+    "focal": 52.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Nikon",
+    "name": "NIKKOR Z 24-70mm f/4 S",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999870657920837,
+      1.000055193901062,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.31397882103919983,
+      -0.10193713754415512,
+      0.008500849828124046
+     ]
+    },
+    "xml_length": 7512,
+    "xml_sha256": "4a1208c73cdc8faf6456b444da380dafadde06ac825dc7a09aabe4077082e61f"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Nikon Z 6",
+   "camera_variant": "",
+   "candidates": [
+    "670208cb3bdfddda7261"
+   ],
+   "description": "NIKKOR Z 100-400mm f/4.5-5.6 VR S\n200mm · f/4 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Nikon Z 6",
+    "focal_length": 200.0,
+    "lens": "NIKKOR Z 100-400mm f/4.5-5.6 VR S",
+    "make": "Nikon Corporation",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Nikon_Z-6_DSC_0754.NEF",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Nikon Z 6",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "mil-nikon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.004086279775947332,
+      0.02816390059888363,
+      -0.02810480073094368
+     ]
+    },
+    "focal": 200.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Nikon",
+    "name": "NIKKOR Z 100-400mm f/4.5-5.6 VR S",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999665021896362,
+      1.000087022781372,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.1594492793083191,
+      -0.7848416566848755,
+      0.4306615889072418
+     ]
+    },
+    "xml_length": 10072,
+    "xml_sha256": "670208cb3bdfddda726185e71f8c09e00e5842ca3a327b8457ac525b531ba241"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": null,
+   "camera_variant": null,
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {
+    "aperture": 2.8,
+    "camera": "E-M1MarkII      ",
+    "focal_length": 28.0,
+    "lens": "OLYMPUS M.12-40mm F2.8",
+    "make": "OLYMPUS CORPORATION    ",
+    "source_orientation": 1
+   },
+   "origin": "sample:Olympus_E-M1MarkII_Olympus_EM1mk2_Standard_20MP_ColorChecker.ORF",
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  },
+  {
+   "camera": "DC-GH5",
+   "camera_variant": "",
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {
+    "aperture": 5.6,
+    "camera": "DC-GH5",
+    "focal_length": 25.0,
+    "make": "Panasonic",
+    "source_orientation": 1
+   },
+   "origin": "sample:Panasonic_DC-GH5__T012010.RW2",
+   "profile": null,
+   "profile_reason": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요.",
+   "reason": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요."
+  },
+  {
+   "camera": "DC-GH5",
+   "camera_variant": "",
+   "candidates": [
+    "efc7bf65ab8b6ab0c44c"
+   ],
+   "description": "LEICA DG 10-25/F1.7\n15.8mm · f/4 · 센서 배율 2\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DC-GH5",
+    "focal_length": 15.8,
+    "lens": "LEICA DG 10-25/F1.7",
+    "make": "Panasonic",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Panasonic_DC-GH5__T012010.RW2",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DC-GH5",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 2.0,
+    "database_file": "mil-panasonic.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.002684940816834569,
+      0.005236797966063023,
+      -0.019942905753850937
+     ]
+    },
+    "focal": 15.8,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Panasonic",
+    "name": "LEICA DG 10-25/F1.7",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0001966953277588,
+      1.0000874996185303,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 1549,
+    "xml_sha256": "efc7bf65ab8b6ab0c44c273afb1d9cb47cf56b7d350f88c25df200c58c624ca0"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Pentax K-1",
+   "camera_variant": "",
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {
+    "aperture": 14.0,
+    "camera": "PENTAX K-1         ",
+    "focal_length": 35.0,
+    "make": "RICOH IMAGING COMPANY, LTD.  ",
+    "source_orientation": 1
+   },
+   "origin": "sample:Pentax_K-1_IMGP8550.PEF",
+   "profile": null,
+   "profile_reason": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요.",
+   "reason": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요."
+  },
+  {
+   "camera": "Pentax K-1",
+   "camera_variant": "",
+   "candidates": [
+    "09c5ebdc06ad4cf54c4a"
+   ],
+   "description": "Ricoh 50mm 1:2.0\n50mm · f/4 · 센서 배율 1\n왜곡 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Pentax K-1",
+    "focal_length": 50.0,
+    "lens": "Ricoh 50mm 1:2.0",
+    "make": "Ricoh Imaging Company, Ltd.",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Pentax_K-1_IMGP8550.PEF",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Pentax K-1",
+    "capabilities": [
+     "distortion",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "slr-ricoh.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "poly3",
+     "terms": [
+      -0.0040799998678267,
+      0.0,
+      0.0
+     ]
+    },
+    "focal": 50.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Ricoh",
+    "name": "Ricoh 50mm 1:2.0",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.25540000200271606,
+      0.3091999888420105,
+      -0.3179999887943268
+     ]
+    },
+    "xml_length": 1963,
+    "xml_sha256": "09c5ebdc06ad4cf54c4a09839d70f11ae2ed9934f736786eebd4dfdfa22256d9"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Ricoh GR III",
+   "camera_variant": "",
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {
+    "aperture": 5.0,
+    "camera": "RICOH GR III       ",
+    "focal_length": 18.3,
+    "make": "RICOH IMAGING COMPANY, LTD.  ",
+    "source_orientation": 1
+   },
+   "origin": "sample:Ricoh_GR-III_R0000357.DNG",
+   "profile": null,
+   "profile_reason": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요.",
+   "reason": "사진에 렌즈 이름이 없습니다. 사용한 렌즈를 선택해 주세요."
+  },
+  {
+   "camera": "Ricoh GR III",
+   "camera_variant": "",
+   "candidates": [
+    "21c5fa04eb121de82d59"
+   ],
+   "description": "Ricoh GR III & compatibles\n18.3mm · f/4 · 센서 배율 1.53\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Ricoh GR III",
+    "focal_length": 18.3,
+    "lens": "Ricoh GR III & compatibles",
+    "make": "Ricoh Imaging Company, Ltd.",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Ricoh_GR-III_R0000357.DNG",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Ricoh GR III",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.5299999713897705,
+    "database_file": "compact-ricoh.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.013000000268220901,
+      -0.03500000014901161,
+      0.017999999225139618
+     ]
+    },
+    "focal": 18.3,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Ricoh imaging company, ltd.",
+    "name": "Ricoh GR III & compatibles",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0002832412719727,
+      0.999938428401947,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -1.3716306686401367,
+      0.8868998885154724,
+      -0.2285187989473343
+     ]
+    },
+    "xml_length": 4392,
+    "xml_sha256": "21c5fa04eb121de82d5916eb35deb094c84d42e4afd3e6b52e1247892275b5a4"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "ILCE-7M3",
+   "camera_variant": "",
+   "candidates": [
+    "e726799dd94b309ff3c1"
+   ],
+   "description": "FE 16-35mm f/2.8 GM\n32mm · f/4 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "ILCE-7M3",
+    "focal_length": 32.0,
+    "lens": "FE 16-35mm F2.8 GM",
+    "make": "SONY",
+    "source_orientation": 1
+   },
+   "origin": "sample:Sony_ILCE-7M3__DSC0009.ARW",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "ILCE-7M3",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "mil-sony.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.006000000052154064,
+      -0.013000000268220901,
+      0.026000000536441803
+     ]
+    },
+    "focal": 32.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Sony",
+    "name": "FE 16-35mm f/2.8 GM",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0001012086868286,
+      0.9999980330467224,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.5828102231025696,
+      0.21842925250530243,
+      -0.11397302150726318
+     ]
+    },
+    "xml_length": 9558,
+    "xml_sha256": "e726799dd94b309ff3c1ceac21e04be00a5dabf5b5e345781338390950426a5d"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "ILCE-7M3",
+   "camera_variant": "",
+   "candidates": [
+    "85515a7f3f351c61ba54"
+   ],
+   "description": "E 10-18mm f/4 OSS\n13.4mm · f/4 · 센서 배율 1\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "ILCE-7M3",
+    "focal_length": 13.4,
+    "lens": "E 10-18mm f/4 OSS",
+    "make": "Sony",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "sample-camera+lens:Sony_ILCE-7M3__DSC0009.ARW",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "ILCE-7M3",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 1.0,
+    "database_file": "mil-sony.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.11974398791790009,
+      -0.256086528301239,
+      0.17811553180217743
+     ]
+    },
+    "focal": 13.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Sony",
+    "name": "E 10-18mm f/4 OSS",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 748,
+    "xml_sha256": "85515a7f3f351c61ba544dd35c9086bdedb0953c16288b65195c33fdccef94a3"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "AEE DV",
+   "camera_variant": "",
+   "candidates": [
+    "4c49e2ac3f618ead8d82"
+   ],
+   "description": "AEE SD19 & compatibles\n5mm · f/4 · 센서 배율 6\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "AEE DV",
+    "focal_length": 5.0,
+    "lens": "AEE SD19 & compatibles",
+    "make": "AEE DV",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:AEE DV/aeeDV",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "AEE DV",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 6.0,
+    "database_file": "actioncams.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.051089998334646225,
+      -0.12092000246047974,
+      0.10954999923706055
+     ]
+    },
+    "focal": 5.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "AEE",
+    "name": "AEE SD19 & compatibles",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 880,
+    "xml_sha256": "4c49e2ac3f618ead8d82282ef25164f3d58568ad25277adcefd189ffc31bf03a"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon EOS R",
+   "camera_variant": "",
+   "candidates": [
+    "a70f6a80e4f9a8f8bd34"
+   ],
+   "description": "Canon EF 100-200mm f/4.5A\n141.4mm · f/4 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon EOS R",
+    "focal_length": 141.4,
+    "lens": "Canon EF 100-200mm f/4.5A",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Canon/Canon RF",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon EOS R",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "slr-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0028114623855799437,
+      0.003645064076408744,
+      0.002124692779034376
+     ]
+    },
+    "focal": 141.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon EF 100-200mm f/4.5A",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999911189079285,
+      0.9998208284378052,
+      0.0,
+      0.0,
+      -3.078847294091247e-05,
+      3.141990237054415e-05
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.6761704087257385,
+      0.15395334362983704,
+      -0.06208593770861626
+     ]
+    },
+    "xml_length": 21195,
+    "xml_sha256": "a70f6a80e4f9a8f8bd345b69b7f7d6b4cb838a9c87dba98937f4212cf839e277"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon PowerShot A650 IS",
+   "camera_variant": "",
+   "candidates": [
+    "ba8b2bce3c41d5b79baf"
+   ],
+   "description": "Canon PowerShot A650 IS & compatibles (Standard)\n18.1mm · f/4 · 센서 배율 4.68\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot A650 IS",
+    "focal_length": 18.1,
+    "lens": "Canon PowerShot A650 IS & compatibles (Standard)",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Canon/canonA650IS",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot A650 IS",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 4.677120208740234,
+    "database_file": "compact-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.0005154867540113628,
+      0.01607290282845497,
+      -0.024313531816005707
+     ]
+    },
+    "focal": 18.1,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon PowerShot A650 IS & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 1020,
+    "xml_sha256": "ba8b2bce3c41d5b79baf4bb01bfe8772197e8a68f398e88f348819ec10481167"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon PowerShot G12",
+   "camera_variant": "",
+   "candidates": [
+    "97dbdac05fff1f8050d4"
+   ],
+   "description": "Canon PowerShot G12 & compatibles (Standard)\n13.6mm · f/4 · 센서 배율 4.63\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot G12",
+    "focal_length": 13.6,
+    "lens": "Canon PowerShot G12 & compatibles (Standard)",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Canon/canonG12",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot G12",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 4.630000114440918,
+    "database_file": "compact-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "poly5",
+     "terms": [
+      -0.00766757084056735,
+      -0.0009060502052307129,
+      0.0
+     ]
+    },
+    "focal": 13.6,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon PowerShot G12 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0003725290298462,
+      1.0001987218856812,
+      0.0,
+      0.0,
+      1.2474990398914088e-05,
+      -4.4909211283084005e-05
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 1189,
+    "xml_sha256": "97dbdac05fff1f8050d4fc7b65df683caf0e3f1f16b51626f8dc6474b0774317"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon PowerShot G3",
+   "camera_variant": "",
+   "candidates": [
+    "3eea8976f5503a07e636"
+   ],
+   "description": "Canon PowerShot G3 & compatibles (Standard)\n14.4mm · f/4 · 센서 배율 4.84\n왜곡 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot G3",
+    "focal_length": 14.4,
+    "lens": "Canon PowerShot G3 & compatibles (Standard)",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Canon/canonG3",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot G3",
+    "capabilities": [
+     "distortion",
+     "vignette"
+    ],
+    "crop": 4.8429999351501465,
+    "database_file": "compact-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0017910818569362164,
+      0.0020431375596672297,
+      0.0
+     ]
+    },
+    "focal": 14.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon PowerShot G3 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.07209999859333038,
+      -0.005200000014156103,
+      0.004800000227987766
+     ]
+    },
+    "xml_length": 10089,
+    "xml_sha256": "3eea8976f5503a07e6368b04f3bf18229070fc2f23c4107917c72402294bc0f8"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon IXUS 125 HS",
+   "camera_variant": "",
+   "candidates": [
+    "3de80e70d015eaa25d75"
+   ],
+   "description": "Canon IXUS 125 HS & compatibles\n9.6mm · f/4 · 센서 배율 5.58\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon IXUS 125 HS",
+    "focal_length": 9.6,
+    "lens": "Canon IXUS 125 HS & compatibles",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Canon/canonIxus125HS",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon IXUS 125 HS",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 5.579999923706055,
+    "database_file": "compact-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.0010870341211557388,
+      -0.0063096266239881516,
+      -0.0010917603503912687
+     ]
+    },
+    "focal": 9.6,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon IXUS 125 HS & compatibles",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 814,
+    "xml_sha256": "3de80e70d015eaa25d75db231026c6a63eef6fd711546b9511fc369d343f3a8f"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon PowerShot S30",
+   "camera_variant": "",
+   "candidates": [
+    "426476f738ef44728a5a"
+   ],
+   "description": "Canon PowerShot S30 & compatibles (Standard)\n12.3mm · f/4 · 센서 배율 4.84\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot S30",
+    "focal_length": 12.3,
+    "lens": "Canon PowerShot S30 & compatibles (Standard)",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Canon/canonS30",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot S30",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 4.8429999351501465,
+    "database_file": "compact-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.00025866436772048473,
+      -0.008297093212604523,
+      0.0
+     ]
+    },
+    "focal": 12.3,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon PowerShot S30 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 1045,
+    "xml_sha256": "426476f738ef44728a5ad07b1e7e2e47a9893de08bf15b41eb098deb098fda3b"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon PowerShot SD950 IS",
+   "camera_variant": "",
+   "candidates": [
+    "561ac36bc3eb1320e18a"
+   ],
+   "description": "Canon PowerShot SD950 IS & compatibles (Standard)\n14.8mm · f/4 · 센서 배율 4.7\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot SD950 IS",
+    "focal_length": 14.8,
+    "lens": "Canon PowerShot SD950 IS & compatibles (Standard)",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Canon/canonSD950",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot SD950 IS",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 4.699999809265137,
+    "database_file": "compact-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "poly3",
+     "terms": [
+      -0.006102093495428562,
+      0.0,
+      0.0
+     ]
+    },
+    "focal": 14.8,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon PowerShot SD950 IS & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 762,
+    "xml_sha256": "561ac36bc3eb1320e18ab00925fdee3d95730ae1779553a21669fcb63d336ace"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Canon PowerShot SX240 HS",
+   "camera_variant": "",
+   "candidates": [
+    "4f02a00a83a906204fb4"
+   ],
+   "description": "Canon PowerShot SX260 HS & compatibles, with CHDK's DNG\n20.1mm · f/4 · 센서 배율 5.56\n왜곡 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot SX240 HS",
+    "focal_length": 20.1,
+    "lens": "Canon PowerShot SX260 HS & compatibles, with CHDK's DNG",
+    "make": "Canon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Canon/canonSX260HS",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon PowerShot SX240 HS",
+    "capabilities": [
+     "distortion",
+     "vignette"
+    ],
+    "crop": 5.559999942779541,
+    "database_file": "compact-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0,
+      -0.0028249076567590237,
+      0.0
+     ]
+    },
+    "focal": 20.1,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon PowerShot SX260 HS & compatibles, with CHDK's DNG",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.029301704838871956,
+      0.22719736397266388,
+      -0.5300575494766235
+     ]
+    },
+    "xml_length": 9848,
+    "xml_sha256": "4f02a00a83a906204fb4a3593e1137ea755d26dc1d548da31b20d3e8a0619f25"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "QV-3000EX",
+   "camera_variant": "",
+   "candidates": [
+    "40ab0ef1fc6ddf45e887"
+   ],
+   "description": "QV-3500EX & compatibles (Standard)\n12.2mm · f/4 · 센서 배율 4.8\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "QV-3000EX",
+    "focal_length": 12.2,
+    "lens": "QV-3500EX & compatibles (Standard)",
+    "make": "Casio",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Casio/casioQV3500",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "QV-3000EX",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 4.800000190734863,
+    "database_file": "compact-casio.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.0004241819551680237,
+      0.003043494187295437,
+      0.0
+     ]
+    },
+    "focal": 12.2,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Casio",
+    "name": "QV-3500EX & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 728,
+    "xml_sha256": "40ab0ef1fc6ddf45e88728706cb5bef4f76fa4f91f9c88706149c60df7852cb6"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Phantom Vision FC200",
+   "camera_variant": "",
+   "candidates": [
+    "e37f92ac2bd140891d7f"
+   ],
+   "description": "Phantom Vision FC200 & compatibles\n5mm · f/4 · 센서 배율 6\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Phantom Vision FC200",
+    "focal_length": 5.0,
+    "lens": "Phantom Vision FC200 & compatibles",
+    "make": "DJI",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:DJI/dijPhantomVisionFC200",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Phantom Vision FC200",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 6.0,
+    "database_file": "actioncams.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.027070000767707825,
+      -0.10021000355482101,
+      -0.09786999970674515
+     ]
+    },
+    "focal": 5.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "DJI",
+    "name": "Phantom Vision FC200 & compatibles",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0002000331878662,
+      1.0006999969482422,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 601,
+    "xml_sha256": "e37f92ac2bd140891d7f1af749cfff2a413c93ebe8fc3ff099c7fbceb5dd832f"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "FinePix E550",
+   "camera_variant": "",
+   "candidates": [
+    "978e24e4ec47d0f92bf7"
+   ],
+   "description": "FinePix F810 & compatibles (Standard)\n14.4mm · f/4 · 센서 배율 4.5\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "FinePix E550",
+    "focal_length": 14.4,
+    "lens": "FinePix F810 & compatibles (Standard)",
+    "make": "Fujifilm",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Fujifilm/fuji810",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "FinePix E550",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 4.5,
+    "database_file": "compact-fujifilm.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0,
+      -0.003297837683930993,
+      0.0
+     ]
+    },
+    "focal": 14.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Fujifilm",
+    "name": "FinePix F810 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 1057,
+    "xml_sha256": "978e24e4ec47d0f92bf7ee89c0c7ba7fcb98b8fbacb30c6283965bf030070813"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "XQ1",
+   "camera_variant": "",
+   "candidates": [
+    "9e9cbb846f9834b4234c"
+   ],
+   "description": "Fujifilm XQ1\n12.8mm · f/4 · 센서 배율 3.91\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "XQ1",
+    "focal_length": 12.8,
+    "lens": "Fujifilm XQ1",
+    "make": "Fujifilm",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Fujifilm/fujiXQ1",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "XQ1",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 3.9100000858306885,
+    "database_file": "compact-fujifilm.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.001898865564726293,
+      -0.004746898543089628,
+      -0.009389481507241726
+     ]
+    },
+    "focal": 12.8,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Fujifilm",
+    "name": "Fujifilm XQ1",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999083280563354,
+      1.0004496574401855,
+      0.0,
+      0.0,
+      5.754303856519982e-05,
+      2.441876176817459e-06
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 1343,
+    "xml_sha256": "9e9cbb846f9834b4234cd84e56591d7a7d8114ef4ea539d90aa35a5c546eb0bb"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "X70",
+   "camera_variant": "",
+   "candidates": [
+    "43f852869d190a69f9bc"
+   ],
+   "description": "X70 & compatibles (Standard)\n18.5mm · f/4 · 센서 배율 1.54\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "X70",
+    "focal_length": 18.5,
+    "lens": "X70 & compatibles (Standard)",
+    "make": "Fujifilm",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Fujifilm/fujix70",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "X70",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 1.537500023841858,
+    "database_file": "compact-fujifilm.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.024630900472402573,
+      -0.07120650261640549,
+      0.06348220258951187
+     ]
+    },
+    "focal": 18.5,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Fujifilm",
+    "name": "X70 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0006595849990845,
+      0.9994220733642578,
+      0.0,
+      0.0,
+      -0.00021889999334234744,
+      0.00020540000696200877
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 474,
+    "xml_sha256": "43f852869d190a69f9bc8ad57296f3b71033a8638604356eeefa2ee0b2273295"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "HERO4 Black",
+   "camera_variant": "",
+   "candidates": [
+    "dbf2ce63ec90f1a4e8cc"
+   ],
+   "description": "HERO4 black\n3mm · f/4 · 센서 배율 5\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "HERO4 Black",
+    "focal_length": 3.0,
+    "lens": "HERO4 black",
+    "make": "GoPro",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:GoPro/goProHero4black",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "HERO4 Black",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 5.0,
+    "database_file": "actioncams.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "poly3",
+     "terms": [
+      -0.03012000024318695,
+      0.0,
+      0.0
+     ]
+    },
+    "focal": 3.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "GoPro",
+    "name": "HERO4 black",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 481,
+    "xml_sha256": "dbf2ce63ec90f1a4e8cc5c6852d23b8d750b3044fb3e32330ce91df4046b84bc"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "VOG-L29",
+   "camera_variant": "",
+   "candidates": [
+    "04aabd7372815e51e811"
+   ],
+   "description": "P30 Pro\n5.8mm · f/4 · 센서 배율 4.86\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "VOG-L29",
+    "focal_length": 5.8,
+    "lens": "P30 Pro",
+    "make": "Huawei",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Huawei/vogl29",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "VOG-L29",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 4.860000133514404,
+    "database_file": "misc.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.006299757398664951,
+      0.009803161956369877,
+      -0.00350746838375926
+     ]
+    },
+    "focal": 5.8,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Huawei",
+    "name": "P30 Pro",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999960660934448,
+      0.9999924898147583,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -1.3933906555175781,
+      1.6708307266235352,
+      -0.7868701219558716
+     ]
+    },
+    "xml_length": 1573,
+    "xml_sha256": "04aabd7372815e51e811efa2d2ec7084cfc8c991134c6c1bddf136c9e149b423"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DiMAGE A200",
+   "camera_variant": "",
+   "candidates": [
+    "d9a50fade52105c0b55a"
+   ],
+   "description": "DiMAGE 7 & compatibles (Standard)\n19.3mm · f/4 · 센서 배율 3.93\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DiMAGE A200",
+    "focal_length": 19.3,
+    "lens": "DiMAGE 7 & compatibles (Standard)",
+    "make": "Konica Minolta",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Konica Minolta/kmD7",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DiMAGE A200",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 3.933000087738037,
+    "database_file": "compact-konica-minolta.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.00041465461254119873,
+      0.004823570139706135,
+      0.0
+     ]
+    },
+    "focal": 19.3,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Konica Minolta",
+    "name": "DiMAGE 7 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 879,
+    "xml_sha256": "d9a50fade52105c0b55a8d031093cf24773056190e0a74bbb25fc7462172d1df"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Digilux 2",
+   "camera_variant": "",
+   "candidates": [
+    "1e475e58318383e32b8e"
+   ],
+   "description": "Digilux 2 & compatibles (Standard)\n12.5mm · f/4 · 센서 배율 3.93\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Digilux 2",
+    "focal_length": 12.5,
+    "lens": "Digilux 2 & compatibles (Standard)",
+    "make": "Leica",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Leica/leicaDigilux2",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Digilux 2",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 3.933000087738037,
+    "database_file": "compact-leica.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0,
+      -0.004281487315893173,
+      -0.004441399592906237
+     ]
+    },
+    "focal": 12.5,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Leica",
+    "name": "Digilux 2 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 1635,
+    "xml_sha256": "1e475e58318383e32b8efb5d90e18a5baf3aedbe3ca14ca98111022f1a4a13f6"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Digilux 3",
+   "camera_variant": "",
+   "candidates": [
+    "cba102275497f77a215f"
+   ],
+   "description": "Beroflex 1:8 500mm\n500mm · f/4 · 센서 배율 2\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Digilux 3",
+    "focal_length": 500.0,
+    "lens": "Beroflex 1:8 500mm",
+    "make": "Leica Camera AG",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Leica Camera AG/Micro 4/3 System",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Digilux 3",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 2.0,
+    "database_file": "misc.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "poly3",
+     "terms": [
+      0.00107999995816499,
+      0.0,
+      0.0
+     ]
+    },
+    "focal": 500.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Beroflex",
+    "name": "Beroflex 1:8 500mm",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999464154243469,
+      0.9997637271881104,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 481,
+    "xml_sha256": "cba102275497f77a215f8a9d1672db30eb1925964734e8e1254d6f69174525f1"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DiMAGE X",
+   "camera_variant": "",
+   "candidates": [
+    "d1f2d32ab1f4b6241821"
+   ],
+   "description": "DiMAGE X & compatibles (Standard)\n9.9mm · f/4 · 센서 배율 6.5\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DiMAGE X",
+    "focal_length": 9.9,
+    "lens": "DiMAGE X & compatibles (Standard)",
+    "make": "Minolta Co., Ltd.",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Minolta Co., Ltd./kmXt",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DiMAGE X",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 6.5,
+    "database_file": "compact-konica-minolta.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0,
+      0.006928290706127882,
+      0.0
+     ]
+    },
+    "focal": 9.9,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Konica Minolta",
+    "name": "DiMAGE X & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 1220,
+    "xml_sha256": "d1f2d32ab1f4b6241821f00c5e13f2dfd868e495e91d0064075130923a02322b"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "E5700",
+   "camera_variant": "",
+   "candidates": [
+    "2b8a0d00d5acd0f7d71e"
+   ],
+   "description": "E5700 & compatibles (Standard)\n25.2mm · f/4 · 센서 배율 3.93\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "E5700",
+    "focal_length": 25.2,
+    "lens": "E5700 & compatibles (Standard)",
+    "make": "Nikon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Nikon/nikon5700",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "E5700",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 3.933000087738037,
+    "database_file": "compact-nikon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.006255225744098425,
+      -0.01147699449211359,
+      0.0
+     ]
+    },
+    "focal": 25.2,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Nikon",
+    "name": "E5700 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 1888,
+    "xml_sha256": "2b8a0d00d5acd0f7d71e4d2b092b4b4e94aea669572e235c3a4d0dc4e0ca5856"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Coolpix P330",
+   "camera_variant": "",
+   "candidates": [
+    "178818898bd931f94fd5"
+   ],
+   "description": "Coolpix P330 & compatibles (Standard)\n11.4mm · f/4 · 센서 배율 4.71\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Coolpix P330",
+    "focal_length": 11.4,
+    "lens": "Coolpix P330 & compatibles (Standard)",
+    "make": "Nikon",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Nikon/nikonP330",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Coolpix P330",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 4.705999851226807,
+    "database_file": "compact-nikon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.0021924094762653112,
+      0.005466043017804623,
+      -0.03046649508178234
+     ]
+    },
+    "focal": 11.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Nikon",
+    "name": "Coolpix P330 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999785423278809,
+      1.001116156578064,
+      0.0,
+      0.0,
+      1.437914397683926e-05,
+      -0.0002834112965501845
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 1731,
+    "xml_sha256": "178818898bd931f94fd51d1cb2a189e812f84e5853e6ab846891dbb486686693"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Nikon D1",
+   "camera_variant": "",
+   "candidates": [
+    "b8aa679ed6918538c886"
+   ],
+   "description": "200-500mm F5.6 174\n316.2mm · f/4 · 센서 배율 1.52\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Nikon D1",
+    "focal_length": 316.2,
+    "lens": "200-500mm F5.6 174",
+    "make": "Nikon Corporation",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Nikon Corporation/Nikon F AF",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Nikon D1",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 1.524999976158142,
+    "database_file": "slr-nikon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.006947482470422983,
+      0.031320661306381226,
+      -0.03942845016717911
+     ]
+    },
+    "focal": 316.2,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Nikon",
+    "name": "200-500mm F5.6 174",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999156594276428,
+      0.9999627470970154,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 1008,
+    "xml_sha256": "b8aa679ed6918538c886b7b30bff79f7defaa8f087a27bea298b4f7e756b60df"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Stylus Epic",
+   "camera_variant": "",
+   "candidates": [
+    "91c45ffdedc13f626c39"
+   ],
+   "description": "Stylus Epic & compatibles (Standard)\n35mm · f/4 · 센서 배율 1\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Stylus Epic",
+    "focal_length": 35.0,
+    "lens": "Stylus Epic & compatibles (Standard)",
+    "make": "Olympus",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Olympus/olympusEpic",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Stylus Epic",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 1.0,
+    "database_file": "compact-olympus.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.012470000423491001,
+      0.027098000049591064,
+      0.0
+     ]
+    },
+    "focal": 35.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Olympus",
+    "name": "Stylus Epic & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 493,
+    "xml_sha256": "91c45ffdedc13f626c39b82461a3233d10ef3c6e3b2b11af77ab74de5d3d3115"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "E-3",
+   "camera_variant": "",
+   "candidates": [
+    "e63e845838b345e4f282"
+   ],
+   "description": "Olympus Zuiko Digital 11-22mm f/2.8-3.5\n15.6mm · f/4 · 센서 배율 2\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "E-3",
+    "focal_length": 15.6,
+    "lens": "Olympus Zuiko Digital 11-22mm f/2.8-3.5",
+    "make": "Olympus Imaging Corp.",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Olympus Imaging Corp./4/3 System",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "E-3",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 2.0,
+    "database_file": "slr-olympus.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "poly3",
+     "terms": [
+      -0.0027284363750368357,
+      0.0,
+      0.0
+     ]
+    },
+    "focal": 15.6,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Olympus",
+    "name": "Olympus Zuiko Digital 11-22mm f/2.8-3.5",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 766,
+    "xml_sha256": "e63e845838b345e4f282dbd3f14eb1e4ef83a0768ce1fb1bb7a8e6fe25cb28bd"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Stylus1",
+   "camera_variant": "",
+   "candidates": [
+    "626988dc57ef1d93f727"
+   ],
+   "description": "Stylus 1 & compatibles\n19.6mm · f/4 · 센서 배율 4.67\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Stylus1",
+    "focal_length": 19.6,
+    "lens": "Stylus 1 & compatibles",
+    "make": "Olympus Imaging Corp.",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Olympus Imaging Corp./olympusStylus1",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Stylus1",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 4.670000076293945,
+    "database_file": "compact-olympus.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0,
+      0.01563662476837635,
+      0.0
+     ]
+    },
+    "focal": 19.6,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Olympus",
+    "name": "Stylus 1 & compatibles",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0002254247665405,
+      1.0000348091125488,
+      0.0,
+      0.0,
+      -6.489999941550195e-05,
+      1.9400000383029692e-05
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 2043,
+    "xml_sha256": "626988dc57ef1d93f7279014d02db5e6403fbf5238aeb096ec790ea14bc1c3d6"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DMC-L1",
+   "camera_variant": "",
+   "candidates": [
+    "3d176de786d6b8a03d8a"
+   ],
+   "description": "Leica D Vario-Elmar 14-150mm f/3.5-5.6 Asph. OIS\n45.8mm · f/4 · 센서 배율 2\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DMC-L1",
+    "focal_length": 45.8,
+    "lens": "Leica D Vario-Elmar 14-150mm f/3.5-5.6 Asph. OIS",
+    "make": "Panasonic",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Panasonic/4/3 System",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DMC-L1",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 2.0,
+    "database_file": "mil-panasonic.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0002641775645315647,
+      0.004830559249967337,
+      -0.0009146188385784626
+     ]
+    },
+    "focal": 45.8,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Panasonic",
+    "name": "Leica D Vario-Elmar 14-150mm f/3.5-5.6 Asph. OIS",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0001381635665894,
+      1.0000189542770386,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 1136,
+    "xml_sha256": "3d176de786d6b8a03d8a9b8d278a4f04600e0f6a1c32c53fa0e8a9ef823d7199"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DMC-FZ100",
+   "camera_variant": "",
+   "candidates": [
+    "326b2269c2e8f056f4f1"
+   ],
+   "description": "DMC-FZ45 & compatibles (Standard)\n22mm · f/4 · 센서 배율 5.6\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DMC-FZ100",
+    "focal_length": 22.0,
+    "lens": "DMC-FZ45 & compatibles (Standard)",
+    "make": "Panasonic",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Panasonic/panasonicDMCFZ45",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DMC-FZ100",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 5.599999904632568,
+    "database_file": "compact-panasonic.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0,
+      0.002888905815780163,
+      0.0
+     ]
+    },
+    "focal": 22.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Panasonic",
+    "name": "DMC-FZ45 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999348521232605,
+      1.0001635551452637,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 1768,
+    "xml_sha256": "326b2269c2e8f056f4f1a0994ed66a9c3b23bf30ac4a06254b7c14a4558d02c1"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DMC-FZ10",
+   "camera_variant": "",
+   "candidates": [
+    "f391b276fd9e8bbab326"
+   ],
+   "description": "DMC-FZ10 & compatibles (Standard)\n20.8mm · f/4 · 센서 배율 5.84\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DMC-FZ10",
+    "focal_length": 20.8,
+    "lens": "DMC-FZ10 & compatibles (Standard)",
+    "make": "Panasonic",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Panasonic/panasonicFZ10",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DMC-FZ10",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 5.840000152587891,
+    "database_file": "compact-panasonic.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      5.233768388279714e-05,
+      0.003976438194513321,
+      0.0
+     ]
+    },
+    "focal": 20.8,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Leica",
+    "name": "DMC-FZ10 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 1058,
+    "xml_sha256": "f391b276fd9e8bbab3267b0852f24c2f9db2e71fee2acfe87ebe03ad9a1d5f16"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DMC-FZ5",
+   "camera_variant": "",
+   "candidates": [
+    "5c812d4553c53cce0d17"
+   ],
+   "description": "DMC-FZ5 & compatibles (Standard)\n20.8mm · f/4 · 센서 배율 6\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DMC-FZ5",
+    "focal_length": 20.8,
+    "lens": "DMC-FZ5 & compatibles (Standard)",
+    "make": "Panasonic",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Panasonic/panasonicFZ5",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DMC-FZ5",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 6.0,
+    "database_file": "compact-panasonic.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.00019485107623040676,
+      0.0013453131541609764,
+      0.0
+     ]
+    },
+    "focal": 20.8,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Leica",
+    "name": "DMC-FZ5 & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 1058,
+    "xml_sha256": "5c812d4553c53cce0d17e6097fb815ff6633318a9ec09c66fc0efd8d39e3a4b6"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DC-TZ90",
+   "camera_variant": "",
+   "candidates": [
+    "f92b7d2fd54f698f154a"
+   ],
+   "description": "DMC-TZ70 & compatibles\n23.6mm · f/4 · 센서 배율 5.58\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DC-TZ90",
+    "focal_length": 23.6,
+    "lens": "DMC-TZ70 & compatibles",
+    "make": "Panasonic",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Panasonic/panasonicTZ70",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DC-TZ90",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 5.579999923706055,
+    "database_file": "compact-panasonic.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.010476232506334782,
+      0.023601630702614784,
+      -0.0007958075730130076
+     ]
+    },
+    "focal": 23.6,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Leica",
+    "name": "DMC-TZ70 & compatibles",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0000338554382324,
+      1.0001182556152344,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 1725,
+    "xml_sha256": "f92b7d2fd54f698f154a02b6c9a12e500ca96ad1c53a3309c8ee5990d2a2e835"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Pentax Optio 450",
+   "camera_variant": "",
+   "candidates": [
+    "d1976aefcc172f96eb08"
+   ],
+   "description": "Pentax Optio 750Z & compatibles (Standard)\n17.4mm · f/4 · 센서 배율 4.84\n왜곡",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Pentax Optio 450",
+    "focal_length": 17.4,
+    "lens": "Pentax Optio 750Z & compatibles (Standard)",
+    "make": "Pentax Corporation",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Pentax Corporation/pentax750",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Pentax Optio 450",
+    "capabilities": [
+     "distortion"
+    ],
+    "crop": 4.8429999351501465,
+    "database_file": "compact-pentax.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0022296919487416744,
+      0.012229647487401962,
+      0.0
+     ]
+    },
+    "focal": 17.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Pentax",
+    "name": "Pentax Optio 750Z & compatibles (Standard)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": null,
+    "xml_length": 1088,
+    "xml_sha256": "d1976aefcc172f96eb081549e568be64d3a984f94b81301411cb247269da0629"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "GR",
+   "camera_variant": "",
+   "candidates": [
+    "a8feab2df845b1c6d20e"
+   ],
+   "description": "Ricoh GR & compatibles\n18.3mm · f/4 · 센서 배율 1.52\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "GR",
+    "focal_length": 18.3,
+    "lens": "Ricoh GR & compatibles",
+    "make": "Ricoh Imaging Company, Ltd.",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Ricoh Imaging Company, Ltd./ricohGR",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "GR",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 1.5230000019073486,
+    "database_file": "compact-ricoh.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.011339999735355377,
+      -0.030659999698400497,
+      0.010590000078082085
+     ]
+    },
+    "focal": 18.3,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Ricoh",
+    "name": "Ricoh GR & compatibles",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0001157522201538,
+      0.999954879283905,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 561,
+    "xml_sha256": "a8feab2df845b1c6d20ec1eb69050c2225b6b388d7c7543e325cd46ac556a84e"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "SM-G991B",
+   "camera_variant": "",
+   "candidates": [
+    "8e579244bc1614c7dee6"
+   ],
+   "description": "Samsung Galaxy S21 ultrawide\n2.2mm · f/4 · 센서 배율 6\n왜곡 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "SM-G991B",
+    "focal_length": 2.2,
+    "lens": "Samsung Galaxy S21 ultrawide",
+    "make": "Samsung",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Samsung/samsungS21uw",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "SM-G991B",
+    "capabilities": [
+     "distortion",
+     "vignette"
+    ],
+    "crop": 6.0,
+    "database_file": "compact-samsung.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.08799999952316284,
+      0.18799999356269836,
+      -0.11599999666213989
+     ]
+    },
+    "focal": 2.2,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Samsung",
+    "name": "Samsung Galaxy S21 ultrawide",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": null,
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -1.153499960899353,
+      1.4805998802185059,
+      -0.6591999530792236
+     ]
+    },
+    "xml_length": 624,
+    "xml_sha256": "8e579244bc1614c7dee6dabae85c50d514c7410a1f53d2c139e18313d4d3b4c6"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "Sigma fp",
+   "camera_variant": "",
+   "candidates": [
+    "258de595056f994b3e3e"
+   ],
+   "description": "105mm F1.4 DG HSM | Art 018\n105mm · f/4 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Sigma fp",
+    "focal_length": 105.0,
+    "lens": "105mm F1.4 DG HSM | Art 018",
+    "make": "Sigma",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Sigma/Leica L",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Sigma fp",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "mil-sigma.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0014406143454834819,
+      -0.00614583445712924,
+      0.012748727574944496
+     ]
+    },
+    "focal": 105.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Sigma",
+    "name": "105mm F1.4 DG HSM | Art 018",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999963045120239,
+      1.0000320672988892,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.20909999310970306,
+      -0.03779999911785126,
+      0.043299999088048935
+     ]
+    },
+    "xml_length": 5615,
+    "xml_sha256": "258de595056f994b3e3e67074ab898f419ea55266da8f31f0ec0e60213c6ce3d"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DSLR-A100",
+   "camera_variant": "",
+   "candidates": [
+    "55dce4c2729ca7d93d98"
+   ],
+   "description": "Carl Zeiss Distagon T* 24mm F2 ZA SSM (SAL24F20Z)\n24mm · f/4 · 센서 배율 1.52\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DSLR-A100",
+    "focal_length": 24.0,
+    "lens": "Carl Zeiss Distagon T* 24mm F2 ZA SSM (SAL24F20Z)",
+    "make": "Sony",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Sony/Sony Alpha",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DSLR-A100",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 1.5230000019073486,
+    "database_file": "slr-sony.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.008999999612569809,
+      -0.026000000536441803,
+      0.014000000432133675
+     ]
+    },
+    "focal": 24.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Sony",
+    "name": "Carl Zeiss Distagon T* 24mm F2 ZA SSM (SAL24F20Z)",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999614953994751,
+      1.0003186464309692,
+      0.0,
+      0.0,
+      0.0001385000068694353,
+      -4.8800000513438135e-05
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 475,
+    "xml_sha256": "55dce4c2729ca7d93d986bc9c1c7697b90bc856408523e81f5049878f71d5227"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DSC-RX0",
+   "camera_variant": "",
+   "candidates": [
+    "fbb4251f6473ad90c8e5"
+   ],
+   "description": "DSC-RX0M2\n7.9mm · f/4 · 센서 배율 2.7\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DSC-RX0",
+    "focal_length": 7.9,
+    "lens": "DSC-RX0M2",
+    "make": "Sony",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Sony/sonyRX0M2",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DSC-RX0",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 2.700000047683716,
+    "database_file": "compact-sony.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.05683000013232231,
+      -0.18776999413967133,
+      0.16030000150203705
+     ]
+    },
+    "focal": 7.9,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Sony",
+    "name": "DSC-RX0M2",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.0000640153884888,
+      1.0000736713409424,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 496,
+    "xml_sha256": "fbb4251f6473ad90c8e51049477b8d1e0006d63600ebe77f5ae83653caa02ce6"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "DSC-RX10M2",
+   "camera_variant": "",
+   "candidates": [
+    "1737daef035cee473422"
+   ],
+   "description": "Sony RX10II & compatibles\n25.4mm · f/4 · 센서 배율 2.73\n왜곡 · 색수차",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "DSC-RX10M2",
+    "focal_length": 25.4,
+    "lens": "Sony RX10II & compatibles",
+    "make": "Sony",
+    "source_orientation": 1,
+    "subject_distance": 1000.0
+   },
+   "origin": "pair:Sony/sonyRX10II",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "DSC-RX10M2",
+    "capabilities": [
+     "distortion",
+     "tca"
+    ],
+    "crop": 2.7300000190734863,
+    "database_file": "compact-sony.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.008850961923599243,
+      0.03979482501745224,
+      0.005270269699394703
+     ]
+    },
+    "focal": 25.4,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Sony",
+    "name": "Sony RX10II & compatibles",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      1.000372290611267,
+      0.9999715089797974,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": null,
+    "xml_length": 1573,
+    "xml_sha256": "1737daef035cee473422355c0f75235239947f801137acd28ae773af67e3aad8"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": null,
+   "camera_variant": null,
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {},
+   "origin": "empty",
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  },
+  {
+   "camera": null,
+   "camera_variant": null,
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {
+    "camera": "not a camera",
+    "make": "Canon"
+   },
+   "origin": "unknown-camera",
+   "profile": null,
+   "profile_reason": "카메라를 선택해 주세요.",
+   "reason": "카메라를 선택해 주세요."
+  },
+  {
+   "camera": "Nikon D750",
+   "camera_variant": "",
+   "candidates": [],
+   "description": "자동 렌즈 프로파일 없음",
+   "metadata": {
+    "aperture": 5.6,
+    "camera": "NIKON D750",
+    "focal_length": 35.0,
+    "lens": "AF-S Nikkor 24-70mm f/2.8G ED",
+    "make": "NIKON CORPORATION"
+   },
+   "origin": "exif-spelling",
+   "profile": null,
+   "profile_reason": "렌즈 후보를 확인해 주세요.",
+   "reason": "렌즈 후보를 확인해 주세요."
+  },
+  {
+   "camera": "Canon EOS 5D Mark IV",
+   "camera_variant": "",
+   "candidates": [
+    "debceedaea7832542060"
+   ],
+   "description": "Canon EF 24-70mm f/2.8L II USM\n50mm · f/4 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 4.0,
+    "camera": "Canon EOS 5D Mark IV",
+    "focal_length": 50.0,
+    "lens": "EF24-70mm f/2.8L II USM",
+    "make": "Canon"
+   },
+   "origin": "exif-spelling",
+   "profile": {
+    "aperture": 4.0,
+    "camera": "Canon EOS 5D Mark IV",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "slr-canon.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      -0.0022299999836832285,
+      0.018559999763965607,
+      -0.018200000748038292
+     ]
+    },
+    "focal": 50.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Canon",
+    "name": "Canon EF 24-70mm f/2.8L II USM",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999836087226868,
+      0.9999502897262573,
+      0.0,
+      0.0,
+      -3.0499999411404133e-05,
+      2.300000005561742e-06
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.5375999808311462,
+      0.6855000257492065,
+      -0.7145000100135803
+     ]
+    },
+    "xml_length": 17674,
+    "xml_sha256": "debceedaea78325420605b7dd8661282724cc2b083efd33224a204d8444c9d27"
+   },
+   "profile_reason": "",
+   "reason": ""
+  },
+  {
+   "camera": "ILCE-7M3",
+   "camera_variant": "",
+   "candidates": [
+    "bdc3bc75eeb83137b542"
+   ],
+   "description": "FE 24-70mm f/2.8 GM\n50mm · f/2.8 · 센서 배율 1\n왜곡 · 색수차 · 주변광량",
+   "metadata": {
+    "aperture": 2.8,
+    "camera": "ILCE-7M3",
+    "focal_length": 50.0,
+    "lens": "FE 24-70mm F2.8 GM",
+    "make": "SONY"
+   },
+   "origin": "exif-spelling",
+   "profile": {
+    "aperture": 2.8,
+    "camera": "ILCE-7M3",
+    "capabilities": [
+     "distortion",
+     "tca",
+     "vignette"
+    ],
+    "crop": 1.0,
+    "database_file": "mil-sony.xml",
+    "distance": 1000.0,
+    "distortion": {
+     "model": "ptlens",
+     "terms": [
+      0.0068617044016718864,
+      -0.0018823659047484398,
+      0.0050962637178599834
+     ]
+    },
+    "focal": 50.0,
+    "library_version": [
+     0,
+     3,
+     4,
+     0
+    ],
+    "license": "CC BY-SA 3.0",
+    "maker": "Sony",
+    "name": "FE 24-70mm f/2.8 GM",
+    "orientation": 1,
+    "source": "Lensfun",
+    "tca": {
+     "model": "poly3",
+     "terms": [
+      0.9999662637710571,
+      0.9999988675117493,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "vignetting": {
+     "model": "pa",
+     "terms": [
+      -0.42132166028022766,
+      0.20941883325576782,
+      -0.3135543465614319
+     ]
+    },
+    "xml_length": 23598,
+    "xml_sha256": "bdc3bc75eeb83137b542fca8630461d8e3d654adb84fff36ae12a32f5b3c772f"
+   },
+   "profile_reason": "",
+   "reason": ""
+  }
+ ],
+ "database_files": 55,
+ "lenses": 1305,
+ "lensfun_version": [
+  0,
+  3,
+  4,
+  0
+ ],
+ "lensfunpy": "1.18.0",
+ "makers": [
+  "",
+  "AEE DV",
+  "Apple",
+  "Canon",
+  "Casio",
+  "DJI",
+  "FUJIFILM",
+  "Fujifilm",
+  "GoPro",
+  "Huawei",
+  "Konica Minolta",
+  "Leica",
+  "Leica Camera AG",
+  "Minolta Co., Ltd.",
+  "NIKON CORPORATION",
+  "Nikon",
+  "Nikon Corporation",
+  "OLYMPUS CORPORATION    ",
+  "Olympus",
+  "Olympus Imaging Corp.",
+  "Panasonic",
+  "Pentax Corporation",
+  "RICOH IMAGING COMPANY, LTD.  ",
+  "Ricoh Imaging Company, Ltd.",
+  "SONY",
+  "Samsung",
+  "Sigma",
+  "Sony"
+ ]
+}

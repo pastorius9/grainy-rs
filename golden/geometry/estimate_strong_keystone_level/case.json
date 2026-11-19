@@ -1,0 +1,12 @@
+{
+ "detected": true,
+ "error": {
+  "message": "믿을 만한 수평·수직 기준선을 찾지 못했습니다. 아래 수평 슬라이더로 조절해 주세요.",
+  "type": "AlignmentError"
+ },
+ "height": 240,
+ "lines_none": false,
+ "mode": "level",
+ "result": null,
+ "width": 320
+}

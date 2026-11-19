@@ -1,0 +1,6 @@
+{
+ "decoder": "PNG 8-bit",
+ "file": "golden/cli/_sources/png8_gamma.png",
+ "input_profile_prophoto": "RGB built-in",
+ "input_profile_srgb": "RGB built-in"
+}

@@ -1,0 +1,524 @@
+{
+ "brush_bits": "15289666597396938752",
+ "brush_default_bits": "17998916245449080832",
+ "brush_default_shape": [
+  64,
+  96
+ ],
+ "brush_default_step": 3,
+ "brush_shape": [
+  64,
+  96
+ ],
+ "brush_step": 3,
+ "cases": [
+  {
+   "component": {
+    "points": [
+     [
+      0.2,
+      0.3
+     ],
+     [
+      0.7,
+      0.8
+     ]
+    ],
+    "type": "linear"
+   },
+   "dtype": "float64",
+   "name": "linear",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "points": [
+     [
+      0.9,
+      0.1
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.1,
+      0.9
+     ]
+    ],
+    "type": "linear"
+   },
+   "dtype": "float64",
+   "name": "linear_rev",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "points": [
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.5,
+      0.5
+     ]
+    ],
+    "type": "linear"
+   },
+   "dtype": "float64",
+   "name": "linear_zero",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "type": "linear"
+   },
+   "dtype": "float64",
+   "name": "linear_default",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "type": "linear"
+   },
+   "dtype": "float64",
+   "name": "linear_ints",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "points": [
+     [
+      0.1,
+      0.9
+     ],
+     [
+      0.6,
+      0.2
+     ]
+    ],
+    "type": "linear"
+   },
+   "dtype": "float64",
+   "name": "linear_odd",
+   "shape": [
+    37,
+    53
+   ]
+  },
+  {
+   "component": {
+    "points": [
+     [
+      0.3,
+      0.3
+     ],
+     [
+      0.7,
+      0.8
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "feather": 0,
+    "points": [
+     [
+      0.3,
+      0.3
+     ],
+     [
+      0.7,
+      0.8
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial_feather0",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "feather": 100,
+    "points": [
+     [
+      0.2,
+      0.1
+     ],
+     [
+      0.6,
+      0.9
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial_feather100",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "angle": 30,
+    "points": [
+     [
+      0.2,
+      0.3
+     ],
+     [
+      0.8,
+      0.6
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial_angle30",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "angle": -90,
+    "feather": 40,
+    "points": [
+     [
+      0.1,
+      0.3
+     ],
+     [
+      0.7,
+      0.6
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial_angle_neg",
+   "shape": [
+    37,
+    53
+   ]
+  },
+  {
+   "component": {
+    "angle": 400.5,
+    "feather": 20,
+    "points": [
+     [
+      0.3,
+      0.2
+     ],
+     [
+      0.6,
+      0.9
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial_angle_big",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "points": [
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.5,
+      0.5
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial_tiny",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "angle": 12,
+    "points": [
+     [
+      -0.5,
+      0.2
+     ],
+     [
+      0.3,
+      1.4
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial_offframe",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial_1px",
+   "shape": [
+    1,
+    1
+   ]
+  },
+  {
+   "component": {
+    "angle": -33,
+    "feather": 55,
+    "points": [
+     [
+      0.1,
+      0.2
+     ],
+     [
+      0.9,
+      0.7
+     ]
+    ],
+    "type": "radial"
+   },
+   "dtype": "float64",
+   "name": "radial_large",
+   "shape": [
+    160,
+    240
+   ]
+  },
+  {
+   "component": {
+    "feather": 30,
+    "points": [
+     [
+      0.2,
+      0.2
+     ],
+     [
+      0.8,
+      0.8
+     ]
+    ],
+    "radius": 0.05,
+    "type": "brush"
+   },
+   "dtype": "float32",
+   "name": "brush",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {},
+   "dtype": "float32",
+   "name": "brush_default",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "points": [
+     [
+      0.1,
+      0.1
+     ]
+    ],
+    "type": "other"
+   },
+   "dtype": "float32",
+   "name": "unknown",
+   "shape": [
+    64,
+    96
+   ]
+  },
+  {
+   "component": {
+    "type": null
+   },
+   "dtype": "float32",
+   "name": "null_type",
+   "shape": [
+    64,
+    96
+   ]
+  }
+ ],
+ "linear_bits": "2007502668204867584",
+ "linear_default_bits": "0",
+ "linear_default_shape": [
+  64,
+  96
+ ],
+ "linear_default_step": 3,
+ "linear_ints_bits": "7523832865742651392",
+ "linear_ints_shape": [
+  64,
+  96
+ ],
+ "linear_ints_step": 3,
+ "linear_odd_bits": "1720257060408393728",
+ "linear_odd_shape": [
+  37,
+  53
+ ],
+ "linear_odd_step": 3,
+ "linear_rev_bits": "2498837099445223424",
+ "linear_rev_shape": [
+  64,
+  96
+ ],
+ "linear_rev_step": 3,
+ "linear_shape": [
+  64,
+  96
+ ],
+ "linear_step": 3,
+ "linear_zero_bits": "0",
+ "linear_zero_shape": [
+  64,
+  96
+ ],
+ "linear_zero_step": 3,
+ "null_type_bits": "9223372036854775808",
+ "null_type_shape": [
+  64,
+  96
+ ],
+ "null_type_step": 3,
+ "radial_1px_bits": "0",
+ "radial_1px_shape": [
+  1,
+  1
+ ],
+ "radial_1px_step": 3,
+ "radial_angle30_bits": "8207059107480338432",
+ "radial_angle30_shape": [
+  64,
+  96
+ ],
+ "radial_angle30_step": 3,
+ "radial_angle_big_bits": "11399535936711688192",
+ "radial_angle_big_shape": [
+  64,
+  96
+ ],
+ "radial_angle_big_step": 3,
+ "radial_angle_neg_bits": "15835721378373304320",
+ "radial_angle_neg_shape": [
+  37,
+  53
+ ],
+ "radial_angle_neg_step": 3,
+ "radial_bits": "7002640796281208832",
+ "radial_feather0_bits": "14155105864305868800",
+ "radial_feather0_shape": [
+  64,
+  96
+ ],
+ "radial_feather0_step": 3,
+ "radial_feather100_bits": "6237462474694590464",
+ "radial_feather100_shape": [
+  64,
+  96
+ ],
+ "radial_feather100_step": 3,
+ "radial_large_bits": "3813067772426977280",
+ "radial_large_shape": [
+  160,
+  240
+ ],
+ "radial_large_step": 4,
+ "radial_offframe_bits": "12804440044764921856",
+ "radial_offframe_shape": [
+  64,
+  96
+ ],
+ "radial_offframe_step": 3,
+ "radial_shape": [
+  64,
+  96
+ ],
+ "radial_step": 3,
+ "radial_tiny_bits": "0",
+ "radial_tiny_shape": [
+  64,
+  96
+ ],
+ "radial_tiny_step": 3,
+ "unknown_bits": "9223372036854775808",
+ "unknown_shape": [
+  64,
+  96
+ ],
+ "unknown_step": 3
+}

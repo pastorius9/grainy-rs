@@ -1,0 +1,34 @@
+{
+ "error": null,
+ "frame": "garden",
+ "operations": [
+  {
+   "points": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.6,
+     0.5
+    ]
+   ],
+   "radius": 0.02,
+   "type": "clone"
+  }
+ ],
+ "output_bits": "11866650028925779968",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "recorded": {
+  "distance": [],
+  "dust": [],
+  "inpaint": 0,
+  "sky": []
+ },
+ "shift": 0
+}

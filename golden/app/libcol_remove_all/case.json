@@ -1,0 +1,86 @@
+{
+ "backups": 1,
+ "backups_after_drive": 0,
+ "columns": {
+  "collection_members": [
+   "collection_id",
+   "photo_id"
+  ],
+  "collections": [
+   "id",
+   "name",
+   "parent_id",
+   "rules"
+  ],
+  "folder_roots": [
+   "path"
+  ],
+  "history": [
+   "id",
+   "photo_id",
+   "label"
+  ],
+  "photos": [
+   "id",
+   "path",
+   "name",
+   "virtual_source",
+   "stack_id"
+  ],
+  "preferences": [
+   "key",
+   "value"
+  ],
+  "preview_state": [
+   "photo_id"
+  ],
+  "snapshots": [
+   "id",
+   "photo_id",
+   "name"
+  ]
+ },
+ "expanded_after": [],
+ "final": {
+  "collection_members": [],
+  "collections": [
+   {
+    "id": 1,
+    "name": "여행",
+    "parent_id": null,
+    "rules": null
+   },
+   {
+    "id": 2,
+    "name": "좋은 사진",
+    "parent_id": null,
+    "rules": "{\"rating_min\": 4}"
+   }
+  ],
+  "folder_roots": [],
+  "history": [],
+  "photos": [],
+  "preferences": [
+   {
+    "key": "folder_panel",
+    "value": "{\"selected\": null, \"include_subfolders\": true, \"expanded\": [], \"current_photo\": null}"
+   },
+   {
+    "key": "removed_folders",
+    "value": "[\"Z:\\\\GrainyGolden\\\\photos\"]"
+   },
+   {
+    "key": "stack_orders",
+    "value": "{\"4\": [6, 4, 5]}"
+   },
+   {
+    "key": "watch_folders",
+    "value": "[]"
+   }
+  ],
+  "preview_state": [],
+  "snapshots": []
+ },
+ "folder": "Z:\\GrainyGolden\\photos",
+ "folder_filter_after": null
+}

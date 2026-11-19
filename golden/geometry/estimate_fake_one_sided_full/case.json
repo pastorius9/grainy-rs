@@ -1,0 +1,12 @@
+{
+ "detected": true,
+ "error": {
+  "message": "화면의 여러 위치에서 기준선이 필요합니다.",
+  "type": "AlignmentError"
+ },
+ "height": 400,
+ "lines_none": false,
+ "mode": "full",
+ "result": null,
+ "width": 600
+}

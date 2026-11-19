@@ -1,0 +1,29 @@
+{
+ "bytes": 11152,
+ "exact": true,
+ "extension": ".tif",
+ "found": {
+  "icc": "ca83bae75efa"
+ },
+ "height": 40,
+ "lossless": true,
+ "options": {
+  "color_space": "sRGB",
+  "dither": false,
+  "format": "TIFF 8-bit",
+  "grayscale": true,
+  "keep_metadata": false,
+  "keywords": "",
+  "longest": null,
+  "quality": 95,
+  "user_metadata": null
+ },
+ "read_metadata": {},
+ "settings": {
+  "contrast": 15.0,
+  "monochrome": true
+ },
+ "settings_key": "mono",
+ "source": "gray8.png",
+ "width": 60
+}

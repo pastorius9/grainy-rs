@@ -1,0 +1,12 @@
+<lensdatabase version="1">
+<lens>
+        <maker>Schneider</maker>
+        <model>Schneider 80mm Xenotar f/2.8</model>
+        <mount>Rollei 6x6</mount>
+        <cropfactor>0.510</cropfactor>
+        <aspect-ratio>1:1</aspect-ratio>
+        <calibration>
+            <distortion model="poly3" focal="80" k1="-0.009721" />
+        </calibration>
+    </lens>
+</lensdatabase>

@@ -1,0 +1,43 @@
+{
+ "mean": [
+  0.3783398815704277,
+  0.3877696058615887,
+  0.38428004103227675
+ ],
+ "original_size": null,
+ "output": "Display P3",
+ "settings": {
+  "masks": [
+   {
+    "adjustments": {
+     "exposure": 0.8,
+     "saturation": 30.0
+    },
+    "components": [
+     {
+      "points": [
+       [
+        0.2,
+        0.2
+       ],
+       [
+        0.8,
+        0.8
+       ]
+      ],
+      "type": "linear"
+     }
+    ]
+   }
+  ],
+  "working_space": "ProPhoto"
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

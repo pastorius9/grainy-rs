@@ -1,0 +1,6 @@
+{
+ "decoder": "TIFF 8-bit",
+ "file": "source.tif",
+ "input_profile_prophoto": "Grainy test CMYK CLUT9",
+ "input_profile_srgb": "Grainy test CMYK CLUT9"
+}

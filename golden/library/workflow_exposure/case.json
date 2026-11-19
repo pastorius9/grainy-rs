@@ -1,0 +1,634 @@
+{
+ "spec": {
+  "calls": [
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1/250",
+      "iso": 100,
+      "aperture": 2.8
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": 0.004,
+      "iso": "400",
+      "aperture": "5.6"
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": " 1/60 ",
+      "iso": 1600,
+      "aperture": 1.4
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1e-3",
+      "iso": 100,
+      "aperture": 4
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": ".5",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "5.",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1_0/2",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1/0",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": 0,
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": -1,
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": null,
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": true,
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "abc",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "inf",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "nan",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1/250",
+      "iso": 100
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "+2",
+      "iso": "1,5",
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1.5E+1",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1/2/3",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": [
+       1
+      ],
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "-1/2",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1 / 2",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1.2.3",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "2e",
+      "iso": 100,
+      "aperture": 2
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": "1/250",
+      "iso": 100,
+      "aperture": 1e-07
+     }
+    }
+   },
+   {
+    "fn": "capture_exposure",
+    "args": {
+     "info": {
+      "shutter": 30,
+      "iso": 3200,
+      "aperture": 22
+     }
+    }
+   },
+   {
+    "fn": "match_exposure",
+    "args": {
+     "reference": {
+      "info": {
+       "shutter": "1/250",
+       "iso": 100,
+       "aperture": 2.8
+      },
+      "settings": {
+       "exposure": 0.7,
+       "contrast": 1
+      }
+     },
+     "target": {
+      "info": {
+       "shutter": 0.004,
+       "iso": "400",
+       "aperture": "5.6"
+      },
+      "settings": {
+       "exposure": -2,
+       "contrast": 3
+      }
+     }
+    }
+   },
+   {
+    "fn": "match_exposure",
+    "args": {
+     "reference": {
+      "info": {
+       "shutter": 0.004,
+       "iso": "400",
+       "aperture": "5.6"
+      },
+      "settings": {
+       "exposure": -2,
+       "contrast": 3
+      }
+     },
+     "target": {
+      "info": {
+       "shutter": "1/250",
+       "iso": 100,
+       "aperture": 2.8
+      },
+      "settings": {
+       "exposure": 0.7,
+       "contrast": 1
+      }
+     }
+    }
+   },
+   {
+    "fn": "match_exposure",
+    "args": {
+     "reference": {
+      "info": {
+       "shutter": 30,
+       "iso": 100,
+       "aperture": 22
+      },
+      "settings": {
+       "exposure": 4.5
+      }
+     },
+     "target": {
+      "info": {
+       "shutter": 0.000125,
+       "iso": 100,
+       "aperture": 1.4
+      },
+      "settings": {}
+     }
+    }
+   },
+   {
+    "fn": "match_exposure",
+    "args": {
+     "reference": {
+      "info": {
+       "shutter": "1/250",
+       "iso": 100,
+       "aperture": 2.8
+      },
+      "settings": {}
+     },
+     "target": {
+      "info": {
+       "shutter": 0.004,
+       "iso": "400",
+       "aperture": "5.6"
+      },
+      "settings": {
+       "exposure": -2,
+       "contrast": 3
+      }
+     }
+    }
+   },
+   {
+    "fn": "match_exposure",
+    "args": {
+     "reference": {
+      "info": {
+       "shutter": "1/250",
+       "iso": 100,
+       "aperture": 2.8
+      },
+      "settings": {
+       "exposure": null
+      }
+     },
+     "target": {
+      "info": {
+       "shutter": 0.004,
+       "iso": "400",
+       "aperture": "5.6"
+      },
+      "settings": {
+       "exposure": -2,
+       "contrast": 3
+      }
+     }
+    }
+   },
+   {
+    "fn": "match_exposure",
+    "args": {
+     "reference": {
+      "info": {
+       "shutter": "1/250",
+       "iso": 100,
+       "aperture": 2.8
+      },
+      "settings": {
+       "exposure": 0.7,
+       "contrast": 1
+      }
+     },
+     "target": {
+      "info": {},
+      "settings": {}
+     }
+    }
+   },
+   {
+    "fn": "match_exposure",
+    "args": {
+     "reference": {
+      "info": {
+       "shutter": "1/250",
+       "iso": 100,
+       "aperture": 2.8
+      },
+      "settings": {
+       "exposure": 0.7,
+       "contrast": 1
+      }
+     },
+     "target": {
+      "info": {
+       "shutter": 0.004,
+       "iso": "400",
+       "aperture": "5.6"
+      },
+      "settings": {
+       "exposure": -2,
+       "contrast": 3
+      }
+     },
+     "extra": 1
+    }
+   }
+  ],
+  "tolerance": 1e-12,
+  "name": "workflow_exposure"
+ },
+ "results": [
+  {
+   "ok": -4.292781749227846
+  },
+  {
+   "ok": -4.292781749227846
+  },
+  {
+   "ok": 3.766111939825723
+  },
+  {
+   "ok": -7.321928094887363
+  },
+  {
+   "ok": 3.643856189774725
+  },
+  {
+   "ok": 6.965784284662087
+  },
+  {
+   "ok": 6.965784284662087
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출 정보가 올바르지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출 정보가 올바르지 않습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "ok": 8.550746785383243
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출 정보가 올바르지 않습니다."
+   }
+  },
+  {
+   "ok": 3.643856189774725
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "ok": 45.18506523353571
+  },
+  {
+   "ok": 7.631883548108648
+  },
+  {
+   "ok": {
+    "exposure": 0.7000000000000002,
+    "contrast": 3
+   }
+  },
+  {
+   "ok": {
+    "exposure": -2.0,
+    "contrast": 1
+   }
+  },
+  {
+   "ok": {
+    "exposure": 5.0
+   }
+  },
+  {
+   "err": {
+    "type": "KeyError",
+    "message": null
+   }
+  },
+  {
+   "err": {
+    "type": "TypeError",
+    "message": null
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "촬영 노출을 맞추려면 셔터·조리개·ISO 정보가 필요합니다."
+   }
+  },
+  {
+   "ok": {
+    "exposure": 0.7000000000000002,
+    "contrast": 3
+   }
+  }
+ ],
+ "tree": {
+  "files": {},
+  "dirs": []
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

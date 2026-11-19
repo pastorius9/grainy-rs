@@ -1,0 +1,66 @@
+{
+ "error": null,
+ "frame": "garden",
+ "operations": [
+  {
+   "repair_method": "texture",
+   "spots": [
+    {
+     "rx": 0.02,
+     "ry": 0.03,
+     "x": 0.3,
+     "y": 0.4
+    }
+   ],
+   "type": "dust"
+  },
+  {
+   "points": [
+    [
+     0.3,
+     0.4
+    ]
+   ],
+   "radius": 0.02,
+   "source": [
+    0.32,
+    0.4
+   ],
+   "type": "clone"
+  }
+ ],
+ "output_bits": "11856926299740176384",
+ "output_shape": [
+  160,
+  240,
+  3
+ ],
+ "output_step": 4,
+ "recorded": {
+  "distance": [],
+  "dust": [
+   {
+    "input_bits": "11866650031610134528",
+    "method": "texture",
+    "output_bits": "11912448648719368192",
+    "spots": [
+     {
+      "rx": 0.02,
+      "ry": 0.03,
+      "x": 0.3,
+      "y": 0.4
+     }
+    ],
+    "window": [
+     59,
+     69,
+     67,
+     77
+    ]
+   }
+  ],
+  "inpaint": 0,
+  "sky": []
+ },
+ "shift": 0
+}

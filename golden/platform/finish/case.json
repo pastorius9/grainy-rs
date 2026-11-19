@@ -1,0 +1,283 @@
+{
+ "cases": [
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ]
+   ],
+   "installed": {
+    "Grainy.exe": "exe 1.0",
+    "_internal/lib.dll": "lib 1.0",
+    "my-notes.txt": "mine"
+   },
+   "kind": "windows",
+   "listing": {
+    ".update": null,
+    ".update/new": null,
+    ".update/new/Grainy.exe": "exe 9.9.9",
+    ".update/new/LICENSE.txt": "MIT",
+    ".update/new/_internal": null,
+    ".update/new/_internal/lib.dll": "lib 9.9.9",
+    ".update/previous-STAMP": null,
+    ".update/previous-STAMP/Grainy.exe": "exe 1.0",
+    ".update/previous-STAMP/_internal": null,
+    ".update/previous-STAMP/_internal/lib.dll": "lib 1.0",
+    "Grainy.exe": "exe 9.9.9",
+    "LICENSE.txt": "MIT",
+    "_internal": null,
+    "_internal/lib.dll": "lib 9.9.9",
+    "my-notes.txt": "mine"
+   },
+   "log": [
+    "previous version moved to previous-STAMP: ['Grainy.exe', '_internal']",
+    "new version copied: ['Grainy.exe', '_internal', 'LICENSE.txt']"
+   ],
+   "name": "success",
+   "result": ""
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ],
+    [
+     "Grainy/THIRD_PARTY_LICENSES/a.txt",
+     "a"
+    ],
+    [
+     "Grainy/skipped.txt",
+     "not an item"
+    ]
+   ],
+   "installed": {
+    "Grainy.exe": "exe 1.0",
+    "_internal/lib.dll": "lib 1.0",
+    "my-notes.txt": "mine"
+   },
+   "kind": "windows",
+   "listing": {
+    ".update": null,
+    ".update/new": null,
+    ".update/new/Grainy.exe": "exe 9.9.9",
+    ".update/new/LICENSE.txt": "MIT",
+    ".update/new/THIRD_PARTY_LICENSES": null,
+    ".update/new/THIRD_PARTY_LICENSES/a.txt": "a",
+    ".update/new/_internal": null,
+    ".update/new/_internal/lib.dll": "lib 9.9.9",
+    ".update/new/skipped.txt": "not an item",
+    ".update/previous-STAMP": null,
+    ".update/previous-STAMP/Grainy.exe": "exe 1.0",
+    ".update/previous-STAMP/_internal": null,
+    ".update/previous-STAMP/_internal/lib.dll": "lib 1.0",
+    "Grainy.exe": "exe 9.9.9",
+    "LICENSE.txt": "MIT",
+    "THIRD_PARTY_LICENSES": null,
+    "THIRD_PARTY_LICENSES/a.txt": "a",
+    "_internal": null,
+    "_internal/lib.dll": "lib 9.9.9",
+    "my-notes.txt": "mine"
+   },
+   "log": [
+    "previous version moved to previous-STAMP: ['Grainy.exe', '_internal']",
+    "new version copied: ['Grainy.exe', '_internal', 'THIRD_PARTY_LICENSES', 'LICENSE.txt']"
+   ],
+   "name": "success_all_items",
+   "result": ""
+  },
+  {
+   "entries": [
+    [
+     "Grainy/Grainy.exe",
+     "exe 9.9.9"
+    ],
+    [
+     "Grainy/_internal/lib.dll",
+     "lib 9.9.9"
+    ],
+    [
+     "Grainy/LICENSE.txt",
+     "MIT"
+    ]
+   ],
+   "installed": {
+    "Grainy.exe": "exe 1.0",
+    "_internal/lib.dll": "lib 1.0",
+    "my-notes.txt": "mine"
+   },
+   "kind": "windows",
+   "listing": {
+    ".update": null,
+    ".update/failed-STAMP": null,
+    ".update/failed-STAMP/Grainy.exe": "exe 9.9.9",
+    ".update/failed-STAMP/_internal": null,
+    ".update/failed-STAMP/_internal/half.dll": "partial",
+    ".update/new": null,
+    ".update/new/Grainy.exe": "exe 9.9.9",
+    ".update/new/LICENSE.txt": "MIT",
+    ".update/new/_internal": null,
+    ".update/new/_internal/lib.dll": "lib 9.9.9",
+    ".update/previous-STAMP": null,
+    "Grainy.exe": "exe 1.0",
+    "_internal": null,
+    "_internal/lib.dll": "lib 1.0",
+    "my-notes.txt": "mine"
+   },
+   "log": [],
+   "name": "copy_fails",
+   "result": "disk full"
+  },
+  {
+   "entries": [],
+   "installed": {
+    "Grainy.exe": "exe 1.0",
+    "_internal/lib.dll": "lib 1.0",
+    "my-notes.txt": "mine"
+   },
+   "kind": "windows",
+   "listing": {
+    "Grainy.exe": "exe 1.0",
+    "_internal": null,
+    "_internal/lib.dll": "lib 1.0",
+    "my-notes.txt": "mine"
+   },
+   "log": [],
+   "name": "incomplete",
+   "result": "staged version is incomplete"
+  },
+  {
+   "bundle": {
+    "Contents/Info.plist": "plist 1.0",
+    "Contents/MacOS/Grainy": "program 1.0",
+    "Contents/Resources/data.txt": "data 1.0"
+   },
+   "fail_second_place": false,
+   "kind": "mac",
+   "listing": {
+    "<work>": null,
+    "<work>/new": null,
+    "<work>/previous-STAMP": null,
+    "<work>/previous-STAMP/Grainy.app": null,
+    "<work>/previous-STAMP/Grainy.app/Contents": null,
+    "<work>/previous-STAMP/Grainy.app/Contents/Info.plist": "plist 1.0",
+    "<work>/previous-STAMP/Grainy.app/Contents/MacOS": null,
+    "<work>/previous-STAMP/Grainy.app/Contents/MacOS/Grainy": "program 1.0",
+    "<work>/previous-STAMP/Grainy.app/Contents/Resources": null,
+    "<work>/previous-STAMP/Grainy.app/Contents/Resources/data.txt": "data 1.0",
+    "Applications": null,
+    "Applications/Grainy.app": null,
+    "Applications/Grainy.app/Contents": null,
+    "Applications/Grainy.app/Contents/Info.plist": "plist 9.9.9",
+    "Applications/Grainy.app/Contents/MacOS": null,
+    "Applications/Grainy.app/Contents/MacOS/Grainy": "program 9.9.9",
+    "Applications/Grainy.app/Contents/Resources": null,
+    "Applications/Grainy.app/Contents/Resources/data.txt": "data 9.9.9",
+    "Applications/Other.app": null,
+    "Support": null
+   },
+   "log": [
+    "previous version moved to previous-STAMP",
+    "new version in place"
+   ],
+   "name": "mac_success",
+   "new_bundle": {
+    "Contents/Info.plist": "plist 9.9.9",
+    "Contents/MacOS/Grainy": "program 9.9.9",
+    "Contents/Resources/data.txt": "data 9.9.9"
+   },
+   "result": ""
+  },
+  {
+   "bundle": {
+    "Contents/Info.plist": "plist 1.0",
+    "Contents/MacOS/Grainy": "program 1.0",
+    "Contents/Resources/data.txt": "data 1.0"
+   },
+   "fail_second_place": true,
+   "kind": "mac",
+   "listing": {
+    "<work>": null,
+    "<work>/new": null,
+    "<work>/new/Grainy.app": null,
+    "<work>/new/Grainy.app/Contents": null,
+    "<work>/new/Grainy.app/Contents/Info.plist": "plist 9.9.9",
+    "<work>/new/Grainy.app/Contents/MacOS": null,
+    "<work>/new/Grainy.app/Contents/MacOS/Grainy": "program 9.9.9",
+    "<work>/new/Grainy.app/Contents/Resources": null,
+    "<work>/new/Grainy.app/Contents/Resources/data.txt": "data 9.9.9",
+    "<work>/previous-STAMP": null,
+    "Applications": null,
+    "Applications/Grainy.app": null,
+    "Applications/Grainy.app/Contents": null,
+    "Applications/Grainy.app/Contents/Info.plist": "plist 1.0",
+    "Applications/Grainy.app/Contents/MacOS": null,
+    "Applications/Grainy.app/Contents/MacOS/Grainy": "program 1.0",
+    "Applications/Grainy.app/Contents/Resources": null,
+    "Applications/Grainy.app/Contents/Resources/data.txt": "data 1.0",
+    "Applications/Other.app": null,
+    "Support": null
+   },
+   "log": [
+    "previous version moved to previous-STAMP",
+    "failed: OSError('disk full'); restoring"
+   ],
+   "name": "mac_place_fails",
+   "new_bundle": {
+    "Contents/Info.plist": "plist 9.9.9",
+    "Contents/MacOS/Grainy": "program 9.9.9",
+    "Contents/Resources/data.txt": "data 9.9.9"
+   },
+   "result": "disk full"
+  },
+  {
+   "bundle": {
+    "Contents/Info.plist": "plist 1.0",
+    "Contents/MacOS/Grainy": "program 1.0",
+    "Contents/Resources/data.txt": "data 1.0"
+   },
+   "fail_second_place": false,
+   "kind": "mac",
+   "listing": {
+    "<work>": null,
+    "<work>/new": null,
+    "<work>/new/Grainy.app": null,
+    "<work>/new/Grainy.app/Contents": null,
+    "<work>/new/Grainy.app/Contents/Info.plist": "plist",
+    "Applications": null,
+    "Applications/Grainy.app": null,
+    "Applications/Grainy.app/Contents": null,
+    "Applications/Grainy.app/Contents/Info.plist": "plist 1.0",
+    "Applications/Grainy.app/Contents/MacOS": null,
+    "Applications/Grainy.app/Contents/MacOS/Grainy": "program 1.0",
+    "Applications/Grainy.app/Contents/Resources": null,
+    "Applications/Grainy.app/Contents/Resources/data.txt": "data 1.0",
+    "Applications/Other.app": null,
+    "Support": null
+   },
+   "log": [],
+   "name": "mac_incomplete_staged",
+   "new_bundle": {
+    "Contents/Info.plist": "plist"
+   },
+   "result": "staged version is incomplete"
+  }
+ ]
+}

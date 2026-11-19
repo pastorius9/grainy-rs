@@ -1,0 +1,151 @@
+{
+ "cases": [
+  {
+   "marker": null,
+   "name": "none",
+   "previous": null,
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "{\"pid\": 111, \"version\": \"0.6.6\", \"started\": 1.5}",
+   "name": "dead_process",
+   "previous": {
+    "pid": 111,
+    "started": 1.5,
+    "version": "0.6.6"
+   },
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "{\"pid\": 4242, \"version\": \"0.6.6\"}",
+   "name": "alive_process",
+   "previous": null,
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "{\"version\": \"0.6.6\"}",
+   "name": "no_pid",
+   "previous": {
+    "version": "0.6.6"
+   },
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "{\"pid\": \"111\"}",
+   "name": "string_pid",
+   "previous": {
+    "pid": "111"
+   },
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "{\"pid\": 111.0}",
+   "name": "float_pid",
+   "previous": {
+    "pid": 111.0
+   },
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "{\"pid\": -5}",
+   "name": "negative_pid",
+   "previous": {
+    "pid": -5
+   },
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "not json",
+   "name": "not_json",
+   "previous": null,
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "[1]",
+   "name": "a_list",
+   "previous": null,
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "",
+   "name": "empty",
+   "previous": null,
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  },
+  {
+   "marker": "{\"pid\": null, \"version\": \"x\"}",
+   "name": "null_pid",
+   "previous": {
+    "pid": null,
+    "version": "x"
+   },
+   "written_keys": [
+    "pid",
+    "version",
+    "started"
+   ],
+   "written_template": "{\"pid\": <pid>, \"version\": \"0.6.8\", \"started\": <t>}",
+   "written_version": "0.6.8"
+  }
+ ]
+}

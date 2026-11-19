@@ -1,0 +1,14 @@
+{
+ "negative": true,
+ "negative_base": [
+  0.8,
+  0.7,
+  0.6
+ ],
+ "negative_peak": [
+  0.02,
+  0.03,
+  0.01
+ ],
+ "raw_mode": "as_shot"
+}

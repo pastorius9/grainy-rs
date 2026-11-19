@@ -1,0 +1,16 @@
+{
+ "arrays": {
+  "input": "d256268cced32f007ed74ced45532f3a8cf419975f44721eeff4a03dc6316a81",
+  "output": "d256268cced32f007ed74ced45532f3a8cf419975f44721eeff4a03dc6316a81"
+ },
+ "curve": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   1.0,
+   1.0
+  ]
+ ]
+}

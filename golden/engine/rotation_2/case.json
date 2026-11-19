@@ -1,0 +1,11 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "flip": true,
+  "rotation": 2,
+  "vignette": -40.0
+ },
+ "source": "colours",
+ "use_crop": true
+}

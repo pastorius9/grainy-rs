@@ -1,0 +1,11 @@
+{
+ "dtype": "uint8",
+ "interpolation": "linear",
+ "op": "resize",
+ "output_dtype": "uint8",
+ "size": [
+  6,
+  4
+ ],
+ "tolerance": 1.0
+}

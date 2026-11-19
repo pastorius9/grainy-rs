@@ -1,0 +1,160 @@
+{
+ "L_bits": "6154826899655753728",
+ "L_shape": [
+  216,
+  324
+ ],
+ "L_stride": 30,
+ "area_half1_bits": "15333312319199379456",
+ "area_half1_shape": [
+  108,
+  162
+ ],
+ "area_half1_stride": 15,
+ "area_half_bits": "8658771263897993216",
+ "area_half_shape": [
+  108,
+  162,
+  3
+ ],
+ "area_half_stride": 15,
+ "blurL_bits": "1069587475543883776",
+ "blurL_shape": [
+  216,
+  324
+ ],
+ "blurL_stride": 30,
+ "blurN_bits": "12970283582986649600",
+ "blurN_shape": [
+  216,
+  324,
+  3
+ ],
+ "blurN_stride": 30,
+ "box1_1_bits": "17219693546160783360",
+ "box1_1_shape": [
+  216,
+  324
+ ],
+ "box1_1_stride": 30,
+ "box1_2_bits": "1861113309441294336",
+ "box1_2_shape": [
+  216,
+  324
+ ],
+ "box1_2_stride": 30,
+ "box1_4_bits": "7411218605808812032",
+ "box1_4_shape": [
+  216,
+  324
+ ],
+ "box1_4_stride": 30,
+ "box1_9_bits": "2610802659329835008",
+ "box1_9_shape": [
+  216,
+  324
+ ],
+ "box1_9_stride": 30,
+ "box3_1_bits": "12618345562870120448",
+ "box3_1_shape": [
+  216,
+  324,
+  3
+ ],
+ "box3_1_stride": 30,
+ "box3_2_bits": "7826709757367943168",
+ "box3_2_shape": [
+  216,
+  324,
+  3
+ ],
+ "box3_2_stride": 30,
+ "box3_4_bits": "8013584618714300416",
+ "box3_4_shape": [
+  216,
+  324,
+  3
+ ],
+ "box3_4_stride": 30,
+ "box3_9_bits": "11465753905846026240",
+ "box3_9_shape": [
+  216,
+  324,
+  3
+ ],
+ "box3_9_stride": 30,
+ "gxL_bits": "17745164861727309824",
+ "gxL_shape": [
+  216,
+  324
+ ],
+ "gxL_stride": 30,
+ "gxN_bits": "16659585190884016128",
+ "gxN_shape": [
+  216,
+  324,
+  3
+ ],
+ "gxN_stride": 30,
+ "gyL_bits": "10096444884719239168",
+ "gyL_shape": [
+  216,
+  324
+ ],
+ "gyL_stride": 30,
+ "gyN_bits": "15392761300689879040",
+ "gyN_shape": [
+  216,
+  324,
+  3
+ ],
+ "gyN_stride": 30,
+ "hsv_bits": "5362128425869901824",
+ "hsv_shape": [
+  216,
+  324,
+  3
+ ],
+ "hsv_stride": 30,
+ "magL_bits": "4091419023181348864",
+ "magL_shape": [
+  216,
+  324
+ ],
+ "magL_stride": 30,
+ "magN_bits": "14728717267122520064",
+ "magN_shape": [
+  216,
+  324,
+  3
+ ],
+ "magN_stride": 30,
+ "n_bits": "566306007043538944",
+ "n_shape": [
+  216,
+  324,
+  3
+ ],
+ "n_stride": 30,
+ "scale": 0.06328125,
+ "scene": "sunset",
+ "shape": [
+  216,
+  324
+ ],
+ "sigma": 0.5,
+ "size": "base",
+ "smooth_bits": "1372232581205983232",
+ "smooth_shape": [
+  216,
+  324
+ ],
+ "smooth_stride": 30,
+ "texture_bits": "1153710478287962112",
+ "texture_shape": [
+  216,
+  324
+ ],
+ "texture_stride": 30,
+ "white": 0.9803921580314636
+}

@@ -1,0 +1,83 @@
+{
+ "color_changed": true,
+ "height": 64,
+ "kind": "maps",
+ "model": {
+  "focal": 22.0,
+  "model": "poly3",
+  "terms": [
+   -0.00018000000272877514,
+   0.0,
+   0.0
+  ]
+ },
+ "settings": {
+  "lensfun": {
+   "aperture": 4,
+   "camera": "",
+   "crop": 1.613,
+   "distance": 1000,
+   "focal": 22.0,
+   "maker": "Canon",
+   "name": "Canon EF-M 22mm f/2 STM",
+   "orientation": 1,
+   "xml": "<lensdatabase version=\"1\"><lens>\n        <maker>Canon</maker>\n        <model>Canon EF-M 22mm f/2 STM</model>\n        <mount>Canon EF-M</mount>\n        <cropfactor>1.613</cropfactor>\n        <calibration>\n            <distortion model=\"poly3\" focal=\"22\" k1=\"-0.00018\" />\n            <tca model=\"poly3\" focal=\"22\" br=\"-0.0000678\" vr=\"1.0002505\" bb=\"0.0000624\" vb=\"1.0000225\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"2\" distance=\"10\" k1=\"-1.7852\" k2=\"1.6007\" k3=\"-0.6249\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"2\" distance=\"1000\" k1=\"-1.7852\" k2=\"1.6007\" k3=\"-0.6249\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"2.2\" distance=\"10\" k1=\"-0.7930\" k2=\"-0.3929\" k3=\"0.4473\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"2.2\" distance=\"1000\" k1=\"-0.7930\" k2=\"-0.3929\" k3=\"0.4473\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"2.5\" distance=\"10\" k1=\"-0.7636\" k2=\"-0.2093\" k3=\"0.2587\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"2.5\" distance=\"1000\" k1=\"-0.7636\" k2=\"-0.2093\" k3=\"0.2587\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"3.2\" distance=\"10\" k1=\"-0.8930\" k2=\"0.3786\" k3=\"-0.1146\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"3.2\" distance=\"1000\" k1=\"-0.8930\" k2=\"0.3786\" k3=\"-0.1146\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"4\" distance=\"10\" k1=\"-0.8868\" k2=\"0.3302\" k3=\"-0.0361\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"4\" distance=\"1000\" k1=\"-0.8868\" k2=\"0.3302\" k3=\"-0.0361\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"5\" distance=\"10\" k1=\"-0.8820\" k2=\"0.3159\" k3=\"-0.0204\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"5\" distance=\"1000\" k1=\"-0.8820\" k2=\"0.3159\" k3=\"-0.0204\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"6.3\" distance=\"10\" k1=\"-0.8804\" k2=\"0.3111\" k3=\"-0.0150\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"6.3\" distance=\"1000\" k1=\"-0.8804\" k2=\"0.3111\" k3=\"-0.0150\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"8\" distance=\"10\" k1=\"-0.8788\" k2=\"0.3072\" k3=\"-0.0121\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"8\" distance=\"1000\" k1=\"-0.8788\" k2=\"0.3072\" k3=\"-0.0121\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"10\" distance=\"10\" k1=\"-0.8842\" k2=\"0.3173\" k3=\"-0.0168\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"10\" distance=\"1000\" k1=\"-0.8842\" k2=\"0.3173\" k3=\"-0.0168\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"13\" distance=\"10\" k1=\"-0.8957\" k2=\"0.3596\" k3=\"-0.0484\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"13\" distance=\"1000\" k1=\"-0.8957\" k2=\"0.3596\" k3=\"-0.0484\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"16\" distance=\"10\" k1=\"-0.8819\" k2=\"0.3147\" k3=\"-0.0177\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"16\" distance=\"1000\" k1=\"-0.8819\" k2=\"0.3147\" k3=\"-0.0177\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"20\" distance=\"10\" k1=\"-0.8851\" k2=\"0.3189\" k3=\"-0.0201\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"20\" distance=\"1000\" k1=\"-0.8851\" k2=\"0.3189\" k3=\"-0.0201\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"22\" distance=\"10\" k1=\"-0.8954\" k2=\"0.3316\" k3=\"-0.0229\" />\n            <vignetting model=\"pa\" focal=\"22\" aperture=\"22\" distance=\"1000\" k1=\"-0.8954\" k2=\"0.3316\" k3=\"-0.0229\" />\n        </calibration>\n    </lens>\n    </lensdatabase>"
+  },
+  "lensfun_distortion": false,
+  "lensfun_enabled": true,
+  "lensfun_scale": false,
+  "lensfun_tca": true,
+  "lensfun_vignette": true
+ },
+ "tca": {
+  "focal": 22.0,
+  "model": "poly3",
+  "terms": [
+   1.0002504587173462,
+   1.000022530555725,
+   0.0,
+   0.0,
+   -6.779999966965988e-05,
+   6.240000220714137e-05
+  ]
+ },
+ "vignetting": {
+  "aperture": 4.0,
+  "distance": 1000.0,
+  "focal": 22.0,
+  "model": "pa",
+  "terms": [
+   -0.8867999911308289,
+   0.3301999866962433,
+   -0.03610000014305115
+  ]
+ },
+ "width": 96,
+ "xs": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  24,
+  48,
+  72,
+  91,
+  92,
+  93,
+  94,
+  95
+ ],
+ "ys": [
+  0,
+  1,
+  2,
+  16,
+  32,
+  48,
+  61,
+  62,
+  63
+ ]
+}

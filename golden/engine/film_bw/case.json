@@ -1,0 +1,10 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "film_look": "kodak-tri-x-400",
+  "grain": 30.0
+ },
+ "source": "patches",
+ "use_crop": true
+}

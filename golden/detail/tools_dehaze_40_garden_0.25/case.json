@@ -1,0 +1,13 @@
+{
+ "bits_sum": "3804229644022972416",
+ "image": "garden",
+ "pixel_scale": 0.25,
+ "settings": {
+  "dehaze": 40.0,
+  "detail_version": 3
+ },
+ "step": [
+  3,
+  3
+ ]
+}

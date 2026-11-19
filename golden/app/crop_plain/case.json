@@ -1,0 +1,1610 @@
+{
+ "changes": {},
+ "original": [
+  1500,
+  1000
+ ],
+ "start": {
+  "crop": null,
+  "flip": false,
+  "rotation": 0,
+  "straighten": 0.0,
+  "upright": null
+ },
+ "steps": [
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "toggle"
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,500 × 1,000 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "canvas": null,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "logical": [
+    1500,
+    1000
+   ],
+   "op": [
+    "frame",
+    0.5,
+    40,
+    30
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,500 × 1,000 px",
+   "use_crop": false
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "handle": "move",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    415,
+    280
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,500 × 1,000 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    430,
+    290
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,500 × 1,000 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    2000,
+    2000
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,500 × 1,000 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    470,
+    300
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,500 × 1,000 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "handle": "se",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    790,
+    530
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,500 × 1,000 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    0.88,
+    0.84
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    700,
+    450
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,320 × 840 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    0.8666666666666667,
+    0.82
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    690,
+    440
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,300 × 820 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.0,
+    0.0,
+    0.8666666666666667,
+    0.82
+   ],
+   "handle": "w",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    40,
+    250
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,300 × 820 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.10666666666666667,
+    0.0,
+    0.8666666666666667,
+    0.82
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    120,
+    250
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,140 × 820 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.13333333333333333,
+    0.0,
+    0.8666666666666667,
+    0.82
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    140,
+    260
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,100 × 820 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.13333333333333333,
+    0.0,
+    0.8666666666666667,
+    0.82
+   ],
+   "handle": "ne",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    690,
+    30
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,100 × 820 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.13333333333333333,
+    0.18,
+    0.8,
+    0.8199999999999998
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    640,
+    120
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "1,000 × 640 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.13333333333333333,
+    0.34,
+    0.7466666666666667,
+    0.82
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    600,
+    200
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "920 × 480 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.13333333333333333,
+    0.34,
+    0.7466666666666667,
+    0.82
+   ],
+   "handle": "move",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    370,
+    320
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "920 × 480 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.16,
+    0.36000000000000004,
+    0.7733333333333334,
+    0.84
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    390,
+    330
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "920 × 480 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.0,
+   "commits": [],
+   "frame": [
+    0.16666666666666666,
+    0.37000000000000005,
+    0.78,
+    0.85
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    395,
+    335
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "920 × 480 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 1.5,
+   "commits": [],
+   "frame": [
+    0.23333333333333342,
+    0.37,
+    0.7133333333333334,
+    0.8499999999999999
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "aspect",
+    2
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "720 × 480 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 1.5,
+   "commits": [],
+   "frame": [
+    0.23333333333333342,
+    0.37,
+    0.7133333333333334,
+    0.8499999999999999
+   ],
+   "handle": "nw",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    215,
+    215
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "720 × 480 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 1.5,
+   "commits": [],
+   "frame": [
+    0.28,
+    0.4166666666666665,
+    0.7133333333333334,
+    0.8499999999999999
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    250,
+    240
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "650 × 433 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 1.5,
+   "commits": [],
+   "frame": [
+    0.29333333333333333,
+    0.4299999999999998,
+    0.7133333333333334,
+    0.8499999999999999
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    260,
+    250
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "630 × 420 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 1.5,
+   "commits": [],
+   "frame": [
+    0.29333333333333333,
+    0.4299999999999998,
+    0.7133333333333334,
+    0.8499999999999999
+   ],
+   "handle": "e",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    575,
+    350
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "630 × 420 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 1.5,
+   "commits": [],
+   "frame": [
+    0.29333333333333333,
+    0.45333333333333325,
+    0.6666666666666666,
+    0.8266666666666665
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    540,
+    350
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "560 × 373 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 1.5,
+   "commits": [],
+   "frame": [
+    0.29333333333333333,
+    0.4599999999999999,
+    0.6533333333333333,
+    0.8199999999999998
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    530,
+    352
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "540 × 360 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.8,
+   "commits": [],
+   "frame": [
+    0.3773333333333333,
+    0.4599999999999999,
+    0.5693333333333332,
+    0.8199999999999998
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "aspect",
+    6
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "288 × 360 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.8,
+   "commits": [],
+   "frame": [
+    0.3773333333333333,
+    0.4599999999999999,
+    0.5693333333333332,
+    0.8199999999999998
+   ],
+   "handle": "n",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    395,
+    260
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "288 × 360 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.8,
+   "commits": [],
+   "frame": [
+    0.36133333333333334,
+    0.4,
+    0.5853333333333333,
+    0.8199999999999998
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    395,
+    230
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "336 × 420 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.8,
+   "commits": [],
+   "frame": [
+    0.35866666666666663,
+    0.39,
+    0.5879999999999999,
+    0.8199999999999998
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    395,
+    225
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "344 × 430 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.8,
+   "commits": [],
+   "frame": [
+    0.35866666666666663,
+    0.39,
+    0.5879999999999999,
+    0.8199999999999998
+   ],
+   "handle": "s",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    395,
+    440
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "344 × 430 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.8,
+   "commits": [],
+   "frame": [
+    0.3426666666666666,
+    0.39,
+    0.6039999999999999,
+    0.88
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    395,
+    470
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "392 × 490 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 0.8,
+   "commits": [],
+   "frame": [
+    0.33733333333333326,
+    0.39,
+    0.6093333333333333,
+    0.9
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    396,
+    480
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "408 × 510 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 2.7083333333333335,
+   "commits": [],
+   "frame": [
+    0.33733333333333326,
+    0.5696769230769231,
+    0.6093333333333333,
+    0.720323076923077
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "aspect",
+    8
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 2.7083333333333335,
+   "commits": [],
+   "frame": [
+    0.33733333333333326,
+    0.5696769230769231,
+    0.6093333333333333,
+    0.720323076923077
+   ],
+   "handle": "se",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    497,
+    390
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 2.7083333333333335,
+   "commits": [],
+   "frame": [
+    0.33733333333333326,
+    0.5696769230769231,
+    0.3523333333333333,
+    0.5779846153846154
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    200,
+    200
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "23 × 8 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 2.7083333333333335,
+   "commits": [],
+   "frame": [
+    0.33733333333333326,
+    0.5696769230769231,
+    0.6093333333333333,
+    0.720323076923077
+   ],
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    200,
+    200
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 0.0,
+   "aspect": 2.7083333333333335,
+   "commits": [],
+   "frame": [
+    0.33733333333333326,
+    0.5696769230769231,
+    0.6093333333333333,
+    0.720323076923077
+   ],
+   "handle": "rotate",
+   "limit": [
+    0.0,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    400,
+    30
+   ],
+   "open": true,
+   "settings": {
+    "crop": null,
+    "flip": false,
+    "rotation": 0,
+    "straighten": 0.0,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [],
+   "frame": [
+    0.33733333333333326,
+    0.5696769230769231,
+    0.6093333333333333,
+    0.720323076923077
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    420,
+    20
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.33733333333333326,
+     0.5696769230769231,
+     0.6093333333333333,
+     0.720323076923077
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [
+    "보정 변경"
+   ],
+   "frame": [
+    0.33733333333333326,
+    0.5696769230769231,
+    0.6093333333333333,
+    0.720323076923077
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    430,
+    25
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.33733333333333326,
+     0.5696769230769231,
+     0.6093333333333333,
+     0.720323076923077
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "canvas": [
+    29.0,
+    44.0,
+    1500,
+    1000
+   ],
+   "commits": [
+    "보정 변경"
+   ],
+   "frame": [
+    0.33733333333333326,
+    0.5696769230769231,
+    0.6093333333333333,
+    0.720323076923077
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "logical": [
+    1558,
+    1088
+   ],
+   "op": [
+    "frame",
+    0.5,
+    40,
+    30
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.33733333333333326,
+     0.5696769230769231,
+     0.6093333333333333,
+     0.720323076923077
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px",
+   "use_crop": "all"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [
+    "보정 변경"
+   ],
+   "frame": [
+    0.33733333333333326,
+    0.5696769230769231,
+    0.6093333333333333,
+    0.720323076923077
+   ],
+   "handle": "move",
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    470,
+    400
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.33733333333333326,
+     0.5696769230769231,
+     0.6093333333333333,
+     0.720323076923077
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [
+    "보정 변경"
+   ],
+   "frame": [
+    0.11066666666666652,
+    0.26967692307692315,
+    0.38266666666666654,
+    0.420323076923077
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "move",
+    300,
+    250
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.33733333333333326,
+     0.5696769230769231,
+     0.6093333333333333,
+     0.720323076923077
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [
+    "보정 변경"
+   ],
+   "frame": [
+    0.016328214449187098,
+    0.09918574437063479,
+    0.2883282144491871,
+    0.24983189821678867
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    200,
+    150
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.33733333333333326,
+     0.5696769230769231,
+     0.6093333333333333,
+     0.720323076923077
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [
+    "보정 변경",
+    "보정 변경"
+   ],
+   "frame": [
+    0.016328214449187098,
+    0.09918574437063479,
+    0.2883282144491871,
+    0.24983189821678867
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "enter"
+   ],
+   "open": false,
+   "settings": {
+    "crop": [
+     0.016328214449187098,
+     0.09918574437063479,
+     0.2883282144491871,
+     0.24983189821678867
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [
+    "보정 변경",
+    "보정 변경"
+   ],
+   "frame": [
+    0.016328214449187098,
+    0.09918574437063479,
+    0.2883282144491871,
+    0.24983189821678867
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "toggle"
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.016328214449187098,
+     0.09918574437063479,
+     0.2883282144491871,
+     0.24983189821678867
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "canvas": [
+    29.0,
+    44.0,
+    1500,
+    1000
+   ],
+   "commits": [
+    "보정 변경",
+    "보정 변경"
+   ],
+   "frame": [
+    0.016328214449187084,
+    0.0991857443706348,
+    0.2883282144491871,
+    0.24983189821678864
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "logical": [
+    1558,
+    1088
+   ],
+   "op": [
+    "frame",
+    0.5,
+    40,
+    30
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.016328214449187098,
+     0.09918574437063479,
+     0.2883282144491871,
+     0.24983189821678867
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px",
+   "use_crop": "all"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [
+    "보정 변경",
+    "보정 변경"
+   ],
+   "frame": [
+    0.016328214449187084,
+    0.0991857443706348,
+    0.2883282144491871,
+    0.24983189821678864
+   ],
+   "handle": "rotate",
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "press",
+    420,
+    300
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.016328214449187098,
+     0.09918574437063479,
+     0.2883282144491871,
+     0.24983189821678867
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [
+    "보정 변경",
+    "보정 변경"
+   ],
+   "frame": [
+    0.016328214449187084,
+    0.0991857443706348,
+    0.2883282144491871,
+    0.24983189821678864
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "release",
+    420,
+    300
+   ],
+   "open": true,
+   "settings": {
+    "crop": [
+     0.016328214449187098,
+     0.09918574437063479,
+     0.2883282144491871,
+     0.24983189821678867
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  },
+  {
+   "angle": 3.4,
+   "aspect": 2.7083333333333335,
+   "commits": [
+    "보정 변경",
+    "보정 변경",
+    "보정 변경"
+   ],
+   "frame": [
+    0.016328214449187084,
+    0.0991857443706348,
+    0.2883282144491871,
+    0.24983189821678864
+   ],
+   "limit": [
+    3.4,
+    1500.0,
+    1000.0
+   ],
+   "op": [
+    "double",
+    420,
+    300
+   ],
+   "open": false,
+   "settings": {
+    "crop": [
+     0.016328214449187084,
+     0.0991857443706348,
+     0.2883282144491871,
+     0.24983189821678864
+    ],
+    "flip": false,
+    "rotation": 0,
+    "straighten": 3.4,
+    "upright": null
+   },
+   "size": "408 × 151 px"
+  }
+ ]
+}

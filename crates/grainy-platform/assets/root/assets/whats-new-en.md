@@ -1,0 +1,102 @@
+# Grainy: what's new
+
+Short English notes shown in the app after an update. The full change log is CHANGELOG.md (Korean).
+
+## 0.6.8 — Safe start: after a crash, update before any photo opens
+
+- If Grainy did not close normally last time (a crash or a forced quit), the next start opens no photo by itself and offers a newer version first, so a fix can arrive even when the old version quits as soon as it opens a photo. With automatic update checks on it checks at once; otherwise it asks first. The folder still comes back, and the status bar says why no photo was opened.
+
+## 0.6.7 — macOS: no more quitting when an assistive app reads the window
+
+- **Fixed:** on macOS, Grainy quit when a photo was opened, and right at start on a Mac that reopens the last photo. It happened while a program that reads the screen was running, such as VoiceOver or an AI assistant that operates the Mac. A bug in Qt, the toolkit Grainy is built on, could read a list entry it had already deleted. Grainy now stays off that path until Qt's fix is released.
+- Such programs now see the photo grid, filmstrip and folder lists as one list each rather than item by item. Buttons, sliders, fields and tabs are unchanged, and so is using Grainy with the mouse and keyboard.
+
+## 0.6.6 — Looks, toe and shoulder for Smooth highlights (DRT)
+
+- With tone mapping set to **Smooth highlights (DRT)** in Basic, a **DRT look** menu appears (Standard, Soft, Punchy, Film-like) and **Advanced** opens four sliders: **DRT contrast**, **Toe** (deeper or lifted blacks), **Shoulder** (highlights reach white sooner, or keep more range) and **White fade** (where bright colours start turning white).
+- Mid grey stays put at every setting, and all zeros is the original rendering, so photos already using the DRT do not change.
+
+## 0.6.5 — Ask AI: Claude Code really works, and knows "this folder"
+
+- **Fixed:** with Claude Code, Ask AI could answer before Grainy's tools were connected and make up a photo list without changing anything. It now waits for the tools and is told never to invent results.
+- Each request says which folder is open, which photos are selected and which photo is being edited, so "this folder" means what you see.
+- Claude Code continues its own conversation on a follow-up, remembering earlier tool results.
+
+## 0.6.4 — Ask AI: sign-in status, official sign-in and install buttons
+
+- Ask AI shows whether Claude Code, Codex and Gemini CLI are signed in (each program's own status; no emails or keys shown).
+- **Sign in…** opens the program's official sign-in in a new window; Grainy never sees passwords or keys. A run that fails on sign-in says so and points to the button.
+- **Install…** appears for a missing program: it shows the vendor's official install command first and runs it in a new window when you confirm; Node.js is pointed out when needed.
+
+## 0.6.3 — Ask AI: give Claude Code, Codex or Gemini CLI a task from inside Grainy
+
+- **Ask AI** (top of the window): pick Claude Code, Codex or Gemini CLI installed on this computer, type what you want ("invert this roll, fix the colour and export it for the web"), and it works with Grainy's own AI-connection tools. Progress and tool use stream into the window; Stop, New conversation and Undo last AI task are there.
+- Each program uses your own account and subscription; Grainy handles no logins and changes no program settings. The AI gets Grainy's tools only: no commands, file edits or web.
+- The old Codex command window and its separate ChatGPT connection are replaced by Ask AI.
+
+## 0.6.2 — AI connection: crop and straighten, look comparison sheets, culling in one call, safer
+
+- **AI connection (MCP):** crop, auto straighten and scan-border crop; compare up to 12 film looks or presets on one photo in a labelled contact sheet without virtual copies; different ratings, flags and labels per photo in one undoable batch; save a contact sheet as a JPEG up to 4000 px; export results list the files, and a dry run plans an export without writing.
+- **Safer:** pending healing marks are kept, jobs always finish, slow photos and unreachable network folders no longer hold calls or the window, copied settings are current, Grainy's settings folder is protected, long or reserved file names are fixed, get_photo works on photos with a film look, and an AI import no longer opens a message box that blocks later calls.
+- After updating Grainy, start a new session in your AI program to see the new tools.
+
+## 0.6.1 — More shortcuts; the AI connection rotates, copies, imports and exports to any folder
+
+- **More shortcuts:** J clipping, Z 1:1 / fit, F full screen, L lights out, Tab side panels, Shift+Tab all panels (Esc leaves lights out and full screen); Ctrl+U Auto tone, Ctrl+Shift+U Auto Color, Ctrl+[ / Ctrl+] rotate 90°; 6–9 colour labels (the same key again clears), Ctrl+' virtual copy, Ctrl+/ the shortcut list. On a Mac, Ctrl is ⌘.
+- **AI connection (MCP):** rotate and flip, virtual copies, export to a folder the AI names (made if missing, never replacing files) with width/height and {film} {preset} {camera} {date} file names, folder import, film and preset lists, presets and copied settings (curves included), snapshots, ratings, flags and labels. A call made while Grainy is still starting now waits a few seconds instead of failing.
+
+## 0.6.0 — Panel switches, more shortcuts, Select Sky, smooth highlights, a hands-on tutorial
+
+- **Every edit panel has the same on/off switch in its header**, and a small dot when it holds edits, so you can see at a glance what is active. Switching a panel off leaves its values as they are.
+- **More shortcuts:** W white balance eyedropper, K new brush mask, M new linear gradient, Shift+M new radial gradient, Q healing, ? the shortcut list. Drag the eyedropper to average a box; one sample now removes the whole cast on ordinary photos.
+- **Select Sky** in the Masks tool finds the sky (no AI model) with edges refined to the photo, plus Sensitivity and Edge softness.
+- **Tone mapping · Smooth highlights (DRT)** in Basic: bright skies and lights keep their colour as they approach white.
+- **Learn Grainy hands-on** at pastorius9.github.io/grainy/learn (Settings › Learn Grainy).
+
+## 0.5.99 — Film looks in the Presets panel
+
+- **The Presets panel now has folders.** The 82 film looks are in a folder per maker (Kodak and Fujifilm split again into colour negative, colour slide, black and white and motion picture); your own and the built-in presets are in Other presets.
+- Clicking a film applies it just as the Film panel does, grain included, as one undo step; other edits stay as they are.
+
+## 0.5.98 — 82 film looks
+
+- **A Film panel in Develop.** Choose from 82 films — Kodak Portra, Ektar, Gold, Kodachrome, Ektachrome, Tri-X, T-MAX and Vision3, Fujifilm Velvia, Provia, Astia, Superia, Pro 400H and Acros, Ilford HP5, FP4 and Delta, Fomapan, Agfa and more.
+- Each look is computed from its maker's published technical data (spectral sensitivity, characteristic curves, dye densities): negatives are printed on the paper they were made for, slides are viewed as they are. Film amount blends it with your photo, and the film's grain goes into Effects › Grain.
+- AI programs can choose a film by name in apply_edits (film_look).
+
+## 0.5.97 — Let an AI program work in Grainy (MCP)
+
+- **AI programs such as Claude Code, Codex, Gemini CLI and Claude Desktop can use Grainy's own tools.** Register Grainy's MCP once with one command, then just ask, e.g. "convert this roll as one roll of negatives, run Auto colour and export it". The commands are under Settings › AI Connection (MCP)… and on pastorius9.github.io/grainy.
+- Edits show in Grainy at once and the last five AI tasks can be undone. Nothing to switch on in Grainy; only AI programs you register on this computer can connect, while Grainy is open. Grainy itself sends nothing over the internet; what the AI program reads is sent to that AI service.
+- Batch edits from the Photo menu keep each RAW photo's own colour settings.
+
+## 0.5.96 — Photos no longer go offline after updating on macOS
+
+- **macOS: photos no longer go offline after every update.** macOS remembers per app which folders and disks it may read. Each macOS build of Grainy used to carry a different signature, so macOS took every update for a new app and forgot the permission. All releases are now signed with the same certificate. The first update to this version may ask once more; later ones keep it.
+- **A photo the system will not let Grainy read is shown as needing access, not as offline**, with its saved preview, and Grainy explains once how to allow the folder again (on macOS with a button that opens the right System Settings page).
+- Reported through the Feedback button (#UMJ92). Thank you.
+
+## 0.5.95 — Feedback reference numbers
+
+- **Sending feedback now gives you a reference number**, such as `#K7Q2M`: five random characters, nothing about you or your computer.
+- **When your feedback is addressed, Grainy tells you after the update** that ships it, once, at the top of this window. No e-mail or account is involved: the reference stays on your computer and the list of addressed references ships with the app.
+
+## 0.5.94 — Turned radial gradients, photo background, overlay that steps aside
+
+- **Radial gradients can be turned and can start off the photo.** A `Turn ellipse` slider appears with a radial gradient selected; start dragging beside the photo or past its edge so only part of the light falls in the frame. Linear gradients can reach past the edge too.
+- **The background behind the photo can be black, dark grey, mid grey or white**, from View › Photo background or a right-click on the photo.
+- **The red mask overlay steps aside while you move the mask's sliders** and comes back when you paint again or press `O`.
+- **`[` and `]` resize the brush wherever the keyboard focus is.**
+- **The tone curve's region sliders sit right under the curve.**
+- Thank you for the suggestions sent through the Feedback button.
+
+## 0.5.93 — A brush that acts on chosen tones only
+
+- **Brush masks have a `Tonal range`.** With the brush selected in the Masks tab, the tool options offer `All` · `Shadows` · `Midtones` · `Highlights`. Paint after choosing one and the adjustment reaches only those tones of what you painted: for dodging the shadows or burning the highlights.
+- Changing it on a mask you already painted applies at once; `All` takes the limit away. The limit appears in the mask list, where its range and edge softness can be refined.
+- Suggested through the Feedback button. Thank you.
+
+## 0.5.92 — What's new after an update, spin box arrows
+
+- **After an update, Grainy shows what changed the first time it opens.** The notes come with the app; nothing is downloaded. They can be opened again from Settings › `What's new in this version…`.
+- **The up arrow of number boxes works.** In the export window (`Quality`, `Longest edge`) and the dust detection windows, the number field covered most of the up arrow on Windows 11, so clicking it did nothing. The two arrows are now stacked on the right edge. Thank you for the report.

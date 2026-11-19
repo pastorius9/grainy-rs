@@ -1,0 +1,724 @@
+{
+ "pending": [
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": null,
+   "seen_present": false
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": null,
+   "seen_present": false
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": null,
+   "seen_present": false
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": null,
+   "seen_present": false
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": "",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": "",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": "",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": "",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": "0.6.7",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": "0.6.7",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": "0.6.7",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": "0.6.7",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "ko",
+   "seen": "0.6.8",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "en",
+   "seen": "0.6.8",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": "0.6.8",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": "0.6.8",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "ko",
+   "seen": "0.6.9",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "en",
+   "seen": "0.6.9",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": "0.6.9",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": "0.6.9",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "ko",
+   "seen": "999.0.0",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "en",
+   "seen": "999.0.0",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": "999.0.0",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": "999.0.0",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 543,
+     "sha256": "e42a14768d8667d89f7b27ee1be98b5d8183f954464cf45bb768ea6b525fb9ca",
+     "title": "macOS: 보조 프로그램이 켜져 있으면 사진을 열 때 꺼지던 문제",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 419,
+     "sha256": "06979db2ac1bcb72e5501b2c934fd38b872718b3dc620dd83d6a862f6f93fc93",
+     "title": "부드러운 하이라이트(DRT)의 룩과 토·숄더 조절",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 406,
+     "sha256": "5b004d3a09501c0ef9d340cf3043fdc500ef487d6911efa376bb20539ec10378",
+     "title": "AI에게 시키기: Claude Code가 실제로 작업하고, \"이 폴더\"를 압니다",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 447,
+     "sha256": "e5d2342ebf200c02c295b5ef92fce2b9486cea87e5c68483bf5f91dd2c0bda39",
+     "title": "AI에게 시키기: 로그인 상태, 공식 로그인·설치 버튼",
+     "version": "0.6.4"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": "0.5.90",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    },
+    {
+     "chars": 602,
+     "sha256": "06ac1e07575b69ac0218fe58180d00d404a47a4f19e1b5353d356cd98d815f59",
+     "title": "macOS: no more quitting when an assistive app reads the window",
+     "version": "0.6.7"
+    },
+    {
+     "chars": 473,
+     "sha256": "05728a3db8738010f5384acc566ba6f3e74f09ddb6b5257a6a061795c4c4e329",
+     "title": "Looks, toe and shoulder for Smooth highlights (DRT)",
+     "version": "0.6.6"
+    },
+    {
+     "chars": 436,
+     "sha256": "e58d7dd17f5ce1539e3c91bccde773605b4d2cf3deb9a4513c5e4c1eacfab0bd",
+     "title": "Ask AI: Claude Code really works, and knows \"this folder\"",
+     "version": "0.6.5"
+    },
+    {
+     "chars": 473,
+     "sha256": "300913fdd93b10b60733a21450e23cc400aab0ace89bf17387eef20eff619780",
+     "title": "Ask AI: sign-in status, official sign-in and install buttons",
+     "version": "0.6.4"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": "0.5.90",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": "0.5.90",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": "0.5.90",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "ko",
+   "seen": 5,
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "en",
+   "seen": 5,
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": 5,
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": 5,
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": 0,
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": 0,
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": 0,
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": 0,
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": true,
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": true,
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": true,
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": true,
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": false,
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": false,
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": false,
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": false,
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": [
+    "0.6.7"
+   ],
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": [
+    "0.6.7"
+   ],
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": [
+    "0.6.7"
+   ],
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": [
+    "0.6.7"
+   ],
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "ko",
+   "seen": {
+    "a": 1
+   },
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "en",
+   "seen": {
+    "a": 1
+   },
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": {
+    "a": 1
+   },
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": {
+    "a": 1
+   },
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": "0.6.7-beta",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": "0.6.7-beta",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": "0.6.7-beta",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": "0.6.7-beta",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": " ",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": " ",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": " ",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": " ",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 429,
+     "sha256": "316a7cb4498ef7b9dfb65ecb884ba96ef59fadd03efe147f73fba195a159719a",
+     "title": "안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "ko",
+   "seen": "x",
+   "seen_present": true
+  },
+  {
+   "entries": [
+    {
+     "chars": 381,
+     "sha256": "f119336ffe2f569a28b8685ad7b8bd94086c7fb148ea9aacf825bfe3a90bb659",
+     "title": "Safe start: after a crash, update before any photo opens",
+     "version": "0.6.8"
+    }
+   ],
+   "first_run": false,
+   "lang": "en",
+   "seen": "x",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": "x",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": "x",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "ko",
+   "seen": "0.6.8.0",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": false,
+   "lang": "en",
+   "seen": "0.6.8.0",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "ko",
+   "seen": "0.6.8.0",
+   "seen_present": true
+  },
+  {
+   "entries": [],
+   "first_run": true,
+   "lang": "en",
+   "seen": "0.6.8.0",
+   "seen_present": true
+  }
+ ],
+ "remember": [
+  {
+   "file": "{\n  \"version_seen\": \"0.6.8\"\n}",
+   "seen": null,
+   "seen_present": false,
+   "value": "0.6.8"
+  },
+  {
+   "file": "{\n  \"version_seen\": \"0.6.8\"\n}",
+   "seen": "0.6.7",
+   "seen_present": true,
+   "value": "0.6.8"
+  },
+  {
+   "file": "{\n  \"version_seen\": \"0.6.8\"\n}",
+   "seen": "0.6.8",
+   "seen_present": true,
+   "value": "0.6.8"
+  },
+  {
+   "file": "{\n  \"version_seen\": \"0.6.8\"\n}",
+   "seen": 5,
+   "seen_present": true,
+   "value": "0.6.8"
+  }
+ ]
+}

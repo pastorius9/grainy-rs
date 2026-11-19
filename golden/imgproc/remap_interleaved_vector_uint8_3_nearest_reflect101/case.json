@@ -1,0 +1,14 @@
+{
+ "border": "reflect101",
+ "border_value": [
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "dtype": "uint8",
+ "interpolation": "nearest",
+ "op": "remap_interleaved",
+ "output_dtype": "uint8",
+ "tolerance": 1.0
+}

@@ -1,0 +1,246 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "pics/a.jpg": {
+     "fill": [
+      65,
+      3
+     ]
+    },
+    "pics/2026/b.jpg": {
+     "fill": [
+      66,
+      4
+     ]
+    },
+    "pics/2026/raw/c.nef": {
+     "fill": [
+      67,
+      5
+     ]
+    },
+    "other/z.jpg": {
+     "fill": [
+      68,
+      6
+     ]
+    },
+    "pics/한글 폴더/d.jpg": {
+     "fill": [
+      69,
+      7
+     ]
+    }
+   },
+   "dirs": [
+    "pics/2026/raw/cache"
+   ],
+   "photos": [
+    {
+     "path": "$ROOT/pics/a.jpg"
+    },
+    {
+     "path": "$ROOT/pics/2026/b.jpg"
+    },
+    {
+     "path": "$ROOT/pics/2026/raw/c.nef"
+    },
+    {
+     "path": "$ROOT/other/z.jpg"
+    },
+    {
+     "path": "$ROOT/pics/한글 폴더/d.jpg"
+    },
+    {
+     "path": "$ROOT/pics/ghost.jpg"
+    },
+    {
+     "virtual_of": 2
+    }
+   ],
+   "prefs": {
+    "removed_folders": [
+     "$ROOT/pics/2026/raw/cache",
+     "$ROOT/elsewhere"
+    ]
+   }
+  },
+  "calls": [
+   {
+    "fn": "move_folder",
+    "args": {
+     "source": "$ROOT/pics",
+     "destination": "$ROOT/archive/pics2"
+    }
+   },
+   {
+    "fn": "move_folder",
+    "args": {
+     "source": "$ROOT/archive/pics2",
+     "destination": "$ROOT/other"
+    }
+   },
+   {
+    "fn": "move_folder",
+    "args": {
+     "source": "$ROOT/archive/pics2",
+     "destination": "$ROOT/archive/pics2/inner"
+    }
+   },
+   {
+    "fn": "move_folder",
+    "args": {
+     "source": "$ROOT/archive/pics2",
+     "destination": "$ROOT/archive/pics2"
+    }
+   },
+   {
+    "fn": "move_folder",
+    "args": {
+     "source": "$ROOT/nothing",
+     "destination": "$ROOT/x"
+    }
+   },
+   {
+    "fn": "move_folder",
+    "args": {
+     "source": "$ANCHOR",
+     "destination": "$ROOT/x"
+    }
+   },
+   {
+    "fn": "move_folder",
+    "args": {
+     "source": "$ROOT/archive/pics2/2026",
+     "destination": "$ROOT/Moved2026"
+    }
+   }
+  ],
+  "name": "move_folder"
+ },
+ "results": [
+  {
+   "ok": null
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "폴더 안쪽이나 기존 폴더로 이동할 수 없습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "폴더 안쪽이나 기존 폴더로 이동할 수 없습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "폴더 안쪽이나 기존 폴더로 이동할 수 없습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "사진 폴더를 선택해 주세요."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "사진 폴더를 선택해 주세요."
+   }
+  },
+  {
+   "ok": null
+  }
+ ],
+ "tree": {
+  "files": {
+   "archive/pics2/a.jpg": {
+    "size": 3,
+    "sha256": "cb1ad2119d8fafb69566510ee712661f9f14b83385006ef92aec47f523a38358"
+   },
+   "archive/pics2/한글 폴더/d.jpg": {
+    "size": 7,
+    "sha256": "5a2bac47182a95b0a18f40ba305b216031e47a28c414ac73088a975048de2a86"
+   },
+   "Moved2026/b.jpg": {
+    "size": 4,
+    "sha256": "4a8d8134f29b0b7b60c126f5532bc9f5d9bb73037373cf6fb872d81f1dcefdfd"
+   },
+   "Moved2026/raw/c.nef": {
+    "size": 5,
+    "sha256": "17b80bc751e1f35c75d6ada07267a5fd9981b7b3655cffcaf94a636e93eb27ba"
+   },
+   "other/z.jpg": {
+    "size": 6,
+    "sha256": "fa80828f32474e88325a1d0bd4339bb892b96639543b6a2808a6b30615fbacb7"
+   }
+  },
+  "dirs": [
+   "archive",
+   "archive/pics2",
+   "archive/pics2/한글 폴더",
+   "Moved2026",
+   "Moved2026/raw",
+   "Moved2026/raw/cache",
+   "other"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\archive\\pics2\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\Moved2026\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\Moved2026\\raw\\c.nef",
+    "name": "c.nef",
+    "virtual_source": null
+   },
+   {
+    "id": 4,
+    "path": "$ROOT\\other\\z.jpg",
+    "name": "z.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 5,
+    "path": "$ROOT\\archive\\pics2\\한글 폴더\\d.jpg",
+    "name": "d.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 6,
+    "path": "$ROOT\\archive\\pics2\\ghost.jpg",
+    "name": "ghost.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 7,
+    "path": "$ROOT\\Moved2026\\b.jpg",
+    "name": "b.jpg · 사본",
+    "virtual_source": 2
+   }
+  ],
+  "folder_roots": [
+   "$ROOT\\archive\\pics2",
+   "$ROOT\\other"
+  ],
+  "preferences": {
+   "removed_folders": "[\"$ROOT\\\\Moved2026\\\\raw\\\\cache\", \"$ROOT\\\\elsewhere\"]"
+  }
+ }
+}

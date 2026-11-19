@@ -1,0 +1,121 @@
+{
+ "cases": [
+  {
+   "has_view": true,
+   "labels": [
+    [
+     "",
+     "Grainy가 0.6.8 버전으로 업데이트되었습니다."
+    ]
+   ],
+   "language": "ko",
+   "markdown": "## 0.6.8 — 안전 시작: 비정상 종료 뒤에는 사진을 열기 전에 업데이트부터\n\n- **Grainy가 지난번에 정상적으로 닫히지 않았으면(충돌이나 강제 종료), 다음에 켤 때 사진을 자동으로 열지 않고 업데이트부터 제안합니다.** 0.6.6의 맥처럼 사진을 여는 순간 꺼지는 문제가 생겨도, 앱 안에서 고친 버전을 받을 수 있습니다.\n  - 폴더는 그대로 보이지만 마지막 사진도, 첫 사진도 자동으로 열지 않습니다. 화면 아래쪽에 그 이유가 표시됩니다.\n  - 새 버전 자동 확인을 켜 두었으면 바로 새 버전을 확인하고, 있으면 '지금 업데이트' 창을 띄웁니다. 꺼 두었으면 '새 버전 확인'을 누를지 먼저 묻습니다(GitHub에 최신 버전 번호만 확인하며, 사진이나 사용 정보는 보내지 않습니다).\n  - 다른 사진 라이브러리로 Grainy를 하나 더 켜 둔 경우는 충돌로 보지 않습니다.\n  - 이 기능은 0.6.8을 설치한 뒤부터 동작합니다.",
+   "name": "this version",
+   "size": [
+    640,
+    540
+   ],
+   "thanks": null,
+   "title": "Grainy 0.6.8의 달라진 점"
+  },
+  {
+   "has_view": true,
+   "labels": [
+    [
+     "",
+     "Grainy가 0.6.8 버전으로 업데이트되었습니다."
+    ]
+   ],
+   "language": "ko",
+   "markdown": "이 버전의 변경 기록을 찾지 못했습니다.",
+   "name": "none",
+   "size": [
+    640,
+    540
+   ],
+   "thanks": null,
+   "title": "Grainy 0.6.8의 달라진 점"
+  },
+  {
+   "has_view": true,
+   "labels": [
+    [
+     "",
+     "Grainy가 0.6.8 버전으로 업데이트되었습니다."
+    ],
+    [
+     "shipped",
+     "보내 주신 피드백(#AB12, #CD34)이 이번 업데이트에 반영되었습니다. 고맙습니다."
+    ]
+   ],
+   "language": "ko",
+   "markdown": "이 버전의 변경 기록을 찾지 못했습니다.",
+   "name": "shipped",
+   "size": [
+    640,
+    540
+   ],
+   "thanks": "보내 주신 피드백(#AB12, #CD34)이 이번 업데이트에 반영되었습니다. 고맙습니다.",
+   "title": "Grainy 0.6.8의 달라진 점"
+  },
+  {
+   "has_view": true,
+   "labels": [
+    [
+     "",
+     "Grainy has been updated to version 0.6.8."
+    ]
+   ],
+   "language": "en",
+   "markdown": "## 0.6.8 — Safe start: after a crash, update before any photo opens\n\n- If Grainy did not close normally last time (a crash or a forced quit), the next start opens no photo by itself and offers a newer version first, so a fix can arrive even when the old version quits as soon as it opens a photo. With automatic update checks on it checks at once; otherwise it asks first. The folder still comes back, and the status bar says why no photo was opened.",
+   "name": "this version",
+   "size": [
+    640,
+    540
+   ],
+   "thanks": null,
+   "title": "What's new in Grainy 0.6.8"
+  },
+  {
+   "has_view": true,
+   "labels": [
+    [
+     "",
+     "Grainy has been updated to version 0.6.8."
+    ]
+   ],
+   "language": "en",
+   "markdown": "The change notes for this version were not found.",
+   "name": "none",
+   "size": [
+    640,
+    540
+   ],
+   "thanks": null,
+   "title": "What's new in Grainy 0.6.8"
+  },
+  {
+   "has_view": true,
+   "labels": [
+    [
+     "",
+     "Grainy has been updated to version 0.6.8."
+    ],
+    [
+     "shipped",
+     "Your feedback (#AB12, #CD34) made it into this update. Thank you."
+    ]
+   ],
+   "language": "en",
+   "markdown": "The change notes for this version were not found.",
+   "name": "shipped",
+   "size": [
+    640,
+    540
+   ],
+   "thanks": "Your feedback (#AB12, #CD34) made it into this update. Thank you.",
+   "title": "What's new in Grainy 0.6.8"
+  }
+ ],
+ "version": "0.6.8"
+}

@@ -1,0 +1,176 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "new/a.jpg": {
+     "fill": [
+      65,
+      4
+     ]
+    },
+    "new/b.PNG": {
+     "fill": [
+      66,
+      4
+     ]
+    },
+    "new/notes.txt": {
+     "fill": [
+      67,
+      4
+     ]
+    },
+    "new/taken.jpg": {
+     "fill": [
+      68,
+      4
+     ]
+    }
+   },
+   "photos": [
+    {
+     "path": "$ROOT/old/a.jpg"
+    },
+    {
+     "path": "$ROOT/old/b.jpg"
+    },
+    {
+     "path": "$ROOT/new/taken.jpg"
+    },
+    {
+     "virtual_of": 1
+    }
+   ]
+  },
+  "calls": [
+   {
+    "fn": "relink",
+    "args": {
+     "id": 1,
+     "path": "$ROOT/new/a.jpg"
+    }
+   },
+   {
+    "fn": "relink",
+    "args": {
+     "id": 2,
+     "path": "$ROOT/new/notes.txt"
+    }
+   },
+   {
+    "fn": "relink",
+    "args": {
+     "id": 2,
+     "path": "$ROOT/new/nothing.jpg"
+    }
+   },
+   {
+    "fn": "relink",
+    "args": {
+     "id": 99,
+     "path": "$ROOT/new/b.PNG"
+    }
+   },
+   {
+    "fn": "relink",
+    "args": {
+     "id": 2,
+     "path": "$ROOT/new/b.PNG"
+    }
+   },
+   {
+    "fn": "relink",
+    "args": {
+     "id": 2,
+     "path": "$ROOT/new/taken.jpg"
+    }
+   }
+  ],
+  "name": "relink"
+ },
+ "results": [
+  {
+   "ok": null
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "지원하는 사진 파일을 선택해 주세요."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "지원하는 사진 파일을 선택해 주세요."
+   }
+  },
+  {
+   "err": {
+    "type": "TypeError",
+    "message": null
+   }
+  },
+  {
+   "ok": null
+  },
+  {
+   "ok": null
+  }
+ ],
+ "tree": {
+  "files": {
+   "new/a.jpg": {
+    "size": 4,
+    "sha256": "63c1dd951ffedf6f7fd968ad4efa39b8ed584f162f46e715114ee184f8de9201"
+   },
+   "new/b.PNG": {
+    "size": 4,
+    "sha256": "4a8d8134f29b0b7b60c126f5532bc9f5d9bb73037373cf6fb872d81f1dcefdfd"
+   },
+   "new/notes.txt": {
+    "size": 4,
+    "sha256": "90b4853e06e722c63b4270463cf558684d7a1e77605d3ad36489d6146e42ab87"
+   },
+   "new/taken.jpg": {
+    "size": 4,
+    "sha256": "3989c4e0b53b03fa44fba6af89eeaa5f4347e8496e934ce81364e132cfca25ed"
+   }
+  },
+  "dirs": [
+   "new"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\new\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\new\\taken.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\new\\taken.jpg",
+    "name": "taken.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 4,
+    "path": "$ROOT\\new\\a.jpg",
+    "name": "a.jpg · 사본",
+    "virtual_source": 1
+   }
+  ],
+  "folder_roots": [
+   "$ROOT\\new",
+   "$ROOT\\old"
+  ],
+  "preferences": {}
+ }
+}

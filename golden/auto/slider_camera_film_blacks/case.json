@@ -1,0 +1,10 @@
+{
+ "key": "blacks",
+ "settings": {
+  "film_look": "kodak-portra-400",
+  "film_strength": 80.0,
+  "raw_mode": "as_shot"
+ },
+ "source": "camera",
+ "value": null
+}

@@ -1,0 +1,668 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "src/a.jpg": {
+     "fill": [
+      1,
+      100
+     ]
+    },
+    "src/b.NEF": {
+     "fill": [
+      2,
+      200
+     ]
+    },
+    "src/c.JPG": {
+     "fill": [
+      3,
+      300
+     ]
+    },
+    "src/d.png": {
+     "fill": [
+      4,
+      400
+     ]
+    },
+    "src/e.tif": {
+     "fill": [
+      5,
+      1500000
+     ]
+    }
+   },
+   "mtimes": {
+    "src/a.jpg": 1800014400000000000,
+    "src/b.NEF": 1800014405000000000,
+    "src/c.JPG": 1800018000000000000,
+    "src/d.png": 1800014400000000000,
+    "src/e.tif": 1800021600000000000
+   }
+  },
+  "calls": [
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": null
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {}
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026:11:13 10:20:30"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026:11:13 10:20:30.5xyz"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026:1:3 4:5:6"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026:11:13T10:20:30"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026-11-13 10:20:30"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026:02:30 10:20:30"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026:11:13 10:20:61"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": 20261113
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "0000:01:01 00:00:00"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026:11:13  10:20:30"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": " 2026:11:13 10:20:30"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026:11: 3 10:20:30"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/a.jpg",
+     "metadata": {
+      "date": "2026:11:13 24:00:00"
+     }
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/none.jpg",
+     "metadata": {}
+    }
+   },
+   {
+    "fn": "capture_time",
+    "args": {
+     "path": "$ROOT/src/c.JPG",
+     "metadata": {}
+    }
+   },
+   {
+    "fn": "plan",
+    "args": {
+     "sources": [
+      "$ROOT/src/a.jpg",
+      "$ROOT/src/b.NEF",
+      "$ROOT/src/c.JPG",
+      "$ROOT/src/d.png",
+      "$ROOT/src/e.tif"
+     ],
+     "meta": {
+      "a.jpg": {
+       "date": "2026:11:13 10:20:30",
+       "camera": "X/100:V \"Pro\""
+      },
+      "b.NEF": {
+       "date": "2026:11:13 09:00:00",
+       "camera": ""
+      },
+      "c.JPG": {
+       "date": "broken"
+      },
+      "d.png": {
+       "camera": "Cam<>"
+      },
+      "e.tif": {
+       "date": "2025:01:02 03:04:05.999",
+       "camera": null
+      }
+     },
+     "subfolders": "year/date",
+     "template": "{date}_{time}_{n:03d}_{camera}_{stem}"
+    }
+   },
+   {
+    "fn": "plan",
+    "args": {
+     "sources": [
+      "$ROOT/src/a.jpg",
+      "$ROOT/src/b.NEF",
+      "$ROOT/src/c.JPG",
+      "$ROOT/src/d.png",
+      "$ROOT/src/e.tif"
+     ],
+     "meta": {
+      "a.jpg": {
+       "date": "2026:11:13 10:20:30",
+       "camera": "X/100:V \"Pro\""
+      },
+      "b.NEF": {
+       "date": "2026:11:13 09:00:00",
+       "camera": ""
+      },
+      "c.JPG": {
+       "date": "broken"
+      },
+      "d.png": {
+       "camera": "Cam<>"
+      },
+      "e.tif": {
+       "date": "2025:01:02 03:04:05.999",
+       "camera": null
+      }
+     },
+     "subfolders": "date",
+     "template": "{date}_{time}_{n:03d}_{camera}_{stem}"
+    }
+   },
+   {
+    "fn": "plan",
+    "args": {
+     "sources": [
+      "$ROOT/src/a.jpg",
+      "$ROOT/src/b.NEF",
+      "$ROOT/src/c.JPG",
+      "$ROOT/src/d.png",
+      "$ROOT/src/e.tif"
+     ],
+     "meta": {
+      "a.jpg": {
+       "date": "2026:11:13 10:20:30",
+       "camera": "X/100:V \"Pro\""
+      },
+      "b.NEF": {
+       "date": "2026:11:13 09:00:00",
+       "camera": ""
+      },
+      "c.JPG": {
+       "date": "broken"
+      },
+      "d.png": {
+       "camera": "Cam<>"
+      },
+      "e.tif": {
+       "date": "2025:01:02 03:04:05.999",
+       "camera": null
+      }
+     },
+     "subfolders": "none",
+     "template": "{date}_{time}_{n:03d}_{camera}_{stem}"
+    }
+   },
+   {
+    "fn": "plan",
+    "args": {
+     "sources": [
+      "$ROOT/src/a.jpg",
+      "$ROOT/src/b.NEF",
+      "$ROOT/src/c.JPG",
+      "$ROOT/src/d.png",
+      "$ROOT/src/e.tif"
+     ],
+     "meta": {
+      "a.jpg": {
+       "date": "2026:11:13 10:20:30",
+       "camera": "X/100:V \"Pro\""
+      },
+      "b.NEF": {
+       "date": "2026:11:13 09:00:00",
+       "camera": ""
+      },
+      "c.JPG": {
+       "date": "broken"
+      },
+      "d.png": {
+       "camera": "Cam<>"
+      },
+      "e.tif": {
+       "date": "2025:01:02 03:04:05.999",
+       "camera": null
+      }
+     },
+     "template": "{stem}",
+     "known": [
+      [
+       "a.jpg",
+       "2026:11:13 10:20:30"
+      ],
+      [
+       "d.png",
+       0.0
+      ],
+      [
+       "b.nef",
+       "2026:11:13 09:00:00"
+      ]
+     ]
+    }
+   },
+   {
+    "fn": "plan",
+    "args": {
+     "sources": [
+      "$ROOT/src/a.jpg",
+      "$ROOT/src/b.NEF"
+     ],
+     "meta": {
+      "a.jpg": {
+       "date": "2026:11:13 10:20:30",
+       "camera": "X/100:V \"Pro\""
+      },
+      "b.NEF": {
+       "date": "2026:11:13 09:00:00",
+       "camera": ""
+      },
+      "c.JPG": {
+       "date": "broken"
+      },
+      "d.png": {
+       "camera": "Cam<>"
+      },
+      "e.tif": {
+       "date": "2025:01:02 03:04:05.999",
+       "camera": null
+      }
+     },
+     "subfolders": "weekly"
+    }
+   },
+   {
+    "fn": "plan",
+    "args": {
+     "sources": [
+      "$ROOT/src/a.jpg",
+      "$ROOT/src/b.NEF"
+     ],
+     "meta": {
+      "a.jpg": {
+       "date": "2026:11:13 10:20:30",
+       "camera": "X/100:V \"Pro\""
+      },
+      "b.NEF": {
+       "date": "2026:11:13 09:00:00",
+       "camera": ""
+      },
+      "c.JPG": {
+       "date": "broken"
+      },
+      "d.png": {
+       "camera": "Cam<>"
+      },
+      "e.tif": {
+       "date": "2025:01:02 03:04:05.999",
+       "camera": null
+      }
+     },
+     "template": "{bad}"
+    }
+   },
+   {
+    "fn": "plan",
+    "args": {
+     "sources": [
+      "$ROOT/src/none.jpg"
+     ],
+     "meta": {
+      "a.jpg": {
+       "date": "2026:11:13 10:20:30",
+       "camera": "X/100:V \"Pro\""
+      },
+      "b.NEF": {
+       "date": "2026:11:13 09:00:00",
+       "camera": ""
+      },
+      "c.JPG": {
+       "date": "broken"
+      },
+      "d.png": {
+       "camera": "Cam<>"
+      },
+      "e.tif": {
+       "date": "2025:01:02 03:04:05.999",
+       "camera": null
+      }
+     }
+    }
+   },
+   {
+    "fn": "plan",
+    "args": {
+     "sources": [],
+     "meta": {
+      "a.jpg": {
+       "date": "2026:11:13 10:20:30",
+       "camera": "X/100:V \"Pro\""
+      },
+      "b.NEF": {
+       "date": "2026:11:13 09:00:00",
+       "camera": ""
+      },
+      "c.JPG": {
+       "date": "broken"
+      },
+      "d.png": {
+       "camera": "Cam<>"
+      },
+      "e.tif": {
+       "date": "2025:01:02 03:04:05.999",
+       "camera": null
+      }
+     }
+    }
+   }
+  ],
+  "name": "import_plan"
+ },
+ "results": [
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "ok": "2026-11-13 10:20:30"
+  },
+  {
+   "ok": "2026-11-13 10:20:30"
+  },
+  {
+   "ok": "2026-01-03 04:05:06"
+  },
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "ok": "2026-11-13 10:20:03"
+  },
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "ok": "2026-11-03 10:20:30"
+  },
+  {
+   "ok": "2027-01-15 21:00:00"
+  },
+  {
+   "err": {
+    "type": "OSError",
+    "message": null
+   }
+  },
+  {
+   "ok": "2027-01-15 22:00:00"
+  },
+  {
+   "ok": {
+    "planned": [
+     [
+      "$ROOT\\src\\e.tif",
+      "2025/2025-01-02/20250102_030405_001_camera_e.tif"
+     ],
+     [
+      "$ROOT\\src\\b.NEF",
+      "2026/2026-11-13/20261113_090000_002_camera_b.nef"
+     ],
+     [
+      "$ROOT\\src\\a.jpg",
+      "2026/2026-11-13/20261113_102030_003_X100V Pro_a.jpg"
+     ],
+     [
+      "$ROOT\\src\\d.png",
+      "2027/2027-01-15/20270115_210000_004_Cam_d.png"
+     ],
+     [
+      "$ROOT\\src\\c.JPG",
+      "2027/2027-01-15/20270115_220000_005_camera_c.jpg"
+     ]
+    ],
+    "skipped": []
+   }
+  },
+  {
+   "ok": {
+    "planned": [
+     [
+      "$ROOT\\src\\e.tif",
+      "2025-01-02/20250102_030405_001_camera_e.tif"
+     ],
+     [
+      "$ROOT\\src\\b.NEF",
+      "2026-11-13/20261113_090000_002_camera_b.nef"
+     ],
+     [
+      "$ROOT\\src\\a.jpg",
+      "2026-11-13/20261113_102030_003_X100V Pro_a.jpg"
+     ],
+     [
+      "$ROOT\\src\\d.png",
+      "2027-01-15/20270115_210000_004_Cam_d.png"
+     ],
+     [
+      "$ROOT\\src\\c.JPG",
+      "2027-01-15/20270115_220000_005_camera_c.jpg"
+     ]
+    ],
+    "skipped": []
+   }
+  },
+  {
+   "ok": {
+    "planned": [
+     [
+      "$ROOT\\src\\e.tif",
+      "20250102_030405_001_camera_e.tif"
+     ],
+     [
+      "$ROOT\\src\\b.NEF",
+      "20261113_090000_002_camera_b.nef"
+     ],
+     [
+      "$ROOT\\src\\a.jpg",
+      "20261113_102030_003_X100V Pro_a.jpg"
+     ],
+     [
+      "$ROOT\\src\\d.png",
+      "20270115_210000_004_Cam_d.png"
+     ],
+     [
+      "$ROOT\\src\\c.JPG",
+      "20270115_220000_005_camera_c.jpg"
+     ]
+    ],
+    "skipped": []
+   }
+  },
+  {
+   "ok": {
+    "planned": [
+     [
+      "$ROOT\\src\\e.tif",
+      "2025/2025-01-02/e.tif"
+     ],
+     [
+      "$ROOT\\src\\c.JPG",
+      "2027/2027-01-15/c.jpg"
+     ]
+    ],
+    "skipped": [
+     "$ROOT\\src\\b.NEF",
+     "$ROOT\\src\\a.jpg",
+     "$ROOT\\src\\d.png"
+    ]
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "weekly"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "이름 규칙에는 {stem}, {date}, {time}, {n}, {camera}만 쓸 수 있습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "OSError",
+    "message": null
+   }
+  },
+  {
+   "ok": {
+    "planned": [],
+    "skipped": []
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "src/a.jpg": {
+    "size": 100,
+    "sha256": "80f93e8c7d0e1e083e6aab0b073011d858d092951eb4bb2d595cd43173e04704"
+   },
+   "src/b.NEF": {
+    "size": 200,
+    "sha256": "cd6b8111a276b52cfc8efbf2a0cbe54964eabd0546f44c7b5e26cb807155d284"
+   },
+   "src/c.JPG": {
+    "size": 300,
+    "sha256": "4d589f89bf33fb54046b592c71fd621ba0c80f192151f4b1d08b0ee0baafd2eb"
+   },
+   "src/d.png": {
+    "size": 400,
+    "sha256": "60d7795fafdd6c2861a72486d379cbdd6e0e2fb8d26cebaddaa29fb7b6f856c1"
+   },
+   "src/e.tif": {
+    "size": 1500000,
+    "sha256": "196534b8175aa932e2c9d7d2b360e18cd36609ffacba23d3494b89bf457f10d2"
+   }
+  },
+  "dirs": [
+   "src"
+  ]
+ },
+ "db": {
+  "photos": [],
+  "folder_roots": [],
+  "preferences": {}
+ }
+}

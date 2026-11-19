@@ -1,0 +1,13 @@
+{
+ "bits_sum": "16297417086949392384",
+ "image": "garden_full",
+ "pixel_scale": 1.0,
+ "settings": {
+  "clarity": 60.0,
+  "detail_version": 3
+ },
+ "step": [
+  3,
+  3
+ ]
+}

@@ -1,0 +1,688 @@
+{
+ "add3_bits": "2258708225094320128",
+ "add3_shape": [
+  155,
+  235
+ ],
+ "add3_step": 4,
+ "all_disabled_bits": "0",
+ "all_disabled_shape": [
+  155,
+  235
+ ],
+ "all_disabled_step": 4,
+ "cases": [
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "feather": 60,
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     },
+     {
+      "feather": 50,
+      "points": [
+       [
+        0.15,
+        0.2
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.85,
+        0.25
+       ]
+      ],
+      "radius": 0.06,
+      "type": "brush"
+     },
+     {
+      "points": [
+       [
+        0.1,
+        0.9
+       ],
+       [
+        0.6,
+        0.3
+       ]
+      ],
+      "type": "linear"
+     }
+    ]
+   },
+   "name": "add3"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "feather": 60,
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     },
+     {
+      "feather": 50,
+      "operation": "subtract",
+      "points": [
+       [
+        0.15,
+        0.2
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.85,
+        0.25
+       ]
+      ],
+      "radius": 0.06,
+      "type": "brush"
+     }
+    ]
+   },
+   "name": "subtract"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "points": [
+       [
+        0.1,
+        0.9
+       ],
+       [
+        0.6,
+        0.3
+       ]
+      ],
+      "type": "linear"
+     },
+     {
+      "feather": 60,
+      "operation": "intersect",
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     }
+    ]
+   },
+   "name": "intersect"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "enabled": false,
+      "feather": 50,
+      "points": [
+       [
+        0.15,
+        0.2
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.85,
+        0.25
+       ]
+      ],
+      "radius": 0.06,
+      "type": "brush"
+     },
+     {
+      "feather": 60,
+      "operation": "subtract",
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     },
+     {
+      "points": [
+       [
+        0.1,
+        0.9
+       ],
+       [
+        0.6,
+        0.3
+       ]
+      ],
+      "type": "linear"
+     }
+    ]
+   },
+   "name": "first_disabled"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "feather": 60,
+      "invert": true,
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     },
+     {
+      "feather": 50,
+      "points": [
+       [
+        0.15,
+        0.2
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.85,
+        0.25
+       ]
+      ],
+      "radius": 0.06,
+      "type": "brush"
+     }
+    ]
+   },
+   "name": "invert_component"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "feather": 60,
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     },
+     {
+      "feather": 50,
+      "points": [
+       [
+        0.15,
+        0.2
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.85,
+        0.25
+       ]
+      ],
+      "radius": 0.06,
+      "type": "brush"
+     }
+    ],
+    "invert": true,
+    "opacity": 0.6
+   },
+   "name": "layer_invert"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "feather": 60,
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     }
+    ],
+    "opacity": 2
+   },
+   "name": "opacity2"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "density": 80,
+      "feather": 50,
+      "flow": 40,
+      "paint_version": 2,
+      "points": [
+       [
+        0.15,
+        0.2
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.85,
+        0.25
+       ]
+      ],
+      "radius": 0.06,
+      "type": "brush"
+     },
+     {
+      "flow": 60,
+      "paint_version": 2,
+      "points": [
+       [
+        0.3,
+        0.8
+       ],
+       [
+        0.6,
+        0.1
+       ]
+      ],
+      "radius": 0.08,
+      "type": "brush"
+     }
+    ]
+   },
+   "name": "pv2_add"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "feather": 60,
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     },
+     {
+      "density": 70,
+      "feather": 50,
+      "flow": 50,
+      "operation": "subtract",
+      "paint_version": 2,
+      "points": [
+       [
+        0.15,
+        0.2
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.85,
+        0.25
+       ]
+      ],
+      "radius": 0.06,
+      "type": "brush"
+     },
+     {
+      "density": -10,
+      "flow": 120,
+      "operation": "intersect",
+      "paint_version": 2,
+      "points": [
+       [
+        0.5,
+        0.5
+       ]
+      ],
+      "radius": 0.2,
+      "type": "brush"
+     }
+    ]
+   },
+   "name": "pv2_ops"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "feather": 50,
+      "flow": 75,
+      "invert": true,
+      "paint_version": 2,
+      "points": [
+       [
+        0.15,
+        0.2
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.85,
+        0.25
+       ]
+      ],
+      "radius": 0.06,
+      "type": "brush"
+     }
+    ]
+   },
+   "name": "pv2_invert"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "feather": 50,
+      "paint_version": 1,
+      "points": [
+       [
+        0.15,
+        0.2
+       ],
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.85,
+        0.25
+       ]
+      ],
+      "radius": 0.06,
+      "type": "brush"
+     },
+     {
+      "feather": 60,
+      "operation": "intersect",
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     }
+    ]
+   },
+   "name": "pv1_brush"
+  },
+  {
+   "image_dependent": true,
+   "layer": {
+    "components": [
+     {
+      "range": [
+       0.2,
+       0.6
+      ],
+      "type": "luma"
+     },
+     {
+      "operation": "intersect",
+      "rgb": [
+       0.5,
+       0.4,
+       0.3
+      ],
+      "tolerance": 0.4,
+      "type": "color"
+     },
+     {
+      "feather": 60,
+      "invert": true,
+      "operation": "subtract",
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     }
+    ]
+   },
+   "name": "range_combo"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": []
+   },
+   "name": "empty"
+  },
+  {
+   "image_dependent": false,
+   "layer": {},
+   "name": "none"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "enabled": false,
+      "feather": 60,
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     }
+    ],
+    "opacity": 0.5
+   },
+   "name": "all_disabled"
+  },
+  {
+   "image_dependent": false,
+   "layer": {
+    "components": [
+     {
+      "feather": 60,
+      "points": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.7,
+        0.85
+       ]
+      ],
+      "type": "radial"
+     },
+     {
+      "operation": "xor",
+      "points": [
+       [
+        0.1,
+        0.9
+       ],
+       [
+        0.6,
+        0.3
+       ]
+      ],
+      "type": "linear"
+     }
+    ]
+   },
+   "name": "unknown_op"
+  }
+ ],
+ "empty_bits": "0",
+ "empty_shape": [
+  155,
+  235
+ ],
+ "empty_step": 4,
+ "first_disabled_bits": "10916626149320687616",
+ "first_disabled_shape": [
+  155,
+  235
+ ],
+ "first_disabled_step": 4,
+ "frame": "garden",
+ "intersect_bits": "11256391544925585408",
+ "intersect_shape": [
+  155,
+  235
+ ],
+ "intersect_step": 4,
+ "invert_component_bits": "3974883240136671232",
+ "invert_component_shape": [
+  155,
+  235
+ ],
+ "invert_component_step": 4,
+ "layer_invert_bits": "5746589001893019648",
+ "layer_invert_shape": [
+  155,
+  235
+ ],
+ "layer_invert_step": 4,
+ "none_bits": "0",
+ "none_shape": [
+  155,
+  235
+ ],
+ "none_step": 4,
+ "opacity2_bits": "3388154764532383744",
+ "opacity2_shape": [
+  155,
+  235
+ ],
+ "opacity2_step": 4,
+ "pv1_brush_bits": "9207970629339316224",
+ "pv1_brush_shape": [
+  155,
+  235
+ ],
+ "pv1_brush_step": 4,
+ "pv2_add_bits": "3733987747946299392",
+ "pv2_add_shape": [
+  155,
+  235
+ ],
+ "pv2_add_step": 4,
+ "pv2_invert_bits": "12044719747753836544",
+ "pv2_invert_shape": [
+  155,
+  235
+ ],
+ "pv2_invert_step": 4,
+ "pv2_ops_bits": "0",
+ "pv2_ops_shape": [
+  155,
+  235
+ ],
+ "pv2_ops_step": 4,
+ "range_combo_bits": "5987439486584225792",
+ "range_combo_shape": [
+  155,
+  235
+ ],
+ "range_combo_step": 4,
+ "subtract_bits": "16748166470076203008",
+ "subtract_shape": [
+  155,
+  235
+ ],
+ "subtract_step": 4,
+ "unknown_op_bits": "18353715418159382528",
+ "unknown_op_shape": [
+  155,
+  235
+ ],
+ "unknown_op_step": 4
+}

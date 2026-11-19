@@ -1,0 +1,7 @@
+{
+ "dtype": null,
+ "expected_error": true,
+ "op": "perspective_matrix",
+ "output_dtype": "float64",
+ "tolerance": 1e-10
+}

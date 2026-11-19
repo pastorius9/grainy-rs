@@ -1,0 +1,9 @@
+{
+  "bytes": 19813334,
+  "files": 2745,
+  "shared_arrays": 1189,
+  "sampled_outputs": 974,
+  "full_outputs": 278,
+  "reproducible": true,
+  "tree_sha256": "1fcaf77f6afdb4414efd83000eac740be4303c337b6f5ac2f5ad9a0dc927cb34"
+}

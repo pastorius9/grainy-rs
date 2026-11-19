@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_nan/profile.dcp",
+ "message": "DCP에 유효하지 않은 수치가 있습니다."
+}

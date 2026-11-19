@@ -1,0 +1,15 @@
+[package]
+name = "grainy-testkit"
+description = "Test support for the Rust Grainy: loads the oracle's golden cases and compares arrays"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+ndarray.workspace = true
+ndarray-npy.workspace = true
+serde_json.workspace = true
+
+[lints]
+workspace = true

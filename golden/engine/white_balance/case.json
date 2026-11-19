@@ -1,0 +1,10 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "temperature": 35.0,
+  "tint": -20.0
+ },
+ "source": "patches",
+ "use_crop": true
+}

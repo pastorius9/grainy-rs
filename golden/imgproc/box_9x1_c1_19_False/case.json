@@ -1,0 +1,13 @@
+{
+ "anchor": null,
+ "border": "reflect101",
+ "dtype": "float32",
+ "normalize": false,
+ "op": "box",
+ "output_dtype": "float32",
+ "size": [
+  19,
+  17
+ ],
+ "tolerance": 0.0002
+}

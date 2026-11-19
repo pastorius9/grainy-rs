@@ -1,0 +1,19 @@
+Lensfun lens correction database (unmodified copy)
+===================================================
+
+Content: the 55 XML files of the Lensfun database (cameras, mounts, lenses, calibrations), byte for byte as
+shipped in the `db_files` folder of the lensfunpy 1.18.0 Python wheel (Lensfun library version 0.3.4.0).
+They are the same files the Python Grainy loads. Nothing was added, removed or edited. The XML data only; no
+Lensfun or lensfunpy program code is part of this folder.
+
+Copyright: Lensfun contributors and the calibration contributors named in the comments of the XML files.
+Project: https://lensfun.github.io/   Database: https://github.com/lensfun/lensfun/tree/master/data/db
+
+Licence: Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+         https://creativecommons.org/licenses/by-sa/3.0/legalcode
+The database stays under this licence, separately from the MIT licence of Grainy's code. If you change or
+extend it and pass it on, the changed files must be offered under the same licence. Attribution does not imply
+endorsement by the Lensfun project or its contributors.
+
+The program embeds these files (crates/grainy-lens/build.rs, src/builtin.rs). Newer data placed by the user in
+the `lensfun` folder of the application's data folder is used instead (see crates/grainy-app/src/commands/lens.rs).

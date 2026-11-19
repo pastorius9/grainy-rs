@@ -1,0 +1,71 @@
+{
+ "changes": {
+  "calibration": [
+   [
+    -40.0,
+    30.0
+   ],
+   [
+    25.0,
+    -20.0
+   ],
+   [
+    60.0,
+    50.0
+   ]
+  ],
+  "camera_matrix": [
+   [
+    1.1,
+    -0.05,
+    -0.05
+   ],
+   [
+    -0.1,
+    1.25,
+    -0.15
+   ],
+   [
+    0.02,
+    -0.22,
+    1.2
+   ]
+  ],
+  "parametric": [
+   0.0,
+   30.0,
+   -30.0,
+   0.0
+  ],
+  "point_colors": [
+   {
+    "hue": -30.0,
+    "lightness": 10.0,
+    "range": 0.08,
+    "rgb": [
+     0.9,
+     0.6,
+     0.1
+    ],
+    "saturation": 40.0
+   },
+   {
+    "hue": 100.0,
+    "lightness": 100.0,
+    "lightness_range": 1.0,
+    "range": 0.3,
+    "rgb": [
+     0.3,
+     0.8,
+     0.3
+    ],
+    "saturation": 100.0,
+    "saturation_range": 1.0,
+    "version": 2
+   }
+  ],
+  "vibrance": -60.0
+ },
+ "image": "std:noise",
+ "kind": "stage"
+}

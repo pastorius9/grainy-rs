@@ -1,0 +1,263 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "a.jpg": {
+     "fill": [
+      65,
+      10
+     ]
+    },
+    "b.jpg": {
+     "fill": [
+      66,
+      12
+     ]
+    },
+    "c.jpg": {
+     "fill": [
+      67,
+      5
+     ]
+    },
+    "사진.jpg": {
+     "fill": [
+      68,
+      6
+     ]
+    }
+   },
+   "dirs": [
+    "dest",
+    "dest2"
+   ],
+   "photos": [
+    {
+     "path": "$ROOT/a.jpg"
+    },
+    {
+     "path": "$ROOT/b.jpg"
+    },
+    {
+     "path": "$ROOT/c.jpg"
+    },
+    {
+     "path": "$ROOT/사진.jpg"
+    },
+    {
+     "virtual_of": 1
+    }
+   ]
+  },
+  "calls": [
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": [
+      [
+       "$ROOT/a.jpg",
+       "$ROOT/dest/a_moved.jpg"
+      ],
+      [
+       "$ROOT/b.jpg",
+       "$ROOT/dest/한글 이름.jpg"
+      ]
+     ]
+    }
+   },
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": [
+      [
+       "$ROOT/c.jpg",
+       "$ROOT/c.jpg"
+      ]
+     ]
+    }
+   },
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": [
+      [
+       "$ROOT/c.jpg",
+       "$ROOT/dest/a_moved.jpg"
+      ]
+     ]
+    }
+   },
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": [
+      [
+       "$ROOT/nothing.jpg",
+       "$ROOT/dest/n.jpg"
+      ]
+     ]
+    }
+   },
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": [
+      [
+       "$ROOT/c.jpg",
+       "$ROOT/nowhere/c.jpg"
+      ]
+     ]
+    }
+   },
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": [
+      [
+       "$ROOT/c.jpg",
+       "$ROOT/dest2/X.jpg"
+      ],
+      [
+       "$ROOT/사진.jpg",
+       "$ROOT/dest2/x.jpg"
+      ]
+     ]
+    }
+   },
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": [
+      [
+       "$ROOT/사진.jpg",
+       "$ROOT/dest2/그림.JPG"
+      ]
+     ]
+    }
+   },
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": [
+      [
+       "$ROOT/c.jpg",
+       "$ROOT/C.JPG"
+      ]
+     ]
+    }
+   },
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": []
+    }
+   }
+  ],
+  "name": "move_files"
+ },
+ "results": [
+  {
+   "ok": 2
+  },
+  {
+   "ok": 0
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "대상 파일이 이미 있습니다: a_moved.jpg"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "원본이 없습니다: nothing.jpg"
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "대상 폴더가 없습니다."
+   }
+  },
+  {
+   "err": {
+    "type": "ValueError",
+    "message": "대상 파일이 이미 있습니다: x.jpg"
+   }
+  },
+  {
+   "ok": 1
+  },
+  {
+   "ok": 0
+  },
+  {
+   "ok": 0
+  }
+ ],
+ "tree": {
+  "files": {
+   "c.jpg": {
+    "size": 5,
+    "sha256": "17b80bc751e1f35c75d6ada07267a5fd9981b7b3655cffcaf94a636e93eb27ba"
+   },
+   "dest/a_moved.jpg": {
+    "size": 10,
+    "sha256": "1d65bf29403e4fb1767522a107c827b8884d16640cf0e3b18c4c1dd107e0d49d"
+   },
+   "dest/한글 이름.jpg": {
+    "size": 12,
+    "sha256": "a65d1fca86fcdc5a3aa9ac1ba1f382c600f67a5470ba503d73ad31e8e0c610c5"
+   },
+   "dest2/그림.JPG": {
+    "size": 6,
+    "sha256": "fa80828f32474e88325a1d0bd4339bb892b96639543b6a2808a6b30615fbacb7"
+   }
+  },
+  "dirs": [
+   "dest",
+   "dest2"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\dest\\a_moved.jpg",
+    "name": "a_moved.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\dest\\한글 이름.jpg",
+    "name": "한글 이름.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 3,
+    "path": "$ROOT\\c.jpg",
+    "name": "c.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 4,
+    "path": "$ROOT\\dest2\\그림.JPG",
+    "name": "그림.JPG",
+    "virtual_source": null
+   },
+   {
+    "id": 5,
+    "path": "$ROOT\\dest\\a_moved.jpg",
+    "name": "a_moved.jpg · 사본",
+    "virtual_source": 1
+   }
+  ],
+  "folder_roots": [
+   "$ROOT",
+   "$ROOT\\dest",
+   "$ROOT\\dest2"
+  ],
+  "preferences": {}
+ }
+}

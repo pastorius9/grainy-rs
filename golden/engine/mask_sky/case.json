@@ -1,0 +1,32 @@
+{
+ "mean": [
+  0.3187065268465085,
+  0.322512759140227,
+  0.3207793990080245
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "masks": [
+   {
+    "adjustments": {
+     "exposure": -1.0,
+     "saturation": 30.0
+    },
+    "components": [
+     {
+      "type": "sky"
+     }
+    ]
+   }
+  ]
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

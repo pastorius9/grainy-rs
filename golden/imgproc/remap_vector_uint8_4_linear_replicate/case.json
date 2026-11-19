@@ -1,0 +1,14 @@
+{
+ "border": "replicate",
+ "border_value": [
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "dtype": "uint8",
+ "interpolation": "linear",
+ "op": "remap",
+ "output_dtype": "uint8",
+ "tolerance": 1.0
+}

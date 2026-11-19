@@ -1,0 +1,22 @@
+{
+ "bits_sum": "9315258842600177664",
+ "pixel_scale": 1.0,
+ "settings": {
+  "detail_version": 1,
+  "noise_luma": 30.0,
+  "sharpen": 70.0,
+  "sharpen_detail": 30.0,
+  "sharpen_mask": 20.0,
+  "sharpen_radius": 1.1
+ },
+ "shape": [
+  300,
+  451,
+  3
+ ],
+ "step": [
+  5,
+  7
+ ],
+ "sum": 125517.07308839262
+}

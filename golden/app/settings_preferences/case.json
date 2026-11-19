@@ -1,0 +1,103 @@
+{
+ "drt": {
+  "after False": {
+   "read": false,
+   "stored": "false"
+  },
+  "after True": {
+   "read": true,
+   "stored": "true"
+  },
+  "default": false
+ },
+ "pending": {
+  "downgrade": [],
+  "first run": [],
+  "from 0.6.5": [
+   "0.6.8",
+   "0.6.7",
+   "0.6.6"
+  ],
+  "older seen": [
+   "0.6.8"
+  ],
+  "same version": []
+ },
+ "rejected": true,
+ "trace": [
+  {
+   "file": {
+    "language": "en"
+   },
+   "order": [
+    "language"
+   ],
+   "step": "language en"
+  },
+  {
+   "file": {
+    "language": "en",
+    "update_check": true
+   },
+   "order": [
+    "language",
+    "update_check"
+   ],
+   "step": "update_check on"
+  },
+  {
+   "file": {
+    "language": "en",
+    "update_check": false
+   },
+   "order": [
+    "language",
+    "update_check"
+   ],
+   "step": "update_check off"
+  },
+  {
+   "file": {
+    "language": "en",
+    "update_check": false,
+    "version_seen": "0.6.8"
+   },
+   "order": [
+    "language",
+    "update_check",
+    "version_seen"
+   ],
+   "step": "version_seen"
+  },
+  {
+   "file": {
+    "language": "en",
+    "update_check": false,
+    "use_gpu": false,
+    "version_seen": "0.6.8"
+   },
+   "order": [
+    "language",
+    "update_check",
+    "version_seen",
+    "use_gpu"
+   ],
+   "step": "gpu off"
+  },
+  {
+   "file": {
+    "language": "ko",
+    "update_check": false,
+    "use_gpu": false,
+    "version_seen": "0.6.8"
+   },
+   "order": [
+    "language",
+    "update_check",
+    "version_seen",
+    "use_gpu"
+   ],
+   "step": "language ko"
+  }
+ ]
+}

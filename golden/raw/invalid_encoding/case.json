@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_encoding/profile.dcp",
+ "message": "지원하지 않는 DCP 색상표 인코딩입니다."
+}

@@ -1,0 +1,35 @@
+{
+ "before": {
+  "camera": "Generated",
+  "daylight_neutral": [
+   1,
+   1,
+   1
+  ],
+  "neutral": [
+   1,
+   1,
+   1
+  ],
+  "xyz_to_camera": [
+   [
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ]
+ },
+ "error": "DNG 색상 태그 분모가 0입니다.",
+ "file": "_files/calibration_zero_denominator/input.dng",
+ "linear_raw": true
+}

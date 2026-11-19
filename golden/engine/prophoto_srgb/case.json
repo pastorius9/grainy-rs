@@ -1,0 +1,22 @@
+{
+ "mean": [
+  0.38053554767548725,
+  0.3954682886528705,
+  0.39114376962611763
+ ],
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "exposure": 0.4,
+  "saturation": 30.0,
+  "working_space": "ProPhoto"
+ },
+ "shape": [
+  160,
+  240,
+  3
+ ],
+ "source": "garden",
+ "step": 3,
+ "use_crop": true
+}

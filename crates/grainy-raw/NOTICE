@@ -1,0 +1,94 @@
+Grainy RAW port
+==============
+
+The Rust code and C ABI shim in this crate follow the workspace MIT license.
+The build-reachable source files below are bundled with their bytes unchanged.
+Unused files were pruned; all licences, copyright notices and readmes from the
+retained distributions remain. Compiler-forced src/native_symbols.h namespaces
+zlib symbols without patching upstream sources, and includes the shared
+grainy-jpeg-sys JPEG namespace header.
+Generated compiler configuration headers are written only to Cargo's OUT_DIR.
+
+Performance build (Windows MSVC): OpenMP processing regions are enabled only in
+the unchanged ahd_demosaic.cpp, crx.cpp and fuji_compressed.cpp translation units.
+All units compile with /openmp so the inline allocation bookkeeping has identical,
+synchronized definitions. The forced src/serial_libraw.h includes those headers
+before undefining LIBRAW_USE_OPENMP for every other implementation file. X-Trans
+interpolation and all other processing paths therefore remain serial. Repeated
+full-buffer decode hashes against the previous serial executable cover all twelve
+manifest-listed CC0 cameras, three colour modes, full/half size and multiple
+OMP_NUM_THREADS settings; see docs/FIELD_TEST.md. This adds the MSVC OpenMP runtime
+dependency (vcomp140.dll, supplied by the Visual C++ redistributable). No vendored
+source bytes or arithmetic flags are changed; non-MSVC builds remain serial.
+
+LibRaw 0.22.1
+  Copyright LibRaw LLC and the contributors identified in its source files.
+  This distribution elects CDDL-1.0, not the alternative LGPL license.
+  Both upstream license files and all source notices are retained in
+  vendor/LibRaw-0.22.1/. Keep that covered source and LICENSE.CDDL available
+  when distributing the linked library/application under the CDDL terms.
+  Source: https://github.com/LibRaw/LibRaw/releases/tag/0.22.1
+  Archive: https://github.com/LibRaw/LibRaw/archive/refs/tags/0.22.1.tar.gz
+  SHA256: e676248284075605aa2697a66eeed7dc258820bd1d4988c724d29edffd726726
+
+libjpeg-turbo 2.1.5.1 (shared dependency, now vendored by grainy-jpeg-sys)
+  IJG / BSD-3-Clause / Zlib; see ../grainy-jpeg-sys/vendor/libjpeg-turbo-2.1.5.1/LICENSE.md
+  and that directory's README.ijg. This software is based in part on the work of the
+  Independent JPEG Group.
+  Source: https://github.com/libjpeg-turbo/libjpeg-turbo/tree/2.1.5.1
+  Archive: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/2.1.5.1.tar.gz
+  SHA256: 61846251941e5791005fb7face196eec24541fce04f12570c308557529e92c75
+
+zlib 1.3.1
+  Zlib license; see vendor/zlib-1.3.1/LICENSE.
+  Source: https://github.com/madler/zlib/tree/v1.3.1
+  Archive: https://github.com/madler/zlib/archive/refs/tags/v1.3.1.tar.gz
+  SHA256: 17e88863f3600672ab49182f217281b6fc4d3c762bde361935e436a95214d05c
+
+LittleCMS 2.19 (shared dependency, not vendored by this crate)
+  MIT; see ../grainy-cms/vendor/lcms2-2.19/LICENSE.
+  Copyright (c) Marti Maria Saguer and contributors.
+  Source: https://github.com/mm2/Little-CMS/tree/lcms2.19
+  Archive: https://github.com/mm2/Little-CMS/archive/refs/tags/lcms2.19.tar.gz
+  SHA256: 6acc3eb5fac194acc85331194133ad1d4a60419dad16b3bc225a7d27380a5b3a
+
+OpenJPEG 2.5.4 (original download removed; never compiled or linked)
+  BSD-2-Clause; no OpenJPEG sources are retained in this crate.
+  Source: https://github.com/uclouvain/openjpeg/tree/v2.5.4
+  Archive: https://github.com/uclouvain/openjpeg/archive/refs/tags/v2.5.4.tar.gz
+  SHA256: a695fbe19c0165f295a8531b1e4e855cd94d0875d2f88ec4b61080677e27188a
+
+Original downloaded archive filenames (all removed): libraw.tar.gz,
+  jpeg.tar.gz, zlib.tar.gz, lcms.tar.gz, openjpeg.tar.gz, respectively for
+  LibRaw, libjpeg-turbo, zlib, LittleCMS and OpenJPEG above. All five origin
+  URLs were re-fetched in memory and matched these original archive hashes.
+  reference/verify_archives.py reproduces that check without retaining archives.
+
+rawpy 0.27.1
+  MIT; copyright Letmaik Neumann and contributors.
+  Reference sources and LICENSE.rawpy are retained in reference/.
+  The C ABI shim ports Params/apply_params and black-level extraction.
+  Source: https://github.com/letmaik/rawpy/tree/v0.27.1
+
+Unicode 15.1
+  unicode_data.rs is generated from the oracle Python's Unicode 15.1
+  casefold/isalnum results, so persistent camera-rule IDs do not change.
+  Unicode data license: https://www.unicode.org/license.txt
+  Normalization uses unicode-normalization 0.1.23 (MIT OR Apache-2.0),
+  which uses the matching Unicode 15.1 normalization tables.
+
+Additional Rust crates (licenses also accompany their crates.io packages):
+  cc: MIT OR Apache-2.0
+  base64: MIT OR Apache-2.0
+  sha2: MIT OR Apache-2.0
+  unicode-normalization: MIT OR Apache-2.0
+  kamadak-exif: BSD-2-Clause
+  mutate_once (kamadak-exif dependency): MIT OR Apache-2.0
+  ndarray, rayon, serde, serde_json, thiserror: workspace-approved dependencies.
+  ndarray-npy: MIT OR Apache-2.0; test-only access to the existing golden reader.
+  grainy-cms: workspace dependency; supplies the single LittleCMS static library.
+  grainy-jpeg-sys: workspace dependency; supplies the single libjpeg-turbo static
+    library, headers and symbol namespace used by LibRaw's USE_JPEG path.
+
+No GPL demosaic packs, OpenCV, Python runtime, CMake, vcpkg, NASM, or external
+codec DLLs are used by this crate. OpenMP is deliberately not linked.

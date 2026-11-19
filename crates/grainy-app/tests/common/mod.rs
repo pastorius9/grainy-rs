@@ -1,0 +1,127 @@
+//! Generated test photos (from `grainy_testkit::input("garden")`, never the owner's photos) and the engine's own
+//! render of them, for comparisons with what the app shows.
+
+#![allow(dead_code)]
+
+use std::path::{Path, PathBuf};
+
+use grainy_core::{normalized, Settings};
+use grainy_engine::files::load_photo;
+use grainy_engine::{develop, Options};
+use ndarray::Array3;
+
+pub mod snapshot;
+
+/// The interface language is process-wide, so every test that renders, switches the language or asserts on
+/// translated text holds this lock for its whole body (never take it twice in one test: it is not re-entrant).
+pub fn language_lock() -> std::sync::MutexGuard<'static, ()> {
+    offline();
+    static LANGUAGE: std::sync::Mutex<()> = std::sync::Mutex::new(());
+    LANGUAGE.lock().unwrap_or_else(|e| e.into_inner())
+}
+
+/// Switches every network use of the program off for this test process (the switch `--offline` /
+/// `GRAINY_OFFLINE=1` sets; ARCHITECTURE.md "Network"). The helpers every test uses call it, so no test can reach
+/// the network even through a real transport.
+pub fn offline() {
+    grainy_platform::net::set_offline();
+}
+
+/// A fresh, empty folder for one test, named `name`. The unique part (the process id) is in the folder above, so
+/// a path shown on screen (folder tree, path lines) reads the same in every run: the folder tree starts at the
+/// first folder that holds photos, and that is this one or one inside it.
+pub fn temp_dir(name: &str) -> PathBuf {
+    offline();
+    let root = std::env::temp_dir().join("grainy-app-tests").join(format!("{name}-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&root);
+    let dir = root.join(name);
+    std::fs::create_dir_all(&dir).expect("temp folder");
+    dir
+}
+
+fn encode(v: f32) -> f32 {
+    let v = v.clamp(0.0, 1.0);
+    if v <= 0.003_130_8 {
+        12.92 * v
+    } else {
+        1.055 * v.powf(1.0 / 2.4) - 0.055
+    }
+}
+
+/// The garden input, each pixel repeated `scale` times, with a per-channel gain.
+pub fn garden(scale: usize, gain: [f32; 3], flip: bool) -> Array3<f32> {
+    let g = grainy_testkit::input("garden");
+    let (h, w, _) = g.dim();
+    Array3::from_shape_fn((h * scale, w * scale, 3), |(y, x, c)| {
+        let sx = if flip { w - 1 - x / scale } else { x / scale };
+        g[[y / scale, sx, c]] * gain[c]
+    })
+}
+
+/// Saves a scene-linear image as an 8-bit sRGB PNG.
+pub fn save_png(image: &Array3<f32>, path: &Path) {
+    let (h, w, _) = image.dim();
+    let buffer = image::RgbImage::from_fn(w as u32, h as u32, |x, y| {
+        let p = |c: usize| (encode(image[[y as usize, x as usize, c]]) * 255.0 + 0.5) as u8;
+        image::Rgb([p(0), p(1), p(2)])
+    });
+    buffer.save(path).expect("write the PNG");
+}
+
+/// Saves a scene-linear image as a 16-bit sRGB TIFF.
+pub fn save_tiff(image: &Array3<f32>, path: &Path) {
+    let (h, w, _) = image.dim();
+    let buffer: image::ImageBuffer<image::Rgb<u16>, Vec<u16>> =
+        image::ImageBuffer::from_fn(w as u32, h as u32, |x, y| {
+            let p = |c: usize| (encode(image[[y as usize, x as usize, c]]) * 65535.0 + 0.5) as u16;
+            image::Rgb([p(0), p(1), p(2)])
+        });
+    buffer.save(path).expect("write the TIFF");
+}
+
+/// Eight photos of the garden (exposures, colour casts, mirrored), PNG and TIFF, in `dir`.
+pub fn eight_photos(dir: &Path) -> Vec<PathBuf> {
+    let variants: [([f32; 3], bool, &str); 8] = [
+        ([1.0, 1.0, 1.0], false, "garden-01.png"),
+        ([0.5, 0.5, 0.5], false, "garden-02.png"),
+        ([2.0, 2.0, 2.0], false, "garden-03.tif"),
+        ([1.3, 1.0, 0.7], false, "garden-04.png"),
+        ([0.7, 1.0, 1.4], true, "garden-05.tif"),
+        ([1.0, 1.0, 1.0], true, "garden-06.png"),
+        ([1.6, 0.8, 1.6], false, "garden-07.png"),
+        ([0.25, 0.25, 0.25], true, "garden-08.png"),
+    ];
+    variants
+        .iter()
+        .map(|(gain, flip, name)| {
+            let path = dir.join(name);
+            let image = garden(2, *gain, *flip);
+            if name.ends_with(".tif") {
+                save_tiff(&image, &path);
+            } else {
+                save_png(&image, &path);
+            }
+            path
+        })
+        .collect()
+}
+
+/// Settings from JSON, normalized.
+pub fn settings(json: serde_json::Value) -> Settings {
+    match json {
+        serde_json::Value::Object(map) => normalized(&map),
+        _ => normalized(&serde_json::Map::new()),
+    }
+}
+
+/// What the engine makes of `path` with `settings` at the worker's sizes: RGBA bytes, width, height.
+pub fn engine_render(path: &Path, max_size: Option<usize>, settings: &Settings) -> (Vec<u8>, usize, usize) {
+    let loaded = load_photo(path, max_size, settings).expect("load");
+    let (h, w, _) = loaded.photo.pixels().dim();
+    let size = |k: &str, f: usize| loaded.metadata.get(k).and_then(serde_json::Value::as_u64).unwrap_or(f as u64);
+    let options =
+        Options { original_size: Some((size("width", w) as f64, size("height", h) as f64)), ..Options::default() };
+    let image = develop(loaded.photo.source(), &settings.0, &options).expect("develop");
+    let converted = grainy_app::histogram::convert(&image);
+    (converted.rgba, converted.width, converted.height)
+}

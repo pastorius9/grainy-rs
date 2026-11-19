@@ -1,0 +1,13 @@
+{
+ "key": "whites",
+ "settings": {
+  "crop": [
+   0.1,
+   0.15,
+   0.85,
+   0.9
+  ]
+ },
+ "source": "garden",
+ "value": 28.0
+}

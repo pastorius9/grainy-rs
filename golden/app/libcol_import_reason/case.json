@@ -1,0 +1,39 @@
+{
+ "cases": [
+  {
+   "error": "Traceback (most recent call last):\n  File \"x.py\", line 1, in f\nPIL.UnidentifiedImageError: cannot identify image file",
+   "path": "C:\\p\\a.jpg",
+   "reason": "PIL.UnidentifiedImageError: cannot identify image file"
+  },
+  {
+   "error": "Traceback\nrawpy._rawpy.LibRawFileUnsupportedError: Unsupported file format",
+   "path": "C:\\p\\a.dng",
+   "reason": "지원하지 않는 RAW 형식입니다."
+  },
+  {
+   "error": "Traceback\nrawpy._rawpy.LibRawFileUnsupportedError: x",
+   "path": "C:\\p\\a.NEF",
+   "reason": "이 압축 방식은 지원하지 않습니다. 니콘의 고효율(HE) RAW라면 카메라에서 \"무손실 압축\"으로 찍거나 DNG로 변환해 주세요."
+  },
+  {
+   "error": "rawpy._rawpy.LibRawFileUnsupportedError: x\n",
+   "path": "C:\\p\\b.nrw",
+   "reason": "이 압축 방식은 지원하지 않습니다. 니콘의 고효율(HE) RAW라면 카메라에서 \"무손실 압축\"으로 찍거나 DNG로 변환해 주세요."
+  },
+  {
+   "error": "ValueError: 동영상 파일은 지원하지 않습니다.",
+   "path": "C:\\p\\c.png",
+   "reason": "ValueError: 동영상 파일은 지원하지 않습니다."
+  },
+  {
+   "error": "  \nOSError: [Errno 2] No such file or directory\n\n",
+   "path": "C:\\p\\d.tif",
+   "reason": "OSError: [Errno 2] No such file or directory"
+  },
+  {
+   "error": "single line",
+   "path": "C:\\p\\e.jpg",
+   "reason": "single line"
+  }
+ ]
+}

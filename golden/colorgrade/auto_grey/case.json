@@ -1,0 +1,26 @@
+{
+ "amount": 1.0,
+ "curves": null,
+ "image": "cg:grey",
+ "kind": "auto",
+ "report": {
+  "casts": [
+   [
+    0.0,
+    -0.0,
+    -0.0
+   ],
+   [
+    0.0,
+    -0.0,
+    0.0
+   ],
+   [
+    -0.0004,
+    0.0001,
+    0.0001
+   ]
+  ],
+  "status": "neutral"
+ }
+}

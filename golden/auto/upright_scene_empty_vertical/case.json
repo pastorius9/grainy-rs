@@ -1,0 +1,8 @@
+{
+ "error": {
+  "kind": "AlignmentError",
+  "message": "사진에서 직선 기준을 찾지 못했습니다."
+ },
+ "mode": "vertical",
+ "source": "scene_empty"
+}

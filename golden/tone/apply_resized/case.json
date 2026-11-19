@@ -1,0 +1,11 @@
+{
+ "dtype": "float64",
+ "first": 0,
+ "highlights": 30.0,
+ "shadows": 80.0,
+ "shape": [
+  80,
+  120
+ ],
+ "stop": 80
+}

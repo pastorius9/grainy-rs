@@ -1,0 +1,3679 @@
+{
+ "cases": [
+  {
+   "name": "measured",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.3619360029697418,
+     0.2305067777633667,
+     0.1072387620806694
+    ],
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.029035750776529312,
+     0.015123492106795311,
+     0.006379679311066866
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "stored",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.8,
+     0.5,
+     0.25
+    ],
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.02,
+     0.012,
+     0.009
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "range_low",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.3619360029697418,
+     0.2305067777633667,
+     0.1072387620806694
+    ],
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.029035750776529312,
+     0.015123492106795311,
+     0.006379679311066866
+    ],
+    "negative_range": 3.0,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "range_high",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.3619360029697418,
+     0.2305067777633667,
+     0.1072387620806694
+    ],
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.029035750776529312,
+     0.015123492106795311,
+     0.006379679311066866
+    ],
+    "negative_range": 10.0,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "density_low",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.3619360029697418,
+     0.2305067777633667,
+     0.1072387620806694
+    ],
+    "negative_density": -3.0,
+    "negative_peak": [
+     0.029035750776529312,
+     0.015123492106795311,
+     0.006379679311066866
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "density_high",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.3619360029697418,
+     0.2305067777633667,
+     0.1072387620806694
+    ],
+    "negative_density": 3.0,
+    "negative_peak": [
+     0.029035750776529312,
+     0.015123492106795311,
+     0.006379679311066866
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "peak_above_base",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.5,
+     0.4,
+     0.3
+    ],
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.6,
+     1e-09,
+     0.2
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "off",
+   "same": true,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": false,
+    "negative_base": [
+     0.3619360029697418,
+     0.2305067777633667,
+     0.1072387620806694
+    ],
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.029035750776529312,
+     0.015123492106795311,
+     0.006379679311066866
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "no_base",
+   "same": true,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": null,
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.029035750776529312,
+     0.015123492106795311,
+     0.006379679311066866
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "mono",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.054739080369472504,
+     0.054037295281887054,
+     0.052633728832006454
+    ],
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.0145926084369421,
+     0.014405528083443642,
+     0.014031353406608105
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "mono_dense",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.054739080369472504,
+     0.054037295281887054,
+     0.052633728832006454
+    ],
+    "negative_density": 1.5,
+    "negative_peak": [
+     0.0145926084369421,
+     0.014405528083443642,
+     0.014031353406608105
+    ],
+    "negative_range": 8.0,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "dusty",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.07940907776355743,
+     0.4396897852420807,
+     0.2698002755641937
+    ],
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.03423328325152397,
+     0.019149230793118477,
+     0.010850141756236553
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  },
+  {
+   "name": "four_channels",
+   "same": false,
+   "settings": {
+    "aspect_scale": 0.0,
+    "blacks": 0.0,
+    "ca_blue": 0.0,
+    "ca_red": 0.0,
+    "calibration": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "camera_matrix": null,
+    "clarity": 0.0,
+    "contrast": 0.0,
+    "crop": null,
+    "curve": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.25,
+      0.25
+     ],
+     [
+      0.5,
+      0.5
+     ],
+     [
+      0.75,
+      0.75
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "dcp_exposure": true,
+    "dcp_huesat": true,
+    "dcp_look": true,
+    "dcp_profile": null,
+    "dcp_tone": true,
+    "defringe": 0.0,
+    "dehaze": 0.0,
+    "detail_version": 3,
+    "distortion": 0.0,
+    "distortion_k2": 0.0,
+    "distortion_k3": 0.0,
+    "drt_contrast": 0.0,
+    "drt_shoulder": 0.0,
+    "drt_toe": 0.0,
+    "drt_white": 0.0,
+    "exposure": 0.0,
+    "film_look": "",
+    "film_strength": 100.0,
+    "flip": false,
+    "grading": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "grading_balance": 0.0,
+    "grain": 0.0,
+    "grain_roughness": 50.0,
+    "grain_size": 25.0,
+    "guides": null,
+    "hdr": false,
+    "hdr_brightness": 0.0,
+    "hdr_limit": 4.0,
+    "highlights": 0.0,
+    "hsl": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "kelvin": 6500.0,
+    "kelvin_enabled": false,
+    "lens_profile": "",
+    "lens_vignette": 0.0,
+    "lensfun": null,
+    "lensfun_distortion": true,
+    "lensfun_enabled": false,
+    "lensfun_scale": true,
+    "lensfun_tca": true,
+    "lensfun_vignette": true,
+    "masks": [],
+    "mixer_mode": "hsv",
+    "monochrome": false,
+    "negative": true,
+    "negative_base": [
+     0.054739080369472504,
+     0.054037295281887054,
+     0.052633728832006454
+    ],
+    "negative_density": 0.0,
+    "negative_peak": [
+     0.0145926084369421,
+     0.014405528083443642,
+     0.014031353406608105
+    ],
+    "negative_range": 6.5,
+    "noise_color": 0.0,
+    "noise_luma": 0.0,
+    "panels_off": [],
+    "parametric": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "perspective_h": 0.0,
+    "perspective_v": 0.0,
+    "photo_filter": "warming85",
+    "photo_filter_density": 25.0,
+    "photo_filter_enabled": false,
+    "photo_filter_luminosity": true,
+    "point_colors": [],
+    "raw_kelvin": 6500.0,
+    "raw_mode": "legacy",
+    "raw_neutral": null,
+    "raw_tint": 0.0,
+    "retouch": [],
+    "rgb_curves": [
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ],
+     [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.25,
+       0.25
+      ],
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.75,
+       0.75
+      ],
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    ],
+    "rotation": 0,
+    "saturation": 0.0,
+    "sdr_compression": 75.0,
+    "sdr_exposure": 0.0,
+    "shadows": 0.0,
+    "sharpen": 0.0,
+    "sharpen_detail": 50.0,
+    "sharpen_mask": 0.0,
+    "sharpen_radius": 0.8,
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "straighten": 0.0,
+    "temperature": 0.0,
+    "texture": 0.0,
+    "tint": 0.0,
+    "tone_mapping": "classic",
+    "tone_version": 3,
+    "transform_scale": 100.0,
+    "upright": null,
+    "upright_crop": true,
+    "vibrance": 0.0,
+    "video_color": null,
+    "video_time": 0.0,
+    "vignette": 0.0,
+    "vignette_feather": 50.0,
+    "vignette_highlights": 0.0,
+    "vignette_midpoint": 50.0,
+    "vignette_roundness": 0.0,
+    "wb_reference": 6500.0,
+    "whites": 0.0,
+    "working_space": "sRGB"
+   }
+  }
+ ]
+}

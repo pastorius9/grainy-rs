@@ -1,0 +1,5 @@
+{
+ "error": "ValueError",
+ "file": "_files/invalid_exposure/profile.dcp",
+ "message": "DCP 기준 노출이 범위를 벗어났습니다."
+}

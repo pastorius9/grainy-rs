@@ -1,0 +1,200 @@
+{
+ "bad_payloads": 7,
+ "cases": [
+  {
+   "args": {
+    "sensitivity": 0
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {
+    "sensitivity": 101
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {
+    "minimum": 1
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {
+    "minimum": 41
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {
+    "maximum": 161
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {
+    "polarity": "invalid"
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {
+    "detailed": 1
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {
+    "soft": null
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {
+    "scratch_width": 2.0
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {
+    "scratch_width": 41
+   },
+   "function": "options",
+   "rejected": true
+  },
+  {
+   "args": {},
+   "function": "spot",
+   "rejected": true
+  },
+  {
+   "args": {
+    "rx": 0.1,
+    "ry": 0.1,
+    "x": 2,
+    "y": 0
+   },
+   "function": "spot",
+   "rejected": true
+  },
+  {
+   "args": {
+    "rx": 0,
+    "ry": 0.1,
+    "x": 0,
+    "y": 0
+   },
+   "function": "spot",
+   "rejected": true
+  },
+  {
+   "args": {
+    "parts": [],
+    "rx": 0.1,
+    "ry": 0.1,
+    "x": 0,
+    "y": 0
+   },
+   "function": "spot",
+   "rejected": true
+  },
+  {
+   "args": {
+    "parts": [
+     {
+      "extra": 1,
+      "rx": 0.1,
+      "ry": 0.1,
+      "x": 0,
+      "y": 0
+     }
+    ],
+    "rx": 0.1,
+    "ry": 0.1,
+    "x": 0,
+    "y": 0
+   },
+   "function": "spot",
+   "rejected": true
+  },
+  {
+   "args": {
+    "rx": 0.1,
+    "ry": 0.1,
+    "scale": 24,
+    "x": 0,
+    "y": 0
+   },
+   "function": "spot",
+   "rejected": true
+  },
+  {
+   "args": {
+    "diameter": 3,
+    "points": []
+   },
+   "function": "manual",
+   "rejected": true
+  },
+  {
+   "args": {
+    "diameter": 3,
+    "points": [
+     [
+      1.1,
+      0
+     ]
+    ]
+   },
+   "function": "manual",
+   "rejected": true
+  },
+  {
+   "args": {
+    "diameter": 0,
+    "points": [
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "function": "manual",
+   "rejected": true
+  },
+  {
+   "args": 0,
+   "function": "visualize",
+   "rejected": true
+  },
+  {
+   "args": 101,
+   "function": "visualize",
+   "rejected": true
+  },
+  {
+   "args": 31,
+   "function": "detect_tile",
+   "rejected": true
+  },
+  {
+   "args": 0,
+   "function": "detect_limit",
+   "rejected": true
+  },
+  {
+   "args": "unknown",
+   "function": "repair",
+   "rejected": true
+  }
+ ]
+}

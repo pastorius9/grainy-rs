@@ -1,0 +1,13 @@
+{
+ "changes": {
+  "straighten": 3.0
+ },
+ "error": null,
+ "function": "geometry",
+ "input": {
+  "channels": 3,
+  "kind": "standard",
+  "name": "wide"
+ },
+ "use_crop": true
+}

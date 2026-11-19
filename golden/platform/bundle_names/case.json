@@ -1,0 +1,80 @@
+{
+ "cases": [
+  {
+   "name": "ok",
+   "names": [
+    "Grainy.app/Contents/MacOS/Grainy",
+    "Grainy.app/Contents/Info.plist"
+   ],
+   "rejected": false
+  },
+  {
+   "name": "escape",
+   "names": [
+    "Grainy.app/Contents/MacOS/Grainy",
+    "Grainy.app/Contents/Info.plist",
+    "../evil.txt"
+   ],
+   "rejected": true
+  },
+  {
+   "name": "other_app",
+   "names": [
+    "Grainy.app/Contents/MacOS/Grainy",
+    "Grainy.app/Contents/Info.plist",
+    "Other.app/x"
+   ],
+   "rejected": true
+  },
+  {
+   "name": "no_program",
+   "names": [
+    "Grainy.app/Contents/Info.plist"
+   ],
+   "rejected": true
+  },
+  {
+   "name": "windows_zip",
+   "names": [
+    "Grainy/Grainy.exe",
+    "Grainy/_internal/lib.dll"
+   ],
+   "rejected": true
+  },
+  {
+   "name": "absolute",
+   "names": [
+    "/Grainy.app/Contents/MacOS/Grainy",
+    "Grainy.app/Contents/Info.plist"
+   ],
+   "rejected": true
+  },
+  {
+   "name": "dot_parts",
+   "names": [
+    "Grainy.app/./Contents/MacOS/Grainy",
+    "Grainy.app/Contents/MacOS/Grainy",
+    "Grainy.app/Contents/Info.plist"
+   ],
+   "rejected": false
+  },
+  {
+   "name": "nested_escape",
+   "names": [
+    "Grainy.app/Contents/MacOS/Grainy",
+    "Grainy.app/Contents/Info.plist",
+    "Grainy.app/../x"
+   ],
+   "rejected": true
+  },
+  {
+   "name": "colon_allowed",
+   "names": [
+    "Grainy.app/Contents/MacOS/Grainy",
+    "Grainy.app/Contents/Info.plist",
+    "Grainy.app/a:b"
+   ],
+   "rejected": false
+  }
+ ]
+}

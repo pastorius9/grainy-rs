@@ -1,0 +1,31 @@
+{
+ "bytes": 8016,
+ "exact": true,
+ "extension": ".tif",
+ "found": {
+  "icc": "43cbfe47eb7c"
+ },
+ "height": 40,
+ "lossless": true,
+ "options": {
+  "color_space": "sRGB",
+  "dither": false,
+  "format": "TIFF 8-bit",
+  "grayscale": false,
+  "keep_metadata": false,
+  "keywords": "",
+  "longest": null,
+  "quality": 95,
+  "user_metadata": null
+ },
+ "read_metadata": {},
+ "settings": {
+  "exposure": 0.2,
+  "film_look": "kodak-portra-400",
+  "film_strength": 70.0,
+  "working_space": "ProPhoto"
+ },
+ "settings_key": "film_wide",
+ "source": "png8.png",
+ "width": 60
+}

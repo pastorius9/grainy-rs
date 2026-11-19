@@ -1,0 +1,98 @@
+{
+ "spec": {
+  "setup": {
+   "files": {
+    "a.jpg": {
+     "fill": [
+      65,
+      10
+     ]
+    },
+    "b.jpg": {
+     "fill": [
+      66,
+      12
+     ]
+    }
+   },
+   "dirs": [
+    "dest"
+   ],
+   "photos": [
+    {
+     "path": "$ROOT/a.jpg"
+    },
+    {
+     "path": "$ROOT/b.jpg"
+    }
+   ],
+   "db": [
+    [
+     "CREATE TRIGGER boom BEFORE UPDATE OF path ON photos BEGIN SELECT RAISE(ABORT,'boom'); END",
+     []
+    ]
+   ]
+  },
+  "calls": [
+   {
+    "fn": "move_files",
+    "args": {
+     "mapping": [
+      [
+       "$ROOT/a.jpg",
+       "$ROOT/dest/a.jpg"
+      ],
+      [
+       "$ROOT/b.jpg",
+       "$ROOT/dest/b.jpg"
+      ]
+     ]
+    }
+   }
+  ],
+  "name": "move_files_rollback"
+ },
+ "results": [
+  {
+   "err": {
+    "type": "sqlite3.Error",
+    "message": null
+   }
+  }
+ ],
+ "tree": {
+  "files": {
+   "a.jpg": {
+    "size": 10,
+    "sha256": "1d65bf29403e4fb1767522a107c827b8884d16640cf0e3b18c4c1dd107e0d49d"
+   },
+   "b.jpg": {
+    "size": 12,
+    "sha256": "a65d1fca86fcdc5a3aa9ac1ba1f382c600f67a5470ba503d73ad31e8e0c610c5"
+   }
+  },
+  "dirs": [
+   "dest"
+  ]
+ },
+ "db": {
+  "photos": [
+   {
+    "id": 1,
+    "path": "$ROOT\\a.jpg",
+    "name": "a.jpg",
+    "virtual_source": null
+   },
+   {
+    "id": 2,
+    "path": "$ROOT\\b.jpg",
+    "name": "b.jpg",
+    "virtual_source": null
+   }
+  ],
+  "folder_roots": [
+   "$ROOT"
+  ],
+  "preferences": {}
+ }
+}

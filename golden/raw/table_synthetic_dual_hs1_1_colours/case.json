@@ -1,0 +1,9 @@
+{
+ "arrays": {
+  "input": "b0839459b8550aed1fdd2a8ee895a4aa8bde688748fb99b084a2337ac298954c",
+  "output": "cf5c9d4400be9f69367694e580c66d71ef0d8ec690803a1cefcb7cd2258aab68"
+ },
+ "encoding": 1,
+ "kind": "hs1",
+ "profile": "synthetic_dual"
+}

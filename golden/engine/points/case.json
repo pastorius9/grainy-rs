@@ -1,0 +1,35 @@
+{
+ "original_size": null,
+ "output": "sRGB",
+ "settings": {
+  "point_colors": [
+   {
+    "hue": 40.0,
+    "lightness": 20.0,
+    "rgb": [
+     0.8,
+     0.3,
+     0.2
+    ],
+    "saturation": -30.0,
+    "version": 2
+   },
+   {
+    "hue": -60.0,
+    "lightness": -30.0,
+    "lightness_range": 0.25,
+    "range": 0.05,
+    "rgb": [
+     0.2,
+     0.5,
+     0.9
+    ],
+    "saturation": 50.0,
+    "saturation_range": 0.3,
+    "version": 2
+   }
+  ]
+ },
+ "source": "patches",
+ "use_crop": true
+}

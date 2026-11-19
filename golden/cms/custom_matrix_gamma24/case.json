@@ -1,0 +1,40 @@
+{
+ "info": {
+  "channels": 3,
+  "colorspace": "rgb",
+  "copyright": "No copyright, use freely",
+  "datetime": "2026-11-13T03:02:50",
+  "description": "RGB built-in",
+  "deviceclass": "display",
+  "gamma": 2.399994,
+  "ismatrixshaper": true,
+  "manufacturer": null,
+  "model": null,
+  "pcs": "xyz",
+  "primaries": [
+   [
+    0.664601,
+    0.32933,
+    0.235169
+   ],
+   [
+    0.300731,
+    0.625349,
+    0.687774
+   ],
+   [
+    0.162914,
+    0.079016,
+    0.077057
+   ]
+  ],
+  "renderingintent": "perceptual",
+  "version": 4.4,
+  "whitepoint": [
+   0.345703,
+   0.358538,
+   1.0
+  ]
+ },
+ "size": 600
+}
