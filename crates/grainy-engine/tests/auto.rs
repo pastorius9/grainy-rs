@@ -237,6 +237,7 @@ fn automatic_white_balance_matches_the_oracle() {
             Err(error) => check_error(name, &error, &case.json()["error"]),
         }
     }
+    grainy_testkit::report_maths("engine automatic white balance (relative)", worst.0, OTHER_MATHS_WHITE_BALANCE);
     report("automatic white balance", worst, cases.len());
 }
 

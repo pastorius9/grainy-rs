@@ -64,6 +64,7 @@ fn the_binary_renders_a_dng_with_the_oracles_pixels() {
         // differently in the last place, which moves a 16-bit sample by a level or so (run 1: 1 of 65535).
         let allowed = grainy_testkit::maths_tolerance(0, if sixteen { 4 } else { 0 });
         println!("{name}: binary output max sample error {max} (tolerance {allowed})");
+        grainy_testkit::report_maths(&format!("cli raw render {name} (levels)"), max as f64, allowed as f64);
         assert!(max <= allowed, "{name}: max sample error {max}");
     }
 }

@@ -101,6 +101,7 @@ fn load_photo_equals_the_oracle_load_image() {
         }
         report.push(name);
     }
+    grainy_testkit::report_maths("engine load_photo", largest, tolerance());
     assert!(failures.is_empty(), "{}", failures.join("\n"));
     println!(
         "{} files x 2 working spaces equal to the oracle (tolerance {:e}, max |error| {largest:e})",

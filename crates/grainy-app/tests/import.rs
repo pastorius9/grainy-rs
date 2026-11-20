@@ -348,7 +348,21 @@ fn copy_import_watch_and_sync_equal_the_oracle() {
 fn a_cancelled_copy_stops_between_photos_and_imports_what_was_copied() {
     let golden = Case::open("app", "import_steps").json().clone();
     let (env, mut cx) = build("import-cancel", &golden);
+    // More photos on the card than the five of the golden, so that the copy is far from its end when the cancel
+    // comes, however fast the machine copies.
+    const EXTRA: usize = 60;
+    for n in 0..EXTRA {
+        env.write(&format!("card/DCIM/103/EXTRA_{n:03}.png"), "one");
+    }
+    let total = 5 + EXTRA;
     let card = card_bytes(&env);
+    let photos = env.root.join("photos");
+    let copies_in = |folder: &Path| -> usize {
+        std::fs::read_dir(folder).map_or(0, |entries| {
+            entries.flatten().filter(|e| e.file_name().to_string_lossy().to_lowercase().ends_with(".png")).count()
+        })
+    };
+    let before = copies_in(&photos);
     let run = CopyRun {
         source: env.full(&common::native(r"<ROOT>\card")),
         destination: env.full(&common::native(r"<ROOT>\photos")),
@@ -364,22 +378,32 @@ fn a_cancelled_copy_stops_between_photos_and_imports_what_was_copied() {
         import::COPY_KIND,
         "",
         move |handle| {
-            // Cancel as soon as the first photo is done (the box's 취소).
+            // The box's 취소 as soon as the first photo is copied. The copy reports each photo in the shared state:
+            // once it has started (its total is known), the state is held until the first copy is on disk, so the
+            // copy cannot go past its first or second photo before the cancel is seen, whatever the timing.
             let flag = handle.clone();
             let stop = std::thread::spawn(move || {
                 let started = Instant::now();
-                while watcher.get().done < 1 && started.elapsed() < Duration::from_secs(60) {
-                    std::thread::sleep(Duration::from_millis(1));
+                let waited = || assert!(started.elapsed() < Duration::from_secs(60), "the copy did not start");
+                while watcher.get().total == 0 {
+                    waited();
+                    std::thread::yield_now();
                 }
-                flag.cancel_flag().store(true, Ordering::Relaxed);
+                watcher.update(|_| {
+                    while copies_in(&photos) == before {
+                        waited();
+                        std::thread::yield_now();
+                    }
+                    flag.cancel_flag().store(true, Ordering::Relaxed);
+                });
             });
             let result = run.run(&library, handle, &shared);
             stop.join().unwrap();
             result
         },
-        |cx: &mut AppContext, result: Result<Copied, String>| {
+        move |cx: &mut AppContext, result: Result<Copied, String>| {
             let copied = result.unwrap();
-            assert!(!copied.copied.is_empty() && copied.copied.len() < 5, "{copied:?}");
+            assert!(!copied.copied.is_empty() && copied.copied.len() < total, "{copied:?}");
             assert!(copied.errors.is_empty(), "{copied:?}");
             import::start_import(
                 cx,
@@ -394,7 +418,7 @@ fn a_cancelled_copy_stops_between_photos_and_imports_what_was_copied() {
     let copies: Vec<&String> = files.iter().filter(|f| f.starts_with("photos/") && f.ends_with(".png")).collect();
     // photos/2026/2026-09-25/IMG_0002.png was there before; the copies made before the stop are beside it.
     let made = copies.len() - 1;
-    assert!((1..5).contains(&made), "{copies:?}");
+    assert!((1..total).contains(&made), "{copies:?}");
     assert_eq!(card_bytes(&env), card);
     let catalog = cx.doc.metadata_catalog().unwrap();
     assert_eq!(catalog.paths().unwrap().len(), 1 + made, "the existing photo and the copies");

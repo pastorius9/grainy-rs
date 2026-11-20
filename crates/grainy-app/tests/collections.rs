@@ -141,9 +141,12 @@ fn query_of(options: &Value, root: &str) -> Query {
 
 /// Whether a listing's options can be compared on this system. The golden library was written by the oracle on
 /// Windows: its photos are at `Z:\GrainyGolden\...`, which on macOS is one file name in no folder (the oracle there
-/// lists nothing for that folder either), so listings filtered by a folder are compared on Windows only.
+/// lists nothing for that folder either, and a `folder` rule reads `str(path.parent)`, `.`), so listings filtered
+/// by a folder or a folder rule are compared on Windows only.
 fn windows_folders(options: &Value) -> bool {
-    cfg!(windows) || options.get("folder").is_none_or(Value::is_null)
+    cfg!(windows)
+        || (options.get("folder").is_none_or(Value::is_null)
+            && options.get("rules").and_then(|r| r.get("folder")).is_none())
 }
 
 fn listed(doc: &CatalogDocument) -> Vec<u64> {
@@ -557,7 +560,7 @@ fn library_harness<'a>(name: &str) -> (Harness<'a, GrainyApp>, PathBuf) {
     let photo = dir.join("garden.png");
     common::save_png(&common::garden(2, [1.0; 3], false), &photo);
     let library = dir.join("Library");
-    let data = dir.join("data");
+    let data = common::data_dir(&dir);
     let mut harness = builder().wgpu().build_eframe(move |cc| {
         let mut app = GrainyApp::with_library(&cc.egui_ctx, &library, Some(data));
         app.set_debug_overlay(false);

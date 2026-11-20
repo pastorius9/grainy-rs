@@ -39,6 +39,15 @@ pub fn temp_dir(name: &str) -> PathBuf {
     dir
 }
 
+/// The app's data folder for a window test on photos in `dir`: beside `dir`, not in it. The folder tree lists the
+/// photo folder's subfolders, and the data folder exists only once the app has written something into it, so a
+/// data folder inside `dir` showed in the tree or not depending on timing.
+pub fn data_dir(dir: &Path) -> PathBuf {
+    dir.parent()
+        .unwrap_or(dir)
+        .join(format!("{}-data", dir.file_name().map_or_else(String::new, |n| n.to_string_lossy().into_owned())))
+}
+
 /// The system's temporary folder in its real, long form, the form the app stores after resolving a path: a
 /// Windows `TEMP` written with 8.3 short names (`C:\Users\RUNNER~1\...` on the GitHub runner) is spelled out, and
 /// macOS's `/var/folders/...` is `/private/var/folders/...` (`/var` is a link). Without the `\\?\` prefix.

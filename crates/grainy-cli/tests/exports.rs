@@ -247,6 +247,7 @@ struct Row {
     max: i64,
     mean: f64,
     note: String,
+    sixteen: bool,
 }
 
 fn check_blocks(name: &str, case: &Case, path: &Path, failures: &mut Vec<String>) {
@@ -313,6 +314,7 @@ fn exports_match_the_oracle() {
                     max: 0,
                     mean: 0.0,
                     note: "refused with the oracle's text".into(),
+                    sixteen: false,
                 }),
                 other => failures.push(format!("{name}: expected the oracle's refusal {expected:?}, got {other:?}")),
             }
@@ -344,7 +346,8 @@ fn exports_match_the_oracle() {
                 if max > allowed {
                     failures.push(format!("{name}: max sample error {max} above {allowed}"));
                 }
-                rows.push(Row { name: name.clone(), max, mean, note: format!("tolerance {allowed}") });
+                let note = format!("tolerance {allowed}");
+                rows.push(Row { name: name.clone(), max, mean, note, sixteen: is_16bit(&format) });
             }
             false => {
                 manifest.push(serde_json::json!({"case": name, "file": output.file_name().unwrap().to_str().unwrap()}));
@@ -364,6 +367,7 @@ fn exports_match_the_oracle() {
                         max,
                         mean,
                         note: "JPEG vs Pillow decoded output; tolerance 0".into(),
+                        sixteen: false,
                     });
                 } else {
                     rows.push(Row {
@@ -371,6 +375,7 @@ fn exports_match_the_oracle() {
                         max: -1,
                         mean: 0.0,
                         note: format!("{format}: blocks here, pixels by gen_cli.py --check"),
+                        sixteen: false,
                     });
                 }
             }
@@ -385,6 +390,10 @@ fn exports_match_the_oracle() {
         *entry = (*entry).max(row.max);
     }
     println!("largest sample error per group: {worst:?}");
+    let sixteen = rows.iter().filter(|r| r.note.starts_with("tolerance") && r.sixteen).map(|r| r.max).max();
+    let eight = rows.iter().filter(|r| r.note.starts_with("tolerance") && !r.sixteen).map(|r| r.max).max();
+    grainy_testkit::report_maths("cli 16-bit export samples (levels)", sixteen.unwrap_or(0) as f64, 4.0);
+    grainy_testkit::report_maths("cli 8-bit export samples (levels)", eight.unwrap_or(0) as f64, 0.0);
     assert!(failures.is_empty(), "{} failures:\n{}", failures.len(), failures.join("\n"));
 }
 

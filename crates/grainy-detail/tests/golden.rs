@@ -73,10 +73,15 @@ fn tolerance(s: &Settings) -> f32 {
     if s.f64("grain") != 0.0 {
         t = t.max(GRAIN);
     }
-    if s.f64("noise_luma") != 0.0 || s.f64("noise_color") != 0.0 {
+    if noise_reduction(s) {
         t = t.max(grainy_testkit::maths_tolerance(0.0, OTHER_MATHS_NOISE));
     }
     t
+}
+
+/// Whether a case runs noise reduction (through CIELAB).
+fn noise_reduction(s: &Settings) -> bool {
+    s.f64("noise_luma") != 0.0 || s.f64("noise_color") != 0.0
 }
 
 /// Compares a result with a case's `output` (full array) or `bits_sum` + `output_sub` (large outputs).
@@ -124,7 +129,10 @@ fn noise_reduction_family() {
         let case = Case::open("detail", &format!("noise_{name}"));
         let lab: Image = case.array("lab");
         let tolerance = grainy_testkit::maths_tolerance(0.0, OTHER_MATHS_LAB);
-        assert_close(&grainy_color::rgb_to_lab(&image(name)), &lab, tolerance, &format!("rgb_to_lab {name}"));
+        let ours = grainy_color::rgb_to_lab(&image(name));
+        let error = max_abs_diff(&ours, &lab).0;
+        grainy_testkit::report_maths(&format!("detail rgb_to_lab {name}"), f64::from(error), f64::from(tolerance));
+        assert_close(&ours, &lab, tolerance, &format!("rgb_to_lab {name}"));
         let lightness: Plane = lab.index_axis(Axis(2), 0).to_owned();
         let profiles: Array2<f32> = case.array("profiles");
         let got = detail::wavelet_profiles(&lightness);
@@ -175,6 +183,7 @@ fn noise_reduction_family() {
 #[test]
 fn detail_tools_cases() {
     let mut worst = 0f32;
+    let mut noise_worst = 0f32;
     let mut checks = grainy_testkit::Checks::default();
     for name in cases("tools_") {
         let case = Case::open("detail", &name);
@@ -182,9 +191,16 @@ fn detail_tools_cases() {
         let ps = case.json()["pixel_scale"].as_f64().unwrap_or(1.0);
         let input = image(case.json()["image"].as_str().unwrap_or(""));
         let got = detail::detail_tools(&input, &s, ps);
-        checks.case(&name, || worst = worst.max(check(&case, &got, tolerance(&s), &name)));
+        checks.case(&name, || {
+            let error = check(&case, &got, tolerance(&s), &name);
+            worst = worst.max(error);
+            if noise_reduction(&s) {
+                noise_worst = noise_worst.max(error);
+            }
+        });
     }
     println!("detail_tools: worst {worst:e}");
+    grainy_testkit::report_maths("detail tools with noise reduction", f64::from(noise_worst), OTHER_MATHS_NOISE.into());
     checks.finish();
 }
 
@@ -211,6 +227,7 @@ fn sharpen_cases() {
 #[test]
 fn stage_cases() {
     let mut worst = 0f32;
+    let mut noise_worst = 0f32;
     let mut checks = grainy_testkit::Checks::default();
     for name in cases("stage_") {
         if name.starts_with("stage_large") || name.starts_with("stage_hdr") {
@@ -221,9 +238,20 @@ fn stage_cases() {
         let ps = case.json()["pixel_scale"].as_f64().unwrap_or(1.0);
         let input = image(case.json()["image"].as_str().unwrap_or(""));
         let got = detail::develop_detail(&input, &s, ps).expect("develop_detail");
-        checks.case(&name, || worst = worst.max(check(&case, &got, tolerance(&s), &name)));
+        checks.case(&name, || {
+            let error = check(&case, &got, tolerance(&s), &name);
+            worst = worst.max(error);
+            if noise_reduction(&s) {
+                noise_worst = noise_worst.max(error);
+            }
+        });
     }
     println!("stage: worst {worst:e}");
+    grainy_testkit::report_maths(
+        "detail stages with noise reduction",
+        f64::from(noise_worst),
+        OTHER_MATHS_NOISE.into(),
+    );
     checks.finish();
 }
 

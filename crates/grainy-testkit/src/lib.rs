@@ -132,6 +132,16 @@ pub fn maths_tolerance<T>(golden: T, other: T) -> T {
     }
 }
 
+/// Where the C runtime is not the goldens' ([`GOLDEN_MATHS`]), writes the largest error a comparison measured
+/// against its other-system tolerance to standard error, past the test harness's capture, so that the CI log of
+/// a passing run shows it (the tolerances are set from these lines). Silent with the goldens' C runtime.
+pub fn report_maths(what: &str, measured: f64, tolerance: f64) {
+    if !GOLDEN_MATHS {
+        use std::io::Write;
+        let _ = writeln!(std::io::stderr(), "MATHS {what}: measured {measured:e}, tolerance {tolerance:e}");
+    }
+}
+
 /// The bytes of a profile LittleCMS created, as LittleCMS creates it on this system. The goldens were written on
 /// Windows, where LittleCMS puts the platform signature `MSFT` into the header (bytes 40..44); on every other
 /// system it writes `APPL` (`cmsio0.c`, `CMS_IS_WINDOWS_`), as the oracle's LittleCMS does on macOS. Profiles
@@ -228,6 +238,34 @@ pub fn slashed(text: &str, placeholders: &[&str]) -> String {
     out
 }
 
+/// The inverse of [`slashed`] for a text that is only compared by its hash: the paths after each placeholder
+/// written as the goldens' Windows oracle wrote them, so that the hash can be compared with the golden's. In JSON
+/// text (it starts with `{` or `[`) a separator is the escaped backslash `\\`, elsewhere `\`. On Windows the
+/// text stays as it is.
+pub fn windows_paths(text: &str, placeholders: &[&str]) -> String {
+    if cfg!(windows) {
+        return text.to_owned();
+    }
+    windows_form(text, placeholders)
+}
+
+fn windows_form(text: &str, placeholders: &[&str]) -> String {
+    let separator = if text.trim_start().starts_with(['{', '[']) { "\\\\" } else { "\\" };
+    let next =
+        |rest: &str| placeholders.iter().filter_map(|p| rest.find(p).map(|at| (at, p.len()))).min_by_key(|(at, _)| *at);
+    let mut out = String::new();
+    let mut rest = text;
+    while let Some((at, len)) = next(rest) {
+        out.push_str(&rest[..at + len]);
+        rest = &rest[at + len..];
+        let end = rest.find(['"', '\'', '\n']).unwrap_or(rest.len());
+        out.push_str(&rest[..end].replace('/', separator));
+        rest = &rest[end..];
+    }
+    out.push_str(rest);
+    out
+}
+
 /// Whether `text` starts with the hex digits of a `\u`, `\x` or `\U` escape.
 fn hex_escape(text: &str, kind: char) -> bool {
     let digits = match kind {
@@ -240,6 +278,17 @@ fn hex_escape(text: &str, kind: char) -> bool {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn hashed_texts_get_the_windows_separators_back() {
+        let b = '\\';
+        let places = ["<ROOT>"];
+        let json = "{\"path\": \"<ROOT>/photos/A/one.jpg\", \"n\": \"a/b\"}";
+        let windows = format!("{{\"path\": \"<ROOT>{b}{b}photos{b}{b}A{b}{b}one.jpg\", \"n\": \"a/b\"}}");
+        assert_eq!(super::windows_form(json, &places), windows);
+        assert_eq!(super::slashed(&windows, &places), json);
+        assert_eq!(super::windows_form("<ROOT>/x/y and a/b", &places), format!("<ROOT>{b}x{b}y and a{b}b"));
+    }
+
     #[test]
     fn golden_paths_are_rewritten_for_other_systems() {
         let b = '\\';

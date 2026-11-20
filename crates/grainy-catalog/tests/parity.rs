@@ -15,8 +15,13 @@ const TOKEN: &str = "0123456789abcdef0123456789abcdef";
 /// they are replayed with Windows path rules on every system. The rules of each system are checked by
 /// `folders_match_all_platforms`.
 const GOLDEN_PLATFORM: Platform = Platform::Windows;
+/// Deterministic sources with this system's path rules (tests on real files).
 fn sources() -> Sources {
-    Sources::new(|| STAMP.into(), || TOKEN.into()).on(GOLDEN_PLATFORM)
+    Sources::new(|| STAMP.into(), || TOKEN.into())
+}
+/// Deterministic sources with the path rules of the goldens' system (the oracle's Windows sessions).
+fn golden_sources() -> Sources {
+    sources().on(GOLDEN_PLATFORM)
 }
 fn input(name: &str) -> PathBuf {
     grainy_testkit::root().join("golden/catalog").join(name)
@@ -230,7 +235,7 @@ fn scripted_writers_and_all_readers_match_oracle() {
     let case = Case::open("catalog", "operations");
     let directory = copy_case("operations", "roundtrip");
     let path = directory.join("catalog.sqlite");
-    let c = Catalog::with_sources(&directory, sources()).unwrap();
+    let c = Catalog::with_sources(&directory, golden_sources()).unwrap();
     for (index, op) in case.json()["steps"].as_array().unwrap().iter().enumerate() {
         let label = format!("operation {index} {}", op["method"]);
         let actual = operation(&c, &path, op);
@@ -269,7 +274,7 @@ fn every_historical_migration_matches() {
         let case = Case::open("catalog", &name);
         let directory = copy_case(&name, &name);
         let path = directory.join("catalog.sqlite");
-        let c = Catalog::with_sources(&directory, sources()).unwrap();
+        let c = Catalog::with_sources(&directory, golden_sources()).unwrap();
         equal(&dump(&path), &case.json()["tables"], &name);
         equal(&readers(&c, &path), &case.json()["readers"], &format!("{name} readers"));
         let mut backups = if directory.join("backups").exists() {

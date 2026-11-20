@@ -117,6 +117,7 @@ fn defaults_only_clip() {
     // differently in the last place (run 1: 1.19e-7).
     let error = max_abs_diff(&result, &expected).0;
     println!("defaults_only_clip: max abs error {error:e}");
+    grainy_testkit::report_maths("engine defaults_only_clip", f64::from(error), 1e-6);
     assert!(error <= grainy_testkit::maths_tolerance(0.0, 1e-6), "defaults_only_clip: max abs error {error:e}");
 }
 

@@ -95,6 +95,7 @@ fn calibrated(name: &str) -> Profile {
     let ulps = ours.iter().zip(&srgb).map(|(a, b)| a.to_bits().abs_diff(b.to_bits())).max().unwrap_or(0);
     let differing = ours.iter().zip(&srgb).filter(|(a, b)| a.to_bits() != b.to_bits()).count();
     println!("to_linear(linspace(0, 1, 65536)): {differing} entries differ, at most {ulps} ulp");
+    grainy_testkit::report_maths("cms to_linear table (ulp)", f64::from(ulps), 1.0);
     assert!(ulps <= grainy_testkit::maths_tolerance(0, 1), "to_linear(linspace(0, 1, 65536)): {ulps} ulp");
     let curves3: Array2<f32> = transfers.array("curves3");
     let curve1: Array1<f32> = transfers.array("curve1");

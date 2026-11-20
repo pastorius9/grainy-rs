@@ -281,7 +281,13 @@ pub fn matches(photo: &Value, rules: &Value, now: NaiveDateTime, platform: Platf
                 }
             }
             "missing" => {
-                let missing = matches!(std::fs::metadata(path),Err(e) if e.kind()==std::io::ErrorKind::NotFound);
+                // `file_access.access(path) == MISSING`: a stat that fails for any reason but a denied permission
+                // (macOS privacy settings), or anything but a regular file. A name too long for the file system
+                // is missing on macOS (ENAMETOOLONG) as on Windows.
+                let missing = match std::fs::metadata(path) {
+                    Err(e) => e.kind() != std::io::ErrorKind::PermissionDenied,
+                    Ok(meta) => !meta.is_file(),
+                };
                 missing == grainy_core::settings::truthy(expected)
             }
             "virtual" => (!photo["virtual_source"].is_null()) == grainy_core::settings::truthy(expected),

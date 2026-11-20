@@ -286,7 +286,7 @@ impl Env {
                     dirs.push(Value::String(rel));
                     walk(root, &path, files, dirs);
                 } else {
-                    let data = std::fs::read(&path).unwrap();
+                    let data = windows_bytes(std::fs::read(&path).unwrap());
                     files.insert(rel, json!({"size": data.len(), "sha256": hex(&Sha256::digest(&data))}));
                 }
             }
@@ -425,6 +425,42 @@ fn strip_stamp(name: &str) -> String {
         }
     }
     out
+}
+
+/// The bytes of a file as the goldens' Windows oracle would have written them. `write_sidecar` writes its XMP
+/// with `ElementTree.write(filename)`, which opens the file in text mode: Python ends the XML declaration's line
+/// (and any other line) with CRLF on Windows and with LF on macOS, where the Rust port does the same. Such a file
+/// (it starts with ElementTree's declaration) gets its CRLF back before it is compared; other files stay as they
+/// are, and on Windows every file does.
+fn windows_bytes(data: Vec<u8>) -> Vec<u8> {
+    const DECLARATION: &[u8] = b"<?xml version='1.0' encoding='utf-8'?>\n<x:xmpmeta";
+    if cfg!(windows) || !data.starts_with(DECLARATION) {
+        return data;
+    }
+    let mut out = Vec::with_capacity(data.len() + 8);
+    for byte in data {
+        if byte == b'\n' {
+            out.push(b'\r');
+        }
+        out.push(byte);
+    }
+    out
+}
+
+/// The oracle's result of a step on this system where the goldens' Windows result does not apply.
+fn other_system_result(scenario: &str, step: usize) -> Option<Value> {
+    if cfg!(windows) {
+        return None;
+    }
+    match (scenario, step) {
+        // A one-byte file as a backup: SQLite's Unix file layer reports a one-byte file as empty (it may have
+        // written that byte itself, ticket #3260), so Python's sqlite3 on macOS opens an empty database and the
+        // oracle refuses it as not a catalogue; Windows' layer reads it as a broken header (`sqlite3.Error`).
+        ("restore_backup", 1) => {
+            Some(json!({"err": {"type": "ValueError", "message": "Luma 카탈로그 백업이 아닙니다."}}))
+        }
+        _ => None,
+    }
 }
 
 fn set_mtime(path: &Path, ns: u64) {
@@ -597,7 +633,7 @@ impl Env {
                 }
                 Ok(Value::Object(m))
             }
-            "read_file" => Ok(json!(hex(&std::fs::read(self.p(&s(a, "path"))).map_err(os_err)?))),
+            "read_file" => Ok(json!(hex(&windows_bytes(std::fs::read(self.p(&s(a, "path"))).map_err(os_err)?)))),
             // ---- file_access.py ------------------------------------------------
             "access" => Ok(json!(access(
                 Path::new(&self.p(&s(a, "path"))),
@@ -1121,6 +1157,8 @@ fn run_scenario(name: &str) -> Result<f64, String> {
     let mut problems = Vec::new();
     let expected = case["results"].as_array().unwrap();
     for (i, (got, want)) in results.iter().zip(expected).enumerate() {
+        let other = other_system_result(name, i);
+        let want = other.as_ref().unwrap_or(want);
         let step = &spec["calls"][i];
         let label = format!(
             "step {i} {} {}",

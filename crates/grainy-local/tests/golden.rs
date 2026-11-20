@@ -48,6 +48,15 @@ fn cases(prefix: &str) -> Vec<String> {
 /// works on those frames (run 1: 6.0e-8 in `local_blacks_0`, 1.2e-7 in the colour component `color_tol2`).
 const OTHER_MATHS: f32 = 2e-5;
 
+/// The largest error [`assert_exact`] measured where the C runtime is not the goldens' (f32 bits; errors are not
+/// negative, so their bits order as the values do).
+static OTHER_WORST: std::sync::atomic::AtomicU32 = std::sync::atomic::AtomicU32::new(0);
+
+fn report_other_worst(what: &str) {
+    let worst = f32::from_bits(OTHER_WORST.load(std::sync::atomic::Ordering::Relaxed));
+    grainy_testkit::report_maths(what, f64::from(worst), f64::from(OTHER_MATHS));
+}
+
 /// Checks an output stored as `{name}_bits`, `{name}_shape` and `{name}_sub` (every `{name}_step`-th row and
 /// column): bit-exact with the goldens' C runtime; elsewhere the subsampled values within [`OTHER_MATHS`].
 fn assert_exact<D: Dimension>(case: &Case, name: &str, got: &Array<f32, D>, what: &str) {
@@ -65,6 +74,8 @@ fn assert_exact<D: Dimension>(case: &Case, name: &str, got: &Array<f32, D>, what
         .slice_each_axis(|ax| if ax.axis.index() < 2 { Slice::new(0, None, step) } else { Slice::from(..) })
         .to_owned();
     let expected: ArrayD<f32> = case.array(&format!("{name}_sub"));
+    let error = max_abs_diff(&sub, &expected).0;
+    OTHER_WORST.fetch_max(error.to_bits(), std::sync::atomic::Ordering::Relaxed);
     assert_close(&sub, &expected, grainy_testkit::maths_tolerance(0.0, OTHER_MATHS), what);
     if grainy_testkit::GOLDEN_MATHS {
         assert_eq!(bits(got.iter()), parse_bits(&meta[format!("{name}_bits")]), "{what}: full bit sum");
@@ -311,6 +322,7 @@ fn layer_components() {
             checks.case(&what, || assert_exact(&case, name, &mask, &what));
         }
     }
+    report_other_worst("local layer components and earlier exact checks");
     checks.finish();
 }
 
@@ -518,6 +530,7 @@ fn apply_local_cases() {
             }
         });
     }
+    report_other_worst("local apply_local cases and earlier exact checks");
     checks.finish();
     println!("local cases through the IPP bilateral filter: max abs error {worst_tolerant:.3e} (tolerance {IPP:.1e})");
 }
@@ -602,6 +615,13 @@ fn healing_offsets() {
     // `math.cos`/`math.sin`: the Microsoft C runtime's are not correctly rounded (sin(pi/4) is 0.7071067811865476
     // there, 0.7071067811865475 on macOS), so elsewhere a direction may differ in the last place.
     let ulps = |a: f64, b: f64| a.to_bits().abs_diff(b.to_bits());
+    let worst = local::directions()
+        .iter()
+        .enumerate()
+        .map(|(k, (c, sn))| ulps(*c, directions[[k, 0]]).max(ulps(*sn, directions[[k, 1]])))
+        .max()
+        .unwrap_or(0);
+    grainy_testkit::report_maths("local healing directions (ulp)", worst as f64, 1.0);
     for (k, (c, sn)) in local::directions().iter().enumerate() {
         let (ec, es) = (directions[[k, 0]], directions[[k, 1]]);
         let off = ulps(*c, ec).max(ulps(*sn, es));

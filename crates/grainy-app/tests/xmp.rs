@@ -658,7 +658,7 @@ fn library_harness<'a>(name: &str) -> (Harness<'a, GrainyApp>, PathBuf) {
     common::save_png(&common::garden(2, [0.8, 1.0, 1.1], true), &photos[1]);
     common::save_png(&common::garden(2, [1.2, 1.0, 0.8], false), &photos[2]);
     let library = dir.join("Library");
-    let data = dir.join("data");
+    let data = common::data_dir(&dir);
     let mut harness = builder().wgpu().build_eframe(move |cc| {
         let mut app = GrainyApp::with_library(&cc.egui_ctx, &library, Some(data));
         app.set_debug_overlay(false);

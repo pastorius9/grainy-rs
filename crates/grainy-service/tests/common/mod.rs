@@ -206,9 +206,12 @@ pub fn dump(db: &Connection, scrub: &Scrub) -> Map<String, Value> {
                         ValueRef::Real(v) => json!(v),
                         ValueRef::Text(t) => {
                             let s = scrub.text(std::str::from_utf8(t).unwrap());
-                            let n = s.chars().count();
+                            // A long text is compared by its hash: the hash of the text as the goldens' Windows
+                            // oracle wrote its paths (on Windows the text itself).
+                            let windows = grainy_testkit::windows_paths(&s, &[PLACE]);
+                            let n = windows.chars().count();
                             if n > LONG {
-                                json!({"sha": sha(&s), "len": n})
+                                json!({"sha": sha(&windows), "len": n})
                             } else {
                                 Value::String(s)
                             }

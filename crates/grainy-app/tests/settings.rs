@@ -431,7 +431,8 @@ fn a_check_reads_the_feed_on_a_job() {
     let _turn = turn();
     grainy_i18n::set_language(Language::Korean);
     let layout = updater::Layout::current();
-    let tail = updater::asset_pattern(&layout).tail().to_owned();
+    // This system's file of the Rust build: the Windows zip, or on macOS the universal disk image.
+    let tail = updater::rust_asset_pattern(&layout).tail().to_owned();
     let feed = |version: &str| {
         json!({"draft": false, "prerelease": false, "body": "새 기능", "assets": [{
             // The Rust build's own release file (`updater::RUST_MARKER`; a Python `Grainy-` file never qualifies).
