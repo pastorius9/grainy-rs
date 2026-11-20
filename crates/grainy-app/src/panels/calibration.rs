@@ -133,7 +133,18 @@ pub fn raw_white_balance(ui: &mut Ui, cx: &mut AppContext) {
         }
     }
     let enabled = current != "legacy";
-    let shown = raw::display_raw_white(cx.settings(), raw::source_info(cx.settings(), camera.as_ref()));
+    // Settings versions are local to each photo. Camera metadata may arrive after the first frame.
+    #[derive(Default)]
+    struct WhiteDisplay {
+        key: Option<(u64, u64, u64, bool)>,
+        shown: Option<(f64, f64)>,
+    }
+    let key = (cx.document_generation, cx.doc.current_id(), cx.doc.edit().version(), camera.is_some());
+    if cx.state::<WhiteDisplay>().key != Some(key) {
+        let shown = raw::display_raw_white(cx.settings(), raw::source_info(cx.settings(), camera.as_ref()));
+        *cx.state::<WhiteDisplay>() = WhiteDisplay { key: Some(key), shown };
+    }
+    let shown = cx.state::<WhiteDisplay>().shown;
     let displayed = shown.unwrap_or((cx.settings().f64("raw_kelvin"), cx.settings().f64("raw_tint")));
     for spec in adjustments::at(Place::Raw) {
         let value = if spec.key == "raw_kelvin" { displayed.0 } else { displayed.1 };
@@ -193,16 +204,47 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
 
 /// The RAW 프로파일 상세 fold-out (`load_raw_controls`'s note, buttons and switches).
 fn raw_profile(ui: &mut Ui, cx: &mut AppContext, width: f32) {
-    let photo = cx.doc.current().map(|p| (p.id, p.path.clone()));
-    let info = photo.as_ref().map(|(id, _)| cx.doc.photo_info(*id)).unwrap_or(Value::Null);
+    #[derive(Default)]
+    struct Details {
+        key: Option<(u64, u64, u64, std::path::PathBuf)>,
+        info: Value,
+        offline: bool,
+        checked: Option<std::time::Instant>,
+    }
+    let key = cx.doc.current().map(|p| (cx.document_generation, p.id, cx.doc.folder_inputs().0, p.path.clone()));
+    if cx.state::<Details>().key != key {
+        let info = key.as_ref().map(|(_, id, _, _)| cx.doc.photo_info(*id)).unwrap_or(Value::Null);
+        *cx.state::<Details>() = Details { key: key.clone(), info, ..Default::default() };
+    }
     let mut usable = usable(cx);
-    let offline = usable && photo.as_ref().is_some_and(|(_, path)| !path.exists());
+    if usable
+        && cx.state::<Details>().checked.is_none_or(|t| t.elapsed() >= crate::folders::REFRESH)
+        && !cx.jobs.running("raw-availability")
+    {
+        if let Some((_, _, _, path)) = &key {
+            let path = path.clone();
+            cx.state::<Details>().checked = Some(std::time::Instant::now());
+            cx.spawn_document_job(
+                "raw-availability",
+                "",
+                move |_| Ok(!path.exists()),
+                move |cx, result| {
+                    if cx.state::<Details>().key == key {
+                        cx.state::<Details>().offline = result.unwrap_or(false);
+                    }
+                },
+            );
+        }
+    }
+    let details = cx.state::<Details>();
+    let offline = usable && details.offline;
+    let info = &details.info;
     let preview =
         ["raw_native", "raw_dual_preview"].iter().any(|k| info.get(*k).is_some_and(grainy_core::settings::truthy));
     if offline && !preview {
         usable = false;
     }
-    widgets::muted(ui, &raw_note(usable, offline, &info));
+    widgets::muted(ui, &raw_note(usable, offline, info));
     let has_profile = grainy_core::settings::truthy(cx.settings().value("dcp_profile"));
     let buttons = [
         ("DCP 파일 직접 불러오기", "raw.load_dcp", usable),

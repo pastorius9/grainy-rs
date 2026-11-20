@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import os
 import re
+import shlex
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
@@ -52,3 +53,29 @@ def zip_name(v: str | None = None) -> str:
 
 def dmg_name(v: str | None = None) -> str:
     return f'GrainyRS-{v or version()}-macos-universal.dmg'
+
+def release_env(windows: bool) -> dict[str, str]:
+    """Remap compiler paths even when a checkout or a user directory contains spaces."""
+    env = dict(os.environ)
+    flags = (env['CARGO_ENCODED_RUSTFLAGS'].split('\x1f') if env.get('CARGO_ENCODED_RUSTFLAGS')
+             else shlex.split(env.get('RUSTFLAGS', '')))
+    if windows:
+        # Environment rustflags take precedence over the target setting in .cargo/config.toml.
+        flags += ['-C', 'target-feature=+crt-static', '-C', 'link-arg=/PDBALTPATH:%_PDB%']
+    home = Path.home()
+    for path, name in ((home, '/build/home'), (Path(env.get('CARGO_HOME', home / '.cargo')), '/build/cargo'),
+                       (REPO, '/build/grainy')):
+        flags.append(f'--remap-path-prefix={path}={name}')
+    env['CARGO_ENCODED_RUSTFLAGS'] = '\x1f'.join(flags)
+    return env
+
+
+def check_binary_paths(path: Path, private: list[Path]):
+    """Detect native, slash-normalized and UTF-16 paths embedded in a release file."""
+    data = path.read_bytes().lower()
+    for root in private:
+        source = str(root)
+        for value in {source, source.replace('\\', '/'), source.replace('/', '\\')}:
+            for encoding in ('utf-8', 'utf-16le'):
+                if value.encode(encoding).lower() in data:
+                    raise SystemExit(f'{path.name} contains a local build path')

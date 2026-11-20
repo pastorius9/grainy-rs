@@ -16,8 +16,8 @@ pub const HIGHLIGHT: u8 = 1;
 pub const SHADOW: u8 = 2;
 
 // Python floats compared with a float32 array become float32 (numpy 2's weak scalars).
-const LOW: f32 = (1.0f64 / 510.0) as f32;
-const HIGH: f32 = (1.0f64 - 1.0f64 / 510.0) as f32;
+pub(crate) const LOW: f32 = (1.0f64 / 510.0) as f32;
+pub(crate) const HIGH: f32 = (1.0f64 - 1.0f64 / 510.0) as f32;
 
 /// The 8-bit value the screen shows for a developed value: `np.uint8(np.clip(v,0,1)*255+.5)` in float32
 /// (NaN becomes 0, as numpy's cast of NaN does on this platform).
@@ -38,6 +38,17 @@ pub struct Converted {
     /// One byte per pixel: [`HIGHLIGHT`] and [`SHADOW`] bits.
     pub mask: Vec<u8>,
     pub channels: Channels,
+}
+
+/// The displayed monitor bytes of `output_rgb`. Clipping and bins have already been
+/// taken from the sRGB branch of the same working frame.
+pub(crate) fn rgba(image: &Image) -> Vec<u8> {
+    let data = image.as_standard_layout();
+    let data = data.as_slice().unwrap_or_default();
+    data.par_chunks_exact(3)
+        .map(|p| [to_byte(p[0]), to_byte(p[1]), to_byte(p[2]), 255])
+        .collect::<Vec<_>>()
+        .into_flattened()
 }
 
 /// Converts a developed H×W×3 image (display-referred, 0–1) to RGBA bytes and the clipping mask, in one pass

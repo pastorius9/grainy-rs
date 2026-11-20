@@ -20,7 +20,7 @@ pub mod whats_new;
 
 pub use preferences::Preferences;
 pub use user_paths::{local_data, Environment, System};
-pub use util::wait_for_exit;
+pub use util::{rename_new, wait_for_exit};
 
 /// The oracle's `__version__` this port is made from.
 pub const APP_VERSION: &str = "0.6.8";
@@ -40,6 +40,6 @@ mod tests {
     #[test]
     fn the_build_version_is_the_rust_version_marked() {
         assert_eq!(super::BUILD_VERSION, format!("rs-{}", super::RS_VERSION));
-        assert_eq!(super::RS_VERSION, "0.2.0");
+        assert_eq!(super::RS_VERSION, "0.2.1");
     }
 }

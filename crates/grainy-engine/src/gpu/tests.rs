@@ -119,6 +119,23 @@ fn engine_matrix_matches_cpu_worker() {
 }
 
 #[test]
+fn a_monitor_conversion_preserves_the_uploaded_geometry() {
+    let (_guard, Some(gpu)) = device() else { return };
+    let source = input("garden");
+    let mut cache = GpuCache::default();
+    let opts = Options::default();
+    let s = Map::new();
+    develop_gpu_cached(&source, &s, &opts, gpu, &mut cache, 9).unwrap();
+    let before = cache.runs();
+    let profile = grainy_cms::profile("Display P3").unwrap();
+    let monitor = Options { output: Output::Icc(&profile), ..opts };
+    develop_gpu_cached(&source, &s, &monitor, gpu, &mut cache, 9).unwrap();
+    assert_eq!(cache.runs(), before);
+    develop_gpu_cached(&source, &s, &opts, gpu, &mut cache, 9).unwrap();
+    assert_eq!(cache.runs(), before);
+}
+
+#[test]
 fn slider_cache_reuses_the_resident_prefix() {
     let (_guard, Some(gpu)) = device() else { return };
     let image = input("garden");

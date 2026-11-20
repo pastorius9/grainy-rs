@@ -26,7 +26,12 @@ pub fn signature(path: impl AsRef<Path>) -> Option<Value> {
 /// Port of `preview_store.snapshot`; reads settings and preview token in one read transaction.
 pub fn snapshot(directory: impl AsRef<Path>, id: i64, full: bool) -> Result<Option<Value>> {
     let directory = directory.as_ref();
-    let c = Catalog::open_reader(directory)?;
+    snapshot_from(directory, directory, id, full)
+}
+
+/// Read catalogue rows from a private database snapshot and preview signatures from the original library.
+pub fn snapshot_from(database_folder: &Path, directory: &Path, id: i64, full: bool) -> Result<Option<Value>> {
+    let c = Catalog::open_reader(database_folder)?;
     let columns = if full { "p.path,s.token,p.edits,p.metadata" } else { "p.path,s.token" };
     let Some(mut value) = c
         .rows(&format!("SELECT {columns} FROM photos p JOIN preview_state s ON s.photo_id=p.id WHERE p.id=?"), [id])?
@@ -445,7 +450,9 @@ pub fn write_offline(path: impl AsRef<Path>, packet: &OfflinePacket) -> Result<(
     if let Some(p) = &packet.legacy_pixels {
         arrays.push(("legacy_pixels.npy", encode_pixels(p)?));
     }
-    let mut zip = zip::ZipWriter::new(fs::File::create(path)?);
+    let path = path.as_ref();
+    let mut stage = tempfile::NamedTempFile::new_in(path.parent().unwrap_or_else(|| Path::new(".")))?;
+    let mut zip = zip::ZipWriter::new(stage.as_file_mut());
     for (name, data) in arrays {
         zip.start_file(
             name,
@@ -454,7 +461,8 @@ pub fn write_offline(path: impl AsRef<Path>, packet: &OfflinePacket) -> Result<(
         .map_err(|e| invalid(e.to_string()))?;
         zip.write_all(&data)?;
     }
-    zip.finish().map_err(|e| invalid(e.to_string()))?;
+    zip.finish().map_err(|e| invalid(e.to_string()))?.sync_all()?;
+    stage.persist(path).map_err(|e| e.error)?;
     Ok(())
 }
 

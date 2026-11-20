@@ -48,12 +48,10 @@ impl Tools for SlotTools<'_> {
 
     fn call(&self, name: &str, arguments: &Value, modern: bool, deadline: Instant) -> ToolResult {
         let wait = deadline.saturating_duration_since(Instant::now()).as_secs_f64().min(CALL_SLOT_SECONDS);
-        if !self.service.calls.acquire(wait) {
+        let Some(_permit) = self.service.calls.permit(wait) else {
             return Ok(serde_json::json!({"content": [{"type": "text", "text": SLOTS_BUSY}], "isError": true}));
-        }
-        let result = self.tools.call(name, arguments, modern, deadline);
-        self.service.calls.release();
-        result
+        };
+        self.tools.call(name, arguments, modern, deadline)
     }
 }
 
@@ -99,7 +97,30 @@ pub struct Endpoint {
     /// The service (call slots, activity log).
     pub service: Arc<McpService>,
     /// The 64 hex digits every request must carry as `Authorization: Bearer ...`.
-    pub token: String,
+    pub token: LiveToken,
+}
+
+/// A server and its settings dialog share the active credential, including on existing connections.
+#[derive(Clone, Default)]
+pub struct LiveToken(Arc<std::sync::RwLock<String>>);
+
+impl From<String> for LiveToken {
+    fn from(token: String) -> Self {
+        Self(Arc::new(std::sync::RwLock::new(token)))
+    }
+}
+
+impl LiveToken {
+    /// Replace the credential after its preference was saved.
+    pub fn replace(&self, token: String) {
+        *self.0.write().unwrap_or_else(std::sync::PoisonError::into_inner) = token;
+    }
+
+    /// Check a bearer value against the currently installed credential.
+    pub fn accepts(&self, candidate: &str) -> bool {
+        let token = self.0.read().unwrap_or_else(std::sync::PoisonError::into_inner);
+        token_ok(&token) && same(candidate.as_bytes(), token.as_bytes())
+    }
 }
 
 /// Port of `start`: bind 127.0.0.1:`port` (0: any free port) and serve on a thread.
@@ -123,13 +144,42 @@ pub fn start(port: u16, endpoint: Endpoint) -> std::io::Result<Server> {
                 continue;
             }
             let (endpoint, open, flight, stop) = (endpoint.clone(), open.clone(), flight2.clone(), stop2.clone());
-            std::thread::spawn(move || {
+            let slot = CounterGuard(open);
+            let _ = std::thread::Builder::new().spawn(move || {
+                let _slot = slot;
                 connection(stream, port, &endpoint, &flight, &stop);
-                open.fetch_sub(1, Ordering::SeqCst);
             });
         }
     })?;
     Ok(Server { port, stop, in_flight, thread: Some(thread) })
+}
+
+struct CounterGuard<T: std::ops::Deref<Target = AtomicUsize>>(T);
+impl<T: std::ops::Deref<Target = AtomicUsize>> Drop for CounterGuard<T> {
+    fn drop(&mut self) {
+        self.0.fetch_sub(1, Ordering::SeqCst);
+    }
+}
+
+struct TimedReader {
+    stream: TcpStream,
+    until: Instant,
+}
+
+fn remaining(until: Instant) -> std::io::Result<Duration> {
+    let left = until.saturating_duration_since(Instant::now());
+    if left.is_zero() {
+        Err(std::io::ErrorKind::TimedOut.into())
+    } else {
+        Ok(left)
+    }
+}
+
+impl Read for TimedReader {
+    fn read(&mut self, buf: &mut [u8]) -> std::io::Result<usize> {
+        self.stream.set_read_timeout(Some(remaining(self.until)?))?;
+        self.stream.read(buf)
+    }
 }
 
 struct Request {
@@ -145,7 +195,7 @@ impl Request {
 }
 
 /// Request line and headers within `seconds`; `Err(Some(status))` for a malformed request.
-fn read_head(reader: &mut BufReader<TcpStream>, seconds: u64) -> Result<Option<Request>, Option<u16>> {
+fn read_head(reader: &mut BufReader<TimedReader>, seconds: u64) -> Result<Option<Request>, Option<u16>> {
     let until = Instant::now() + Duration::from_secs(seconds);
     let mut lines: Vec<String> = Vec::new();
     let mut total = 0usize;
@@ -154,7 +204,7 @@ fn read_head(reader: &mut BufReader<TcpStream>, seconds: u64) -> Result<Option<R
         if left.is_zero() {
             return Err(None);
         }
-        let _ = reader.get_ref().set_read_timeout(Some(left));
+        reader.get_mut().until = until;
         let mut line = Vec::new();
         match reader.by_ref().take(65537).read_until(b'\n', &mut line) {
             Ok(0) => return if lines.is_empty() { Ok(None) } else { Err(None) },
@@ -212,8 +262,18 @@ fn write_reply(stream: &mut TcpStream, status: u16, headers: &[(&str, String)], 
         head += &format!("{k}: {v}\r\n");
     }
     head += "\r\n";
-    stream.write_all(head.as_bytes())?;
-    stream.write_all(body)?;
+    let until = Instant::now() + Duration::from_secs(BODY_SECONDS);
+    for mut bytes in [head.as_bytes(), body] {
+        while !bytes.is_empty() {
+            stream.set_write_timeout(Some(remaining(until)?))?;
+            match stream.write(bytes) {
+                Ok(0) => return Err(std::io::ErrorKind::WriteZero.into()),
+                Ok(n) => bytes = &bytes[n..],
+                Err(e) if e.kind() == std::io::ErrorKind::Interrupted => continue,
+                Err(e) => return Err(e),
+            }
+        }
+    }
     stream.flush()
 }
 
@@ -257,7 +317,7 @@ fn same(a: &[u8], b: &[u8]) -> bool {
 
 fn connection(stream: TcpStream, port: u16, endpoint: &Endpoint, in_flight: &AtomicUsize, stop: &AtomicBool) {
     let Ok(mut writer) = stream.try_clone() else { return };
-    let mut reader = BufReader::new(stream);
+    let mut reader = BufReader::new(TimedReader { stream, until: Instant::now() });
     let mut seconds = HEADER_SECONDS;
     while !stop.load(Ordering::SeqCst) {
         let request = match read_head(&mut reader, seconds) {
@@ -279,7 +339,7 @@ fn connection(stream: TcpStream, port: u16, endpoint: &Endpoint, in_flight: &Ato
 
 /// Port of `Handler.route`; false when the connection closes.
 fn route(
-    reader: &mut BufReader<TcpStream>,
+    reader: &mut BufReader<TimedReader>,
     writer: &mut TcpStream,
     request: &Request,
     port: u16,
@@ -308,13 +368,9 @@ fn route(
         return false;
     }
     let challenge = [("WWW-Authenticate", "Bearer realm=\"Grainy\"".to_owned())];
-    if !token_ok(&endpoint.token) {
-        early(writer, 401, &challenge, service);
-        return false;
-    }
     let authorization = request.header("Authorization").unwrap_or("");
     let (scheme, value) = authorization.split_once(' ').unwrap_or((authorization, ""));
-    if !scheme.eq_ignore_ascii_case("bearer") || !same(value.trim().as_bytes(), endpoint.token.as_bytes()) {
+    if !scheme.eq_ignore_ascii_case("bearer") || !endpoint.token.accepts(value.trim()) {
         early(writer, 401, &challenge, service);
         return false;
     }
@@ -339,7 +395,7 @@ fn route(
         early(writer, 415, &[], service);
         return false;
     }
-    let _ = reader.get_ref().set_read_timeout(Some(Duration::from_secs(BODY_SECONDS)));
+    reader.get_mut().until = Instant::now() + Duration::from_secs(BODY_SECONDS);
     let mut body = vec![0u8; size as usize];
     if reader.read_exact(&mut body).is_err() {
         return false;
@@ -365,10 +421,10 @@ fn route(
     let deadline = Instant::now() + Duration::from_secs(DEADLINE_SECONDS);
     let started = Instant::now();
     in_flight.fetch_add(1, Ordering::SeqCst);
+    let _flight = CounterGuard(in_flight);
     let tools = SlotTools { tools: endpoint.tools.as_ref(), service };
     let outcome = endpoint.protocol.handle(&message, &request.headers, flavour, &tools, deadline);
     let sent = reply(writer, outcome.status, outcome.body.as_ref());
-    in_flight.fetch_sub(1, Ordering::SeqCst);
     if outcome.status != 202 {
         note(service, &message, outcome.body.as_ref(), started);
     }
@@ -391,4 +447,16 @@ fn note(service: &McpService, message: &Value, body: Option<&Value>, _started: I
         _ => "ok".into(),
     };
     service.note(&name.chars().take(64).collect::<String>(), &result);
+}
+
+#[cfg(test)]
+#[test]
+fn expired_io_and_unwound_slots_release_resources() {
+    assert_eq!(remaining(Instant::now()).unwrap_err().kind(), std::io::ErrorKind::TimedOut);
+    let semaphore = Arc::new(crate::service::Semaphore::new(1));
+    let _ = std::panic::catch_unwind(|| {
+        let _permit = semaphore.permit(0.).unwrap();
+        panic!("generated failure")
+    });
+    assert!(semaphore.permit(0.).is_some());
 }

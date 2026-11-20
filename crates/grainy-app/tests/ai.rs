@@ -416,7 +416,7 @@ fn program_arguments_and_run_files_are_the_oracles() {
             _ => {}
         }
         let request = unplace(&row["request"], &root);
-        let r = Request {
+        let mut r = Request {
             executable: request["executable"].as_array().unwrap().iter().map(|v| text(v).to_owned()).collect(),
             workspace: PathBuf::from(text(&request["workspace"])),
             server: server_order(&request["server"]),
@@ -437,6 +437,11 @@ fn program_arguments_and_run_files_are_the_oracles() {
         }
         let files: Value = serde_json::to_value(tree_files(&r.workspace)).unwrap();
         assert_eq!(files, unplace(&row["files"], &root), "{name}");
+        if text(&row["kind"]) == "codex" && name == "model-only" {
+            r.prompt = "- adjust exposure".into();
+            let argv = codex_command(&r, &sys).unwrap();
+            assert_eq!(&argv[argv.len() - 2..], ["--", "- adjust exposure"]);
+        }
     }
 }
 
@@ -690,6 +695,7 @@ fn macos_sign_in_and_installers_open_terminal_scripts() {
 #[derive(Clone, Default)]
 struct FakeNet {
     taken: Arc<Mutex<Vec<u16>>>,
+    active: Arc<Mutex<grainy_mcp::http::LiveToken>>,
     bound: Arc<Mutex<Vec<u16>>>,
 }
 
@@ -703,11 +709,12 @@ impl Bound for FakeServer {
 }
 
 impl Binder for FakeNet {
-    fn bind(&mut self, port: u16, _endpoint: Endpoint) -> std::io::Result<Box<dyn Bound>> {
+    fn bind(&mut self, port: u16, endpoint: Endpoint) -> std::io::Result<Box<dyn Bound>> {
         self.bound.lock().unwrap().push(port);
         if self.taken.lock().unwrap().contains(&port) {
             return Err(std::io::Error::new(std::io::ErrorKind::AddrInUse, "address in use"));
         }
+        *self.active.lock().unwrap() = endpoint.token;
         Ok(Box::new(FakeServer(port)))
     }
 }
@@ -811,7 +818,12 @@ fn the_connection_starts_stops_and_writes_what_the_oracle_writes() {
     check(&connection, Value::Null, take(&net));
     let r = connection.start(None);
     check(&connection, json!(r), take(&net));
+    let previous = connection.token().unwrap();
+    let live = net.active.lock().unwrap().clone();
+    assert!(live.accepts(&previous));
     connection.regenerate_token().unwrap();
+    assert!(!live.accepts(&previous));
+    assert!(live.accepts(&connection.token().unwrap()));
     check(&connection, Value::Null, take(&net));
     let r = connection.change_port();
     check(&connection, json!(r), take(&net));

@@ -121,7 +121,11 @@ impl NetworkBackend {
         let layout = Layout::current();
         let launch_layout = layout.clone();
         NetworkBackend {
-            open: Arc::new(|url: &str| get(url, &download_headers())),
+            open: Arc::new(|url: &str| {
+                net::get_with_budget(url, &download_headers(), updater::TIMEOUT, 30 * 60)
+                    .map(|reader| Box::new(reader) as Box<dyn Read>)
+                    .map_err(io_error)
+            }),
             launcher: Arc::new(move |staged: &Path, app: &Path, arguments: &[String]| {
                 updater::launch_for(staged, app, arguments, &launch_layout, &updater::RS_PACKAGE)
             }),
@@ -205,10 +209,35 @@ pub fn finish_arguments(args: &[String]) -> Option<(PathBuf, i64, Vec<String>)> 
     if args.first().map(String::as_str) != Some("--finish-update") {
         return None;
     }
+    if args.get(2)?.as_str() != "--wait-pid" {
+        return None;
+    }
     let app = PathBuf::from(args.get(1)?);
     let pid = args.get(3)?.parse().ok()?;
     let rest = args.iter().position(|a| a == "--").map_or_else(Vec::new, |at| args[at + 1..].to_vec());
     Some((app, pid, rest))
+}
+
+fn valid_handover(app: &Path, staged: &Path, executable: &Path, layout: &Layout) -> bool {
+    let locations = crate::paths::Locations::current();
+    let package = &updater::RS_PACKAGE;
+    let work = updater::work_folder_for(app, layout, package);
+    if !app.is_absolute() || [app, &work, staged].iter().any(|p| crate::paths::is_oracle_folder(p, &locations)) {
+        return false;
+    }
+    let (expected, program) = if layout.system.is_mac() {
+        if app.file_name() != Some(std::ffi::OsStr::new(package.mac.name)) {
+            return false;
+        }
+        (work.join("new").join(package.mac.name), package.mac.program)
+    } else {
+        (work.join("new"), package.program)
+    };
+    let same = |a: &Path, b: &Path| match (a.canonicalize(), b.canonicalize()) {
+        (Ok(a), Ok(b)) => a == b,
+        _ => false,
+    };
+    same(&expected, staged) && same(&expected.join(program), executable)
 }
 
 /// Port of `run_finish` (main.py `--finish-update`), run by the new version from its staged folder: replaces the
@@ -228,6 +257,9 @@ pub fn run_finish(args: &[String]) -> Option<i32> {
         executable.parent().map(Path::to_path_buf)
     }
     .unwrap_or_default();
+    if !valid_handover(&app, &staged, &executable, &layout) {
+        return Some(1);
+    }
     let error = updater::finish_logged_for(&app, &staged, pid, &layout, &updater::RS_PACKAGE);
     if !error.is_empty() {
         log::error!("update not finished: {error}");
@@ -235,6 +267,7 @@ pub fn run_finish(args: &[String]) -> Option<i32> {
             "{}",
             crate::text::tr_with("업데이트하지 못했습니다. 이전 버전을 그대로 사용합니다.\n{0}", &[&error])
         );
+        return Some(1);
     }
     let started = if layout.system.is_mac() {
         let program = app.join(updater::RS_PACKAGE.mac.program);
@@ -250,8 +283,8 @@ pub fn run_finish(args: &[String]) -> Option<i32> {
         let target = app.join(updater::RS_PACKAGE.program);
         target.is_file().then(|| std::process::Command::new(&target).args(&arguments).current_dir(&app).spawn())
     };
-    if let Some(Err(e)) = started {
+    if let Some(Err(e)) = &started {
         log::error!("the updated program did not start: {e}");
     }
-    Some(if error.is_empty() { 0 } else { 1 })
+    Some(i32::from(!matches!(started, Some(Ok(_)))))
 }

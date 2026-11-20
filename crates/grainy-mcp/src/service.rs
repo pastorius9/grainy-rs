@@ -49,7 +49,17 @@ pub struct Semaphore {
     signal: Condvar,
 }
 
+pub(crate) struct Permit(Arc<Semaphore>);
+impl Drop for Permit {
+    fn drop(&mut self) {
+        self.0.release();
+    }
+}
+
 impl Semaphore {
+    pub(crate) fn permit(self: &Arc<Self>, seconds: f64) -> Option<Permit> {
+        self.acquire(seconds).then(|| Permit(self.clone()))
+    }
     /// A semaphore with `count` permits.
     pub fn new(count: usize) -> Self {
         Self { free: Mutex::new(count), signal: Condvar::new() }
@@ -300,11 +310,11 @@ pub struct McpService {
     tokens: Mutex<TokenSource>,
     local_time: Box<dyn Fn() -> String + Send + Sync>,
     /// `render_lock`: one preview or contact sheet at a time.
-    pub render_lock: Semaphore,
+    pub render_lock: Arc<Semaphore>,
     /// `io_slots`: bounded file reads (`mcp_io.run`).
-    pub io_slots: Semaphore,
+    pub io_slots: Arc<Semaphore>,
     /// `calls`: tool calls handled at once (`mcp_http.SlotTools`).
-    pub calls: Semaphore,
+    pub calls: Arc<Semaphore>,
 }
 
 impl McpService {
@@ -340,9 +350,9 @@ impl McpService {
             }),
             tokens: Mutex::new(tokens),
             local_time,
-            render_lock: Semaphore::new(1),
-            io_slots: Semaphore::new(4),
-            calls: Semaphore::new(4),
+            render_lock: Arc::new(Semaphore::new(1)),
+            io_slots: Arc::new(Semaphore::new(4)),
+            calls: Arc::new(Semaphore::new(4)),
         })
     }
 

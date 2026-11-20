@@ -93,16 +93,16 @@ pub fn poll(cx: &mut AppContext) {
         return;
     }
     let folder = cx.doc.library_folder();
-    let stored = cx.doc.preference("hdr_sdr_preview").and_then(|v| v.as_bool()).unwrap_or(false);
-    let state = cx.state::<HdrState>();
-    if state.loaded.as_ref() != Some(&folder) {
+    if cx.state::<HdrState>().loaded.as_ref() != Some(&folder) {
+        let stored = cx.doc.preference("hdr_sdr_preview").and_then(|v| v.as_bool()).unwrap_or(false);
+        let state = cx.state::<HdrState>();
         state.loaded = Some(folder);
         if state.view.sdr_preview != stored {
             state.view.sdr_preview = stored;
             bump(state);
         }
     }
-    let view = state.view;
+    let view = cx.state::<HdrState>().view;
     cx.renderer.set_hdr_view(view);
 }
 

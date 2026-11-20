@@ -202,8 +202,7 @@ pub fn after_crash(cx: &mut AppContext) {
 /// Whether a job the install must not interrupt is running (`export_running`, `import_busy`, `import_scans`,
 /// `maintenance_running`, `command_running`).
 fn busy(cx: &AppContext) -> bool {
-    ["import", "export", "maintenance", "files", "auto", "previews"].iter().any(|kind| cx.jobs.running(kind))
-        || cx.dialog_open("maintenance")
+    !cx.jobs.jobs_idle() || !cx.renderer.idle() || crate::ai::running_job(cx).is_some() || cx.dialog_open("maintenance")
 }
 
 /// The box shown when a job is running (`QMessageBox.information` of `install`).
@@ -236,11 +235,16 @@ pub fn install(cx: &mut AppContext, release: Release) {
     };
     let work = updater::work_folder_for(&app, &layout, &updater::RS_PACKAGE);
     let backend: Arc<dyn Backend> = cx.state::<UpdateEnv>().backend.clone().unwrap_or_else(|| Arc::new(Unavailable));
-    let arguments = cx
-        .state::<UpdateEnv>()
-        .arguments
-        .clone()
-        .unwrap_or_else(|| updater::restart_arguments(&std::env::args().skip(1).collect::<Vec<_>>()));
+    let arguments = match cx.state::<UpdateEnv>().arguments.clone() {
+        Some(args) => args,
+        None => match std::env::args_os().skip(1).map(|arg| arg.into_string()).collect::<Result<Vec<_>, _>>() {
+            Ok(args) => updater::restart_arguments(&args),
+            Err(_) => {
+                fail(cx, "Cannot preserve a non-Unicode restart argument".into());
+                return;
+            }
+        },
+    };
     let shared = Shared::new(100);
     let (worker_shared, done_shared) = (shared.clone(), shared.clone());
     let launcher = backend.clone();
@@ -260,13 +264,19 @@ pub fn install(cx: &mut AppContext, release: Release) {
             match result {
                 Err(reason) => fail(cx, reason),
                 Ok(None) => cx.state::<UpdateEnv>().outcome = Some(Outcome::Cancelled),
-                Ok(Some(staged)) => match launcher.launch(&staged, &app, &arguments) {
-                    Ok(()) => {
-                        cx.state::<UpdateEnv>().outcome = Some(Outcome::Handover);
-                        cx.egui.send_viewport_cmd(egui::ViewportCommand::Close);
+                Ok(Some(_)) if busy(cx) => {
+                    cx.state::<UpdateEnv>().outcome = Some(Outcome::Refused);
+                    cx.open_dialog(Box::new(busy_box()));
+                }
+                Ok(Some(staged)) => {
+                    match cx.commit_document().and_then(|()| launcher.launch(&staged, &app, &arguments)) {
+                        Ok(()) => {
+                            cx.state::<UpdateEnv>().outcome = Some(Outcome::Handover);
+                            cx.egui.send_viewport_cmd(egui::ViewportCommand::Close);
+                        }
+                        Err(reason) => fail(cx, reason),
                     }
-                    Err(reason) => fail(cx, reason),
-                },
+                }
             }
         },
     );

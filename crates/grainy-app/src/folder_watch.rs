@@ -188,7 +188,7 @@ pub fn scan_now(cx: &mut AppContext) -> bool {
 /// The listing runs on a worker thread; `FolderSync.found` gets its result.
 fn start_scan(cx: &mut AppContext, job: ScanJob) {
     let (revision, removed) = (job.revision, job.removed.clone());
-    cx.jobs.spawn(
+    cx.spawn_document_job(
         SCAN_KIND,
         "",
         move |_| Ok(job.run()),
@@ -227,6 +227,20 @@ fn start_scan(cx: &mut AppContext, job: ScanJob) {
             }
         },
     );
+}
+
+/// Persist watched-folder export exclusions while the owning library is still attached.
+pub(crate) fn shutdown(cx: &mut AppContext) {
+    with_sync(cx, |state, catalog, _| {
+        if let Some(sync) = &mut state.sync {
+            reconcile(sync, catalog);
+            if let Err(e) = sync.shutdown(catalog) {
+                log::warn!("folder exclusions: {e}");
+            }
+        }
+        state.sync = None;
+        state.library = None;
+    });
 }
 
 /// An import finished: `FolderSync.imported` for the photos added, `import_failed` for the files the automatic

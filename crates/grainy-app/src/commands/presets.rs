@@ -572,7 +572,7 @@ pub fn export_to(cx: &mut AppContext, path: PathBuf) {
     cx.jobs.spawn(
         "preset",
         tr("프리셋"),
-        move |_| std::fs::write(&path, export_text(&path, &settings)).map_err(text),
+        move |_| crate::paths::write_json(&path, &export_text(&path, &settings)).map_err(text),
         |cx: &mut AppContext, result| {
             if let Err(message) = result {
                 preset_review::show_error(cx, &message);

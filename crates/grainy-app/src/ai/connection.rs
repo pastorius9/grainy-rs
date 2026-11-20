@@ -230,12 +230,14 @@ impl Binder for HttpBinder {
 }
 
 /// `secrets.token_hex(n)` from SQLite's cryptographically strong generator (no new dependency).
+fn random_hex(bytes: usize) -> Option<String> {
+    let db = grainy_catalog::rusqlite::Connection::open_in_memory().ok()?;
+    db.query_row(&format!("SELECT lower(hex(randomblob({bytes})))"), [], |r| r.get::<_, String>(0)).ok()
+}
+
+/// Unique non-secret run identifiers also used for random port selection.
 pub fn token_hex(bytes: usize) -> String {
-    let random = || -> Option<String> {
-        let db = grainy_catalog::rusqlite::Connection::open_in_memory().ok()?;
-        db.query_row(&format!("SELECT lower(hex(randomblob({bytes})))"), [], |r| r.get::<_, String>(0)).ok()
-    };
-    random().unwrap_or_else(|| {
+    random_hex(bytes).unwrap_or_else(|| {
         // Never reached in practice: an in-memory database always opens.
         let nanos = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0, |d| d.as_nanos());
         format!("{nanos:0width$x}", width = bytes * 2).chars().take(bytes * 2).collect()
@@ -260,7 +262,7 @@ pub struct Sources {
 
 impl Default for Sources {
     fn default() -> Self {
-        Self { token: Box::new(|| token_hex(32)), port: Box::new(random_port), service: None }
+        Self { token: Box::new(|| random_hex(32).unwrap_or_default()), port: Box::new(random_port), service: None }
     }
 }
 
@@ -306,6 +308,7 @@ pub struct Connection {
     pub service: Arc<McpService>,
     bridge: Bridge,
     server: Option<Box<dyn Bound>>,
+    live_token: grainy_mcp::http::LiveToken,
     gui: Option<Arc<GuiQueue>>,
     /// `running`.
     pub running: bool,
@@ -350,6 +353,7 @@ impl Connection {
             library: setup.library,
             service,
             server: None,
+            live_token: Default::default(),
             gui: None,
             running: false,
             error: None,
@@ -447,6 +451,9 @@ impl Connection {
     fn ensure_secrets(&mut self) -> std::io::Result<()> {
         if self.token().is_none() {
             let token = (self.tokens)();
+            if !is_token(&token) {
+                return Err(std::io::Error::other("credential generation failed"));
+            }
             self.save("mcp_token", Json::Str(token))?;
         }
         Ok(())
@@ -480,17 +487,18 @@ impl Connection {
         }));
         let tools: Arc<dyn grainy_mcp::Tools + Send + Sync> =
             Arc::new(GrainyTools::new(self.service.clone(), Some(gui.clone() as Arc<dyn Gui>)));
-        let endpoint = |token: &str| Endpoint {
+        self.live_token = token.into();
+        let endpoint = || Endpoint {
             protocol: Protocol::new(&self.version),
             tools: tools.clone(),
             service: self.service.clone(),
-            token: token.to_owned(),
+            token: self.live_token.clone(),
         };
-        let mut bound = self.binder.bind(chosen, endpoint(&token));
+        let mut bound = self.binder.bind(chosen, endpoint());
         if bound.is_err() && first {
             for _ in 0..20 {
                 let candidate = (self.ports)();
-                let attempt = self.binder.bind(candidate, endpoint(&token));
+                let attempt = self.binder.bind(candidate, endpoint());
                 let ok = attempt.is_ok();
                 bound = attempt;
                 if ok {
@@ -581,7 +589,11 @@ impl Connection {
     /// Port of `regenerate_token()`: a new key (a failed save goes to the caller).
     pub fn regenerate_token(&mut self) -> std::io::Result<()> {
         let token = (self.tokens)();
-        self.save("mcp_token", Json::Str(token))?;
+        if !is_token(&token) {
+            return Err(std::io::Error::other("credential generation failed"));
+        }
+        self.save("mcp_token", Json::Str(token.clone()))?;
+        self.live_token.replace(token);
         self.note("key", "new key");
         if self.running && self.write_bridges() {
             self.write_connection();

@@ -3,17 +3,17 @@
 //! copy); the application then hands the copies to the normal import. Sources are never changed or removed, and
 //! existing files are never overwritten.
 
-use crate::fsops::{copy_stat, digest_bytes};
+use crate::fsops::{copy_new_verified, digest_bytes};
 use crate::pathx::{self, name, norm_str, stem_suffix, with_name, with_suffix};
 use crate::pyformat::{self, strptime_exif, Arg};
 use crate::{Cancel, Error, Result};
 use chrono::{Datelike, NaiveDateTime, Timelike};
 use grainy_catalog::folders::Platform;
 use grainy_catalog::Catalog;
-use grainy_i18n::{tr, tr_with};
+use grainy_i18n::tr;
 use serde_json::{Map, Value};
 use std::collections::{BTreeSet, HashSet};
-use std::fs::{self, File, OpenOptions};
+use std::fs;
 use std::io;
 use std::path::Path;
 
@@ -192,34 +192,18 @@ pub fn free_name(platform: Platform, path: &str) -> String {
 }
 
 /// Port of `import_copy._copy`: copy to a new file (exclusive create) and verify the bytes; returns the written
-/// path. A stale or foreign `.grainy-part` file is an error, never overwritten.
+/// path. A concurrent publication picks the next free name without replacing any existing file.
 pub fn copy_verified(platform: Platform, source: &str, target: &str) -> Result<String> {
-    let target = free_name(platform, target);
-    let parent = pathx::parent(platform, &target);
+    let parent = pathx::parent(platform, target);
     fs::create_dir_all(&parent).map_err(|e| Error::os(&e, Path::new(&parent), false))?;
-    let partial = with_name(platform, &target, &format!("{}.grainy-part", name(platform, &target)));
-    {
-        let mut input = File::open(source).map_err(|e| Error::os(&e, Path::new(source), true))?;
-        let mut output = OpenOptions::new()
-            .write(true)
-            .create_new(true)
-            .open(&partial)
-            .map_err(|e| Error::os(&e, Path::new(&partial), true))?;
-        io::copy(&mut input, &mut output).map_err(|e| Error::os(&e, Path::new(&partial), true))?;
+    loop {
+        let candidate = free_name(platform, target);
+        match copy_new_verified(Path::new(source), Path::new(&candidate)) {
+            Ok(()) => return Ok(candidate),
+            Err(Error::Os { kind: io::ErrorKind::AlreadyExists, .. }) if Path::new(&candidate).is_file() => continue,
+            Err(error) => return Err(error),
+        }
     }
-    copy_stat(Path::new(source), Path::new(&partial)).map_err(|e| Error::os(&e, Path::new(&partial), false))?;
-    let same = digest_bytes(Path::new(&partial)).map_err(|e| Error::os(&e, Path::new(&partial), true))?
-        == digest_bytes(Path::new(source)).map_err(|e| Error::os(&e, Path::new(source), true))?;
-    if !same {
-        let _ = fs::remove_file(&partial);
-        return Err(Error::Os {
-            message: tr_with("복사한 파일이 원본과 다릅니다: {0}", &[&name(platform, source)]),
-            kind: io::ErrorKind::InvalidData,
-        });
-    }
-    let target = if Path::new(&target).exists() { free_name(platform, &target) } else { target }; // appeared meanwhile
-    fs::rename(&partial, &target).map_err(|e| Error::os(&e, Path::new(&target), false))?;
-    Ok(target)
 }
 
 /// What [`execute`] did.

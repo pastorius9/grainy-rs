@@ -350,7 +350,7 @@ pub fn load_photo(path: impl AsRef<Path>, max_size: Option<usize>, settings: &gr
     let path = path.as_ref();
     check_source_kind(path)?;
     if RAW_EXTENSIONS.contains(&extension(path).as_str()) {
-        return load_raw(path, max_size, settings);
+        return load_raw(path, max_size, settings, None);
     }
     let options =
         LoadOptions { max_size, working_space: settings.str("working_space").to_owned(), ..LoadOptions::default() };
@@ -386,7 +386,12 @@ fn fingerprint(path: &Path, size: u64, modified: std::time::SystemTime) -> Resul
 /// The RAW branch of `engine.load_image`. The metadata dictionary starts with the file facts and the EXIF values
 /// (`read_metadata`), then `rawcolor.decode` (or the legacy path) adds its keys, then the size, decoder and
 /// orientation. Half-size development is used for previews only (the longest side is more than twice `max_size`).
-fn load_raw(path: &Path, max_size: Option<usize>, settings: &grainy_core::Settings) -> Result<Loaded> {
+fn load_raw(
+    path: &Path,
+    max_size: Option<usize>,
+    settings: &grainy_core::Settings,
+    secondary: Option<(usize, &mut Option<Photo>)>,
+) -> Result<Loaded> {
     let stat = std::fs::metadata(path)?;
     let mut metadata = Metadata::new();
     metadata.insert("filename".into(), Value::String(path.file_name().unwrap_or_default().to_string_lossy().into()));
@@ -441,17 +446,64 @@ fn load_raw(path: &Path, max_size: Option<usize>, settings: &grainy_core::Settin
     };
     metadata.insert("source_orientation".into(), Value::from(orientation));
     let photo = match max_size.filter(|m| *m > 0) {
-        Some(longest) => match photo {
-            Photo::Linear(rgb) => Photo::Linear(grainy_codecs::resize_float(&rgb, longest)?),
-            Photo::Camera(camera) => {
-                let pixels = grainy_codecs::resize_float(camera.pixels(), longest)?;
-                let resized = CameraSource::new(pixels, camera.raw_info().clone()).map_err(|e| raw_error(path, e))?;
-                Photo::Camera(Box::new(resized))
+        Some(longest) => {
+            let visible = resize_photo(&photo, longest, path)?;
+            if let Some((size, slot)) = secondary {
+                // Both sizes use the identical half-size LibRaw decode. Move its pre-resize
+                // pixels to the analysis job; a second resize of the visible image is different.
+                if width.max(height) as usize > longest.max(size).saturating_mul(2) {
+                    *slot = Some(photo);
+                }
             }
-        },
+            visible
+        }
         None => photo,
     };
     Ok(Loaded { photo, metadata })
+}
+
+/// The pre-resize half-size RAW of `engine.load_image`, reusable for a second preview size.
+pub struct AnalysisSeed {
+    photo: Photo,
+    size: usize,
+    path: PathBuf,
+}
+
+impl AnalysisSeed {
+    /// Complete the deferred resize of `engine.load_image` on the analysis thread.
+    pub fn finish(self) -> Result<Photo> {
+        resize_photo(&self.photo, self.size, &self.path)
+    }
+}
+
+fn resize_photo(photo: &Photo, longest: usize, path: &Path) -> Result<Photo> {
+    Ok(match photo {
+        Photo::Linear(rgb) => Photo::Linear(grainy_codecs::resize_float(rgb, longest)?),
+        Photo::Camera(camera) => {
+            let pixels = grainy_codecs::resize_float(camera.pixels(), longest)?;
+            Photo::Camera(Box::new(
+                CameraSource::new(pixels, camera.raw_info().clone()).map_err(|e| raw_error(path, e))?,
+            ))
+        }
+    })
+}
+
+/// Port of the two preview sizes of `engine.load_image`: hand off a compatible decoded RAW
+/// without delaying the visible frame for the analysis resize. Other files use the usual loader.
+pub fn load_preview(
+    path: &Path,
+    size: usize,
+    analysis_size: usize,
+    settings: &grainy_core::Settings,
+) -> Result<(Loaded, Option<AnalysisSeed>)> {
+    if !RAW_EXTENSIONS.contains(&extension(path).as_str()) {
+        return Ok((load_photo(path, Some(size), settings)?, None));
+    }
+    let _span = grainy_core::timing::Span::new("load_photo");
+    check_source_kind(path)?;
+    let mut seed = None;
+    let loaded = load_raw(path, Some(size), settings, Some((analysis_size, &mut seed)))?;
+    Ok((loaded, seed.map(|photo| AnalysisSeed { photo, size: analysis_size, path: path.to_owned() })))
 }
 
 /// Port of luma/engine.py `export_image(source_path, output_path, settings, format, quality, longest,

@@ -83,7 +83,7 @@ pub fn duplicate_groups(platform: Platform, photos: &[Value]) -> Result<Vec<Vec<
 /// moved files.
 pub fn move_files(catalog: &Catalog, mapping: &[(String, String)]) -> Result<usize> {
     let p = catalog.platform();
-    let mut pairs: Vec<(String, String)> = Vec::new();
+    let mut pairs: Vec<(String, String, String)> = Vec::new();
     let mut targets = HashSet::new();
     for (source, destination) in mapping {
         let (src, dst) = (resolve(p, source), resolve(p, destination));
@@ -100,21 +100,21 @@ pub fn move_files(catalog: &Catalog, mapping: &[(String, String)]) -> Result<usi
             return Err(Error::value("대상 폴더가 없습니다."));
         }
         targets.insert(casefold(&dst));
-        pairs.push((src, dst));
+        pairs.push((src, dst, p.stored_path(source)));
     }
     let mut completed: Vec<(String, String)> = Vec::new();
     let outcome = (|| -> Result<()> {
-        for (src, dst) in &pairs {
+        for (src, dst, _) in &pairs {
             move_file(Path::new(src), Path::new(dst))?;
             completed.push((src.clone(), dst.clone()));
         }
         crate::tx(catalog, || {
-            for (src, dst) in &pairs {
+            for (src, dst, supplied) in &pairs {
                 let stored = p.stored_path(dst);
                 let stored_name = name(p, &stored);
                 catalog.connection().execute(
-                    "UPDATE photos SET path=?,name=CASE WHEN virtual_source IS NULL THEN ? ELSE ? END WHERE path=? COLLATE NOCASE",
-                    params![stored, stored_name, format!("{stored_name} · 사본"), src],
+                    "UPDATE photos SET path=?,name=CASE WHEN virtual_source IS NULL THEN ? ELSE ? END WHERE path=? COLLATE NOCASE OR path=? COLLATE NOCASE",
+                    params![stored, stored_name, format!("{stored_name} · 사본"), src, supplied],
                 )?;
                 catalog
                     .connection()

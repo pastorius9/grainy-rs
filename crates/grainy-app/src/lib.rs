@@ -7,6 +7,7 @@
 pub mod adjustments;
 pub mod ai;
 pub mod app;
+mod basic_preview;
 pub mod commands;
 pub mod context;
 pub mod dialogs;
@@ -26,6 +27,7 @@ pub mod logger;
 pub mod masks;
 mod menus;
 pub mod menus_photo;
+mod monitor_preview;
 pub mod network;
 pub mod panels;
 pub mod paths;

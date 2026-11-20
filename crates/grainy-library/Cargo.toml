@@ -9,6 +9,7 @@ license.workspace = true
 [dependencies]
 grainy-imgproc = { path = "../grainy-imgproc" }
 grainy-core.workspace = true
+grainy-platform = { path = "../grainy-platform" }
 grainy-catalog = { path = "../grainy-catalog" }
 grainy-i18n = { path = "../grainy-i18n" }
 ndarray.workspace = true

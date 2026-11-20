@@ -9,11 +9,12 @@ use grainy_app::paths::Arguments;
 fn main() -> eframe::Result {
     grainy_app::logger::init();
     // The new version, started from its staged folder by an update: --finish-update APP --wait-pid PID -- ARGS.
-    let raw: Vec<String> = std::env::args().skip(1).collect();
-    if let Some(code) = grainy_app::network::run_finish(&raw) {
-        std::process::exit(code);
+    let raw: Vec<_> = std::env::args_os().skip(1).collect();
+    if raw.first().is_some_and(|arg| arg == "--finish-update") {
+        let args: Result<Vec<_>, _> = raw.into_iter().map(|arg| arg.into_string()).collect();
+        std::process::exit(args.ok().and_then(|args| grainy_app::network::run_finish(&args)).unwrap_or(2));
     }
-    let args = match Arguments::parse(std::env::args_os().skip(1)) {
+    let args = match Arguments::parse(raw) {
         Ok(args) => args,
         Err(message) => {
             eprintln!("{message}\nusage: grainy-app [--library <folder>] [--memory] [--lensfun <folder>] [--offline] [--smoke <folder>] [--debug] [<photo or folder>...]");

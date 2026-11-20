@@ -19,7 +19,7 @@ use crate::panels::Tool;
 use crate::text::tr;
 
 /// Job kinds of the menus' photo batches (`command_running`).
-const COMMAND_KINDS: [&str; 5] = ["auto", "auto_level", "crop_border", "preset", "metadata_refresh"];
+const COMMAND_KINDS: [&str; 6] = ["workflow", "auto", "auto_level", "crop_border", "preset", "metadata_refresh"];
 /// The MCP worker pool's job kind (`McpWindowState.pool`).
 pub const POOL_KIND: &str = "mcp";
 /// The AI import queue's job kind.

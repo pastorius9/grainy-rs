@@ -236,12 +236,22 @@ pub fn language_cancelled(cx: &mut AppContext, first_run: bool) {
 /// The folder with `CHANGELOG.md` and `assets/whats-new-en.md`: next to the program when they ship there, else
 /// the copies in the platform crate (development).
 pub fn notes_root() -> PathBuf {
-    if let Some(folder) = std::env::current_exe().ok().and_then(|exe| exe.parent().map(Path::to_path_buf)) {
-        if folder.join("CHANGELOG.md").is_file() {
-            return folder;
+    let exe = std::env::current_exe().unwrap_or_default();
+    let folder = exe.parent().unwrap_or(Path::new("."));
+    if folder.join("CHANGELOG.md").is_file() {
+        return folder.to_owned();
+    }
+    // A Cargo build can use the development assets relative to its target directory. An
+    // installed executable must never contain or look up a developer's absolute checkout.
+    for target in folder.ancestors().filter(|p| p.file_name().is_some_and(|n| n == "target")) {
+        if let Some(workspace) = target.parent() {
+            let assets = workspace.join("crates/grainy-platform/assets/root");
+            if assets.join("CHANGELOG.md").is_file() {
+                return assets;
+            }
         }
     }
-    Path::new(env!("CARGO_MANIFEST_DIR")).join("..").join("grainy-platform").join("assets").join("root")
+    folder.to_owned()
 }
 
 /// Port of `DesktopSession.whats_new`: once after an update of the shipped program, what changed since the

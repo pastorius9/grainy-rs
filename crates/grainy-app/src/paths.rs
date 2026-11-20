@@ -10,9 +10,8 @@
 //! The path logic follows `grainy_platform::user_paths` (port of luma/user_paths.py), with the Rust app's folder
 //! name; every function takes an [`grainy_platform::Environment`] so all systems are tested anywhere.
 
-use std::path::{Component, Path, PathBuf};
+use std::path::{Path, PathBuf};
 
-use grainy_catalog::folders::Platform;
 use grainy_platform::{Environment, System};
 
 /// The folder name of the Rust app's data.
@@ -78,90 +77,35 @@ impl Locations {
     }
 }
 
-/// The path with `.` and `..` resolved lexically and compared as the system's file system compares names: on
-/// Windows without case, on macOS (APFS, HFS+) without case and Unicode composition (NFC and lower case, the
-/// oracle's `folders.path_key` there), elsewhere exactly.
-fn key(path: &Path, system: System) -> Vec<String> {
-    let absolute = std::path::absolute(path).unwrap_or_else(|_| path.to_path_buf());
-    let mut parts: Vec<String> = Vec::new();
-    for component in absolute.components() {
-        match component {
-            Component::ParentDir => {
-                parts.pop();
-            }
-            Component::CurDir => {}
-            other => {
-                let text = other.as_os_str().to_string_lossy().replace('/', "\\");
-                let text = text.trim_end_matches('\\').to_owned();
-                parts.push(match system {
-                    System::Windows => text.to_lowercase(),
-                    System::MacOs => Platform::Mac.stored_path(&text).to_lowercase(),
-                    System::Other => text,
-                });
-            }
-        }
-    }
-    parts
-}
+pub(crate) use grainy_platform::user_paths::is_within;
 
-// Resolve the existing prefix even when the final directory has not been created.
-// canonicalize(path) alone misses a new directory below a symlink or junction.
-fn resolved(path: &Path) -> PathBuf {
-    let absolute = std::path::absolute(path).unwrap_or_else(|_| path.to_path_buf());
-    let mut suffix = Vec::new();
-    let mut ancestor = absolute.as_path();
-    loop {
-        if let Ok(real) = std::fs::canonicalize(ancestor) {
-            let text = real.to_string_lossy();
-            let mut real = if let Some(unc) = text.strip_prefix(r"\\?\UNC\") {
-                PathBuf::from(format!(r"\\{unc}"))
-            } else {
-                PathBuf::from(text.strip_prefix(r"\\?\").unwrap_or(&text))
-            };
-            for part in suffix.iter().rev() {
-                real.push(part);
-            }
-            return real;
-        }
-        let (Some(name), Some(parent)) = (ancestor.file_name(), ancestor.parent()) else {
-            return absolute;
-        };
-        suffix.push(name.to_owned());
-        ancestor = parent;
-    }
-}
-
-/// Whether a snapshot target is the source directory or below it, including path aliases.
-pub(crate) fn is_within(path: &Path, root: &Path) -> bool {
-    let system = System::current();
-    key(path, system).starts_with(&key(root, system))
-        || key(&resolved(path), system).starts_with(&key(&resolved(root), system))
-}
-
-/// Whether `path` is one of the Python Grainy's folders or inside one (so it must not be opened for writing).
-/// The path as written and its resolved form (links, junctions and 8.3 short names of its existing part
-/// followed) are compared with the Python Grainy's folders as written and resolved: an 8.3 or linked
-/// `LOCALAPPDATA` (or home), or a link to one of the folders, names the same folder differently. For the Python
-/// Grainy's folders only their parent folder's real name is asked: the folders themselves and everything inside
-/// them are never opened, read or written.
+/// Whether a selected path lies inside the Python Grainy's protected data folders.
 pub fn is_oracle_folder(path: &Path, locations: &Locations) -> bool {
-    let system = locations.env.system;
-    let folders = locations.oracle_folders();
-    let protected: Vec<Vec<String>> = folders
-        .iter()
-        .map(|folder| key(folder, system))
-        .chain(folders.iter().map(|f| key(&resolved_parent(f), system)))
-        .collect();
-    let inside = |candidate: Vec<String>| protected.iter().any(|f| !f.is_empty() && candidate.starts_with(f));
-    inside(key(path, system)) || inside(key(&resolved(path), system))
+    grainy_platform::user_paths::is_oracle_folder(path, &locations.env)
 }
 
-/// `folder` with its parent resolved (links, junctions, 8.3 short names): the folder itself is never opened.
-fn resolved_parent(folder: &Path) -> PathBuf {
-    match (folder.parent(), folder.file_name()) {
-        (Some(parent), Some(name)) => resolved(parent).join(name),
-        _ => folder.to_path_buf(),
+/// Check a user-selected output before creating, replacing or recycling it.
+pub(crate) fn writable(path: &Path) -> std::io::Result<()> {
+    if is_oracle_folder(path, &Locations::current()) {
+        Err(std::io::Error::new(std::io::ErrorKind::PermissionDenied, "the Python Grainy folder is read-only"))
+    } else {
+        Ok(())
     }
+}
+
+/// Publish a settings export without opening an existing photo or following a destination symlink.
+pub(crate) fn write_json(path: &Path, data: &str) -> std::io::Result<()> {
+    use std::io::Write;
+    writable(path)?;
+    if !path.extension().is_some_and(|ext| ext.eq_ignore_ascii_case("json")) {
+        return Err(std::io::Error::other("a JSON filename is required"));
+    }
+    let parent = path.parent().filter(|p| !p.as_os_str().is_empty()).unwrap_or(Path::new("."));
+    let mut staged = tempfile::NamedTempFile::new_in(parent)?;
+    staged.write_all(data.as_bytes())?;
+    staged.as_file().sync_all()?;
+    staged.persist(path).map_err(|e| e.error)?;
+    Ok(())
 }
 
 /// The command line of the Rust app: `[--library <folder>] [--debug] [<photo or folder>...]`.
@@ -221,6 +165,15 @@ impl Arguments {
 mod tests {
     use super::*;
 
+    #[test]
+    fn preset_output_cannot_truncate_a_photo() {
+        let temp = tempfile::tempdir().unwrap();
+        let original = temp.path().join("photo.tiff");
+        std::fs::write(&original, b"generated").unwrap();
+        assert!(write_json(&original, "{}").is_err());
+        assert_eq!(std::fs::read(original).unwrap(), b"generated");
+    }
+
     #[cfg(windows)]
     fn windows(local: &str) -> Locations {
         Locations {
@@ -245,6 +198,12 @@ mod tests {
             assert_eq!(w.library_folder(), PathBuf::from(r"C:\Users\someone\AppData\Local\GrainyRS\Library"));
             assert_eq!(w.oracle_library(), PathBuf::from(r"C:\Users\someone\AppData\Local\Luma\Library"));
             assert_eq!(w.oracle_settings(), PathBuf::from(r"C:\Users\someone\AppData\Local\Grainy"));
+        }
+        #[cfg(windows)]
+        {
+            let env = windows(r"C:\\Generated\\Local").env;
+            assert!(grainy_platform::user_paths::contains_oracle(Path::new(r"C:\\Generated"), &env));
+            assert!(!grainy_platform::user_paths::contains_oracle(Path::new(r"C:\\Generated\\Photos"), &env));
         }
         let mac = Locations {
             env: Environment { system: System::MacOs, local_app_data: None, home: PathBuf::from("/Users/a") },

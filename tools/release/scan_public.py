@@ -60,7 +60,9 @@ except ImportError:  # pragma: no cover
     np = None
 
 REPO = Path(__file__).resolve().parents[2]
-DEFAULT_FOLDER = REPO.parent.parent / 'grainy-rs-public'
+import layout
+
+DEFAULT_FOLDER = layout.public_folder()
 DEFAULT_NAMES = REPO / '.scan-names.txt'
 NOREPLY = '177642243+pastorius9@users.noreply.github.com'
 
@@ -216,14 +218,18 @@ class Scan:
                     if binary_noise(m.start(), m.end()):
                         self.add('random binary match', where, offset(m.start()), category, '(binary)')
                         continue
-                    segment = m.group(1).decode('latin-1').strip().rstrip('.')
-                    base = Path('E:\\') if category.startswith('E') else Path('C:\\Users')
-                    exists = bool(segment) and (base / segment).exists() and segment.lower() not in (
-                        'public', 'default', 'all users', 'default user')
-                    if category.startswith('E') and not segment:
-                        exists = False
-                    shown = m.group(0).decode('latin-1')
-                    cls = 'real' if exists else 'generic example path'
+                    segment = m.group(1).decode('latin-1').strip().rstrip('.`);,]')
+                    # Machine-independent test folders used by the tests and goldens (a memory card, a
+                    # fallback drive, GitHub's runner account); anything else on E:\ or under C:\Users counts.
+                    examples = {'', 'public', 'default', 'all users', 'default user', 'someone',
+                                'example', 'user', 'test', 'testuser', 'generated', 'photos',
+                                'card', 'dcim', 'archive', 'x', 'fallback', 'runner~1', 'runneradmin'}
+                    if not text and len(segment) <= 2 and segment.casefold() not in examples:
+                        # Two bytes after "e:/" inside a binary file (pixel or table data), not a folder name.
+                        self.add('random binary match', where, offset(m.start()), category, '(binary)')
+                        continue
+                    cls = 'generic example path' if segment.casefold() in examples else 'real'
+                    shown = '(path withheld)'
                     self.add(cls, where, offset(m.start()), category, shown)
             for category, regex in TOKENS:
                 for m in regex.finditer(view):
@@ -374,9 +380,9 @@ def main(argv=None) -> int:
     user = windows_user()
     print(f'scanning {root}')
     print(f'Windows user name: {"read from the environment" if user else "NOT FOUND in the environment"}')
-    if names is None:
-        print('personal names: the names file is absent; scanned WITHOUT personal names')
-        names = []
+    if not names:
+        print('publication scan requires a nonempty personal names file')
+        return 2
     else:
         print(f'personal names: {len(names)} read from the names file')
     scan = Scan(root, user, names)

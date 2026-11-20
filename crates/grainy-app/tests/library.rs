@@ -444,6 +444,28 @@ fn a_read_only_snapshot_rejects_its_source_before_writing() {
 }
 
 #[test]
+fn concurrent_snapshots_read_committed_wal_without_pinning_the_writer() {
+    let dir = common::temp_dir("snapshot-wal");
+    let library = dir.join("hash#percent%library");
+    let writer = Catalog::new(&library).unwrap();
+    writer.add("first.png", None, None, true).unwrap();
+    let scratch = dir.join("scratch");
+    let old = CatalogDocument::open_read_only(&library, &scratch).unwrap();
+    writer.add("second.png", None, None, true).unwrap();
+    let new = CatalogDocument::open_read_only(&library, &scratch).unwrap();
+    let mut old = old;
+    old.refresh_now().unwrap();
+    let cache = old.thumb_cache(0).unwrap();
+    assert_ne!(cache.snapshot.as_ref(), Some(&library));
+    assert_eq!(old.catalog().photos().unwrap().len(), 1);
+    assert_eq!(new.catalog().photos().unwrap().len(), 2);
+    let busy: i64 = writer.connection().query_row("PRAGMA wal_checkpoint(TRUNCATE)", [], |r| r.get(0)).unwrap();
+    assert_eq!(busy, 0);
+    drop((old, new));
+    assert_eq!(std::fs::read_dir(scratch).unwrap().count(), 0);
+}
+
+#[test]
 fn a_read_only_library_writes_nothing() {
     let meta = case();
     let dir = common::temp_dir("read-only");

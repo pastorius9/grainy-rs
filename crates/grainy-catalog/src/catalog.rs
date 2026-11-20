@@ -51,6 +51,16 @@ pub struct Catalog {
     pub(crate) sources: Sources,
     reader: bool,
 }
+fn immutable_reader(path: &Path) -> Result<Connection> {
+    let name =
+        crate::path_text(path).replace(char::from(92), "/").replace('%', "%25").replace('?', "%3f").replace('#', "%23");
+    let uri = format!("file:{}{}?immutable=1", if name.starts_with("//") { "//" } else { "" }, name);
+    Ok(Connection::open_with_flags(
+        uri,
+        OpenFlags::SQLITE_OPEN_READ_ONLY | OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_NO_MUTEX,
+    )?)
+}
+
 impl Catalog {
     /// Port of `Catalog.__init__`, including WAL, migrations and historical folder registration.
     pub fn new(directory: impl AsRef<Path>) -> Result<Self> {
@@ -73,12 +83,9 @@ impl Catalog {
         let path = directory.join("catalog.sqlite");
         let flags = OpenFlags::SQLITE_OPEN_READ_ONLY | OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_NO_MUTEX;
         let db = if directory.join("catalog.sqlite-wal").exists() {
-            Connection::open_with_flags(&path, flags)?
+            Connection::open_with_flags(&path, flags - OpenFlags::SQLITE_OPEN_URI)?
         } else {
-            let name =
-                crate::path_text(&path).replace('\\', "/").replace('%', "%25").replace('?', "%3f").replace('#', "%23");
-            let uri = format!("file:{}{}?immutable=1", if name.starts_with("//") { "//" } else { "" }, name);
-            Connection::open_with_flags(uri, flags)?
+            immutable_reader(&path)?
         };
         db.busy_timeout(Duration::from_secs(2))?;
         db.execute_batch("BEGIN")?;
@@ -467,7 +474,10 @@ impl Catalog {
         target.busy_timeout(Duration::from_secs(5))?;
         {
             let backup = rusqlite::backup::Backup::new(source, &mut target)?;
-            backup.run_to_completion(1_000_000, Duration::from_millis(0), None)?;
+            // A restore is one transaction: leave the current catalogue intact when another writer owns it.
+            if !matches!(backup.step(-1)?, rusqlite::backup::StepResult::Done) {
+                return Err(invalid("catalogue busy during restore"));
+            }
         }
         drop(target);
         Self::new(&self.directory)?;
@@ -475,6 +485,15 @@ impl Catalog {
     }
     /// Port of `Catalog.backup`; uses SQLite's online backup API, including committed WAL pages.
     pub fn backup(&self, destination: impl AsRef<Path>) -> Result<PathBuf> {
+        self.backup_to(destination.as_ref(), false)
+    }
+
+    /// Port of luma/cloud_backup.py snapshot: use a self-contained DELETE-journal archive.
+    pub fn portable_backup(&self, destination: impl AsRef<Path>) -> Result<PathBuf> {
+        self.backup_to(destination.as_ref(), true)
+    }
+
+    fn backup_to(&self, destination: &Path, portable: bool) -> Result<PathBuf> {
         let dest = std::path::absolute(destination)?;
         let source = std::path::absolute(self.directory.join("catalog.sqlite"))?;
         if self.platform.path_key(&dest.to_string_lossy()) == self.platform.path_key(&source.to_string_lossy())
@@ -485,10 +504,46 @@ impl Catalog {
         if let Some(p) = dest.parent() {
             std::fs::create_dir_all(p)?;
         }
-        let mut output = Connection::open(&dest)?;
-        let backup = rusqlite::backup::Backup::new(&self.db, &mut output)?;
-        backup.run_to_completion(100, Duration::from_millis(10), None)?;
-        drop(backup);
+        // Never exchange a live database's main file underneath its journal or WAL.
+        if ["-journal", "-wal", "-shm"].iter().any(|suffix| {
+            let mut path = dest.as_os_str().to_owned();
+            path.push(suffix);
+            Path::new(&path).exists()
+        }) {
+            return Err(invalid("backup destination has active SQLite sidecars"));
+        }
+        if dest.exists() {
+            // An explicit overwrite may replace a previous catalogue backup, never an unrelated file.
+            let previous = immutable_reader(&dest)?;
+            previous.prepare("SELECT id FROM photos LIMIT 0")?;
+        }
+        let stage = tempfile::NamedTempFile::new_in(dest.parent().ok_or_else(|| invalid("missing backup folder"))?)?;
+        let mut output = Connection::open(stage.path())?;
+        {
+            let backup = rusqlite::backup::Backup::new(&self.db, &mut output)?;
+            let mut blocked_since = None;
+            loop {
+                use rusqlite::backup::StepResult;
+                match backup.step(100)? {
+                    StepResult::Done => break,
+                    StepResult::More => blocked_since = None,
+                    StepResult::Busy | StepResult::Locked => {
+                        if blocked_since.get_or_insert_with(std::time::Instant::now).elapsed() >= Duration::from_secs(5)
+                        {
+                            return Err(invalid("catalogue busy during backup"));
+                        }
+                    }
+                    _ => return Err(invalid("unexpected SQLite backup result")),
+                }
+                std::thread::sleep(Duration::from_millis(10));
+            }
+        }
+        if portable {
+            output.execute_batch("PRAGMA journal_mode=DELETE")?;
+        }
+        output.close().map_err(|(_, e)| e)?;
+        stage.as_file().sync_all()?;
+        stage.persist(&dest).map_err(|e| e.error)?;
         Ok(dest)
     }
     /// Port of `Catalog.virtual_copy`; copy-of-copy refers to the original and never copies stack membership.

@@ -10,6 +10,7 @@ license.workspace = true
 gpu = ["dep:grainy-gpu"]
 
 [dependencies]
+sha2 = "0.10"
 grainy-gpu = { path = "../grainy-gpu", optional = true }
 grainy-core.workspace = true
 grainy-color = { path = "../grainy-color" }

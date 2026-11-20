@@ -65,7 +65,7 @@ impl MessageBox {
 pub const LENSFUN_NOTICE: &str = "렌즈 보정 데이터베이스는 Lensfun(https://lensfun.github.io/)의 것으로, CC BY-SA 3.0 라이선스(https://creativecommons.org/licenses/by-sa/3.0/)에 따라 수정 없이 들어 있습니다. 저작권은 Lensfun 기여자들에게 있습니다.";
 
 /// Port of `show_about`: the version and the notice of the licences and trademarks. The version line names the Rust
-/// build and its own version (`Grainy RS 0.2.0`), not the oracle's.
+/// build and its own version (`Grainy RS 0.2.1`), not the oracle's.
 pub fn about_box() -> MessageBox {
     let mut message = MessageBox::information("about", tr("Grainy 정보"), format!("Grainy RS {RS_VERSION}"));
     let oracle = tr("원본을 건드리지 않는 사진 보정·관리 프로그램입니다.\n\nGrainy의 코드는 MIT 라이선스입니다. 함께 들어 있는 외부 부품의 라이선스 고지는 배포본의 THIRD_PARTY_LICENSES 폴더에 있습니다.\n\nAdobe, Lightroom, Photoshop은 Adobe Inc.의 상표입니다. Grainy는 Adobe가 만들거나 후원·보증한 프로그램이 아니며 Adobe와 관련이 없습니다. 그 밖의 상표는 각 소유자의 것입니다.");

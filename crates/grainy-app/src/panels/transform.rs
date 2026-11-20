@@ -88,6 +88,7 @@ pub struct UprightState {
 /// One analysis: what [`finish`] checks before applying the result.
 #[derive(Debug, Clone)]
 pub struct Ticket {
+    document: u64,
     pub generation: u64,
     pub photo: u64,
     pub mode: &'static str,
@@ -166,7 +167,7 @@ pub fn begin(cx: &mut AppContext, mode: &'static str) -> Option<Ticket> {
     let note = tr("사진의 직선과 소실점을 분석하고 있습니다…");
     cx.state::<UprightState>().note = Some((photo, note));
     crop::set_level_note(cx, Some(tr("사진의 기준선을 분석하고 있습니다…")));
-    Some(Ticket { generation, photo, mode, saved })
+    Some(Ticket { document: cx.document_generation, generation, photo, mode, saved })
 }
 
 /// The last line of an error without its exception name (`str(error).strip().splitlines()[-1].split(': ',1)[-1]`).
@@ -191,6 +192,7 @@ pub fn finish(cx: &mut AppContext, ticket: &Ticket, result: Result<Value, String
     let state = cx.state::<UprightState>();
     state.running = false;
     let fresh = ticket.generation == state.generation
+        && ticket.document == cx.document_generation
         && cx.doc.current().is_some_and(|p| p.id == ticket.photo)
         && settings_eq(cx.settings(), &ticket.saved);
     match result {

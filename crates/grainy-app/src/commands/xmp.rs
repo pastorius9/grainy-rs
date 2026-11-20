@@ -71,6 +71,7 @@ pub fn write_sidecars(rows: &[Value]) -> Result<Vec<PathBuf>, String> {
     let mut written = Vec::new();
     for row in rows {
         let path = sidecar_path(row);
+        crate::paths::writable(&path).map_err(|e| e.to_string())?;
         xmp::write_sidecar(row, &path).map_err(|e| e.to_string())?;
         written.push(path);
     }
@@ -188,7 +189,7 @@ fn read(cx: &mut AppContext, _: &Invocation) {
         Ok(rows) => rows,
         Err(message) => return failed(cx, &message),
     };
-    cx.jobs.spawn(
+    cx.spawn_document_job(
         "xmp_read",
         tr("XMP 불러오기"),
         move |handle| {
@@ -226,7 +227,7 @@ fn show_map(cx: &mut AppContext, _: &Invocation) {
         cx.open_dialog(Box::new(map::MapDialog::new(points, map::World::load())));
         return;
     };
-    cx.jobs.spawn(
+    cx.spawn_document_job(
         "gps_map",
         tr("GPS 지도"),
         move |handle| {

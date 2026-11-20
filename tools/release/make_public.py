@@ -56,6 +56,7 @@ REMOVE = [
     'docs/PLAN.md',              # the private work plan (names the oracle's folder on this PC)
     '**/BRIEF.md', 'BRIEF.md',   # worker briefs
     '**/REVIEW_REPORT.md', 'REVIEW_REPORT.md', '**/REVIEW.md', 'REVIEW.md',  # raw review reports
+    '**/*_BRIEF.md', '**/*_REVIEW*.md', '**/REVIEW2.md', '**/CODEX_FINAL.md',
     '**/*.log', '*.log',         # build and test logs
     'tools/field',               # orchestration and field-test scripts with machine paths
     '.scan-names.txt', '**/.scan-names.txt',
@@ -157,6 +158,8 @@ def main(argv=None) -> int:
                         help='add one commit to the existing public folder instead of starting a fresh history')
     args = parser.parse_args(argv)
     out = Path(args.out)
+    if not scan_public.read_names(Path(args.names)):
+        parser.error("publication requires a nonempty private name list")
 
     if args.update:
         prepare_update(out)

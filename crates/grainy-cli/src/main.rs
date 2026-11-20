@@ -31,8 +31,11 @@ render options:
 JPEG XL: the pure-Rust encoder writes lossless files only (the quality is not used).";
 
 fn main() -> ExitCode {
-    let args: Vec<String> = std::env::args().skip(1).collect();
-    match run(&args) {
+    let args = std::env::args_os()
+        .skip(1)
+        .map(|arg| arg.into_string().map_err(|_| "argument is not valid Unicode".to_owned()))
+        .collect::<Result<Vec<_>, _>>();
+    match args.and_then(|args| run(&args)) {
         Ok(()) => ExitCode::SUCCESS,
         Err(message) => {
             eprintln!("grainy-cli: {}", message.lines().next().unwrap_or("failed"));
@@ -141,6 +144,9 @@ fn render(args: &[String]) -> Result<(), String> {
     }
     let source = source.ok_or("usage: grainy-cli render <source> -o <output> [options]")?;
     let output = output.ok_or("render needs -o <output>")?;
+    if grainy_platform::user_paths::is_oracle_folder(&output, &grainy_platform::Environment::current()) {
+        return Err("the Python Grainy folder is read-only".into());
+    }
     request.format = match format {
         Some(format) => format,
         None => format_from_name(&output)?,

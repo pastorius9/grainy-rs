@@ -69,3 +69,36 @@ pub fn wait_for_exit(pid: i64, timeout: Duration) -> bool {
         std::thread::sleep(Duration::from_millis(100));
     }
 }
+
+/// Rename on one volume only, atomically refusing to replace a destination that appeared concurrently.
+pub fn rename_new(source: &std::path::Path, target: &std::path::Path) -> std::io::Result<()> {
+    #[cfg(windows)]
+    {
+        use std::os::windows::ffi::OsStrExt;
+        fn wide(path: &std::path::Path) -> std::io::Result<Vec<u16>> {
+            let mut name: Vec<_> = std::path::absolute(path)?.as_os_str().encode_wide().collect();
+            if name.contains(&0) {
+                return Err(std::io::ErrorKind::InvalidInput.into());
+            }
+            name.push(0);
+            Ok(name)
+        }
+        let from = wide(source)?;
+        let to = wide(target)?;
+        // SAFETY: both buffers are NUL-terminated, live and immutable throughout the call.
+        // Zero flags disallow replacement and the API's unverified cross-volume copy fallback.
+        #[allow(unsafe_code)]
+        let moved = unsafe { windows_sys::Win32::Storage::FileSystem::MoveFileExW(from.as_ptr(), to.as_ptr(), 0) };
+        if moved == 0 {
+            return Err(std::io::Error::last_os_error());
+        }
+        Ok(())
+    }
+    #[cfg(any(target_vendor = "apple", target_os = "linux"))]
+    {
+        use rustix::fs::{renameat_with, RenameFlags, CWD};
+        renameat_with(CWD, source, CWD, target, RenameFlags::NOREPLACE).map_err(Into::into)
+    }
+    #[cfg(not(any(windows, target_vendor = "apple", target_os = "linux")))]
+    Err(std::io::ErrorKind::Unsupported.into())
+}

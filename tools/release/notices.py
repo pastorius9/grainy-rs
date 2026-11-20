@@ -84,6 +84,15 @@ def parse(expression: str):
     return disjunction()
 
 
+def require_reviewed(flags):
+    # THIRD_PARTY_NOTICES.md documents this exact bundled-font exception. Keep the licence
+    # texts and the flag in the generated notices. A new version or expression needs review.
+    reviewed = {('epaint_default_fonts 0.37.0', '(MIT OR Apache-2.0) AND OFL-1.1 AND Ubuntu-font-1.0')}
+    unknown = [(label, why) for label, why in flags if (label, why) not in reviewed]
+    if unknown:
+        raise SystemExit('unreviewed licence flags: ' + ', '.join(label for label, _ in unknown))
+
+
 def choose(expression: str | None):
     """(licences used, flagged): MIT/Apache first, else the smallest allowed alternative, else flagged."""
     if not expression:

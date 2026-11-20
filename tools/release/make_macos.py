@@ -157,7 +157,8 @@ def minimum_system(path: Path):
 
 
 def build_universal(target_dir: Path, work: Path, skip_build: bool) -> dict[str, Path]:
-    env = dict(os.environ, MACOSX_DEPLOYMENT_TARGET='.'.join(str(n) for n in MINIMUM_SYSTEM))
+    env = layout.release_env(windows=False)
+    env['MACOSX_DEPLOYMENT_TARGET'] = '.'.join(str(n) for n in MINIMUM_SYSTEM)
     env['PATH'] = str(Path.home() / '.cargo' / 'bin') + os.pathsep + env.get('PATH', '')
     for target in TARGETS:
         if not skip_build:
@@ -201,6 +202,7 @@ def make_bundle(root: Path, version: str, programs: dict[str, Path]) -> Path:
     shutil.copy2(ICON, resources / 'GrainyRS.icns')
     shutil.copy2(REPO / 'LICENSE', resources / 'LICENSE')
     text, rows, flags = notices.build(list(TARGETS))
+    notices.require_reviewed(flags)
     (resources / 'THIRD_PARTY_NOTICES.txt').write_bytes(text.encode('utf-8'))
     (resources / 'README.txt').write_bytes(readme_text(version).encode('utf-8'))
     with (app / 'Contents' / 'Info.plist').open('wb') as handle:
@@ -231,22 +233,10 @@ def sign(app: Path):
 
 
 def no_checkout_paths(app: Path):
-    """No file in the bundle may name the folder this was built in (a CI runner's folder is no secret)."""
-    private = [str(REPO).encode()]
-    on_ci = bool(os.environ.get('CI'))
-    if not on_ci:
-        private.append(str(Path.home()).encode())
-    leaked = [p.relative_to(app).as_posix() for p in app.rglob('*')
-              if p.is_file() and not p.is_symlink() and any(text in p.read_bytes() for text in private)]
-    if not leaked:
-        print('  no file in the bundle names the checkout folder')
-        return
-    binaries = {'Contents/MacOS/GrainyRS', 'Contents/MacOS/grainy-cli'}
-    if on_ci and set(leaked) <= binaries:
-        print(f'  WARNING: {leaked} name the checkout folder (a CI runner\'s folder: not secret; '
-              'a build on a person\'s Mac must not do this)')
-        return
-    raise SystemExit(f'files in the app name the folder it was built in: {leaked[:10]}')
+    """Check all shipped files before constructing the disk image."""
+    for file in app.rglob('*'):
+        if file.is_file() and not file.is_symlink():
+            layout.check_binary_paths(file, [REPO, Path.home()])
 
 
 def smoke_run(app: Path):

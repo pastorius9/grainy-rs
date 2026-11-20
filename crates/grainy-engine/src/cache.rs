@@ -132,7 +132,16 @@ pub fn settings_key(s: &Settings, keys: &[&str]) -> String {
         out.push('"');
         out.push_str(key);
         out.push_str("\":");
-        out.push_str(&s.value(key).to_string());
+        let value = s.value(key);
+        if *key == "dcp_profile" && value.is_object() {
+            // Hash the actual record, never trust its self-reported digest. Later stages nest this key.
+            use sha2::{Digest, Sha256};
+            let mut hash = Sha256::new();
+            serde_json::to_writer(&mut hash, value).expect("writing a JSON value to a digest cannot fail");
+            out.push_str(&format!("#{:x}", hash.finalize()));
+        } else {
+            out.push_str(&value.to_string());
+        }
     }
     out.push('}');
     out
@@ -276,4 +285,16 @@ impl DevelopmentCache {
             None => Ok(self.store(stage, key, calculate()?)),
         }
     }
+}
+
+#[cfg(test)]
+#[test]
+fn embedded_profile_cache_key_is_bounded_and_covers_the_payload() {
+    let mut s = grainy_core::defaults();
+    let data = "a".repeat(65536);
+    s.set("dcp_profile", serde_json::json!({"data":data,"sha256":"same"}));
+    let first = settings_key(&s, &RAW_KEYS);
+    assert!(first.len() < 1024);
+    s.set("dcp_profile", serde_json::json!({"data":"different","sha256":"same"}));
+    assert_ne!(settings_key(&s, &RAW_KEYS), first);
 }

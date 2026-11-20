@@ -440,6 +440,12 @@ fn invalid_input_is_fallible_and_outputs_are_exclusive() {
     fs::write(&p, b"keep").unwrap();
     assert!(export_image(&a, &p, &p, &ExportOptions::default(), &cms).is_err());
     assert_eq!(fs::read(&p).unwrap(), b"keep");
+    let tmp = tempfile::tempdir().unwrap();
+    let occupied = tmp.path().join("photo.png");
+    fs::write(&occupied, b"already delivered").unwrap();
+    assert!(export_image(&a, "missing", &occupied, &ExportOptions::default(), &cms).is_err());
+    assert_eq!(fs::read(occupied).unwrap(), b"already delivered");
+    assert_eq!(fs::read_dir(tmp.path()).unwrap().count(), 1);
     let p = output().join("unsupported-jxl.jxl");
     assert!(export_image(
         &a,

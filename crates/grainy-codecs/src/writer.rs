@@ -470,11 +470,17 @@ pub fn export_image(
         std::fs::create_dir_all(parent)?;
     }
     let _timing = grainy_core::timing::Span::new("export.write");
-    let mut file = std::fs::OpenOptions::new().read(true).write(true).create_new(true).open(output)?;
-    if let Err(error) = file.write_all(&bytes).and_then(|_| file.flush()) {
-        drop(file);
-        let _ = std::fs::remove_file(output);
-        return Err(error.into());
+    let parent = output.parent().filter(|p| !p.as_os_str().is_empty()).unwrap_or(Path::new("."));
+    let mut builder = tempfile::Builder::new();
+    builder.prefix(".grainy-export-");
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        builder.permissions(std::fs::Permissions::from_mode(0o666));
     }
+    let mut stage = builder.tempfile_in(parent)?;
+    stage.write_all(&bytes)?;
+    stage.as_file().sync_all()?;
+    stage.persist_noclobber(output).map_err(|e| e.error)?;
     Ok((w, h))
 }

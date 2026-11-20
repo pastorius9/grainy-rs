@@ -247,9 +247,28 @@ fn platform() -> Platform {
     Platform::native()
 }
 
+fn owned_as_written(own: &[PathBuf], target: &Path) -> bool {
+    own.iter().any(|root| platform().contains_folder(&path_text(root), &path_text(target)))
+}
+
 fn own_contains(own: &[PathBuf], target: &Path) -> Result<bool> {
+    if owned_as_written(own, target) {
+        return Ok(true);
+    }
+    let env = grainy_platform::Environment::current();
+    let protected = ["Grainy", "Luma"].map(|name| grainy_platform::local_data(&env, name, None));
     for folder in own {
-        let folder = resolved(folder).map_err(|e| Error::Failed(Failure::io(&e)))?;
+        let is_protected =
+            protected.iter().any(|p| platform().path_key(&path_text(p)) == platform().path_key(&path_text(folder)));
+        let folder = if is_protected {
+            match (folder.parent(), folder.file_name()) {
+                (Some(parent), Some(name)) => resolved(parent).map(|p| p.join(name)),
+                _ => Ok(folder.clone()),
+            }
+        } else {
+            resolved(folder)
+        }
+        .map_err(|e| Error::Failed(Failure::io(&e)))?;
         if platform().contains_folder(&path_text(&folder), &path_text(target)) {
             return Ok(true);
         }
@@ -261,6 +280,9 @@ fn own_contains(own: &[PathBuf], target: &Path) -> Result<bool> {
 /// inside one of Grainy's own folders.
 pub fn export_folder(root: &Path, subfolder: Option<&Value>, own: &[PathBuf], create: bool) -> Result<PathBuf> {
     let io = |e: std::io::Error| Error::Failed(Failure::io(&e));
+    if owned_as_written(own, root) {
+        return Err(service(format!("the export folder is inside {OWN_TEXT}")));
+    }
     let target = match subfolder {
         Some(sub) => {
             let message = "subfolder must be one folder name without path characters";
@@ -275,7 +297,11 @@ pub fn export_folder(root: &Path, subfolder: Option<&Value>, own: &[PathBuf], cr
             if bad {
                 return Err(service(message));
             }
-            let target = resolved(&root.join(s)).map_err(io)?;
+            let child = root.join(s);
+            if owned_as_written(own, &child) {
+                return Err(service(format!("the export folder is inside {OWN_TEXT}")));
+            }
+            let target = resolved(&child).map_err(io)?;
             let base = resolved(root).map_err(io)?;
             let parent = target.parent().map(path_text).unwrap_or_default();
             if platform().path_key(&parent) != platform().path_key(&path_text(&base)) {
@@ -307,6 +333,9 @@ pub fn named_folder(value: &Value, own: &[PathBuf], what: &str) -> Result<PathBu
     let path = PathBuf::from(path_str(strip(text)));
     if !path.is_absolute() {
         return Err(service(format!("{what} must be an absolute folder path (with its drive or starting at /)")));
+    }
+    if owned_as_written(own, &path) {
+        return Err(service(format!("{what} is inside {OWN_TEXT}")));
     }
     let path = resolved(&path).map_err(|_| service(format!("{what} cannot be used")))?;
     if own_contains(own, &path)? {

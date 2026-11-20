@@ -60,7 +60,7 @@ pub fn import_paths(cx: &mut AppContext, paths: Vec<PathBuf>) {
     }
     match cx.doc.library_folder() {
         None => {
-            cx.jobs.spawn(
+            cx.spawn_document_job(
                 "import",
                 tr("폴더를 찾는 중…"),
                 move |_| Ok(crate::session::photo_files(&paths)),
@@ -80,7 +80,7 @@ pub fn import_paths(cx: &mut AppContext, paths: Vec<PathBuf>) {
         }
         Some(folder) => {
             cx.status = tr("폴더를 찾는 중…");
-            cx.jobs.spawn(
+            cx.spawn_document_job(
                 "import",
                 tr("사진 가져오기"),
                 move |handle| {
@@ -106,6 +106,15 @@ fn choose_library(cx: &mut AppContext, _: &Invocation) {
     cx.choose(Purpose::OpenLibrary);
 }
 
+#[derive(Default)]
+struct OpenRequest(u64);
+
+fn next_open(cx: &mut AppContext) -> u64 {
+    let request = cx.state::<OpenRequest>();
+    request.0 += 1;
+    request.0
+}
+
 /// Opens a library folder for writing on a job; the Python Grainy's folders open read-only instead.
 pub fn open_library(cx: &mut AppContext, folder: &Path) {
     let locations = crate::paths::Locations::current();
@@ -115,13 +124,17 @@ pub fn open_library(cx: &mut AppContext, folder: &Path) {
     }
     let folder = folder.to_path_buf();
     cx.status = tr("불러오는 중…");
+    let ticket = next_open(cx);
     cx.jobs.spawn(
         "open",
         tr("라이브러리 폴더 열기…"),
         move |_| CatalogDocument::open(&folder),
-        |cx: &mut AppContext, result: Result<CatalogDocument, String>| match result {
+        move |cx: &mut AppContext, result: Result<CatalogDocument, String>| match result {
+            _ if cx.state::<OpenRequest>().0 != ticket => {}
             Ok(doc) => {
-                cx.set_document(Box::new(doc));
+                if !cx.set_document(Box::new(doc)) {
+                    return;
+                }
                 cx.set_mode(Mode::Library);
                 cx.status = tr("준비됨");
             }
@@ -148,13 +161,17 @@ pub fn open_read_only(cx: &mut AppContext, folder: PathBuf) {
         .unwrap_or_else(|| crate::paths::Locations::current().data_folder())
         .join("read-only snapshot");
     cx.status = tr("불러오는 중…");
+    let ticket = next_open(cx);
     cx.jobs.spawn(
         "open",
         tr("읽기 전용"),
         move |_| CatalogDocument::open_read_only(&folder, &scratch),
-        |cx: &mut AppContext, result: Result<CatalogDocument, String>| match result {
+        move |cx: &mut AppContext, result: Result<CatalogDocument, String>| match result {
+            _ if cx.state::<OpenRequest>().0 != ticket => {}
             Ok(doc) => {
-                cx.set_document(Box::new(doc));
+                if !cx.set_document(Box::new(doc)) {
+                    return;
+                }
                 cx.set_mode(Mode::Library);
                 cx.status = tr("읽기 전용 · 보정은 이 창에서만 유지되고 저장되지 않습니다.");
             }

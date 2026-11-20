@@ -150,6 +150,22 @@ pub type Waker = Arc<dyn Fn() + Send + Sync>;
 
 /// Turns jobs into pictures without blocking the caller.
 pub trait Renderer {
+    /// Start a new document with fresh source caches and its own offline packet directory.
+    fn set_library(&mut self, _folder: Option<PathBuf>) {}
+
+    /// Whether an accepted frame came from a file renderer and can trigger idle analysis I/O.
+    fn prepares_analysis(&self) -> bool {
+        false
+    }
+
+    /// Take a compatible pre-resize RAW from the visible load for the automatic buttons.
+    fn take_analysis_seed(
+        &mut self,
+        _path: &std::path::Path,
+        _settings: &Settings,
+    ) -> Option<grainy_engine::files::AnalysisSeed> {
+        None
+    }
     /// Asks for the open photo's picture; replaces a waiting request.
     fn preview(&mut self, job: PreviewJob);
     /// Asks for a thumbnail; replaces a waiting request for the same photo.

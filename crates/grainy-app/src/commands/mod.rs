@@ -11,6 +11,7 @@
 
 pub mod ai;
 pub mod auto;
+pub(crate) mod auto_source;
 pub mod collections;
 pub mod compare;
 pub mod crop;

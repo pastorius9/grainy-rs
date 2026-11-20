@@ -472,10 +472,7 @@ pub fn blocked(app: Option<&Path>, size: u64, layout: &Layout, free: &dyn Fn(&Pa
     let Some(app) = app else { return tr("소스에서 실행 중이라 직접 업데이트할 수 없습니다.") };
     // macOS: the bundle is replaced as a whole, so the folder that holds it must be writable.
     let folder = if layout.system.is_mac() { app.parent().unwrap_or(app) } else { app };
-    let probe = folder.join(format!(".update-probe-{}", unique_hex()));
-    let wrote = std::fs::write(&probe, b"").and_then(|()| std::fs::remove_file(&probe));
-    if wrote.is_err() {
-        let _ = std::fs::remove_file(&probe);
+    if tempfile::Builder::new().prefix(".update-probe-").tempfile_in(folder).and_then(|probe| probe.close()).is_err() {
         return tr("프로그램 폴더에 쓸 수 없습니다.");
     }
     match free(app) {
@@ -513,42 +510,43 @@ pub fn download(
     open: Opener<'_>,
 ) -> Result<Option<PathBuf>, UpdateError> {
     std::fs::create_dir_all(folder)?;
+    if Path::new(&release.name).file_name().and_then(|name| name.to_str()) != Some(&release.name)
+        || release.name.contains(['/', '\\', ':'])
+    {
+        return Err(bad_structure());
+    }
     let target = folder.join(&release.name);
-    let part = folder.join(format!("{}.part", release.name));
     let mut stream: Box<dyn Read> =
         if release.url.contains("://") { open(&release.url)? } else { Box::new(std::fs::File::open(&release.url)?) };
-    let result = (|| -> Result<Option<PathBuf>, UpdateError> {
-        let mut output = std::fs::File::create(&part)?;
-        let mut digest = Sha256::new();
-        let mut done: u64 = 0;
-        let mut buffer = vec![0u8; 1 << 20];
-        loop {
-            if cancel.is_some_and(|flag| flag.load(Ordering::SeqCst)) {
-                return Ok(None);
-            }
-            let n = read_block(stream.as_mut(), &mut buffer)?;
-            if n == 0 {
-                break;
-            }
-            output.write_all(&buffer[..n])?;
-            digest.update(&buffer[..n]);
-            done += n as u64;
-            if done > release.size {
-                break;
-            }
-            if let Some(report) = progress.as_deref_mut() {
-                report(done, release.size);
-            }
+    let mut output = tempfile::Builder::new().prefix(".grainy-download-").tempfile_in(folder)?;
+    let mut digest = Sha256::new();
+    let mut done: u64 = 0;
+    let mut buffer = vec![0u8; 1 << 20];
+    loop {
+        if cancel.is_some_and(|flag| flag.load(Ordering::SeqCst)) {
+            return Ok(None);
         }
-        drop(output);
-        if done != release.size || hex(&digest.finalize()) != release.sha256 {
-            return Err(UpdateError::Value(tr("내려받은 파일이 깃헙에 올라간 파일과 다릅니다.")));
+        let n = read_block(stream.as_mut(), &mut buffer)?;
+        if n == 0 {
+            break;
         }
-        std::fs::rename(&part, &target)?;
-        Ok(Some(target.clone()))
-    })();
-    let _ = std::fs::remove_file(&part);
-    result
+        output.write_all(&buffer[..n])?;
+        digest.update(&buffer[..n]);
+        done += n as u64;
+        if done > release.size {
+            break;
+        }
+        if let Some(report) = progress.as_deref_mut() {
+            report(done, release.size);
+        }
+    }
+
+    if done != release.size || hex(&digest.finalize()) != release.sha256 {
+        return Err(UpdateError::Value(tr("내려받은 파일이 깃헙에 올라간 파일과 다릅니다.")));
+    }
+    output.as_file().sync_all()?;
+    output.persist(&target).map_err(|e| e.error)?;
+    Ok(Some(target))
 }
 
 fn bad_structure() -> UpdateError {
@@ -893,6 +891,13 @@ pub fn stage_rust(
     if layout.system.is_mac() {
         stage_disk_image(archive, work, &RS_PACKAGE.mac, tools)
     } else {
+        let names = entry_names(archive)?;
+        for item in RS_ITEMS {
+            let wanted = format!("{}/{item}", RS_PACKAGE.folder);
+            if !names.iter().any(|name| name.replace('\\', "/") == wanted) {
+                return Err(bad_structure());
+            }
+        }
         stage_package(archive, work, &RS_PACKAGE)
     }
 }
@@ -1087,6 +1092,75 @@ fn finish_bundle(
         note("the app did not close");
         return tr("Grainy가 닫히지 않아 업데이트하지 않았습니다.");
     }
+    if bundle.name == ORACLE_MAC.name {
+        return finish_oracle_bundle(app, staged, note, work, hooks, stamp, bundle);
+    }
+    let result = (|| -> std::io::Result<()> {
+        let parent = app.parent().ok_or_else(|| std::io::Error::other("missing application folder"))?;
+        let scratch = tempfile::Builder::new().prefix(".grainy-update-").tempdir_in(parent)?;
+        let incoming = scratch.path().join("incoming.app");
+        let previous = work.join(format!("previous-{stamp}"));
+        // ditto may fail after copying only part of a cross-volume bundle. The installed app stays live.
+        (hooks.place)(staged, &incoming)?;
+        if !incoming.join(bundle.program).is_file() {
+            return Err(std::io::Error::other("incoming bundle is incomplete"));
+        }
+        // macOS exchanges two complete bundles in one filesystem operation. A killed updater
+        // leaves a launchable app at its original path, even before we archive the old bundle.
+        #[cfg(target_os = "macos")]
+        let old = {
+            use rustix::fs::{renameat_with, RenameFlags, CWD};
+            renameat_with(CWD, &incoming, CWD, app, RenameFlags::EXCHANGE)?;
+            incoming
+        };
+        // The cross-platform harness exercises staging and rollback on hosts without Darwin's exchange.
+        #[cfg(not(target_os = "macos"))]
+        let old = {
+            let old = scratch.path().join("previous.app");
+            std::fs::rename(app, &old)?;
+            if let Err(install) = std::fs::rename(&incoming, app) {
+                if let Err(rollback) = std::fs::rename(&old, app) {
+                    let recovery = scratch.keep();
+                    return Err(std::io::Error::other(format!(
+                        "{install}; restore from {}: {rollback}",
+                        recovery.display()
+                    )));
+                }
+                return Err(install);
+            }
+            old
+        };
+        if let Err(error) = std::fs::create_dir(&previous)
+            .and_then(|()| (hooks.place)(&old, &previous.join(app.file_name().unwrap_or_default())))
+        {
+            let recovery = scratch.keep();
+            note(&format!("new version installed; previous bundle retained at {}: {error}", recovery.display()));
+        } else {
+            note(&format!("previous version moved to previous-{stamp}"));
+        }
+        note("new version in place");
+        Ok(())
+    })();
+    result
+        .err()
+        .map(|e| {
+            note(&format!("failed: OSError({}); restoring", crate::json::str_repr(&reason(&e))));
+            reason(&e)
+        })
+        .unwrap_or_default()
+}
+
+// Compatibility entry point for the Python package's existing finish protocol. The desktop
+// updater always selects RS_PACKAGE and swaps complete bundles on the installation volume.
+fn finish_oracle_bundle(
+    app: &Path,
+    staged: &Path,
+    note: &mut dyn FnMut(&str),
+    work: &Path,
+    hooks: &Hooks,
+    stamp: &str,
+    bundle: &MacBundle,
+) -> String {
     let backup = work.join(format!("previous-{stamp}"));
     let _ = std::fs::create_dir_all(&backup);
     let name = app.file_name().unwrap_or_default().to_os_string();
@@ -1110,7 +1184,7 @@ fn finish_bundle(
         Err(error) => {
             note(&format!("failed: OSError({}); restoring", crate::json::str_repr(&reason(&error))));
             let _ = (|| -> std::io::Result<()> {
-                if app.exists() {
+                if moved && app.exists() {
                     let failed = work.join(format!("failed-{stamp}"));
                     std::fs::create_dir_all(&failed)?;
                     (hooks.place)(app, &failed.join(&name))?;
@@ -1123,6 +1197,80 @@ fn finish_bundle(
             reason(&error)
         }
     }
+}
+
+/// The Rust Windows package contains only flat files. Prepare and sync *all* bytes while the
+/// installed files are live. Publish each dependency before either executable by same-volume rename.
+fn finish_windows_files(
+    app: &Path,
+    staged: &Path,
+    work: &Path,
+    stamp: &str,
+    hooks: &Hooks,
+    package: &Package,
+    note: &mut dyn FnMut(&str),
+) -> std::io::Result<()> {
+    let previous = work.join(format!("previous-{stamp}"));
+    let pending = work.join(format!("failed-{stamp}"));
+    std::fs::create_dir_all(work)?;
+    std::fs::create_dir(&pending)?;
+    let mut present = Vec::new();
+    for &name in package.items {
+        let from = staged.join(name);
+        if from.is_dir() {
+            return Err(std::io::Error::other("unexpected directory in flat release"));
+        }
+        if from.is_file() {
+            (hooks.copy_file)(&from, &pending.join(name))?;
+            std::fs::OpenOptions::new().write(true).open(pending.join(name))?.sync_all()?;
+            present.push(name);
+        }
+    }
+    if present.len() != package.items.len() {
+        return Err(std::io::Error::other("staged version is incomplete"));
+    }
+    std::fs::create_dir(&previous)?;
+    let mut saved = Vec::new();
+    for &name in package.items {
+        let live = app.join(name);
+        if live.exists() {
+            if !live.is_file() {
+                return Err(std::io::Error::other("unexpected installed directory"));
+            }
+            // The backup and live file share bytes until the live directory entry is replaced.
+            if std::fs::hard_link(&live, previous.join(name)).is_err() {
+                copy_file(&live, &previous.join(name))?;
+                std::fs::OpenOptions::new().write(true).open(previous.join(name))?.sync_all()?;
+            }
+            saved.push(name);
+        }
+    }
+    note(&format!("previous version saved to previous-{stamp}: {}", python_list(&saved)));
+    let mut installed = Vec::new();
+    for &name in present
+        .iter()
+        .filter(|n| !n.ends_with(".exe"))
+        .chain(present.iter().filter(|n| n.ends_with(".exe") && **n != package.program))
+        .chain(std::iter::once(&package.program))
+    {
+        if let Err(error) = move_item(&pending.join(name), &app.join(name), 40) {
+            for &revert in installed.iter().rev() {
+                let rollback = if saved.contains(&revert) {
+                    move_item(&previous.join(revert), &app.join(revert), 8)
+                } else {
+                    move_item(&app.join(revert), &pending.join(revert), 8)
+                };
+                if let Err(e) = rollback {
+                    return Err(std::io::Error::other(format!("{error}; rollback of {revert} failed: {e}")));
+                }
+            }
+            return Err(error);
+        }
+        installed.push(name);
+    }
+    note(&format!("new version copied: {}", python_list(&present)));
+    let _ = std::fs::remove_dir(pending);
+    Ok(())
 }
 
 /// Port of `finish`: replaces the app's files with the staged version, `pid` being the old app (waited for). The
@@ -1160,7 +1308,10 @@ pub fn finish_package(
     package: &Package,
 ) -> String {
     let work = work_folder_for(app, layout, package);
-    let stamp = hooks.stamp.clone().unwrap_or_else(|| chrono::Local::now().format("%Y%m%d-%H%M%S").to_string());
+    let stamp = hooks.stamp.clone().unwrap_or_else(|| {
+        let format = if package.folder == RS_PACKAGE.folder { "%Y%m%d-%H%M%S-%f" } else { "%Y%m%d-%H%M%S" };
+        chrono::Local::now().format(format).to_string()
+    });
     let mut log = log;
     let mut note = |text: &str| {
         if let Some(log) = log.as_deref_mut() {
@@ -1177,6 +1328,15 @@ pub fn finish_package(
     if !wait_for_exit(pid, hooks.exit_wait) {
         note("the app did not close");
         return tr("Grainy가 닫히지 않아 업데이트하지 않았습니다.");
+    }
+    if package.folder == RS_PACKAGE.folder {
+        return finish_windows_files(app, staged, &work, &stamp, hooks, package, &mut note)
+            .err()
+            .map(|error| {
+                note(&format!("failed: OSError({}); restoring", crate::json::str_repr(&reason(&error))));
+                reason(&error)
+            })
+            .unwrap_or_default();
     }
     let backup = work.join(format!("previous-{stamp}"));
     let _ = std::fs::create_dir_all(&backup);

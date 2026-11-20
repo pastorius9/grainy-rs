@@ -193,6 +193,7 @@ impl GrainyApp {
             .show(ui, |ui| cx.center(ui, tools));
         crate::dialogs::show_all(&ctx, cx);
         cx.flush();
+        cx.request_preview();
         crate::commands::settings::end_frame(cx, lights);
     }
 }
@@ -264,6 +265,12 @@ impl eframe::App for GrainyApp {
     fn ui(&mut self, ui: &mut Ui, frame: &mut eframe::Frame) {
         crate::display::watch_window(&mut self.cx, frame);
         self.show(ui);
+        if ui.input(|i| i.viewport().close_requested()) {
+            if let Err(reason) = self.cx.commit_document() {
+                self.cx.status = crate::text::tr_with("처리하지 못했습니다: {0}", &[&reason]);
+                ui.ctx().send_viewport_cmd(egui::ViewportCommand::CancelClose);
+            }
+        }
         crate::smoke::frame(&mut self.cx, ui.ctx());
     }
 
@@ -275,6 +282,7 @@ impl eframe::App for GrainyApp {
         crate::ai::shutdown(&mut self.cx);
         self.cx.doc.edit_mut().commit("보정 변경");
         self.cx.flush();
+        crate::folder_watch::shutdown(&mut self.cx);
         crate::window_state::flush(&mut self.cx);
         crate::startup::shutdown(&mut self.cx);
     }

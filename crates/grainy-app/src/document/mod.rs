@@ -191,6 +191,8 @@ impl LabelField {
 /// Where a thumbnail can be read from and stored (`preview_store`): the library folder and the photo's id.
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct ThumbCache {
+    /// Private catalogue snapshot for a read-only library.
+    pub snapshot: Option<PathBuf>,
     pub directory: PathBuf,
     pub id: i64,
     /// Rendered thumbnails are published to the cache (never for a read-only library).
@@ -421,6 +423,14 @@ pub trait Document {
     /// The library folder the import job writes to (`None` for the session and a read-only library).
     fn library_folder(&self) -> Option<PathBuf> {
         None
+    }
+
+    /// The directory holding a library's photo assets, including those of a read-only catalogue.
+    fn asset_folder(&self) -> Option<PathBuf> {
+        match self.kind() {
+            Kind::Catalog { folder, .. } => Some(folder),
+            _ => None,
+        }
     }
 
     /// The listing to read in the background, once per refresh asked for.

@@ -36,7 +36,7 @@ impl Control {
             enabled: AtomicBool::new(enabled),
             environment_off: std::env::var("GRAINY_GPU").as_deref() == Ok("0")
                 || crate::context::FROZEN_TIMING.load(Ordering::Relaxed),
-            status: Mutex::new("unavailable (warming up)".into()),
+            status: Mutex::new("enabled (on demand)".into()),
         })
     }
 
@@ -68,16 +68,19 @@ impl Control {
 pub(crate) struct PreviewGpu {
     control: Arc<Control>,
     gpu: Option<Gpu>,
-    cache: GpuCache,
+    cache: [GpuCache; 2],
     attempted: bool,
     hits: u64,
 }
 
 impl PreviewGpu {
     pub(crate) fn new(control: Arc<Control>) -> Self {
-        let mut state = Self { control, gpu: None, cache: GpuCache::default(), attempted: false, hits: 0 };
-        state.warm_up();
-        state
+        Self { control, gpu: None, cache: Default::default(), attempted: false, hits: 0 }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn attempted(&self) -> bool {
+        self.attempted
     }
 
     fn warm_up(&mut self) {
@@ -102,7 +105,7 @@ impl PreviewGpu {
     }
 
     fn fail(&mut self, reason: &str) {
-        self.cache = GpuCache::default();
+        self.cache = Default::default();
         self.hits = 0;
         self.gpu = None;
         self.control.message(format!("unavailable ({reason})"));
@@ -115,20 +118,20 @@ impl PreviewGpu {
         settings: &Map<String, Value>,
         options: &Options<'_>,
         token: u64,
+        resolution: crate::render::Resolution,
     ) -> Option<Result<Image, String>> {
         if !self.control.enabled() {
             return None;
         }
         self.warm_up();
         let gpu = self.gpu.as_ref()?;
-        let before = self.cache.runs();
-        match catch_unwind(AssertUnwindSafe(|| {
-            develop_gpu_cached(source, settings, options, gpu, &mut self.cache, token)
-        })) {
+        let cache = &mut self.cache[usize::from(resolution == crate::render::Resolution::Full)];
+        let before = cache.runs();
+        match catch_unwind(AssertUnwindSafe(|| develop_gpu_cached(source, settings, options, gpu, cache, token))) {
             Ok(Ok(image)) => {
-                let after = self.cache.runs();
+                let after = cache.runs();
                 if before.uploads == after.uploads {
-                    let slots = match self.cache.fallback() {
+                    let slots = match cache.fallback() {
                         Some(grainy_gpu::CpuStage::Tone) => 0,
                         Some(grainy_gpu::CpuStage::Color) => 1,
                         Some(grainy_gpu::CpuStage::Detail) => 2,
@@ -165,11 +168,12 @@ impl PreviewGpu {
         }
     }
 
-    pub(crate) fn counters(&self) -> (u64, u64) {
-        let runs = self.cache.runs();
+    pub(crate) fn counters(&self, resolution: crate::render::Resolution) -> (u64, u64) {
+        let cache = &self.cache[usize::from(resolution == crate::render::Resolution::Full)];
+        let runs = cache.runs();
         (
-            self.cache.host_cache().hits() + self.hits,
-            self.cache.host_cache().misses() + runs.tone + runs.color + runs.detail + runs.finish,
+            cache.host_cache().hits() + self.hits,
+            cache.host_cache().misses() + runs.tone + runs.color + runs.detail + runs.finish,
         )
     }
 }
@@ -231,8 +235,10 @@ mod tests {
             assert_eq!(control.status().text, "unavailable (device lost (test))");
         }
         let image = Image::zeros((2, 3, 3));
-        assert!(state.render(Source::Linear(&image), &Map::new(), &Options::default(), 1).is_none());
+        assert!(state
+            .render(Source::Linear(&image), &Map::new(), &Options::default(), 1, crate::render::Resolution::Fit)
+            .is_none());
         assert!(state.gpu.is_none());
-        assert_eq!(state.cache.runs(), grainy_gpu::StageRuns::default());
+        assert_eq!(state.cache[0].runs(), grainy_gpu::StageRuns::default());
     }
 }

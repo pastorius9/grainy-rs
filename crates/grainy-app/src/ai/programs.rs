@@ -295,6 +295,9 @@ pub fn codex_command(r: &Request, sys: &dyn System) -> Result<Vec<String>, Build
     if !r.model.is_empty() {
         args.extend(["-m".to_owned(), r.model.clone()]);
     }
+    if r.prompt.starts_with('-') {
+        args.push("--".into());
+    }
     args.push(r.prompt.clone());
     Ok(args)
 }

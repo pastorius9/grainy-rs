@@ -58,35 +58,24 @@ jobs:
           echo "Grainy RS $version"
 
       - name: Format
-        if: ${{ !cancelled() }}
         run: cargo fmt --all --check
 
       - name: Clippy
-        if: ${{ !cancelled() }}
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
 
       - name: Tests
-        if: ${{ !cancelled() }}
         run: cargo test --workspace --all-features --no-fail-fast
 
-      - name: Release build
-        if: ${{ !cancelled() }}
-        run: cargo build --release -p grainy-app -p grainy-cli
-
-      - name: Zip
-        if: ${{ !cancelled() }}
-        run: python tools/release/make_release.py --skip-build --dist dist
+      - name: Build and package the Windows release
+        run: python tools/release/make_release.py --dist dist
 
       - name: Import check (no Visual C++ runtime except vcomp140.dll)
-        if: ${{ !cancelled() }}
         run: python tools/release/check_imports.py dist/GrainyRS-${{ steps.version.outputs.version }}-windows-x64.zip
 
       - name: Smoke run of the zip
-        if: ${{ !cancelled() }}
         run: python tools/release/smoke.py dist/GrainyRS-${{ steps.version.outputs.version }}-windows-x64.zip
 
       - name: Upload the zip
-        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: GrainyRS-${{ steps.version.outputs.version }}-windows-x64.zip
@@ -118,6 +107,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: 1.100.0
+          components: rustfmt, clippy
           targets: aarch64-apple-darwin, x86_64-apple-darwin
 
       - uses: Swatinem/rust-cache@v2
@@ -132,26 +122,25 @@ jobs:
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "Grainy RS $version"
 
+      - name: Format
+        run: cargo fmt --all --check
+
+      - name: Clippy (Apple Silicon)
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+
       - name: Tests (Apple Silicon)
-        if: ${{ !cancelled() }}
         run: cargo test --workspace --all-features --no-fail-fast
-
-      - name: Release build (Apple Silicon)
-        if: ${{ !cancelled() }}
-        run: cargo build --release --target aarch64-apple-darwin -p grainy-app -p grainy-cli
-
-      - name: Release build (Intel)
-        if: ${{ !cancelled() }}
-        run: cargo build --release --target x86_64-apple-darwin -p grainy-app -p grainy-cli
 
       # The same certificate in every release keeps the folder and disk permissions macOS gave the app.
       # Without the secrets (a pull request from a fork, or none set) the app is signed ad hoc.
       - name: Signing identity (the same certificate for every release)
-        if: ${{ !cancelled() }}
         env:
           P12: ${{ secrets.MACOS_SIGN_P12 }}
           PASSWORD: ${{ secrets.MACOS_SIGN_PASSWORD }}
         run: |
+          if [ -z "$P12" ] && { [ -n "$PASSWORD" ] || [[ "$GITHUB_REF" == refs/tags/v* ]]; }; then
+            echo "::error::The release signing certificate is missing."; exit 1
+          fi
           if [ -z "$P12" ]; then echo "::notice::No signing certificate in the secrets: the app is signed ad hoc."; exit 0; fi
           KEYCHAIN="$RUNNER_TEMP/grainy-signing.keychain-db"; KEYPASS="$(openssl rand -hex 16)"
           printf '%s' "$P12" | base64 --decode > "$RUNNER_TEMP/grainy.p12"
@@ -170,11 +159,9 @@ jobs:
           echo "GRAINY_SIGN_KEYCHAIN=$KEYCHAIN" >> "$GITHUB_ENV"
 
       - name: App bundle, signing, smoke run and disk image
-        if: ${{ !cancelled() }}
-        run: python tools/release/make_macos.py --skip-build --dist dist
+        run: python tools/release/make_macos.py --dist dist
 
       - name: Upload the disk image
-        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: GrainyRS-${{ steps.version.outputs.version }}-macos-universal.dmg

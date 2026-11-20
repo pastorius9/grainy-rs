@@ -150,6 +150,11 @@ fn a_download_can_be_cancelled_and_leaves_nothing() {
     assert!(got.is_none());
     assert_eq!(blocks, 1);
     assert!(listing(&temp.0.join("d"), None).is_empty(), "no .part file left");
+    let foreign = temp.0.join("d").join(format!("{}.part", release.name));
+    std::fs::write(&foreign, b"another download").unwrap();
+    let never = |_: &str| -> std::io::Result<Box<dyn std::io::Read>> { panic!("unexpected network") };
+    let _ = updater::download(&release, &temp.0.join("d"), None, Some(&cancel), &never);
+    assert_eq!(std::fs::read(foreign).unwrap(), b"another download");
 }
 
 #[test]

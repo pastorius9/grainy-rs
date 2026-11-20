@@ -593,6 +593,11 @@ fn the_rust_release_is_staged_for_its_system() {
     assert_eq!(staged, work.join("new"));
     assert!(staged.join("vcomp140.dll").is_file());
     assert!(tools.calls().is_empty());
+    let incomplete: Vec<_> = entries.into_iter().filter(|(name, _)| !name.ends_with("vcomp140.dll")).collect();
+    zip_file(&zip, &incomplete);
+    let other = s.root.0.join("incomplete");
+    assert!(updater::stage_rust(&zip, &other, &windows, &tools).is_err());
+    assert!(!other.join("new").exists());
 }
 
 // ---- the swap of the whole bundle ------------------------------------------------------------------------------
@@ -653,6 +658,19 @@ fn place_failing_from_new(source: &Path, target: &Path) -> std::io::Result<()> {
         return Err(std::io::Error::other("disk full"));
     }
     updater::place(source, target)
+}
+
+#[test]
+fn partial_cross_volume_copy_never_becomes_the_installed_bundle() {
+    fn partial(_: &Path, target: &Path) -> std::io::Result<()> {
+        std::fs::create_dir(target)?;
+        std::fs::write(target.join("partial"), b"unfinished")?;
+        Err(std::io::Error::other("copy interrupted"))
+    }
+    let s = swap_setup();
+    let hooks = Hooks { place: partial, ..Hooks::default() };
+    assert_eq!(updater::finish_package(&s.app, &s.staged, 0, None, &s.layout, &hooks, &RS_PACKAGE), "copy interrupted");
+    assert_eq!(std::fs::read(s.app.join(updater::RS_PROGRAM)).unwrap(), b"GrainyRS 0.1.0");
 }
 
 #[test]

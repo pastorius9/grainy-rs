@@ -240,14 +240,27 @@ impl AppContext {
         egui::ScrollArea::horizontal().id_salt("filmstrip").auto_shrink([false, false]).show(ui, |ui| {
             ui.horizontal(|ui| {
                 ui.spacing_mut().item_spacing.x = 0.0;
-                for index in 0..self.doc.len() {
-                    let (cell, response) = ui.allocate_exact_size(STRIP_CELL + Vec2::new(6.0, 0.0), Sense::click());
-                    let cell = cell.shrink2(Vec2::new(3.0, 0.0));
-                    self.thumbnail(ui, cell, index, response.hovered(), (7.0, 36.0));
-                    if current == Some(index) && self.scroll_to_current {
-                        response.scroll_to_me(None);
+                let count = self.doc.len();
+                if count == 0 {
+                    return;
+                }
+                let step = STRIP_CELL + Vec2::new(6.0, 0.0);
+                let (area, _) = ui.allocate_exact_size(Vec2::new(step.x * count as f32, step.y), Sense::hover());
+                let rect = |index: usize| Rect::from_min_size(area.min + Vec2::new(index as f32 * step.x, 0.0), step);
+                if self.scroll_to_current {
+                    if let Some(index) = current {
+                        ui.scroll_to_rect(rect(index), None);
                         self.scroll_to_current = false;
                     }
+                }
+                let clip = ui.clip_rect();
+                let first = ((clip.left() - area.left()) / step.x).floor().max(0.0) as usize;
+                let end = (((clip.right() - area.left()) / step.x).ceil().max(0.0) as usize).min(count);
+                for index in first.min(count)..end {
+                    let bounds = rect(index);
+                    let response = ui.interact(bounds, ui.scope_id().with(("filmstrip_cell", index)), Sense::click());
+                    let cell = bounds.shrink2(Vec2::new(3.0, 0.0));
+                    self.thumbnail(ui, cell, index, response.hovered(), (7.0, 36.0));
                     response.context_menu(|ui| self.photo_context_menu(ui, index));
                     if response.clicked() {
                         self.click_photo(ui, index);
@@ -329,7 +342,7 @@ impl AppContext {
             let galley = widgets::galley(ui, stars, t::font(t::FONT_SIZE), color);
             painter.galley(line.center() - galley.size() / 2.0, galley, color);
         }
-        self.thumbs_drawn.insert(id);
+        self.thumbs_drawn.insert(id, index);
     }
 
     /// The library toolbar: the source's name and count, search, sort and its direction (`change_sort`).
@@ -403,7 +416,10 @@ impl AppContext {
             let count = self.doc.len();
             let rows = count.div_ceil(columns);
             let (area, _) = ui.allocate_exact_size(Vec2::new(width, 8.0 + rows as f32 * step.y), Sense::hover());
-            for index in 0..count {
+            let clip = ui.clip_rect();
+            let first = ((clip.top() - area.top() - 8.0) / step.y).floor().max(0.) as usize;
+            let end = ((clip.bottom() - area.top() - 8.0) / step.y).floor().max(0.) as usize + 1;
+            for index in first.saturating_mul(columns).min(count)..end.saturating_mul(columns).min(count) {
                 let offset =
                     Vec2::new(8.0 + (index % columns) as f32 * step.x, 8.0 + (index / columns) as f32 * step.y);
                 let cell = Rect::from_min_size(area.min + offset, GRID_CELL);

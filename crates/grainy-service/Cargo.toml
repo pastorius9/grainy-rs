@@ -9,6 +9,7 @@ license.workspace = true
 [dependencies]
 grainy-geometry = { path = "../grainy-geometry" }
 grainy-core.workspace = true
+grainy-platform = { path = "../grainy-platform" }
 grainy-catalog = { path = "../grainy-catalog" }
 grainy-film = { path = "../grainy-film" }
 serde_json = { workspace = true, features = ["preserve_order", "float_roundtrip"] }

@@ -93,13 +93,16 @@ pub fn submit(cx: &mut AppContext, form: &Form) -> Result<(), String> {
     let extras = form.extras();
     let shared = CopyShared::default();
     let (progress, finish) = (shared.clone(), shared.clone());
+    let generation = cx.document_generation;
     let job = cx.jobs.spawn(
         COPY_KIND,
         tr("사진을 복사하는 중…"),
         move |handle| run.run(&folder, handle, &progress),
         move |cx: &mut AppContext, result: Result<Copied, String>| {
             finish.update(|s| s.finished = true); // the box closes
-            copied(cx, result, &extras);
+            if generation == cx.document_generation {
+                copied(cx, result, &extras);
+            }
         },
     );
     cx.open_dialog(Box::new(CopyProgress::new(job, shared)));
@@ -184,6 +187,17 @@ impl CopyRun {
         let (planned, skipped) =
             import_copy::plan(platform, &files, &self.subfolders, &self.template, &known, &mut read)
                 .map_err(|e| e.to_string())?;
+        for folder in std::iter::once(&self.destination).chain(self.backup.iter()) {
+            crate::paths::writable(Path::new(folder)).map_err(|e| e.to_string())?;
+            for (_, relative) in &planned {
+                let base = Path::new(folder);
+                let target = base.join(relative);
+                if !grainy_platform::user_paths::resolved_within(&target, base) {
+                    return Err("copy destination is outside the selected folder".into());
+                }
+                crate::paths::writable(&target).map_err(|e| e.to_string())?;
+            }
+        }
         note_cancel();
         let total = files.len();
         let mut progress = |n: usize| {
@@ -424,7 +438,7 @@ pub fn start_import(cx: &mut AppContext, run: ImportRun) {
     if run.scan {
         cx.status = tr("폴더를 찾는 중…");
     }
-    cx.jobs.spawn(
+    cx.spawn_document_job(
         "import",
         tr("사진 가져오기"),
         move |handle| {

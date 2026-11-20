@@ -52,6 +52,7 @@ pub struct Gpu {
     failed: Arc<Mutex<Option<String>>>,
     pipelines: Vec<wgpu::ComputePipeline>,
     layout: wgpu::BindGroupLayout,
+    empty_storage: wgpu::Buffer,
     outputs: Arc<Mutex<Pool>>,
     staging: Arc<Mutex<Pool>>,
 }
@@ -179,7 +180,14 @@ impl Gpu {
         if let Some(e) = pollster::block_on(scope.pop()) {
             return Err(Error::Device(e.to_string()));
         }
+        let empty_storage = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("empty table and auxiliary"),
+            size: 8,
+            usage: wgpu::BufferUsages::STORAGE,
+            mapped_at_creation: false,
+        });
         let gpu = Self {
+            empty_storage,
             device,
             queue,
             info,
@@ -235,6 +243,7 @@ impl Gpu {
 
     /// Port of the upload in `native_gpu.develop_resident`; RGB float32 storage has no half-float quantization.
     pub fn upload(&self, image: &Image) -> Result<Frame> {
+        let _span = grainy_core::timing::Span::new("gpu.upload");
         self.check()?;
         let (height, width, channels) = image.dim();
         if channels != 3 || !image.iter().all(|v| v.is_finite()) {
@@ -272,14 +281,23 @@ impl Gpu {
         staging.slice(..).map_async(wgpu::MapMode::Read, move |r| {
             let _ = tx.send(r);
         });
+        let wait = grainy_core::timing::Span::new("gpu.readback.wait");
         self.wait()?;
         rx.recv_timeout(Duration::from_secs(30))
             .map_err(|e| Error::Device(e.to_string()))?
             .map_err(|e| Error::Device(e.to_string()))?;
+        drop(wait);
+        let copying = grainy_core::timing::Span::new("gpu.readback.copy");
         let mapped = staging.slice(..).get_mapped_range().map_err(|e| Error::Device(e.to_string()))?;
         // Mapping alignment is implementation-defined; decode little-endian floats without unsafe casts.
-        let values = mapped.as_chunks::<4>().0.iter().map(|b| f32::from_le_bytes(*b)).collect();
+        let values = if cfg!(target_endian = "little") {
+            bytemuck::try_cast_slice::<u8, f32>(&mapped).ok().map(<[f32]>::to_vec)
+        } else {
+            None
+        }
+        .unwrap_or_else(|| mapped.as_chunks::<4>().0.iter().map(|b| f32::from_le_bytes(*b)).collect());
         drop(mapped);
+        drop(copying);
         staging.unmap();
         self.check()?;
         // Failure paths discard the buffer: never cache a pending or failed mapping.
@@ -367,20 +385,18 @@ impl Gpu {
         );
         let buffer = |name, contents: &[u8]| self.buffer_init(name, contents, wgpu::BufferUsages::STORAGE);
         let p = buffer("parameters", bytemuck::cast_slice(params))?;
-        let t = buffer(
-            "curves and local maps",
-            bytemuck::cast_slice(if table.is_empty() { &[[0.0, 0.0]] } else { table }),
-        )?;
-        let a = buffer("unused auxiliary", bytemuck::cast_slice(&[0f32]))?;
+        let t =
+            if table.is_empty() { None } else { Some(buffer("curves and local maps", bytemuck::cast_slice(table))?) };
+        let a = &self.empty_storage;
         let entries: Vec<_> = [
             &source.buffer,
             &out,
             &p,
-            &t,
-            extra[0].unwrap_or(&a),
-            extra[1].unwrap_or(&a),
-            extra[2].unwrap_or(&a),
-            extra[3].unwrap_or(&a),
+            t.as_ref().unwrap_or(a),
+            extra[0].unwrap_or(a),
+            extra[1].unwrap_or(a),
+            extra[2].unwrap_or(a),
+            extra[3].unwrap_or(a),
         ]
         .into_iter()
         .enumerate()
@@ -489,6 +505,8 @@ mod tests {
         let image = grainy_testkit::input("colours");
         let mut resident = Resident::new(&g, &image).unwrap();
         let mut s = grainy_core::defaults();
+        // Exercise reuse between actual shader dispatches; neutral colour aliases the tone buffer.
+        s.set("saturation", 24.0);
         let original = g.develop_resident(&mut resident, &s, 1.0).unwrap().unwrap();
         let original_pixels = g.readback(&original).unwrap();
         let clone = original.clone();

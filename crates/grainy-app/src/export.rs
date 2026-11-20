@@ -477,6 +477,7 @@ pub fn run_records(
     progress: &(dyn Fn(usize, usize) + Sync),
     cancel: &AtomicBool,
 ) -> Result<Outcome, String> {
+    crate::paths::writable(Path::new(&options.folder)).map_err(|e| e.to_string())?;
     let total = records.len();
     let workers = grainy_library::quick_export::export_concurrency_here(records).map_err(|e| e.to_string())?;
     let report = |done: usize| progress(done, total);

@@ -40,7 +40,7 @@ pub fn py_eq(a: &Value, b: &Value) -> bool {
 
 /// `dict == dict` for settings.
 pub fn settings_eq(a: &Settings, b: &Settings) -> bool {
-    py_eq(&Value::Object(a.0.clone()), &Value::Object(b.0.clone()))
+    a.0.len() == b.0.len() && a.0.iter().all(|(key, value)| b.0.get(key).is_some_and(|other| py_eq(value, other)))
 }
 
 /// Port of `panel_keys.changed_keys`: the keys whose values differ between two settings.
@@ -213,6 +213,10 @@ impl EditState {
     /// The labels committed in this session, newest first (the session's History list).
     pub fn history(&self) -> &[String] {
         &self.history
+    }
+
+    pub(crate) fn journal(&self) -> &[Change] {
+        &self.journal
     }
 
     /// Takes the changes recorded since the last call (the document stores them).

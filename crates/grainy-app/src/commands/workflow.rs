@@ -404,6 +404,7 @@ fn start_auto(cx: &mut AppContext, auto: Auto, records: Vec<Value>) {
     let kind = auto.kind;
     let (name, label) = (auto.name, auto.label);
     let cancel_first = CANCEL_NEXT.swap(false, std::sync::atomic::Ordering::SeqCst);
+    let generation = cx.document_generation;
     let job = cx.jobs.spawn(
         KIND,
         tr(label),
@@ -434,6 +435,9 @@ fn start_auto(cx: &mut AppContext, auto: Auto, records: Vec<Value>) {
         },
         move |cx: &mut AppContext, result: Result<Outcome, String>| {
             done_shared.finish();
+            if generation != cx.document_generation {
+                return;
+            }
             match result {
                 Ok(Outcome::Values(values)) => {
                     commit_pending(cx);
@@ -503,6 +507,7 @@ fn spawn_own(
     let shared = Shared::new(if counted { total } else { 0 });
     let (work_shared, done_shared) = (shared.clone(), shared.clone());
     let work_records = records.clone();
+    let generation = cx.document_generation;
     let job = cx.jobs.spawn(
         KIND,
         tr(label),
@@ -539,6 +544,9 @@ fn spawn_own(
         },
         move |cx: &mut AppContext, result: Result<Outcome, String>| {
             done_shared.finish();
+            if generation != cx.document_generation {
+                return;
+            }
             match result {
                 Ok(Outcome::Cancelled) => {}
                 Ok(outcome) => finish(cx, records, outcome),

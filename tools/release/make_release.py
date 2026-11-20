@@ -39,7 +39,7 @@ FOLDER = 'GrainyRS'
 
 
 def cargo_env():
-    env = dict(os.environ)
+    env = layout.release_env(windows=True)
     cargo_bin = Path.home() / '.cargo' / 'bin'
     env['PATH'] = str(cargo_bin) + os.pathsep + env.get('PATH', '')
     return env
@@ -145,9 +145,13 @@ def main(argv=None) -> int:
         if not (release / exe).is_file():
             raise SystemExit(f'{release / exe} is missing: build first (without --skip-build)')
 
+    for exe in ('grainy-app.exe', 'grainy-cli.exe'):
+        layout.check_binary_paths(release / exe, [REPO, Path.home()])
+
     with tempfile.TemporaryDirectory(prefix='grainy-release-') as tmp:
         stage = Path(tmp)
         text, rows, flags = notices.build('x86_64-pc-windows-msvc', vcomp_version=vcomp[1] if vcomp else None)
+        notices.require_reviewed(flags)
         (stage / 'THIRD_PARTY_NOTICES.txt').write_bytes(text.replace('\n', '\r\n').encode('utf-8'))
         readme = (Path(__file__).parent / 'README.txt').read_text(encoding='utf-8').replace('{version}', version)
         (stage / 'README.txt').write_bytes(readme.replace('\r\n', '\n').replace('\n', '\r\n').encode('utf-8'))

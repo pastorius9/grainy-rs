@@ -5,7 +5,9 @@
 use std::path::PathBuf;
 
 fn main() {
-    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("vendor").join("lcms2-2.19");
+    // Cargo runs build scripts in the crate directory. Relative C source names also keep
+    // MSVC's wide assert(__FILE__) strings free of the private checkout path.
+    let root = PathBuf::from("vendor").join("lcms2-2.19");
     let mut sources: Vec<PathBuf> = std::fs::read_dir(root.join("src"))
         .expect("vendor/lcms2-2.19/src is missing")
         .filter_map(|entry| entry.ok().map(|entry| entry.path()))
@@ -30,7 +32,7 @@ fn main() {
     }
     build.compile("lcms2");
     // For crates that build C code against this LittleCMS (LibRaw in grainy-raw): `DEP_LCMS2_INCLUDE`.
-    println!("cargo:include={}", root.join("include").display());
+    println!("cargo:include={}", PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(root.join("include")).display());
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=vendor/lcms2-2.19");
 }

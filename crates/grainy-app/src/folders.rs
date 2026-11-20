@@ -42,7 +42,7 @@ pub struct FolderPanel {
     /// The scan revision the missing folders were last looked at for.
     seen_revision: u64,
     /// The listing whose offline packets were noted.
-    offline_listing: Option<(u64, usize)>,
+    offline_listing: Option<(u64, u64, usize)>,
     /// Switched off by tests that must not search on their own.
     pub automatic_off: bool,
 }
@@ -93,22 +93,36 @@ pub fn poll(cx: &mut AppContext) {
 /// (`worker::register_offline`), once per listing.
 fn note_offline(cx: &mut AppContext) {
     let Some(folder) = cx.doc.library_folder() else { return };
-    let key = (cx.doc.folder_inputs().0, cx.doc.photos().len());
+    let key = (cx.document_generation, cx.doc.folder_inputs().0, cx.doc.photos().len());
     if cx.state::<FolderPanel>().offline_listing == Some(key) {
         return;
     }
     cx.state::<FolderPanel>().offline_listing = Some(key);
-    let previews = folder.join("previews");
-    let Ok(entries) = std::fs::read_dir(&previews) else { return };
-    let packets: HashSet<u64> = entries
-        .filter_map(|e| e.ok())
-        .filter_map(|e| e.file_name().to_str()?.strip_suffix(".npz")?.parse().ok())
-        .collect();
-    for photo in cx.doc.photos() {
-        if packets.contains(&photo.id) && !grainy_library::file_access::present(&photo.path) {
-            crate::worker::register_offline(&photo.path, &folder, photo.id as i64);
-        }
-    }
+    let photos: Vec<_> = cx.doc.photos().iter().map(|photo| (photo.id, photo.path.clone())).collect();
+    cx.spawn_document_job(
+        "offline-index",
+        "",
+        move |_| {
+            let entries = match std::fs::read_dir(folder.join("previews")) {
+                Ok(entries) => entries,
+                Err(_) => return Ok((folder, Vec::new())),
+            };
+            let packets: HashSet<u64> = entries
+                .filter_map(|e| e.ok())
+                .filter_map(|e| e.file_name().to_str()?.strip_suffix(".npz")?.parse().ok())
+                .collect();
+            Ok((folder, photos.into_iter().filter(|(id, _)| packets.contains(id)).collect()))
+        },
+        move |cx, result| {
+            if cx.state::<FolderPanel>().offline_listing == Some(key) {
+                if let Ok((folder, photos)) = result {
+                    for (id, path) in photos {
+                        crate::worker::register_offline(&path, &folder, id as i64);
+                    }
+                }
+            }
+        },
+    );
 }
 
 /// Notes the packets again on the next frame (after 오프라인 편집용 미리보기 만들기).

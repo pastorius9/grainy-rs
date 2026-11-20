@@ -203,18 +203,18 @@ fn a_feedback_post_carries_the_oracles_fields_and_the_rust_version() {
     assert_eq!(
         request.headers,
         vec![
-            ("User-Agent".to_string(), "Grainy/rs-0.2.0".to_string()),
+            ("User-Agent".to_string(), "Grainy/rs-0.2.1".to_string()),
             ("Content-Type".to_string(), "application/x-www-form-urlencoded".to_string()),
         ]
     );
     let fields = form(&request.body);
     let keys: Vec<&str> = fields.keys().map(String::as_str).collect();
     assert_eq!(keys, ["entry.1045781291", "entry.1065046570", "entry.839337160"], "exactly the oracle's three fields");
-    assert_eq!(fields["entry.1045781291"], "rs-0.2.0", "the version field names the Rust build");
+    assert_eq!(fields["entry.1045781291"], "rs-0.2.1", "the version field names the Rust build");
     assert_eq!(fields["entry.1065046570"], "미리보기가 늦어요");
     let system = &fields["entry.839337160"];
     assert!(system.starts_with("Windows 11 (10.0.26200) · AMD64 · GPU Example GPU · #"), "{system}");
-    assert!(model.note().contains("Grainy rs-0.2.0"), "the window says what is sent: {}", model.note());
+    assert!(model.note().contains("Grainy rs-0.2.1"), "the window says what is sent: {}", model.note());
     grainy_i18n::set_language(Language::Korean);
 }
 
@@ -288,7 +288,7 @@ fn a_check_of_todays_feed_ends_up_to_date() {
     assert!(cx.state::<UpdateState>().release.is_none(), "no release qualifies");
     let prefs = grainy_platform::preferences::Preferences::new(folder.join("settings.json"));
     assert!(prefs.values.contains_key("update_checked"), "the check succeeded (a failure records nothing)");
-    assert_eq!(settings::latest_box().text, "최신 버전을 쓰고 있습니다 (0.2.0).");
+    assert_eq!(settings::latest_box().text, "최신 버전을 쓰고 있습니다 (0.2.1).");
     grainy_i18n::set_language(Language::Korean);
 }
 
@@ -557,8 +557,8 @@ fn an_update_from_0_1_0_to_0_2_0() {
     std::fs::write(app.join("my notes.txt"), b"the person's own file").unwrap();
     let before = files(&app);
 
-    // The check: one read of the Rust build's feed; the release is newer than 0.1.0 (this build is 0.2.0 itself,
-    // so it compares with the version a 0.1.0 build has).
+    // The check: one read of the Rust build's feed; the release is newer than 0.1.0 (this build, 0.2.1, does
+    // not offer 0.2.0, so it compares with the version a 0.1.0 build has).
     let zip = zip_0_2_0();
     let feed = feed_0_2_0(&zip, b"a disk image");
     let asked = Mutex::new(Vec::new());
@@ -802,6 +802,7 @@ fn a_mac_refuses_other_files_and_other_bundles() {
 #[test]
 fn the_finish_step_reads_its_command_line() {
     let args = |list: &[&str]| list.iter().map(|s| s.to_string()).collect::<Vec<_>>();
+    assert!(network::finish_arguments(&args(&["--finish-update", "generated", "--wrong", "42"])).is_none());
     assert_eq!(network::finish_arguments(&args(&["--library", "x"])), None);
     assert_eq!(network::run_finish(&args(&["photo.jpg"])), None, "an ordinary start is not the finish step");
     assert_eq!(

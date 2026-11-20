@@ -4,8 +4,7 @@
 //! `paste_edits` with `manager.edit_photo`, `set_rating`, `set_flag`, `manager.set_label`, `manager.remove`) and the
 //! import of `import_paths` / `import_next` (add in place).
 //!
-//! A library opened read-only (the Python Grainy's own library) is read through `Catalog::open_reader` and listed
-//! from a snapshot copy in the Rust app's data folder: nothing of the original folder is ever written, and edits,
+//! A library opened read-only is read and listed from a private snapshot in the Rust app's data folder: nothing of the original folder is ever written, and edits,
 //! ratings and labels stay in memory.
 
 use std::collections::{BTreeSet, HashMap};
@@ -184,6 +183,7 @@ pub struct CatalogDocument {
     folder: PathBuf,
     /// The catalogue file listings read: the library's own, or the snapshot of a read-only library.
     listing_db: PathBuf,
+    snapshot: Option<tempfile::TempDir>,
     read_only: bool,
     listing: Listing,
     query: Query,
@@ -292,6 +292,17 @@ impl CatalogDocument {
         if crate::paths::is_oracle_folder(folder, &crate::paths::Locations::current()) {
             return Err(format!("{} belongs to the Python Grainy: it opens read-only only", folder.display()));
         }
+        for name in [
+            "catalog.sqlite",
+            "catalog.sqlite-wal",
+            "catalog.sqlite-shm",
+            "catalog.sqlite-journal",
+            "backups",
+            "thumbnails",
+            "previews",
+        ] {
+            crate::paths::writable(&folder.join(name)).map_err(err)?;
+        }
         std::fs::create_dir_all(folder).map_err(err)?;
         Self::with_catalog(Catalog::new(folder).map_err(err)?)
     }
@@ -304,8 +315,7 @@ impl CatalogDocument {
         Ok(Self::build(catalog, folder, listing_db, read_only))
     }
 
-    /// Opens a library read-only: `Catalog::open_reader` on the folder, and a snapshot copy of the catalogue in
-    /// `scratch` (a folder of the Rust app's own) for the listings, so nothing in `folder` is written.
+    /// Opens a verified private copy of the catalogue and its committed WAL in `scratch`.
     pub fn open_read_only(folder: &Path, scratch: &Path) -> Result<Self, String> {
         // Validate before creating a directory or removing an old snapshot. In particular,
         // scratch == folder must never unlink the source catalogue and its WAL.
@@ -314,14 +324,48 @@ impl CatalogDocument {
         {
             return Err("the snapshot folder must be the Rust app's own".into());
         }
-        let catalog = Catalog::open_reader(folder).map_err(err)?;
+        // SQLite may create a shared-memory index even for a read-only live WAL connection.
+        // Only open SQLite on our private copy. Reject a changing source instead of mixing generations.
         std::fs::create_dir_all(scratch).map_err(err)?;
-        let snapshot = scratch.join("catalog.sqlite");
-        for suffix in ["", "-wal", "-shm"] {
-            let _ = std::fs::remove_file(scratch.join(format!("catalog.sqlite{suffix}")));
+        let snapshot = tempfile::tempdir_in(scratch).map_err(err)?;
+        let db = "catalog.sqlite";
+        let wal = "catalog.sqlite-wal";
+        let journal = folder.join("catalog.sqlite-journal");
+        if journal.try_exists().map_err(err)? {
+            return Err("the source library has a rollback journal; close it before opening a snapshot".into());
         }
-        catalog.backup(&snapshot).map_err(err)?;
-        Ok(Self::build(catalog, folder.to_path_buf(), snapshot, true))
+        let fingerprint = |name: &str| -> std::io::Result<Option<[u8; 32]>> {
+            match grainy_library::fsops::digest_bytes(&folder.join(name)) {
+                Ok(hash) => Ok(Some(hash)),
+                Err(e) if name == wal && e.kind() == std::io::ErrorKind::NotFound => Ok(None),
+                Err(e) => Err(e),
+            }
+        };
+        let before = [fingerprint(db).map_err(err)?, fingerprint(wal).map_err(err)?];
+        for (name, hash) in [db, wal].into_iter().zip(before) {
+            if let Some(expected) = hash {
+                let target = snapshot.path().join(name);
+                let mut input = std::fs::File::open(folder.join(name)).map_err(err)?;
+                std::io::copy(&mut input, &mut std::fs::File::create(&target).map_err(err)?).map_err(err)?;
+                if grainy_library::fsops::digest_bytes(&target).map_err(err)? != expected {
+                    return Err("the source library changed while taking the snapshot; try again".into());
+                }
+            }
+        }
+        if journal.try_exists().map_err(err)?
+            || before != [fingerprint(db).map_err(err)?, fingerprint(wal).map_err(err)?]
+        {
+            return Err("the source library changed while taking the snapshot; try again".into());
+        }
+        let listing = snapshot.path().join(db);
+        // Recover committed WAL frames in the copy and leave a self-contained read-only database.
+        let copied = rusqlite::Connection::open(&listing).map_err(err)?;
+        copied.execute_batch("PRAGMA journal_mode=DELETE").map_err(err)?;
+        drop(copied);
+        let catalog = Catalog::open_reader(snapshot.path()).map_err(err)?;
+        let mut doc = Self::build(catalog, folder.to_owned(), listing, true);
+        doc.snapshot = Some(snapshot);
+        Ok(doc)
     }
 
     fn build(catalog: Catalog, folder: PathBuf, listing_db: PathBuf, read_only: bool) -> Self {
@@ -329,6 +373,7 @@ impl CatalogDocument {
             catalog,
             folder,
             listing_db,
+            snapshot: None,
             read_only,
             listing: Listing::default(),
             query: Query::default(),
@@ -456,7 +501,9 @@ impl CatalogDocument {
 
     /// Port of `clear_active_photo`.
     fn clear_active_photo(&mut self) {
-        self.leave_current();
+        if !self.leave_current() {
+            return;
+        }
         self.open = None;
         self.edit = EditState::default();
         self.history.clear();
@@ -464,14 +511,16 @@ impl CatalogDocument {
 
     /// Commits and stores the open photo's pending change before it is left; a read-only library keeps its
     /// state in memory.
-    fn leave_current(&mut self) {
+    fn leave_current(&mut self) -> bool {
         self.edit.commit("보정 변경");
         if let Err(message) = Document::flush(self) {
             log::warn!("cannot store the edit: {message}");
+            return false;
         }
         if let (true, Some(open)) = (self.read_only, &self.open) {
             self.memory.insert(open.id, std::mem::take(&mut self.edit));
         }
+        true
     }
 
     /// Port of `activate`'s reads: the stored settings and the `undo:{id}` stacks.
@@ -512,13 +561,13 @@ impl CatalogDocument {
     }
 
     /// Port of `save_undo`.
-    fn save_undo(&self, id: u64) -> Result<(), String> {
+    fn save_undo(&self, id: u64) -> grainy_catalog::Result<()> {
         let (undo, redo) = self.edit.stored_stacks();
         let value = json!({
             "undo": undo.iter().map(stored).collect::<Vec<_>>(),
             "redo": redo.iter().map(stored).collect::<Vec<_>>(),
         });
-        self.catalog.save_preference(&format!("undo:{id}"), &value).map_err(err)
+        self.catalog.save_preference(&format!("undo:{id}"), &value)
     }
 
     /// Port of `manager.edit_photo` for a photo that is not open: one stored step with its own undo stack.
@@ -546,8 +595,12 @@ impl CatalogDocument {
         let skip = undo.len().saturating_sub(crate::state::UNDO_LIMIT);
         state["undo"] = Value::Array(undo.split_off(skip));
         state["redo"] = json!([]);
-        self.catalog.edit(id as i64, settings, label).map_err(err)?;
-        self.catalog.save_preference(&format!("undo:{id}"), &state).map_err(err)?;
+        self.catalog
+            .immediate(|| {
+                self.catalog.edit(id as i64, settings, label)?;
+                self.catalog.save_preference(&format!("undo:{id}"), &state)
+            })
+            .map_err(err)?;
         self.bump(id);
         Ok(())
     }
@@ -605,11 +658,14 @@ impl Document for CatalogDocument {
 
     fn select(&mut self, index: usize) -> bool {
         let Some(entry) = self.listing.photos.get(index).cloned() else { return false };
-        self.selection = BTreeSet::from([entry.id]);
         if self.open.as_ref().is_some_and(|o| o.id == entry.id) {
+            self.selection = BTreeSet::from([entry.id]);
             return false;
         }
-        self.leave_current();
+        if !self.leave_current() {
+            return false;
+        }
+        self.selection = BTreeSet::from([entry.id]);
         match self.load(entry.id) {
             Ok(edit) => {
                 self.edit = edit;
@@ -692,7 +748,12 @@ impl Document for CatalogDocument {
         {
             return None;
         }
-        Some(ThumbCache { directory: self.folder.clone(), id: photo.id as i64, writable: !self.read_only })
+        Some(ThumbCache {
+            snapshot: self.snapshot.as_ref().map(|s| s.path().to_owned()),
+            directory: self.folder.clone(),
+            id: photo.id as i64,
+            writable: !self.read_only,
+        })
     }
 
     fn set_original(&mut self, id: u64, size: (u32, u32)) {
@@ -705,30 +766,27 @@ impl Document for CatalogDocument {
     }
 
     fn flush(&mut self) -> Result<(), String> {
-        if let Some(id) = self.open.as_ref().map(|o| o.id) {
-            self.commits.extend(self.edit.take_commits().into_iter().map(|c| (id, c)));
-        }
-        let journal = self.edit.take_journal();
-        if journal.is_empty() {
-            return Ok(());
-        }
         let Some(id) = self.open.as_ref().map(|o| o.id) else { return Ok(()) };
-        self.bump(id);
-        if self.read_only {
+        if !self.edit.has_journal() {
             return Ok(());
         }
-        for change in &journal {
-            match change {
-                Change::Committed { label, settings } => {
-                    self.catalog.edit(id as i64, settings, label).map_err(err)?;
-                }
-                Change::Restored { settings } => {
-                    self.catalog.set_settings(id as i64, settings).map_err(err)?;
-                }
-            }
+        if !self.read_only {
+            self.catalog
+                .immediate(|| {
+                    for change in self.edit.journal() {
+                        match change {
+                            Change::Committed { label, settings } => self.catalog.edit(id as i64, settings, label)?,
+                            Change::Restored { settings } => self.catalog.set_settings(id as i64, settings)?,
+                        }
+                    }
+                    self.save_undo(id)
+                })
+                .map_err(err)?;
+            self.refresh_history();
         }
-        self.save_undo(id)?;
-        self.refresh_history();
+        self.edit.take_journal();
+        self.commits.extend(self.edit.take_commits().into_iter().map(|c| (id, c)));
+        self.bump(id);
         Ok(())
     }
 
@@ -1246,4 +1304,35 @@ pub mod import {
         progress(queue.len(), queue.len(), "");
         Ok(report)
     }
+}
+
+#[cfg(test)]
+#[test]
+fn failed_undo_write_retains_edit_and_rolls_back_history_before_retry() {
+    let tmp = tempfile::tempdir().unwrap();
+    let mut doc = CatalogDocument::open(tmp.path()).unwrap();
+    let first = doc.catalog.add("first.png", None, None, true).unwrap();
+    doc.catalog.add("second.png", None, None, true).unwrap();
+    doc.refresh_now().unwrap();
+    doc.select(0);
+    assert_eq!(doc.current_id(), first as u64);
+    let mut settings = doc.edit().settings().clone();
+    settings.set("exposure", json!(1.5));
+    doc.edit_mut().replace(settings, "exposure");
+    doc.catalog
+        .connection()
+        .execute_batch(
+            "CREATE TEMP TRIGGER fail_undo BEFORE INSERT ON preferences WHEN NEW.key LIKE 'undo:%'
+         BEGIN SELECT RAISE(ABORT, 'injected failure'); END;",
+        )
+        .unwrap();
+    assert!(doc.flush().is_err());
+    assert!(!doc.select(1));
+    assert!(doc.edit().has_journal());
+    assert!(doc.catalog.histories(first).unwrap().is_empty());
+    doc.catalog.connection().execute_batch("DROP TRIGGER fail_undo").unwrap();
+    doc.flush().unwrap();
+    doc.flush().unwrap();
+    assert_eq!(doc.catalog.histories(first).unwrap().len(), 1);
+    assert_eq!(doc.catalog.photo(first).unwrap().unwrap()["settings"]["exposure"], json!(1.5));
 }

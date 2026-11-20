@@ -123,6 +123,9 @@ pub fn surplus(names: &[String], keep: usize) -> Vec<String> {
 /// Port of `trim`: retires the surplus backups of `folder` through `recycle` (the recycle bin; a backup that
 /// cannot be recycled stays, never deleted for good).
 pub fn trim(folder: &Path, keep: usize, recycle: &dyn Fn(&Path) -> bool) {
+    if crate::paths::writable(folder).is_err() {
+        return;
+    }
     let names: Vec<String> = std::fs::read_dir(folder)
         .into_iter()
         .flatten()
@@ -158,6 +161,7 @@ pub fn upload(
     recycle: &dyn Fn(&Path) -> bool,
 ) -> Result<(Option<PathBuf>, String), String> {
     let result = (|| -> Result<(Option<PathBuf>, String), String> {
+        crate::paths::writable(folder).map_err(|e| e.to_string())?;
         quick_check(staged)?;
         let value = digest(staged).map_err(|e| e.to_string())?;
         if last_hash == Some(value.as_str()) {
@@ -165,19 +169,26 @@ pub fn upload(
         }
         std::fs::create_dir_all(folder).map_err(|e| e.to_string())?;
         let stamp = now.format("%Y%m%d-%H%M%S").to_string();
-        let mut target = folder.join(format!("{PREFIX}{stamp}.sqlite"));
-        let mut n = 1;
-        while target.exists() {
-            target = folder.join(format!("{PREFIX}{stamp}-{n}.sqlite"));
-            n += 1;
-        }
-        let part = PathBuf::from(format!("{}.part", target.display()));
-        std::fs::copy(staged, &part).map_err(|e| e.to_string())?;
-        if digest(&part).map_err(|e| e.to_string())? != value {
-            let _ = std::fs::remove_file(&part);
+        let mut partial = tempfile::NamedTempFile::new_in(folder).map_err(|e| e.to_string())?;
+        let mut input = std::fs::File::open(staged).map_err(|e| e.to_string())?;
+        std::io::copy(&mut input, partial.as_file_mut()).map_err(|e| e.to_string())?;
+        partial.as_file().sync_all().map_err(|e| e.to_string())?;
+        if digest(partial.path()).map_err(|e| e.to_string())? != value {
             return Err(tr("업로드한 사본이 원본과 다릅니다."));
         }
-        std::fs::rename(&part, &target).map_err(|e| e.to_string())?;
+        let mut n = 0;
+        let target = loop {
+            let suffix = if n == 0 { String::new() } else { format!("-{n}") };
+            let path = folder.join(format!("{PREFIX}{stamp}{suffix}.sqlite"));
+            match partial.persist_noclobber(&path) {
+                Ok(_) => break path,
+                Err(e) if e.error.kind() == std::io::ErrorKind::AlreadyExists => {
+                    partial = e.file;
+                    n += 1;
+                }
+                Err(e) => return Err(e.error.to_string()),
+            }
+        };
         trim(folder, keep, recycle);
         Ok((Some(target), value))
     })();
@@ -317,13 +328,19 @@ pub fn save(cx: &mut AppContext, changes: &[(&str, Value)]) {
 /// Port of `snapshot`: a consistent copy of the catalogue in its backups folder, one self-contained file.
 pub fn snapshot(cx: &mut AppContext) -> Result<PathBuf, String> {
     let library = cx.doc.library_folder().ok_or_else(|| tr("카탈로그를 찾지 못했습니다."))?;
-    let unique = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0, |d| d.as_nanos());
-    let staged = library.join("backups").join("cloud-staging").join(format!("{unique:032x}.sqlite"));
-    cx.doc.file_op(FileOp::Backup { path: staged.clone() })?;
-    let db = Connection::open(&staged).map_err(|e| e.to_string())?;
-    db.query_row("PRAGMA journal_mode=DELETE", [], |row| row.get::<_, String>(0)).map_err(|e| e.to_string())?;
-    drop(db);
-    Ok(staged)
+    cx.doc.file_op(FileOp::Commit)?;
+    snapshot_of(&library)
+}
+
+fn snapshot_of(library: &Path) -> Result<PathBuf, String> {
+    let directory = library.join("backups").join("cloud-staging");
+    crate::paths::writable(&directory).map_err(|e| e.to_string())?;
+    let unique =
+        std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_err(|e| e.to_string())?.as_nanos();
+    let staged = directory.join(format!("{unique:032x}.sqlite"));
+    grainy_catalog::Catalog::open_reader(library)
+        .and_then(|catalog| catalog.portable_backup(staged))
+        .map_err(|e| e.to_string())
 }
 
 /// Port of `CloudBackup.start`: backs up now (`manual`) or when enabled (automatic). `notify` gets the message.
@@ -334,20 +351,12 @@ pub fn start(cx: &mut AppContext, manual: bool, notify: Option<Notify>) -> bool 
     if state.busy || state.closing || s.folder.is_empty() || !(manual || s.enabled) {
         return false;
     }
-    let staged = (|| {
-        if manual {
-            cx.doc.edit_mut().commit("보정 변경");
-            cx.doc.flush()?;
-        }
-        snapshot(cx)
-    })();
-    let staged = match staged {
-        Ok(path) => path,
-        Err(error) => {
-            finish(cx, Err(error), manual, notify);
-            return false;
-        }
-    };
+    let Some(library) = cx.doc.library_folder() else { return false };
+    if let Err(error) = cx.doc.file_op(FileOp::Commit) {
+        finish(cx, Err(error), manual, notify);
+        return false;
+    }
+    let generation = cx.document_generation;
     cx.state::<CloudState>().busy = true;
     let uploader = uploader(cx);
     let hash = (!manual).then_some(s.hash.clone()).filter(|h| !h.is_empty());
@@ -355,10 +364,16 @@ pub fn start(cx: &mut AppContext, manual: bool, notify: Option<Notify>) -> bool 
     cx.jobs.spawn(
         "cloud_backup",
         "",
-        move |_| uploader.upload(&staged, &folder, hash.as_deref()),
+        move |_| {
+            crate::paths::writable(&folder).map_err(|e| e.to_string())?;
+            let staged = snapshot_of(&library)?;
+            uploader.upload(&staged, &folder, hash.as_deref())
+        },
         move |cx: &mut AppContext, result: Result<(Option<PathBuf>, String), String>| {
             cx.state::<CloudState>().busy = false;
-            finish(cx, result, manual, notify);
+            if generation == cx.document_generation {
+                finish(cx, result, manual, notify);
+            }
         },
     );
     true
@@ -448,13 +463,17 @@ pub fn shutdown(cx: &mut AppContext) {
     };
     let started = Instant::now();
     while cx.state::<CloudState>().busy && started.elapsed() < timeout {
-        for finished in cx.jobs.poll() {
+        for finished in cx.jobs.poll_kind(Some("cloud_backup")) {
             finished(cx);
         }
         std::thread::sleep(Duration::from_millis(20));
     }
     let s = settings(cx);
     if !s.enabled || s.folder.is_empty() || cx.state::<CloudState>().busy {
+        return;
+    }
+    if let Err(e) = crate::paths::writable(Path::new(&s.folder)) {
+        save(cx, &[("error", json!(e.to_string()))]);
         return;
     }
     let staged = match snapshot(cx) {

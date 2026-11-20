@@ -406,6 +406,11 @@ pub fn trash_now(cx: &mut AppContext, ids: &[u64]) {
         Some(Err(message)) => return fail(cx, &message),
         None => return,
     };
+    for path in &paths {
+        if let Err(error) = crate::paths::writable(Path::new(path)) {
+            return fail(cx, &error.to_string());
+        }
+    }
     let bin: Arc<dyn Trash> = cx.state::<FilesState>().trash.clone().unwrap_or_else(|| Arc::new(SystemTrash));
     for path in &paths {
         if Path::new(path).exists() {
@@ -605,7 +610,7 @@ pub fn backup_to(cx: &mut AppContext, path: &Path) {
 }
 
 fn transfers_running(cx: &AppContext) -> bool {
-    cx.jobs.running("import") || cx.jobs.running("export")
+    !cx.jobs.jobs_idle() || !cx.renderer.idle() || crate::ai::running_job(cx).is_some()
 }
 
 /// 카탈로그 복원: refused while an import or export runs; the open dialog, the question, then [`restore_from`].
@@ -631,6 +636,9 @@ fn restore(cx: &mut AppContext, invocation: &Invocation) {
 /// Port of `manager.restore` after 예: the preview batch stops, the catalogue is replaced by the backup (a copy of
 /// the current one is kept first), and the list is read again without collection, rules or folder.
 pub fn restore_from(cx: &mut AppContext, path: &Path) {
+    if transfers_running(cx) {
+        return fail(cx, "가져오기·내보내기 완료 후 복원하세요.");
+    }
     stop_batch(cx);
     if op(cx, FileOp::Restore { path: path.to_path_buf() }).is_some() {
         cx.photo_changed();
@@ -656,27 +664,33 @@ pub fn integrity_text(status: &str, photos: usize, missing: usize, denied: usize
 /// on a job.
 fn integrity(cx: &mut AppContext, _: &Invocation) {
     let Some(catalog) = cx.doc.metadata_catalog() else { return };
-    let status: String = match catalog.connection().query_row("PRAGMA integrity_check", [], |r| r.get(0)) {
-        Ok(status) => status,
-        Err(error) => return fail(cx, &error.to_string()),
-    };
-    let paths: Vec<String> = match catalog.photos() {
-        Ok(rows) => rows.iter().map(|r| r["path"].as_str().unwrap_or("").to_owned()).collect(),
-        Err(error) => return fail(cx, &error.to_string()),
-    };
-    let total = paths.len();
-    cx.jobs.spawn(
+    // For a read-only library this is the private snapshot directory.
+    let directory = catalog.directory().to_owned();
+    cx.spawn_document_job(
         "files",
         tr("카탈로그 검사"),
-        move |_| {
-            let states: Vec<Access> = paths.iter().map(|p| access(Path::new(p), false)).collect();
-            Ok((
-                states.iter().filter(|s| **s == Access::Missing).count(),
-                states.iter().filter(|s| **s == Access::Denied).count(),
-            ))
+        move |handle| {
+            let db = grainy_catalog::Catalog::open_reader(&directory).map_err(|e| e.to_string())?;
+            let status: String =
+                db.connection().query_row("PRAGMA integrity_check", [], |r| r.get(0)).map_err(|e| e.to_string())?;
+            let mut statement = db.connection().prepare("SELECT path FROM photos").map_err(|e| e.to_string())?;
+            let paths = statement.query_map([], |row| row.get::<_, String>(0)).map_err(|e| e.to_string())?;
+            let (mut count, mut missing, mut denied) = (0, 0, 0);
+            for path in paths {
+                if handle.cancelled() {
+                    return Err("cancelled".into());
+                }
+                count += 1;
+                match access(Path::new(&path.map_err(|e| e.to_string())?), false) {
+                    Access::Missing => missing += 1,
+                    Access::Denied => denied += 1,
+                    _ => {}
+                }
+            }
+            Ok((status, count, missing, denied))
         },
-        move |cx: &mut AppContext, result: Result<(usize, usize), String>| match result {
-            Ok((missing, denied)) => {
+        move |cx, result| match result {
+            Ok((status, total, missing, denied)) => {
                 cx.open_dialog(Box::new(MessageBox::information(
                     "files_integrity",
                     tr("카탈로그 검사"),
@@ -829,7 +843,7 @@ fn next(cx: &mut AppContext) {
     batch.running = true;
     let cancel = batch.cancel.clone();
     let token = cancel.clone();
-    let cache = ThumbCache { directory, id: id as i64, writable: true };
+    let cache = ThumbCache { snapshot: None, directory, id: id as i64, writable: true };
     cx.jobs.spawn(
         "previews",
         "",

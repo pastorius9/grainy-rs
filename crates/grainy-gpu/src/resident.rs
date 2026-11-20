@@ -155,12 +155,30 @@ impl Gpu {
         let color_key = params::key(s, params::COLOR_KEYS);
         if r.color.as_ref().is_none_or(|(key, _)| *key != color_key) {
             let source = &r.tone.as_ref().ok_or_else(|| Error::Device("missing tone slot".into()))?.1;
-            let frame = self.dispatch(source, 1, &color_params.0, &color_params.1, &[])?;
+            // SDR tone has already clipped. Without colour operations the shader would only clip again.
+            let frame = if color_params.0[2] == 0.0 && color_params.1.is_empty() {
+                source.clone()
+            } else {
+                self.dispatch(source, 1, &color_params.0, &color_params.1, &[])?
+            };
             r.color = Some((color_key, frame));
             r.detail = None;
             r.finish = None;
             r.runs.color += 1;
         }
+        let neutral_detail = [
+            "noise_luma",
+            "noise_color",
+            "dehaze",
+            "texture",
+            "defringe",
+            "monochrome",
+            "clarity",
+            "sharpen",
+            "vignette",
+        ]
+        .iter()
+        .all(|key| !s.bool(key));
         let mut detail_key = params::key(s, crate::detail::KEYS);
         detail_key.push(Value::from(pixel_scale));
         if r.detail.as_ref().is_none_or(|(key, _)| *key != detail_key) {
@@ -168,8 +186,13 @@ impl Gpu {
             if !self.detail_supported(s, source.width, source.height, pixel_scale)? {
                 return Ok(ResidentResult { frame: Some(source.clone()), fallback: Some(CpuStage::Detail) });
             }
-            let Some(frame) = self.detail_frame(source, s, pixel_scale)? else {
-                return Ok(ResidentResult { frame: Some(source.clone()), fallback: Some(CpuStage::Detail) });
+            let frame = if neutral_detail {
+                source.clone()
+            } else {
+                let Some(frame) = self.detail_frame(source, s, pixel_scale)? else {
+                    return Ok(ResidentResult { frame: Some(source.clone()), fallback: Some(CpuStage::Detail) });
+                };
+                frame
             };
             r.detail = Some((detail_key, frame));
             r.finish = None;
@@ -188,13 +211,17 @@ impl Gpu {
                 r.runs.grain_uploads += 1;
             }
             let params = [source.width as f32, source.height as f32, f32::from(s.bool("grain")), f32::from(!clip)];
-            let frame = self.dispatch_buffers(
-                source,
-                2,
-                &params,
-                &[],
-                [r.grain.as_ref().map(|(_, buffer)| buffer), None, None, None],
-            )?;
+            let frame = if !s.bool("grain") && (!clip || neutral_detail) {
+                source.clone()
+            } else {
+                self.dispatch_buffers(
+                    source,
+                    2,
+                    &params,
+                    &[],
+                    [r.grain.as_ref().map(|(_, buffer)| buffer), None, None, None],
+                )?
+            };
             r.finish = Some((finish_key, frame));
             r.runs.finish += 1;
         }

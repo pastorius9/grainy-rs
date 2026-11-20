@@ -86,7 +86,6 @@ pub fn develop_gpu_cached<'a>(
         && (s.str("working_space") == "ProPhoto" || !matches!(options.output, Output::Named("sRGB")));
     // HDR needs the CPU colour/detail tail. Keep its extended-range result bit-exact throughout too.
     if s.bool("hdr") || cms_output {
-        cache.resident = None;
         cache.fallback = Some(CpuStage::Tone);
         return Ok(crate::develop_cached(source, settings, options, &mut cache.cpu, token)?);
     }
@@ -147,7 +146,9 @@ pub fn develop_gpu_cached<'a>(
     }
     let masks = s.value("masks").as_array().is_some_and(|layers| !layers.is_empty());
     let resident = &mut cache.resident.as_mut().ok_or_else(|| grainy_gpu::Error::Device("missing resident".into()))?.1;
+    let dispatch = grainy_core::timing::Span::new("gpu.resident_prefix");
     let result = gpu.develop_resident_prefix(resident, &s, scale, !masks)?;
+    drop(dispatch);
     cache.fallback = result.fallback;
     let tone_key = format!("gpu|{geometry_key}|{}", settings_key(&s, &TONE_KEYS));
     let color_key = format!("{tone_key}|{}", settings_key(&s, &COLOR_KEYS));
@@ -174,12 +175,18 @@ pub fn develop_gpu_cached<'a>(
             };
             // The oracle stores the unclipped detail/grain readback when resident_layers is unavailable.
             // Changing only mask geometry or adjustments then needs neither a dispatch nor another readback.
-            match host.as_deref_mut().filter(|_| masks) {
+            if !masks {
+                // The finish shader already ran the final clip. No local operation or further output
+                // transform is possible on this branch (nonidentity CMS went through the CPU above).
+                return readback();
+            }
+            match host.as_deref_mut() {
                 Some(host) => host.evaluate("gpu-mask-detail", &detail_key, readback)?,
                 None => Arc::new(readback()?),
             }
         }
     };
+    let tail = grainy_core::timing::Span::new("gpu.host_tail");
     let a = Arc::try_unwrap(a).unwrap_or_else(|image| (*image).clone());
     let colour_source = if stages::needs_colour_source(&s) {
         let key = format!("{raw_key}|{}", negative_key.as_deref().unwrap_or("-"));
@@ -190,6 +197,7 @@ pub fn develop_gpu_cached<'a>(
     let (height, width, _) = source.pixels().dim();
     let mut a = stages::local(a, (height, width), colour_source.as_deref(), &s, options.use_crop, scale, &externals)?;
     grainy_color::clip01_in_place(&mut a);
+    drop(tail);
     let destination = match options.output {
         Output::Working => return Ok(a),
         Output::Named("sRGB") if s.str("working_space") != "ProPhoto" => return Ok(a),

@@ -145,7 +145,7 @@ fn http_endpoint_checks_and_answers() {
         protocol: Protocol::new("0.6.8"),
         tools: tools.clone(),
         service: service.clone(),
-        token: token.clone(),
+        token: token.clone().into(),
     };
     let server = grainy_mcp::http::start(0, endpoint).unwrap();
     let port = server.port();

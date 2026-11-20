@@ -90,10 +90,6 @@ fn the_swap_replaces_only_the_release_items_and_keeps_the_previous_version() {
     assert!(log.contains("new version copied"), "{log}");
 }
 
-fn broken_copy(_: &std::path::Path, _: &std::path::Path) -> std::io::Result<()> {
-    Err(std::io::Error::other("copy failed"))
-}
-
 #[test]
 fn a_failed_swap_restores_the_previous_version() {
     let root = Temp::new();
@@ -107,14 +103,12 @@ fn a_failed_swap_restores_the_previous_version() {
     let error = updater::finish_package(&app, &root.0.join("empty"), 0, None, &layout, &hooks, &RS_PACKAGE);
     assert_eq!(error, "staged version is incomplete");
     assert_eq!(std::fs::read_to_string(app.join("GrainyRS.exe")).unwrap(), "old");
-    // A copy that fails halfway (an item that is a folder goes through copy_tree, which breaks here): the new files
-    // go aside and the previous version is put back.
+    // An invalid directory in a flat file slot is rejected during private staging.
     let staged = root.0.join("staged");
     put(&staged, &[("GrainyRS.exe".into(), "new".into()), ("LICENSE".into(), "new licence".into())]);
     std::fs::create_dir_all(staged.join("README.txt")).unwrap();
-    let hooks = Hooks { copy_tree: broken_copy, ..hooks };
     let error = updater::finish_package(&app, &staged, 0, None, &layout, &hooks, &RS_PACKAGE);
-    assert_eq!(error, "copy failed");
+    assert_eq!(error, "unexpected directory in flat release");
     assert_eq!(std::fs::read_to_string(app.join("GrainyRS.exe")).unwrap(), "old");
     assert_eq!(std::fs::read_to_string(app.join("LICENSE")).unwrap(), "old licence");
     assert!(!app.join("README.txt").exists());
@@ -286,7 +280,7 @@ fn the_swap_from_0_1_0_adds_openmp_and_keeps_everything_else() {
     assert_eq!(names, ["vcomp140.dll"], "the only new entry of the folder");
     let log = String::from_utf8(log).unwrap();
     assert!(
-        log.contains("previous version moved to previous-20261120-120000: ['GrainyRS.exe', 'grainy-cli.exe', 'LICENSE', 'THIRD_PARTY_NOTICES.txt', 'README.txt']"),
+        log.contains("previous version saved to previous-20261120-120000: ['GrainyRS.exe', 'grainy-cli.exe', 'LICENSE', 'THIRD_PARTY_NOTICES.txt', 'README.txt']"),
         "{log}"
     );
     assert!(

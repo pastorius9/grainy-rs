@@ -116,9 +116,9 @@ pub struct AppContext {
     /// Thumbnail keys asked for and not answered.
     thumbs_asked: HashMap<u64, u64>,
     /// Photos whose thumbnails were drawn this frame (only those are asked for).
-    pub(crate) thumbs_drawn: HashSet<u64>,
+    pub(crate) thumbs_drawn: HashMap<u64, usize>,
     /// The photos whose thumbnails were drawn in the frame before the last request round (what `idle` waits for).
-    thumbs_shown: HashSet<u64>,
+    thumbs_shown: HashMap<u64, usize>,
     chosen_tx: Sender<Chosen>,
     chosen_rx: Receiver<Chosen>,
     /// Open dialogs, the last on top.
@@ -176,6 +176,9 @@ impl AppContext {
         crate::theme::apply(egui);
         let repaint = egui.clone();
         let waker: Waker = Arc::new(move || repaint.request_repaint());
+        if let Some(folder) = doc.asset_folder() {
+            renderer.set_library(Some(folder));
+        }
         renderer.set_waker(waker.clone());
         let mut jobs = Jobs::default();
         jobs.set_waker(Some(waker.clone()));
@@ -197,8 +200,8 @@ impl AppContext {
             bins: None,
             thumbs: HashMap::new(),
             thumbs_asked: HashMap::new(),
-            thumbs_drawn: HashSet::new(),
-            thumbs_shown: HashSet::new(),
+            thumbs_drawn: HashMap::new(),
+            thumbs_shown: HashMap::new(),
             chosen_tx,
             chosen_rx,
             dialogs: Vec::new(),
@@ -277,11 +280,30 @@ impl AppContext {
         self.doc.as_mut()
     }
 
+    /// Applies a background result only to the document that requested it.
+    pub(crate) fn spawn_document_job<T: Send + 'static>(
+        &mut self,
+        kind: &'static str,
+        label: impl Into<String>,
+        work: impl FnOnce(&crate::jobs::JobHandle) -> Result<T, String> + Send + 'static,
+        done: impl FnOnce(&mut Self, Result<T, String>) + 'static,
+    ) -> crate::jobs::JobId {
+        let generation = self.document_generation;
+        self.jobs.spawn(kind, label, work, move |cx, result| {
+            if cx.document_generation == generation {
+                done(cx, result);
+            }
+        })
+    }
+
     /// Replaces the document (opening a library): the picture and the thumbnails start again.
-    pub fn set_document(&mut self, doc: Box<dyn Document>) {
-        if let Err(message) = self.doc.flush() {
-            log::warn!("cannot store the last edit: {message}");
+    pub fn set_document(&mut self, doc: Box<dyn Document>) -> bool {
+        if let Err(message) = self.commit_document() {
+            self.status = tr_with("처리하지 못했습니다: {0}", &[&message]);
+            return false;
         }
+        crate::folder_watch::shutdown(self);
+        self.renderer.set_library(doc.asset_folder());
         self.doc = doc;
         self.document_generation += 1;
         self.requests += 1;
@@ -290,6 +312,7 @@ impl AppContext {
         self.thumbs_asked.clear();
         self.wanted = None;
         self.photo_changed();
+        true
     }
 
     /// Whether the open document is the Python Grainy's library opened read-only (the "읽기 전용" badge).
@@ -505,6 +528,7 @@ impl AppContext {
 
     /// What changes when another photo opens.
     pub(crate) fn photo_changed(&mut self) {
+        crate::commands::auto_source::clear(self);
         self.texture = None;
         self.clip_texture = None;
         self.frame = None;
@@ -715,6 +739,12 @@ impl AppContext {
         self.jobs.set_render_busy(!self.renderer.idle());
     }
 
+    /// Commit an active gesture and persist the journal before a library switch, update or window close.
+    pub(crate) fn commit_document(&mut self) -> Result<(), String> {
+        self.doc.edit_mut().commit("보정 변경");
+        self.doc.flush()
+    }
+
     /// Stores the edits recorded this frame.
     pub(crate) fn flush(&mut self) {
         if let Err(message) = self.doc.flush() {
@@ -724,7 +754,7 @@ impl AppContext {
     }
 
     /// Collects the renderer's replies and sends the requests the screen needs now.
-    pub(crate) fn refresh_picture(&mut self) {
+    pub fn refresh_picture(&mut self) {
         for reply in self.renderer.poll() {
             match reply {
                 Reply::Frame(frame) => {
@@ -752,6 +782,9 @@ impl AppContext {
                         tr_with(source, &[&values[0], &values[1], &values[2]])
                     };
                     self.show_frame(frame);
+                    if self.renderer.prepares_analysis() {
+                        crate::commands::auto_source::prepare(self);
+                    }
                 }
                 Reply::Failed { id, photo, message } => {
                     self.answered = self.answered.max(id);
@@ -810,7 +843,7 @@ impl AppContext {
         }
     }
 
-    fn request_preview(&mut self) {
+    pub(crate) fn request_preview(&mut self) {
         let crop = crate::tools::crop::preview_crop(self);
         let Some(photo) = self.doc.current() else { return };
         let wanted = Wanted {
@@ -823,6 +856,14 @@ impl AppContext {
             hdr: crate::hdr::revision(self),
         };
         if self.wanted == Some(wanted) {
+            return;
+        }
+        // Let one drag frame reach the screen. Submitting every intermediate value would make
+        // every reply stale during continuous movement. The reply wakes us to submit the latest.
+        if self.answered < self.requests
+            && self.doc.edit().dirty()
+            && self.wanted.is_some_and(|w| Wanted { version: wanted.version, ..w } == wanted)
+        {
             return;
         }
         let path = photo.path.clone();
@@ -838,8 +879,9 @@ impl AppContext {
     /// thumbnail replaces the first, freshly rendered one when the library reports it, and the two differ by the
     /// JPEG's rounding, so a picture taken before that second request would differ from run to run.
     fn thumbnails_current(&self) -> bool {
-        self.doc.photos().iter().enumerate().all(|(index, photo)| {
-            if !self.thumbs_shown.contains(&photo.id) {
+        self.thumbs_shown.iter().all(|(&id, &index)| {
+            let Some(photo) = self.doc.photos().get(index) else { return true };
+            if photo.id != id {
                 return true;
             }
             let key = thumb_key(photo.id, self.doc.version_of(index), self.doc.thumb_cache(index).is_some())
@@ -853,10 +895,17 @@ impl AppContext {
         let current = self.doc.current_index();
         let dragging = self.doc.edit().dirty();
         let drawn = std::mem::take(&mut self.thumbs_drawn);
+        // Drop offscreen textures in batches; preserve the complete visible set even on large displays.
+        if self.thumbs.len() > 256 && !drawn.is_empty() {
+            self.thumbs.retain(|id, _| drawn.contains_key(id));
+        }
         self.thumbs_shown.clone_from(&drawn);
         let mut jobs = Vec::new();
-        for (index, photo) in self.doc.photos().iter().enumerate() {
-            if !drawn.contains(&photo.id) || (current == Some(index) && dragging) {
+        let mut visible: Vec<_> = drawn.into_iter().collect();
+        visible.sort_unstable_by_key(|&(_, index)| index);
+        for (id, index) in visible {
+            let Some(photo) = self.doc.photos().get(index) else { continue };
+            if photo.id != id || (current == Some(index) && dragging) {
                 continue;
             }
             let cache = self.doc.thumb_cache(index);
@@ -884,7 +933,12 @@ impl AppContext {
             log::warn!("renderer returned a picture of the wrong size");
             return;
         }
-        let image = egui::ColorImage::from_rgba_unmultiplied([preview.width, preview.height], &preview.rgba);
+        let size = [preview.width, preview.height];
+        let image = if preview.rgba.as_chunks::<4>().0.iter().all(|p| p[3] == 255) {
+            egui::ColorImage::from_rgba_premultiplied(size, &preview.rgba)
+        } else {
+            egui::ColorImage::from_rgba_unmultiplied(size, &preview.rgba)
+        };
         let options = egui::TextureOptions::LINEAR;
         match &mut self.texture {
             Some(texture) => texture.set(image, options),
@@ -920,6 +974,30 @@ mod review_tests {
     use crate::render::TestCard;
 
     #[test]
+    fn continuous_slider_edits_show_inflight_frames_and_then_the_latest_value() {
+        let mut doc = Session::default();
+        doc.add([PathBuf::from("generated.png")]);
+        let mut cx = AppContext::new(&Default::default(), Box::<TestCard>::default(), Box::new(doc));
+        cx.request_preview();
+        let first = cx.requests;
+        for ev in 1..=8 {
+            cx.edit_state_mut().set("exposure", ev as f64 / 10.);
+            cx.request_preview();
+        }
+        assert_eq!(cx.requests, first);
+        cx.refresh_picture();
+        assert_eq!(cx.frame().unwrap().id, first);
+        assert!(!cx.jobs.running("prepare-auto"), "a synthetic renderer must not read its document paths");
+        assert_eq!(cx.requests, first + 1);
+        assert_eq!(cx.wanted.unwrap().version, cx.edit_state().version());
+        cx.refresh_picture();
+        assert_eq!(cx.frame().unwrap().id, first + 1);
+        cx.pan = Vec2::new(30., 60.);
+        cx.refresh_picture();
+        assert_eq!(cx.requests, first + 1);
+    }
+
+    #[test]
     fn switching_documents_rejects_queued_frames_and_thumbnails() {
         let mut cx = AppContext::new(&egui::Context::default(), Box::<TestCard>::default(), memory_document());
         cx.refresh_picture();
@@ -945,6 +1023,23 @@ mod review_tests {
         assert!(cx.frame.is_none(), "an old library's photo id can equal the new library's id");
         assert!(cx.thumbs.is_empty());
         assert_eq!(cx.thumbs_asked.get(&0), Some(&8));
+    }
+
+    #[test]
+    fn a_completed_document_job_is_discarded_after_a_switch() {
+        let mut cx = AppContext::new(&egui::Context::default(), Box::<TestCard>::default(), memory_document());
+        let (tx, rx) = std::sync::mpsc::channel();
+        cx.jobs.set_waker(Some(Arc::new(move || {
+            let _ = tx.send(());
+        })));
+        cx.spawn_document_job("xmp_read", "", |_| Ok(()), |_, _| panic!("old result applied"));
+        rx.recv_timeout(std::time::Duration::from_secs(10)).unwrap();
+        let callbacks = cx.jobs.poll();
+        assert_eq!(callbacks.len(), 1);
+        cx.set_document(memory_document());
+        for done in callbacks {
+            done(&mut cx);
+        }
     }
 
     #[test]

@@ -180,3 +180,39 @@ fn error_types_name_the_python_exceptions() {
     let io = std::io::Error::from(std::io::ErrorKind::NotFound);
     assert_eq!(Error::os(&io, Path::new("x"), true).to_string(), "[Errno 2] No such file or directory: 'x'");
 }
+
+#[test]
+fn import_retries_past_an_abandoned_partial_without_touching_it() {
+    let dir = tempfile::tempdir().unwrap();
+    let source = dir.path().join("card.raw");
+    let target = dir.path().join("copy.raw");
+    let partial = dir.path().join("copy.raw.grainy-part");
+    std::fs::write(&source, b"generated photo").unwrap();
+    std::fs::write(&partial, b"another operation").unwrap();
+    grainy_library::import_copy::copy_verified(
+        grainy_catalog::folders::Platform::native(),
+        source.to_str().unwrap(),
+        target.to_str().unwrap(),
+    )
+    .unwrap();
+    assert_eq!(std::fs::read(target).unwrap(), b"generated photo");
+    assert_eq!(std::fs::read(partial).unwrap(), b"another operation");
+}
+
+#[test]
+fn move_updates_the_stored_spelling_of_the_photo_path() {
+    let dir = temp();
+    let db = Catalog::new(dir.path().join("catalog")).unwrap();
+    let photo = dir.path().join("image.jpg");
+    std::fs::create_dir(dir.path().join("sub")).unwrap();
+    std::fs::write(&photo, b"photo").unwrap();
+    let spelling = dir.path().join("sub").join("..").join("image.jpg").display().to_string();
+    let target = dir.path().join("renamed.jpg");
+    let id = db.add(&spelling, None, None, true).unwrap();
+    db.connection()
+        .execute("UPDATE photos SET path=? WHERE id=?", grainy_catalog::rusqlite::params![spelling, id])
+        .unwrap();
+    grainy_library::library::move_files(&db, &[(spelling, target.display().to_string())]).unwrap();
+    let stored = db.photo(id).unwrap().unwrap()["path"].as_str().unwrap().to_owned();
+    assert_eq!(std::fs::canonicalize(stored).unwrap(), std::fs::canonicalize(target).unwrap());
+}

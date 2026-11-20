@@ -51,29 +51,26 @@ pub fn copy_stat(source: &Path, target: &Path) -> io::Result<()> {
 /// Copies `source` to a new file `target` (exclusive create, never overwrites) with its stat, and verifies the
 /// copy. On a mismatch or failure the half-written target is removed (it is ours: it did not exist before).
 pub fn copy_new_verified(source: &Path, target: &Path) -> Result<()> {
-    let mut created = false;
-    let result = (|| -> io::Result<()> {
-        let mut input = File::open(source)?;
-        let mut output = OpenOptions::new().write(true).create_new(true).open(target)?;
-        created = true;
-        io::copy(&mut input, &mut output)?;
-        output.flush()?;
-        output.sync_all()?;
-        drop(output);
-        copy_stat(source, target)?;
-        if digest_bytes(source)? != digest_bytes(target)? {
+    let mut input = File::open(source).map_err(|e| Error::os(&e, source, true))?;
+    let mut publish = || -> io::Result<()> {
+        let parent = target.parent().filter(|p| !p.as_os_str().is_empty()).unwrap_or(Path::new("."));
+        let mut stage = tempfile::NamedTempFile::new_in(parent)?;
+        io::copy(&mut input, stage.as_file_mut())?;
+        stage.as_file_mut().flush()?;
+        stage.as_file().sync_all()?;
+        if digest_bytes(source)? != digest_bytes(stage.path())? {
             return Err(io::Error::other("copy differs from the source"));
         }
+        copy_stat(source, stage.path())?;
+        // Windows tempfile publication normalizes the temporary file's attributes.
+        #[cfg(windows)]
+        let permissions = input.metadata()?.permissions();
+        let _published = stage.persist_noclobber(target).map_err(|e| e.error)?;
+        #[cfg(windows)]
+        _published.set_permissions(permissions)?;
         Ok(())
-    })();
-    if let Err(error) = result {
-        // Only remove what this call created.
-        if created {
-            let _ = fs::remove_file(target);
-        }
-        return Err(Error::os(&error, target, true));
-    }
-    Ok(())
+    };
+    publish().map_err(|e| Error::os(&e, target, true))
 }
 
 /// `shutil.move` for one file, without ever replacing an existing target: a rename, or, across volumes, a
@@ -85,21 +82,20 @@ pub fn move_file(source: &Path, target: &Path) -> Result<()> {
             kind: io::ErrorKind::AlreadyExists,
         });
     }
-    match fs::rename(source, target) {
+    match grainy_platform::rename_new(source, target) {
         Ok(()) => Ok(()),
         Err(error) if error.kind() == io::ErrorKind::CrossesDevices => {
-            copy_new_verified(source, target)?;
-            fs::remove_file(source).map_err(|e| Error::os(&e, source, false))
+            publish_from_held_source(source, |original| copy_new_verified(original, target))
         }
         Err(error) => Err(Error::os(&error, source, false)),
     }
 }
 
-fn tree(root: &Path, base: &Path, out: &mut Vec<(String, Option<u64>)>) -> io::Result<()> {
+fn tree(root: &Path, base: &Path, out: &mut Vec<(std::path::PathBuf, Option<[u8; 32]>)>) -> io::Result<()> {
     for entry in fs::read_dir(base)? {
         let entry = entry?;
         let kind = entry.file_type()?;
-        let relative = entry.path().strip_prefix(root).map(|p| p.to_string_lossy().into_owned()).unwrap_or_default();
+        let relative = entry.path().strip_prefix(root).map_err(io::Error::other)?.to_owned();
         if kind.is_symlink() {
             return Err(io::Error::other("a symbolic link cannot be moved across volumes"));
         }
@@ -107,7 +103,7 @@ fn tree(root: &Path, base: &Path, out: &mut Vec<(String, Option<u64>)>) -> io::R
             out.push((relative, None));
             tree(root, &entry.path(), out)?;
         } else {
-            out.push((relative, Some(entry.metadata()?.len())));
+            out.push((relative, Some(digest_bytes(&entry.path())?)));
         }
     }
     Ok(())
@@ -151,23 +147,91 @@ pub fn move_dir(source: &Path, target: &Path) -> Result<()> {
             fs::create_dir_all(parent).map_err(|e| Error::os(&e, parent, false))?;
         }
     }
-    match fs::rename(source, target) {
+    match grainy_platform::rename_new(source, target) {
         Ok(()) => Ok(()),
-        Err(error) if error.kind() == io::ErrorKind::CrossesDevices => {
-            copy_tree(source, target)?;
-            let (mut a, mut b) = (Vec::new(), Vec::new());
-            tree(source, source, &mut a).map_err(|e| Error::os(&e, source, false))?;
-            tree(target, target, &mut b).map_err(|e| Error::os(&e, target, false))?;
-            a.sort();
-            b.sort();
-            if a != b {
-                return Err(Error::Os {
-                    message: "the copied folder differs from the source".into(),
-                    kind: io::ErrorKind::Other,
-                });
-            }
-            fs::remove_dir_all(source).map_err(|e| Error::os(&e, source, false))
-        }
+        Err(error) if error.kind() == io::ErrorKind::CrossesDevices => move_dir_across_volumes(source, target),
         Err(error) => Err(Error::os(&error, source, false)),
     }
+}
+
+fn move_dir_across_volumes(source: &Path, target: &Path) -> Result<()> {
+    let parent = |p: &Path| p.parent().filter(|p| !p.as_os_str().is_empty()).unwrap_or(Path::new(".")).to_path_buf();
+    let stage = tempfile::Builder::new()
+        .prefix(".grainy-copy-")
+        .tempdir_in(parent(target))
+        .map_err(|e| Error::os(&e, target, false))?;
+    let incoming = stage.path().join("incoming");
+    copy_tree(source, &incoming)?;
+    publish_from_held_source(source, |original| {
+        let (mut a, mut b) = (Vec::new(), Vec::new());
+        tree(original, original, &mut a).map_err(|e| Error::os(&e, source, false))?;
+        tree(&incoming, &incoming, &mut b).map_err(|e| Error::os(&e, target, false))?;
+        a.sort();
+        b.sort();
+        if a != b {
+            return Err(Error::value("the copied folder differs from the source"));
+        }
+        grainy_platform::rename_new(&incoming, target).map_err(|e| Error::os(&e, target, false))
+    })
+}
+
+fn publish_from_held_source(source: &Path, publish: impl FnOnce(&Path) -> Result<()>) -> Result<()> {
+    let parent = source.parent().filter(|p| !p.as_os_str().is_empty()).unwrap_or(Path::new("."));
+    // Move the intact source out of the public namespace in one operation. Never put the only
+    // original inside an auto-deleting guard, even during an unwind or failed rollback.
+    let hold = tempfile::Builder::new()
+        .prefix(".grainy-move-")
+        .tempdir_in(parent)
+        .map_err(|e| Error::os(&e, source, false))?
+        .keep();
+    let original = hold.join("original");
+    if let Err(e) = grainy_platform::rename_new(source, &original) {
+        let _ = fs::remove_dir(&hold);
+        return Err(Error::os(&e, source, false));
+    }
+    if let Err(error) = publish(&original) {
+        if let Err(rollback) = grainy_platform::rename_new(&original, source) {
+            return Err(Error::value(format!("{error}; original retained at {}: {rollback}", original.display())));
+        }
+        let _ = fs::remove_dir(&hold);
+        return Err(error);
+    }
+    // The complete verified destination is now authoritative. An undeletable old file can
+    // only leave redundant material in the private recovery directory.
+    let _ = fs::remove_dir_all(hold);
+    Ok(())
+}
+
+#[cfg(test)]
+#[test]
+fn cross_volume_file_move_preserves_a_concurrent_replacement() {
+    let tmp = tempfile::tempdir().unwrap();
+    let source = tmp.path().join("source.jpg");
+    let target = tmp.path().join("target.jpg");
+    fs::write(&source, b"original").unwrap();
+    publish_from_held_source(&source, |held| {
+        fs::write(&source, b"new at old path").unwrap();
+        copy_new_verified(held, &target)
+    })
+    .unwrap();
+    assert_eq!(fs::read(source).unwrap(), b"new at old path");
+    assert_eq!(fs::read(target).unwrap(), b"original");
+}
+
+#[cfg(test)]
+#[test]
+fn cross_volume_publication_race_preserves_the_original_tree() {
+    let dir = tempfile::tempdir().unwrap();
+    let source = dir.path().join("source");
+    let target = dir.path().join("target");
+    fs::create_dir(&source).unwrap();
+    fs::create_dir(&target).unwrap();
+    fs::write(source.join("photo.jpg"), b"original").unwrap();
+    assert!(move_dir_across_volumes(&source, &target).is_err());
+    assert_eq!(fs::read(source.join("photo.jpg")).unwrap(), b"original");
+    assert_eq!(fs::read_dir(&target).unwrap().count(), 0);
+    fs::remove_dir(&target).unwrap();
+    move_dir_across_volumes(&source, &target).unwrap();
+    assert_eq!(fs::read(target.join("photo.jpg")).unwrap(), b"original");
+    assert!(!source.exists());
 }

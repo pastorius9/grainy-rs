@@ -7,6 +7,8 @@ rust-version.workspace = true
 license.workspace = true
 
 [dependencies]
+tempfile = "3"
+unicode-normalization = "0.1"
 grainy-i18n = { path = "../grainy-i18n" }
 serde.workspace = true
 serde_json.workspace = true
@@ -29,7 +31,10 @@ http = ["dep:ureq", "dep:native-tls"]
 
 # The monitor's colour profile (src/monitor.rs, the crate's only `unsafe` module): already in the tree through winit.
 [target.'cfg(windows)'.dependencies]
-windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Graphics_Gdi", "Win32_UI_ColorSystem"] }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Graphics_Gdi", "Win32_UI_ColorSystem", "Win32_Storage_FileSystem"] }
+
+[target.'cfg(any(target_vendor = "apple", target_os = "linux"))'.dependencies]
+rustix = { version = "1", features = ["fs"] }
 
 [dev-dependencies]
 grainy-testkit.workspace = true

@@ -367,7 +367,7 @@ pub fn lens_file_text(path: &Path, settings: &Settings) -> String {
 /// `save_lens`'s write.
 pub fn save_to(cx: &mut AppContext, path: PathBuf) {
     let text = lens_file_text(&path, cx.settings());
-    if let Err(error) = std::fs::write(&path, text) {
+    if let Err(error) = crate::paths::write_json(&path, &text) {
         let message = tr_with("처리하지 못했습니다: {0}", &[&error.to_string()]);
         cx.set_status(message);
     }

@@ -100,6 +100,7 @@ pub fn range_add_mode(cx: &mut AppContext) {
 /// A pick on its way: what `pick_range` captured before its job (the `valid` check and `ready` read these).
 #[derive(Debug, Clone)]
 pub struct Pick {
+    document: u64,
     pub token: u64,
     pub photo: u64,
     pub settings: Settings,
@@ -145,8 +146,10 @@ pub fn prepare(cx: &mut AppContext, points: &[[f64; 2]], mode: Mode, add: bool) 
     let layer = actions::current_layer(cx).map(|_| actions::state(cx).layer as usize);
     let photo = cx.doc.current_id();
     let settings = cx.doc.edit().settings().clone();
+    let document = cx.document_generation;
     let s = actions::state(cx);
     Some(Pick {
+        document,
         token,
         photo,
         settings,
@@ -171,7 +174,8 @@ fn valid(cx: &mut AppContext, pick: &Pick) -> bool {
         let s = actions::state(cx);
         (s.component, s.mode)
     };
-    generation == pick.token
+    pick.document == cx.document_generation
+        && generation == pick.token
         && cx.doc.current_id() == pick.photo
         && component == pick.selection
         && layer == pick.layer

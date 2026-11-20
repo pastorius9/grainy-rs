@@ -181,19 +181,28 @@ pub fn elided_middle(ui: &Ui, text: &str, font: FontId, color: Color32, width: f
         return full;
     }
     let chars: Vec<char> = text.chars().collect();
-    let mut keep = chars.len();
-    while keep > 1 {
-        keep -= 1;
+    let candidate = |keep: usize| {
         let head = keep.div_ceil(2);
         let tail = keep / 2;
-        let candidate: String =
+        let value =
             chars[..head].iter().collect::<String>() + "…" + &chars[chars.len() - tail..].iter().collect::<String>();
-        let g = galley(ui, candidate, font.clone(), color);
-        if g.size().x <= width {
-            return g;
+        galley(ui, value, font.clone(), color)
+    };
+    // Preserve the original fitting order for normal labels. Bound shaping work for long metadata names.
+    if chars.len() <= 64 {
+        return (1..chars.len()).rev().map(candidate).find(|g| g.size().x <= width).unwrap_or_else(|| candidate(0));
+    }
+    let mut low = 0;
+    let mut high = chars.len();
+    while high - low > 1 {
+        let mid = low + (high - low) / 2;
+        if candidate(mid).size().x <= width {
+            low = mid;
+        } else {
+            high = mid;
         }
     }
-    galley(ui, "…", font, color)
+    candidate(low)
 }
 
 /// Buttons side by side with no gap, filling `width` in equal parts (a row of QPushButtons in a QHBoxLayout

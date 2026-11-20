@@ -524,6 +524,19 @@ fn invalid_inputs_rollback_and_noop_tokens() {
     assert!(c.snapshot(999, "missing").is_err());
     assert!(c.virtual_copy(999).is_err());
     assert!(c.set_user_metadata(999, json!({"title":"x"}).as_object().unwrap()).is_err());
+    let unrelated = directory.join("original.tif");
+    fs::write(&unrelated, b"original").unwrap();
+    assert!(c.backup(&unrelated).is_err());
+    assert_eq!(fs::read(&unrelated).unwrap(), b"original");
+    let saved = c.backup(directory.join("safety.sqlite")).unwrap();
+    let archive = c.portable_backup(directory.join("cloud.sqlite")).unwrap();
+    let archived = Connection::open(archive).unwrap();
+    let mode: String = archived.query_row("PRAGMA journal_mode", [], |r| r.get(0)).unwrap();
+    assert_eq!(mode, "delete");
+    let old = fs::read(&saved).unwrap();
+    fs::write(directory.join("safety.sqlite-wal"), b"busy").unwrap();
+    assert!(c.backup(&saved).is_err());
+    assert_eq!(fs::read(&saved).unwrap(), old);
     assert!(c.backup(&path).is_err());
     assert!(c.backup(directory.join("thumbnails/../catalog.sqlite")).is_err());
     for profile in [
@@ -677,6 +690,27 @@ fn missing_corrupt_and_external_profile_references_fail_closed() {
         assert!(c.presets().is_err(), "{mode}");
         c.close().unwrap();
     }
+}
+
+#[test]
+fn busy_restore_and_backup_preserve_both_catalogues() {
+    let tmp = tempfile::tempdir().unwrap();
+    let live = Catalog::new(tmp.path()).unwrap();
+    let backup = tmp.path().join("backup.sqlite");
+    live.add("generated-first.jpg", None, None, true).unwrap();
+    live.backup(&backup).unwrap();
+    let initial = fs::read(&backup).unwrap();
+    live.add("generated-second.jpg", None, None, true).unwrap();
+    let archive = Connection::open_with_flags(&backup, rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY).unwrap();
+    live.connection().execute_batch("BEGIN IMMEDIATE").unwrap();
+    assert!(live.restore_from(&archive).is_err());
+    drop(archive);
+    let another = tmp.path().join("other.sqlite");
+    assert!(live.backup(&another).is_err());
+    live.connection().execute_batch("ROLLBACK").unwrap();
+    assert!(!another.exists());
+    assert_eq!(fs::read(backup).unwrap(), initial);
+    assert_eq!(live.connection().query_row("SELECT COUNT(*) FROM photos", [], |r| r.get::<_, i64>(0)).unwrap(), 2);
 }
 
 #[test]

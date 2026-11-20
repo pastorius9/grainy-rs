@@ -23,7 +23,7 @@ use grainy_app::dialogs::snapshots as boxes;
 use grainy_app::document::catalog::stacks::{StackOp, StackReply};
 use grainy_app::document::catalog::CatalogDocument;
 use grainy_app::document::Query;
-use grainy_app::render::TestCard;
+use grainy_app::render::{PreviewJob, Renderer, Reply, TestCard, ThumbnailJob};
 use grainy_app::{AppContext, GrainyApp};
 use grainy_catalog::rusqlite::{types::ValueRef, Connection};
 use grainy_catalog::{Catalog, Sources};
@@ -457,6 +457,32 @@ fn listed_ids(harness: &Harness<'_, GrainyApp>) -> Vec<u64> {
     harness.state().cx.doc.photos().iter().map(|p| p.id).collect()
 }
 
+/// The name-dialog fixture shows the newly selected filename with the previous photo's histogram.
+/// Hold the real worker's replies until that frame is captured, independently of its speed.
+struct HoldReplies {
+    worker: Box<dyn Renderer>,
+    hold: std::rc::Rc<std::cell::Cell<bool>>,
+}
+
+impl Renderer for HoldReplies {
+    fn preview(&mut self, job: PreviewJob) {
+        self.worker.preview(job);
+    }
+    fn thumbnail(&mut self, job: ThumbnailJob) {
+        self.worker.thumbnail(job);
+    }
+    fn poll(&mut self) -> Vec<Reply> {
+        if self.hold.get() {
+            Vec::new()
+        } else {
+            self.worker.poll()
+        }
+    }
+    fn idle(&self) -> bool {
+        self.worker.idle()
+    }
+}
+
 /// The grid with a stack open and collapsed, the menu commands and the snapshot boxes end to end.
 fn window_flow(language: Language, tag: &str) {
     let _turn = common::language_lock();
@@ -494,12 +520,18 @@ fn window_flow(language: Language, tag: &str) {
     common::snapshot::settle(&mut harness);
 
     // The snapshot boxes.
+    let hold = std::rc::Rc::new(std::cell::Cell::new(true));
+    let renderer = &mut harness.state_mut().cx.renderer;
+    let mut worker: Box<dyn Renderer> = Box::<TestCard>::default();
+    std::mem::swap(renderer, &mut worker);
+    *renderer = Box::new(HoldReplies { worker, hold: hold.clone() });
     harness.state_mut().cx.doc.select(0);
     assert!(harness.state_mut().run("snapshots.save"));
     harness.run_steps(3);
     common::snapshot::pin_status(harness.state_mut(), "");
     assert!(harness.state().dialog_open(boxes::NAME_BOX));
     common::snapshot::save(&mut harness, &format!("stacks-snapshot-name-{tag}"));
+    hold.set(false);
     harness.state_mut().close_dialog(boxes::NAME_BOX);
     {
         let cx = &mut harness.state_mut().cx;

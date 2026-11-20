@@ -485,7 +485,7 @@ fn after_load(cx: &mut AppContext) {
         if let Some(index) = cx.doc.current_index() {
             let path = cx.doc.photos()[index].path.clone();
             let settings = cx.doc.settings_of(index);
-            cx.jobs.spawn(
+            cx.spawn_document_job(
                 "metadata",
                 "",
                 move |_| {

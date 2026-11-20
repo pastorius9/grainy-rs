@@ -67,11 +67,26 @@ pub(super) fn apply(doc: &mut CatalogDocument, op: FileOp) -> Result<FileReply, 
         FileOp::Invalidate { .. } => Ok(FileReply::Done),
         FileOp::Commit => Ok(FileReply::Done),
         FileOp::MoveFiles { mapping } => {
+            for (src, dst) in &mapping {
+                for path in [src, dst] {
+                    crate::paths::writable(Path::new(path)).map_err(err)?;
+                }
+            }
             let count = grainy_library::library::move_files(&doc.catalog, &mapping).map_err(err)?;
             reload_current(doc);
             Ok(FileReply::Count(count))
         }
         FileOp::MoveFolder { source, destination } => {
+            for path in [&source, &destination] {
+                crate::paths::writable(Path::new(path)).map_err(err)?;
+            }
+            if grainy_platform::user_paths::contains_oracle(
+                Path::new(&source),
+                &grainy_platform::Environment::current(),
+            ) || grainy_platform::user_paths::resolved_within(doc.catalog.directory(), Path::new(&source))
+            {
+                return Err("cannot move a folder containing application data".into());
+            }
             grainy_library::library::move_folder(&doc.catalog, &source, &destination).map_err(err)?;
             reload_current(doc);
             Ok(FileReply::Done)
@@ -97,6 +112,7 @@ pub(super) fn apply(doc: &mut CatalogDocument, op: FileOp) -> Result<FileReply, 
             Ok(FileReply::Done)
         }
         FileOp::Backup { path } => {
+            crate::paths::writable(&path).map_err(err)?;
             doc.catalog.backup(&path).map_err(err)?;
             Ok(FileReply::Done)
         }
@@ -129,8 +145,11 @@ fn reload_current(doc: &mut CatalogDocument) {
 /// Port of `manager.restore` after the question (`restore_backup`, then the list without collection, rules and
 /// folder; `photo_model.invalidate_thumbnails()`).
 fn restore(doc: &mut CatalogDocument, path: &Path) -> Result<FileReply, String> {
-    doc.clear_active_photo();
+    // SQLite may create a WAL index even on a read-only connection to a live backup.
+    crate::paths::writable(path).map_err(err)?;
+    crate::paths::writable(&doc.catalog.directory().join("backups")).map_err(err)?;
     grainy_library::library::restore_backup(&doc.catalog, path).map_err(err)?;
+    doc.clear_active_photo();
     doc.query.collection = None;
     doc.query.rules = json!({});
     doc.query.folder = None;

@@ -186,7 +186,7 @@ pub fn develop<'a>(
     settings: &Map<String, Value>,
     options: &Options<'_>,
 ) -> Result<Image> {
-    run(source.into(), settings, options, None)
+    run(source.into(), settings, options, None, false).map(Arc::unwrap_or_clone)
 }
 
 /// [`develop`] with the worker-owned cache of previews (`develop(..., cache=cache)`): stages whose settings did
@@ -199,12 +199,34 @@ pub fn develop_cached<'a>(
     cache: &mut DevelopmentCache,
     token: u64,
 ) -> Result<Image> {
-    let source = source.into();
+    cached(source.into(), settings, options, cache, token, false).map(Arc::unwrap_or_clone)
+}
+
+/// Working pixels for the oracle's SDR preview and histogram. A neutral suffix can share the
+/// cached, already clipped tone result with the display until the next edit.
+pub fn preview_working<'a>(
+    source: impl Into<Source<'a>>,
+    settings: &Map<String, Value>,
+    options: &Options<'_>,
+    cache: &mut DevelopmentCache,
+    token: u64,
+) -> Result<Arc<Image>> {
+    cached(source.into(), settings, &Options { output: Output::Working, ..*options }, cache, token, true)
+}
+
+fn cached(
+    source: Source<'_>,
+    settings: &Map<String, Value>,
+    options: &Options<'_>,
+    cache: &mut DevelopmentCache,
+    token: u64,
+    preview: bool,
+) -> Result<Arc<Image>> {
     let bytes = source.pixels().len() * std::mem::size_of::<f32>();
     cache.bind(token, bytes);
     // Avoid extra full-resolution copies when a useful prefix cannot fit.
     let usable = bytes * 2 <= cache.max_bytes();
-    run(source, settings, options, usable.then_some(cache))
+    run(source, settings, options, usable.then_some(cache), preview)
 }
 
 fn stage(
@@ -225,7 +247,8 @@ fn run(
     settings: &Map<String, Value>,
     options: &Options<'_>,
     mut cache: Option<&mut DevelopmentCache>,
-) -> Result<Image> {
+    preview: bool,
+) -> Result<Arc<Image>> {
     let _timing = grainy_core::timing::Span::new("develop");
     if source.pixels().dim().2 != 3 {
         return Err(Error::Shape(source.pixels().shape().to_vec()));
@@ -285,6 +308,12 @@ fn run(
 
     let tone_key = format!("{geometry_key}|{}", key_of(&TONE_KEYS));
     let toned = stage(&mut cache, "tone", &tone_key, || tone(frame, &s))?;
+    if preview && !s.bool("hdr") && !s.bool("masks") {
+        static DEFAULTS: std::sync::LazyLock<Settings> = std::sync::LazyLock::new(|| working_settings(&Map::new()));
+        if COLOR_KEYS.iter().chain(&DETAIL_KEYS).all(|k| s.value(k) == DEFAULTS.value(k)) {
+            return Ok(toned);
+        }
+    }
     let color_key = format!("{tone_key}|{}", key_of(&COLOR_KEYS));
     let coloured = stage(&mut cache, "color", &color_key, || Ok(grainy_colorgrade::develop_color(&toned, &s)?))?;
     let detail_key = format!("{color_key}|{scale}|{}", key_of(&DETAIL_KEYS));
@@ -308,7 +337,7 @@ fn run(
     let a = if s.bool("hdr") {
         let limited = grainy_tone::hdr::limit(&a, &s);
         if matches!(options.output, Output::Working) {
-            return Ok(limited);
+            return Ok(Arc::new(limited));
         }
         grainy_tone::hdr::sdr_rendition(&limited, &s)
     } else {
@@ -316,16 +345,16 @@ fn run(
         grainy_color::clip01_in_place(&mut a);
         // output_rgb would only clip again.
         if matches!(options.output, Output::Named("sRGB")) && s.str("working_space") != "ProPhoto" {
-            return Ok(a);
+            return Ok(Arc::new(a));
         }
         a
     };
     let destination = match options.output {
-        Output::Working => return Ok(a),
+        Output::Working => return Ok(Arc::new(a)),
         Output::Named(name) => grainy_cms::Destination::Named(name),
         Output::Icc(profile) => grainy_cms::Destination::Icc(profile),
     };
-    Ok(grainy_cms::output_rgb(&a, s.str("working_space"), destination)?)
+    Ok(Arc::new(grainy_cms::output_rgb(&a, s.str("working_space"), destination)?))
 }
 
 /// The tone stage with the film look of the settings.

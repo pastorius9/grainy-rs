@@ -12,6 +12,7 @@ path = "src/main.rs"
 
 [dependencies]
 grainy-core.workspace = true
+grainy-platform = { path = "../grainy-platform" }
 grainy-engine = { path = "../grainy-engine" }
 grainy-codecs = { path = "../grainy-codecs" }
 serde_json.workspace = true

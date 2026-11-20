@@ -65,12 +65,13 @@ mod client {
 
     use super::{offline, Failure, Headers};
 
-    fn agent(timeout: u64) -> Result<ureq::Agent, Failure> {
+    fn agent(timeout: u64, budget: u64) -> Result<ureq::Agent, Failure> {
         let tls = native_tls::TlsConnector::new().map_err(|e| Failure::Other(e.to_string()))?;
         let timeout = Duration::from_secs(timeout);
         Ok(ureq::AgentBuilder::new()
             .https_only(true)
             .tls_connector(Arc::new(tls))
+            .timeout(Duration::from_secs(budget))
             .timeout_connect(timeout)
             .timeout_read(timeout)
             .timeout_write(timeout)
@@ -109,7 +110,7 @@ mod client {
         if offline() {
             return Err(Failure::Offline);
         }
-        let mut request = agent(timeout)?.post(url);
+        let mut request = agent(timeout, timeout)?.post(url);
         for (name, value) in headers {
             request = request.set(name, value);
         }
@@ -119,10 +120,20 @@ mod client {
     /// Opens `url` for reading with `headers` (the oracle's `urlopen(Request(url, headers), timeout)`); the body
     /// is read as it arrives.
     pub fn get(url: &str, headers: Headers<'_>, timeout: u64) -> Result<Box<dyn Read + Send + Sync>, Failure> {
+        get_with_budget(url, headers, timeout, timeout)
+    }
+
+    /// Open a download with a separate upper bound on the entire HTTPS transfer.
+    pub fn get_with_budget(
+        url: &str,
+        headers: Headers<'_>,
+        timeout: u64,
+        budget: u64,
+    ) -> Result<Box<dyn Read + Send + Sync>, Failure> {
         if offline() {
             return Err(Failure::Offline);
         }
-        let mut request = agent(timeout)?.get(url);
+        let mut request = agent(timeout, budget)?.get(url);
         for (name, value) in headers {
             request = request.set(name, value);
         }
@@ -133,13 +144,13 @@ mod client {
     #[test]
     fn plaintext_is_rejected_before_a_connection_is_opened() {
         // ureq applies the same policy to each redirect, before resolving its host.
-        let error = agent(1).unwrap().get("http://example.invalid/").call().unwrap_err();
+        let error = agent(1, 1).unwrap().get("http://example.invalid/").call().unwrap_err();
         assert_eq!(error.kind(), ureq::ErrorKind::InsecureRequestHttpsOnly);
     }
 }
 
 #[cfg(feature = "http")]
-pub use client::{get, post};
+pub use client::{get, get_with_budget, post};
 
 #[cfg(test)]
 mod tests {

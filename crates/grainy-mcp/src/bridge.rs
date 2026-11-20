@@ -28,25 +28,12 @@ pub fn private_folder(folder: &Path) -> std::io::Result<()> {
 
 /// `_write_private`: write a small file atomically (a temporary file renamed over it); on POSIX 0600 from the start.
 pub fn write_private(path: &Path, data: &[u8]) -> std::io::Result<()> {
-    let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
-    let nonce = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0, |d| d.subsec_nanos());
-    let temporary = path.with_file_name(format!(".{name}.{:08x}.tmp", nonce ^ std::process::id()));
-    let result = (|| {
-        let mut options = std::fs::OpenOptions::new();
-        options.write(true).create_new(true);
-        #[cfg(unix)]
-        {
-            use std::os::unix::fs::OpenOptionsExt;
-            options.mode(0o600);
-        }
-        use std::io::Write;
-        let mut file = options.open(&temporary)?;
-        file.write_all(data)?;
-        drop(file);
-        std::fs::rename(&temporary, path)
-    })();
-    let _ = std::fs::remove_file(&temporary);
-    result
+    use std::io::Write;
+    let mut staged = tempfile::NamedTempFile::new_in(path.parent().unwrap_or(Path::new(".")))?;
+    staged.write_all(data)?;
+    staged.as_file().sync_all()?;
+    staged.persist(path).map_err(|e| e.error)?;
+    Ok(())
 }
 
 /// `_lock`: the open file holding an exclusive lock, or `None` when another process (or another handle) holds it.

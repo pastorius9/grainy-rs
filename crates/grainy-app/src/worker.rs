@@ -11,10 +11,11 @@ use std::time::Instant;
 
 use grainy_codecs::ColorManager;
 use grainy_core::Settings;
-use grainy_engine::files::{load_photo, Photo};
+use grainy_engine::files::{load_photo, AnalysisSeed, Loaded, Photo};
 use grainy_engine::{develop, develop_cached, Crop, DevelopmentCache, Options, Output};
 use serde_json::{Map, Value};
 
+use crate::commands::auto_source::LoadSettings;
 use crate::document::ThumbCache;
 use crate::histogram;
 use crate::render::{
@@ -48,6 +49,8 @@ struct Queues {
 }
 
 struct Shared {
+    library: Option<PathBuf>,
+    analysis_seed: Mutex<Option<(PathBuf, LoadSettings, AnalysisSeed)>>,
     queues: Mutex<Queues>,
     preview_ready: Condvar,
     thumbnail_ready: Condvar,
@@ -91,17 +94,19 @@ impl Default for Worker {
 impl Worker {
     /// Starts the preview and thumbnail threads.
     pub fn new() -> Self {
-        Self::start(None)
+        Self::start(None, None)
     }
 
     /// Port of the oracle's preview worker with GPU warm-up and CPU retry on device failure.
     /// The ordinary constructor remains the CPU reference for tests and deterministic clients.
     pub fn with_gpu(enabled: bool) -> Self {
-        Self::start(Some(crate::gpu_worker::Control::new(enabled)))
+        Self::start(Some(crate::gpu_worker::Control::new(enabled)), None)
     }
 
-    fn start(gpu: Option<Arc<crate::gpu_worker::Control>>) -> Self {
+    fn start(gpu: Option<Arc<crate::gpu_worker::Control>>, library: Option<PathBuf>) -> Self {
         let shared = Arc::new(Shared {
+            library,
+            analysis_seed: Mutex::default(),
             queues: Mutex::new(Queues::default()),
             preview_ready: Condvar::new(),
             thumbnail_ready: Condvar::new(),
@@ -163,6 +168,28 @@ impl Drop for Worker {
 }
 
 impl Renderer for Worker {
+    fn set_library(&mut self, library: Option<PathBuf>) {
+        let next = Self::start(self.shared.gpu.clone(), library);
+        *lock(&next.shared.monitor) = lock(&self.shared.monitor).clone();
+        *lock(&next.shared.hdr_view) = *lock(&self.shared.hdr_view);
+        *lock(&next.shared.waker) = lock(&self.shared.waker).clone();
+        *self = next;
+    }
+
+    fn prepares_analysis(&self) -> bool {
+        true
+    }
+
+    fn take_analysis_seed(&mut self, path: &Path, settings: &Settings) -> Option<AnalysisSeed> {
+        let mut slot = lock(&self.shared.analysis_seed);
+        let key = LoadSettings::new(path, settings);
+        if slot.as_ref().is_some_and(|(p, s, _)| p == path && *s == key) {
+            slot.take().map(|(_, _, seed)| seed)
+        } else {
+            None
+        }
+    }
+
     fn preview(&mut self, job: PreviewJob) {
         self.last_preview = Some(job.clone());
         let mut queues = lock(&self.shared.queues);
@@ -235,8 +262,10 @@ impl Renderer for Worker {
     fn set_gpu_enabled(&mut self, enabled: bool) {
         if let Some(control) = &self.shared.gpu {
             control.set_enabled(enabled);
-            if let Some(job) = self.last_preview.clone() {
-                self.preview(job);
+            if lock(&self.shared.monitor).is_none() {
+                if let Some(job) = self.last_preview.clone() {
+                    self.preview(job);
+                }
             }
         }
     }
@@ -261,7 +290,7 @@ fn side_replies_keep_the_renderer_busy_until_consumed() {
 struct Source {
     path: PathBuf,
     resolution: Resolution,
-    working_space: String,
+    load_settings: LoadSettings,
     photo: Arc<Photo>,
     token: u64,
     /// The file's oriented, uncropped (width, height).
@@ -296,29 +325,37 @@ fn load(
     settings: &Settings,
     token: u64,
     resolution: Resolution,
+    offline: Option<(PathBuf, i64)>,
 ) -> Result<Source, String> {
-    let loaded = match offline_for(path) {
+    let loaded = match offline {
         Some((directory, id)) => offline_photo(&directory, id, settings)?,
         None => load_photo(path, max_size, settings).map_err(|e| e.to_string())?,
     };
+    Ok(loaded_source(path, settings, token, resolution, loaded))
+}
+
+fn loaded_source(path: &Path, settings: &Settings, token: u64, resolution: Resolution, loaded: Loaded) -> Source {
     let (h, w, _) = loaded.photo.pixels().dim();
     let size = |key: &str, fallback: usize| {
         loaded.metadata.get(key).and_then(serde_json::Value::as_u64).map_or(fallback as u32, |v| v as u32)
     };
     let original = (size("width", w), size("height", h));
-    Ok(Source {
+    Source {
         path: path.to_path_buf(),
         resolution,
-        working_space: settings.str("working_space").to_owned(),
+        load_settings: LoadSettings::new(path, settings),
         photo: Arc::new(loaded.photo),
         token,
         original,
-    })
+    }
 }
 
 /// The preview thread's state: the development cache and the loaded sources.
 struct PreviewState {
-    cache: DevelopmentCache,
+    library: Option<PathBuf>,
+    analysis_seed: Option<(PathBuf, LoadSettings, AnalysisSeed)>,
+    cache: [DevelopmentCache; 2],
+    monitor: crate::monitor_preview::MonitorPreview,
     sources: Vec<Source>,
     tokens: u64,
     gpu: Option<crate::gpu_worker::PreviewGpu>,
@@ -328,7 +365,10 @@ impl PreviewState {
     fn new(gpu: Option<Arc<crate::gpu_worker::Control>>) -> Self {
         // Grows to a few copies of the source (a full-size frame), at most 1.5 GB.
         Self {
-            cache: DevelopmentCache::growing(256 << 20, 4.0, Some(1536 << 20)),
+            library: None,
+            analysis_seed: None,
+            cache: std::array::from_fn(|_| DevelopmentCache::growing(256 << 20, 4.0, Some(1536 << 20))),
+            monitor: Default::default(),
             sources: Vec::new(),
             tokens: 0,
             gpu: gpu.map(crate::gpu_worker::PreviewGpu::new),
@@ -336,11 +376,11 @@ impl PreviewState {
     }
 
     fn source(&mut self, job: &PreviewJob) -> Result<usize, String> {
-        let space = job.settings.str("working_space");
+        let key = LoadSettings::new(&job.path, &job.settings);
         if let Some(at) = self
             .sources
             .iter()
-            .position(|s| s.path == job.path && s.resolution == job.resolution && s.working_space == space)
+            .position(|s| s.path == job.path && s.resolution == job.resolution && s.load_settings == key)
         {
             // Most recently used last.
             let source = self.sources.remove(at);
@@ -352,7 +392,20 @@ impl PreviewState {
             Resolution::Full => None,
         };
         self.tokens += 1;
-        let source = load(&job.path, max, &job.settings, self.tokens, job.resolution)?;
+        let offline = offline_for(&job.path, self.library.as_deref(), Some(job.photo as i64));
+        let source = if job.resolution == Resolution::Fit && offline.is_none() {
+            let (loaded, seed) = grainy_engine::files::load_preview(
+                &job.path,
+                PREVIEW_SIZE,
+                crate::commands::auto_source::SIZE,
+                &job.settings,
+            )
+            .map_err(|e| e.to_string())?;
+            self.analysis_seed = seed.map(|seed| (job.path.clone(), key, seed));
+            loaded_source(&job.path, &job.settings, self.tokens, job.resolution, loaded)
+        } else {
+            load(&job.path, max, &job.settings, self.tokens, job.resolution, offline)?
+        };
         if self.sources.len() >= PREVIEW_SOURCES {
             self.sources.remove(0);
         }
@@ -363,17 +416,14 @@ impl PreviewState {
     /// `_prefetch`: loads the fit source of a neighbour into the sources (as the least recently used one, so the
     /// open photo's source stays). Errors are left for the real load to report.
     fn prefetch(&mut self, job: &PrefetchJob) -> bool {
-        let space = job.settings.str("working_space");
-        if self
-            .sources
-            .iter()
-            .any(|s| s.path == job.path && s.resolution == Resolution::Fit && s.working_space == space)
+        let key = LoadSettings::new(&job.path, &job.settings);
+        if self.sources.iter().any(|s| s.path == job.path && s.resolution == Resolution::Fit && s.load_settings == key)
             || !grainy_library::file_access::present(&job.path)
         {
             return false;
         }
         self.tokens += 1;
-        let Ok(source) = load(&job.path, Some(PREVIEW_SIZE), &job.settings, self.tokens, Resolution::Fit) else {
+        let Ok(source) = load(&job.path, Some(PREVIEW_SIZE), &job.settings, self.tokens, Resolution::Fit, None) else {
             return false;
         };
         if self.sources.len() >= PREVIEW_SOURCES {
@@ -390,15 +440,28 @@ impl PreviewState {
         hdr_view: crate::hdr::View,
     ) -> Result<Frame, String> {
         let started = Instant::now();
-        let at = self.source(job)?;
+        // A new monitor's LittleCMS bounds depend only on its profile. Build them alongside
+        // the cold RAW decode, before the exact CPU presentation needs either result.
+        let at = if let Some(profile) = monitor.filter(|p| {
+            !self.monitor.is_cached(p) && !job.settings.bool("hdr") && job.settings.str("working_space") != "ProPhoto"
+        }) {
+            let mut cache = std::mem::take(&mut self.monitor);
+            let (source, bounds) = rayon::join(|| self.source(job), || cache.table(profile).map(|_| ()));
+            self.monitor = cache;
+            bounds?;
+            source?
+        } else {
+            self.source(job)?
+        };
         let source = &self.sources[at];
         let mut options = source.options();
         options.use_crop = job.crop;
+        let cache = &mut self.cache[usize::from(job.resolution == Resolution::Full)];
         if crate::hdr::enabled() && job.settings.bool("hdr") {
             // The HDR branch of the oracle's `render` (CPU only, as the oracle's GPU preview skips HDR photos):
             // the limited working pixels, then the display, histogram and clipping of `crate::hdr::present`.
             let working = Options { output: Output::Working, ..options };
-            let image = develop_cached(source.photo.source(), &job.settings.0, &working, &mut self.cache, source.token)
+            let image = develop_cached(source.photo.source(), &job.settings.0, &working, cache, source.token)
                 .map_err(|e| e.to_string())?;
             let shown = crate::hdr::present(&image, &job.settings, hdr_view, monitor)?;
             return Ok(Frame {
@@ -412,36 +475,68 @@ impl PreviewState {
                 scale: source.scale(),
                 original: source.original,
                 millis: started.elapsed().as_secs_f64() * 1000.0,
-                hits: self.cache.hits(),
-                misses: self.cache.misses(),
+                hits: cache.hits(),
+                misses: cache.misses(),
                 hdr: Some(shown.info),
             });
         }
-        let mut develop_with = |options: &Options<'_>| {
-            let accelerated = self
-                .gpu
-                .as_mut()
-                .and_then(|gpu| gpu.render(source.photo.source(), &job.settings.0, options, source.token));
-            match accelerated {
-                Some(result) => {
-                    let (hits, misses) = self.gpu.as_ref().map_or((0, 0), crate::gpu_worker::PreviewGpu::counters);
-                    result.map(|image| (image, hits, misses))
-                }
-                None => develop_cached(source.photo.source(), &job.settings.0, options, &mut self.cache, source.token)
-                    .map(|image| (image, self.cache.hits(), self.cache.misses()))
-                    .map_err(|e| e.to_string()),
+        options.output = Output::Working;
+        let effective = grainy_engine::working_settings(&job.settings.0);
+        if let Photo::Linear(pixels) = &*source.photo {
+            if let Some(frame) = crate::basic_preview::render(pixels, &effective, monitor, &mut self.monitor)? {
+                let (height, width, _) = pixels.dim();
+                return Ok(Frame {
+                    id: job.id,
+                    photo: job.photo,
+                    resolution: job.resolution,
+                    preview: Preview { width, height, rgba: frame.rgba },
+                    bins: frame.bins,
+                    channels: frame.channels,
+                    clipping: frame.mask,
+                    scale: source.scale(),
+                    original: source.original,
+                    millis: started.elapsed().as_secs_f64() * 1000.,
+                    hits: cache.hits(),
+                    misses: cache.misses(),
+                    hdr: None,
+                });
+            }
+        }
+        let space = effective.str("working_space");
+        // A quantized LittleCMS lookup can amplify a GPU ULP. All ICC outputs use canonical floats.
+        let accelerated =
+            self.gpu.as_mut().filter(|_| monitor.is_none() && space != "ProPhoto").and_then(|gpu| {
+                gpu.render(source.photo.source(), &job.settings.0, &options, source.token, job.resolution)
+            });
+        let (working, hits, misses) = match accelerated {
+            Some(result) => {
+                let (hits, misses) = self.gpu.as_ref().map_or((0, 0), |gpu| gpu.counters(job.resolution));
+                (Arc::new(result?), hits, misses)
+            }
+            None => {
+                let image = grainy_engine::preview_working(
+                    source.photo.source(),
+                    &job.settings.0,
+                    &options,
+                    cache,
+                    source.token,
+                )
+                .map_err(|e| e.to_string())?;
+                (image, cache.hits(), cache.misses())
             }
         };
-        let (image, hits, misses) = develop_with(&options)?;
-        let converted = histogram::convert(&image);
+        let srgb = if space == "ProPhoto" {
+            Some(
+                grainy_cms::output_rgb(&working, space, grainy_cms::Destination::Named("sRGB"))
+                    .map_err(|e| e.to_string())?,
+            )
+        } else {
+            None
+        };
+        let converted = histogram::convert(srgb.as_ref().unwrap_or(&working));
         let bins = histogram::bins(&converted.rgba, converted.width, converted.height);
-        // With a monitor profile the picture is the working pixels through it (`output_rgb(working, space,
-        // monitor_profile)`); the histogram and the clipping are those of the sRGB frame, as in the oracle.
         let rgba = match monitor {
-            Some(profile) => {
-                let shown = Options { output: Output::Icc(profile), ..options };
-                histogram::convert(&develop_with(&shown)?.0).rgba
-            }
+            Some(profile) => self.monitor.rgba(&working, space, profile)?,
             None => converted.rgba,
         };
         let millis = started.elapsed().as_secs_f64() * 1000.0;
@@ -467,8 +562,42 @@ fn caught<T>(work: impl FnOnce() -> Result<T, String>) -> Result<T, String> {
     catch_unwind(AssertUnwindSafe(work)).unwrap_or_else(|_| Err("internal error".to_owned()))
 }
 
+#[cfg(test)]
+#[test]
+fn monitor_and_histogram_share_one_develop_and_zoom_keeps_the_fit_stages() {
+    let path = PathBuf::from("generated.png");
+    let settings = grainy_core::defaults();
+    let mut job =
+        PreviewJob { id: 1, photo: 1, path: path.clone(), settings, resolution: Resolution::Fit, crop: Crop::Cropped };
+    let control = crate::gpu_worker::Control::new(true);
+    let mut state = PreviewState::new(Some(control));
+    for (token, resolution) in [(1, Resolution::Fit), (2, Resolution::Full)] {
+        state.sources.push(Source {
+            path: path.clone(),
+            resolution,
+            load_settings: LoadSettings::new(&path, &job.settings),
+            photo: Arc::new(Photo::Linear(grainy_testkit::input("garden"))),
+            token,
+            original: (257, 193),
+        });
+    }
+    let profile = grainy_cms::profile("Display P3").unwrap();
+    let first = state.render(&job, Some(&profile), Default::default()).unwrap();
+    assert!(!state.gpu.as_ref().unwrap().attempted(), "the first ICC frame never initializes a GPU");
+    state.gpu = None;
+    assert_eq!((first.hits, first.misses), (0, 1), "one tone operation in the cold neutral frame");
+    job.resolution = Resolution::Full;
+    state.render(&job, None, Default::default()).unwrap();
+    job.resolution = Resolution::Fit;
+    let plain = state.render(&job, None, Default::default()).unwrap();
+    assert_eq!((plain.hits, plain.misses), (1, 1));
+    assert_eq!(plain.bins, first.bins);
+    assert_eq!(plain.clipping, first.clipping);
+}
+
 fn preview_loop(shared: &Shared) {
     let mut state = PreviewState::new(shared.gpu.clone());
+    state.library.clone_from(&shared.library);
     if let Some(waker) = lock(&shared.waker).clone() {
         waker();
     }
@@ -504,6 +633,15 @@ fn preview_loop(shared: &Shared) {
         shared.renders.fetch_add(1, Ordering::SeqCst);
         let monitor = lock(&shared.monitor).clone();
         let hdr_view = *lock(&shared.hdr_view);
+        {
+            let mut seed = lock(&shared.analysis_seed);
+            if seed
+                .as_ref()
+                .is_some_and(|(p, s, _)| *p != job.path || *s != LoadSettings::new(&job.path, &job.settings))
+            {
+                *seed = None;
+            }
+        }
         let reply = match caught(|| state.render(&job, monitor.as_ref(), hdr_view)) {
             Ok(frame) => {
                 log::info!(
@@ -522,24 +660,35 @@ fn preview_loop(shared: &Shared) {
                 Reply::Failed { id: job.id, photo: job.photo, message }
             }
         };
+        if let Some(seed) = state.analysis_seed.take() {
+            *lock(&shared.analysis_seed) = Some(seed);
+        }
         shared.answer(reply);
     }
 }
 
 /// The thumbnail thread's loaded sources, most recently used last.
 struct ThumbnailState {
+    library: Option<PathBuf>,
     sources: Vec<Source>,
 }
 
 impl ThumbnailState {
     fn source(&mut self, path: &Path, settings: &Settings) -> Result<usize, String> {
-        let space = settings.str("working_space");
-        if let Some(at) = self.sources.iter().position(|s| s.path == path && s.working_space == space) {
+        let key = LoadSettings::new(path, settings);
+        if let Some(at) = self.sources.iter().position(|s| s.path == path && s.load_settings == key) {
             let source = self.sources.remove(at);
             self.sources.push(source);
             return Ok(self.sources.len() - 1);
         }
-        let source = load(path, Some(THUMB_SIZE), settings, 0, Resolution::Fit)?;
+        let source = load(
+            path,
+            Some(THUMB_SIZE),
+            settings,
+            0,
+            Resolution::Fit,
+            offline_for(path, self.library.as_deref(), None),
+        )?;
         if self.sources.len() >= THUMB_SOURCES {
             self.sources.remove(0);
         }
@@ -577,7 +726,12 @@ impl ThumbnailState {
     /// snapshot is taken before rendering, so a render made stale by a newer edit is not stored.
     fn cached(&mut self, cache: &ThumbCache) -> (Result<Preview, String>, Option<(u32, u32)>, String) {
         let _publication = crate::thumbjpeg::publication();
-        let snapshot = match grainy_catalog::preview::snapshot(&cache.directory, cache.id, true) {
+        let snapshot = match grainy_catalog::preview::snapshot_from(
+            cache.snapshot.as_deref().unwrap_or(&cache.directory),
+            &cache.directory,
+            cache.id,
+            true,
+        ) {
             Ok(snapshot) => snapshot,
             Err(error) => return (Err(error.to_string()), None, "읽기 오류".into()),
         };
@@ -646,7 +800,7 @@ impl ThumbnailState {
 }
 
 fn thumbnail_loop(shared: &Shared) {
-    let mut state = ThumbnailState { sources: Vec::new() };
+    let mut state = ThumbnailState { sources: Vec::new(), library: shared.library.clone() };
     loop {
         let job = {
             let mut queues = lock(&shared.queues);
@@ -697,14 +851,21 @@ fn side_loop(shared: &Shared) {
         };
         let monitor = lock(&shared.monitor).clone();
         let result = caught(|| {
-            let space = job.settings.str("working_space");
+            let key = LoadSettings::new(&job.path, &job.settings);
             let at = match sources
                 .iter()
-                .position(|(size, s)| *size == job.max_size && s.path == job.path && s.working_space == space)
+                .position(|(size, s)| *size == job.max_size && s.path == job.path && s.load_settings == key)
             {
                 Some(at) => at,
                 None => {
-                    let source = load(&job.path, job.max_size, &job.settings, 0, Resolution::Fit)?;
+                    let source = load(
+                        &job.path,
+                        job.max_size,
+                        &job.settings,
+                        0,
+                        Resolution::Fit,
+                        offline_for(&job.path, shared.library.as_deref(), None),
+                    )?;
                     if sources.len() >= SIDE_SOURCES {
                         sources.remove(0);
                     }
@@ -748,7 +909,7 @@ static OFFLINE: Mutex<Vec<(PathBuf, PathBuf, i64)>> = Mutex::new(Vec::new());
 /// workers develop the packet instead (`preview_store.load_offline`).
 pub fn register_offline(original: &Path, directory: &Path, id: i64) {
     let mut list = lock(&OFFLINE);
-    list.retain(|(path, _, _)| path != original);
+    list.retain(|(path, lib, _)| path != original || lib != directory);
     list.push((original.to_path_buf(), directory.to_path_buf(), id));
     if list.len() > 256 {
         list.remove(0);
@@ -756,13 +917,14 @@ pub fn register_offline(original: &Path, directory: &Path, id: i64) {
 }
 
 /// The packet to load for `path`: when the original is not there and a packet was noted for it.
-fn offline_for(path: &Path) -> Option<(PathBuf, i64)> {
+fn offline_for(path: &Path, library: Option<&Path>, id: Option<i64>) -> Option<(PathBuf, i64)> {
+    let directory = library?;
+    let id =
+        id.or_else(|| lock(&OFFLINE).iter().rev().find(|(p, lib, _)| p == path && lib == directory).map(|v| v.2))?;
     if grainy_library::file_access::present(path) {
         return None;
     }
-    let list = lock(&OFFLINE);
-    let (_, directory, id) = list.iter().find(|(p, _, _)| p == path)?;
-    directory.join("previews").join(format!("{id}.npz")).is_file().then(|| (directory.clone(), *id))
+    directory.join("previews").join(format!("{id}.npz")).is_file().then(|| (directory.to_owned(), id))
 }
 
 /// Port of `preview_store.load_offline`: the packet's pixels as a develop source (`rawcolor.CameraSource` for a
@@ -841,7 +1003,7 @@ pub fn rebuild_preview(cache: &ThumbCache, force: bool, cancel: &AtomicBool) -> 
         Value::Object(map) => grainy_core::normalized(map),
         _ => grainy_core::normalized(&Map::new()),
     };
-    let mut state = ThumbnailState { sources: Vec::new() };
+    let mut state = ThumbnailState { sources: Vec::new(), library: Some(cache.directory.clone()) };
     let (preview, _) = state.render(&path, &settings);
     let preview = match preview {
         Ok(preview) => preview,
@@ -878,12 +1040,12 @@ mod publication_tests {
         let catalog = grainy_catalog::Catalog::new(root.join("library")).unwrap();
         let publication = crate::thumbjpeg::publication();
         let id = catalog.add(source.to_str().unwrap(), None, None, true).unwrap();
-        let cache = ThumbCache { directory: catalog.directory().to_path_buf(), id, writable: true };
+        let cache = ThumbCache { snapshot: None, directory: catalog.directory().to_path_buf(), id, writable: true };
         let (begun, start) = mpsc::channel();
         let (send, answer) = mpsc::channel();
         let worker = std::thread::spawn(move || {
             begun.send(()).unwrap();
-            let mut state = ThumbnailState { sources: Vec::new() };
+            let mut state = ThumbnailState { sources: Vec::new(), library: None };
             send.send(state.cached(&cache)).unwrap();
         });
         start.recv_timeout(Duration::from_secs(10)).unwrap();
@@ -900,4 +1062,21 @@ mod publication_tests {
         drop(catalog);
         std::fs::remove_dir_all(root).unwrap();
     }
+}
+
+#[cfg(test)]
+#[test]
+fn offline_sources_are_scoped_to_the_requesting_library() {
+    let root = tempfile::tempdir().unwrap();
+    let source = root.path().join("missing.png");
+    let a = root.path().join("a");
+    let b = root.path().join("b");
+    for (dir, id) in [(&a, 7), (&b, 9)] {
+        std::fs::create_dir_all(dir.join("previews")).unwrap();
+        std::fs::write(dir.join("previews").join(format!("{id}.npz")), b"marker").unwrap();
+        register_offline(&source, dir, id);
+    }
+    assert_eq!(offline_for(&source, Some(&a), None), Some((a.clone(), 7)));
+    assert_eq!(offline_for(&source, Some(&b), Some(9)), Some((b, 9)));
+    assert_eq!(offline_for(&source, None, None), None);
 }

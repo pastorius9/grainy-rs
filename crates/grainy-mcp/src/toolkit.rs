@@ -269,16 +269,17 @@ impl GrainyTools {
     /// Port of `mcp_io.run` (`Tools.background`): `f` on a worker thread, bounded by the deadline.
     fn background<T: Send + 'static>(&self, deadline: Instant, f: impl FnOnce() -> R<T> + Send + 'static) -> R<T> {
         check_deadline(deadline)?;
-        if !self.service.io_slots.acquire(0.0) {
+        let Some(permit) = self.service.io_slots.permit(0.0) else {
             return Err(busy("earlier file reads are still finishing"));
-        }
+        };
         let (tx, rx) = mpsc::channel();
-        let service = self.service.clone();
-        std::thread::spawn(move || {
-            let result = check_deadline(deadline).and_then(|()| f());
-            service.io_slots.release();
-            let _ = tx.send(result);
-        });
+        std::thread::Builder::new()
+            .spawn(move || {
+                let _permit = permit;
+                let result = check_deadline(deadline).and_then(|()| f());
+                let _ = tx.send(result);
+            })
+            .map_err(|e| service_error(e.to_string()))?;
         match rx.recv_timeout(deadline.saturating_duration_since(Instant::now())) {
             Ok(result) => result,
             Err(_) => Err(service_error(TIME_LIMIT)),
@@ -322,11 +323,8 @@ impl GrainyTools {
     }
 
     /// Port of `Tools.render_slot`.
-    fn render_slot(&self, deadline: Instant) -> R<()> {
-        if !self.service.render_lock.acquire(left(deadline).min(5.0)) {
-            return Err(busy("another preview is being made"));
-        }
-        Ok(())
+    fn render_slot(&self, deadline: Instant) -> R<crate::service::Permit> {
+        self.service.render_lock.permit(left(deadline).min(5.)).ok_or_else(|| busy("another preview is being made"))
     }
 
     /// Port of `Tools.job_reply`.
@@ -497,7 +495,7 @@ impl GrainyTools {
         let note = self.read_commit(ids.clone(), deadline)?;
         let rows = self.reader_rows(&ids)?;
         let (mut images, mut previews, mut errors, mut total) = (Vec::new(), Vec::new(), Vec::new(), 0usize);
-        self.render_slot(deadline)?;
+        let permit = self.render_slot(deadline)?;
         let outcome = (|| -> R<()> {
             for (ident, row) in ids.iter().zip(&rows) {
                 let error = |text: &str| json!({"id": ident, "error": text});
@@ -531,7 +529,7 @@ impl GrainyTools {
             }
             Ok(())
         })();
-        self.service.render_lock.release();
+        drop(permit);
         outcome?;
         let mut out = Map::new();
         out.insert("previews".into(), Value::Array(previews));
@@ -606,10 +604,11 @@ impl GrainyTools {
         }
         let note = self.read_commit(page.clone(), deadline)?;
         let folder = if saving { Some(self.destination(a, deadline, false)?) } else { None };
-        self.render_slot(deadline)?;
+        let permit = self.render_slot(deadline)?;
         let (tools, total, arguments, paged) = (self.clone(), ids.len(), a.clone(), kind != "ids");
         let sheet_page = page.clone();
         let sheet = self.background(deadline, move || {
+            let _permit = permit;
             tools.render_sheet(
                 &sheet_page,
                 &arguments,
@@ -623,7 +622,6 @@ impl GrainyTools {
                 deadline,
             )
         });
-        self.service.render_lock.release();
         let (data, mut out, saved) = sheet?;
         if let (Some(folder), Some((encoded, w, h))) = (folder, saved) {
             let own = self.service.own_folders();

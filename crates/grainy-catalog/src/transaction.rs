@@ -6,18 +6,25 @@ pub fn run<T, E: From<rusqlite::Error>>(
     immediate: bool,
     f: impl FnOnce() -> std::result::Result<T, E>,
 ) -> std::result::Result<T, E> {
-    db.execute_batch(if immediate { "BEGIN IMMEDIATE" } else { "BEGIN" })?;
+    if db.is_autocommit() {
+        let behavior =
+            if immediate { rusqlite::TransactionBehavior::Immediate } else { rusqlite::TransactionBehavior::Deferred };
+        let transaction = rusqlite::Transaction::new_unchecked(db, behavior)?;
+        let result = f()?;
+        transaction.commit()?;
+        return Ok(result);
+    }
+    // Each inner operation keeps its own rollback boundary. SQLite resolves repeated
+    // savepoint names to the most recently opened one.
+    db.execute_batch("SAVEPOINT grainy_operation")?;
     match f() {
-        Ok(v) => {
-            if let Err(e) = db.execute_batch("COMMIT") {
-                let _ = db.execute_batch("ROLLBACK");
-                return Err(e.into());
-            }
-            Ok(v)
+        Ok(value) => {
+            db.execute_batch("RELEASE grainy_operation")?;
+            Ok(value)
         }
-        Err(e) => {
-            let _ = db.execute_batch("ROLLBACK");
-            Err(e)
+        Err(error) => {
+            db.execute_batch("ROLLBACK TO grainy_operation; RELEASE grainy_operation")?;
+            Err(error)
         }
     }
 }

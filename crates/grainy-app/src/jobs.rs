@@ -74,6 +74,7 @@ pub struct Jobs<C> {
     running: BTreeMap<JobId, Running<C>>,
     tx: Sender<(JobId, Payload)>,
     rx: Receiver<(JobId, Payload)>,
+    deferred: Vec<(JobId, Payload)>,
     waker: Option<Waker>,
     render_busy: bool,
 }
@@ -81,7 +82,7 @@ pub struct Jobs<C> {
 impl<C> Default for Jobs<C> {
     fn default() -> Self {
         let (tx, rx) = channel();
-        Self { next: 0, running: BTreeMap::new(), tx, rx, waker: None, render_busy: false }
+        Self { next: 0, running: BTreeMap::new(), deferred: Vec::new(), tx, rx, waker: None, render_busy: false }
     }
 }
 
@@ -137,8 +138,18 @@ impl<C: 'static> Jobs<C> {
 
     /// The finished jobs, to run with the context (`job_finished`).
     pub fn poll(&mut self) -> Vec<Finished<C>> {
+        self.poll_kind(None)
+    }
+
+    pub(crate) fn poll_kind(&mut self, kind: Option<&str>) -> Vec<Finished<C>> {
         let mut out: Vec<Finished<C>> = Vec::new();
-        while let Ok((id, payload)) = self.rx.try_recv() {
+        let mut ready = std::mem::take(&mut self.deferred);
+        ready.extend(self.rx.try_iter());
+        for (id, payload) in ready {
+            if kind.is_some_and(|k| self.running.get(&id).is_some_and(|j| j.kind != k)) {
+                self.deferred.push((id, payload));
+                continue;
+            }
             if let Some(job) = self.running.remove(&id) {
                 let done = job.done;
                 out.push(Box::new(move |cx: &mut C| done(cx, payload)));

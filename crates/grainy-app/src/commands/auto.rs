@@ -1,11 +1,10 @@
 //! The automatic buttons of the Basic panel, as background jobs: 자동 톤 (`auto_tone`), 자동 색 (`auto_color`),
 //! 네거티브 반전 (`toggle_negative` with `measure_negative`) and 다시 분석 (`measure_negative_again`) of
-//! luma/app.py, measuring through `grainy_engine::auto`. The photo is loaded on the job (`load_image(path, 1800)`,
-//! the oracle's source); the result is applied only if the same photo is still open with the same settings.
+//! luma/app.py, measuring through `grainy_engine::auto` on the shared 1800-pixel source.
+//! The result is applied only if the same photo is still open with the same settings.
 
 use grainy_core::Settings;
 use grainy_engine::auto;
-use grainy_engine::files::load_photo;
 use grainy_engine::Externals;
 use serde_json::Value;
 
@@ -21,9 +20,6 @@ pub const COMMANDS: &[Command] = &[
     Command { id: "develop.negative", label: "네거티브 반전", enabled: idle_photo, run: negative },
     Command { id: "develop.negative_again", label: "다시 분석", enabled: negative_on, run: negative_again },
 ];
-
-/// The source size of the oracle's develop view (`load_image(path, 1800, ...)`).
-const SOURCE_SIZE: usize = 1800;
 
 fn idle_photo(cx: &AppContext) -> bool {
     photo_open(cx) && !cx.jobs.running("auto")
@@ -62,20 +58,17 @@ fn an_auto_result_belongs_to_one_document_even_if_ids_and_versions_match() {
     assert!(!still(&cx, id, version, generation));
 }
 
-fn source(path: &std::path::Path, settings: &Settings) -> Result<grainy_engine::files::Loaded, String> {
-    load_photo(path, Some(SOURCE_SIZE), settings).map_err(|e| e.to_string())
-}
-
 /// Port of `auto_tone`.
 fn auto_tone(cx: &mut AppContext, _: &Invocation) {
     let Some((id, path, settings, version, generation)) = target(cx) else { return };
     let input = settings.clone();
+    let source = super::auto_source::for_click(cx, &path, &input);
     cx.jobs.spawn(
         "auto",
         tr("자동 톤"),
         move |_| {
-            let loaded = source(&path, &input)?;
-            auto::auto_tone_settings(loaded.photo.source(), &input, &Externals::default()).map_err(|e| e.to_string())
+            let loaded = source.load(&input)?;
+            auto::auto_tone_settings(loaded.source(), &input, &Externals::default()).map_err(|e| e.to_string())
         },
         move |cx: &mut AppContext, result| {
             if !still(cx, id, version, generation) {
@@ -124,12 +117,13 @@ fn python_g(v: f64) -> String {
 fn auto_color(cx: &mut AppContext, _: &Invocation) {
     let Some((id, path, settings, version, generation)) = target(cx) else { return };
     let amount = 100.0;
+    let source = super::auto_source::for_click(cx, &path, &settings);
     cx.jobs.spawn(
         "auto",
         tr("자동 색"),
         move |_| {
-            let loaded = source(&path, &settings)?;
-            auto::auto_color_settings(loaded.photo.source(), &settings, amount / 100.0, &Externals::default())
+            let loaded = source.load(&settings)?;
+            auto::auto_color_settings(loaded.source(), &settings, amount / 100.0, &Externals::default())
                 .map_err(|e| e.to_string())
         },
         move |cx: &mut AppContext, result| {
@@ -169,12 +163,13 @@ fn measure(cx: &mut AppContext, label: &'static str) {
     let mut input = settings.clone();
     // A RAW scan is measured in the camera's own colours, as the oracle loads it once the conversion is on.
     input.set("negative", true);
+    let source = super::auto_source::for_click(cx, &path, &input);
     cx.jobs.spawn(
         "auto",
         tr("네거티브 반전"),
         move |_| {
-            let loaded = source(&path, &input)?;
-            auto::measure_negative(loaded.photo.source(), &settings, &Externals::default()).map_err(|e| e.to_string())
+            let loaded = source.load(&input)?;
+            auto::measure_negative(loaded.source(), &settings, &Externals::default()).map_err(|e| e.to_string())
         },
         move |cx: &mut AppContext, result| {
             if !still(cx, id, version, generation) {
