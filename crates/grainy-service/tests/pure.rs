@@ -191,6 +191,15 @@ fn pure_functions_match_the_oracle() {
         let mut expected = c.as_object().unwrap().clone();
         expected.shift_remove("fn");
         expected.shift_remove("args");
+        if f == "summaries" && !cfg!(windows) {
+            // The folders are `str(Path(path).parent)` of paths given with slashes (`D:/Film/a.png`): Windows
+            // writes them with backslashes (the goldens), macOS as given.
+            if let Some(folders) = expected.get_mut("result").and_then(|r| r.get_mut(0)).and_then(Value::as_array_mut) {
+                for folder in folders {
+                    *folder = Value::String(folder.as_str().unwrap().replace('\\', "/"));
+                }
+            }
+        }
         check(&actual, &Value::Object(expected), &format!("case {n} {f} {}", c["args"]));
         *counts.entry(f.into()).or_default() += 1;
     }

@@ -33,8 +33,7 @@ pub fn capture_time(path: &str, metadata: Option<&Map<String, Value>>) -> Result
     }
     let meta = fs::metadata(path).map_err(|e| Error::os(&e, Path::new(path), false))?;
     let modified = meta.modified().map_err(|e| Error::os(&e, Path::new(path), false))?;
-    let local: chrono::DateTime<chrono::Local> = modified.into();
-    Ok(local.naive_local())
+    Ok(grainy_core::local_time::wall_time_of(modified))
 }
 
 /// Port of `import_copy.check_template`: `ValueError` unless the name template uses only known fields and gives

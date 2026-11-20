@@ -11,6 +11,9 @@ fn device() -> (MutexGuard<'static, ()>, Option<&'static Gpu>) {
     static LOCK: Mutex<()> = Mutex::new(());
     static GPU: OnceLock<Option<Gpu>> = OnceLock::new();
     let guard = LOCK.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+    if grainy_gpu::gpu_tests_switched_off("grainy-engine gpu::tests") {
+        return (guard, None);
+    }
     let gpu = GPU.get_or_init(|| Gpu::with_adapter(AdapterKind::Hardware).expect("GPU initialization"));
     if gpu.is_none() {
         eprintln!("SKIP GPU preview: no adapter (CPU-only CI)");

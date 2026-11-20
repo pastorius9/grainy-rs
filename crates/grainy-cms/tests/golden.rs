@@ -104,7 +104,8 @@ fn links_littlecms_2_19() {
 fn builtin_profile_bytes() {
     for name in BUILTIN {
         let ours = profile(name).unwrap();
-        let golden = golden_bytes(&format!("profile_{}", slug(name)));
+        // LittleCMS made these profiles: on macOS its header names the platform `APPL`, on Windows `MSFT`.
+        let golden = grainy_testkit::lcms_created(&golden_bytes(&format!("profile_{}", slug(name))));
         assert_eq!(ours.bytes().len(), golden.len(), "{name}: size");
         // Header bytes 24..36 are the creation time (UTC, when the profile was made); all else is identical.
         let mut masked = ours.bytes().to_vec();
@@ -115,7 +116,7 @@ fn builtin_profile_bytes() {
         assert_eq!(profile(name).unwrap().bytes(), ours.bytes());
     }
     // Pillow's sRGB profile (engine.srgb_profile, its own LittleCMS 2.19) is the same profile.
-    let pillow = golden_bytes("profile_pillow_srgb");
+    let pillow = grainy_testkit::lcms_created(&golden_bytes("profile_pillow_srgb"));
     let mut ours = profile("sRGB").unwrap().bytes().to_vec();
     ours[24..36].copy_from_slice(&pillow[24..36]);
     assert_eq!(ours, pillow);

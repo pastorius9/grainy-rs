@@ -475,6 +475,11 @@ fn read_only_library_badge() {
     harness.state_mut().edit_state_mut().commit("보정 변경");
     harness.key_press(egui::Key::Num5);
     settle(&mut harness);
+    // The golden library's photos are on Z:, which no machine has: the status line says the open photo cannot
+    // be read, with the system's own error text in the system's language (Korean here, English on the CI
+    // runner). The status line is not the subject of this picture.
+    common::snapshot::pin_status(harness.state_mut(), "");
+    harness.run_steps(2);
     save(&mut harness, "library-readonly-ko");
     assert!(
         std::fs::read(library.join("catalog.sqlite")).unwrap() == std::fs::read(&start).unwrap(),

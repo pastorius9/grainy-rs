@@ -16,6 +16,12 @@ use serde_json::Value;
 const IPP: f32 = 2e-5;
 /// Cases with grain (grainy-effects' grain field; see its own tolerance).
 const GRAIN: f32 = 1e-5;
+/// Noise reduction converts to CIELAB and back with the C runtime's `cbrtf` and `powf`; where that is not the
+/// goldens' C runtime (macOS) they round some values differently in the last place (`cbrtf` of the Microsoft C
+/// runtime is up to 2 ulp from the correctly rounded value). L*a*b* itself (a* = 500 (fx - fy)): run 1 5.96e-5.
+const OTHER_MATHS_LAB: f32 = 2e-4;
+/// The same for the RGB results of noise reduction (run 1: 1.4e-6 in `stage_combo_v3_colours_0.25`).
+const OTHER_MATHS_NOISE: f32 = 2e-5;
 
 fn inputs() -> Case {
     Case::open("detail", "inputs")
@@ -67,6 +73,9 @@ fn tolerance(s: &Settings) -> f32 {
     if s.f64("grain") != 0.0 {
         t = t.max(GRAIN);
     }
+    if s.f64("noise_luma") != 0.0 || s.f64("noise_color") != 0.0 {
+        t = t.max(grainy_testkit::maths_tolerance(0.0, OTHER_MATHS_NOISE));
+    }
     t
 }
 
@@ -114,7 +123,8 @@ fn noise_reduction_family() {
     for name in ["garden", "noise", "colours"] {
         let case = Case::open("detail", &format!("noise_{name}"));
         let lab: Image = case.array("lab");
-        assert_close(&grainy_color::rgb_to_lab(&image(name)), &lab, 0.0, &format!("rgb_to_lab {name}"));
+        let tolerance = grainy_testkit::maths_tolerance(0.0, OTHER_MATHS_LAB);
+        assert_close(&grainy_color::rgb_to_lab(&image(name)), &lab, tolerance, &format!("rgb_to_lab {name}"));
         let lightness: Plane = lab.index_axis(Axis(2), 0).to_owned();
         let profiles: Array2<f32> = case.array("profiles");
         let got = detail::wavelet_profiles(&lightness);
@@ -165,15 +175,17 @@ fn noise_reduction_family() {
 #[test]
 fn detail_tools_cases() {
     let mut worst = 0f32;
+    let mut checks = grainy_testkit::Checks::default();
     for name in cases("tools_") {
         let case = Case::open("detail", &name);
         let s = settings(&case);
         let ps = case.json()["pixel_scale"].as_f64().unwrap_or(1.0);
         let input = image(case.json()["image"].as_str().unwrap_or(""));
         let got = detail::detail_tools(&input, &s, ps);
-        worst = worst.max(check(&case, &got, tolerance(&s), &name));
+        checks.case(&name, || worst = worst.max(check(&case, &got, tolerance(&s), &name)));
     }
     println!("detail_tools: worst {worst:e}");
+    checks.finish();
 }
 
 #[test]
@@ -199,6 +211,7 @@ fn sharpen_cases() {
 #[test]
 fn stage_cases() {
     let mut worst = 0f32;
+    let mut checks = grainy_testkit::Checks::default();
     for name in cases("stage_") {
         if name.starts_with("stage_large") || name.starts_with("stage_hdr") {
             continue;
@@ -208,9 +221,10 @@ fn stage_cases() {
         let ps = case.json()["pixel_scale"].as_f64().unwrap_or(1.0);
         let input = image(case.json()["image"].as_str().unwrap_or(""));
         let got = detail::develop_detail(&input, &s, ps).expect("develop_detail");
-        worst = worst.max(check(&case, &got, tolerance(&s), &name));
+        checks.case(&name, || worst = worst.max(check(&case, &got, tolerance(&s), &name)));
     }
     println!("stage: worst {worst:e}");
+    checks.finish();
 }
 
 #[test]

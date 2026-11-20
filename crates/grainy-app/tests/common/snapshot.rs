@@ -46,9 +46,18 @@ pub fn difference(a: &image::RgbaImage, b: &image::RgbaImage) -> Option<(usize, 
     Some((count, largest))
 }
 
+/// Whether this system compares pictures. The committed pictures are Windows renders; other systems draw text
+/// with their own font rasteriser and GPU, so there the window is still built, driven and rendered (a missing
+/// glyph or a failed render still fails), but the picture is neither compared nor written.
+pub const COMPARED: bool = cfg!(windows);
+
 /// Compares `image` with the committed snapshot `name` (or replaces it under `GRAINY_UPDATE_SNAPSHOTS=1`).
 /// Panics, after writing `<name>.new.png`, when the picture differs beyond the tolerance or is missing.
+/// Windows only ([`COMPARED`]).
 pub fn check(image: &image::RgbaImage, name: &str) {
+    if !COMPARED {
+        return;
+    }
     let dir = snapshot_dir();
     std::fs::create_dir_all(&dir).expect("snapshot folder");
     let committed = dir.join(format!("{name}.png"));
@@ -104,7 +113,7 @@ fn fixture_drive_captions(app: &mut GrainyApp) {
     // The committed fixtures were rendered on C:. Keep the fixture's drive caption
     // stable when TEMP is redirected into a worktree on another drive. Paths, keys,
     // pixels and comparison tolerances are not rewritten.
-    let temporary = std::env::temp_dir();
+    let temporary = super::temp_root();
     let state = app.cx.state::<grainy_app::session_state::ColumnState>();
     fn contains_fixture(nodes: &[grainy_app::session_state::TreeNode], temporary: &std::path::Path) -> bool {
         nodes.iter().any(|node| {

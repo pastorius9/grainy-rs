@@ -46,9 +46,11 @@ fn golden_catalog(name: &str) -> (PathBuf, Catalog) {
         ),
     )
     .unwrap();
-    let root = meta["root"].as_str().unwrap();
+    // The generator's fixed folder `Z:\GrainyGolden\meta`, spelled as this system spells an absolute folder (the
+    // photo's name is the last part of its path by the system's rules).
+    let root = common::native_absolute(meta["root"].as_str().unwrap());
     for row in meta["rows"].as_array().unwrap() {
-        let path = format!("{root}\\{}", row["name"].as_str().unwrap());
+        let path = format!("{root}{}{}", std::path::MAIN_SEPARATOR, row["name"].as_str().unwrap());
         let id = catalog.add(&path, None, Some(&json!({})), true).unwrap();
         let mut fields = Map::new();
         fields.insert("metadata".into(), row["metadata"].clone());

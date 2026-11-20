@@ -92,13 +92,24 @@ fn names(group: &str) -> Vec<String> {
         .collect()
 }
 
+/// White balance where the C runtime is not the goldens' (macOS): its temperature and tint are `log2f` of channel
+/// gain ratios (`grainy_core::analysis`), which another `log2f` rounds differently in the last place, scaled by
+/// 90 and 1/0.013 (run 1: 8.9e-8 in `wb_garden_defaults.temperature`).
+const OTHER_MATHS_WHITE_BALANCE: f64 = 1e-5;
+
 /// Compares JSON values; numbers within `TOLERANCE * max(1, |expected|)`. Returns the largest scaled difference.
 fn compare(actual: &Value, expected: &Value, path: &str) -> f64 {
+    compare_within(actual, expected, path, TOLERANCE)
+}
+
+/// [`compare`] with another relative tolerance.
+fn compare_within(actual: &Value, expected: &Value, path: &str, tolerance: f64) -> f64 {
+    let compare = |a: &Value, e: &Value, p: &str| compare_within(a, e, p, tolerance);
     match (actual, expected) {
         (Value::Number(a), Value::Number(e)) => {
             let (a, e) = (a.as_f64().unwrap(), e.as_f64().unwrap());
             let d = (a - e).abs() / e.abs().max(1.0);
-            assert!(d <= TOLERANCE, "{path}: {a} against the oracle's {e} ({d:e})");
+            assert!(d <= tolerance, "{path}: {a} against the oracle's {e} ({d:e})");
             d
         }
         (Value::Bool(a), Value::Number(e)) | (Value::Number(e), Value::Bool(a)) => {
@@ -219,7 +230,8 @@ fn automatic_white_balance_matches_the_oracle() {
                 let expected = case.json()["values"].as_object().unwrap_or_else(|| panic!("{name}: expected an error"));
                 let mut whole = s.0.clone();
                 whole.extend(expected.clone());
-                let d = compare(&Value::Object(values.0), &Value::Object(whole), name);
+                let tolerance = grainy_testkit::maths_tolerance(TOLERANCE, OTHER_MATHS_WHITE_BALANCE);
+                let d = compare_within(&Value::Object(values.0), &Value::Object(whole), name, tolerance);
                 track(&mut worst, d, name);
             }
             Err(error) => check_error(name, &error, &case.json()["error"]),

@@ -4,6 +4,7 @@
 //! catalog's stored settings are read as they are.
 
 pub mod analysis;
+pub mod local_time;
 pub mod numpy;
 pub mod panel_keys;
 pub mod parallel;

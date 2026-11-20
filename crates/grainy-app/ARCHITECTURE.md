@@ -191,7 +191,8 @@ fn my_feature() {
   * Set `grainy_app::context::FROZEN_TIMING` in the builder (the status bar's render time reads `0 ms`). While it is
     set the app also previews on the CPU renderer only (no GPU adapter is used), because GPU frames may differ from
     CPU frames by a rounding step between machines.
-  * Make every folder and file name that can be on screen fixed. `common::temp_dir(name)` returns `<temp>/grainy-app-tests/<name>-<pid>/<name>`:
+  * Make every folder and file name that can be on screen fixed. `common::temp_dir(name)` returns `<temp>/grainy-app-tests/<name>-<pid>/<name>`
+    (`<temp>` resolved to its real long form, `common::temp_root`: no 8.3 short names, macOS's `/private/var`):
     the unique part is the folder above, the folder you get is called `name`, and the folder tree starts at the
     first folder that holds photos. Never put the process id, a random part or a date into a name that is drawn.
   * Wait until the app is idle with `common::snapshot::settle`, not with a fixed number of frames.
@@ -209,3 +210,6 @@ fn my_feature() {
   `crates/grainy-app/.gitignore`) for inspection. The committed files are replaced only when the environment variable
   `GRAINY_UPDATE_SNAPSHOTS=1` is set (`GRAINY_UPDATE_SNAPSHOTS=1 cargo test -p grainy-app`); look at every changed
   picture before committing it. A snapshot that is not committed yet fails the same way: create it with the variable.
+  **Pictures are compared on Windows only** (`common::snapshot::COMPARED`): the committed PNGs are Windows renders;
+  on macOS the tests still build, drive and render the window, but its fonts and GPU draw differently, so the picture
+  is neither compared nor written there.

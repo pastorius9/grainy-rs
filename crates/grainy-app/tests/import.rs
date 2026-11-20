@@ -243,7 +243,9 @@ fn opened(env: &Env, form: &Form) -> Value {
 fn copy_import_watch_and_sync_equal_the_oracle() {
     let _turn = common::language_lock();
     grainy_i18n::set_language(Language::Korean);
-    let golden = Case::open("app", "import_steps").json().clone();
+    let mut golden = Case::open("app", "import_steps").json().clone();
+    // The steps' backslashes are the separators of `<ROOT>\...` paths: on macOS the oracle writes `/`.
+    golden["steps"] = common::native_json(&golden["steps"]);
     let (env, mut cx) = build("import-steps", &golden);
     assert!(folder_watch::ensure(&mut cx));
     let card = card_bytes(&env);
@@ -348,8 +350,8 @@ fn a_cancelled_copy_stops_between_photos_and_imports_what_was_copied() {
     let (env, mut cx) = build("import-cancel", &golden);
     let card = card_bytes(&env);
     let run = CopyRun {
-        source: env.full("<ROOT>\\card"),
-        destination: env.full("<ROOT>\\photos"),
+        source: env.full(&common::native(r"<ROOT>\card")),
+        destination: env.full(&common::native(r"<ROOT>\photos")),
         backup: None,
         subfolders: "none".into(),
         template: "{stem}".into(),
@@ -421,9 +423,11 @@ fn the_dialog_waits_for_a_running_import() {
     assert!(cx.run("import.copy"));
     assert!(cx.dialog_open("import_copy"));
     // A problem: nothing saved.
-    let form = Form { source: env.full("<ROOT>\\nowhere"), destination: env.full("<ROOT>\\photos"), ..Form::default() };
+    let photos = env.full(&common::native(r"<ROOT>\photos"));
+    let form =
+        Form { source: env.full(&common::native(r"<ROOT>\nowhere")), destination: photos.clone(), ..Form::default() };
     assert_eq!(import::submit(&mut cx, &form), Err("가져올 폴더를 선택하세요.".to_owned()));
-    let empty = Form { source: String::new(), destination: env.full("<ROOT>\\photos"), ..Form::default() };
+    let empty = Form { source: String::new(), destination: photos, ..Form::default() };
     assert_eq!(
         empty.problem().as_deref(),
         Some("가져올 폴더를 선택하세요."),
@@ -486,12 +490,12 @@ fn watched_folders_are_read_on_their_timer() {
     cx.state::<folder_watch::WatchState>().watch_interval = Some(Duration::from_millis(30));
     folder_watch::set_sync_enabled(&mut cx, false);
     drain(&mut cx);
-    import::add_watch(&mut cx, &env.full("<ROOT>\\inbox"));
+    import::add_watch(&mut cx, &env.full(&common::native(r"<ROOT>\inbox")));
     drain(&mut cx);
     let count = |cx: &AppContext| cx.doc.metadata_catalog().unwrap().paths().unwrap().len();
     assert_eq!(count(&cx), 3, "in1 and in2 joined the existing photo");
     // The subfolder leaves the catalogue; a new photo appears there and one at the top.
-    cx.doc.remove_folder(&env.full("<ROOT>\\inbox\\sub")).unwrap();
+    cx.doc.remove_folder(&env.full(&common::native(r"<ROOT>\inbox\sub"))).unwrap();
     assert_eq!(count(&cx), 2);
     env.write("inbox/sub/in3.png", "one");
     env.write("inbox/in4.png", "five");
@@ -501,7 +505,7 @@ fn watched_folders_are_read_on_their_timer() {
     drain(&mut cx);
     let paths = cx.doc.metadata_catalog().unwrap().paths().unwrap();
     assert!(paths.iter().any(|p| p.ends_with("in4.png")));
-    assert!(!paths.iter().any(|p| p.contains("\\sub\\")), "the removed folder stays out: {paths:?}");
+    assert!(!paths.iter().any(|p| p.contains(&common::native(r"\sub\"))), "the removed folder stays out: {paths:?}");
     assert!(cx.run("import.unwatch"));
     std::thread::sleep(Duration::from_millis(40));
     folder_watch::poll(&mut cx);

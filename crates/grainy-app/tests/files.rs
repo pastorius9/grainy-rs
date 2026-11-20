@@ -241,7 +241,9 @@ fn str_arg(v: &Value) -> Option<String> {
 fn a_scripted_session_equals_the_oracle() {
     let _turn = common::language_lock();
     grainy_i18n::set_language(Language::Korean);
-    let golden = Case::open("app", "files_steps").json().clone();
+    let mut golden = Case::open("app", "files_steps").json().clone();
+    // The steps' backslashes are the separators of `<ROOT>\...` paths: on macOS the oracle writes `/`.
+    golden["steps"] = common::native_json(&golden["steps"]);
     let (env, mut cx, trashed) = build("files-steps", &golden);
     let platform = Platform::native();
     let mut previous_tables = None;
@@ -490,11 +492,14 @@ fn originals_keep_their_bytes() {
 /// The rename box's mapping: the template with `stem` and `n`, the suffix kept, folder parts refused.
 #[test]
 fn rename_templates() {
-    let paths = vec![r"C:\p\A\one.png".to_owned(), r"C:\p\B\two.JPG".to_owned()];
+    // Paths as this system writes them (`C:\p\...` is one file name on macOS, whose stem holds `:` and `\`).
+    let at =
+        |windows: &str| if cfg!(windows) { windows.to_owned() } else { windows.replace("C:", "").replace('\\', "/") };
+    let paths = vec![at(r"C:\p\A\one.png"), at(r"C:\p\B\two.JPG")];
     let mapping = files::rename_mapping(&paths, "{stem}_{n:03d}").unwrap();
-    assert_eq!(mapping[0].1, r"C:\p\A\one_001.png");
-    assert_eq!(mapping[1].1, r"C:\p\B\two_002.JPG");
-    assert_eq!(files::rename_mapping(&paths, "trip-{n}").unwrap()[1].1, r"C:\p\B\trip-2.JPG");
+    assert_eq!(mapping[0].1, at(r"C:\p\A\one_001.png"));
+    assert_eq!(mapping[1].1, at(r"C:\p\B\two_002.JPG"));
+    assert_eq!(files::rename_mapping(&paths, "trip-{n}").unwrap()[1].1, at(r"C:\p\B\trip-2.JPG"));
     for bad in ["a/{stem}", "a\\{stem}", "x:{stem}", "{stem}?"] {
         assert_eq!(
             files::rename_mapping(&paths, bad).unwrap_err(),
@@ -613,7 +618,7 @@ fn a_renamed_folder_is_relinked_by_the_scan() {
     std::fs::rename(env.root.join("photos/C"), env.root.join("photos/C-renamed")).unwrap();
     harness.state_mut().cx.state::<grainy_app::session_state::ColumnState>().rescan();
     wait_for(&mut harness, "the relink", |app| {
-        paths(app, &env).contains(&"<ROOT>\\photos\\C-renamed\\c1.png".to_owned())
+        paths(app, &env).contains(&common::native(r"<ROOT>\photos\C-renamed\c1.png"))
     });
     assert_eq!(backups(&env).get("folder-location"), Some(&1));
     assert!(harness.state().status().contains("C-renamed"), "{}", harness.state().status());
@@ -647,7 +652,7 @@ fn a_renamed_folder_without_identity_is_found_again() {
     std::fs::rename(env.root.join("photos/A"), env.root.join("photos/A-later")).unwrap();
     harness.state_mut().cx.state::<grainy_app::session_state::ColumnState>().rescan();
     wait_for(&mut harness, "the recovery", |app| {
-        paths(app, &env).contains(&"<ROOT>\\photos\\A-later\\sub\\a3.png".to_owned())
+        paths(app, &env).contains(&common::native(r"<ROOT>\photos\A-later\sub\a3.png"))
     });
     let report = harness.state().cx.doc.preference("folder_recovery_last").expect("the report");
     assert_eq!(report["photos"], 4, "a1, a2, a3 and the virtual copy of a1");

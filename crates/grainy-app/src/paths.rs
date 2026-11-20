@@ -139,14 +139,29 @@ pub(crate) fn is_within(path: &Path, root: &Path) -> bool {
 }
 
 /// Whether `path` is one of the Python Grainy's folders or inside one (so it must not be opened for writing).
-/// Symbolic links of `path` are followed when it exists; the Python Grainy's folders are compared by name only
-/// (they are never looked at on disk).
+/// The path as written and its resolved form (links, junctions and 8.3 short names of its existing part
+/// followed) are compared with the Python Grainy's folders as written and resolved: an 8.3 or linked
+/// `LOCALAPPDATA` (or home), or a link to one of the folders, names the same folder differently. For the Python
+/// Grainy's folders only their parent folder's real name is asked: the folders themselves and everything inside
+/// them are never opened, read or written.
 pub fn is_oracle_folder(path: &Path, locations: &Locations) -> bool {
     let system = locations.env.system;
-    let protected = locations.oracle_folders().map(|folder| key(&folder, system));
+    let folders = locations.oracle_folders();
+    let protected: Vec<Vec<String>> = folders
+        .iter()
+        .map(|folder| key(folder, system))
+        .chain(folders.iter().map(|f| key(&resolved_parent(f), system)))
+        .collect();
     let inside = |candidate: Vec<String>| protected.iter().any(|f| !f.is_empty() && candidate.starts_with(f));
-    // A name match needs no filesystem access to a protected folder.
     inside(key(path, system)) || inside(key(&resolved(path), system))
+}
+
+/// `folder` with its parent resolved (links, junctions, 8.3 short names): the folder itself is never opened.
+fn resolved_parent(folder: &Path) -> PathBuf {
+    match (folder.parent(), folder.file_name()) {
+        (Some(parent), Some(name)) => resolved(parent).join(name),
+        _ => folder.to_path_buf(),
+    }
 }
 
 /// The command line of the Rust app: `[--library <folder>] [--debug] [<photo or folder>...]`.
@@ -206,6 +221,7 @@ impl Arguments {
 mod tests {
     use super::*;
 
+    #[cfg(windows)]
     fn windows(local: &str) -> Locations {
         Locations {
             env: Environment {
@@ -220,11 +236,16 @@ mod tests {
 
     #[test]
     fn data_folders_per_system() {
-        let w = windows(r"C:\Users\someone\AppData\Local");
-        assert_eq!(w.data_folder(), PathBuf::from(r"C:\Users\someone\AppData\Local\GrainyRS"));
-        assert_eq!(w.library_folder(), PathBuf::from(r"C:\Users\someone\AppData\Local\GrainyRS\Library"));
-        assert_eq!(w.oracle_library(), PathBuf::from(r"C:\Users\someone\AppData\Local\Luma\Library"));
-        assert_eq!(w.oracle_settings(), PathBuf::from(r"C:\Users\someone\AppData\Local\Grainy"));
+        // Windows folders are spelled with `\`, which only a Windows `PathBuf` reads as a separator (elsewhere the
+        // join adds `/`): the Windows half runs on Windows.
+        #[cfg(windows)]
+        {
+            let w = windows(r"C:\Users\someone\AppData\Local");
+            assert_eq!(w.data_folder(), PathBuf::from(r"C:\Users\someone\AppData\Local\GrainyRS"));
+            assert_eq!(w.library_folder(), PathBuf::from(r"C:\Users\someone\AppData\Local\GrainyRS\Library"));
+            assert_eq!(w.oracle_library(), PathBuf::from(r"C:\Users\someone\AppData\Local\Luma\Library"));
+            assert_eq!(w.oracle_settings(), PathBuf::from(r"C:\Users\someone\AppData\Local\Grainy"));
+        }
         let mac = Locations {
             env: Environment { system: System::MacOs, local_app_data: None, home: PathBuf::from("/Users/a") },
             home_override: None,

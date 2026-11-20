@@ -35,6 +35,9 @@ fn fixture_bundle_stays_under_three_megabytes() {
 }
 
 fn gpu(kind: AdapterKind) -> Option<Gpu> {
+    if grainy_gpu::gpu_tests_switched_off(&format!("grainy-gpu parity ({kind:?})")) {
+        return None;
+    }
     let gpu = Gpu::with_adapter(kind).expect("adapter exists but GPU initialization failed");
     match &gpu {
         Some(g) => println!("ADAPTER {kind:?}: {:?}", g.adapter_info()),

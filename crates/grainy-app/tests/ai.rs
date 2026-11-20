@@ -20,7 +20,7 @@ use std::time::{Duration, Instant};
 use common::snapshot::{pin_status, save, settle};
 use eframe::egui;
 use egui_kittest::{Harness, HarnessBuilder};
-use grainy_app::ai::ask::{grainy_context, undo_line, AskAi, Link, Seen};
+use grainy_app::ai::ask::{grainy_context, undo_line, undo_line_in, AskAi, Link, Seen};
 use grainy_app::ai::auth::{authentication_failed, authentication_failed_value, gemini_status, parse_status};
 use grainy_app::ai::connection::{
     activity_text, install_commands, install_text, Binder, Bound, Connection, Setup, Sources,
@@ -28,7 +28,9 @@ use grainy_app::ai::connection::{
 use grainy_app::ai::programs::{
     claude_command, codex_command, gemini_command, redact, tool_event, EventParser, Profile, Request, PROFILES,
 };
-use grainy_app::ai::system::{Console, HostSystem, Launch, Os, Piped, System};
+#[cfg(windows)]
+use grainy_app::ai::system::HostSystem;
+use grainy_app::ai::system::{Console, Launch, Os, Piped, System};
 use grainy_app::ai::{discover, install, runner, AiState};
 use grainy_app::dialogs::mcp::{refresh, McpState, Shown};
 use grainy_app::GrainyApp;
@@ -63,21 +65,57 @@ fn fixed_dir(name: &str) -> PathBuf {
     PathBuf::from(text.strip_prefix(r"\\?\").unwrap_or(&text))
 }
 
-/// The golden's placeholders filled with `root`.
-fn unplace(value: &Value, root: &Path) -> Value {
-    let root_text = root.to_string_lossy().into_owned();
-    let json = serde_json::to_string(&root_text).unwrap();
-    let uri = grainy_app::ai::programs::as_uri(root);
+/// The golden's paths below `<ROOT>` as this system's oracle writes them. The goldens were made on Windows, where
+/// the oracle's paths read `\` (`\\` inside JSON text); on macOS its `pathlib` joins the same folders with `/`. Only
+/// the path that follows `<ROOT>` or `<ROOT_JSON>` changes, up to its end (a quote, `;`, white space or the end of
+/// the text): other backslashes (PowerShell's own `'Grainy\mcp\...'`, the test's `C:\p\claude.exe`) stay.
+fn native_paths(value: &Value) -> Value {
+    fn convert(text: &str) -> String {
+        let mut out = String::with_capacity(text.len());
+        let mut rest = text;
+        loop {
+            let next = [("<ROOT_JSON>", r"\\"), ("<ROOT>", r"\")]
+                .iter()
+                .filter_map(|(marker, separator)| rest.find(marker).map(|at| (at, *marker, *separator)))
+                .min_by_key(|(at, _, _)| *at);
+            let Some((at, marker, separator)) = next else {
+                out.push_str(rest);
+                return out;
+            };
+            out.push_str(&rest[..at + marker.len()]);
+            rest = &rest[at + marker.len()..];
+            let end = rest.find(|c: char| matches!(c, '\'' | '"' | ';') || c.is_whitespace()).unwrap_or(rest.len());
+            out.push_str(&rest[..end].replace(separator, "/"));
+            rest = &rest[end..];
+        }
+    }
     match value {
-        Value::String(s) => Value::String(
-            s.replace("<ROOT_URI>", &uri)
-                .replace("<ROOT_JSON>", &json[1..json.len() - 1])
-                .replace("<ROOT>", &root_text),
-        ),
-        Value::Array(a) => Value::Array(a.iter().map(|v| unplace(v, root)).collect()),
-        Value::Object(m) => Value::Object(m.iter().map(|(k, v)| (k.clone(), unplace(v, root))).collect()),
+        _ if cfg!(windows) => value.clone(),
+        Value::String(s) => Value::String(convert(s)),
+        Value::Array(a) => Value::Array(a.iter().map(native_paths).collect()),
+        Value::Object(m) => Value::Object(m.iter().map(|(k, v)| (k.clone(), native_paths(v))).collect()),
         other => other.clone(),
     }
+}
+
+/// The golden's placeholders filled with `root`, its paths as this system's oracle writes them ([`native_paths`]).
+fn unplace(value: &Value, root: &Path) -> Value {
+    fn fill(value: &Value, root: &Path) -> Value {
+        let root_text = root.to_string_lossy().into_owned();
+        let json = serde_json::to_string(&root_text).unwrap();
+        let uri = grainy_app::ai::programs::as_uri(root);
+        match value {
+            Value::String(s) => Value::String(
+                s.replace("<ROOT_URI>", &uri)
+                    .replace("<ROOT_JSON>", &json[1..json.len() - 1])
+                    .replace("<ROOT>", &root_text),
+            ),
+            Value::Array(a) => Value::Array(a.iter().map(|v| fill(v, root)).collect()),
+            Value::Object(m) => Value::Object(m.iter().map(|(k, v)| (k.clone(), fill(v, root))).collect()),
+            other => other.clone(),
+        }
+    }
+    fill(&native_paths(value), root)
 }
 
 // ---- a fake computer ---------------------------------------------------------------------------------------------
@@ -200,8 +238,11 @@ fn install_commands_and_activity_texts_are_the_oracles() {
         standard.as_ref().map(|p| Value::String(p.to_string_lossy().into())),
         Some(unplace(&c["standard"], &root))
     );
+    // The install texts take Windows folders (`Z:\Temp\it's lib\mcp`, `/tmp/...` read as `\tmp\...`) and compare
+    // them without case (`os.path.normcase`), which only Windows does: on Windows only.
+    let installs = if cfg!(windows) { c["installs"].as_array().unwrap().clone() } else { Vec::new() };
     let mut checked = 0;
-    for item in c["installs"].as_array().unwrap() {
+    for item in &installs {
         let windows = item["windows"].as_bool().unwrap();
         let folder = unplace(&item["folder"], &root);
         let folder = folder.as_str().map(PathBuf::from);
@@ -213,7 +254,7 @@ fn install_commands_and_activity_texts_are_the_oracles() {
             checked += 1;
         }
     }
-    assert_eq!(checked, 30);
+    assert_eq!(checked, if cfg!(windows) { 30 } else { 0 });
     for code in ["ko", "en"] {
         grainy_i18n::set_language(language(code));
         for row in c["activity"][code].as_array().unwrap() {
@@ -462,6 +503,11 @@ fn a_run_reports_the_oracles_events_and_result() {
 
 // ---- discovery and launches ----------------------------------------------------------------------------------
 
+/// The layouts are Windows installations (`claude.EXE`, `npm.CMD`, `PATHEXT`, `%LOCALAPPDATA%\Programs`), found by
+/// this computer's own system ([`HostSystem`]): Windows only. On macOS the host system would look in this Mac's
+/// `/opt/homebrew/bin` and `/usr/local/bin`; the macOS discovery is covered with a fake Mac
+/// (`macos_sign_in_and_installers_open_terminal_scripts`).
+#[cfg(windows)]
 #[test]
 fn programs_are_found_where_the_oracle_finds_them() {
     let c = case("ai_paths");
@@ -948,7 +994,11 @@ fn the_mcp_dialog_shows_what_the_oracles_shows() {
             activity,
         };
         let mut state = McpState { key_visible: i == 2, ..McpState::default() };
-        let got = refresh(&mut state, &shown, &sys, undo_line(entries[i].as_ref(), job));
+        // The undo line's time is local (`astimezone()`): the golden was made at UTC+9 (03:04 UTC reads 12:04),
+        // so the line is built in that zone, whatever zone this computer is in.
+        let golden_zone = chrono::FixedOffset::east_opt(9 * 3600).unwrap();
+        let undo = undo_line_in(entries[i].as_ref(), job, &golden_zone);
+        let got = refresh(&mut state, &shown, &sys, undo);
         let name = text(&expected["name"]);
         assert_eq!(got.enabled, expected["enabled"].as_bool().unwrap(), "{name}");
         assert_eq!(got.status, text(&expected["status"]), "{name}");
@@ -1137,8 +1187,8 @@ fn the_ask_ai_window_behaves_as_the_oracles() {
             assert_eq!(request.session_id, text(&expected["session_id"]));
             assert_eq!(request.context, text(&expected["context"]));
             let workspace = request.workspace.to_string_lossy().into_owned();
-            let (prefix, run) = text(&expected["workspace"]).rsplit_once('\\').unwrap();
-            let (head, key) = workspace.rsplit_once('\\').unwrap();
+            let (prefix, run) = text(&expected["workspace"]).rsplit_once(std::path::MAIN_SEPARATOR).unwrap();
+            let (head, key) = workspace.rsplit_once(std::path::MAIN_SEPARATOR).unwrap();
             assert_eq!(head, prefix);
             assert!(key.len() == 32 && key.bytes().all(|b| b.is_ascii_hexdigit()), "{key}");
             // The golden names the random run keys <RUN1>, <RUN2>...: the same name is the same folder.

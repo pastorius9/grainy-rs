@@ -125,10 +125,19 @@ pub fn grainy_context(seen: &Seen) -> String {
     )
 }
 
-/// The undo line of both AI windows (`McpDialog.refresh_undo`): the text and whether the button works.
+/// The undo line of both AI windows (`McpDialog.refresh_undo`): the text and whether the button works. The
+/// batch's time reads in this computer's time zone.
 pub fn undo_line(entry: Option<&Value>, job_running: bool) -> (String, bool) {
+    undo_line_in(entry, job_running, &chrono::Local)
+}
+
+/// [`undo_line`] with the batch's time in `zone` (tests compare with goldens made in a known zone).
+pub fn undo_line_in<Tz: chrono::TimeZone>(entry: Option<&Value>, job_running: bool, zone: &Tz) -> (String, bool)
+where
+    Tz::Offset: std::fmt::Display,
+{
     let Some(entry) = entry else { return (tr("되돌릴 AI 작업이 없습니다."), false) };
-    let when = entry.get("created").and_then(Value::as_str).and_then(local_minutes).unwrap_or_default();
+    let when = entry.get("created").and_then(Value::as_str).and_then(|t| zone_minutes(t, zone)).unwrap_or_default();
     let label = match entry.get("label") {
         Some(Value::String(s)) => s.clone(),
         Some(other) => grainy_mcp::pyjson::py_str(other),
@@ -155,19 +164,23 @@ pub(crate) fn thousands(n: i64) -> String {
     }
 }
 
-/// `datetime.fromisoformat(text).astimezone().strftime('%H:%M')` (a time without zone is local).
-fn local_minutes(text: &str) -> Option<String> {
-    use chrono::{DateTime, Local, NaiveDateTime, TimeZone};
+/// `datetime.fromisoformat(text).astimezone().strftime('%H:%M')` with the local zone `zone` (a time without zone
+/// is local).
+fn zone_minutes<Tz: chrono::TimeZone>(text: &str, zone: &Tz) -> Option<String>
+where
+    Tz::Offset: std::fmt::Display,
+{
+    use chrono::{DateTime, NaiveDateTime};
     let text = text.replacen(' ', "T", 1);
     if let Ok(aware) = DateTime::parse_from_rfc3339(&text) {
-        return Some(aware.with_timezone(&Local).format("%H:%M").to_string());
+        return Some(aware.with_timezone(zone).format("%H:%M").to_string());
     }
     for format in ["%Y-%m-%dT%H:%M:%S%.f", "%Y-%m-%dT%H:%M", "%Y-%m-%d"] {
         let parsed = NaiveDateTime::parse_from_str(&text, format)
             .ok()
             .or_else(|| chrono::NaiveDate::parse_from_str(&text, format).ok().and_then(|d| d.and_hms_opt(0, 0, 0)));
         if let Some(naive) = parsed {
-            return Local.from_local_datetime(&naive).earliest().map(|t| t.format("%H:%M").to_string());
+            return zone.from_local_datetime(&naive).earliest().map(|t| t.format("%H:%M").to_string());
         }
     }
     None

@@ -58,9 +58,17 @@ fn settings(working: &str) -> grainy_core::Settings {
     grainy_core::normalized(&stored)
 }
 
+/// Tolerance of the samples: 0 with the goldens' C runtime. Elsewhere (macOS) `to_linear`'s `powf` rounds some
+/// samples differently in the last place (run 1: 12 samples of `gray8_plain_png`, 3.0e-8).
+fn tolerance() -> f64 {
+    grainy_testkit::maths_tolerance(0.0, 1e-6)
+}
+
 #[test]
 fn load_photo_equals_the_oracle_load_image() {
     let mut report = Vec::new();
+    let mut failures = Vec::new();
+    let mut largest = 0f64;
     for name in CASES {
         let case = Case::open("cms", &format!("load_{name}"));
         let path = source(&case, name);
@@ -76,15 +84,27 @@ fn load_photo_equals_the_oracle_load_image() {
                 let same = a.to_bits() == e.to_bits() || (a.is_nan() && e.is_nan());
                 if !same {
                     mismatches += 1;
-                    worst = worst.max((*a as f64 - *e as f64).abs());
+                    let d = if a.is_nan() || e.is_nan() { f64::INFINITY } else { (*a as f64 - *e as f64).abs() };
+                    worst = worst.max(d);
                 }
             }
-            assert_eq!(mismatches, 0, "{name} ({working}): {mismatches} values differ, max |error| {worst:e}");
+            largest = largest.max(worst);
+            if mismatches > 0 {
+                println!("{name} ({working}): {mismatches} values differ, max |error| {worst:e}");
+            }
+            if worst > tolerance() || (tolerance() == 0.0 && mismatches > 0) {
+                failures.push(format!("{name} ({working}): {mismatches} values differ, max |error| {worst:e}"));
+            }
             let profile = &case.json()[format!("input_profile_{key}")];
             assert_eq!(loaded.metadata.get("input_profile").unwrap_or(&Value::Null), profile, "{name}: input_profile");
             assert_eq!(loaded.metadata.get("decoder"), Some(&case.json()["decoder"]), "{name}: decoder");
         }
         report.push(name);
     }
-    println!("{} files x 2 working spaces equal to the oracle (tolerance 0, max |error| 0)", report.len());
+    assert!(failures.is_empty(), "{}", failures.join("\n"));
+    println!(
+        "{} files x 2 working spaces equal to the oracle (tolerance {:e}, max |error| {largest:e})",
+        report.len(),
+        tolerance()
+    );
 }

@@ -298,6 +298,12 @@ fn store_goldens() {
         std::fs::write(folder.join(format!("payload_{i}.json")), serde_json::to_vec(v).unwrap()).unwrap();
     }
     for (i, v) in c.json()["targets"].as_array().unwrap().iter().enumerate() {
+        // A folder target is the key of `Path(folder).resolve()`; the oracle's folder is a Windows path (a drive
+        // letter, backslashes), which only Windows resolves to itself. The ID targets are checked everywhere.
+        if !cfg!(windows) && v["snapshot"]["folder"].is_string() {
+            println!("target_key/{i}: Windows folder path, checked on Windows only");
+            continue;
+        }
         equal(
             json!(dust::store::target_key(&v["snapshot"], v["scope"].as_str().unwrap()).unwrap()),
             &v["key"],
@@ -325,6 +331,13 @@ fn catalog_goldens_and_roundtrip() {
     let root = grainy_testkit::root();
     let catalog = grainy_catalog::Catalog::open_reader(root.join("golden/dust/batch")).unwrap();
     for (i, v) in c.json()["scopes"].as_array().unwrap().iter().enumerate() {
+        // The oracle's catalogue holds Windows paths (drive letters, backslashes): a folder scope of it is a
+        // Windows folder, whose parent and members only Windows path rules give. The live catalogue below checks
+        // folder scopes on every system.
+        if !cfg!(windows) && v["output"]["folder"].is_string() {
+            println!("capture_scope_ids/{i}: Windows folder, checked on Windows only");
+            continue;
+        }
         equal(
             dust::batch::capture_scope_ids(
                 &catalog,

@@ -5,7 +5,6 @@ use std::sync::{
 use std::time::Duration;
 
 use grainy_core::{Image, Plane, Settings};
-use wgpu::util::DeviceExt;
 
 use crate::pool::{Lease, Pool};
 use crate::{params, Error, Resident, Result};
@@ -241,11 +240,11 @@ impl Gpu {
         self.bytes(height, width)?;
         let contiguous = image.as_standard_layout();
         let values = contiguous.as_slice().ok_or_else(|| Error::Input("cannot make contiguous image".into()))?;
-        let buffer = self.device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-            label: Some("Grainy upload"),
-            contents: bytemuck::cast_slice(values),
-            usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
-        });
+        let buffer = self.buffer_init(
+            "Grainy upload",
+            bytemuck::cast_slice(values),
+            wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
+        )?;
         self.check()?;
         Ok(Frame { buffer, width, height, owner: self.owner, _lease: None })
     }
@@ -311,11 +310,32 @@ impl Gpu {
         if values.len() as u64 * 4 > self.limits.max_storage_buffer_binding_size {
             return Err(Error::Limit("auxiliary buffer too large".into()));
         }
-        Ok(self.device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-            label: Some("Grainy auxiliary"),
-            contents: bytemuck::cast_slice(if values.is_empty() { &[0.0] } else { values }),
-            usage: wgpu::BufferUsages::STORAGE,
-        }))
+        self.buffer_init(
+            "Grainy auxiliary",
+            bytemuck::cast_slice(if values.is_empty() { &[0.0] } else { values }),
+            wgpu::BufferUsages::STORAGE,
+        )
+    }
+
+    /// `wgpu::util::DeviceExt::create_buffer_init` without its panic: when the device is lost (also before the
+    /// device-lost callback has run, as WARP of Windows Server 2022 shows), the new buffer cannot be mapped and
+    /// this is an error, so the caller falls back to the CPU.
+    pub(crate) fn buffer_init(&self, label: &str, contents: &[u8], usage: wgpu::BufferUsages) -> Result<wgpu::Buffer> {
+        let unpadded = contents.len() as wgpu::BufferAddress;
+        let mask = wgpu::COPY_BUFFER_ALIGNMENT - 1;
+        let size = ((unpadded + mask) & !mask).max(wgpu::COPY_BUFFER_ALIGNMENT);
+        let buffer = self.device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some(label),
+            size,
+            usage,
+            mapped_at_creation: true,
+        });
+        {
+            let mut view = buffer.get_mapped_range_mut(..).map_err(|e| Error::Device(format!("{label}: {e}")))?;
+            view.slice(..unpadded as usize).copy_from_slice(contents);
+        }
+        buffer.unmap();
+        Ok(buffer)
     }
 
     pub(crate) fn dispatch_buffers(
@@ -342,17 +362,13 @@ impl Gpu {
                 mapped_at_creation: false,
             },
         );
-        let buffer = |name, contents: &[u8]| {
-            self.device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                label: Some(name),
-                contents,
-                usage: wgpu::BufferUsages::STORAGE,
-            })
-        };
-        let p = buffer("parameters", bytemuck::cast_slice(params));
-        let t =
-            buffer("curves and local maps", bytemuck::cast_slice(if table.is_empty() { &[[0.0, 0.0]] } else { table }));
-        let a = buffer("unused auxiliary", bytemuck::cast_slice(&[0f32]));
+        let buffer = |name, contents: &[u8]| self.buffer_init(name, contents, wgpu::BufferUsages::STORAGE);
+        let p = buffer("parameters", bytemuck::cast_slice(params))?;
+        let t = buffer(
+            "curves and local maps",
+            bytemuck::cast_slice(if table.is_empty() { &[[0.0, 0.0]] } else { table }),
+        )?;
+        let a = buffer("unused auxiliary", bytemuck::cast_slice(&[0f32]))?;
         let entries: Vec<_> = [
             &source.buffer,
             &out,
@@ -524,6 +540,29 @@ mod tests {
         assert_eq!(g.readback(&small_frame).unwrap(), g.readback(&replaced).unwrap());
         assert_eq!(g.readback(&clone).unwrap(), original_pixels);
         assert_eq!(g.readback(&clone).unwrap().dim(), image.dim());
+    }
+
+    #[test]
+    fn a_device_lost_before_its_callback_runs_gives_errors_not_panics() {
+        // WARP of Windows Server 2022 removes the device while a detail stage runs; the next stage then created
+        // its buffers on the lost device before the device-lost callback had run, and wgpu's `create_buffer_init`
+        // panicked. Every entry point must instead return an error, so the preview falls back to the CPU.
+        let Some(g) = Gpu::with_adapter(AdapterKind::Hardware).expect("GPU initialization") else {
+            eprintln!("SKIP device-lost test: no adapter");
+            return;
+        };
+        let image = grainy_testkit::input("ramp");
+        let frame = g.upload(&image).unwrap();
+        let mut noise = grainy_core::defaults();
+        noise.set("noise_color", serde_json::json!(50.0));
+        g.device.destroy();
+        assert!(g.buffer_init("parameters", &[0; 16], wgpu::BufferUsages::STORAGE).is_err());
+        assert!(g.upload(&image).is_err());
+        assert!(g.upload_values(&[1.0, 2.0]).is_err());
+        assert!(g.dispatch(&frame, 0, &[0.0; 4], &[], &[]).is_err());
+        assert!(g.detail(&image, &noise, 1.0).is_err());
+        assert!(g.develop(&image, &grainy_core::defaults(), 1.0).is_err());
+        assert!(g.readback(&frame).is_err());
     }
 
     #[test]

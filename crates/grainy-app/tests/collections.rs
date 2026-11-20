@@ -139,6 +139,13 @@ fn query_of(options: &Value, root: &str) -> Query {
     q
 }
 
+/// Whether a listing's options can be compared on this system. The golden library was written by the oracle on
+/// Windows: its photos are at `Z:\GrainyGolden\...`, which on macOS is one file name in no folder (the oracle there
+/// lists nothing for that folder either), so listings filtered by a folder are compared on Windows only.
+fn windows_folders(options: &Value) -> bool {
+    cfg!(windows) || options.get("folder").is_none_or(Value::is_null)
+}
+
 fn listed(doc: &CatalogDocument) -> Vec<u64> {
     doc.photos().iter().map(|p| p.id).collect()
 }
@@ -153,6 +160,9 @@ fn every_filter_field_lists_what_the_oracle_lists() {
     assert!(listings.len() > 50);
     for listing in listings {
         let name = listing["name"].as_str().unwrap();
+        if !windows_folders(&listing["options"]) {
+            continue;
+        }
         doc.set_query(query_of(&listing["options"], "")).unwrap();
         doc.refresh_now().unwrap();
         let expected: Vec<u64> = listing["ids"].as_array().unwrap().iter().map(|i| i.as_u64().unwrap()).collect();
@@ -369,6 +379,10 @@ fn run_session(name: &str, golden: &Value, script: &Value) {
     let mut last_tables = tables(&s.dir);
     for (step, expected) in script.iter().zip(session["steps"].as_array().unwrap()) {
         let at = format!("{name}: {step}");
+        if !windows_folders(&json!({"folder": (step[0] == "folder").then_some(&step[1])})) {
+            // From the folder filter on (`Z:\GrainyGolden\photos`, a Windows folder) every list is Windows-only.
+            break;
+        }
         s.cx.set_status("");
         run_step(&mut s, step, expected);
         let had_refresh = s.cx.doc.listing_pending();

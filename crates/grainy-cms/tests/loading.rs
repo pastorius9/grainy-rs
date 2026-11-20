@@ -54,7 +54,9 @@ fn exact(actual: &[f32], expected: &[f32], what: &str) -> f64 {
     worst
 }
 
+/// `golden` is a profile LittleCMS made (on macOS its header names the platform `APPL`, on Windows `MSFT`).
 fn same_profile(ours: &Profile, golden: &[u8], what: &str) {
+    let golden = grainy_testkit::lcms_created(golden);
     assert_eq!(ours.bytes().len(), golden.len(), "{what}: size");
     let mut masked = ours.bytes().to_vec();
     masked[24..36].copy_from_slice(&golden[24..36]);
@@ -85,8 +87,15 @@ fn calibrated(name: &str) -> Profile {
         [p[0], p[1], p[2], p[3], p[4], p[5]]
     });
     let gamma = c.has("gamma").then(|| c.array::<f64, Ix1>("gamma")[0]);
-    let srgb = srgb_transfer_table();
-    assert_eq!(srgb, transfers.array::<f32, Ix1>("srgb").to_vec(), "to_linear(linspace(0, 1, 65536))");
+    // `to_linear` is the C runtime's `powf`: equal to the oracle's table with the goldens' C runtime; elsewhere
+    // within one unit in the last place (6 of its 65536 entries differ from the correctly rounded values). The
+    // profile is built from the oracle's table, so what follows tests LittleCMS alone, exactly, on every system.
+    let srgb = transfers.array::<f32, Ix1>("srgb").to_vec();
+    let ours = srgb_transfer_table();
+    let ulps = ours.iter().zip(&srgb).map(|(a, b)| a.to_bits().abs_diff(b.to_bits())).max().unwrap_or(0);
+    let differing = ours.iter().zip(&srgb).filter(|(a, b)| a.to_bits() != b.to_bits()).count();
+    println!("to_linear(linspace(0, 1, 65536)): {differing} entries differ, at most {ulps} ulp");
+    assert!(ulps <= grainy_testkit::maths_tolerance(0, 1), "to_linear(linspace(0, 1, 65536)): {ulps} ulp");
     let curves3: Array2<f32> = transfers.array("curves3");
     let curve1: Array1<f32> = transfers.array("curve1");
     let rows: Vec<Vec<f32>> = curves3.outer_iter().map(|row| row.to_vec()).collect();

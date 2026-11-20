@@ -116,11 +116,24 @@ impl Scrub {
     }
 }
 
-/// Arguments with the placeholder replaced by this test's root.
+/// Golden values with the paths below the placeholder as the oracle writes them on this system
+/// ([`grainy_testkit::native_paths`]).
+pub fn native_paths(value: &Value) -> Value {
+    grainy_testkit::native_paths(value, &[PLACE])
+}
+
+/// Arguments with the placeholder replaced by this test's root (paths as this system writes them).
 pub fn unplace(value: &Value, root: &str) -> Value {
+    if !cfg!(windows) {
+        return unplace_text(&native_paths(value), root);
+    }
+    unplace_text(value, root)
+}
+
+fn unplace_text(value: &Value, root: &str) -> Value {
     match value {
-        Value::Object(m) => Value::Object(m.iter().map(|(k, v)| (k.clone(), unplace(v, root))).collect()),
-        Value::Array(a) => Value::Array(a.iter().map(|v| unplace(v, root)).collect()),
+        Value::Object(m) => Value::Object(m.iter().map(|(k, v)| (k.clone(), unplace_text(v, root))).collect()),
+        Value::Array(a) => Value::Array(a.iter().map(|v| unplace_text(v, root)).collect()),
         Value::String(s) => Value::String(s.replace(PLACE, root)),
         other => other.clone(),
     }
@@ -149,6 +162,7 @@ pub fn same(actual: &Value, expected: &Value) -> bool {
 }
 
 pub fn check(actual: &Value, expected: &Value, what: &str) {
+    let expected = &native_paths(expected);
     if !same(actual, expected) {
         let a = serde_json::to_string(actual).unwrap();
         let e = serde_json::to_string(expected).unwrap();

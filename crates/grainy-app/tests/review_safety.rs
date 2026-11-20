@@ -63,6 +63,45 @@ fn a_new_directory_below_a_junction_cannot_bypass_the_oracle_guard() {
     std::fs::remove_dir(alias).unwrap();
 }
 
+/// An 8.3 spelling of the folder that holds the Python Grainy's folders (the GitHub runner's `TEMP`, and so its test
+/// `LOCALAPPDATA`, is `C:\Users\RUNNER~1\...`) names the same folders as the long spelling: a path written either
+/// way is refused, whichever way the locations spell the folder.
+#[cfg(windows)]
+#[test]
+fn an_8_3_spelling_of_the_folders_cannot_bypass_the_oracle_guard() {
+    use std::os::windows::process::CommandExt;
+    let root = common::temp_dir("review-short-names").join("Local App Data");
+    std::fs::create_dir_all(root.join("Grainy")).unwrap();
+    let output = std::process::Command::new("cmd")
+        .raw_arg(format!("/d /c for %I in (\"{}\") do @echo %~sI", root.display()))
+        .output()
+        .unwrap();
+    let short = String::from_utf8_lossy(&output.stdout).trim().to_owned();
+    if short.is_empty() || short.eq_ignore_ascii_case(&root.to_string_lossy()) {
+        println!("this volume makes no 8.3 names: nothing to check");
+        return;
+    }
+    let at = |local: &str| grainy_app::paths::Locations {
+        env: grainy_platform::Environment {
+            system: grainy_platform::System::Windows,
+            local_app_data: Some(local.to_owned()),
+            home: root.clone(),
+        },
+        home_override: None,
+        xdg_data_home: None,
+    };
+    let long = root.to_string_lossy().into_owned();
+    for (locations, candidate) in [
+        (at(&short), root.join("Grainy").join("x")),
+        (at(&long), std::path::Path::new(&short).join("Grainy").join("x")),
+        (at(&short), root.join("Grainy").join("new").join("child")),
+    ] {
+        assert!(grainy_app::paths::is_oracle_folder(&candidate, &locations), "{candidate:?} with {short}");
+    }
+    assert!(!grainy_app::paths::is_oracle_folder(&root.join("GrainyRS"), &at(&short)));
+    assert!(!root.join("Grainy").join("new").exists());
+}
+
 #[cfg(windows)]
 #[test]
 fn session_folder_scanning_does_not_follow_junction_cycles() {

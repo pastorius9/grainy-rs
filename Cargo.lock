@@ -1746,6 +1746,7 @@ dependencies = [
 name = "grainy-core"
 version = "0.2.0"
 dependencies = [
+ "chrono",
  "grainy-testkit",
  "ndarray",
  "rayon",

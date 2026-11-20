@@ -98,7 +98,8 @@ fn automatic_values_match_the_oracle() {
         } else {
             Error::Failed(Failure::new(s(&r["error"]), "x"))
         };
-        assert_eq!(reason(&error, &format!("{root_text}\\{}", s(&r["path"]))), s(&r["reason"]));
+        let path = format!("{root_text}{}{}", std::path::MAIN_SEPARATOR, s(&r["path"]));
+        assert_eq!(reason(&error, &path), s(&r["reason"]));
     }
 }
 

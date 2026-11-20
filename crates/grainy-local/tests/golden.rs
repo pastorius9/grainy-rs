@@ -43,8 +43,13 @@ fn cases(prefix: &str) -> Vec<String> {
     names
 }
 
+/// Tolerance of the "exact" outputs where the C runtime is not the goldens' (macOS): the display frames are
+/// `to_srgb` of the inputs, whose `powf` rounds some samples differently in the last place, and everything after
+/// works on those frames (run 1: 6.0e-8 in `local_blacks_0`, 1.2e-7 in the colour component `color_tol2`).
+const OTHER_MATHS: f32 = 2e-5;
+
 /// Checks an output stored as `{name}_bits`, `{name}_shape` and `{name}_sub` (every `{name}_step`-th row and
-/// column): bit-exact.
+/// column): bit-exact with the goldens' C runtime; elsewhere the subsampled values within [`OTHER_MATHS`].
 fn assert_exact<D: Dimension>(case: &Case, name: &str, got: &Array<f32, D>, what: &str) {
     let meta = case.json();
     let shape: Vec<usize> = meta[format!("{name}_shape")]
@@ -60,8 +65,10 @@ fn assert_exact<D: Dimension>(case: &Case, name: &str, got: &Array<f32, D>, what
         .slice_each_axis(|ax| if ax.axis.index() < 2 { Slice::new(0, None, step) } else { Slice::from(..) })
         .to_owned();
     let expected: ArrayD<f32> = case.array(&format!("{name}_sub"));
-    assert_close(&sub, &expected, 0.0, what);
-    assert_eq!(bits(got.iter()), parse_bits(&meta[format!("{name}_bits")]), "{what}: full bit sum");
+    assert_close(&sub, &expected, grainy_testkit::maths_tolerance(0.0, OTHER_MATHS), what);
+    if grainy_testkit::GOLDEN_MATHS {
+        assert_eq!(bits(got.iter()), parse_bits(&meta[format!("{name}_bits")]), "{what}: full bit sum");
+    }
 }
 
 fn error_text(error: &local::Error) -> String {
@@ -133,8 +140,12 @@ fn transform(name: &str) -> fn(&Image) -> local::Result<Image> {
 #[test]
 fn frames_match_the_oracle() {
     let case = Case::open(MODULE, "inputs");
+    // The display frames are `to_srgb` (`powf`): bit-identical with the goldens' C runtime only (elsewhere
+    // grainy-color's own goldens check `to_srgb` within their tolerance).
     for (name, expected) in case.json()["frames"].as_object().expect("frames") {
-        assert_eq!(bits(frame(name).iter()), parse_bits(expected), "frame {name}");
+        if grainy_testkit::GOLDEN_MATHS {
+            assert_eq!(bits(frame(name).iter()), parse_bits(expected), "frame {name}");
+        }
     }
     for (name, expected) in case.json()["linear"].as_object().expect("linear") {
         assert_eq!(bits(linear(name).iter()), parse_bits(expected), "linear frame {name}");
@@ -284,6 +295,7 @@ fn component_masks() {
 
 #[test]
 fn layer_components() {
+    let mut checks = grainy_testkit::Checks::default();
     for tname in ["identity", "cropflip"] {
         let case = Case::open(MODULE, &format!("layer_component_{tname}"));
         let t = transform(tname);
@@ -295,9 +307,11 @@ fn layer_components() {
             let (h, w, _) = source.dim();
             let mask = local::layer_component(&image, (h, w), obj(&row["component"]), &t, source_image.as_ref(), None)
                 .expect("component");
-            assert_exact(&case, name, &mask, &format!("{tname} component {name}"));
+            let what = format!("{tname} component {name}");
+            checks.case(&what, || assert_exact(&case, name, &mask, &what));
         }
     }
+    checks.finish();
 }
 
 #[test]
@@ -386,6 +400,7 @@ struct PointCall {
 #[test]
 fn apply_local_cases() {
     let mut worst_tolerant = 0f32;
+    let mut checks = grainy_testkit::Checks::default();
     for name in cases("local_") {
         let case = Case::open(MODULE, &name);
         let meta = case.json();
@@ -433,58 +448,77 @@ fn apply_local_cases() {
             hooks.on_point = Some(&mut on_point);
         }
         let out = local::apply_local(&image, &layers, &ctx, &mut hooks).unwrap_or_else(|e| panic!("{name}: {e}"));
-        if meta["tolerant"].as_bool() == Some(true) {
-            let step = meta["output_step"].as_i64().unwrap_or(1) as isize;
-            let sub = out.slice(s![..;step, ..;step, ..]).to_owned();
-            let expected: Image = case.array("output_sub");
-            assert_close(&sub, &expected, IPP, &format!("{name} (IPP bilateral)"));
-            worst_tolerant = worst_tolerant.max(max_abs_diff(&sub, &expected).0);
-        } else {
-            assert_exact(&case, "output", &out, &name);
-        }
-        let seen = &meta["callbacks"];
-        if !mode.is_null() {
-            let expected_masks: Vec<usize> =
-                seen["masks"].as_array().expect("masks").iter().map(|v| v.as_u64().unwrap_or(0) as usize).collect();
-            let got: Vec<usize> = masks.borrow().iter().map(|(i, _)| *i).collect();
-            assert_eq!(got, expected_masks, "{name}: on_mask indices");
-            for (k, (_, mask)) in masks.borrow().iter().enumerate() {
-                assert_exact(&case, &format!("cb_mask_{k}"), mask, &format!("{name}: on_mask {k}"));
+        checks.case(&name, || {
+            if meta["tolerant"].as_bool() == Some(true) {
+                let step = meta["output_step"].as_i64().unwrap_or(1) as isize;
+                let sub = out.slice(s![..;step, ..;step, ..]).to_owned();
+                let expected: Image = case.array("output_sub");
+                assert_close(&sub, &expected, IPP, &format!("{name} (IPP bilateral)"));
+                worst_tolerant = worst_tolerant.max(max_abs_diff(&sub, &expected).0);
+            } else {
+                assert_exact(&case, "output", &out, &name);
             }
-            let expected_inputs: Vec<(usize, u64)> = seen["inputs"]
+            let seen = &meta["callbacks"];
+            if !mode.is_null() {
+                let expected_masks: Vec<usize> =
+                    seen["masks"].as_array().expect("masks").iter().map(|v| v.as_u64().unwrap_or(0) as usize).collect();
+                let got: Vec<usize> = masks.borrow().iter().map(|(i, _)| *i).collect();
+                assert_eq!(got, expected_masks, "{name}: on_mask indices");
+                for (k, (_, mask)) in masks.borrow().iter().enumerate() {
+                    assert_exact(&case, &format!("cb_mask_{k}"), mask, &format!("{name}: on_mask {k}"));
+                }
+                let expected_inputs: Vec<(usize, u64)> = seen["inputs"]
+                    .as_array()
+                    .expect("inputs")
+                    .iter()
+                    .map(|v| (v[0].as_u64().unwrap_or(0) as usize, parse_bits(&v[1])))
+                    .collect();
+                // The layer inputs are the frames (`to_srgb`): their bit sums only with the goldens' C runtime.
+                if grainy_testkit::GOLDEN_MATHS {
+                    assert_eq!(*inputs.borrow(), expected_inputs, "{name}: on_layer_input");
+                } else {
+                    let indices = |list: &[(usize, u64)]| list.iter().map(|(i, _)| *i).collect::<Vec<_>>();
+                    assert_eq!(indices(&inputs.borrow()), indices(&expected_inputs), "{name}: on_layer_input");
+                }
+            }
+            let expected_points: Vec<PointCall> = seen["points"]
                 .as_array()
-                .expect("inputs")
-                .iter()
-                .map(|v| (v[0].as_u64().unwrap_or(0) as usize, parse_bits(&v[1])))
-                .collect();
-            assert_eq!(*inputs.borrow(), expected_inputs, "{name}: on_layer_input");
-        }
-        let expected_points: Vec<PointCall> = seen["points"]
-            .as_array()
-            .map(|list| {
-                list.iter()
-                    .map(|p| {
-                        let usizes = |v: &Value| {
-                            v.as_array()
-                                .map(|a| a.iter().map(|x| x.as_u64().unwrap_or(0) as usize).collect::<Vec<_>>())
-                                .unwrap_or_default()
-                        };
-                        PointCall {
-                            layer: p["layer"].as_u64().unwrap_or(0) as usize,
-                            point: p["point"].as_u64().unwrap_or(0) as usize,
-                            image: parse_bits(&p["image"]),
-                            image_shape: usizes(&p["image_shape"]),
-                            mask: parse_bits(&p["mask"]),
-                            mask_shape: usizes(&p["mask_shape"]),
-                            origin: shape2(&p["origin"]),
-                            frame: shape2(&p["frame"]),
-                        }
-                    })
-                    .collect()
-            })
-            .unwrap_or_default();
-        assert_eq!(*calls.borrow(), expected_points, "{name}: on_point");
+                .map(|list| {
+                    list.iter()
+                        .map(|p| {
+                            let usizes = |v: &Value| {
+                                v.as_array()
+                                    .map(|a| a.iter().map(|x| x.as_u64().unwrap_or(0) as usize).collect::<Vec<_>>())
+                                    .unwrap_or_default()
+                            };
+                            PointCall {
+                                layer: p["layer"].as_u64().unwrap_or(0) as usize,
+                                point: p["point"].as_u64().unwrap_or(0) as usize,
+                                image: parse_bits(&p["image"]),
+                                image_shape: usizes(&p["image_shape"]),
+                                mask: parse_bits(&p["mask"]),
+                                mask_shape: usizes(&p["mask_shape"]),
+                                origin: shape2(&p["origin"]),
+                                frame: shape2(&p["frame"]),
+                            }
+                        })
+                        .collect()
+                })
+                .unwrap_or_default();
+            if grainy_testkit::GOLDEN_MATHS {
+                assert_eq!(*calls.borrow(), expected_points, "{name}: on_point");
+            } else {
+                // Image and mask bit sums come from the frames (`to_srgb`): compare everything else.
+                let plain = |list: &[PointCall]| {
+                    list.iter()
+                        .map(|c| (c.layer, c.point, c.image_shape.clone(), c.mask_shape.clone(), c.origin, c.frame))
+                        .collect::<Vec<_>>()
+                };
+                assert_eq!(plain(&calls.borrow()), plain(&expected_points), "{name}: on_point");
+            }
+        });
     }
+    checks.finish();
     println!("local cases through the IPP bilateral filter: max abs error {worst_tolerant:.3e} (tolerance {IPP:.1e})");
 }
 
@@ -565,8 +599,13 @@ fn retouch_without_operations_returns_the_source() {
 fn healing_offsets() {
     let replay = Replay::new("healing_offsets");
     let directions: Array2<f64> = replay.case.array("directions");
+    // `math.cos`/`math.sin`: the Microsoft C runtime's are not correctly rounded (sin(pi/4) is 0.7071067811865476
+    // there, 0.7071067811865475 on macOS), so elsewhere a direction may differ in the last place.
+    let ulps = |a: f64, b: f64| a.to_bits().abs_diff(b.to_bits());
     for (k, (c, sn)) in local::directions().iter().enumerate() {
-        assert_eq!((*c, *sn), (directions[[k, 0]], directions[[k, 1]]), "direction {k}");
+        let (ec, es) = (directions[[k, 0]], directions[[k, 1]]);
+        let off = ulps(*c, ec).max(ulps(*sn, es));
+        assert!(off <= grainy_testkit::maths_tolerance(0, 1), "direction {k}: {:?} against {:?}", (c, sn), (ec, es));
     }
     let garden = input("garden");
     let (gh, gw, _) = garden.dim();

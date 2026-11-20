@@ -113,7 +113,11 @@ fn defaults_only_clip() {
     // Process 3 defaults: the highlight roll-off, the sRGB encoding and the clip; nothing else changes pixels.
     let case = Case::open("engine", "defaults_noise");
     let expected: Image = case.array("output");
-    assert_eq!(max_abs_diff(&result, &expected).0, 0.0);
+    // Exact with the goldens' C runtime; elsewhere (macOS) the sRGB encoding's `powf` rounds some samples
+    // differently in the last place (run 1: 1.19e-7).
+    let error = max_abs_diff(&result, &expected).0;
+    println!("defaults_only_clip: max abs error {error:e}");
+    assert!(error <= grainy_testkit::maths_tolerance(0.0, 1e-6), "defaults_only_clip: max abs error {error:e}");
 }
 
 #[test]

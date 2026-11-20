@@ -42,7 +42,11 @@ fn info(p: &Value) -> Result<Value> {
 
 /// Port of `library_query.sync_index`; each 512-row batch is one IMMEDIATE transaction.
 pub fn sync_index(db: &Connection, cancel: &AtomicBool) -> Result<()> {
-    let platform = Platform::native();
+    sync_index_on(Platform::native(), db, cancel)
+}
+
+/// [`sync_index`] with the path rules of `platform`.
+pub fn sync_index_on(platform: Platform, db: &Connection, cancel: &AtomicBool) -> Result<()> {
     loop {
         cancelled(cancel)?;
         db.execute_batch("BEGIN IMMEDIATE")?;
@@ -85,21 +89,37 @@ pub fn sync_index(db: &Connection, cancel: &AtomicBool) -> Result<()> {
 
 /// Port of `library_query.query`; the caller owns cancellation and the query's local clock.
 pub fn query(path: impl AsRef<Path>, options: &Value, cancel: &Arc<AtomicBool>, now: NaiveDateTime) -> Result<Value> {
-    let result = query_inner(path.as_ref(), options, cancel, now);
+    query_on(Platform::native(), path, options, cancel, now)
+}
+
+/// [`query`] with the path rules of `platform` (parity tests of a session the oracle ran on Windows).
+pub fn query_on(
+    platform: Platform,
+    path: impl AsRef<Path>,
+    options: &Value,
+    cancel: &Arc<AtomicBool>,
+    now: NaiveDateTime,
+) -> Result<Value> {
+    let result = query_inner(platform, path.as_ref(), options, cancel, now);
     if cancel.load(Ordering::Relaxed) {
         Err(crate::Error::Cancelled)
     } else {
         result
     }
 }
-fn query_inner(path: &Path, options: &Value, cancel: &Arc<AtomicBool>, now: NaiveDateTime) -> Result<Value> {
+fn query_inner(
+    platform: Platform,
+    path: &Path,
+    options: &Value,
+    cancel: &Arc<AtomicBool>,
+    now: NaiveDateTime,
+) -> Result<Value> {
     object(options)?;
     let db = connect(path)?;
-    sync_index(&db, cancel)?;
+    sync_index_on(platform, &db, cancel)?;
     let progress_cancel = Arc::clone(cancel);
     db.progress_handler(1000, Some(move || progress_cancel.load(Ordering::Relaxed)))?;
     db.execute_batch("BEGIN")?;
-    let platform = Platform::native();
     let search = fold(options["search"].as_str().unwrap_or(""));
     let folder = options["folder"].as_str().filter(|s| !s.is_empty());
     let mut rules = vec![options.get("rules").filter(|v| !v.is_null()).cloned().unwrap_or(json!({}))];

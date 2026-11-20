@@ -75,6 +75,13 @@ fn query(options: &Value) -> Query {
     q
 }
 
+/// Whether a listing's options can be compared on this system. The golden library was written by the oracle on
+/// Windows: its photos are at `Z:\GrainyGolden\...`, which on macOS is one file name in no folder (the oracle there
+/// lists nothing for that folder either), so listings filtered by a folder are compared on Windows only.
+fn windows_folders(options: &Value) -> bool {
+    cfg!(windows) || options.get("folder").is_none_or(Value::is_null)
+}
+
 fn ids(doc: &dyn Document) -> Vec<u64> {
     doc.photos().iter().map(|p| p.id).collect()
 }
@@ -185,6 +192,9 @@ fn listings_match_the_oracle_for_filters_and_sorts() {
     let listings = meta["listings"].as_array().unwrap();
     for listing in listings {
         let name = listing["name"].as_str().unwrap();
+        if !windows_folders(&listing["options"]) {
+            continue;
+        }
         doc.set_query(query(&listing["options"])).unwrap();
         doc.refresh_now().unwrap();
         let expected: Vec<u64> = listing["ids"].as_array().unwrap().iter().map(|v| v.as_u64().unwrap()).collect();
@@ -205,10 +215,13 @@ fn listings_match_the_oracle_for_filters_and_sorts() {
     }
     walk(&folders, &mut counts);
     let root = meta["root"].as_str().unwrap();
-    // `library_query`'s counts per folder (the virtual copy counts, as in the oracle).
-    assert!(counts.contains(&(format!(r"{root}\photos"), 4, 8)), "{counts:?}");
-    assert!(counts.contains(&(format!(r"{root}\photos\roll 2"), 3, 4)), "{counts:?}");
-    assert!(counts.contains(&(format!(r"{root}\photos\roll 2\sub"), 1, 1)), "{counts:?}");
+    // `library_query`'s counts per folder (the virtual copy counts, as in the oracle); the folders are Windows
+    // folders (see `windows_folders`).
+    if cfg!(windows) {
+        assert!(counts.contains(&(format!(r"{root}\photos"), 4, 8)), "{counts:?}");
+        assert!(counts.contains(&(format!(r"{root}\photos\roll 2"), 3, 4)), "{counts:?}");
+        assert!(counts.contains(&(format!(r"{root}\photos\roll 2\sub"), 1, 1)), "{counts:?}");
+    }
     let collections = doc.collections();
     assert_eq!(
         collections.iter().map(|c| (c.name.as_str(), c.smart)).collect::<Vec<_>>(),
@@ -304,6 +317,24 @@ fn a_scripted_session_writes_what_the_oracle_writes() {
     doc.refresh_now().unwrap();
     let tables = dump(&dir.join("catalog.sqlite"), meta["token"].as_str().unwrap());
     for (table, expected) in meta["final_tables"].as_object().unwrap() {
+        if !cfg!(windows) && table == "browser_index" {
+            // Each photo's folder is the parent of its Windows path `Z:\GrainyGolden\...`; on macOS that path is
+            // one file name, whose parent is `.` (as `Path(...).parent` in the oracle there): the other columns.
+            let without = |rows: &Value| -> Value {
+                rows.as_array()
+                    .unwrap()
+                    .iter()
+                    .map(|r| {
+                        let mut r = r.as_object().unwrap().clone();
+                        r.remove("folder");
+                        r.remove("folder_key");
+                        Value::Object(r)
+                    })
+                    .collect()
+            };
+            equal(&without(&tables[table]), &without(expected), table);
+            continue;
+        }
         equal(&tables[table], expected, table);
         println!("{table}: {} rows equal to the oracle's", expected.as_array().map_or(0, Vec::len));
     }

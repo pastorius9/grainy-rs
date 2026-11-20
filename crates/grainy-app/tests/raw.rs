@@ -136,6 +136,27 @@ impl Tree {
         profiles::profile_roots(&self.root.join("lib"), folders, &move |k| env.get(k).cloned(), &self.own())
     }
 
+    /// The roots the tests scan: [`Tree::roots`] without the computer's own folders (macOS adds Adobe's
+    /// `/Library/Application Support/...`, which a Mac with Adobe's software fills), so a scan reads only the
+    /// generated tree. On Windows every root is in the tree.
+    fn scan_roots(&self, folders: &[String]) -> Vec<String> {
+        self.roots(folders).into_iter().filter(|r| Path::new(r).starts_with(&self.root)).collect()
+    }
+
+    /// The oracle's `profile_roots` on this system for the generator's tree: the golden's (Windows) list, and on
+    /// macOS Adobe's all-users folder before Grainy's own (`if MAC: roots.extend([Path('/')/support,
+    /// Path.home()/support, local_data('Luma')/'CameraProfiles'])`; the home folder comes from the environment,
+    /// which has none here).
+    fn expected_roots(&self, golden: &Value) -> Value {
+        let mut roots: Vec<Value> = golden.as_array().unwrap().clone();
+        if cfg!(target_os = "macos") {
+            let own = json!(self.text(&self.own().to_string_lossy()));
+            let at = roots.iter().position(|r| *r == own).expect("Grainy's own folder is a root");
+            roots.insert(at, json!("/Library/Application Support/Adobe/CameraRaw/CameraProfiles"));
+        }
+        Value::Array(roots)
+    }
+
     fn row_json(&self, row: &ProfileRow) -> Value {
         let mut value = row.to_json();
         value["error"] = Value::Bool(!row.error.is_empty());
@@ -150,6 +171,20 @@ impl Tree {
             "cancelled": result.cancelled, "truncated": result.truncated,
             "profiles": result.profiles.iter().map(|r| self.row_json(r)).collect::<Vec<_>>(),
         })
+    }
+
+    /// The oracle's index rows on this system: its keys are `os.path.normcase(path)`, lower case on Windows (the
+    /// golden's `<t>` rows) and the path itself elsewhere, read in the order of the keys (`ORDER BY path`).
+    fn expected_index(golden: &Value) -> Value {
+        if cfg!(windows) {
+            return golden.clone();
+        }
+        let mut rows: Vec<Value> = golden.as_array().unwrap().clone();
+        for row in &mut rows {
+            row["path"] = row["summary"]["path"].clone();
+        }
+        rows.sort_by(|a, b| a["path"].as_str().cmp(&b["path"].as_str()));
+        Value::Array(rows)
     }
 
     fn index_json(&self, cache: &Path) -> Value {
@@ -177,16 +212,17 @@ impl Tree {
 #[test]
 fn the_profile_library_scans_like_the_oracle() {
     let _turn = korean();
-    let meta = case("raw_profiles");
+    // The golden's backslashes are all path separators: on macOS the oracle's paths read `/`.
+    let meta = common::native_json(&case("raw_profiles"));
     let time = meta["time"].as_i64().unwrap();
     let tree = Tree::new("raw-profiles");
     for file in meta["files"].as_array().unwrap() {
         tree.place(file[0].as_str().unwrap(), &file[1], time);
     }
     let extra = tree.root.join("extra").to_string_lossy().into_owned();
-    let roots = tree.roots(std::slice::from_ref(&extra));
-    let texts: Vec<String> = roots.iter().map(|r| tree.text(r)).collect();
-    same(&json!(texts), &meta["roots"], "roots");
+    let texts: Vec<String> = tree.roots(std::slice::from_ref(&extra)).iter().map(|r| tree.text(r)).collect();
+    same(&json!(texts), &tree.expected_roots(&meta["roots"]), "roots");
+    let roots = tree.scan_roots(std::slice::from_ref(&extra));
 
     let cache = tree.root.join("lib").join("cache").join("dcp-index.sqlite");
     let never = || false;
@@ -199,12 +235,12 @@ fn the_profile_library_scans_like_the_oracle() {
     std::fs::remove_file(tree.root.join(meta["removed"].as_str().unwrap())).unwrap();
     let third = profiles::scan(&roots, &cache, &never, profiles::LIMIT).unwrap();
     same(&tree.scan_json(&third), &meta["scans"][2], "scan after a change and a removal");
-    same(&tree.index_json(&cache), &meta["index"], "index");
+    same(&tree.index_json(&cache), &Tree::expected_index(&meta["index"]), "index");
 
     let capped_cache = tree.root.join("capped.sqlite");
     let capped = profiles::scan(&roots, &capped_cache, &never, 3).unwrap();
     same(&tree.scan_json(&capped), &meta["capped"], "capped scan");
-    same(&tree.index_json(&capped_cache), &meta["capped_index"], "capped index");
+    same(&tree.index_json(&capped_cache), &Tree::expected_index(&meta["capped_index"]), "capped index");
     let cancelled = profiles::scan(&roots, &tree.root.join("cancelled.sqlite"), &|| true, profiles::LIMIT).unwrap();
     same(&tree.scan_json(&cancelled), &meta["cancelled"], "cancelled scan");
 
@@ -282,7 +318,7 @@ fn dialog_step<'a>(meta: &'a Value, name: &str) -> &'a Value {
 #[test]
 fn the_profile_browser_shows_what_the_oracles_dialog_shows() {
     let _turn = korean();
-    let meta = case("raw_profiles");
+    let meta = common::native_json(&case("raw_profiles"));
     let time = meta["time"].as_i64().unwrap();
     let tree = Tree::new("raw-profile-browser");
     for file in meta["files"].as_array().unwrap() {
@@ -295,7 +331,7 @@ fn the_profile_browser_shows_what_the_oracles_dialog_shows() {
     let cache = tree.root.join("dialog-lib").join("cache").join("dcp-index.sqlite");
     let mut folders = vec![extra.clone()];
     let scan = |b: &mut ProfileBrowser, folders: &[String]| {
-        let roots = tree.roots(folders);
+        let roots = tree.scan_roots(folders);
         assert!(b.begin_scan(&roots));
         let result = profiles::scan(&roots, &cache, &|| false, profiles::LIMIT).unwrap();
         b.ready(&result);

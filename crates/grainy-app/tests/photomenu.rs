@@ -181,9 +181,18 @@ fn same_menu(nodes: &[Node], expected: &Value, at: &str) {
             Node::Sub(s) => s.title.to_owned(),
         })
         .collect();
+    // The golden is the oracle's menu on Windows; on macOS its item reads `'Finder에서 폴더 열기' if
+    // sys.platform=='darwin' else '탐색기에서 폴더 열기'` (luma/photo_actions.py).
+    let on_this_system = |title: &str| {
+        if title == grainy_app::text::tr("탐색기에서 폴더 열기") {
+            grainy_app::text::tr(grainy_app::system_open::SHOW_FOLDER_IN_FILE_MANAGER)
+        } else {
+            title.to_owned()
+        }
+    };
     let wanted: Vec<String> = expected
         .iter()
-        .map(|e| e.as_str().map_or_else(|| e["title"].as_str().unwrap().to_owned(), |_| "---".into()))
+        .map(|e| e.as_str().map_or_else(|| on_this_system(e["title"].as_str().unwrap()), |_| "---".into()))
         .collect();
     assert_eq!(shown, wanted, "{at}: the entries in order");
     for (node, e) in nodes.iter().zip(expected) {

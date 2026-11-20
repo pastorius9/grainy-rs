@@ -112,3 +112,159 @@ where
         );
     }
 }
+
+/// Whether this build computes `powf`, `expf`, `logf`, `log2f`, `cbrtf`, `sin`, ... with the C runtime the goldens
+/// were written with: Microsoft's, on Windows x86-64 (numpy calls it, and so does Rust's `f32::powf` and the
+/// like). Other maths libraries (macOS) round some of these results differently in the last place. A pure-Rust
+/// replacement that keeps every result of the goldens' machine is not possible: the Microsoft C runtime's float
+/// functions are not correctly rounded and their errors follow no published algorithm (of the 2^32 inputs,
+/// `expf` differs from the correctly rounded result for 23,280, `log2f` for 313,550, `powf(x, 2.4)` for 4.0
+/// million and `cbrtf` for 1.29 billion), and its own versions differ too. Tests keep their tolerance here and
+/// state a separate, measured one for other systems ([`maths_tolerance`]).
+pub const GOLDEN_MATHS: bool = cfg!(all(windows, target_arch = "x86_64"));
+
+/// `golden` where the C runtime is the goldens' ([`GOLDEN_MATHS`]), `other` elsewhere.
+pub fn maths_tolerance<T>(golden: T, other: T) -> T {
+    if GOLDEN_MATHS {
+        golden
+    } else {
+        other
+    }
+}
+
+/// The bytes of a profile LittleCMS created, as LittleCMS creates it on this system. The goldens were written on
+/// Windows, where LittleCMS puts the platform signature `MSFT` into the header (bytes 40..44); on every other
+/// system it writes `APPL` (`cmsio0.c`, `CMS_IS_WINDOWS_`), as the oracle's LittleCMS does on macOS. Profiles
+/// LittleCMS read from a file keep their signature: use this only for profiles it made.
+pub fn lcms_created(golden: &[u8]) -> Vec<u8> {
+    let mut bytes = golden.to_vec();
+    if !cfg!(windows) && bytes.len() >= 128 && &bytes[40..44] == b"MSFT" {
+        bytes[40..44].copy_from_slice(b"APPL");
+    }
+    bytes
+}
+
+/// Runs the checks of many cases and reports every failing case at the end instead of stopping at the first, so
+/// that one run on another system (CI) shows all differences.
+#[derive(Default)]
+pub struct Checks {
+    failures: Vec<String>,
+}
+
+impl Checks {
+    /// Runs the checks of one case; a failing assertion inside is recorded under `what`.
+    pub fn case(&mut self, what: &str, checks: impl FnOnce()) {
+        if let Err(panic) = std::panic::catch_unwind(std::panic::AssertUnwindSafe(checks)) {
+            let message = panic
+                .downcast_ref::<String>()
+                .map(String::as_str)
+                .or_else(|| panic.downcast_ref::<&str>().copied())
+                .unwrap_or("panic");
+            self.failures.push(format!("{what}: {message}"));
+        }
+    }
+
+    /// Fails with every recorded failure.
+    pub fn finish(self) {
+        assert!(self.failures.is_empty(), "{} failing cases:\n{}", self.failures.len(), self.failures.join("\n"));
+    }
+}
+
+/// The paths below a placeholder of golden data as the oracle writes them on this system. The goldens were
+/// written on Windows (`<ROOT>\photos\Aone.jpg`, `<ROOT>\\photos\\A` inside JSON text or a Python repr);
+/// on macOS the oracle writes `<ROOT>/photos/A/one.jpg`. Outside Windows every text (and key) of `value` gets
+/// [`slashed`]; on Windows `value` stays as it is.
+pub fn native_paths(value: &Value, placeholders: &[&str]) -> Value {
+    if cfg!(windows) {
+        return value.clone();
+    }
+    match value {
+        Value::Object(m) => {
+            Value::Object(m.iter().map(|(k, v)| (slashed(k, placeholders), native_paths(v, placeholders))).collect())
+        }
+        Value::Array(a) => Value::Array(a.iter().map(|v| native_paths(v, placeholders)).collect()),
+        Value::String(s) => Value::String(slashed(s, placeholders)),
+        other => other.clone(),
+    }
+}
+
+/// The Windows path after each placeholder in `text` with slashes: a backslash, or a doubled one (escaped JSON
+/// text, a Python repr), is one separator. The path ends at a quote (also an escaped one) or a line end; the
+/// `\uXXXX`, `\xXX` and `\UXXXXXXXX` escapes of ASCII-only JSON text or a repr stay as they are.
+pub fn slashed(text: &str, placeholders: &[&str]) -> String {
+    let next =
+        |rest: &str| placeholders.iter().filter_map(|p| rest.find(p).map(|at| (at, p.len()))).min_by_key(|(at, _)| *at);
+    let mut out = String::new();
+    let mut rest = text;
+    while let Some((at, len)) = next(rest) {
+        out.push_str(&rest[..at + len]);
+        rest = &rest[at + len..];
+        let mut chars = rest.char_indices().peekable();
+        let mut end = rest.len();
+        while let Some((i, c)) = chars.next() {
+            match c {
+                '"' | '\'' | '\n' => {
+                    end = i;
+                    break;
+                }
+                '\\' => match chars.peek().map(|(_, n)| *n) {
+                    Some('"' | '\'') => {
+                        end = i;
+                        break;
+                    }
+                    Some('\\') => {
+                        chars.next();
+                        out.push('/');
+                    }
+                    Some(kind @ ('u' | 'x' | 'U')) if hex_escape(&rest[i + 2..], kind) => out.push('\\'),
+                    _ => out.push('/'),
+                },
+                c => out.push(c),
+            }
+        }
+        rest = &rest[end..];
+    }
+    out.push_str(rest);
+    out
+}
+
+/// Whether `text` starts with the hex digits of a `\u`, `\x` or `\U` escape.
+fn hex_escape(text: &str, kind: char) -> bool {
+    let digits = match kind {
+        'x' => 2,
+        'u' => 4,
+        _ => 8,
+    };
+    text.chars().take(digits).filter(char::is_ascii_hexdigit).count() == digits
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn golden_paths_are_rewritten_for_other_systems() {
+        let b = '\\';
+        let places = ["<ROOT>", "$ROOT"];
+        let cases = [
+            // A column or a reply text.
+            (format!("<ROOT>{b}photos{b}A{b}one.jpg"), "<ROOT>/photos/A/one.jpg".to_owned()),
+            // JSON text in a column: separators doubled, ASCII-only escapes kept.
+            (
+                format!("{{\"path\": \"<ROOT>{b}{b}photos{b}{b}Roll 12{b}{b}caf{b}u00e9.jpg\", \"n\": 1}}"),
+                format!("{{\"path\": \"<ROOT>/photos/Roll 12/caf{b}u00e9.jpg\", \"n\": 1}}"),
+            ),
+            // A Python repr in an error message ends at its quote; other backslashes stay.
+            (format!("No such file: '$ROOT{b}{b}gone.png' (x{b}y)"), format!("No such file: '$ROOT/gone.png' (x{b}y)")),
+            ("<ROOT>".to_owned(), "<ROOT>".to_owned()),
+            (format!("a{b}b <ROOT>{b}x $ROOT{b}y{b}z"), format!("a{b}b <ROOT>/x $ROOT/y/z")),
+            // JSON text inside JSON text: an escaped quote ends the path.
+            (
+                format!("{{{b}\"p{b}\": {b}\"<ROOT>{b}{b}a{b}{b}b{b}\"}}"),
+                format!("{{{b}\"p{b}\": {b}\"<ROOT>/a/b{b}\"}}"),
+            ),
+            ("plain text".to_owned(), "plain text".to_owned()),
+        ];
+        for (windows, other) in cases {
+            assert_eq!(super::slashed(&windows, &places), other, "{windows}");
+        }
+    }
+}

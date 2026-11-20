@@ -11,8 +11,12 @@ use std::{
 
 const STAMP: &str = "2026-11-13T01:02:03.456789+00:00";
 const TOKEN: &str = "0123456789abcdef0123456789abcdef";
+/// The scripted sessions and migrations are the oracle's run on Windows (paths such as `Z:\Grainy Generated\...`):
+/// they are replayed with Windows path rules on every system. The rules of each system are checked by
+/// `folders_match_all_platforms`.
+const GOLDEN_PLATFORM: Platform = Platform::Windows;
 fn sources() -> Sources {
-    Sources::new(|| STAMP.into(), || TOKEN.into())
+    Sources::new(|| STAMP.into(), || TOKEN.into()).on(GOLDEN_PLATFORM)
 }
 fn input(name: &str) -> PathBuf {
     grainy_testkit::root().join("golden/catalog").join(name)
@@ -174,7 +178,10 @@ fn operation(c: &Catalog, path: &Path, op: &Value) -> Value {
         }
         "histories" => return json!(c.histories(id(&a[0])).unwrap()),
         "readers" => return readers(c, path),
-        "query" => return query::query(path, &a[0], &std::sync::Arc::new(AtomicBool::new(false)), now()).unwrap(),
+        "query" => {
+            let cancel = std::sync::Arc::new(AtomicBool::new(false));
+            return query::query_on(GOLDEN_PLATFORM, path, &a[0], &cancel, now()).unwrap();
+        }
         "read_page" => return query::read_page(path, &ids(&a[0])).unwrap(),
         "repeat_edit" => {
             for i in 0..id(&a[1]) {
@@ -280,7 +287,7 @@ fn every_historical_migration_matches() {
             assert_eq!(db.query_row("PRAGMA integrity_check", [], |r| r.get::<_, String>(0)).unwrap(), "ok");
         }
         c.close().unwrap();
-        let c = Catalog::new(&directory).unwrap();
+        let c = Catalog::with_sources(&directory, Sources::default().on(GOLDEN_PLATFORM)).unwrap();
         equal(&dump(&path), &case.json()["tables"], "reopening migration is idempotent");
         c.close().unwrap();
         println!("migration {stage}: max error 0");

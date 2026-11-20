@@ -19,13 +19,16 @@ mod common;
 
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
+#[cfg(windows)]
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 use eframe::egui;
 use egui_kittest::{Harness, HarnessBuilder};
 use grainy_app::commands::files::FilesState;
-use grainy_app::commands::lightroom::import::{self, Failure, Progress, TickingClock};
+#[cfg(windows)]
+use grainy_app::commands::lightroom::import::Progress;
+use grainy_app::commands::lightroom::import::{self, Failure, TickingClock};
 use grainy_app::commands::lightroom::{self as lightroom, LightroomState, Review};
 use grainy_app::commands::Invocation;
 use grainy_app::dialogs::about::MessageBox;
@@ -115,6 +118,7 @@ impl Env {
         text
     }
 
+    #[cfg(windows)]
     fn rel_value(&self, value: &Value) -> Value {
         match value {
             Value::String(s) => Value::String(self.rel(s)),
@@ -182,6 +186,7 @@ impl Env {
 }
 
 /// Compares the tables a golden step lists (the ones that changed) and the set of table names.
+#[cfg(windows)]
 fn compare_tables(what: &str, now: &BTreeMap<String, Vec<Value>>, step: &Value) {
     if let Some(names) = step.get("table_names") {
         let expected: Vec<&str> = names.as_array().unwrap().iter().map(|v| v.as_str().unwrap()).collect();
@@ -203,6 +208,7 @@ fn compare_tables(what: &str, now: &BTreeMap<String, Vec<Value>>, step: &Value) 
 }
 
 /// Also checks that unchanged tables did not change on this side.
+#[cfg(windows)]
 fn unchanged(what: &str, before: &BTreeMap<String, Vec<Value>>, now: &BTreeMap<String, Vec<Value>>, step: &Value) {
     let listed = step.get("tables").and_then(Value::as_object);
     for (name, rows) in now {
@@ -224,6 +230,12 @@ fn library(folder: &Path, stamp: &str) -> Catalog {
 
 // ---- the scenarios -----------------------------------------------------------------------------------------
 
+// The scenario catalogues are Windows Lightroom catalogues (root folders `C:\Grainy Lightroom Test\Photos`):
+// on macOS no such path exists and both the oracle and the app skip their photos as unsupported paths, so the
+// scenarios and the window's flow compare with the goldens on Windows only. The source's safety (never
+// written), the inspection, the cancel and the damaged catalogue run everywhere.
+
+#[cfg(windows)]
 struct Run<'a> {
     env: &'a Env,
     scenario: &'a Value,
@@ -234,6 +246,7 @@ struct Run<'a> {
     previous: BTreeMap<String, Vec<Value>>,
 }
 
+#[cfg(windows)]
 impl Run<'_> {
     fn step(&self) -> &Value {
         &self.scenario["steps"][self.index]
@@ -313,14 +326,17 @@ impl Run<'_> {
     }
 }
 
+#[cfg(windows)]
 fn first_photo(dest: &Catalog) -> i64 {
     dest.photos().unwrap()[0]["id"].as_i64().unwrap()
 }
 
+#[cfg(windows)]
 fn fields(pairs: &[(&str, Value)]) -> Map<String, Value> {
     pairs.iter().map(|(k, v)| ((*k).to_owned(), v.clone())).collect()
 }
 
+#[cfg(windows)]
 fn run_scenario(env: &Env, root: &Path, golden: &Value, scenario: &Value) {
     let name = scenario["name"].as_str().unwrap();
     let folder = root.join(name);
@@ -416,6 +432,7 @@ fn file_digest(path: &Path) -> Vec<u8> {
     Sha256::digest(std::fs::read(path).unwrap()).to_vec()
 }
 
+#[cfg(windows)]
 #[test]
 fn every_scenario_equals_the_oracle() {
     let _turn = common::language_lock();
@@ -439,7 +456,10 @@ fn the_source_catalogue_is_never_written() {
     let dest = library(&root.join("luma"), &stamp());
     let mut clock = TickingClock::new(&stamp()).unwrap();
     let result = import::import_catalog(&source, dest.directory(), None, &mut |_| Ok(()), true, &mut clock).unwrap();
-    assert_eq!(result["imported"], 3);
+    // The fixture's photos are on `C:\...`: imported on Windows, skipped as unsupported paths elsewhere.
+    if cfg!(windows) {
+        assert_eq!(result["imported"], 3);
+    }
     assert_eq!(file_digest(&source), before);
     // No sidecar files appear next to the catalogue.
     let mut names: Vec<String> =
@@ -458,7 +478,7 @@ fn inspection_equals_the_oracle() {
     let recipe = golden["recipe"].as_array().unwrap();
     build_source(&source, schema.as_array().unwrap(), recipe, recipe.len());
     let info = import::inspect_catalog(&source, None).unwrap();
-    assert_eq!(env.rel(&info.path), golden["info"]["path"].as_str().unwrap());
+    assert_eq!(env.rel(&info.path), common::native(golden["info"]["path"].as_str().unwrap()));
     assert_eq!(info.source_key, golden["info"]["source_key"].as_str().unwrap());
     let counts: Map<String, Value> = info.counts.iter().map(|(k, n)| (k.clone(), json!(n))).collect();
     assert_eq!(Value::Object(counts), golden["info"]["counts"]);
@@ -490,6 +510,7 @@ fn drain(cx: &mut AppContext) {
     }
 }
 
+#[cfg(windows)]
 #[test]
 fn the_window_flow_equals_the_oracle() {
     let _turn = common::language_lock();

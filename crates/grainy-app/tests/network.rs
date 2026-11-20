@@ -9,7 +9,10 @@
 mod common;
 
 use std::collections::BTreeMap;
-use std::io::{Read, Write};
+use std::io::Read;
+// Writing zips and installing them are the Windows tests' (the update of a program folder).
+#[cfg(windows)]
+use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
@@ -19,7 +22,9 @@ use eframe::egui;
 use egui_kittest::{Harness, HarnessBuilder};
 use grainy_app::commands::settings::{self, UpdateState};
 use grainy_app::dialogs::feedback::{FeedbackDialog, FeedbackModel, FeedbackState, Transport};
-use grainy_app::dialogs::update::{self, Outcome, UpdateEnv};
+use grainy_app::dialogs::update::UpdateEnv;
+#[cfg(windows)]
+use grainy_app::dialogs::update::{self, Outcome};
 use grainy_app::document::catalog::CatalogDocument;
 use grainy_app::network::{self, HttpTransport, NetworkBackend};
 use grainy_app::paths::Arguments;

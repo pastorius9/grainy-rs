@@ -30,3 +30,20 @@ pub enum Error {
 
 /// Result of a port of a `luma/native_gpu.py` operation.
 pub type Result<T> = std::result::Result<T, Error>;
+
+/// Whether the GPU parity tests are switched off on this machine: only when the environment variable
+/// `GRAINY_CI_NO_GPU` is `1`. The CI workflow sets it for the Windows runner, which has no graphics card: its only
+/// adapter, WARP of Windows Server 2022 (driver 10.0.20348), removes the device in the first stage of the noise
+/// reduction (the Lab conversion); the same stages pass on WARP of Windows 11, on Metal and on hardware adapters. Everywhere else
+/// the tests run. Says so loudly on standard error (not captured by the test harness) when it skips.
+pub fn gpu_tests_switched_off(test: &str) -> bool {
+    let off = std::env::var_os("GRAINY_CI_NO_GPU").is_some_and(|v| v == "1");
+    if off {
+        use std::io::Write;
+        let _ = writeln!(
+            std::io::stderr(),
+            "!!! SKIPPED GPU TEST {test}: GRAINY_CI_NO_GPU=1 (CI runner without a usable GPU)"
+        );
+    }
+    off
+}

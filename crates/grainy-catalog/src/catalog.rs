@@ -11,17 +11,19 @@ use std::{
     time::Duration,
 };
 
-/// Injectable clock and preview token source for `Catalog` writers.
+/// Injectable clock, preview token source and path rules for `Catalog` writers.
 #[derive(Clone)]
 pub struct Sources {
     pub(crate) clock: Arc<dyn Fn() -> String + Send + Sync>,
     pub(crate) token: Option<Arc<dyn Fn() -> String + Send + Sync>>,
+    pub(crate) platform: Platform,
 }
 impl Default for Sources {
     fn default() -> Self {
         Self {
             clock: Arc::new(|| chrono::Utc::now().to_rfc3339_opts(chrono::SecondsFormat::Micros, false)),
             token: None,
+            platform: Platform::native(),
         }
     }
 }
@@ -31,7 +33,13 @@ impl Sources {
         clock: impl Fn() -> String + Send + Sync + 'static,
         token: impl Fn() -> String + Send + Sync + 'static,
     ) -> Self {
-        Self { clock: Arc::new(clock), token: Some(Arc::new(token)) }
+        Self { clock: Arc::new(clock), token: Some(Arc::new(token)), platform: Platform::native() }
+    }
+    /// The path rules of another system instead of this one's ([`Platform::native`]): parity tests replay a
+    /// session the oracle ran on Windows (drive letters, backslashes) on every system.
+    pub fn on(mut self, platform: Platform) -> Self {
+        self.platform = platform;
+        self
     }
 }
 
@@ -54,7 +62,7 @@ impl Catalog {
         std::fs::create_dir_all(directory.join("thumbnails"))?;
         let db = Connection::open(directory.join("catalog.sqlite"))?;
         db.busy_timeout(Duration::from_secs(5))?;
-        let c = Self { db, directory, platform: Platform::native(), sources, reader: false };
+        let c = Self { db, directory, platform: sources.platform, sources, reader: false };
         schema::migrate(&c)?;
         Ok(c)
     }

@@ -25,6 +25,10 @@ jobs:
   windows:
     runs-on: windows-2022
     timeout-minutes: 240
+    env:
+      # The runner has no graphics card and its WARP software adapter loses the device in the GPU tests
+      # (Windows Server 2022 only; WARP on Windows 11, Metal and hardware pass): skip them here, loudly.
+      GRAINY_CI_NO_GPU: '1'
     steps:
       - name: Check out without line-ending conversion
         run: git config --global core.autocrlf false

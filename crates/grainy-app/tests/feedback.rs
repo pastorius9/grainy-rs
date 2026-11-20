@@ -482,6 +482,26 @@ impl Backend for FakeBackend {
     }
 }
 
+/// The running program in `folder/app` as each system installs it: `app/Grainy.exe` on Windows (the golden's
+/// layout), on macOS inside the app bundle `app/Grainy RS.app/Contents/MacOS/GrainyRS`, which the update replaces
+/// as a whole (`app_folder`: the bundle three folders above the program).
+fn program_in(folder: &Path) -> PathBuf {
+    if cfg!(target_os = "macos") {
+        folder.join("app").join("Grainy RS.app").join("Contents").join("MacOS").join("GrainyRS")
+    } else {
+        folder.join("app").join("Grainy.exe")
+    }
+}
+
+/// The name of the replaced program folder on this system: the golden's `app` on Windows, the bundle on macOS.
+fn app_name_here(golden: &str) -> String {
+    if cfg!(target_os = "macos") {
+        "Grainy RS.app".to_owned()
+    } else {
+        golden.to_owned()
+    }
+}
+
 #[test]
 fn the_install_follows_the_oracle() {
     let _turn = turn();
@@ -496,7 +516,7 @@ fn the_install_follows_the_oracle() {
         {
             let env = cx.state::<UpdateEnv>();
             env.backend = Some(backend.clone());
-            env.executable = Some(folder.join("app").join("Grainy.exe"));
+            env.executable = Some(program_in(&folder));
             env.arguments = Some(vec!["--probe".into()]);
             env.supported = Some(true);
         }
@@ -548,7 +568,7 @@ fn the_install_follows_the_oracle() {
                     .map(|l| {
                         (
                             text(&l["staged"]),
-                            text(&l["app"]),
+                            app_name_here(&text(&l["app"])),
                             l["args"].as_array().unwrap().iter().map(text_of).collect(),
                         )
                     })
@@ -569,7 +589,7 @@ fn the_default_backend_prepares_nothing() {
     let (mut cx, folder) = with_data("feedback-install-default");
     {
         let env = cx.state::<UpdateEnv>();
-        env.executable = Some(folder.join("app").join("Grainy.exe"));
+        env.executable = Some(program_in(&folder));
         env.supported = Some(true);
     }
     update::install(&mut cx, release());
@@ -915,7 +935,8 @@ fn fake_uploader(delay: Duration, hash: &str) -> Arc<FakeUploader> {
 #[test]
 fn finishing_a_backup_says_what_the_oracle_says() {
     let _turn = turn();
-    let g = Case::open("app", "feedback_cloud_backup").json().clone();
+    // The golden's backslashes are path separators only: on macOS the oracle writes `/`.
+    let g = common::native_json(Case::open("app", "feedback_cloud_backup").json());
     for want in g["finish"].as_array().unwrap() {
         let language = want["language"].as_str().unwrap();
         set_language(language);
@@ -982,7 +1003,8 @@ fn sqlite_files(folder: &Path) -> Vec<String> {
 fn starting_a_backup_follows_the_oracle() {
     let _turn = turn();
     set_language("ko");
-    let g = Case::open("app", "feedback_cloud_backup").json().clone();
+    // The golden's backslashes are path separators only: on macOS the oracle writes `/`.
+    let g = common::native_json(Case::open("app", "feedback_cloud_backup").json());
     let (mut cx, home) = with_library("feedback-cloud-start");
     let target = home.join("drive");
     let hex64 = Regex::new(r"^[0-9a-f]{64}$").unwrap();
@@ -1102,7 +1124,8 @@ fn the_schedule_and_the_final_backup() {
 #[test]
 fn the_backup_window_follows_the_oracle() {
     let _turn = turn();
-    let g = Case::open("app", "feedback_cloud_backup").json().clone();
+    // The golden's backslashes are path separators only: on macOS the oracle writes `/`.
+    let g = common::native_json(Case::open("app", "feedback_cloud_backup").json());
     let hex = Regex::new(r"^[0-9a-f]{64}$").unwrap();
     for want in g["dialogs"].as_array().unwrap() {
         let name = want["name"].as_str().unwrap();

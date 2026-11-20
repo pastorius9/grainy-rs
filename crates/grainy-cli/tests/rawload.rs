@@ -52,15 +52,19 @@ fn the_binary_renders_a_dng_with_the_oracles_pixels() {
         assert!(stdout.contains(&format!("({}x{})", meta["width"], meta["height"])), "{name}: {stdout}");
         let bitmap = decode_bitmap(&output, &LoadOptions::default()).unwrap();
         let actual: Vec<i64> = bitmap.samples.iter().map(|v| *v as i64).collect();
-        let expected: Vec<i64> = if meta["options"]["format"].as_str().unwrap().contains("16") {
+        let sixteen = meta["options"]["format"].as_str().unwrap().contains("16");
+        let expected: Vec<i64> = if sixteen {
             case.array::<u16, ndarray::IxDyn>("expected").iter().map(|v| *v as i64).collect()
         } else {
             case.array::<u8, ndarray::IxDyn>("expected").iter().map(|v| *v as i64).collect()
         };
         assert_eq!(actual.len(), expected.len(), "{name}");
         let max = actual.iter().zip(&expected).map(|(a, b)| (a - b).abs()).max().unwrap();
-        println!("{name}: binary output max sample error {max}");
-        assert_eq!(max, 0, "{name}");
+        // Exact with the goldens' C runtime; elsewhere (macOS) `powf`, `expf`, ... round some intermediate values
+        // differently in the last place, which moves a 16-bit sample by a level or so (run 1: 1 of 65535).
+        let allowed = grainy_testkit::maths_tolerance(0, if sixteen { 4 } else { 0 });
+        println!("{name}: binary output max sample error {max} (tolerance {allowed})");
+        assert!(max <= allowed, "{name}: max sample error {max}");
     }
 }
 

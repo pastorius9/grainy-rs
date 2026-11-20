@@ -219,21 +219,27 @@ fn found_blocks(path: &Path) -> Blocks {
     blocks
 }
 
-/// ICC bytes equal except the creation time (bytes 24..36), the one thing that differs between two runs.
+/// ICC bytes equal except the creation time (bytes 24..36), the one thing that differs between two runs. The
+/// output profiles are made by LittleCMS, whose header names the platform (`APPL` on macOS, `MSFT` on Windows).
 fn icc_equal(actual: &[u8], expected: &[u8]) -> bool {
+    let expected = grainy_testkit::lcms_created(expected);
     actual.len() == expected.len() && actual[..24] == expected[..24] && actual[36..] == expected[36..]
 }
 
 // ------------------------------------------------------------------------------------ comparison
 
 /// How far (in integer samples) a case may be from the oracle, and why. Zero wherever the develop is bit-exact.
+/// Elsewhere than with the goldens' C runtime (macOS), `powf`, `expf`, `cbrtf`, ... round some intermediate values
+/// differently in the last place: 16-bit samples may then differ by a few levels (run 1: at most 3 of 65535, in
+/// `cs_sRGB_wide_tiff16` and `meta_rich_p3_tiff16`); 8-bit samples did not differ.
 fn tolerance(name: &str, case: &Case, format: &str) -> i64 {
-    let _ = (name, format);
-    if case.json()["exact"] == false {
+    let _ = name;
+    let base = if case.json()["exact"] == false {
         1 // luminance noise reduction and sized grain are not bit-exact in the engine (1e-6 level)
     } else {
         0
-    }
+    };
+    grainy_testkit::maths_tolerance(base, if is_16bit(format) { base.max(4) } else { base })
 }
 
 struct Row {
@@ -574,7 +580,7 @@ fn the_binary_renders_the_same_pixels() {
         let (expected_shape, expected) = golden_ints(&case, "expected", format);
         assert_eq!(shape, expected_shape, "{name}");
         let (max, _) = difference(&actual, &expected);
-        assert_eq!(max, 0, "{name}: max sample error {max}");
+        assert!(max <= tolerance(name, &case, format), "{name}: max sample error {max}");
         let mut failures = vec![];
         check_blocks(name, &case, &output, &mut failures);
         assert!(failures.is_empty(), "{failures:?}");

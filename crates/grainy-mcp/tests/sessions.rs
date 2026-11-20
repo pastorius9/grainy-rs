@@ -240,6 +240,8 @@ fn only_hashes_differ(a: &Value, b: &Value) -> bool {
 fn replay(name: &str) -> Measure {
     let golden_folder = golden_dir(name);
     let case: Value = serde_json::from_str(&std::fs::read_to_string(golden_folder.join("case.json")).unwrap()).unwrap();
+    // The oracle ran the sessions on Windows; on macOS it writes the same paths below the root with slashes.
+    let case = grainy_testkit::native_paths(&case, &[PLACE]);
     let root = fresh(name);
     let root_text = root.to_string_lossy().into_owned();
     let scrub = Scrub::new(&root_text);
@@ -585,6 +587,9 @@ fn around(a: &str, b: &str) -> (String, String) {
 
 #[test]
 fn sessions_replay_like_the_oracle() {
+    // Snapshot times are shown in local time: the zone of the machine the goldens were written on (UTC+9),
+    // whatever the zone of this one.
+    grainy_core::local_time::fix_offset(9 * 3600);
     let mut all = Vec::new();
     for name in ["main", "many"] {
         let m = replay(name);

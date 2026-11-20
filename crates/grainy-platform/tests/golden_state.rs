@@ -101,7 +101,10 @@ fn the_settings_file_is_written_and_merged_like_the_oracle() {
             }
             assert_eq!(outcome, step["outcome"].as_str().unwrap(), "{name}: {}", step["op"]);
             let file = std::fs::read(&path).ok().map(|b| String::from_utf8(b).unwrap());
-            assert_eq!(file.as_deref(), step["file"].as_str(), "{name}: file after {}", step["op"]);
+            // The oracle wrote the goldens on Windows, where Python's text mode ends its lines with CRLF; on
+            // macOS it writes LF (`preferences::LINE_END`). Contents a step writes itself have no CRLF.
+            let expected = step["file"].as_str().map(|f| f.replace("\r\n", grainy_platform::preferences::LINE_END));
+            assert_eq!(file.as_deref(), expected.as_deref(), "{name}: file after {}", step["op"]);
             assert_eq!(
                 prefs.language().map(Language::code),
                 step["language"].as_str(),

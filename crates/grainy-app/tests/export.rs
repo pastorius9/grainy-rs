@@ -481,7 +481,8 @@ fn exports_write_the_oracles_files_records_and_preferences() {
     assert!(sidecars.len() >= 3);
     for (name, text) in sidecars {
         let ours = std::fs::read(out.join(name)).unwrap();
-        assert_eq!(String::from_utf8(ours).unwrap(), text.as_str().unwrap(), "{name}");
+        // ElementTree writes the sidecar in text mode: CRLF on Windows (the golden), LF on macOS.
+        assert_eq!(String::from_utf8(ours).unwrap(), common::native_lines(text.as_str().unwrap()), "{name}");
     }
     for name in case["runs"]["copies_equal_original"].as_object().unwrap().keys() {
         assert_eq!(std::fs::read(out.join(name)).unwrap(), std::fs::read(src.join(name)).unwrap(), "{name}");

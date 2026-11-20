@@ -205,7 +205,7 @@ fn find_snapshot(catalog: &Catalog, ident: i64, name: &str) -> R<Option<Value>> 
 fn local_minutes(created: &Value) -> String {
     let Some(text) = created.as_str() else { return String::new() };
     if let Ok(stamp) = chrono::DateTime::parse_from_rfc3339(text) {
-        return stamp.with_timezone(&chrono::Local).format("%Y-%m-%d %H:%M").to_string();
+        return grainy_core::local_time::wall_time(&stamp).format("%Y-%m-%d %H:%M").to_string();
     }
     for format in ["%Y-%m-%dT%H:%M:%S%.f", "%Y-%m-%d %H:%M:%S%.f", "%Y-%m-%dT%H:%M", "%Y-%m-%d"] {
         if let Ok(stamp) = chrono::NaiveDateTime::parse_from_str(text, format) {

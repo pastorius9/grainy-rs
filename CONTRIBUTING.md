@@ -21,8 +21,8 @@ nothing before anything is published.
 The application's window tests compare rendered pictures with `crates/grainy-app/tests/snapshots/*.png`; to
 replace them after an intended change, run the tests with `GRAINY_UPDATE_SNAPSHOTS=1` and look at every changed
 picture (see `crates/grainy-app/ARCHITECTURE.md`). Pictures can differ between systems in font rendering and GPU
-output: do not replace the checked-in snapshots with ones made on another system without looking at every
-difference.
+output: the snapshots are Windows renders and are compared on Windows only (on macOS the window tests run and
+render without comparing).
 
 ## Reference data (goldens)
 

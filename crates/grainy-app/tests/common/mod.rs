@@ -32,11 +32,72 @@ pub fn offline() {
 /// first folder that holds photos, and that is this one or one inside it.
 pub fn temp_dir(name: &str) -> PathBuf {
     offline();
-    let root = std::env::temp_dir().join("grainy-app-tests").join(format!("{name}-{}", std::process::id()));
+    let root = temp_root().join("grainy-app-tests").join(format!("{name}-{}", std::process::id()));
     let _ = std::fs::remove_dir_all(&root);
     let dir = root.join(name);
     std::fs::create_dir_all(&dir).expect("temp folder");
     dir
+}
+
+/// The system's temporary folder in its real, long form, the form the app stores after resolving a path: a
+/// Windows `TEMP` written with 8.3 short names (`C:\Users\RUNNER~1\...` on the GitHub runner) is spelled out, and
+/// macOS's `/var/folders/...` is `/private/var/folders/...` (`/var` is a link). Without the `\\?\` prefix.
+pub fn temp_root() -> PathBuf {
+    let temp = std::env::temp_dir();
+    match std::fs::canonicalize(&temp) {
+        Ok(real) => {
+            let text = real.to_string_lossy().into_owned();
+            match text.strip_prefix(r"\\?\UNC\") {
+                Some(rest) => PathBuf::from(format!(r"\\{rest}")),
+                None => PathBuf::from(text.strip_prefix(r"\\?\").unwrap_or(&text)),
+            }
+        }
+        Err(_) => temp,
+    }
+}
+
+/// A path of a golden as this system's oracle spells it. The goldens were made on Windows, where the oracle's
+/// paths read `\`; on macOS the oracle joins the same folders with `/` (`pathlib`, `os.path.join`). Only for texts
+/// that are paths (or path lists) built below a placeholder such as `<ROOT>`: other backslashes would change too.
+pub fn native(text: &str) -> String {
+    if cfg!(windows) {
+        text.to_owned()
+    } else {
+        text.replace('\\', "/")
+    }
+}
+
+/// A fixed absolute Windows path of a golden (`Z:\GrainyGolden\meta`) as an absolute path of this system: as it
+/// is on Windows, without its drive and with `/` elsewhere (`/GrainyGolden/meta`), so that the system's own path
+/// rules (file names, parent folders) apply to it as they applied to the Windows path in the oracle.
+pub fn native_absolute(windows: &str) -> String {
+    if cfg!(windows) {
+        return windows.to_owned();
+    }
+    let bytes = windows.as_bytes();
+    let rest =
+        if bytes.len() >= 2 && bytes[1] == b':' && bytes[0].is_ascii_alphabetic() { &windows[2..] } else { windows };
+    native(rest)
+}
+
+/// [`native`] for every string in a JSON value.
+pub fn native_json(value: &serde_json::Value) -> serde_json::Value {
+    use serde_json::Value;
+    match value {
+        Value::String(s) => Value::String(native(s)),
+        Value::Array(a) => Value::Array(a.iter().map(native_json).collect()),
+        Value::Object(m) => Value::Object(m.iter().map(|(k, v)| (k.clone(), native_json(v))).collect()),
+        other => other.clone(),
+    }
+}
+
+/// A text file of a golden as this system's oracle writes it: Python's text mode writes `\r\n` on Windows only.
+pub fn native_lines(text: &str) -> String {
+    if cfg!(windows) {
+        text.to_owned()
+    } else {
+        text.replace("\r\n", "\n")
+    }
 }
 
 fn encode(v: f32) -> f32 {

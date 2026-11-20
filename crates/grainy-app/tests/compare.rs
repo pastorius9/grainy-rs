@@ -417,6 +417,13 @@ fn survey_and_reference_windows() {
         }
         settle(&mut harness);
         save(&mut harness, &format!("compare-reference-{suffix}"));
+        // The window keeps its size however many frames run (it used to grow by 10 pixels a frame until the screen
+        // stopped it, so the picture depended on the machine's speed).
+        let window = egui::Id::unique(("reference_window", 2u64));
+        let rect = harness.ctx.memory(|m| m.area_rect(window)).expect("the reference window");
+        assert_eq!(rect.size(), egui::vec2(1000.0, 720.0), "the window's default size");
+        harness.run_steps(30);
+        assert_eq!(harness.ctx.memory(|m| m.area_rect(window)), Some(rect), "the window does not grow");
     }
     grainy_i18n::set_language(Language::Korean);
 }

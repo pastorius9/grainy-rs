@@ -4,7 +4,7 @@
 
 use std::path::PathBuf;
 
-use eframe::egui::{self, Vec2};
+use eframe::egui::{self, Rect, Vec2};
 use grainy_core::Settings;
 
 use super::Dialog;
@@ -132,6 +132,7 @@ impl Dialog for ReferenceWindow {
         compare::pump(cx);
         self.sync(cx);
         let label = self.label(cx);
+        let fit_text = tr("맞춤");
         let mut open = true;
         let mut fit = false;
         let slot = self.slot();
@@ -144,19 +145,23 @@ impl Dialog for ReferenceWindow {
             .collapsible(false)
             .show(ctx, |ui| {
                 widgets::label(ui, &label, t::TEXT, t::FONT_SIZE);
-                // The button row first, from the bottom, then the picture in exactly the height that is left: a
-                // guessed reserve made the window grow by a few pixels every frame.
-                ui.with_layout(egui::Layout::bottom_up(egui::Align::Min), |ui| {
-                    ui.horizontal(|ui| {
-                        fit = widgets::button(ui, &tr("맞춤")).clicked();
-                    });
-                    ui.add_space(6.0);
-                    let size = Vec2::new(ui.available_width(), ui.available_height().max(80.0));
-                    let (rect, _) = ui.allocate_exact_size(size, egui::Sense::hover());
-                    let picture =
-                        cx.state_ref::<SideLane>().and_then(|l| l.slot(slot)).and_then(|s| s.picture.as_ref());
-                    self.view.show(ui, egui::Id::unique(("reference_view", slot)), rect, picture);
-                });
+                // Below the label, one rectangle of exactly the size that is left: the picture, then the button
+                // row at its bottom. (A bottom-up layout here was offered 10 pixels more than the window has, so
+                // the window grew by 10 pixels every frame until the screen stopped it, and its size depended on
+                // how many frames had run.)
+                let area = Rect::from_min_size(ui.cursor().min, ui.available_size());
+                ui.allocate_rect(area, egui::Sense::hover());
+                let fit_button = widgets::Button::new(&fit_text);
+                let row = fit_button.size(ui).y;
+                let bottom = (area.max.y - row - 6.0).max(area.min.y + 80.0);
+                let picture_rect = Rect::from_min_max(area.min, egui::pos2(area.max.x, bottom));
+                let picture = cx.state_ref::<SideLane>().and_then(|l| l.slot(slot)).and_then(|s| s.picture.as_ref());
+                self.view.show(ui, egui::Id::unique(("reference_view", slot)), picture_rect, picture);
+                let row_rect = Rect::from_min_max(egui::pos2(area.min.x, area.max.y - row), area.max);
+                let mut row_ui = ui.new_child(
+                    egui::UiBuilder::new().max_rect(row_rect).layout(egui::Layout::left_to_right(egui::Align::Center)),
+                );
+                fit = fit_button.show(&mut row_ui).clicked();
             });
         if fit {
             self.view.fit();

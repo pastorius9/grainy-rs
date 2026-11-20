@@ -537,11 +537,12 @@ fn batch_review_matches_the_oracle() {
     let _turn = common::language_lock();
     grainy_i18n::set_language(Language::Korean);
     let meta = case();
-    let golden = meta["batch"].as_array().unwrap().clone();
+    // The golden's only backslashes are the separators of `$ROOT\roll\a.png`: on macOS the oracle writes `/`.
+    let golden = common::native_json(&meta["batch"]).as_array().unwrap().clone();
     let dir = common::temp_dir("dust-batch");
     let (root, mut cx) = build(&dir);
     let root_text = root.to_string_lossy().into_owned();
-    equal(&project(&cx, &root_text), &meta["batch_start"], "start");
+    equal(&project(&cx, &root_text), &common::native_json(&meta["batch_start"]), "start");
     for n in 1..=3 {
         cx.state::<SessionIds>().queue.push_back(format!("{n:032x}"));
     }

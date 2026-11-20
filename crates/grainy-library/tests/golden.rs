@@ -158,7 +158,7 @@ impl Env {
             return pathx::split(platform(), &self.root).0;
         }
         if let Some(rest) = value.strip_prefix("$ROOT") {
-            return format!("{}{}", self.root, rest.replace('/', "\\"));
+            return format!("{}{}", self.root, rest.replace('/', std::path::MAIN_SEPARATOR_STR));
         }
         value.to_owned()
     }
@@ -1110,6 +1110,8 @@ fn scenario_names() -> Vec<String> {
 fn run_scenario(name: &str) -> Result<f64, String> {
     let text = std::fs::read_to_string(golden_dir().join(name).join("case.json")).map_err(|e| e.to_string())?;
     let case: Value = serde_json::from_str(&text).map_err(|e| e.to_string())?;
+    // The oracle ran the scenarios on Windows; on macOS it writes the same paths below the root with slashes.
+    let case = grainy_testkit::native_paths(&case, &["$ROOT", "$root"]);
     let Some(spec) = case.get("spec") else { return Ok(0.0) };
     let tolerance = spec.get("tolerance").and_then(Value::as_f64).unwrap_or(0.0);
     let mut env = Env::new(spec.clone());
@@ -1170,13 +1172,25 @@ fn run_scenario(name: &str) -> Result<f64, String> {
 
 #[test]
 fn library_scenarios() {
+    // Local times (a file's modification time when a photo has no capture date) as on the machine the goldens
+    // were written on (UTC+9), whatever the zone of this one.
+    grainy_core::local_time::fix_offset(9 * 3600);
     let mut failures = Vec::new();
     let mut worst = 0.0f64;
     let names = scenario_names();
     for name in &names {
-        match run_scenario(name) {
-            Ok(w) => worst = worst.max(w),
-            Err(e) => failures.push(format!("== {name}\n{e}")),
+        // A scenario that panics is one failure among the others (so one run shows every differing scenario).
+        match std::panic::catch_unwind(|| run_scenario(name)) {
+            Ok(Ok(w)) => worst = worst.max(w),
+            Ok(Err(e)) => failures.push(format!("== {name}\n{e}")),
+            Err(panic) => {
+                let message = panic
+                    .downcast_ref::<String>()
+                    .cloned()
+                    .or_else(|| panic.downcast_ref::<&str>().map(|s| s.to_string()))
+                    .unwrap_or_default();
+                failures.push(format!("== {name}\npanicked: {message}"));
+            }
         }
     }
     eprintln!("{} scenarios, largest numeric difference {worst:e}", names.len());
