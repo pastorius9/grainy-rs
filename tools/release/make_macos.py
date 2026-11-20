@@ -129,9 +129,10 @@ def slices_of(path: Path) -> set[str]:
 
 
 def check_libraries(path: Path):
-    """`otool -L`: only /usr/lib and /System libraries (the first line names the file itself)."""
-    lines = output('otool', '-L', path).splitlines()[1:]
-    names = [line.strip().split(' (')[0] for line in lines if line.strip()]
+    """`otool -L`: only /usr/lib and /System libraries. Header lines name the file itself (`<path>:`, or
+    `<path> (architecture arm64):` once per slice of a universal file) and are skipped; libraries are indented."""
+    lines = output('otool', '-L', path).splitlines()
+    names = sorted({line.strip().split(' (')[0] for line in lines if line.strip() and line[:1].isspace()})
     bad = [n for n in names if not n.startswith(('/usr/lib/', '/System/'))]
     if bad:
         raise SystemExit(f'{path} loads libraries outside /usr/lib and /System: {bad}')

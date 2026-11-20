@@ -14,7 +14,10 @@ static NEXT_ID: AtomicU64 = AtomicU64::new(1);
 /// Adapter policy for the port of `native_gpu._handle`: discrete first, or software for parity tests.
 #[derive(Clone, Copy, Debug, Default)]
 pub enum AdapterKind {
-    /// Prefer a discrete GPU, then an integrated GPU, then other available adapters.
+    /// Prefer a discrete GPU, then an integrated GPU, then other available adapters; never a software rasterizer
+    /// (`DeviceType::Cpu`: WARP, llvmpipe, SwiftShader). The CPU engine gives the same pixels faster than a software
+    /// adapter, and WARP on Windows Server loses its device in the heavier stages (the window, which shares the
+    /// adapter, then fails too).
     #[default]
     Hardware,
     /// Request wgpu's `force_fallback_adapter` (WARP on Windows).
@@ -95,7 +98,7 @@ impl Gpu {
                             if a.get_info().backend == wgpu::Backend::Dx12 { 0 } else { 1 },
                         )
                     });
-                    adapters.into_iter().next()
+                    adapters.into_iter().find(|a| a.get_info().device_type != wgpu::DeviceType::Cpu)
                 }
                 AdapterKind::Software => pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions {
                     force_fallback_adapter: true,

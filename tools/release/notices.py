@@ -248,6 +248,8 @@ PORTED = [
 
 DATA = [
     ('Lensfun lens database (built into the program)', [], ['crates/grainy-lens/data/lensfun/NOTICE']),
+    ('Pillow default font (Aileron subset; contact-sheet captions when the system has no other font)', [],
+     ['crates/grainy-mcp/assets/PILLOW-DEFAULT-FONT-NOTICE.txt']),
     ('CIE colorimetric data', [], ['crates/grainy-color/assets/ILLUMINANTS-NOTICE.txt']),
     ('Film looks: CIE data, makers\' data sheets, trademarks', [], ['crates/grainy-film/assets/film/NOTICE.txt']),
     ('Natural Earth (offline map)', [
