@@ -29,7 +29,9 @@ use grainy_catalog::rusqlite::{types::ValueRef, Connection};
 use grainy_catalog::{Catalog, Sources};
 use grainy_i18n::Language;
 use grainy_testkit::Case;
-use serde_json::{json, Value};
+use serde_json::json;
+#[cfg(windows)]
+use serde_json::Value;
 
 // ---- the oracle's library -----------------------------------------------------------------------------------
 

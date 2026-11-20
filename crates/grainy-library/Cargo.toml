@@ -20,7 +20,6 @@ roxmltree.workspace = true
 thiserror.workspace = true
 sysinfo.workspace = true
 tempfile = "3"
-file-id = "0.2"
 unicode-casefold = "0.2"
 
 [dev-dependencies]
@@ -29,3 +28,6 @@ regex-lite = "0.1"
 
 [lints]
 workspace = true
+
+[target.'cfg(windows)'.dependencies]
+file-id = "0.2"
