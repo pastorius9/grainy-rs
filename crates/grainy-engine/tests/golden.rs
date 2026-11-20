@@ -114,11 +114,13 @@ fn defaults_only_clip() {
     let case = Case::open("engine", "defaults_noise");
     let expected: Image = case.array("output");
     // Exact with the goldens' C runtime; elsewhere (macOS) the sRGB encoding's `powf` rounds some samples
-    // differently in the last place (run 1: 1.19e-7).
+    // differently in the last place (measured on macOS, CI runs 1 and 5: 1.19e-7, one ulp below 1; tolerance
+    // 2.5e-7, about 2x).
     let error = max_abs_diff(&result, &expected).0;
     println!("defaults_only_clip: max abs error {error:e}");
-    grainy_testkit::report_maths("engine defaults_only_clip", f64::from(error), 1e-6);
-    assert!(error <= grainy_testkit::maths_tolerance(0.0, 1e-6), "defaults_only_clip: max abs error {error:e}");
+    let tolerance = grainy_testkit::maths_tolerance(0.0, 2.5e-7);
+    grainy_testkit::report_maths("engine defaults_only_clip", f64::from(error), f64::from(tolerance));
+    assert!(error <= tolerance, "defaults_only_clip: max abs error {error:e}");
 }
 
 #[test]

@@ -230,8 +230,9 @@ fn icc_equal(actual: &[u8], expected: &[u8]) -> bool {
 
 /// How far (in integer samples) a case may be from the oracle, and why. Zero wherever the develop is bit-exact.
 /// Elsewhere than with the goldens' C runtime (macOS), `powf`, `expf`, `cbrtf`, ... round some intermediate values
-/// differently in the last place: 16-bit samples may then differ by a few levels (run 1: at most 3 of 65535, in
-/// `cs_sRGB_wide_tiff16` and `meta_rich_p3_tiff16`); 8-bit samples did not differ.
+/// differently in the last place: 16-bit samples then differ by a few levels (measured on macOS, CI runs 1 and 5:
+/// at most 3 of 65535, in `cs_sRGB_wide_tiff16` and `meta_rich_p3_tiff16`; tolerance 4, the next level up);
+/// 8-bit samples did not differ (tolerance 0).
 fn tolerance(name: &str, case: &Case, format: &str) -> i64 {
     let _ = name;
     let base = if case.json()["exact"] == false {

@@ -59,9 +59,10 @@ fn settings(working: &str) -> grainy_core::Settings {
 }
 
 /// Tolerance of the samples: 0 with the goldens' C runtime. Elsewhere (macOS) `to_linear`'s `powf` rounds some
-/// samples differently in the last place (run 1: 12 samples of `gray8_plain_png`, 3.0e-8).
+/// samples differently in the last place (measured on macOS, CI runs 1 and 5: 2.98e-8, 12 samples of
+/// `gray8_plain_png`); tolerance 6e-8, 2x.
 fn tolerance() -> f64 {
-    grainy_testkit::maths_tolerance(0.0, 1e-6)
+    grainy_testkit::maths_tolerance(0.0, 6e-8)
 }
 
 #[test]

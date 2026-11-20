@@ -61,8 +61,9 @@ fn the_binary_renders_a_dng_with_the_oracles_pixels() {
         assert_eq!(actual.len(), expected.len(), "{name}");
         let max = actual.iter().zip(&expected).map(|(a, b)| (a - b).abs()).max().unwrap();
         // Exact with the goldens' C runtime; elsewhere (macOS) `powf`, `expf`, ... round some intermediate values
-        // differently in the last place, which moves a 16-bit sample by a level or so (run 1: 1 of 65535).
-        let allowed = grainy_testkit::maths_tolerance(0, if sixteen { 4 } else { 0 });
+        // differently in the last place, which moves a 16-bit sample by a level (measured on macOS, CI runs 1 and 5:
+        // 1 of 65535 in `export_bayer0_legacy_png16`, 0 in the 8-bit ones; tolerance 2 levels, 2x).
+        let allowed = grainy_testkit::maths_tolerance(0, if sixteen { 2 } else { 0 });
         println!("{name}: binary output max sample error {max} (tolerance {allowed})");
         grainy_testkit::report_maths(&format!("cli raw render {name} (levels)"), max as f64, allowed as f64);
         assert!(max <= allowed, "{name}: max sample error {max}");

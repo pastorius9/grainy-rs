@@ -88,7 +88,8 @@ fn calibrated(name: &str) -> Profile {
     });
     let gamma = c.has("gamma").then(|| c.array::<f64, Ix1>("gamma")[0]);
     // `to_linear` is the C runtime's `powf`: equal to the oracle's table with the goldens' C runtime; elsewhere
-    // within one unit in the last place (6 of its 65536 entries differ from the correctly rounded values). The
+    // within one unit in the last place (6 of its 65536 entries differ from the correctly rounded values; measured
+    // on macOS, CI run 5: 1 ulp; tolerance 1 ulp, the least there is). The
     // profile is built from the oracle's table, so what follows tests LittleCMS alone, exactly, on every system.
     let srgb = transfers.array::<f32, Ix1>("srgb").to_vec();
     let ours = srgb_transfer_table();

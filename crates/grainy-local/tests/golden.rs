@@ -45,8 +45,9 @@ fn cases(prefix: &str) -> Vec<String> {
 
 /// Tolerance of the "exact" outputs where the C runtime is not the goldens' (macOS): the display frames are
 /// `to_srgb` of the inputs, whose `powf` rounds some samples differently in the last place, and everything after
-/// works on those frames (run 1: 6.0e-8 in `local_blacks_0`, 1.2e-7 in the colour component `color_tol2`).
-const OTHER_MATHS: f32 = 2e-5;
+/// works on those frames. Measured on macOS (CI run 5): 5.36e-7 over the checks up to the end of
+/// `apply_local_cases`, 1.19e-7 up to the end of `layer_components`; tolerance 1e-6, about 2x.
+const OTHER_MATHS: f32 = 1e-6;
 
 /// The largest error [`assert_exact`] measured where the C runtime is not the goldens' (f32 bits; errors are not
 /// negative, so their bits order as the values do).
@@ -613,7 +614,8 @@ fn healing_offsets() {
     let replay = Replay::new("healing_offsets");
     let directions: Array2<f64> = replay.case.array("directions");
     // `math.cos`/`math.sin`: the Microsoft C runtime's are not correctly rounded (sin(pi/4) is 0.7071067811865476
-    // there, 0.7071067811865475 on macOS), so elsewhere a direction may differ in the last place.
+    // there, 0.7071067811865475 on macOS), so elsewhere a direction may differ in the last place (measured on
+    // macOS, CI run 5: 1 ulp; tolerance 1 ulp, the least there is).
     let ulps = |a: f64, b: f64| a.to_bits().abs_diff(b.to_bits());
     let worst = local::directions()
         .iter()

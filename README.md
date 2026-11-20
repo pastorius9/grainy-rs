@@ -58,9 +58,14 @@ uninstall, move the app to the Trash (delete the data folder as well to remove t
 - The automatic lens-correction scale is the least exact part of the engine (within 4e-4 of the Python Grainy;
   everything else is equal or within float rounding).
 - Simple RAW develops are slower than in the Python Grainy for some cameras (Fujifilm X-Trans in particular).
-- macOS: the first macOS release. It passes the automated tests, but few Macs have run it. There is no
-  OpenMP on macOS (the serial code path, which gives the same pixels, only slower for some RAW files).
-  <!-- macOS: what is not done yet, to be filled after the first macOS test run. -->
+- macOS: the first macOS release. It is built and tested on GitHub's macOS runners (the same tests as on
+  Windows, about 950), but few real Macs have run it. There is no OpenMP on macOS (the serial code path, which
+  gives the same pixels, only slower for some RAW files). macOS's maths library rounds a few functions
+  differently from Windows', so some stages (noise reduction, Lab conversion, local adjustments, 16-bit exports)
+  match the Python Grainy within small stated tolerances instead of exactly (8-bit exports are equal). Pictures
+  of the window are compared with the reference pictures on Windows only (fonts render differently). The
+  automatic monitor profile (ColorSync) and the self-update from the disk image have not yet been tried on a
+  real Mac.
 - Linux is not packaged or tested.
 
 ## Licence

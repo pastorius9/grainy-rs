@@ -18,10 +18,16 @@ const IPP: f32 = 2e-5;
 const GRAIN: f32 = 1e-5;
 /// Noise reduction converts to CIELAB and back with the C runtime's `cbrtf` and `powf`; where that is not the
 /// goldens' C runtime (macOS) they round some values differently in the last place (`cbrtf` of the Microsoft C
-/// runtime is up to 2 ulp from the correctly rounded value). L*a*b* itself (a* = 500 (fx - fy)): run 1 5.96e-5.
+/// runtime is up to 2 ulp from the correctly rounded value). L*a*b* itself (a* = 500 (fx - fy)): measured on
+/// macOS (CI run 5) 9.16e-5 (`noise`), 8.96e-5 (`colours`), 5.96e-5 (`garden`); tolerance 2e-4, about 2x.
 const OTHER_MATHS_LAB: f32 = 2e-4;
-/// The same for the RGB results of noise reduction (run 1: 1.4e-6 in `stage_combo_v3_colours_0.25`).
-const OTHER_MATHS_NOISE: f32 = 2e-5;
+/// The RGB results of `develop_detail` with noise reduction on macOS: measured 3.81e-6 (CI run 5); tolerance
+/// 8e-6, about 2x.
+const OTHER_MATHS_STAGES: f32 = 8e-6;
+/// The RGB results of `detail_tools` with noise reduction on macOS: measured 1.155e-5 (CI run 5, over these cases
+/// together with the IPP ones); tolerance 2e-5, about 1.7x. The HDR and large-frame stages, whose errors run 5
+/// did not print, keep this value too.
+const OTHER_MATHS_TOOLS: f32 = 2e-5;
 
 fn inputs() -> Case {
     Case::open("detail", "inputs")
@@ -63,8 +69,9 @@ fn bits_sum(a: &Image) -> u64 {
     a.iter().fold(0u64, |acc, &v| acc.wrapping_add(f64::from(v).to_bits()))
 }
 
-/// The tolerance of a stage or tools case from its settings.
-fn tolerance(s: &Settings) -> f32 {
+/// The tolerance of a stage or tools case from its settings; `other_maths` applies to noise reduction where the
+/// C runtime is not the goldens'.
+fn tolerance(s: &Settings, other_maths: f32) -> f32 {
     let mut t = 0f32;
     let version = s.0.get("detail_version").and_then(Value::as_i64).unwrap_or(1);
     if s.f64("noise_luma") != 0.0 && version < 3 {
@@ -74,7 +81,7 @@ fn tolerance(s: &Settings) -> f32 {
         t = t.max(GRAIN);
     }
     if noise_reduction(s) {
-        t = t.max(grainy_testkit::maths_tolerance(0.0, OTHER_MATHS_NOISE));
+        t = t.max(grainy_testkit::maths_tolerance(0.0, other_maths));
     }
     t
 }
@@ -192,7 +199,7 @@ fn detail_tools_cases() {
         let input = image(case.json()["image"].as_str().unwrap_or(""));
         let got = detail::detail_tools(&input, &s, ps);
         checks.case(&name, || {
-            let error = check(&case, &got, tolerance(&s), &name);
+            let error = check(&case, &got, tolerance(&s, OTHER_MATHS_TOOLS), &name);
             worst = worst.max(error);
             if noise_reduction(&s) {
                 noise_worst = noise_worst.max(error);
@@ -200,7 +207,7 @@ fn detail_tools_cases() {
         });
     }
     println!("detail_tools: worst {worst:e}");
-    grainy_testkit::report_maths("detail tools with noise reduction", f64::from(noise_worst), OTHER_MATHS_NOISE.into());
+    grainy_testkit::report_maths("detail tools with noise reduction", f64::from(noise_worst), OTHER_MATHS_TOOLS.into());
     checks.finish();
 }
 
@@ -239,7 +246,7 @@ fn stage_cases() {
         let input = image(case.json()["image"].as_str().unwrap_or(""));
         let got = detail::develop_detail(&input, &s, ps).expect("develop_detail");
         checks.case(&name, || {
-            let error = check(&case, &got, tolerance(&s), &name);
+            let error = check(&case, &got, tolerance(&s, OTHER_MATHS_STAGES), &name);
             worst = worst.max(error);
             if noise_reduction(&s) {
                 noise_worst = noise_worst.max(error);
@@ -250,7 +257,7 @@ fn stage_cases() {
     grainy_testkit::report_maths(
         "detail stages with noise reduction",
         f64::from(noise_worst),
-        OTHER_MATHS_NOISE.into(),
+        OTHER_MATHS_STAGES.into(),
     );
     checks.finish();
 }
@@ -274,7 +281,10 @@ fn hdr_branch() {
         let s = settings(&case);
         let input: Image = case.array("input");
         let got = detail::develop_detail(&input, &s, 1.0).expect("develop_detail");
-        check(&case, &got, tolerance(&s), &name);
+        let error = check(&case, &got, tolerance(&s, OTHER_MATHS_TOOLS), &name);
+        if noise_reduction(&s) {
+            grainy_testkit::report_maths(&format!("detail {name}"), f64::from(error), OTHER_MATHS_TOOLS.into());
+        }
     }
 }
 
@@ -311,6 +321,9 @@ fn large_frame_and_thread_count() {
         let one = run(1);
         let many = run(8);
         assert_eq!(one, many, "{name}: the result depends on the thread count");
-        check(&case, &many, tolerance(&s), &name);
+        let error = check(&case, &many, tolerance(&s, OTHER_MATHS_TOOLS), &name);
+        if noise_reduction(&s) {
+            grainy_testkit::report_maths(&format!("detail {name}"), f64::from(error), OTHER_MATHS_TOOLS.into());
+        }
     }
 }

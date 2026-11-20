@@ -94,8 +94,9 @@ fn names(group: &str) -> Vec<String> {
 
 /// White balance where the C runtime is not the goldens' (macOS): its temperature and tint are `log2f` of channel
 /// gain ratios (`grainy_core::analysis`), which another `log2f` rounds differently in the last place, scaled by
-/// 90 and 1/0.013 (run 1: 8.9e-8 in `wb_garden_defaults.temperature`).
-const OTHER_MATHS_WHITE_BALANCE: f64 = 1e-5;
+/// 90 and 1/0.013. Measured on macOS (CI runs 1 and 5): 8.94e-8 relative, in `wb_garden_defaults.temperature`;
+/// tolerance 2e-7, about 2x.
+const OTHER_MATHS_WHITE_BALANCE: f64 = 2e-7;
 
 /// Compares JSON values; numbers within `TOLERANCE * max(1, |expected|)`. Returns the largest scaled difference.
 fn compare(actual: &Value, expected: &Value, path: &str) -> f64 {
