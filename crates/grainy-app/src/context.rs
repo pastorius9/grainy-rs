@@ -87,6 +87,8 @@ struct Wanted {
     display: u64,
     /// The HDR viewing choices' revision (`crate::hdr::revision`).
     hdr: u64,
+    /// The fitted view's size the fit preview is developed at (`AppContext::view_need`; `None` for full size).
+    view: Option<usize>,
 }
 
 /// The application context.
@@ -154,6 +156,9 @@ pub struct AppContext {
     pub(crate) scroll_to_current: bool,
     /// Where the photo was drawn at the last frame (screen points).
     pub(crate) photo_rect: Option<egui::Rect>,
+    /// The fitted photo's long side on screen in device pixels, rounded up (`None` when not fitted): the size the
+    /// fit preview is developed at (`Renderer::set_view_size`).
+    pub(crate) view_need: Option<usize>,
     pub(crate) debug_overlay: bool,
     /// Status bar message (already translated).
     pub(crate) status: String,
@@ -228,6 +233,7 @@ impl AppContext {
             grid_columns: 1,
             scroll_to_current: false,
             photo_rect: None,
+            view_need: None,
             debug_overlay: false,
             status: tr("준비됨  ·  사진을 가져오면 시작할 수 있습니다."),
             auto_note: tr("자동톤: 검정·흰색 양끝 3% 여유\n목표 밝기 약 8–247 / 255"),
@@ -846,14 +852,16 @@ impl AppContext {
     pub(crate) fn request_preview(&mut self) {
         let crop = crate::tools::crop::preview_crop(self);
         let Some(photo) = self.doc.current() else { return };
+        let resolution = self.resolution();
         let wanted = Wanted {
             crop,
             photo: photo.id,
             version: self.doc.edit().version(),
             before: self.before,
-            resolution: self.resolution(),
+            resolution,
             display: crate::display::revision(self),
             hdr: crate::hdr::revision(self),
+            view: self.view_need.filter(|_| resolution == Resolution::Fit),
         };
         if self.wanted == Some(wanted) {
             return;
@@ -872,6 +880,7 @@ impl AppContext {
         let settings = if self.before { before_settings(self.settings()) } else { self.settings().clone() };
         let job =
             PreviewJob { id: self.requests, photo: wanted.photo, path, settings, resolution: wanted.resolution, crop };
+        self.renderer.set_view_size(wanted.view);
         self.renderer.preview(job);
     }
 

@@ -99,6 +99,12 @@ impl AppContext {
             self.pan += ui.input(|i| trackpad_pan(&i.events));
         }
         let shown = size * scale;
+        // The fitted photo's long side in device pixels, rounded up to 128 so small layout changes keep the preview.
+        // Previews developed at this size are as sharp on screen as the full fit source and cost a fraction of it.
+        self.view_need = (self.zoom == Zoom::Fit && shown.x > 0.0 && shown.y > 0.0).then(|| {
+            let long = (shown.x.max(shown.y) * ppp).ceil() as usize;
+            long.div_ceil(128).max(4) * 128
+        });
         // The open tool takes the pointer first (in frame coordinates); otherwise a drag pans.
         let view = ViewTransform { rect: self.photo_rect.unwrap_or(area) };
         let used = self.doc.current().is_some() && tools::dispatch(ui, &response, &view, self, tools);

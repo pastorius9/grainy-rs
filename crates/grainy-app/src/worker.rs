@@ -67,6 +67,8 @@ struct Shared {
     monitor: Mutex<Option<grainy_cms::Profile>>,
     /// The HDR viewing choices (`Renderer::set_hdr_view`), read when a job starts.
     hdr_view: Mutex<crate::hdr::View>,
+    /// The fitted photo's long side on screen (`Renderer::set_view_size`), read when a job starts.
+    view: Mutex<Option<usize>>,
 }
 
 impl Shared {
@@ -121,6 +123,7 @@ impl Worker {
             gpu,
             monitor: Mutex::new(None),
             hdr_view: Mutex::new(crate::hdr::View::default()),
+            view: Mutex::new(None),
         });
         let preview = shared.clone();
         let spawned = std::thread::Builder::new().name("grainy-preview".into()).spawn(move || preview_loop(&preview));
@@ -172,6 +175,7 @@ impl Renderer for Worker {
         let next = Self::start(self.shared.gpu.clone(), library);
         *lock(&next.shared.monitor) = lock(&self.shared.monitor).clone();
         *lock(&next.shared.hdr_view) = *lock(&self.shared.hdr_view);
+        *lock(&next.shared.view) = *lock(&self.shared.view);
         *lock(&next.shared.waker) = lock(&self.shared.waker).clone();
         *self = next;
     }
@@ -240,6 +244,10 @@ impl Renderer for Worker {
 
     fn set_hdr_view(&mut self, view: crate::hdr::View) {
         *lock(&self.shared.hdr_view) = view;
+    }
+
+    fn set_view_size(&mut self, long: Option<usize>) {
+        *lock(&self.shared.view) = long;
     }
 
     fn side(&mut self, job: SideJob) {
@@ -357,9 +365,14 @@ struct PreviewState {
     cache: [DevelopmentCache; 2],
     monitor: crate::monitor_preview::MonitorPreview,
     sources: Vec<Source>,
+    /// The fit source reduced to the fitted view's size: (the fit source's token, long side, the reduced source).
+    reduced: Option<(u64, usize, Source)>,
     tokens: u64,
     gpu: Option<crate::gpu_worker::PreviewGpu>,
 }
+
+/// A fit source is reduced to the view only when that saves at least this share of its long side.
+const REDUCE_BELOW: f64 = 0.85;
 
 impl PreviewState {
     fn new(gpu: Option<Arc<crate::gpu_worker::Control>>) -> Self {
@@ -370,9 +383,39 @@ impl PreviewState {
             cache: std::array::from_fn(|_| DevelopmentCache::growing(256 << 20, 4.0, Some(1536 << 20))),
             monitor: Default::default(),
             sources: Vec::new(),
+            reduced: None,
             tokens: 0,
             gpu: gpu.map(crate::gpu_worker::PreviewGpu::new),
         }
+    }
+
+    /// The fit source `at` reduced to `long` pixels on its long side (Lanczos, as the preview source itself), kept
+    /// until the source or the size changes. The develop's spatial operations scale with the source
+    /// (`original_size`), so the reduced picture is the full one seen at the screen's size.
+    fn reduce(&mut self, at: usize, long: usize, settings: &Settings) -> Result<(), String> {
+        let parent = &self.sources[at];
+        if self.reduced.as_ref().is_some_and(|(token, size, _)| *token == parent.token && *size == long) {
+            return Ok(());
+        }
+        let resize = |image: &grainy_core::Image| grainy_codecs::resize_float(image, long).map_err(|e| e.to_string());
+        let photo = match &*parent.photo {
+            Photo::Linear(pixels) => Photo::Linear(resize(pixels)?),
+            Photo::Camera(camera) => Photo::Camera(Box::new(
+                grainy_engine::CameraSource::new(resize(camera.pixels())?, camera.raw_info().clone())
+                    .map_err(|e| e.to_string())?,
+            )),
+        };
+        self.tokens += 1;
+        let source = Source {
+            path: parent.path.clone(),
+            resolution: parent.resolution,
+            load_settings: LoadSettings::new(&parent.path, settings),
+            photo: Arc::new(photo),
+            token: self.tokens,
+            original: parent.original,
+        };
+        self.reduced = Some((parent.token, long, source));
+        Ok(())
     }
 
     fn source(&mut self, job: &PreviewJob) -> Result<usize, String> {
@@ -438,6 +481,7 @@ impl PreviewState {
         job: &PreviewJob,
         monitor: Option<&grainy_cms::Profile>,
         hdr_view: crate::hdr::View,
+        view: Option<usize>,
     ) -> Result<Frame, String> {
         let started = Instant::now();
         // A new monitor's LittleCMS bounds depend only on its profile. Build them alongside
@@ -453,7 +497,17 @@ impl PreviewState {
         } else {
             self.source(job)?
         };
-        let source = &self.sources[at];
+        // A fitted view smaller than the fit source: develop only the pixels the screen shows.
+        let reduce = view.filter(|&long| {
+            job.resolution == Resolution::Fit && (long as f64) < self.sources[at].long_side() as f64 * REDUCE_BELOW
+        });
+        if let Some(long) = reduce {
+            self.reduce(at, long, &job.settings)?;
+        }
+        let source = match (&self.reduced, reduce) {
+            (Some((_, _, reduced)), Some(_)) => reduced,
+            _ => &self.sources[at],
+        };
         let mut options = source.options();
         options.use_crop = job.crop;
         let cache = &mut self.cache[usize::from(job.resolution == Resolution::Full)];
@@ -503,11 +557,13 @@ impl PreviewState {
             }
         }
         let space = effective.str("working_space");
-        // A quantized LittleCMS lookup can amplify a GPU ULP. All ICC outputs use canonical floats.
-        let accelerated =
-            self.gpu.as_mut().filter(|_| monitor.is_none() && space != "ProPhoto").and_then(|gpu| {
-                gpu.render(source.photo.source(), &job.settings.0, &options, source.token, job.resolution)
-            });
+        // The GPU develops the working pixels with or without a monitor profile: the profile is applied to them on the
+        // CPU afterwards. The screen may then differ from the CPU develop by a rounding step (a GPU ULP through the
+        // LittleCMS lookup), never visibly; exports always develop on the CPU. Without this, every edit of a photo
+        // with noise reduction or sharpening re-ran the detail stage on the CPU (1.5 s for a 24 MP RAW's preview).
+        let accelerated = self.gpu.as_mut().filter(|_| space != "ProPhoto").and_then(|gpu| {
+            gpu.render(source.photo.source(), &job.settings.0, &options, source.token, job.resolution)
+        });
         let (working, hits, misses) = match accelerated {
             Some(result) => {
                 let (hits, misses) = self.gpu.as_ref().map_or((0, 0), |gpu| gpu.counters(job.resolution));
@@ -582,14 +638,14 @@ fn monitor_and_histogram_share_one_develop_and_zoom_keeps_the_fit_stages() {
         });
     }
     let profile = grainy_cms::profile("Display P3").unwrap();
-    let first = state.render(&job, Some(&profile), Default::default()).unwrap();
-    assert!(!state.gpu.as_ref().unwrap().attempted(), "the first ICC frame never initializes a GPU");
+    let first = state.render(&job, Some(&profile), Default::default(), None).unwrap();
+    assert!(!state.gpu.as_ref().unwrap().attempted(), "the exact Basic shortcut answers before a GPU starts");
     state.gpu = None;
     assert_eq!((first.hits, first.misses), (0, 1), "one tone operation in the cold neutral frame");
     job.resolution = Resolution::Full;
-    state.render(&job, None, Default::default()).unwrap();
+    state.render(&job, None, Default::default(), None).unwrap();
     job.resolution = Resolution::Fit;
-    let plain = state.render(&job, None, Default::default()).unwrap();
+    let plain = state.render(&job, None, Default::default(), None).unwrap();
     assert_eq!((plain.hits, plain.misses), (1, 1));
     assert_eq!(plain.bins, first.bins);
     assert_eq!(plain.clipping, first.clipping);
@@ -633,6 +689,7 @@ fn preview_loop(shared: &Shared) {
         shared.renders.fetch_add(1, Ordering::SeqCst);
         let monitor = lock(&shared.monitor).clone();
         let hdr_view = *lock(&shared.hdr_view);
+        let view = *lock(&shared.view);
         {
             let mut seed = lock(&shared.analysis_seed);
             if seed
@@ -642,7 +699,7 @@ fn preview_loop(shared: &Shared) {
                 *seed = None;
             }
         }
-        let reply = match caught(|| state.render(&job, monitor.as_ref(), hdr_view)) {
+        let reply = match caught(|| state.render(&job, monitor.as_ref(), hdr_view, view)) {
             Ok(frame) => {
                 log::info!(
                     "render {}x{} ({:?}) in {:.0} ms, cache hits {} misses {}",

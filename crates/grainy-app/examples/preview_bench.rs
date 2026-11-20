@@ -36,6 +36,13 @@ fn context(path: &Path, gpu: bool, monitor: Option<&Profile>) -> (AppContext, mp
     });
     cx.renderer.set_waker(wake.clone());
     cx.jobs.set_waker(Some(wake));
+    // GRAINY_BENCH_SETTINGS=<json file>: start from a photo's stored edits instead of the defaults.
+    if let Some(file) = std::env::var_os("GRAINY_BENCH_SETTINGS") {
+        let text = std::fs::read_to_string(file).expect("read the settings file");
+        let map: serde_json::Map<String, serde_json::Value> = serde_json::from_str(&text).expect("settings JSON");
+        cx.edit_state_mut().set_all(grainy_core::normalized(&map));
+        cx.edit_state_mut().commit("bench settings");
+    }
     (cx, rx)
 }
 
@@ -153,6 +160,10 @@ fn worker(path: &Path, gpu: bool, monitor: Option<&Profile>) {
         let mut times = Vec::new();
         let mut ready = Vec::new();
         for i in 1..=5 {
+            // GRAINY_BENCH_GAP_MS: idle time before each change, as between a person's slider moves.
+            if let Some(gap) = std::env::var("GRAINY_BENCH_GAP_MS").ok().and_then(|v| v.parse().ok()) {
+                std::thread::sleep(Duration::from_millis(gap));
+            }
             let start = Instant::now();
             cx.edit_state_mut().set(key, if key == "exposure" { i as f64 / 10. } else { i as f64 });
             shown(&mut cx, &wake);
@@ -164,6 +175,9 @@ fn worker(path: &Path, gpu: bool, monitor: Option<&Profile>) {
         cx.edit_state_mut().set(key, 0.);
     }
     cx.edit_state_mut().commit("reset");
+    if std::env::var_os("GRAINY_BENCH_FIT_ONLY").is_some() {
+        return;
+    }
     cx.set_zoom(Zoom::Actual);
     let start = Instant::now();
     shown(&mut cx, &wake);

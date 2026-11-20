@@ -193,6 +193,9 @@ pub trait Renderer {
     /// The viewing choices for HDR photos (`crate::hdr::View`: SDR preview, HDR range view); a renderer without the
     /// HDR preview path ignores it.
     fn set_hdr_view(&mut self, _view: crate::hdr::View) {}
+    /// The long side in device pixels the fitted photo occupies on screen (`None`: not fitted). A fit preview is
+    /// developed at that size instead of the whole preview source, as Lightroom does; a renderer may ignore it.
+    fn set_view_size(&mut self, _long: Option<usize>) {}
     /// Asks the second preview lane for a picture; replaces a waiting request of the same slot.
     fn side(&mut self, _job: SideJob) {}
     /// The second lane's answers that are ready.
