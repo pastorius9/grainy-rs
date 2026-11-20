@@ -1289,6 +1289,9 @@ fn the_ask_ai_window_behaves_as_the_oracles() {
 fn programs_without_sessions_get_the_conversation_again() {
     // `send` for a program that keeps no conversation (Codex): the earlier turns go with the request, the oldest
     // dropped first when they are too long (AiDialog.send).
+    // The transcript line is translated text: hold the language lock (another test may switch the language).
+    let _turn = common::language_lock();
+    grainy_i18n::set_language(Language::Korean);
     let root = fixed_dir("ai-ask-history");
     let sys: Arc<dyn System> = Arc::new(FakeSystem::isolated(&root, &[]));
     let mut link = FakeLink {
