@@ -24,11 +24,17 @@ fn main() {
     build.opt_level(2).debug(false);
     if build.get_compiler().is_like_msvc() {
         build.flag("/fp:precise");
+        build.define("HAVE_GMTIME_S", "1");
     } else {
         // Same IEEE semantics elsewhere (clang on macOS, also when cross-building for the other architecture):
         // no fused multiply-add contraction, no fast-math.
         build.flag_if_supported("-ffp-contract=off");
         build.flag_if_supported("-fno-fast-math");
+        if std::env::var("CARGO_CFG_UNIX").is_ok() {
+            build.define("HAVE_GMTIME_R", "1");
+        } else if std::env::var("CARGO_CFG_WINDOWS").is_ok() {
+            build.define("HAVE_GMTIME_S", "1");
+        }
     }
     build.compile("lcms2");
     // For crates that build C code against this LittleCMS (LibRaw in grainy-raw): `DEP_LCMS2_INCLUDE`.

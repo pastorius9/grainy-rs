@@ -81,23 +81,68 @@ void* gr_process(void* handle,int mode,int half,const unsigned short** pixels,un
     } catch(const std::bad_alloc&){*error=LIBRAW_UNSUFFICIENT_MEMORY;return nullptr;}
       catch(...){*error=LIBRAW_UNSPECIFIED_ERROR;return nullptr;}
 }
-// Profiles are serialised and reopened, matching imagecodecs.cms_profile's ICC
-// fixed-point quantisation before native_color creates its float transform.
-int gr_prophoto_srgb(const float* input,float* output,unsigned count) {
-    cmsCIExyY d50={.3457,.3585,1.};
-    cmsCIExyYTRIPLE pro={ {.7347,.2653,1.}, {.1596,.8404,1.}, {.0366,.0001,1.} };
-    cmsCIExyY d65={.3127,.3290,1.};
-    cmsCIExyYTRIPLE srgb={ {.64,.33,1.}, {.30,.60,1.}, {.15,.06,1.} };
-    cmsToneCurve* curve=cmsBuildGamma(nullptr,1.); if(!curve)return 1;
-    cmsToneCurve* curves[]={curve,curve,curve};
-    auto a=cmsCreateRGBProfile(&d50,&pro,curves); auto b=cmsCreateRGBProfile(&d65,&srgb,curves);cmsFreeToneCurve(curve);
-    if(!a||!b){if(a)cmsCloseProfile(a);if(b)cmsCloseProfile(b);return 1;}
-    unsigned char ab[4096],bb[4096];cmsUInt32Number al=4096,bl=4096;
-    bool ok=cmsSaveProfileToMem(a,ab,&al)&&cmsSaveProfileToMem(b,bb,&bl);
-    cmsCloseProfile(a);cmsCloseProfile(b);if(!ok)return 1;
-    a=cmsOpenProfileFromMem(ab,al);b=cmsOpenProfileFromMem(bb,bl);
-    auto transform=cmsCreateTransform(a,TYPE_RGB_FLT,b,TYPE_RGB_FLT,1,cmsFLAGS_NOCACHE);
-    cmsCloseProfile(a);cmsCloseProfile(b);if(!transform)return 1;
-    cmsDoTransform(transform,input,output,count);cmsDeleteTransform(transform);return 0;
-}
+} // extern "C"
+
+// Profiles are serialised once and reopened per thread with an isolated cmsContext,
+// matching imagecodecs.cms_profile's ICC fixed-point quantisation before native_color creates its float transform.
+namespace {
+struct ProPhotoSrgbProfiles {
+    unsigned char ab[4096], bb[4096];
+    cmsUInt32Number al = 0, bl = 0;
+    bool ok = false;
+    ProPhotoSrgbProfiles() {
+        cmsContext ctx = cmsCreateContext(nullptr, nullptr);
+        if (!ctx) return;
+        cmsCIExyY d50 = {.3457, .3585, 1.};
+        cmsCIExyYTRIPLE pro = {{.7347, .2653, 1.}, {.1596, .8404, 1.}, {.0366, .0001, 1.}};
+        cmsCIExyY d65 = {.3127, .3290, 1.};
+        cmsCIExyYTRIPLE srgb = {{.64, .33, 1.}, {.30, .60, 1.}, {.15, .06, 1.}};
+        cmsToneCurve* curve = cmsBuildGamma(ctx, 1.);
+        if (!curve) {
+            cmsDeleteContext(ctx);
+            return;
+        }
+        cmsToneCurve* curves[] = {curve, curve, curve};
+        auto a = cmsCreateRGBProfileTHR(ctx, &d50, &pro, curves);
+        auto b = cmsCreateRGBProfileTHR(ctx, &d65, &srgb, curves);
+        cmsFreeToneCurve(curve);
+        if (a && b) {
+            al = sizeof(ab);
+            bl = sizeof(bb);
+            ok = cmsSaveProfileToMem(a, ab, &al) && cmsSaveProfileToMem(b, bb, &bl);
+        }
+        if (a) cmsCloseProfile(a);
+        if (b) cmsCloseProfile(b);
+        cmsDeleteContext(ctx);
+    }
+};
+
+struct ProPhotoSrgbTransform {
+    cmsContext ctx = nullptr;
+    cmsHTRANSFORM transform = nullptr;
+    ProPhotoSrgbTransform() {
+        static const ProPhotoSrgbProfiles profiles;
+        if (!profiles.ok) return;
+        ctx = cmsCreateContext(nullptr, nullptr);
+        if (!ctx) return;
+        auto a = cmsOpenProfileFromMemTHR(ctx, profiles.ab, profiles.al);
+        auto b = cmsOpenProfileFromMemTHR(ctx, profiles.bb, profiles.bl);
+        if (a && b) {
+            transform = cmsCreateTransformTHR(ctx, a, TYPE_RGB_FLT, b, TYPE_RGB_FLT, 1, cmsFLAGS_NOCACHE);
+        }
+        if (a) cmsCloseProfile(a);
+        if (b) cmsCloseProfile(b);
+    }
+    ~ProPhotoSrgbTransform() {
+        if (transform) cmsDeleteTransform(transform);
+        if (ctx) cmsDeleteContext(ctx);
+    }
+};
+} // namespace
+
+extern "C" int gr_prophoto_srgb(const float* input, float* output, unsigned count) {
+    thread_local ProPhotoSrgbTransform cached;
+    if (!cached.transform) return 1;
+    cmsDoTransform(cached.transform, input, output, count);
+    return 0;
 }

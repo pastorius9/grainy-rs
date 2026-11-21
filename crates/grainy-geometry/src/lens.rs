@@ -228,13 +228,21 @@ fn check_subpixel(coords: &Array4<f32>, rows: usize, width: usize) -> Result<()>
     Ok(())
 }
 
-fn remap_planes(sensor: &Array3<f32>, coords: &Array4<f32>, output: &mut Array3<f32>, y: usize) -> Result<()> {
+fn sensor_planes(sensor: &Array3<f32>) -> [ndarray::Array2<f32>; 3] {
+    std::array::from_fn(|c| sensor.index_axis(Axis(2), c).to_owned())
+}
+
+fn remap_planes(
+    planes: &[ndarray::Array2<f32>; 3],
+    coords: &Array4<f32>,
+    output: &mut Array3<f32>,
+    y: usize,
+) -> Result<()> {
     let rows = coords.dim().0;
-    for c in 0..3 {
-        let plane = sensor.index_axis(Axis(2), c).to_owned();
+    for (c, plane) in planes.iter().enumerate() {
         let mx = coords.slice(s![.., .., c, 0]).to_owned();
         let my = coords.slice(s![.., .., c, 1]).to_owned();
-        let out = remap(&plane, &mx, &my, Interpolation::Linear, Border::Constant(0.0))?;
+        let out = remap(plane, &mx, &my, Interpolation::Linear, Border::Constant(0.0))?;
         output.slice_mut(s![y..y + rows, .., c]).assign(&out);
     }
     Ok(())
@@ -266,7 +274,8 @@ pub fn lens_geometry_with_budget<'a>(
                 return Ok(Cow::Borrowed(pixels));
             };
             check_subpixel(&coords, h, w)?;
-            remap_planes(&sensor, &coords, &mut output, 0)?;
+            let planes = sensor_planes(&sensor);
+            remap_planes(&planes, &coords, &mut output, 0)?;
         } else {
             let Some(coords) = model.geometry_coordinates(&request, 0, h).map_err(Error::Lens)? else {
                 return Ok(Cow::Borrowed(pixels));
@@ -276,6 +285,7 @@ pub fn lens_geometry_with_budget<'a>(
         }
         return Ok(Cow::Owned(orient_pixels(output.view(), orientation)));
     }
+    let mut planes = None;
     for y in (0..h).step_by(STRIP_ROWS) {
         let count = STRIP_ROWS.min(h - y);
         if chromatic {
@@ -283,7 +293,8 @@ pub fn lens_geometry_with_budget<'a>(
                 return Ok(Cow::Borrowed(pixels));
             };
             check_subpixel(&coords, count, w)?;
-            remap_planes(&sensor, &coords, &mut output, y)?;
+            let planes = planes.get_or_insert_with(|| sensor_planes(&sensor));
+            remap_planes(planes, &coords, &mut output, y)?;
         } else {
             let Some(coords) = model.geometry_coordinates(&request, y, count).map_err(Error::Lens)? else {
                 return Ok(Cow::Borrowed(pixels));
