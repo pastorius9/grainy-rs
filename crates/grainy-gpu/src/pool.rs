@@ -57,25 +57,103 @@ impl Pool {
     }
 }
 
+/// A batch-private buffer cache layered over [`Pool`]. While a command encoder is recording
+/// (`committed == false`), dropped intermediate frames return here so later passes in the same
+/// encoder reuse them without exposing them to other threads. Once committed after `queue.submit()`,
+/// idle buffers drain back to the shared pool and future frame drops return directly to it.
+#[derive(Debug)]
+pub(crate) struct BatchPool {
+    state: Mutex<BatchPoolState>,
+    parent: Weak<Mutex<Pool>>,
+}
+
+#[derive(Debug)]
+struct BatchPoolState {
+    idle: Vec<wgpu::Buffer>,
+    committed: bool,
+}
+
+impl BatchPool {
+    pub(crate) fn new(parent: &Arc<Mutex<Pool>>) -> Arc<Self> {
+        Arc::new(Self {
+            state: Mutex::new(BatchPoolState { idle: Vec::new(), committed: false }),
+            parent: Arc::downgrade(parent),
+        })
+    }
+
+    pub(crate) fn take(&self, device: &wgpu::Device, desc: &wgpu::BufferDescriptor<'_>) -> wgpu::Buffer {
+        {
+            let mut state = self.state.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+            if let Some(index) = state.idle.iter().rposition(|b| b.size() == desc.size) {
+                let buffer = state.idle.remove(index);
+                #[cfg(test)]
+                if let Some(parent) = self.parent.upgrade() {
+                    parent.lock().unwrap_or_else(std::sync::PoisonError::into_inner).reuses += 1;
+                }
+                return buffer;
+            }
+        }
+        if let Some(parent) = self.parent.upgrade() {
+            parent.lock().unwrap_or_else(std::sync::PoisonError::into_inner).take(device, desc)
+        } else {
+            device.create_buffer(desc)
+        }
+    }
+
+    fn release(&self, buffer: wgpu::Buffer) {
+        let committed = {
+            let mut state = self.state.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+            if state.committed {
+                true
+            } else {
+                state.idle.push(buffer.clone());
+                false
+            }
+        };
+        if committed {
+            if let Some(parent) = self.parent.upgrade() {
+                parent.lock().unwrap_or_else(std::sync::PoisonError::into_inner).put(buffer);
+            }
+        }
+    }
+
+    pub(crate) fn commit(&self) {
+        let drained = {
+            let mut state = self.state.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+            if state.committed {
+                return;
+            }
+            state.committed = true;
+            std::mem::take(&mut state.idle)
+        };
+        if !drained.is_empty() {
+            if let Some(parent) = self.parent.upgrade() {
+                let mut pool = parent.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+                for buffer in drained {
+                    pool.put(buffer);
+                }
+            }
+        }
+    }
+}
+
 /// A frame clone keeps the lease alive. Pending dispatches are already submitted to the same queue before
 /// the last clone drops, so their reads precede any future pooled write without a host synchronization.
 #[derive(Debug)]
 pub(crate) struct Lease {
     buffer: wgpu::Buffer,
-    pool: Weak<Mutex<Pool>>,
+    batch: Arc<BatchPool>,
 }
 
 impl Lease {
-    pub(crate) fn new(buffer: &wgpu::Buffer, pool: &Arc<Mutex<Pool>>) -> Arc<Self> {
-        Arc::new(Self { buffer: buffer.clone(), pool: Arc::downgrade(pool) })
+    pub(crate) fn from_batch(buffer: &wgpu::Buffer, batch: &Arc<BatchPool>) -> Arc<Self> {
+        Arc::new(Self { buffer: buffer.clone(), batch: Arc::clone(batch) })
     }
 }
 
 impl Drop for Lease {
     fn drop(&mut self) {
-        if let Some(pool) = self.pool.upgrade() {
-            pool.lock().unwrap_or_else(std::sync::PoisonError::into_inner).put(self.buffer.clone());
-        }
+        self.batch.release(self.buffer.clone());
     }
 }
 

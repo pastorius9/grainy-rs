@@ -23,11 +23,47 @@ fn lab_rgb(a:vec3<f32>)->vec3<f32>{
     let c=clip(vec3(3.07993494*x-1.53715152*y-0.542783419*z,-0.921234183*x+1.87599*y+0.0452441813*z,0.052889682*x-0.204041338*y+1.15115166*z));
     return vec3(srgb(c.r),srgb(c.g),srgb(c.b));
 }
+fn sort4(v: vec4<f32>) -> vec4<f32> {
+    var a=v.x;var b=v.y;var c=v.z;var d=v.w;
+    var t=min(a,b);b=max(a,b);a=t; t=min(c,d);d=max(c,d);c=t;
+    t=min(a,c);c=max(a,c);a=t; t=min(b,d);d=max(b,d);b=t;
+    t=min(b,c);c=max(b,c);b=t;
+    return vec4(a,b,c,d);
+}
+fn sort5(a0:f32,b0:f32,c0:f32,d0:f32,e0:f32) -> array<f32,5> {
+    var a=a0;var b=b0;var c=c0;var d=d0;var e=e0;
+    var t=min(a,b);b=max(a,b);a=t; t=min(d,e);e=max(d,e);d=t;
+    t=min(c,e);e=max(c,e);c=t; t=min(c,d);d=max(c,d);c=t;
+    t=min(a,d);d=max(a,d);a=t; t=min(a,c);c=max(a,c);a=t;
+    t=min(b,e);e=max(b,e);b=t; t=min(b,d);d=max(b,d);b=t;
+    t=min(b,c);c=max(b,c);b=t;
+    return array<f32,5>(a,b,c,d,e);
+}
+// Exact 25-element register-only median network (zero dynamic array indexing / local memory spills).
 fn median5(x:i32,y:i32,c:u32)->f32{
-    var v:array<f32,25>;let w=i32(p[0]);let h=i32(p[1]);
-    for(var j=0;j<5;j++){for(var i=0;i<5;i++){v[u32(j*5+i)]=source[u32((clamp(y+j-2,0,h-1)*w+clamp(x+i-2,0,w-1))*3)+c];}}
-    for(var k=0u;k<13u;k++){for(var n=k+1u;n<25u;n++){let lo=min(v[k],v[n]);v[n]=max(v[k],v[n]);v[k]=lo;}}
-    return v[12];
+    let w=i32(p[0]);let h=i32(p[1]);
+    let x0=u32(clamp(x-2,0,w-1));let x1=u32(clamp(x-1,0,w-1));let x2=u32(x);let x3=u32(clamp(x+1,0,w-1));let x4=u32(clamp(x+2,0,w-1));
+    let y0=u32(clamp(y-2,0,h-1))*u32(w);let y1=u32(clamp(y-1,0,h-1))*u32(w);let y2=u32(y)*u32(w);let y3=u32(clamp(y+1,0,h-1))*u32(w);let y4=u32(clamp(y+2,0,h-1))*u32(w);
+    let r0=sort5(source[(y0+x0)*3u+c],source[(y0+x1)*3u+c],source[(y0+x2)*3u+c],source[(y0+x3)*3u+c],source[(y0+x4)*3u+c]);
+    let r1=sort5(source[(y1+x0)*3u+c],source[(y1+x1)*3u+c],source[(y1+x2)*3u+c],source[(y1+x3)*3u+c],source[(y1+x4)*3u+c]);
+    let r2=sort5(source[(y2+x0)*3u+c],source[(y2+x1)*3u+c],source[(y2+x2)*3u+c],source[(y2+x3)*3u+c],source[(y2+x4)*3u+c]);
+    let r3=sort5(source[(y3+x0)*3u+c],source[(y3+x1)*3u+c],source[(y3+x2)*3u+c],source[(y3+x3)*3u+c],source[(y3+x4)*3u+c]);
+    let r4=sort5(source[(y4+x0)*3u+c],source[(y4+x1)*3u+c],source[(y4+x2)*3u+c],source[(y4+x3)*3u+c],source[(y4+x4)*3u+c]);
+    let c0=sort5(r0[0],r1[0],r2[0],r3[0],r4[0]);
+    let c1=sort5(r0[1],r1[1],r2[1],r3[1],r4[1]);
+    let c2=sort5(r0[2],r1[2],r2[2],r3[2],r4[2]);
+    let c3=sort5(r0[3],r1[3],r2[3],r3[3],r4[3]);
+    let c4=sort5(r0[4],r1[4],r2[4],r3[4],r4[4]);
+    let m=sort5(c4[0],c3[1],c2[2],c1[3],c0[4]);
+    let u=sort4(vec4(c3[0],c2[1],c1[2],c0[3]));
+    let l=sort4(vec4(c4[1],c3[2],c2[3],c1[4]));
+    var a0=min(u.x,l.w);var b0=max(u.x,l.w);var a1=min(u.y,l.z);var b1=max(u.y,l.z);
+    var a2=min(u.z,l.y);var b2=max(u.z,l.y);var a3=min(u.w,l.x);var b3=max(u.w,l.x);
+    var t=min(a0,a2);a2=max(a0,a2);a0=t; t=min(a1,a3);a3=max(a1,a3);a1=t;
+    t=min(a0,a1);a1=max(a0,a1);a0=t; t=min(a2,a3);a3=max(a2,a3);a2=t;
+    t=min(b0,b2);b2=max(b0,b2);b0=t; t=min(b1,b3);b3=max(b1,b3);b1=t;
+    t=min(b0,b1);b1=max(b0,b1);b0=t; t=min(b2,b3);b3=max(b2,b3);b2=t;
+    return max(max(max(a1,min(a2,m[4])),max(min(a3,m[3]),min(b0,m[2]))),max(min(b1,m[1]),min(b2,m[0])));
 }
 @compute @workgroup_size(16,16,1)
 fn main(@builtin(global_invocation_id) id:vec3<u32>){
@@ -35,9 +71,57 @@ fn main(@builtin(global_invocation_id) id:vec3<u32>){
     let x=i32(id.x);let y=i32(id.y);let index=(id.y*w+id.x)*3u;let stage=detail_stage;let flags=u32(p[3]);
     var a=load_rgb(index);
     switch stage {
-        case 0u,1u:{
-            var sum=vec3(0.0);let r=i32(p[11]);
-            for(var k=-r;k<=r;k++){let value=select(at(x,y+k),at(x+k,y),stage==0u);sum+=value*table[u32(k+r)].x;}
+        case 0u:{
+            let r=i32(p[11]);let stride=max(i32(p[14]),1);let margin=r*stride;let mode=u32(p[31]);
+            let row_base=id.y*w;
+            if mode==1u{
+                var sum=0.0;
+                if x>=margin&&x+margin<i32(w){for(var k=-r;k<=r;k++){sum+=source[(row_base+u32(x+k*stride))*3u]*table[u32(k+r)].x;}}
+                else{for(var k=-r;k<=r;k++){sum+=source[(row_base+reflected(x+k*stride,i32(w)))*3u]*table[u32(k+r)].x;}}
+                output[index]=sum;return;
+            }
+            if mode==3u{
+                let wt=table[0].x;var sum=0.0;
+                if x>=margin&&x+margin<i32(w){for(var k=-r;k<=r;k++){sum+=source[(row_base+u32(x+k*stride))*3u]*wt;}}
+                else{for(var k=-r;k<=r;k++){sum+=source[(row_base+reflected(x+k*stride,i32(w)))*3u]*wt;}}
+                output[index]=sum;return;
+            }
+            var sum=vec3(0.0);
+            if mode==2u{
+                let wt=table[0].x;
+                if x>=margin&&x+margin<i32(w){for(var k=-r;k<=r;k++){sum+=load_rgb((row_base+u32(x+k*stride))*3u)*wt;}}
+                else{for(var k=-r;k<=r;k++){sum+=load_rgb((row_base+reflected(x+k*stride,i32(w)))*3u)*wt;}}
+            }else if x>=margin&&x+margin<i32(w){
+                for(var k=-r;k<=r;k++){sum+=load_rgb((row_base+u32(x+k*stride))*3u)*table[u32(k+r)].x;}
+            }else{
+                for(var k=-r;k<=r;k++){sum+=load_rgb((row_base+reflected(x+k*stride,i32(w)))*3u)*table[u32(k+r)].x;}
+            }
+            a=sum;
+        }
+        case 1u:{
+            let r=i32(p[11]);let stride=max(i32(p[14]),1);let margin=r*stride;let mode=u32(p[31]);
+            if mode==1u{
+                var sum=0.0;
+                if y>=margin&&y+margin<i32(h){for(var k=-r;k<=r;k++){sum+=source[(u32(y+k*stride)*w+id.x)*3u]*table[u32(k+r)].x;}}
+                else{for(var k=-r;k<=r;k++){sum+=source[(reflected(y+k*stride,i32(h))*w+id.x)*3u]*table[u32(k+r)].x;}}
+                output[index]=sum;return;
+            }
+            if mode==3u{
+                let wt=table[0].x;var sum=0.0;
+                if y>=margin&&y+margin<i32(h){for(var k=-r;k<=r;k++){sum+=source[(u32(y+k*stride)*w+id.x)*3u]*wt;}}
+                else{for(var k=-r;k<=r;k++){sum+=source[(reflected(y+k*stride,i32(h))*w+id.x)*3u]*wt;}}
+                output[index]=sum;return;
+            }
+            var sum=vec3(0.0);
+            if mode==2u{
+                let wt=table[0].x;
+                if y>=margin&&y+margin<i32(h){for(var k=-r;k<=r;k++){sum+=load_rgb((u32(y+k*stride)*w+id.x)*3u)*wt;}}
+                else{for(var k=-r;k<=r;k++){sum+=load_rgb((reflected(y+k*stride,i32(h))*w+id.x)*3u)*wt;}}
+            }else if y>=margin&&y+margin<i32(h){
+                for(var k=-r;k<=r;k++){sum+=load_rgb((u32(y+k*stride)*w+id.x)*3u)*table[u32(k+r)].x;}
+            }else{
+                for(var k=-r;k<=r;k++){sum+=load_rgb((reflected(y+k*stride,i32(h))*w+id.x)*3u)*table[u32(k+r)].x;}
+            }
             a=sum;
         }
         case 2u:{
@@ -108,12 +192,12 @@ fn main(@builtin(global_invocation_id) id:vec3<u32>){
         case 24u:{let k=from_aux(index);a=vec3(extra0[index]-(k.x*a.x+k.y*a.y+k.z*a.z),0.0,0.0);}
         case 25u:{let g=from_aux(index);let k=from_e0(index);let value=a[u32(p[12])];let q=k.x*g.x+k.y*g.y+k.z*g.z+extra1[index];let blended=value+(q-value)*p[13];if p[12]==1.0{a.y=blended;}else{a.z=blended;}}
         case 26u:{a=vec3(a.x,0.0,0.0);}
-        case 29u:{let s=from_aux(index);let d=a.x-s.x;let guide=select(a.z,s.x,p[27]==0.0);a=vec3(d*d,d,guide);}
+        case 29u:{let sx=aux[index];let d=a.x-sx;let guide=select(a.z,sx,p[27]==0.0);a=vec3(d*d,d,guide);}
         case 30u:{
-            let s=from_aux(index);let d=a.x-s.x;let energy=extra0[index];let guide=select(a.z,s.x,p[27]==0.0);
+            let sx=aux[index];let d=a.x-sx;let energy=extra0[index];let guide=select(a.z,sx,p[27]==0.0);
             let t=guide/12.5-0.5;var sigma=table[0].x;
             if t>=7.0{sigma=table[7].x;}else if t>0.0{let j=u32(t);let f=t-f32(j);sigma=table[j].x+(table[j+1u].x-table[j].x)*f;}
-            sigma*=1.25;let gain=energy/(energy+p[26]*sigma*sigma+1e-12);a=vec3(s.x,a.y+d*gain,guide);
+            sigma*=1.25;let gain=energy/(energy+p[26]*sigma*sigma+1e-12);a=vec3(sx,a.y+d*gain,guide);
         }
         case 31u:{let b=from_aux(index);a.x=b.x+b.y;}
         default:{}

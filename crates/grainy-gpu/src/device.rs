@@ -1,3 +1,4 @@
+use std::num::NonZeroU64;
 use std::sync::{
     atomic::{AtomicU64, Ordering},
     mpsc, Arc, Mutex,
@@ -6,8 +7,12 @@ use std::time::Duration;
 
 use grainy_core::{Image, Plane, Settings};
 
-use crate::pool::{Lease, Pool};
+use crate::pool::{BatchPool, Lease, Pool};
 use crate::{params, Error, Resident, Result};
+
+const SLAB_BYTES: u64 = 64 * 1024;
+const REDUCE_SCRATCH_BYTES: u64 = 2049 * 16;
+const REDUCE_PROFILE_BYTES: u64 = 8 * 8;
 
 static NEXT_ID: AtomicU64 = AtomicU64::new(1);
 
@@ -52,9 +57,16 @@ pub struct Gpu {
     failed: Arc<Mutex<Option<String>>>,
     pipelines: Vec<wgpu::ComputePipeline>,
     layout: wgpu::BindGroupLayout,
+    reduce_pipelines: [wgpu::ComputePipeline; 5],
+    reduce_layout: wgpu::BindGroupLayout,
     empty_storage: wgpu::Buffer,
+    pub(crate) wavelet_taps: wgpu::Buffer,
+    pub(crate) box2_taps: wgpu::Buffer,
     outputs: Arc<Mutex<Pool>>,
     staging: Arc<Mutex<Pool>>,
+    slabs: Arc<Mutex<Pool>>,
+    reduce_scratch: Arc<Mutex<Pool>>,
+    reduce_profiles: Arc<Mutex<Pool>>,
 }
 
 impl Gpu {
@@ -177,6 +189,42 @@ impl Gpu {
                 }));
             }
         }
+        let reduce_entries: Vec<_> = (0..4)
+            .map(|binding| wgpu::BindGroupLayoutEntry {
+                binding,
+                visibility: wgpu::ShaderStages::COMPUTE,
+                ty: wgpu::BindingType::Buffer {
+                    ty: wgpu::BufferBindingType::Storage { read_only: binding == 0 || binding == 3 },
+                    has_dynamic_offset: false,
+                    min_binding_size: None,
+                },
+                count: None,
+            })
+            .collect();
+        let reduce_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
+            label: Some("Grainy wavelet reduction"),
+            entries: &reduce_entries,
+        });
+        let reduce_pipeline_layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+            label: Some("Grainy reduce"),
+            bind_group_layouts: &[Some(&reduce_layout)],
+            immediate_size: 0,
+        });
+        let reduce_shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("reduce"),
+            source: wgpu::ShaderSource::Wgsl(include_str!("reduce.wgsl").into()),
+        });
+        let reduce_names = ["mean_part", "mean_final", "hist_part", "hist_final", "halve_profile"];
+        let reduce_pipelines = std::array::from_fn(|i| {
+            device.create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
+                label: Some(reduce_names[i]),
+                layout: Some(&reduce_pipeline_layout),
+                module: &reduce_shader,
+                entry_point: Some(reduce_names[i]),
+                compilation_options: Default::default(),
+                cache: None,
+            })
+        });
         if let Some(e) = pollster::block_on(scope.pop()) {
             return Err(Error::Device(e.to_string()));
         }
@@ -186,8 +234,33 @@ impl Gpu {
             usage: wgpu::BufferUsages::STORAGE,
             mapped_at_creation: false,
         });
+        let init_static = |label: &str, data: &[[f32; 2]]| -> Result<wgpu::Buffer> {
+            let contents = bytemuck::cast_slice(data);
+            let unpadded = contents.len() as wgpu::BufferAddress;
+            let mask = wgpu::COPY_BUFFER_ALIGNMENT - 1;
+            let size = ((unpadded + mask) & !mask).max(wgpu::COPY_BUFFER_ALIGNMENT);
+            let buffer = device.create_buffer(&wgpu::BufferDescriptor {
+                label: Some(label),
+                size,
+                usage: wgpu::BufferUsages::STORAGE,
+                mapped_at_creation: true,
+            });
+            {
+                let mut view = buffer.get_mapped_range_mut(..).map_err(|e| Error::Device(format!("{label}: {e}")))?;
+                view.slice(..unpadded as usize).copy_from_slice(contents);
+            }
+            buffer.unmap();
+            Ok(buffer)
+        };
+        let wavelet_taps = init_static(
+            "wavelet 5-tap kernel",
+            &[[1.0 / 16.0, 0.0], [4.0 / 16.0, 0.0], [6.0 / 16.0, 0.0], [4.0 / 16.0, 0.0], [1.0 / 16.0, 0.0]],
+        )?;
+        let box2_taps = init_static("box(2) kernel", &[[0.2, 0.0]; 5])?;
         let gpu = Self {
             empty_storage,
+            wavelet_taps,
+            box2_taps,
             device,
             queue,
             info,
@@ -196,8 +269,13 @@ impl Gpu {
             failed,
             pipelines,
             layout,
+            reduce_pipelines,
+            reduce_layout,
             outputs: Pool::new(1024 * 1024 * 1024, 16),
             staging: Pool::new(512 * 1024 * 1024, 2),
+            slabs: Pool::new(4 * 1024 * 1024, 8),
+            reduce_scratch: Pool::new(4 * 1024 * 1024, 4),
+            reduce_profiles: Pool::new(64 * 1024, 8),
         };
         gpu.check()?;
         Ok(Some(gpu))
@@ -358,6 +436,360 @@ impl Gpu {
         buffer.unmap();
         Ok(buffer)
     }
+}
+
+#[derive(Clone)]
+pub(crate) struct BufferSlice {
+    buffer: wgpu::Buffer,
+    offset: u64,
+    size: Option<NonZeroU64>,
+}
+
+impl BufferSlice {
+    pub(crate) fn entire(buffer: &wgpu::Buffer) -> Self {
+        Self { buffer: buffer.clone(), offset: 0, size: None }
+    }
+
+    fn resource(&self) -> wgpu::BindingResource<'_> {
+        wgpu::BindingResource::Buffer(wgpu::BufferBinding {
+            buffer: &self.buffer,
+            offset: self.offset,
+            size: self.size,
+        })
+    }
+}
+
+/// Records multiple compute stages into a single `wgpu::CommandEncoder` and a pooled parameter slab,
+/// submitting once with one `queue.submit()` while keeping intermediate frames isolated per batch.
+pub(crate) struct Batch<'a> {
+    pub(crate) gpu: &'a Gpu,
+    encoder: wgpu::CommandEncoder,
+    outputs: Arc<BatchPool>,
+    slab: Option<wgpu::Buffer>,
+    slab_cap: usize,
+    slab_bytes: Vec<u8>,
+    retired_slabs: Vec<(wgpu::Buffer, Vec<u8>)>,
+    scratch: Option<wgpu::Buffer>,
+    profiles: Vec<wgpu::Buffer>,
+    pending: usize,
+}
+
+impl<'a> Batch<'a> {
+    pub(crate) fn new(gpu: &'a Gpu) -> Self {
+        Self {
+            gpu,
+            encoder: gpu.device.create_command_encoder(&Default::default()),
+            outputs: BatchPool::new(&gpu.outputs),
+            slab: None,
+            slab_cap: 0,
+            slab_bytes: Vec::new(),
+            retired_slabs: Vec::new(),
+            scratch: None,
+            profiles: Vec::new(),
+            pending: 0,
+        }
+    }
+
+    fn write_slab(&mut self, bytes: &[u8]) -> Result<BufferSlice> {
+        let len = bytes.len();
+        if len as u64 > self.gpu.limits.max_storage_buffer_binding_size {
+            return Err(Error::Limit("stage table is too large".into()));
+        }
+        let align = (self.gpu.limits.min_storage_buffer_offset_alignment as usize).max(4);
+        let padded_len = ((len + 3) & !3).max(4);
+        let aligned_off = (self.slab_bytes.len() + align - 1) & !(align - 1);
+        if self.slab.is_none() || aligned_off + padded_len > self.slab_cap {
+            if let Some(old) = self.slab.take() {
+                self.retired_slabs.push((old, std::mem::take(&mut self.slab_bytes)));
+            }
+            let cap = SLAB_BYTES.max(((padded_len as u64 + 255) & !255).max(SLAB_BYTES));
+            let desc = wgpu::BufferDescriptor {
+                label: Some("Grainy parameter slab"),
+                size: cap,
+                usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
+                mapped_at_creation: false,
+            };
+            let buf = if cap == SLAB_BYTES {
+                self.gpu.slabs.lock().unwrap_or_else(std::sync::PoisonError::into_inner).take(&self.gpu.device, &desc)
+            } else {
+                self.gpu.device.create_buffer(&desc)
+            };
+            self.slab_cap = cap as usize;
+            self.slab = Some(buf);
+            self.slab_bytes.clear();
+        }
+        let offset = if self.slab_bytes.is_empty() {
+            0
+        } else {
+            self.slab_bytes.resize(aligned_off, 0);
+            aligned_off
+        };
+        self.slab_bytes.extend_from_slice(bytes);
+        self.slab_bytes.resize(offset + padded_len, 0);
+        Ok(BufferSlice {
+            buffer: self.slab.as_ref().unwrap().clone(),
+            offset: offset as u64,
+            size: NonZeroU64::new(padded_len as u64),
+        })
+    }
+
+    pub(crate) fn stage_table(&mut self, table: &[[f32; 2]]) -> Result<BufferSlice> {
+        if table.is_empty() {
+            return Ok(BufferSlice::entire(&self.gpu.empty_storage));
+        }
+        let bytes = bytemuck::cast_slice(table);
+        if bytes.len() as u64 <= SLAB_BYTES {
+            self.write_slab(bytes)
+        } else {
+            if bytes.len() as u64 > self.gpu.limits.max_storage_buffer_binding_size {
+                return Err(Error::Limit("stage table is too large".into()));
+            }
+            let buf = self.gpu.buffer_init("curves and local maps", bytes, wgpu::BufferUsages::STORAGE)?;
+            Ok(BufferSlice::entire(&buf))
+        }
+    }
+
+    pub(crate) fn alloc_profile(&mut self) -> wgpu::Buffer {
+        let buf = self.gpu.reduce_profiles.lock().unwrap_or_else(std::sync::PoisonError::into_inner).take(
+            &self.gpu.device,
+            &wgpu::BufferDescriptor {
+                label: Some("Grainy wavelet profile"),
+                size: REDUCE_PROFILE_BYTES,
+                usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
+                mapped_at_creation: false,
+            },
+        );
+        self.profiles.push(buf.clone());
+        buf
+    }
+
+    fn ensure_scratch(&mut self) -> wgpu::Buffer {
+        self.scratch
+            .get_or_insert_with(|| {
+                self.gpu.reduce_scratch.lock().unwrap_or_else(std::sync::PoisonError::into_inner).take(
+                    &self.gpu.device,
+                    &wgpu::BufferDescriptor {
+                        label: Some("Grainy reduction scratch"),
+                        size: REDUCE_SCRATCH_BYTES,
+                        usage: wgpu::BufferUsages::STORAGE,
+                        mapped_at_creation: false,
+                    },
+                )
+            })
+            .clone()
+    }
+
+    pub(crate) fn reduce_noise_profile(&mut self, energy: &Frame, profile: &wgpu::Buffer) -> Result<()> {
+        self.gpu.check_frame(energy)?;
+        let count = energy
+            .width
+            .checked_mul(energy.height)
+            .and_then(|n| u32::try_from(n).ok())
+            .filter(|&n| n > 0)
+            .ok_or_else(|| Error::Limit("image size overflow".into()))?;
+        let groups = count.div_ceil(256).clamp(1, 256);
+        let inv = 1.0f64 / f64::from(count);
+        let inv_hi = inv as f32;
+        let inv_lo = (inv - f64::from(inv_hi)) as f32;
+        let meta = [count, groups, inv_hi.to_bits(), inv_lo.to_bits()];
+        let meta_slice = self.write_slab(bytemuck::cast_slice(&meta))?;
+        let scratch = self.ensure_scratch();
+        let bind = self.gpu.device.create_bind_group(&wgpu::BindGroupDescriptor {
+            label: Some("Grainy wavelet reduction"),
+            layout: &self.gpu.reduce_layout,
+            entries: &[
+                wgpu::BindGroupEntry { binding: 0, resource: energy.buffer.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 1, resource: scratch.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 2, resource: profile.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 3, resource: meta_slice.resource() },
+            ],
+        });
+        for (pipeline, dispatch_x) in [(0, groups), (1, 1), (2, groups), (3, 1)] {
+            let mut pass = self.encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                label: Some("Grainy reduce"),
+                timestamp_writes: None,
+            });
+            pass.set_pipeline(&self.gpu.reduce_pipelines[pipeline]);
+            pass.set_bind_group(0, &bind, &[]);
+            pass.dispatch_workgroups(dispatch_x, 1, 1);
+        }
+        self.pending += 4;
+        Ok(())
+    }
+
+    pub(crate) fn halve_noise_profile(&mut self, profile: &wgpu::Buffer) -> Result<()> {
+        self.gpu.check()?;
+        let scratch = self.ensure_scratch();
+        let bind = self.gpu.device.create_bind_group(&wgpu::BindGroupDescriptor {
+            label: Some("Grainy wavelet halve"),
+            layout: &self.gpu.reduce_layout,
+            entries: &[
+                wgpu::BindGroupEntry { binding: 0, resource: self.gpu.empty_storage.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 1, resource: scratch.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 2, resource: profile.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 3, resource: self.gpu.empty_storage.as_entire_binding() },
+            ],
+        });
+        let mut pass = self
+            .encoder
+            .begin_compute_pass(&wgpu::ComputePassDescriptor { label: Some("Grainy halve"), timestamp_writes: None });
+        pass.set_pipeline(&self.gpu.reduce_pipelines[4]);
+        pass.set_bind_group(0, &bind, &[]);
+        pass.dispatch_workgroups(1, 1, 1);
+        self.pending += 1;
+        Ok(())
+    }
+
+    pub(crate) fn dispatch_with_table(
+        &mut self,
+        source: &Frame,
+        stage: usize,
+        params: &[f32],
+        table: &BufferSlice,
+        extra: [Option<&wgpu::Buffer>; 4],
+    ) -> Result<Frame> {
+        self.gpu.check_frame(source)?;
+        let bytes = self.gpu.bytes(source.height, source.width)?;
+        let p_slice = self.write_slab(bytemuck::cast_slice(if params.is_empty() { &[0.0] } else { params }))?;
+        let out = self.outputs.take(
+            &self.gpu.device,
+            &wgpu::BufferDescriptor {
+                label: Some("Grainy resident frame"),
+                size: bytes,
+                usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
+                mapped_at_creation: false,
+            },
+        );
+        let a = &self.gpu.empty_storage;
+        let bind = self.gpu.device.create_bind_group(&wgpu::BindGroupDescriptor {
+            label: Some("Grainy stage"),
+            layout: &self.gpu.layout,
+            entries: &[
+                wgpu::BindGroupEntry { binding: 0, resource: source.buffer.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 1, resource: out.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 2, resource: p_slice.resource() },
+                wgpu::BindGroupEntry { binding: 3, resource: table.resource() },
+                wgpu::BindGroupEntry { binding: 4, resource: extra[0].unwrap_or(a).as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 5, resource: extra[1].unwrap_or(a).as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 6, resource: extra[2].unwrap_or(a).as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 7, resource: extra[3].unwrap_or(a).as_entire_binding() },
+            ],
+        });
+        {
+            let mut pass = self
+                .encoder
+                .begin_compute_pass(&wgpu::ComputePassDescriptor { label: Some("Grainy"), timestamp_writes: None });
+            pass.set_pipeline(&self.gpu.pipelines[stage]);
+            pass.set_bind_group(0, &bind, &[]);
+            pass.dispatch_workgroups(source.width.div_ceil(16) as u32, source.height.div_ceil(16) as u32, 1);
+        }
+        self.pending += 1;
+        let lease = Lease::from_batch(&out, &self.outputs);
+        Ok(Frame {
+            buffer: out,
+            width: source.width,
+            height: source.height,
+            owner: self.gpu.owner,
+            _lease: Some(lease),
+        })
+    }
+
+    pub(crate) fn dispatch_buffers(
+        &mut self,
+        source: &Frame,
+        stage: usize,
+        params: &[f32],
+        table: &[[f32; 2]],
+        extra: [Option<&wgpu::Buffer>; 4],
+    ) -> Result<Frame> {
+        let table_slice = self.stage_table(table)?;
+        self.dispatch_with_table(source, stage, params, &table_slice, extra)
+    }
+
+    pub(crate) fn dispatch(
+        &mut self,
+        source: &Frame,
+        stage: usize,
+        params: &[f32],
+        table: &[[f32; 2]],
+        aux: &[f32],
+    ) -> Result<Frame> {
+        if aux.is_empty() {
+            self.dispatch_buffers(source, stage, params, table, [None; 4])
+        } else {
+            let aux = self.gpu.upload_values(aux)?;
+            self.dispatch_buffers(source, stage, params, table, [Some(&aux), None, None, None])
+        }
+    }
+
+    fn return_resources(&mut self) {
+        self.outputs.commit();
+        if let Some(slab) = self.slab.take() {
+            if slab.size() == SLAB_BYTES {
+                self.gpu.slabs.lock().unwrap_or_else(std::sync::PoisonError::into_inner).put(slab);
+            }
+        }
+        for (slab, _) in self.retired_slabs.drain(..) {
+            if slab.size() == SLAB_BYTES {
+                self.gpu.slabs.lock().unwrap_or_else(std::sync::PoisonError::into_inner).put(slab);
+            }
+        }
+        if let Some(scratch) = self.scratch.take() {
+            self.gpu.reduce_scratch.lock().unwrap_or_else(std::sync::PoisonError::into_inner).put(scratch);
+        }
+        if !self.profiles.is_empty() {
+            let mut pool = self.gpu.reduce_profiles.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+            for buf in self.profiles.drain(..) {
+                pool.put(buf);
+            }
+        }
+        self.slab_bytes.clear();
+        self.slab_cap = 0;
+    }
+
+    /// Submit all recorded passes to the GPU queue in a single submission and reset the batch for further use.
+    pub(crate) fn flush(&mut self) -> Result<()> {
+        if self.pending == 0 {
+            self.return_resources();
+            return self.gpu.check();
+        }
+        self.gpu.check()?;
+        for (slab, bytes) in &self.retired_slabs {
+            if !bytes.is_empty() {
+                self.gpu.queue.write_buffer(slab, 0, bytes);
+            }
+        }
+        if let Some(slab) = &self.slab {
+            if !self.slab_bytes.is_empty() {
+                self.gpu.queue.write_buffer(slab, 0, &self.slab_bytes);
+            }
+        }
+        let next_encoder = self.gpu.device.create_command_encoder(&Default::default());
+        let encoder = std::mem::replace(&mut self.encoder, next_encoder);
+        self.gpu.queue.submit([encoder.finish()]);
+        self.pending = 0;
+        self.return_resources();
+        self.outputs = BatchPool::new(&self.gpu.outputs);
+        let _ = self.gpu.device.poll(wgpu::PollType::Poll);
+        self.gpu.check()
+    }
+
+    /// Submit all recorded passes and consume the batch.
+    pub(crate) fn submit(mut self) -> Result<()> {
+        self.flush()
+    }
+}
+
+impl Drop for Batch<'_> {
+    fn drop(&mut self) {
+        self.return_resources();
+    }
+}
+
+impl Gpu {
+    pub(crate) fn batch(&self) -> Batch<'_> {
+        Batch::new(self)
+    }
 
     pub(crate) fn dispatch_buffers(
         &self,
@@ -367,58 +799,10 @@ impl Gpu {
         table: &[[f32; 2]],
         extra: [Option<&wgpu::Buffer>; 4],
     ) -> Result<Frame> {
-        self.check_frame(source)?;
-        let bytes = self.bytes(source.height, source.width)?;
-        for len in [params.len() * 4, table.len() * 8] {
-            if len as u64 > self.limits.max_storage_buffer_binding_size {
-                return Err(Error::Limit("stage table is too large".into()));
-            }
-        }
-        let out = self.outputs.lock().unwrap_or_else(std::sync::PoisonError::into_inner).take(
-            &self.device,
-            &wgpu::BufferDescriptor {
-                label: Some("Grainy resident frame"),
-                size: bytes,
-                usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
-                mapped_at_creation: false,
-            },
-        );
-        let buffer = |name, contents: &[u8]| self.buffer_init(name, contents, wgpu::BufferUsages::STORAGE);
-        let p = buffer("parameters", bytemuck::cast_slice(params))?;
-        let t =
-            if table.is_empty() { None } else { Some(buffer("curves and local maps", bytemuck::cast_slice(table))?) };
-        let a = &self.empty_storage;
-        let entries: Vec<_> = [
-            &source.buffer,
-            &out,
-            &p,
-            t.as_ref().unwrap_or(a),
-            extra[0].unwrap_or(a),
-            extra[1].unwrap_or(a),
-            extra[2].unwrap_or(a),
-            extra[3].unwrap_or(a),
-        ]
-        .into_iter()
-        .enumerate()
-        .map(|(binding, b)| wgpu::BindGroupEntry { binding: binding as u32, resource: b.as_entire_binding() })
-        .collect();
-        let bind = self.device.create_bind_group(&wgpu::BindGroupDescriptor {
-            label: Some("Grainy stage"),
-            layout: &self.layout,
-            entries: &entries,
-        });
-        let mut encoder = self.device.create_command_encoder(&Default::default());
-        {
-            let mut pass = encoder
-                .begin_compute_pass(&wgpu::ComputePassDescriptor { label: Some("Grainy"), timestamp_writes: None });
-            pass.set_pipeline(&self.pipelines[stage]);
-            pass.set_bind_group(0, &bind, &[]);
-            pass.dispatch_workgroups(source.width.div_ceil(16) as u32, source.height.div_ceil(16) as u32, 1);
-        }
-        self.queue.submit([encoder.finish()]);
-        self.check()?;
-        let lease = Lease::new(&out, &self.outputs);
-        Ok(Frame { buffer: out, width: source.width, height: source.height, owner: self.owner, _lease: Some(lease) })
+        let mut batch = self.batch();
+        let frame = batch.dispatch_buffers(source, stage, params, table, extra)?;
+        batch.submit()?;
+        Ok(frame)
     }
 
     /// Port of `native_gpu.tone`: upload, tone compute and readback, or None for a CPU-only setting.
@@ -478,6 +862,37 @@ impl Gpu {
     pub fn develop(&self, image: &Image, s: &Settings, pixel_scale: f64) -> Result<Option<Image>> {
         let mut resident = Resident::new(self, image)?;
         self.develop_resident(&mut resident, s, pixel_scale)?.map(|out| self.readback(&out)).transpose()
+    }
+
+    #[cfg(test)]
+    pub(crate) fn readback_profile(&self, profile: &wgpu::Buffer) -> Result<[f32; 8]> {
+        self.check()?;
+        let staging = self.device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("Grainy profile readback"),
+            size: REDUCE_PROFILE_BYTES,
+            usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
+            mapped_at_creation: false,
+        });
+        let mut encoder = self.device.create_command_encoder(&Default::default());
+        encoder.copy_buffer_to_buffer(profile, 0, &staging, 0, REDUCE_PROFILE_BYTES);
+        self.queue.submit([encoder.finish()]);
+        let (tx, rx) = mpsc::sync_channel(1);
+        staging.slice(..).map_async(wgpu::MapMode::Read, move |r| {
+            let _ = tx.send(r);
+        });
+        self.wait()?;
+        rx.recv_timeout(Duration::from_secs(30))
+            .map_err(|e| Error::Device(e.to_string()))?
+            .map_err(|e| Error::Device(e.to_string()))?;
+        let mapped = staging.slice(..).get_mapped_range().map_err(|e| Error::Device(e.to_string()))?;
+        let mut out = [0f32; 8];
+        for (i, slot) in out.iter_mut().enumerate() {
+            let off = i * 8;
+            *slot = f32::from_le_bytes(mapped[off..off + 4].try_into().unwrap());
+        }
+        drop(mapped);
+        staging.unmap();
+        Ok(out)
     }
 }
 

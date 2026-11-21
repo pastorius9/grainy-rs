@@ -104,6 +104,7 @@ impl Gpu {
         if !pixel_scale.is_finite() || pixel_scale <= 0.0 {
             return Err(Error::Input("pixel_scale must be finite and positive".into()));
         }
+        let mut batch = self.batch();
         let tone_key = params::key(s, params::TONE_KEYS);
         if r.tone.as_ref().is_none_or(|(key, _)| *key != tone_key) {
             if params::needs_local(s) {
@@ -139,7 +140,7 @@ impl Gpu {
             let Some((p, t)) = params::tone(s, &r.source, r.base.as_ref().map(|(_, b)| b))? else {
                 return Ok(ResidentResult { frame: None, fallback: Some(CpuStage::Tone) });
             };
-            let frame = self.dispatch(&r.frame, 0, &p, &t, &[])?;
+            let frame = batch.dispatch(&r.frame, 0, &p, &t, &[])?;
             r.tone = Some((tone_key, frame));
             r.color = None;
             r.detail = None;
@@ -147,6 +148,7 @@ impl Gpu {
             r.runs.tone += 1;
         }
         let Some(color_params) = params::color(s, r.frame.width, r.frame.height)? else {
+            batch.submit()?;
             return Ok(ResidentResult {
                 frame: r.tone.as_ref().map(|(_, f)| f.clone()),
                 fallback: Some(CpuStage::Color),
@@ -159,7 +161,7 @@ impl Gpu {
             let frame = if color_params.0[2] == 0.0 && color_params.1.is_empty() {
                 source.clone()
             } else {
-                self.dispatch(source, 1, &color_params.0, &color_params.1, &[])?
+                batch.dispatch(source, 1, &color_params.0, &color_params.1, &[])?
             };
             r.color = Some((color_key, frame));
             r.detail = None;
@@ -184,12 +186,14 @@ impl Gpu {
         if r.detail.as_ref().is_none_or(|(key, _)| *key != detail_key) {
             let source = &r.color.as_ref().ok_or_else(|| Error::Device("missing color slot".into()))?.1;
             if !self.detail_supported(s, source.width, source.height, pixel_scale)? {
+                batch.submit()?;
                 return Ok(ResidentResult { frame: Some(source.clone()), fallback: Some(CpuStage::Detail) });
             }
             let frame = if neutral_detail {
                 source.clone()
             } else {
-                let Some(frame) = self.detail_frame(source, s, pixel_scale)? else {
+                let Some(frame) = self.detail_in_batch(&mut batch, source, s, pixel_scale)? else {
+                    batch.submit()?;
                     return Ok(ResidentResult { frame: Some(source.clone()), fallback: Some(CpuStage::Detail) });
                 };
                 frame
@@ -214,7 +218,7 @@ impl Gpu {
             let frame = if !s.bool("grain") && (!clip || neutral_detail) {
                 source.clone()
             } else {
-                self.dispatch_buffers(
+                batch.dispatch_buffers(
                     source,
                     2,
                     &params,
@@ -225,6 +229,7 @@ impl Gpu {
             r.finish = Some((finish_key, frame));
             r.runs.finish += 1;
         }
+        batch.submit()?;
         Ok(ResidentResult { frame: r.finish.as_ref().map(|(_, f)| f.clone()), fallback: None })
     }
 }
