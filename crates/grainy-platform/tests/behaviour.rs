@@ -13,17 +13,21 @@ use grainy_platform::json::Value;
 use grainy_platform::updater::{self, UpdateError};
 use grainy_platform::{safe_start, wait_for_exit, Preferences};
 
+#[test]
+fn waiting_child_process() {
+    if std::env::var_os("GRAINY_TEST_WAITING_CHILD").is_some() {
+        std::thread::sleep(Duration::from_secs(30));
+    }
+}
+
 fn spawn_waiting() -> Child {
-    let mut command = if cfg!(windows) {
-        let mut c = Command::new("ping");
-        c.args(["-n", "30", "127.0.0.1"]);
-        c
-    } else {
-        let mut c = Command::new("sleep");
-        c.arg("30");
-        c
-    };
-    command.stdout(Stdio::null()).stderr(Stdio::null()).spawn().unwrap()
+    Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "waiting_child_process"])
+        .env("GRAINY_TEST_WAITING_CHILD", "1")
+        .stdout(Stdio::null())
+        .stderr(Stdio::null())
+        .spawn()
+        .unwrap()
 }
 
 fn spawn_gone() -> u32 {

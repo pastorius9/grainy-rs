@@ -109,6 +109,21 @@ impl CanvasTool for Masks {
                     PointerKind::Hover => false,
                 }
             }
+            Mode::Object => {
+                let state = actions::state(cx);
+                match event.kind {
+                    PointerKind::Press => state.points = vec![point, point],
+                    PointerKind::Drag if state.points.len() == 2 => state.points[1] = point,
+                    PointerKind::Release if !state.points.is_empty() => {
+                        let first = state.points[0];
+                        state.points.clear();
+                        crate::masks::selection::rectangle(cx, first, point);
+                    }
+                    PointerKind::Hover => return false,
+                    _ => {}
+                }
+                true
+            }
             Mode::Linear | Mode::Radial => {
                 match event.kind {
                     PointerKind::Press => {
@@ -180,6 +195,10 @@ impl CanvasTool for Masks {
             for p in [points[0], points[1], centre] {
                 painter.circle(p, 5.0, HANDLE_FILL, stroke);
             }
+        }
+        if state.mode == Mode::Object && state.points.len() == 2 {
+            let r = eframe::egui::Rect::from_two_pos(view.to_screen(state.points[0]), view.to_screen(state.points[1]));
+            painter.rect_stroke(r, 0., Stroke::new(1.5, OUTLINE), eframe::egui::StrokeKind::Inside);
         }
         if state.mode.gradient() && state.points.len() >= 2 {
             let a = view.to_screen(state.points[0]);

@@ -16,6 +16,7 @@ pub mod cache;
 pub mod files;
 #[cfg(feature = "gpu")]
 pub mod gpu;
+pub mod merge;
 pub mod stages;
 
 pub use cache::{settings_key, DevelopmentCache, COLOR_KEYS, DETAIL_KEYS, GEOMETRY_KEYS, RAW_KEYS, TONE_KEYS};

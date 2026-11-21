@@ -22,6 +22,7 @@ pub mod mask;
 mod np;
 pub mod range;
 pub mod retouch;
+pub mod selection;
 mod value;
 
 use grainy_core::{Image, Plane};

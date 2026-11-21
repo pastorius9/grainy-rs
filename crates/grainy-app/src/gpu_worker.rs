@@ -78,11 +78,6 @@ impl PreviewGpu {
         Self { control, gpu: None, cache: Default::default(), attempted: false, hits: 0 }
     }
 
-    #[cfg(test)]
-    pub(crate) fn attempted(&self) -> bool {
-        self.attempted
-    }
-
     fn warm_up(&mut self) {
         if self.attempted || !self.control.enabled() {
             return;

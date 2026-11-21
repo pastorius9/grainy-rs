@@ -13,14 +13,24 @@ use std::path::Path;
 /// Catalogue preference holding the previous export settings.
 pub const PREFERENCE: &str = "previous_photo_export";
 /// `quick_export.FORMATS`.
-pub const FORMATS: [&str; 9] =
-    ["JPEG", "AVIF", "JPEG XL", "PNG", "PNG 16-bit", "TIFF 16-bit", "TIFF 8-bit", "TIFF HDR 32-bit", "Original"];
+pub const FORMATS: [&str; 10] = [
+    "JPEG",
+    "AVIF",
+    "JPEG XL",
+    "PNG",
+    "PNG 16-bit",
+    "TIFF 16-bit",
+    "TIFF 8-bit",
+    "TIFF HDR 32-bit",
+    "Original",
+    "AVIF HDR 10-bit",
+];
 
 /// `quick_export.SUFFIXES`: the file suffix of a format (`Original` has none).
 pub fn suffix(format: &str) -> Option<&'static str> {
     Some(match format {
         "JPEG" => ".jpg",
-        "AVIF" => ".avif",
+        "AVIF" | "AVIF HDR 10-bit" => ".avif",
         "JPEG XL" => ".jxl",
         "PNG" | "PNG 16-bit" => ".png",
         "TIFF 16-bit" | "TIFF 8-bit" | "TIFF HDR 32-bit" => ".tif",
@@ -68,7 +78,7 @@ pub fn validate_previous(value: &Value, hdr_feature: bool) -> Option<Map<String,
         return None;
     }
     let format = result["format"].as_str()?;
-    if !FORMATS.contains(&format) || (format == "TIFF HDR 32-bit" && !hdr_feature) {
+    if !FORMATS.contains(&format) || (matches!(format, "TIFF HDR 32-bit" | "AVIF HDR 10-bit") && !hdr_feature) {
         return None;
     }
     if !is_int_in(&result["quality"], 40, 100) || !is_int_in(&result["longest"], 0, 30000) {

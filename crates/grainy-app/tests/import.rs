@@ -237,6 +237,48 @@ fn opened(env: &Env, form: &Form) -> Value {
     })
 }
 
+#[test]
+fn nested_catalog_thumbnails_are_never_reimported() {
+    use grainy_library::folder_sync::{FolderSync, SyncHost};
+
+    let root = common::temp_dir("nested-catalog");
+    let library = root.join("Library");
+    let catalog = Catalog::new(&library).unwrap();
+    let cache = library.join("thumbnails");
+    let other_thumbnails = root.join("thumbnails");
+    let originals = library.join("Originals");
+    std::fs::create_dir_all(&other_thumbnails).unwrap();
+    std::fs::create_dir_all(&originals).unwrap();
+    let sources = [originals.join("photo.png"), other_thumbnails.join("scan.png")];
+    for path in &sources {
+        image::RgbImage::new(3, 2).save(path).unwrap();
+    }
+    image::RgbImage::new(2, 2).save(cache.join("99.jpg")).unwrap();
+    catalog.register_folder(&pathx::text(&root), false).unwrap();
+    catalog.register_folder(&pathx::text(&cache), false).unwrap();
+
+    let scan = || {
+        let mut sync = FolderSync::new(&catalog, || 0.0).unwrap();
+        let job = sync.scan(&catalog, &SyncHost::default()).unwrap().unwrap();
+        let mut paths: Vec<PathBuf> = job.run_at(f64::MAX).into_iter().map(PathBuf::from).collect();
+        paths.sort();
+        paths
+    };
+    let mut expected = sources.to_vec();
+    expected.sort();
+    assert_eq!(scan(), expected);
+
+    let watched = ImportRun::watched(vec![root, cache.clone(), cache.join("99.jpg")]);
+    let import = || watched.run(&library, &false.into(), &|_, _, _| {}).unwrap();
+    let first = import();
+    assert_eq!(first.report.errors, Vec::<String>::new());
+    assert_eq!(first.report.added.len(), sources.len());
+    assert!(scan().is_empty());
+    let again = import();
+    assert_eq!(again.files.len(), sources.len());
+    assert!(again.report.added.is_empty());
+}
+
 // ---- the session against the oracle -------------------------------------------------------------------------
 
 #[test]

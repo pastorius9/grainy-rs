@@ -17,7 +17,7 @@ ZIP defaults to `<dist>/GrainyRS-<version>-windows-x64.zip` (tools/release/layou
    Develop, exports it with the export dialog's defaults, writes `<out>/smoke.json` (lens database source and
    size, network switch, frame size, files written) and closes. Checks the exit code, the report (built-in lens
    database found, offline, the photo shown, one JPEG written, no failures) and the exported file.
-6. Runs `grainy-cli.exe info` and `render` from the zip on the same image.
+6. Runs the packaged CLI and reopens its SDR AVIF, HDR AVIF and JPEG XL exports.
 7. Checks `%LOCALAPPDATA%\\GrainyRS` did not appear or change, and that the app's data went to the temporary
    data folder.
 8. Removes the temporary folder (unless --keep).
@@ -170,6 +170,24 @@ def exercise(c: Checks, app: Path, cli: Path, tmp: Path, timeout: float):
                             timeout=120)
     size = jpeg_size(rendered) if rendered.is_file() else None
     c.check(render.returncode == 0 and size == (320, 214), f'{cli.name} render', f'{size}')
+    hdr_settings = tmp / 'hdr-settings.json'
+    hdr_settings.write_text('{"hdr":true,"exposure":1}', encoding='utf-8')
+    for fmt, filename in [('AVIF', 'sdr.avif'), ('AVIF HDR 10-bit', 'hdr.avif'), ('JPEG XL', 'lossless.jxl')]:
+        encoded = out / filename
+        args = [cli, 'render', source, '-o', encoded, '--format', fmt, '--longest', '96']
+        if fmt == 'AVIF HDR 10-bit':
+            args += ['--settings', hdr_settings]
+        write = subprocess.run(args, cwd=tmp, env=env, capture_output=True, text=True, encoding='utf-8',
+                               errors='replace', timeout=120)
+        c.check(write.returncode == 0, f'{cli.name} writes {fmt}', write.stderr.strip() if write.returncode else '')
+        if write.returncode:
+            continue
+        reopened = out / f'{encoded.stem}-reopened.jpg'
+        read = subprocess.run([cli, 'render', encoded, '-o', reopened], cwd=tmp, env=env, capture_output=True,
+                              text=True, encoding='utf-8', errors='replace', timeout=120)
+        size = jpeg_size(reopened) if reopened.is_file() else None
+        c.check(read.returncode == 0 and size == (96, 64), f'{cli.name} reopens {fmt}',
+                read.stderr.strip() if read.returncode else str(size))
     c.check(source.read_bytes() == source_bytes, 'the original image is still unchanged')
 
 

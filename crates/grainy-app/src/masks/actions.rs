@@ -307,6 +307,7 @@ pub fn mode(cx: &mut AppContext, kind: Mode) {
     cx.wb_picker = false;
     set_tool(cx, kind);
     let message = match kind {
+        Mode::Object => "사진 안에서 개체를 둘러싸 주세요.",
         Mode::Brush => "사진에서 드래그하세요. Alt: 지우기 · [ / ]: 크기",
         Mode::None => "도구를 종료했습니다.",
         _ => "사진에서 드래그하세요. Alt+클릭: 복구 원본 지정",
@@ -344,6 +345,9 @@ pub fn create_mask(cx: &mut AppContext, kind: &str) {
     if cx.doc.current().is_none() {
         return;
     }
+    if super::selection::choose(cx, kind, true, Operation::Add) {
+        return;
+    }
     if kind == "sky" {
         mode(cx, Mode::None);
         new_layer(cx);
@@ -361,6 +365,9 @@ pub fn create_mask(cx: &mut AppContext, kind: &str) {
 pub fn extend_mask(cx: &mut AppContext, kind: &str, operation: Operation) {
     if current_layer(cx).is_none() {
         create_mask(cx, kind);
+        return;
+    }
+    if super::selection::choose(cx, kind, false, operation) {
         return;
     }
     if kind == "sky" {

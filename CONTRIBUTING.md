@@ -3,7 +3,7 @@
 ## Build and test
 
 ```
-cargo fmt --all --check
+cargo fmt --check
 cargo clippy --workspace --all-targets --all-features -- -D warnings
 cargo test --workspace --all-features
 ```

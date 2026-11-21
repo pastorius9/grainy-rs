@@ -28,7 +28,7 @@ pub mod scan_border;
 pub mod straighten;
 pub mod upright;
 
-pub use geometry::{geometry, UseCrop};
+pub use geometry::{crop_bounds, geometry, UseCrop};
 pub use lens::{LensFlags, LensModel, LensRequest, MAP_BUDGET};
 pub use optical::optical_geometry;
 pub use orient::{flip_left_right, orient_pixels, rot90};

@@ -28,11 +28,15 @@ pub mod actions;
 pub mod gradient;
 pub mod layers;
 pub mod overlay;
+pub(crate) mod selection;
 
 use crate::imagespace::CoordinateMap;
 
 /// The mask kinds in the menus' order (`None` = separator). Port of `StudioTools.MASK_KINDS`.
-pub const MASK_KINDS: [(Option<&str>, &str); 8] = [
+pub const MASK_KINDS: [(Option<&str>, &str); 11] = [
+    (Some("subject"), "피사체 선택"),
+    (Some("background"), "배경 선택"),
+    (Some("object"), "개체 선택"),
     (Some("sky"), "하늘 선택"),
     (None, ""),
     (Some("brush"), "브러시"),
@@ -58,7 +62,10 @@ pub const BRUSH_RANGES: [BrushRange; 4] = [
 pub const BRUSH_RANGE_SOFTNESS: f64 = 0.25;
 
 /// Component names in the mask list. Port of luma/mask_dialog.py `NAMES`.
-pub const NAMES: [(&str, &str); 6] = [
+pub const NAMES: [(&str, &str); 9] = [
+    ("subject", "피사체 선택"),
+    ("background", "배경 선택"),
+    ("object", "개체 선택"),
     ("brush", "브러시"),
     ("linear", "선형 그레이디언트"),
     ("radial", "방사형 그레이디언트"),
@@ -87,6 +94,7 @@ pub enum Mode {
     ColorRange,
     ColorRangeAdd,
     LumaRange,
+    Object,
     /// The handles of the selected gradient (`edit_component`).
     EditComponent,
 }
@@ -96,6 +104,7 @@ impl Mode {
     pub fn as_str(self) -> &'static str {
         match self {
             Mode::None => "",
+            Mode::Object => "object",
             Mode::Brush => "brush",
             Mode::Linear => "linear",
             Mode::Radial => "radial",
@@ -109,6 +118,7 @@ impl Mode {
     /// The mode of a kind name (`''` and unknown names: none).
     pub fn from_kind(kind: &str) -> Mode {
         match kind {
+            "object" => Mode::Object,
             "brush" => Mode::Brush,
             "linear" => Mode::Linear,
             "radial" => Mode::Radial,
@@ -231,6 +241,7 @@ pub struct HandleDrag {
 /// What the Masks tool keeps between frames (`StudioTools`' mask attributes and the view's tool state), stored in
 /// the context with `cx.state::<MaskState>()`.
 pub struct MaskState {
+    pub(crate) new_object_layer: bool,
     /// The photo the selection belongs to (another photo starts again at its first mask).
     pub photo: u64,
     /// `layer_index` (−1 when there is no mask).
@@ -274,6 +285,7 @@ impl Default for MaskState {
             photo: 0,
             layer: 0,
             component: -1,
+            new_object_layer: false,
             fresh_layer: None,
             operation: Operation::Add,
             mode: Mode::None,

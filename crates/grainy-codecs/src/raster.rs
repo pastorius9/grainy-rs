@@ -1,3 +1,6 @@
+#[allow(unsafe_code)]
+mod modern;
+
 use crate::metadata::{extract_exif, jpeg_segments, parse_exif, png_chunks, u16_at, u32_at, webp_chunks, Ifd};
 use crate::{codec, invalid, validate, ColorManager, ColorModel, Error, Metadata, Profile, Result};
 use grainy_core::Image;
@@ -496,6 +499,12 @@ pub fn decode_bitmap(path: impl AsRef<Path>, options: &LoadOptions) -> Result<De
     let path = path.as_ref();
     let data = std::fs::read(path)?;
     let ext = path.extension().unwrap_or_default().to_string_lossy().to_lowercase();
+    if ext == "avif" {
+        return modern::avif(&data);
+    }
+    if ext == "jxl" {
+        return modern::jxl(&data);
+    }
     if ext == "png" {
         return decode_png(&data);
     }

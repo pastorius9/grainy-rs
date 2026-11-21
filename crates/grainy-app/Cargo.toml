@@ -53,12 +53,18 @@ base64.workspace = true
 # Already in the tree through eframe/winit (MIT/Apache-2.0/Zlib): the window handle the monitor is looked up by.
 raw-window-handle = "0.6"
 
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.62.2", features = ["AI_MachineLearning", "Foundation_Collections"] }
+
 [dev-dependencies]
 egui_kittest = { version = "0.37", features = ["wgpu", "snapshot", "eframe"] }
 image = { version = "0.25.10", default-features = false, features = ["png", "tiff", "jpeg"] }
 grainy-testkit.workspace = true
 # Release zips of the network tests (crates/grainy-app/tests/network.rs).
 zip.workspace = true
+
+[target.'cfg(windows)'.build-dependencies]
+cc = "1"
 
 [lints]
 workspace = true

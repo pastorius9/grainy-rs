@@ -29,6 +29,8 @@ pub enum FileOp {
     /// `manager.remove(True)` after the files went to the recycle bin: every row (virtual copies too) whose path is
     /// one of `paths` leaves the catalogue. Answers [`FileReply::Count`].
     RemovePaths { paths: Vec<String> },
+    /// Refresh the listing after originals and their virtual copies have been recycled.
+    Trashed { ids: Vec<i64> },
     /// `manager.relink`: `library.relink(catalog, id, path)` then `reload_current`.
     Relink { id: u64, path: String },
     /// `manager.backup`: `catalog.backup(path)` after the commit.
@@ -62,9 +64,14 @@ pub(super) fn apply(doc: &mut CatalogDocument, op: FileOp) -> Result<FileReply, 
         }
         return Ok(FileReply::Done);
     }
+    if let FileOp::Trashed { ids } = &op {
+        // The command flushed pending edits before it began recycling files.
+        forget_removed(doc, ids);
+        return Ok(FileReply::Count(ids.len()));
+    }
     commit(doc)?;
     match op {
-        FileOp::Invalidate { .. } => Ok(FileReply::Done),
+        FileOp::Invalidate { .. } | FileOp::Trashed { .. } => Ok(FileReply::Done),
         FileOp::Commit => Ok(FileReply::Done),
         FileOp::MoveFiles { mapping } => {
             for (src, dst) in &mapping {
@@ -100,10 +107,8 @@ pub(super) fn apply(doc: &mut CatalogDocument, op: FileOp) -> Result<FileReply, 
                 .filter(|p| p["path"].as_str().is_some_and(|path| paths.iter().any(|q| q == path)))
                 .filter_map(|p| p["id"].as_i64())
                 .collect();
-            doc.clear_active_photo();
             doc.catalog.remove_photos(&ids).map_err(err)?;
-            doc.listing.photos.retain(|p| !ids.contains(&(p.id as i64)));
-            doc.request_refresh(true);
+            forget_removed(doc, &ids);
             Ok(FileReply::Count(ids.len()))
         }
         FileOp::Relink { id, path } => {
@@ -119,6 +124,15 @@ pub(super) fn apply(doc: &mut CatalogDocument, op: FileOp) -> Result<FileReply, 
         FileOp::Restore { path } => restore(doc, &path),
         FileOp::ApplyRelinks { plans } => apply_relinks(doc, &plans),
     }
+}
+
+fn forget_removed(doc: &mut CatalogDocument, ids: &[i64]) {
+    let removed: std::collections::HashSet<i64> = ids.iter().copied().collect();
+    if doc.open.as_ref().is_some_and(|open| removed.contains(&(open.id as i64))) {
+        doc.clear_active_photo();
+    }
+    doc.listing.photos.retain(|photo| !removed.contains(&(photo.id as i64)));
+    doc.request_refresh(true);
 }
 
 /// `w.commit()`: the pending change of the open photo is stored.
@@ -191,16 +205,17 @@ fn apply_relinks(doc: &mut CatalogDocument, plans: &[Plan]) -> Result<FileReply,
 /// The paths of the photos `ids` (as the catalogue stores them), each once, in the order of `ids`
 /// (`dict.fromkeys(p['path'] for p in selected_photos())`).
 pub fn paths_of(catalog: &grainy_catalog::Catalog, ids: &[u64]) -> Result<Vec<String>, String> {
-    let mut out: Vec<String> = Vec::new();
-    for id in ids {
-        if let Some(row) = catalog.photo(*id as i64).map_err(err)? {
-            let path = row["path"].as_str().unwrap_or("").to_owned();
-            if !out.contains(&path) {
-                out.push(path);
-            }
-        }
-    }
-    Ok(out)
+    let mut statement = catalog
+        .connection()
+        .prepare_cached(
+            "SELECT p.path FROM json_each(?1) AS selection
+         JOIN photos AS p ON p.id = selection.value
+         GROUP BY p.path COLLATE BINARY ORDER BY MIN(selection.key)",
+        )
+        .map_err(err)?;
+    let selected = serde_json::to_string(ids).map_err(err)?;
+    let paths = statement.query_map([selected], |row| row.get(0)).map_err(err)?;
+    paths.collect::<rusqlite::Result<Vec<_>>>().map_err(err)
 }
 
 /// The rows `Catalog.photos()` gives (for the duplicate search and the catalogue check).

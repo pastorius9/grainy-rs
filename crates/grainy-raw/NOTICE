@@ -9,15 +9,17 @@ zlib symbols without patching upstream sources, and includes the shared
 grainy-jpeg-sys JPEG namespace header.
 Generated compiler configuration headers are written only to Cargo's OUT_DIR.
 
-Performance build (Windows MSVC): OpenMP processing regions are enabled only in
-the unchanged ahd_demosaic.cpp, crx.cpp and fuji_compressed.cpp translation units.
+Performance build (Windows MSVC): upstream OpenMP processing regions are enabled
+in the unchanged ahd_demosaic.cpp, crx.cpp and fuji_compressed.cpp translation units.
 All units compile with /openmp so the inline allocation bookkeeping has identical,
 synchronized definitions. The forced src/serial_libraw.h includes those headers
-before undefining LIBRAW_USE_OPENMP for every other implementation file. X-Trans
-interpolation and all other processing paths therefore remain serial. Repeated
-full-buffer decode hashes against the previous serial executable cover all twelve
-manifest-listed CC0 cameras, three colour modes, full/half size and multiple
-OMP_NUM_THREADS settings; see docs/FIELD_TEST.md. This adds the MSVC OpenMP runtime
+before undefining LIBRAW_USE_OPENMP for every other implementation file.
+src/libraw/xtrans_demosaic.cpp is a derivative of LibRaw 0.22.1 under the same
+CDDL-1.0 or LGPL-2.1 terms as the upstream file. Grainy uses the CDDL-1.0 option.
+The derivative schedules independent X-Trans tiles concurrently and retains raster
+order for tiles whose reads or writes overlap. Other targets use the upstream file.
+The X-Trans timing and pixel checks are documented in this crate's README.
+The Windows build uses the MSVC OpenMP runtime
 dependency (vcomp140.dll, supplied by the Visual C++ redistributable). No vendored
 source bytes or arithmetic flags are changed; non-MSVC builds remain serial.
 

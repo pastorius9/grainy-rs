@@ -1,13 +1,14 @@
 [workspace]
 resolver = "2"
 members = ["crates/*"]
+exclude = ["crates/grainy-codecs/vendor"]
 
 [workspace.package]
-version = "0.2.1"
+version = "0.3.0"
 edition = "2021"
 rust-version = "1.90"
 license = "MIT"
-repository = "https://github.com/pastorius9/grainy"
+repository = "https://github.com/pastorius9/grainy-rs"
 
 [workspace.dependencies]
 grainy-core = { path = "crates/grainy-core" }

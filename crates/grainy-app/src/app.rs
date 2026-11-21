@@ -145,8 +145,14 @@ impl GrainyApp {
                 .show(ui, |ui| cx.menu_bar(ui));
         }
         if cx.bars {
+            let vertical = if cx.mode() == Mode::Develop { 5 } else { 13 };
             Panel::top("header")
-                .frame(EguiFrame::new().fill(t::BG).inner_margin(Margin { left: 24, right: 20, top: 13, bottom: 13 }))
+                .frame(EguiFrame::new().fill(t::BG).inner_margin(Margin {
+                    left: 24,
+                    right: 20,
+                    top: vertical,
+                    bottom: vertical,
+                }))
                 .show_separator_line(false)
                 .resizable(false)
                 .show(ui, |ui| header(ui, cx));
@@ -175,7 +181,7 @@ impl GrainyApp {
                 .show(ui, |ui| cx.library_column(ui));
             let panels = &mut self.panels;
             let develop = Panel::right("develop_column")
-                .frame(EguiFrame::new().fill(t::BG).inner_margin(Margin { left: 16, right: 16, top: 8, bottom: 12 }))
+                .frame(EguiFrame::new().fill(t::BG).inner_margin(Margin { left: 8, right: 8, top: 4, bottom: 6 }))
                 .show_separator_line(false)
                 .resizable(true)
                 .default_size(develop_width)

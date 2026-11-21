@@ -51,7 +51,10 @@ pub fn sync_index_on(platform: Platform, db: &Connection, cancel: &AtomicBool) -
         cancelled(cancel)?;
         db.execute_batch("BEGIN IMMEDIATE")?;
         let work = (|| {
-            let rows=rows(db,"SELECT p.id,p.path,p.name,p.keywords,p.metadata,p.extras FROM browser_dirty d JOIN photos p ON p.id=d.id LIMIT 512")?;
+            let rows = rows(
+                db,
+                "SELECT p.id,p.path,p.name,p.keywords,p.metadata,p.extras FROM browser_dirty d JOIN photos p ON p.id=d.id LIMIT 512",
+            )?;
             for p in &rows {
                 let folder = platform.parent(string(&p["path"])?);
                 let i = info(p)?;
@@ -70,6 +73,14 @@ pub fn sync_index_on(platform: Platform, db: &Connection, cancel: &AtomicBool) -
                 )?;
                 db.execute("DELETE FROM browser_dirty WHERE id=?", [integer(&p["id"])?])?;
             }
+            if rows.is_empty() && has_folder_totals(db)? && !folder_totals_ready(db)? {
+                // Rebuild once after an import or folder change. Ordinary queries read only
+                // the folder rows, including counts outside the user's current selection.
+                db.execute_batch(
+                    "INSERT INTO browser_folder_totals
+                    SELECT folder_key,MIN(folder),COUNT(*) FROM browser_index GROUP BY folder_key",
+                )?;
+            }
             Ok::<_, crate::Error>(rows.is_empty())
         })();
         match work {
@@ -85,6 +96,37 @@ pub fn sync_index_on(platform: Platform, db: &Connection, cancel: &AtomicBool) -
             }
         }
     }
+}
+
+fn has_folder_totals(db: &Connection) -> Result<bool> {
+    Ok(db.query_row(
+        "SELECT EXISTS(SELECT 1 FROM sqlite_master WHERE name='browser_folder_totals' AND type='table')",
+        [],
+        |row| row.get(0),
+    )?)
+}
+
+fn folder_totals_ready(db: &Connection) -> Result<bool> {
+    Ok(db.query_row("SELECT EXISTS(SELECT 1 FROM browser_folder_totals)", [], |row| row.get(0))?)
+}
+
+/// Install the trigram index when a library first needs substring search at scale.
+fn search_index(db: &Connection) -> Result<bool> {
+    const EXISTS: &str = "SELECT EXISTS(SELECT 1 FROM sqlite_master WHERE name='browser_text' AND type='table')";
+    if db.query_row(EXISTS, [], |row| row.get::<_, bool>(0))? {
+        return Ok(true);
+    }
+    let large: bool =
+        db.query_row("SELECT EXISTS(SELECT 1 FROM browser_index LIMIT 1 OFFSET 511)", [], |row| row.get(0))?;
+    if large {
+        crate::transaction::run(db, true, || -> Result<()> {
+            if !db.query_row(EXISTS, [], |row| row.get::<_, bool>(0))? {
+                db.execute_batch(include_str!("../assets/browser_search.sql"))?;
+            }
+            Ok(())
+        })?;
+    }
+    Ok(large)
 }
 
 /// Port of `library_query.query`; the caller owns cancellation and the query's local clock.
@@ -119,25 +161,61 @@ fn query_inner(
     sync_index_on(platform, &db, cancel)?;
     let progress_cancel = Arc::clone(cancel);
     db.progress_handler(1000, Some(move || progress_cancel.load(Ordering::Relaxed)))?;
-    db.execute_batch("BEGIN")?;
     let search = fold(options["search"].as_str().unwrap_or(""));
-    let folder = options["folder"].as_str().filter(|s| !s.is_empty());
-    let mut rules = vec![options.get("rules").filter(|v| !v.is_null()).cloned().unwrap_or(json!({}))];
-    let mut membership = None;
+    let indexed_search = search.chars().take(3).count() == 3 && !search.contains('\0') && search_index(&db)?;
+    db.execute_batch("BEGIN")?;
+    let mut filters = Vec::new();
+    let mut bindings: Vec<rusqlite::types::Value> = Vec::new();
+    let mut rules = Vec::new();
+    if let Some(rule) = options.get("rules").filter(|v| !v.is_null()) {
+        rules.push(rule.clone());
+    }
     if let Some(id) = options["collection"].as_i64() {
-        let r: Option<Option<String>> =
-            db.query_row("SELECT rules FROM collections WHERE id=?", [id], |r| r.get(0)).optional()?;
-        match r {
-            None => membership = Some(std::collections::BTreeSet::new()),
+        let saved: Option<Option<String>> =
+            db.query_row("SELECT rules FROM collections WHERE id=?", [id], |row| row.get(0)).optional()?;
+        match saved {
+            None => filters.push("0"),
             Some(Some(text)) => rules.push(serde_json::from_str(&text)?),
             Some(None) => {
-                let ids = db
-                    .prepare("SELECT photo_id FROM collection_members WHERE collection_id=?")?
-                    .query_map([id], |r| r.get::<_, i64>(0))?
-                    .collect::<rusqlite::Result<std::collections::BTreeSet<_>>>()?;
-                membership = Some(ids);
+                filters.push("p.id IN (SELECT photo_id FROM collection_members WHERE collection_id=?)");
+                bindings.push(id.into());
             }
         }
+    }
+    if indexed_search {
+        // MATCH finds literal substrings in the pre-folded keys. SQLite FTS stops at NUL;
+        // include the (normally empty) partial index of such rows for exact verification below.
+        filters.push(
+            "i.id IN (SELECT rowid FROM browser_text WHERE browser_text MATCH ? UNION ALL
+            SELECT id FROM browser_index WHERE instr(name_key,char(0)) OR instr(keywords_key,char(0)))",
+        );
+        bindings.push(format!("\"{}\"", search.replace('"', "\"\"")).into());
+    }
+    if !search.is_empty() {
+        filters.push("(instr(i.name_key, ?) OR instr(i.keywords_key, ?))");
+        bindings.push(search.clone().into());
+        bindings.push(search.into());
+    }
+    if let Some(folder) = options["folder"].as_str().filter(|s| !s.is_empty()) {
+        let key = platform.path_key(folder);
+        if options["recursive"].as_bool().unwrap_or(true) {
+            // Exact folder equality is binary. Descendants follow SQLite's ASCII-only
+            // NOCASE even on POSIX, using an index range with a literal path separator.
+            let base = key.trim_end_matches(['\\', '/']);
+            let prefix = format!("{base}{}", platform.sep());
+            let end = format!("{base}{}", if platform.sep() == "/" { '0' } else { ']' });
+            filters.push("(i.folder_key=? OR (i.folder_key COLLATE NOCASE >= ? AND i.folder_key COLLATE NOCASE < ?))");
+            bindings.extend([key.into(), prefix.into(), end.into()]);
+        } else {
+            filters.push("i.folder_key=?");
+            bindings.push(key.into());
+        }
+    }
+    match options["mode"].as_str() {
+        Some("picked") => filters.push("p.flag=1"),
+        Some("rejected") => filters.push("p.flag=-1"),
+        Some("rated") => filters.push("p.rating>=4"),
+        _ => {}
     }
     let sort = match options["sort"].as_str() {
         Some("name") => "i.name_key",
@@ -146,55 +224,49 @@ fn query_inner(
         _ => "p.id",
     };
     let direction = if grainy_core::settings::truthy(&options["descending"]) { "DESC" } else { "ASC" };
-    let mut statement=db.prepare(&format!("SELECT p.id,p.path,p.name,p.keywords,p.rating,p.flag,p.label,p.virtual_source,p.metadata,p.extras,p.imported,p.stack_id,i.folder_key,i.name_key,i.keywords_key FROM photos p JOIN browser_index i ON i.id=p.id ORDER BY {sort} {direction},p.id {direction}"))?;
-    let mut cursor = statement.query([])?;
+    rules.retain(|rule| !rule.as_object().is_some_and(|object| object.is_empty()));
+    let columns = if rules.is_empty() {
+        "p.id,p.stack_id"
+    } else {
+        "p.id,p.stack_id,p.path,p.name,p.keywords,p.rating,p.flag,p.label,p.virtual_source,p.metadata,p.extras,
+         p.imported,i.folder_key,i.name_key,i.keywords_key"
+    };
+    let where_clause = if filters.is_empty() { String::new() } else { format!("WHERE {}", filters.join(" AND ")) };
+    let sql = format!(
+        "SELECT {columns} FROM photos p JOIN browser_index i ON i.id=p.id {where_clause}
+                       ORDER BY {sort} {direction},p.id {direction}"
+    );
+    let mut statement = db.prepare(&sql)?;
+    let mut cursor = statement.query(rusqlite::params_from_iter(bindings))?;
     let mut selected = Vec::new();
     while let Some(row) = cursor.next()? {
         cancelled(cancel)?;
-        let p = row_value(row)?;
-        let id = integer(&p["id"])?;
-        if membership.as_ref().is_some_and(|s| !s.contains(&id)) {
-            continue;
-        }
-        if !search.is_empty()
-            && !string(&p["name_key"])?.contains(&search)
-            && !string(&p["keywords_key"])?.contains(&search)
-        {
-            continue;
-        }
-        if let Some(f) = folder {
-            let key = platform.path_key(f);
-            let actual = string(&p["folder_key"])?;
-            let recursive = options["recursive"].as_bool().unwrap_or(true);
-            // SQLite LIKE is ASCII case-insensitive, even on POSIX; preserve that quirk.
-            let prefix = format!("{}{}", key.trim_end_matches(['\\', '/']), platform.sep());
-            if actual != key && (!recursive || !actual.to_ascii_lowercase().starts_with(&prefix.to_ascii_lowercase())) {
+        if !rules.is_empty() {
+            let photo = row_value(row)?;
+            let mut valid = true;
+            for rule in &rules {
+                if !matches(&photo, rule, now, platform)? {
+                    valid = false;
+                    break;
+                }
+            }
+            if !valid {
                 continue;
             }
         }
-        match options["mode"].as_str() {
-            Some("picked") if p["flag"] != 1 => continue,
-            Some("rejected") if p["flag"] != -1 => continue,
-            Some("rated") if p["rating"].as_i64().unwrap_or(0) < 4 => continue,
-            _ => {}
-        }
-        let mut valid = true;
-        for r in &rules {
-            if !matches(&p, r, now, platform)? {
-                valid = false;
-                break;
-            }
-        }
-        if valid {
-            selected.push(json!({"id":id,"stack_id":p["stack_id"]}));
-        }
+        selected.push(json!({"id":row.get::<_,i64>(0)?, "stack_id":row.get::<_,Option<i64>>(1)?}));
     }
     let ids = workflow::arrange_stacks(
         &selected,
         options.get("stack_orders").unwrap_or(&json!({})),
         grainy_core::settings::truthy(&options["collapsed"]),
     )?;
-    let folders = rows(&db, "SELECT MIN(folder) folder,COUNT(*) count FROM browser_index GROUP BY folder_key")?
+    let totals = if has_folder_totals(&db)? && folder_totals_ready(&db)? {
+        "SELECT folder,count FROM browser_folder_totals ORDER BY folder_key"
+    } else {
+        "SELECT MIN(folder) folder,COUNT(*) count FROM browser_index GROUP BY folder_key"
+    };
+    let folders = rows(&db, totals)?
         .into_iter()
         .map(|r| Ok(json!({"path":platform.join(string(&r["folder"])?,"__count__"),"count":r["count"]})))
         .collect::<Result<Vec<_>>>()?;

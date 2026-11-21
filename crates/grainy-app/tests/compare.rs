@@ -11,7 +11,7 @@
 
 mod common;
 
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::time::{Duration, Instant};
 
 use eframe::egui;
@@ -272,7 +272,7 @@ fn the_second_picture_follows_the_main_view() {
 #[test]
 fn the_second_lane_answers_each_slot_with_its_newest_request() {
     let dir = common::temp_dir("compare-lane");
-    let paths = common::eight_photos(&dir);
+    let paths = charts(&dir);
     let mut worker = grainy_app::worker::Worker::new();
     use grainy_app::render::{Renderer, SideJob};
     let edits = common::settings(json!({"exposure": 0.7, "crop": [0.1, 0.2, 0.6, 0.7]}));
@@ -292,11 +292,13 @@ fn the_second_lane_answers_each_slot_with_its_newest_request() {
     assert!(ids.contains(&(8, 4)), "{ids:?}");
     assert!(ids.contains(&(7, 3)), "the newest of slot 7 is answered: {ids:?}");
     assert!(ids.len() <= 3, "replaced requests are not rendered: {ids:?}");
-    let frame = answers.iter().find(|f| f.slot == 7 && f.id == 3).unwrap();
-    let preview = frame.result.as_ref().expect("rendered");
-    let (rgba, w, h) = common::engine_render(&paths[0], Some(1800), &edits);
-    assert_eq!((preview.width, preview.height), (w, h));
-    assert_eq!(preview.rgba, rgba, "the second lane renders as the engine");
+    for (slot, id, file, limit) in [(7, 3, &paths[0], Some(1800)), (8, 4, &paths[1], None)] {
+        let frame = answers.iter().find(|f| (f.slot, f.id) == (slot, id)).unwrap();
+        let preview = frame.result.as_ref().expect("rendered");
+        let (rgba, w, h) = common::engine_render(file, limit, &edits);
+        assert_eq!((preview.width, preview.height), (w, h));
+        assert_eq!(preview.rgba, rgba, "slot {slot} renders its own cropped chart as the engine");
+    }
     assert_eq!(worker.preview_renders(), 0, "the open photo's lane did nothing");
 }
 
@@ -327,10 +329,42 @@ fn save(harness: &mut Harness<'_, GrainyApp>, name: &str) -> image::RgbaImage {
     common::snapshot::save(harness, name)
 }
 
-/// Three photos opened, the first edited (geometry and tone), settled.
+/// Three independent geometric targets with distinct orientation cues. The fixtures have no external inputs.
+fn charts(dir: &Path) -> Vec<PathBuf> {
+    let chips = dir.join("01-color-patches.png");
+    let steps = dir.join("02-gray-steps.png");
+    let rings = dir.join("03-square-rings.tif");
+
+    let palette = [[192, 48, 64], [232, 153, 45], [52, 175, 95], [49, 142, 195], [126, 86, 176], [210, 95, 151]];
+    image::RgbImage::from_fn(480, 320, |x, y| {
+        let column = (x / 80) as usize;
+        let row = y / 80;
+        let rgb = palette[column].map(|value: u32| (value * (5 - row) / 5) as u8);
+        image::Rgb(if x % 80 < 4 || y % 80 < 4 { [24; 3] } else { rgb })
+    })
+    .save(&chips)
+    .unwrap();
+
+    image::RgbImage::from_fn(320, 480, |x, y| {
+        let gray = (32 + (y / 48) * 21) as u8;
+        image::Rgb(if x / 32 == y / 48 { [24, 172, 202] } else { [gray; 3] })
+    })
+    .save(&steps)
+    .unwrap();
+
+    let ring_chart = image::ImageBuffer::from_fn(400, 400, |x: u32, y: u32| {
+        let band = x.abs_diff(150).max(y.abs_diff(210)) / 28;
+        let color: [u16; 3] = [[10500, 16000, 29000], [60000, 35000, 9000], [17000, 46000, 42000]][band as usize % 3];
+        image::Rgb(color)
+    });
+    ring_chart.save(&rings).unwrap();
+    vec![chips, steps, rings]
+}
+
+/// Three charts opened, the first edited (geometry and tone), settled.
 fn three_photos(name: &str) -> (Harness<'static, GrainyApp>, Vec<PathBuf>) {
     let dir = common::temp_dir(name);
-    let paths: Vec<PathBuf> = common::eight_photos(&dir).into_iter().take(3).collect();
+    let paths = charts(&dir);
     let mut harness = photo_harness(paths.clone());
     settle(&mut harness);
     harness.state_mut().select_photo(0);

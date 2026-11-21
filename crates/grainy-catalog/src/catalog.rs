@@ -74,6 +74,7 @@ impl Catalog {
         db.busy_timeout(Duration::from_secs(5))?;
         let c = Self { db, directory, platform: sources.platform, sources, reader: false };
         schema::migrate(&c)?;
+        c.recover_trash()?;
         Ok(c)
     }
     /// Port of `Catalog.open_reader`; no migration, directory creation, or write connection.
@@ -627,7 +628,7 @@ impl Catalog {
             Ok(())
         })
     }
-    fn delete_photos(&self, ids: &[i64]) -> Result<()> {
+    pub(crate) fn delete_photos(&self, ids: &[i64]) -> Result<()> {
         for part in ids.chunks(500) {
             let marks = vec!["?"; part.len()].join(",");
             for table in ["history", "snapshots", "collection_members"] {

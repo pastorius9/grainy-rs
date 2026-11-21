@@ -182,6 +182,7 @@ impl SyncHost {
 #[derive(Clone, Debug)]
 pub struct ScanJob {
     platform: Platform,
+    thumbnail_cache: String,
     /// Registered folders to read.
     pub roots: Vec<String>,
     /// Folders taken out of the catalogue.
@@ -203,16 +204,16 @@ impl ScanJob {
     }
     /// Runs `new_files` as of `now` (seconds since the epoch).
     pub fn run_at(&self, now: f64) -> Vec<String> {
-        new_files(
-            self.platform,
-            &self.roots,
-            &self.known,
-            &self.skipped,
-            Some(&self.cancel),
-            SETTLE,
-            now,
-            &self.removed,
-        )
+        let cache = resolve(self.platform, &self.thumbnail_cache);
+        let roots: Vec<_> = self
+            .roots
+            .iter()
+            .map(|root| resolve(self.platform, root))
+            .filter(|root| !self.platform.contains_folder(&cache, root))
+            .collect();
+        let mut excluded = self.removed.clone();
+        excluded.push(cache);
+        new_files(self.platform, &roots, &self.known, &self.skipped, Some(&self.cancel), SETTLE, now, &excluded)
     }
 }
 
@@ -331,6 +332,7 @@ impl FolderSync {
         self.last = (self.clock)();
         Ok(Some(ScanJob {
             platform: self.platform,
+            thumbnail_cache: crate::pathx::text(&catalog.directory().join("thumbnails")),
             roots,
             removed,
             known,

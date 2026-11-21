@@ -394,9 +394,7 @@ fn trash(cx: &mut AppContext, _: &Invocation) {
     })));
 }
 
-/// Port of `manager.remove(True)` after 예: the pending edit is stored, each photo's file (when it is there) goes
-/// to the recycle bin, and every row with one of those paths (virtual copies too) leaves the catalogue. A file the
-/// bin refuses stops the removal before the catalogue changes (the oracle's `send2trash` raising).
+/// Commit pending edits, then recycle each original with its own recoverable catalog write.
 pub fn trash_now(cx: &mut AppContext, ids: &[u64]) {
     if op(cx, FileOp::Commit).is_none() {
         return;
@@ -412,14 +410,24 @@ pub fn trash_now(cx: &mut AppContext, ids: &[u64]) {
         }
     }
     let bin: Arc<dyn Trash> = cx.state::<FilesState>().trash.clone().unwrap_or_else(|| Arc::new(SystemTrash));
-    for path in &paths {
-        if Path::new(path).exists() {
-            if let Err(message) = bin.trash(Path::new(path)) {
-                return fail(cx, &message);
+    let Some(catalog) = cx.doc.metadata_catalog() else { return };
+    let mut removed = Vec::new();
+    let mut failure = None;
+    for path in paths {
+        match catalog.trash_original(&path, |file| bin.trash(file).map_err(grainy_catalog::Error::Invalid)) {
+            Ok(mut ids) => removed.append(&mut ids),
+            Err(error) => {
+                failure = Some(error.to_string());
+                break;
             }
         }
     }
-    op(cx, FileOp::RemovePaths { paths });
+    if !removed.is_empty() {
+        op(cx, FileOp::Trashed { ids: removed });
+    }
+    if let Some(message) = failure {
+        fail(cx, &message);
+    }
 }
 
 // ---- relink -------------------------------------------------------------------------------------------------

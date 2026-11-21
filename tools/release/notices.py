@@ -204,6 +204,14 @@ VENDORED = [
         'in its LICENSE.md and README.ijg, both reproduced below in full.',
     ], ['crates/grainy-jpeg-sys/vendor/libjpeg-turbo-2.1.5.1/LICENSE.md',
         'crates/grainy-jpeg-sys/vendor/libjpeg-turbo-2.1.5.1/README.ijg']),
+    ('libavif 1.3.0 (AVIF decoding)', [
+        'Source: https://github.com/AOMediaCodec/libavif. The AVIF decoder and the notices for its',
+        'constituent source files are distributed in crates/grainy-codecs/vendor/libavif/.',
+    ], ['crates/grainy-codecs/vendor/libavif/LICENSE']),
+    ('dav1d (AV1 decoding for libavif)', [
+        'Source: https://code.videolan.org/videolan/dav1d. The source and its notices are distributed in',
+        'crates/grainy-codecs/vendor/dav1d/.',
+    ], ['crates/grainy-codecs/vendor/dav1d/COPYING', 'crates/grainy-codecs/vendor/DECODER-COPYRIGHTS.txt']),
     ('zlib 1.3.1 (compiled into the program for LibRaw)', [
         'Copyright (C) 1995-2022 Jean-loup Gailly and Mark Adler. Source: https://github.com/madler/zlib',
         '(unmodified). Licence: zlib, reproduced below.',
@@ -306,13 +314,14 @@ def build(target, vcomp_version: str | None = None):
         metadata_args += ['--filter-platform', t]
     metadata = json.loads(cargo(*metadata_args))
     packages = {(p['name'], p['version']): p for p in metadata['packages']}
-    workspace = set(metadata['workspace_members'])
+    codec_vendor = REPO / 'crates' / 'grainy-codecs' / 'vendor'
     crates = []
     for key in sorted(linked_crates(targets)):
         p = packages.get(key)
-        if p is None or p['id'] in workspace or p.get('source') is None:
-            continue
-        crates.append(p)
+        if p is None:
+            raise ValueError(f'No cargo metadata for linked crate {key}')
+        if p.get('source') is not None or Path(p['manifest_path']).is_relative_to(codec_vendor):
+            crates.append(p)
 
     rows, flags, short_lines, full_texts = [], [], [], {}
     apache = None
@@ -321,6 +330,21 @@ def build(target, vcomp_version: str | None = None):
         expression = p.get('license') or (f"see {p['license_file']}" if p.get('license_file') else None)
         used, flagged = choose(p.get('license'))
         files = crate_files(folder)
+        vendored = folder.is_relative_to(codec_vendor)
+        if vendored:
+            # Some upstream workspaces keep one license for all member crates.
+            project = codec_vendor / folder.relative_to(codec_vendor).parts[0]
+            if folder != project:
+                files += crate_files(project)
+            if not files:
+                raise ValueError(f'No vendored license text for {p["name"]}')
+        if (p['name'], p['version']) == ('brotli-decompressor', '5.0.0'):
+            # The published crate ships the BSD-3-Clause text of its dual-licensed source.
+            used = {'BSD-3-Clause'}
+        if (p['name'], p['version']) == ('alloc-stdlib', '0.2.2') and not files:
+            # The two allocator crates share one upstream workspace license. Only alloc-no-stdlib packages it.
+            shared = packages[('alloc-no-stdlib', '2.0.4')]
+            files = crate_files(Path(shared['manifest_path']).parent)
         label = f"{p['name']} {p['version']}"
         rows.append((label, expression or 'NONE', 'FLAG' if flagged else '', p.get('repository') or ''))
         if flagged:
@@ -329,7 +353,7 @@ def build(target, vcomp_version: str | None = None):
             for name, text in files:
                 if 'apache' in name.lower() and 'TERMS AND CONDITIONS FOR USE' in text:
                     apache = text
-        if used is not None and used <= SHORT and not flagged:
+        if used is not None and used <= SHORT and not flagged and not vendored:
             lines = copyright_lines(files)
             if not lines and p.get('authors'):
                 lines = ['Copyright the authors: ' + ', '.join(re.sub(r'\s*<[^>]*>', '', a) for a in p['authors'])]

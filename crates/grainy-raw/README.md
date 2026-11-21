@@ -4,6 +4,30 @@ CPU port of Grainy's RAW decoding, camera colour, DCP profiles and metadata-base
 import rules. The Python oracle and the owner's libraries/settings were not modified
 or used as test inputs. Work belongs to branch `port/raw`.
 
+## Windows X-Trans interpolation
+
+On 2026-11-21, three interleaved runs on an i9-12900K compared the 0.3.0
+serial LibRaw kernel with its dependency-ordered tile schedule. On the CC0
+Fujifilm X-T3 `AFXT2721.RAF`, the median full-resolution sRGB native
+postprocess took **16.437 s with raster-order tiles and 4.822 s with the new
+schedule**. These measurements used identical optimized MSVC release
+archives, with only the X-Trans translation unit replaced, and eight available
+OpenMP threads. This particular frame used seven workers. Timings start after
+unpacking and stop before checking the RGB16 buffer.
+
+The X-T3 produced the same full-buffer SHA-256 in camera, sRGB and ProPhoto
+colour modes at full and half resolution. The sRGB full result also matched
+at thread limits 1, 2 and 8. A second CC0 camera, the X-T2
+`20170114_173532_TFW04723.RAF`, matched the original serial decoder at both
+resolutions. Both originals are in the Fujifilm collection at raw.pixls.us.
+The Windows regression test `xtrans_partial_tiles_equal_the_serial_rgb16_decode`
+generates a textured 1031 × 1043 mosaic with partial tile edges and checks
+the RGB16 digest captured from the original serial kernel.
+
+The schedule limits scratch to eight tile buffers. Each eight-direction
+buffer takes 23.5 MiB. Available physical memory and commit space can reduce
+the worker count, and a single worker processes tiles in raster order.
+
 ## API and oracle mapping
 
 | Oracle | Rust |

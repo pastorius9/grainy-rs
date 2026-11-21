@@ -330,26 +330,19 @@ fn convert() {
             assert_settings(&label, &result.settings.0, &expected["settings"]);
             assert_eq!(json!(result.mapped), expected["mapped"], "{label}: mapped");
             assert_eq!(pairs_of(&result.omitted), expected["omitted"], "{label}: omitted (and its order)");
-            assert_eq!(
-                develop::summary(&result, None),
-                expected["summary"].as_str().expect("summary"),
-                "{label}: summary"
-            );
-            assert_eq!(
-                develop::summary(&result, Some(5)),
-                expected["summary5"].as_str().expect("summary5"),
-                "{label}: summary(5)"
-            );
-            assert_eq!(
-                develop::summary(&result, Some(1)),
-                expected["summary1"].as_str().expect("summary1"),
-                "{label}: summary(1)"
-            );
-            assert_eq!(
-                develop::summary(&result, Some(0)),
-                expected["summary0"].as_str().expect("summary0"),
-                "{label}: summary(0)"
-            );
+            // Grainy also identifies the Adobe renderer used by the source. All other text remains
+            // byte-for-byte identical to the reference converter, for each supported report length.
+            let source_version = entry["values"]["table"].as_array().and_then(|items| {
+                let encoded = items.iter().find(|pair| pair[0]["str"] == "ProcessVersion")?.get(1)?;
+                encoded.get("str").or_else(|| encoded.get("int")).or_else(|| encoded.get("float"))?.as_str()
+            });
+            assert_eq!(result.process_version.as_deref(), source_version, "{label}: process version");
+            for (limit, key) in [(None, "summary"), (Some(5), "summary5"), (Some(1), "summary1"), (Some(0), "summary0")]
+            {
+                let legacy = expected[key].as_str().expect("summary");
+                let wanted = expected_summary(legacy, source_version);
+                assert_eq!(develop::summary(&result, limit), wanted, "{label}: {key}");
+            }
             mapped_total += result.mapped.len();
         }
     }
@@ -379,6 +372,15 @@ fn preset_values_and_translate() {
     }
 }
 
+fn expected_summary(legacy: &str, source_version: Option<&str>) -> String {
+    let insertion = legacy.find("\n\n").unwrap_or(legacy.len());
+    let mut wanted = legacy.to_owned();
+    if let Some(version) = source_version {
+        wanted.insert_str(insertion, &format!("\n원본 Adobe ProcessVersion {version} · Grainy 현상 엔진으로 변환"));
+    }
+    wanted
+}
+
 #[test]
 fn preset_read_and_resolve() {
     let c = case("preset_read");
@@ -387,8 +389,18 @@ fn preset_read_and_resolve() {
     for entry in list(&c, "cases") {
         let file = entry["file"].as_str().expect("file");
         let label = format!("preset read {file}");
-        if let Some(settings) = outcome(&label, preset::read(&folder.join(file)), entry) {
-            assert_eq!(Value::Object(settings.clone()), entry["ok"], "{label}");
+        let mut expected = entry.clone();
+        let version_reports: &[&str] = match file {
+            "b.lrtemplate" => &["/ok/_adobe_preset/report", "/ok/_adobe_preset/preview"],
+            "info.xmp" => &["/error/message"],
+            _ => &[],
+        };
+        for path in version_reports {
+            let field = expected.pointer_mut(path).expect("report field");
+            *field = json!(expected_summary(field.as_str().expect("report text"), Some("11.0")));
+        }
+        if let Some(settings) = outcome(&label, preset::read(&folder.join(file)), &expected) {
+            assert_eq!(Value::Object(settings.clone()), expected["ok"], "{label}");
             stored.insert(file.to_owned(), settings);
         }
     }

@@ -2,9 +2,8 @@
 //! to `tests/snapshots/`. The harness panics on a missing glyph, so a passing run also means every character of
 //! the interface was found in the loaded fonts.
 //!
-//! The shell's own snapshots use the test card; the photo snapshots open generated photos (from the garden test
-//! input) through the real path (the background worker and the engine) and compare the photo on screen with
-//! `grainy_engine::develop` of the same settings.
+//! The shell uses the test card. Photo snapshots open generated charts through the worker and compare the
+//! displayed pixels with `grainy_engine::develop` of the same settings.
 
 mod common;
 
@@ -146,6 +145,54 @@ fn photo_snapshot(
 }
 
 #[test]
+fn basic_raw_sliders_fit_full_hd() {
+    use grainy_app::adjustments::{at, Place};
+    let _turn = common::language_lock();
+    for language in [Language::Korean, Language::English] {
+        grainy_i18n::set_language(language);
+        // A maximized window can have about 1000 client pixels after Windows reserves its title and task bars.
+        for (scale, height) in [(1.0, 1080.0), (1.25, 1080.0), (1.25, 1000.0)] {
+            let photo = grainy_testkit::root().join("golden/rawload/_files/triple.dng");
+            let mut harness =
+                builder_sized(1920.0 / scale, height / scale).with_pixels_per_point(scale).build_eframe(|cc| {
+                    let mut app = GrainyApp::new(&cc.egui_ctx);
+                    app.open_paths(vec![photo]);
+                    app.set_mode(Mode::Develop);
+                    app
+                });
+            settle(&mut harness);
+            assert!(harness.state().cx.raw_view());
+            let mut hidden = Vec::new();
+            for place in [Place::WhiteBalance, Place::Raw, Place::Tone, Place::Presence, Place::Color] {
+                for spec in at(place) {
+                    let id = egui::Id::unique(("adjustment", spec.key)).with("slider");
+                    let slider = harness.ctx.read_response(id).expect("Basic slider");
+                    if !slider.interact_rect.contains_rect(slider.rect) {
+                        hidden.push(spec.key);
+                    }
+                }
+            }
+            assert!(hidden.is_empty(), "{language:?}, scale {scale}, height {height}: clipped {hidden:?}");
+            // The last visible number field must also receive mouse and keyboard input.
+            let field = egui::Id::unique(("adjustment", "saturation")).with("value");
+            let pos = harness.ctx.read_response(field).unwrap().rect.center();
+            harness.hover_at(pos);
+            harness.run_steps(1);
+            harness.drag_at(pos);
+            harness.run_steps(1);
+            harness.drop_at(pos);
+            harness.run_steps(1);
+            harness.event(egui::Event::Text("17".into()));
+            harness.run_steps(1);
+            harness.key_press(egui::Key::Enter);
+            harness.run_steps(2);
+            assert_eq!(harness.state().settings().f64("saturation"), 17.0);
+        }
+    }
+    grainy_i18n::set_language(Language::Korean);
+}
+
+#[test]
 fn develop_screen_korean() {
     render(Language::Korean, "develop-ko", |_| {});
 }
@@ -256,9 +303,12 @@ fn develop_photo_at_defaults() {
     let (harness, image) = photo_snapshot(Language::Korean, "develop-photo-ko", &path, |_| {});
     let app = harness.state();
     let frame = app.frame().expect("a frame").clone();
-    assert_eq!((frame.preview.width, frame.preview.height), (1440, 960));
-    assert!(app.status().contains("1440 × 960"), "the status shows the render: {}", app.status());
-    let expected = common::engine_render(&path, Some(2048), &common::settings(json!({})));
+    assert_eq!(frame.original, (1440, 960));
+    let rect = app.photo_rect().unwrap();
+    assert!(frame.preview.width as f32 >= rect.width() && frame.preview.height as f32 >= rect.height());
+    let size = format!("{} × {}", frame.preview.width, frame.preview.height);
+    assert!(app.status().contains(&size), "the status shows the render: {}", app.status());
+    let expected = common::engine_render_for_frame(&path, &frame, &common::settings(json!({})));
     assert!(expected.0 == frame.preview.rgba, "the worker's frame is the engine's develop");
     let (largest, mean) = compare(&image, app, &expected, 300.0);
     println!("fit view at defaults: largest {largest}, mean {mean:.3}");
@@ -279,7 +329,9 @@ fn develop_photo_with_edits() {
         });
         let app = harness.state();
         let frame = app.frame().expect("a frame").clone();
-        let expected = common::engine_render(&path, Some(2048), &edits());
+        let rect = app.photo_rect().unwrap();
+        assert!(frame.preview.width as f32 >= rect.width() && frame.preview.height as f32 >= rect.height());
+        let expected = common::engine_render_for_frame(&path, &frame, &edits());
         assert_eq!((frame.preview.width, frame.preview.height), (expected.1, expected.2));
         assert!(frame.preview.height > frame.preview.width, "rotated a quarter turn");
         assert!(expected.0 == frame.preview.rgba, "the worker's frame is the engine's develop");
@@ -314,8 +366,9 @@ fn before_shows_the_default_render() {
         app.set_before(true);
     });
     let app = harness.state();
-    let expected = common::engine_render(&path, Some(2048), &common::settings(json!({})));
-    assert!(app.frame().is_some_and(|f| f.preview.rgba == expected.0), "the before view is the default develop");
+    let frame = app.frame().expect("before frame");
+    let expected = common::engine_render_for_frame(&path, frame, &common::settings(json!({})));
+    assert!(frame.preview.rgba == expected.0, "the before view is the default develop");
     let (_, mean) = compare(&image, app, &expected, 300.0);
     assert!(mean < 4.0);
     assert_eq!(app.edit_state().settings().f64("exposure"), 0.7, "the edits stay");
@@ -426,6 +479,13 @@ fn library_on_disk() {
     // Which folders of the tree are open depends on when the listing grew: open the drives only.
     common::snapshot::open_folders(harness.state_mut(), &[]);
     settle(&mut harness);
+    // Reopen the selected chart after import: its completed preview supplies the status line.
+    let selected = harness.state().document().current_index().expect("import selected a photo");
+    harness.state_mut().select_photo((selected + 1) % 8);
+    settle(&mut harness);
+    harness.state_mut().select_photo(selected);
+    settle(&mut harness);
+    assert_eq!(harness.state().frame().unwrap().photo, harness.state().document().current_id());
     save(&mut harness, "library-catalog-ko");
     let id = harness.state().document().current_id() as i64;
     assert!(id > 0);

@@ -21,9 +21,7 @@ use serde_json::{Map, Value};
 
 use crate::{develop, CameraSource, Options, Output, Source};
 
-/// RAW extensions of `luma/engine.py RAW_EXTENSIONS`.
-pub const RAW_EXTENSIONS: [&str; 15] =
-    ["arw", "cr2", "cr3", "nef", "nrw", "raf", "rw2", "orf", "pef", "dng", "srw", "3fr", "iiq", "kdc", "mos"];
+pub use grainy_core::formats::RAW_NAMES as RAW_EXTENSIONS;
 /// Video extensions of `luma/engine.py VIDEO_EXTENSIONS`.
 pub const VIDEO_EXTENSIONS: [&str; 5] = ["mp4", "mov", "avi", "mkv", "m4v"];
 
@@ -275,6 +273,7 @@ pub fn parse_format(name: &str) -> Option<ExportFormat> {
         "tiff 16-bit" => ExportFormat::Tiff16,
         "tiff hdr 32-bit" => ExportFormat::TiffHdr32,
         "avif" => ExportFormat::Avif,
+        "avif hdr 10-bit" => ExportFormat::AvifHdr,
         "jpeg xl" | "jxl" => ExportFormat::JpegXl,
         _ => return None,
     })
@@ -534,10 +533,15 @@ pub fn export_photo(
     let s = grainy_core::Settings(settings.clone());
     let working_space = s.str("working_space").to_owned();
     let loaded = load_photo(source_path, None, &s)?;
-    let hdr_export = request.format == ExportFormat::TiffHdr32;
+    let hdr_export = matches!(request.format, ExportFormat::TiffHdr32 | ExportFormat::AvifHdr);
     let (developed, cms) = if hdr_export {
         if !s.bool("hdr") {
-            return Err(Error::Refused("HDR TIFF를 저장하려면 사진의 HDR 모드를 켜 주세요.".into()));
+            let message = if request.format == ExportFormat::AvifHdr {
+                "HDR AVIF를 저장하려면 사진의 HDR 모드를 켜 주세요."
+            } else {
+                "HDR TIFF를 저장하려면 사진의 HDR 모드를 켜 주세요."
+            };
+            return Err(Error::Refused(message.into()));
         }
         let working =
             develop(loaded.photo.source(), &settings, &Options { output: Output::Working, ..Options::default() })?;

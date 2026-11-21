@@ -126,6 +126,7 @@ pub fn tool_hint(cx: &mut AppContext) -> String {
             None => tr("새 마스크"),
         };
         let how = match mode {
+            Mode::Object => "사진 안에서 개체를 둘러싸 주세요.",
             Mode::Brush => "사진 위를 칠하세요.",
             Mode::Linear => "사진 위에서 드래그하세요.",
             Mode::Radial => "사진 위에서 드래그해 타원을 그리세요.",

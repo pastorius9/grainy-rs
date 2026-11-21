@@ -103,6 +103,8 @@ impl AppContext {
         // Previews developed at this size are as sharp on screen as the full fit source and cost a fraction of it.
         self.view_need = (self.zoom == Zoom::Fit && shown.x > 0.0 && shown.y > 0.0).then(|| {
             let long = (shown.x.max(shown.y) * ppp).ceil() as usize;
+            #[cfg(windows)]
+            let long = long.max(crate::native_hdr::fitted_side(self, size));
             long.div_ceil(128).max(4) * 128
         });
         // The open tool takes the pointer first (in frame coordinates); otherwise a drag pans.

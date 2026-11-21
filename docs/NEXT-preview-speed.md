@@ -4,6 +4,15 @@ Hand-over note, 2026-11-21. Branch `preview-speed`, commit "Preview speed with d
 profile, fit previews at the view's size". **Not yet run after these changes: the test suite and the on-screen
 measurement of the view-size change.**
 
+## Develop UI update
+
+The product goal is a Rust photo editor that surpasses Lightroom Classic in daily editing. For the Basic panel,
+we measure how many complete controls a photographer can see and use before scrolling. On the same default DNG
+at 1920×1080 and 125% scaling, the Korean panel went from 4 fully visible adjustment rows to all 15.
+The English panel also fits all 15. The regression test `basic_raw_sliders_fit_full_hd` opens the DNG,
+checks the slider hit areas and types a value into the last field, including with only 1000 client pixels of height.
+These measurements compare the two Grainy builds. A side-by-side editing session with Lightroom Classic is still pending.
+
 ## What the owner reported (after 0.2.1)
 
 1. On a 24 MP Leica SL DNG, Lightroom Classic reacts far faster. Moving **Exposure** updates the filmstrip
@@ -51,8 +60,8 @@ measurement of the view-size change.**
 4. **Compare with Lightroom Classic** using the same tool (below): same photo, Develop module, fit view, drag
    Exposure; undo afterwards (Ctrl+Z). The owner opens Lightroom on the photo first.
 5. **Zoom:** the first full-resolution render took 18 s on the CPU before the GPU change; measure it again.
-6. **Denser Develop panel** (report 2): font sizes, row heights, button heights and spacing of the right panel,
-   compared side by side with Lightroom Classic at the same screen size.
+6. **Develop panel comparison** (report 2): compare the compact layout with Lightroom Classic at the same screen
+   size, especially the precision of fine slider movements and the time needed to find an adjustment.
 
 ## How to measure
 

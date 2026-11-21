@@ -12,12 +12,13 @@ const USAGE: &str = "\
 usage:
   grainy-cli render <source> -o <output> [options]
   grainy-cli info <source>
+  grainy-cli merge hdr|panorama <first> <second> [more photos] -o <new file.tif>
 
 render options:
   -o, --output <file>       the file to create (it must not exist; the source is never written)
   --settings <file.json>    the settings object the catalogue stores (missing keys are defaults)
   --format <name>           JPEG | PNG | \"PNG 16-bit\" | \"TIFF 8-bit\" | \"TIFF 16-bit\" | \"TIFF HDR 32-bit\" | AVIF |
-                            \"JPEG XL\" (default: from the output extension)
+                            \"AVIF HDR 10-bit\" | \"JPEG XL\" (default: from the output extension)
   --quality <0-100>         JPEG and AVIF quality (default 95)
   --longest <N>             shrink so the long side is N pixels (never enlarges)
   --box <W>x<H>             shrink into a box (0 = no limit on that side), with --fit inside|cover
@@ -31,6 +32,7 @@ render options:
 JPEG XL: the pure-Rust encoder writes lossless files only (the quality is not used).";
 
 fn main() -> ExitCode {
+    grainy_core::settings::set_hdr_feature(true);
     let args = std::env::args_os()
         .skip(1)
         .map(|arg| arg.into_string().map_err(|_| "argument is not valid Unicode".to_owned()))
@@ -47,14 +49,34 @@ fn main() -> ExitCode {
 fn run(args: &[String]) -> Result<(), String> {
     match args.first().map(String::as_str) {
         Some("render") => render(&args[1..]),
+        Some("merge") => merge(&args[1..]),
         Some("info") => info(&args[1..]),
         Some("-h" | "--help" | "help") => {
             println!("{USAGE}");
             Ok(())
         }
-        Some(other) => Err(format!("unknown command {other:?} (try: render, info)")),
-        None => Err("no command (try: render, info; --help for usage)".into()),
+        Some(other) => Err(format!("unknown command {other:?} (try: render, info, merge)")),
+        None => Err("no command (try: render, info, merge; --help for usage)".into()),
     }
+}
+
+fn merge(args: &[String]) -> Result<(), String> {
+    use grainy_engine::merge::{merge_to_tiff, Mode};
+    let usage = "usage: grainy-cli merge hdr|panorama <first> <second> [more photos] -o <new file.tif>";
+    let [kind, sources @ .., option, destination] = args else { return Err(usage.into()) };
+    if sources.len() < 2 || !matches!(option.as_str(), "-o" | "--output") {
+        return Err(usage.into());
+    }
+    let mode = match kind.as_str() {
+        "hdr" => Mode::Hdr,
+        "panorama" => Mode::Panorama,
+        _ => return Err(usage.into()),
+    };
+    let paths = sources.iter().map(PathBuf::from).collect::<Vec<_>>();
+    let output = PathBuf::from(destination);
+    let (width, height) = merge_to_tiff(&paths, &output, mode, &std::sync::atomic::AtomicBool::new(false), &|_| {})?;
+    println!("{} ({} x {})", output.display(), width, height);
+    Ok(())
 }
 
 fn info(args: &[String]) -> Result<(), String> {

@@ -84,7 +84,7 @@ pub fn import_paths(cx: &mut AppContext, paths: Vec<PathBuf>) {
                 "import",
                 tr("사진 가져오기"),
                 move |handle| {
-                    let (files, roots) = import::scan(&paths, handle.cancel_flag());
+                    let (files, roots) = import::scan_for_library(&paths, handle.cancel_flag(), &folder);
                     let catalog = grainy_catalog::Catalog::new(&folder).map_err(|e| e.to_string())?;
                     let progress = |done: usize, total: usize, name: &str| {
                         let text = if name.is_empty() {

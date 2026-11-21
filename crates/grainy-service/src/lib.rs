@@ -102,16 +102,7 @@ pub const SORTS: [&str; 4] = ["imported", "name", "capture", "rating"];
 pub const PRESET_KEY: &str = "_preset";
 /// Port of `engine.VIDEO_EXTENSIONS` (copied; batch tools skip videos an older version imported).
 pub const VIDEO_EXTENSIONS: [&str; 5] = [".mp4", ".mov", ".avi", ".mkv", ".m4v"];
-/// Port of `engine.RAW_EXTENSIONS` (copied).
-pub const RAW_EXTENSIONS: [&str; 15] = [
-    ".arw", ".cr2", ".cr3", ".nef", ".nrw", ".raf", ".rw2", ".orf", ".pef", ".dng", ".srw", ".3fr", ".iiq", ".kdc",
-    ".mos",
-];
-/// Port of `engine.IMAGE_EXTENSIONS` (copied): RAW plus the ordinary image formats.
-pub const IMAGE_EXTENSIONS: [&str; 22] = [
-    ".arw", ".cr2", ".cr3", ".nef", ".nrw", ".raf", ".rw2", ".orf", ".pef", ".dng", ".srw", ".3fr", ".iiq", ".kdc",
-    ".mos", ".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp", ".webp",
-];
+pub use grainy_core::formats::{IMAGE_EXTENSIONS, RAW_EXTENSIONS};
 
 /// Kind of `command_batch.BatchConflict`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

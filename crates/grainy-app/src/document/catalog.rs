@@ -1133,9 +1133,22 @@ pub mod import {
     /// `Path.rglob('*')`), sorted as text and without duplicates, and the folders to register (each folder
     /// resolved; a file's own folder).
     pub fn scan(paths: &[PathBuf], cancel: &AtomicBool) -> (Vec<PathBuf>, Vec<PathBuf>) {
+        scan_excluding(paths, cancel, None)
+    }
+
+    /// Scans selected paths without reimporting this catalogue's generated JPEG thumbnails.
+    pub(crate) fn scan_for_library(
+        paths: &[PathBuf],
+        cancel: &AtomicBool,
+        library: &Path,
+    ) -> (Vec<PathBuf>, Vec<PathBuf>) {
+        scan_excluding(paths, cancel, Some(&resolve(&library.join("thumbnails"))))
+    }
+
+    fn scan_excluding(paths: &[PathBuf], cancel: &AtomicBool, cache: Option<&Path>) -> (Vec<PathBuf>, Vec<PathBuf>) {
         let mut files = BTreeSet::new();
         let mut roots = Vec::new();
-        fn walk(folder: &Path, out: &mut BTreeSet<String>, cancel: &AtomicBool) {
+        fn walk(folder: &Path, out: &mut BTreeSet<String>, cancel: &AtomicBool, cache: Option<&Path>) {
             if cancel.load(std::sync::atomic::Ordering::Relaxed) {
                 return;
             }
@@ -1144,18 +1157,24 @@ pub mod import {
                 let path = entry.path();
                 let Ok(kind) = entry.file_type() else { continue };
                 if kind.is_dir() {
-                    walk(&path, out, cancel);
+                    if !cache.is_some_and(|cache| resolve(&path) == cache) {
+                        walk(&path, out, cancel, cache);
+                    }
                 } else if super::super::has_extension(&path, &grainy_service::IMAGE_EXTENSIONS) && path.is_file() {
                     out.insert(path.to_string_lossy().into_owned());
                 }
             }
         }
         for path in paths {
+            let resolved = resolve(path);
+            if cache.is_some_and(|cache| resolved.starts_with(cache)) {
+                continue;
+            }
             if path.is_dir() {
-                roots.push(resolve(path));
-                walk(path, &mut files, cancel);
+                roots.push(resolved);
+                walk(path, &mut files, cancel, cache);
             } else if super::super::has_extension(path, &grainy_service::IMAGE_EXTENSIONS) {
-                if let Some(parent) = resolve(path).parent() {
+                if let Some(parent) = resolved.parent() {
                     roots.push(parent.to_path_buf());
                 }
                 files.insert(path.to_string_lossy().into_owned());

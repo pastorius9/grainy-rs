@@ -40,6 +40,6 @@ mod tests {
     #[test]
     fn the_build_version_is_the_rust_version_marked() {
         assert_eq!(super::BUILD_VERSION, format!("rs-{}", super::RS_VERSION));
-        assert_eq!(super::RS_VERSION, "0.2.1");
+        assert_eq!(super::RS_VERSION, env!("CARGO_PKG_VERSION"));
     }
 }

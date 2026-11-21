@@ -1,6 +1,6 @@
 //! The Basic panel (기본): black and white, the automatic buttons, the negative, white balance, tone, presence and colour (luma/app.py `build_ui`, luma/studio.py `film_balance`, `drt_panel`).
 
-use eframe::egui::{self, Ui, Vec2};
+use eframe::egui::Ui;
 use grainy_i18n::{tr, tr_with};
 
 use super::controls;
@@ -49,18 +49,19 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
     super::calibration::profile_box(ui, cx);
     let width = ui.available_width();
     let gap = 4.0;
-    let cell = ((width - 2.0 * gap) / 3.0).floor();
-    // 흑백 · 자동 톤 · 자동 색
+    let negative = cx.settings().bool("negative");
     ui.horizontal(|ui| {
         ui.spacing_mut().item_spacing.x = gap;
-        ui.allocate_ui_with_layout(Vec2::new(cell, 30.0), egui::Layout::left_to_right(egui::Align::Center), |ui| {
-            ui.set_min_size(Vec2::new(cell, 30.0));
-            let mut mono = cx.settings().bool("monochrome");
-            if widgets::checkbox(ui, &mut mono, &tr("흑백")).changed() {
-                cx.doc.edit_mut().set("monochrome", mono);
-                cx.doc.edit_mut().commit("보정 변경");
-            }
-        });
+        let mut mono = cx.settings().bool("monochrome");
+        if widgets::checkbox(ui, &mut mono, &tr("흑백")).changed() {
+            cx.doc.edit_mut().set("monochrome", mono);
+            cx.doc.edit_mut().commit("보정 변경");
+        }
+        let cell = ((ui.available_width() - 2.0 * gap) / 3.0).floor();
+        let tip = tr("스캔한 네거티브 필름을 사진으로 바꿉니다. 필름 베이스 색(컬러 네거티브의 주황색)을 빼고 채널별로 뒤집습니다. 다른 보정은 반전한 사진에 그대로 적용됩니다.");
+        if Button::new(&crate::text::tr("네거티브")).checked(negative).width(cell).show(ui).on_hover_text(tip).clicked() {
+            cx.run("develop.negative");
+        }
         let tone_tip = tr("현재 크롭 영역의 밝기 하위·상위 0.1%를 기준으로 분석합니다. 검정·흰색 양끝에 3% 여유를 두고 약 8–247/255로 보정합니다.");
         if Button::new(&tr("자동 톤")).width(cell).show(ui).on_hover_text(format!("{tone_tip} ({})", controls::hint("Ctrl+U"))).clicked() {
             cx.run("develop.auto_tone");
@@ -70,16 +71,9 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
             cx.run("develop.auto_color");
         }
     });
-    // The HDR button (`hdr_button`, in the oracle's automatic row; here a row of its own, as 흑백 shares the row and
-    // four cells do not fit the English labels). Only while the HDR mode is on.
+    // Additional actions only appear for HDR photos and inverted film scans.
     crate::hdr::button(ui, cx, width);
-    // 네거티브 반전: `toggle_negative` (the scan is measured on a background job the first time).
-    let negative = cx.settings().bool("negative");
-    let tip = tr("스캔한 네거티브 필름을 사진으로 바꿉니다. 필름 베이스 색(컬러 네거티브의 주황색)을 빼고 채널별로 뒤집습니다. 다른 보정은 반전한 사진에 그대로 적용됩니다.");
-    if Button::new(&tr("네거티브 반전")).checked(negative).width(width).show(ui).on_hover_text(tip).clicked() {
-        cx.run("develop.negative");
-    }
-    if negative {
+    if cx.settings().bool("negative") {
         cx.sliders(ui, Place::Negative);
         let labels = [tr("필름 베이스 찍기"), tr("다시 분석")];
         let row = [Button::new(&labels[0]).checked(tools::eyedropper::base_checked(cx)), Button::new(&labels[1])];
@@ -94,41 +88,39 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
         }
     }
     // 화이트 밸런스
-    widgets::section(ui, &tr("화이트 밸런스"));
     let wb_tip = tr_with!(
         "사진에서 중성 회색이나 흰색을 클릭하거나, 드래그해 사각형 영역의 평균으로 맞춥니다. ({0})",
         controls::hint("W")
     );
-    if Button::new(&tr("화이트 밸런스 스포이드"))
-        .checked(tools::eyedropper::wb_checked(cx))
-        .width(width)
-        .show(ui)
-        .on_hover_text(wb_tip)
-        .clicked()
-    {
-        cx.run("develop.white_balance");
-    }
+    ui.horizontal(|ui| {
+        widgets::section(ui, &tr("화이트 밸런스"));
+        if Button::new(&crate::text::tr("스포이드"))
+            .checked(tools::eyedropper::wb_checked(cx))
+            .width(ui.available_width())
+            .show(ui)
+            .on_hover_text(wb_tip)
+            .clicked()
+        {
+            cx.run("develop.white_balance");
+        }
+    });
     cx.sliders(ui, Place::WhiteBalance);
     if cx.raw_view() {
         super::calibration::raw_white_balance(ui, cx);
     }
-    let s = cx.settings();
-    let checked: Vec<bool> = FILM_BALANCE
-        .iter()
-        .map(|(_, _, reference, light)| {
-            s.bool("kelvin_enabled") && s.f64("wb_reference") == *reference && s.f64("kelvin") == *light
-        })
-        .collect();
-    let labels: Vec<String> = FILM_BALANCE.iter().map(|(_, title, _, _)| tr(title)).collect();
-    let row: Vec<Button<'_>> = labels.iter().zip(&checked).map(|(l, c)| Button::new(l).checked(*c)).collect();
-    if let Some(i) = widgets::button_row(ui, &row, width, gap) {
-        film_balance(cx, i, !checked[i]);
-    }
     let mut open = cx.foldouts.contains("wb_detail");
-    ui.add_space(2.0);
     widgets::foldout(ui, &tr("화이트 밸런스 상세"), &mut open);
     cx.set_foldout("wb_detail", open);
     if open {
+        let s = cx.settings();
+        let checked = FILM_BALANCE.map(|(_, _, reference, light)| {
+            s.bool("kelvin_enabled") && s.f64("wb_reference") == reference && s.f64("kelvin") == light
+        });
+        let labels = FILM_BALANCE.map(|(_, title, _, _)| tr(title));
+        let row = [Button::new(&labels[0]).checked(checked[0]), Button::new(&labels[1]).checked(checked[1])];
+        if let Some(i) = widgets::button_row(ui, &row, width, gap) {
+            film_balance(cx, i, !checked[i]);
+        }
         let mut kelvin = cx.settings().bool("kelvin_enabled");
         if widgets::checkbox(ui, &mut kelvin, &tr("켈빈 화이트 밸런스 사용")).changed() {
             cx.doc.edit_mut().set("kelvin_enabled", kelvin);
@@ -138,12 +130,17 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
         cx.sliders(ui, Place::WhiteBalanceDetail);
     }
     // 톤
-    widgets::section(ui, &tr("톤"));
     let modes = [("classic", "톤 매핑 · 기본"), ("drt", "톤 매핑 · 부드러운 하이라이트 (DRT)")];
     let current = cx.settings().str("tone_mapping").to_owned();
     let index = modes.iter().position(|(v, _)| *v == current).unwrap_or(0);
     let names: Vec<String> = modes.iter().map(|(_, n)| tr(n)).collect();
-    if let Some(chosen) = controls::choice(ui, "tone_mapping", &tr("톤 매핑"), &names, index, width) {
+    let chosen = ui
+        .horizontal(|ui| {
+            widgets::section(ui, &tr("톤"));
+            controls::choice(ui, "tone_mapping", &tr("톤 매핑"), &names, index, ui.available_width())
+        })
+        .inner;
+    if let Some(chosen) = chosen {
         if modes[chosen].0 != current {
             cx.set_and_commit("tone_mapping", modes[chosen].0, "톤 매핑");
         }

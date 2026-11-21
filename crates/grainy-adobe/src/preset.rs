@@ -18,11 +18,7 @@ pub const KEY: &str = "_adobe_preset";
 const LIMIT: usize = 16 * 1024 * 1024;
 /// `adobe_preset.GEOMETRY`: per-photo composition that a preset never replaces.
 pub const GEOMETRY: [&str; 4] = ["crop", "rotation", "straighten", "flip"];
-/// `engine.RAW_EXTENSIONS`.
-pub const RAW_EXTENSIONS: [&str; 15] = [
-    ".arw", ".cr2", ".cr3", ".nef", ".nrw", ".raf", ".rw2", ".orf", ".pef", ".dng", ".srw", ".3fr", ".iiq", ".kdc",
-    ".mos",
-];
+pub use grainy_core::formats::RAW_EXTENSIONS;
 
 fn python_base64() -> GeneralPurpose {
     // binascii.a2b_base64(strict): canonical padding required, non-zero trailing bits tolerated.

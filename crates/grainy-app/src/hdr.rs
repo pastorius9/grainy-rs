@@ -13,13 +13,8 @@
 //! oracle's maths: an HDR photo saved as JPEG/PNG/TIFF goes through `sdr_rendition` with the photo's SDR preview
 //! sliders, exactly as the oracle did when the mode was on.
 //!
-//! **What stays off: the native HDR screen.** The oracle shows HDR pixels above SDR white on an HDR monitor through
-//! its own Direct3D 11 swap chain in scRGB (`native_hdr.py`, a separately built `grainy_hdr.dll`; its self-test
-//! notes `physical_hdr_verified=False`). The Rust window draws through egui on an 8-bit sRGB surface, and replacing
-//! that surface for the photo area is not possible without owning the window's swap chain. So the screen is always
-//! the oracle's SDR screen (`native_hdr.Display()`: not active, `stops = 0`): the status reads "SDR 화면 · 흰색까지
-//! 표시 · HDR 계조는 유지", values above white are clipped on screen and marked by the clipping overlay, the HDR
-//! histogram shows everything above white as beyond the screen. Nothing claims an HDR screen.
+//! The main egui surface is SDR. Windows also offers a separate scRGB preview on an active HDR monitor. Its
+//! float render comes from the same edit and is mapped to that monitor's SDR reference white and peak luminance.
 
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -51,6 +46,8 @@ pub struct View {
     pub sdr_preview: bool,
     /// 'HDR 영역 표시' (`hdr_visualize`; not stored).
     pub visualize: bool,
+    /// Retain extended linear pixels while a separate HDR output is presenting them.
+    pub native_preview: bool,
 }
 
 /// What the histogram and the clipping button show about an HDR frame (`Histogram.hdr`, `hdr_limit`,
@@ -92,6 +89,8 @@ pub fn poll(cx: &mut AppContext) {
     if !enabled() {
         return;
     }
+    #[cfg(windows)]
+    crate::native_hdr::poll(cx);
     let folder = cx.doc.library_folder();
     if cx.state::<HdrState>().loaded.as_ref() != Some(&folder) {
         let stored = cx.doc.preference("hdr_sdr_preview").and_then(|v| v.as_bool()).unwrap_or(false);
@@ -154,6 +153,8 @@ pub fn panel(ui: &mut Ui, cx: &mut AppContext) {
             cx.slider(ui, spec, true);
         }
     }
+    #[cfg(windows)]
+    crate::native_hdr::button(ui, cx);
     let mut view = cx.state::<HdrState>().view;
     if widgets::checkbox(ui, &mut view.visualize, &tr("HDR 영역 표시")).changed() {
         set_view(cx, view);
@@ -291,6 +292,7 @@ pub struct Presented {
     /// One byte per pixel: [`HIGHLIGHT`] (above what the screen shows) and [`SHADOW`].
     pub mask: Vec<u8>,
     pub info: FrameInfo,
+    pub native_hdr: Option<std::sync::Arc<[f32]>>,
 }
 
 /// Port of the HDR branch of `render`'s `work()` and `done()` (luma/app.py) on the SDR screen: `working` is
@@ -359,6 +361,14 @@ pub fn present(
         channels,
         mask,
         info: FrameInfo { limit, inside, outside, preview: view.sdr_preview },
+        native_hdr: view.native_preview.then(|| {
+            let linear = grainy_color::to_linear(&hdr_pixels);
+            let mut rgba = Vec::with_capacity(width * height * 4);
+            for rgb in linear.as_standard_layout().as_slice().unwrap().as_chunks::<3>().0 {
+                rgba.extend_from_slice(&[rgb[0], rgb[1], rgb[2], 1.0]);
+            }
+            rgba.into()
+        }),
     })
 }
 

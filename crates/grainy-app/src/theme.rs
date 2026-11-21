@@ -96,6 +96,11 @@ pub const THUMB_EMPTY: Color32 = hex(0x222930);
 /// `font-size:12px`: the interface text.
 pub const FONT_SIZE: f32 = 12.0;
 
+/// The Develop inspector is the right panel. Dialogs and the library use their own spacing.
+pub fn in_develop_column(ui: &egui::Ui) -> bool {
+    ui.stack().contained_in(egui::UiKind::RightPanel)
+}
+
 /// The bold family registered by [`crate::fonts::install`].
 pub fn bold_family() -> FontFamily {
     FontFamily::Name(crate::fonts::BOLD.into())

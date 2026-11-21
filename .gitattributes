@@ -4,4 +4,6 @@ tools/golden/*.py text eol=lf
 docs/*.md text eol=lf
 
 crates/grainy-lens/data/lensfun/*.xml -text
+golden/**/*.[xX][mM][pP] -text
+golden/**/*.bin -text
 tools/release/macos/*.icns binary

@@ -133,25 +133,11 @@ pub struct Copied {
 
 /// `sorted(str(p) for p in src.rglob('*') if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS)`.
 pub fn image_files(source: &str) -> Vec<String> {
-    fn walk(folder: &Path, text: &str, out: &mut Vec<String>) {
-        let Ok(entries) = std::fs::read_dir(folder) else { return };
-        for entry in entries.flatten() {
-            let name = entry.file_name().to_string_lossy().into_owned();
-            let path = pathx::join(Platform::native(), text, &name);
-            let Ok(kind) = entry.file_type() else { continue };
-            if kind.is_dir() {
-                walk(&entry.path(), &path, out);
-            } else if crate::document::has_extension(Path::new(&name), &grainy_service::IMAGE_EXTENSIONS)
-                && Path::new(&path).is_file()
-            {
-                out.push(path);
-            }
-        }
+    if !Path::new(source).is_dir() {
+        return Vec::new();
     }
-    let mut out = Vec::new();
-    walk(Path::new(source), source, &mut out);
-    out.sort();
-    out
+    let (files, _) = import::scan(&[PathBuf::from(source)], &false.into());
+    files.into_iter().map(|file| pathx::text(&file)).collect()
 }
 
 /// `engine.read_metadata` for `plan`: the EXIF capture time and camera. A file whose metadata cannot be read
@@ -165,7 +151,8 @@ impl CopyRun {
     /// `execute`. Cancelling stops between photos (`cancel.is_set()` before each one).
     pub fn run(&self, library: &Path, handle: &crate::jobs::JobHandle, shared: &CopyShared) -> Result<Copied, String> {
         let platform = Platform::native();
-        let files = image_files(&self.source);
+        let (files, _) = import::scan_for_library(&[PathBuf::from(&self.source)], handle.cancel_flag(), library);
+        let files: Vec<_> = files.into_iter().map(|file| pathx::text(&file)).collect();
         shared.update(|s| s.total = files.len());
         handle.progress(0, files.len(), "");
         let known = if self.skip {
@@ -382,8 +369,11 @@ impl ImportRun {
     ) -> Result<Imported, String> {
         let catalog = Catalog::new(library).map_err(|e| e.to_string())?;
         let platform = catalog.platform();
-        let (mut files, roots) =
-            if self.scan { import::scan(&self.paths, cancel) } else { (self.paths.clone(), vec![]) };
+        let (mut files, roots) = if self.scan {
+            import::scan_for_library(&self.paths, cancel, library)
+        } else {
+            (self.paths.clone(), vec![])
+        };
         let roots = if self.restore {
             roots
         } else {

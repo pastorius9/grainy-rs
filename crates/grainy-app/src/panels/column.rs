@@ -15,8 +15,10 @@ use crate::widgets::{self, Button};
 
 /// Draws the column.
 pub fn develop_column(ui: &mut Ui, cx: &mut AppContext, panels: &mut [Box<dyn Panel>]) {
+    ui.spacing_mut().interact_size.y = 20.0;
+    ui.spacing_mut().button_padding = Vec2::new(6.0, 2.0);
     EguiPanel::bottom("develop_footer")
-        .frame(Frame::new().inner_margin(Margin { left: 0, right: 0, top: 6, bottom: 0 }))
+        .frame(Frame::new().inner_margin(Margin { left: 0, right: 0, top: 3, bottom: 0 }))
         .show_separator_line(false)
         .resizable(false)
         .show(ui, |ui| {
@@ -34,9 +36,7 @@ pub fn develop_column(ui: &mut Ui, cx: &mut AppContext, panels: &mut [Box<dyn Pa
             }
         });
     egui::CentralPanel::no_frame().show(ui, |ui| {
-        ui.spacing_mut().item_spacing = Vec2::new(5.0, 6.0);
-        widgets::section(ui, "HISTOGRAM");
-        histogram(ui, cx);
+        ui.spacing_mut().item_spacing = Vec2::new(4.0, 2.0);
         let info = match cx.doc.current() {
             Some(photo) => match photo.original {
                 Some((w, h)) => format!("{}  ·  {w} × {h}", photo.name),
@@ -47,7 +47,16 @@ pub fn develop_column(ui: &mut Ui, cx: &mut AppContext, panels: &mut [Box<dyn Pa
             }
             None => tr("사진 정보"),
         };
-        widgets::label(ui, &info, t::MUTED, t::FONT_SIZE);
+        ui.horizontal(|ui| {
+            widgets::section(ui, "HISTOGRAM");
+            let width = ui.available_width();
+            let caption = widgets::elided_middle(ui, &info, t::font(t::FONT_SIZE), t::MUTED, width);
+            let (rect, response) = ui.allocate_exact_size(Vec2::new(width, caption.size().y), Sense::hover());
+            let pos = Pos2::new(rect.right() - caption.size().x, rect.center().y - caption.size().y / 2.0);
+            ui.painter().galley(pos, caption, t::MUTED);
+            response.on_hover_text(&info);
+        });
+        histogram(ui, cx);
         tool_strip(ui, cx);
         egui::ScrollArea::vertical().id_salt("develop_panels").auto_shrink([false, false]).show(ui, |ui| {
             ui.spacing_mut().item_spacing = Vec2::ZERO;
@@ -64,10 +73,66 @@ pub fn develop_column(ui: &mut Ui, cx: &mut AppContext, panels: &mut [Box<dyn Pa
     });
 }
 
+#[derive(Clone, Copy, Default)]
+struct ToneDrag {
+    document: u64,
+    photo: u64,
+    start_x: f32,
+    value: f64,
+}
+
+/// Lock the tone control at the press position, even when a drag crosses a neighbouring band.
+/// On the HDR histogram SDR white is halfway across; the remaining stops belong to Whites.
+fn histogram_adjustments(ui: &mut Ui, cx: &mut AppContext, rect: Rect, hdr: bool) {
+    let Some(photo) = cx.doc.current() else { return };
+    let photo = photo.id;
+    let plot = Rect::from_min_max(rect.min + Vec2::new(0.0, 23.0), rect.max);
+    let sdr = if hdr { 0.5 } else { 1.0 };
+    let keys = ["blacks", "shadows", "exposure", "highlights", "whites"];
+    for (index, key) in keys.into_iter().enumerate() {
+        let left = plot.left() + plot.width() * index as f32 / 5.0 * sdr;
+        let right = if index == 4 { plot.right() } else { plot.left() + plot.width() * (index + 1) as f32 / 5.0 * sdr };
+        let band = Rect::from_min_max(Pos2::new(left, plot.top()), Pos2::new(right, plot.bottom()));
+        let id = egui::Id::unique(("histogram_tone", key));
+        let response = ui.interact(band, id, Sense::drag());
+        let spec = crate::adjustments::spec(key).expect("registered tone control");
+        if response.hovered() || response.dragged() {
+            ui.painter().rect_filled(band, CornerRadius::ZERO, Color32::from_white_alpha(18));
+            let label = format!("{}  {}", tr(spec.label), spec.format(cx.settings().f64(key)));
+            response.clone().on_hover_cursor(egui::CursorIcon::ResizeHorizontal).on_hover_text(label);
+        }
+        if response.drag_started_by(egui::PointerButton::Primary) {
+            if let Some(origin) = ui.input(|i| i.pointer.press_origin()) {
+                let grab = ToneDrag {
+                    photo,
+                    document: cx.document_generation,
+                    start_x: origin.x,
+                    value: cx.settings().f64(key),
+                };
+                ui.data_mut(|d| d.insert_temp(id, grab));
+            }
+        }
+        let stopped = response.drag_stopped();
+        let grab = ui.data_mut(|d| if stopped { d.remove_temp::<ToneDrag>(id) } else { d.get_temp::<ToneDrag>(id) });
+        if let Some(grab) = grab.filter(|g| g.photo == photo && g.document == cx.document_generation) {
+            if response.dragged_by(egui::PointerButton::Primary) || stopped {
+                let value = ui
+                    .input(|i| i.pointer.interact_pos())
+                    .map(|p| {
+                        let fraction = f64::from((p.x - grab.start_x) / plot.width().max(1.0));
+                        spec.value_at(spec.position(grab.value + fraction * (spec.high - spec.low)))
+                    })
+                    .filter(|v| *v != cx.settings().f64(key));
+                cx.apply_row(key, widgets::RowEvent { set: value, commit: stopped });
+            }
+        }
+    }
+}
+
 /// The histogram of the picture on screen (`Histogram.paintEvent`) with the two clipping buttons.
 fn histogram(ui: &mut Ui, cx: &mut AppContext) {
     let width = ui.available_width();
-    let (rect, _) = ui.allocate_exact_size(Vec2::new(width, 104.0), Sense::hover());
+    let (rect, _) = ui.allocate_exact_size(Vec2::new(width, 78.0), Sense::hover());
     let painter = ui.painter_at(rect);
     painter.rect_filled(rect, CornerRadius::ZERO, t::HISTOGRAM_BG);
     if let Some(bins) = &cx.bins {
@@ -99,6 +164,9 @@ fn histogram(ui: &mut Ui, cx: &mut AppContext) {
     let hdr = cx.frame.as_ref().and_then(|f| f.hdr);
     if let Some(info) = &hdr {
         crate::hdr::paint_histogram(&painter, rect, info);
+    }
+    if cx.bins.is_some() {
+        histogram_adjustments(ui, cx, rect, hdr.is_some());
     }
     for (index, active) in [(0, cx.clip_shadows), (1, cx.clip_highlights)] {
         let min =
@@ -148,13 +216,13 @@ fn histogram(ui: &mut Ui, cx: &mut AppContext) {
 
 /// The tool strip: 보정 / 크롭 / 복구 / 마스크 (`developTool` buttons, equal widths).
 fn tool_strip(ui: &mut Ui, cx: &mut AppContext) {
-    ui.add_space(4.0);
     let width = ui.available_width();
     let gap = 3.0;
     let each = (width - gap * 3.0) / 4.0;
-    let (strip, _) = ui.allocate_exact_size(Vec2::new(width, 36.0), Sense::hover());
+    let (strip, _) = ui.allocate_exact_size(Vec2::new(width, 24.0), Sense::hover());
     for (i, (tool, title)) in TOOL_STRIP.iter().enumerate() {
-        let rect = Rect::from_min_size(strip.min + Vec2::new(i as f32 * (each + gap), 0.0), Vec2::new(each, 36.0));
+        let rect =
+            Rect::from_min_size(strip.min + Vec2::new(i as f32 * (each + gap), 0.0), Vec2::new(each, strip.height()));
         let response = ui.interact(rect, egui::Id::unique(("tool", i)), Sense::click());
         let checked = cx.tool == *tool;
         let painter = ui.painter();
@@ -188,7 +256,6 @@ fn tool_strip(ui: &mut Ui, cx: &mut AppContext) {
             cx.select_tool(*tool);
         }
     }
-    ui.add_space(7.0);
 }
 
 /// One panel: the header (arrow, title, switch, edited dot, context menu) and, when expanded, its body.
@@ -201,7 +268,7 @@ fn panel(ui: &mut Ui, cx: &mut AppContext, key: &'static str, title: &str, panel
     let width = ui.available_width();
     let title_text = tr(title);
     let galley = widgets::galley(ui, title_text.clone(), t::bold(t::FONT_SIZE), t::PANEL_HEADER_TEXT);
-    let height = galley.size().y + 20.0 + 1.0;
+    let height = (galley.size().y + 6.0).max(24.0);
     let (rect, response) = ui.allocate_exact_size(Vec2::new(width, height), Sense::click());
     let switch_rect =
         Rect::from_min_size(Pos2::new(rect.right() - 9.0 - 22.0, rect.center().y - 6.0), Vec2::new(22.0, 12.0));
@@ -260,16 +327,13 @@ fn panel(ui: &mut Ui, cx: &mut AppContext, key: &'static str, title: &str, panel
         }
     });
     if expanded {
-        Frame::new().fill(t::PANEL_BODY).inner_margin(Margin { left: 8, right: 8, top: 9, bottom: 12 }).show(
-            ui,
-            |ui| {
-                ui.set_width(width - 16.0);
-                ui.spacing_mut().item_spacing = Vec2::new(4.0, 4.0);
-                match panels.iter_mut().find(|p| p.key() == key) {
-                    Some(panel) => panel.ui(ui, cx),
-                    None => cx.sliders(ui, crate::adjustments::Place::Panel(key)),
-                }
-            },
-        );
+        Frame::new().fill(t::PANEL_BODY).inner_margin(Margin { left: 6, right: 6, top: 3, bottom: 4 }).show(ui, |ui| {
+            ui.set_width(width - 12.0);
+            ui.spacing_mut().item_spacing = Vec2::new(4.0, 1.0);
+            match panels.iter_mut().find(|p| p.key() == key) {
+                Some(panel) => panel.ui(ui, cx),
+                None => cx.sliders(ui, crate::adjustments::Place::Panel(key)),
+            }
+        });
     }
 }

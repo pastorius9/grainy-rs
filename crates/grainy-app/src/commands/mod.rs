@@ -29,6 +29,7 @@ pub mod lens;
 pub mod library_column;
 pub mod lightroom;
 pub mod masks;
+pub mod merge;
 pub mod metadata;
 pub mod photo;
 pub mod photo_actions;
@@ -38,6 +39,7 @@ pub mod raw;
 pub mod settings;
 pub mod stacks;
 pub mod sync;
+pub mod tether;
 pub mod view;
 pub mod workflow;
 pub mod xmp;
@@ -118,6 +120,7 @@ pub const REGISTRY: &[&[Command]] = &[
     collections::COMMANDS,
     sync::COMMANDS,
     metadata::COMMANDS,
+    merge::COMMANDS,
     raw::COMMANDS,
     stacks::COMMANDS,
     lens::COMMANDS,
@@ -131,6 +134,7 @@ pub const REGISTRY: &[&[Command]] = &[
     display::COMMANDS,
     photo_actions::COMMANDS,
     import::COMMANDS,
+    tether::COMMANDS,
     lightroom::COMMANDS,
     feedback::COMMANDS,
     crate::hdr::COMMANDS,

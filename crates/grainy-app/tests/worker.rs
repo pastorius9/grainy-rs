@@ -38,6 +38,40 @@ fn job(id: u64, path: &std::path::Path, settings: Settings) -> PreviewJob {
 }
 
 #[test]
+fn fit_delivers_screen_pixels_after_crop_and_rotation() {
+    let dir = tempfile::tempdir().unwrap();
+    let mut worker = Worker::new();
+    for (width, height, rotation, crop, shown, expected) in [
+        (2048, 1536, 0, [0.25, 0.25, 0.75, 0.75], 1024, (1024, 768)),
+        (3072, 1536, 0, [0.0, 0.0, 0.25, 0.25], 640, (640, 320)),
+        (1536, 3072, 1, [0.0, 0.0, 0.25, 0.5], 768, (768, 768)),
+        (2048, 1536, 0, [0.0, 0.0, 1.0, 1.0], 1024, (1024, 768)),
+    ] {
+        let path = dir.path().join(format!("{width}-{height}.png"));
+        if !path.exists() {
+            image::RgbImage::from_fn(width, height, |x, y| image::Rgb([x as u8, y as u8, (x ^ y) as u8]))
+                .save(&path)
+                .unwrap();
+        }
+        worker.set_view_size(Some(shown));
+        let settings = common::settings(json!({"rotation": rotation, "crop": crop}));
+        worker.preview(job(1, &path, settings.clone()));
+        let frame = wait(&mut worker)
+            .into_iter()
+            .find_map(|reply| match reply {
+                Reply::Frame(f) => Some(f),
+                Reply::Failed { message, .. } => panic!("{message}"),
+                Reply::Thumbnail(_) => None,
+            })
+            .expect("cropped frame");
+        assert_eq!(frame.original, (width, height));
+        assert_eq!((frame.preview.width, frame.preview.height), expected);
+        let reference = common::engine_render_for_frame(&path, &frame, &settings);
+        assert!(frame.preview.rgba == reference.0, "cropped pixels equal the CPU develop at screen resolution");
+    }
+}
+
+#[test]
 fn histogram_matches_the_oracle() {
     for name in ["histogram_garden", "histogram_small"] {
         let case = grainy_testkit::Case::open("app", name);
@@ -162,16 +196,24 @@ fn thumbnails_use_each_photos_settings() {
     }
     let replies = wait(&mut worker);
     assert_eq!(replies.len(), 2);
+    let mut received = Vec::new();
     for reply in replies {
         let Reply::Thumbnail(thumb) = reply else { panic!("{reply:?}") };
         let preview = thumb.result.expect("thumbnail");
         assert_eq!(preview.width.max(preview.height), 320, "thumbnails are 320 pixels");
         assert_eq!(thumb.original, Some((480, 320)));
-        let mean = preview.rgba.iter().map(|v| f64::from(*v)).sum::<f64>() / preview.rgba.len() as f64;
-        if thumb.photo == 2 {
-            assert!(mean < 100.0, "the second photo's own settings (exposure -2): mean {mean}");
-        }
+        let (path, settings) = match thumb.photo {
+            1 => (&paths[0], &plain),
+            2 => (&paths[1], &dark),
+            other => panic!("unexpected thumbnail for photo {other}"),
+        };
+        let (expected, width, height) = common::engine_render(path, Some(320), settings);
+        assert_eq!((preview.width, preview.height), (width, height));
+        assert!(preview.rgba == expected, "thumbnail {} differs from its photo's own develop", thumb.photo);
+        received.push(thumb.photo);
     }
+    received.sort_unstable();
+    assert_eq!(received, [1, 2]);
 }
 
 #[test]

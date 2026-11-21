@@ -1,8 +1,7 @@
 # Grainy RS
 
 Grainy RS is the Rust rewrite of [Grainy](https://github.com/pastorius9/grainy), a photo editor for film scans
-and digital photos. It makes the same edits and the same pixels as Grainy 0.6.8: every stage of the engine is
-tested against reference data computed by the Python Grainy.
+and digital photos. Shared development stages are tested against reference data from Python Grainy 0.6.8.
 
 **This is an early release.** The Python Grainy at <https://github.com/pastorius9/grainy> stays the main product
 for now; use Grainy RS to try it out and report what you find.
@@ -36,6 +35,20 @@ The data folder is `~/Library/Application Support/GrainyRS` (separate from the P
 command-line program is inside the app: `/Applications/Grainy RS.app/Contents/MacOS/grainy-cli --help`. To
 uninstall, move the app to the Trash (delete the data folder as well to remove the edits).
 
+## Develop and library changes in 0.3.0
+
+- The RAW Basic panel fits its 15 sliders at 1920 × 1080 with 125% Windows scaling. Use the arrow keys to adjust the active Basic slider and Shift for larger steps. Cropping and rotating a photo preserve the resolution needed for a fit-to-window preview.
+- Filename search uses a catalog index. When a batch recycle-bin operation stops partway through, Grainy updates the originals and virtual copies that moved. It reconciles interrupted catalog writes when the library reopens.
+- JPEG XL export is labeled 16-bit lossless. Lightroom preset and catalog import reports include the Adobe process version when available.
+- Subject and background masks run locally. On Windows an optional U²-Net ONNX model can supply the foreground mask. Set `GRAINY_U2NET_MODEL` to a local model file. Without a model, Grainy estimates the selection from image contrast.
+- Tethered capture saves new shots to a chosen folder and imports them into the originating library. It requires a camera that supports remote capture through gphoto2, or through a WIA driver on Windows.
+
+## Merge selected photographs
+
+Select two or more originals in the library, then choose **Library → Merge HDR Exposures** for a bracket of a static scene or **Library → Merge Planar Panorama** for a horizontal or vertical sequence with overlap. Arrange panorama frames in shooting order. Both commands align translations, work from the original exposures, and save a new linear 32-bit TIFF. Grainy adds the result to the originating library or session. For a rotating camera sweep requiring a cylindrical or spherical projection, use a dedicated panorama stitcher.
+
+The same processing is available as `grainy-cli merge hdr dark.dng light.dng -o result.tif` and `grainy-cli merge panorama left.tif right.tif -o panorama.tif`.
+
 ## Where it keeps its data
 
 - Original photo files are never written, moved or deleted. Edits are stored in the library.
@@ -52,7 +65,7 @@ uninstall, move the app to the Trash (delete the data folder as well to remove t
 
 ## What is not done yet
 
-- HDR editing works and exports 32-bit HDR TIFF files, but the screen shows HDR photos as SDR.
+- HDR edits can be exported as a 32-bit floating-point TIFF or a 10-bit PQ AVIF. Windows has a separate HDR display window on compatible hardware. The standard editing canvas uses an SDR preview.
 - Video files are recognised and refused (as in the Python Grainy, which removed video in 0.5.74).
 - A few English texts of the interface are still Korean, as in the Python Grainy.
 - The automatic lens-correction scale is the least exact part of the engine (within 4e-4 of the Python Grainy;

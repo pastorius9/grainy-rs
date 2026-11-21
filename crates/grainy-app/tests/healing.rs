@@ -314,9 +314,9 @@ fn staged_heal_on_a_photo() {
     assert_eq!(app.edit_state().history()[0], "힐링 2개 실행");
     // The photo on screen is the engine's develop with the same operations (as an export gives).
     let frame = app.frame().expect("a frame").clone();
-    let expected = common::engine_render(&path, Some(2048), app.settings());
+    let expected = common::engine_render_for_frame(&path, &frame, app.settings());
     assert!(expected.0 == frame.preview.rgba, "the healed frame is the engine's develop");
-    let untouched = common::engine_render(&path, Some(2048), &common::settings(json!({})));
+    let untouched = common::engine_render_for_frame(&path, &frame, &common::settings(json!({})));
     assert!(untouched.0 != frame.preview.rgba, "the heal changed the picture");
     save(&mut harness, "healing-applied-ko");
 }

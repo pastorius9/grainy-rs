@@ -22,9 +22,10 @@ const EMPTY: char = '\0';
 const NAMING_MESSAGE: &str =
     "naming may contain only {stem}, {n} or {n:02d}..{n:06d}, {film}, {preset}, {camera}, {date} and no path characters";
 /// Port of `quick_export.SUFFIXES`.
-pub const SUFFIXES: [(&str, &str); 8] = [
+pub const SUFFIXES: [(&str, &str); 9] = [
     ("JPEG", ".jpg"),
     ("AVIF", ".avif"),
+    ("AVIF HDR 10-bit", ".avif"),
     ("JPEG XL", ".jxl"),
     ("PNG", ".png"),
     ("PNG 16-bit", ".png"),

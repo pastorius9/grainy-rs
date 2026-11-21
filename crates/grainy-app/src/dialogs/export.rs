@@ -109,8 +109,12 @@ fn form(ui: &mut Ui, options: &mut ExportOptions) -> (Option<bool>, bool) {
             options.set_format(listed[i]);
         }
     });
-    row(ui, &tr("품질 (JPEG·AVIF·JPEG XL)"), |ui| {
-        ui.add_enabled(fields.quality, egui::DragValue::new(&mut options.quality).range(40..=100));
+    row(ui, &tr("품질"), |ui| {
+        if options.format_name() == "JPEG XL" {
+            widgets::label(ui, &tr("16비트 무손실"), t::MUTED, t::FONT_SIZE);
+        } else {
+            ui.add_enabled(fields.quality, egui::DragValue::new(&mut options.quality).range(40..=100));
+        }
     });
     row(ui, &tr("긴 변 (px)"), |ui| {
         ui.add_enabled_ui(fields.longest, |ui| {
@@ -121,6 +125,10 @@ fn form(ui: &mut Ui, options: &mut ExportOptions) -> (Option<bool>, bool) {
         });
     });
     row(ui, &tr("출력 색공간"), |ui| {
+        if options.format_name() == "AVIF HDR 10-bit" {
+            widgets::label(ui, "Rec.2100 PQ · BT.2020", t::TEXT, t::FONT_SIZE);
+            return;
+        }
         let names: Vec<String> = COLOR_SPACES.iter().map(|c| (*c).to_owned()).collect();
         ui.add_enabled_ui(fields.color_space, |ui| {
             if let Some(i) = crate::panels::controls::choice(

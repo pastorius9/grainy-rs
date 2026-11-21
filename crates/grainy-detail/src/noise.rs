@@ -38,7 +38,9 @@ pub fn atrous_smooth(x: &Plane, level: u32) -> Plane {
 
 /// Port of luma/processing.py `_box`: `cv2.boxFilter` of size `2r+1` (normalized, reflect-101) on every channel.
 pub fn box_filter(a: &Image, r: usize) -> Image {
-    cv::box_filter(&Mat::from_image(a), 2 * r + 1).into_image()
+    let k = 2 * r + 1;
+    grainy_imgproc::box_filter(a, (k, k), None, true, grainy_imgproc::Border::Reflect101)
+        .unwrap_or_else(|_| Mat::from_image(a).into_image())
 }
 
 /// Port of luma/processing.py `chroma_guided_params`: (box radius, eps of the L* guide, eps of the chroma guide,

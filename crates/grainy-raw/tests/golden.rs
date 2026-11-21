@@ -591,3 +591,49 @@ fn invalid_inputs_and_parallel_determinism() {
     assert_eq!(one, many);
 }
 use serde_json::json;
+#[cfg(all(windows, target_env = "msvc"))]
+#[test]
+fn xtrans_partial_tiles_equal_the_serial_rgb16_decode() {
+    use sha2::{Digest, Sha256};
+    use std::{fs, io::Write};
+
+    // Three columns of tiles and partial bottom/right edges exercise above-right
+    // dependencies. The first 528 bytes from tifffile 2026.2.20 describe our own
+    // uncompressed little-endian 16-bit DNG, black 64, white 16383, D65 identity
+    // matrix, unity as-shot neutral and the 6x6 CFA below. No camera data is embedded.
+    const CFA: [[u8; 6]; 6] = [
+        [1, 2, 1, 1, 0, 1],
+        [0, 1, 0, 2, 1, 2],
+        [1, 2, 1, 1, 0, 1],
+        [1, 0, 1, 1, 2, 1],
+        [2, 1, 2, 0, 1, 0],
+        [1, 0, 1, 1, 2, 1],
+    ];
+    let mut bytes = Vec::with_capacity(528 + 2 * 1031 * 1043);
+    bytes.extend_from_slice(include_bytes!("fixtures/xtrans-1031x1043-header.bin"));
+    for y in 0..1043 {
+        for x in 0..1031 {
+            let sample = match CFA[y % 6][x % 6] {
+                0 => (x * 13 + y * 29 + x * y / 9) % 16320,
+                1 => ((x / 8 + y / 13) % 2) * 14000 + 130,
+                _ => ((x ^ y) * 37 + x) % 16220,
+            };
+            bytes.extend_from_slice(&(64 + sample as u16).to_le_bytes());
+        }
+    }
+    let now = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos();
+    let path = std::env::temp_dir().join(format!("grainy-xtrans-{}-{now}.dng", std::process::id()));
+    let mut file = fs::File::create_new(&path).unwrap();
+    file.write_all(&bytes).unwrap();
+    drop(file);
+    let result =
+        grainy_raw::RawFile::open(&path).and_then(|mut raw| raw.postprocess(grainy_raw::DecodeMode::Srgb, false));
+    fs::remove_file(&path).unwrap();
+    let pixels = result.unwrap();
+    let mut digest = Sha256::new();
+    for &sample in &pixels {
+        digest.update(sample.to_le_bytes());
+    }
+    // Captured with the unmodified 0.3.0 MSVC LibRaw raster-order decoder.
+    assert_eq!(format!("{:x}", digest.finalize()), "881954068bab37ff1737f7afb5ac2dec373efad416ad25e0906c1ebb17ebda92");
+}

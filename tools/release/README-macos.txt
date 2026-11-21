@@ -1,10 +1,9 @@
 Grainy RS {version} for macOS (Apple Silicon and Intel)
 =====================================================
 
-Grainy RS is the Rust rewrite of Grainy, a photo editor for film scans and digital photos. It makes the
-same edits and the same pixels as Grainy 0.6.8. This is an EARLY RELEASE: the Python Grainy
-(https://github.com/pastorius9/grainy) stays the main product for now. This is also the first Grainy RS
-for macOS: it passes the automated tests but has not been used on many Macs. It needs macOS 11 or newer.
+Grainy RS is a photo editor for film scans and digital photos. Develop RAW files, adjust colour,
+and export individual photos or batches. The earlier Python edition is available at
+https://github.com/pastorius9/grainy. This build requires macOS 11 or newer.
 
 Install and first start
 -----------------------
@@ -22,7 +21,8 @@ The command-line program is inside the app:
 
 Your photos and your data
 -------------------------
-Original photo files are never written, moved or deleted: edits are stored in the library.
+Photo edits are stored in the library. The Library menu also includes explicit commands
+to move, rename or send selected originals to the system trash.
 Grainy RS keeps its library and settings in ~/Library/Application Support/GrainyRS (its own folder, separate
 from the Python Grainy). Other places:
     "Grainy RS.app/Contents/MacOS/GrainyRS" --library <folder>    use another library folder

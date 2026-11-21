@@ -164,6 +164,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "alloc-no-stdlib"
+version = "2.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cc7bb162ec39d46ab1ca8c77bf72e890535becd1751bb45f64c597edb4c8c6b3"
+
+[[package]]
+name = "alloc-stdlib"
+version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "94fb8275041c72129eb51b7d0322c29b8387a0386127718b096429201a5d6ece"
+dependencies = [
+ "alloc-no-stdlib",
+]
+
+[[package]]
 name = "allocator-api2"
 version = "0.2.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -615,6 +630,16 @@ dependencies = [
  "futures-io",
  "futures-lite",
  "piper",
+]
+
+[[package]]
+name = "brotli-decompressor"
+version = "5.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "874bb8112abecc98cbd6d81ea4fa7e94fb9449648c93cc89aa40c81c24d7de03"
+dependencies = [
+ "alloc-no-stdlib",
+ "alloc-stdlib",
 ]
 
 [[package]]
@@ -1585,7 +1610,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-adobe"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "base64",
  "chrono",
@@ -1599,9 +1624,10 @@ dependencies = [
 
 [[package]]
 name = "grainy-app"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "base64",
+ "cc",
  "chrono",
  "eframe",
  "egui_kittest",
@@ -1643,12 +1669,13 @@ dependencies = [
  "sha2",
  "sysinfo",
  "tempfile",
+ "windows",
  "zip 9.5.1",
 ]
 
 [[package]]
 name = "grainy-catalog"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "base64",
  "chrono",
@@ -1669,7 +1696,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-cli"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "flate2",
  "grainy-codecs",
@@ -1683,7 +1710,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-cms"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "cc",
  "grainy-color",
@@ -1698,8 +1725,10 @@ dependencies = [
 
 [[package]]
 name = "grainy-codecs"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
+ "avif-serialize",
+ "cc",
  "flate2",
  "grainy-color",
  "grainy-core",
@@ -1707,8 +1736,10 @@ dependencies = [
  "grainy-testkit",
  "image",
  "image-webp",
+ "jxl-oxide",
  "ndarray",
  "png",
+ "rav1e",
  "ravif",
  "rayon",
  "serde_json",
@@ -1722,7 +1753,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-color"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-core",
  "grainy-imgproc",
@@ -1734,7 +1765,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-colorgrade"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-color",
  "grainy-core",
@@ -1748,7 +1779,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-core"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "chrono",
  "grainy-testkit",
@@ -1760,7 +1791,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-detail"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-color",
  "grainy-core",
@@ -1776,7 +1807,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-dust"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "flate2",
  "grainy-catalog",
@@ -1794,7 +1825,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-effects"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-core",
  "grainy-imgproc",
@@ -1806,7 +1837,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-engine"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-cms",
  "grainy-codecs",
@@ -1829,12 +1860,13 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
+ "tempfile",
  "thiserror 2.0.21",
 ]
 
 [[package]]
 name = "grainy-film"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-color",
  "grainy-core",
@@ -1848,7 +1880,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-geometry"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-color",
  "grainy-core",
@@ -1862,7 +1894,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-gpu"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "bytemuck",
  "grainy-colorgrade",
@@ -1881,7 +1913,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-i18n"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-testkit",
  "serde_json",
@@ -1889,7 +1921,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-imgproc"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-core",
  "grainy-testkit",
@@ -1901,7 +1933,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-jpeg-sys"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "cc",
  "grainy-testkit",
@@ -1910,7 +1942,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-lens"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-core",
  "grainy-engine",
@@ -1927,7 +1959,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-library"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "chrono",
  "file-id",
@@ -1950,8 +1982,10 @@ dependencies = [
 
 [[package]]
 name = "grainy-local"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
+ "base64",
+ "flate2",
  "grainy-color",
  "grainy-colorgrade",
  "grainy-core",
@@ -1966,7 +2000,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-mcp"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "ab_glyph",
  "chrono",
@@ -1993,7 +2027,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-platform"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "chrono",
  "fs4",
@@ -2017,7 +2051,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-raw"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "base64",
  "cc",
@@ -2039,7 +2073,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-service"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "chrono",
  "grainy-catalog",
@@ -2058,7 +2092,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-sky"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-core",
  "grainy-imgproc",
@@ -2071,7 +2105,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-testkit"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "ndarray",
  "ndarray-npy",
@@ -2080,7 +2114,7 @@ dependencies = [
 
 [[package]]
 name = "grainy-tone"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "grainy-color",
  "grainy-core",
@@ -2467,6 +2501,158 @@ dependencies = [
  "cfg-if",
  "futures-util",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "jxl-bitstream"
+version = "1.1.0"
+dependencies = [
+ "tracing",
+]
+
+[[package]]
+name = "jxl-coding"
+version = "1.0.1"
+dependencies = [
+ "jxl-bitstream",
+ "tracing",
+]
+
+[[package]]
+name = "jxl-color"
+version = "0.11.0"
+dependencies = [
+ "jxl-bitstream",
+ "jxl-coding",
+ "jxl-grid",
+ "jxl-image",
+ "jxl-oxide-common",
+ "jxl-threadpool",
+ "tracing",
+]
+
+[[package]]
+name = "jxl-frame"
+version = "0.13.3"
+dependencies = [
+ "jxl-bitstream",
+ "jxl-coding",
+ "jxl-grid",
+ "jxl-image",
+ "jxl-modular",
+ "jxl-oxide-common",
+ "jxl-threadpool",
+ "jxl-vardct",
+ "tracing",
+]
+
+[[package]]
+name = "jxl-grid"
+version = "0.6.2"
+dependencies = [
+ "tracing",
+]
+
+[[package]]
+name = "jxl-image"
+version = "0.13.0"
+dependencies = [
+ "jxl-bitstream",
+ "jxl-grid",
+ "jxl-oxide-common",
+ "tracing",
+]
+
+[[package]]
+name = "jxl-jbr"
+version = "0.2.1"
+dependencies = [
+ "brotli-decompressor",
+ "jxl-bitstream",
+ "jxl-frame",
+ "jxl-grid",
+ "jxl-image",
+ "jxl-modular",
+ "jxl-oxide-common",
+ "jxl-threadpool",
+ "jxl-vardct",
+ "tracing",
+]
+
+[[package]]
+name = "jxl-modular"
+version = "0.11.3"
+dependencies = [
+ "jxl-bitstream",
+ "jxl-coding",
+ "jxl-grid",
+ "jxl-oxide-common",
+ "jxl-threadpool",
+ "tracing",
+]
+
+[[package]]
+name = "jxl-oxide"
+version = "0.12.6"
+dependencies = [
+ "brotli-decompressor",
+ "jxl-bitstream",
+ "jxl-color",
+ "jxl-frame",
+ "jxl-grid",
+ "jxl-image",
+ "jxl-jbr",
+ "jxl-oxide-common",
+ "jxl-render",
+ "jxl-threadpool",
+ "tracing",
+]
+
+[[package]]
+name = "jxl-oxide-common"
+version = "1.0.0"
+dependencies = [
+ "jxl-bitstream",
+]
+
+[[package]]
+name = "jxl-render"
+version = "0.12.4"
+dependencies = [
+ "bytemuck",
+ "jxl-bitstream",
+ "jxl-coding",
+ "jxl-color",
+ "jxl-frame",
+ "jxl-grid",
+ "jxl-image",
+ "jxl-modular",
+ "jxl-oxide-common",
+ "jxl-threadpool",
+ "jxl-vardct",
+ "tracing",
+]
+
+[[package]]
+name = "jxl-threadpool"
+version = "1.0.0"
+dependencies = [
+ "rayon",
+ "rayon-core",
+ "tracing",
+]
+
+[[package]]
+name = "jxl-vardct"
+version = "0.11.1"
+dependencies = [
+ "jxl-bitstream",
+ "jxl-coding",
+ "jxl-grid",
+ "jxl-modular",
+ "jxl-oxide-common",
+ "jxl-threadpool",
+ "tracing",
 ]
 
 [[package]]

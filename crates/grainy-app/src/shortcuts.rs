@@ -96,6 +96,10 @@ impl AppContext {
         if self.modal_open() {
             return;
         }
+        if self.mode == Mode::Develop && self.sides && self.expanded.contains(&"basic") && self.doc.current().is_some()
+        {
+            crate::widgets::basic_keys::route(&ctx);
+        }
         for (row, sequence) in take_pressed(&ctx) {
             commands::run(self, row.command, &Invocation::key(sequence));
         }

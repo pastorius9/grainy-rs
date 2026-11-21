@@ -79,6 +79,8 @@ pub struct Frame {
     pub misses: u64,
     /// The HDR histogram and indicators of an HDR photo's frame (`None`: an ordinary frame).
     pub hdr: Option<crate::hdr::FrameInfo>,
+    /// Extended linear sRGB RGBA for the native HDR output, allocated only while its window is open.
+    pub native_hdr: Option<Arc<[f32]>>,
 }
 
 impl Frame {
@@ -274,6 +276,7 @@ impl TestCard {
             hits: 0,
             misses: 0,
             hdr: None,
+            native_hdr: None,
         }
     }
 }

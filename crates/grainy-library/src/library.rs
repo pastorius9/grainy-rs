@@ -15,16 +15,10 @@ use serde_json::{json, Value};
 use std::collections::HashSet;
 use std::path::Path;
 
-/// `engine.RAW_EXTENSIONS`.
-pub const RAW_EXTENSIONS: &[&str] = &[
-    ".arw", ".cr2", ".cr3", ".nef", ".nrw", ".raf", ".rw2", ".orf", ".pef", ".dng", ".srw", ".3fr", ".iiq", ".kdc",
-    ".mos",
-];
-/// `engine.IMAGE_EXTENSIONS` (`RAW_EXTENSIONS` and the plain formats).
-pub const IMAGE_EXTENSIONS: &[&str] = &[
-    ".arw", ".cr2", ".cr3", ".nef", ".nrw", ".raf", ".rw2", ".orf", ".pef", ".dng", ".srw", ".3fr", ".iiq", ".kdc",
-    ".mos", ".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp", ".webp",
-];
+/// Supported photo suffixes shared with the RAW engine and file chooser.
+pub const RAW_EXTENSIONS: &[&str] = &grainy_core::formats::RAW_EXTENSIONS;
+/// RAW and bitmap suffixes accepted by the library.
+pub const IMAGE_EXTENSIONS: &[&str] = &grainy_core::formats::IMAGE_EXTENSIONS;
 
 /// Whether a lower-cased extension (with the dot) is one Grainy opens.
 pub fn is_image_extension(extension: &str) -> bool {

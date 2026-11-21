@@ -5,17 +5,19 @@ included under their own licences. The release package holds `THIRD_PARTY_NOTICE
 `tools/release/notices.py` from this repository and `cargo metadata`, with every licence text in full and every Rust
 crate of the release build with its version and licence. Per-crate details are in the `NOTICE` files of the crates.
 
-## C/C++ libraries compiled into the program (vendored, unmodified)
+## C/C++ libraries compiled into the program
 
 | Library | Where | Licence |
 |---|---|---|
 | LibRaw 0.22.1 | `crates/grainy-raw/vendor/LibRaw-0.22.1/` | dual LGPL-2.1 / CDDL-1.0; **used under CDDL-1.0**. The covered source files stay available, unmodified, in that folder of this repository; the licence text ships with the program. |
 | Little CMS 2.19 | `crates/grainy-cms/vendor/lcms2-2.19/` | MIT |
 | libjpeg-turbo 2.1.5.1 | `crates/grainy-jpeg-sys/vendor/libjpeg-turbo-2.1.5.1/` | IJG, BSD-3-Clause, zlib (`LICENSE.md`, `README.ijg`). This software is based in part on the work of the Independent JPEG Group. |
+| libavif 1.3.0 | `crates/grainy-codecs/vendor/libavif/` | BSD-2-Clause and the component notices in `LICENSE` |
+| dav1d | `crates/grainy-codecs/vendor/dav1d/` | BSD-2-Clause and the notices in `COPYING` |
 | zlib 1.3.1 | `crates/grainy-raw/vendor/zlib-1.3.1/` | zlib |
 
 LibRaw's parallel decoders use the MSVC OpenMP runtime (`vcomp140.dll`, part of the Microsoft Visual C++
-Redistributable), which is not shipped with the program.
+Redistributable), which is shipped beside the Windows executables.
 
 ## Code ported from other projects
 
@@ -48,6 +50,11 @@ Redistributable), which is not shipped with the program.
   `ImageFont.load_default`, unmodified; Pillow is MIT-CMU. See `PILLOW-DEFAULT-FONT-NOTICE.txt` there.
 
 ## Rust crates
+
+The JPEG XL decoder uses the jxl-oxide workspace (MIT or Apache-2.0) under
+`crates/grainy-codecs/vendor/`. Cargo fetches brotli-decompressor 5.0.0, alloc-no-stdlib 2.0.4, and
+alloc-stdlib 0.2.2 from crates.io and verifies their checksums against `Cargo.lock`. The Windows and macOS
+packages include the BSD-3-Clause license used for these three crates.
 
 About 250 crates from crates.io are linked into `grainy-app` and `grainy-cli` (the exact list with versions and
 licences is in `THIRD_PARTY_NOTICES.txt`). They are licensed under MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause,

@@ -9,6 +9,52 @@ use grainy_engine::files::{load_photo, Photo};
 use grainy_testkit::{root, Case};
 use serde_json::{Map, Value};
 
+/// Grainy's own exports must reopen through the normal RAW/bitmap dispatch.
+#[test]
+fn avif_and_jpeg_xl_exports_reopen_in_linear_light() {
+    use grainy_codecs::{export_image, ExportFormat, ExportOptions};
+    use grainy_engine::files::Cms;
+
+    let scratch = tempfile::tempdir().unwrap();
+    for (format, name, hdr) in [
+        (ExportFormat::Avif, "encoded.avif", false),
+        (ExportFormat::JpegXl, "lossless.jxl", false),
+        (ExportFormat::AvifHdr, "pq.avif", true),
+    ] {
+        let palette: [[f32; 3]; 2] =
+            if hdr { [[0.18, 0.18, 0.18], [1.1, 2.0, 3.0]] } else { [[0.20, 0.42, 0.75], [0.8, 0.65, 0.3]] };
+        let encoded = grainy_core::Image::from_shape_fn((39, 77, 3), |(_, x, c)| palette[(x >= 40) as usize][c]);
+        let path = scratch.path().join(name);
+        let options = ExportOptions {
+            format,
+            quality: 99.,
+            hdr_enabled: hdr,
+            jxl_lossless: true,
+            keep_metadata: false,
+            ..Default::default()
+        };
+        export_image(&encoded, &path, &path, &options, &Cms::for_export_of_developed_pixels()).unwrap();
+        let loaded = load_photo(&path, None, &grainy_core::defaults()).unwrap();
+        let Photo::Linear(actual) = loaded.photo else { panic!("expected decoded bitmap") };
+        assert_eq!(actual.dim(), encoded.dim());
+        for x in [12, 58] {
+            for c in 0..3 {
+                let signal = encoded[[16, x, c]];
+                let expected = if hdr { signal } else { ((signal + 0.055) / 1.055).powf(2.4) };
+                let error = (actual[[16, x, c]] - expected).abs();
+                let tolerance = if hdr {
+                    0.055
+                } else if format == ExportFormat::JpegXl {
+                    0.0003
+                } else {
+                    0.017
+                };
+                assert!(error < tolerance, "{name}, channel {c}: {} vs {expected}", actual[[16, x, c]]);
+            }
+        }
+    }
+}
+
 const CASES: [&str; 30] = [
     "gray8_plain_png",
     "gray8_icc_png",

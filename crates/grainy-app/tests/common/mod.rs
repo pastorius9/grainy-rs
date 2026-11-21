@@ -1,5 +1,4 @@
-//! Generated test photos (from `grainy_testkit::input("garden")`, never the owner's photos) and the engine's own
-//! render of them, for comparisons with what the app shows.
+//! Generated color and resolution charts and the engine's own render of them, for comparisons with the UI.
 
 #![allow(dead_code)]
 
@@ -118,13 +117,46 @@ fn encode(v: f32) -> f32 {
     }
 }
 
-/// The garden input, each pixel repeated `scale` times, with a per-channel gain.
+/// The UI fixture keeps its historical 240 × 160 dimensions and filenames. It only uses
+/// generated colors: gradients for tone/white balance, reference patches and line pairs for detail.
 pub fn garden(scale: usize, gain: [f32; 3], flip: bool) -> Array3<f32> {
-    let g = grainy_testkit::input("garden");
-    let (h, w, _) = g.dim();
-    Array3::from_shape_fn((h * scale, w * scale, 3), |(y, x, c)| {
-        let sx = if flip { w - 1 - x / scale } else { x / scale };
-        g[[y / scale, sx, c]] * gain[c]
+    const WIDTH: usize = 240;
+    const HEIGHT: usize = 160;
+    const PATCHES: [[u32; 3]; 8] = [
+        [928, 76, 48],
+        [48, 740, 126],
+        [73, 142, 935],
+        [880, 590, 31],
+        [508, 76, 690],
+        [38, 632, 701],
+        [492, 312, 178],
+        [384, 384, 384],
+    ];
+    let chart = Array3::from_shape_fn((HEIGHT, WIDTH, 3), |(y, x, c)| {
+        let level = if y < 16 {
+            (1023 * x / (WIDTH - 1)) as u32
+        } else if y >= 120 {
+            // Four checkerboard frequencies, each at high and low contrast.
+            let period = [1, 2, 4, 8][x / 60];
+            let contrast = if y < 140 { 432 } else { 64 };
+            if (x / period + y / period).is_multiple_of(2) {
+                512 - contrast
+            } else {
+                512 + contrast
+            }
+        } else if x >= 176 {
+            PATCHES[(y - 16) / 26 * 2 + (x - 176) / 32][c]
+        } else {
+            let red = 48 + 890 * x / 175;
+            let green = 32 + 820 * (y - 16) / 103;
+            let blue = 48 + 5 * (x.abs_diff(43) + y.abs_diff(78));
+            [red, green, blue.min(994)][c] as u32
+        };
+        level as f32 / 1023.0
+    });
+    Array3::from_shape_fn((HEIGHT * scale, WIDTH * scale, 3), |(y, x, c)| {
+        let sx = if flip { WIDTH - 1 - x / scale } else { x / scale };
+        chart[[y / scale, sx, c]] * gain[c]
     })
 }
 
@@ -149,7 +181,7 @@ pub fn save_tiff(image: &Array3<f32>, path: &Path) {
     buffer.save(path).expect("write the TIFF");
 }
 
-/// Eight photos of the garden (exposures, colour casts, mirrored), PNG and TIFF, in `dir`.
+/// Eight PNG/TIFF chart variants in `dir`, with different exposures, color casts and orientations.
 pub fn eight_photos(dir: &Path) -> Vec<PathBuf> {
     let variants: [([f32; 3], bool, &str); 8] = [
         ([1.0, 1.0, 1.0], false, "garden-01.png"),
@@ -194,4 +226,14 @@ pub fn engine_render(path: &Path, max_size: Option<usize>, settings: &Settings) 
     let image = develop(loaded.photo.source(), &settings.0, &options).expect("develop");
     let converted = grainy_app::histogram::convert(&image);
     (converted.rgba, converted.width, converted.height)
+}
+
+/// Reproduce a preview develop at its actual source sampling, before rotation, cropping and retouch.
+pub fn engine_render_for_frame(
+    path: &Path,
+    frame: &grainy_app::render::Frame,
+    settings: &Settings,
+) -> (Vec<u8>, usize, usize) {
+    let longest = (f64::from(frame.original.0.max(frame.original.1)) / frame.scale).round() as usize;
+    engine_render(path, Some(longest), settings)
 }

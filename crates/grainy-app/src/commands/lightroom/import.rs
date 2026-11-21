@@ -364,6 +364,18 @@ fn resolve(path: &Path) -> String {
     pathx::resolve(platform(), &pathx::text(path))
 }
 
+/// SQLite's Win32 file calls require an extended path for long library locations.
+/// Resolve the parent because a newly created backup has no canonical name yet.
+fn sqlite_path(path: &Path) -> PathBuf {
+    #[cfg(windows)]
+    if let (Some(parent), Some(name)) = (path.parent(), path.file_name()) {
+        if let Ok(folder) = parent.canonicalize() {
+            return folder.join(name);
+        }
+    }
+    path.to_path_buf()
+}
+
 /// `Path(value)` of a stored value: text, or the oracle's `TypeError`.
 fn path_text(value: &Value) -> Result<String, Failure> {
     match value {
@@ -392,8 +404,10 @@ impl Source {
     /// `Source(path, cancel)`.
     pub fn open(path: &Path, cancel: Option<&Cancel>) -> Result<Self, Failure> {
         let resolved = resolve(path);
-        let db =
-            Connection::open_with_flags(&resolved, OpenFlags::SQLITE_OPEN_READ_ONLY | OpenFlags::SQLITE_OPEN_NO_MUTEX)?;
+        let db = Connection::open_with_flags(
+            sqlite_path(Path::new(&resolved)),
+            OpenFlags::SQLITE_OPEN_READ_ONLY | OpenFlags::SQLITE_OPEN_NO_MUTEX,
+        )?;
         db.busy_timeout(Duration::from_secs(2))?;
         db.execute_batch("PRAGMA query_only=ON; PRAGMA trusted_schema=OFF;")?;
         if let Some(cancel) = cancel {
@@ -892,6 +906,9 @@ fn photos(
                 if current_rows.len() == 1 {
                     translated = history::decode_row(&current_rows[0], is_raw, orientation.as_ref(), warnings)?;
                     if let Some(t) = &translated {
+                        if let Some(version) = &t.process_version {
+                            warnings.add(&format!("adobe_process:{version}"), 1);
+                        }
                         photo_payload = py_json(&Value::Object(t.settings.0.clone()));
                         converted_photos += 1;
                     }
@@ -1220,7 +1237,10 @@ pub fn import_catalog(
     result.insert("source_path".into(), Value::String(source_path));
     result.insert("backup".into(), Value::String(String::new()));
     let source = Source::open(path, cancel)?;
-    let db = Connection::open_with_flags(&target, OpenFlags::SQLITE_OPEN_READ_WRITE | OpenFlags::SQLITE_OPEN_NO_MUTEX)?;
+    let db = Connection::open_with_flags(
+        sqlite_path(&target),
+        OpenFlags::SQLITE_OPEN_READ_WRITE | OpenFlags::SQLITE_OPEN_NO_MUTEX,
+    )?;
     db.busy_timeout(Duration::from_secs(5))?;
     let outcome = run(
         &source,
@@ -1283,7 +1303,7 @@ fn run(
         std::fs::create_dir_all(folder).map_err(|e| Failure::Error(format!("OSError: {e}")))?;
     }
     {
-        let mut copy = Connection::open(pending)?;
+        let mut copy = Connection::open(sqlite_path(pending))?;
         let job = rusqlite::backup::Backup::new(db, &mut copy)?;
         loop {
             let step = job.step(256)?;
@@ -1329,4 +1349,22 @@ fn run(
         params![run_id, isoformat(clock.utc()), source.path, source.key, py_json(&Value::Object(result.clone()))],
     )?;
     Ok(())
+}
+
+#[cfg(all(windows, test))]
+#[test]
+fn a_long_windows_backup_path_can_be_created_and_reopened_read_only() {
+    let root = tempfile::tempdir().unwrap();
+    let mut directory = root.path().to_owned();
+    while pathx::text(&directory).len() < 245 {
+        directory.push("lightroom-catalog-backups");
+    }
+    std::fs::create_dir_all(&directory).unwrap();
+    let backup = directory.join("before-lightroom-import-0123456789.pending");
+    let target = sqlite_path(&backup);
+    let db = Connection::open(&target).unwrap();
+    db.execute_batch("CREATE TABLE example(value INTEGER); INSERT INTO example VALUES(42)").unwrap();
+    drop(db);
+    let reader = Connection::open_with_flags(target, OpenFlags::SQLITE_OPEN_READ_ONLY).unwrap();
+    assert_eq!(reader.query_row("SELECT value FROM example", [], |row| row.get::<_, i64>(0)).unwrap(), 42);
 }

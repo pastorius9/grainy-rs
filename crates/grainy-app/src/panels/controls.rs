@@ -81,8 +81,10 @@ pub fn choice(ui: &mut Ui, id: &str, accessible: &str, names: &[String], index: 
     let mut chosen = None;
     let selected = names.get(index).cloned().unwrap_or_default();
     ui.scope(|ui| {
-        ui.spacing_mut().button_padding = Vec2::new(7.0, 7.0);
-        ui.spacing_mut().interact_size.y = 30.0;
+        if !t::in_develop_column(ui) {
+            ui.spacing_mut().button_padding = Vec2::new(7.0, 7.0);
+            ui.spacing_mut().interact_size.y = 30.0;
+        }
         let response =
             egui::ComboBox::from_id_salt(id).width(width - 2.0).selected_text(selected.clone()).show_ui(ui, |ui| {
                 for (i, name) in names.iter().enumerate() {

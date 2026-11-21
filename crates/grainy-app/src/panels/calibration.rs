@@ -108,10 +108,17 @@ pub fn profile_box(ui: &mut Ui, cx: &mut AppContext) {
     if !usable(cx) {
         return;
     }
-    if Button::new(&tr("카메라 프로파일 찾아보기")).width(ui.available_width()).show(ui).clicked() {
+    let browse = tr("카메라 프로파일 찾아보기");
+    let profile = cx.settings().value("dcp_profile").get("name").and_then(Value::as_str).filter(|s| !s.is_empty());
+    let note = dcp_note(cx.settings());
+    if Button::new(profile.unwrap_or(&browse))
+        .width(ui.available_width())
+        .show(ui)
+        .on_hover_text(format!("{browse}\n{note}"))
+        .clicked()
+    {
         cx.run("raw.browse_dcp");
     }
-    widgets::label(ui, &dcp_note(cx.settings()), crate::theme::TEXT, crate::theme::FONT_SIZE);
 }
 
 /// The RAW white balance of the Basic page: the mode (`change_raw_mode`), the temperature and tint

@@ -754,3 +754,52 @@ fn locate_question_korean() {
 fn locate_question_english() {
     locate(Language::English, "en");
 }
+
+#[test]
+fn partial_bin_failure_updates_only_completed_original_and_its_virtual_copies() {
+    struct RefuseSecond {
+        first: PathBuf,
+        moved_to: PathBuf,
+    }
+    impl Trash for RefuseSecond {
+        fn trash(&self, path: &Path) -> Result<(), String> {
+            if std::fs::canonicalize(path).map_err(|e| e.to_string())? != self.first {
+                return Err("simulated bin refusal".into());
+            }
+            std::fs::rename(path, &self.moved_to).map_err(|error| error.to_string())
+        }
+    }
+    let dir = tempfile::tempdir().unwrap();
+    let first = dir.path().join("first.png");
+    let second = dir.path().join("second.png");
+    std::fs::write(&first, b"first").unwrap();
+    std::fs::write(&second, b"second").unwrap();
+    let catalog = Catalog::new(dir.path().join("library")).unwrap();
+    let a = catalog.add(first.to_str().unwrap(), None, None, false).unwrap();
+    let b = catalog.add(second.to_str().unwrap(), None, None, false).unwrap();
+    let a_copy = catalog.virtual_copy(a).unwrap();
+    let b_copy = catalog.virtual_copy(b).unwrap();
+    // Selection order controls which original is recycled first. Virtual copies and
+    // repeated IDs must not cause a second filesystem operation.
+    let selected = [b_copy, a_copy, b, a, b_copy].map(|id| id as u64);
+    let paths = grainy_app::document::catalog::files::paths_of(&catalog, &selected).unwrap();
+    assert_eq!(paths, [b, a].map(|id| catalog.photo(id).unwrap().unwrap()["path"].as_str().unwrap().to_owned()));
+    let mut doc = CatalogDocument::with_catalog(catalog).unwrap();
+    doc.refresh_now().unwrap();
+    let mut cx = AppContext::new(&egui::Context::default(), Box::new(TestCard::default()), Box::new(doc));
+    let moved_to = dir.path().join("fake-bin");
+    files::set_trash(
+        &mut cx,
+        Arc::new(RefuseSecond { first: std::fs::canonicalize(&first).unwrap(), moved_to: moved_to.clone() }),
+    );
+    files::trash_now(&mut cx, &[a_copy as u64, a as u64, b as u64]);
+    assert_eq!(cx.state::<FilesState>().last_error.as_deref(), Some("simulated bin refusal"));
+    let catalog = cx.doc.metadata_catalog().unwrap();
+    assert_eq!(std::fs::read(moved_to).unwrap(), b"first");
+    assert!(!first.exists());
+    assert_eq!(std::fs::read(second).unwrap(), b"second");
+    assert!(catalog.photo(a).unwrap().is_none());
+    assert!(catalog.photo(a_copy).unwrap().is_none());
+    assert!(catalog.photo(b).unwrap().is_some());
+    assert!(catalog.photo(b_copy).unwrap().is_some());
+}

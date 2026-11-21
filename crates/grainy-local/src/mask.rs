@@ -93,6 +93,9 @@ pub fn component_mask(shape: (usize, usize), component: &Obj) -> Result<Plane> {
         Some(Value::String(kind)) => kind.as_str(),
         Some(_) => "",
     };
+    if matches!(kind, "subject" | "background" | "object") {
+        return crate::selection::coverage(shape, component);
+    }
     let p = value::points(component, "points", &CENTRE)?;
     if kind == "brush" {
         return brush_mask(shape, &p, num(component, "radius", 0.04)?, num(component, "feather", 70.0)?);

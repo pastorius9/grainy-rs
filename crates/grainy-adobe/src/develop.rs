@@ -109,6 +109,8 @@ impl Omitted {
 /// The result dict of `convert` (and of `adobe_preset.translate`).
 #[derive(Clone, Debug, PartialEq)]
 pub struct Converted {
+    /// Source process version used by Adobe's renderer, retained for the conversion report.
+    pub process_version: Option<String>,
     /// The Grainy settings (normalized, with the translated values applied).
     pub settings: Settings,
     /// Adobe keys that were translated, sorted.
@@ -585,6 +587,15 @@ pub fn convert(
         Lua::Table(t) if t.keys().all(|k| matches!(k, Key::Str(_))) => t,
         _ => return Err(Error::data("이름이 있는 Adobe 보정 표가 아닙니다.")),
     };
+    let process_version = match table.get_str("ProcessVersion") {
+        Some(Lua::Str(s)) => {
+            let version: String = s.trim().chars().filter(|c| !c.is_control()).take(64).collect();
+            (!version.is_empty()).then_some(version)
+        }
+        Some(Lua::Int(n)) => Some(n.to_string()),
+        Some(Lua::Float(n)) if n.is_finite() => Some(n.to_string()),
+        _ => None,
+    };
     let empty = Map::new();
     let settings = normalized(base.unwrap_or(&empty)).0;
     let mut run =
@@ -594,7 +605,7 @@ pub fn convert(
         if boolean(applied)? {
             let mut omitted = Omitted::default();
             omitted.set("AlreadyApplied", "픽셀에 이미 반영된 보정을 중복 적용하지 않습니다.");
-            return Ok(Converted { settings: Settings(run.settings), mapped: Vec::new(), omitted });
+            return Ok(Converted { process_version, settings: Settings(run.settings), mapped: Vec::new(), omitted });
         }
     }
     for (key, target, low, high) in SCALARS {
@@ -786,13 +797,16 @@ pub fn convert(
     let mapped: Vec<String> = run.mapped.iter().cloned().collect::<BTreeSet<_>>().into_iter().collect();
     let mut omitted = run.omitted;
     omitted.0.sort_by(|a, b| a.0.cmp(&b.0));
-    Ok(Converted { settings: Settings(run.settings), mapped, omitted })
+    Ok(Converted { process_version, settings: Settings(run.settings), mapped, omitted })
 }
 
 /// Port of `adobe_develop.summary(result, limit=None)`: the report shown to the person.
 pub fn summary(result: &Converted, limit: Option<usize>) -> String {
     let mut text = format!("변환한 보정 항목: {}개\n", result.mapped.len());
     text.push_str("Luma의 현상 방식으로 적용하므로 Lightroom과 색·명암·효과 강도가 달라질 수 있습니다.");
+    if let Some(version) = &result.process_version {
+        text.push_str(&format!("\n원본 Adobe ProcessVersion {version} · Grainy 현상 엔진으로 변환"));
+    }
     if !result.omitted.is_empty() {
         let items = &result.omitted.0;
         let shown = match limit {

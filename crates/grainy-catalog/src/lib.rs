@@ -9,6 +9,7 @@ pub mod profiles;
 pub mod query;
 mod schema;
 pub mod transaction;
+mod trash;
 pub mod workflow;
 
 pub use catalog::{Catalog, Sources};

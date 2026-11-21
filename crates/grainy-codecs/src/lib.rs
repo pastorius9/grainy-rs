@@ -1,5 +1,6 @@
 //! Ports of `luma/engine.py`, `rasterio.py` and `colorio.py`: files to linear pixels and developed pixels to files.
 
+mod hdr_avif;
 mod jpeg;
 mod metadata;
 mod pixels;

@@ -38,6 +38,8 @@ const LIBRARY: &[Entry] = &[
     ("스냅샷 불러오기", "snapshots.restore"),
     ("선택 사진 스택으로 묶기", "stacks.stack"),
     ("선택 사진 스택 해제", "stacks.unstack"),
+    ("HDR 노출 병합…", "photo.merge_hdr"),
+    ("평면 파노라마 병합…", "photo.merge_panorama"),
     ("메타데이터 편집", "metadata.edit"),
     ("촬영 시각 일괄 이동", "metadata.shift_date"),
     ("XMP 저장", "metadata.write_xmp"),
@@ -81,6 +83,8 @@ const SYNC: &[Entry] = &[
 
 const EXTRAS: &[Entry] = &[
     ("사진 복사해서 가져오기 (카드·다른 폴더)…", "import.copy"),
+    ("테더 촬영 폴더 선택…", "tether.folder"),
+    ("카메라 셔터 릴리스", "tether.capture"),
     ("GPS 지도", "extras.map"),
     ("현재 폴더 자동 가져오기", "import.watch"),
     ("자동 가져오기 해제", "import.unwatch"),

@@ -336,7 +336,11 @@ pub fn watch_window(cx: &mut AppContext, frame: &eframe::Frame) {
         return;
     }
     let screen = match native_window(frame) {
-        Some(Native::Windows(handle)) => grainy_platform::monitor::screen_of_window(handle).unwrap_or_default(),
+        Some(Native::Windows(handle)) => {
+            #[cfg(windows)]
+            crate::native_hdr::bind(cx, handle);
+            grainy_platform::monitor::screen_of_window(handle).unwrap_or_default()
+        }
         Some(Native::Mac) => match system_place(&cx.egui) {
             Some((window, monitor)) => {
                 grainy_platform::monitor::mac_screen_of_window(window, monitor).unwrap_or_default()

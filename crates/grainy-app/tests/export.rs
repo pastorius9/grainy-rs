@@ -192,7 +192,9 @@ fn the_format_list_and_the_fields_each_format_enables() {
             ("grayscale", fields.grayscale),
             ("dither", fields.dither),
         ] {
-            assert_eq!(enabled[key].as_bool().unwrap(), value, "{name}: {key}");
+            // The Rust JPEG XL writer is always lossless; the historical dialog enabled quality.
+            let expected = enabled[key].as_bool().unwrap() && !(name == "JPEG XL" && key == "quality");
+            assert_eq!(expected, value, "{name}: {key}");
         }
         assert_eq!(COLOR_SPACES[options.color_space], row["color_space"].as_str().unwrap(), "{name}: colour space");
     }
@@ -255,7 +257,8 @@ fn the_dialog_opens_with_the_previous_export() {
         assert_eq!(options.naming, state["naming"].as_str().unwrap(), "{name}: naming");
         let fields = options.fields();
         let enabled = &case["enabled"];
-        assert_eq!(fields.quality, enabled["quality"].as_bool().unwrap(), "{name}");
+        let quality = enabled["quality"].as_bool().unwrap() && options.format_name() != "JPEG XL";
+        assert_eq!(fields.quality, quality, "{name}");
         assert_eq!(fields.color_space, enabled["color_space"].as_bool().unwrap(), "{name}");
         assert_eq!(fields.longest, enabled["longest"].as_bool().unwrap(), "{name}");
         assert_eq!(fields.keep_metadata, enabled["keep_metadata"].as_bool().unwrap(), "{name}");

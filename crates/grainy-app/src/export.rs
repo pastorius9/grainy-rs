@@ -18,15 +18,27 @@ use serde_json::{json, Map, Value};
 
 use crate::render::Waker;
 
-/// The file formats (`quick_export.FORMATS`); the last one is "Original + settings" (`원본 + 설정`: the file and a
-/// Grainy XMP). The dialog lists [`listed_formats`]: the HDR TIFF only while the HDR mode is on.
-pub const FORMATS: [&str; 9] =
-    ["JPEG", "AVIF", "JPEG XL", "PNG", "PNG 16-bit", "TIFF 16-bit", "TIFF 8-bit", "TIFF HDR 32-bit", "Original"];
+/// Stable format indices; append new formats so existing selections keep their meaning.
+/// "Original" copies the source and writes a Grainy XMP.
+pub const FORMATS: [&str; 10] = [
+    "JPEG",
+    "AVIF",
+    "JPEG XL",
+    "PNG",
+    "PNG 16-bit",
+    "TIFF 16-bit",
+    "TIFF 8-bit",
+    "TIFF HDR 32-bit",
+    "Original",
+    "AVIF HDR 10-bit",
+];
 
-/// The indices in [`FORMATS`] the dialog lists, in order (`ExportDialog`: the HDR TIFF is skipped while
+/// The indices in [`FORMATS`] the dialog lists, in order (HDR outputs are skipped while
 /// `engine.HDR_FEATURE` is off).
 pub fn listed_formats() -> Vec<usize> {
-    (0..FORMATS.len()).filter(|i| FORMATS[*i] != "TIFF HDR 32-bit" || crate::hdr::enabled()).collect()
+    (0..FORMATS.len())
+        .filter(|i| !matches!(FORMATS[*i], "TIFF HDR 32-bit" | "AVIF HDR 10-bit") || crate::hdr::enabled())
+        .collect()
 }
 /// The output colour spaces of the dialog.
 pub const COLOR_SPACES: [&str; 4] = ["sRGB", "Adobe RGB", "Display P3", "ProPhoto RGB"];
@@ -114,8 +126,8 @@ impl ExportOptions {
     pub fn fields(&self) -> Fields {
         let f = self.format_name();
         Fields {
-            quality: matches!(f, "JPEG" | "AVIF" | "JPEG XL"),
-            color_space: !matches!(f, "TIFF HDR 32-bit" | "Original" | "JPEG XL"),
+            quality: matches!(f, "JPEG" | "AVIF" | "AVIF HDR 10-bit"),
+            color_space: !matches!(f, "AVIF HDR 10-bit" | "TIFF HDR 32-bit" | "Original" | "JPEG XL"),
             longest: f != "Original",
             keep_metadata: f != "Original",
             grayscale: matches!(f, "JPEG" | "PNG" | "TIFF 8-bit" | "TIFF 16-bit"),
@@ -421,7 +433,7 @@ impl Exporter for AppExporter {
             keywords: get("keywords").as_str().unwrap_or_default().to_owned(),
             grayscale: options.grayscale,
             dither: options.dither,
-            jxl_lossless: false,
+            jxl_lossless: format == grainy_codecs::ExportFormat::JpegXl,
         };
         let path = get("path");
         let settings = get("settings").as_object().cloned().unwrap_or_default();

@@ -741,3 +741,111 @@ fn batching_over_500_deletes_all_related_rows_and_keeps_sources() {
     drop(db);
     c.close().unwrap();
 }
+
+#[test]
+fn indexed_substrings_keep_literal_unicode_and_track_changes() {
+    let tmp = tempfile::tempdir().unwrap();
+    let c = Catalog::new(tmp.path()).unwrap();
+    let path = tmp.path().join("catalog.sqlite");
+    c.connection().execute_batch("WITH RECURSIVE seq(i) AS (SELECT 1 UNION ALL SELECT i+1 FROM seq WHERE i<600)
+        INSERT INTO photos(path,name,edits,imported) SELECT printf('/roll/%d.png',i),printf('%d.png',i),'{}','' FROM seq;
+        UPDATE photos SET name='Straße_%\"FÄRBEN.png' WHERE id=2;
+        UPDATE photos SET keywords='pre' || char(0) || 'NUL-marker' WHERE id=3").unwrap();
+    let cancel = std::sync::Arc::new(AtomicBool::new(false));
+    let search = |term| query::query(&path, &json!({"search":term}), &cancel, now()).unwrap()["ids"].clone();
+    assert_eq!(search("SSE_%"), json!([2]));
+    assert_eq!(search("%\"Fä"), json!([2]));
+    assert_eq!(search("nul-marker"), json!([3]));
+    assert_eq!(search("\0NUL"), json!([3]));
+    c.connection().execute("UPDATE photos SET name='new name',keywords='new value' WHERE id=2", []).unwrap();
+    assert_eq!(search("SSE_%"), json!([]));
+    assert_eq!(search("W VAL"), json!([2]));
+    c.remove_photos(&[2]).unwrap();
+    assert_eq!(search("W VAL"), json!([]));
+    let all = || query::query(&path, &json!({}), &cancel, now()).unwrap();
+    let before = all();
+    assert_eq!(before["total"], 599);
+    assert_eq!(before["folders"].as_array().unwrap().len(), 1);
+    c.connection().execute("UPDATE photos SET path='/another/3.png' WHERE id=3", []).unwrap();
+    let moved = all();
+    assert_eq!(moved["total"], 599);
+    assert_eq!(moved["folders"].as_array().unwrap().len(), 2);
+    assert!(moved["folders"].as_array().unwrap().iter().any(|folder| folder["count"] == 1));
+    c.remove_photos(&[3]).unwrap();
+    let after = all();
+    assert_eq!(after["total"], 598);
+    assert_eq!(after["folders"].as_array().unwrap().len(), 1);
+}
+
+#[test]
+#[ignore = "measures warm filename search at three library sizes"]
+fn large_library_filename_search() {
+    let cancel = std::sync::Arc::new(AtomicBool::new(false));
+    for size in [1000, 10_000, 100_000] {
+        let tmp = tempfile::tempdir().unwrap();
+        let catalog = Catalog::new(tmp.path()).unwrap();
+        catalog
+            .connection()
+            .execute_batch(&format!(
+                "WITH RECURSIVE nums(i) AS (SELECT 1 UNION ALL SELECT i+1 FROM nums WHERE i<{size})
+             INSERT INTO photos(path,name,edits,imported)
+             SELECT printf('C:/photos/img%07d.jpg',i),printf('img%07d.jpg',i),'{{}}','2026-11-21' FROM nums"
+            ))
+            .unwrap();
+        let path = tmp.path().join("catalog.sqlite");
+        let search = || query::query(&path, &json!({"search":"img0000001.jpg"}), &cancel, now()).unwrap();
+        assert_eq!(search()["ids"], json!([1]));
+        let mut elapsed = Vec::new();
+        for _ in 0..3 {
+            let start = std::time::Instant::now();
+            assert_eq!(search()["ids"], json!([1]));
+            elapsed.push(start.elapsed().as_micros());
+        }
+        println!("{size} photos, warm filename search in microseconds: {elapsed:?}");
+    }
+}
+
+#[test]
+fn interrupted_trash_keeps_recoverable_edits_and_reconciles_on_open() {
+    let root = tempfile::tempdir().unwrap();
+    let folder = root.path().join("library");
+    let source = root.path().join("frame.dng");
+    let bin = root.path().join("recycled-frame.dng");
+    fs::write(&source, b"test original").unwrap();
+    let c = Catalog::new(&folder).unwrap();
+    let id = c.add(source.to_str().unwrap(), None, None, false).unwrap();
+    let copy = c.virtual_copy(id).unwrap();
+    let record = c.photo(id).unwrap().unwrap();
+    let catalog_path = record["path"].as_str().unwrap();
+    c.connection()
+        .execute_batch(
+            "CREATE TRIGGER refuse_delete BEFORE DELETE ON photos BEGIN
+        SELECT RAISE(ABORT,'catalog cannot accept delete'); END",
+        )
+        .unwrap();
+    let result = c.trash_original(catalog_path, |_| panic!("bin called despite a failed catalog write"));
+    assert!(result.is_err());
+    assert!(source.exists());
+    assert!(c.photo(copy).unwrap().is_some());
+
+    // A deferred constraint fails at COMMIT after the filesystem move, simulating a
+    // rollback that leaves the durable intent and the pre-move catalog records intact.
+    c.connection()
+        .execute_batch(
+            "DROP TRIGGER refuse_delete; PRAGMA foreign_keys=ON;
+        CREATE TABLE fail_parent(id INTEGER PRIMARY KEY);
+        CREATE TABLE fail_child(parent INTEGER REFERENCES fail_parent(id) DEFERRABLE INITIALLY DEFERRED);
+        CREATE TRIGGER fail_commit AFTER DELETE ON photos BEGIN INSERT INTO fail_child VALUES(1); END",
+        )
+        .unwrap();
+    assert!(c.trash_original(catalog_path, |path| Ok(fs::rename(path, &bin)?)).is_err());
+    assert!(!source.exists());
+    assert!(c.photo(id).unwrap().is_some());
+    assert!(c.photo(copy).unwrap().is_some());
+    c.connection().execute_batch("DROP TRIGGER fail_commit").unwrap();
+    drop(c);
+    let reopened = Catalog::new(&folder).unwrap();
+    assert!(reopened.photo(id).unwrap().is_none());
+    assert!(reopened.photo(copy).unwrap().is_none());
+    assert_eq!(fs::read(bin).unwrap(), b"test original");
+}

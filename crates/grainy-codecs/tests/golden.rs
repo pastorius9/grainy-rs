@@ -314,7 +314,18 @@ fn jpeg_export_files_equal_pillow_bytes() {
             };
             export_image(&input, root().join("metadata_jpg/input.jpg"), &path, &options, &Cms::default()).unwrap();
             let actual = fs::read(&path).unwrap();
-            let expected = bytes(name, &format!("expected_q{quality}.jpg"));
+            let mut expected = bytes(name, &format!("expected_q{quality}.jpg"));
+            if options.keep_metadata {
+                // The oracle JPEG has EXIF/IPTC but omits the XMP packet. The richer export
+                // must add the independently generated XMP bytes and preserve every other byte.
+                let namespace = b"http://ns.adobe.com/xap/1.0/\0";
+                let packet = bytes(name, "xmp.bin");
+                let length = u16::try_from(2 + namespace.len() + packet.len()).unwrap().to_be_bytes();
+                let segment = [b"\xff\xe1".as_slice(), &length, namespace, &packet].concat();
+                assert_eq!(&expected[2..4], b"\xff\xed");
+                let after_iptc = 4 + usize::from(u16::from_be_bytes([expected[4], expected[5]]));
+                expected.splice(after_iptc..after_iptc, segment);
+            }
             assert_eq!(actual.len(), expected.len(), "{name} q{quality}: JPEG length");
             let first = actual.iter().zip(&expected).position(|(a, b)| a != b);
             assert_eq!(first, None, "{name} q{quality}: first differing JPEG byte");

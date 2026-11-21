@@ -4,6 +4,7 @@ use crate::{codec, invalid, validate, ColorManager, ColorModel, Error, Metadata,
 use grainy_core::Image;
 use ndarray::Array3;
 use std::{
+    borrow::Cow,
     io::{Cursor, Write},
     path::Path,
 };
@@ -25,6 +26,8 @@ pub enum ExportFormat {
     TiffHdr32,
     /// AVIF, 8-bit 4:4:4, speed 6.
     Avif,
+    /// 10-bit Rec.2100 PQ AVIF, from scene-linear working RGB.
+    AvifHdr,
     /// JPEG XL; built-in encoding requires explicit lossless mode (see jxl_lossless).
     JpegXl,
 }
@@ -206,7 +209,11 @@ fn encode_avif(pixels: &Array3<u8>, quality: f64, b: &Blocks<'_>) -> Result<Vec<
         .with_bit_depth(ravif::BitDepth::Eight)
         .encode_rgb(ravif::Img::new(&rgb, w, h))
         .map_err(codec)?;
-    let top = boxes(&encoded.avif_file)?;
+    avif_metadata(&encoded.avif_file, Some(b.icc), b)
+}
+
+fn avif_metadata(file: &[u8], icc_profile: Option<&[u8]>, b: &Blocks<'_>) -> Result<Vec<u8>> {
+    let top = boxes(file)?;
     let av1 = top.iter().find(|(k, _)| k == b"mdat").map(|(_, p)| *p).ok_or_else(|| invalid("ravif missing mdat"))?;
     let meta = top.iter().find(|(k, _)| k == b"meta").map(|(_, p)| *p).ok_or_else(|| invalid("ravif missing meta"))?;
     let meta = boxes(get(meta, 4, meta.len().saturating_sub(4))?)?;
@@ -220,9 +227,11 @@ fn encode_avif(pixels: &Array3<u8>, quality: f64, b: &Blocks<'_>) -> Result<Vec<
             properties.push(box_bytes(&k, p)?);
         }
     }
-    let mut icc = b"prof".to_vec();
-    icc.extend(b.icc);
-    properties.push(box_bytes(b"colr", &icc)?);
+    if let Some(profile) = icc_profile {
+        let mut icc = b"prof".to_vec();
+        icc.extend(profile);
+        properties.push(box_bytes(b"colr", &icc)?);
+    }
     // Rebuild a simple one-image HEIF container so ICC, EXIF and XMP are all first-class items.
     let mut items = vec![(1u16, *b"av01", av1.to_vec())];
     if let Some(exif) = b.exif {
@@ -233,7 +242,10 @@ fn encode_avif(pixels: &Array3<u8>, quality: f64, b: &Blocks<'_>) -> Result<Vec<
     if let Some(xmp) = b.xmp {
         items.push((3, *b"mime", xmp.to_vec()));
     }
-    let ftyp = box_bytes(b"ftyp", b"avif\0\0\0\0avifmif1miafMA1A")?;
+    let ftyp = box_bytes(
+        b"ftyp",
+        if icc_profile.is_some() { b"avif\0\0\0\0avifmif1miafMA1A" } else { b"avif\0\0\0\0avifmif1miafMA1B" },
+    )?;
     let build_meta = |start: u32| -> Result<Vec<u8>> {
         let mut body = vec![];
         let mut hdlr = vec![0; 4];
@@ -316,9 +328,13 @@ pub fn export_image(
         )));
     }
     let timing = grainy_core::timing::Span::new("export.prepare");
-    let hdr = options.format == ExportFormat::TiffHdr32;
+    let hdr = matches!(options.format, ExportFormat::TiffHdr32 | ExportFormat::AvifHdr);
     if hdr && !options.hdr_enabled {
-        return Err(invalid("HDR TIFF requires HDR enabled"));
+        return Err(invalid(if options.format == ExportFormat::TiffHdr32 {
+            "HDR TIFF requires HDR enabled"
+        } else {
+            "HDR AVIF requires HDR enabled"
+        }));
     }
     let source = source.as_ref();
     let output = output.as_ref();
@@ -330,32 +346,41 @@ pub fn export_image(
             return Err(invalid("cannot overwrite source"));
         }
     }
-    let mut result = if hdr {
-        developed.clone()
-    } else if options.working_space == "ProPhoto" || options.color_space != "sRGB" {
-        let source = cms.profile_bytes(&Profile::Named(
-            if options.working_space == "ProPhoto" { "Luma Wide" } else { "sRGB" }.into(),
-        ))?;
-        cms.convert(
-            developed,
-            ColorModel::Rgb,
-            &source,
-            &cms.profile_bytes(&Profile::Named(options.color_space.clone()))?,
-        )?
+    let direct_rgb8 = options.format == ExportFormat::Jpeg
+        && options.working_space != "ProPhoto"
+        && options.color_space == "sRGB"
+        && options.longest.is_none();
+    let mut result = if direct_rgb8 {
+        Cow::Borrowed(developed)
     } else {
-        developed.clone()
+        let mut result = if hdr {
+            developed.clone()
+        } else if options.working_space == "ProPhoto" || options.color_space != "sRGB" {
+            let source = cms.profile_bytes(&Profile::Named(
+                if options.working_space == "ProPhoto" { "Luma Wide" } else { "sRGB" }.into(),
+            ))?;
+            cms.convert(
+                developed,
+                ColorModel::Rgb,
+                &source,
+                &cms.profile_bytes(&Profile::Named(options.color_space.clone()))?,
+            )?
+        } else {
+            developed.clone()
+        };
+        if result.dim() != developed.dim() {
+            return Err(invalid("CMS export shape mismatch"));
+        }
+        validate(&result)?;
+        if !hdr {
+            grainy_color::clip01_in_place(&mut result);
+        }
+        Cow::Owned(result)
     };
-    if result.dim() != developed.dim() {
-        return Err(invalid("CMS export shape mismatch"));
-    }
-    validate(&result)?;
-    if !hdr {
-        grainy_color::clip01_in_place(&mut result);
-    }
     drop(timing);
     if let Some(limit) = options.longest {
         let side = crate::export_longest((result.shape()[0], result.shape()[1]), limit)?;
-        result = crate::resize_export(&result, side, hdr)?;
+        result = Cow::Owned(crate::resize_export(&result, side, hdr)?);
     }
     let (h, w, _) = result.dim();
     let width = u32::try_from(w).map_err(codec)?;
@@ -364,7 +389,11 @@ pub fn export_image(
         && options.color_space == "sRGB"
         && matches!(options.format, ExportFormat::Jpeg | ExportFormat::Png | ExportFormat::Tiff8 | ExportFormat::Tiff16)
     {
-        crate::neutral_gray(&result, 1e-4)
+        if direct_rgb8 {
+            crate::pixels::jpeg_neutral_gray(&result, 1e-4)
+        } else {
+            crate::neutral_gray(&result, 1e-4)
+        }
     } else {
         None
     };
@@ -380,13 +409,23 @@ pub fn export_image(
     } else {
         &options.color_space
     };
-    let icc = cms.profile_bytes(&Profile::Named(name.into()))?;
+    let icc = if options.format == ExportFormat::AvifHdr {
+        Vec::new()
+    } else {
+        cms.profile_bytes(&Profile::Named(name.into()))?
+    };
     let exif = if options.keep_metadata {
         Some(crate::export_exif(
             source,
             &options.user_metadata,
             Some((width, height)),
-            if hdr { "HDR linear" } else { &options.color_space },
+            if options.format == ExportFormat::AvifHdr {
+                "Rec.2100 PQ"
+            } else if hdr {
+                "HDR linear"
+            } else {
+                &options.color_space
+            },
         )?)
     } else {
         None
@@ -419,15 +458,22 @@ pub fn export_image(
             encode_png(&p, width, height, false, true, &icc, exif.as_deref(), xmp.as_deref())?
         }
         ExportFormat::Jpeg => {
-            let mut encoded = encode_jpeg(
-                &eight(frame)?.into_raw_vec_and_offset().0,
-                width,
-                height,
-                gray.is_some(),
-                options.quality,
-                &icc,
-                exif.as_deref(),
-            )?;
+            let pixels = match (direct_rgb8, options.dither) {
+                (true, true) => crate::pixels::jpeg_dithered8(frame),
+                (true, false) => crate::pixels::jpeg_rgb8(frame),
+                (false, _) => eight(frame)?.into_raw_vec_and_offset().0,
+            };
+            let mut encoded =
+                encode_jpeg(&pixels, width, height, gray.is_some(), options.quality, &icc, exif.as_deref())?;
+            drop(pixels);
+            if let Some(packet) = xmp.as_deref() {
+                // XMP in JPEG uses an APP1 segment separate from the EXIF APP1.
+                const NS: &[u8] = b"http://ns.adobe.com/xap/1.0/\0";
+                let len = u16::try_from(2 + NS.len() + packet.len())
+                    .map_err(|_| invalid("XMP metadata exceeds the JPEG APP1 segment limit"))?;
+                let prefix = [b"\xff\xe1".as_slice(), &len.to_be_bytes(), NS, packet].concat();
+                encoded.splice(2..2, prefix);
+            }
             if options.keep_metadata {
                 encoded = crate::metadata::inject_iptc(&encoded, &options.user_metadata, &options.keywords)?;
             }
@@ -451,6 +497,14 @@ pub fn export_image(
         }
         ExportFormat::TiffHdr32 => {
             encode_tiff::<ct::RGB32Float>(&result.iter().copied().collect::<Vec<_>>(), width, height, &blocks)?
+        }
+        ExportFormat::AvifHdr => {
+            let encoded = crate::hdr_avif::encode(&result, options.working_space == "ProPhoto", options.quality)?;
+            if exif.is_none() && xmp.is_none() {
+                encoded
+            } else {
+                avif_metadata(&encoded, None, &blocks)?
+            }
         }
         ExportFormat::Avif => encode_avif(&eight(&result)?, options.quality.max(1.), &blocks)?,
         ExportFormat::JpegXl => {

@@ -377,7 +377,7 @@ impl grainy_service::export::Exporter for EngineExporter {
             keywords: get(job.record, "keywords").as_str().unwrap_or("").to_owned(),
             grayscale: options.grayscale,
             dither: options.dither,
-            jxl_lossless: false,
+            jxl_lossless: format == grainy_codecs::ExportFormat::JpegXl,
         };
         let path = get(job.record, "path").as_str().unwrap_or("");
         let (w, h) = grainy_engine::files::export_photo(path, job.destination, &settings_of(job.record), &request)

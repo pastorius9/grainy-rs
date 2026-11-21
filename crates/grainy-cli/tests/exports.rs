@@ -527,6 +527,56 @@ fn cli() -> Command {
     Command::new(env!("CARGO_BIN_EXE_grainy-cli"))
 }
 
+#[test]
+fn cli_hdr_round_trip_preserves_highlights_with_explicit_settings() {
+    use grainy_codecs::{export_image, ExportOptions};
+    use grainy_engine::files::Cms;
+
+    let dir = scratch("hdr-cli");
+    let input = dir.join("linear.tif");
+    let settings = dir.join("hdr.json");
+    fs::write(&settings, r#"{"hdr":true}"#).unwrap();
+    let pixels = grainy_core::Image::from_shape_fn((32, 64, 3), |(_, x, _)| if x < 32 { 0.18 } else { 3.0 });
+    let options = ExportOptions {
+        format: ExportFormat::TiffHdr32,
+        hdr_enabled: true,
+        keep_metadata: false,
+        ..Default::default()
+    };
+    export_image(&pixels, &input, &input, &options, &Cms::for_export_of_developed_pixels()).unwrap();
+    let render = |from: &Path, to: &Path, format: &str, hdr: bool| {
+        let mut command = cli();
+        command.arg("render").arg(from).arg("-o").arg(to).args(["--format", format, "--quality", "100"]);
+        if hdr {
+            command.arg("--settings").arg(&settings);
+        }
+        command.output().unwrap()
+    };
+    let baseline = dir.join("baseline.tif");
+    let avif = dir.join("hdr.avif");
+    let decoded = dir.join("decoded.tif");
+    assert!(!render(&input, &baseline, "TIFF HDR 32-bit", false).status.success());
+    assert!(!baseline.exists());
+    for (from, to, format) in [
+        (&input, &baseline, "TIFF HDR 32-bit"),
+        (&input, &avif, "AVIF HDR 10-bit"),
+        (&avif, &decoded, "TIFF HDR 32-bit"),
+    ] {
+        let result = render(from, to, format, true);
+        assert!(result.status.success(), "{format}: {}", String::from_utf8_lossy(&result.stderr));
+    }
+    let reference = decode_bitmap(&baseline, &LoadOptions::default()).unwrap();
+    let roundtrip = decode_bitmap(&decoded, &LoadOptions::default()).unwrap();
+    assert_eq!(roundtrip.bit_depth, 32);
+    assert_eq!(roundtrip.samples.dim(), pixels.dim());
+    assert!(roundtrip.samples[[16, 48, 0]] > 1.0);
+    for x in [16, 48] {
+        for c in 0..3 {
+            assert!((reference.samples[[16, x, c]] - roundtrip.samples[[16, x, c]]).abs() < 0.10);
+        }
+    }
+}
+
 fn flags(case: &Case) -> Vec<String> {
     let o = &case.json()["options"];
     let mut args: Vec<String> =

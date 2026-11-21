@@ -1,11 +1,11 @@
 # Builds, tests and packages Grainy RS on GitHub-hosted runners: the Windows zip (windows-2022) and the macOS
-# disk image (macos-15, Apple Silicon, universal binaries). Nothing here writes to the repository; releases are
-# made by hand from the uploaded artifacts.
+# disk image (macos-15, Apple Silicon, universal binaries). A version tag or the designated release branch
+# publishes both tested packages together.
 name: Build
 
 on:
   push:
-    branches: [main, mac]
+    branches: [main, mac, release/v0.3.0]
     tags: ['v*']
   pull_request:
     branches: [main]
@@ -24,6 +24,8 @@ env:
 jobs:
   windows:
     runs-on: windows-2022
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     timeout-minutes: 240
     env:
       # The runner has no graphics card and its WARP software adapter loses the device in the GPU tests
@@ -58,7 +60,7 @@ jobs:
           echo "Grainy RS $version"
 
       - name: Format
-        run: cargo fmt --all --check
+        run: cargo fmt --check
 
       - name: Clippy
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
@@ -123,7 +125,7 @@ jobs:
           echo "Grainy RS $version"
 
       - name: Format
-        run: cargo fmt --all --check
+        run: cargo fmt --check
 
       - name: Clippy (Apple Silicon)
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
@@ -138,7 +140,7 @@ jobs:
           P12: ${{ secrets.MACOS_SIGN_P12 }}
           PASSWORD: ${{ secrets.MACOS_SIGN_PASSWORD }}
         run: |
-          if [ -z "$P12" ] && { [ -n "$PASSWORD" ] || [[ "$GITHUB_REF" == refs/tags/v* ]]; }; then
+          if [ -z "$P12" ] && { [ -n "$PASSWORD" ] || [[ "$GITHUB_REF" == refs/tags/v* || "$GITHUB_REF" == refs/heads/release/v0.3.0 ]]; }; then
             echo "::error::The release signing certificate is missing."; exit 1
           fi
           if [ -z "$P12" ]; then echo "::notice::No signing certificate in the secrets: the app is signed ad hoc."; exit 0; fi
@@ -177,3 +179,28 @@ jobs:
           name: macos-snapshot-differences
           path: crates/grainy-app/tests/snapshots/*.new.png
           if-no-files-found: ignore
+
+  publish:
+    if: >-
+      github.repository == 'pastorius9/grainy-rs' && github.event_name == 'push' &&
+      (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/release/v0.3.0')
+    needs: [windows, macos]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: publish-grainy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: GrainyRS-${{ needs.windows.outputs.version }}-*
+          path: dist
+          merge-multiple: true
+      - name: Verify both packages and publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/release/publish_release.py dist

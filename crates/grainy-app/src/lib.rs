@@ -28,6 +28,9 @@ pub mod masks;
 mod menus;
 pub mod menus_photo;
 mod monitor_preview;
+#[cfg(windows)]
+#[allow(unsafe_code)]
+mod native_hdr;
 pub mod network;
 pub mod panels;
 pub mod paths;

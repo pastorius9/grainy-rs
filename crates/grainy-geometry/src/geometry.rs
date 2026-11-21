@@ -46,6 +46,20 @@ fn clamp_index(v: f64, low: i64, high: i64) -> i64 {
     (v as i64).max(low).min(high)
 }
 
+/// Pixel bounds of a stored crop on the rotated canvas, with the same rounding as the renderer.
+pub fn crop_bounds(crop: &Value, w: usize, h: usize) -> Result<[usize; 4]> {
+    let [x0, y0, x1, y1] = crop_values(crop)?;
+    if h == 0 || w == 0 {
+        return Err(Error::Value("cannot crop an empty frame".into()));
+    }
+    let (wi, hi) = (w as i64, h as i64);
+    let l = clamp_index(py_round(x0 * w as f64), 0, wi - 1);
+    let t = clamp_index(py_round(y0 * h as f64), 0, hi - 1);
+    let r = (py_round(x1 * w as f64) as i64).min(wi).max(l + 1);
+    let b = (py_round(y1 * h as f64) as i64).min(hi).max(t + 1);
+    Ok([l as usize, t as usize, r as usize, b as usize])
+}
+
 /// Port of luma/engine.py `geometry(a, settings, use_crop)` on an H×W×C frame or mask (1 or 3 channels):
 /// optical geometry (lens profile, guides, manual transform), quarter turns (`rotation`), `flip`, the crop
 /// tool's padded canvas (`UseCrop::All`), straighten (Pillow bicubic per channel, the oracle's CPU path),
@@ -86,17 +100,9 @@ pub fn geometry<'a>(
     }
     let crop = if use_crop == UseCrop::Yes { settings.value("crop") } else { &Value::Null };
     if grainy_core::settings::truthy(crop) {
-        let [x0, y0, x1, y1] = crop_values(crop)?;
         let (h, w, _) = a.dim();
-        if h == 0 || w == 0 {
-            return Err(Error::Value("cannot crop an empty frame".into()));
-        }
-        let (wi, hi) = (w as i64, h as i64);
-        let l = clamp_index(py_round(x0 * w as f64), 0, wi - 1);
-        let t = clamp_index(py_round(y0 * h as f64), 0, hi - 1);
-        let r = (py_round(x1 * w as f64) as i64).min(wi).max(l + 1);
-        let b = (py_round(y1 * h as f64) as i64).min(hi).max(t + 1);
-        let cropped = a.slice(s![t as usize..b as usize, l as usize..r as usize, ..]).to_owned();
+        let [l, t, r, b] = crop_bounds(crop, w, h)?;
+        let cropped = a.slice(s![t..b, l..r, ..]).to_owned();
         a = Cow::Owned(cropped);
     }
     Ok(a)

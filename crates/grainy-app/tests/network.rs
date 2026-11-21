@@ -203,18 +203,26 @@ fn a_feedback_post_carries_the_oracles_fields_and_the_rust_version() {
     assert_eq!(
         request.headers,
         vec![
-            ("User-Agent".to_string(), "Grainy/rs-0.2.1".to_string()),
+            ("User-Agent".to_string(), format!("Grainy/rs-{}", env!("CARGO_PKG_VERSION"))),
             ("Content-Type".to_string(), "application/x-www-form-urlencoded".to_string()),
         ]
     );
     let fields = form(&request.body);
     let keys: Vec<&str> = fields.keys().map(String::as_str).collect();
     assert_eq!(keys, ["entry.1045781291", "entry.1065046570", "entry.839337160"], "exactly the oracle's three fields");
-    assert_eq!(fields["entry.1045781291"], "rs-0.2.1", "the version field names the Rust build");
+    assert_eq!(
+        fields["entry.1045781291"],
+        concat!("rs-", env!("CARGO_PKG_VERSION")),
+        "the version field names the Rust build"
+    );
     assert_eq!(fields["entry.1065046570"], "미리보기가 늦어요");
     let system = &fields["entry.839337160"];
     assert!(system.starts_with("Windows 11 (10.0.26200) · AMD64 · GPU Example GPU · #"), "{system}");
-    assert!(model.note().contains("Grainy rs-0.2.1"), "the window says what is sent: {}", model.note());
+    assert!(
+        model.note().contains(concat!("Grainy rs-", env!("CARGO_PKG_VERSION"))),
+        "the window says what is sent: {}",
+        model.note()
+    );
     grainy_i18n::set_language(Language::Korean);
 }
 
@@ -288,7 +296,7 @@ fn a_check_of_todays_feed_ends_up_to_date() {
     assert!(cx.state::<UpdateState>().release.is_none(), "no release qualifies");
     let prefs = grainy_platform::preferences::Preferences::new(folder.join("settings.json"));
     assert!(prefs.values.contains_key("update_checked"), "the check succeeded (a failure records nothing)");
-    assert_eq!(settings::latest_box().text, "최신 버전을 쓰고 있습니다 (0.2.1).");
+    assert_eq!(settings::latest_box().text, concat!("최신 버전을 쓰고 있습니다 (", env!("CARGO_PKG_VERSION"), ")."));
     grainy_i18n::set_language(Language::Korean);
 }
 

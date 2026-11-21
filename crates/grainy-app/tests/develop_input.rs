@@ -1,0 +1,104 @@
+//! End-to-end input routing in the Develop inspector, including the undo boundary.
+
+use eframe::egui::{self, Id, Key, Modifiers, Pos2};
+use egui_kittest::Harness;
+use grainy_app::{GrainyApp, Mode};
+
+fn window() -> (tempfile::TempDir, Harness<'static, GrainyApp>) {
+    let files = tempfile::tempdir().unwrap();
+    let paths = ["first.png", "second.png"].map(|name| {
+        let file = files.path().join(name);
+        image::RgbImage::new(8, 8).save(&file).unwrap();
+        file
+    });
+    let mut app = Harness::builder().with_size(egui::vec2(1600.0, 1000.0)).build_eframe(move |cc| {
+        let mut app = GrainyApp::with_test_card(&cc.egui_ctx);
+        app.open_paths(Vec::from(paths));
+        app.set_mode(Mode::Develop);
+        app
+    });
+    app.run_steps(4);
+    (files, app)
+}
+
+fn slider(key: &str) -> Id {
+    Id::unique(("adjustment", key)).with("slider")
+}
+
+#[test]
+fn basic_focus_hover_cycle_text_and_filmstrip() {
+    let (_files, mut app) = window();
+    let photo = app.state().document().current_index().unwrap();
+    let point = app.ctx.read_response(slider("exposure")).unwrap().rect.center();
+    app.hover_at(point);
+    app.run_steps(1);
+    app.key_press(Key::ArrowUp);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("exposure"), 0.01);
+    app.key_press_modifiers(Modifiers::SHIFT, Key::ArrowUp);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("exposure"), 0.11);
+    assert_eq!(app.state().document().current_index(), Some(photo));
+
+    app.key_press(Key::Period);
+    app.run_steps(2);
+    assert!(app.ctx.read_response(slider("contrast")).unwrap().has_focus());
+    app.key_press(Key::Minus);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("contrast"), -1.0);
+    app.key_press(Key::Comma);
+    app.run_steps(2);
+    assert!(app.ctx.read_response(slider("exposure")).unwrap().has_focus());
+
+    let field = Id::unique(("adjustment", "exposure")).with("value");
+    let pos = app.ctx.read_response(field).unwrap().rect.center();
+    app.hover_at(pos);
+    app.run_steps(1);
+    app.drag_at(pos);
+    app.run_steps(1);
+    app.drop_at(pos);
+    app.run_steps(1);
+    assert!(app.ctx.text_edit_focused());
+    app.event(egui::Event::Text("1.75".into()));
+    app.key_press(Key::ArrowDown);
+    app.run_steps(1);
+    assert_eq!(app.state().document().current_index(), Some(photo));
+    app.key_press(Key::Enter);
+    app.run_steps(2);
+    assert_eq!(app.state().settings().f64("exposure"), 1.75);
+
+    app.hover_at(Pos2::new(400.0, 200.0));
+    app.run_steps(1);
+    app.key_press(Key::ArrowDown);
+    app.run_steps(2);
+    assert_eq!(app.state().document().current_index(), Some(photo + 1));
+}
+
+#[test]
+fn histogram_edits_only_the_initial_tone_zone_and_undoes_in_one_step() {
+    let (_files, mut app) = window();
+    let keys = ["blacks", "shadows", "exposure", "highlights", "whites"];
+    for key in keys {
+        let band = app.ctx.read_response(Id::unique(("histogram_tone", key))).unwrap().rect;
+        let start = band.center();
+        let direction = if key == "whites" { -1.0 } else { 1.0 };
+        let end = start + egui::vec2(band.width() * direction, 0.0);
+        app.hover_at(start);
+        app.run_steps(1);
+        app.drag_at(start);
+        app.run_steps(1);
+        app.hover_at(start.lerp(end, 0.5));
+        app.run_steps(1);
+        app.hover_at(end);
+        app.run_steps(1);
+        app.drop_at(end);
+        app.run_steps(2);
+        assert!(app.state().settings().f64(key) * f64::from(direction) > 0.0, "{key}");
+        for other in keys.into_iter().filter(|other| *other != key) {
+            assert_eq!(app.state().settings().f64(other), 0.0, "{key} changed {other}");
+        }
+        app.state_mut().run("develop.undo");
+        app.run_steps(2);
+        assert_eq!(app.state().settings().f64(key), 0.0, "one undo restores {key}");
+    }
+}

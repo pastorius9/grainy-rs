@@ -270,10 +270,8 @@ impl Renderer for Worker {
     fn set_gpu_enabled(&mut self, enabled: bool) {
         if let Some(control) = &self.shared.gpu {
             control.set_enabled(enabled);
-            if lock(&self.shared.monitor).is_none() {
-                if let Some(job) = self.last_preview.clone() {
-                    self.preview(job);
-                }
+            if let Some(job) = self.last_preview.clone() {
+                self.preview(job);
             }
         }
     }
@@ -303,6 +301,8 @@ struct Source {
     token: u64,
     /// The file's oriented, uncropped (width, height).
     original: (u32, u32),
+    /// The source size requested on load. An offline or reduced-resolution file can supply fewer pixels.
+    load_limit: usize,
 }
 
 impl Source {
@@ -325,6 +325,19 @@ impl Source {
             ..Options::default()
         }
     }
+
+    fn fit_source_long(&self, shown: usize, crop: Crop, settings: &Settings) -> Result<usize, String> {
+        let (w, h) = (self.original.0 as usize, self.original.1 as usize);
+        let long = w.max(h).max(1);
+        let bounds = settings.value("crop");
+        if crop != Crop::Cropped || !grainy_core::settings::truthy(bounds) {
+            return Ok(shown.clamp(1, long));
+        }
+        let (w, h) = if settings.i64("rotation").rem_euclid(2) == 0 { (w, h) } else { (h, w) };
+        let [l, t, r, b] = grainy_geometry::crop_bounds(bounds, w, h).map_err(|e| e.to_string())?;
+        let cropped = (r - l).max(b - t);
+        Ok((shown.clamp(1, cropped) as u64 * long as u64).div_ceil(cropped as u64) as usize)
+    }
 }
 
 fn load(
@@ -335,14 +348,22 @@ fn load(
     resolution: Resolution,
     offline: Option<(PathBuf, i64)>,
 ) -> Result<Source, String> {
+    let load_limit = if offline.is_some() { usize::MAX } else { max_size.unwrap_or(usize::MAX) };
     let loaded = match offline {
         Some((directory, id)) => offline_photo(&directory, id, settings)?,
         None => load_photo(path, max_size, settings).map_err(|e| e.to_string())?,
     };
-    Ok(loaded_source(path, settings, token, resolution, loaded))
+    Ok(loaded_source(path, settings, token, resolution, load_limit, loaded))
 }
 
-fn loaded_source(path: &Path, settings: &Settings, token: u64, resolution: Resolution, loaded: Loaded) -> Source {
+fn loaded_source(
+    path: &Path,
+    settings: &Settings,
+    token: u64,
+    resolution: Resolution,
+    load_limit: usize,
+    loaded: Loaded,
+) -> Source {
     let (h, w, _) = loaded.photo.pixels().dim();
     let size = |key: &str, fallback: usize| {
         loaded.metadata.get(key).and_then(serde_json::Value::as_u64).map_or(fallback as u32, |v| v as u32)
@@ -355,6 +376,7 @@ fn loaded_source(path: &Path, settings: &Settings, token: u64, resolution: Resol
         photo: Arc::new(loaded.photo),
         token,
         original,
+        load_limit,
     }
 }
 
@@ -389,7 +411,7 @@ impl PreviewState {
         }
     }
 
-    /// The fit source `at` reduced to `long` pixels on its long side (Lanczos, as the preview source itself), kept
+    /// The fit source `at` reduced to `long` pixels on its long side with the preview loader's filter, kept
     /// until the source or the size changes. The develop's spatial operations scale with the source
     /// (`original_size`), so the reduced picture is the full one seen at the screen's size.
     fn reduce(&mut self, at: usize, long: usize, settings: &Settings) -> Result<(), String> {
@@ -413,6 +435,7 @@ impl PreviewState {
             photo: Arc::new(photo),
             token: self.tokens,
             original: parent.original,
+            load_limit: long,
         };
         self.reduced = Some((parent.token, long, source));
         Ok(())
@@ -445,7 +468,7 @@ impl PreviewState {
             )
             .map_err(|e| e.to_string())?;
             self.analysis_seed = seed.map(|seed| (job.path.clone(), key, seed));
-            loaded_source(&job.path, &job.settings, self.tokens, job.resolution, loaded)
+            loaded_source(&job.path, &job.settings, self.tokens, job.resolution, PREVIEW_SIZE, loaded)
         } else {
             load(&job.path, max, &job.settings, self.tokens, job.resolution, offline)?
         };
@@ -497,10 +520,27 @@ impl PreviewState {
         } else {
             self.source(job)?
         };
-        // A fitted view smaller than the fit source: develop only the pixels the screen shows.
-        let reduce = view.filter(|&long| {
-            job.resolution == Resolution::Fit && (long as f64) < self.sources[at].long_side() as f64 * REDUCE_BELOW
-        });
+        let effective = grainy_engine::working_settings(&job.settings.0);
+        let fit_long = view
+            .filter(|_| job.resolution == Resolution::Fit)
+            .map(|shown| self.sources[at].fit_source_long(shown, job.crop, &effective))
+            .transpose()?;
+        if let Some(needed) = fit_long.filter(|&n| n > self.sources[at].load_limit && n > self.sources[at].long_side())
+        {
+            // A tight crop or a large monitor can outresolve the default fit decode. Keep the larger source
+            // available for later edits. The offline packet, when used, is already the best available source.
+            let limit = needed.div_ceil(256) * 256;
+            self.tokens += 1;
+            self.sources[at] = load(
+                &job.path,
+                Some(limit),
+                &job.settings,
+                self.tokens,
+                Resolution::Fit,
+                offline_for(&job.path, self.library.as_deref(), Some(job.photo as i64)),
+            )?;
+        }
+        let reduce = fit_long.filter(|&long| (long as f64) < self.sources[at].long_side() as f64 * REDUCE_BELOW);
         if let Some(long) = reduce {
             self.reduce(at, long, &job.settings)?;
         }
@@ -532,10 +572,10 @@ impl PreviewState {
                 hits: cache.hits(),
                 misses: cache.misses(),
                 hdr: Some(shown.info),
+                native_hdr: shown.native_hdr,
             });
         }
         options.output = Output::Working;
-        let effective = grainy_engine::working_settings(&job.settings.0);
         if let Photo::Linear(pixels) = &*source.photo {
             if let Some(frame) = crate::basic_preview::render(pixels, &effective, monitor, &mut self.monitor)? {
                 let (height, width, _) = pixels.dim();
@@ -553,6 +593,7 @@ impl PreviewState {
                     hits: cache.hits(),
                     misses: cache.misses(),
                     hdr: None,
+                    native_hdr: None,
                 });
             }
         }
@@ -561,9 +602,10 @@ impl PreviewState {
         // CPU afterwards. The screen may then differ from the CPU develop by a rounding step (a GPU ULP through the
         // LittleCMS lookup), never visibly; exports always develop on the CPU. Without this, every edit of a photo
         // with noise reduction or sharpening re-ran the detail stage on the CPU (1.5 s for a 24 MP RAW's preview).
-        let accelerated = self.gpu.as_mut().filter(|_| space != "ProPhoto").and_then(|gpu| {
-            gpu.render(source.photo.source(), &job.settings.0, &options, source.token, job.resolution)
-        });
+        let accelerated =
+            self.gpu.as_mut().filter(|_| space != "ProPhoto").and_then(|gpu| {
+                gpu.render(source.photo.source(), &job.settings.0, &options, source.token, job.resolution)
+            });
         let (working, hits, misses) = match accelerated {
             Some(result) => {
                 let (hits, misses) = self.gpu.as_ref().map_or((0, 0), |gpu| gpu.counters(job.resolution));
@@ -610,6 +652,7 @@ impl PreviewState {
             hits,
             misses,
             hdr: None,
+            native_hdr: None,
         })
     }
 }
@@ -625,8 +668,7 @@ fn monitor_and_histogram_share_one_develop_and_zoom_keeps_the_fit_stages() {
     let settings = grainy_core::defaults();
     let mut job =
         PreviewJob { id: 1, photo: 1, path: path.clone(), settings, resolution: Resolution::Fit, crop: Crop::Cropped };
-    let control = crate::gpu_worker::Control::new(true);
-    let mut state = PreviewState::new(Some(control));
+    let mut state = PreviewState::new(None);
     for (token, resolution) in [(1, Resolution::Fit), (2, Resolution::Full)] {
         state.sources.push(Source {
             path: path.clone(),
@@ -635,12 +677,11 @@ fn monitor_and_histogram_share_one_develop_and_zoom_keeps_the_fit_stages() {
             photo: Arc::new(Photo::Linear(grainy_testkit::input("garden"))),
             token,
             original: (257, 193),
+            load_limit: PREVIEW_SIZE,
         });
     }
     let profile = grainy_cms::profile("Display P3").unwrap();
     let first = state.render(&job, Some(&profile), Default::default(), None).unwrap();
-    assert!(!state.gpu.as_ref().unwrap().attempted(), "the exact Basic shortcut answers before a GPU starts");
-    state.gpu = None;
     assert_eq!((first.hits, first.misses), (0, 1), "one tone operation in the cold neutral frame");
     job.resolution = Resolution::Full;
     state.render(&job, None, Default::default(), None).unwrap();

@@ -88,6 +88,7 @@ fn the_hdr_preview_matches_the_oracle() {
         let view = View {
             sdr_preview: golden["sdr_preview"].as_bool().unwrap(),
             visualize: golden["visualize"].as_bool().unwrap(),
+            ..View::default()
         };
         let shown = hdr::present(&expected_working, &settings, view, None).unwrap();
         let display: Array3<u8> = case.array("display");
@@ -130,8 +131,13 @@ fn the_export_dialog_lists_the_hdr_tiff() {
     let case = Case::open("app_hdr", "formats");
     let golden = case.json();
     let listed: Vec<&str> = export::listed_formats().iter().map(|i| FORMATS[*i]).collect();
-    let expected: Vec<&str> = golden["listed"].as_array().unwrap().iter().map(|v| v.as_str().unwrap()).collect();
+    let mut expected: Vec<&str> = golden["listed"].as_array().unwrap().iter().map(|v| v.as_str().unwrap()).collect();
+    expected.push("AVIF HDR 10-bit");
     assert_eq!(listed, expected);
+    let mut pq = ExportOptions::default();
+    pq.set_format(FORMATS.iter().position(|f| *f == "AVIF HDR 10-bit").unwrap());
+    assert!(pq.fields().quality && pq.fields().keep_metadata);
+    assert!(!pq.fields().color_space && !pq.fields().dither && !pq.fields().grayscale);
     for row in golden["rows"].as_array().unwrap() {
         let name = row["format"].as_str().unwrap();
         let mut options = ExportOptions { color_space: 1, ..ExportOptions::default() };
@@ -146,7 +152,9 @@ fn the_export_dialog_lists_the_hdr_tiff() {
             ("grayscale", fields.grayscale),
             ("dither", fields.dither),
         ] {
-            assert_eq!(value, enabled[key].as_bool().unwrap(), "{name} {key}");
+            // The legacy dialog exposed a quality control for the lossless JPEG XL encoder.
+            let expected = enabled[key].as_bool().unwrap() && !(name == "JPEG XL" && key == "quality");
+            assert_eq!(value, expected, "{name} {key}");
         }
     }
     // A saved HDR TIFF export is valid while the mode is on (`quick_export.previous`).
@@ -202,7 +210,7 @@ fn the_worker_renders_hdr_frames() {
     let options = Options { output: Output::Working, original_size: Some((w as f64, h as f64)), ..Options::default() };
     let working = develop(loaded.photo.source(), &settings.0, &options).expect("develop");
     let mut worker = Worker::new();
-    for (id, view) in [(1, View::default()), (2, View { sdr_preview: true, visualize: false })] {
+    for (id, view) in [(1, View::default()), (2, View { sdr_preview: true, ..View::default() })] {
         worker.set_hdr_view(view);
         worker.preview(PreviewJob {
             id,
@@ -293,7 +301,7 @@ fn hdr_in_the_window(language: Language, suffix: &str) {
     harness.run_steps(2);
     common::snapshot::save(&mut harness, &format!("hdr-panel-{suffix}"));
 
-    hdr::set_view(&mut harness.state_mut().cx, View { sdr_preview: true, visualize: true });
+    hdr::set_view(&mut harness.state_mut().cx, View { sdr_preview: true, visualize: true, ..View::default() });
     common::snapshot::settle(&mut harness);
     let info = harness.state().frame().and_then(|f| f.hdr).expect("an HDR frame on screen");
     assert!(info.preview);

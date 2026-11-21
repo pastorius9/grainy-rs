@@ -38,11 +38,18 @@ fn frame(replies: Vec<Reply>) -> Arc<Frame> {
 #[test]
 fn preview_toggle_and_cpu_thumbnails() {
     let _turn = common::language_lock();
+    check_toggle(None);
+    check_toggle(Some(grainy_cms::profile("Display P3").expect("monitor profile")));
+}
+
+fn check_toggle(profile: Option<grainy_cms::Profile>) {
     let dir = common::temp_dir("gpu-worker");
     let path = dir.join("generated.png");
     common::save_png(&common::garden(1, [1.0; 3], false), &path);
     let mut cpu = Worker::new();
     let mut gpu = Worker::with_gpu(true);
+    gpu.set_monitor(profile.clone());
+    cpu.set_monitor(profile);
     let settings = common::settings(json!({"exposure":0.3,"saturation":15,"grain":20}));
     let job = PreviewJob {
         id: 1,

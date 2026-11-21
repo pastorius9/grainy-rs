@@ -192,6 +192,13 @@ pub fn report_text(result: &ImportResult) -> String {
     if let Some(Value::Object(warnings)) = result.get("warnings").filter(|w| grainy_core::settings::truthy(w)) {
         lines.push(format!("\n{}", tr_lightroom("확인이 필요한 항목:")));
         for (key, count) in warnings {
+            if let Some(version) = key.strip_prefix("adobe_process:") {
+                lines.push(tr_with(
+                    "Adobe 처리 버전 {0} → Grainy 현상 · {1}장",
+                    &[version, &thousands(count.as_i64().unwrap_or(0))],
+                ));
+                continue;
+            }
             let label = if let Some(field) = key.strip_prefix("develop_field:") {
                 tr_with("미변환 보정: {0}", &[field])
             } else if let Some(reason) = key.strip_prefix("smart_reason:") {

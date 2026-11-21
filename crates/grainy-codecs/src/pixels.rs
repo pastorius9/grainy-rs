@@ -210,6 +210,56 @@ pub fn quantize8(a: &Image) -> Result<Array3<u8>> {
     validate(a)?;
     quantize_rows(a, |_, _, v| wrapped(v * 255. + 0.5, 256.) as u8)
 }
+/// Convert validated, finite samples directly to the clipped RGB bytes used by JPEG export.
+pub(crate) fn jpeg_rgb8(a: &Image) -> Vec<u8> {
+    // A saturating cast yields the same bytes as clipping to [0, 1] before scaling and rounding.
+    let scale = |v: &f32| (*v * 255. + 0.5) as u8;
+    match a.as_slice() {
+        Some(slice) => slice.par_iter().with_min_len(parallel::TILE_PIXELS).map(scale).collect(),
+        None => a.iter().map(scale).collect(),
+    }
+}
+
+fn dither_byte(v: f32, noise: f32) -> u8 {
+    if v <= 0. {
+        0
+    } else if v >= 1. {
+        255
+    } else {
+        // Keep the float32 multiplication and both additions in the oracle's order.
+        (v * 255. + 0.5 + noise) as u8
+    }
+}
+
+/// Convert finite image samples with the deterministic 256x256 TPDF tile, in logical row order.
+pub(crate) fn jpeg_dithered8(a: &Image) -> Vec<u8> {
+    use rayon::prelude::ParallelSliceMut;
+    let (_, width, channels) = a.dim();
+    let tile = dither_tile();
+    let mut output = vec![0; a.len()];
+    output.par_chunks_mut(width * channels).zip(a.axis_iter(Axis(0)).into_par_iter()).enumerate().for_each(
+        |(y, (dst, row))| {
+            let noise = tile.row(y % 256);
+            if let Some(src) = row.as_slice() {
+                for (x, (input, output)) in src.chunks_exact(channels).zip(dst.chunks_exact_mut(channels)).enumerate() {
+                    let n = noise[x % 256];
+                    for (dst, v) in output.iter_mut().zip(input) {
+                        *dst = dither_byte(*v, n);
+                    }
+                }
+            } else {
+                for (x, (input, output)) in row.outer_iter().zip(dst.chunks_exact_mut(channels)).enumerate() {
+                    let n = noise[x % 256];
+                    for (dst, v) in output.iter_mut().zip(input) {
+                        *dst = dither_byte(*v, n);
+                    }
+                }
+            }
+        },
+    );
+    output
+}
+
 /// Port of `luma/engine.py _quantize(result, 65535, uint16)`. Keeps the caller's pixels immutable.
 pub fn quantize16(a: &Image) -> Result<Array3<u16>> {
     validate(a)?;
@@ -218,26 +268,30 @@ pub fn quantize16(a: &Image) -> Result<Array3<u16>> {
 
 /// Port of `luma/engine.py _neutral_gray`: select green only if every channel is neutral within tolerance.
 pub fn neutral_gray(a: &Image, tolerance: f32) -> Option<Image> {
+    neutral_gray_using(a, tolerance, |v| v)
+}
+
+/// Detect neutral RGB after the clamp used for SDR JPEG export.
+pub(crate) fn jpeg_neutral_gray(a: &Image, tolerance: f32) -> Option<Image> {
+    neutral_gray_using(a, tolerance, |v| v.clamp(0., 1.))
+}
+
+fn neutral_gray_using(a: &Image, tolerance: f32, sample: impl Fn(f32) -> f32) -> Option<Image> {
     let (h, w, c) = a.dim();
     if c != 3 || h == 0 || w == 0 || !tolerance.is_finite() || tolerance < 0. {
         return None;
     }
-    let mut spread = 0f32;
     for row in a.outer_iter() {
         for p in row.outer_iter() {
-            let r = (p[0] - p[1]).abs();
-            let b = (p[2] - p[1]).abs();
-            if !r.is_finite() || !b.is_finite() {
+            let g = sample(p[1]);
+            let r = (sample(p[0]) - g).abs();
+            let b = (sample(p[2]) - g).abs();
+            if !(r <= tolerance && b <= tolerance) {
                 return None;
             }
-            spread = spread.max(r).max(b);
         }
     }
-    if spread > tolerance {
-        None
-    } else {
-        Some(Image::from_shape_fn((h, w, 1), |(y, x, _)| a[[y, x, 1]]))
-    }
+    Some(Image::from_shape_fn((h, w, 1), |(y, x, _)| sample(a[[y, x, 1]])))
 }
 
 /// Port of `luma/engine.py jxl_distance` (including out-of-range finite qualities).
@@ -275,4 +329,45 @@ pub fn jxl_container(codestream: &[u8], exif: Option<&[u8]>, xmp: Option<&[u8]>)
     }
     out.extend(box_bytes(b"jxlc", codestream)?);
     Ok(out)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn jpeg_rgb8_matches_clipped_quantization_on_rounding_boundaries_and_strided_pixels() {
+        let mut values = vec![-f32::MAX, -2., -0.5, -0., 0., f32::EPSILON, 1., 1.5, f32::MAX];
+        for byte in 0..256 {
+            let midpoint = (byte as f32 + 0.5) / 255.;
+            values.extend([midpoint.next_down(), midpoint, midpoint.next_up()]);
+        }
+        let image = Image::from_shape_vec((1, values.len() / 3, 3), values).unwrap();
+        let strided = image.clone().slice_move(ndarray::s![.., ..;-2, ..;-1]);
+        for frame in [&image, &strided] {
+            let reference = quantize8(&frame.mapv(|v| v.clamp(0., 1.))).unwrap();
+            assert_eq!(jpeg_rgb8(frame), reference.into_raw_vec_and_offset().0);
+        }
+    }
+    #[test]
+    fn jpeg_auto_gray_and_dither_match_clipped_pixels_across_tile_boundaries() {
+        let gray = Image::from_shape_fn((259, 263, 3), |(y, x, c)| match (x + y) % 4 {
+            0 => -1. - c as f32,
+            1 => 2. + c as f32,
+            2 => 0.5 + c as f32 * 0.00003,
+            _ => ((x + y) % 255) as f32 / 255.,
+        });
+        let mut color = gray.clone();
+        color[[258, 262, 0]] = 0.;
+        color[[258, 262, 1]] = 1.;
+        assert!(jpeg_neutral_gray(&gray, 1e-4).is_some());
+        assert!(jpeg_neutral_gray(&color, 1e-4).is_none());
+        let reversed = color.clone().slice_move(ndarray::s![..;-1, ..;-1, ..;-1]);
+        for a in [&gray, &color, &reversed] {
+            let clipped = a.mapv(|v| v.clamp(0., 1.));
+            assert_eq!(jpeg_neutral_gray(a, 1e-4), neutral_gray(&clipped, 1e-4));
+            let reference = quantize8_dithered(&clipped).unwrap();
+            assert_eq!(jpeg_dithered8(a), reference.into_raw_vec_and_offset().0);
+        }
+    }
 }

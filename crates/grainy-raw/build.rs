@@ -38,6 +38,7 @@ fn main() {
     println!("cargo:rerun-if-changed=src/shim.cpp");
     println!("cargo:rerun-if-changed=src/native_symbols.h");
     println!("cargo:rerun-if-changed=src/serial_libraw.h");
+    println!("cargo:rerun-if-changed=src/libraw/xtrans_demosaic.cpp");
     println!("cargo:rerun-if-changed=vendor");
     let out = PathBuf::from(env::var_os("OUT_DIR").expect("Cargo OUT_DIR"));
     let jpg = env::var_os("DEP_GRAINY_JPEG_INCLUDE").expect("grainy-jpeg-sys include path");
@@ -59,8 +60,8 @@ fn main() {
             .define("USE_LCMS2", None);
         b
     };
-    // Only these measured, independently tiled paths enable OpenMP. In particular,
-    // xtrans_demosaic.cpp has no parallel regions, independent of OMP_NUM_THREADS.
+    // These upstream translation units use their native parallel paths on MSVC.
+    // The MSVC X-Trans derivative below preserves the serial order of dependent tiles.
     // Other platforms retain the serial build until their toolchains are verified: on macOS
     // Apple's clang has no OpenMP (Homebrew's libomp is never used), so every file is compiled
     // without `-fopenmp`, `_OPENMP` stays undefined and LibRaw takes its serial path, which
@@ -68,12 +69,15 @@ fn main() {
     // so a cross build for the other Mac architecture uses the same flags.
     let msvc = env::var("CARGO_CFG_TARGET_ENV").as_deref() == Ok("msvc");
     let parallel_names = ["ahd_demosaic.cpp", "crx.cpp", "fuji_compressed.cpp"];
-    let (parallel, serial): (Vec<_>, Vec<_>) = sources(&raw.join("src"), "cpp", true)
+    let (parallel, mut serial): (Vec<_>, Vec<_>) = sources(&raw.join("src"), "cpp", true)
         .into_iter()
         .filter(|p| !p.file_name().unwrap().to_string_lossy().ends_with("_ph.cpp"))
         .partition(|p| msvc && parallel_names.iter().any(|name| p.file_name().is_some_and(|n| n == *name)));
     let mut raw_build = configured();
     if msvc {
+        let xtrans = raw.join("src/demosaic/xtrans_demosaic.cpp");
+        let source = serial.iter_mut().find(|path| **path == xtrans).expect("vendored LibRaw X-Trans source");
+        *source = Path::new("src/libraw/xtrans_demosaic.cpp").into();
         // LibRaw's inline allocator must have identical, synchronized definitions
         // in every translation unit. Load that header with OpenMP enabled first,
         // then disable only the source-file parallel regions in the serial group.
