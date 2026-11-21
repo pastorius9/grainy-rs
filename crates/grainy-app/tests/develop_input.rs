@@ -48,6 +48,24 @@ fn track_press_jumps_immediately_then_drags_as_one_edit() {
 }
 
 #[test]
+fn a_single_track_click_sets_fractional_exposure() {
+    let (_files, mut app) = window();
+    let track = app.ctx.read_response(slider("exposure")).unwrap().rect.shrink2(egui::vec2(4.0, 0.0));
+    let point = track.left_center().lerp(track.right_center(), 0.625);
+    app.hover_at(point);
+    app.run_steps(1);
+    app.drag_at(point);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("exposure"), 1.25);
+    app.drop_at(point);
+    app.run_steps(2);
+    assert_eq!(app.state().settings().f64("exposure"), 1.25);
+    app.state_mut().run("develop.undo");
+    app.run_steps(2);
+    assert_eq!(app.state().settings().f64("exposure"), 0.0);
+}
+
+#[test]
 fn basic_focus_hover_cycle_text_and_filmstrip() {
     let (_files, mut app) = window();
     let photo = app.state().document().current_index().unwrap();
