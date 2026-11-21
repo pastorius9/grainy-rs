@@ -265,6 +265,7 @@ struct Viewer {
         cls.lpfnWndProc = procedure;
         cls.hInstance = instance;
         cls.lpszClassName = L"GrainyScRGBPhotoViewer";
+        cls.hIcon = LoadIconW(instance, MAKEINTRESOURCEW(1));
         cls.hCursor = LoadCursorW(nullptr, MAKEINTRESOURCEW(32512));
         cls.hbrBackground = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
         if (!RegisterClassW(&cls) && GetLastError() != ERROR_CLASS_ALREADY_EXISTS) throw HRESULT(E_FAIL);

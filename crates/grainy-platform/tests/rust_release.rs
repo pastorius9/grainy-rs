@@ -234,3 +234,31 @@ fn the_mac_check_reads_the_rust_feed_through_the_opener() {
     assert!(updater::newer(&release.version, "0.1.0"));
     assert!(!updater::newer(&release.version, grainy_platform::RS_VERSION), "0.2.0 offers 0.2.0 to nobody");
 }
+
+#[test]
+fn a_mac_falls_back_to_recent_releases_when_latest_is_windows_only() {
+    let mac = layout(System::MacOs, "arm64");
+    let windows = layout(System::Windows, "AMD64");
+    let win_only = feed(&[asset("GrainyRS-0.3.1-windows-x64.zip", 42, 'a')]);
+    let older_mac = feed(&[asset("GrainyRS-0.3.0-macos-universal.dmg", 55, 'b')]);
+    let oldest_mac = feed(&[asset("GrainyRS-0.2.1-macos-universal.dmg", 51, 'c')]);
+    let list_json =
+        format!("[{}, {}, {}]", win_only.dump(None, false), oldest_mac.dump(None, false), older_mac.dump(None, false));
+    let latest_json = win_only.dump(None, false);
+    let asked = std::sync::Mutex::new(Vec::new());
+    let open = |url: &str| -> std::io::Result<Box<dyn std::io::Read>> {
+        asked.lock().unwrap().push(url.to_string());
+        let body = if url == updater::RS_FEED { latest_json.clone() } else { list_json.clone() };
+        Ok(Box::new(std::io::Cursor::new(body.into_bytes())))
+    };
+    // Windows resolves directly from RS_FEED in a single request.
+    let win_rel = updater::latest_rust(&open, None, &windows).unwrap().unwrap();
+    assert_eq!(win_rel.name, "GrainyRS-0.3.1-windows-x64.zip");
+    assert_eq!(*asked.lock().unwrap(), [updater::RS_FEED]);
+    asked.lock().unwrap().clear();
+    // macOS falls back to RS_RELEASES_FEED and chooses the newest matching version (0.3.0 over 0.2.1).
+    let mac_rel = updater::latest_rust(&open, None, &mac).unwrap().unwrap();
+    assert_eq!(mac_rel.name, "GrainyRS-0.3.0-macos-universal.dmg");
+    assert_eq!(mac_rel.version, "0.3.0");
+    assert_eq!(*asked.lock().unwrap(), [updater::RS_FEED, updater::RS_RELEASES_FEED]);
+}

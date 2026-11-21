@@ -52,6 +52,9 @@ pub const ORACLE_DOWNLOADS: &str = "https://github.com/pastorius9/grainy/release
 pub const RS_REPOSITORY: &str = "pastorius9/grainy-rs";
 /// The Rust build's feed: the newest release's description ([`latest_rust`]).
 pub const RS_FEED: &str = "https://api.github.com/repos/pastorius9/grainy-rs/releases/latest";
+/// Recent releases feed used as a fallback when [`RS_FEED`] is a single-platform release (e.g. a Windows-only
+/// hotfix checked from macOS).
+pub const RS_RELEASES_FEED: &str = "https://api.github.com/repos/pastorius9/grainy-rs/releases?per_page=20";
 /// The Rust build's page to download from by hand.
 pub const RS_PAGE: &str = "https://github.com/pastorius9/grainy-rs/releases/latest";
 /// The only address the Rust build's downloads may come from.
@@ -356,9 +359,37 @@ pub fn parse_release(payload: &Value, trusted: Option<&str>, layout: &Layout) ->
 }
 
 /// [`parse_release`] for this Rust build: only a file carrying [`RUST_MARKER`] qualifies; the Python Grainy's
-/// files are never returned.
+/// files are never returned. Accepts either a single release JSON object or a list of releases (returning the
+/// newest valid version for `layout`).
 pub fn parse_rust_release(payload: &Value, trusted: Option<&str>, layout: &Layout) -> Option<Release> {
-    parse_release_with(payload, trusted, &rust_asset_pattern(layout)).filter(|release| is_rust_release(release, layout))
+    match payload {
+        Value::List(releases) => {
+            let mut best: Option<Release> = None;
+            for item in releases {
+                let Some(candidate) = parse_rust_release(item, trusted, layout) else { continue };
+                if best.as_ref().is_none_or(|current| newer(&candidate.version, &current.version)) {
+                    best = Some(candidate);
+                }
+            }
+            best
+        }
+        _ => parse_release_with(payload, trusted, &rust_asset_pattern(layout))
+            .filter(|release| is_rust_release(release, layout)),
+    }
+}
+
+fn has_other_platform_rust_asset(payload: &Value) -> bool {
+    let Value::Object(map) = payload else { return false };
+    if map.get("draft").is_some_and(Value::truthy) || map.get("prerelease").is_some_and(Value::truthy) {
+        return false;
+    }
+    let Some(Value::List(assets)) = map.get("assets") else { return false };
+    assets.iter().any(|asset| {
+        let Value::Object(asset) = asset else { return false };
+        let name = text_of(asset.get("name"));
+        let url = text_of(asset.get("browser_download_url"));
+        name.starts_with(RUST_MARKER) && url.starts_with(RS_DOWNLOADS)
+    })
 }
 
 /// [`parse_release`] with the file name pattern given.
@@ -407,6 +438,8 @@ pub fn latest(open: Opener<'_>, override_feed: Option<&str>, layout: &Layout) ->
 
 /// [`latest`] for this Rust build: reads [`RS_FEED`] (or the override) and returns the newest release's file
 /// carrying [`RUST_MARKER`], or none (the Python Grainy's files never qualify; see [`RUST_MARKER`]).
+/// If [`RS_FEED`] points to a single-platform release without a package for `layout`, falls back to
+/// [`RS_RELEASES_FEED`] to find the newest release for this platform.
 pub fn latest_rust(
     open: Opener<'_>,
     override_feed: Option<&str>,
@@ -415,7 +448,19 @@ pub fn latest_rust(
     let bytes = fetch(&rust_feed(override_feed), open)?;
     let text = String::from_utf8(bytes).map_err(|e| UpdateError::Value(e.to_string()))?;
     let payload = Value::parse(&text).map_err(|e| UpdateError::Value(e.to_string()))?;
-    Ok(parse_rust_release(&payload, Some(RS_DOWNLOADS), layout))
+    if let Some(release) = parse_rust_release(&payload, Some(RS_DOWNLOADS), layout) {
+        return Ok(Some(release));
+    }
+    if override_feed.is_none_or(str::is_empty) && has_other_platform_rust_asset(&payload) {
+        if let Ok(list_bytes) = fetch(RS_RELEASES_FEED, open) {
+            if let Ok(list_text) = String::from_utf8(list_bytes) {
+                if let Ok(list_payload) = Value::parse(&list_text) {
+                    return Ok(parse_rust_release(&list_payload, Some(RS_DOWNLOADS), layout));
+                }
+            }
+        }
+    }
+    Ok(None)
 }
 
 /// `project` is the project's feed and its download prefix: only a release read from that feed must come from
