@@ -46,6 +46,23 @@ fn main() -> eframe::Result {
     eframe::run_native(
         "Grainy",
         options,
-        Box::new(move |cc| Ok(Box::new(grainy_app::GrainyApp::from_arguments(&cc.egui_ctx, args)))),
+        Box::new(move |cc| {
+            #[cfg(windows)]
+            if let Some(window) = cc.winit_window() {
+                use winit::dpi::LogicalSize;
+                use winit::platform::windows::{IconExtWindows, WindowExtWindows};
+                use winit::window::Icon;
+                let icon_at = |size: u32| {
+                    Icon::from_resource(1, Some(LogicalSize::new(size, size).to_physical(window.scale_factor())))
+                };
+                if let Ok(icon) = icon_at(16) {
+                    window.set_window_icon(Some(icon));
+                }
+                if let Ok(icon) = icon_at(32) {
+                    window.set_taskbar_icon(Some(icon));
+                }
+            }
+            Ok(Box::new(grainy_app::GrainyApp::from_arguments(&cc.egui_ctx, args)))
+        }),
     )
 }

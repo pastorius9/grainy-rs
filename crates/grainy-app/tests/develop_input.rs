@@ -26,6 +26,28 @@ fn slider(key: &str) -> Id {
 }
 
 #[test]
+fn track_press_jumps_immediately_then_drags_as_one_edit() {
+    let (_files, mut app) = window();
+    let track = app.ctx.read_response(slider("contrast")).unwrap().rect.shrink2(egui::vec2(4.0, 0.0));
+    let point = |fraction| track.left_center().lerp(track.right_center(), fraction);
+    for (start, end, first, last) in [(0.75, 0.0, 50.0, -100.0), (0.25, 1.0, -50.0, 100.0)] {
+        app.hover_at(point(start));
+        app.run_steps(1);
+        app.drag_at(point(start));
+        app.run_steps(1);
+        assert_eq!(app.state().settings().f64("contrast"), first);
+        app.hover_at(point(end));
+        app.run_steps(1);
+        assert_eq!(app.state().settings().f64("contrast"), last);
+        app.drop_at(point(end));
+        app.run_steps(2);
+        app.state_mut().run("develop.undo");
+        app.run_steps(2);
+        assert_eq!(app.state().settings().f64("contrast"), 0.0);
+    }
+}
+
+#[test]
 fn basic_focus_hover_cycle_text_and_filmstrip() {
     let (_files, mut app) = window();
     let photo = app.state().document().current_index().unwrap();

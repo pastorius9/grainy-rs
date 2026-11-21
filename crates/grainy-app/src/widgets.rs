@@ -350,8 +350,8 @@ pub struct RowEvent {
 
 #[derive(Debug, Clone, Copy)]
 struct Grab {
-    /// Pointer x minus the handle centre when the handle was pressed; `None` after a page step on the groove.
-    offset: Option<f32>,
+    /// Preserve the initial grip on the handle. A track press centres it under the pointer.
+    offset: f32,
 }
 
 /// Width of the label column in a compact row (`Adjustment.compact`).
@@ -415,25 +415,11 @@ pub fn adjustment_row(ui: &mut Ui, id: &str, label: &str, spec: &Spec, value: f6
         let mut grab: Option<Grab> = ui.data(|d| d.get_temp(slider_id));
         if pressed && response.hovered() {
             if let Some(p) = pointer {
-                let grab_rect = if compact {
-                    Rect::from_center_size(handle_rect.center(), Vec2::new(14.0, slider_rect.height()))
-                } else {
-                    handle_rect.expand(2.0)
-                };
-                if grab_rect.contains(p) {
-                    grab = Some(Grab { offset: Some(p.x - handle_rect.center().x) });
-                } else {
-                    // A click on the groove moves one page step towards it (QAbstractSlider).
-                    let page = (spec.scale as i64).max(1);
-                    let target = if p.x < handle_rect.center().x { position - page } else { position + page };
-                    let target = target.clamp(low, high);
-                    if target != position {
-                        event.set = Some(spec.value_at(target));
-                    }
-                    grab = Some(Grab { offset: None });
-                }
+                let offset = if handle_rect.contains(p) { p.x - handle_rect.center().x } else { 0.0 };
+                grab = Some(Grab { offset });
             }
-        } else if let (Some(Grab { offset: Some(offset) }), true, Some(p)) = (grab, down, pointer) {
+        }
+        if let (Some(Grab { offset }), Some(p)) = (grab, pointer) {
             let target = p_of(p.x - offset);
             if target != position {
                 event.set = Some(spec.value_at(target));
