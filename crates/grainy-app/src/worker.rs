@@ -11,7 +11,7 @@ use std::time::Instant;
 
 use grainy_codecs::ColorManager;
 use grainy_core::Settings;
-use grainy_engine::files::{load_photo, AnalysisSeed, Loaded, Photo};
+use grainy_engine::files::{load_photo, AnalysisSeed, Photo};
 use grainy_engine::{develop, develop_cached, Crop, DevelopmentCache, Options, Output};
 use serde_json::{Map, Value};
 
@@ -351,9 +351,14 @@ fn load(
     let load_limit = if offline.is_some() { usize::MAX } else { max_size.unwrap_or(usize::MAX) };
     let loaded = match offline {
         Some((directory, id)) => offline_photo(&directory, id, settings)?,
+        None if max_size.is_none() => {
+            let (photo, metadata) =
+                grainy_engine::files::load_full_preview(path, settings).map_err(|e| e.to_string())?;
+            return Ok(loaded_source(path, settings, token, resolution, load_limit, photo, metadata));
+        }
         None => load_photo(path, max_size, settings).map_err(|e| e.to_string())?,
     };
-    Ok(loaded_source(path, settings, token, resolution, load_limit, loaded))
+    Ok(loaded_source(path, settings, token, resolution, load_limit, Arc::new(loaded.photo), loaded.metadata))
 }
 
 fn loaded_source(
@@ -362,18 +367,19 @@ fn loaded_source(
     token: u64,
     resolution: Resolution,
     load_limit: usize,
-    loaded: Loaded,
+    photo: Arc<Photo>,
+    metadata: grainy_codecs::Metadata,
 ) -> Source {
-    let (h, w, _) = loaded.photo.pixels().dim();
+    let (h, w, _) = photo.pixels().dim();
     let size = |key: &str, fallback: usize| {
-        loaded.metadata.get(key).and_then(serde_json::Value::as_u64).map_or(fallback as u32, |v| v as u32)
+        metadata.get(key).and_then(serde_json::Value::as_u64).map_or(fallback as u32, |v| v as u32)
     };
     let original = (size("width", w), size("height", h));
     Source {
         path: path.to_path_buf(),
         resolution,
         load_settings: LoadSettings::new(path, settings),
-        photo: Arc::new(loaded.photo),
+        photo,
         token,
         original,
         load_limit,
@@ -468,7 +474,15 @@ impl PreviewState {
             )
             .map_err(|e| e.to_string())?;
             self.analysis_seed = seed.map(|seed| (job.path.clone(), key, seed));
-            loaded_source(&job.path, &job.settings, self.tokens, job.resolution, PREVIEW_SIZE, loaded)
+            loaded_source(
+                &job.path,
+                &job.settings,
+                self.tokens,
+                job.resolution,
+                PREVIEW_SIZE,
+                Arc::new(loaded.photo),
+                loaded.metadata,
+            )
         } else {
             load(&job.path, max, &job.settings, self.tokens, job.resolution, offline)?
         };

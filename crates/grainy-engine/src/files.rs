@@ -12,7 +12,11 @@
 //! Video files are refused, as are the colour models and profile kinds that `grainy-cms` does not expose yet
 //! (see [`Cms`]).
 
+mod full_preview;
+pub use full_preview::load_full_preview;
+
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
 use grainy_cms::{CmsError, Profile as CmsProfile};
 use grainy_codecs::{ColorManager, ColorModel, ExportFormat, ExportOptions, LoadOptions, Metadata, Profile, SizeLimit};
@@ -532,7 +536,13 @@ pub fn export_photo(
     let settings = normalized(settings).0;
     let s = grainy_core::Settings(settings.clone());
     let working_space = s.str("working_space").to_owned();
-    let loaded = load_photo(source_path, None, &s)?;
+    let photo = match full_preview::for_export(source_path, &s) {
+        Some(photo) => {
+            let _hit = grainy_core::timing::Span::new("export.reuse_full_raw");
+            photo
+        }
+        None => Arc::new(load_photo(source_path, None, &s)?.photo),
+    };
     let hdr_export = matches!(request.format, ExportFormat::TiffHdr32 | ExportFormat::AvifHdr);
     let (developed, cms) = if hdr_export {
         if !s.bool("hdr") {
@@ -543,12 +553,11 @@ pub fn export_photo(
             };
             return Err(Error::Refused(message.into()));
         }
-        let working =
-            develop(loaded.photo.source(), &settings, &Options { output: Output::Working, ..Options::default() })?;
+        let working = develop(photo.source(), &settings, &Options { output: Output::Working, ..Options::default() })?;
         (grainy_color::to_linear(&working), Cms::for_export_of_developed_pixels())
     } else {
         let options = Options { output: Output::Named(&request.color_space), ..Options::default() };
-        (develop(loaded.photo.source(), &settings, &options)?, Cms::for_export_of_developed_pixels())
+        (develop(photo.source(), &settings, &options)?, Cms::for_export_of_developed_pixels())
     };
     let options = ExportOptions {
         format: request.format,
