@@ -452,10 +452,15 @@ pub fn export_exif(
     size: Option<(u32, u32)>,
     color_space: &str,
 ) -> Result<Vec<u8>> {
+    let source = source.as_ref();
+    let ext = source.extension().unwrap_or_default().to_string_lossy().to_lowercase();
     let mut data = std::fs::read(source)
         .ok()
-        .and_then(|d| extract_exif(&d).ok().flatten())
         .and_then(|d| {
+            if ext == "cr3" || ext == "raf" {
+                return container_exif(&d, &ext).ok();
+            }
+            let d = extract_exif(&d).ok().flatten()?;
             let parsed = parse_exif(&d).ok()?;
             let tiff = d.strip_prefix(b"Exif\0\0").unwrap_or(&d);
             let le = tiff.starts_with(b"II");
@@ -859,4 +864,59 @@ pub fn append_tiff_exif(handle: &mut (impl Read + Write + Seek), exif: &[u8]) ->
     handle.write_all(&data)?;
     handle.seek(SeekFrom::End(0))?;
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn minimal_tiff_ifd(tag: u16, value: &str) -> Vec<u8> {
+        let mut ifd = Ifd::new();
+        ifd.insert(tag, Entry::ascii(value));
+        let mut tiff = b"MM\0*\0\0\0\x08".to_vec();
+        tiff.extend(piexif_ifd(&ifd, 8, true, &[]).unwrap());
+        tiff
+    }
+
+    #[test]
+    fn export_exif_preserves_raf_and_cr3_camera_tags() {
+        let dir = tempfile::tempdir().unwrap();
+        // Minimal RAF header with embedded JPEG containing EXIF Make ("FUJIFILM").
+        let make_tiff = minimal_tiff_ifd(271, "FUJIFILM");
+        let mut app1 = b"Exif\0\0".to_vec();
+        app1.extend(&make_tiff);
+        let mut jpeg = vec![0xff, 0xd8, 0xff, 0xe1];
+        jpeg.extend(((app1.len() + 2) as u16).to_be_bytes());
+        jpeg.extend(&app1);
+        jpeg.extend([0xff, 0xd9]);
+        let mut raf = b"FUJIFILMCCD-RAW ".to_vec();
+        raf.resize(128, 0);
+        raf[84..88].copy_from_slice(&128u32.to_be_bytes());
+        raf[88..92].copy_from_slice(&(jpeg.len() as u32).to_be_bytes());
+        raf.extend(&jpeg);
+        let raf_path = dir.path().join("sample.raf");
+        std::fs::write(&raf_path, &raf).unwrap();
+        let exported = export_exif(&raf_path, &Metadata::new(), Some((100, 80)), "sRGB").unwrap();
+        let parsed = parse_exif(&exported).unwrap();
+        assert_eq!(parsed.root.get(&271).map(Entry::text).as_deref(), Some("FUJIFILM"));
+
+        // Minimal CR3 box stream with CMT1 (Make = "Canon") and CMT2 (ISO = 400).
+        let cmt1_tiff = minimal_tiff_ifd(271, "Canon");
+        let mut exif_ifd = Ifd::new();
+        exif_ifd.insert(34855, Entry::uint(3, 400));
+        let mut cmt2_tiff = b"MM\0*\0\0\0\x08".to_vec();
+        cmt2_tiff.extend(piexif_ifd(&exif_ifd, 8, true, &[]).unwrap());
+        let mut cr3 = Vec::new();
+        for (name, body) in [(b"CMT1", &cmt1_tiff), (b"CMT2", &cmt2_tiff)] {
+            cr3.extend(((8 + body.len()) as u32).to_be_bytes());
+            cr3.extend(name);
+            cr3.extend(body);
+        }
+        let cr3_path = dir.path().join("sample.cr3");
+        std::fs::write(&cr3_path, &cr3).unwrap();
+        let exported = export_exif(&cr3_path, &Metadata::new(), Some((100, 80)), "sRGB").unwrap();
+        let parsed = parse_exif(&exported).unwrap();
+        assert_eq!(parsed.root.get(&271).map(Entry::text).as_deref(), Some("Canon"));
+        assert_eq!(parsed.exif.get(&34855).map(Entry::number), Some(400.0));
+    }
 }

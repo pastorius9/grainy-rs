@@ -6,8 +6,12 @@ use std::sync::atomic::{AtomicBool, Ordering};
 
 use grainy_codecs::{ExportFormat, ExportOptions};
 use grainy_core::{Image, Plane};
+use rayon::prelude::*;
 
 use crate::files::{load_photo, Cms, Photo};
+
+/// Maximum memory retained for already-decoded source images between alignment and blending.
+const CACHE_BYTES: usize = 1536 << 20;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Mode {
@@ -195,22 +199,41 @@ fn exposure(a: &Plane, b: &Plane, d: Offset) -> Result<f32, String> {
     Ok(ratio)
 }
 
-fn placements(
-    paths: &[PathBuf],
-    mode: Mode,
-    cancel: &AtomicBool,
-    progress: &dyn Fn(usize),
-) -> Result<(usize, usize, Vec<Frame>), String> {
-    let first = pyramid(luminance(&load_linear(&paths[0])?));
+struct Placed {
+    width: usize,
+    height: usize,
+    frames: Vec<Frame>,
+    cached: Vec<Option<Image>>,
+}
+
+fn placements(paths: &[PathBuf], mode: Mode, cancel: &AtomicBool, progress: &dyn Fn(usize)) -> Result<Placed, String> {
+    let first_image = load_linear(&paths[0])?;
+    let first = pyramid(luminance(&first_image));
     let (h, w) = first[0].dim();
+    let frame_bytes = h.saturating_mul(w).saturating_mul(12);
+    let mut cached_bytes = 0usize;
+    let mut cached = Vec::with_capacity(paths.len());
+    if frame_bytes <= CACHE_BYTES {
+        cached_bytes += frame_bytes;
+        cached.push(Some(first_image));
+    } else {
+        cached.push(None);
+    }
     let mut frames = vec![Frame { offset: Offset::default(), exposure: 1. }];
     let mut previous = first;
     progress(1);
     for (index, path) in paths.iter().enumerate().skip(1) {
         check_cancel(cancel)?;
-        let current = pyramid(luminance(&load_linear(path)?));
+        let image = load_linear(path)?;
+        let current = pyramid(luminance(&image));
         if current[0].dim() != (h, w) {
             return Err("The oriented dimensions of the selected photos must match.".into());
+        }
+        if cached_bytes.saturating_add(frame_bytes) <= CACHE_BYTES {
+            cached_bytes += frame_bytes;
+            cached.push(Some(image));
+        } else {
+            cached.push(None);
         }
         let relative = register(&previous, &current, mode, cancel)?;
         let ratio = exposure(&previous[0], &current[0], relative)?;
@@ -235,7 +258,7 @@ fn placements(
             f.exposure /= middle;
         }
     }
-    Ok((w, h, frames))
+    Ok(Placed { width: w, height: h, frames, cached })
 }
 
 fn canvas(w: usize, h: usize, frames: &[Frame], mode: Mode) -> Result<Rect, String> {
@@ -279,9 +302,8 @@ fn zeros(n: usize) -> Result<Vec<f32>, String> {
 
 fn blend(
     paths: &[PathBuf],
-    frames: &[Frame],
+    mut placed: Placed,
     bounds: Rect,
-    input: (usize, usize),
     mode: Mode,
     cancel: &AtomicBool,
     progress: &dyn Fn(usize),
@@ -290,51 +312,77 @@ fn blend(
     let count = w.checked_mul(h).ok_or("Merged image dimensions are too large.")?;
     let mut sums = zeros(count.checked_mul(3).ok_or("Merged image dimensions are too large.")?)?;
     let mut weights = zeros(count)?;
-    for (i, (path, frame)) in paths.iter().zip(frames).enumerate() {
+    let input = (placed.width, placed.height);
+    for (i, (path, frame)) in paths.iter().zip(&placed.frames).enumerate() {
         check_cancel(cancel)?;
-        let image = load_linear(path)?;
+        let image = match placed.cached.get_mut(i).and_then(Option::take) {
+            Some(image) => image,
+            None => load_linear(path)?,
+        };
         let (ih, iw, _) = image.dim();
         if (iw, ih) != input {
             return Err(format!("Input changed while merging: {}", path.display()));
         }
         let r = bounds.intersect(Rect::image(iw, ih, frame.offset));
-        for y in r.top..r.bottom {
+        if r.top < r.bottom && r.left < r.right {
+            let y_start = (r.top - bounds.top) as usize;
+            let y_end = (r.bottom - bounds.top) as usize;
+            let x_start = (r.left - bounds.left) as usize;
+            let x_end = (r.right - bounds.left) as usize;
+            let edge_scale = (iw.min(ih) as f32 * 0.15).max(1.);
+            let inv_exposure = 1. / frame.exposure;
+            let sum_rows = &mut sums[y_start * w * 3..y_end * w * 3];
+            let weight_rows = &mut weights[y_start * w..y_end * w];
+            sum_rows.par_chunks_mut(w * 3).zip(weight_rows.par_chunks_mut(w)).enumerate().for_each(
+                |(row_off, (sum_row, weight_row))| {
+                    if cancel.load(Ordering::Relaxed) {
+                        return;
+                    }
+                    let y = r.top + row_off as i64;
+                    let sy = (y - frame.offset.y) as usize;
+                    let w_span = &mut weight_row[x_start..x_end];
+                    let s_span = &mut sum_row[x_start * 3..x_end * 3];
+                    for (dx, (weight_slot, sum_px)) in
+                        w_span.iter_mut().zip(s_span.as_chunks_mut::<3>().0.iter_mut()).enumerate()
+                    {
+                        let x = bounds.left + (x_start + dx) as i64;
+                        let sx = (x - frame.offset.x) as usize;
+                        let px = [image[[sy, sx, 0]], image[[sy, sx, 1]], image[[sy, sx, 2]]];
+                        let weight = match mode {
+                            Mode::Hdr => {
+                                // Brighter unsaturated observations have lower relative shot noise.
+                                // Exclude all three channels together to prevent colour casts near clipping.
+                                let peak = px[0].max(px[1]).max(px[2]).max(0.);
+                                frame.exposure * (peak / 0.025).clamp(0.001, 1.) * ((0.985 - peak) / 0.12).clamp(0., 1.)
+                                    + 1e-10 * inv_exposure
+                            }
+                            Mode::Panorama => {
+                                let edge = (sx + 1).min(iw - sx).min(sy + 1).min(ih - sy) as f32;
+                                (edge / edge_scale).min(1.)
+                            }
+                        };
+                        *weight_slot += weight;
+                        let scale = weight * inv_exposure;
+                        sum_px[0] += px[0] * scale;
+                        sum_px[1] += px[1] * scale;
+                        sum_px[2] += px[2] * scale;
+                    }
+                },
+            );
             check_cancel(cancel)?;
-            let sy = (y - frame.offset.y) as usize;
-            for x in r.left..r.right {
-                let sx = (x - frame.offset.x) as usize;
-                let ix = (y - bounds.top) as usize * w + (x - bounds.left) as usize;
-                let px = [image[[sy, sx, 0]], image[[sy, sx, 1]], image[[sy, sx, 2]]];
-                let weight = match mode {
-                    Mode::Hdr => {
-                        // Brighter unsaturated observations have lower relative shot noise.
-                        // Exclude all three channels together to prevent colour casts near clipping.
-                        let peak = px[0].max(px[1]).max(px[2]).max(0.);
-                        frame.exposure * (peak / 0.025).clamp(0.001, 1.) * ((0.985 - peak) / 0.12).clamp(0., 1.)
-                            + 1e-10 / frame.exposure
-                    }
-                    Mode::Panorama => {
-                        let edge = (sx + 1).min(iw - sx).min(sy + 1).min(ih - sy) as f32;
-                        (edge / (iw.min(ih) as f32 * 0.15).max(1.)).min(1.)
-                    }
-                };
-                weights[ix] += weight;
-                for c in 0..3 {
-                    sums[ix * 3 + c] += px[c] * weight / frame.exposure;
-                }
-            }
         }
         progress(paths.len() + i + 1);
     }
     let (pixels, _) = sums.as_chunks_mut::<3>();
-    for (px, w) in pixels.iter_mut().zip(weights) {
+    pixels.par_iter_mut().zip(weights.par_iter()).try_for_each(|(px, &w)| {
         if w <= 0. {
-            return Err("The selected photos leave a gap in the panorama.".into());
+            return Err("The selected photos leave a gap in the panorama.".to_string());
         }
         for c in px {
             *c /= w;
         }
-    }
+        Ok(())
+    })?;
     Image::from_shape_vec((h, w, 3), sums).map_err(|e| e.to_string())
 }
 
@@ -374,9 +422,9 @@ pub fn merge_to_tiff(
         }
         initial.push(fingerprint(path)?);
     }
-    let (w, h, frames) = placements(paths, mode, cancel, progress)?;
-    let bounds = canvas(w, h, &frames, mode)?;
-    let image = blend(paths, &frames, bounds, (w, h), mode, cancel, progress)?;
+    let placed = placements(paths, mode, cancel, progress)?;
+    let bounds = canvas(placed.width, placed.height, &placed.frames, mode)?;
+    let image = blend(paths, placed, bounds, mode, cancel, progress)?;
     check_cancel(cancel)?;
     for (path, before) in paths.iter().zip(initial) {
         if fingerprint(path)? != before {

@@ -28,6 +28,7 @@ grainy-lens = { path = "../grainy-lens" }
 grainy-imgproc = { path = "../grainy-imgproc" }
 grainy-codecs = { path = "../grainy-codecs" }
 ndarray.workspace = true
+rayon.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
 

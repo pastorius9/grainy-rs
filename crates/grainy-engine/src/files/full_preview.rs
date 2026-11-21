@@ -29,8 +29,10 @@ fn content_digest(path: &Path) -> Option<[u8; 32]> {
 /// its immutable pixels while the caller keeps them. Reduced and offline previews use
 /// their existing loaders.
 pub fn load_full_preview(path: &Path, settings: &Settings) -> Result<(Arc<Photo>, Metadata)> {
-    let digest = RAW_EXTENSIONS.contains(&extension(path).as_str()).then(|| content_digest(path)).flatten();
-    let loaded = load_photo(path, None, settings)?;
+    let is_raw = RAW_EXTENSIONS.contains(&extension(path).as_str());
+    let (digest, loaded) =
+        rayon::join(|| is_raw.then(|| content_digest(path)).flatten(), || load_photo(path, None, settings));
+    let loaded = loaded?;
     let photo = Arc::new(loaded.photo);
     if let (Some(digest), Some(stamp)) = (digest, loaded.metadata.get("file_fingerprint")) {
         let entry = Entry {

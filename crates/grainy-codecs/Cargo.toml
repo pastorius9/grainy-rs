@@ -21,8 +21,8 @@ image-webp = "=0.2.4"
 image = { version = "=0.25.10", default-features = false, features = ["bmp"] }
 zune-core = "=0.5.3"
 avif-serialize = "=0.8.9"
-rav1e = { version = "=0.8.1", default-features = false }
-ravif = { version = "=0.13.0", default-features = false }
+rav1e = { version = "=0.8.1", default-features = false, features = ["threading"] }
+ravif = { version = "=0.13.0", default-features = false, features = ["threading"] }
 zune-jpegxl = "=0.5.2"
 jxl-oxide = { path = "vendor/jxl-oxide/crates/jxl-oxide" }
 flate2 = { version = "1", default-features = false, features = ["rust_backend"] }

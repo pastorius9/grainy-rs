@@ -4,6 +4,7 @@
 use avif_serialize::{constants, Aviffy};
 use grainy_core::Image;
 use rav1e::prelude::*;
+use rayon::prelude::*;
 
 use crate::{codec, invalid, Result};
 
@@ -24,30 +25,40 @@ fn fill(frame: &mut Frame<u16>, image: &Image, matrix: &[[f64; 3]; 3]) {
     let (height, width, _) = image.dim();
     let [luma, chroma_b, chroma_r] = &mut frame.planes;
     let (ys, us, vs) = (luma.cfg.stride, chroma_b.cfg.stride, chroma_r.cfg.stride);
-    let (yp, up, vp) = (luma.data_origin_mut(), chroma_b.data_origin_mut(), chroma_r.data_origin_mut());
-    for y0 in (0..height).step_by(2) {
-        for x0 in (0..width).step_by(2) {
-            let (mut cb, mut cr, mut n) = (0.0, 0.0, 0.0);
-            for y in y0..(y0 + 2).min(height) {
-                for x in x0..(x0 + 2).min(width) {
-                    let rgb = [0, 1, 2].map(|c| f64::from(image[[y, x, c]]));
-                    let [r, g, b] = matrix.map(|m| pq(m[0] * rgb[0] + m[1] * rgb[1] + m[2] * rgb[2]));
-                    let signal = 0.2627 * r + 0.6780 * g + 0.0593 * b;
-                    yp[y * ys + x] = (64.0 + 876.0 * signal).round() as u16;
-                    cb += (b - signal) / (2.0 * (1.0 - 0.0593));
-                    cr += (r - signal) / (2.0 * (1.0 - 0.2627));
-                    n += 1.0;
+    let y_pairs = height.div_ceil(2);
+    let yp = &mut luma.data_origin_mut()[..height * ys];
+    let up = &mut chroma_b.data_origin_mut()[..y_pairs * us];
+    let vp = &mut chroma_r.data_origin_mut()[..y_pairs * vs];
+    yp.par_chunks_mut(2 * ys).zip(up.par_chunks_mut(us)).zip(vp.par_chunks_mut(vs)).enumerate().for_each(
+        |(py, ((y_rows, u_row), v_row))| {
+            let y0 = py * 2;
+            let y_end = (y0 + 2).min(height);
+            for x0 in (0..width).step_by(2) {
+                let (mut cb, mut cr, mut n) = (0.0, 0.0, 0.0);
+                for y in y0..y_end {
+                    let row_offset = (y - y0) * ys;
+                    for x in x0..(x0 + 2).min(width) {
+                        let rgb = [0, 1, 2].map(|c| f64::from(image[[y, x, c]]));
+                        let [r, g, b] = matrix.map(|m| pq(m[0] * rgb[0] + m[1] * rgb[1] + m[2] * rgb[2]));
+                        let signal = 0.2627 * r + 0.6780 * g + 0.0593 * b;
+                        y_rows[row_offset + x] = (64.0 + 876.0 * signal).round() as u16;
+                        cb += (b - signal) / (2.0 * (1.0 - 0.0593));
+                        cr += (r - signal) / (2.0 * (1.0 - 0.2627));
+                        n += 1.0;
+                    }
                 }
+                let x = x0 / 2;
+                u_row[x] = (512.0 + 896.0 * cb / n).round() as u16;
+                v_row[x] = (512.0 + 896.0 * cr / n).round() as u16;
             }
-            let (x, y) = (x0 / 2, y0 / 2);
-            up[y * us + x] = (512.0 + 896.0 * cb / n).round() as u16;
-            vp[y * vs + x] = (512.0 + 896.0 * cr / n).round() as u16;
-        }
-    }
+        },
+    );
 }
 
 pub(crate) fn encode(image: &Image, wide: bool, quality: f64) -> Result<Vec<u8>> {
     let (height, width, _) = image.dim();
+    let threads = std::thread::available_parallelism().map_or(1, usize::from).min(16);
+    let tiles = if width >= 256 && height >= 256 { threads } else { 1 };
     let encoder = EncoderConfig {
         height,
         width,
@@ -61,10 +72,12 @@ pub(crate) fn encode(image: &Image, wide: bool, quality: f64) -> Result<Vec<u8>>
         }),
         still_picture: true,
         low_latency: true,
+        tiles,
         quantizer: ((100.0 - quality) * 2.55).round() as usize,
         ..EncoderConfig::with_speed_preset(6)
     };
-    let mut ctx: Context<u16> = Config::new().with_encoder_config(encoder).new_context().map_err(codec)?;
+    let mut ctx: Context<u16> =
+        Config::new().with_threads(threads).with_encoder_config(encoder).new_context().map_err(codec)?;
     let mut frame = ctx.new_frame();
     fill(&mut frame, image, if wide { &PROPHOTO_TO_2020 } else { &SRGB_TO_2020 });
     ctx.send_frame(frame).map_err(codec)?;

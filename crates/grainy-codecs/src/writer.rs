@@ -199,14 +199,14 @@ fn infe(id: u16, kind: &[u8; 4], content: Option<&[u8]>) -> Result<Vec<u8>> {
 
 fn encode_avif(pixels: &Array3<u8>, quality: f64, b: &Blocks<'_>) -> Result<Vec<u8>> {
     let (h, w, _) = pixels.dim();
-    let rgb: Vec<ravif::RGB8> = pixels
-        .outer_iter()
-        .flat_map(|r| r.outer_iter().map(|p| ravif::RGB8::new(p[0], p[1], p[2])).collect::<Vec<_>>())
-        .collect();
+    let contiguous = pixels.as_standard_layout();
+    let slice = contiguous.as_slice().ok_or_else(|| invalid("noncontiguous AVIF pixels"))?;
+    let rgb: Vec<ravif::RGB8> = slice.as_chunks::<3>().0.iter().map(|&[r, g, b]| ravif::RGB8::new(r, g, b)).collect();
     let encoded = ravif::Encoder::new()
         .with_quality(quality as f32)
         .with_speed(6)
         .with_bit_depth(ravif::BitDepth::Eight)
+        .with_num_threads(None)
         .encode_rgb(ravif::Img::new(&rgb, w, h))
         .map_err(codec)?;
     avif_metadata(&encoded.avif_file, Some(b.icc), b)
@@ -530,7 +530,7 @@ pub fn export_image(
     #[cfg(unix)]
     {
         use std::os::unix::fs::PermissionsExt;
-        builder.permissions(std::fs::Permissions::from_mode(0o666));
+        builder.permissions(std::fs::Permissions::from_mode(0o644));
     }
     let mut stage = builder.tempfile_in(parent)?;
     stage.write_all(&bytes)?;
