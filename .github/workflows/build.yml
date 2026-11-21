@@ -31,11 +31,17 @@ jobs:
       # The runner has no graphics card and its WARP software adapter loses the device in the GPU tests
       # (Windows Server 2022 only; WARP on Windows 11, Metal and hardware pass): skip them here, loudly.
       GRAINY_CI_NO_GPU: '1'
+      GRAINY_JPEG_ASSEMBLER: nasm
     steps:
       - name: Check out without line-ending conversion
         run: git config --global core.autocrlf false
 
       - uses: actions/checkout@v4
+
+      - name: Install NASM for the Windows x64 JPEG encoder
+        uses: ilammy/setup-nasm@72793074d3c8cdda771dba85f6deafe00623038b # setup-nasm v1
+        with:
+          version: '2.16.01'
 
       - uses: actions/setup-python@v5
         with:

@@ -384,6 +384,10 @@ def build(target, vcomp_version: str | None = None):
     out.append(rule('1. C/C++ libraries compiled into the program' + (' and shipped beside it' if with_vcomp else '')))
     for title, lines, files in VENDORED:
         section(out, title, [line.replace('{libraw_openmp}', openmp) for line in lines], files)
+        if title.startswith('LibRaw ') and not macos:
+            section(out, 'Windows X-Trans interpolation source', [
+                'Grainy RS builds this modified LibRaw 0.22.1 translation unit under CDDL-1.0.',
+            ], ['crates/grainy-raw/src/libraw/xtrans_demosaic.cpp'])
     if with_vcomp:
         section(out, *vcomp_section(vcomp_version))
     out.append(rule('2. Code ported from other projects'))

@@ -1,4 +1,50 @@
-use std::{env, fs, path::PathBuf};
+use std::{
+    env,
+    ffi::OsString,
+    fs,
+    path::{Path, PathBuf},
+    process::Command,
+};
+
+// Only the compressor uses these kernels. Keep decoder multiplier widths and
+// implementation unchanged, including when LibRaw calls us for lossy DNG.
+const SIMD_ENCODER: &[&str] = &["jccolor", "jcdctmgr", "jfdctint", "jfdctfst", "jfdctflt", "jchuff", "jmemmgr"];
+
+fn assemble_encoder(jpg: &Path, out: &Path) -> Vec<PathBuf> {
+    println!("cargo:rerun-if-env-changed=GRAINY_JPEG_ASSEMBLER");
+    if env::var("TARGET").as_deref() != Ok("x86_64-pc-windows-msvc") {
+        return vec![];
+    }
+    let assembler = env::var_os("GRAINY_JPEG_ASSEMBLER").or_else(|| {
+        ["nasm", "yasm"]
+            .into_iter()
+            .find(|name| Command::new(name).arg("-v").output().is_ok_and(|r| r.status.success()))
+            .map(OsString::from)
+    });
+    let Some(assembler) = assembler else {
+        println!("cargo:warning=Using scalar JPEG encoder. Install NASM or set GRAINY_JPEG_ASSEMBLER for faster Windows x64 exports.");
+        return vec![];
+    };
+    let nasm = jpg.join("simd/nasm");
+    let x64 = jpg.join("simd/x86_64");
+    ["jccolor-sse2", "jfdctint-sse2", "jquanti-sse2", "jchuff-sse2"]
+        .iter()
+        .map(|name| {
+            let output = out.join(format!("{name}.obj"));
+            let status = Command::new(&assembler)
+                .args(["-f", "win64", "-DWIN64", "-D__x86_64__", "--prefix=grainy_jpeg_"])
+                .arg(format!("-I{}/", nasm.display()))
+                .arg(format!("-I{}/", x64.display()))
+                .arg("-o")
+                .arg(&output)
+                .arg(x64.join(format!("{name}.asm")))
+                .status()
+                .expect("run the configured JPEG assembler");
+            assert!(status.success(), "assemble {name} with {assembler:?}");
+            output
+        })
+        .collect()
+}
 
 fn main() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
@@ -30,9 +76,19 @@ fn main() {
         build.flag("-include").flag(symbols.to_str().expect("native header path"));
         build.flag("-fno-fast-math").flag("-ffp-contract=off");
     }
-    // Scalar code and flags retained from grainy-raw: lossy DNG pixels must not change.
+    let assembly = assemble_encoder(&jpg, &out);
+    let accelerated = !assembly.is_empty();
+    if accelerated {
+        let mut encoder = build.clone();
+        encoder.flag(format!("/FI{}", root.join("src/encoder_sse2.h").display()));
+        encoder.files(SIMD_ENCODER.iter().map(|name| jpg.join(format!("{name}.c"))));
+        encoder.file("src/encoder_sse2.c");
+        build.objects(encoder.compile_intermediates()).objects(assembly);
+    }
     for name in "jcicc jdicc jcapimin jcapistd jccoefct jccolor jcdctmgr jchuff jcinit jcmainct jcmarker jcmaster jcomapi jcparam jcphuff jcprepct jcsample jctrans jdapimin jdapistd jdatadst jdatasrc jdcoefct jdcolor jddctmgr jdhuff jdinput jdmainct jdmarker jdmaster jdmerge jdphuff jdpostct jdsample jdtrans jerror jfdctflt jfdctfst jfdctint jidctflt jidctfst jidctint jidctred jquant1 jquant2 jutils jmemmgr jmemnobs jaricom jcarith jdarith jsimd_none".split_whitespace() {
-        build.file(jpg.join(format!("{name}.c")));
+        if !accelerated || !SIMD_ENCODER.contains(&name) {
+            build.file(jpg.join(format!("{name}.c")));
+        }
     }
     build.file("src/shim.c").compile("grainy_jpeg");
     // Generator-only coefficient transcoder. Never part of the runtime library/API.

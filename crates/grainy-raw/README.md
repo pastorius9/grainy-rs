@@ -24,6 +24,13 @@ The Windows regression test `xtrans_partial_tiles_equal_the_serial_rgb16_decode`
 generates a textured 1031 × 1043 mosaic with partial tile edges and checks
 the RGB16 digest captured from the original serial kernel.
 
+A second optimization shares each derivative threshold across directions and
+computes the 5-by-5 homogeneity score as two 5-sample sums. Three-channel
+CIELab conversion uses the decoder's original tables and operation order.
+On the same X-T3 frame, three interleaved Windows trials of this change
+reduced median sRGB postprocessing from 3.407 s to 2.428 s with identical
+full-frame RGB16 hashes. Each pair used the same eight-thread limit.
+
 The schedule limits scratch to eight tile buffers. Each eight-direction
 buffer takes 23.5 MiB. Available physical memory and commit space can reduce
 the worker count, and a single worker processes tiles in raster order.

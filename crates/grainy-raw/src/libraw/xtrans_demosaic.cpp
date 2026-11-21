@@ -17,9 +17,10 @@
  */
 
 // Modified by the Grainy RS contributors on 2026-11-21 to adapt tile
-// scheduling in LibRaw 0.22.1. This derivative
+// scheduling, CIELab conversion and homogeneity sums in LibRaw 0.22.1. This derivative
 // retains the upstream license above. The original source is in
 // vendor/LibRaw-0.22.1/src/demosaic/xtrans_demosaic.cpp.
+#include <algorithm>
 #include <memory>
 #include <new>
 #include <omp.h>
@@ -408,8 +409,34 @@ void LibRaw::xtrans_interpolate(int passes)
     for (int d = 0; d < ndir; d++)
     {
         for (int row = 2; row < mrow - 2; row++)
+        {
+#ifndef LIBRAW_NOTHREADS
+            if (colors == 3)
+            {
+                const auto &lab_matrix = tls->ahd_data.xyz_cam;
+                const float *lab_curve = tls->ahd_data.cbrt;
+                for (int col = 2; col < mcol - 2; col++)
+                {
+                    const ushort *pixel = rgb[d][row][col];
+                    float xyz[3];
+                    for (int axis = 0; axis < 3; axis++)
+                    {
+                        float value = 0.5f;
+                        value += lab_matrix[axis][0] * pixel[0];
+                        value += lab_matrix[axis][1] * pixel[1];
+                        value += lab_matrix[axis][2] * pixel[2];
+                        xyz[axis] = lab_curve[CLIP(int(value))];
+                    }
+                    lab[row][col][0] = short(64 * (116 * xyz[1] - 16));
+                    lab[row][col][1] = short(64 * 500 * (xyz[0] - xyz[1]));
+                    lab[row][col][2] = short(64 * 200 * (xyz[1] - xyz[2]));
+                }
+                continue;
+            }
+#endif
             for (int col = 2; col < mcol - 2; col++)
                 cielab(rgb[d][row][col], lab[row][col]);
+        }
         for (int f = dir[d & 3], row = 3; row < mrow - 3; row++)
             for (int col = 3; col < mcol - 3; col++)
             {
@@ -426,36 +453,53 @@ void LibRaw::xtrans_interpolate(int passes)
 
     /* Build homogeneity maps from the derivatives:			*/
     memset(homo, 0, ndir * LIBRAW_AHD_TILE * LIBRAW_AHD_TILE);
-    for (int row = 4; row < mrow - 4; row++)
+    for (int row = 4; row < mrow - 4; row++) {
+        // Process one direction's contiguous image row at a time. Each
+        // threshold is shared by all directions and all nine neighbours.
+        float row_limit[LIBRAW_AHD_TILE];
+        std::fill_n(row_limit + 4, std::max(0, mcol - 8), FLT_MAX);
+        for (int d = 0; d < ndir; d++)
+            for (int col = 4; col < mcol - 4; col++)
+                if (row_limit[col] > drv[d][row][col])
+                    row_limit[col] = drv[d][row][col];
         for (int col = 4; col < mcol - 4; col++)
-        {
-            int d;
-            float tr;
-            for (tr = FLT_MAX, d = 0; d < ndir; d++)
-                if (tr > drv[d][row][col])
-                    tr = drv[d][row][col];
-            tr *= 8;
-            for (int dd = 0; dd < ndir; dd++)
-                for (int v = -1; v <= 1; v++)
-                    for (int h = -1; h <= 1; h++)
-                        if (drv[dd][row + v][col + h] <= tr)
-                            homo[dd][row][col]++;
+            row_limit[col] *= 8;
+        for (int d = 0; d < ndir; d++) {
+            const float *above = drv[d][row - 1], *at = drv[d][row], *below = drv[d][row + 1];
+            for (int col = 4; col < mcol - 4; col++) {
+                const float t = row_limit[col];
+                homo[d][row][col] = char((above[col-1] <= t) + (above[col] <= t) + (above[col+1] <= t)
+                                       + (at[col-1] <= t) + (at[col] <= t) + (at[col+1] <= t)
+                                       + (below[col-1] <= t) + (below[col] <= t) + (below[col+1] <= t));
+            }
         }
+    }
 
     /* Average the most homogeneous pixels for the final result:	*/
     if (height - top < LIBRAW_AHD_TILE + 4)
         mrow = height - top + 2;
     if (width - left < LIBRAW_AHD_TILE + 4)
         mcol = width - left + 2;
+    const int first_col = MIN(left, 8);
     for (int row = MIN(top, 8); row < mrow - 8; row++)
-        for (int col = MIN(left, 8); col < mcol - 8; col++)
+    {
+        // A map entry is at most 9. Both the five-row sums (45) and the
+        // complete 5x5 windows (225) fit in an unsigned byte.
+        unsigned char windows[8][LIBRAW_AHD_TILE];
+        for (int d = 0; d < ndir; d++)
         {
-            int v;
+            unsigned char vertical[LIBRAW_AHD_TILE];
+            for (int x = first_col - 2; x < mcol - 6; x++)
+                vertical[x] = homo[d][row-2][x] + homo[d][row-1][x] + homo[d][row][x]
+                            + homo[d][row+1][x] + homo[d][row+2][x];
+            for (int x = first_col; x < mcol - 8; x++)
+                windows[d][x] = vertical[x-2] + vertical[x-1] + vertical[x] + vertical[x+1] + vertical[x+2];
+        }
+        for (int col = first_col; col < mcol - 8; col++)
+        {
             int hm[8];
             for (int d = 0; d < ndir; d++)
-                for (v = -2, hm[d] = 0; v <= 2; v++)
-                    for (int h = -2; h <= 2; h++)
-                        hm[d] += homo[d][row + v][col + h];
+                hm[d] = windows[d][col];
             for (int d = 0; d < ndir - 4; d++)
                 if (hm[d] < hm[d + 4])
                     hm[d] = 0;
@@ -478,6 +522,7 @@ void LibRaw::xtrans_interpolate(int passes)
                 }
             FORC3 image[(row + top) * width + col + left][c] = avg[c] / avg[3];
         }
+    }
 
   };
   if (workers == 1) {

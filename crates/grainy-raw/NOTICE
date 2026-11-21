@@ -17,7 +17,10 @@ before undefining LIBRAW_USE_OPENMP for every other implementation file.
 src/libraw/xtrans_demosaic.cpp is a derivative of LibRaw 0.22.1 under the same
 CDDL-1.0 or LGPL-2.1 terms as the upstream file. Grainy uses the CDDL-1.0 option.
 The derivative schedules independent X-Trans tiles concurrently and retains raster
-order for tiles whose reads or writes overlap. Other targets use the upstream file.
+order for tiles whose reads or writes overlap. It specializes three-channel
+Lab conversion and computes homogeneity scores by row. The Windows package
+includes this translation unit in THIRD_PARTY_NOTICES.txt. Other targets use
+the upstream file.
 The X-Trans timing and pixel checks are documented in this crate's README.
 The Windows build uses the MSVC OpenMP runtime
 dependency (vcomp140.dll, supplied by the Visual C++ redistributable). No vendored

@@ -15,12 +15,13 @@ libjpeg-turbo 2.1.5.1
   Source: https://github.com/libjpeg-turbo/libjpeg-turbo/tree/2.1.5.1
   Original archive SHA256 (provenance from grainy-raw/NOTICE):
     61846251941e5791005fb7face196eec24541fce04f12570c308557529e92c75
-  No sources were downloaded for this move.
+  The unmodified x86-64 encoder kernels and NASM includes come from the same
+  libjpeg-turbo 2.1.5.1 tag. Their source files retain the zlib notices.
 
-Only retained scalar source files are compiled (no NASM, external DLLs,
-CMake or package-manager native libraries). src/native_symbols.h namespaces
-all library symbols without editing upstream sources. Configuration headers
-and public header copies are generated in Cargo's OUT_DIR. grainy-raw and
+On Windows x64, NASM or YASM assembles the SSE2 compressor when available.
+JPEG decoding and builds without those kernels use the scalar implementation.
+src/native_symbols.h namespaces the library symbols. Cargo generates
+configuration headers and public header copies in OUT_DIR. grainy-raw and
 grainy-codecs link this single library through links = "grainy_jpeg".
 
 cc (build dependency): MIT OR Apache-2.0.
