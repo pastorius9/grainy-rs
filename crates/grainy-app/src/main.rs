@@ -3,6 +3,8 @@
 //! `--library`; `--memory` opens photos in memory only. The photos and folders given are imported (added in
 //! place). The Python Grainy's library is only opened read-only (파일 관리 → Grainy 라이브러리 읽기 전용으로 열기).
 
+#![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
+
 use eframe::egui;
 use grainy_app::paths::Arguments;
 
