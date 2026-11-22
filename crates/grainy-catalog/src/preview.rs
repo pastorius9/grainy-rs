@@ -512,3 +512,129 @@ pub fn load_offline(
     info["offline_fingerprint"] = fingerprint;
     Ok((source, info))
 }
+
+/// Default on-disk thumbnail + offline preview cache limit (2 GiB).
+pub const DEFAULT_CACHE_LIMIT_BYTES: u64 = 2 * 1024 * 1024 * 1024;
+
+/// Summary returned by [`prune_cache`].
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct PruneStats {
+    pub removed_files: usize,
+    pub freed_bytes: u64,
+}
+
+/// Removes orphaned `thumbnails/{id}.*` and `previews/{id}.*` cache entries (for deleted photos),
+/// cleans stale `.tmp` files, and evicts the oldest remaining cache entries (LRU by mtime) when
+/// total cache size exceeds `max_bytes`.
+pub fn prune_cache(directory: impl AsRef<Path>, max_bytes: u64) -> Result<PruneStats> {
+    let directory = directory.as_ref();
+    let catalog = Catalog::open_reader(directory)?;
+    let mut live_ids = std::collections::HashSet::<i64>::new();
+    let mut stmt = catalog.connection().prepare("SELECT id FROM photos")?;
+    for id in stmt.query_map([], |row| row.get::<_, i64>(0))? {
+        live_ids.insert(id?);
+    }
+    drop(stmt);
+    drop(catalog);
+
+    let now = SystemTime::now();
+    let mut stats = PruneStats::default();
+    let mut groups: std::collections::HashMap<(u8, i64), (SystemTime, u64, Vec<PathBuf>)> =
+        std::collections::HashMap::new();
+
+    for (bucket, sub) in [(0u8, "thumbnails"), (1u8, "previews")] {
+        let dir = directory.join(sub);
+        let Ok(entries) = fs::read_dir(&dir) else { continue };
+        for entry in entries.flatten() {
+            let path = entry.path();
+            let Ok(meta) = entry.metadata() else { continue };
+            if !meta.is_file() {
+                continue;
+            }
+            let size = meta.len();
+            let mtime = meta.modified().unwrap_or(UNIX_EPOCH);
+            let name = entry.file_name();
+            let Some(name) = name.to_str() else { continue };
+            if name.ends_with(".tmp") {
+                if now.duration_since(mtime).unwrap_or_default() > Duration::from_secs(300)
+                    && fs::remove_file(&path).is_ok()
+                {
+                    stats.removed_files += 1;
+                    stats.freed_bytes += size;
+                }
+                continue;
+            }
+            let Some((stem, ext)) = name.rsplit_once('.') else { continue };
+            if !matches!(ext, "jpg" | "json" | "npz") {
+                continue;
+            }
+            let Ok(id) = stem.parse::<i64>() else { continue };
+            if !live_ids.contains(&id) {
+                if fs::remove_file(&path).is_ok() {
+                    stats.removed_files += 1;
+                    stats.freed_bytes += size;
+                }
+                continue;
+            }
+            let slot = groups.entry((bucket, id)).or_insert_with(|| (mtime, 0, Vec::new()));
+            if mtime > slot.0 {
+                slot.0 = mtime;
+            }
+            slot.1 += size;
+            slot.2.push(path);
+        }
+    }
+
+    let mut total: u64 = groups.values().map(|g| g.1).sum();
+    if total > max_bytes {
+        let mut ordered: Vec<(SystemTime, u64, Vec<PathBuf>)> = groups.into_values().collect();
+        ordered.sort_by_key(|(mtime, _, _)| *mtime);
+        for (_, group_bytes, paths) in ordered {
+            if total <= max_bytes {
+                break;
+            }
+            for path in paths {
+                let bytes = fs::metadata(&path).map(|m| m.len()).unwrap_or(0);
+                if fs::remove_file(&path).is_ok() {
+                    stats.removed_files += 1;
+                    stats.freed_bytes += bytes;
+                }
+            }
+            total = total.saturating_sub(group_bytes);
+        }
+    }
+    Ok(stats)
+}
+
+#[cfg(test)]
+mod prune_tests {
+    use super::*;
+
+    #[test]
+    fn prune_cache_removes_orphans_and_evicts_oldest_over_budget() {
+        let dir = tempfile::tempdir().unwrap();
+        let catalog = Catalog::new(dir.path()).unwrap();
+        let p1 = dir.path().join("a.jpg");
+        let p2 = dir.path().join("b.jpg");
+        fs::write(&p1, b"a").unwrap();
+        fs::write(&p2, b"b").unwrap();
+        let id1 = catalog.add(p1.to_str().unwrap(), None, None, false).unwrap();
+        let id2 = catalog.add(p2.to_str().unwrap(), None, None, false).unwrap();
+        drop(catalog);
+
+        let thumbs = dir.path().join("thumbnails");
+        fs::create_dir_all(&thumbs).unwrap();
+        fs::write(thumbs.join("9999.jpg"), vec![0u8; 400]).unwrap();
+        fs::write(thumbs.join("9999.json"), b"{}").unwrap();
+        fs::write(thumbs.join(format!("{id1}.jpg")), vec![1u8; 500]).unwrap();
+        std::thread::sleep(Duration::from_millis(25));
+        fs::write(thumbs.join(format!("{id2}.jpg")), vec![2u8; 500]).unwrap();
+
+        let stats = prune_cache(dir.path(), 600).unwrap();
+        assert!(!thumbs.join("9999.jpg").exists(), "orphan removed");
+        assert!(!thumbs.join("9999.json").exists(), "orphan stamp removed");
+        assert!(!thumbs.join(format!("{id1}.jpg")).exists(), "oldest entry evicted by LRU");
+        assert!(thumbs.join(format!("{id2}.jpg")).exists(), "newest entry retained under budget");
+        assert!(stats.removed_files >= 3 && stats.freed_bytes >= 900);
+    }
+}

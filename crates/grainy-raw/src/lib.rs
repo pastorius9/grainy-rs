@@ -45,4 +45,4 @@ fn invalid(message: impl Into<String>) -> Error {
     Error::Invalid(message.into())
 }
 
-pub use sys::{libraw_version, DecodeMode, RawFile, RawMetadata};
+pub use sys::{extract_thumbnail, libraw_version, DecodeMode, EmbeddedThumb, RawFile, RawMetadata, RawThumbnail};

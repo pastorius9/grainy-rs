@@ -63,6 +63,38 @@ void* gr_open(const void* path, GrainyMeta* meta, int* error) {
 }
 void gr_close(void* handle) { delete static_cast<GrainyRaw*>(handle); }
 void gr_free_image(void* image) { LibRaw::dcraw_clear_mem(static_cast<libraw_processed_image_t*>(image)); }
+void* gr_extract_thumb(
+    const void* path, int* is_jpeg, const unsigned char** data, unsigned* data_size,
+    unsigned* w, unsigned* h, unsigned* colors, unsigned* bits,
+    int* flip, unsigned* full_w, unsigned* full_h, int* error
+) {
+    GrainyRaw* raw = nullptr;
+    try {
+        raw = new GrainyRaw;
+#ifdef _WIN32
+        *error = raw->open_file(static_cast<const wchar_t*>(path));
+#else
+        *error = raw->open_file(static_cast<const char*>(path));
+#endif
+        if (!*error) *error = raw->unpack_thumb();
+        if (*error) { delete raw; return nullptr; }
+        auto image = raw->dcraw_make_mem_thumb(error);
+        if (!image) { delete raw; return nullptr; }
+        *flip = raw->imgdata.sizes.flip;
+        *full_w = raw->imgdata.sizes.iwidth;
+        *full_h = raw->imgdata.sizes.iheight;
+        *is_jpeg = (image->type == LIBRAW_IMAGE_JPEG) ? 1 : 0;
+        *data = image->data;
+        *data_size = image->data_size;
+        *w = image->width;
+        *h = image->height;
+        *colors = image->colors;
+        *bits = image->bits;
+        delete raw;
+        return image;
+    } catch (const std::bad_alloc&) { delete raw; *error = LIBRAW_UNSUFFICIENT_MEMORY; return nullptr; }
+      catch (...) { delete raw; *error = LIBRAW_UNSPECIFIED_ERROR; return nullptr; }
+}
 void* gr_process(void* handle,int mode,int half,const unsigned short** pixels,unsigned* h,unsigned* w,unsigned* channels,int* error) {
     try {
         auto raw=static_cast<GrainyRaw*>(handle); auto& p=raw->imgdata.params;

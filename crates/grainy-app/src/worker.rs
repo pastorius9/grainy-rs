@@ -144,11 +144,15 @@ impl Worker {
         if let Err(error) = spawned {
             log::error!("cannot start the preview thread: {error}");
         }
-        let thumbs = shared.clone();
-        let spawned =
-            std::thread::Builder::new().name("grainy-thumbnails".into()).spawn(move || thumbnail_loop(&thumbs));
-        if let Err(error) = spawned {
-            log::error!("cannot start the thumbnail thread: {error}");
+        let thumb_workers = (std::thread::available_parallelism().map(|n| n.get()).unwrap_or(2) / 2).clamp(2, 4);
+        for index in 0..thumb_workers {
+            let thumbs = shared.clone();
+            let spawned = std::thread::Builder::new()
+                .name(format!("grainy-thumbnails-{index}"))
+                .spawn(move || thumbnail_loop(&thumbs));
+            if let Err(error) = spawned {
+                log::error!("cannot start thumbnail thread {index}: {error}");
+            }
         }
         let side = shared.clone();
         let spawned = std::thread::Builder::new().name("grainy-side".into()).spawn(move || side_loop(&side));
@@ -889,7 +893,12 @@ impl ThumbnailState {
     }
 
     /// Develops `path` with `settings` at the thumbnail size.
+    /// For unedited RAW files, extracts the camera's embedded JPEG/RGB preview (~1–3 ms vs ~400 ms)
+    /// and falls back to full LibRaw develop whenever any edit is applied or no usable preview exists.
     fn render(&mut self, path: &Path, settings: &Settings) -> (Result<Preview, String>, Option<(u32, u32)>) {
+        if let Some((preview, original)) = try_fast_raw_thumbnail(path, settings) {
+            return (Ok(preview), original);
+        }
         let at = match self.source(path, settings) {
             Ok(at) => at,
             Err(message) => return (Err(message), None),
@@ -917,19 +926,25 @@ impl ThumbnailState {
     /// current; otherwise a render with the stored settings, published when the library is writable. The
     /// snapshot is taken before rendering, so a render made stale by a newer edit is not stored.
     fn cached(&mut self, cache: &ThumbCache) -> (Result<Preview, String>, Option<(u32, u32)>, String) {
-        let _publication = crate::thumbjpeg::publication();
-        let snapshot = match grainy_catalog::preview::snapshot_from(
-            cache.snapshot.as_deref().unwrap_or(&cache.directory),
-            &cache.directory,
-            cache.id,
-            true,
-        ) {
-            Ok(snapshot) => snapshot,
-            Err(error) => return (Err(error.to_string()), None, "읽기 오류".into()),
-        };
-        let inspection = match grainy_catalog::preview::inspect_snapshot(&cache.directory, cache.id, snapshot.clone()) {
-            Ok(inspection) => inspection,
-            Err(error) => return (Err(error.to_string()), None, "읽기 오류".into()),
+        // Hold the publication lock only around cache inspection and final publish, never across RAW decode,
+        // so the parallel thumbnail worker pool runs at full multi-core throughput.
+        let (snapshot, inspection) = {
+            let _publication = crate::thumbjpeg::publication();
+            let snapshot = match grainy_catalog::preview::snapshot_from(
+                cache.snapshot.as_deref().unwrap_or(&cache.directory),
+                &cache.directory,
+                cache.id,
+                true,
+            ) {
+                Ok(snapshot) => snapshot,
+                Err(error) => return (Err(error.to_string()), None, "읽기 오류".into()),
+            };
+            let inspection =
+                match grainy_catalog::preview::inspect_snapshot(&cache.directory, cache.id, snapshot.clone()) {
+                    Ok(inspection) => inspection,
+                    Err(error) => return (Err(error.to_string()), None, "읽기 오류".into()),
+                };
+            (snapshot, inspection)
         };
         let status = inspection.state["status"].as_str().unwrap_or("").to_owned();
         let rebuild = inspection.state["rebuild"].as_bool().unwrap_or(false);
@@ -963,7 +978,11 @@ impl ThumbnailState {
                 .ok();
             match crate::thumbjpeg::encode_rgba(&preview.rgba, preview.width, preview.height, icc) {
                 Ok(jpeg) => {
-                    match grainy_catalog::preview::publish(&cache.directory, &snapshot, &jpeg, None, "sRGB") {
+                    let published = {
+                        let _publication = crate::thumbjpeg::publication();
+                        grainy_catalog::preview::publish(&cache.directory, &snapshot, &jpeg, None, "sRGB")
+                    };
+                    match published {
                         // What is shown is what is stored, as on the next start: whether a thumbnail was just
                         // rendered or read back must not change its pixels (the JPEG rounds them).
                         Ok(_) => {
@@ -989,6 +1008,58 @@ impl ThumbnailState {
             },
         }
     }
+}
+
+fn is_unedited_raw_for_thumb(settings: &Settings) -> bool {
+    let defaults = grainy_core::defaults();
+    let current = grainy_core::normalized(&settings.0);
+    for (key, value) in &current.0 {
+        if matches!(key.as_str(), "tone_version" | "detail_version") {
+            continue;
+        }
+        if defaults.0.get(key) != Some(value) {
+            return false;
+        }
+    }
+    true
+}
+
+fn try_fast_raw_thumbnail(path: &Path, settings: &Settings) -> Option<(Preview, Option<(u32, u32)>)> {
+    if !crate::commands::raw::is_raw_path(path) || !is_unedited_raw_for_thumb(settings) {
+        return None;
+    }
+    let extracted = grainy_raw::extract_thumbnail(path).ok()?;
+    let dyn_img = match extracted.image {
+        grainy_raw::EmbeddedThumb::Jpeg(bytes) => {
+            image::ImageReader::with_format(std::io::Cursor::new(bytes), image::ImageFormat::Jpeg).decode().ok()?
+        }
+        grainy_raw::EmbeddedThumb::Rgb8 { width, height, data } => {
+            let rgb = image::RgbImage::from_raw(width, height, data)?;
+            image::DynamicImage::ImageRgb8(rgb)
+        }
+    };
+    if dyn_img.width().max(dyn_img.height()) < 160 {
+        return None;
+    }
+    let oriented = match extracted.flip {
+        3 => dyn_img.rotate180(),
+        5 => dyn_img.rotate270(),
+        6 => dyn_img.rotate90(),
+        _ => dyn_img,
+    };
+    let (w, h) = (oriented.width() as usize, oriented.height() as usize);
+    let long = w.max(h);
+    let resized = if long > THUMB_SIZE {
+        let scale = THUMB_SIZE as f64 / long as f64;
+        let nw = ((w as f64 * scale).round() as u32).max(1);
+        let nh = ((h as f64 * scale).round() as u32).max(1);
+        oriented.resize_exact(nw, nh, image::imageops::FilterType::Triangle)
+    } else {
+        oriented
+    };
+    let rgba = resized.to_rgba8();
+    let full = (extracted.full_size.0 > 0 && extracted.full_size.1 > 0).then_some(extracted.full_size);
+    Some((Preview { width: rgba.width() as usize, height: rgba.height() as usize, rgba: rgba.into_raw() }, full))
 }
 
 fn thumbnail_loop(shared: &Shared) {

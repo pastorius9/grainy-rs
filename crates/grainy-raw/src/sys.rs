@@ -39,6 +39,20 @@ extern "C" {
     fn gr_open(path: *const c_void, meta: *mut Meta, error: *mut i32) -> *mut c_void;
     fn gr_close(handle: *mut c_void);
     fn gr_free_image(image: *mut c_void);
+    fn gr_extract_thumb(
+        path: *const c_void,
+        is_jpeg: *mut i32,
+        data: *mut *const u8,
+        data_size: *mut u32,
+        w: *mut u32,
+        h: *mut u32,
+        colors: *mut u32,
+        bits: *mut u32,
+        flip: *mut i32,
+        full_w: *mut u32,
+        full_h: *mut u32,
+        error: *mut i32,
+    ) -> *mut c_void;
     fn gr_process(
         handle: *mut c_void,
         mode: i32,
@@ -242,6 +256,91 @@ impl Drop for RawFile {
         /* SAFETY: handle is owned and destroyed exactly once. */
         unsafe { gr_close(self.handle.as_ptr()) }
     }
+}
+
+/// Embedded preview payload extracted directly from a RAW container without demosaicing.
+#[derive(Clone, Debug)]
+pub enum EmbeddedThumb {
+    /// Embedded JPEG bitstream (most DSLR/mirrorless RAWs).
+    Jpeg(Vec<u8>),
+    /// Uncompressed 8-bit RGB bitmap preview.
+    Rgb8 { width: u32, height: u32, data: Vec<u8> },
+}
+
+/// Fast-path embedded RAW thumbnail plus camera orientation and full sensor dimensions.
+#[derive(Clone, Debug)]
+pub struct RawThumbnail {
+    pub image: EmbeddedThumb,
+    /// LibRaw orientation code (`0` normal, `3` 180°, `5` 90° CCW, `6` 90° CW).
+    pub flip: i32,
+    /// Oriented full-resolution dimensions `(width, height)`.
+    pub full_size: (u32, u32),
+}
+
+/// Extracts the camera's embedded thumbnail/preview from a RAW file without unpacking or demosaicing
+/// the sensor mosaic (`~1–3 ms` vs `~300–600 ms` full RAW decode).
+pub fn extract_thumbnail(path: impl AsRef<Path>) -> Result<RawThumbnail> {
+    let _timing = grainy_core::timing::Span::new("load.raw_extract_thumb");
+    #[cfg(windows)]
+    let encoded: Vec<u16> = {
+        use std::os::windows::ffi::OsStrExt;
+        let mut v: Vec<u16> = path.as_ref().as_os_str().encode_wide().collect();
+        if v.contains(&0) {
+            return Err(invalid("NUL in RAW path"));
+        }
+        v.push(0);
+        v
+    };
+    #[cfg(not(windows))]
+    let encoded = {
+        use std::os::unix::ffi::OsStrExt;
+        std::ffi::CString::new(path.as_ref().as_os_str().as_bytes()).map_err(|_| invalid("NUL in RAW path"))?
+    };
+    let (mut is_jpeg, mut data_size, mut w, mut h, mut colors, mut bits) = (0, 0, 0, 0, 0, 0);
+    let (mut flip, mut full_w, mut full_h, mut error) = (0, 0, 0, 0);
+    let mut data: *const u8 = std::ptr::null();
+    // SAFETY: encoded path is NUL-terminated and lives for the synchronous FFI call; returned
+    // LibRaw buffer is freed via ImageGuard below.
+    let handle = unsafe {
+        gr_extract_thumb(
+            encoded.as_ptr().cast(),
+            &mut is_jpeg,
+            &mut data,
+            &mut data_size,
+            &mut w,
+            &mut h,
+            &mut colors,
+            &mut bits,
+            &mut flip,
+            &mut full_w,
+            &mut full_h,
+            &mut error,
+        )
+    };
+    if handle.is_null() {
+        return Err(decoder_error(error));
+    }
+    struct ThumbGuard(*mut c_void);
+    impl Drop for ThumbGuard {
+        fn drop(&mut self) {
+            /* SAFETY: unique LibRaw thumbnail allocation. */
+            unsafe { gr_free_image(self.0) }
+        }
+    }
+    let _guard = ThumbGuard(handle);
+    if data.is_null() || data_size == 0 || data_size > 64 * 1024 * 1024 {
+        return Err(invalid("empty or oversized RAW embedded thumbnail"));
+    }
+    // SAFETY: LibRaw guarantees `data` holds `data_size` initialized bytes until `gr_free_image`.
+    let bytes = unsafe { std::slice::from_raw_parts(data, data_size as usize) }.to_vec();
+    let image = if is_jpeg != 0 {
+        EmbeddedThumb::Jpeg(bytes)
+    } else if bits == 8 && colors == 3 && (w as usize).saturating_mul(h as usize).saturating_mul(3) == bytes.len() {
+        EmbeddedThumb::Rgb8 { width: w, height: h, data: bytes }
+    } else {
+        return Err(invalid("unsupported RAW embedded thumbnail format"));
+    };
+    Ok(RawThumbnail { image, flip, full_size: (full_w, full_h) })
 }
 
 pub(crate) fn prophoto_srgb(a: &grainy_core::Image) -> Result<grainy_core::Image> {
