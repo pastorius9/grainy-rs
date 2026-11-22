@@ -240,7 +240,7 @@ impl Stock {
 
     /// Port of `Stock.densities`: per-layer output densities of one linear sRGB scene colour (float32).
     pub fn densities(&self, rgb: [f32; 3]) -> [f32; 3] {
-        let offset = (self.reference - GREY.log10() - f64::from(self.grid[0])) as f32;
+        let offset = self.density_offset();
         let scale = (1.0 / self.dx) as f32;
         let top = (SAMPLES as f64 - 1.001) as f32;
         let mut out = [0.0f32; 3];
@@ -254,6 +254,33 @@ impl Stock {
             out[j] = self.tables[j][i] + self.slopes[j][i] * t;
         }
         out
+    }
+
+    /// Log-exposure lookup offset matching [`Self::densities`] (used by GPU film shaders).
+    pub fn density_offset(&self) -> f32 {
+        (self.reference - GREY.log10() - f64::from(self.grid[0])) as f32
+    }
+
+    /// D65 white scaled to `Y = 1` for black-and-white stock XYZ conversion.
+    pub fn d65_white() -> [f32; 3] {
+        let w = d65();
+        [0, 1, 2].map(|k| (w[k] / w[1]) as f32)
+    }
+
+    /// Parsed halation `(radius_fraction, threshold, [r, g, b] strength)` if enabled on this stock.
+    pub fn halation_spec(&self) -> Option<(f64, f32, [f32; 3])> {
+        let spec = self.data.get("halation")?;
+        if !grainy_core::settings::truthy(spec) {
+            return None;
+        }
+        let number = |key: &str, default: f64| spec.get(key).and_then(Value::as_f64).unwrap_or(default);
+        let radius = number("radius", 0.004);
+        let threshold = number("threshold", 1.0) as f32;
+        let strength = match spec.get("strength").and_then(Value::as_array) {
+            Some(list) => [0, 1, 2].map(|i| list.get(i).and_then(Value::as_f64).unwrap_or(0.0) as f32),
+            None => [0.35, 0.06, 0.0],
+        };
+        Some((radius, threshold, strength))
     }
 
     /// Port of `Stock.xyz`: XYZ (D65, white = 1) of one linear sRGB scene colour, as float32 (the oracle

@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::num::NonZeroU64;
 use std::sync::{
     atomic::{AtomicU64, Ordering},
@@ -13,6 +14,9 @@ use crate::{params, Error, Resident, Result};
 const SLAB_BYTES: u64 = 64 * 1024;
 const REDUCE_SCRATCH_BYTES: u64 = 2049 * 16;
 const REDUCE_PROFILE_BYTES: u64 = 8 * 8;
+pub(crate) const FILM_BASE: usize = 35;
+pub(crate) const LOCAL_BASE: usize = 40;
+pub(crate) const GEOMETRY_STAGE: usize = 43;
 
 static NEXT_ID: AtomicU64 = AtomicU64::new(1);
 
@@ -73,6 +77,7 @@ pub struct Gpu {
     slabs: Arc<Mutex<Pool>>,
     reduce_scratch: Arc<Mutex<Pool>>,
     reduce_profiles: Arc<Mutex<Pool>>,
+    pub(crate) film_stocks: Mutex<HashMap<String, Arc<wgpu::Buffer>>>,
 }
 
 impl Gpu {
@@ -196,26 +201,28 @@ impl Gpu {
             immediate_size: 0,
         });
         let mut pipelines = Vec::new();
-        for (name, code) in [
-            ("tone", include_str!("tone.wgsl")),
-            ("color", include_str!("color.wgsl")),
-            ("finish", include_str!("finish.wgsl")),
-            ("detail", include_str!("detail.wgsl")),
+        for (name, code, stages, const_name) in [
+            ("tone", include_str!("tone.wgsl"), 1usize, ""),
+            ("color", include_str!("color.wgsl"), 1, ""),
+            ("finish", include_str!("finish.wgsl"), 1, ""),
+            ("detail", include_str!("detail.wgsl"), 32, "detail_stage"),
+            ("film", include_str!("film.wgsl"), 5, "film_stage"),
+            ("local", include_str!("local.wgsl"), 3, "local_stage"),
+            ("geometry", include_str!("geometry.wgsl"), 1, ""),
         ] {
             let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
                 label: Some(name),
                 source: wgpu::ShaderSource::Wgsl(format!("{}\n{code}", include_str!("common.wgsl")).into()),
             });
-            let stages = if name == "detail" { 32 } else { 1 };
             for stage in 0..stages {
-                let constants = [("detail_stage", stage as f64)];
+                let constants = [(const_name, stage as f64)];
                 pipelines.push(device.create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
                     label: Some(&format!("{name}/{stage}")),
                     layout: Some(&pipeline_layout),
                     module: &shader,
                     entry_point: Some("main"),
                     compilation_options: wgpu::PipelineCompilationOptions {
-                        constants: if name == "detail" { &constants } else { &[] },
+                        constants: if !const_name.is_empty() { &constants } else { &[] },
                         ..Default::default()
                     },
                     cache: None,
@@ -449,6 +456,7 @@ impl Gpu {
             slabs: Pool::new(4 * 1024 * 1024, 8),
             reduce_scratch: Pool::new(4 * 1024 * 1024, 4),
             reduce_profiles: Pool::new(64 * 1024, 8),
+            film_stocks: Mutex::new(HashMap::new()),
         };
         gpu.check()?;
         Ok(gpu)
@@ -953,6 +961,54 @@ impl<'a> Batch<'a> {
         self.dispatch_with_table(source, stage, params, &table_slice, extra)
     }
 
+    pub(crate) fn dispatch_sized(
+        &mut self,
+        source: &Frame,
+        stage: usize,
+        out_width: usize,
+        out_height: usize,
+        params: &[f32],
+    ) -> Result<Frame> {
+        self.gpu.check_frame(source)?;
+        let bytes = self.gpu.bytes(out_height, out_width)?;
+        let p_slice = self.write_slab(bytemuck::cast_slice(if params.is_empty() { &[0.0] } else { params }))?;
+        let out = self.outputs.take(
+            &self.gpu.device,
+            &wgpu::BufferDescriptor {
+                label: Some("Grainy resized frame"),
+                size: bytes,
+                usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
+                mapped_at_creation: false,
+            },
+        );
+        let a = &self.gpu.empty_storage;
+        let bind = self.gpu.device.create_bind_group(&wgpu::BindGroupDescriptor {
+            label: Some("Grainy sized stage"),
+            layout: &self.gpu.layout,
+            entries: &[
+                wgpu::BindGroupEntry { binding: 0, resource: source.buffer.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 1, resource: out.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 2, resource: p_slice.resource() },
+                wgpu::BindGroupEntry { binding: 3, resource: a.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 4, resource: a.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 5, resource: a.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 6, resource: a.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 7, resource: a.as_entire_binding() },
+            ],
+        });
+        {
+            let mut pass = self
+                .encoder
+                .begin_compute_pass(&wgpu::ComputePassDescriptor { label: Some("Grainy"), timestamp_writes: None });
+            pass.set_pipeline(&self.gpu.pipelines[stage]);
+            pass.set_bind_group(0, &bind, &[]);
+            pass.dispatch_workgroups(out_width.div_ceil(16) as u32, out_height.div_ceil(16) as u32, 1);
+        }
+        self.pending += 1;
+        let lease = Lease::from_batch(&out, &self.outputs);
+        Ok(Frame { buffer: out, width: out_width, height: out_height, owner: self.gpu.owner, _lease: Some(lease) })
+    }
+
     pub(crate) fn dispatch(
         &mut self,
         source: &Frame,
@@ -1068,7 +1124,29 @@ impl Gpu {
         if params::needs_local(s) && !linear.iter().all(|v| v.is_finite()) {
             return Err(Error::Input("non-finite tone analysis pixels".into()));
         }
-        let Some((p, t)) = params::tone(s, linear, None, None)? else {
+        if grainy_film::active(s) {
+            let mut batch = self.batch();
+            let Some(encoded) = self.film_encode_in_batch(&mut batch, frame, s, None)? else {
+                return Ok(None);
+            };
+            let base = if params::needs_local(s) {
+                let name = s.str("film_look").to_owned();
+                let space = grainy_film::WorkingSpace::from_setting(s.str("working_space"));
+                let render = move |a: ndarray::ArrayView3<'_, f32>| {
+                    grainy_film::render(&a.to_owned(), &name, space).unwrap_or_else(|_| a.to_owned())
+                };
+                Some(grainy_tone::tone_base(linear, s, Some(&render)).map_err(|e| Error::Input(e.to_string()))?)
+            } else {
+                None
+            };
+            let Some((p, t)) = params::tone(s, linear, (frame.width, frame.height), base.as_ref(), None, true)? else {
+                return Ok(None);
+            };
+            let out = batch.dispatch(&encoded, 0, &p, &t, &[])?;
+            batch.submit()?;
+            return Ok(Some(out));
+        }
+        let Some((p, t)) = params::tone(s, linear, (frame.width, frame.height), None, None, false)? else {
             return Ok(None);
         };
         self.dispatch(frame, 0, &p, &t, &[]).map(Some)

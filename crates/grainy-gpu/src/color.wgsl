@@ -45,7 +45,7 @@ fn main(@builtin(global_invocation_id) id: vec3<u32>) {
         a=hls_rgb(hls.x+dh,hls.y,hls.z*(1.0+ds),simd);
     }
     for(var i=0u;i<u32(p[3]);i++) {
-        let j=66u+i*16u;let hls=rgb_hls(a,simd);let hue=hls.x;let l=hls.y;let sat=hls.z;
+        let j=73u+i*16u;let hls=rgb_hls(a,simd);let hue=hls.x;let l=hls.y;let sat=hls.z;
         var weight=clamp(1.0-abs(wrap(hue-p[j]+0.5)-0.5)/p[j+4u],0.0,1.0);
         if p[j+12u]!=0.0 {
             if p[j+13u]!=0.0 {weight=1.0;}
@@ -62,5 +62,30 @@ fn main(@builtin(global_invocation_id) id: vec3<u32>) {
     if (flags&128u)!=0u {
         a=vec3((a.r*p[57]+a.g*p[58])+a.b*p[59],(a.r*p[60]+a.g*p[61])+a.b*p[62],(a.r*p[63]+a.g*p[64])+a.b*p[65]);
     }
-    store_rgb(index,clip(a));
+    a=clip(a);
+    if (flags&512u)!=0u {
+        let lin=vec3(lin_srgb(a.r),lin_srgb(a.g),lin_srgb(a.b));
+        let gain=vec3(p[66],p[67],p[68]);
+        let wt=vec3(p[69],p[70],p[71]);
+        var filt=lin*gain;
+        if (flags&1024u)!=0u {
+            if (flags&2048u)!=0u {
+                let comp=filt/p[72];
+                let gv=(comp.r*wt.r+comp.g*wt.g)+comp.b*wt.b;
+                filt=vec3(gv);
+            } else {
+                let lum=(lin.r*wt.r+lin.g*wt.g)+lin.b*wt.b;
+                let chg=(filt.r*wt.r+filt.g*wt.g)+filt.b*wt.b;
+                let ratio=lum/max(chg,1e-12);
+                filt*=ratio;
+                let delta=filt-vec3(lum);
+                let upper=(1.0-lum)/max(max(max(delta.r,delta.g),delta.b),1e-12);
+                let lower=lum/max(-min(min(delta.r,delta.g),delta.b),1e-12);
+                let amt=clamp(min(upper,lower),0.0,1.0);
+                filt=vec3(lum)+delta*amt;
+            }
+        }
+        a=vec3(srgb(max(filt.r,0.0)),srgb(max(filt.g,0.0)),srgb(max(filt.b,0.0)));
+    }
+    store_rgb(index,a);
 }

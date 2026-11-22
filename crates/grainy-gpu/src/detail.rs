@@ -27,7 +27,7 @@ pub(crate) const KEYS: &[&str] = &[
     "wavelet_profiles",
 ];
 
-fn gaussian(sigma: f64) -> Vec<[f32; 2]> {
+pub(crate) fn gaussian(sigma: f64) -> Vec<[f32; 2]> {
     let sigma = sigma.max(0.05);
     let n = ((sigma * 8.0 + 1.0).round_ties_even() as usize) | 1;
     let r = n / 2;

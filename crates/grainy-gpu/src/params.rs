@@ -57,6 +57,8 @@ pub(crate) const COLOR_KEYS: &[&str] = &[
     "photo_filter_enabled",
     "photo_filter_density",
     "photo_filter_luminosity",
+    "working_space",
+    "monochrome",
     "hdr",
 ];
 
@@ -90,10 +92,12 @@ pub(crate) fn needs_local(s: &Settings) -> bool {
 pub(crate) fn tone(
     s: &Settings,
     image: &Image,
+    frame_size: (usize, usize),
     base: Option<&ToneBase>,
     tile: Option<TileContext>,
+    skip_encode: bool,
 ) -> Result<Option<Built>> {
-    if grainy_film::active(s) || grainy_tone::mapping::active(s) {
+    if !skip_encode && grainy_film::active(s) {
         return Ok(None);
     }
     let Some(mut table) = curve(s.value("curve")) else {
@@ -104,25 +108,29 @@ pub(crate) fn tone(
         return Ok(None);
     }
     let n = table.len();
-    let (h, w, c) = image.dim();
-    if c != 3 || h == 0 || w == 0 {
+    let (w, h) = frame_size;
+    if image.dim().2 != 3 || h == 0 || w == 0 {
         return Err(Error::Input("tone needs finite nonempty RGB".into()));
     }
     let wb = grainy_core::white_balance(s);
-    let v4 = !s.bool("hdr") && s.f64("tone_version") >= 4.0;
+    let drt_active = !skip_encode && grainy_tone::mapping::active(s);
+    let v4 = !skip_encode && !drt_active && !s.bool("hdr") && s.f64("tone_version") >= 4.0;
     let mut flags = u32::from(s.bool("shadows") || s.bool("highlights"))
         | (u32::from(s.bool("contrast")) << 1)
         | (u32::from(!unchanged) << 2)
         | (u32::from(s.bool("lens_vignette")) << 3)
         | (u32::from(s.bool("hdr")) << 4)
         | (u32::from(v4) << 7)
-        | (u32::from(tile.is_some()) << 8);
+        | (u32::from(tile.is_some()) << 8)
+        | (u32::from(drt_active) << 9)
+        | (u32::from(skip_encode) << 10);
     let white = grainy_tone::rolloff_white(s);
-    if !s.bool("hdr") && !v4 && s.f64("tone_version") >= 2.0 && white > 1.0 {
+    if !skip_encode && !drt_active && !s.bool("hdr") && !v4 && s.f64("tone_version") >= 2.0 && white > 1.0 {
         flags |= 32;
     }
     let slope = ((table[n - 1][1] - table[n - 2][1]) / (table[n - 1][0] - table[n - 2][0]).max(1e-6)).max(0.0);
     let uv = tile.map_or([0.0, 0.0, 1.0, 1.0], |t| t.uv);
+    let drt = grainy_tone::mapping::params(s);
     let mut p = vec![
         w as f32,
         h as f32,
@@ -148,6 +156,12 @@ pub(crate) fn tone(
         uv[1],
         uv[2],
         uv[3],
+        drt.p as f32,
+        drt.s as f32,
+        drt.m as f32,
+        drt.toe as f32,
+        drt.white as f32,
+        drt.shoulder as f32,
     ];
     if needs_local(s) {
         let local = grainy_tone::tone_local(image, s, base, None)
@@ -171,7 +185,7 @@ pub(crate) fn tone(
 }
 
 pub(crate) fn color(s: &Settings, w: usize, h: usize) -> Result<Option<Built>> {
-    if s.bool("hdr") || s.bool("photo_filter_enabled") {
+    if s.bool("hdr") {
         return Ok(None);
     }
     let c = match ColorParams::from_settings(s) {
@@ -181,7 +195,7 @@ pub(crate) fn color(s: &Settings, w: usize, h: usize) -> Result<Option<Built>> {
     if c.hsl.len() != 8 || c.calibration.len() != 3 || c.grading.len() != 3 || c.parametric.len() != 4 {
         return Ok(None);
     }
-    let mut p = vec![0f32; 66];
+    let mut p = vec![0f32; 73];
     p[0] = w as f32;
     p[1] = h as f32;
     p[4] = (1.0 + c.saturation / 100.0) as f32;
@@ -245,6 +259,45 @@ pub(crate) fn color(s: &Settings, w: usize, h: usize) -> Result<Option<Built>> {
         flags |= 128;
         for (slot, v) in p[57..66].iter_mut().zip(matrix.iter().flatten()) {
             *slot = *v;
+        }
+    }
+    if s.bool("photo_filter_enabled") {
+        if let Some(rgb) = grainy_colorgrade::photo_filter::transmission(s.str("photo_filter")) {
+            let density = match s.0.get("photo_filter_density") {
+                None => 0.25,
+                Some(Value::Number(n)) => n.as_f64().unwrap_or(0.0) / 100.0,
+                Some(Value::Bool(b)) => f64::from(u8::from(*b)) / 100.0,
+                Some(Value::String(t)) => t.trim().parse::<f64>().unwrap_or(0.0) / 100.0,
+                _ => 0.0,
+            };
+            if density.is_finite() && density > 0.0 {
+                let amount = density.min(1.0) as f32;
+                let gain = [
+                    1.0 + amount * (rgb[0] as f32 - 1.0),
+                    1.0 + amount * (rgb[1] as f32 - 1.0),
+                    1.0 + amount * (rgb[2] as f32 - 1.0),
+                ];
+                let weights = if s.0.get("working_space").and_then(Value::as_str) == Some("ProPhoto") {
+                    [0.28804f32, 0.71187, 0.00009]
+                } else {
+                    convert::LUMA
+                };
+                let luminosity = s.0.get("photo_filter_luminosity").is_none_or(grainy_core::settings::truthy);
+                let monochrome = s.0.get("monochrome").is_some_and(grainy_core::settings::truthy);
+                let neutral = (f64::from(gain[0] * weights[0])
+                    + f64::from(gain[1] * weights[1])
+                    + f64::from(gain[2] * weights[2])) as f32;
+                flags |= 512;
+                if luminosity {
+                    flags |= 1024;
+                }
+                if monochrome {
+                    flags |= 2048;
+                }
+                p[66..69].copy_from_slice(&gain);
+                p[69..72].copy_from_slice(&weights);
+                p[72] = neutral;
+            }
         }
     }
     let mut count = 0;

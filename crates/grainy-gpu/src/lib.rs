@@ -4,12 +4,17 @@
 
 mod detail;
 mod device;
+mod film;
+mod geometry;
+mod local;
 mod params;
 mod pool;
 mod present;
 mod resident;
 
 pub use device::{AdapterKind, Frame, Gpu};
+pub use geometry::GpuGeometryParams;
+pub use local::{can_gpu_local_layer, LocalMask};
 pub use params::TileContext;
 pub use present::{lut33_input_grid, pack_lut33, MonitorLut, PresentCrop, Presented, LUT_ENTRIES, LUT_SIZE};
 pub use resident::{CpuStage, Resident, ResidentResult, StageRuns};

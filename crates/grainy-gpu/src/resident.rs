@@ -70,6 +70,30 @@ impl Resident {
             runs: StageRuns { uploads: 1, ..Default::default() },
         })
     }
+    /// Wrap an already GPU-resident linear frame (e.g. produced by [`Gpu::warp_geometry`]) without
+    /// a host readback or re-upload. `analysis_source` may be a downscaled linear frame when `ToneBase`
+    /// is computed externally or at preview resolution.
+    pub fn from_frame(frame: Frame, analysis_source: Image) -> Self {
+        Self {
+            frame,
+            source: analysis_source,
+            tone: None,
+            color: None,
+            detail: None,
+            finish: None,
+            grain: None,
+            base: None,
+            runs: StageRuns::default(),
+        }
+    }
+
+    /// Replace the resident GPU frame with another already-on-GPU frame, invalidating downstream slots.
+    pub fn replace_frame(&mut self, frame: Frame, analysis_source: Image) {
+        let uploads = self.runs.uploads;
+        *self = Self::from_frame(frame, analysis_source);
+        self.runs.uploads = uploads;
+    }
+
     /// Port of the geometry-key invalidation in `native_gpu.develop_resident`; failed uploads leave the old cache intact.
     pub fn replace(&mut self, gpu: &Gpu, image: &Image) -> Result<()> {
         let replacement = Self::new(gpu, image)?;
@@ -154,11 +178,17 @@ impl Gpu {
                     ];
                     let key = params::key(s, &keys);
                     if r.base.as_ref().is_none_or(|(k, _)| *k != key) {
-                        if grainy_film::active(s) || grainy_tone::mapping::active(s) {
-                            return Ok(ResidentResult { frame: None, fallback: Some(CpuStage::Tone) });
-                        }
-                        let base =
-                            grainy_tone::tone_base(&r.source, s, None).map_err(|e| Error::Input(e.to_string()))?;
+                        let base = if grainy_film::active(s) {
+                            let name = s.str("film_look").to_owned();
+                            let space = grainy_film::WorkingSpace::from_setting(s.str("working_space"));
+                            let render = move |a: ndarray::ArrayView3<'_, f32>| {
+                                grainy_film::render(&a.to_owned(), &name, space).unwrap_or_else(|_| a.to_owned())
+                            };
+                            grainy_tone::tone_base(&r.source, s, Some(&render))
+                                .map_err(|e| Error::Input(e.to_string()))?
+                        } else {
+                            grainy_tone::tone_base(&r.source, s, None).map_err(|e| Error::Input(e.to_string()))?
+                        };
                         r.base = Some((key, base));
                         r.runs.analyses += 1;
                     }
@@ -167,10 +197,22 @@ impl Gpu {
             } else {
                 None
             };
-            let Some((p, t)) = params::tone(s, &r.source, base_ref, tile)? else {
-                return Ok(ResidentResult { frame: None, fallback: Some(CpuStage::Tone) });
+            let frame = if grainy_film::active(s) {
+                let Some(encoded) = self.film_encode_in_batch(&mut batch, &r.frame, s, tile)? else {
+                    return Ok(ResidentResult { frame: None, fallback: Some(CpuStage::Tone) });
+                };
+                let Some((p, t)) = params::tone(s, &r.source, (r.frame.width, r.frame.height), base_ref, tile, true)?
+                else {
+                    return Ok(ResidentResult { frame: None, fallback: Some(CpuStage::Tone) });
+                };
+                batch.dispatch(&encoded, 0, &p, &t, &[])?
+            } else {
+                let Some((p, t)) = params::tone(s, &r.source, (r.frame.width, r.frame.height), base_ref, tile, false)?
+                else {
+                    return Ok(ResidentResult { frame: None, fallback: Some(CpuStage::Tone) });
+                };
+                batch.dispatch(&r.frame, 0, &p, &t, &[])?
             };
-            let frame = batch.dispatch(&r.frame, 0, &p, &t, &[])?;
             r.tone = Some((tone_key, frame));
             r.color = None;
             r.detail = None;
@@ -284,14 +326,13 @@ mod tests {
         let image = grainy_testkit::input("colours");
         let mut resident = Resident::new(&gpu, &image).unwrap();
         let mut s = grainy_core::defaults();
-        s.set("photo_filter_enabled", true);
-        s.set("photo_filter", "cooling80");
+        s.set("point_colors", vec![serde_json::json!({"hue": 1.0}); 257]);
         let result = gpu.develop_resident_prefix(&mut resident, &s, 1.0, false).unwrap();
         assert_eq!(result.fallback, Some(CpuStage::Color));
         let toned = grainy_tone::develop_tone(&image, &s, None).unwrap();
         grainy_testkit::assert_close(&gpu.readback(&result.frame.unwrap()).unwrap(), &toned, 1e-5, "tone prefix");
         assert_eq!((resident.runs().tone, resident.runs().color, resident.runs().detail), (1, 0, 0));
-        s.set("photo_filter_enabled", false);
+        s.set("point_colors", serde_json::json!([]));
         s.set("sharpen", 50);
         s.set("sharpen_radius", 1000);
         let result = gpu.develop_resident_prefix(&mut resident, &s, 1.0, false).unwrap();
@@ -304,10 +345,107 @@ mod tests {
         let result = gpu.develop_resident_prefix(&mut resident, &s, 1.0, false).unwrap();
         assert!(result.fallback.is_none());
         assert_eq!((resident.runs().tone, resident.runs().color, resident.runs().detail), (1, 1, 1));
-        s.set("film_look", "kodak-portra-400");
+        s.set("curve", serde_json::json!([[0.0, 0.0]]));
         let result = gpu.develop_resident_prefix(&mut resident, &s, 1.0, false).unwrap();
         assert_eq!(result.fallback, Some(CpuStage::Tone));
         assert!(result.frame.is_none());
+    }
+
+    #[test]
+    fn phase5a_gpu_film_drt_photo_filter_local_and_geometry_match_cpu() {
+        let Some(gpu) = Gpu::with_adapter(crate::AdapterKind::Hardware).expect("GPU initialization") else {
+            eprintln!("SKIP phase5a parity: no compute adapter");
+            return;
+        };
+        let image = grainy_testkit::input("garden");
+
+        // 1. DRT tone mapping on GPU
+        let mut s_drt = grainy_core::defaults();
+        s_drt.set("tone_mapping", "drt");
+        s_drt.set("drt_contrast", 25.0);
+        s_drt.set("drt_toe", 30.0);
+        s_drt.set("drt_shoulder", -25.0);
+        s_drt.set("drt_white", -20.0);
+        s_drt.set("highlights", -30.0);
+        s_drt.set("shadows", 25.0);
+        let cpu_drt = grainy_tone::develop_tone(&image, &s_drt, None).unwrap();
+        let gpu_drt = gpu.tone(&image, &s_drt).unwrap().expect("DRT runs on GPU");
+        grainy_testkit::assert_close(&gpu_drt, &cpu_drt, 2e-5, "GPU DRT vs CPU");
+
+        // 2. Film Look on GPU: color negative, halation (CineStill 800T), B&W negative, partial strength + DRT
+        for (stock_name, strength, drt) in [
+            ("kodak-portra-400", 100.0, false),
+            ("cinestill-800t", 100.0, false),
+            ("kodak-tri-x-400", 100.0, false),
+            ("kodak-portra-400", 60.0, true),
+        ] {
+            let mut s = grainy_core::defaults();
+            s.set("film_look", stock_name);
+            s.set("film_strength", strength);
+            s.set("exposure", 0.3);
+            s.set("shadows", 20.0);
+            if drt {
+                s.set("tone_mapping", "drt");
+            }
+            let space = grainy_film::WorkingSpace::from_setting(s.str("working_space"));
+            let name_owned = stock_name.to_owned();
+            let render =
+                move |a: ndarray::ArrayView3<'_, f32>| grainy_film::render(&a.to_owned(), &name_owned, space).unwrap();
+            let cpu_film = grainy_tone::develop_tone(&image, &s, Some(&render)).unwrap();
+            let gpu_film = gpu.tone(&image, &s).unwrap().expect("Film runs on GPU");
+            grainy_testkit::assert_close(&gpu_film, &cpu_film, 3e-5, &format!("GPU Film {stock_name} ({strength}%)"));
+        }
+
+        // 3. Photo Filter on GPU (normal luminosity + monochrome luminosity + non-luminosity)
+        for (filter, density, lum, mono) in
+            [("warming85", 45.0, true, false), ("cooling80", 70.0, true, true), ("red", 35.0, false, false)]
+        {
+            let mut s = grainy_core::defaults();
+            s.set("photo_filter_enabled", true);
+            s.set("photo_filter", filter);
+            s.set("photo_filter_density", density);
+            s.set("photo_filter_luminosity", lum);
+            s.set("monochrome", mono);
+            let toned = grainy_tone::develop_tone(&image, &s, None).unwrap();
+            let cpu_c = grainy_colorgrade::develop_color(&toned, &s).unwrap();
+            let gpu_c = gpu.color(&toned, &s).unwrap().expect("Photo filter runs on GPU");
+            grainy_testkit::assert_close(&gpu_c, &cpu_c, 2e-5, &format!("GPU PhotoFilter {filter} mono={mono}"));
+        }
+
+        // 4. Local Mask on GPU (exposure + contrast + WB + sat + shadows/highlights + clarity)
+        let (h, w, _) = image.dim();
+        let mask = grainy_core::Plane::from_shape_fn((h, w), |(y, x)| (x as f32 / w as f32) * (y as f32 / h as f32));
+        let gpu_mask = gpu.upload_mask(&mask).unwrap();
+        let base_srgb = grainy_tone::develop_tone(&image, &grainy_core::defaults(), None).unwrap();
+        let base_frame = gpu.upload(&base_srgb).unwrap();
+        let mut edit = serde_json::Map::new();
+        edit.insert("exposure".into(), serde_json::json!(0.45));
+        edit.insert("contrast".into(), serde_json::json!(20.0));
+        edit.insert("temperature".into(), serde_json::json!(15.0));
+        edit.insert("saturation".into(), serde_json::json!(18.0));
+        edit.insert("shadows".into(), serde_json::json!(25.0));
+        edit.insert("clarity".into(), serde_json::json!(30.0));
+        let out_gpu = gpu.apply_local_layers(&base_frame, &[(&gpu_mask, &edit)], 1.0).unwrap().unwrap();
+        let out_read = gpu.readback(&out_gpu).unwrap();
+        assert_eq!(out_read.dim(), base_srgb.dim());
+        assert!(out_read.iter().all(|v| v.is_finite() && *v >= 0.0 && *v <= 1.0));
+        // Unmasked corner (0,0) has mask=0 -> must remain bit-identical to base_srgb.
+        for c in 0..3 {
+            assert_eq!(out_read[[0, 0, c]], base_srgb[[0, 0, c]]);
+        }
+
+        // 5. Single-pass GPU Catmull-Rom Geometry Warp
+        let mut s_geo = grainy_core::defaults();
+        s_geo.set("straighten", 3.5);
+        s_geo.set("perspective_v", 12.0);
+        s_geo.set("distortion", -8.0);
+        s_geo.set("crop", serde_json::json!([0.1, 0.1, 0.9, 0.9]));
+        let geom = crate::GpuGeometryParams::from_settings(w, h, &s_geo, true, false).unwrap();
+        let src_frame = gpu.upload(&image).unwrap();
+        let warped = gpu.warp_geometry(&src_frame, &geom).unwrap();
+        let warped_cpu = gpu.readback(&warped).unwrap();
+        assert_eq!(warped_cpu.dim(), (geom.out_height, geom.out_width, 3));
+        assert!(warped_cpu.iter().all(|v| v.is_finite()));
     }
 
     #[test]

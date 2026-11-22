@@ -110,17 +110,54 @@ fn cpu_cases(g: &Gpu, label: &str) {
                     Some(g.readback(&g.grain_clip(&g.upload(&a).unwrap(), Some(&grain)).unwrap()).unwrap())
                 }
             };
-            assert_eq!(out.is_some(), case["supported"].as_bool().unwrap_or(true), "{label} {name}: support");
+            let promoted = match kind {
+                "tone" => grainy_film::active(&s) || grainy_tone::mapping::active(&s),
+                "color" => !s.bool("hdr") && s.bool("photo_filter_enabled"),
+                "chain" | "detail_chain" => {
+                    !s.bool("hdr")
+                        && (grainy_film::active(&s)
+                            || grainy_tone::mapping::active(&s)
+                            || s.bool("photo_filter_enabled"))
+                }
+                _ => false,
+            };
+            let expect_supported = case["supported"].as_bool().unwrap_or(true) || promoted;
+            assert_eq!(out.is_some(), expect_supported, "{label} {name}: support");
             if let Some(out) = out {
+                let film_name = grainy_film::active(&s).then(|| s.str("film_look").to_owned());
+                let film_space = grainy_film::WorkingSpace::from_setting(s.str("working_space"));
                 let expected = match kind {
-                    "tone" => grainy_tone::develop_tone(&a, &s, None).unwrap(),
+                    "tone" => {
+                        if let Some(ref stock_name) = film_name {
+                            let stock_name = stock_name.clone();
+                            let render = move |img: ndarray::ArrayView3<'_, f32>| {
+                                grainy_film::render(&img.to_owned(), &stock_name, film_space).unwrap()
+                            };
+                            grainy_tone::develop_tone(&a, &s, Some(&render)).unwrap()
+                        } else {
+                            grainy_tone::develop_tone(&a, &s, None).unwrap()
+                        }
+                    }
                     "color" => grainy_colorgrade::develop_color(&a, &s).unwrap(),
                     "grain" => grainy_effects::add_grain(a, &s, scale).mapv(|v| v.clamp(0.0, 1.0)),
-                    _ => cpu_chain(&a, &s, scale),
+                    _ => {
+                        let toned = if let Some(ref stock_name) = film_name {
+                            let stock_name = stock_name.clone();
+                            let render = move |img: ndarray::ArrayView3<'_, f32>| {
+                                grainy_film::render(&img.to_owned(), &stock_name, film_space).unwrap()
+                            };
+                            grainy_tone::develop_tone(&a, &s, Some(&render)).unwrap()
+                        } else {
+                            grainy_tone::develop_tone(&a, &s, None).unwrap()
+                        };
+                        let colored = grainy_colorgrade::develop_color(&toned, &s).unwrap();
+                        grainy_detail::develop_detail(&colored, &s, scale).unwrap().mapv(|v| v.clamp(0.0, 1.0))
+                    }
                 };
                 let tol = match kind {
                     "grain" => 0.0,
                     "color" if name.contains("default") => 0.0,
+                    _ if film_name.is_some() => 3e-5,
                     "detail_chain" => 2e-5,
                     _ => 1e-5,
                 };
@@ -134,8 +171,12 @@ fn cpu_cases(g: &Gpu, label: &str) {
         let name = case["name"].as_str().unwrap();
         let s = settings(&case["settings"]);
         let a = input("colours");
-        assert_eq!(g.tone(&a, &s).unwrap().is_some(), case["tone"].as_bool().unwrap(), "{name} tone");
-        assert_eq!(g.color(&a, &s).unwrap().is_some(), case["color"].as_bool().unwrap(), "{name} color");
+        // Phase 5A promoted film look, DRT tone mapping, and photo filters to full GPU execution.
+        let expect_tone =
+            case["tone"].as_bool().unwrap() || grainy_film::active(&s) || grainy_tone::mapping::active(&s);
+        let expect_color = case["color"].as_bool().unwrap() || (!s.bool("hdr") && s.bool("photo_filter_enabled"));
+        assert_eq!(g.tone(&a, &s).unwrap().is_some(), expect_tone, "{name} tone");
+        assert_eq!(g.color(&a, &s).unwrap().is_some(), expect_color, "{name} color");
     }
 }
 

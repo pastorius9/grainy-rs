@@ -2,10 +2,15 @@
 //! CPU exports are unchanged. One preview worker owns this cache and its GPU. Source tokens have the same
 //! contract as `develop_cached`: change the token whenever source pixels or camera calibration change.
 
+use std::borrow::Cow;
+use std::collections::HashMap;
 use std::sync::Arc;
 
-use grainy_core::Image;
-use grainy_gpu::{CpuStage, Frame as GpuFrame, Gpu, PresentCrop, Resident, StageRuns, TileContext};
+use grainy_core::{Image, Plane};
+use grainy_gpu::{
+    can_gpu_local_layer, CpuStage, Frame as GpuFrame, Gpu, GpuGeometryParams, LocalMask, PresentCrop, Resident,
+    StageRuns, TileContext,
+};
 use grainy_tone::ToneBase;
 use serde_json::{Map, Value};
 
@@ -53,7 +58,11 @@ pub enum Error {
 pub struct GpuCache {
     cpu: DevelopmentCache,
     resident: Option<(String, Resident)>,
+    raw_gpu: Option<(String, GpuFrame)>,
     whole_base: Option<(String, ToneBase)>,
+    mask_planes: HashMap<String, Arc<Plane>>,
+    gpu_masks: HashMap<String, LocalMask>,
+    mask_uploads: u64,
     fallback: Option<CpuStage>,
 }
 
@@ -66,7 +75,21 @@ impl Default for GpuCache {
 impl GpuCache {
     /// Port of `DevelopmentCache` construction with an explicit host-memory budget.
     pub fn new(cpu: DevelopmentCache) -> Self {
-        Self { cpu, resident: None, whole_base: None, fallback: None }
+        Self {
+            cpu,
+            resident: None,
+            raw_gpu: None,
+            whole_base: None,
+            mask_planes: HashMap::new(),
+            gpu_masks: HashMap::new(),
+            mask_uploads: 0,
+            fallback: None,
+        }
+    }
+
+    /// Number of GPU local mask buffer uploads performed by this cache (for slider-reuse verification).
+    pub fn mask_uploads(&self) -> u64 {
+        self.mask_uploads
     }
 
     /// Port of resident dispatch diagnostics (counts for the currently uploaded geometry).
@@ -100,6 +123,125 @@ pub fn develop_gpu_cached<'a>(
         GpuOutput::Resident { frame, .. } => Ok(gpu.readback(&frame)?),
         GpuOutput::Host(image) => Ok(image),
     }
+}
+
+fn layer_shape_key(layer: &Map<String, Value>) -> String {
+    let mut stripped = Map::new();
+    for (k, v) in layer {
+        if k != "adjustments" {
+            stripped.insert(k.clone(), v.clone());
+        }
+    }
+    serde_json::to_string(&Value::Object(stripped)).unwrap_or_default()
+}
+
+type GpuMaskLayer<'a> = (&'a Map<String, Value>, Map<String, Value>);
+
+fn gpu_eligible_masks(s: &grainy_core::Settings, scale: f64) -> Option<Vec<GpuMaskLayer<'_>>> {
+    if s.bool("hdr") {
+        return None;
+    }
+    let layers = s.value("masks").as_array()?;
+    if layers.is_empty() {
+        return None;
+    }
+    let mut out = Vec::new();
+    for raw in layers {
+        let layer = raw.as_object()?;
+        let on = layer.get("enabled").is_none_or(grainy_core::settings::truthy);
+        if !on {
+            continue;
+        }
+        if grainy_local::image_dependent(layer) {
+            return None;
+        }
+        let edit = match layer.get("adjustments") {
+            None => Map::new(),
+            Some(v) => v.as_object()?.clone(),
+        };
+        if !can_gpu_local_layer(&edit, scale) {
+            return None;
+        }
+        out.push((layer, edit));
+    }
+    Some(out)
+}
+
+#[allow(clippy::too_many_arguments)]
+fn prepare_mask_planes(
+    mask_planes: &mut HashMap<String, Arc<Plane>>,
+    frame: &Image,
+    source_shape: (usize, usize),
+    colour_source: Option<&Image>,
+    s: &grainy_core::Settings,
+    crop: crate::Crop,
+    externals: &Externals<'_>,
+    base_key: &str,
+    layers: &[GpuMaskLayer<'_>],
+) -> Result<Vec<(String, Arc<Plane>)>, Error> {
+    let use_crop = match crop {
+        crate::Crop::Cropped => grainy_geometry::UseCrop::Yes,
+        crate::Crop::Uncropped => grainy_geometry::UseCrop::No,
+        crate::Crop::All => grainy_geometry::UseCrop::All,
+    };
+    let transform = |mask: &Image| -> grainy_local::Result<Image> {
+        grainy_geometry::geometry(mask, s, use_crop, externals.lens)
+            .map(Cow::into_owned)
+            .map_err(|e| grainy_local::Error::Invalid(e.to_string()))
+    };
+    let mut out = Vec::with_capacity(layers.len());
+    for (idx, (layer, _)) in layers.iter().enumerate() {
+        let key = format!("{base_key}|{idx}|{}", layer_shape_key(layer));
+        let plane = if let Some(cached) = mask_planes.get(&key) {
+            cached.clone()
+        } else {
+            let computed = Arc::new(
+                grainy_local::layer_mask(frame, source_shape, layer, &transform, colour_source, externals.sky)
+                    .map_err(crate::Error::from)?,
+            );
+            if mask_planes.len() >= 16 {
+                mask_planes.clear();
+            }
+            mask_planes.insert(key.clone(), computed.clone());
+            computed
+        };
+        out.push((key, plane));
+    }
+    Ok(out)
+}
+
+fn upload_cached_masks(
+    gpu: &Gpu,
+    gpu_masks: &mut HashMap<String, LocalMask>,
+    mask_uploads: &mut u64,
+    planes: &[(String, Arc<Plane>)],
+    tile_slice: Option<(usize, usize, usize, usize)>,
+) -> Result<Vec<LocalMask>, Error> {
+    let mut out = Vec::with_capacity(planes.len());
+    for (base_key, plane) in planes {
+        let key = match tile_slice {
+            Some((px0, py0, pw, ph)) => format!("tile|{base_key}|{px0},{py0},{pw},{ph}"),
+            None => base_key.clone(),
+        };
+        if let Some(cached) = gpu_masks.get(&key) {
+            out.push(cached.clone());
+            continue;
+        }
+        let uploaded = match tile_slice {
+            Some((px0, py0, pw, ph)) => {
+                let sub = plane.slice(ndarray::s![py0..py0 + ph, px0..px0 + pw]).to_owned();
+                gpu.upload_mask(&sub)?
+            }
+            None => gpu.upload_mask(plane)?,
+        };
+        if gpu_masks.len() >= 24 {
+            gpu_masks.clear();
+        }
+        gpu_masks.insert(key, uploaded.clone());
+        *mask_uploads += 1;
+        out.push(uploaded);
+    }
+    Ok(out)
 }
 
 /// Zero-copy GPU develop entry point: keeps the final float32 frame resident in VRAM when no CPU
@@ -170,6 +312,69 @@ pub fn develop_gpu_resident<'a>(
         options.use_crop,
         settings_key(&s, &GEOMETRY_KEYS)
     );
+    let masks = s.value("masks").as_array().is_some_and(|layers| !layers.is_empty());
+    let retouch_empty = s.value("retouch").as_array().is_none_or(Vec::is_empty);
+
+    // PV4 Single-Pass GPU Catmull-Rom Geometry Warp fast path:
+    // keeps the pre-geometry linear frame on GPU so Straighten/Perspective/Distortion/Crop drags
+    // execute in one Bicubic GPU pass with zero CPU re-warping and zero PCIe re-upload.
+    let (lin_h, lin_w, _) = linear.dim();
+    let pv4_gpu_geom = if s.f64("tone_version") >= 4.0 && !s.bool("hdr") && !masks && tile.is_none() && retouch_empty {
+        GpuGeometryParams::from_settings(
+            lin_w,
+            lin_h,
+            &s,
+            options.use_crop == crate::Crop::Cropped,
+            options.use_crop == crate::Crop::All,
+        )
+    } else {
+        None
+    };
+    if let Some(geom) = pv4_gpu_geom {
+        let raw_gpu_key = format!("{token}|{version}|{raw_key}|{}", negative_key.as_deref().unwrap_or("-"));
+        if cache.raw_gpu.as_ref().is_none_or(|(k, _)| *k != raw_gpu_key) {
+            cache.raw_gpu = Some((raw_gpu_key, gpu.upload(&linear)?));
+        }
+        let resident_key = format!("pv4geo|{token}|{version}|{geometry_key}");
+        if cache.resident.as_ref().is_none_or(|(k, _)| *k != resident_key) {
+            let raw_frame = &cache.raw_gpu.as_ref().unwrap().1;
+            let warped = gpu.warp_geometry(raw_frame, &geom)?;
+            // Downscale source to <=512px before small analysis warp so ToneBase takes <1 ms.
+            let analysis_src = {
+                let small_limit = 512.0 / lin_w.max(lin_h) as f64;
+                let small = if small_limit < 1.0 {
+                    let sw = ((lin_w as f64 * small_limit).round() as usize).max(1);
+                    let sh = ((lin_h as f64 * small_limit).round() as usize).max(1);
+                    grainy_imgproc::resize(&linear, (sw, sh), grainy_imgproc::Interpolation::Area)
+                        .unwrap_or_else(|_| linear.to_owned())
+                } else {
+                    linear.to_owned()
+                };
+                stages::geometry(&small, &s, options.use_crop, &externals)?.unwrap_or(small)
+            };
+            match &mut cache.resident {
+                Some((k, resident)) => {
+                    resident.replace_frame(warped, analysis_src);
+                    *k = resident_key;
+                }
+                slot @ None => *slot = Some((resident_key, Resident::from_frame(warped, analysis_src))),
+            }
+        }
+        let resident =
+            &mut cache.resident.as_mut().ok_or_else(|| grainy_gpu::Error::Device("missing resident".into()))?.1;
+        let result = gpu.develop_resident_prefix(resident, &s, scale, true)?;
+        if result.fallback.is_none() {
+            cache.fallback = None;
+            let gpu_frame = result.frame.ok_or_else(|| grainy_gpu::Error::Device("missing finish".into()))?;
+            return Ok(GpuOutput::Resident {
+                frame: gpu_frame,
+                present_crop: None,
+                tile_uv: None,
+                full_size: (geom.out_width, geom.out_height),
+            });
+        }
+    }
+
     let moved = match host.as_deref_mut().and_then(|host| host.lookup("geometry", &geometry_key)) {
         Some(image) => Some(image),
         None => stages::geometry(&linear, &s, options.use_crop, &externals)?.map(|image| match host.as_deref_mut() {
@@ -179,12 +384,15 @@ pub fn develop_gpu_resident<'a>(
     };
     let frame = moved.as_deref().unwrap_or(&linear);
     let (full_h, full_w, _) = frame.dim();
-    let masks = s.value("masks").as_array().is_some_and(|layers| !layers.is_empty());
+    let gpu_masks_plan = gpu_eligible_masks(&s, scale);
+    let masks_on_gpu = masks && gpu_masks_plan.is_some();
+    let (src_h, src_w, _) = source.pixels().dim();
+    let mask_base_key = format!("{token}|{version}|{geometry_key}");
 
     // True 1:1 viewport tile fast path: slice only the visible tile + spatial halo from the
     // cached post-geometry frame and supply a shared whole-frame ToneBase so zoomed slider drags
-    // develop ~2 MP instead of 45 MP with zero seams.
-    if let Some(req) = tile.filter(|_| !masks && full_w.max(full_h) > 1536) {
+    // develop ~2 MP instead of 45 MP with zero seams (now also supporting Film, DRT, and GPU local masks!).
+    if let Some(req) = tile.filter(|_| (!masks || masks_on_gpu) && full_w.max(full_h) > 1536) {
         let u0 = req.roi[0].clamp(0.0, 1.0);
         let v0 = req.roi[1].clamp(0.0, 1.0);
         let u1 = req.roi[2].clamp(u0, 1.0);
@@ -216,7 +424,7 @@ pub fn develop_gpu_resident<'a>(
             }
             let needs_base =
                 s.f64("tone_version") >= 3.0 && !s.bool("hdr") && (s.bool("shadows") || s.bool("highlights"));
-            let base_ref = if needs_base && !grainy_film::active(&s) && !grainy_tone::mapping::active(&s) {
+            let base_ref = if needs_base {
                 let base_keys = [
                     "exposure",
                     "temperature",
@@ -238,7 +446,16 @@ pub fn develop_gpu_resident<'a>(
                 ];
                 let bk = format!("{token}|{version}|{geometry_key}|{}", settings_key(&s, &base_keys));
                 if cache.whole_base.as_ref().is_none_or(|(k, _)| *k != bk) {
-                    let base = grainy_tone::tone_base(frame, &s, None).map_err(crate::Error::from)?;
+                    let base = if grainy_film::active(&s) {
+                        let name = s.str("film_look").to_owned();
+                        let space = grainy_film::WorkingSpace::from_setting(s.str("working_space"));
+                        let render = move |a: ndarray::ArrayView3<'_, f32>| {
+                            grainy_film::render(&a.to_owned(), &name, space).unwrap_or_else(|_| a.to_owned())
+                        };
+                        grainy_tone::tone_base(frame, &s, Some(&render)).map_err(crate::Error::from)?
+                    } else {
+                        grainy_tone::tone_base(frame, &s, None).map_err(crate::Error::from)?
+                    };
                     cache.whole_base = Some((bk, base));
                 }
                 cache.whole_base.as_ref().map(|(_, b)| b)
@@ -256,28 +473,67 @@ pub fn develop_gpu_resident<'a>(
             };
             let resident =
                 &mut cache.resident.as_mut().ok_or_else(|| grainy_gpu::Error::Device("missing resident".into()))?.1;
-            let result = gpu.develop_resident_tile(resident, &s, scale, true, Some(tile_ctx), base_ref)?;
+            let result = gpu.develop_resident_tile(resident, &s, scale, !masks_on_gpu, Some(tile_ctx), base_ref)?;
             if result.fallback.is_none() {
                 cache.fallback = None;
-                let gpu_frame = result.frame.ok_or_else(|| grainy_gpu::Error::Device("missing tile finish".into()))?;
-                return Ok(GpuOutput::Resident {
-                    frame: gpu_frame,
-                    present_crop: Some(PresentCrop {
-                        x: (x0 - px0) as u32,
-                        y: (y0 - py0) as u32,
-                        width: tile_w as u32,
-                        height: tile_h as u32,
-                    }),
-                    tile_uv: Some([
-                        x0 as f32 / full_w as f32,
-                        y0 as f32 / full_h as f32,
-                        x1 as f32 / full_w as f32,
-                        y1 as f32 / full_h as f32,
-                    ]),
-                    full_size: (full_w, full_h),
-                });
+                let mut gpu_frame =
+                    result.frame.ok_or_else(|| grainy_gpu::Error::Device("missing tile finish".into()))?;
+                let mut ok_masked = true;
+                if let Some(layers) = gpu_masks_plan.as_deref() {
+                    if !layers.is_empty() {
+                        let colour_source = if stages::needs_colour_source(&s) {
+                            let key = format!("{raw_key}|{}", negative_key.as_deref().unwrap_or("-"));
+                            Some(crate::stage(&mut host, "mask-source", &key, || Ok(grainy_color::to_srgb(&linear)))?)
+                        } else {
+                            None
+                        };
+                        let planes = prepare_mask_planes(
+                            &mut cache.mask_planes,
+                            frame,
+                            (src_h, src_w),
+                            colour_source.as_deref(),
+                            &s,
+                            options.use_crop,
+                            &externals,
+                            &mask_base_key,
+                            layers,
+                        )?;
+                        let uploaded = upload_cached_masks(
+                            gpu,
+                            &mut cache.gpu_masks,
+                            &mut cache.mask_uploads,
+                            &planes,
+                            Some((px0, py0, pw, ph)),
+                        )?;
+                        let pair_refs: Vec<(&LocalMask, &Map<String, Value>)> =
+                            uploaded.iter().zip(layers.iter()).map(|(m, (_, e))| (m, e)).collect();
+                        if let Some(masked) = gpu.apply_local_layers(&gpu_frame, &pair_refs, scale)? {
+                            gpu_frame = masked;
+                        } else {
+                            ok_masked = false;
+                        }
+                    }
+                }
+                if ok_masked {
+                    return Ok(GpuOutput::Resident {
+                        frame: gpu_frame,
+                        present_crop: Some(PresentCrop {
+                            x: (x0 - px0) as u32,
+                            y: (y0 - py0) as u32,
+                            width: tile_w as u32,
+                            height: tile_h as u32,
+                        }),
+                        tile_uv: Some([
+                            x0 as f32 / full_w as f32,
+                            y0 as f32 / full_h as f32,
+                            x1 as f32 / full_w as f32,
+                            y1 as f32 / full_h as f32,
+                        ]),
+                        full_size: (full_w, full_h),
+                    });
+                }
             }
-            // Tile needed a CPU fallback (e.g. film look or DRT): fall through to full-frame path.
+            // Tile needed a fallback: fall through to full-frame path.
         }
     }
 
@@ -323,6 +579,48 @@ pub fn develop_gpu_resident<'a>(
                     tile_uv: None,
                     full_size: (full_w, full_h),
                 });
+            }
+            // Zero-copy GPU local mask fast path: compute/cache mask planes & GPU buffers once,
+            // then run all local mask adjustments directly in VRAM!
+            if let Some(layers) = gpu_masks_plan.as_deref() {
+                if layers.is_empty() {
+                    // All mask layers are disabled: still clip to [0, 1] and stay zero-copy!
+                    let clipped = gpu.grain_clip(&gpu_frame, None)?;
+                    return Ok(GpuOutput::Resident {
+                        frame: clipped,
+                        present_crop: None,
+                        tile_uv: None,
+                        full_size: (full_w, full_h),
+                    });
+                }
+                let colour_source = if stages::needs_colour_source(&s) {
+                    let key = format!("{raw_key}|{}", negative_key.as_deref().unwrap_or("-"));
+                    Some(crate::stage(&mut host, "mask-source", &key, || Ok(grainy_color::to_srgb(&linear)))?)
+                } else {
+                    None
+                };
+                let planes = prepare_mask_planes(
+                    &mut cache.mask_planes,
+                    frame,
+                    (src_h, src_w),
+                    colour_source.as_deref(),
+                    &s,
+                    options.use_crop,
+                    &externals,
+                    &mask_base_key,
+                    layers,
+                )?;
+                let uploaded = upload_cached_masks(gpu, &mut cache.gpu_masks, &mut cache.mask_uploads, &planes, None)?;
+                let pair_refs: Vec<(&LocalMask, &Map<String, Value>)> =
+                    uploaded.iter().zip(layers.iter()).map(|(m, (_, e))| (m, e)).collect();
+                if let Some(masked) = gpu.apply_local_layers(&gpu_frame, &pair_refs, scale)? {
+                    return Ok(GpuOutput::Resident {
+                        frame: masked,
+                        present_crop: None,
+                        tile_uv: None,
+                        full_size: (full_w, full_h),
+                    });
+                }
             }
             let readback = || -> Result<Image, Error> { Ok(gpu.readback(&gpu_frame)?) };
             match host.as_deref_mut() {

@@ -18,6 +18,11 @@ fn srgb(x: f32) -> f32 {
     if a<=0.0031308 {return a*12.92;}
     return 1.055*pow(a,1.0/2.4)-0.055;
 }
+fn lin_srgb(x: f32) -> f32 {
+    let a=max(x,0.0);
+    if a<=0.04045 {return a/12.92;}
+    return pow((a+0.055)/1.055,2.4);
+}
 // numpy.interp uses the last duplicate abscissa. Binary search also bounds arbitrary-size curves.
 fn interp(x: f32,first: u32,count: u32) -> f32 {
     if x<table[first].x {return table[first].y;}
