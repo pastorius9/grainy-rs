@@ -171,6 +171,8 @@ pub struct AppContext {
     pub(crate) search: String,
     /// Columns of the library grid at its last drawing (Up/Down move by a row).
     pub(crate) grid_columns: usize,
+    /// Last index reached during Shift+Click / Shift+Arrow range selection.
+    pub(crate) selection_cursor: Option<usize>,
     /// The filmstrip scrolls to the open photo on its next drawing.
     pub(crate) scroll_to_current: bool,
     /// Where the photo was drawn at the last frame (screen points).
@@ -256,6 +258,7 @@ impl AppContext {
             folder_search: String::new(),
             search: String::new(),
             grid_columns: 1,
+            selection_cursor: None,
             scroll_to_current: false,
             photo_rect: None,
             view_need: None,
@@ -600,6 +603,7 @@ impl AppContext {
             crate::views::compare::left(self, leaving);
             self.photo_changed();
         }
+        self.selection_cursor = Some(index);
         self.scroll_to_current = true;
     }
 

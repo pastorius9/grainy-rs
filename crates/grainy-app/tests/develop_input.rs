@@ -210,3 +210,70 @@ fn number_field_arrow_keys_fine_adjust_like_lightroom() {
     app.key_press(Key::Enter);
     app.run_steps(2);
 }
+
+#[test]
+fn filmstrip_supports_shift_click_ctrl_click_shift_arrow_and_select_all() {
+    let files = tempfile::tempdir().unwrap();
+    let paths: Vec<_> = (0..5)
+        .map(|i| {
+            let file = files.path().join(format!("photo_{i}.png"));
+            image::RgbImage::new(8, 8).save(&file).unwrap();
+            file
+        })
+        .collect();
+    let mut app = Harness::builder().with_size(egui::vec2(1600.0, 1000.0)).build_eframe(move |cc| {
+        let mut app = GrainyApp::with_test_card(&cc.egui_ctx);
+        app.open_paths(paths);
+        app.set_mode(Mode::Develop);
+        app
+    });
+    app.run_steps(4);
+    assert_eq!(app.state().document().selected_indices(), vec![0]);
+
+    let click_cell = |app: &mut Harness<'static, GrainyApp>, index: usize, modifiers: Modifiers| {
+        let id = Id::unique(("filmstrip_cell", index));
+        let pos = app.ctx.read_response(id).expect("filmstrip cell visible").rect.center();
+        app.hover_at(pos);
+        app.run_steps(1);
+        app.event(egui::Event::PointerButton { pos, button: egui::PointerButton::Primary, pressed: true, modifiers });
+        app.run_steps(1);
+        app.event(egui::Event::PointerButton { pos, button: egui::PointerButton::Primary, pressed: false, modifiers });
+        app.run_steps(1);
+    };
+
+    // Shift+Click on cell 3 selects range 0..=3 while keeping photo 0 active.
+    click_cell(&mut app, 3, Modifiers::SHIFT);
+    assert_eq!(app.state().document().current_index(), Some(0));
+    assert_eq!(app.state().document().selected_indices(), vec![0, 1, 2, 3]);
+
+    // Shift+Click on cell 1 shrinks range to 0..=1 from the same anchor.
+    click_cell(&mut app, 1, Modifiers::SHIFT);
+    assert_eq!(app.state().document().selected_indices(), vec![0, 1]);
+
+    // Ctrl/Cmd+Click toggles cell 4 into the selection.
+    click_cell(&mut app, 4, Modifiers::COMMAND);
+    assert_eq!(app.state().document().selected_indices(), vec![0, 1, 4]);
+
+    // Plain click on cell 1 resets selection to [1].
+    click_cell(&mut app, 1, Modifiers::NONE);
+    assert_eq!(app.state().document().current_index(), Some(1));
+    assert_eq!(app.state().document().selected_indices(), vec![1]);
+
+    // Shift+Right extends range to [1, 2], then [1, 2, 3].
+    app.hover_at(Pos2::new(400.0, 200.0));
+    app.run_steps(1);
+    app.key_press_modifiers(Modifiers::SHIFT, Key::ArrowRight);
+    app.run_steps(1);
+    assert_eq!(app.state().document().selected_indices(), vec![1, 2]);
+    app.key_press_modifiers(Modifiers::SHIFT, Key::ArrowRight);
+    app.run_steps(1);
+    assert_eq!(app.state().document().selected_indices(), vec![1, 2, 3]);
+
+    // Ctrl/Cmd+A selects all 5 photos; Ctrl/Cmd+D deselects back to [1].
+    app.key_press_modifiers(Modifiers::COMMAND, Key::A);
+    app.run_steps(1);
+    assert_eq!(app.state().document().selected_indices(), vec![0, 1, 2, 3, 4]);
+    app.key_press_modifiers(Modifiers::COMMAND, Key::D);
+    app.run_steps(1);
+    assert_eq!(app.state().document().selected_indices(), vec![1]);
+}

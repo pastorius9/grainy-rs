@@ -103,24 +103,51 @@ impl AppContext {
         for (row, sequence) in take_pressed(&ctx) {
             commands::run(self, row.command, &Invocation::key(sequence));
         }
-        // Arrow keys: the previous or next photo (a row up or down in the grid).
+        // Multi-selection shortcuts (Ctrl/Cmd+A select all, Ctrl/Cmd+D deselect) and arrow navigation.
         if !ctx.text_edit_focused() && !self.doc.is_empty() {
             let row = if self.mode == Mode::Library { self.grid_columns.max(1) as isize } else { 1 };
-            let step = ctx.input(|i| {
-                if i.key_pressed(Key::ArrowLeft) {
-                    -1
-                } else if i.key_pressed(Key::ArrowRight) {
-                    1
-                } else if i.key_pressed(Key::ArrowUp) {
-                    -row
-                } else if i.key_pressed(Key::ArrowDown) {
-                    row
-                } else {
-                    0
+            let (select_all, deselect, step, shift) = ctx.input(|i| {
+                let mut select_all = false;
+                let mut deselect = false;
+                let mut step = 0isize;
+                let mut shift = false;
+                for event in &i.events {
+                    let egui::Event::Key { key, pressed: true, modifiers, .. } = event else { continue };
+                    let cmd_only = modifiers.command && !modifiers.alt && !modifiers.shift;
+                    if cmd_only && *key == Key::A {
+                        select_all = true;
+                    } else if cmd_only && *key == Key::D {
+                        deselect = true;
+                    } else if !modifiers.command && !modifiers.alt && !modifiers.ctrl && !modifiers.mac_cmd {
+                        let delta = match key {
+                            Key::ArrowLeft => -1,
+                            Key::ArrowRight => 1,
+                            Key::ArrowUp => -row,
+                            Key::ArrowDown => row,
+                            _ => 0,
+                        };
+                        if delta != 0 {
+                            step = delta;
+                            shift = modifiers.shift || i.modifiers.shift;
+                        }
+                    }
                 }
+                (select_all, deselect, step, shift)
             });
+            if select_all {
+                self.doc.select_all();
+            } else if deselect {
+                self.doc.deselect_others();
+                self.selection_cursor = self.doc.current_index();
+            }
             if step != 0 {
-                if let Some(current) = self.doc.current_index() {
+                if shift {
+                    if let Some(base) = self.selection_cursor.or_else(|| self.doc.current_index()) {
+                        let target = base.saturating_add_signed(step).min(self.doc.len() - 1);
+                        self.doc.select_range(target, false);
+                        self.selection_cursor = Some(target);
+                    }
+                } else if let Some(current) = self.doc.current_index() {
                     let target = current.saturating_add_signed(step).min(self.doc.len() - 1);
                     self.select_photo(target);
                 }

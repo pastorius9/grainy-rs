@@ -287,8 +287,18 @@ pub trait Document {
         self.select(target)
     }
 
-    /// Ctrl-click: adds or removes a photo from the selection (the open photo stays selected).
+    /// Ctrl/Cmd-click: adds or removes a photo from the selection (the open photo stays selected).
     fn toggle_selected(&mut self, index: usize);
+
+    /// Shift-click (or Ctrl/Cmd+Shift-click when `additive`): selects the contiguous range from the
+    /// selection anchor (or open photo) to `index`, keeping the open photo selected.
+    fn select_range(&mut self, index: usize, additive: bool);
+
+    /// Ctrl/Cmd+A: selects every photo in the current listing.
+    fn select_all(&mut self);
+
+    /// Ctrl/Cmd+D: clears multi-selection back to only the open photo.
+    fn deselect_others(&mut self);
 
     /// Whether a photo is selected.
     fn is_selected(&self, id: u64) -> bool;

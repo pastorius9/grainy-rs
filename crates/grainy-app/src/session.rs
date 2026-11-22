@@ -69,8 +69,10 @@ pub struct Session {
     /// The open photo's settings and undo (a scratch state when no photo is open).
     pub edit: EditState,
     next_id: u64,
-    /// Selected photo ids (the open photo and Ctrl-clicked ones).
+    /// Selected photo ids (the open photo and Shift/Ctrl-clicked ones).
     selection: BTreeSet<u64>,
+    /// Anchor photo id for Shift-click / Shift-arrow range selection.
+    selection_anchor: Option<u64>,
     copied: Option<Settings>,
     /// The open photo's commits not yet handed to Auto Sync.
     commits: Vec<(u64, Commit)>,
@@ -181,6 +183,7 @@ impl Session {
             return false;
         }
         self.selection = BTreeSet::from([self.photos[index].id]);
+        self.selection_anchor = Some(self.photos[index].id);
         if self.current == Some(index) {
             return false;
         }
@@ -200,16 +203,60 @@ impl Session {
         self.select(target)
     }
 
-    /// Ctrl-click: adds or removes a photo from the selection (the open photo stays selected).
+    /// Ctrl/Cmd-click: adds or removes a photo from the selection (the open photo stays selected).
     pub fn toggle_selected(&mut self, index: usize) {
         let Some(photo) = self.photos.get(index) else { return };
         let id = photo.id;
-        if id == self.current_id() {
+        let current_id = self.current_id();
+        if current_id != 0 {
+            self.selection.insert(current_id);
+        }
+        if id == current_id {
+            self.selection_anchor = Some(id);
             return;
         }
         if !self.selection.remove(&id) {
             self.selection.insert(id);
         }
+        self.selection_anchor = Some(id);
+    }
+
+    /// Shift-click / Shift-arrow: selects a contiguous range from the anchor (or open photo) to `index`.
+    pub fn select_range(&mut self, index: usize, additive: bool) {
+        if index >= self.photos.len() {
+            return;
+        }
+        let anchor = self
+            .selection_anchor
+            .and_then(|id| self.photos.iter().position(|p| p.id == id))
+            .or(self.current)
+            .unwrap_or(index);
+        if self.selection_anchor.is_none() {
+            self.selection_anchor = self.photos.get(anchor).map(|p| p.id);
+        }
+        if !additive {
+            self.selection.clear();
+            let current_id = self.current_id();
+            if current_id != 0 {
+                self.selection.insert(current_id);
+            }
+        }
+        let (lo, hi) = (anchor.min(index), anchor.max(index));
+        for photo in &self.photos[lo..=hi] {
+            self.selection.insert(photo.id);
+        }
+    }
+
+    /// Selects every photo in the session.
+    pub fn select_all(&mut self) {
+        self.selection = self.photos.iter().map(|p| p.id).collect();
+    }
+
+    /// Clears multi-selection back to only the open photo.
+    pub fn deselect_others(&mut self) {
+        let current_id = self.current_id();
+        self.selection = if current_id != 0 { BTreeSet::from([current_id]) } else { BTreeSet::new() };
+        self.selection_anchor = (current_id != 0).then_some(current_id);
     }
 
     /// Whether a photo is selected.
@@ -299,6 +346,18 @@ impl Document for Session {
 
     fn toggle_selected(&mut self, index: usize) {
         Session::toggle_selected(self, index);
+    }
+
+    fn select_range(&mut self, index: usize, additive: bool) {
+        Session::select_range(self, index, additive);
+    }
+
+    fn select_all(&mut self) {
+        Session::select_all(self);
+    }
+
+    fn deselect_others(&mut self) {
+        Session::deselect_others(self);
     }
 
     fn is_selected(&self, id: u64) -> bool {

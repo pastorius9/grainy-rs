@@ -342,7 +342,7 @@ impl AppContext {
                 let end = (((clip.right() - area.left()) / step.x).ceil().max(0.0) as usize).min(count);
                 for index in first.min(count)..end {
                     let bounds = rect(index);
-                    let response = ui.interact(bounds, ui.scope_id().with(("filmstrip_cell", index)), Sense::click());
+                    let response = ui.interact(bounds, egui::Id::unique(("filmstrip_cell", index)), Sense::click());
                     let cell = bounds.shrink2(Vec2::new(3.0, 0.0));
                     self.thumbnail(ui, cell, index, response.hovered(), (7.0, 36.0));
                     response.context_menu(|ui| self.photo_context_menu(ui, index));
@@ -354,10 +354,26 @@ impl AppContext {
         });
     }
 
-    /// A click on a thumbnail: opens the photo, or with Ctrl adds it to the selection.
+    /// A click on a thumbnail: opens the photo; Shift selects a range from the anchor;
+    /// Ctrl/Cmd toggles one photo (or Ctrl/Cmd+Shift adds a range).
     fn click_photo(&mut self, ui: &Ui, index: usize) {
-        if ui.input(|i| i.modifiers.command) {
+        let (shift, command) = ui.input(|i| {
+            let mut shift = i.modifiers.shift;
+            let mut command = i.modifiers.command;
+            for e in &i.events {
+                if let egui::Event::PointerButton { button: egui::PointerButton::Primary, modifiers, .. } = e {
+                    shift |= modifiers.shift;
+                    command |= modifiers.command;
+                }
+            }
+            (shift, command)
+        });
+        if shift {
+            self.doc.select_range(index, command);
+            self.selection_cursor = Some(index);
+        } else if command {
             self.doc.toggle_selected(index);
+            self.selection_cursor = Some(index);
         } else {
             self.select_photo(index);
         }
@@ -371,7 +387,10 @@ impl AppContext {
         let rect = Rect::from_min_max(cell.min + Vec2::new(4.0, 3.0), cell.max - Vec2::new(4.0, 3.0));
         let current = Some(index) == self.doc.current_index();
         let selected = current || self.doc.is_selected(id);
-        let (border, fill) = if selected {
+        let multi = selected && self.doc.selected_indices().len() > 1;
+        let (border, fill) = if current && multi {
+            (t::BRAND, t::LIST_SELECTED)
+        } else if selected {
             (t::LIST_SELECTED_BORDER, t::LIST_SELECTED)
         } else if hover {
             (t::BUTTON_BORDER, t::LIST_HOVER)

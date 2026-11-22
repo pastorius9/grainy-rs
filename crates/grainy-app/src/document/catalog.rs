@@ -230,6 +230,7 @@ pub struct CatalogDocument {
     open: Option<PhotoEntry>,
     edit: EditState,
     selection: BTreeSet<u64>,
+    selection_anchor: Option<u64>,
     copied: Option<Settings>,
     versions: HashMap<u64, u64>,
     /// Read-only libraries: the edits of photos that are not open, in memory.
@@ -416,6 +417,7 @@ impl CatalogDocument {
             open: None,
             edit: EditState::default(),
             selection: BTreeSet::new(),
+            selection_anchor: None,
             copied: None,
             versions: HashMap::new(),
             memory: HashMap::new(),
@@ -698,12 +700,14 @@ impl Document for CatalogDocument {
         let Some(entry) = self.listing.photos.get(index).cloned() else { return false };
         if self.open.as_ref().is_some_and(|o| o.id == entry.id) {
             self.selection = BTreeSet::from([entry.id]);
+            self.selection_anchor = Some(entry.id);
             return false;
         }
         if !self.leave_current() {
             return false;
         }
         self.selection = BTreeSet::from([entry.id]);
+        self.selection_anchor = Some(entry.id);
         match self.load(entry.id) {
             Ok(edit) => {
                 self.edit = edit;
@@ -724,12 +728,53 @@ impl Document for CatalogDocument {
     fn toggle_selected(&mut self, index: usize) {
         let Some(photo) = self.listing.photos.get(index) else { return };
         let id = photo.id;
-        if id == self.current_id() {
+        let current_id = self.current_id();
+        if current_id != 0 {
+            self.selection.insert(current_id);
+        }
+        if id == current_id {
+            self.selection_anchor = Some(id);
             return;
         }
         if !self.selection.remove(&id) {
             self.selection.insert(id);
         }
+        self.selection_anchor = Some(id);
+    }
+
+    fn select_range(&mut self, index: usize, additive: bool) {
+        if index >= self.listing.photos.len() {
+            return;
+        }
+        let anchor = self
+            .selection_anchor
+            .and_then(|id| self.listing.photos.iter().position(|p| p.id == id))
+            .or_else(|| self.current_index())
+            .unwrap_or(index);
+        if self.selection_anchor.is_none() {
+            self.selection_anchor = self.listing.photos.get(anchor).map(|p| p.id);
+        }
+        if !additive {
+            self.selection.clear();
+            let current_id = self.current_id();
+            if current_id != 0 {
+                self.selection.insert(current_id);
+            }
+        }
+        let (lo, hi) = (anchor.min(index), anchor.max(index));
+        for photo in &self.listing.photos[lo..=hi] {
+            self.selection.insert(photo.id);
+        }
+    }
+
+    fn select_all(&mut self) {
+        self.selection = self.listing.photos.iter().map(|p| p.id).collect();
+    }
+
+    fn deselect_others(&mut self) {
+        let current_id = self.current_id();
+        self.selection = if current_id != 0 { BTreeSet::from([current_id]) } else { BTreeSet::new() };
+        self.selection_anchor = (current_id != 0).then_some(current_id);
     }
 
     fn is_selected(&self, id: u64) -> bool {
