@@ -10,7 +10,7 @@ use std::sync::mpsc::{channel, Receiver};
 
 use grainy_codecs::SizeLimit;
 use grainy_core::Settings;
-use grainy_engine::files::{export_photo, parse_format, ExportRequest};
+use grainy_engine::files::{export_photo_with_gpu, parse_format, ExportRequest};
 use grainy_library::pyformat::{self, Arg};
 use grainy_service::export::{ExportJob, Exporter, Longest};
 use grainy_service::Failure;
@@ -396,7 +396,31 @@ pub fn python_order(settings: &Map<String, Value>) -> Map<String, Value> {
 }
 
 /// `engine.export_image` and `quick_export.copy_original` for `photo_service.export_records`.
-pub struct AppExporter;
+/// Lazily initializes one hardware GPU context per batch (bounding full-res VRAM peak via a
+/// mutex during the brief GPU compute pass while all worker threads decode RAW & encode files
+/// in parallel).
+pub struct AppExporter {
+    gpu: std::sync::Mutex<Option<grainy_gpu::Gpu>>,
+}
+
+impl Default for AppExporter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl AppExporter {
+    pub fn new() -> Self {
+        let use_gpu = std::env::var("GRAINY_GPU").as_deref() != Ok("0")
+            && !crate::context::FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed);
+        let gpu = if use_gpu {
+            grainy_gpu::Gpu::with_adapter(grainy_gpu::AdapterKind::Hardware).ok().flatten()
+        } else {
+            None
+        };
+        Self { gpu: std::sync::Mutex::new(gpu) }
+    }
+}
 
 fn failure_of(error: &grainy_engine::files::Error) -> Failure {
     use grainy_engine::files::Error as E;
@@ -437,8 +461,14 @@ impl Exporter for AppExporter {
         };
         let path = get("path");
         let settings = get("settings").as_object().cloned().unwrap_or_default();
-        let (w, h) = export_photo(path.as_str().unwrap_or_default(), job.destination, &settings, &request)
-            .map_err(|e| failure_of(&e))?;
+        let (w, h) = export_photo_with_gpu(
+            path.as_str().unwrap_or_default(),
+            job.destination,
+            &settings,
+            &request,
+            Some(&self.gpu),
+        )
+        .map_err(|e| failure_of(&e))?;
         Ok(json!([w, h]))
     }
 
@@ -491,15 +521,16 @@ pub fn run_records(
 ) -> Result<Outcome, String> {
     crate::paths::writable(Path::new(&options.folder)).map_err(|e| e.to_string())?;
     let total = records.len();
-    let workers = grainy_library::quick_export::export_concurrency_here(records).map_err(|e| e.to_string())?;
+    let workers = grainy_library::quick_export::rs_export_concurrency_here(records).map_err(|e| e.to_string())?;
     let report = |done: usize| progress(done, total);
+    let exporter = AppExporter::new();
     let result = grainy_service::export::export_records(
         records,
         Path::new(&options.folder),
         &options.service(),
         Some(cancel),
         Some(&report),
-        &AppExporter,
+        &exporter,
         false,
         workers,
     )

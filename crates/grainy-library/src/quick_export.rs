@@ -186,3 +186,53 @@ pub fn export_concurrency_here(records: &[Value]) -> Result<usize> {
     let cpus = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1);
     export_concurrency(records, cpus, physical_memory())
 }
+
+/// Native Rust multi-core batch export concurrency: unlocks parallel LibRaw decode & codec encode
+/// starting from 4-core machines (including 8–10 core Apple Silicon) up to 8 concurrent workers,
+/// bounded by one-third of physical RAM using Grainy RS's compact float32 footprint.
+pub fn rs_export_concurrency(records: &[Value], cpus: usize, memory: Option<u64>) -> Result<usize> {
+    if records.len() < 2 || cpus < 4 {
+        return Ok(1);
+    }
+    let mut pixels: i64 = 0;
+    for r in records {
+        let info = r.get("info").ok_or_else(|| Error::Type("KeyError: 'info'".into()))?;
+        let side = |key: &str| -> Result<i64> {
+            match info.get(key) {
+                Some(v) if grainy_core::settings::truthy(v) => pyformat::py_int(v),
+                _ => Ok(0),
+            }
+        };
+        pixels = pixels.max(side("width")? * side("height")?);
+    }
+    if pixels == 0 {
+        pixels = 24_000_000;
+    }
+    let budget = memory.filter(|m| *m > 0).unwrap_or(8 * 1024 * 1024 * 1024) / 3;
+    // Per-photo working set in Rust (source + developed float32 + encoder buffers ~ 4× RGB f32).
+    let per_photo = (pixels as u64) * 3 * 4 * 4;
+    let ram_limit = (budget / per_photo.max(1)) as usize;
+    let cpu_limit = (cpus / 2).clamp(2, 8);
+    Ok(1.max(cpu_limit.min(ram_limit).min(records.len())))
+}
+
+/// [`rs_export_concurrency`] for this machine.
+pub fn rs_export_concurrency_here(records: &[Value]) -> Result<usize> {
+    let cpus = std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1);
+    rs_export_concurrency(records, cpus, physical_memory())
+}
+
+#[cfg(test)]
+mod rs_concurrency_tests {
+    use super::*;
+
+    #[test]
+    fn rs_export_concurrency_scales_on_apple_silicon_and_workstations() {
+        let rec = json!({"info": {"width": 6000, "height": 4000}});
+        let batch: Vec<Value> = vec![rec.clone(); 12];
+        assert_eq!(rs_export_concurrency(&[rec], 16, Some(32 << 30)).unwrap(), 1);
+        assert_eq!(rs_export_concurrency(&batch, 8, Some(16 << 30)).unwrap(), 4);
+        assert_eq!(rs_export_concurrency(&batch, 16, Some(32 << 30)).unwrap(), 8);
+        assert_eq!(rs_export_concurrency(&batch, 16, Some(2 << 30)).unwrap(), 1);
+    }
+}

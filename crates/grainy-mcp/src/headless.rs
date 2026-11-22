@@ -388,7 +388,7 @@ impl Host for HeadlessHost {
         self.events.push(json!(["export_started", records.len()]));
         let ExportStart { folder, options, cancel, progress, on_done, on_error, .. } = export;
         let work: Work = Box::new(move || {
-            let workers = grainy_library::quick_export::export_concurrency_here(&records).unwrap_or(1).max(1);
+            let workers = grainy_library::quick_export::rs_export_concurrency_here(&records).unwrap_or(1).max(1);
             let report = move |n: usize| progress(n);
             let result = grainy_service::export::export_records(
                 &records,

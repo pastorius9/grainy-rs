@@ -281,7 +281,7 @@ impl Host for AppHost<'_> {
             "export",
             tr("내보내기"),
             move |handle| {
-                let workers = grainy_library::quick_export::export_concurrency_here(&records).unwrap_or(1).max(1);
+                let workers = grainy_library::quick_export::rs_export_concurrency_here(&records).unwrap_or(1).max(1);
                 let report = |n: usize| {
                     progress(n);
                     handle.progress(n, total, crate::text::tr_with("내보내는 중… {0}/{1}", &[&n.to_string(), &total.to_string()]));

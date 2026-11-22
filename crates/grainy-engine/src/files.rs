@@ -522,8 +522,48 @@ pub fn export_photo(
     settings: &Map<String, Value>,
     request: &ExportRequest,
 ) -> Result<(usize, usize)> {
+    export_photo_impl(source_path.as_ref(), output_path.as_ref(), settings, request, |source, s, opts| {
+        develop(source, s, opts)
+    })
+}
+
+/// GPU-accelerated full-resolution export: develops SDR exports on the hardware GPU (with automatic
+/// CPU fallback on any unsupported path or device error), while keeping HDR exports on the canonical
+/// HDR pipeline. Takes a mutex-guarded GPU so batch worker threads decode RAW and encode output
+/// files in full parallel while bounding peak GPU VRAM during the brief compute pass.
+#[cfg(feature = "gpu")]
+pub fn export_photo_with_gpu(
+    source_path: impl AsRef<Path>,
+    output_path: impl AsRef<Path>,
+    settings: &Map<String, Value>,
+    request: &ExportRequest,
+    gpu: Option<&std::sync::Mutex<Option<grainy_gpu::Gpu>>>,
+) -> Result<(usize, usize)> {
+    export_photo_impl(source_path.as_ref(), output_path.as_ref(), settings, request, |source, s, opts| {
+        if let Some(mutex) = gpu {
+            let guard = mutex.lock().unwrap_or_else(|e| e.into_inner());
+            if let Some(gpu) = guard.as_ref() {
+                let mut cache = crate::gpu::GpuCache::default();
+                if let Ok(img) = crate::gpu::develop_gpu_cached(source, s, opts, gpu, &mut cache, 0) {
+                    return Ok(img);
+                }
+            }
+        }
+        develop(source, s, opts)
+    })
+}
+
+fn export_photo_impl<F>(
+    source_path: &Path,
+    output_path: &Path,
+    settings: &Map<String, Value>,
+    request: &ExportRequest,
+    develop_sdr: F,
+) -> Result<(usize, usize)>
+where
+    F: FnOnce(crate::Source<'_>, &Map<String, Value>, &Options<'_>) -> crate::Result<grainy_core::Image>,
+{
     let _timing = grainy_core::timing::Span::new("export_photo");
-    let (source_path, output_path) = (source_path.as_ref(), output_path.as_ref());
     if request.format == ExportFormat::JpegXl && request.color_space != "sRGB" {
         return Err(Error::Refused("JPEG XL은 sRGB로만 저장합니다. 출력 색공간을 sRGB로 바꿔 주세요.".into()));
     }
@@ -557,7 +597,7 @@ pub fn export_photo(
         (grainy_color::to_linear(&working), Cms::for_export_of_developed_pixels())
     } else {
         let options = Options { output: Output::Named(&request.color_space), ..Options::default() };
-        (develop(photo.source(), &settings, &options)?, Cms::for_export_of_developed_pixels())
+        (develop_sdr(photo.source(), &settings, &options)?, Cms::for_export_of_developed_pixels())
     };
     let options = ExportOptions {
         format: request.format,
