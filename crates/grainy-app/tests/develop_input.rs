@@ -4,6 +4,16 @@ use eframe::egui::{self, Id, Key, Modifiers, Pos2};
 use egui_kittest::Harness;
 use grainy_app::{GrainyApp, Mode};
 
+fn wait_for_photos(app: &mut Harness<'static, GrainyApp>, count: usize) {
+    let deadline = std::time::Instant::now() + std::time::Duration::from_secs(10);
+    while app.state().document().len() < count || app.state().document().current().is_none() {
+        assert!(std::time::Instant::now() < deadline, "timed out waiting for {count} photos to open");
+        app.run_steps(1);
+        std::thread::sleep(std::time::Duration::from_millis(5));
+    }
+    app.run_steps(2);
+}
+
 fn window() -> (tempfile::TempDir, Harness<'static, GrainyApp>) {
     let files = tempfile::tempdir().unwrap();
     let paths = ["first.png", "second.png"].map(|name| {
@@ -17,7 +27,7 @@ fn window() -> (tempfile::TempDir, Harness<'static, GrainyApp>) {
         app.set_mode(Mode::Develop);
         app
     });
-    app.run_steps(4);
+    wait_for_photos(&mut app, 2);
     (files, app)
 }
 
@@ -227,7 +237,7 @@ fn filmstrip_supports_shift_click_ctrl_click_shift_arrow_and_select_all() {
         app.set_mode(Mode::Develop);
         app
     });
-    app.run_steps(4);
+    wait_for_photos(&mut app, 5);
     assert_eq!(app.state().document().selected_indices(), vec![0]);
 
     let click_cell = |app: &mut Harness<'static, GrainyApp>, index: usize, modifiers: Modifiers| {
