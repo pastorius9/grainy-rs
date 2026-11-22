@@ -125,7 +125,16 @@ fn main(@builtin(global_invocation_id) id:vec3<u32>){
             a=sum;
         }
         case 2u:{
-            if (flags&1u)!=0u{a+=(a-from_aux(index))*p[4]/100.0;}
+            if (flags&1u)!=0u{
+                if (flags&128u)!=0u{
+                    let y=clamp(luma(a),0.0,1.0);let d=y-aux[index];
+                    let gate=exp(-d*d/(2.0*0.08*0.08));
+                    let y_new=clamp(y+d*gate*clamp(p[4],-100.0,100.0)/100.0,0.0,1.0);
+                    a*=(y_new+0.03)/(y+0.03);
+                }else{
+                    a+=(a-from_aux(index))*p[4]/100.0;
+                }
+            }
             if (flags&16u)==0u{a=clip(a);if (flags&2u)!=0u{a=vec3(luma(a));}}
         }
         case 3u:{a+=(a-from_aux(index))*p[5]/140.0;}
@@ -141,6 +150,7 @@ fn main(@builtin(global_invocation_id) id:vec3<u32>){
         }
         case 5u:{
             var u=select(-1.0,-1.0+2.0*f32(x)/f32(max(w,2u)-1u),w>1u);var v=select(-1.0,-1.0+2.0*f32(y)/f32(max(h,2u)-1u),h>1u);
+            if p[28]>0.0{u=-1.0+2.0*(p[26]+((f32(x)+0.5)/f32(w))*p[28]);v=-1.0+2.0*(p[27]+((f32(y)+0.5)/f32(h))*p[29]);}
             if p[19]!=0.0{u*=1.0+p[19]*(p[24]-1.0);v*=1.0+p[19]*(p[25]-1.0);}
             var d2=u*u+v*v;if p[20]!=2.0{d2=pow(pow(abs(u),p[20])+pow(abs(v),p[20]),2.0/p[20]);}
             d2=clamp(d2*p[21],0.0,2.0);if p[22]!=1.0{d2=2.0*pow(d2/2.0,p[22]);}
@@ -158,6 +168,7 @@ fn main(@builtin(global_invocation_id) id:vec3<u32>){
             a.x=center*(1.0-p[13])+(sum/weights)*p[13];
         }
         case 8u:{a=lab_rgb(a);}
+        case 9u:{a=vec3(clamp(luma(a),0.0,1.0),0.0,0.0);}
         case 10u:{a=vec3(min(min(a.r,a.g),a.b));}
         case 11u,12u:{
             var m=a.x;let r=i32(p[18]);
@@ -170,6 +181,31 @@ fn main(@builtin(global_invocation_id) id:vec3<u32>){
             let lap=(channel_max(x-1,y)+channel_max(x+1,y)+channel_max(x,y-1)+channel_max(x,y+1))-4.0*channel_max(x,y);
             let edge=abs(lap)*p[17];let weight=clamp(purple*6.0,0.0,1.0)*clamp(edge*3.0,0.0,1.0)*p[16]/100.0;
             let mean=(a.r+a.g+a.b)/3.0;a=clip(a*(1.0-weight)+mean*weight);if (flags&2u)!=0u{a=vec3(luma(a));}
+        }
+        case 15u:{
+            // PV4 guided dehaze coefficients: source = [mean_i, mean_p, corr_ip], aux.x = corr_ii
+            let var_i=max(aux[index]-a.x*a.x,0.0);
+            let cov_ip=a.z-a.x*a.y;
+            let av=cov_ip/(var_i+0.005);
+            a=vec3(av,a.y-av*a.x,0.0);
+        }
+        case 16u:{
+            // PV4 guided dehaze apply: source = RGB, aux = [mean_a, mean_b, _]
+            let g=clamp(luma(a),0.0,1.0);
+            let ab=from_aux(index);
+            let transmission=clamp(ab.x*g+ab.y,0.2,1.8);
+            a=(a-1.0)/transmission+1.0;
+        }
+        case 27u:{
+            // PV4 guided dehaze pack: source = RGB, aux.x = eroded dark channel -> [g, t_raw, g*t_raw]
+            let g=clamp(luma(a),0.0,1.0);
+            let t_raw=clamp(1.0-p[15]*aux[index],0.2,1.8);
+            a=vec3(g,t_raw,g*t_raw);
+        }
+        case 28u:{
+            // PV4 guided dehaze g*g: source = RGB -> [g*g, 0, 0]
+            let g=clamp(luma(a),0.0,1.0);
+            a=vec3(g*g,0.0,0.0);
         }
         case 17u:{a=vec3(a.x/100.0,median5(x,y,1u)/100.0,median5(x,y,2u)/100.0);}
         case 18u:{a=a.x*a;}

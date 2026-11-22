@@ -6,10 +6,14 @@ mod detail;
 mod device;
 mod params;
 mod pool;
+mod present;
 mod resident;
 
 pub use device::{AdapterKind, Frame, Gpu};
+pub use params::TileContext;
+pub use present::{lut33_input_grid, pack_lut33, MonitorLut, PresentCrop, Presented, LUT_ENTRIES, LUT_SIZE};
 pub use resident::{CpuStage, Resident, ResidentResult, StageRuns};
+pub use wgpu;
 
 /// Errors of the `luma/native_gpu.py` device/frame and parameter boundary.
 #[derive(Debug, thiserror::Error)]

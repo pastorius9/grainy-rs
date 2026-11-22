@@ -1,6 +1,7 @@
 //! Port of native_gpu._detail_params/_gaussian/detail and processing's noise filters.
 //! Wavelet luminance-noise statistics run on the GPU via double-float reductions (zero host readbacks).
 use crate::device::{Batch, BufferSlice};
+use crate::params::TileContext;
 use crate::{Error, Frame, Gpu, Result};
 use grainy_core::{Image, Settings};
 
@@ -39,15 +40,16 @@ fn gaussian(sigma: f64) -> Vec<[f32; 2]> {
     let sum: f64 = values.iter().sum();
     values.iter().map(|v| [(v / sum) as f32, 0.0]).collect()
 }
-fn constants(s: &Settings, w: usize, h: usize, scale: f64) -> Result<Option<Vec<f32>>> {
+fn constants(s: &Settings, w: usize, h: usize, scale: f64, tile: Option<TileContext>) -> Result<Option<Vec<f32>>> {
     if !scale.is_finite() || scale <= 0.0 {
         return Err(Error::Input("pixel_scale must be finite and positive".into()));
     }
     if s.bool("hdr") {
         return Ok(None);
     }
+    let v4 = s.f64("detail_version") >= 4.0;
     // Bound shader loop lengths before any float-to-integer conversions or allocation.
-    if scale > 32.0 || s.f64("sharpen_radius") * scale > 256.0 || (h.min(w) as f64 / 80.0) > 256.0 {
+    if scale > 32.0 || s.f64("sharpen_radius") * scale > 256.0 || (!v4 && (h.min(w) as f64 / 80.0) > 256.0) {
         return Ok(None);
     }
     let mut p = vec![0.0; 32];
@@ -58,7 +60,8 @@ fn constants(s: &Settings, w: usize, h: usize, scale: f64) -> Result<Option<Vec<
         | (u32::from(s.f64("sharpen_detail") < 100.0) << 2)
         | (u32::from(s.bool("sharpen_mask")) << 3)
         | (u32::from(s.bool("defringe")) << 4)
-        | (u32::from(s.f64("detail_version") >= 2.0) << 6);
+        | (u32::from(s.f64("detail_version") >= 2.0) << 6)
+        | (u32::from(v4) << 7);
     p[3] = flags as f32;
     p[4] = s.f32("texture");
     p[5] = s.f32("clarity");
@@ -71,7 +74,8 @@ fn constants(s: &Settings, w: usize, h: usize, scale: f64) -> Result<Option<Vec<
     p[16] = s.f32("defringe");
     p[17] = (scale * scale) as f32;
     p[18] = (3.0 * scale).round_ties_even() as f32;
-    let v = grainy_effects::vignette_shape(s, w, h);
+    let (vw, vh) = tile.map_or((w, h), |t| t.full_size);
+    let v = grainy_effects::vignette_shape(s, vw, vh);
     p[19] = v.round as f32;
     p[20] = v.p as f32;
     p[21] = v.scale as f32;
@@ -79,6 +83,12 @@ fn constants(s: &Settings, w: usize, h: usize, scale: f64) -> Result<Option<Vec<
     p[23] = v.protect as f32;
     p[24] = v.aspect_x as f32;
     p[25] = v.aspect_y as f32;
+    if let Some(tile) = tile {
+        p[26] = tile.uv[0];
+        p[27] = tile.uv[1];
+        p[28] = tile.uv[2];
+        p[29] = tile.uv[3];
+    }
     if !p.iter().all(|v| v.is_finite()) {
         return Err(Error::Input("non-finite detail constants".into()));
     }
@@ -87,7 +97,7 @@ fn constants(s: &Settings, w: usize, h: usize, scale: f64) -> Result<Option<Vec<
 
 impl Gpu {
     pub(crate) fn detail_supported(&self, s: &Settings, w: usize, h: usize, scale: f64) -> Result<bool> {
-        Ok(constants(s, w, h, scale)?.is_some())
+        Ok(constants(s, w, h, scale, None)?.is_some())
     }
 
     fn detail_pass_table(
@@ -165,7 +175,7 @@ impl Gpu {
     /// Port of the detail slot in `native_gpu.develop_resident`; all pixel filtering and wavelet statistics stay on GPU.
     pub fn detail_frame(&self, frame: &Frame, s: &Settings, pixel_scale: f64) -> Result<Option<Frame>> {
         let mut batch = self.batch();
-        let out = self.detail_in_batch(&mut batch, frame, s, pixel_scale)?;
+        let out = self.detail_in_batch(&mut batch, frame, s, pixel_scale, None)?;
         batch.submit()?;
         Ok(out)
     }
@@ -176,11 +186,13 @@ impl Gpu {
         frame: &Frame,
         s: &Settings,
         pixel_scale: f64,
+        tile: Option<TileContext>,
     ) -> Result<Option<Frame>> {
         self.check_frame(frame)?;
-        let Some(p) = constants(s, frame.width, frame.height, pixel_scale)? else {
+        let Some(p) = constants(s, frame.width, frame.height, pixel_scale, tile)? else {
             return Ok(None);
         };
+        let v4 = s.f64("detail_version") >= 4.0;
         let none = [None; 4];
         let mut current = frame.clone();
         if p[18] > 0.0 && (s.bool("noise_luma") || s.bool("noise_color")) {
@@ -201,10 +213,21 @@ impl Gpu {
             let minimum = self.detail_pass(batch, &current, &p, 10, &[], none)?;
             let x = self.detail_pass(batch, &minimum, &p, 11, &[], none)?;
             let y = self.detail_pass(batch, &x, &p, 12, &[], none)?;
-            current = self.detail_pass(batch, &current, &p, 13, &[], [Some(&y), None, None, None])?;
+            if v4 {
+                current = self.guided_dehaze_in_batch(batch, &current, &p, &y, pixel_scale)?;
+            } else {
+                current = self.detail_pass(batch, &current, &p, 13, &[], [Some(&y), None, None, None])?;
+            }
         }
         let blurred = if s.bool("texture") {
-            Some(self.filter(batch, &current, &p, &gaussian(1.3 * pixel_scale))?)
+            let taps = gaussian(1.3 * pixel_scale);
+            if v4 {
+                let luma = self.detail_pass(batch, &current, &p, 9, &[], none)?;
+                let table = batch.stage_table(&taps)?;
+                Some(self.filter_with_table(batch, &luma, &p, taps.len() / 2, 1, 1, &table)?)
+            } else {
+                Some(self.filter(batch, &current, &p, &taps)?)
+            }
         } else {
             None
         };
@@ -212,19 +235,214 @@ impl Gpu {
         if s.bool("defringe") {
             current = self.detail_pass(batch, &current, &p, 14, &[], none)?;
         }
-        for (active, sigma, stage) in [
-            (s.bool("clarity"), pixel_scale.max(frame.height.min(frame.width) as f64 / 80.0), 3),
-            (s.bool("sharpen"), s.f64("sharpen_radius") * pixel_scale, 4),
-        ] {
-            if active {
+        if s.bool("clarity") {
+            if v4 {
+                current = self.local_laplacian_in_batch(batch, &current, s.f64("clarity"), pixel_scale)?;
+            } else {
+                let sigma = pixel_scale.max(frame.height.min(frame.width) as f64 / 80.0);
                 let blurred = self.filter(batch, &current, &p, &gaussian(sigma))?;
-                current = self.detail_pass(batch, &current, &p, stage, &[], [Some(&blurred), None, None, None])?;
+                current = self.detail_pass(batch, &current, &p, 3, &[], [Some(&blurred), None, None, None])?;
             }
+        }
+        if s.bool("sharpen") {
+            let sigma = s.f64("sharpen_radius") * pixel_scale;
+            let blurred = self.filter(batch, &current, &p, &gaussian(sigma))?;
+            current = self.detail_pass(batch, &current, &p, 4, &[], [Some(&blurred), None, None, None])?;
         }
         if s.bool("vignette") {
             current = self.detail_pass(batch, &current, &p, 5, &[], none)?;
         }
         Ok(Some(current))
+    }
+
+    fn guided_dehaze_in_batch(
+        &self,
+        batch: &mut Batch<'_>,
+        current: &Frame,
+        p: &[f32],
+        dark: &Frame,
+        pixel_scale: f64,
+    ) -> Result<Frame> {
+        let d = 2 * (3.0 * pixel_scale).round_ties_even().max(0.0) as usize + 1;
+        let r = (d * 2).max(5);
+        let wt = 1.0 / (2 * r + 1) as f32;
+        let taps = batch.stage_table(&[[wt, 0.0]])?;
+        let none = [None; 4];
+        let packed = self.detail_pass(batch, current, p, 27, &[], [Some(dark), None, None, None])?;
+        let means = self.filter_with_table(batch, &packed, p, r, 1, 2, &taps)?;
+        let g2 = self.detail_pass(batch, current, p, 28, &[], none)?;
+        let corr_ii = self.filter_with_table(batch, &g2, p, r, 1, 3, &taps)?;
+        let coeff = self.detail_pass(batch, &means, p, 15, &[], [Some(&corr_ii), None, None, None])?;
+        let mean_ab = self.filter_with_table(batch, &coeff, p, r, 1, 2, &taps)?;
+        self.detail_pass(batch, current, p, 16, &[], [Some(&mean_ab), None, None, None])
+    }
+
+    fn local_laplacian_in_batch(
+        &self,
+        batch: &mut Batch<'_>,
+        frame: &Frame,
+        clarity: f64,
+        pixel_scale: f64,
+    ) -> Result<Frame> {
+        let (w, h) = (frame.width, frame.height);
+        let target = if pixel_scale > 0.6 {
+            5
+        } else if pixel_scale > 0.3 {
+            4
+        } else {
+            3
+        };
+        let mut min_dim = w.min(h);
+        let mut levels = 0usize;
+        while min_dim >= 8 && levels < target {
+            min_dim = min_dim.div_ceil(2);
+            levels += 1;
+        }
+        if levels == 0 || clarity == 0.0 {
+            return Ok(frame.clone());
+        }
+
+        // Pyramid level dimensions: dims[0] = (w, h), ..., dims[levels].
+        let mut dims = Vec::with_capacity(levels + 1);
+        let (mut cw, mut ch) = (w, h);
+        dims.push((cw, ch));
+        for _ in 0..levels {
+            cw = cw.div_ceil(2);
+            ch = ch.div_ceil(2);
+            dims.push((cw, ch));
+        }
+
+        // Allocate 1-channel pyramid buffers for G[0..=levels], R[0..=levels], tmp_h[0..levels], L_out[0..levels].
+        let mut g_pyr = Vec::with_capacity(levels + 1);
+        let mut r_pyr = Vec::with_capacity(levels + 1);
+        let mut tmp_h = Vec::with_capacity(levels);
+        let mut l_out = Vec::with_capacity(levels);
+        for (l, &(lw, lh)) in dims.iter().enumerate() {
+            g_pyr.push(batch.alloc_plane(lw * lh)?);
+            r_pyr.push(batch.alloc_plane(lw * lh)?);
+            if l < levels {
+                let (nw, _) = dims[l + 1];
+                tmp_h.push(batch.alloc_plane(nw * lh)?);
+                l_out.push(batch.alloc_plane(lw * lh)?);
+            }
+        }
+
+        // 0: extract_luma(frame) -> g_pyr[0]
+        batch.laplacian_dispatch(0, &frame.buffer, None, None, &g_pyr[0], &[w as f32, h as f32], w, h)?;
+        // Build Gaussian pyramid G[1..=levels]
+        for l in 0..levels {
+            let (lw, lh) = dims[l];
+            let (nw, nh) = dims[l + 1];
+            batch.laplacian_dispatch(
+                2,
+                &g_pyr[l],
+                None,
+                None,
+                &tmp_h[l],
+                &[lw as f32, lh as f32, nw as f32, nh as f32],
+                nw,
+                lh,
+            )?;
+            batch.laplacian_dispatch(
+                3,
+                &tmp_h[l],
+                None,
+                None,
+                &g_pyr[l + 1],
+                &[nw as f32, lh as f32, nw as f32, nh as f32],
+                nw,
+                nh,
+            )?;
+        }
+
+        // Fast Local Laplacian accumulation across K = 8 reference luminance levels.
+        const K: usize = 8;
+        let k_max = (K - 1) as f32;
+        let boost = (clarity.clamp(-100.0, 100.0) / 100.0 * 0.85) as f32;
+        let sigma_r = 0.14_f32;
+        let inv_2s2 = 1.0 / (2.0 * sigma_r * sigma_r);
+        for k in 0..K {
+            let gk = k as f32 / k_max;
+            batch.laplacian_dispatch(
+                1,
+                &g_pyr[0],
+                None,
+                None,
+                &r_pyr[0],
+                &[w as f32, h as f32, gk, boost, inv_2s2],
+                w,
+                h,
+            )?;
+            for l in 0..levels {
+                let (lw, lh) = dims[l];
+                let (nw, nh) = dims[l + 1];
+                batch.laplacian_dispatch(
+                    2,
+                    &r_pyr[l],
+                    None,
+                    None,
+                    &tmp_h[l],
+                    &[lw as f32, lh as f32, nw as f32, nh as f32],
+                    nw,
+                    lh,
+                )?;
+                batch.laplacian_dispatch(
+                    3,
+                    &tmp_h[l],
+                    None,
+                    None,
+                    &r_pyr[l + 1],
+                    &[nw as f32, lh as f32, nw as f32, nh as f32],
+                    nw,
+                    nh,
+                )?;
+            }
+            for l in 0..levels {
+                let (lw, lh) = dims[l];
+                let (nw, nh) = dims[l + 1];
+                batch.laplacian_dispatch(
+                    4,
+                    &g_pyr[l],
+                    Some(&r_pyr[l]),
+                    Some(&r_pyr[l + 1]),
+                    &l_out[l],
+                    &[lw as f32, lh as f32, nw as f32, nh as f32, k as f32, k_max],
+                    lw,
+                    lh,
+                )?;
+            }
+        }
+
+        // Collapse output Laplacian pyramid bottom-up into r_pyr[0] (reusing r_pyr as scratch).
+        let mut cur = g_pyr[levels].clone();
+        for l in (0..levels).rev() {
+            let (sw, sh) = dims[l + 1];
+            let (dw, dh) = dims[l];
+            batch.laplacian_dispatch(
+                5,
+                &cur,
+                Some(&l_out[l]),
+                None,
+                &r_pyr[l],
+                &[sw as f32, sh as f32, dw as f32, dh as f32],
+                dw,
+                dh,
+            )?;
+            cur = r_pyr[l].clone();
+        }
+
+        let out = batch.alloc_frame(w, h)?;
+        batch.laplacian_dispatch(
+            6,
+            &frame.buffer,
+            Some(&g_pyr[0]),
+            Some(&cur),
+            &out.buffer,
+            &[w as f32, h as f32],
+            w,
+            h,
+        )?;
+        Ok(out)
     }
 
     fn chroma(&self, batch: &mut Batch<'_>, lab: &Frame, p: &[f32], amount: f64, scale: f64) -> Result<Frame> {

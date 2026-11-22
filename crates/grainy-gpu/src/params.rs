@@ -7,6 +7,15 @@ use serde_json::Value;
 
 pub(crate) type Built = (Vec<f32>, Vec<[f32; 2]>);
 
+/// Normalized `[u0, v0, u_span, v_span]` coverage of a padded 1:1 viewport tile inside the
+/// full cropped frame (`full_size = (full_width, full_height)`), so spatially-dependent stages
+/// (`ToneBase`, lens vignette, post-crop vignette) align seamlessly with the whole image.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct TileContext {
+    pub uv: [f32; 4],
+    pub full_size: (usize, usize),
+}
+
 pub(crate) const TONE_KEYS: &[&str] = &[
     "exposure",
     "temperature",
@@ -78,7 +87,12 @@ pub(crate) fn needs_local(s: &Settings) -> bool {
     s.f64("tone_version") >= 3.0 && !s.bool("hdr") && (s.bool("highlights") || s.bool("shadows"))
 }
 
-pub(crate) fn tone(s: &Settings, image: &Image, base: Option<&ToneBase>) -> Result<Option<Built>> {
+pub(crate) fn tone(
+    s: &Settings,
+    image: &Image,
+    base: Option<&ToneBase>,
+    tile: Option<TileContext>,
+) -> Result<Option<Built>> {
     if grainy_film::active(s) || grainy_tone::mapping::active(s) {
         return Ok(None);
     }
@@ -95,16 +109,20 @@ pub(crate) fn tone(s: &Settings, image: &Image, base: Option<&ToneBase>) -> Resu
         return Err(Error::Input("tone needs finite nonempty RGB".into()));
     }
     let wb = grainy_core::white_balance(s);
+    let v4 = !s.bool("hdr") && s.f64("tone_version") >= 4.0;
     let mut flags = u32::from(s.bool("shadows") || s.bool("highlights"))
         | (u32::from(s.bool("contrast")) << 1)
         | (u32::from(!unchanged) << 2)
         | (u32::from(s.bool("lens_vignette")) << 3)
-        | (u32::from(s.bool("hdr")) << 4);
+        | (u32::from(s.bool("hdr")) << 4)
+        | (u32::from(v4) << 7)
+        | (u32::from(tile.is_some()) << 8);
     let white = grainy_tone::rolloff_white(s);
-    if !s.bool("hdr") && s.f64("tone_version") >= 2.0 && white > 1.0 {
+    if !s.bool("hdr") && !v4 && s.f64("tone_version") >= 2.0 && white > 1.0 {
         flags |= 32;
     }
     let slope = ((table[n - 1][1] - table[n - 2][1]) / (table[n - 1][0] - table[n - 2][0]).max(1e-6)).max(0.0);
+    let uv = tile.map_or([0.0, 0.0, 1.0, 1.0], |t| t.uv);
     let mut p = vec![
         w as f32,
         h as f32,
@@ -114,8 +132,8 @@ pub(crate) fn tone(s: &Settings, image: &Image, base: Option<&ToneBase>) -> Resu
         wb[1],
         wb[2],
         2f64.powf(s.f64("exposure")) as f32,
-        (s.f64("shadows") / 180.0) as f32,
-        (s.f64("highlights") / 180.0) as f32,
+        if v4 { s.f32("shadows") } else { (s.f64("shadows") / 180.0) as f32 },
+        if v4 { s.f32("highlights") } else { (s.f64("highlights") / 180.0) as f32 },
         (s.f64("blacks").clamp(-200.0, 200.0) / 250.0) as f32,
         2f64.powf(s.f64("whites").clamp(-200.0, 200.0) / 100.0) as f32,
         (1.0 + s.f64("contrast") / 125.0) as f32,
@@ -126,6 +144,10 @@ pub(crate) fn tone(s: &Settings, image: &Image, base: Option<&ToneBase>) -> Resu
         0.0,
         0.0,
         0.05,
+        uv[0],
+        uv[1],
+        uv[2],
+        uv[3],
     ];
     if needs_local(s) {
         let local = grainy_tone::tone_local(image, s, base, None)

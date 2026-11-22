@@ -50,16 +50,22 @@ impl Frame {
 /// Port of `native_gpu._handle`, with one wgpu implementation for DX12, Vulkan and Metal.
 pub struct Gpu {
     pub(crate) device: wgpu::Device,
-    queue: wgpu::Queue,
+    pub(crate) queue: wgpu::Queue,
     info: wgpu::AdapterInfo,
-    limits: wgpu::Limits,
-    owner: u64,
+    pub(crate) limits: wgpu::Limits,
+    pub(crate) owner: u64,
     failed: Arc<Mutex<Option<String>>>,
     pipelines: Vec<wgpu::ComputePipeline>,
     layout: wgpu::BindGroupLayout,
     reduce_pipelines: [wgpu::ComputePipeline; 5],
     reduce_layout: wgpu::BindGroupLayout,
-    empty_storage: wgpu::Buffer,
+    pub(crate) present_pipelines: [wgpu::ComputePipeline; 2],
+    pub(crate) present_layout: wgpu::BindGroupLayout,
+    pub(crate) laplacian_pipelines: [wgpu::ComputePipeline; 7],
+    pub(crate) laplacian_layout: wgpu::BindGroupLayout,
+    pub(crate) empty_storage: wgpu::Buffer,
+    pub(crate) empty_lut: wgpu::Buffer,
+    pub(crate) empty_stats: wgpu::Buffer,
     pub(crate) wavelet_taps: wgpu::Buffer,
     pub(crate) box2_taps: wgpu::Buffer,
     outputs: Arc<Mutex<Pool>>,
@@ -92,6 +98,21 @@ impl Gpu {
             ..wgpu::InstanceDescriptor::new_without_display_handle()
         });
         Self::with_instance(kind, instance)
+    }
+
+    /// Attach `grainy-gpu` compute and presentation pipelines to an existing `wgpu::Device`
+    /// and `wgpu::Queue` (such as `eframe`'s `egui_wgpu::RenderState`) for zero-copy viewport
+    /// rendering without replacing the host's device error callbacks.
+    pub fn from_shared(adapter: &wgpu::Adapter, device: wgpu::Device, queue: wgpu::Queue) -> Result<Self> {
+        let info = adapter.get_info();
+        let limits = device.limits();
+        if limits.max_storage_buffers_per_shader_stage < 8 {
+            return Err(Error::Limit(format!(
+                "shared wgpu device exposes {} storage buffers per stage (need 8)",
+                limits.max_storage_buffers_per_shader_stage
+            )));
+        }
+        Self::init(info, limits, device, queue, false)
     }
 
     fn with_instance(kind: AdapterKind, instance: wgpu::Instance) -> Result<Option<Self>> {
@@ -130,16 +151,28 @@ impl Gpu {
             ..Default::default()
         }))
         .map_err(|e| Error::Device(e.to_string()))?;
+        Ok(Some(Self::init(info, limits, device, queue, true)?))
+    }
+
+    fn init(
+        info: wgpu::AdapterInfo,
+        limits: wgpu::Limits,
+        device: wgpu::Device,
+        queue: wgpu::Queue,
+        own_callbacks: bool,
+    ) -> Result<Self> {
         let failed = Arc::new(Mutex::new(None));
-        let state = failed.clone();
-        device.set_device_lost_callback(move |reason, message| {
-            *state.lock().unwrap_or_else(std::sync::PoisonError::into_inner) =
-                Some(format!("device lost ({reason:?}): {message}"));
-        });
-        let state = failed.clone();
-        device.on_uncaptured_error(Arc::new(move |e| {
-            *state.lock().unwrap_or_else(std::sync::PoisonError::into_inner) = Some(format!("{e}"));
-        }));
+        if own_callbacks {
+            let state = failed.clone();
+            device.set_device_lost_callback(move |reason, message| {
+                *state.lock().unwrap_or_else(std::sync::PoisonError::into_inner) =
+                    Some(format!("device lost ({reason:?}): {message}"));
+            });
+            let state = failed.clone();
+            device.on_uncaptured_error(Arc::new(move |e| {
+                *state.lock().unwrap_or_else(std::sync::PoisonError::into_inner) = Some(format!("{e}"));
+            }));
+        }
         let scope = device.push_error_scope(wgpu::ErrorFilter::Validation);
         let entries: Vec<_> = (0..8)
             .map(|binding| wgpu::BindGroupLayoutEntry {
@@ -225,12 +258,146 @@ impl Gpu {
                 cache: None,
             })
         });
+        let present_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
+            label: Some("Grainy present"),
+            entries: &[
+                wgpu::BindGroupLayoutEntry {
+                    binding: 0,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: true },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 1,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: true },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 2,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: true },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 3,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::StorageTexture {
+                        access: wgpu::StorageTextureAccess::WriteOnly,
+                        format: wgpu::TextureFormat::Rgba8Unorm,
+                        view_dimension: wgpu::TextureViewDimension::D2,
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 4,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: false },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 5,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: false },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
+            ],
+        });
+        let present_pipeline_layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+            label: Some("Grainy present"),
+            bind_group_layouts: &[Some(&present_layout)],
+            immediate_size: 0,
+        });
+        let present_shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("present"),
+            source: wgpu::ShaderSource::Wgsl(include_str!("present.wgsl").into()),
+        });
+        let present_names = ["present_frame", "clip_overlay"];
+        let present_pipelines = std::array::from_fn(|i| {
+            device.create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
+                label: Some(present_names[i]),
+                layout: Some(&present_pipeline_layout),
+                module: &present_shader,
+                entry_point: Some(present_names[i]),
+                compilation_options: Default::default(),
+                cache: None,
+            })
+        });
+        let lap_entries: Vec<_> = (0..5)
+            .map(|binding| wgpu::BindGroupLayoutEntry {
+                binding,
+                visibility: wgpu::ShaderStages::COMPUTE,
+                ty: wgpu::BindingType::Buffer {
+                    ty: wgpu::BufferBindingType::Storage { read_only: binding != 3 },
+                    has_dynamic_offset: false,
+                    min_binding_size: None,
+                },
+                count: None,
+            })
+            .collect();
+        let laplacian_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
+            label: Some("Grainy local laplacian"),
+            entries: &lap_entries,
+        });
+        let laplacian_pipeline_layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+            label: Some("Grainy local laplacian"),
+            bind_group_layouts: &[Some(&laplacian_layout)],
+            immediate_size: 0,
+        });
+        let laplacian_shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("laplacian"),
+            source: wgpu::ShaderSource::Wgsl(include_str!("laplacian.wgsl").into()),
+        });
+        let lap_names =
+            ["extract_luma", "remap_luma", "down_h", "down_v", "accum_laplacian", "collapse_add", "apply_luma"];
+        let laplacian_pipelines = std::array::from_fn(|i| {
+            device.create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
+                label: Some(lap_names[i]),
+                layout: Some(&laplacian_pipeline_layout),
+                module: &laplacian_shader,
+                entry_point: Some(lap_names[i]),
+                compilation_options: Default::default(),
+                cache: None,
+            })
+        });
         if let Some(e) = pollster::block_on(scope.pop()) {
             return Err(Error::Device(e.to_string()));
         }
         let empty_storage = device.create_buffer(&wgpu::BufferDescriptor {
             label: Some("empty table and auxiliary"),
             size: 8,
+            usage: wgpu::BufferUsages::STORAGE,
+            mapped_at_creation: false,
+        });
+        let empty_lut = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("empty monitor LUT"),
+            size: 16,
+            usage: wgpu::BufferUsages::STORAGE,
+            mapped_at_creation: false,
+        });
+        let empty_stats = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("empty present stats"),
+            size: 385 * 4,
             usage: wgpu::BufferUsages::STORAGE,
             mapped_at_creation: false,
         });
@@ -259,6 +426,8 @@ impl Gpu {
         let box2_taps = init_static("box(2) kernel", &[[0.2, 0.0]; 5])?;
         let gpu = Self {
             empty_storage,
+            empty_lut,
+            empty_stats,
             wavelet_taps,
             box2_taps,
             device,
@@ -271,6 +440,10 @@ impl Gpu {
             layout,
             reduce_pipelines,
             reduce_layout,
+            present_pipelines,
+            present_layout,
+            laplacian_pipelines,
+            laplacian_layout,
             outputs: Pool::new(1024 * 1024 * 1024, 16),
             staging: Pool::new(512 * 1024 * 1024, 2),
             slabs: Pool::new(4 * 1024 * 1024, 8),
@@ -278,7 +451,17 @@ impl Gpu {
             reduce_profiles: Pool::new(64 * 1024, 8),
         };
         gpu.check()?;
-        Ok(Some(gpu))
+        Ok(gpu)
+    }
+
+    /// Underlying `wgpu::Device` (shared with `eframe` when initialized via [`Self::from_shared`]).
+    pub fn device(&self) -> &wgpu::Device {
+        &self.device
+    }
+
+    /// Underlying `wgpu::Queue`.
+    pub fn queue(&self) -> &wgpu::Queue {
+        &self.queue
     }
 
     /// Port of `native_gpu.status`: the selected adapter and backend.
@@ -640,6 +823,70 @@ impl<'a> Batch<'a> {
         Ok(())
     }
 
+    pub(crate) fn alloc_plane(&self, elems: usize) -> Result<wgpu::Buffer> {
+        let bytes = (elems.max(1) as u64) * 4;
+        if bytes > self.gpu.limits.max_storage_buffer_binding_size {
+            return Err(Error::Limit("laplacian plane exceeds storage limit".into()));
+        }
+        Ok(self.gpu.device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("Grainy laplacian plane"),
+            size: bytes,
+            usage: wgpu::BufferUsages::STORAGE,
+            mapped_at_creation: false,
+        }))
+    }
+
+    pub(crate) fn alloc_frame(&mut self, width: usize, height: usize) -> Result<Frame> {
+        let bytes = self.gpu.bytes(height, width)?;
+        let out = self.outputs.take(
+            &self.gpu.device,
+            &wgpu::BufferDescriptor {
+                label: Some("Grainy resident frame"),
+                size: bytes,
+                usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
+                mapped_at_creation: false,
+            },
+        );
+        let lease = Lease::from_batch(&out, &self.outputs);
+        Ok(Frame { buffer: out, width, height, owner: self.gpu.owner, _lease: Some(lease) })
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn laplacian_dispatch(
+        &mut self,
+        pipeline: usize,
+        src0: &wgpu::Buffer,
+        src1: Option<&wgpu::Buffer>,
+        src2: Option<&wgpu::Buffer>,
+        dst: &wgpu::Buffer,
+        lp: &[f32],
+        width: usize,
+        height: usize,
+    ) -> Result<()> {
+        let p_slice = self.write_slab(bytemuck::cast_slice(lp))?;
+        let empty = &self.gpu.empty_storage;
+        let bind = self.gpu.device.create_bind_group(&wgpu::BindGroupDescriptor {
+            label: Some("Grainy laplacian"),
+            layout: &self.gpu.laplacian_layout,
+            entries: &[
+                wgpu::BindGroupEntry { binding: 0, resource: src0.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 1, resource: src1.unwrap_or(empty).as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 2, resource: src2.unwrap_or(empty).as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 3, resource: dst.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 4, resource: p_slice.resource() },
+            ],
+        });
+        let mut pass = self.encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+            label: Some("Grainy laplacian"),
+            timestamp_writes: None,
+        });
+        pass.set_pipeline(&self.gpu.laplacian_pipelines[pipeline]);
+        pass.set_bind_group(0, &bind, &[]);
+        pass.dispatch_workgroups(width.div_ceil(16) as u32, height.div_ceil(16) as u32, 1);
+        self.pending += 1;
+        Ok(())
+    }
+
     pub(crate) fn dispatch_with_table(
         &mut self,
         source: &Frame,
@@ -821,7 +1068,7 @@ impl Gpu {
         if params::needs_local(s) && !linear.iter().all(|v| v.is_finite()) {
             return Err(Error::Input("non-finite tone analysis pixels".into()));
         }
-        let Some((p, t)) = params::tone(s, linear, None)? else {
+        let Some((p, t)) = params::tone(s, linear, None, None)? else {
             return Ok(None);
         };
         self.dispatch(frame, 0, &p, &t, &[]).map(Some)
