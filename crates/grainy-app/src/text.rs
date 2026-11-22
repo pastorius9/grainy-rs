@@ -5,7 +5,22 @@
 use grainy_i18n::Language;
 
 /// Korean source → English, for the strings this crate adds.
-pub const ENGLISH: [(&str, &str); 81] = [
+pub const ENGLISH: [(&str, &str); 93] = [
+    ("AI에게 시키기 (로그인·모델 선택)…", "Ask AI (Sign In · Model)…"),
+    ("프로그램 기본 모델", "Program default"),
+    ("직접 입력", "Custom"),
+    ("Claude Sonnet (권장)", "Claude Sonnet (Recommended)"),
+    ("Claude Opus (최고 품질)", "Claude Opus (Highest quality)"),
+    ("Claude Haiku (빠름)", "Claude Haiku (Fast)"),
+    ("GPT-5.4 (권장)", "GPT-5.4 (Recommended)"),
+    ("GPT-5.4 Mini (빠름)", "GPT-5.4 Mini (Fast)"),
+    ("o3 (추론)", "o3 (Reasoning)"),
+    ("Gemini 2.5 Pro (권장)", "Gemini 2.5 Pro (Recommended)"),
+    ("Gemini 2.5 Flash (빠름)", "Gemini 2.5 Flash (Fast)"),
+    (
+        "자동 색 세기 슬라이더로 적용 정도(0–100%)를 실시간으로 조절할 수 있습니다.",
+        "Adjust the Auto Color strength (0–100%) live after applying.",
+    ),
     ("AI 노이즈 제거", "AI Denoise"),
     ("GPU 협업 패치 AI 디노이즈 · 로컬 오프라인 처리", "GPU Collaborative Patch AI Denoise · Local Offline"),
     ("소프트 프루핑", "Soft Proofing"),

@@ -50,6 +50,7 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
     let width = ui.available_width();
     let gap = 4.0;
     let negative = cx.settings().bool("negative");
+    let auto_color_amount = crate::commands::auto::active_auto_color_amount(cx);
     ui.horizontal(|ui| {
         ui.spacing_mut().item_spacing.x = gap;
         let mut mono = cx.settings().bool("monochrome");
@@ -67,10 +68,30 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
             cx.run("develop.auto_tone");
         }
         let color_tip = tr("어두운 곳·중간·밝은 곳의 무채색 영역을 각각 찾아 색 틀어짐(녹색 끼 등)을 채널 커브로 바로잡습니다. 밝기는 그대로 둡니다. 강한 색 조명만 있는 영역은 건드리지 않습니다.");
-        if Button::new(&tr("자동 색")).width(cell).show(ui).on_hover_text(format!("{color_tip} ({})", controls::hint("Ctrl+Shift+U"))).clicked() {
+        let strength_hint = crate::text::tr("자동 색 세기 슬라이더로 적용 정도(0–100%)를 실시간으로 조절할 수 있습니다.");
+        if Button::new(&tr("자동 색"))
+            .checked(auto_color_amount.is_some())
+            .width(cell)
+            .show(ui)
+            .on_hover_text(format!("{color_tip} {strength_hint} ({})", controls::hint("Ctrl+Shift+U")))
+            .clicked()
+        {
             cx.run("develop.auto_color");
         }
     });
+    if let Some(amount) = auto_color_amount {
+        let spec = crate::adjustments::Spec {
+            key: "auto_color_amount",
+            label: "자동 색 세기",
+            low: 0.0,
+            high: 100.0,
+            scale: 1.0,
+            reset: crate::adjustments::Reset::Value(100.0),
+            place: Place::Panel("basic"),
+        };
+        let event = widgets::adjustment_row(ui, "auto_color_amount", &tr("자동 색 세기"), &spec, amount, true);
+        crate::commands::auto::apply_auto_color_amount(cx, event);
+    }
     // Additional actions only appear for HDR photos and inverted film scans.
     crate::hdr::button(ui, cx, width);
     if cx.settings().bool("negative") {

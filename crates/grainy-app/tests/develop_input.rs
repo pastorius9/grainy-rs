@@ -287,3 +287,67 @@ fn filmstrip_supports_shift_click_ctrl_click_shift_arrow_and_select_all() {
     app.run_steps(1);
     assert_eq!(app.state().document().selected_indices(), vec![1]);
 }
+
+#[test]
+fn auto_color_strength_slider_appears_and_adjusts_live() {
+    let files = tempfile::tempdir().unwrap();
+    let file = files.path().join("green_cast.png");
+    // Construct a 64x64 image with a clear green cast across shadows, midtones, and highlights.
+    let mut img = image::RgbImage::new(64, 64);
+    for (x, y, px) in img.enumerate_pixels_mut() {
+        let base = if y < 22 {
+            40u8
+        } else if y < 44 {
+            120u8
+        } else {
+            200u8
+        };
+        let tweak = (x % 3) as u8;
+        *px = image::Rgb([base.saturating_sub(14) + tweak, base.saturating_add(16), base.saturating_sub(8)]);
+    }
+    img.save(&file).unwrap();
+
+    let mut app = Harness::builder().with_size(egui::vec2(1600.0, 1000.0)).build_eframe(move |cc| {
+        let mut app = GrainyApp::with_test_card(&cc.egui_ctx);
+        app.open_paths(vec![file]);
+        app.set_mode(Mode::Develop);
+        app
+    });
+    wait_for_photos(&mut app, 1);
+
+    // Before Auto Color, the strength slider is hidden to preserve Basic panel density.
+    assert!(app.ctx.read_response(slider("auto_color_amount")).is_none());
+
+    // Run Auto Color and wait for background analysis to apply.
+    assert!(app.state_mut().run("develop.auto_color"));
+    let deadline = std::time::Instant::now() + std::time::Duration::from_secs(10);
+    while app.ctx.read_response(slider("auto_color_amount")).is_none() {
+        assert!(std::time::Instant::now() < deadline, "auto_color_amount slider did not appear");
+        app.run_steps(1);
+        std::thread::sleep(std::time::Duration::from_millis(5));
+    }
+    let curves_100 = app.state().settings().value("rgb_curves").clone();
+
+    // Drag the Auto Color Strength slider to 50% and verify RGB curves blend smoothly in real time.
+    let track = app.ctx.read_response(slider("auto_color_amount")).unwrap().rect.shrink2(egui::vec2(4.0, 0.0));
+    let mid = track.left_center().lerp(track.right_center(), 0.5);
+    app.hover_at(mid);
+    app.run_steps(1);
+    app.drag_at(mid);
+    app.run_steps(1);
+    app.drop_at(mid);
+    app.run_steps(2);
+    let curves_50 = app.state().settings().value("rgb_curves").clone();
+    assert_ne!(curves_50, curves_100, "50% strength must soften the auto-color curves");
+    assert!(app.state().status().contains("50%"), "status reflects 50%: {}", app.state().status());
+
+    // Undo restores 100% strength while keeping the slider active; second Undo removes Auto Color and hides slider.
+    app.state_mut().run("develop.undo");
+    app.run_steps(2);
+    assert_eq!(app.state().settings().value("rgb_curves"), &curves_100);
+    assert!(app.ctx.read_response(slider("auto_color_amount")).is_some());
+
+    app.state_mut().run("develop.undo");
+    app.run_steps(2);
+    assert!(app.ctx.read_response(slider("auto_color_amount")).is_none());
+}

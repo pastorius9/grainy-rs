@@ -44,6 +44,24 @@ pub struct AskAiDialog {
     boxed: Option<Boxed>,
 }
 
+/// Curated per-program model presets (`(cli_model_id, display_label)`).
+/// Leaving the model empty (`""`) lets the chosen CLI program use its own default model.
+fn recommended_models(program_key: &str) -> &'static [(&'static str, &'static str)] {
+    match program_key {
+        "claude" => {
+            &[("sonnet", "Claude Sonnet (권장)"), ("opus", "Claude Opus (최고 품질)"), ("haiku", "Claude Haiku (빠름)")]
+        }
+        "codex" => &[
+            ("gpt-5.4", "GPT-5.4 (권장)"),
+            ("gpt-5.3-codex", "GPT-5.3 Codex"),
+            ("gpt-5.4-mini", "GPT-5.4 Mini (빠름)"),
+            ("o3", "o3 (추론)"),
+        ],
+        "gemini" => &[("gemini-2.5-pro", "Gemini 2.5 Pro (권장)"), ("gemini-2.5-flash", "Gemini 2.5 Flash (빠름)")],
+        _ => &[],
+    }
+}
+
 fn confirm_text(installer: &Installer) -> String {
     tr_with(
         "설치할 프로그램: {0}\n제공자: {1}\n공식 안내: {2}\n\n실행할 명령:\n{3}",
@@ -78,26 +96,63 @@ impl AskAiDialog {
             ui.add_space(6.0);
             let names: Vec<String> = model.profiles.iter().map(|p| tr(p.name)).collect();
             let selected = model.program.and_then(|i| names.get(i).cloned()).unwrap_or_default();
+            let current_key = model.program.and_then(|i| model.profiles.get(i)).map(|p| p.key).unwrap_or("");
             ui.add_enabled_ui(view.program_enabled, |ui| {
-                egui::ComboBox::from_id_salt("ai_program").selected_text(selected).width(200.0).show_ui(ui, |ui| {
+                egui::ComboBox::from_id_salt("ai_program").selected_text(selected).width(145.0).show_ui(ui, |ui| {
                     for (i, name) in names.iter().enumerate() {
                         if ui.selectable_label(model.program == Some(i), name).clicked() && model.program != Some(i) {
+                            // Clear a model preset that belonged to the previous provider so it isn't sent to another CLI.
+                            let trimmed = model.model.trim();
+                            if recommended_models(current_key).iter().any(|(id, _)| *id == trimmed) {
+                                model.model.clear();
+                            }
                             model.program = Some(i);
                             clicks.push(Click::Choice);
                         }
                     }
                 });
             });
-            ui.add_space(12.0);
+            ui.add_space(10.0);
             widgets::label(ui, &tr("모델 (선택)"), t::TEXT, t::FONT_SIZE);
             ui.add_space(6.0);
+            let program_key = model.program.and_then(|i| model.profiles.get(i)).map(|p| p.key).unwrap_or("");
+            let presets = recommended_models(program_key);
+            let trimmed_model = model.model.trim().to_owned();
+            let preset_label = if trimmed_model.is_empty() {
+                tr("프로그램 기본 모델")
+            } else if let Some((_, label)) = presets.iter().find(|(id, _)| *id == trimmed_model.as_str()) {
+                tr(label)
+            } else {
+                tr("직접 입력")
+            };
+            ui.add_enabled_ui(view.program_enabled, |ui| {
+                egui::ComboBox::from_id_salt("ai_model_preset").selected_text(preset_label).width(185.0).show_ui(
+                    ui,
+                    |ui| {
+                        if ui.selectable_label(trimmed_model.is_empty(), tr("프로그램 기본 모델")).clicked()
+                            && !trimmed_model.is_empty()
+                        {
+                            model.model.clear();
+                            clicks.push(Click::Choice);
+                        }
+                        for (id, label) in presets {
+                            if ui.selectable_label(trimmed_model == *id, tr(label)).clicked() && trimmed_model != *id {
+                                model.model = (*id).to_owned();
+                                clicks.push(Click::Choice);
+                            }
+                        }
+                    },
+                );
+            });
+            ui.add_space(6.0);
+            let field_width = ui.available_width().max(130.0);
             let field = ui.add_enabled(
                 view.program_enabled,
                 egui::TextEdit::singleline(&mut model.model)
                     .hint_text(tr("비워 두면 프로그램 기본 모델"))
-                    .desired_width(220.0),
+                    .desired_width(field_width),
             );
-            if field.lost_focus() {
+            if field.lost_focus() || (field.has_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter))) {
                 clicks.push(Click::Choice);
             }
         });

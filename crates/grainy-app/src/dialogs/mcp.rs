@@ -231,6 +231,12 @@ impl McpDialog {
             }
             ui.add_space(8.0);
             widgets::label(ui, &view.status, t::TEXT, t::FONT_SIZE);
+            ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                if Button::new(&tr("AI에게 시키기 (로그인·모델 선택)…")).kind(Kind::Primary).show(ui).clicked()
+                {
+                    action = Some("ask_ai");
+                }
+            });
         });
         ui.add_space(6.0);
         widgets::label(ui, &tr("AI 프로그램에 설치하기"), t::TEXT, t::FONT_SIZE);
@@ -321,6 +327,9 @@ impl McpDialog {
             }
         }
         match action {
+            Some("ask_ai") => {
+                cx.run("ai.ask");
+            }
             Some("folder") => {
                 let start = view.export_folder.clone();
                 let (tx, rx) = channel();

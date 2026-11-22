@@ -45,6 +45,36 @@ fn still(cx: &AppContext, id: u64, version: u64, generation: u64) -> bool {
 
 #[cfg(test)]
 #[test]
+fn scale_curves_and_infer_amount_round_trip() {
+    let full = [
+        vec![[0.0, 0.0], [0.22, 0.18], [0.54, 0.48], [0.84, 0.80], [1.0, 1.0]],
+        vec![[0.0, 0.0], [0.16, 0.18], [0.46, 0.48], [0.78, 0.80], [1.0, 1.0]],
+        vec![[0.0, 0.0], [0.18, 0.18], [0.48, 0.48], [0.80, 0.80], [1.0, 1.0]],
+    ];
+    // 100% reproduces full curves verbatim.
+    let at_100 = scale_curves(&full, 100.0);
+    assert_eq!(at_100, serde_json::json!(full));
+    assert_eq!(infer_amount(&at_100, &full), Some(100.0));
+
+    // 50% halves every correction shift and recovers cleanly for Undo/Redo.
+    let at_50 = scale_curves(&full, 50.0);
+    assert_eq!(at_50[0][2], serde_json::json!([0.54, 0.51]));
+    assert_eq!(at_50[1][2], serde_json::json!([0.46, 0.47]));
+    assert_eq!(infer_amount(&at_50, &full), Some(50.0));
+
+    // 0% produces exact identity along every anchor.
+    let at_0 = scale_curves(&full, 0.0);
+    assert_eq!(at_0[0][2], serde_json::json!([0.54, 0.54]));
+    assert_eq!(infer_amount(&at_0, &full), Some(0.0));
+
+    // Manual curve edits are rejected so the Auto Color strength slider hides cleanly.
+    let manual =
+        serde_json::json!([[[0.0, 0.0], [0.5, 0.7], [1.0, 1.0]], [[0.0, 0.0], [1.0, 1.0]], [[0.0, 0.0], [1.0, 1.0]],]);
+    assert_eq!(infer_amount(&manual, &full), None);
+}
+
+#[cfg(test)]
+#[test]
 fn an_auto_result_belongs_to_one_document_even_if_ids_and_versions_match() {
     let mut cx = AppContext::new(
         &eframe::egui::Context::default(),
@@ -113,18 +143,193 @@ fn python_g(v: f64) -> String {
     text.strip_suffix(".0").map(str::to_owned).unwrap_or(text)
 }
 
-/// Port of `auto_color` at full strength (the strength slider is the Basic panel's later work).
+/// Live state for the "자동 색 세기" (Auto color strength) slider shown after Auto Color is applied.
+pub(crate) struct AutoColorState {
+    amount: f64,
+    loaded_generation: Option<u64>,
+    active: Option<ActiveAutoColor>,
+}
+
+impl Default for AutoColorState {
+    fn default() -> Self {
+        Self { amount: 100.0, loaded_generation: None, active: None }
+    }
+}
+
+struct ActiveAutoColor {
+    generation: u64,
+    photo_id: u64,
+    full_curves: [Vec<[f64; 2]>; 3],
+    last_applied: Value,
+}
+
+fn round4(x: f64) -> f64 {
+    if !x.is_finite() {
+        return x;
+    }
+    format!("{x:.4}").parse().unwrap_or(x)
+}
+
+fn parse_curves(value: &Value) -> Option<[Vec<[f64; 2]>; 3]> {
+    let channels = value.as_array()?;
+    if channels.len() != 3 {
+        return None;
+    }
+    let mut out = [Vec::new(), Vec::new(), Vec::new()];
+    for (c, ch) in channels.iter().enumerate() {
+        let pts = ch.as_array()?;
+        let mut parsed = Vec::with_capacity(pts.len());
+        for pt in pts {
+            let pair = pt.as_array()?;
+            if pair.len() != 2 {
+                return None;
+            }
+            parsed.push([pair[0].as_f64()?, pair[1].as_f64()?]);
+        }
+        out[c] = parsed;
+    }
+    Some(out)
+}
+
+/// Scales the 100%-strength auto-color channel curves linearly to `amount_pct` (0..=100%),
+/// preserving exact monotonicity and endpoint identity (`[0, 0]` and `[1, 1]`).
+pub(crate) fn scale_curves(full: &[Vec<[f64; 2]>; 3], amount_pct: f64) -> Value {
+    let scale = (amount_pct / 100.0).clamp(0.0, 1.0);
+    let scaled: [Vec<[f64; 2]>; 3] = std::array::from_fn(|c| {
+        let mut out: Vec<[f64; 2]> = Vec::with_capacity(full[c].len());
+        let mut prev_y = 0.0f64;
+        for &[x, y_full] in &full[c] {
+            let y = if x <= 0.0 {
+                0.0
+            } else if x >= 1.0 {
+                1.0
+            } else {
+                let raw = x + (y_full - x) * scale;
+                round4(raw.max(prev_y).clamp(0.0, 1.0))
+            };
+            prev_y = y;
+            out.push([x, y]);
+        }
+        out
+    });
+    serde_json::json!(scaled)
+}
+
+/// If `current` still matches a scaled version of `full` (e.g. after Undo/Redo between strengths),
+/// recovers the percentage (`0..=100`). Returns `None` if the user manually edited or cleared the curves.
+fn infer_amount(current: &Value, full: &[Vec<[f64; 2]>; 3]) -> Option<f64> {
+    let cur = parse_curves(current)?;
+    let mut ratio_sum = 0.0;
+    let mut ratio_count = 0usize;
+    for c in 0..3 {
+        if cur[c].len() != full[c].len() {
+            return None;
+        }
+        for (&[cx, cy], &[fx, fy]) in cur[c].iter().zip(&full[c]) {
+            if (cx - fx).abs() > 1e-4 {
+                return None;
+            }
+            let df = fy - fx;
+            if df.abs() >= 1e-3 {
+                let r = (cy - cx) / df;
+                if !(-0.02..=1.02).contains(&r) {
+                    return None;
+                }
+                ratio_sum += r.clamp(0.0, 1.0);
+                ratio_count += 1;
+            } else if (cy - cx).abs() > 2e-3 {
+                return None;
+            }
+        }
+    }
+    if ratio_count == 0 {
+        return None;
+    }
+    let avg = (ratio_sum / ratio_count as f64).clamp(0.0, 1.0);
+    // Verify every interior anchor agrees closely with this single global scale factor.
+    for c in 0..3 {
+        for (&[_cx, cy], &[fx, fy]) in cur[c].iter().zip(&full[c]) {
+            let expected = (fx + (fy - fx) * avg).clamp(0.0, 1.0);
+            if (cy - expected).abs() > 2e-3 {
+                return None;
+            }
+        }
+    }
+    Some((avg * 100.0).round().clamp(0.0, 100.0))
+}
+
+fn ensure_loaded_amount(cx: &mut AppContext) -> f64 {
+    let generation = cx.document_generation;
+    let loaded = cx.state_ref::<AutoColorState>().and_then(|s| s.loaded_generation);
+    if loaded != Some(generation) {
+        let saved = cx.doc.preference("auto_color_amount").and_then(|v| v.as_f64()).unwrap_or(100.0).clamp(0.0, 100.0);
+        let state = cx.state::<AutoColorState>();
+        state.amount = saved.round();
+        state.loaded_generation = Some(generation);
+        state.active = None;
+    }
+    cx.state::<AutoColorState>().amount
+}
+
+/// Returns the current Auto Color strength (`0..=100%`) while Auto Color is active on the open photo,
+/// or `None` when the strength slider should remain hidden.
+pub(crate) fn active_auto_color_amount(cx: &mut AppContext) -> Option<f64> {
+    let generation = cx.document_generation;
+    let photo_id = cx.doc.current_id();
+    let current_curves = cx.settings().value("rgb_curves").clone();
+    let state = cx.state::<AutoColorState>();
+    let active = state.active.as_mut()?;
+    if active.generation != generation || active.photo_id != photo_id {
+        state.active = None;
+        return None;
+    }
+    if current_curves == active.last_applied {
+        return Some(state.amount);
+    }
+    if let Some(inferred) = infer_amount(&current_curves, &active.full_curves) {
+        state.amount = inferred;
+        active.last_applied = current_curves;
+        return Some(inferred);
+    }
+    state.active = None;
+    None
+}
+
+/// Applies live changes and commit events from the Basic panel's "자동 색 세기" slider.
+pub(crate) fn apply_auto_color_amount(cx: &mut AppContext, event: crate::widgets::RowEvent) {
+    if let Some(new_pct) = event.set {
+        let clamped = new_pct.round().clamp(0.0, 100.0);
+        let scaled = {
+            let state = cx.state::<AutoColorState>();
+            let Some(active) = state.active.as_mut() else { return };
+            state.amount = clamped;
+            let scaled = scale_curves(&active.full_curves, clamped);
+            active.last_applied = scaled.clone();
+            scaled
+        };
+        cx.doc.edit_mut().set("rgb_curves", scaled);
+        cx.before = false;
+    }
+    if event.commit {
+        let amount = cx.state::<AutoColorState>().amount;
+        cx.doc.edit_mut().commit("자동 색 세기");
+        let _ = cx.doc.save_preference("auto_color_amount", &serde_json::json!(amount));
+        cx.status = tr_with("자동 색 적용 · 세기 {0}% · 채널 커브에서 다듬을 수 있습니다.", &[&format!("{amount:.0}")]);
+    }
+}
+
+/// Port of `auto_color`: computes the full 100% cast-correction curves once, applies them at the saved
+/// `auto_color_amount` (0–100%), and enables the live "자동 색 세기" slider in the Basic panel.
 fn auto_color(cx: &mut AppContext, _: &Invocation) {
     let Some((id, path, settings, version, generation)) = target(cx) else { return };
-    let amount = 100.0;
+    let amount = ensure_loaded_amount(cx);
     let source = super::auto_source::for_click(cx, &path, &settings);
     cx.jobs.spawn(
         "auto",
         tr("자동 색"),
         move |_| {
             let loaded = source.load(&settings)?;
-            auto::auto_color_settings(loaded.source(), &settings, amount / 100.0, &Externals::default())
-                .map_err(|e| e.to_string())
+            auto::auto_color_settings(loaded.source(), &settings, 1.0, &Externals::default()).map_err(|e| e.to_string())
         },
         move |cx: &mut AppContext, result| {
             if !still(cx, id, version, generation) {
@@ -132,10 +337,25 @@ fn auto_color(cx: &mut AppContext, _: &Invocation) {
             }
             match result {
                 Ok((adjusted, report)) if report["status"] == "applied" => {
+                    let full_value = adjusted.value("rgb_curves").clone();
+                    let (applied_value, active) = match parse_curves(&full_value) {
+                        Some(full_curves) => {
+                            let scaled = scale_curves(&full_curves, amount);
+                            (
+                                scaled.clone(),
+                                Some(ActiveAutoColor { generation, photo_id: id, full_curves, last_applied: scaled }),
+                            )
+                        }
+                        None => (full_value, None),
+                    };
                     let edit = cx.doc.edit_mut();
-                    edit.set("rgb_curves", adjusted.value("rgb_curves").clone());
+                    edit.set("rgb_curves", applied_value);
                     edit.commit("자동 색");
                     cx.before = false;
+                    let state = cx.state::<AutoColorState>();
+                    state.amount = amount;
+                    state.loaded_generation = Some(generation);
+                    state.active = active;
                     cx.status = tr_with(
                         "자동 색 적용 · 세기 {0}% · 채널 커브에서 다듬을 수 있습니다.",
                         &[&format!("{amount:.0}")],
