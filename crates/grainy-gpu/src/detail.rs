@@ -638,4 +638,50 @@ mod tests {
             }
         }
     }
+
+    #[test]
+    fn pv4_structure_adaptive_denoise_gpu_matches_cpu_and_beats_v3() {
+        let Some(gpu) = Gpu::with_adapter(crate::AdapterKind::Hardware).expect("GPU init") else {
+            return;
+        };
+        let (h, w) = (160, 240);
+        // Synthetic high-ISO scene: flat noisy left/right halves separated by a crisp vertical edge.
+        let image = Image::from_shape_fn((h, w, 3), |(y, x, c)| {
+            let base = if x < w / 2 { 0.22 } else { 0.72 };
+            let hash = ((x.wrapping_mul(73856093) ^ y.wrapping_mul(19349663) ^ c.wrapping_mul(83492791)) % 1009) as f32
+                / 1009.0
+                - 0.5;
+            (base + hash * 0.14).clamp(0.0, 1.0)
+        });
+        let mut s4 = grainy_core::defaults();
+        s4.set("detail_version", serde_json::json!(4));
+        s4.set("noise_luma", serde_json::json!(65.0));
+        s4.set("noise_color", serde_json::json!(25.0));
+        let cpu_v4 = grainy_detail::develop_detail(&image, &s4, 1.0).unwrap();
+        let gpu_v4 = gpu.detail(&image, &s4, 1.0).unwrap().expect("GPU PV4 denoise");
+        let max_diff = cpu_v4.iter().zip(gpu_v4.iter()).map(|(a, b)| (a - b).abs()).fold(0.0f32, f32::max);
+        assert!(max_diff < 5e-4, "PV4 denoise GPU vs CPU max diff {max_diff}");
+
+        // Compare flat-region noise variance & edge gradient preservation vs v3.
+        let mut s3 = s4.clone();
+        s3.set("detail_version", serde_json::json!(3));
+        let cpu_v3 = grainy_detail::develop_detail(&image, &s3, 1.0).unwrap();
+        let flat_std = |img: &Image| -> f64 {
+            let vals: Vec<f64> =
+                (20..h - 20).flat_map(|y| (20..w / 2 - 20).map(move |x| f64::from(img[[y, x, 0]]))).collect();
+            let mean = vals.iter().sum::<f64>() / vals.len() as f64;
+            (vals.iter().map(|v| (v - mean).powi(2)).sum::<f64>() / vals.len() as f64).sqrt()
+        };
+        let edge_contrast = |img: &Image| -> f64 {
+            (20..h - 20).map(|y| f64::from((img[[y, w / 2 + 1, 0]] - img[[y, w / 2 - 2, 0]]).abs())).sum::<f64>()
+                / (h - 40) as f64
+        };
+        let std_raw = flat_std(&image);
+        let std_v3 = flat_std(&cpu_v3);
+        let std_v4 = flat_std(&cpu_v4);
+        let edge_v3 = edge_contrast(&cpu_v3);
+        let edge_v4 = edge_contrast(&cpu_v4);
+        assert!(std_v4 < std_v3 && std_v4 < std_raw * 0.45, "std raw={std_raw:.4} v3={std_v3:.4} v4={std_v4:.4}");
+        assert!(edge_v4 >= edge_v3 * 0.99, "edge contrast v3={edge_v3:.4} v4={edge_v4:.4}");
+    }
 }

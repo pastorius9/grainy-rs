@@ -1,4 +1,5 @@
-//! A separate Windows scRGB surface for the HDR photo. All HWND and Direct3D objects stay on the UI thread.
+//! A separate native HDR surface for the HDR photo: Direct3D 11 FP16 scRGB on Windows and
+//! Metal FP16 Extended Linear sRGB (EDR) on macOS. All native window/GPU objects stay on the UI thread.
 
 use std::{ffi::c_void, marker::PhantomData, ptr::NonNull, rc::Rc, time::Duration};
 
@@ -20,7 +21,11 @@ unsafe extern "C" {
 
 fn error(hr: i32) -> String {
     if hr as u32 == 0x887a0004 {
-        tr("Windows에서 HDR을 켜고 HDR 모니터의 밝기 정보를 확인해 주세요.")
+        if cfg!(target_os = "macos") {
+            tr("macOS 디스플레이 설정에서 HDR(EDR) 지원 모니터를 확인해 주세요.")
+        } else {
+            tr("Windows에서 HDR을 켜고 HDR 모니터의 밝기 정보를 확인해 주세요.")
+        }
     } else {
         tr_with("HDR 미리보기를 열 수 없습니다 ({0}).", &[&format!("0x{:08X}", hr as u32)])
     }

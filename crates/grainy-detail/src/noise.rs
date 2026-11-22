@@ -241,6 +241,65 @@ pub fn luma_wavelet(
     out + &x
 }
 
+/// Scale-adaptive shrinkage weights across the 5 à trous wavelet levels in Process Version 4.
+/// Fine sensor grain (levels 0-1) is attenuated strongly while coarser macro-structure (levels 3-4)
+/// is preserved to avoid plastic smearing.
+pub const PV4_WAVELET_SCALE_WEIGHTS: [f32; WAVELET_LEVELS] = [1.15, 1.00, 0.78, 0.45, 0.22];
+
+/// Process Version 4 (`detail_version >= 4`) structure-adaptive edge-preserving wavelet luminance
+/// denoiser. Augments the 5×5 local wavelet energy with cross-scale smoothed-base gradient energy
+/// so real edges stay crisp while flat noisy areas receive steeper empirical Wiener attenuation.
+pub fn luma_wavelet_v4(
+    lightness: &Plane,
+    amount: f64,
+    pixel_scale: f64,
+    profiles: Option<&[[f32; WAVELET_BINS]]>,
+) -> Plane {
+    let _timing = grainy_core::timing::Span::new("detail.luma_wavelet_v4");
+    let lam = wavelet_lambda(amount, pixel_scale);
+    let mut x = lightness.to_owned();
+    let (h, w) = x.dim();
+    let mut out = Plane::zeros((h, w));
+    let mut guide: Option<Plane> = None;
+    let mut profile = [0f32; WAVELET_BINS];
+    let centres: Vec<f64> =
+        (0..WAVELET_BINS).map(|i| f64::from((i as f32 + 0.5) * (100.0 / WAVELET_BINS as f64) as f32)).collect();
+    for (level, &scale_w) in PV4_WAVELET_SCALE_WEIGHTS.iter().enumerate() {
+        let smooth = atrous_smooth(&x, level as u32);
+        let d = &x - &smooth;
+        let g = guide.get_or_insert_with(|| smooth.clone());
+        if level >= WAVELET_ESTIMATED {
+            profile.iter_mut().for_each(|v| *v *= 0.5);
+        } else {
+            profile = match profiles.and_then(|p| p.get(level)) {
+                Some(p) => *p,
+                None => noise_profile(&d, g),
+            };
+        }
+        let fp: Vec<f64> = profile.iter().map(|&v| f64::from(v)).collect();
+        let squares = d.mapv(|v| v * v);
+        let energy = cv::box_filter(&Mat::from_plane(&squares), 5).into_plane();
+        let lam_l = lam * scale_w;
+        Zip::indexed(&mut out).and(&d).and(&energy).and(&*g).par_for_each(|(y, xi), o, &dv, &e, &gv| {
+            let xm = xi.saturating_sub(1);
+            let xp = (xi + 1).min(w - 1);
+            let ym = y.saturating_sub(1);
+            let yp = (y + 1).min(h - 1);
+            let gx = smooth[[y, xp]] - smooth[[y, xm]];
+            let gy = smooth[[yp, xi]] - smooth[[ym, xi]];
+            let signal = e + 0.65 * 0.25 * (gx * gx + gy * gy);
+            let sigma = interp(f64::from(gv), &centres, &fp) as f32 * 1.25;
+            let threshold = lam_l * sigma * sigma;
+            let w_snr = signal / (signal + threshold + 1e-12);
+            let inv = 1.0 - w_snr;
+            let gain = (w_snr * w_snr) / (w_snr + 0.55 * inv * inv);
+            *o += dv * gain;
+        });
+        x = smooth;
+    }
+    out + &x
+}
+
 /// Port of luma/processing.py `luma_noise_reduction` (detail_version 1 and 2): a bilateral filter of L*
 /// (diameter `2·round(3·pixel_scale)+1`), blended by the slider strength.
 pub fn luma_noise_reduction(lightness: &Plane, amount: f64, pixel_scale: f64) -> Plane {

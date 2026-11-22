@@ -5,13 +5,14 @@
 use grainy_i18n::Language;
 
 /// Korean source → English, for the strings this crate adds.
-pub const ENGLISH: [(&str, &str); 61] = [
+pub const ENGLISH: [(&str, &str); 70] = [
     ("16비트 무손실", "16-bit lossless"),
     ("품질", "Quality"),
     ("HDR 모니터 창 열기", "Open HDR monitor window"),
     ("HDR 모니터 창 닫기", "Close HDR monitor window"),
     ("HDR 모니터 · +{0} EV", "HDR monitor · +{0} EV"),
     ("Windows에서 HDR을 켜고 HDR 모니터의 밝기 정보를 확인해 주세요.", "Enable HDR in Windows and check the HDR monitor's reported luminance."),
+    ("macOS 디스플레이 설정에서 HDR(EDR) 지원 모니터를 확인해 주세요.", "Enable HDR/EDR on an HDR-capable display in macOS Display settings."),
     ("HDR 미리보기를 열 수 없습니다 ({0}).", "The HDR preview could not be displayed ({0})."),
     ("Adobe 처리 버전 {0} → Grainy 현상 · {1}장", "Adobe process version {0} → Grainy rendering · {1} photo(s)"),
     ("테더 촬영 폴더 선택…", "Choose Tethered Capture Folder…"),
@@ -29,10 +30,21 @@ pub const ENGLISH: [(&str, &str); 61] = [
     ("피사체 선택", "Select Subject"),
     ("배경 선택", "Select Background"),
     ("개체 선택", "Select Object"),
+    ("인물 피부 선택", "Select Portrait Skin"),
     ("사진 안에서 개체를 둘러싸 주세요.", "Drag a rectangle around the object."),
     ("선택 영역을 계산하는 중…", "Computing selection…"),
     ("피사체의 경계를 찾지 못했습니다. 개체를 더 가깝게 둘러싸 주세요.", "No distinct foreground was found. Draw a tighter rectangle around the object."),
+    ("피부 영역을 찾지 못했습니다. 인물 사진인지 확인해 주세요.", "No distinct portrait skin region was found."),
     ("경계 검출", "Edge detection"),
+    ("경계 검출 + 경계 다듬기", "Edge detection + guided matte"),
+    ("피부 검출 + 경계 다듬기", "Skin detection + guided matte"),
+    ("프로세스 버전", "Process Version"),
+    ("프로세스 3 · 클래식 (호환)", "Process 3 · Classic (Compatible)"),
+    ("프로세스 4 · Grainy RS 네이티브", "Process 4 · Grainy RS Native"),
+    (
+        "하이라이트 복원, 무헤일로 부분 대비(Local Laplacian), 엣지 인식 텍스처·안개 제거를 사용합니다.",
+        "Uses highlight reconstruction, halo-free Local Laplacian clarity, and edge-aware texture, dehaze & denoise.",
+    ),
     ("{0} 선택 완료 · {1}", "{0} complete · {1}"),
     ("HDR 노출 병합…", "Merge HDR Exposures…"),
     ("평면 파노라마 병합…", "Merge Planar Panorama…"),

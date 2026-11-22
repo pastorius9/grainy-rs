@@ -89,7 +89,7 @@ pub fn poll(cx: &mut AppContext) {
     if !enabled() {
         return;
     }
-    #[cfg(windows)]
+    #[cfg(any(windows, target_os = "macos"))]
     crate::native_hdr::poll(cx);
     let folder = cx.doc.library_folder();
     if cx.state::<HdrState>().loaded.as_ref() != Some(&folder) {
@@ -153,7 +153,7 @@ pub fn panel(ui: &mut Ui, cx: &mut AppContext) {
             cx.slider(ui, spec, true);
         }
     }
-    #[cfg(windows)]
+    #[cfg(any(windows, target_os = "macos"))]
     crate::native_hdr::button(ui, cx);
     let mut view = cx.state::<HdrState>().view;
     if widgets::checkbox(ui, &mut view.visualize, &tr("HDR 영역 표시")).changed() {

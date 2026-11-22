@@ -57,7 +57,10 @@ pub fn detail_tools(a: &Image, s: &Settings, pixel_scale: f64) -> Image {
         }
         if noise_luma != 0.0 {
             let lightness = lab.index_axis(Axis(2), 0).to_owned();
-            let filtered = if detail_version(s) >= 3 {
+            let filtered = if detail_version(s) >= 4 {
+                let profiles = settings_profiles(s);
+                noise::luma_wavelet_v4(&lightness, noise_luma, pixel_scale, profiles.as_deref())
+            } else if detail_version(s) >= 3 {
                 let profiles = settings_profiles(s);
                 noise::luma_wavelet(&lightness, noise_luma, pixel_scale, profiles.as_deref())
             } else {

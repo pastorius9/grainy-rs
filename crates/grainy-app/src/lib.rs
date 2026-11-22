@@ -28,7 +28,7 @@ pub mod masks;
 mod menus;
 pub mod menus_photo;
 mod monitor_preview;
-#[cfg(windows)]
+#[cfg(any(windows, target_os = "macos"))]
 #[allow(unsafe_code)]
 mod native_hdr;
 pub mod network;

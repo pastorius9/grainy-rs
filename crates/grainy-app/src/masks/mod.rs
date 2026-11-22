@@ -33,10 +33,11 @@ pub(crate) mod selection;
 use crate::imagespace::CoordinateMap;
 
 /// The mask kinds in the menus' order (`None` = separator). Port of `StudioTools.MASK_KINDS`.
-pub const MASK_KINDS: [(Option<&str>, &str); 11] = [
+pub const MASK_KINDS: [(Option<&str>, &str); 12] = [
     (Some("subject"), "피사체 선택"),
     (Some("background"), "배경 선택"),
     (Some("object"), "개체 선택"),
+    (Some("portrait"), "인물 피부 선택"),
     (Some("sky"), "하늘 선택"),
     (None, ""),
     (Some("brush"), "브러시"),
@@ -62,10 +63,11 @@ pub const BRUSH_RANGES: [BrushRange; 4] = [
 pub const BRUSH_RANGE_SOFTNESS: f64 = 0.25;
 
 /// Component names in the mask list. Port of luma/mask_dialog.py `NAMES`.
-pub const NAMES: [(&str, &str); 9] = [
+pub const NAMES: [(&str, &str); 10] = [
     ("subject", "피사체 선택"),
     ("background", "배경 선택"),
     ("object", "개체 선택"),
+    ("portrait", "인물 피부 선택"),
     ("brush", "브러시"),
     ("linear", "선형 그레이디언트"),
     ("radial", "방사형 그레이디언트"),

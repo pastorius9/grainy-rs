@@ -93,7 +93,7 @@ pub fn component_mask(shape: (usize, usize), component: &Obj) -> Result<Plane> {
         Some(Value::String(kind)) => kind.as_str(),
         Some(_) => "",
     };
-    if matches!(kind, "subject" | "background" | "object") {
+    if matches!(kind, "subject" | "background" | "object" | "portrait") {
         return crate::selection::coverage(shape, component);
     }
     let p = value::points(component, "points", &CENTRE)?;

@@ -300,8 +300,8 @@ fn window_place(ctx: &eframe::egui::Context) -> [u32; 7] {
 enum Native {
     /// A Windows window: its `HWND` as a number.
     Windows(isize),
-    /// A macOS window (looked up by its place).
-    Mac,
+    /// A macOS window: its `NSView*` pointer (monitor is looked up by its place).
+    Mac(isize),
 }
 
 /// The window's native window, `None` where the toolkit gives none (tests) or on other systems.
@@ -309,7 +309,7 @@ fn native_window(frame: &eframe::Frame) -> Option<Native> {
     use raw_window_handle::{HasWindowHandle, RawWindowHandle};
     match frame.window_handle().ok()?.as_raw() {
         RawWindowHandle::Win32(handle) => Some(Native::Windows(handle.hwnd.get())),
-        RawWindowHandle::AppKit(_) => Some(Native::Mac),
+        RawWindowHandle::AppKit(handle) => Some(Native::Mac(handle.ns_view.as_ptr() as isize)),
         _ => None,
     }
 }
@@ -341,13 +341,17 @@ pub fn watch_window(cx: &mut AppContext, frame: &eframe::Frame) {
             crate::native_hdr::bind(cx, handle);
             grainy_platform::monitor::screen_of_window(handle).unwrap_or_default()
         }
-        Some(Native::Mac) => match system_place(&cx.egui) {
-            Some((window, monitor)) => {
-                grainy_platform::monitor::mac_screen_of_window(window, monitor).unwrap_or_default()
+        Some(Native::Mac(_handle)) => {
+            #[cfg(target_os = "macos")]
+            crate::native_hdr::bind(cx, _handle);
+            match system_place(&cx.egui) {
+                Some((window, monitor)) => {
+                    grainy_platform::monitor::mac_screen_of_window(window, monitor).unwrap_or_default()
+                }
+                // Not placed yet (or minimised): asked again when the window moves.
+                None => return,
             }
-            // Not placed yet (or minimised): asked again when the window moves.
-            None => return,
-        },
+        }
         None => return,
     };
     cx.state::<DisplayState>().screen_seen(&screen);

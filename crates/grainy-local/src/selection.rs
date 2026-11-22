@@ -95,9 +95,189 @@ pub fn foreground(rgb: &[[u8; 3]]) -> Result<Vec<u8>> {
         .collect())
 }
 
+/// Separable O(N) box mean over a `SIDE × SIDE` float plane with clamped borders.
+fn box_mean(src: &[f32], radius: usize) -> Vec<f32> {
+    let n = SIDE;
+    let mut tmp = vec![0.0f32; n * n];
+    let mut out = vec![0.0f32; n * n];
+    let r = radius as isize;
+    let win = (2 * radius + 1) as f32;
+    for y in 0..n {
+        let row = y * n;
+        let mut acc = 0.0f32;
+        for dx in -r..=r {
+            let x = dx.clamp(0, (n - 1) as isize) as usize;
+            acc += src[row + x];
+        }
+        tmp[row] = acc / win;
+        for x in 1..n {
+            let add_x = (x + radius).min(n - 1);
+            let sub_x = x.saturating_sub(radius + 1);
+            acc += src[row + add_x] - src[row + sub_x];
+            tmp[row + x] = acc / win;
+        }
+    }
+    for x in 0..n {
+        let mut acc = 0.0f32;
+        for dy in -r..=r {
+            let y = dy.clamp(0, (n - 1) as isize) as usize;
+            acc += tmp[y * n + x];
+        }
+        out[x] = acc / win;
+        for y in 1..n {
+            let add_y = (y + radius).min(n - 1);
+            let sub_y = y.saturating_sub(radius + 1);
+            acc += tmp[add_y * n + x] - tmp[sub_y * n + x];
+            out[y * n + x] = acc / win;
+        }
+    }
+    out
+}
+
+/// Edge-preserving 3-channel RGB Guided Filter (He et al.) matte refinement at `SIDE × SIDE`.
+/// Aligns soft foreground/subject/skin matte transitions with fine luminance and colour edges
+/// (hair, fur, foliage, jawlines) while keeping solid interior/exterior regions untouched.
+pub fn refine_matte(rgb: &[[u8; 3]], matte: &[u8], radius: usize, eps: f32) -> Result<Vec<u8>> {
+    let n = SIDE * SIDE;
+    if rgb.len() != n || matte.len() != n {
+        return Err(Error::Invalid("invalid selection matte dimensions".into()));
+    }
+    if radius == 0 {
+        return Ok(matte.to_vec());
+    }
+    let mut r = vec![0.0f32; n];
+    let mut g = vec![0.0f32; n];
+    let mut b = vec![0.0f32; n];
+    let mut p = vec![0.0f32; n];
+    for i in 0..n {
+        r[i] = f32::from(rgb[i][0]) / 255.0;
+        g[i] = f32::from(rgb[i][1]) / 255.0;
+        b[i] = f32::from(rgb[i][2]) / 255.0;
+        p[i] = f32::from(matte[i]) / 255.0;
+    }
+    let mr = box_mean(&r, radius);
+    let mg = box_mean(&g, radius);
+    let mb = box_mean(&b, radius);
+    let mp = box_mean(&p, radius);
+
+    let prod = |a: &[f32], c: &[f32]| -> Vec<f32> { a.iter().zip(c).map(|(x, y)| x * y).collect() };
+    let rr = box_mean(&prod(&r, &r), radius);
+    let rg = box_mean(&prod(&r, &g), radius);
+    let rb = box_mean(&prod(&r, &b), radius);
+    let gg = box_mean(&prod(&g, &g), radius);
+    let gb = box_mean(&prod(&g, &b), radius);
+    let bb = box_mean(&prod(&b, &b), radius);
+    let rp = box_mean(&prod(&r, &p), radius);
+    let gp = box_mean(&prod(&g, &p), radius);
+    let bp = box_mean(&prod(&b, &p), radius);
+
+    let eps = eps.max(1e-6);
+    let mut ar = vec![0.0f32; n];
+    let mut ag = vec![0.0f32; n];
+    let mut ab = vec![0.0f32; n];
+    let mut bv = vec![0.0f32; n];
+    for i in 0..n {
+        let a11 = rr[i] - mr[i] * mr[i] + eps;
+        let a12 = rg[i] - mr[i] * mg[i];
+        let a13 = rb[i] - mr[i] * mb[i];
+        let a22 = gg[i] - mg[i] * mg[i] + eps;
+        let a23 = gb[i] - mg[i] * mb[i];
+        let a33 = bb[i] - mb[i] * mb[i] + eps;
+
+        let i11 = a22 * a33 - a23 * a23;
+        let i12 = a13 * a23 - a12 * a33;
+        let i13 = a12 * a23 - a13 * a22;
+        let i22 = a11 * a33 - a13 * a13;
+        let i23 = a13 * a12 - a11 * a23;
+        let i33 = a11 * a22 - a12 * a12;
+        let det = (a11 * i11 + a12 * i12 + a13 * i13).max(1e-12);
+
+        let cr = rp[i] - mr[i] * mp[i];
+        let cg = gp[i] - mg[i] * mp[i];
+        let cb = bp[i] - mb[i] * mp[i];
+
+        ar[i] = (i11 * cr + i12 * cg + i13 * cb) / det;
+        ag[i] = (i12 * cr + i22 * cg + i23 * cb) / det;
+        ab[i] = (i13 * cr + i23 * cg + i33 * cb) / det;
+        bv[i] = mp[i] - (ar[i] * mr[i] + ag[i] * mg[i] + ab[i] * mb[i]);
+    }
+    let mar = box_mean(&ar, radius);
+    let mag = box_mean(&ag, radius);
+    let mab = box_mean(&ab, radius);
+    let mbv = box_mean(&bv, radius);
+    Ok((0..n)
+        .map(|i| {
+            let q = (mar[i] * r[i] + mag[i] * g[i] + mab[i] * b[i] + mbv[i]).clamp(0.0, 1.0);
+            (q * 255.0).round() as u8
+        })
+        .collect())
+}
+
+/// Adaptive portrait skin matte in YCbCr chromaticity space (covering light through deep skin tones),
+/// optionally weighted by a foreground subject matte and refined along fine facial/hair boundaries.
+pub fn portrait_skin(rgb: &[[u8; 3]], fg: Option<&[u8]>) -> Result<Vec<u8>> {
+    let n = SIDE * SIDE;
+    if rgb.len() != n || fg.is_some_and(|m| m.len() != n) {
+        return Err(Error::Invalid("invalid selection image dimensions".into()));
+    }
+    let mut prob = vec![0.0f32; n];
+    for (i, &[ru, gu, bu]) in rgb.iter().enumerate() {
+        let r = f32::from(ru);
+        let g = f32::from(gu);
+        let b = f32::from(bu);
+        let y = 0.299 * r + 0.587 * g + 0.114 * b;
+        let cb = 128.0 - 0.168736 * r - 0.331264 * g + 0.5 * b;
+        let cr = 128.0 + 0.5 * r - 0.418688 * g - 0.081312 * b;
+
+        // Soft distance outside the human skin Cb/Cr locus [77..127] x [133..174].
+        let dcb = if cb < 77.0 {
+            77.0 - cb
+        } else if cb > 127.0 {
+            cb - 127.0
+        } else {
+            0.0
+        };
+        let dcr = if cr < 133.0 {
+            133.0 - cr
+        } else if cr > 174.0 {
+            cr - 174.0
+        } else {
+            0.0
+        };
+        let chroma = (-((dcb * dcb + dcr * dcr) / (2.0 * 7.5 * 7.5))).exp();
+        // Luminance gate (excludes black shadows/hair while preserving deep brown skin tones).
+        let luma = ((y - 22.0) / 24.0).clamp(0.0, 1.0) * ((252.0 - y) / 16.0).clamp(0.0, 1.0);
+        // Warmth and saturation plausibility (excludes blue/green casts and neon red clothing).
+        let warm = ((r - b - 4.0) / 18.0).clamp(0.0, 1.0) * ((r - g + 10.0) / 22.0).clamp(0.0, 1.0);
+        let spread = r.max(g).max(b) - r.min(g).min(b);
+        let sat = ((165.0 - spread) / 35.0).clamp(0.0, 1.0);
+        prob[i] = (chroma * luma * warm * sat).clamp(0.0, 1.0);
+    }
+    if let Some(fg) = fg {
+        let fg_skin: f32 = prob.iter().zip(fg).map(|(&s, &f)| s * f32::from(f) / 255.0).sum();
+        let all_skin: f32 = prob.iter().sum();
+        if all_skin > 1.0 && fg_skin / all_skin > 0.25 {
+            for (s, &f) in prob.iter_mut().zip(fg) {
+                let w = 0.15 + 0.85 * (f32::from(f) / 255.0);
+                *s *= w;
+            }
+        }
+    }
+    let raw: Vec<u8> = prob.into_iter().map(|v| (v.clamp(0.0, 1.0) * 255.0).round() as u8).collect();
+    let refined = refine_matte(rgb, &raw, 4, 2e-3)?;
+    let covered = refined.iter().filter(|&&v| v >= 64).count();
+    if covered < n / 400 {
+        return Err(Error::Invalid("No distinct portrait skin region was found.".into()));
+    }
+    Ok(refined)
+}
+
 /// Encode a soft matte only once. The model and source file are then unnecessary for playback.
 pub fn component(kind: &str, bounds: Box2d, matte: &[u8]) -> Result<Map<String, Value>> {
-    if !matches!(kind, "subject" | "background" | "object") || !bounds_valid(bounds) || matte.len() != SIDE * SIDE {
+    if !matches!(kind, "subject" | "background" | "object" | "portrait")
+        || !bounds_valid(bounds)
+        || matte.len() != SIDE * SIDE
+    {
         return Err(Error::Invalid("invalid selection matte".into()));
     }
     let mut out = ZlibEncoder::new(Vec::new(), Compression::fast());
@@ -181,5 +361,33 @@ mod tests {
         let obj = coverage((80, 100), &component("object", [0., 0., 0.5, 0.5], &mask).unwrap()).unwrap();
         assert!(obj[[20, 25]] > 0.99 && obj[[40, 50]] == 0.);
         assert!(foreground(&vec![[0; 3]; SIDE * SIDE]).is_err());
+
+        // Guided matte refinement keeps crisp interior/exterior boundaries intact.
+        let refined = refine_matte(&img, &mask, 4, 1e-3).unwrap();
+        let ref_cov = coverage((80, 100), &component("subject", FULL, &refined).unwrap()).unwrap();
+        assert!(ref_cov[[40, 50]] > 0.98 && ref_cov[[24, 29]] < 0.02);
+    }
+
+    #[test]
+    fn portrait_skin_detects_skin_tones_and_rejects_non_skin() {
+        let img: Vec<_> = (0..SIDE * SIDE)
+            .map(|i| {
+                let x = i % SIDE;
+                let y = i / SIDE;
+                let dx = x as isize - (SIDE / 2) as isize;
+                let dy = y as isize - (SIDE / 2) as isize;
+                if dx * dx + dy * dy < 60 * 60 {
+                    [215, 165, 138] // natural portrait skin tone
+                } else {
+                    [40, 110, 175] // cool blue background
+                }
+            })
+            .collect();
+        let skin = portrait_skin(&img, None).unwrap();
+        let cov = coverage((80, 80), &component("portrait", FULL, &skin).unwrap()).unwrap();
+        assert!(cov[[40, 40]] > 0.9, "center skin coverage {}", cov[[40, 40]]);
+        assert!(cov[[5, 5]] < 0.05, "background leakage {}", cov[[5, 5]]);
+        // Pure blue frame has no portrait skin.
+        assert!(portrait_skin(&vec![[30, 90, 180]; SIDE * SIDE], None).is_err());
     }
 }

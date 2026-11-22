@@ -13,6 +13,10 @@ use crate::tools::range_pick::{self, RangeState};
 #[cfg(windows)]
 mod winml;
 
+#[cfg(target_os = "macos")]
+#[allow(unsafe_code)]
+mod macos_vision;
+
 fn pixels(image: &Image, bounds: Box2d) -> Vec<[u8; 3]> {
     let (h, w, _) = image.dim();
     let sample = |i: usize, n: usize, lo: f64, hi: f64| {
@@ -36,7 +40,7 @@ fn generate(
     settings: &Settings,
     kind: &str,
     bounds: Box2d,
-) -> Result<(Map<String, Value>, bool), String> {
+) -> Result<(Map<String, Value>, String), String> {
     let mut s = settings.clone();
     let defaults = grainy_core::defaults();
     for key in grainy_engine::GEOMETRY_KEYS {
@@ -47,18 +51,59 @@ fn generate(
     let loaded = range_pick::load(path, 1200, &s)?;
     let image = grainy_engine::develop(loaded.photo.source(), &s.0, &Default::default()).map_err(|e| e.to_string())?;
     let rgb = pixels(&image, bounds);
-    #[cfg(windows)]
-    let learned = winml::foreground(&rgb)?;
-    #[cfg(not(windows))]
-    let learned: Option<Vec<u8>> = None;
-    let is_learned = learned.is_some();
-    let matte = match learned {
-        Some(matte) => matte,
-        None => selection::foreground(&rgb)
-            .map_err(|_| tr("피사체의 경계를 찾지 못했습니다. 개체를 더 가깝게 둘러싸 주세요."))?,
+    let (learned_matte, learned_tag): (Option<Vec<u8>>, Option<&'static str>) = {
+        #[cfg(windows)]
+        {
+            match winml::foreground(&rgb)? {
+                Some(inf) => (Some(inf.matte), Some(if inf.gpu { "U²-Net (GPU)" } else { "U²-Net" })),
+                None => (None, None),
+            }
+        }
+        #[cfg(target_os = "macos")]
+        {
+            let matte = if kind == "portrait" {
+                macos_vision::person(&rgb).or_else(|| macos_vision::foreground(&rgb))
+            } else {
+                macos_vision::foreground(&rgb)
+            };
+            match matte {
+                Some(m) => (Some(m), Some("Apple Vision")),
+                None => (None, None),
+            }
+        }
+        #[cfg(not(any(windows, target_os = "macos")))]
+        {
+            (None, None)
+        }
+    };
+    let (matte, method) = if kind == "portrait" {
+        let fg = match learned_matte {
+            Some(m) => Some(m),
+            None => selection::foreground(&rgb).ok(),
+        };
+        let skin = selection::portrait_skin(&rgb, fg.as_deref())
+            .map_err(|_| tr("피부 영역을 찾지 못했습니다. 인물 사진인지 확인해 주세요."))?;
+        let label = match learned_tag {
+            Some(tag) => format!("{tag} + Skin"),
+            None => tr("피부 검출 + 경계 다듬기"),
+        };
+        (skin, label)
+    } else {
+        match learned_matte {
+            Some(raw) => {
+                let refined = selection::refine_matte(&rgb, &raw, 3, 2e-3).unwrap_or(raw);
+                (refined, learned_tag.unwrap_or("AI").to_owned())
+            }
+            None => {
+                let raw = selection::foreground(&rgb)
+                    .map_err(|_| tr("피사체의 경계를 찾지 못했습니다. 개체를 더 가깝게 둘러싸 주세요."))?;
+                let refined = selection::refine_matte(&rgb, &raw, 4, 1e-3).unwrap_or(raw);
+                (refined, tr("경계 검출 + 경계 다듬기"))
+            }
+        }
     };
     let component = selection::component(kind, bounds, &matte).map_err(|e| e.to_string())?;
-    Ok((component, is_learned))
+    Ok((component, method))
 }
 
 pub(super) fn choose(cx: &mut AppContext, kind: &str, new_layer: bool, operation: Operation) -> bool {
@@ -69,9 +114,13 @@ pub(super) fn choose(cx: &mut AppContext, kind: &str, new_layer: bool, operation
             state.new_object_layer = new_layer;
             state.operation = operation;
         }
-        "subject" | "background" => {
+        "subject" | "background" | "portrait" => {
             actions::mode(cx, Mode::None);
-            let kind = if kind == "subject" { "subject" } else { "background" };
+            let kind = match kind {
+                "subject" => "subject",
+                "portrait" => "portrait",
+                _ => "background",
+            };
             start(cx, kind, FULL, new_layer, operation);
         }
         _ => return false,
@@ -148,7 +197,7 @@ fn start(cx: &mut AppContext, kind: &'static str, bounds: Box2d, new_layer: bool
             if (state.layer, state.component, state.mode) != (layer, index, mode) {
                 return;
             }
-            let (mut component, learned) = match result {
+            let (mut component, method) = match result {
                 Ok(x) => x,
                 Err(e) => {
                     cx.set_status(e);
@@ -164,7 +213,6 @@ fn start(cx: &mut AppContext, kind: &'static str, bounds: Box2d, new_layer: bool
             actions::add_component(cx, component);
             actions::mode(cx, Mode::None);
             cx.doc.edit_mut().commit(super::kind_name(kind));
-            let method = if learned { "U²-Net".to_owned() } else { tr("경계 검출") };
             cx.set_status(tr_with("{0} 선택 완료 · {1}", &[&name, &method]));
         },
     );

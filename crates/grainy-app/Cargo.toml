@@ -64,7 +64,7 @@ grainy-testkit.workspace = true
 # Release zips of the network tests (crates/grainy-app/tests/network.rs).
 zip.workspace = true
 
-[target.'cfg(windows)'.build-dependencies]
+[target.'cfg(any(windows, target_os = "macos"))'.build-dependencies]
 cc = "1"
 
 [lints]

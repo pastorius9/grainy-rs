@@ -27,4 +27,19 @@ fn main() {
             println!("cargo:rustc-link-lib={lib}");
         }
     }
+    #[cfg(target_os = "macos")]
+    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("macos") {
+        println!("cargo:rerun-if-changed=native/hdr_display_macos.mm");
+        println!("cargo:rerun-if-changed=native/macos_vision.mm");
+        cc::Build::new()
+            .cpp(true)
+            .std("c++17")
+            .flag("-fobjc-arc")
+            .file("native/hdr_display_macos.mm")
+            .file("native/macos_vision.mm")
+            .compile("grainy_macos_native");
+        for framework in ["AppKit", "QuartzCore", "Metal", "CoreGraphics", "CoreVideo", "Vision", "Foundation"] {
+            println!("cargo:rustc-link-lib=framework={framework}");
+        }
+    }
 }

@@ -233,7 +233,23 @@ fn main(@builtin(global_invocation_id) id:vec3<u32>){
             let sx=aux[index];let d=a.x-sx;let energy=extra0[index];let guide=select(a.z,sx,p[27]==0.0);
             let t=guide/12.5-0.5;var sigma=table[0].x;
             if t>=7.0{sigma=table[7].x;}else if t>0.0{let j=u32(t);let f=t-f32(j);sigma=table[j].x+(table[j+1u].x-table[j].x)*f;}
-            sigma*=1.25;let gain=energy/(energy+p[26]*sigma*sigma+1e-12);a=vec3(sx,a.y+d*gain,guide);
+            sigma*=1.25;
+            var gain=energy/(energy+p[26]*sigma*sigma+1e-12);
+            if (flags&128u)!=0u{
+                let xm=u32(max(x-1,0));let xp=u32(min(x+1,i32(w)-1));
+                let ym=u32(max(y-1,0));let yp=u32(min(y+1,i32(h)-1));
+                let gx=aux[(id.y*w+xp)*3u]-aux[(id.y*w+xm)*3u];
+                let gy=aux[(yp*w+id.x)*3u]-aux[(ym*w+id.x)*3u];
+                let signal=energy+0.65*0.25*(gx*gx+gy*gy);
+                let lvl=u32(p[27]);
+                var sw=0.22;
+                if lvl==0u{sw=1.15;}else if lvl==1u{sw=1.00;}else if lvl==2u{sw=0.78;}else if lvl==3u{sw=0.45;}
+                let threshold=p[26]*sw*sigma*sigma;
+                let w_snr=signal/(signal+threshold+1e-12);
+                let inv=1.0-w_snr;
+                gain=(w_snr*w_snr)/(w_snr+0.55*inv*inv);
+            }
+            a=vec3(sx,a.y+d*gain,guide);
         }
         case 31u:{let b=from_aux(index);a.x=b.x+b.y;}
         default:{}
