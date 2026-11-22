@@ -52,10 +52,7 @@ impl HuffmanCode {
             reordered_bits[idx] = bit;
         }
 
-        BuiltHuffmanTable {
-            lengths: reordered_lengths,
-            bits: reordered_bits,
-        }
+        BuiltHuffmanTable { lengths: reordered_lengths, bits: reordered_bits }
     }
 }
 
@@ -75,20 +72,10 @@ impl Bundle for HuffmanCode {
             *count = x as u8;
         }
         let values = (0..sum_counts)
-            .map(|_| {
-                bitstream
-                    .read_u32(U(2), 4 + U(2), 8 + U(4), 1 + U(8))
-                    .map(|x| x as u8)
-            })
+            .map(|_| bitstream.read_u32(U(2), 4 + U(2), 8 + U(4), 1 + U(8)).map(|x| x as u8))
             .collect::<Result<_, _>>()?;
 
-        Ok(Self {
-            is_ac,
-            id,
-            is_last,
-            counts,
-            values,
-        })
+        Ok(Self { is_ac, id, is_last, counts, values })
     }
 }
 
@@ -102,9 +89,8 @@ impl std::fmt::Debug for BuiltHuffmanTable {
         struct Helper<'a>(&'a BuiltHuffmanTable);
         impl std::fmt::Debug for Helper<'_> {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                let entries = std::iter::zip(&self.0.lengths, &self.0.bits)
-                    .enumerate()
-                    .filter_map(|(sym, (&len, &bit))| {
+                let entries =
+                    std::iter::zip(&self.0.lengths, &self.0.bits).enumerate().filter_map(|(sym, (&len, &bit))| {
                         if len == 0 {
                             return None;
                         }
@@ -121,9 +107,7 @@ impl std::fmt::Debug for BuiltHuffmanTable {
             }
         }
 
-        f.debug_struct("BulitHuffmanTable")
-            .field("mapping", &Helper(self))
-            .finish()
+        f.debug_struct("BulitHuffmanTable").field("mapping", &Helper(self)).finish()
     }
 }
 
@@ -131,15 +115,8 @@ impl BuiltHuffmanTable {
     pub fn lookup(&self, symbol: u8) -> crate::Result<(u8, u64)> {
         let idx = symbol as usize;
         let length = self.lengths.get(idx).copied().unwrap_or(0);
-        if length == 0 {
-            Err(crate::Error::HuffmanLookup)
-        } else {
-            Ok((length, self.bits[idx]))
-        }
+        if length == 0 { Err(crate::Error::HuffmanLookup) } else { Ok((length, self.bits[idx])) }
     }
 }
 
-pub(crate) static EMPTY_TABLE: BuiltHuffmanTable = BuiltHuffmanTable {
-    lengths: Vec::new(),
-    bits: Vec::new(),
-};
+pub(crate) static EMPTY_TABLE: BuiltHuffmanTable = BuiltHuffmanTable { lengths: Vec::new(), bits: Vec::new() };

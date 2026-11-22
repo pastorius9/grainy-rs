@@ -73,8 +73,7 @@ impl<'recon> ScanState<'recon> {
         let (len, bits) = ac_table.lookup((eobn as u8) << 4)?;
         self.bit_writer.write_huffman(bits, len);
         let mask = (1u32 << eobn) - 1;
-        self.bit_writer
-            .write_raw((self.eobrun & mask) as u64, eobn as u8);
+        self.bit_writer.write_raw((self.eobrun & mask) as u64, eobn as u8);
         self.eobrun = 0;
 
         let refinement_bits = std::mem::take(&mut self.refinement_bits);
@@ -86,20 +85,14 @@ impl<'recon> ScanState<'recon> {
         Ok(())
     }
 
-    fn flush_bit_writer(
-        &mut self,
-        padding_bitstream: Option<&mut Bitstream>,
-        mut writer: impl Write,
-    ) -> Result<()> {
+    fn flush_bit_writer(&mut self, padding_bitstream: Option<&mut Bitstream>, mut writer: impl Write) -> Result<()> {
         self.emit_eobrun()?;
 
         let mut bit_writer = std::mem::replace(&mut self.bit_writer, BitWriter::new());
         let padding_needed = bit_writer.padding_bits();
         if padding_needed != 0 {
             let bits = if let Some(padding_bitstream) = padding_bitstream {
-                padding_bitstream
-                    .read_bits(padding_needed)
-                    .map_err(|_| Error::InvalidData)?
+                padding_bitstream.read_bits(padding_needed).map_err(|_| Error::InvalidData)?
             } else {
                 (-1i32) as u32
             };
@@ -107,18 +100,12 @@ impl<'recon> ScanState<'recon> {
         }
 
         let bytes = bit_writer.finalize();
-        writer
-            .write_all(&bytes)
-            .map_err(Error::ReconstructionWrite)?;
+        writer.write_all(&bytes).map_err(Error::ReconstructionWrite)?;
 
         Ok(())
     }
 
-    fn restart(
-        &mut self,
-        padding_bitstream: Option<&mut Bitstream>,
-        mut writer: impl Write,
-    ) -> Result<()> {
+    fn restart(&mut self, padding_bitstream: Option<&mut Bitstream>, mut writer: impl Write) -> Result<()> {
         self.dc_pred.fill(0);
         self.flush_bit_writer(padding_bitstream, &mut writer)?;
 
@@ -293,9 +280,7 @@ fn process_progressive_refinement<'recon>(
                 if zero_runs == 16 {
                     let (len, bits) = ac_table.lookup(0xf0)?;
                     state.bit_writer.write_huffman(bits, len);
-                    state
-                        .bit_writer
-                        .write_raw(refinement_bits, refinement_bitlen);
+                    state.bit_writer.write_raw(refinement_bits, refinement_bitlen);
                     zero_runs = 0;
                     refinement_bitlen = 0;
                 }
@@ -313,9 +298,7 @@ fn process_progressive_refinement<'recon>(
         let (len, bits) = ac_table.lookup(sym)?;
         state.bit_writer.write_huffman(bits, len);
         state.bit_writer.write_raw(bit, 1);
-        state
-            .bit_writer
-            .write_raw(refinement_bits, refinement_bitlen);
+        state.bit_writer.write_raw(refinement_bits, refinement_bitlen);
     }
 
     let mut remaining_zrl = extra_zero_runs.unwrap_or(0);
@@ -323,11 +306,7 @@ fn process_progressive_refinement<'recon>(
         state.emit_eobrun()?;
     }
 
-    let (zrl_len, zrl_bits) = if remaining_zrl > 0 {
-        ac_table.lookup(0xf0)?
-    } else {
-        (0, 0)
-    };
+    let (zrl_len, zrl_bits) = if remaining_zrl > 0 { ac_table.lookup(0xf0)? } else { (0, 0) };
 
     let mut zero_runs = 0u8;
     let mut refinement_bitlen = 0u8;
@@ -337,9 +316,7 @@ fn process_progressive_refinement<'recon>(
             zero_runs += 1;
             if remaining_zrl > 0 && zero_runs == 16 {
                 state.bit_writer.write_huffman(zrl_bits, zrl_len);
-                state
-                    .bit_writer
-                    .write_raw(refinement_bits, refinement_bitlen);
+                state.bit_writer.write_raw(refinement_bits, refinement_bitlen);
                 zero_runs = 0;
                 refinement_bitlen = 0;
                 remaining_zrl -= 1;
@@ -352,9 +329,7 @@ fn process_progressive_refinement<'recon>(
 
     for _ in 0..remaining_zrl {
         state.bit_writer.write_huffman(zrl_bits, zrl_len);
-        state
-            .bit_writer
-            .write_raw(refinement_bits, refinement_bitlen);
+        state.bit_writer.write_raw(refinement_bits, refinement_bitlen);
         zero_runs = 0;
         refinement_bitlen = 0;
     }
@@ -375,24 +350,11 @@ fn process_progressive_refinement<'recon>(
 }
 
 impl super::JpegBitstreamReconstructor<'_, '_, '_> {
-    pub(super) fn process_scan<const TYPE: usize>(
-        &mut self,
-        params: ScanParams,
-        mut writer: impl Write,
-    ) -> Result<()> {
+    pub(super) fn process_scan<const TYPE: usize>(&mut self, params: ScanParams, mut writer: impl Write) -> Result<()> {
         assert!(TYPE < 3);
 
-        let ScanParams {
-            si,
-            smi,
-            upsampling_shifts_ycbcr,
-            hsamples,
-            vsamples,
-            max_hsample,
-            max_vsample,
-            w8,
-            h8,
-        } = params;
+        let ScanParams { si, smi, upsampling_shifts_ycbcr, hsamples, vsamples, max_hsample, max_vsample, w8, h8 } =
+            params;
         let comps = &si.component_info;
         let frame_header = self.frame.header();
         let dc_offset = self.parsed.dc_offset;
@@ -415,33 +377,21 @@ impl super::JpegBitstreamReconstructor<'_, '_, '_> {
                     state.restart(self.padding_bitstream.as_mut(), &mut writer)?;
                 }
 
-                let group_idx = frame_header
-                    .group_idx_from_coord(x8 << (3 + max_hsample), y8 << (3 + max_vsample))
-                    .unwrap();
+                let group_idx =
+                    frame_header.group_idx_from_coord(x8 << (3 + max_hsample), y8 << (3 + max_vsample)).unwrap();
                 let lf_group_idx = frame_header.lf_group_idx_from_group_idx(group_idx);
 
                 let hf_coeff = self.parsed.hf_coeff(group_idx);
                 let lf_quant = self.parsed.lf_quant(lf_group_idx);
 
-                let it = comps
-                    .iter()
-                    .enumerate()
-                    .zip(std::iter::zip(&hsamples, &vsamples));
+                let it = comps.iter().enumerate().zip(std::iter::zip(&hsamples, &vsamples));
                 for ((cidx, c), (&hs, &vs)) in it {
-                    let dc_table = self.dc_tables[c.dc_tbl_idx as usize]
-                        .as_ref()
-                        .unwrap_or(&huffman::EMPTY_TABLE);
-                    let ac_table = self.ac_tables[c.ac_tbl_idx as usize]
-                        .as_ref()
-                        .unwrap_or(&huffman::EMPTY_TABLE);
+                    let dc_table = self.dc_tables[c.dc_tbl_idx as usize].as_ref().unwrap_or(&huffman::EMPTY_TABLE);
+                    let ac_table = self.ac_tables[c.ac_tbl_idx as usize].as_ref().unwrap_or(&huffman::EMPTY_TABLE);
 
                     state.try_init_ac_table(ac_table);
 
-                    let idx = if frame_header.do_ycbcr {
-                        c.comp_idx as usize
-                    } else {
-                        [1, 0, 2][c.comp_idx as usize]
-                    };
+                    let idx = if frame_header.do_ycbcr { c.comp_idx as usize } else { [1, 0, 2][c.comp_idx as usize] };
                     let lf_quant = &lf_quant[idx];
                     let hf_coeff = hf_coeff[idx];
                     let dc_offset = dc_offset[idx];
@@ -463,28 +413,17 @@ impl super::JpegBitstreamReconstructor<'_, '_, '_> {
                             let x_dc = (x_dc & group_width_mask) as usize;
                             let x_ac_start = (x_ac_start & group_width_mask) as usize;
 
-                            let hf_coeff = hf_coeff.subgrid(
-                                x_ac_start..(x_ac_start + 8),
-                                y_ac_start..(y_ac_start + 8),
-                            );
+                            let hf_coeff = hf_coeff.subgrid(x_ac_start..(x_ac_start + 8), y_ac_start..(y_ac_start + 8));
 
                             let dc_coeff = (si.ss == 0).then(|| {
-                                let dc_coeff = lf_quant
-                                    .get(x_dc, y_dc)
-                                    .saturating_sub(dc_offset)
-                                    .clamp(-2047, 2047);
+                                let dc_coeff = lf_quant.get(x_dc, y_dc).saturating_sub(dc_offset).clamp(-2047, 2047);
                                 dc_coeff >> al
                             });
 
                             let mut ac_coeffs: Vec<i16> = Vec::with_capacity((se - ss) as usize);
-                            for &(x, y) in &jxl_vardct::DCT8_NATURAL_ORDER[ss as usize..se as usize]
-                            {
+                            for &(x, y) in &jxl_vardct::DCT8_NATURAL_ORDER[ss as usize..se as usize] {
                                 let coeff = hf_coeff.get(x as usize, y as usize) as i16;
-                                let coeff = if coeff < 0 {
-                                    -((-coeff) >> al)
-                                } else {
-                                    coeff >> al
-                                };
+                                let coeff = if coeff < 0 { -((-coeff) >> al) } else { coeff >> al };
                                 ac_coeffs.push(coeff);
                             }
 

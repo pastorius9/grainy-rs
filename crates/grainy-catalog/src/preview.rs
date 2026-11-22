@@ -552,8 +552,7 @@ pub fn prune_cache(directory: impl AsRef<Path>, max_bytes: u64) -> Result<PruneS
 
     let now = SystemTime::now();
     let mut stats = PruneStats::default();
-    let mut groups: std::collections::HashMap<i64, (SystemTime, u64, Vec<PathBuf>)> =
-        std::collections::HashMap::new();
+    let mut groups: std::collections::HashMap<i64, (SystemTime, u64, Vec<PathBuf>)> = std::collections::HashMap::new();
 
     for (is_thumb, sub) in [(true, "thumbnails"), (false, "previews")] {
         let dir = directory.join(sub);

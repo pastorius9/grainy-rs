@@ -20,11 +20,8 @@ pub const ILLUMINANT_DCI: [f32; 2] = [0.314, 0.351];
 pub(crate) const ILLUMINANT_D50: [f32; 2] = [0.345669, 0.358496];
 
 /// Primaries used by the sRGB colorspace.
-pub const PRIMARIES_SRGB: [[f32; 2]; 3] = [
-    [0.639998686, 0.330010138],
-    [0.300003784, 0.600003357],
-    [0.150002046, 0.059997204],
-];
+pub const PRIMARIES_SRGB: [[f32; 2]; 3] =
+    [[0.639998686, 0.330010138], [0.300003784, 0.600003357], [0.150002046, 0.059997204]];
 
 /// Primaries specified in ITU-R BT.2100-2.
 pub const PRIMARIES_BT2100: [[f32; 2]; 3] = [[0.708, 0.292], [0.170, 0.797], [0.131, 0.046]];

@@ -19,9 +19,7 @@ pub fn adaptive_lf_smoothing_impl(
 ) -> crate::Result<()> {
     if is_aarch64_feature_detected!("neon") {
         // SAFETY: Feature set is checked above.
-        return unsafe {
-            adaptive_lf_smoothing_core_neon(width, height, shifts, lf_image, lf_scale, tracker)
-        };
+        return unsafe { adaptive_lf_smoothing_core_neon(width, height, shifts, lf_image, lf_scale, tracker) };
     }
 
     generic::adaptive_lf_smoothing_impl(width, height, shifts, lf_image, lf_scale, tracker)

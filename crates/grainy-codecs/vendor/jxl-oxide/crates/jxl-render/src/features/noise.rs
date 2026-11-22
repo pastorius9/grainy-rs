@@ -23,9 +23,7 @@ pub fn render_noise(
     let [grid_x, grid_y, grid_b] = grid.as_color_floats_mut();
 
     let full_frame_region = Region::with_size(header.width, header.height);
-    let actual_region = region
-        .intersection(full_frame_region)
-        .downsample_with_shift(shift);
+    let actual_region = region.intersection(full_frame_region).downsample_with_shift(shift);
 
     let left = actual_region.left as usize;
     let top = actual_region.top as usize;
@@ -33,13 +31,7 @@ pub fn render_noise(
     let height = actual_region.height as usize;
     let (corr_x, corr_b) = base_correlations_xb.unwrap_or((0.0, 1.0));
 
-    let noise_buffer = init_noise(
-        visible_frames_num,
-        invisible_frames_num,
-        header,
-        tracker.as_ref(),
-        pool,
-    )?;
+    let noise_buffer = init_noise(visible_frames_num, invisible_frames_num, header, tracker.as_ref(), pool)?;
 
     let mut lut = [0f32; 9];
     lut[..8].copy_from_slice(&params.lut);
@@ -127,12 +119,7 @@ fn init_noise(
     // Each channel is convolved by the 5×5 kernel
     let mut jobs = Vec::with_capacity(num_groups * 3);
     for (channel_idx, out) in convolved.iter_mut().enumerate() {
-        for (group_idx, out_subgrid) in out
-            .as_subgrid_mut()
-            .into_groups(group_dim, group_dim)
-            .into_iter()
-            .enumerate()
-        {
+        for (group_idx, out_subgrid) in out.as_subgrid_mut().into_groups(group_dim, group_dim).into_iter().enumerate() {
             let group_x = group_idx % groups_per_row;
             let group_y = group_idx / groups_per_row;
 
@@ -140,15 +127,11 @@ fn init_noise(
             let adjacent_groups: [_; 9] = std::array::from_fn(|idx| {
                 let offset_x = (idx % 3) as isize - 1;
                 let offset_y = (idx / 3) as isize - 1;
-                if let (Some(x), Some(y)) = (
-                    group_x.checked_add_signed(offset_x),
-                    group_y.checked_add_signed(offset_y),
-                ) {
+                if let (Some(x), Some(y)) = (group_x.checked_add_signed(offset_x), group_y.checked_add_signed(offset_y))
+                {
                     let group_idx = y * groups_per_row + x;
                     if x < groups_per_row {
-                        noise_groups
-                            .get(group_idx)
-                            .map(|group| group.as_subgrid(channel_idx))
+                        noise_groups.get(group_idx).map(|group| group.as_subgrid(channel_idx))
                     } else {
                         None
                     }
@@ -197,19 +180,11 @@ struct NoiseGroup {
 }
 
 impl NoiseGroup {
-    fn new(
-        width: usize,
-        height: usize,
-        seed0: u64,
-        seed1: u64,
-        tracker: Option<&AllocTracker>,
-    ) -> Result<Self> {
+    fn new(width: usize, height: usize, seed0: u64, seed1: u64, tracker: Option<&AllocTracker>) -> Result<Self> {
         let width_n2 = width.div_ceil(N * 2);
         let stride = width_n2 * N * 2;
         let elems = stride * height * 3;
-        let alloc_handle = tracker
-            .map(|tracker| tracker.alloc::<f32>(elems))
-            .transpose()?;
+        let alloc_handle = tracker.map(|tracker| tracker.alloc::<f32>(elems)).transpose()?;
 
         let mut rng = XorShift128Plus::new(seed0, seed1);
 
@@ -224,13 +199,7 @@ impl NoiseGroup {
             buf
         });
 
-        Ok(Self {
-            buf,
-            width,
-            height,
-            stride,
-            _alloc_handle: alloc_handle,
-        })
+        Ok(Self { buf, width, height, stride, _alloc_handle: alloc_handle })
     }
 
     #[inline]
@@ -257,12 +226,8 @@ fn convolve_fill(
         for offset_y in -2..0 {
             let out = rows.get_row_mut(2usize.wrapping_add_signed(offset_y));
             let c = c.get_row(c.height().wrapping_add_signed(offset_y));
-            let l = l
-                .as_ref()
-                .map(|l| l.get_row(l.height().wrapping_add_signed(offset_y)));
-            let r = r
-                .as_ref()
-                .map(|r| r.get_row(r.height().wrapping_add_signed(offset_y)));
+            let l = l.as_ref().map(|l| l.get_row(l.height().wrapping_add_signed(offset_y)));
+            let r = r.as_ref().map(|r| r.get_row(r.height().wrapping_add_signed(offset_y)));
             fill_padded_row(out, c, l, r);
         }
     } else if height >= 2 {
@@ -328,19 +293,9 @@ fn fill_once(out: &mut [f32], fill_y: usize, adjacent_groups: [Option<SharedSubg
     let height = this.height();
 
     let (source_y, c, l, r) = if let Some(fill_y) = fill_y.checked_sub(height) {
-        (
-            fill_y,
-            adjacent_groups[7],
-            adjacent_groups[6],
-            adjacent_groups[8],
-        )
+        (fill_y, adjacent_groups[7], adjacent_groups[6], adjacent_groups[8])
     } else {
-        (
-            fill_y,
-            adjacent_groups[4],
-            adjacent_groups[3],
-            adjacent_groups[5],
-        )
+        (fill_y, adjacent_groups[4], adjacent_groups[3], adjacent_groups[5])
     };
 
     let (source_y, c, l, r) = if let Some(c) = c {
@@ -428,11 +383,7 @@ impl XorShift128Plus {
     #[inline]
     pub fn get_u32_bits(&mut self) -> [u32; N * 2] {
         let batch = self.fill_batch();
-        if 1u64.to_le() == 1u64 {
-            bytemuck::cast(batch)
-        } else {
-            bytemuck::cast(batch.map(|x| x.rotate_left(32)))
-        }
+        if 1u64.to_le() == 1u64 { bytemuck::cast(batch) } else { bytemuck::cast(batch.map(|x| x.rotate_left(32))) }
     }
 
     #[inline]

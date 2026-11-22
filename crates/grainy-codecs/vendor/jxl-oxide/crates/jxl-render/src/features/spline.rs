@@ -38,34 +38,21 @@ struct SplineArc {
 }
 
 impl Spline {
-    fn dequant(
-        quant_spline: &QuantSpline,
-        quant_adjust: i32,
-        base_correlations_xb: Option<(f32, f32)>,
-    ) -> Self {
-        let points: Vec<_> = quant_spline
-            .quant_points
-            .iter()
-            .map(|&(x, y)| Point::new(x as f32, y as f32))
-            .collect();
+    fn dequant(quant_spline: &QuantSpline, quant_adjust: i32, base_correlations_xb: Option<(f32, f32)>) -> Self {
+        let points: Vec<_> = quant_spline.quant_points.iter().map(|&(x, y)| Point::new(x as f32, y as f32)).collect();
 
         let mut xyb_dct = [[0f32; 32]; 3];
         let mut sigma_dct = [0f32; 32];
 
         let quant_adjust = quant_adjust as f32;
-        let inverted_qa = if quant_adjust >= 0.0 {
-            1.0 / (1.0 + quant_adjust / 8.0)
-        } else {
-            1.0 - quant_adjust / 8.0
-        };
+        let inverted_qa = if quant_adjust >= 0.0 { 1.0 / (1.0 + quant_adjust / 8.0) } else { 1.0 - quant_adjust / 8.0 };
 
         const CHANNEL_WEIGHTS: [f32; 4] = [0.0042, 0.075, 0.07, 0.3333];
         for chan_idx in 0..3 {
             #[allow(clippy::needless_range_loop)]
             for i in 0..32 {
-                xyb_dct[chan_idx][i] = quant_spline.xyb_dct[chan_idx][i] as f32
-                    * CHANNEL_WEIGHTS[chan_idx]
-                    * inverted_qa;
+                xyb_dct[chan_idx][i] =
+                    quant_spline.xyb_dct[chan_idx][i] as f32 * CHANNEL_WEIGHTS[chan_idx] * inverted_qa;
             }
         }
         let (corr_x, corr_b) = base_correlations_xb.unwrap_or((0.0, 1.0));
@@ -79,11 +66,7 @@ impl Spline {
             *sigma_dct = quant_sigma_dct as f32 * CHANNEL_WEIGHTS[3] * inverted_qa;
         }
 
-        Spline {
-            points,
-            xyb_dct,
-            sigma_dct,
-        }
+        Spline { points, xyb_dct, sigma_dct }
     }
 
     fn get_samples(&self) -> Vec<SplineArc> {
@@ -91,32 +74,21 @@ impl Spline {
 
         let mut current = upsampled_points[0];
         let mut next_idx = 0;
-        let mut all_samples = vec![SplineArc {
-            point: current,
-            length: 1f32,
-        }];
+        let mut all_samples = vec![SplineArc { point: current, length: 1f32 }];
 
         while next_idx < upsampled_points.len() {
             let mut prev = current;
             let mut arclength = 0f32;
             loop {
                 if next_idx >= upsampled_points.len() {
-                    all_samples.push(SplineArc {
-                        point: prev,
-                        length: arclength,
-                    });
+                    all_samples.push(SplineArc { point: prev, length: arclength });
                     break;
                 }
                 let next = upsampled_points[next_idx];
                 let arclength_to_next = (next - prev).norm();
                 if arclength + arclength_to_next >= 1.0 {
-                    current = prev
-                        + ((upsampled_points[next_idx] - prev)
-                            * ((1.0 - arclength) / arclength_to_next));
-                    all_samples.push(SplineArc {
-                        point: current,
-                        length: 1.0,
-                    });
+                    current = prev + ((upsampled_points[next_idx] - prev) * ((1.0 - arclength) / arclength_to_next));
+                    all_samples.push(SplineArc { point: current, length: 1.0 });
                     break;
                 }
                 arclength += arclength_to_next;
@@ -207,15 +179,9 @@ pub fn render_spline(
             let max_distance = f32::sqrt(2.0 * (f32::ln(10.0) * 3.0 + max_color)) * sigma.abs();
 
             let xbegin = i32::max(0, (arc.point.x - max_distance + 0.5).floor() as i32);
-            let xend = i32::min(
-                (frame_header.width) as i32,
-                (arc.point.x + max_distance + 1.5).floor() as i32,
-            );
+            let xend = i32::min((frame_header.width) as i32, (arc.point.x + max_distance + 1.5).floor() as i32);
             let ybegin = i32::max(0, (arc.point.y - max_distance + 0.5).floor() as i32);
-            let yend = i32::min(
-                (frame_header.height) as i32,
-                (arc.point.y + max_distance + 1.5).floor() as i32,
-            );
+            let yend = i32::min((frame_header.height) as i32, (arc.point.y + max_distance + 1.5).floor() as i32);
 
             for (channel, buffer) in base_grid.as_color_floats_mut().iter_mut().enumerate() {
                 for y in ybegin..yend {
@@ -263,10 +229,7 @@ impl Point {
     }
 
     fn mirror(&self, center: &Self) -> Self {
-        Self {
-            x: center.x + center.x - self.x,
-            y: center.y + center.y - self.y,
-        }
+        Self { x: center.x + center.x - self.x, y: center.y + center.y - self.y }
     }
 
     fn norm_squared(&self) -> f32 {
@@ -295,10 +258,7 @@ impl Sub for Point {
 impl Mul<f32> for Point {
     type Output = Self;
     fn mul(self, rhs: f32) -> Self::Output {
-        Self {
-            x: self.x * rhs,
-            y: self.y * rhs,
-        }
+        Self { x: self.x * rhs, y: self.y * rhs }
     }
 }
 

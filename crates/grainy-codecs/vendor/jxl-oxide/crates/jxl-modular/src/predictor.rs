@@ -62,10 +62,7 @@ impl TryFrom<u32> for Predictor {
             12 => AvgNorthAndNorthEast,
             13 => AvgAll,
             _ => {
-                return Err(jxl_bitstream::Error::InvalidEnum {
-                    name: "MaProperty",
-                    value,
-                });
+                return Err(jxl_bitstream::Error::InvalidEnum { name: "MaProperty", value });
             }
         })
     }
@@ -86,11 +83,7 @@ impl Predictor {
                 let n = predictor.n;
                 let w = predictor.w;
                 let nw = predictor.nw;
-                if n.abs_diff(nw) < w.abs_diff(nw) {
-                    w
-                } else {
-                    n
-                }
+                if n.abs_diff(nw) < w.abs_diff(nw) { w } else { n }
             }
             Gradient => {
                 let n = predictor.n as i64;
@@ -99,9 +92,7 @@ impl Predictor {
                 (n + w - nw).clamp(w.min(n), w.max(n)) as i32
             }
             SelfCorrecting => {
-                let prediction = properties
-                    .prediction()
-                    .expect("predict_non_sc called with SelfCorrecting predictor");
+                let prediction = properties.prediction().expect("predict_non_sc called with SelfCorrecting predictor");
                 ((prediction + 3) >> 3) as i32
             }
             NorthEast => predictor.ne::<EDGE>(),
@@ -109,9 +100,7 @@ impl Predictor {
             WestWest => predictor.ww::<EDGE>(),
             AvgWestAndNorthWest => ((predictor.w as i64 + predictor.nw as i64) / 2) as i32,
             AvgNorthAndNorthWest => ((predictor.n as i64 + predictor.nw as i64) / 2) as i32,
-            AvgNorthAndNorthEast => {
-                ((predictor.n as i64 + predictor.ne::<EDGE>() as i64) / 2) as i32
-            }
+            AvgNorthAndNorthEast => ((predictor.n as i64 + predictor.ne::<EDGE>() as i64) / 2) as i32,
             AvgAll => {
                 let n = predictor.n as i64;
                 let w = predictor.w as i64;
@@ -182,8 +171,7 @@ impl<'prev, 'a, S: Sample> PredictorState<'prev, 'a, S> {
         prev_channels_rev: &[&'a MutableSubgrid<'prev, S>],
         wp_header: Option<&WpHeader>,
     ) {
-        self.self_correcting =
-            wp_header.map(|wp_header| SelfCorrectingPredictor::new(width, wp_header.clone()));
+        self.self_correcting = wp_header.map(|wp_header| SelfCorrectingPredictor::new(width, wp_header.clone()));
         self.prev_row.clear();
         self.curr_row.clear();
         if let Some(additional) = (width as usize).checked_sub(self.prev_row.capacity()) {
@@ -204,22 +192,13 @@ impl<'prev, 'a, S: Sample> PredictorState<'prev, 'a, S> {
 
     #[inline(always)]
     pub fn properties<'p, const EDGE: bool>(&'p mut self) -> Properties<'p, 'prev, 'a, S> {
-        let prediction = self
-            .self_correcting
-            .as_ref()
-            .map(|sc_pred| self.run_sc_pred::<EDGE>(sc_pred));
+        let prediction = self.self_correcting.as_ref().map(|sc_pred| self.run_sc_pred::<EDGE>(sc_pred));
         Properties::new::<EDGE>(self, prediction)
     }
 
     #[inline(always)]
     fn run_sc_pred<const EDGE: bool>(&self, sc_pred: &SelfCorrectingPredictor) -> PredictionResult {
-        sc_pred.predict(
-            self.n,
-            self.nw,
-            self.ne::<EDGE>(),
-            self.w,
-            self.nn::<EDGE>(),
-        )
+        sc_pred.predict(self.n, self.nw, self.ne::<EDGE>(), self.w, self.nn::<EDGE>())
     }
 }
 
@@ -227,10 +206,7 @@ impl<S: Sample> PredictorState<'_, '_, S> {
     #[inline(always)]
     fn nn<const EDGE: bool>(&self) -> i32 {
         if EDGE {
-            self.curr_row
-                .get(self.x as usize)
-                .copied()
-                .unwrap_or(self.n)
+            self.curr_row.get(self.x as usize).copied().unwrap_or(self.n)
         } else {
             self.curr_row[self.x as usize]
         }
@@ -239,11 +215,7 @@ impl<S: Sample> PredictorState<'_, '_, S> {
     #[inline(always)]
     fn ne<const EDGE: bool>(&self) -> i32 {
         let x = self.x;
-        if EDGE && (self.prev_row.is_empty() || x + 1 >= self.width) {
-            self.n
-        } else {
-            self.prev_row[x as usize + 1]
-        }
+        if EDGE && (self.prev_row.is_empty() || x + 1 >= self.width) { self.n } else { self.prev_row[x as usize + 1] }
     }
 
     #[inline(always)]
@@ -260,11 +232,7 @@ impl<S: Sample> PredictorState<'_, '_, S> {
     fn ww<const EDGE: bool>(&self) -> i32 {
         let x = self.x;
         if EDGE {
-            if let Some(x) = x.checked_sub(2) {
-                self.curr_row[x as usize]
-            } else {
-                self.w
-            }
+            if let Some(x) = x.checked_sub(2) { self.curr_row[x as usize] } else { self.w }
         } else {
             self.curr_row[(x - 2) as usize]
         }
@@ -346,9 +314,7 @@ impl SelfCorrectingPredictor {
 
         let mut subpred_err_sum = [0u32; 4];
         for (i, sum) in subpred_err_sum.iter_mut().enumerate() {
-            *sum = subpred_err_nw_ww[i]
-                .wrapping_add(subpred_err_n_w[i])
-                .wrapping_add(subpred_err_ne[i]);
+            *sum = subpred_err_nw_ww[i].wrapping_add(subpred_err_n_w[i]).wrapping_add(subpred_err_ne[i]);
         }
 
         let wp_wn = [wp.wp_w0, wp.wp_w1, wp.wp_w2, wp.wp_w3];
@@ -383,11 +349,7 @@ impl SelfCorrectingPredictor {
             }
         }
 
-        PredictionResult {
-            prediction,
-            max_error: max_error as i32,
-            subpred,
-        }
+        PredictionResult { prediction, max_error: max_error as i32, subpred }
     }
 
     #[inline(always)]
@@ -471,17 +433,10 @@ impl<'p, 'prev, 'a, S: Sample> Properties<'p, 'prev, 'a, S> {
             pred.n.wrapping_sub(pred.ne::<EDGE>()),
             pred.n.wrapping_sub(pred.nn::<EDGE>()),
             pred.w.wrapping_sub(pred.ww::<EDGE>()),
-            sc_prediction
-                .as_ref()
-                .map(|pred| pred.max_error)
-                .unwrap_or(0),
+            sc_prediction.as_ref().map(|pred| pred.max_error).unwrap_or(0),
         ];
 
-        Self {
-            predictor: pred,
-            sc_prediction,
-            prop_cache,
-        }
+        Self { predictor: pred, sc_prediction, prop_cache }
     }
 }
 
@@ -520,21 +475,13 @@ impl<S: Sample> Properties<'_, '_, '_, S> {
                     S::grad_clamped(n, w, nw).to_i32()
                 }
             };
-            if prop_idx == 2 {
-                c.abs_diff(g) as i32
-            } else {
-                c.wrapping_sub(g)
-            }
+            if prop_idx == 2 { c.abs_diff(g) as i32 } else { c.wrapping_sub(g) }
         }
     }
 
     #[inline(always)]
     pub fn get(&self, property: usize) -> i32 {
-        if let Some(property) = property.checked_sub(16) {
-            self.get_extra(property)
-        } else {
-            self.prop_cache[property]
-        }
+        if let Some(property) = property.checked_sub(16) { self.get_extra(property) } else { self.prop_cache[property] }
     }
 
     #[inline(always)]

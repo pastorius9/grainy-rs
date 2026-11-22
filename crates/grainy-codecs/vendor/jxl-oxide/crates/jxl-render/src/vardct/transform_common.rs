@@ -23,12 +23,7 @@ pub unsafe fn transform_varblocks_inner(
         crate::vardct::for_each_varblocks(
             block_info,
             shift,
-            |VarblockInfo {
-                 shifted_bx,
-                 shifted_by,
-                 dct_select,
-                 ..
-             }| {
+            |VarblockInfo { shifted_bx, shifted_by, dct_select, .. }| {
                 let (bw, bh) = dct_select.dct_select_size();
                 let left = shifted_bx * 8;
                 let top = shifted_by * 8;
@@ -38,13 +33,8 @@ pub unsafe fn transform_varblocks_inner(
                 let logbw = bw.trailing_zeros() as usize;
                 let logbh = bh.trailing_zeros() as usize;
 
-                let mut out = coeff
-                    .borrow_mut()
-                    .subgrid(left..(left + bw), top..(top + bh));
-                if matches!(
-                    dct_select,
-                    Hornuss | Dct2 | Dct4 | Dct8x4 | Dct4x8 | Dct8 | Afv0 | Afv1 | Afv2 | Afv3
-                ) {
+                let mut out = coeff.borrow_mut().subgrid(left..(left + bw), top..(top + bh));
+                if matches!(dct_select, Hornuss | Dct2 | Dct4 | Dct8x4 | Dct4x8 | Dct8 | Afv0 | Afv1 | Afv2 | Afv3) {
                     debug_assert_eq!(bw * bh, 1);
                     *out.get_mut(0, 0) = lf.get(shifted_bx, shifted_by);
                 } else {
@@ -63,9 +53,7 @@ pub unsafe fn transform_varblocks_inner(
                     }
                 }
 
-                let mut block = coeff
-                    .borrow_mut()
-                    .subgrid(left..(left + bw * 8), top..(top + bh * 8));
+                let mut block = coeff.borrow_mut().subgrid(left..(left + bw * 8), top..(top + bh * 8));
                 unsafe {
                     transform(&mut block, dct_select);
                 }

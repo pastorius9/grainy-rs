@@ -11,10 +11,7 @@ pub struct HfPassParams<'a> {
 
 impl<'a> HfPassParams<'a> {
     pub fn new(hf_block_ctx: &'a crate::HfBlockContext, num_hf_presets: u32) -> Self {
-        Self {
-            hf_block_ctx,
-            num_hf_presets,
-        }
+        Self { hf_block_ctx, num_hf_presets }
     }
 }
 
@@ -32,17 +29,11 @@ impl Bundle<HfPassParams<'_>> for HfPass {
     type Error = crate::Error;
 
     fn parse(bitstream: &mut Bitstream, params: HfPassParams<'_>) -> crate::Result<Self> {
-        let HfPassParams {
-            hf_block_ctx,
-            num_hf_presets,
-        } = params;
+        let HfPassParams { hf_block_ctx, num_hf_presets } = params;
         let mut used_orders = bitstream.read_u32(0x5F, 0x13, 0x00, U(13))?;
-        let mut decoder = (used_orders != 0)
-            .then(|| Decoder::parse(bitstream, 8))
-            .transpose()?;
+        let mut decoder = (used_orders != 0).then(|| Decoder::parse(bitstream, 8)).transpose()?;
 
-        let mut permutation: [_; 13] =
-            std::array::from_fn(|_| [Vec::new(), Vec::new(), Vec::new()]);
+        let mut permutation: [_; 13] = std::array::from_fn(|_| [Vec::new(), Vec::new(), Vec::new()]);
         if let Some(decoder) = &mut decoder {
             let it = permutation.iter_mut().zip(BLOCK_SIZES).enumerate();
             for (idx, (permutation, (bw, bh))) in it {
@@ -63,15 +54,9 @@ impl Bundle<HfPassParams<'_>> for HfPass {
             decoder.finalize()?;
         }
 
-        let hf_dist = Decoder::parse(
-            bitstream,
-            495 * num_hf_presets * hf_block_ctx.num_block_clusters,
-        )?;
+        let hf_dist = Decoder::parse(bitstream, 495 * num_hf_presets * hf_block_ctx.num_block_clusters)?;
 
-        Ok(Self {
-            permutation,
-            hf_dist,
-        })
+        Ok(Self { permutation, hf_dist })
     }
 }
 
@@ -84,11 +69,7 @@ impl HfPass {
     #[inline]
     pub(crate) fn order(&self, order_id: usize, channel: usize) -> &[(u16, u16)] {
         let permutation = &self.permutation[order_id][channel];
-        if permutation.is_empty() {
-            natural_order_lazy(order_id)
-        } else {
-            permutation
-        }
+        if permutation.is_empty() { natural_order_lazy(order_id) } else { permutation }
     }
 }
 
@@ -131,14 +112,9 @@ fn natural_order_lazy(idx: usize) -> &'static [(u16, u16)] {
         return NATURAL_ORDER[idx];
     };
 
-    static INITIALIZER: [std::sync::Once; 4] = [
-        std::sync::Once::new(),
-        std::sync::Once::new(),
-        std::sync::Once::new(),
-        std::sync::Once::new(),
-    ];
-    static mut LARGE_NATURAL_ORDER: [Vec<(u16, u16)>; 4] =
-        [Vec::new(), Vec::new(), Vec::new(), Vec::new()];
+    static INITIALIZER: [std::sync::Once; 4] =
+        [std::sync::Once::new(), std::sync::Once::new(), std::sync::Once::new(), std::sync::Once::new()];
+    static mut LARGE_NATURAL_ORDER: [Vec<(u16, u16)>; 4] = [Vec::new(), Vec::new(), Vec::new(), Vec::new()];
 
     // TODO: Replace this with `OnceLock` when it is available in stable.
     INITIALIZER[idx].call_once(|| {
@@ -173,11 +149,7 @@ const fn const_compute_natural_order<const N: usize>((bw, bh): (usize, usize)) -
         let margin = dist.saturating_sub(bw);
         let mut order = margin;
         while order < dist - margin {
-            let (x, y) = if dist % 2 == 1 {
-                (order, dist - 1 - order)
-            } else {
-                (dist - 1 - order, order)
-            };
+            let (x, y) = if dist % 2 == 1 { (order, dist - 1 - order) } else { (dist - 1 - order, order) };
             order += 1;
 
             if x < lbw && y < lbw {
@@ -212,11 +184,7 @@ fn fill_natural_order((bw, bh): (usize, usize), output: &mut [(u16, u16)]) {
     for dist in 1..(2 * bw) {
         let margin = dist.saturating_sub(bw);
         for order in margin..(dist - margin) {
-            let (x, y) = if dist % 2 == 1 {
-                (order, dist - 1 - order)
-            } else {
-                (dist - 1 - order, order)
-            };
+            let (x, y) = if dist % 2 == 1 { (order, dist - 1 - order) } else { (dist - 1 - order, order) };
 
             if x < lbw && y < lbw {
                 continue;

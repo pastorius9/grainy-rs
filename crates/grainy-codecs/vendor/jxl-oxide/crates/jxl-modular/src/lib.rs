@@ -41,11 +41,7 @@ impl<S: Sample> Bundle<ModularParams<'_, '_>> for Modular<S> {
     type Error = crate::Error;
 
     fn parse(bitstream: &mut Bitstream, params: ModularParams) -> Result<Self> {
-        let inner = if params.channels.is_empty() {
-            None
-        } else {
-            Some(ModularData::<S>::parse(bitstream, params)?)
-        };
+        let inner = if params.channels.is_empty() { None } else { Some(ModularData::<S>::parse(bitstream, params)?) };
         Ok(Self { inner })
     }
 }
@@ -57,13 +53,8 @@ impl<S: Sample> Modular<S> {
     }
 
     pub fn try_clone(&self) -> Result<Self> {
-        let inner = if let Some(inner) = &self.inner {
-            Some(ModularData {
-                image: inner.image.try_clone()?,
-            })
-        } else {
-            None
-        };
+        let inner =
+            if let Some(inner) = &self.inner { Some(ModularData { image: inner.image.try_clone()? }) } else { None };
 
         Ok(Self { inner })
     }
@@ -104,12 +95,8 @@ impl<S: Sample> Bundle<ModularParams<'_, '_>> for ModularData<S> {
 
     fn parse(bitstream: &mut Bitstream, params: ModularParams) -> Result<Self> {
         let channels = ModularChannels::from_params(&params);
-        let (header, ma_ctx) = read_and_validate_local_modular_header(
-            bitstream,
-            &channels,
-            params.ma_config,
-            params.tracker,
-        )?;
+        let (header, ma_ctx) =
+            read_and_validate_local_modular_header(bitstream, &channels, params.ma_config, params.tracker)?;
         Ok(Self {
             image: image::ModularImageDestination::new(
                 header,
@@ -141,15 +128,8 @@ struct ModularChannels {
 
 impl ModularChannels {
     fn from_params(params: &ModularParams) -> Self {
-        let info = params
-            .channels
-            .iter()
-            .map(|ch| ModularChannelInfo::new(ch.width, ch.height, ch.shift))
-            .collect();
-        Self {
-            info,
-            nb_meta_channels: 0,
-        }
+        let info = params.channels.iter().map(|ch| ModularChannelInfo::new(ch.width, ch.height, ch.shift)).collect();
+        Self { info, nb_meta_channels: 0 }
     }
 }
 
@@ -207,10 +187,7 @@ fn read_and_validate_local_modular_header(
 ) -> Result<(ModularHeader, MaConfig)> {
     let mut header = ModularHeader::parse(bitstream, ())?;
     if header.nb_transforms > 512 {
-        tracing::error!(
-            nb_transforms = header.nb_transforms,
-            "nb_transforms too large"
-        );
+        tracing::error!(nb_transforms = header.nb_transforms, "nb_transforms too large");
         return Err(jxl_bitstream::Error::ProfileConformance("nb_transforms too large").into());
     }
 
@@ -226,19 +203,11 @@ fn read_and_validate_local_modular_header(
     }
 
     let ma_ctx = if header.use_global_tree {
-        global_ma_config
-            .ok_or(crate::Error::GlobalMaTreeNotAvailable)?
-            .clone()
+        global_ma_config.ok_or(crate::Error::GlobalMaTreeNotAvailable)?.clone()
     } else {
-        let local_samples = tr_channels
-            .info
-            .iter()
-            .fold(0u64, |acc, ch| acc + (ch.width as u64 * ch.height as u64));
-        let params = MaConfigParams {
-            tracker,
-            node_limit: (1024 + local_samples).min(1 << 20) as usize,
-            depth_limit: 2048,
-        };
+        let local_samples = tr_channels.info.iter().fold(0u64, |acc, ch| acc + (ch.width as u64 * ch.height as u64));
+        let params =
+            MaConfigParams { tracker, node_limit: (1024 + local_samples).min(1 << 20) as usize, depth_limit: 2048 };
         MaConfig::parse(bitstream, params)?
     };
 

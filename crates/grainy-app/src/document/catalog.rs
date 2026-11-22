@@ -344,9 +344,9 @@ impl CatalogDocument {
         }
         std::fs::create_dir_all(folder).map_err(err)?;
         let mut doc = Self::with_catalog(Catalog::new(folder).map_err(err)?)?;
-        let has_cache_files = ["thumbnails", "previews"].iter().any(|sub| {
-            std::fs::read_dir(folder.join(sub)).ok().is_some_and(|mut it| it.next().is_some())
-        });
+        let has_cache_files = ["thumbnails", "previews"]
+            .iter()
+            .any(|sub| std::fs::read_dir(folder.join(sub)).ok().is_some_and(|mut it| it.next().is_some()));
         if has_cache_files && !crate::context::FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed) {
             let dir = folder.to_path_buf();
             doc.prune_thread = std::thread::Builder::new()

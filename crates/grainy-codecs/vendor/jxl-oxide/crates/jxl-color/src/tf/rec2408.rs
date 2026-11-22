@@ -81,9 +81,7 @@ pub(crate) unsafe fn rec2408_eetf_x86_64_avx2(
     // Step 1
     let source_pq_diff = luminances[1] - luminances[0];
     let v_source_pq_diff = _mm256_set1_ps(source_pq_diff);
-    let normalized_source_pq_sample = from_pq_sample
-        .sub(v_min_source_luminance)
-        .div(v_source_pq_diff);
+    let normalized_source_pq_sample = from_pq_sample.sub(v_min_source_luminance).div(v_source_pq_diff);
     let min_luminance = (luminances[2] - luminances[0]) / source_pq_diff;
     let max_luminance = (luminances[3] - luminances[0]) / source_pq_diff;
 
@@ -101,21 +99,16 @@ pub(crate) unsafe fn rec2408_eetf_x86_64_avx2(
     let t_p3 = t_p2.mul(t);
 
     let compressed_pq_sample = v_ks.muladd(
-        t_p3.muladd(
-            _mm256_set1_ps(2.0),
-            t_p2.muladd(_mm256_set1_ps(-3.0), _mm256_set1_ps(1.0)),
-        ),
+        t_p3.muladd(_mm256_set1_ps(2.0), t_p2.muladd(_mm256_set1_ps(-3.0), _mm256_set1_ps(1.0))),
         v_one_sub_ks.muladd(
             t_p2.muladd(_mm256_set1_ps(-2.0), t_p3.add(t)),
-            _mm256_set1_ps(max_luminance)
-                .mul(t_p3.muladd(_mm256_set1_ps(-2.0), t_p2.mul(_mm256_set1_ps(3.0)))),
+            _mm256_set1_ps(max_luminance).mul(t_p3.muladd(_mm256_set1_ps(-2.0), t_p2.mul(_mm256_set1_ps(3.0)))),
         ),
     );
 
     // Step 3
     let is_small = _mm256_cmp_ps::<_CMP_LT_OQ>(normalized_source_pq_sample, v_ks);
-    let compressed_pq_sample =
-        _mm256_blendv_ps(compressed_pq_sample, normalized_source_pq_sample, is_small);
+    let compressed_pq_sample = _mm256_blendv_ps(compressed_pq_sample, normalized_source_pq_sample, is_small);
 
     let one_sub_compressed_p4 = {
         let x = _mm256_set1_ps(1.0).sub(compressed_pq_sample);
@@ -156,9 +149,7 @@ pub(crate) unsafe fn rec2408_eetf_x86_64_fma(
     // Step 1
     let source_pq_diff = luminances[1] - luminances[0];
     let v_source_pq_diff = _mm_set1_ps(source_pq_diff);
-    let normalized_source_pq_sample = from_pq_sample
-        .sub(v_min_source_luminance)
-        .div(v_source_pq_diff);
+    let normalized_source_pq_sample = from_pq_sample.sub(v_min_source_luminance).div(v_source_pq_diff);
     let min_luminance = (luminances[2] - luminances[0]) / source_pq_diff;
     let max_luminance = (luminances[3] - luminances[0]) / source_pq_diff;
 
@@ -176,21 +167,16 @@ pub(crate) unsafe fn rec2408_eetf_x86_64_fma(
     let t_p3 = t_p2.mul(t);
 
     let compressed_pq_sample = v_ks.muladd(
-        t_p3.muladd(
-            _mm_set1_ps(2.0),
-            t_p2.muladd(_mm_set1_ps(-3.0), _mm_set1_ps(1.0)),
-        ),
+        t_p3.muladd(_mm_set1_ps(2.0), t_p2.muladd(_mm_set1_ps(-3.0), _mm_set1_ps(1.0))),
         v_one_sub_ks.muladd(
             t_p2.muladd(_mm_set1_ps(-2.0), t_p3.add(t)),
-            _mm_set1_ps(max_luminance)
-                .mul(t_p3.muladd(_mm_set1_ps(-2.0), t_p2.mul(_mm_set1_ps(3.0)))),
+            _mm_set1_ps(max_luminance).mul(t_p3.muladd(_mm_set1_ps(-2.0), t_p2.mul(_mm_set1_ps(3.0)))),
         ),
     );
 
     // Step 3
     let is_small = _mm_cmplt_ps(normalized_source_pq_sample, v_ks);
-    let compressed_pq_sample =
-        _mm_blendv_ps(compressed_pq_sample, normalized_source_pq_sample, is_small);
+    let compressed_pq_sample = _mm_blendv_ps(compressed_pq_sample, normalized_source_pq_sample, is_small);
 
     let one_sub_compressed_p4 = {
         let x = _mm_set1_ps(1.0).sub(compressed_pq_sample);
@@ -229,9 +215,7 @@ pub(crate) unsafe fn rec2408_eetf_x86_64_sse2(
     // Step 1
     let source_pq_diff = luminances[1] - luminances[0];
     let v_source_pq_diff = _mm_set1_ps(source_pq_diff);
-    let normalized_source_pq_sample = from_pq_sample
-        .sub(v_min_source_luminance)
-        .div(v_source_pq_diff);
+    let normalized_source_pq_sample = from_pq_sample.sub(v_min_source_luminance).div(v_source_pq_diff);
     let min_luminance = (luminances[2] - luminances[0]) / source_pq_diff;
     let max_luminance = (luminances[3] - luminances[0]) / source_pq_diff;
 
@@ -249,23 +233,17 @@ pub(crate) unsafe fn rec2408_eetf_x86_64_sse2(
     let t_p3 = t_p2.mul(t);
 
     let compressed_pq_sample = v_ks.muladd(
-        t_p3.muladd(
-            _mm_set1_ps(2.0),
-            t_p2.muladd(_mm_set1_ps(-3.0), _mm_set1_ps(1.0)),
-        ),
+        t_p3.muladd(_mm_set1_ps(2.0), t_p2.muladd(_mm_set1_ps(-3.0), _mm_set1_ps(1.0))),
         v_one_sub_ks.muladd(
             t_p2.muladd(_mm_set1_ps(-2.0), t_p3.add(t)),
-            _mm_set1_ps(max_luminance)
-                .mul(t_p3.muladd(_mm_set1_ps(-2.0), t_p2.mul(_mm_set1_ps(3.0)))),
+            _mm_set1_ps(max_luminance).mul(t_p3.muladd(_mm_set1_ps(-2.0), t_p2.mul(_mm_set1_ps(3.0)))),
         ),
     );
 
     // Step 3
     let is_small = _mm_cmplt_ps(normalized_source_pq_sample, v_ks);
-    let compressed_pq_sample = _mm_or_ps(
-        _mm_andnot_ps(is_small, compressed_pq_sample),
-        _mm_and_ps(is_small, normalized_source_pq_sample),
-    );
+    let compressed_pq_sample =
+        _mm_or_ps(_mm_andnot_ps(is_small, compressed_pq_sample), _mm_and_ps(is_small, normalized_source_pq_sample));
 
     let one_sub_compressed_p4 = {
         let x = _mm_set1_ps(1.0).sub(compressed_pq_sample);
@@ -302,10 +280,8 @@ pub(crate) unsafe fn rec2408_eetf_aarch64_neon(
 
     // Step 1
     let source_pq_diff = luminances[1] - luminances[0];
-    let normalized_source_pq_sample = vmulq_n_f32(
-        vsubq_f32(from_pq_sample, vdupq_n_f32(luminances[0])),
-        source_pq_diff.recip(),
-    );
+    let normalized_source_pq_sample =
+        vmulq_n_f32(vsubq_f32(from_pq_sample, vdupq_n_f32(luminances[0])), source_pq_diff.recip());
     let min_luminance = (luminances[2] - luminances[0]) / source_pq_diff;
     let max_luminance = (luminances[3] - luminances[0]) / source_pq_diff;
 
@@ -315,18 +291,12 @@ pub(crate) unsafe fn rec2408_eetf_aarch64_neon(
 
     // Step 4
     let one_sub_ks = 1.0 - ks;
-    let t = vmulq_n_f32(
-        vsubq_f32(normalized_source_pq_sample, vdupq_n_f32(ks)),
-        one_sub_ks.recip(),
-    );
+    let t = vmulq_n_f32(vsubq_f32(normalized_source_pq_sample, vdupq_n_f32(ks)), one_sub_ks.recip());
     let t_p2 = vmulq_f32(t, t);
     let t_p3 = vmulq_f32(t_p2, t);
     let compressed_pq_sample = vfmaq_n_f32(
         vfmaq_n_f32(
-            vmulq_n_f32(
-                vfmaq_n_f32(vmulq_n_f32(t_p2, 3.0), t_p3, -2.0),
-                max_luminance,
-            ),
+            vmulq_n_f32(vfmaq_n_f32(vmulq_n_f32(t_p2, 3.0), t_p3, -2.0), max_luminance),
             vfmaq_n_f32(vaddq_f32(t_p3, t), t_p2, -2.0),
             one_sub_ks,
         ),
@@ -336,8 +306,7 @@ pub(crate) unsafe fn rec2408_eetf_aarch64_neon(
 
     // Step 3
     let is_small = vcltq_f32(normalized_source_pq_sample, vdupq_n_f32(ks));
-    let compressed_pq_sample =
-        vbslq_f32(is_small, normalized_source_pq_sample, compressed_pq_sample);
+    let compressed_pq_sample = vbslq_f32(is_small, normalized_source_pq_sample, compressed_pq_sample);
 
     let one_sub_compressed_p4 = {
         let x = vsubq_f32(vdupq_n_f32(1.0), compressed_pq_sample);
@@ -347,9 +316,5 @@ pub(crate) unsafe fn rec2408_eetf_aarch64_neon(
     let normalized_target_pq_sample = vfmaq_n_f32(compressed_pq_sample, one_sub_compressed_p4, b);
 
     // Step 5
-    vfmaq_n_f32(
-        vdupq_n_f32(luminances[0]),
-        normalized_target_pq_sample,
-        source_pq_diff,
-    )
+    vfmaq_n_f32(vdupq_n_f32(luminances[0]), normalized_target_pq_sample, source_pq_diff)
 }

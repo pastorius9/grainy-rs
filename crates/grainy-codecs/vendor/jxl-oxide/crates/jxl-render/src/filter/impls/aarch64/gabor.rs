@@ -4,11 +4,7 @@ use crate::filter::gabor::GaborRow;
 
 #[target_feature(enable = "neon")]
 pub(super) unsafe fn run_gabor_row_aarch64_neon(row: GaborRow) {
-    let GaborRow {
-        input_rows,
-        output_row,
-        weights,
-    } = row;
+    let GaborRow { input_rows, output_row, weights } = row;
     let width = output_row.len();
     assert_eq!(input_rows[0].len(), width);
     assert_eq!(input_rows[1].len(), width);

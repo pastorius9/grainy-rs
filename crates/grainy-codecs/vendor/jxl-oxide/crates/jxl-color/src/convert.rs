@@ -1,9 +1,9 @@
 use std::sync::Arc;
 
 use crate::{
-    ColorManagementSystem, ColourEncoding, ColourSpace, EnumColourEncoding, Error,
-    OpsinInverseMatrix, PreparedTransform, RenderingIntent, Result, ToneMapping, TransferFunction,
-    ciexyz::*, consts::*, icc::colour_encoding_to_icc, tf,
+    ColorManagementSystem, ColourEncoding, ColourSpace, EnumColourEncoding, Error, OpsinInverseMatrix,
+    PreparedTransform, RenderingIntent, Result, ToneMapping, TransferFunction, ciexyz::*, consts::*,
+    icc::colour_encoding_to_icc, tf,
 };
 
 mod gamut_map;
@@ -21,10 +21,7 @@ impl std::fmt::Debug for ColorEncodingWithProfile {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("ColorEncodingWithProfile")
             .field("encoding", &self.encoding)
-            .field(
-                "icc_profile",
-                &format_args!("({} byte(s))", self.icc_profile.len()),
-            )
+            .field("icc_profile", &format_args!("({} byte(s))", self.icc_profile.len()))
             .field("is_cmyk", &self.is_cmyk)
             .finish()
     }
@@ -33,11 +30,7 @@ impl std::fmt::Debug for ColorEncodingWithProfile {
 impl ColorEncodingWithProfile {
     /// Creates a color encoding from enum values.
     pub fn new(encoding: EnumColourEncoding) -> Self {
-        Self {
-            encoding: ColourEncoding::Enum(encoding),
-            icc_profile: Vec::new(),
-            is_cmyk: false,
-        }
+        Self { encoding: ColourEncoding::Enum(encoding), icc_profile: Vec::new(), is_cmyk: false }
     }
 
     /// Creates a color encoding from ICC profile.
@@ -137,11 +130,7 @@ impl Default for ColorTransformBuilder {
 impl ColorTransformBuilder {
     /// Creates a new `ColorTransform` builder.
     pub fn new() -> Self {
-        Self {
-            detect_peak: false,
-            srgb_icc: false,
-            from_pq: false,
-        }
+        Self { detect_peak: false, srgb_icc: false, from_pq: false }
     }
 
     pub fn set_detect_peak(&mut self, value: bool) -> &mut Self {
@@ -195,14 +184,7 @@ impl ColorTransform {
         tone_mapping: &ToneMapping,
         cms: &Cms,
     ) -> Result<Self> {
-        Self::with_builder(
-            ColorTransformBuilder::default(),
-            from,
-            to,
-            oim,
-            tone_mapping,
-            cms,
-        )
+        Self::with_builder(ColorTransformBuilder::default(), from, to, oim, tone_mapping, cms)
     }
 
     fn with_builder<Cms: ColorManagementSystem + ?Sized>(
@@ -213,25 +195,14 @@ impl ColorTransform {
         tone_mapping: &ToneMapping,
         cms: &Cms,
     ) -> Result<Self> {
-        let ColorTransformBuilder {
-            detect_peak,
-            srgb_icc,
-            from_pq,
-        } = builder;
-        let connecting_tf = if srgb_icc {
-            TransferFunction::Srgb
-        } else {
-            TransferFunction::Linear
-        };
+        let ColorTransformBuilder { detect_peak, srgb_icc, from_pq } = builder;
+        let connecting_tf = if srgb_icc { TransferFunction::Srgb } else { TransferFunction::Linear };
 
         let intensity_target = tone_mapping.intensity_target;
         let min_nits = tone_mapping.min_nits;
 
         let begin_channels = match &from.encoding {
-            ColourEncoding::Enum(EnumColourEncoding {
-                colour_space: ColourSpace::Grey,
-                ..
-            }) => 1,
+            ColourEncoding::Enum(EnumColourEncoding { colour_space: ColourSpace::Grey, .. }) => 1,
             ColourEncoding::Enum(_) => 3,
             ColourEncoding::IccProfile(_) => {
                 let profile = from.icc_profile();
@@ -248,30 +219,21 @@ impl ColorTransform {
         };
 
         if from.is_equivalent(to) {
-            return Ok(Self {
-                begin_channels,
-                ops: Vec::new(),
-            });
+            return Ok(Self { begin_channels, ops: Vec::new() });
         }
 
         let mut ops = Vec::new();
 
         let mut current_encoding = match from.encoding {
             ColourEncoding::IccProfile(_) => {
-                let rendering_intent = crate::icc::parse_icc_raw(&from.icc_profile)?
-                    .header
-                    .rendering_intent;
+                let rendering_intent = crate::icc::parse_icc_raw(&from.icc_profile)?.header.rendering_intent;
                 match &to.encoding {
                     ColourEncoding::IccProfile(_) => {
                         let from = &from.icc_profile;
                         let to = &to.icc_profile;
-                        let transform = cms
-                            .prepare_transform(from, to, rendering_intent)
-                            .map_err(crate::Error::CmsFailure)?;
-                        return Ok(Self {
-                            begin_channels,
-                            ops: vec![ColorTransformOp::IccToIcc(transform.into())],
-                        });
+                        let transform =
+                            cms.prepare_transform(from, to, rendering_intent).map_err(crate::Error::CmsFailure)?;
+                        return Ok(Self { begin_channels, ops: vec![ColorTransformOp::IccToIcc(transform.into())] });
                     }
                     ColourEncoding::Enum(encoding) => {
                         let mut target_encoding = encoding.clone();
@@ -279,19 +241,14 @@ impl ColorTransform {
 
                         let from = &from.icc_profile;
                         let to = colour_encoding_to_icc(&target_encoding);
-                        let transform = cms
-                            .prepare_transform(from, &to, rendering_intent)
-                            .map_err(crate::Error::CmsFailure)?;
+                        let transform =
+                            cms.prepare_transform(from, &to, rendering_intent).map_err(crate::Error::CmsFailure)?;
                         ops.push(ColorTransformOp::IccToIcc(transform.into()));
                         target_encoding
                     }
                 }
             }
-            ColourEncoding::Enum(EnumColourEncoding {
-                colour_space: ColourSpace::Xyb,
-                rendering_intent,
-                ..
-            }) => {
+            ColourEncoding::Enum(EnumColourEncoding { colour_space: ColourSpace::Xyb, rendering_intent, .. }) => {
                 let inv_mat = oim.inv_mat;
                 #[rustfmt::skip]
                 let matrix = [
@@ -299,32 +256,19 @@ impl ColorTransform {
                     inv_mat[1][0], inv_mat[1][1], inv_mat[1][2],
                     inv_mat[2][0], inv_mat[2][1], inv_mat[2][2],
                 ];
-                ops.push(ColorTransformOp::XybToMixedLms {
-                    opsin_bias: oim.opsin_bias,
-                    intensity_target,
-                });
+                ops.push(ColorTransformOp::XybToMixedLms { opsin_bias: oim.opsin_bias, intensity_target });
                 ops.push(ColorTransformOp::Matrix(matrix));
                 // result: RGB; D65 illuminant, sRGB primaries, linear tf
                 EnumColourEncoding::srgb_linear(rendering_intent)
             }
             ColourEncoding::Enum(
-                ref encoding @ EnumColourEncoding {
-                    colour_space: ColourSpace::Rgb,
-                    white_point,
-                    primaries,
-                    tf,
-                    ..
-                },
+                ref encoding @ EnumColourEncoding { colour_space: ColourSpace::Rgb, white_point, primaries, tf, .. },
             ) => {
                 let mat = crate::ciexyz::primaries_to_xyz_mat(primaries, white_point);
                 let luminances = [mat[3], mat[4], mat[5]];
                 ops.push(ColorTransformOp::TransferFunction {
                     tf,
-                    hdr_params: HdrParams {
-                        luminances,
-                        intensity_target,
-                        min_nits,
-                    },
+                    hdr_params: HdrParams { luminances, intensity_target, min_nits },
                     inverse: true,
                 });
 
@@ -333,12 +277,7 @@ impl ColorTransform {
                 current_encoding
             }
             ColourEncoding::Enum(
-                ref encoding @ EnumColourEncoding {
-                    colour_space: ColourSpace::Grey,
-                    white_point,
-                    tf,
-                    ..
-                },
+                ref encoding @ EnumColourEncoding { colour_space: ColourSpace::Grey, white_point, tf, .. },
             ) => {
                 // primaries don't matter for grayscale
                 let mat = crate::ciexyz::primaries_to_xyz_mat(PRIMARIES_SRGB, white_point);
@@ -346,11 +285,7 @@ impl ColorTransform {
 
                 ops.push(ColorTransformOp::TransferFunction {
                     tf,
-                    hdr_params: HdrParams {
-                        luminances,
-                        intensity_target,
-                        min_nits,
-                    },
+                    hdr_params: HdrParams { luminances, intensity_target, min_nits },
                     inverse: true,
                 });
 
@@ -372,10 +307,7 @@ impl ColorTransform {
                     .prepare_transform(&from, to, current_encoding.rendering_intent)
                     .map_err(crate::Error::CmsFailure)?;
                 ops.push(ColorTransformOp::IccToIcc(transform.into()));
-                return Ok(Self {
-                    begin_channels,
-                    ops,
-                });
+                return Ok(Self { begin_channels, ops });
             }
         };
 
@@ -384,11 +316,7 @@ impl ColorTransform {
 
             ops.push(ColorTransformOp::TransferFunction {
                 tf: current_encoding.tf,
-                hdr_params: HdrParams {
-                    luminances: [0.0, 0.0, 0.0],
-                    intensity_target,
-                    min_nits,
-                },
+                hdr_params: HdrParams { luminances: [0.0, 0.0, 0.0], intensity_target, min_nits },
                 inverse: true,
             });
             current_encoding.tf = TransferFunction::Linear;
@@ -400,16 +328,10 @@ impl ColorTransform {
                 && current_encoding.primaries != target_encoding.primaries)
         {
             if current_encoding.rendering_intent == RenderingIntent::Perceptual {
-                let mat = crate::ciexyz::primaries_to_xyz_mat(
-                    current_encoding.primaries,
-                    current_encoding.white_point,
-                );
+                let mat = crate::ciexyz::primaries_to_xyz_mat(current_encoding.primaries, current_encoding.white_point);
                 let luminances = [mat[3], mat[4], mat[5]];
 
-                ops.push(ColorTransformOp::GamutMap {
-                    luminances,
-                    saturation_factor: 0.3,
-                });
+                ops.push(ColorTransformOp::GamutMap { luminances, saturation_factor: 0.3 });
             } else {
                 ops.push(ColorTransformOp::Clip);
             }
@@ -417,16 +339,13 @@ impl ColorTransform {
             match current_encoding.colour_space {
                 ColourSpace::Rgb => {
                     // RGB to XYZ
-                    let mat = crate::ciexyz::primaries_to_xyz_mat(
-                        current_encoding.primaries,
-                        current_encoding.white_point,
-                    );
+                    let mat =
+                        crate::ciexyz::primaries_to_xyz_mat(current_encoding.primaries, current_encoding.white_point);
                     ops.push(ColorTransformOp::Matrix(mat));
                 }
                 ColourSpace::Grey => {
                     // Yxy to XYZ
-                    let illuminant =
-                        crate::ciexyz::AsIlluminant::as_illuminant(&current_encoding.white_point);
+                    let illuminant = crate::ciexyz::AsIlluminant::as_illuminant(&current_encoding.white_point);
                     ops.push(ColorTransformOp::LumaToXyz { illuminant });
                 }
                 ColourSpace::Xyb | ColourSpace::Unknown => {
@@ -443,10 +362,8 @@ impl ColorTransform {
             match target_encoding.colour_space {
                 ColourSpace::Rgb => {
                     // XYZ to RGB
-                    let mat = crate::ciexyz::xyz_to_primaries_mat(
-                        target_encoding.primaries,
-                        target_encoding.white_point,
-                    );
+                    let mat =
+                        crate::ciexyz::xyz_to_primaries_mat(target_encoding.primaries, target_encoding.white_point);
                     ops.push(ColorTransformOp::Matrix(mat));
                 }
                 ColourSpace::Grey => {
@@ -463,17 +380,10 @@ impl ColorTransform {
             current_encoding.primaries = target_encoding.primaries;
         }
 
-        let mat = crate::ciexyz::primaries_to_xyz_mat(
-            current_encoding.primaries,
-            current_encoding.white_point,
-        );
+        let mat = crate::ciexyz::primaries_to_xyz_mat(current_encoding.primaries, current_encoding.white_point);
         let luminances = [mat[3], mat[4], mat[5]];
 
-        let mut hdr_params = HdrParams {
-            luminances,
-            intensity_target,
-            min_nits,
-        };
+        let mut hdr_params = HdrParams { luminances, intensity_target, min_nits };
 
         if intensity_target > 255.0 && !target_encoding.is_hdr() {
             if current_encoding.colour_space == ColourSpace::Grey {
@@ -483,17 +393,10 @@ impl ColorTransform {
                     detect_peak,
                 });
             } else {
-                ops.push(ColorTransformOp::ToneMapRec2408 {
-                    hdr_params,
-                    target_display_luminance: 255.0,
-                    detect_peak,
-                });
+                ops.push(ColorTransformOp::ToneMapRec2408 { hdr_params, target_display_luminance: 255.0, detect_peak });
 
                 if current_encoding.rendering_intent == RenderingIntent::Perceptual {
-                    ops.push(ColorTransformOp::GamutMap {
-                        luminances,
-                        saturation_factor: 0.3,
-                    });
+                    ops.push(ColorTransformOp::GamutMap { luminances, saturation_factor: 0.3 });
                 }
             }
         }
@@ -522,10 +425,7 @@ impl ColorTransform {
             if current_encoding.colour_space != ColourSpace::Grey
                 && current_encoding.rendering_intent == RenderingIntent::Perceptual
             {
-                ops.push(ColorTransformOp::GamutMap {
-                    luminances,
-                    saturation_factor: 0.1,
-                });
+                ops.push(ColorTransformOp::GamutMap { luminances, saturation_factor: 0.1 });
             }
 
             // Skip inverse OOTF in transfer funcion conversion.
@@ -533,17 +433,10 @@ impl ColorTransform {
         }
 
         if target_encoding.tf != TransferFunction::Linear {
-            ops.push(ColorTransformOp::TransferFunction {
-                tf: target_encoding.tf,
-                hdr_params,
-                inverse: false,
-            });
+            ops.push(ColorTransformOp::TransferFunction { tf: target_encoding.tf, hdr_params, inverse: false });
         }
 
-        let mut ret = Self {
-            begin_channels,
-            ops,
-        };
+        let mut ret = Self { begin_channels, ops };
         ret.optimize();
         Ok(ret)
     }
@@ -616,18 +509,11 @@ impl ColorTransform {
     /// # Errors
     /// This function will return an error if it encountered ICC to ICC operation and the provided
     /// CMS cannot handle it.
-    pub fn run_with_threads(
-        &self,
-        channels: &mut [&mut [f32]],
-        pool: &jxl_threadpool::JxlThreadPool,
-    ) -> Result<usize> {
+    pub fn run_with_threads(&self, channels: &mut [&mut [f32]], pool: &jxl_threadpool::JxlThreadPool) -> Result<usize> {
         let _gurad = tracing::trace_span!("Run color transform ops").entered();
 
         let mut chunks = Vec::new();
-        let mut it = channels
-            .iter_mut()
-            .map(|ch| ch.chunks_mut(65536))
-            .collect::<Vec<_>>();
+        let mut it = channels.iter_mut().map(|ch| ch.chunks_mut(65536)).collect::<Vec<_>>();
         // Transpose chunked channel buffers.
         while let Some::<Vec<_>>(chunk) = it.iter_mut().map(|it| it.next()).collect() {
             chunks.push(chunk);
@@ -686,35 +572,15 @@ impl ColorTransform {
 
 #[derive(Clone)]
 enum ColorTransformOp {
-    XybToMixedLms {
-        opsin_bias: [f32; 3],
-        intensity_target: f32,
-    },
-    LumaToXyz {
-        illuminant: [f32; 2],
-    },
+    XybToMixedLms { opsin_bias: [f32; 3], intensity_target: f32 },
+    LumaToXyz { illuminant: [f32; 2] },
     XyzToLuma,
     Matrix([f32; 9]),
-    TransferFunction {
-        tf: TransferFunction,
-        hdr_params: HdrParams,
-        inverse: bool,
-    },
+    TransferFunction { tf: TransferFunction, hdr_params: HdrParams, inverse: bool },
     HlgInverseOotf(HdrParams),
-    ToneMapRec2408 {
-        hdr_params: HdrParams,
-        target_display_luminance: f32,
-        detect_peak: bool,
-    },
-    ToneMapLumaRec2408 {
-        hdr_params: HdrParams,
-        target_display_luminance: f32,
-        detect_peak: bool,
-    },
-    GamutMap {
-        luminances: [f32; 3],
-        saturation_factor: f32,
-    },
+    ToneMapRec2408 { hdr_params: HdrParams, target_display_luminance: f32, detect_peak: bool },
+    ToneMapLumaRec2408 { hdr_params: HdrParams, target_display_luminance: f32, detect_peak: bool },
+    GamutMap { luminances: [f32; 3], saturation_factor: f32 },
     Clip,
     IccToIcc(Arc<dyn PreparedTransform>),
 }
@@ -722,57 +588,34 @@ enum ColorTransformOp {
 impl std::fmt::Debug for ColorTransformOp {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::XybToMixedLms {
-                opsin_bias,
-                intensity_target,
-            } => f
+            Self::XybToMixedLms { opsin_bias, intensity_target } => f
                 .debug_struct("XybToMixedLms")
                 .field("opsin_bias", opsin_bias)
                 .field("intensity_target", intensity_target)
                 .finish(),
-            Self::LumaToXyz { illuminant } => f
-                .debug_struct("LumaToXyz")
-                .field("illuminant", illuminant)
-                .finish(),
+            Self::LumaToXyz { illuminant } => f.debug_struct("LumaToXyz").field("illuminant", illuminant).finish(),
             Self::XyzToLuma => f.debug_struct("XyzToLuma").finish(),
             Self::Matrix(arg0) => f.debug_tuple("Matrix").field(arg0).finish(),
-            Self::TransferFunction {
-                tf,
-                hdr_params,
-                inverse,
-            } => f
+            Self::TransferFunction { tf, hdr_params, inverse } => f
                 .debug_struct("TransferFunction")
                 .field("tf", tf)
                 .field("hdr_params", hdr_params)
                 .field("inverse", inverse)
                 .finish(),
-            Self::ToneMapRec2408 {
-                hdr_params,
-                target_display_luminance,
-                detect_peak,
-            } => f
+            Self::ToneMapRec2408 { hdr_params, target_display_luminance, detect_peak } => f
                 .debug_struct("ToneMapRec2408")
                 .field("hdr_params", hdr_params)
                 .field("target_display_luminance", target_display_luminance)
                 .field("detect_peak", detect_peak)
                 .finish(),
-            Self::ToneMapLumaRec2408 {
-                hdr_params,
-                target_display_luminance,
-                detect_peak,
-            } => f
+            Self::ToneMapLumaRec2408 { hdr_params, target_display_luminance, detect_peak } => f
                 .debug_struct("ToneMapLumaRec2408")
                 .field("hdr_params", hdr_params)
                 .field("target_display_luminance", target_display_luminance)
                 .field("detect_peak", detect_peak)
                 .finish(),
-            Self::HlgInverseOotf(hdr_params) => {
-                f.debug_tuple("HlgInverseOotf").field(hdr_params).finish()
-            }
-            Self::GamutMap {
-                luminances,
-                saturation_factor,
-            } => f
+            Self::HlgInverseOotf(hdr_params) => f.debug_tuple("HlgInverseOotf").field(hdr_params).finish(),
+            Self::GamutMap { luminances, saturation_factor } => f
                 .debug_struct("GamutMap")
                 .field("luminances", luminances)
                 .field("saturation_factor", saturation_factor)
@@ -790,10 +633,7 @@ impl ColorTransformOp {
             ColorTransformOp::XybToMixedLms { .. } | ColorTransformOp::Matrix(_) => Some(3),
             ColorTransformOp::LumaToXyz { .. } => Some(1),
             ColorTransformOp::XyzToLuma => Some(3),
-            ColorTransformOp::TransferFunction {
-                tf: TransferFunction::Hlg,
-                ..
-            } => Some(3),
+            ColorTransformOp::TransferFunction { tf: TransferFunction::Hlg, .. } => Some(3),
             ColorTransformOp::TransferFunction { .. } => None,
             ColorTransformOp::HlgInverseOotf(_) => Some(3),
             ColorTransformOp::ToneMapRec2408 { .. } => Some(3),
@@ -810,10 +650,7 @@ impl ColorTransformOp {
             ColorTransformOp::XybToMixedLms { .. } | ColorTransformOp::Matrix(_) => Some(3),
             ColorTransformOp::LumaToXyz { .. } => Some(3),
             ColorTransformOp::XyzToLuma => Some(1),
-            ColorTransformOp::TransferFunction {
-                tf: TransferFunction::Hlg,
-                ..
-            } => Some(3),
+            ColorTransformOp::TransferFunction { tf: TransferFunction::Hlg, .. } => Some(3),
             ColorTransformOp::TransferFunction { .. } => None,
             ColorTransformOp::HlgInverseOotf(_) => Some(3),
             ColorTransformOp::ToneMapRec2408 { .. } => Some(3),
@@ -834,21 +671,14 @@ impl ColorTransformOp {
         }
 
         Ok(match self {
-            Self::XybToMixedLms {
-                opsin_bias,
-                intensity_target,
-            } => {
-                let [x, y, b, ..] = channels else {
-                    unreachable!()
-                };
+            Self::XybToMixedLms { opsin_bias, intensity_target } => {
+                let [x, y, b, ..] = channels else { unreachable!() };
                 let xyb = [&mut **x, &mut **y, &mut **b];
                 crate::xyb::run(xyb, *opsin_bias, *intensity_target);
                 3
             }
             Self::LumaToXyz { illuminant } => {
-                let [a, b, c, ..] = channels else {
-                    unreachable!()
-                };
+                let [a, b, c, ..] = channels else { unreachable!() };
                 let [x, y] = illuminant;
                 for ((a, b), c) in a.iter_mut().zip(&mut **b).zip(&mut **c) {
                     let luma_div_y = *a / y;
@@ -866,9 +696,7 @@ impl ColorTransformOp {
                 1
             }
             Self::Matrix(matrix) => {
-                let [a, b, c, ..] = channels else {
-                    unreachable!()
-                };
+                let [a, b, c, ..] = channels else { unreachable!() };
                 for ((a, b), c) in a.iter_mut().zip(&mut **b).zip(&mut **c) {
                     let result = crate::ciexyz::matmul3vec(matrix, &[*a, *b, *c]);
                     *a = result[0];
@@ -877,65 +705,32 @@ impl ColorTransformOp {
                 }
                 3
             }
-            Self::TransferFunction {
-                tf,
-                hdr_params,
-                inverse: false,
-            } => {
+            Self::TransferFunction { tf, hdr_params, inverse: false } => {
                 apply_transfer_function(&mut channels[..num_input_channels], *tf, *hdr_params);
                 num_input_channels
             }
-            Self::TransferFunction {
-                tf,
-                hdr_params,
-                inverse: true,
-            } => {
-                apply_inverse_transfer_function(
-                    &mut channels[..num_input_channels],
-                    *tf,
-                    *hdr_params,
-                );
+            Self::TransferFunction { tf, hdr_params, inverse: true } => {
+                apply_inverse_transfer_function(&mut channels[..num_input_channels], *tf, *hdr_params);
                 num_input_channels
             }
-            Self::HlgInverseOotf(HdrParams {
-                luminances,
-                intensity_target,
-                ..
-            }) => {
+            Self::HlgInverseOotf(HdrParams { luminances, intensity_target, .. }) => {
                 // FIXME: allow grayscale images.
-                let [r, g, b, ..] = channels else {
-                    unreachable!()
-                };
+                let [r, g, b, ..] = channels else { unreachable!() };
                 tf::hlg_inverse_oo([r, g, b], *luminances, *intensity_target);
                 3
             }
-            Self::ToneMapRec2408 {
-                hdr_params,
-                target_display_luminance,
-                detect_peak,
-            } => {
-                let [r, g, b, ..] = channels else {
-                    unreachable!()
-                };
+            Self::ToneMapRec2408 { hdr_params, target_display_luminance, detect_peak } => {
+                let [r, g, b, ..] = channels else { unreachable!() };
                 tone_map::tone_map(r, g, b, hdr_params, *target_display_luminance, *detect_peak);
                 3
             }
-            Self::ToneMapLumaRec2408 {
-                hdr_params,
-                target_display_luminance,
-                detect_peak,
-            } => {
+            Self::ToneMapLumaRec2408 { hdr_params, target_display_luminance, detect_peak } => {
                 let [y, ..] = channels else { unreachable!() };
                 tone_map::tone_map_luma(y, hdr_params, *target_display_luminance, *detect_peak);
                 1
             }
-            Self::GamutMap {
-                luminances,
-                saturation_factor,
-            } => {
-                let [r, g, b, ..] = channels else {
-                    unreachable!()
-                };
+            Self::GamutMap { luminances, saturation_factor } => {
+                let [r, g, b, ..] = channels else { unreachable!() };
                 gamut_map::gamut_map(r, g, b, *luminances, *saturation_factor);
                 3
             }
@@ -948,9 +743,7 @@ impl ColorTransformOp {
                 num_input_channels
             }
             Self::IccToIcc(transform) => {
-                transform
-                    .transform(channels)
-                    .map_err(crate::Error::CmsFailure)?;
+                transform.transform(channels).map_err(crate::Error::CmsFailure)?;
                 transform.num_output_channels()
             }
         })
@@ -964,25 +757,15 @@ struct HdrParams {
     min_nits: f32,
 }
 
-fn apply_transfer_function(
-    channels: &mut [&mut [f32]],
-    tf: TransferFunction,
-    hdr_params: HdrParams,
-) {
+fn apply_transfer_function(channels: &mut [&mut [f32]], tf: TransferFunction, hdr_params: HdrParams) {
     match tf {
-        TransferFunction::Gamma {
-            g: gamma,
-            inverted: false,
-        } => {
+        TransferFunction::Gamma { g: gamma, inverted: false } => {
             let gamma = 1e7 / gamma as f32;
             for ch in channels {
                 tf::apply_gamma(ch, gamma);
             }
         }
-        TransferFunction::Gamma {
-            g: gamma,
-            inverted: true,
-        } => {
+        TransferFunction::Gamma { g: gamma, inverted: true } => {
             let gamma = gamma as f32 / 1e7;
             for ch in channels {
                 tf::apply_gamma(ch, gamma);
@@ -1028,25 +811,15 @@ fn apply_transfer_function(
     }
 }
 
-fn apply_inverse_transfer_function(
-    channels: &mut [&mut [f32]],
-    tf: TransferFunction,
-    hdr_params: HdrParams,
-) {
+fn apply_inverse_transfer_function(channels: &mut [&mut [f32]], tf: TransferFunction, hdr_params: HdrParams) {
     match tf {
-        TransferFunction::Gamma {
-            g: gamma,
-            inverted: false,
-        } => {
+        TransferFunction::Gamma { g: gamma, inverted: false } => {
             let gamma = gamma as f32 / 1e7;
             for ch in channels {
                 tf::apply_gamma(ch, gamma);
             }
         }
-        TransferFunction::Gamma {
-            g: gamma,
-            inverted: true,
-        } => {
+        TransferFunction::Gamma { g: gamma, inverted: true } => {
             let gamma = 1e7 / gamma as f32;
             for ch in channels {
                 tf::apply_gamma(ch, gamma);

@@ -6,11 +6,7 @@ pub struct BitWriter {
 
 impl BitWriter {
     pub fn new() -> Self {
-        Self {
-            output: Vec::new(),
-            buf: 0,
-            valid_buf_bits: 0,
-        }
+        Self { output: Vec::new(), buf: 0, valid_buf_bits: 0 }
     }
 
     fn flush_buf(&mut self, next_buf: u64) {
@@ -64,8 +60,7 @@ impl BitWriter {
         }
 
         if !has_ff_byte(out) {
-            self.output
-                .extend_from_slice(&out.to_be_bytes()[..valid_bytes]);
+            self.output.extend_from_slice(&out.to_be_bytes()[..valid_bytes]);
             return self.output;
         }
 

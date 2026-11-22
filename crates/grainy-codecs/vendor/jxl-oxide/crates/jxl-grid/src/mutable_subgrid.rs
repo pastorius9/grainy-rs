@@ -36,26 +36,12 @@ impl<'g, V> MutableSubgrid<'g, V> {
     /// Panics if `width > stride`.
     pub unsafe fn new(ptr: NonNull<V>, width: usize, height: usize, stride: usize) -> Self {
         assert!(width == 0 || width <= stride);
-        Self {
-            ptr,
-            split_base: None,
-            width,
-            height,
-            stride,
-            _marker: Default::default(),
-        }
+        Self { ptr, split_base: None, width, height, stride, _marker: Default::default() }
     }
 
     /// Creates a empty, zero-sized subgrid that points to nowhere.
     pub fn empty() -> Self {
-        Self {
-            ptr: NonNull::dangling(),
-            split_base: None,
-            width: 0,
-            height: 0,
-            stride: 0,
-            _marker: Default::default(),
-        }
+        Self { ptr: NonNull::dangling(), split_base: None, width: 0, height: 0, stride: 0, _marker: Default::default() }
     }
 
     /// Create a `MutableSubgrid` from buffer slice, width, height and stride.
@@ -76,14 +62,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
             assert!(buf.len() >= required_len);
         }
         // SAFETY: We have unique access to `buf`, and the area is in bounds.
-        unsafe {
-            Self::new(
-                NonNull::new(buf.as_mut_ptr()).unwrap(),
-                width,
-                height,
-                stride,
-            )
-        }
+        unsafe { Self::new(NonNull::new(buf.as_mut_ptr()).unwrap(), width, height, stride) }
     }
 
     /// Returns the width of the subgrid.
@@ -190,9 +169,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
 
         // SAFETY: row is in bounds, `width` consecutive elements from the start of a row is valid.
         Some(unsafe {
-            let offset = row
-                .checked_mul(self.stride)
-                .expect("subgrid row offset overflows usize");
+            let offset = row.checked_mul(self.stride).expect("subgrid row offset overflows usize");
             let ptr = self.ptr.as_ptr().add(offset);
             std::slice::from_raw_parts(ptr as *const _, self.width)
         })
@@ -249,9 +226,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
 
         // SAFETY: row is in bounds, `width` consecutive elements from the start of a row is valid.
         Some(unsafe {
-            let offset = row
-                .checked_mul(self.stride)
-                .expect("subgrid row offset overflows usize");
+            let offset = row.checked_mul(self.stride).expect("subgrid row offset overflows usize");
             let ptr = self.ptr.as_ptr().add(offset);
             std::slice::from_raw_parts_mut(ptr, self.width)
         })
@@ -291,11 +266,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
     ///
     /// # Panics
     /// Panics if the range is out of bounds.
-    pub fn subgrid(
-        self,
-        range_x: impl RangeBounds<usize>,
-        range_y: impl RangeBounds<usize>,
-    ) -> MutableSubgrid<'g, V> {
+    pub fn subgrid(self, range_x: impl RangeBounds<usize>, range_y: impl RangeBounds<usize>) -> MutableSubgrid<'g, V> {
         use std::ops::Bound;
 
         let left = match range_x.start_bound() {
@@ -345,8 +316,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
         unsafe {
             let split_base = self.split_base.unwrap_or(self.ptr.cast());
             let mut left_grid = MutableSubgrid::new(left_ptr, x, self.height, self.stride);
-            let mut right_grid =
-                MutableSubgrid::new(right_ptr, self.width - x, self.height, self.stride);
+            let mut right_grid = MutableSubgrid::new(right_ptr, self.width - x, self.height, self.stride);
             left_grid.split_base = Some(split_base);
             right_grid.split_base = Some(split_base);
             (left_grid, right_grid)
@@ -367,8 +337,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
             let split_base = self.split_base.unwrap_or(self.ptr.cast());
             self.width = x;
             self.split_base = Some(split_base);
-            let mut right_grid =
-                MutableSubgrid::new(right_ptr, right_width, self.height, self.stride);
+            let mut right_grid = MutableSubgrid::new(right_ptr, right_width, self.height, self.stride);
             right_grid.split_base = Some(split_base);
             right_grid
         }
@@ -387,8 +356,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
         unsafe {
             let split_base = self.split_base.unwrap_or(self.ptr.cast());
             let mut top_grid = MutableSubgrid::new(top_ptr, self.width, y, self.stride);
-            let mut bottom_grid =
-                MutableSubgrid::new(bottom_ptr, self.width, self.height - y, self.stride);
+            let mut bottom_grid = MutableSubgrid::new(bottom_ptr, self.width, self.height - y, self.stride);
             top_grid.split_base = Some(split_base);
             bottom_grid.split_base = Some(split_base);
             (top_grid, bottom_grid)
@@ -409,8 +377,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
             let split_base = self.split_base.unwrap_or(self.ptr.cast());
             self.height = y;
             self.split_base = Some(split_base);
-            let mut bottom_grid =
-                MutableSubgrid::new(bottom_ptr, self.width, bottom_height, self.stride);
+            let mut bottom_grid = MutableSubgrid::new(bottom_ptr, self.width, bottom_height, self.stride);
             bottom_grid.split_base = Some(split_base);
             bottom_grid
         }
@@ -432,10 +399,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
         assert_eq!(self.stride, right.stride);
         assert_eq!(self.height, right.height);
         assert!(self.stride >= self.width + right.width);
-        assert!(std::ptr::eq(
-            self.get_ptr_wrapping(self.width, 0) as *const _,
-            right.ptr.as_ptr() as *const _,
-        ));
+        assert!(std::ptr::eq(self.get_ptr_wrapping(self.width, 0) as *const _, right.ptr.as_ptr() as *const _,));
 
         let right_width = right.width;
         self.width += right_width;
@@ -456,10 +420,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
         assert_eq!(self.split_base, bottom.split_base);
         assert_eq!(self.stride, bottom.stride);
         assert_eq!(self.width, bottom.width);
-        assert!(std::ptr::eq(
-            self.get_ptr_wrapping(0, self.height) as *const _,
-            bottom.ptr.as_ptr() as *const _,
-        ));
+        assert!(std::ptr::eq(self.get_ptr_wrapping(0, self.height) as *const _, bottom.ptr.as_ptr() as *const _,));
 
         let bottom_height = bottom.height;
         self.height += bottom_height;
@@ -484,11 +445,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
     ///
     /// # Panics
     /// Panics if either `group_width` or `group_height` is zero.
-    pub fn into_groups(
-        self,
-        group_width: usize,
-        group_height: usize,
-    ) -> Vec<MutableSubgrid<'g, V>> {
+    pub fn into_groups(self, group_width: usize, group_height: usize) -> Vec<MutableSubgrid<'g, V>> {
         assert!(
             group_width > 0 && group_height > 0,
             "expected group width and height to be nonzero, got width = {group_width}, height = {group_height}"
@@ -512,19 +469,10 @@ impl<'g, V> MutableSubgrid<'g, V> {
         num_cols: usize,
         num_rows: usize,
     ) -> Vec<MutableSubgrid<'g, V>> {
-        let MutableSubgrid {
-            ptr,
-            split_base,
-            width,
-            height,
-            stride,
-            ..
-        } = self;
+        let MutableSubgrid { ptr, split_base, width, height, stride, .. } = self;
         let split_base = split_base.unwrap_or(ptr.cast());
 
-        let group_count = num_cols
-            .checked_mul(num_rows)
-            .expect("subgrid group count overflows usize");
+        let group_count = num_cols.checked_mul(num_rows).expect("subgrid group count overflows usize");
         let mut groups = Vec::with_capacity(group_count);
         for gy in 0..num_rows {
             let y = gy.saturating_mul(group_height).min(height);
@@ -541,9 +489,7 @@ impl<'g, V> MutableSubgrid<'g, V> {
                 };
                 let group_ptr = unsafe { ptr.as_ptr().add(offset) };
 
-                let mut grid = unsafe {
-                    MutableSubgrid::new(NonNull::new(group_ptr).unwrap(), gw, gh, stride)
-                };
+                let mut grid = unsafe { MutableSubgrid::new(NonNull::new(group_ptr).unwrap(), gw, gh, stride) };
                 grid.split_base = Some(split_base);
                 groups.push(grid);
             }
@@ -560,26 +506,21 @@ impl MutableSubgrid<'_, f32> {
     /// # Panics
     /// Panics if given SIMD vector type is not supported.
     pub fn as_vectored<V: SimdVector>(&mut self) -> Option<MutableSubgrid<'_, V>> {
-        assert!(
-            V::available(),
-            "Vector type `{}` is not supported by current CPU",
-            std::any::type_name::<V>()
-        );
+        assert!(V::available(), "Vector type `{}` is not supported by current CPU", std::any::type_name::<V>());
 
         let mask = V::SIZE - 1;
         let align_mask = std::mem::align_of::<V>() - 1;
 
-        (self.ptr.as_ptr() as usize & align_mask == 0
-            && self.width & mask == 0
-            && self.stride & mask == 0)
-            .then(|| MutableSubgrid {
+        (self.ptr.as_ptr() as usize & align_mask == 0 && self.width & mask == 0 && self.stride & mask == 0).then(|| {
+            MutableSubgrid {
                 ptr: self.ptr.cast::<V>(),
                 split_base: self.split_base,
                 width: self.width / V::SIZE,
                 height: self.height,
                 stride: self.stride / V::SIZE,
                 _marker: Default::default(),
-            })
+            }
+        })
     }
 }
 

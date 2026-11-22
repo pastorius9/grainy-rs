@@ -6,12 +6,9 @@ use std::{
 use jxl_frame::data::{HfGlobal, LfGlobal, LfGroup};
 use jxl_modular::{ChannelShift, Sample};
 
-use crate::{
-    Error, ImageWithRegion, IndexedFrame, Reference, Region, Result, image::RenderedImage,
-};
+use crate::{Error, ImageWithRegion, IndexedFrame, Reference, Region, Result, image::RenderedImage};
 
-pub type RenderOp<S> =
-    Arc<dyn Fn(FrameRender<S>, Region) -> FrameRender<S> + Send + Sync + 'static>;
+pub type RenderOp<S> = Arc<dyn Fn(FrameRender<S>, Region) -> FrameRender<S> + Send + Sync + 'static>;
 
 #[derive(Debug)]
 pub struct RenderCache<S: Sample> {
@@ -24,8 +21,7 @@ impl<S: Sample> RenderCache<S> {
     pub fn new(frame: &crate::IndexedFrame) -> Self {
         let frame_header = frame.header();
         let jpeg_upsampling = frame_header.jpeg_upsampling;
-        let shifts_cbycr: [_; 3] =
-            std::array::from_fn(|idx| ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx));
+        let shifts_cbycr: [_; 3] = std::array::from_fn(|idx| ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx));
 
         let lf_width = frame_header.color_sample_width().div_ceil(8);
         let lf_height = frame_header.color_sample_height().div_ceil(8);
@@ -35,11 +31,7 @@ impl<S: Sample> RenderCache<S> {
             *w = shift_w;
             *h = shift_h;
         }
-        Self {
-            lf_global: None,
-            hf_global: None,
-            lf_groups: HashMap::new(),
-        }
+        Self { lf_global: None, hf_global: None, lf_groups: HashMap::new() }
     }
 }
 
@@ -95,14 +87,7 @@ impl<S: Sample> FrameRenderHandle<S> {
         render_op: RenderOp<S>,
         refs: [Option<Reference<S>>; 4],
     ) -> Self {
-        Self {
-            frame,
-            image_region,
-            render: Mutex::new(FrameRender::None),
-            condvar: Condvar::new(),
-            render_op,
-            refs,
-        }
+        Self { frame, image_region, render: Mutex::new(FrameRender::None), condvar: Condvar::new(), render_op, refs }
     }
 
     #[inline]
@@ -114,14 +99,7 @@ impl<S: Sample> FrameRenderHandle<S> {
         refs: [Option<Reference<S>>; 4],
     ) -> Self {
         let render = FrameRender::InProgress(Box::new(cache));
-        Self {
-            frame,
-            image_region,
-            render: Mutex::new(render),
-            condvar: Condvar::new(),
-            render_op,
-            refs,
-        }
+        Self { frame, image_region, render: Mutex::new(render), condvar: Condvar::new(), render_op, refs }
     }
 
     pub fn run_with_image(self: Arc<Self>) -> Result<RenderedImage<S>> {

@@ -228,8 +228,7 @@ unsafe fn inverse_h_i16_x86_64_avx2(merged: &mut MutableSubgrid<'_, i16>) {
         let rows: [_; 8] = std::array::from_fn(|dy| merged.get_row_mut(y + dy).as_mut_ptr());
 
         let mut avg = _mm_setr_epi16(
-            *rows[0x0], *rows[0x1], *rows[0x2], *rows[0x3], *rows[0x4], *rows[0x5], *rows[0x6],
-            *rows[0x7],
+            *rows[0x0], *rows[0x1], *rows[0x2], *rows[0x3], *rows[0x4], *rows[0x5], *rows[0x6], *rows[0x7],
         );
         let mut left = avg;
         for x16 in 0..(avg_width - 1) / 16 {
@@ -273,9 +272,8 @@ unsafe fn inverse_h_i16_x86_64_avx2(merged: &mut MutableSubgrid<'_, i16>) {
         if (avg_width - 1) % 16 >= 8 {
             let x16 = (avg_width - 1) / 16;
             let x = x16 * 16 + 1;
-            let avgs = transpose_i16x8(std::array::from_fn(|idx| unsafe {
-                _mm_loadu_si128(rows[idx].add(x) as *const _)
-            }));
+            let avgs =
+                transpose_i16x8(std::array::from_fn(|idx| unsafe { _mm_loadu_si128(rows[idx].add(x) as *const _) }));
             let residuals = transpose_i16x8(std::array::from_fn(|idx| unsafe {
                 _mm_loadu_si128(rows[idx].add(avg_width - 1 + x) as *const _)
             }));
@@ -303,8 +301,7 @@ unsafe fn inverse_h_i16_x86_64_avx2(merged: &mut MutableSubgrid<'_, i16>) {
                 _mm_loadu_si128(rows[idx].add(width - 8) as *const _)
             }));
             let from = (!(width / 2) + 1) % 8;
-            for (dx, (residual, next_avg)) in residuals.into_iter().zip(avgs).enumerate().skip(from)
-            {
+            for (dx, (residual, next_avg)) in residuals.into_iter().zip(avgs).enumerate().skip(from) {
                 let dx = 8 - dx;
                 let diff = _mm_add_epi16(residual, tendency_i16_x86_64_sse41(left, avg, next_avg));
                 let diff_2 = _mm_srai_epi16::<1>(_mm_add_epi16(diff, _mm_srli_epi16::<15>(diff)));
@@ -324,9 +321,7 @@ unsafe fn inverse_h_i16_x86_64_avx2(merged: &mut MutableSubgrid<'_, i16>) {
         let mut chunks_it = scratch.chunks_exact(8);
         for (x8, chunk) in (&mut chunks_it).enumerate() {
             let x = x8 * 8;
-            let v = transpose_i16x8(std::array::from_fn(|idx| unsafe {
-                chunk[idx].assume_init_read()
-            }));
+            let v = transpose_i16x8(std::array::from_fn(|idx| unsafe { chunk[idx].assume_init_read() }));
             for (row, v) in rows.iter().zip(v) {
                 _mm_storeu_si128(row.add(x) as *mut _, v);
             }
@@ -377,15 +372,13 @@ unsafe fn inverse_h_i16_x86_64_sse41(merged: &mut MutableSubgrid<'_, i16>) {
         let rows: [_; 8] = std::array::from_fn(|dy| merged.get_row_mut(y + dy).as_mut_ptr());
 
         let mut avg = _mm_setr_epi16(
-            *rows[0x0], *rows[0x1], *rows[0x2], *rows[0x3], *rows[0x4], *rows[0x5], *rows[0x6],
-            *rows[0x7],
+            *rows[0x0], *rows[0x1], *rows[0x2], *rows[0x3], *rows[0x4], *rows[0x5], *rows[0x6], *rows[0x7],
         );
         let mut left = avg;
         for x8 in 0..(avg_width - 1) / 8 {
             let x = x8 * 8 + 1;
-            let avgs = transpose_i16x8(std::array::from_fn(|idx| unsafe {
-                _mm_loadu_si128(rows[idx].add(x) as *const _)
-            }));
+            let avgs =
+                transpose_i16x8(std::array::from_fn(|idx| unsafe { _mm_loadu_si128(rows[idx].add(x) as *const _) }));
             let residuals = transpose_i16x8(std::array::from_fn(|idx| unsafe {
                 _mm_loadu_si128(rows[idx].add(avg_width - 1 + x) as *const _)
             }));
@@ -413,8 +406,7 @@ unsafe fn inverse_h_i16_x86_64_sse41(merged: &mut MutableSubgrid<'_, i16>) {
                 _mm_loadu_si128(rows[idx].add(width - 8) as *const _)
             }));
             let from = (!(width / 2) + 1) % 8;
-            for (dx, (residual, next_avg)) in residuals.into_iter().zip(avgs).enumerate().skip(from)
-            {
+            for (dx, (residual, next_avg)) in residuals.into_iter().zip(avgs).enumerate().skip(from) {
                 let dx = 8 - dx;
                 let diff = _mm_add_epi16(residual, tendency_i16_x86_64_sse41(left, avg, next_avg));
                 let diff_2 = _mm_srai_epi16::<1>(_mm_add_epi16(diff, _mm_srli_epi16::<15>(diff)));
@@ -434,9 +426,7 @@ unsafe fn inverse_h_i16_x86_64_sse41(merged: &mut MutableSubgrid<'_, i16>) {
         let mut chunks_it = scratch.chunks_exact(8);
         for (x8, chunk) in (&mut chunks_it).enumerate() {
             let x = x8 * 8;
-            let v = transpose_i16x8(std::array::from_fn(|idx| unsafe {
-                chunk[idx].assume_init_read()
-            }));
+            let v = transpose_i16x8(std::array::from_fn(|idx| unsafe { chunk[idx].assume_init_read() }));
             for (row, v) in rows.iter().zip(v) {
                 _mm_storeu_si128(row.add(x) as *mut _, v);
             }
@@ -473,12 +463,7 @@ unsafe fn inverse_h_i16_aarch64_neon(merged: &mut MutableSubgrid<'_, i16>) {
         let int16x4x2_t(tr2, tr3) = vtrn_s16(v2, v3);
         let int32x2x2_t(o0, o2) = vtrn_s32(vreinterpret_s32_s16(tr0), vreinterpret_s32_s16(tr2));
         let int32x2x2_t(o1, o3) = vtrn_s32(vreinterpret_s32_s16(tr1), vreinterpret_s32_s16(tr3));
-        [
-            vreinterpret_s16_s32(o0),
-            vreinterpret_s16_s32(o1),
-            vreinterpret_s16_s32(o2),
-            vreinterpret_s16_s32(o3),
-        ]
+        [vreinterpret_s16_s32(o0), vreinterpret_s16_s32(o1), vreinterpret_s16_s32(o2), vreinterpret_s16_s32(o3)]
     }
 
     let height = merged.height();
@@ -527,10 +512,8 @@ unsafe fn inverse_h_i16_aarch64_neon(merged: &mut MutableSubgrid<'_, i16>) {
             ]);
             for (dx, (residual, next_avg)) in residuals.into_iter().zip(avgs).enumerate() {
                 let diff = vadd_s16(residual, tendency_i16_neon(left, avg, next_avg));
-                let diff_2 = vshr_n_s16::<1>(vadd_s16(
-                    diff,
-                    vreinterpret_s16_u16(vshr_n_u16::<15>(vreinterpret_u16_s16(diff))),
-                ));
+                let diff_2 =
+                    vshr_n_s16::<1>(vadd_s16(diff, vreinterpret_s16_u16(vshr_n_u16::<15>(vreinterpret_u16_s16(diff)))));
                 let first = vadd_s16(avg, diff_2);
                 let second = vsub_s16(first, diff);
                 scratch[x4 * 8 + dx * 2].write(first);
@@ -558,14 +541,11 @@ unsafe fn inverse_h_i16_aarch64_neon(merged: &mut MutableSubgrid<'_, i16>) {
                 vld1_s16(rows[3].add(width - 4) as *const _),
             ]);
             let from = (!(width / 2) + 1) % 4;
-            for (dx, (residual, next_avg)) in residuals.into_iter().zip(avgs).enumerate().skip(from)
-            {
+            for (dx, (residual, next_avg)) in residuals.into_iter().zip(avgs).enumerate().skip(from) {
                 let dx = 4 - dx;
                 let diff = vadd_s16(residual, tendency_i16_neon(left, avg, next_avg));
-                let diff_2 = vshr_n_s16::<1>(vadd_s16(
-                    diff,
-                    vreinterpret_s16_u16(vshr_n_u16::<15>(vreinterpret_u16_s16(diff))),
-                ));
+                let diff_2 =
+                    vshr_n_s16::<1>(vadd_s16(diff, vreinterpret_s16_u16(vshr_n_u16::<15>(vreinterpret_u16_s16(diff)))));
                 let first = vadd_s16(avg, diff_2);
                 let second = vsub_s16(first, diff);
                 scratch[width / 2 * 2 - dx * 2].write(first);
@@ -668,15 +648,11 @@ unsafe fn inverse_h_i16_wasm32_simd128(merged: &mut MutableSubgrid<'_, i16>) {
         // SAFETY: Rows are disjoint.
         let rows: [_; 8] = std::array::from_fn(|dy| merged.get_row_mut(y + dy).as_mut_ptr());
 
-        let mut avg = i16x8(
-            *rows[0], *rows[1], *rows[2], *rows[3], *rows[4], *rows[5], *rows[6], *rows[7],
-        );
+        let mut avg = i16x8(*rows[0], *rows[1], *rows[2], *rows[3], *rows[4], *rows[5], *rows[6], *rows[7]);
         let mut left = avg;
         for x8 in 0..(avg_width - 1) / 8 {
             let x = x8 * 8 + 1;
-            let avgs = transpose(std::array::from_fn(|idx| unsafe {
-                v128_load(rows[idx].add(x) as *const _)
-            }));
+            let avgs = transpose(std::array::from_fn(|idx| unsafe { v128_load(rows[idx].add(x) as *const _) }));
             let residuals = transpose(std::array::from_fn(|idx| unsafe {
                 v128_load(rows[idx].add(avg_width - 1 + x) as *const _)
             }));
@@ -694,18 +670,15 @@ unsafe fn inverse_h_i16_wasm32_simd128(merged: &mut MutableSubgrid<'_, i16>) {
 
         // Check if we have more data to process.
         if (avg_width - 1) % 8 != 0 || width % 2 == 0 {
-            let mut avgs = transpose(std::array::from_fn(|idx| unsafe {
-                v128_load(rows[idx].add(avg_width - 8) as *const _)
-            }));
+            let mut avgs =
+                transpose(std::array::from_fn(|idx| unsafe { v128_load(rows[idx].add(avg_width - 8) as *const _) }));
             if width % 2 == 0 {
                 avgs = std::array::from_fn(|idx| if idx == 7 { avgs[7] } else { avgs[idx + 1] });
             }
-            let residuals = transpose(std::array::from_fn(|idx| unsafe {
-                v128_load(rows[idx].add(width - 8) as *const _)
-            }));
+            let residuals =
+                transpose(std::array::from_fn(|idx| unsafe { v128_load(rows[idx].add(width - 8) as *const _) }));
             let from = (!(width / 2) + 1) % 8;
-            for (dx, (residual, next_avg)) in residuals.into_iter().zip(avgs).enumerate().skip(from)
-            {
+            for (dx, (residual, next_avg)) in residuals.into_iter().zip(avgs).enumerate().skip(from) {
                 let dx = 8 - dx;
                 let diff = i16x8_add(residual, tendency_i16_wasm32_simd128(left, avg, next_avg));
                 let diff_2 = i16x8_shr(i16x8_add(diff, u16x8_shr(diff, 15)), 1);
@@ -725,9 +698,7 @@ unsafe fn inverse_h_i16_wasm32_simd128(merged: &mut MutableSubgrid<'_, i16>) {
         let mut chunks_it = scratch.chunks_exact(8);
         for (x8, chunk) in (&mut chunks_it).enumerate() {
             let x = x8 * 8;
-            let v = transpose(std::array::from_fn(|idx| unsafe {
-                chunk[idx].assume_init_read()
-            }));
+            let v = transpose(std::array::from_fn(|idx| unsafe { chunk[idx].assume_init_read() }));
             for (row, v) in rows.iter().zip(v) {
                 v128_store(row.add(x) as *mut _, v);
             }
@@ -888,8 +859,7 @@ unsafe fn inverse_v_i16_x86_64_avx2(merged: &mut MutableSubgrid<'_, i16>) {
         let mut top = avg;
         let mut chunks_it = scratch.chunks_exact_mut(2);
         for (y, pair) in (&mut chunks_it).enumerate() {
-            let residual =
-                _mm256_loadu_si256(merged.get_mut(x, avg_height + y) as *mut _ as *const _);
+            let residual = _mm256_loadu_si256(merged.get_mut(x, avg_height + y) as *mut _ as *const _);
             let next_avg = if y + 1 < avg_height {
                 _mm256_loadu_si256(merged.get_mut(x, y + 1) as *mut _ as *const _)
             } else {
@@ -897,8 +867,7 @@ unsafe fn inverse_v_i16_x86_64_avx2(merged: &mut MutableSubgrid<'_, i16>) {
             };
 
             let diff = _mm256_add_epi16(residual, tendency_i16_x86_64_avx2(top, avg, next_avg));
-            let diff_2 =
-                _mm256_srai_epi16::<1>(_mm256_add_epi16(diff, _mm256_srli_epi16::<15>(diff)));
+            let diff_2 = _mm256_srai_epi16::<1>(_mm256_add_epi16(diff, _mm256_srli_epi16::<15>(diff)));
             let first = _mm256_add_epi16(avg, diff_2);
             let second = _mm256_sub_epi16(first, diff);
             pair[0].write(first);
@@ -912,10 +881,7 @@ unsafe fn inverse_v_i16_x86_64_avx2(merged: &mut MutableSubgrid<'_, i16>) {
         }
 
         for (y, v) in scratch.iter().enumerate() {
-            _mm256_storeu_si256(
-                merged.get_mut(x, y) as *mut i16 as *mut _,
-                v.assume_init_read(),
-            );
+            _mm256_storeu_si256(merged.get_mut(x, y) as *mut i16 as *mut _, v.assume_init_read());
         }
     }
 
@@ -951,11 +917,8 @@ unsafe fn inverse_v_i16_x86_64_sse41(merged: &mut MutableSubgrid<'_, i16>) {
         let mut chunks_it = scratch.chunks_exact_mut(2);
         for (y, pair) in (&mut chunks_it).enumerate() {
             let residual = _mm_loadu_si128(merged.get_mut(x, avg_height + y) as *mut _ as *const _);
-            let next_avg = if y + 1 < avg_height {
-                _mm_loadu_si128(merged.get_mut(x, y + 1) as *mut _ as *const _)
-            } else {
-                avg
-            };
+            let next_avg =
+                if y + 1 < avg_height { _mm_loadu_si128(merged.get_mut(x, y + 1) as *mut _ as *const _) } else { avg };
 
             let diff = _mm_add_epi16(residual, tendency_i16_x86_64_sse41(top, avg, next_avg));
             let diff_2 = _mm_srai_epi16::<1>(_mm_add_epi16(diff, _mm_srli_epi16::<15>(diff)));
@@ -972,10 +935,7 @@ unsafe fn inverse_v_i16_x86_64_sse41(merged: &mut MutableSubgrid<'_, i16>) {
         }
 
         for (y, v) in scratch.iter().enumerate() {
-            _mm_storeu_si128(
-                merged.get_mut(x, y) as *mut i16 as *mut _,
-                v.assume_init_read(),
-            );
+            _mm_storeu_si128(merged.get_mut(x, y) as *mut i16 as *mut _, v.assume_init_read());
         }
     }
 
@@ -1010,17 +970,11 @@ unsafe fn inverse_v_i16_aarch64_neon(merged: &mut MutableSubgrid<'_, i16>) {
         let mut chunks_it = scratch.chunks_exact_mut(2);
         for (y, pair) in (&mut chunks_it).enumerate() {
             let residual = vld1_s16(merged.get_mut(x, avg_height + y) as *mut i16);
-            let next_avg = if y + 1 < avg_height {
-                vld1_s16(merged.get_mut(x, y + 1) as *mut i16)
-            } else {
-                avg
-            };
+            let next_avg = if y + 1 < avg_height { vld1_s16(merged.get_mut(x, y + 1) as *mut i16) } else { avg };
 
             let diff = vadd_s16(residual, tendency_i16_neon(top, avg, next_avg));
-            let diff_2 = vshr_n_s16::<1>(vadd_s16(
-                diff,
-                vreinterpret_s16_u16(vshr_n_u16::<15>(vreinterpret_u16_s16(diff))),
-            ));
+            let diff_2 =
+                vshr_n_s16::<1>(vadd_s16(diff, vreinterpret_s16_u16(vshr_n_u16::<15>(vreinterpret_u16_s16(diff)))));
             let first = vadd_s16(avg, diff_2);
             let second = vsub_s16(first, diff);
             pair[0].write(first);
@@ -1068,11 +1022,8 @@ unsafe fn inverse_v_i16_wasm32_simd128(merged: &mut MutableSubgrid<'_, i16>) {
         let mut chunks_it = scratch.chunks_exact_mut(2);
         for (y, pair) in (&mut chunks_it).enumerate() {
             let residual = v128_load(merged.get_mut(x, avg_height + y) as *mut _ as *const _);
-            let next_avg = if y + 1 < avg_height {
-                v128_load(merged.get_mut(x, y + 1) as *mut _ as *const _)
-            } else {
-                avg
-            };
+            let next_avg =
+                if y + 1 < avg_height { v128_load(merged.get_mut(x, y + 1) as *mut _ as *const _) } else { avg };
 
             let diff = i16x8_add(residual, tendency_i16_wasm32_simd128(top, avg, next_avg));
             let diff_2 = i16x8_shr(i16x8_add(diff, u16x8_shr(diff, 15)), 1);
@@ -1089,10 +1040,7 @@ unsafe fn inverse_v_i16_wasm32_simd128(merged: &mut MutableSubgrid<'_, i16>) {
         }
 
         for (y, v) in scratch.iter().enumerate() {
-            v128_store(
-                merged.get_mut(x, y) as *mut i16 as *mut _,
-                v.assume_init_read(),
-            );
+            v128_store(merged.get_mut(x, y) as *mut i16 as *mut _, v.assume_init_read());
         }
     }
 
@@ -1187,10 +1135,7 @@ unsafe fn tendency_i16_x86_64_avx2(
     let abs_b_c = _mm256_abs_epi16(b_c);
     let abs_a_c = _mm256_abs_epi16(a_c);
     let non_monotonic = _mm256_cmpgt_epi16(_mm256_setzero_si256(), _mm256_xor_si256(a_b, b_c));
-    let skip = _mm256_andnot_si256(
-        _mm256_cmpeq_epi16(a_b, _mm256_setzero_si256()),
-        non_monotonic,
-    );
+    let skip = _mm256_andnot_si256(_mm256_cmpeq_epi16(a_b, _mm256_setzero_si256()), non_monotonic);
     let skip = _mm256_andnot_si256(_mm256_cmpeq_epi16(b_c, _mm256_setzero_si256()), skip);
 
     let abs_a_b_3 = _mm256_mulhi_epi16(abs_a_b, _mm256_set1_epi16(0x5556));
@@ -1198,10 +1143,7 @@ unsafe fn tendency_i16_x86_64_avx2(
     let x = _mm256_add_epi16(abs_a_b_3, _mm256_add_epi16(abs_a_c, _mm256_set1_epi16(2)));
     let x = _mm256_srai_epi16::<2>(x);
 
-    let abs_a_b_2_add_x = _mm256_add_epi16(
-        _mm256_slli_epi16::<1>(abs_a_b),
-        _mm256_and_si256(x, _mm256_set1_epi16(1)),
-    );
+    let abs_a_b_2_add_x = _mm256_add_epi16(_mm256_slli_epi16::<1>(abs_a_b), _mm256_and_si256(x, _mm256_set1_epi16(1)));
     let x = _mm256_blendv_epi8(
         x,
         _mm256_add_epi16(_mm256_slli_epi16::<1>(abs_a_b), _mm256_set1_epi16(1)),
@@ -1212,17 +1154,11 @@ unsafe fn tendency_i16_x86_64_avx2(
     let x = _mm256_blendv_epi8(
         x,
         abs_b_c_2,
-        _mm256_cmpgt_epi16(
-            _mm256_add_epi16(x, _mm256_and_si256(x, _mm256_set1_epi16(1))),
-            abs_b_c_2,
-        ),
+        _mm256_cmpgt_epi16(_mm256_add_epi16(x, _mm256_and_si256(x, _mm256_set1_epi16(1))), abs_b_c_2),
     );
 
     let need_neg = _mm256_cmpgt_epi16(c, a);
-    let mask = _mm256_andnot_si256(
-        skip,
-        _mm256_or_si256(_mm256_slli_epi16::<1>(need_neg), _mm256_set1_epi16(1)),
-    );
+    let mask = _mm256_andnot_si256(skip, _mm256_or_si256(_mm256_slli_epi16::<1>(need_neg), _mm256_set1_epi16(1)));
     _mm256_sign_epi16(x, mask)
 }
 
@@ -1250,10 +1186,7 @@ unsafe fn tendency_i16_x86_64_sse41(
     let x = _mm_add_epi16(abs_a_b_3, _mm_add_epi16(abs_a_c, _mm_set1_epi16(2)));
     let x = _mm_srai_epi16::<2>(x);
 
-    let abs_a_b_2_add_x = _mm_add_epi16(
-        _mm_slli_epi16::<1>(abs_a_b),
-        _mm_and_si128(x, _mm_set1_epi16(1)),
-    );
+    let abs_a_b_2_add_x = _mm_add_epi16(_mm_slli_epi16::<1>(abs_a_b), _mm_and_si128(x, _mm_set1_epi16(1)));
     let x = _mm_blendv_epi8(
         x,
         _mm_add_epi16(_mm_slli_epi16::<1>(abs_a_b), _mm_set1_epi16(1)),
@@ -1264,17 +1197,11 @@ unsafe fn tendency_i16_x86_64_sse41(
     let x = _mm_blendv_epi8(
         x,
         abs_b_c_2,
-        _mm_cmpgt_epi16(
-            _mm_add_epi16(x, _mm_and_si128(x, _mm_set1_epi16(1))),
-            abs_b_c_2,
-        ),
+        _mm_cmpgt_epi16(_mm_add_epi16(x, _mm_and_si128(x, _mm_set1_epi16(1))), abs_b_c_2),
     );
 
     let need_neg = _mm_cmpgt_epi16(c, a);
-    let mask = _mm_andnot_si128(
-        skip,
-        _mm_or_si128(_mm_slli_epi16::<1>(need_neg), _mm_set1_epi16(1)),
-    );
+    let mask = _mm_andnot_si128(skip, _mm_or_si128(_mm_slli_epi16::<1>(need_neg), _mm_set1_epi16(1)));
     _mm_sign_epi16(x, mask)
 }
 
@@ -1299,26 +1226,15 @@ unsafe fn tendency_i16_neon(
     let no_skip = vreinterpret_s16_u16(no_skip);
 
     let abs_a_b_3_merged = vreinterpretq_s16_s32(vmull_n_s16(abs_a_b, 0x5556));
-    let abs_a_b_3 = vuzp2_s16(
-        vget_low_s16(abs_a_b_3_merged),
-        vget_high_s16(abs_a_b_3_merged),
-    );
+    let abs_a_b_3 = vuzp2_s16(vget_low_s16(abs_a_b_3_merged), vget_high_s16(abs_a_b_3_merged));
 
     let x = vshr_n_s16::<2>(vadd_s16(abs_a_b_3, vadd_s16(abs_a_c, vdup_n_s16(2))));
 
     let abs_a_b_2_add_x = vadd_s16(vshl_n_s16::<1>(abs_a_b), vand_s16(x, vdup_n_s16(1)));
-    let x = vbsl_s16(
-        vcgt_s16(x, abs_a_b_2_add_x),
-        vadd_s16(vshl_n_s16::<1>(abs_a_b), vdup_n_s16(1)),
-        x,
-    );
+    let x = vbsl_s16(vcgt_s16(x, abs_a_b_2_add_x), vadd_s16(vshl_n_s16::<1>(abs_a_b), vdup_n_s16(1)), x);
 
     let abs_b_c_2 = vshl_n_s16::<1>(abs_b_c);
-    let x = vbsl_s16(
-        vcgt_s16(vadd_s16(x, vand_s16(x, vdup_n_s16(1))), abs_b_c_2),
-        abs_b_c_2,
-        x,
-    );
+    let x = vbsl_s16(vcgt_s16(vadd_s16(x, vand_s16(x, vdup_n_s16(1))), abs_b_c_2), abs_b_c_2, x);
 
     let need_neg = vcltz_s16(a_c);
     let neg_x = vneg_s16(x);
@@ -1353,18 +1269,10 @@ fn tendency_i16_wasm32_simd128(
     let x = i16x8_shr(i16x8_add(abs_a_b_3, i16x8_add(abs_a_c, i16x8_splat(2))), 2);
 
     let abs_a_b_2_add_x = i16x8_add(i16x8_shl(abs_a_b, 1), v128_and(x, i16x8_splat(1)));
-    let x = v128_bitselect(
-        i16x8_add(i16x8_shl(abs_a_b, 1), i16x8_splat(1)),
-        x,
-        i16x8_gt(x, abs_a_b_2_add_x),
-    );
+    let x = v128_bitselect(i16x8_add(i16x8_shl(abs_a_b, 1), i16x8_splat(1)), x, i16x8_gt(x, abs_a_b_2_add_x));
 
     let abs_b_c_2 = i16x8_shl(abs_b_c, 1);
-    let x = v128_bitselect(
-        abs_b_c_2,
-        x,
-        i16x8_gt(i16x8_add(x, v128_and(x, i16x8_splat(1))), abs_b_c_2),
-    );
+    let x = v128_bitselect(abs_b_c_2, x, i16x8_gt(i16x8_add(x, v128_and(x, i16x8_splat(1))), abs_b_c_2));
 
     let need_neg = i16x8_lt(a_c, i16x8_splat(0));
     let neg_x = i16x8_neg(x);

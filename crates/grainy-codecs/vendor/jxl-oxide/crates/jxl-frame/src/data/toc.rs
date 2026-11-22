@@ -23,26 +23,11 @@ impl std::fmt::Debug for Toc {
             .field("total_size", &self.total_size)
             .field(
                 "groups",
-                &format_args!(
-                    "({} {})",
-                    self.groups.len(),
-                    if self.groups.len() == 1 {
-                        "entry"
-                    } else {
-                        "entries"
-                    },
-                ),
+                &format_args!("({} {})", self.groups.len(), if self.groups.len() == 1 { "entry" } else { "entries" },),
             )
             .field(
                 "bitstream_order",
-                &format_args!(
-                    "({})",
-                    if self.bitstream_to_original.is_empty() {
-                        "empty"
-                    } else {
-                        "non-empty"
-                    },
-                ),
+                &format_args!("({})", if self.bitstream_to_original.is_empty() { "empty" } else { "non-empty" },),
             )
             .finish_non_exhaustive()
     }
@@ -82,14 +67,8 @@ impl Ord for TocGroupKind {
             (Self::HfGlobal, _) => std::cmp::Ordering::Less,
             (_, Self::HfGlobal) => std::cmp::Ordering::Greater,
             (
-                Self::GroupPass {
-                    pass_idx: p_self,
-                    group_idx: g_self,
-                },
-                Self::GroupPass {
-                    pass_idx: p_other,
-                    group_idx: g_other,
-                },
+                Self::GroupPass { pass_idx: p_self, group_idx: g_self },
+                Self::GroupPass { pass_idx: p_other, group_idx: g_other },
             ) => p_self.cmp(p_other).then(g_self.cmp(g_other)),
         }
     }
@@ -123,22 +102,12 @@ impl Toc {
             TocGroupKind::LfGlobal => 0,
             TocGroupKind::LfGroup(lf_group_idx) => 1 + lf_group_idx as usize,
             TocGroupKind::HfGlobal => 1 + self.num_lf_groups,
-            TocGroupKind::GroupPass {
-                pass_idx,
-                group_idx,
-            } => {
-                1 + self.num_lf_groups
-                    + 1
-                    + pass_idx as usize * self.num_groups
-                    + group_idx as usize
+            TocGroupKind::GroupPass { pass_idx, group_idx } => {
+                1 + self.num_lf_groups + 1 + pass_idx as usize * self.num_groups + group_idx as usize
             }
         };
 
-        if self.original_to_bitstream.is_empty() {
-            original_order
-        } else {
-            self.original_to_bitstream[original_order]
-        }
+        if self.original_to_bitstream.is_empty() { original_order } else { self.original_to_bitstream[original_order] }
     }
 
     /// Returns the total size of the frame data in bytes.
@@ -150,10 +119,7 @@ impl Toc {
         let groups = if self.bitstream_to_original.is_empty() {
             self.groups.clone()
         } else {
-            self.bitstream_to_original
-                .iter()
-                .map(|&idx| self.groups[idx])
-                .collect()
+            self.bitstream_to_original.iter().map(|&idx| self.groups[idx]).collect()
         };
         groups.into_iter()
     }
@@ -181,11 +147,8 @@ impl Bundle<&crate::FrameHeader> for Toc {
         let num_groups = ctx.num_groups();
         let num_passes = ctx.passes.num_passes;
 
-        let entry_count = if num_groups == 1 && num_passes == 1 {
-            1
-        } else {
-            1 + ctx.num_lf_groups() + 1 + num_groups * num_passes
-        };
+        let entry_count =
+            if num_groups == 1 && num_passes == 1 { 1 } else { 1 + ctx.num_lf_groups() + 1 + num_groups * num_passes };
 
         if entry_count > 65536 {
             return Err(jxl_bitstream::Error::ValidationFailed("Too many TOC entries").into());
@@ -195,8 +158,7 @@ impl Bundle<&crate::FrameHeader> for Toc {
         let permutation = if permutated_toc {
             let mut decoder = jxl_coding::Decoder::parse(bitstream, 8)?;
             decoder.begin(bitstream)?;
-            let permutation =
-                jxl_coding::read_permutation(bitstream, &mut decoder, entry_count, 0)?;
+            let permutation = jxl_coding::read_permutation(bitstream, &mut decoder, entry_count, 0)?;
             decoder.finalize()?;
             permutation
         } else {
@@ -229,10 +191,7 @@ impl Bundle<&crate::FrameHeader> for Toc {
             out.push(TocGroupKind::HfGlobal);
             for pass_idx in 0..num_passes {
                 for group_idx in 0..num_groups {
-                    out.push(TocGroupKind::GroupPass {
-                        pass_idx,
-                        group_idx,
-                    });
+                    out.push(TocGroupKind::GroupPass { pass_idx, group_idx });
                 }
             }
             out

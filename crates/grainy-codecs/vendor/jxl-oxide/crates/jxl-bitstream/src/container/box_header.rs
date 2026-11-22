@@ -11,10 +11,7 @@ pub struct ContainerBoxHeader {
 /// Result of parsing container box header.
 pub enum HeaderParseResult {
     /// Box header is read successfully.
-    Done {
-        header: ContainerBoxHeader,
-        header_size: usize,
-    },
+    Done { header: ContainerBoxHeader, header_size: usize },
     /// Parser needs more data to read a header.
     NeedMoreData,
 }
@@ -45,15 +42,8 @@ impl ContainerBoxHeader {
         };
         let is_last = box_size.is_none();
 
-        let header = Self {
-            ty: tbox,
-            box_size,
-            is_last,
-        };
-        Ok(HeaderParseResult::Done {
-            header,
-            header_size,
-        })
+        let header = Self { ty: tbox, box_size, is_last };
+        Ok(HeaderParseResult::Done { header, header_size })
     }
 }
 

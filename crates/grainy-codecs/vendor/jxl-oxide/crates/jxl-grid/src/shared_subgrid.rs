@@ -27,13 +27,7 @@ impl<'g, V> SharedSubgrid<'g, V> {
     /// # Safety
     /// The memory region specified by `width`, `height` and `stride` must be valid.
     pub unsafe fn new(ptr: NonNull<V>, width: usize, height: usize, stride: usize) -> Self {
-        Self {
-            ptr,
-            width,
-            height,
-            stride,
-            _marker: Default::default(),
-        }
+        Self { ptr, width, height, stride, _marker: Default::default() }
     }
 
     /// Create a `SharedSubgrid` from buffer slice, width, height and stride.
@@ -53,14 +47,7 @@ impl<'g, V> SharedSubgrid<'g, V> {
             .expect("subgrid area overflows usize");
         assert!(buf.len() >= required_len);
         // SAFETY: the area is in bounds.
-        unsafe {
-            Self::new(
-                NonNull::new(buf.as_ptr() as *mut _).unwrap(),
-                width,
-                height,
-                stride,
-            )
-        }
+        unsafe { Self::new(NonNull::new(buf.as_ptr() as *mut _).unwrap(), width, height, stride) }
     }
 
     /// Returns the width of the subgrid.
@@ -148,9 +135,7 @@ impl<'g, V> SharedSubgrid<'g, V> {
 
         // SAFETY: row is in bounds, `width` consecutive elements from the start of a row is valid.
         Some(unsafe {
-            let offset = row
-                .checked_mul(self.stride)
-                .expect("subgrid row offset overflows usize");
+            let offset = row.checked_mul(self.stride).expect("subgrid row offset overflows usize");
             let ptr = self.ptr.as_ptr().add(offset);
             std::slice::from_raw_parts(ptr as *const _, self.width)
         })
@@ -168,8 +153,7 @@ impl<'g, V> SharedSubgrid<'g, V> {
         // SAFETY: two grids are contained in `self`.
         unsafe {
             let left_grid = SharedSubgrid::new(left_ptr, x, self.height, self.stride);
-            let right_grid =
-                SharedSubgrid::new(right_ptr, self.width - x, self.height, self.stride);
+            let right_grid = SharedSubgrid::new(right_ptr, self.width - x, self.height, self.stride);
             (left_grid, right_grid)
         }
     }
@@ -186,8 +170,7 @@ impl<'g, V> SharedSubgrid<'g, V> {
         // SAFETY: two grids are contained in `self`.
         unsafe {
             let top_grid = SharedSubgrid::new(top_ptr, self.width, y, self.stride);
-            let bottom_grid =
-                SharedSubgrid::new(bottom_ptr, self.width, self.height - y, self.stride);
+            let bottom_grid = SharedSubgrid::new(bottom_ptr, self.width, self.height - y, self.stride);
             (top_grid, bottom_grid)
         }
     }
@@ -196,11 +179,7 @@ impl<'g, V> SharedSubgrid<'g, V> {
     ///
     /// # Panics
     /// Panics if the range is out of bounds.
-    pub fn subgrid(
-        &self,
-        range_x: impl RangeBounds<usize>,
-        range_y: impl RangeBounds<usize>,
-    ) -> SharedSubgrid<'g, V> {
+    pub fn subgrid(&self, range_x: impl RangeBounds<usize>, range_y: impl RangeBounds<usize>) -> SharedSubgrid<'g, V> {
         use std::ops::Bound;
 
         let left = match range_x.start_bound() {
@@ -256,25 +235,20 @@ impl<'g> SharedSubgrid<'g, f32> {
     /// # Panics
     /// Panics if given SIMD vector type is not supported.
     pub fn as_vectored<V: SimdVector>(&self) -> Option<SharedSubgrid<'g, V>> {
-        assert!(
-            V::available(),
-            "Vector type `{}` is not supported by current CPU",
-            std::any::type_name::<V>()
-        );
+        assert!(V::available(), "Vector type `{}` is not supported by current CPU", std::any::type_name::<V>());
 
         let mask = V::SIZE - 1;
         let align_mask = std::mem::align_of::<V>() - 1;
 
-        (self.ptr.as_ptr() as usize & align_mask == 0
-            && self.width & mask == 0
-            && self.stride & mask == 0)
-            .then(|| SharedSubgrid {
+        (self.ptr.as_ptr() as usize & align_mask == 0 && self.width & mask == 0 && self.stride & mask == 0).then(|| {
+            SharedSubgrid {
                 ptr: self.ptr.cast::<V>(),
                 width: self.width / V::SIZE,
                 height: self.height,
                 stride: self.stride / V::SIZE,
                 _marker: Default::default(),
-            })
+            }
+        })
     }
 
     /// Reinterprets this subgrid as `i32` subgrid.

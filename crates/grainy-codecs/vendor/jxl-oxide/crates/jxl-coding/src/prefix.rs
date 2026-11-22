@@ -44,11 +44,7 @@ impl Histogram {
         for (idx, syms) in syms_for_length.iter().enumerate().take(toplevel_bits) {
             let shifts = toplevel_bits - 1 - idx;
             for &sym in syms {
-                let entry = Entry {
-                    nested: false,
-                    bits_or_mask: (idx + 1) as u8,
-                    symbol_or_offset: sym,
-                };
+                let entry = Entry { nested: false, bits_or_mask: (idx + 1) as u8, symbol_or_offset: sym };
                 entries[current_bits as usize..][..(1 << shifts)].fill(entry);
                 current_bits += 1u16 << shifts;
             }
@@ -75,11 +71,7 @@ impl Histogram {
                     }
                 }
                 for &sym in syms {
-                    let entry = Entry {
-                        nested: false,
-                        bits_or_mask: (idx + 1) as u8,
-                        symbol_or_offset: sym,
-                    };
+                    let entry = Entry { nested: false, bits_or_mask: (idx + 1) as u8, symbol_or_offset: sym };
                     chunk.push(entry);
                     if chunk.len() == chunk_size {
                         entries[current_bits as usize] = Entry {
@@ -104,29 +96,15 @@ impl Histogram {
         if current_bits == 1 << toplevel_bits {
             let mut toplevel_entries = Vec::with_capacity(entries.len());
             vec_reverse_bits(&entries, &mut toplevel_entries);
-            Ok(Self {
-                toplevel_bits,
-                toplevel_mask: (1 << toplevel_bits) - 1,
-                toplevel_entries,
-                second_level_entries,
-            })
+            Ok(Self { toplevel_bits, toplevel_mask: (1 << toplevel_bits) - 1, toplevel_entries, second_level_entries })
         } else {
             Err(Error::InvalidPrefixHistogram)
         }
     }
 
     fn with_single_symbol(symbol: u16) -> Self {
-        let entry = Entry {
-            nested: false,
-            bits_or_mask: 0,
-            symbol_or_offset: symbol,
-        };
-        Self {
-            toplevel_bits: 0,
-            toplevel_mask: 0,
-            toplevel_entries: vec![entry],
-            second_level_entries: Vec::new(),
-        }
+        let entry = Entry { nested: false, bits_or_mask: 0, symbol_or_offset: symbol };
+        Self { toplevel_bits: 0, toplevel_mask: 0, toplevel_entries: vec![entry], second_level_entries: Vec::new() }
     }
 
     pub fn parse(bitstream: &mut Bitstream, alphabet_size: u32) -> CodingResult<Self> {
@@ -158,12 +136,8 @@ impl Histogram {
                 return Ok(Self::with_single_symbol(sym as u16));
             }
             2 => {
-                let syms = [
-                    0,
-                    0,
-                    bitstream.read_bits(alphabet_bits)? as usize,
-                    bitstream.read_bits(alphabet_bits)? as usize,
-                ];
+                let syms =
+                    [0, 0, bitstream.read_bits(alphabet_bits)? as usize, bitstream.read_bits(alphabet_bits)? as usize];
 
                 syms.into_iter().zip([0u8, 0, 1u8, 1])
             }
@@ -186,11 +160,7 @@ impl Histogram {
                 ];
                 let tree_selector = bitstream.read_bool()?;
 
-                if tree_selector {
-                    syms.into_iter().zip([1u8, 2, 3, 3])
-                } else {
-                    syms.into_iter().zip([2u8, 2, 2, 2])
-                }
+                if tree_selector { syms.into_iter().zip([1u8, 2, 3, 3]) } else { syms.into_iter().zip([2u8, 2, 2, 2]) }
             }
             _ => unreachable!(),
         };
@@ -206,13 +176,8 @@ impl Histogram {
         Self::with_code_lengths(code_lengths)
     }
 
-    fn parse_complex(
-        bitstream: &mut Bitstream,
-        alphabet_size: u32,
-        hskip: u32,
-    ) -> CodingResult<Self> {
-        const CODE_LENGTH_ORDER: [usize; 18] =
-            [1, 2, 3, 4, 0, 5, 17, 6, 16, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    fn parse_complex(bitstream: &mut Bitstream, alphabet_size: u32, hskip: u32) -> CodingResult<Self> {
+        const CODE_LENGTH_ORDER: [usize; 18] = [1, 2, 3, 4, 0, 5, 17, 6, 16, 7, 8, 9, 10, 11, 12, 13, 14, 15];
         let mut code_length_code_lengths = [0u8; 18];
         let mut bitacc = 0usize;
 
@@ -335,12 +300,7 @@ impl Histogram {
 impl Histogram {
     #[inline(always)]
     pub fn read_symbol(&self, bitstream: &mut Bitstream) -> CodingResult<u32> {
-        let Self {
-            toplevel_bits,
-            toplevel_mask,
-            ref toplevel_entries,
-            ref second_level_entries,
-        } = *self;
+        let Self { toplevel_bits, toplevel_mask, ref toplevel_entries, ref second_level_entries } = *self;
         let peeked = bitstream.peek_bits_const::<MAX_PREFIX_BITS>();
         let toplevel_offset = peeked & toplevel_mask;
         let toplevel_entry = toplevel_entries[toplevel_offset as usize];
@@ -358,14 +318,7 @@ impl Histogram {
 
     #[inline]
     pub fn single_symbol(&self) -> Option<u32> {
-        if let &[
-            Entry {
-                nested: false,
-                bits_or_mask: 0,
-                symbol_or_offset: symbol,
-            },
-        ] = &*self.toplevel_entries
-        {
+        if let &[Entry { nested: false, bits_or_mask: 0, symbol_or_offset: symbol }] = &*self.toplevel_entries {
             Some(symbol as u32)
         } else {
             None

@@ -10,13 +10,10 @@ use jxl_grid::{AlignedGrid, MutableSubgrid, SharedSubgrid};
 use jxl_image::ImageHeader;
 use jxl_modular::{ChannelShift, Sample};
 use jxl_threadpool::JxlThreadPool;
-use jxl_vardct::{
-    BlockInfo, LfChannelCorrelation, LfChannelDequantization, Quantizer, TransformType,
-};
+use jxl_vardct::{BlockInfo, LfChannelCorrelation, LfChannelDequantization, Quantizer, TransformType};
 
 use crate::{
-    Error, ImageWithRegion, IndexedFrame, Reference, Region, RenderCache, Result,
-    image::ImageBuffer, modular, util,
+    Error, ImageWithRegion, IndexedFrame, Reference, Region, RenderCache, Result, image::ImageBuffer, modular, util,
 };
 
 mod dct_common;
@@ -61,16 +58,13 @@ pub(crate) fn render_vardct<S: Sample>(
 
     let jpeg_upsampling = frame_header.jpeg_upsampling;
     let subsampled = jpeg_upsampling.into_iter().any(|x| x != 0);
-    let shifts_cbycr: [_; 3] = std::array::from_fn(|idx| {
-        ChannelShift::from_jpeg_upsampling(frame_header.jpeg_upsampling, idx)
-    });
+    let shifts_cbycr: [_; 3] =
+        std::array::from_fn(|idx| ChannelShift::from_jpeg_upsampling(frame_header.jpeg_upsampling, idx));
 
     let lf_global = match &cache.lf_global {
         Some(x) if !x.gmodular.is_partial() => x,
         _ => {
-            let lf_global = frame
-                .try_parse_lf_global()
-                .ok_or(Error::IncompleteFrame)??;
+            let lf_global = frame.try_parse_lf_global().ok_or(Error::IncompleteFrame)??;
             cache.lf_global = Some(lf_global);
             cache.lf_global.as_ref().unwrap()
         }
@@ -107,36 +101,19 @@ pub(crate) fn render_vardct<S: Sample>(
             width: aligned_region.width / 8,
             height: aligned_region.height / 8,
         };
-        if frame_header.flags.skip_adaptive_lf_smoothing() {
-            aligned_region_div8
-        } else {
-            aligned_region_div8.pad(1)
-        }
-        .container_aligned(frame_header.group_dim())
+        if frame_header.flags.skip_adaptive_lf_smoothing() { aligned_region_div8 } else { aligned_region_div8.pad(1) }
+            .container_aligned(frame_header.group_dim())
     };
 
-    let aligned_region = aligned_region.intersection(Region::with_size(
-        width_rounded as u32,
-        height_rounded as u32,
-    ));
-    let aligned_lf_region = aligned_lf_region.intersection(Region::with_size(
-        width_rounded as u32 / 8,
-        height_rounded as u32 / 8,
-    ));
-    let modular_region =
-        modular::compute_modular_region(frame_header, &gmodular, aligned_region, false);
-    let modular_lf_region =
-        modular::compute_modular_region(frame_header, &gmodular, aligned_lf_region, true)
-            .intersection(Region::with_size(
-                width_rounded as u32 / 8,
-                height_rounded as u32 / 8,
-            ));
+    let aligned_region = aligned_region.intersection(Region::with_size(width_rounded as u32, height_rounded as u32));
+    let aligned_lf_region =
+        aligned_lf_region.intersection(Region::with_size(width_rounded as u32 / 8, height_rounded as u32 / 8));
+    let modular_region = modular::compute_modular_region(frame_header, &gmodular, aligned_region, false);
+    let modular_lf_region = modular::compute_modular_region(frame_header, &gmodular, aligned_lf_region, true)
+        .intersection(Region::with_size(width_rounded as u32 / 8, height_rounded as u32 / 8));
 
     let mut modular_image = gmodular.modular.image_mut();
-    let groups = modular_image
-        .as_mut()
-        .map(|x| x.prepare_groups(frame.pass_shifts()))
-        .transpose()?;
+    let groups = modular_image.as_mut().map(|x| x.prepare_groups(frame.pass_shifts())).transpose()?;
     let (lf_group_image, pass_group_image) = groups.map(|x| (x.lf_groups, x.pass_groups)).unzip();
     let lf_group_image = lf_group_image.unwrap_or_else(Vec::new);
     let pass_group_image = pass_group_image.unwrap_or_else(|| {
@@ -164,16 +141,8 @@ pub(crate) fn render_vardct<S: Sample>(
             });
         }
 
-        let lf_xyb = tracing::trace_span!("Load LF groups").in_scope(|| {
-            util::load_lf_groups(
-                frame,
-                lf_global,
-                lf_groups,
-                lf_group_image,
-                modular_lf_region,
-                pool,
-            )
-        })?;
+        let lf_xyb = tracing::trace_span!("Load LF groups")
+            .in_scope(|| util::load_lf_groups(frame, lf_global, lf_groups, lf_group_image, modular_lf_region, pool))?;
 
         let lf_xyb = if let Some(x) = lf_frame {
             tracing::trace_span!("Copy LFQuant").in_scope(|| -> Result<_> {
@@ -186,10 +155,7 @@ pub(crate) fn render_vardct<S: Sample>(
 
             if !subsampled {
                 tracing::trace_span!("LF CfL").in_scope(|| {
-                    chroma_from_luma_lf(
-                        lf_xyb.as_color_floats_mut(),
-                        &lf_global_vardct.lf_chan_corr,
-                    );
+                    chroma_from_luma_lf(lf_xyb.as_color_floats_mut(), &lf_global_vardct.lf_chan_corr);
                 });
             }
 
@@ -215,8 +181,7 @@ pub(crate) fn render_vardct<S: Sample>(
                 let (w8, h8) = shift.shift_size((width.div_ceil(8), height.div_ceil(8)));
                 let width = w8 * 8;
                 let height = h8 * 8;
-                let buffer =
-                    AlignedGrid::with_alloc_tracker(width as usize, height as usize, tracker)?;
+                let buffer = AlignedGrid::with_alloc_tracker(width as usize, height as usize, tracker)?;
                 fb.append_channel_shifted(ImageBuffer::F32(buffer), modular_region, shift);
             }
             fb
@@ -276,9 +241,8 @@ pub(crate) fn render_vardct<S: Sample>(
                     let allow_partial = bitstream.partial;
                     let mut bitstream = bitstream.bitstream;
 
-                    let modular = image_it
-                        .find(|(image_idx, _)| *image_idx == group_idx as usize)
-                        .map(|(_, modular)| modular);
+                    let modular =
+                        image_it.find(|(image_idx, _)| *image_idx == group_idx as usize).map(|(_, modular)| modular);
 
                     let result = &result;
                     scope.spawn(move |_| {
@@ -327,12 +291,7 @@ pub(crate) fn render_vardct<S: Sample>(
                 let left = group_x * group_dim;
                 let top = group_y * group_dim;
 
-                let group_region = Region {
-                    left: left as i32,
-                    top: top as i32,
-                    width: group_dim,
-                    height: group_dim,
-                };
+                let group_region = Region { left: left as i32, top: top as i32, width: group_dim, height: group_dim };
                 !group_region.intersection(aligned_region).is_empty()
             };
 
@@ -360,14 +319,10 @@ pub(crate) fn render_vardct<S: Sample>(
                 let cfl_base_y = ((group_y % 8) * group_dim / 64) as usize;
                 let gw = grid_xyb[0].width().div_ceil(64);
                 let gh = grid_xyb[0].height().div_ceil(64);
-                let x_from_y = hf_meta
-                    .x_from_y
-                    .as_subgrid()
-                    .subgrid(cfl_base_x..(cfl_base_x + gw), cfl_base_y..(cfl_base_y + gh));
-                let b_from_y = hf_meta
-                    .b_from_y
-                    .as_subgrid()
-                    .subgrid(cfl_base_x..(cfl_base_x + gw), cfl_base_y..(cfl_base_y + gh));
+                let x_from_y =
+                    hf_meta.x_from_y.as_subgrid().subgrid(cfl_base_x..(cfl_base_x + gw), cfl_base_y..(cfl_base_y + gh));
+                let b_from_y =
+                    hf_meta.b_from_y.as_subgrid().subgrid(cfl_base_x..(cfl_base_x + gw), cfl_base_y..(cfl_base_y + gh));
                 chroma_from_luma_hf_grouped(grid_xyb, &x_from_y, &b_from_y, lf_chan_corr);
             }
 
@@ -432,14 +387,7 @@ pub fn adaptive_lf_smoothing(
     let in_y = in_y.buf_mut();
     let in_b = in_b.buf_mut();
 
-    impls::adaptive_lf_smoothing_impl(
-        width,
-        height,
-        shifts,
-        [in_x, in_y, in_b],
-        [lf_x, lf_y, lf_b],
-        tracker.as_ref(),
-    )
+    impls::adaptive_lf_smoothing_impl(width, height, shifts, [in_x, in_y, in_b], [lf_x, lf_y, lf_b], tracker.as_ref())
 }
 
 pub fn dequant_hf_varblock_grouped<S: Sample>(
@@ -451,18 +399,14 @@ pub fn dequant_hf_varblock_grouped<S: Sample>(
     lf_groups: &HashMap<u32, LfGroup<S>>,
     hf_global: &HfGlobal,
 ) {
-    let shifts_cbycr: [_; 3] = std::array::from_fn(|idx| {
-        ChannelShift::from_jpeg_upsampling(frame_header.jpeg_upsampling, idx)
-    });
+    let shifts_cbycr: [_; 3] =
+        std::array::from_fn(|idx| ChannelShift::from_jpeg_upsampling(frame_header.jpeg_upsampling, idx));
     let oim = &image_header.metadata.opsin_inverse_matrix;
     let quantizer = &lf_global.vardct.as_ref().unwrap().quantizer;
     let dequant_matrices = &hf_global.dequant_matrices;
 
-    let qm_scale = [
-        0.8f32.powi(frame_header.x_qm_scale as i32 - 2),
-        1.0f32,
-        0.8f32.powi(frame_header.b_qm_scale as i32 - 2),
-    ];
+    let qm_scale =
+        [0.8f32.powi(frame_header.x_qm_scale as i32 - 2), 1.0f32, 0.8f32.powi(frame_header.b_qm_scale as i32 - 2)];
 
     let quant_bias_numerator = oim.quant_bias_numerator;
 
@@ -486,75 +430,55 @@ pub fn dequant_hf_varblock_grouped<S: Sample>(
     let block_info = &hf_meta.block_info;
     let lf_width = (block_info.width() - left_in_lf).min(group_dim as usize / 8);
     let lf_height = (block_info.height() - top_in_lf).min(group_dim as usize / 8);
-    let block_info = hf_meta.block_info.as_subgrid().subgrid(
-        left_in_lf..(left_in_lf + lf_width),
-        top_in_lf..(top_in_lf + lf_height),
-    );
+    let block_info = hf_meta
+        .block_info
+        .as_subgrid()
+        .subgrid(left_in_lf..(left_in_lf + lf_width), top_in_lf..(top_in_lf + lf_height));
 
     for (channel, coeff) in out.iter_mut().enumerate() {
         let quant_bias = oim.quant_bias[channel];
         let shift = shifts_cbycr[channel];
-        for_each_varblocks(
-            &block_info,
-            shift,
-            |VarblockInfo {
-                 shifted_bx,
-                 shifted_by,
-                 dct_select,
-                 hf_mul,
-             }| {
-                let (bw, bh) = dct_select.dct_select_size();
-                let left = shifted_bx * 8;
-                let top = shifted_by * 8;
+        for_each_varblocks(&block_info, shift, |VarblockInfo { shifted_bx, shifted_by, dct_select, hf_mul }| {
+            let (bw, bh) = dct_select.dct_select_size();
+            let left = shifted_bx * 8;
+            let top = shifted_by * 8;
 
-                let bw = bw as usize;
-                let bh = bh as usize;
-                let width = bw * 8;
-                let height = bh * 8;
+            let bw = bw as usize;
+            let bh = bh as usize;
+            let width = bw * 8;
+            let height = bh * 8;
 
-                let need_transpose = dct_select.need_transpose();
-                let mul =
-                    65536.0 / (quantizer.global_scale as f32 * hf_mul as f32) * qm_scale[channel];
+            let need_transpose = dct_select.need_transpose();
+            let mul = 65536.0 / (quantizer.global_scale as f32 * hf_mul as f32) * qm_scale[channel];
 
-                let matrix = if need_transpose {
-                    dequant_matrices.get_transposed(channel, dct_select)
-                } else {
-                    dequant_matrices.get(channel, dct_select)
-                };
+            let matrix = if need_transpose {
+                dequant_matrices.get_transposed(channel, dct_select)
+            } else {
+                dequant_matrices.get(channel, dct_select)
+            };
 
-                let mut coeff = coeff
-                    .borrow_mut()
-                    .subgrid(left..(left + width), top..(top + height));
-                for (y, matrix_row) in matrix.chunks_exact(width).enumerate() {
-                    let row = coeff.get_row_mut(y);
-                    for (q, &m) in row.iter_mut().zip(matrix_row) {
-                        let qn = q.to_bits() as i32;
-                        *q = qn as f32;
-                        if q.abs() <= 1.0 {
-                            *q *= quant_bias;
-                        } else {
-                            *q -= quant_bias_numerator / *q;
-                        }
-                        *q *= m;
-                        *q *= mul;
+            let mut coeff = coeff.borrow_mut().subgrid(left..(left + width), top..(top + height));
+            for (y, matrix_row) in matrix.chunks_exact(width).enumerate() {
+                let row = coeff.get_row_mut(y);
+                for (q, &m) in row.iter_mut().zip(matrix_row) {
+                    let qn = q.to_bits() as i32;
+                    *q = qn as f32;
+                    if q.abs() <= 1.0 {
+                        *q *= quant_bias;
+                    } else {
+                        *q -= quant_bias_numerator / *q;
                     }
+                    *q *= m;
+                    *q *= mul;
                 }
-            },
-        );
+            }
+        });
     }
 }
 
-pub fn chroma_from_luma_lf(
-    coeff_xyb: [&mut AlignedGrid<f32>; 3],
-    lf_chan_corr: &LfChannelCorrelation,
-) {
+pub fn chroma_from_luma_lf(coeff_xyb: [&mut AlignedGrid<f32>; 3], lf_chan_corr: &LfChannelCorrelation) {
     let LfChannelCorrelation {
-        colour_factor,
-        base_correlation_x,
-        base_correlation_b,
-        x_factor_lf,
-        b_factor_lf,
-        ..
+        colour_factor, base_correlation_x, base_correlation_b, x_factor_lf, b_factor_lf, ..
     } = *lf_chan_corr;
 
     let x_factor = x_factor_lf as i32 - 128;
@@ -590,10 +514,8 @@ pub fn chroma_from_luma_hf_grouped(
         let coeff_b = coeff_b.get_row_mut(y);
 
         for (x64, (&kx, &kb)) in x_from_y.iter().zip(b_from_y).enumerate() {
-            let kx =
-                lf_chan_corr.base_correlation_x + (kx as f32 / lf_chan_corr.colour_factor as f32);
-            let kb =
-                lf_chan_corr.base_correlation_b + (kb as f32 / lf_chan_corr.colour_factor as f32);
+            let kx = lf_chan_corr.base_correlation_x + (kx as f32 / lf_chan_corr.colour_factor as f32);
+            let kb = lf_chan_corr.base_correlation_b + (kb as f32 / lf_chan_corr.colour_factor as f32);
 
             for dx in 0..((gw - x64 * 64).min(64)) {
                 let x = x64 * 64 + dx;
@@ -614,9 +536,8 @@ pub fn transform_with_lf_grouped<S: Sample>(
 ) {
     let lf_regions = <[_; 3]>::try_from(&lf.regions_and_shifts()[..3]).unwrap();
     let [lf_x, lf_y, lf_b] = lf.as_color_floats();
-    let shifts_cbycr: [_; 3] = std::array::from_fn(|idx| {
-        ChannelShift::from_jpeg_upsampling(frame_header.jpeg_upsampling, idx)
-    });
+    let shifts_cbycr: [_; 3] =
+        std::array::from_fn(|idx| ChannelShift::from_jpeg_upsampling(frame_header.jpeg_upsampling, idx));
 
     let group_dim = frame_header.group_dim();
     let groups_per_row = frame_header.groups_per_row();
@@ -626,12 +547,7 @@ pub fn transform_with_lf_grouped<S: Sample>(
     let group_y = group_idx / groups_per_row;
     let lf_base_left = group_x * group_dim / 8;
     let lf_base_top = group_y * group_dim / 8;
-    let lf = [
-        (lf_regions[0], lf_x),
-        (lf_regions[1], lf_y),
-        (lf_regions[2], lf_b),
-    ]
-    .map(|((lf_region, shift), lf)| {
+    let lf = [(lf_regions[0], lf_x), (lf_regions[1], lf_y), (lf_regions[2], lf_b)].map(|((lf_region, shift), lf)| {
         let lf_base_left = lf_base_left.checked_add_signed(-lf_region.left).unwrap();
         let lf_base_top = lf_base_top.checked_add_signed(-lf_region.top).unwrap();
         let lf_width = (lf_region.width - lf_base_left).min(group_width.div_ceil(8));
@@ -642,10 +558,8 @@ pub fn transform_with_lf_grouped<S: Sample>(
         let lf_base_left = lf_base_left >> shift.hshift();
         let lf_base_top = lf_base_top >> shift.vshift();
         let (lf_width, lf_height) = shift.shift_size((lf_width, lf_height));
-        lf.as_subgrid().subgrid(
-            lf_base_left..(lf_base_left + lf_width as usize),
-            lf_base_top..(lf_base_top + lf_height as usize),
-        )
+        lf.as_subgrid()
+            .subgrid(lf_base_left..(lf_base_left + lf_width as usize), lf_base_top..(lf_base_top + lf_height as usize))
     });
 
     let lf_group_idx = frame_header.lf_group_idx_from_group_idx(group_idx);
@@ -675,10 +589,10 @@ pub fn transform_with_lf_grouped<S: Sample>(
         let lf_width = (lf_region.width - lf_base_left).min(group_width.div_ceil(8));
         let lf_height = (lf_region.height - lf_base_top).min(group_height.div_ceil(8));
 
-        hf_meta.block_info.as_subgrid().subgrid(
-            left_in_lf..(left_in_lf + lf_width as usize),
-            top_in_lf..(top_in_lf + lf_height as usize),
-        )
+        hf_meta
+            .block_info
+            .as_subgrid()
+            .subgrid(left_in_lf..(left_in_lf + lf_width as usize), top_in_lf..(top_in_lf + lf_height as usize))
     };
 
     impls::transform_varblocks(&lf, coeff_out, shifts_cbycr, &block_info);
@@ -693,11 +607,7 @@ struct VarblockInfo {
 }
 
 #[inline(always)]
-fn for_each_varblocks(
-    block_info: &SharedSubgrid<BlockInfo>,
-    shift: ChannelShift,
-    mut f: impl FnMut(VarblockInfo),
-) {
+fn for_each_varblocks(block_info: &SharedSubgrid<BlockInfo>, shift: ChannelShift, mut f: impl FnMut(VarblockInfo)) {
     let w8 = block_info.width();
     let h8 = block_info.height();
     let vshift = shift.vshift();
@@ -714,20 +624,12 @@ fn for_each_varblocks(
                 if (shifted_bx << hshift) != bx || (shifted_by << vshift) != by {
                     continue;
                 }
-                if !matches!(
-                    block_info.get(shifted_bx, shifted_by),
-                    BlockInfo::Data { .. }
-                ) {
+                if !matches!(block_info.get(shifted_bx, shifted_by), BlockInfo::Data { .. }) {
                     continue;
                 }
             }
 
-            f(VarblockInfo {
-                shifted_bx,
-                shifted_by,
-                dct_select,
-                hf_mul,
-            })
+            f(VarblockInfo { shifted_bx, shifted_by, dct_select, hf_mul })
         }
     }
 }

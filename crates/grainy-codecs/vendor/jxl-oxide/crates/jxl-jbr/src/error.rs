@@ -40,10 +40,7 @@ impl std::fmt::Display for Error {
             Error::ReconstructionDataIncomplete => write!(f, "reconstruction data is incomplete"),
             Error::FrameDataIncomplete => write!(f, "JPEG XL frame data is incomplete"),
             Error::FrameParse(e) => write!(f, "error parsing JPEG XL frame: {e}"),
-            Error::IncompatibleFrame => write!(
-                f,
-                "JPEG XL frame data is incompatible with reconstruction data"
-            ),
+            Error::IncompatibleFrame => write!(f, "JPEG XL frame data is incompatible with reconstruction data"),
         }
     }
 }

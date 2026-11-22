@@ -45,11 +45,8 @@ pub fn adaptive_lf_smoothing_impl(
     let mut udsum_y = AlignedGrid::with_alloc_tracker(width, height - 2, tracker)?;
     let mut udsum_b = AlignedGrid::with_alloc_tracker(width, height - 2, tracker)?;
 
-    for (g, out) in [
-        (&mut *in_x, udsum_x.buf_mut()),
-        (&mut *in_y, udsum_y.buf_mut()),
-        (&mut *in_b, udsum_b.buf_mut()),
-    ] {
+    for (g, out) in [(&mut *in_x, udsum_x.buf_mut()), (&mut *in_y, udsum_y.buf_mut()), (&mut *in_b, udsum_b.buf_mut())]
+    {
         let up = g.chunks_exact(width);
         let down = g[width * 2..].chunks_exact(width);
         let out = out.chunks_exact_mut(width);
@@ -150,12 +147,7 @@ fn adaptive_lf_smoothing_subsampled_impl(
         let down = g[width * 2..].chunks_exact(width);
         let out = out.chunks_exact_mut(width - 2);
         for (((up, center), down), out) in up.zip(center).zip(down).zip(out) {
-            for (((u, c), d), out) in up
-                .windows(3)
-                .zip(center.windows(3))
-                .zip(down.windows(3))
-                .zip(out)
-            {
+            for (((u, c), d), out) in up.windows(3).zip(center.windows(3)).zip(down.windows(3)).zip(out) {
                 let me = c[1];
                 let side = u[1] + c[0] + c[2] + d[1];
                 let diag = u[0] + u[2] + d[0] + d[2];
@@ -191,8 +183,7 @@ fn adaptive_lf_smoothing_subsampled_impl(
 
         for col in 0..width {
             let coords_x = shifts.map(|shift| col >> shift.hshift());
-            if std::iter::zip(coords_x, dims).any(|(col, (width, _))| col == 0 || col == width - 1)
-            {
+            if std::iter::zip(coords_x, dims).any(|(col, (width, _))| col == 0 || col == width - 1) {
                 continue;
             }
 

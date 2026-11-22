@@ -22,14 +22,7 @@ impl<'a, 'b> ModularParams<'a, 'b> {
         ma_config: Option<&'a MaConfig>,
         tracker: Option<&'b AllocTracker>,
     ) -> Self {
-        let channels = channel_shifts
-            .into_iter()
-            .map(|shift| ModularChannelParams {
-                width,
-                height,
-                shift,
-            })
-            .collect();
+        let channels = channel_shifts.into_iter().map(|shift| ModularChannelParams { width, height, shift }).collect();
         Self::with_channels(group_dim, bit_depth, channels, ma_config, tracker)
     }
 
@@ -40,14 +33,7 @@ impl<'a, 'b> ModularParams<'a, 'b> {
         ma_config: Option<&'a MaConfig>,
         tracker: Option<&'b AllocTracker>,
     ) -> Self {
-        Self {
-            group_dim,
-            bit_depth,
-            channels,
-            ma_config,
-            tracker,
-            narrow_buffer: false,
-        }
+        Self { group_dim, bit_depth, channels, ma_config, tracker, narrow_buffer: false }
     }
 }
 
@@ -60,38 +46,21 @@ pub struct ModularChannelParams {
 
 impl ModularChannelParams {
     pub fn new(width: u32, height: u32) -> Self {
-        Self {
-            width,
-            height,
-            shift: ChannelShift::from_shift(0),
-        }
+        Self { width, height, shift: ChannelShift::from_shift(0) }
     }
 
     pub fn jpeg(width: u32, height: u32, jpeg_upsampling: [u32; 3], idx: usize) -> Self {
-        Self {
-            width,
-            height,
-            shift: ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx),
-        }
+        Self { width, height, shift: ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx) }
     }
 
     pub fn with_shift(width: u32, height: u32, shift: ChannelShift) -> Self {
-        Self {
-            width,
-            height,
-            shift,
-        }
+        Self { width, height, shift }
     }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ChannelShift {
-    JpegUpsampling {
-        has_h_subsample: bool,
-        h_subsample: bool,
-        has_v_subsample: bool,
-        v_subsample: bool,
-    },
+    JpegUpsampling { has_h_subsample: bool, h_subsample: bool, has_v_subsample: bool, v_subsample: bool },
     Shifts(u32),
     Raw(i32, i32),
 }
@@ -113,12 +82,7 @@ impl ChannelShift {
             3 => (hscale, false),
             _ => panic!("Invalid jpeg_upsampling value of {upsampling}"),
         };
-        Self::JpegUpsampling {
-            has_h_subsample: hscale,
-            h_subsample: h,
-            has_v_subsample: vscale,
-            v_subsample: v,
-        }
+        Self::JpegUpsampling { has_h_subsample: hscale, h_subsample: h, has_v_subsample: vscale, v_subsample: v }
     }
 
     #[inline]
@@ -141,12 +105,7 @@ impl ChannelShift {
 
     pub fn shift_size(&self, (width, height): (u32, u32)) -> (u32, u32) {
         match *self {
-            Self::JpegUpsampling {
-                has_h_subsample,
-                has_v_subsample,
-                h_subsample,
-                v_subsample,
-            } => {
+            Self::JpegUpsampling { has_h_subsample, has_v_subsample, h_subsample, v_subsample } => {
                 let width = if has_h_subsample {
                     let size = width.div_ceil(2);
                     if h_subsample { size } else { size * 2 }

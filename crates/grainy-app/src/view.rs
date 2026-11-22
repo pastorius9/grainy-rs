@@ -525,12 +525,7 @@ impl AppContext {
         ui.spacing_mut().item_spacing.y = 8.0;
         let query = self.doc.query();
         let source = if let Some(cid) = query.collection {
-            self.doc
-                .collections()
-                .iter()
-                .find(|c| c.id == cid)
-                .map(|c| c.name.clone())
-                .unwrap_or_else(|| tr("컬렉션"))
+            self.doc.collections().iter().find(|c| c.id == cid).map(|c| c.name.clone()).unwrap_or_else(|| tr("컬렉션"))
         } else if let Some(folder) = &query.folder {
             std::path::Path::new(folder)
                 .file_name()

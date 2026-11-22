@@ -36,10 +36,7 @@ impl crate::ColorManagementSystem for Moxcms {
         from_icc: &[u8],
         to_icc: &[u8],
         intent: RenderingIntent,
-    ) -> Result<
-        Box<dyn jxl_color::PreparedTransform>,
-        Box<dyn std::error::Error + Send + Sync + 'static>,
-    > {
+    ) -> Result<Box<dyn jxl_color::PreparedTransform>, Box<dyn std::error::Error + Send + Sync + 'static>> {
         let profile_from = moxcms::ColorProfile::new_from_slice(from_icc)?;
         let profile_to = moxcms::ColorProfile::new_from_slice(to_icc)?;
 
@@ -52,19 +49,11 @@ impl crate::ColorManagementSystem for Moxcms {
             RenderingIntent::Saturation => moxcms::RenderingIntent::Saturation,
             RenderingIntent::Absolute => moxcms::RenderingIntent::AbsoluteColorimetric,
         };
-        let options = moxcms::TransformOptions {
-            rendering_intent,
-            ..Default::default()
-        };
+        let options = moxcms::TransformOptions { rendering_intent, ..Default::default() };
 
-        let transform =
-            profile_from.create_transform_f32(layout_from, &profile_to, layout_to, options)?;
+        let transform = profile_from.create_transform_f32(layout_from, &profile_to, layout_to, options)?;
 
-        let prepared = PreparedTransform {
-            transform,
-            from_channels,
-            to_channels,
-        };
+        let prepared = PreparedTransform { transform, from_channels, to_channels };
 
         Ok(Box::new(prepared) as Box<_>)
     }
@@ -79,15 +68,8 @@ impl crate::PreparedTransform for PreparedTransform {
         self.to_channels
     }
 
-    fn transform(
-        &self,
-        channels: &mut [&mut [f32]],
-    ) -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>> {
-        let Self {
-            ref transform,
-            from_channels,
-            to_channels,
-        } = *self;
+    fn transform(&self, channels: &mut [&mut [f32]]) -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>> {
+        let Self { ref transform, from_channels, to_channels } = *self;
 
         let mut buf_in = vec![0f32; 1024 * from_channels];
         let mut buf_out = vec![0f32; 1024 * to_channels];
@@ -100,10 +82,7 @@ impl crate::PreparedTransform for PreparedTransform {
                 }
             }
 
-            transform.transform(
-                &buf_in[..chunk_len * from_channels],
-                &mut buf_out[..chunk_len * to_channels],
-            )?;
+            transform.transform(&buf_in[..chunk_len * from_channels], &mut buf_out[..chunk_len * to_channels])?;
 
             for k in 0..chunk_len {
                 for (channel_idx, ch) in channels[..to_channels].iter_mut().enumerate() {

@@ -28,9 +28,7 @@ impl<Ctx> Bundle<Ctx> for ImageHeader {
     fn parse(bitstream: &mut Bitstream, _: Ctx) -> BitstreamResult<Self> {
         let signature = bitstream.read_bits(16)?;
         if signature != 0xaff {
-            return Err(jxl_bitstream::Error::ValidationFailed(
-                "JPEG XL signature mismatch",
-            ));
+            return Err(jxl_bitstream::Error::ValidationFailed("JPEG XL signature mismatch"));
         }
 
         let size = SizeHeader::parse(bitstream, ())?;
@@ -38,28 +36,19 @@ impl<Ctx> Bundle<Ctx> for ImageHeader {
 
         if metadata.ec_info.len() > 256 {
             tracing::error!(num_extra = metadata.ec_info.len(), "num_extra too large");
-            return Err(jxl_bitstream::Error::ProfileConformance(
-                "num_extra too large",
-            ));
+            return Err(jxl_bitstream::Error::ProfileConformance("num_extra too large"));
         }
 
         let tone_mapping = &metadata.tone_mapping;
         if tone_mapping.intensity_target <= 0.0 {
-            return Err(jxl_bitstream::Error::ValidationFailed(
-                "Invalid intensity target",
-            ));
+            return Err(jxl_bitstream::Error::ValidationFailed("Invalid intensity target"));
         }
         if tone_mapping.min_nits < 0.0 || tone_mapping.min_nits > tone_mapping.intensity_target {
-            return Err(jxl_bitstream::Error::ValidationFailed(
-                "Invalid tone mapping min_nits",
-            ));
+            return Err(jxl_bitstream::Error::ValidationFailed("Invalid tone mapping min_nits"));
         }
-        if tone_mapping.linear_below < 0.0
-            || (tone_mapping.relative_to_max_display && tone_mapping.linear_below > 1.0)
+        if tone_mapping.linear_below < 0.0 || (tone_mapping.relative_to_max_display && tone_mapping.linear_below > 1.0)
         {
-            return Err(jxl_bitstream::Error::ValidationFailed(
-                "Invalid tone mapping linear_below",
-            ));
+            return Err(jxl_bitstream::Error::ValidationFailed("Invalid tone mapping linear_below"));
         }
 
         Ok(Self { size, metadata })
@@ -70,17 +59,13 @@ impl ImageHeader {
     /// Returns the image width with orientation applied.
     #[inline]
     pub fn width_with_orientation(&self) -> u32 {
-        self.metadata
-            .apply_orientation(self.size.width, self.size.height, 0, 0, false)
-            .0
+        self.metadata.apply_orientation(self.size.width, self.size.height, 0, 0, false).0
     }
 
     /// Returns the image height with orientation applied.
     #[inline]
     pub fn height_with_orientation(&self) -> u32 {
-        self.metadata
-            .apply_orientation(self.size.width, self.size.height, 0, 0, false)
-            .1
+        self.metadata.apply_orientation(self.size.width, self.size.height, 0, 0, false).1
     }
 }
 
@@ -239,9 +224,7 @@ impl ImageMetadata {
 
     /// Returns the index of the first alpha channel in the image.
     pub fn alpha(&self) -> Option<usize> {
-        self.ec_info
-            .iter()
-            .position(|info| matches!(info.ty, ExtraChannelType::Alpha { .. }))
+        self.ec_info.iter().position(|info| matches!(info.ty, ExtraChannelType::Alpha { .. }))
     }
 
     /// Returns where the given coordinate will be placed after the orientation is applied.
@@ -304,9 +287,7 @@ impl<Ctx> Bundle<Ctx> for ExtraChannelInfo {
         let name = Name::parse(bitstream, ())?;
 
         let ty = match ty_id {
-            ExtraChannelTypeRaw::Alpha => ExtraChannelType::Alpha {
-                alpha_associated: bitstream.read_bool()?,
-            },
+            ExtraChannelTypeRaw::Alpha => ExtraChannelType::Alpha { alpha_associated: bitstream.read_bool()? },
             ExtraChannelTypeRaw::Depth => ExtraChannelType::Depth,
             ExtraChannelTypeRaw::SpotColour => ExtraChannelType::SpotColour {
                 red: bitstream.read_f16_as_f32()?,
@@ -316,20 +297,15 @@ impl<Ctx> Bundle<Ctx> for ExtraChannelInfo {
             },
             ExtraChannelTypeRaw::SelectionMask => ExtraChannelType::SelectionMask,
             ExtraChannelTypeRaw::Black => ExtraChannelType::Black,
-            ExtraChannelTypeRaw::Cfa => ExtraChannelType::Cfa {
-                cfa_channel: bitstream.read_u32(1, U(2), 3 + U(4), 19 + U(8))?,
-            },
+            ExtraChannelTypeRaw::Cfa => {
+                ExtraChannelType::Cfa { cfa_channel: bitstream.read_u32(1, U(2), 3 + U(4), 19 + U(8))? }
+            }
             ExtraChannelTypeRaw::Thermal => ExtraChannelType::Thermal,
             ExtraChannelTypeRaw::NonOptional => ExtraChannelType::NonOptional,
             ExtraChannelTypeRaw::Optional => ExtraChannelType::Optional,
         };
 
-        Ok(Self {
-            ty,
-            bit_depth,
-            dim_shift,
-            name,
-        })
+        Ok(Self { ty, bit_depth, dim_shift, name })
     }
 }
 
@@ -343,11 +319,7 @@ impl ExtraChannelInfo {
     /// Returns whether the alpha channel has premultiplied semantics.
     #[inline]
     pub fn alpha_associated(&self) -> Option<bool> {
-        if let ExtraChannelType::Alpha { alpha_associated } = self.ty {
-            Some(alpha_associated)
-        } else {
-            None
-        }
+        if let ExtraChannelType::Alpha { alpha_associated } = self.ty { Some(alpha_associated) } else { None }
     }
 
     /// Returns whether this is a black channel of a CMYK image.
@@ -361,21 +333,12 @@ impl ExtraChannelInfo {
 #[derive(Debug, PartialEq, Copy, Clone)]
 #[repr(u8)]
 pub enum ExtraChannelType {
-    Alpha {
-        alpha_associated: bool,
-    } = 0,
+    Alpha { alpha_associated: bool } = 0,
     Depth,
-    SpotColour {
-        red: f32,
-        green: f32,
-        blue: f32,
-        solidity: f32,
-    },
+    SpotColour { red: f32, green: f32, blue: f32, solidity: f32 },
     SelectionMask,
     Black,
-    Cfa {
-        cfa_channel: u32,
-    },
+    Cfa { cfa_channel: u32 },
     Thermal,
     NonOptional = 15,
     Optional,
@@ -383,9 +346,7 @@ pub enum ExtraChannelType {
 
 impl Default for ExtraChannelType {
     fn default() -> Self {
-        Self::Alpha {
-            alpha_associated: false,
-        }
+        Self::Alpha { alpha_associated: false }
     }
 }
 
@@ -446,9 +407,7 @@ impl BitDepth {
     pub fn bits_per_sample(self) -> u32 {
         match self {
             Self::IntegerSample { bits_per_sample } => bits_per_sample,
-            Self::FloatSample {
-                bits_per_sample, ..
-            } => bits_per_sample,
+            Self::FloatSample { bits_per_sample, .. } => bits_per_sample,
         }
     }
 
@@ -461,10 +420,7 @@ impl BitDepth {
                 let div = (1i32 << bits_per_sample) - 1;
                 sample as f32 / div as f32
             }
-            Self::FloatSample {
-                bits_per_sample,
-                exp_bits,
-            } => {
+            Self::FloatSample { bits_per_sample, exp_bits } => {
                 let sample = sample as u32;
                 let mantissa_bits = bits_per_sample - exp_bits - 1;
                 let mantissa_mask = (1u32 << mantissa_bits) - 1;
@@ -501,26 +457,17 @@ impl<Ctx> Bundle<Ctx> for BitDepth {
             let bits_per_sample = bitstream.read_u32(32, 16, 24, 1 + U(6))?;
             let exp_bits = bitstream.read_bits(4)? + 1;
             if !(2..=8).contains(&exp_bits) {
-                return Err(jxl_bitstream::Error::ValidationFailed(
-                    "Invalid exp_bits per float sample",
-                ));
+                return Err(jxl_bitstream::Error::ValidationFailed("Invalid exp_bits per float sample"));
             }
             let mantissa_bits = bits_per_sample.wrapping_sub(exp_bits + 1);
             if !(2..=23).contains(&mantissa_bits) {
-                return Err(jxl_bitstream::Error::ValidationFailed(
-                    "Invalid mantissa_bits per float sample",
-                ));
+                return Err(jxl_bitstream::Error::ValidationFailed("Invalid mantissa_bits per float sample"));
             }
-            Ok(Self::FloatSample {
-                bits_per_sample,
-                exp_bits,
-            })
+            Ok(Self::FloatSample { bits_per_sample, exp_bits })
         } else {
             let bits_per_sample = bitstream.read_u32(8, 10, 12, 1 + U(6))?;
             if bits_per_sample > 31 {
-                return Err(jxl_bitstream::Error::ValidationFailed(
-                    "Invalid bits_per_sample",
-                ));
+                return Err(jxl_bitstream::Error::ValidationFailed("Invalid bits_per_sample"));
             }
             Ok(Self::IntegerSample { bits_per_sample })
         }

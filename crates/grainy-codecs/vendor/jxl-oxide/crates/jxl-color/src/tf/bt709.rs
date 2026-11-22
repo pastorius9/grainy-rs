@@ -7,15 +7,10 @@ pub fn linear_to_bt709(samples: &mut [f32]) {
             for chunk in &mut it {
                 unsafe {
                     let v = std::arch::aarch64::vld1q_f32(chunk.as_ptr());
-                    let mask =
-                        std::arch::aarch64::vcleq_f32(v, std::arch::aarch64::vdupq_n_f32(0.018));
+                    let mask = std::arch::aarch64::vcleq_f32(v, std::arch::aarch64::vdupq_n_f32(0.018));
                     let lin = std::arch::aarch64::vmulq_n_f32(v, 4.5);
                     let exp = crate::fastmath::fast_powf_aarch64_neon(v, 0.45);
-                    let exp = std::arch::aarch64::vfmaq_n_f32(
-                        std::arch::aarch64::vdupq_n_f32(-0.099),
-                        exp,
-                        1.099,
-                    );
+                    let exp = std::arch::aarch64::vfmaq_n_f32(std::arch::aarch64::vdupq_n_f32(-0.099), exp, 1.099);
                     let v = std::arch::aarch64::vbslq_f32(mask, lin, exp);
                     std::arch::aarch64::vst1q_f32(chunk.as_mut_ptr(), v);
                 }
@@ -28,21 +23,16 @@ pub fn linear_to_bt709(samples: &mut [f32]) {
 
     #[cfg(target_arch = "x86_64")]
     let samples = {
-        if std::arch::is_x86_feature_detected!("avx2") && std::arch::is_x86_feature_detected!("fma")
-        {
+        if std::arch::is_x86_feature_detected!("avx2") && std::arch::is_x86_feature_detected!("fma") {
             unsafe { linear_to_bt709_x86_64_avx2(samples) }
         } else {
             let mut it = samples.chunks_exact_mut(4);
             for chunk in &mut it {
                 unsafe {
                     let v = std::arch::x86_64::_mm_loadu_ps(chunk.as_ptr());
-                    let mask =
-                        std::arch::x86_64::_mm_cmple_ps(v, std::arch::x86_64::_mm_set1_ps(0.018));
+                    let mask = std::arch::x86_64::_mm_cmple_ps(v, std::arch::x86_64::_mm_set1_ps(0.018));
                     let lin = std::arch::x86_64::_mm_mul_ps(v, std::arch::x86_64::_mm_set1_ps(4.5));
-                    let exp = crate::fastmath::fast_powf_x86_64_sse2(
-                        v,
-                        std::arch::x86_64::_mm_set1_ps(0.45),
-                    );
+                    let exp = crate::fastmath::fast_powf_x86_64_sse2(v, std::arch::x86_64::_mm_set1_ps(0.45));
                     let exp = std::arch::x86_64::_mm_add_ps(
                         std::arch::x86_64::_mm_mul_ps(exp, std::arch::x86_64::_mm_set1_ps(1.099)),
                         std::arch::x86_64::_mm_set1_ps(-0.099),
@@ -60,11 +50,7 @@ pub fn linear_to_bt709(samples: &mut [f32]) {
 
     for x in samples {
         let a = *x;
-        *x = if a <= 0.018 {
-            4.5 * a
-        } else {
-            crate::fastmath::fast_powf_generic(a, 0.45).mul_add(1.099, -0.099)
-        };
+        *x = if a <= 0.018 { 4.5 * a } else { crate::fastmath::fast_powf_generic(a, 0.45).mul_add(1.099, -0.099) };
     }
 }
 

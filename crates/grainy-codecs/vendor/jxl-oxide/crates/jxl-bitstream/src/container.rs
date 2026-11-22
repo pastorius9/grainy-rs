@@ -64,9 +64,9 @@ impl ContainerParser {
     pub fn kind(&self) -> BitstreamKind {
         match self.state {
             DetectState::WaitingSignature => BitstreamKind::Unknown,
-            DetectState::WaitingBoxHeader
-            | DetectState::WaitingJxlpIndex(..)
-            | DetectState::InAuxBox { .. } => BitstreamKind::Container,
+            DetectState::WaitingBoxHeader | DetectState::WaitingJxlpIndex(..) | DetectState::InAuxBox { .. } => {
+                BitstreamKind::Container
+            }
             DetectState::InCodestream { kind, .. } => kind,
         }
     }
@@ -78,10 +78,7 @@ impl ContainerParser {
     /// again.
     ///
     /// [`previous_consumed_bytes`]: Self::previous_consumed_bytes
-    pub fn feed_bytes<'inner, 'buf>(
-        &'inner mut self,
-        input: &'buf [u8],
-    ) -> ParseEvents<'inner, 'buf> {
+    pub fn feed_bytes<'inner, 'buf>(&'inner mut self, input: &'buf [u8]) -> ParseEvents<'inner, 'buf> {
         ParseEvents::new(self, input)
     }
 

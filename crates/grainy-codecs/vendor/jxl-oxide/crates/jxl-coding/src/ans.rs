@@ -139,9 +139,7 @@ impl Histogram {
             let mut acc = 0;
             let mut prev_dist = 0u16;
             for (idx, code) in dist.iter_mut().enumerate() {
-                if repeat_range_idx < repeat_ranges.len()
-                    && repeat_ranges[repeat_range_idx].start <= idx
-                {
+                if repeat_range_idx < repeat_ranges.len() && repeat_ranges[repeat_range_idx].start <= idx {
                     if repeat_ranges[repeat_range_idx].end == idx {
                         repeat_range_idx += 1;
                     } else {
@@ -165,8 +163,7 @@ impl Histogram {
                 if *code > 1 {
                     let zeros = (*code - 1) as i16;
                     let bitcount = (shift - ((12 - zeros) >> 1)).clamp(0, zeros);
-                    *code = (1 << zeros)
-                        + ((bitstream.read_bits(bitcount as usize)? as u16) << (zeros - bitcount));
+                    *code = (1 << zeros) + ((bitstream.read_bits(bitcount as usize)? as u16) << (zeros - bitcount));
                 }
                 prev_dist = *code;
                 acc += *code;
@@ -253,12 +250,7 @@ impl Histogram {
             })
             .collect();
 
-        Ok(Self {
-            buckets,
-            log_bucket_size,
-            bucket_mask: (1 << log_bucket_size) - 1,
-            single_symbol: None,
-        })
+        Ok(Self { buckets, log_bucket_size, bucket_mask: (1 << log_bucket_size) - 1, single_symbol: None })
     }
 
     fn read_u8(bitstream: &mut Bitstream) -> CodingResult<u8> {
@@ -287,26 +279,15 @@ impl Histogram {
 
         // Ported from libjxl; this makes map_alias branchless.
         let (alias_symbol, alias_cutoff, dist) = if is_le {
-            (
-                (bucket_int & 0xff) as usize,
-                ((bucket_int >> 8) & 0xff) as u32,
-                ((bucket_int >> 16) & 0xffff) as u32,
-            )
+            ((bucket_int & 0xff) as usize, ((bucket_int >> 8) & 0xff) as u32, ((bucket_int >> 16) & 0xffff) as u32)
         } else {
-            (
-                bucket.alias_symbol as usize,
-                bucket.alias_cutoff as u32,
-                bucket.dist as u32,
-            )
+            (bucket.alias_symbol as usize, bucket.alias_cutoff as u32, bucket.dist as u32)
         };
 
         let map_to_alias = pos >= alias_cutoff;
         let (offset, dist_xor) = if is_le {
             let cond_bucket = if map_to_alias { bucket_int } else { 0 };
-            (
-                (cond_bucket >> 32) as u32 & 0xffff,
-                (cond_bucket >> 48) as u32,
-            )
+            ((cond_bucket >> 32) as u32 & 0xffff, (cond_bucket >> 48) as u32)
         } else if map_to_alias {
             (bucket.alias_offset as u32, bucket.alias_dist_xor as u32)
         } else {
@@ -320,11 +301,7 @@ impl Histogram {
         let next_state = (*state >> 12) * dist + offset;
         let appended_state = (next_state << 16) | bitstream.peek_bits_const::<16>();
         let select_appended = next_state < (1 << 16);
-        *state = if select_appended {
-            appended_state
-        } else {
-            next_state
-        };
+        *state = if select_appended { appended_state } else { next_state };
         bitstream.consume_bits(if select_appended { 16 } else { 0 })?;
         Ok(symbol as u32)
     }

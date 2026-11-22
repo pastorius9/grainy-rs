@@ -32,10 +32,7 @@ impl std::fmt::Debug for DataKind {
         match self {
             Self::Init => write!(f, "Init"),
             Self::NoData => write!(f, "NoData"),
-            Self::Raw(buf) => f
-                .debug_tuple("Raw")
-                .field(&format_args!("{} byte(s)", buf.len()))
-                .finish(),
+            Self::Raw(buf) => f.debug_tuple("Raw").field(&format_args!("{} byte(s)", buf.len())).finish(),
             Self::Brotli(_) => f.debug_tuple("Brotli").finish(),
         }
     }
@@ -84,11 +81,7 @@ impl AuxBoxReader {
 impl AuxBoxReader {
     pub fn feed_data(&mut self, data: &[u8]) -> Result<()> {
         if self.done {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::InvalidData,
-                "cannot feed into finalized box",
-            )
-            .into());
+            return Err(std::io::Error::new(std::io::ErrorKind::InvalidData, "cannot feed into finalized box").into());
         }
 
         match self.data {
@@ -257,11 +250,7 @@ impl AuxBoxList {
                 self.current_box_ty = None;
                 self.last_box = true;
             }
-            ParseEvent::AuxBoxStart {
-                ty,
-                brotli_compressed,
-                last_box,
-            } => {
+            ParseEvent::AuxBoxStart { ty, brotli_compressed, last_box } => {
                 self.current_box_ty = Some(ty);
                 if ty != ContainerBoxType::JPEG_RECONSTRUCTION {
                     if brotli_compressed {
@@ -318,9 +307,7 @@ impl AuxBoxList {
     pub(crate) fn jbrd(&self) -> AuxBoxData<&jxl_jbr::JpegBitstreamData> {
         if let Some(data) = self.jbrd.data() {
             AuxBoxData::Data(data)
-        } else if self.last_box
-            && self.current_box_ty != Some(ContainerBoxType::JPEG_RECONSTRUCTION)
-        {
+        } else if self.last_box && self.current_box_ty != Some(ContainerBoxType::JPEG_RECONSTRUCTION) {
             AuxBoxData::NotFound
         } else {
             AuxBoxData::Decoding

@@ -74,31 +74,19 @@ impl ImageBuffer {
 
     #[inline]
     pub fn as_float(&self) -> Option<&AlignedGrid<f32>> {
-        if let Self::F32(g) = self {
-            Some(g)
-        } else {
-            None
-        }
+        if let Self::F32(g) = self { Some(g) } else { None }
     }
 
     #[inline]
     pub fn as_float_mut(&mut self) -> Option<&mut AlignedGrid<f32>> {
-        if let Self::F32(g) = self {
-            Some(g)
-        } else {
-            None
-        }
+        if let Self::F32(g) = self { Some(g) } else { None }
     }
 
-    pub fn convert_to_float_modular(
-        &mut self,
-        bit_depth: BitDepth,
-    ) -> Result<&mut AlignedGrid<f32>> {
+    pub fn convert_to_float_modular(&mut self, bit_depth: BitDepth) -> Result<&mut AlignedGrid<f32>> {
         Ok(match self {
             Self::F32(g) => g,
             Self::I32(g) => {
-                let mut out =
-                    AlignedGrid::with_alloc_tracker(g.width(), g.height(), g.tracker().as_ref())?;
+                let mut out = AlignedGrid::with_alloc_tracker(g.width(), g.height(), g.tracker().as_ref())?;
                 for (o, &i) in out.buf_mut().iter_mut().zip(g.buf()) {
                     *o = bit_depth.parse_integer_sample(i);
                 }
@@ -107,8 +95,7 @@ impl ImageBuffer {
                 self.as_float_mut().unwrap()
             }
             Self::I16(g) => {
-                let mut out =
-                    AlignedGrid::with_alloc_tracker(g.width(), g.height(), g.tracker().as_ref())?;
+                let mut out = AlignedGrid::with_alloc_tracker(g.width(), g.height(), g.tracker().as_ref())?;
                 for (o, &i) in out.buf_mut().iter_mut().zip(g.buf()) {
                     *o = bit_depth.parse_integer_sample(i as i32);
                 }
@@ -123,8 +110,7 @@ impl ImageBuffer {
         Ok(match self {
             Self::F32(g) => g,
             Self::I32(g) => {
-                let mut out =
-                    AlignedGrid::with_alloc_tracker(g.width(), g.height(), g.tracker().as_ref())?;
+                let mut out = AlignedGrid::with_alloc_tracker(g.width(), g.height(), g.tracker().as_ref())?;
                 for (o, &i) in out.buf_mut().iter_mut().zip(g.buf()) {
                     *o = i as f32;
                 }
@@ -133,8 +119,7 @@ impl ImageBuffer {
                 self.as_float_mut().unwrap()
             }
             Self::I16(g) => {
-                let mut out =
-                    AlignedGrid::with_alloc_tracker(g.width(), g.height(), g.tracker().as_ref())?;
+                let mut out = AlignedGrid::with_alloc_tracker(g.width(), g.height(), g.tracker().as_ref())?;
                 for (o, &i) in out.buf_mut().iter_mut().zip(g.buf()) {
                     *o = i as f32;
                 }
@@ -190,13 +175,7 @@ impl ImageBuffer {
 
     pub(crate) fn upsample_nn(&self, factor: u32) -> Result<ImageBuffer> {
         #[inline]
-        fn inner<S: Copy>(
-            original: &[S],
-            target: &mut [S],
-            width: usize,
-            height: usize,
-            factor: u32,
-        ) {
+        fn inner<S: Copy>(original: &[S], target: &mut [S], width: usize, height: usize, factor: u32) {
             assert_eq!(original.len(), width * height);
             assert_eq!(target.len(), original.len() << (factor * 2));
             let step = 1usize << factor;
@@ -224,8 +203,7 @@ impl ImageBuffer {
             Self::F32(g) => {
                 let up_width = width << factor;
                 let up_height = height << factor;
-                let mut out =
-                    AlignedGrid::with_alloc_tracker(up_width, up_height, tracker.as_ref())?;
+                let mut out = AlignedGrid::with_alloc_tracker(up_width, up_height, tracker.as_ref())?;
 
                 let original = g.buf();
                 let target = out.buf_mut();
@@ -235,8 +213,7 @@ impl ImageBuffer {
             Self::I32(g) => {
                 let up_width = width << factor;
                 let up_height = height << factor;
-                let mut out =
-                    AlignedGrid::with_alloc_tracker(up_width, up_height, tracker.as_ref())?;
+                let mut out = AlignedGrid::with_alloc_tracker(up_width, up_height, tracker.as_ref())?;
 
                 let original = g.buf();
                 let target = out.buf_mut();
@@ -246,8 +223,7 @@ impl ImageBuffer {
             Self::I16(g) => {
                 let up_width = width << factor;
                 let up_height = height << factor;
-                let mut out =
-                    AlignedGrid::with_alloc_tracker(up_width, up_height, tracker.as_ref())?;
+                let mut out = AlignedGrid::with_alloc_tracker(up_width, up_height, tracker.as_ref())?;
 
                 let original = g.buf();
                 let target = out.buf_mut();
@@ -282,11 +258,7 @@ impl ImageWithRegion {
 
     pub(crate) fn try_clone(&self) -> Result<Self> {
         Ok(Self {
-            buffer: self
-                .buffer
-                .iter()
-                .map(|x| x.try_clone())
-                .collect::<std::result::Result<_, _>>()?,
+            buffer: self.buffer.iter().map(|x| x.try_clone()).collect::<std::result::Result<_, _>>()?,
             regions: self.regions.clone(),
             color_channels: self.color_channels,
             ct_done: self.ct_done,
@@ -334,12 +306,7 @@ impl ImageWithRegion {
     }
 
     #[inline]
-    pub fn append_channel_shifted(
-        &mut self,
-        buffer: ImageBuffer,
-        original_region: Region,
-        shift: ChannelShift,
-    ) {
+    pub fn append_channel_shifted(&mut self, buffer: ImageBuffer, original_region: Region, shift: ChannelShift) {
         let (width, height) = shift.shift_size((original_region.width, original_region.height));
         assert_eq!(buffer.width(), width as usize);
         assert_eq!(buffer.height(), height as usize);
@@ -371,12 +338,7 @@ impl ImageWithRegion {
     }
 
     #[inline]
-    pub(crate) fn swap_channel_f32(
-        &mut self,
-        index: usize,
-        buffer: &mut AlignedGrid<f32>,
-        region: Region,
-    ) {
+    pub(crate) fn swap_channel_f32(&mut self, index: usize, buffer: &mut AlignedGrid<f32>, region: Region) {
         assert_eq!(buffer.width(), region.width as usize);
         assert_eq!(buffer.height(), region.height as usize);
         let ImageBuffer::F32(original_buffer) = &mut self.buffer[index] else {
@@ -422,14 +384,9 @@ impl ImageWithRegion {
         Ok(())
     }
 
-    pub(crate) fn convert_modular_xyb(
-        &mut self,
-        lf_dequant: &LfChannelDequantization,
-    ) -> Result<()> {
+    pub(crate) fn convert_modular_xyb(&mut self, lf_dequant: &LfChannelDequantization) -> Result<()> {
         assert_eq!(self.color_channels, 3);
-        let [y, x, b, ..] = &mut *self.buffer else {
-            panic!()
-        };
+        let [y, x, b, ..] = &mut *self.buffer else { panic!() };
         ImageBuffer::convert_to_float_modular_xyb([y, x, b], lf_dequant)?;
         Ok(())
     }
@@ -445,36 +402,25 @@ impl ImageWithRegion {
         Ok(out)
     }
 
-    pub(crate) fn upsample_jpeg(
-        &mut self,
-        valid_region: Region,
-        bit_depth: BitDepth,
-    ) -> Result<()> {
+    pub(crate) fn upsample_jpeg(&mut self, valid_region: Region, bit_depth: BitDepth) -> Result<()> {
         assert_eq!(self.color_channels, 3);
         self.convert_modular_color(bit_depth)?;
 
         for (g, (region, shift)) in self.buffer.iter_mut().zip(&mut self.regions).take(3) {
             let downsampled_image_region = region.downsample_with_shift(*shift);
             let downsampled_valid_region = valid_region.downsample_with_shift(*shift);
-            let left = downsampled_valid_region
-                .left
-                .abs_diff(downsampled_image_region.left);
-            let top = downsampled_valid_region
-                .top
-                .abs_diff(downsampled_image_region.top);
+            let left = downsampled_valid_region.left.abs_diff(downsampled_image_region.left);
+            let top = downsampled_valid_region.top.abs_diff(downsampled_image_region.top);
             let width = downsampled_valid_region.width;
             let height = downsampled_valid_region.height;
 
-            let subgrid = g.as_float().unwrap().as_subgrid().subgrid(
-                left as usize..(left + width) as usize,
-                top as usize..(top + height) as usize,
-            );
-            let out = crate::filter::apply_jpeg_upsampling_single(
-                subgrid,
-                *shift,
-                valid_region,
-                self.tracker.as_ref(),
-            )?;
+            let subgrid = g
+                .as_float()
+                .unwrap()
+                .as_subgrid()
+                .subgrid(left as usize..(left + width) as usize, top as usize..(top + height) as usize);
+            let out =
+                crate::filter::apply_jpeg_upsampling_single(subgrid, *shift, valid_region, self.tracker.as_ref())?;
 
             *g = ImageBuffer::F32(out);
             *region = valid_region;
@@ -498,8 +444,7 @@ impl ImageWithRegion {
         let color_channels = self.color_channels;
         let color_shift = frame_header.upsampling.trailing_zeros();
 
-        for (idx, ((region, shift), g)) in self.regions.iter_mut().zip(&mut self.buffer).enumerate()
-        {
+        for (idx, ((region, shift), g)) in self.regions.iter_mut().zip(&mut self.buffer).enumerate() {
             let tracker = g.tracker();
             let ChannelShift::Shifts(upsampling_factor) = *shift else {
                 panic!("invalid channel shift for upsampling: {shift:?}");
@@ -518,35 +463,26 @@ impl ImageWithRegion {
 
             let downsampled_image_region = region.downsample(upsampling_factor);
             let downsampled_valid_region = upsampled_valid_region.downsample(upsampling_factor);
-            let left = downsampled_valid_region
-                .left
-                .abs_diff(downsampled_image_region.left);
-            let top = downsampled_valid_region
-                .top
-                .abs_diff(downsampled_image_region.top);
+            let left = downsampled_valid_region.left.abs_diff(downsampled_image_region.left);
+            let top = downsampled_valid_region.top.abs_diff(downsampled_image_region.top);
             let width = downsampled_valid_region.width;
             let height = downsampled_valid_region.height;
 
-            let subgrid = grid.as_subgrid().subgrid(
-                left as usize..(left + width) as usize,
-                top as usize..(top + height) as usize,
-            );
+            let subgrid = grid
+                .as_subgrid()
+                .subgrid(left as usize..(left + width) as usize, top as usize..(top + height) as usize);
             *region = downsampled_valid_region;
-            let out = tracing::trace_span!(
-                "Non-separable upsampling",
-                channel_idx = idx,
-                upsampling_factor,
-                target_factor
-            )
-            .in_scope(|| {
-                crate::features::upsample(
-                    subgrid,
-                    region,
-                    image_header,
-                    upsampling_factor - target_factor,
-                    tracker.as_ref(),
-                )
-            })?;
+            let out =
+                tracing::trace_span!("Non-separable upsampling", channel_idx = idx, upsampling_factor, target_factor)
+                    .in_scope(|| {
+                    crate::features::upsample(
+                        subgrid,
+                        region,
+                        image_header,
+                        upsampling_factor - target_factor,
+                        tracker.as_ref(),
+                    )
+                })?;
             if let Some(out) = out {
                 *g = ImageBuffer::F32(out);
             }
@@ -601,10 +537,7 @@ impl ImageWithRegion {
             let channel = &mut self.buffer[self.color_channels + ec_idx];
             let opaque_int = match ec_info.bit_depth {
                 BitDepth::IntegerSample { bits_per_sample } => (1u32 << bits_per_sample) - 1,
-                BitDepth::FloatSample {
-                    bits_per_sample,
-                    exp_bits,
-                } => {
+                BitDepth::FloatSample { bits_per_sample, exp_bits } => {
                     let mantissa_bits = bits_per_sample - exp_bits - 1;
                     ((1u32 << (exp_bits - 1)) - 1) << mantissa_bits
                 }
@@ -647,9 +580,7 @@ impl ImageWithRegion {
 impl ImageWithRegion {
     pub(crate) fn as_color_floats(&self) -> [&AlignedGrid<f32>; 3] {
         assert_eq!(self.color_channels, 3);
-        let [a, b, c, ..] = &*self.buffer else {
-            panic!()
-        };
+        let [a, b, c, ..] = &*self.buffer else { panic!() };
         let a = a.as_float().unwrap();
         let b = b.as_float().unwrap();
         let c = c.as_float().unwrap();
@@ -658,9 +589,7 @@ impl ImageWithRegion {
 
     pub(crate) fn as_color_floats_mut(&mut self) -> [&mut AlignedGrid<f32>; 3] {
         assert_eq!(self.color_channels, 3);
-        let [a, b, c, ..] = &mut *self.buffer else {
-            panic!()
-        };
+        let [a, b, c, ..] = &mut *self.buffer else { panic!() };
         let a = a.as_float_mut().unwrap();
         let b = b.as_float_mut().unwrap();
         let c = c.as_float_mut().unwrap();
@@ -747,19 +676,10 @@ impl<S: Sample> RenderedImage<S> {
         *grid_lock = FrameRender::Rendering;
         drop(grid_lock);
 
-        composite(
-            &self.image.frame,
-            &mut grid,
-            self.image.refs.clone(),
-            oriented_image_region,
-            pool,
-        )?;
+        composite(&self.image.frame, &mut grid, self.image.refs.clone(), oriented_image_region, pool)?;
 
         let image = Arc::new(grid);
-        drop(
-            self.image
-                .done_render(FrameRender::Blended(Arc::clone(&image))),
-        );
+        drop(self.image.done_render(FrameRender::Blended(Arc::clone(&image))));
         Ok(image)
     }
 
@@ -794,9 +714,8 @@ pub(crate) fn composite_preprocess(
     let frame_header = frame.header();
 
     if frame_header.can_reference() {
-        let bit_depth_it =
-            std::iter::repeat_n(image_header.metadata.bit_depth, grid.color_channels)
-                .chain(image_header.metadata.ec_info.iter().map(|ec| ec.bit_depth));
+        let bit_depth_it = std::iter::repeat_n(image_header.metadata.bit_depth, grid.color_channels)
+            .chain(image_header.metadata.ec_info.iter().map(|ec| ec.bit_depth));
         for (buffer, bit_depth) in grid.buffer.iter_mut().zip(bit_depth_it) {
             buffer.convert_to_float_modular(bit_depth)?;
         }
@@ -824,16 +743,14 @@ pub(crate) fn composite<S: Sample>(
 ) -> Result<()> {
     let image_header = frame.image_header();
     let frame_header = frame.header();
-    let frame_region = oriented_image_region
-        .translate(-frame_header.x0, -frame_header.y0)
-        .downsample(frame_header.lf_level * 3);
+    let frame_region =
+        oriented_image_region.translate(-frame_header.x0, -frame_header.y0).downsample(frame_header.lf_level * 3);
     let frame_region = util::pad_lf_region(frame_header, frame_region);
     let frame_region = util::pad_color_region(image_header, frame_header, frame_region);
     let frame_region = frame_region.upsample(frame_header.upsampling.ilog2());
     let frame_region = if frame_header.frame_type.is_normal_frame() {
-        let full_image_region_in_frame =
-            Region::with_size(image_header.size.width, image_header.size.height)
-                .translate(-frame_header.x0, -frame_header.y0);
+        let full_image_region_in_frame = Region::with_size(image_header.size.width, image_header.size.height)
+            .translate(-frame_header.x0, -frame_header.y0);
         frame_region.intersection(full_image_region_in_frame)
     } else {
         frame_region

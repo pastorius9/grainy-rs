@@ -1,14 +1,10 @@
 use crate::consts::*;
 use crate::{Primaries, WhitePoint};
 
-const MAT_BRADFORD: [f32; 9] = [
-    0.8951, 0.2664, -0.1614, -0.7502, 1.7135, 0.0367, 0.0389, -0.0685, 1.0296,
-];
+const MAT_BRADFORD: [f32; 9] = [0.8951, 0.2664, -0.1614, -0.7502, 1.7135, 0.0367, 0.0389, -0.0685, 1.0296];
 
-const MAT_BRADFORD_INV: [f32; 9] = [
-    0.9869929, -0.1470543, 0.1599627, 0.4323053, 0.5183603, 0.0492912, -0.0085287, 0.0400428,
-    0.9684867,
-];
+const MAT_BRADFORD_INV: [f32; 9] =
+    [0.9869929, -0.1470543, 0.1599627, 0.4323053, 0.5183603, 0.0492912, -0.0085287, 0.0400428, 0.9684867];
 
 pub trait AsIlluminant {
     fn as_illuminant(&self) -> [f32; 2];
@@ -49,9 +45,7 @@ impl AsPrimaries for Primaries {
     fn as_primaries(&self) -> [[f32; 2]; 3] {
         match *self {
             Primaries::Srgb => PRIMARIES_SRGB,
-            Primaries::Custom { red, green, blue } => {
-                [red.as_float(), green.as_float(), blue.as_float()]
-            }
+            Primaries::Custom { red, green, blue } => [red.as_float(), green.as_float(), blue.as_float()],
             Primaries::Bt2100 => PRIMARIES_BT2100,
             Primaries::P3 => PRIMARIES_P3,
         }
@@ -121,11 +115,7 @@ pub fn adapt_mat(from_illuminant: impl AsIlluminant, to_illuminant: impl AsIllum
     let from_lms = matmul3vec(&MAT_BRADFORD, &from_w);
     let to_lms = matmul3vec(&MAT_BRADFORD, &to_w);
 
-    let mul = [
-        to_lms[0] / from_lms[0],
-        to_lms[1] / from_lms[1],
-        to_lms[2] / from_lms[2],
-    ];
+    let mul = [to_lms[0] / from_lms[0], to_lms[1] / from_lms[1], to_lms[2] / from_lms[2]];
     let multiplied = std::array::from_fn(|idx| MAT_BRADFORD[idx] * mul[idx / 3]);
     matmul3(&MAT_BRADFORD_INV, &multiplied)
 }

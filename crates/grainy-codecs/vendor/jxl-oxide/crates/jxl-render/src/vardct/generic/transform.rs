@@ -177,10 +177,7 @@ pub(crate) fn transform_afv<const N: usize>(coeff: &mut MutableSubgrid<'_>) {
             scratch_4x4[ix * 4 + iy] = coeff.get(2 * ix + 1, 2 * iy);
         }
     }
-    dct_2d(
-        &mut MutableSubgrid::from_buf(&mut scratch_4x4, 4, 4, 4),
-        DctDirection::Inverse,
-    );
+    dct_2d(&mut MutableSubgrid::from_buf(&mut scratch_4x4, 4, 4, 4), DctDirection::Inverse);
 
     scratch_4x8[0] = coeff.get(0, 0) - coeff.get(0, 1);
     for iy in 0..4 {
@@ -191,10 +188,7 @@ pub(crate) fn transform_afv<const N: usize>(coeff: &mut MutableSubgrid<'_>) {
             scratch_4x8[iy * 8 + ix] = coeff.get(ix, 2 * iy + 1);
         }
     }
-    dct_2d(
-        &mut MutableSubgrid::from_buf(&mut scratch_4x8, 8, 4, 8),
-        DctDirection::Inverse,
-    );
+    dct_2d(&mut MutableSubgrid::from_buf(&mut scratch_4x8, 8, 4, 8), DctDirection::Inverse);
 
     for iy in 0..4 {
         let afv_y = if flip_y == 0 { iy } else { 3 - iy };
@@ -246,13 +240,6 @@ pub fn transform_varblocks(
     block_info: &SharedSubgrid<BlockInfo>,
 ) {
     unsafe {
-        transform_varblocks_inner(
-            lf,
-            coeff_out,
-            shifts_cbycr,
-            block_info,
-            super::dct::dct_2d,
-            transform,
-        );
+        transform_varblocks_inner(lf, coeff_out, shifts_cbycr, block_info, super::dct::dct_2d, transform);
     }
 }

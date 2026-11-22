@@ -126,10 +126,7 @@ impl JxlThreadPool {
     }
 
     /// Creates a fork-join scope of tasks.
-    pub fn scope<'scope, R: Send>(
-        &'scope self,
-        op: impl for<'r> FnOnce(JxlScope<'r, 'scope>) -> R + Send,
-    ) -> R {
+    pub fn scope<'scope, R: Send>(&'scope self, op: impl for<'r> FnOnce(JxlScope<'r, 'scope>) -> R + Send) -> R {
         match &self.0 {
             #[cfg(feature = "rayon")]
             JxlThreadPoolImpl::Rayon(pool) => pool.scope(|scope| {
@@ -176,11 +173,7 @@ impl JxlThreadPool {
     }
 
     /// Runs a job for each element of the mutable slice.
-    pub fn for_each_mut_slice<'a, T: Send>(
-        &self,
-        v: &'a mut [T],
-        op: impl Fn(&'a mut T) + Send + Sync,
-    ) {
+    pub fn for_each_mut_slice<'a, T: Send>(&self, v: &'a mut [T], op: impl Fn(&'a mut T) + Send + Sync) {
         match &self.0 {
             #[cfg(feature = "rayon")]
             JxlThreadPoolImpl::Rayon(pool) => pool.install(|| par_for_each(v, op)),
@@ -211,10 +204,7 @@ impl JxlThreadPool {
 }
 
 #[cfg(feature = "rayon")]
-fn par_for_each<T: Send>(
-    it: impl rayon::iter::IntoParallelIterator<Item = T>,
-    op: impl Fn(T) + Send + Sync,
-) {
+fn par_for_each<T: Send>(it: impl rayon::iter::IntoParallelIterator<Item = T>, op: impl Fn(T) + Send + Sync) {
     use rayon::prelude::*;
     it.into_par_iter().for_each(op);
 }

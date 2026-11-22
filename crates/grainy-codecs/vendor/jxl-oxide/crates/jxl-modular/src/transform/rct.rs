@@ -24,12 +24,7 @@ pub fn inverse_rct<S: Sample, const TYPE: u32>(
         #[cfg(target_arch = "x86_64")]
         if is_x86_feature_detected!("avx2") {
             unsafe {
-                run_rows_unsafe(
-                    permutation,
-                    grids,
-                    inverse_row_i16_x86_64_avx2::<TYPE>,
-                    pool,
-                );
+                run_rows_unsafe(permutation, grids, inverse_row_i16_x86_64_avx2::<TYPE>, pool);
                 return;
             }
         }
@@ -37,12 +32,7 @@ pub fn inverse_rct<S: Sample, const TYPE: u32>(
         #[cfg(target_arch = "aarch64")]
         if is_aarch64_feature_detected!("neon") {
             unsafe {
-                run_rows_unsafe(
-                    permutation,
-                    grids,
-                    inverse_row_i16_aarch64_neon::<TYPE>,
-                    pool,
-                );
+                run_rows_unsafe(permutation, grids, inverse_row_i16_aarch64_neon::<TYPE>, pool);
                 return;
             }
         }
@@ -58,12 +48,7 @@ pub fn inverse_rct<S: Sample, const TYPE: u32>(
         #[cfg(target_arch = "x86_64")]
         if is_x86_feature_detected!("avx2") {
             unsafe {
-                run_rows_unsafe(
-                    permutation,
-                    grids,
-                    inverse_row_i32_x86_64_avx2::<TYPE>,
-                    pool,
-                );
+                run_rows_unsafe(permutation, grids, inverse_row_i32_x86_64_avx2::<TYPE>, pool);
                 return;
             }
         }
@@ -71,12 +56,7 @@ pub fn inverse_rct<S: Sample, const TYPE: u32>(
         #[cfg(target_arch = "aarch64")]
         if is_aarch64_feature_detected!("neon") {
             unsafe {
-                run_rows_unsafe(
-                    permutation,
-                    grids,
-                    inverse_row_i32_aarch64_neon::<TYPE>,
-                    pool,
-                );
+                run_rows_unsafe(permutation, grids, inverse_row_i32_aarch64_neon::<TYPE>, pool);
                 return;
             }
         }
@@ -86,12 +66,7 @@ pub fn inverse_rct<S: Sample, const TYPE: u32>(
 }
 
 #[inline]
-fn run_rows<S: Sample>(
-    permutation: u32,
-    grids: [&mut MutableSubgrid<S>; 3],
-    f: FnRow<S>,
-    pool: &JxlThreadPool,
-) {
+fn run_rows<S: Sample>(permutation: u32, grids: [&mut MutableSubgrid<S>; 3], f: FnRow<S>, pool: &JxlThreadPool) {
     // SAFETY: `f` is safe.
     unsafe { run_rows_unsafe(permutation, grids, f, pool) }
 }

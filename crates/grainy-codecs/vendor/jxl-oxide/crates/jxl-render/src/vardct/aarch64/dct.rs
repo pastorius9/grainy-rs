@@ -49,29 +49,16 @@ unsafe fn dct4_vec_forward(v: Lane) -> Lane {
 
     let v01 = vget_low_f32(v);
     let v23 = vget_high_f32(v);
-    let addsub = vcombine_f32(
-        vadd_f32(v01, vrev64_f32(v23)),
-        vfma_n_f32(vrev64_f32(v01), v23, -1f32),
-    );
+    let addsub = vcombine_f32(vadd_f32(v01, vrev64_f32(v23)), vfma_n_f32(vrev64_f32(v01), v23, -1f32));
 
     let addsub3012 = vextq_f32(addsub, addsub, 3);
     let addsub03 = vrev64_f32(vget_low_f32(addsub3012));
     let addsub12 = vget_high_f32(addsub3012);
 
     let a = vcombine_f32(addsub03, addsub12);
-    let mul_a = Lane::set([
-        0.25,
-        (std::f32::consts::FRAC_1_SQRT_2 / 2.0 + 0.25) * SEC0,
-        -0.25,
-        -0.25 * SEC1,
-    ]);
+    let mul_a = Lane::set([0.25, (std::f32::consts::FRAC_1_SQRT_2 / 2.0 + 0.25) * SEC0, -0.25, -0.25 * SEC1]);
     let b = vcombine_f32(addsub12, addsub03);
-    let mul_b = Lane::set([
-        0.25,
-        (std::f32::consts::FRAC_1_SQRT_2 / 2.0 - 0.25) * SEC1,
-        0.25,
-        0.25 * SEC0,
-    ]);
+    let mul_b = Lane::set([0.25, (std::f32::consts::FRAC_1_SQRT_2 / 2.0 - 0.25) * SEC1, 0.25, 0.25 * SEC0]);
     a.muladd(mul_a, b.mul(mul_b))
 }
 
@@ -93,12 +80,7 @@ pub(crate) unsafe fn dct4_vec_inverse(v: Lane) -> Lane {
 #[inline]
 unsafe fn dct8_vec_forward(vl: Lane, vr: Lane) -> (Lane, Lane) {
     #[allow(clippy::excessive_precision)]
-    let sec_vec = Lane::set([
-        0.2548977895520796,
-        0.30067244346752264,
-        0.4499881115682078,
-        1.2814577238707527,
-    ]);
+    let sec_vec = Lane::set([0.2548977895520796, 0.30067244346752264, 0.4499881115682078, 1.2814577238707527]);
     let vr_rev = vrev64q_f32(vextq_f32(vr, vr, 2));
     let input0 = vmulq_n_f32(vl.add(vr_rev), 0.5);
     let input1 = vl.sub(vr_rev).mul(sec_vec);
@@ -113,12 +95,7 @@ unsafe fn dct8_vec_forward(vl: Lane, vr: Lane) -> (Lane, Lane) {
 #[inline]
 pub(crate) unsafe fn dct8_vec_inverse(vl: Lane, vr: Lane) -> (Lane, Lane) {
     #[allow(clippy::excessive_precision)]
-    let sec_vec = Lane::set([
-        0.5097955791041592,
-        0.6013448869350453,
-        0.8999762231364156,
-        2.5629154477415055,
-    ]);
+    let sec_vec = Lane::set([0.5097955791041592, 0.6013448869350453, 0.8999762231364156, 2.5629154477415055]);
     let float32x4x2_t(input0, input1) = vuzpq_f32(vl, vr);
     let input1_shifted = vextq_f32(Lane::zero(), input1, 3);
     let input1_mul = vsetq_lane_f32(std::f32::consts::SQRT_2, Lane::splat_f32(1.0), 0);
@@ -154,11 +131,7 @@ unsafe fn dct8x8(io: &mut MutableSubgrid<'_, Lane>, direction: DctDirection) {
     }
 }
 
-unsafe fn column_dct_lane(
-    io: &mut MutableSubgrid<'_, Lane>,
-    scratch: &mut [Lane],
-    direction: DctDirection,
-) {
+unsafe fn column_dct_lane(io: &mut MutableSubgrid<'_, Lane>, scratch: &mut [Lane], direction: DctDirection) {
     let width = io.width();
     let height = io.height();
     let (io_lanes, scratch_lanes) = scratch[..height * 2].split_at_mut(height);
@@ -177,11 +150,7 @@ unsafe fn column_dct_lane(
     }
 }
 
-unsafe fn row_dct_lane(
-    io: &mut MutableSubgrid<'_, Lane>,
-    scratch: &mut [Lane],
-    direction: DctDirection,
-) {
+unsafe fn row_dct_lane(io: &mut MutableSubgrid<'_, Lane>, scratch: &mut [Lane], direction: DctDirection) {
     let width = io.width() * LANE_SIZE;
     let height = io.height();
     let (io_lanes, scratch_lanes) = scratch[..width * 2].split_at_mut(width);
@@ -234,12 +203,7 @@ pub(crate) unsafe fn dct4_inverse(input: [Lane; 4]) -> [Lane; 4] {
     let sum02 = input[0].add(input[2]);
     let sub02 = input[0].sub(input[2]);
 
-    [
-        sum02.add(out0),
-        sub02.add(out1),
-        sub02.sub(out1),
-        sum02.sub(out0),
-    ]
+    [sum02.add(out0), sub02.add(out1), sub02.sub(out1), sum02.sub(out0)]
 }
 
 #[inline]

@@ -23,15 +23,10 @@ pub enum TransformInfo {
 }
 
 impl TransformInfo {
-    pub(super) fn prepare_transform_info(
-        &mut self,
-        channels: &mut super::ModularChannels,
-    ) -> Result<()> {
+    pub(super) fn prepare_transform_info(&mut self, channels: &mut super::ModularChannels) -> Result<()> {
         match self {
             Self::Rct(rct) => rct.transform_channel_info(channels),
-            Self::Palette(pal) => {
-                pal.transform_channel_info::<i16>(channels, &mut Vec::new(), None)
-            }
+            Self::Palette(pal) => pal.transform_channel_info::<i16>(channels, &mut Vec::new(), None),
             Self::Squeeze(sq) => {
                 sq.set_default_params(channels);
                 sq.transform_channel_info::<i16>(channels, None)
@@ -45,14 +40,8 @@ impl TransformInfo {
         tracker: Option<&AllocTracker>,
     ) -> Result<()> {
         if let Self::Palette(pal) = self {
-            meta_channels.insert(
-                0,
-                AlignedGrid::with_alloc_tracker(
-                    pal.nb_colours as usize,
-                    pal.num_c as usize,
-                    tracker,
-                )?,
-            );
+            meta_channels
+                .insert(0, AlignedGrid::with_alloc_tracker(pal.nb_colours as usize, pal.num_c as usize, tracker)?);
         }
         Ok(())
     }
@@ -65,9 +54,7 @@ impl TransformInfo {
     ) -> Result<()> {
         match self {
             Self::Rct(rct) => rct.transform_channel_info(channels),
-            Self::Palette(pal) => {
-                pal.transform_channel_info(channels, meta_channel_grids, Some(grids))
-            }
+            Self::Palette(pal) => pal.transform_channel_info(channels, meta_channel_grids, Some(grids)),
             Self::Squeeze(sq) => sq.transform_channel_info(channels, Some(grids)),
         }
     }
@@ -103,10 +90,7 @@ impl Bundle<&WpHeader> for TransformInfo {
             0 => Rct::parse(bitstream, ()).map(Self::Rct),
             1 => Palette::parse(bitstream, wp_header).map(Self::Palette),
             2 => Squeeze::parse(bitstream, ()).map(Self::Squeeze),
-            value => Err(crate::Error::Bitstream(jxl_bitstream::Error::InvalidEnum {
-                name: "TransformId",
-                value,
-            })),
+            value => Err(crate::Error::Bitstream(jxl_bitstream::Error::InvalidEnum { name: "TransformId", value })),
         }
     }
 }
@@ -158,11 +142,7 @@ impl Bundle<&WpHeader> for Palette {
             nb_colours,
             nb_deltas,
             d_pred,
-            wp_header: if d_pred == Predictor::SelfCorrecting {
-                Some(wp_header.clone())
-            } else {
-                None
-            },
+            wp_header: if d_pred == Predictor::SelfCorrecting { Some(wp_header.clone()) } else { None },
         })
     }
 }
@@ -237,18 +217,11 @@ impl Palette {
             }
         }
 
-        channels
-            .info
-            .drain((begin_c as usize + 1)..(end_c as usize));
-        channels.info.insert(
-            0,
-            ModularChannelInfo::new_unshiftable(self.nb_colours, self.num_c),
-        );
+        channels.info.drain((begin_c as usize + 1)..(end_c as usize));
+        channels.info.insert(0, ModularChannelInfo::new_unshiftable(self.nb_colours, self.num_c));
 
         if let Some(grids) = grids {
-            let members = grids
-                .drain((begin_c as usize + 1)..(end_c as usize))
-                .collect::<Vec<_>>();
+            let members = grids.drain((begin_c as usize + 1)..(end_c as usize)).collect::<Vec<_>>();
             grids[begin_c as usize].merge(members);
 
             let palette_grid = meta_channel_grids.pop().unwrap();
@@ -294,16 +267,8 @@ impl Squeeze {
         if channels.info.len() as u32 - first >= 3 {
             let next_ch = &channels.info[first as usize + 1];
             if next_ch.width == w && next_ch.height == h {
-                let param_base = SqueezeParams {
-                    begin_c: first + 1,
-                    num_c: 2,
-                    in_place: false,
-                    horizontal: false,
-                };
-                self.sp.push(SqueezeParams {
-                    horizontal: true,
-                    ..param_base
-                });
+                let param_base = SqueezeParams { begin_c: first + 1, num_c: 2, in_place: false, horizontal: false };
+                self.sp.push(SqueezeParams { horizontal: true, ..param_base });
                 self.sp.push(param_base);
             }
         }
@@ -316,25 +281,16 @@ impl Squeeze {
         };
 
         if h >= w && h > 8 {
-            self.sp.push(SqueezeParams {
-                horizontal: false,
-                ..param_base
-            });
+            self.sp.push(SqueezeParams { horizontal: false, ..param_base });
             h = h.div_ceil(2);
         }
         while w > 8 || h > 8 {
             if w > 8 {
-                self.sp.push(SqueezeParams {
-                    horizontal: true,
-                    ..param_base
-                });
+                self.sp.push(SqueezeParams { horizontal: true, ..param_base });
                 w = w.div_ceil(2);
             }
             if h > 8 {
-                self.sp.push(SqueezeParams {
-                    horizontal: false,
-                    ..param_base
-                });
+                self.sp.push(SqueezeParams { horizontal: false, ..param_base });
                 h = h.div_ceil(2);
             }
         }
@@ -346,12 +302,7 @@ impl Squeeze {
         mut grids: Option<&mut Vec<TransformedGrid<'_, S>>>,
     ) -> Result<()> {
         for sp in &self.sp {
-            let SqueezeParams {
-                horizontal,
-                in_place,
-                begin_c: begin,
-                num_c,
-            } = *sp;
+            let SqueezeParams { horizontal, in_place, begin_c: begin, num_c } = *sp;
             let end = begin + num_c;
 
             if end as usize > channels.info.len() {
@@ -371,18 +322,9 @@ impl Squeeze {
             let mut residu_channels = Vec::with_capacity(residu_cap);
             let mut residu_grids = grids.is_some().then(|| Vec::with_capacity(residu_cap));
 
-            for (idx, ch) in channels.info[(begin as usize)..(end as usize)]
-                .iter_mut()
-                .enumerate()
-            {
+            for (idx, ch) in channels.info[(begin as usize)..(end as usize)].iter_mut().enumerate() {
                 let mut residu = ch.clone();
-                let super::ModularChannelInfo {
-                    width: w,
-                    height: h,
-                    hshift,
-                    vshift,
-                    ..
-                } = ch;
+                let super::ModularChannelInfo { width: w, height: h, hshift, vshift, .. } = ch;
                 if *w == 0 || *h == 0 {
                     tracing::error!(?ch, "Cannot squeeze zero-sized channel");
                     return Err(Error::InvalidSqueezeParams);
@@ -462,18 +404,14 @@ impl SqueezeParams {
         pool: &jxl_threadpool::JxlThreadPool,
     ) {
         let i0 = i0.grid_mut();
-        let TransformedGrid::Single(i1) = i1 else {
-            panic!("residual channel should be Single channel")
-        };
+        let TransformedGrid::Single(i1) = i1 else { panic!("residual channel should be Single channel") };
         if self.horizontal {
             i0.merge_horizontal_in_place(i1);
             let width = i0.width();
             let height = i0.height();
             if height > 16 {
                 let remaining = i0.split_vertical(0).1;
-                pool.for_each_vec(remaining.into_groups(width, 16), |mut group| {
-                    squeeze::inverse_h(&mut group)
-                });
+                pool.for_each_vec(remaining.into_groups(width, 16), |mut group| squeeze::inverse_h(&mut group));
             } else {
                 squeeze::inverse_h(i0);
             }
@@ -483,9 +421,7 @@ impl SqueezeParams {
             let height = i0.height();
             if width > 16 {
                 let remaining = i0.split_horizontal(0).1;
-                pool.for_each_vec(remaining.into_groups(16, height), |mut group| {
-                    squeeze::inverse_v(&mut group)
-                });
+                pool.for_each_vec(remaining.into_groups(16, height), |mut group| squeeze::inverse_v(&mut group));
             } else {
                 squeeze::inverse_v(i0);
             }

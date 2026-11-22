@@ -17,11 +17,7 @@ struct AllocTrackerInner {
 impl AllocTracker {
     /// Creates a memory allocation tracker with allowed allocation limit.
     pub fn with_limit(bytes_left: usize) -> Self {
-        Self {
-            inner: Arc::new(AllocTrackerInner {
-                bytes_left: AtomicUsize::new(bytes_left),
-            }),
-        }
+        Self { inner: Arc::new(AllocTrackerInner { bytes_left: AtomicUsize::new(bytes_left) }) }
     }
 
     /// Records an allocation of `count` number of `T`, and returns handle of the record.
@@ -29,19 +25,15 @@ impl AllocTracker {
     /// Returns an error if the allocation exceeds the current limit.
     pub fn alloc<T>(&self, count: usize) -> Result<AllocHandle, crate::OutOfMemory> {
         let bytes = count * std::mem::size_of::<T>();
-        let result = self.inner.bytes_left.fetch_update(
-            Ordering::Relaxed,
-            Ordering::Relaxed,
-            |bytes_left| bytes_left.checked_sub(bytes),
-        );
+        let result = self
+            .inner
+            .bytes_left
+            .fetch_update(Ordering::Relaxed, Ordering::Relaxed, |bytes_left| bytes_left.checked_sub(bytes));
 
         match result {
             Ok(prev) => {
                 tracing::trace!(bytes, left = prev - bytes, "Created allocation handle");
-                Ok(AllocHandle {
-                    bytes,
-                    inner: Arc::clone(&self.inner),
-                })
+                Ok(AllocHandle { bytes, inner: Arc::clone(&self.inner) })
             }
             Err(left) => {
                 tracing::trace!(bytes, left, "Allocation failed");
@@ -60,17 +52,12 @@ impl AllocTracker {
     /// Returns an error if the total amount of current allocation doesn't allow shrinking the
     /// limit.
     pub fn shrink_limit(&self, by_bytes: usize) -> Result<(), crate::OutOfMemory> {
-        let result = self.inner.bytes_left.fetch_update(
-            Ordering::Relaxed,
-            Ordering::Relaxed,
-            |bytes_left| bytes_left.checked_sub(by_bytes),
-        );
+        let result = self
+            .inner
+            .bytes_left
+            .fetch_update(Ordering::Relaxed, Ordering::Relaxed, |bytes_left| bytes_left.checked_sub(by_bytes));
 
-        if result.is_ok() {
-            Ok(())
-        } else {
-            Err(crate::OutOfMemory::new(by_bytes))
-        }
+        if result.is_ok() { Ok(()) } else { Err(crate::OutOfMemory::new(by_bytes)) }
     }
 }
 
@@ -93,8 +80,6 @@ impl Drop for AllocHandle {
 impl AllocHandle {
     /// Returns the tracker the handle belongs to.
     pub fn tracker(&self) -> AllocTracker {
-        AllocTracker {
-            inner: Arc::clone(&self.inner),
-        }
+        AllocTracker { inner: Arc::clone(&self.inner) }
     }
 }

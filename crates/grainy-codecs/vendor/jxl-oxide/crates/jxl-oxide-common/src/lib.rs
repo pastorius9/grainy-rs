@@ -303,8 +303,7 @@ impl<Ctx> Bundle<Ctx> for Name {
         for b in &mut data {
             *b = bitstream.read_bits(8)? as u8;
         }
-        let name = String::from_utf8(data)
-            .map_err(|_| jxl_bitstream::Error::ValidationFailed("non-UTF-8 name"))?;
+        let name = String::from_utf8(data).map_err(|_| jxl_bitstream::Error::ValidationFailed("non-UTF-8 name"))?;
         Ok(Self(name))
     }
 }

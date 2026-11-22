@@ -9,11 +9,7 @@ pub fn dct_2d(io: &mut MutableSubgrid<'_>, direction: DctDirection) {
         return;
     }
 
-    let mul = if direction == DctDirection::Forward {
-        0.5
-    } else {
-        1.0
-    };
+    let mul = if direction == DctDirection::Forward { 0.5 } else { 1.0 };
     if width == 2 && height == 1 {
         let v0 = io.get(0, 0);
         let v1 = io.get(1, 0);
@@ -153,12 +149,7 @@ fn dct4(input: [f32; 4], direction: DctDirection) -> [f32; 4] {
         let out0 = (tmp0 + tmp1) / 4.0;
         let out1 = (tmp0 - tmp1) / 4.0;
 
-        [
-            (sum03 + sum12) / 4.0,
-            out0 * std::f32::consts::SQRT_2 + out1,
-            (sum03 - sum12) / 4.0,
-            out1,
-        ]
+        [(sum03 + sum12) / 4.0, out0 * std::f32::consts::SQRT_2 + out1, (sum03 - sum12) / 4.0, out1]
     } else {
         let tmp0 = input[1] * std::f32::consts::SQRT_2;
         let tmp1 = input[1] + input[3];
@@ -204,12 +195,7 @@ fn dct(input_output: &mut [f32], scratch: &mut [f32], direction: DctDirection) {
         let io = input_output;
         let sec = dct_common::sec_half_small(8);
         if direction == DctDirection::Forward {
-            let input0 = [
-                (io[0] + io[7]) / 2.0,
-                (io[1] + io[6]) / 2.0,
-                (io[2] + io[5]) / 2.0,
-                (io[3] + io[4]) / 2.0,
-            ];
+            let input0 = [(io[0] + io[7]) / 2.0, (io[1] + io[6]) / 2.0, (io[2] + io[5]) / 2.0, (io[3] + io[4]) / 2.0];
             let input1 = [
                 (io[0] - io[7]) * sec[0] / 2.0,
                 (io[1] - io[6]) * sec[1] / 2.0,
@@ -228,12 +214,7 @@ fn dct(input_output: &mut [f32], scratch: &mut [f32], direction: DctDirection) {
             io[7] = output1[3];
         } else {
             let input0 = [io[0], io[2], io[4], io[6]];
-            let input1 = [
-                io[1] * std::f32::consts::SQRT_2,
-                io[3] + io[1],
-                io[5] + io[3],
-                io[7] + io[5],
-            ];
+            let input1 = [io[1] * std::f32::consts::SQRT_2, io[3] + io[1], io[5] + io[3], io[7] + io[5]];
             let output0 = dct4(input0, DctDirection::Inverse);
             let output1 = dct4(input1, DctDirection::Inverse);
             for (idx, &sec) in sec.iter().enumerate() {

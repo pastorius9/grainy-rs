@@ -32,11 +32,8 @@ impl<Ctx> Bundle<Ctx> for ColourEncoding {
             if want_icc {
                 Self::IccProfile(colour_space)
             } else {
-                let white_point = if colour_space == ColourSpace::Xyb {
-                    WhitePoint::D65
-                } else {
-                    WhitePoint::parse(bitstream, ())?
-                };
+                let white_point =
+                    if colour_space == ColourSpace::Xyb { WhitePoint::D65 } else { WhitePoint::parse(bitstream, ())? };
                 let primaries = if matches!(colour_space, ColourSpace::Xyb | ColourSpace::Grey) {
                     Primaries::Srgb
                 } else {
@@ -44,13 +41,7 @@ impl<Ctx> Bundle<Ctx> for ColourEncoding {
                 };
                 let tf = TransferFunction::parse(bitstream, ())?;
                 let rendering_intent = bitstream.read_enum::<RenderingIntent>()?;
-                Self::Enum(EnumColourEncoding {
-                    colour_space,
-                    white_point,
-                    primaries,
-                    tf,
-                    rendering_intent,
-                })
+                Self::Enum(EnumColourEncoding { colour_space, white_point, primaries, tf, rendering_intent })
             }
         })
     }
@@ -148,10 +139,7 @@ impl EnumColourEncoding {
             colour_space: ColourSpace::Rgb,
             white_point: WhitePoint::D65,
             primaries: Primaries::Srgb,
-            tf: TransferFunction::Gamma {
-                g: 22000000,
-                inverted: false,
-            },
+            tf: TransferFunction::Gamma { g: 22000000, inverted: false },
             rendering_intent,
         }
     }
@@ -184,10 +172,7 @@ impl EnumColourEncoding {
             colour_space: ColourSpace::Grey,
             white_point: WhitePoint::D65,
             primaries: Primaries::Srgb,
-            tf: TransferFunction::Gamma {
-                g: 22000000,
-                inverted: false,
-            },
+            tf: TransferFunction::Gamma { g: 22000000, inverted: false },
             rendering_intent,
         }
     }
@@ -281,12 +266,7 @@ impl EnumColourEncoding {
     pub fn is_srgb_gamut(&self) -> bool {
         matches!(
             self,
-            Self {
-                colour_space: ColourSpace::Rgb,
-                white_point: WhitePoint::D65,
-                primaries: Primaries::Srgb,
-                ..
-            }
+            Self { colour_space: ColourSpace::Rgb, white_point: WhitePoint::D65, primaries: Primaries::Srgb, .. }
         )
     }
 
@@ -300,11 +280,7 @@ impl EnumColourEncoding {
     pub fn cicp(&self) -> Option<[u8; 4]> {
         let primaries_cicp = self.primaries.cicp();
         let tf_cicp = self.tf.cicp();
-        if let (Some(primaries), Some(tf)) = (primaries_cicp, tf_cicp) {
-            Some([primaries, tf, 0, 1])
-        } else {
-            None
-        }
+        if let (Some(primaries), Some(tf)) = (primaries_cicp, tf_cicp) { Some([primaries, tf, 0, 1]) } else { None }
     }
 }
 
@@ -456,11 +432,7 @@ pub enum Primaries {
     #[default]
     Srgb = 1,
     /// Custom RGB primaries.
-    Custom {
-        red: Customxy,
-        green: Customxy,
-        blue: Customxy,
-    } = 2,
+    Custom { red: Customxy, green: Customxy, blue: Customxy } = 2,
     /// BT.2100 primaries (same as BT.2020).
     Bt2100 = 9,
     /// DCI-P3 primaries.
@@ -581,10 +553,7 @@ impl<Ctx> Bundle<Ctx> for TransferFunction {
         let has_gamma = bitstream.read_bool()?;
         if has_gamma {
             let gamma = bitstream.read_bits(24)?;
-            Ok(Self::Gamma {
-                g: gamma,
-                inverted: true,
-            })
+            Ok(Self::Gamma { g: gamma, inverted: true })
         } else {
             bitstream.read_enum::<TransferFunction>()
         }

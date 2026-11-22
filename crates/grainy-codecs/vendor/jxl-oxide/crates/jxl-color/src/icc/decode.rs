@@ -13,9 +13,7 @@ pub fn read_icc(bitstream: &mut Bitstream) -> Result<Vec<u8>> {
     if enc_size > (1 << 28) {
         // Avoids allocating too much memory (>256MiB)
         // Maximum ICC output_size for Level 10
-        return Err(
-            jxl_bitstream::Error::ProfileConformance("Too large encoded ICC profile").into(),
-        );
+        return Err(jxl_bitstream::Error::ProfileConformance("Too large encoded ICC profile").into());
     }
 
     let mut decoder = jxl_coding::Decoder::parse(bitstream, 41)?;
@@ -40,13 +38,7 @@ pub fn read_icc(bitstream: &mut Bitstream) -> Result<Vec<u8>> {
     let output_size = varint(&mut tmp_cursor)?;
     let commands_size = varint(&mut tmp_cursor)?;
     let stream_offset = tmp_cursor.position();
-    tracing::trace!(
-        enc_size,
-        output_size,
-        commands_size,
-        stream_offset,
-        "Quick ICC validity check",
-    );
+    tracing::trace!(enc_size, output_size, commands_size, stream_offset, "Quick ICC validity check",);
 
     if stream_offset + commands_size > enc_size {
         return Err(Error::InvalidIccStream("invalid commands_size"));
@@ -57,9 +49,7 @@ pub fn read_icc(bitstream: &mut Bitstream) -> Result<Vec<u8>> {
     }
 
     if output_size + 65536 < enc_size {
-        return Err(Error::InvalidIccStream(
-            "reported output_size is far smaller than enc_size",
-        ));
+        return Err(Error::InvalidIccStream("reported output_size is far smaller than enc_size"));
     }
 
     // Read remaining data
@@ -109,9 +99,7 @@ fn varint(stream: &mut Cursor<&[u8]>) -> Result<u64> {
     let mut shift = 0;
     let mut b = 0;
     while shift < 63 {
-        stream
-            .read_exact(std::slice::from_mut(&mut b))
-            .map_err(|_| Error::InvalidIccStream("stream is too short"))?;
+        stream.read_exact(std::slice::from_mut(&mut b)).map_err(|_| Error::InvalidIccStream("stream is too short"))?;
         value |= ((b & 0x7f) as u64) << shift;
         if b & 0x80 == 0 {
             break;
@@ -192,13 +180,11 @@ pub fn decode_icc(stream: &[u8]) -> Result<Vec<u8>> {
     use std::num::Wrapping;
 
     const COMMON_TAGS: [&[u8]; 19] = [
-        b"rTRC", b"rXYZ", b"cprt", b"wtpt", b"bkpt", b"rXYZ", b"gXYZ", b"bXYZ", b"kXYZ", b"rTRC",
-        b"gTRC", b"bTRC", b"kTRC", b"chad", b"desc", b"chrm", b"dmnd", b"dmdd", b"lumi",
+        b"rTRC", b"rXYZ", b"cprt", b"wtpt", b"bkpt", b"rXYZ", b"gXYZ", b"bXYZ", b"kXYZ", b"rTRC", b"gTRC", b"bTRC",
+        b"kTRC", b"chad", b"desc", b"chrm", b"dmnd", b"dmdd", b"lumi",
     ];
 
-    const COMMON_DATA: [&[u8]; 8] = [
-        b"XYZ ", b"desc", b"text", b"mluc", b"para", b"curv", b"sf32", b"gbd ",
-    ];
+    const COMMON_DATA: [&[u8]; 8] = [b"XYZ ", b"desc", b"text", b"mluc", b"para", b"curv", b"sf32", b"gbd "];
 
     let mut tmp_cursor = Cursor::new(stream);
     let output_size = varint(&mut tmp_cursor)?;
@@ -244,10 +230,7 @@ pub fn decode_icc(stream: &[u8]) -> Result<Vec<u8>> {
 
         loop {
             let mut command = 0u8;
-            if commands_stream
-                .read_exact(std::slice::from_mut(&mut command))
-                .is_err()
-            {
+            if commands_stream.read_exact(std::slice::from_mut(&mut command)).is_err() {
                 return Ok(out);
             }
             let tagcode = command & 63;
@@ -265,11 +248,8 @@ pub fn decode_icc(stream: &[u8]) -> Result<Vec<u8>> {
                 _ => return Err(Error::InvalidIccStream("invalid tagcode")),
             };
 
-            let tagstart = if command & 64 == 0 {
-                prev_tagstart + prev_tagsize
-            } else {
-                varint(&mut commands_stream)? as u32
-            };
+            let tagstart =
+                if command & 64 == 0 { prev_tagstart + prev_tagsize } else { varint(&mut commands_stream)? as u32 };
             let tagsize = match tag {
                 _ if command & 128 != 0 => varint(&mut commands_stream)? as u32,
                 b"rXYZ" | b"gXYZ" | b"bXYZ" | b"kXYZ" | b"wtpt" | b"bkpt" | b"lumi" => 20,
@@ -305,10 +285,7 @@ pub fn decode_icc(stream: &[u8]) -> Result<Vec<u8>> {
 
     // Main
     let mut command = 0u8;
-    while commands_stream
-        .read_exact(std::slice::from_mut(&mut command))
-        .is_ok()
-    {
+    while commands_stream.read_exact(std::slice::from_mut(&mut command)).is_ok() {
         match command {
             1 => {
                 let num = varint(&mut commands_stream)? as usize;
@@ -326,11 +303,7 @@ pub fn decode_icc(stream: &[u8]) -> Result<Vec<u8>> {
                 }
                 let (bytes, next_data) = data.split_at(num);
                 data = next_data;
-                let bytes = if command == 2 {
-                    shuffle2(bytes)
-                } else {
-                    shuffle4(bytes)
-                };
+                let bytes = if command == 2 { shuffle2(bytes) } else { shuffle4(bytes) };
                 out.extend_from_slice(&bytes);
             }
             4 => {

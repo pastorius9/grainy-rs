@@ -17,9 +17,7 @@ pub(crate) fn render_modular<S: Sample>(
     let lf_global = if let Some(x) = &cache.lf_global {
         x
     } else {
-        let lf_global = frame
-            .try_parse_lf_global()
-            .ok_or(Error::IncompleteFrame)??;
+        let lf_global = frame.try_parse_lf_global().ok_or(Error::IncompleteFrame)??;
         cache.lf_global = Some(lf_global);
         cache.lf_global.as_ref().unwrap()
     };
@@ -62,71 +60,53 @@ pub(crate) fn render_modular<S: Sample>(
                 .enumerate()
                 .flat_map(|(pass_idx, pass_image)| {
                     let pass_idx = pass_idx as u32;
-                    pass_image
-                        .into_iter()
-                        .enumerate()
-                        .filter_map(move |(group_idx, modular)| {
-                            let group_idx = group_idx as u32;
-                            let group_x = group_idx % groups_per_row;
-                            let group_y = group_idx / groups_per_row;
-                            let left = group_x * group_dim;
-                            let top = group_y * group_dim;
+                    pass_image.into_iter().enumerate().filter_map(move |(group_idx, modular)| {
+                        let group_idx = group_idx as u32;
+                        let group_x = group_idx % groups_per_row;
+                        let group_y = group_idx / groups_per_row;
+                        let left = group_x * group_dim;
+                        let top = group_y * group_dim;
 
-                            let group_region = Region {
-                                left: left as i32,
-                                top: top as i32,
-                                width: group_dim,
-                                height: group_dim,
-                            };
-                            if group_region.intersection(modular_region).is_empty() {
-                                return None;
-                            }
+                        let group_region =
+                            Region { left: left as i32, top: top as i32, width: group_dim, height: group_dim };
+                        if group_region.intersection(modular_region).is_empty() {
+                            return None;
+                        }
 
-                            Some(PassGroupJob {
-                                pass_idx,
-                                group_idx,
-                                modular,
-                            })
-                        })
+                        Some(PassGroupJob { pass_idx, group_idx, modular })
+                    })
                 })
                 .collect::<Vec<_>>();
 
-            pool.for_each_vec(
-                jobs,
-                |PassGroupJob {
-                     pass_idx,
-                     group_idx,
-                     modular,
-                 }| {
-                    let bitstream = match frame.pass_group_bitstream(pass_idx, group_idx) {
-                        Some(Ok(bitstream)) => bitstream,
-                        Some(Err(e)) => {
-                            *result.write().unwrap() = Err(e.into());
-                            return;
-                        }
-                        None => return,
-                    };
-
-                    let allow_partial = bitstream.partial;
-                    let mut bitstream = bitstream.bitstream;
-                    let global_ma_config = gmodular.ma_config.as_ref();
-                    let result = &result;
-                    let r = jxl_frame::data::decode_pass_group_modular(
-                        &mut bitstream,
-                        frame_header,
-                        global_ma_config,
-                        pass_idx,
-                        group_idx,
-                        modular,
-                        allow_partial,
-                        tracker,
-                        pool,
-                    );
-                    if !allow_partial && r.is_err() {
-                        *result.write().unwrap() = r.map_err(From::from);
+            pool.for_each_vec(jobs, |PassGroupJob { pass_idx, group_idx, modular }| {
+                let bitstream = match frame.pass_group_bitstream(pass_idx, group_idx) {
+                    Some(Ok(bitstream)) => bitstream,
+                    Some(Err(e)) => {
+                        *result.write().unwrap() = Err(e.into());
+                        return;
                     }
-                },
-            );
+                    None => return,
+                };
+
+                let allow_partial = bitstream.partial;
+                let mut bitstream = bitstream.bitstream;
+                let global_ma_config = gmodular.ma_config.as_ref();
+                let result = &result;
+                let r = jxl_frame::data::decode_pass_group_modular(
+                    &mut bitstream,
+                    frame_header,
+                    global_ma_config,
+                    pass_idx,
+                    group_idx,
+                    modular,
+                    allow_partial,
+                    tracker,
+                    pool,
+                );
+                if !allow_partial && r.is_err() {
+                    *result.write().unwrap() = r.map_err(From::from);
+                }
+            });
         });
         result.into_inner().unwrap()
     })?;
@@ -139,8 +119,7 @@ pub(crate) fn render_modular<S: Sample>(
     fb.extend_from_gmodular(gmodular);
 
     if xyb_encoded {
-        tracing::trace_span!("Dequant XYB")
-            .in_scope(|| fb.convert_modular_xyb(&lf_global.lf_dequant))?;
+        tracing::trace_span!("Dequant XYB").in_scope(|| fb.convert_modular_xyb(&lf_global.lf_dequant))?;
     }
 
     Ok(fb)

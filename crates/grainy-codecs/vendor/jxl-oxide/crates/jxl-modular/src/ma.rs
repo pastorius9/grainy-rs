@@ -81,11 +81,7 @@ impl Bundle<MaConfigParams<'_>> for MaConfig {
             Leaf(FoldingTreeLeaf),
         }
 
-        let MaConfigParams {
-            tracker,
-            node_limit,
-            depth_limit,
-        } = params;
+        let MaConfigParams { tracker, node_limit, depth_limit } = params;
 
         let mut tree_decoder = Decoder::parse(bitstream, 6)?;
         if is_infinite_tree_dist(&tree_decoder) {
@@ -95,9 +91,7 @@ impl Bundle<MaConfigParams<'_>> for MaConfig {
 
         let mut ctx = 0u32;
         let mut nodes_left = 1usize;
-        let mut tmp_alloc_handle = tracker
-            .map(|tracker| tracker.alloc::<FoldingTree>(16))
-            .transpose()?;
+        let mut tmp_alloc_handle = tracker.map(|tracker| tracker.alloc::<FoldingTree>(16)).transpose()?;
         let mut nodes = Vec::with_capacity(16);
         let mut max_depth = 1usize;
 
@@ -108,9 +102,7 @@ impl Bundle<MaConfigParams<'_>> for MaConfig {
             }
             if nodes.len() > node_limit {
                 tracing::error!(node_limit, "MA tree limit exceeded");
-                return Err(
-                    jxl_bitstream::Error::ProfileConformance("MA tree limit exceeded").into(),
-                );
+                return Err(jxl_bitstream::Error::ProfileConformance("MA tree limit exceeded").into());
             }
 
             if nodes.len() == nodes.capacity() && tmp_alloc_handle.is_some() {
@@ -151,12 +143,7 @@ impl Bundle<MaConfigParams<'_>> for MaConfig {
                     return Err(crate::Error::InvalidMaTree);
                 }
                 let multiplier = (mul_bits + 1) << mul_log;
-                let node = FoldingTree::Leaf(FoldingTreeLeaf {
-                    ctx,
-                    predictor,
-                    offset,
-                    multiplier,
-                });
+                let node = FoldingTree::Leaf(FoldingTreeLeaf { ctx, predictor, offset, multiplier });
                 ctx += 1;
                 node
             };
@@ -168,45 +155,25 @@ impl Bundle<MaConfigParams<'_>> for MaConfig {
         let decoder = Decoder::parse(bitstream, ctx)?;
         let cluster_map = decoder.cluster_map();
 
-        let tree_alloc_handle = tracker
-            .map(|tracker| tracker.alloc::<FoldingTree>(nodes.len()))
-            .transpose()?;
+        let tree_alloc_handle = tracker.map(|tracker| tracker.alloc::<FoldingTree>(nodes.len())).transpose()?;
         let mut tmp = VecDeque::<(_, usize)>::with_capacity(max_depth);
         for node in nodes.into_iter().rev() {
             match node {
                 FoldingTree::Decision(property, value) => {
                     let (right, dr) = tmp.pop_front().unwrap();
                     let (left, dl) = tmp.pop_front().unwrap();
-                    let node = Box::new(MaTreeNode::Decision {
-                        property,
-                        value,
-                        left,
-                        right,
-                    });
+                    let node = Box::new(MaTreeNode::Decision { property, value, left, right });
                     let depth = dr.max(dl) + 1;
                     if depth > depth_limit {
                         tracing::error!(depth_limit, "Decoded MA tree is too deep");
-                        return Err(jxl_bitstream::Error::ProfileConformance(
-                            "decoded MA tree is too deep",
-                        )
-                        .into());
+                        return Err(jxl_bitstream::Error::ProfileConformance("decoded MA tree is too deep").into());
                     }
 
                     tmp.push_back((node, depth));
                 }
-                FoldingTree::Leaf(FoldingTreeLeaf {
-                    ctx,
-                    predictor,
-                    offset,
-                    multiplier,
-                }) => {
+                FoldingTree::Leaf(FoldingTreeLeaf { ctx, predictor, offset, multiplier }) => {
                     let cluster = cluster_map[ctx as usize];
-                    let leaf = MaTreeLeafClustered {
-                        cluster,
-                        predictor,
-                        offset,
-                        multiplier,
-                    };
+                    let leaf = MaTreeLeafClustered { cluster, predictor, offset, multiplier };
                     let node = Box::new(MaTreeNode::Leaf(leaf));
                     tmp.push_back((node, 0));
                 }
@@ -216,12 +183,7 @@ impl Bundle<MaConfigParams<'_>> for MaConfig {
         let (tree, tree_depth) = tmp.pop_front().unwrap();
         let tree = *tree;
 
-        Ok(Self {
-            num_tree_nodes,
-            tree_depth,
-            tree: Arc::new((tree, tree_alloc_handle)),
-            decoder,
-        })
+        Ok(Self { num_tree_nodes, tree_depth, tree: Arc::new((tree, tree_alloc_handle)), decoder })
     }
 }
 
@@ -273,25 +235,16 @@ pub(crate) struct MaTreeLeafClustered {
 impl FlatMaTree {
     fn new(nodes: Vec<FlatMaTreeNode>) -> Self {
         let need_self_correcting = nodes.iter().any(|node| match *node {
-            FlatMaTreeNode::FusedDecision {
-                prop_level0: p,
-                props_level1: (pl, pr),
-                ..
-            } => p == 15 || pl == 15 || pr == 15,
-            FlatMaTreeNode::Table { prop, .. } => prop == 15,
-            FlatMaTreeNode::Leaf(MaTreeLeafClustered { predictor, .. }) => {
-                predictor == Predictor::SelfCorrecting
+            FlatMaTreeNode::FusedDecision { prop_level0: p, props_level1: (pl, pr), .. } => {
+                p == 15 || pl == 15 || pr == 15
             }
+            FlatMaTreeNode::Table { prop, .. } => prop == 15,
+            FlatMaTreeNode::Leaf(MaTreeLeafClustered { predictor, .. }) => predictor == Predictor::SelfCorrecting,
         });
 
         let mut max_prev_channel_depth = 0usize;
         for node in &nodes {
-            if let FlatMaTreeNode::FusedDecision {
-                prop_level0: p,
-                props_level1: (pl, pr),
-                ..
-            } = *node
-            {
+            if let FlatMaTreeNode::FusedDecision { prop_level0: p, props_level1: (pl, pr), .. } = *node {
                 if let Some(p) = p.checked_sub(16) {
                     max_prev_channel_depth = max_prev_channel_depth.max((p as usize / 4) + 1);
                 }
@@ -308,11 +261,7 @@ impl FlatMaTree {
             }
         }
 
-        Self {
-            nodes,
-            need_self_correcting,
-            max_prev_channel_depth,
-        }
+        Self { nodes, need_self_correcting, max_prev_channel_depth }
     }
 
     pub(crate) fn get_leaf<S: Sample>(&self, properties: &Properties<S>) -> &MaTreeLeafClustered {
@@ -335,15 +284,9 @@ impl FlatMaTree {
                     let next_node = index_base + if high_bit { r } else { l };
                     current_node = &self.nodes[next_node as usize];
                 }
-                &FlatMaTreeNode::Table {
-                    prop,
-                    value_base,
-                    ref indices,
-                } => {
+                &FlatMaTreeNode::Table { prop, value_base, ref indices } => {
                     let v = properties.get(prop as usize);
-                    let idx = v
-                        .saturating_sub(value_base)
-                        .clamp(0, indices.len() as i32 - 1) as usize;
+                    let idx = v.saturating_sub(value_base).clamp(0, indices.len() as i32 - 1) as usize;
                     let next_node = indices[idx];
                     current_node = &self.nodes[next_node as usize];
                 }
@@ -378,11 +321,7 @@ impl FlatMaTree {
         dist_multiplier: u32,
     ) -> Result<(i32, super::predictor::Predictor)> {
         let leaf = self.get_leaf(properties);
-        let diff = decoder.read_varint_with_multiplier_clustered(
-            bitstream,
-            leaf.cluster,
-            dist_multiplier,
-        )?;
+        let diff = decoder.read_varint_with_multiplier_clustered(bitstream, leaf.cluster, dist_multiplier)?;
         let diff = unpack_signed(diff).wrapping_muladd_i32(leaf.multiplier as i32, leaf.offset);
         Ok((diff, leaf.predictor))
     }
@@ -396,12 +335,7 @@ impl FlatMaTree {
     }
 
     pub(crate) fn simple_table(&self) -> Option<SimpleMaTable> {
-        let Some(&FlatMaTreeNode::Table {
-            prop: decision_prop,
-            value_base,
-            ref indices,
-        }) = self.nodes.first()
-        else {
+        let Some(&FlatMaTreeNode::Table { prop: decision_prop, value_base, ref indices }) = self.nodes.first() else {
             return None;
         };
 
@@ -446,34 +380,19 @@ pub(crate) struct SimpleMaTable {
 
 #[derive(Debug)]
 enum MaTreeNode {
-    Decision {
-        property: u32,
-        value: i32,
-        left: Box<MaTreeNode>,
-        right: Box<MaTreeNode>,
-    },
+    Decision { property: u32, value: i32, left: Box<MaTreeNode>, right: Box<MaTreeNode> },
     Leaf(MaTreeLeafClustered),
 }
 
 impl MaTreeNode {
     fn next_decision_node(&self, channel: u32, stream_idx: u32, prev_channels: u32) -> &MaTreeNode {
         match *self {
-            MaTreeNode::Decision {
-                property: property @ (0 | 1),
-                value,
-                ref left,
-                ref right,
-            } => {
+            MaTreeNode::Decision { property: property @ (0 | 1), value, ref left, ref right } => {
                 let target = if property == 0 { channel } else { stream_idx };
                 let node = if target as i32 > value { left } else { right };
                 node.next_decision_node(channel, stream_idx, prev_channels)
             }
-            ref node @ MaTreeNode::Decision {
-                property,
-                value,
-                ref left,
-                ref right,
-            } if property >= 16 => {
+            ref node @ MaTreeNode::Decision { property, value, ref left, ref right } if property >= 16 => {
                 let prev_channel_idx = (property - 16) / 4;
                 if prev_channel_idx >= prev_channels {
                     let node = if value < 0 { left } else { right };
@@ -493,32 +412,22 @@ impl MaTreeNode {
         prev_channels: u32,
         next_index_base: u32,
     ) -> Option<(FlatMaTreeNode, Vec<&MaTreeNode>)> {
-        let &MaTreeNode::Decision {
-            property,
-            value,
-            ref left,
-            ref right,
-        } = self
-        else {
+        let &MaTreeNode::Decision { property, value, ref left, ref right } = self else {
             return None;
         };
 
         let mut lower_bound = value;
         let mut upper_bound = value;
-        let mut stack = vec![
-            (&**left, (value + 1)..=i32::MAX),
-            (&**right, i32::MIN..=value),
-        ];
+        let mut stack = vec![(&**left, (value + 1)..=i32::MAX), (&**right, i32::MIN..=value)];
         let mut range_nodes = Vec::new();
         while let Some((node, range)) = stack.pop() {
             let node = node.next_decision_node(channel, stream_idx, prev_channels);
             let (value, left, right) = match node {
-                &MaTreeNode::Decision {
-                    property: target_property,
-                    value,
-                    ref left,
-                    ref right,
-                } if target_property == property => (value, left, right),
+                &MaTreeNode::Decision { property: target_property, value, ref left, ref right }
+                    if target_property == property =>
+                {
+                    (value, left, right)
+                }
                 _ => {
                     range_nodes.push((node, *range.end()));
                     continue;
@@ -568,11 +477,8 @@ impl MaTreeNode {
             range_start = range_end;
         }
 
-        let node = FlatMaTreeNode::Table {
-            prop: property,
-            value_base: lower_bound,
-            indices: indices.into_boxed_slice(),
-        };
+        let node =
+            FlatMaTreeNode::Table { prop: property, value_base: lower_bound, indices: indices.into_boxed_slice() };
         Some((node, nodes))
     }
 
@@ -585,8 +491,7 @@ impl MaTreeNode {
         let mut next_base = 1u32;
         while let Some(target) = q.pop_front() {
             let target = target.next_decision_node(channel, stream_idx, prev_channels);
-            if let Some((out_node, nodes)) =
-                target.try_compile_to_table(channel, stream_idx, prev_channels, next_base)
+            if let Some((out_node, nodes)) = target.try_compile_to_table(channel, stream_idx, prev_channels, next_base)
             {
                 let len = nodes.len() as u32;
                 out.push(out_node);
@@ -596,30 +501,19 @@ impl MaTreeNode {
             }
 
             match *target {
-                MaTreeNode::Decision {
-                    property,
-                    value,
-                    ref left,
-                    ref right,
-                } => {
+                MaTreeNode::Decision { property, value, ref left, ref right } => {
                     let left = left.next_decision_node(channel, stream_idx, prev_channels);
                     let (lp, lv, ll, lr) = match left {
-                        &MaTreeNode::Decision {
-                            property,
-                            value,
-                            ref left,
-                            ref right,
-                        } => (property, value, &**left, &**right),
+                        &MaTreeNode::Decision { property, value, ref left, ref right } => {
+                            (property, value, &**left, &**right)
+                        }
                         node => (0, 0, node, node),
                     };
                     let right = right.next_decision_node(channel, stream_idx, prev_channels);
                     let (rp, rv, rl, rr) = match right {
-                        &MaTreeNode::Decision {
-                            property,
-                            value,
-                            ref left,
-                            ref right,
-                        } => (property, value, &**left, &**right),
+                        &MaTreeNode::Decision { property, value, ref left, ref right } => {
+                            (property, value, &**left, &**right)
+                        }
                         node => (0, 0, node, node),
                     };
                     out.push(FlatMaTreeNode::FusedDecision {

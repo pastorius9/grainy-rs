@@ -1,6 +1,5 @@
 use crate::{
-    ColourSpace, Customxy, EnumColourEncoding, Error, Primaries, RenderingIntent, Result,
-    TransferFunction, WhitePoint,
+    ColourSpace, Customxy, EnumColourEncoding, Error, Primaries, RenderingIntent, Result, TransferFunction, WhitePoint,
 };
 
 #[derive(Debug)]
@@ -38,11 +37,7 @@ impl IccProfileInfo {
     #[inline]
     pub fn trc_color(&self) -> Option<TransferFunction> {
         let [r, g, b] = self.trc_rgb?;
-        if r == g && g == b {
-            Some(r.into())
-        } else {
-            None
-        }
+        if r == g && g == b { Some(r.into()) } else { None }
     }
 
     #[inline]
@@ -83,18 +78,9 @@ impl IccProfileInfo {
             xyz_rgb_mat_adapted[2] + xyz_rgb_mat_adapted[5] + xyz_rgb_mat_adapted[8],
         ];
         let primaries = [
-            [
-                xyz_rgb_mat_adapted[0] / xyz_sum[0],
-                xyz_rgb_mat_adapted[3] / xyz_sum[0],
-            ],
-            [
-                xyz_rgb_mat_adapted[1] / xyz_sum[1],
-                xyz_rgb_mat_adapted[4] / xyz_sum[1],
-            ],
-            [
-                xyz_rgb_mat_adapted[2] / xyz_sum[2],
-                xyz_rgb_mat_adapted[5] / xyz_sum[2],
-            ],
+            [xyz_rgb_mat_adapted[0] / xyz_sum[0], xyz_rgb_mat_adapted[3] / xyz_sum[0]],
+            [xyz_rgb_mat_adapted[1] / xyz_sum[1], xyz_rgb_mat_adapted[4] / xyz_sum[1]],
+            [xyz_rgb_mat_adapted[2] / xyz_sum[2], xyz_rgb_mat_adapted[5] / xyz_sum[2]],
         ];
 
         'outer: for (known_primaries, ret) in PRIMARIES_TO_ENUM {
@@ -110,18 +96,9 @@ impl IccProfileInfo {
         }
 
         Some(Primaries::Custom {
-            red: Customxy {
-                x: (primaries[0][0] * 1e6 + 0.5) as i32,
-                y: (primaries[0][1] * 1e6 + 0.5) as i32,
-            },
-            green: Customxy {
-                x: (primaries[1][0] * 1e6 + 0.5) as i32,
-                y: (primaries[1][1] * 1e6 + 0.5) as i32,
-            },
-            blue: Customxy {
-                x: (primaries[2][0] * 1e6 + 0.5) as i32,
-                y: (primaries[2][1] * 1e6 + 0.5) as i32,
-            },
+            red: Customxy { x: (primaries[0][0] * 1e6 + 0.5) as i32, y: (primaries[0][1] * 1e6 + 0.5) as i32 },
+            green: Customxy { x: (primaries[1][0] * 1e6 + 0.5) as i32, y: (primaries[1][1] * 1e6 + 0.5) as i32 },
+            blue: Customxy { x: (primaries[2][0] * 1e6 + 0.5) as i32, y: (primaries[2][1] * 1e6 + 0.5) as i32 },
         })
     }
 
@@ -152,10 +129,7 @@ impl IccProfileInfo {
             return ret;
         }
 
-        WhitePoint::Custom(Customxy {
-            x: (illuminant[0] * 1e6 + 0.5) as i32,
-            y: (illuminant[1] * 1e6 + 0.5) as i32,
-        })
+        WhitePoint::Custom(Customxy { x: (illuminant[0] * 1e6 + 0.5) as i32, y: (illuminant[1] * 1e6 + 0.5) as i32 })
     }
 }
 
@@ -175,10 +149,7 @@ impl From<KnownIccTrc> for TransferFunction {
             KnownIccTrc::ParametricGamma(g) => {
                 let g = g as u64;
                 let g_1e7 = (g * 10000000 + 32768) / 65536;
-                TransferFunction::Gamma {
-                    g: g_1e7 as u32,
-                    inverted: false,
-                }
+                TransferFunction::Gamma { g: g_1e7 as u32, inverted: false }
             }
             KnownIccTrc::Linear => TransferFunction::Linear,
             KnownIccTrc::Srgb => TransferFunction::Srgb,
@@ -246,24 +217,15 @@ pub(crate) fn parse_icc_raw(profile: &[u8]) -> Result<IccProfile<'_>> {
         _ => return Err(Error::IccParseFailure("invalid rendering intent")),
     };
 
-    let header = super::IccHeader {
-        color_space,
-        rendering_intent,
-    };
+    let header = super::IccHeader { color_space, rendering_intent };
 
     if size < 0x84 {
-        return Ok(IccProfile {
-            header,
-            tags: Vec::new(),
-        });
+        return Ok(IccProfile { header, tags: Vec::new() });
     }
 
-    let tag_count =
-        u32::from_be_bytes([profile[0x80], profile[0x81], profile[0x82], profile[0x83]]);
+    let tag_count = u32::from_be_bytes([profile[0x80], profile[0x81], profile[0x82], profile[0x83]]);
     if size < 0x84 + 12 * tag_count {
-        return Err(Error::IccParseFailure(
-            "unexpected end of profile while reading tag list",
-        ));
+        return Err(Error::IccParseFailure("unexpected end of profile while reading tag list"));
     }
 
     let mut tags = Vec::new();
@@ -274,15 +236,10 @@ pub(crate) fn parse_icc_raw(profile: &[u8]) -> Result<IccProfile<'_>> {
         let tag_size = u32::from_be_bytes([raw_tag[8], raw_tag[9], raw_tag[10], raw_tag[11]]);
         let tag_end = offset + tag_size;
         if size < tag_end {
-            return Err(Error::IccParseFailure(
-                "unexpected end of profile while reading tag data",
-            ));
+            return Err(Error::IccParseFailure("unexpected end of profile while reading tag data"));
         }
 
-        tags.push(RawTag {
-            tag,
-            data: &profile[offset as usize..tag_end as usize],
-        });
+        tags.push(RawTag { tag, data: &profile[offset as usize..tag_end as usize] });
     }
 
     Ok(IccProfile { header, tags })
@@ -326,9 +283,7 @@ pub fn detect_profile_info(profile: &[u8]) -> Result<IccProfileInfo> {
                         match curve_type {
                             0 => {
                                 if parameters != 1 {
-                                    return Err(Error::IccParseFailure(
-                                        "invalid parametricCurveType",
-                                    ));
+                                    return Err(Error::IccParseFailure("invalid parametricCurveType"));
                                 }
 
                                 let [gamma]: [i32; 1] = std::array::from_fn(|idx| {
@@ -344,9 +299,7 @@ pub fn detect_profile_info(profile: &[u8]) -> Result<IccProfileInfo> {
                             }
                             3 => {
                                 if parameters != 5 {
-                                    return Err(Error::IccParseFailure(
-                                        "invalid parametricCurveType",
-                                    ));
+                                    return Err(Error::IccParseFailure("invalid parametricCurveType"));
                                 }
 
                                 let params: [i32; 5] = std::array::from_fn(|idx| {
@@ -476,20 +429,12 @@ pub fn detect_profile_info(profile: &[u8]) -> Result<IccProfileInfo> {
         None
     };
     let trc_rgb = if let [Some(r), Some(g), Some(b), _] = trcs {
-        if let Some(trc) = override_trc {
-            Some([trc; 3])
-        } else {
-            Some([r, g, b])
-        }
+        if let Some(trc) = override_trc { Some([trc; 3]) } else { Some([r, g, b]) }
     } else {
         None
     };
     let trc_k = trcs[3].map(|k| override_trc.unwrap_or(k));
-    let xyz_rgb = if let [Some(r), Some(g), Some(b)] = xyzs {
-        Some([r, g, b])
-    } else {
-        None
-    };
+    let xyz_rgb = if let [Some(r), Some(g), Some(b)] = xyzs { Some([r, g, b]) } else { None };
 
     Ok(IccProfileInfo {
         color_space,
@@ -547,13 +492,7 @@ pub(crate) fn parse_icc(profile: &[u8]) -> Result<EnumColourEncoding> {
             return Err(Error::UnsupportedIccProfile);
         };
         let wp = info.white_point();
-        Ok(EnumColourEncoding {
-            colour_space: ColourSpace::Rgb,
-            white_point: wp,
-            primaries,
-            tf,
-            rendering_intent,
-        })
+        Ok(EnumColourEncoding { colour_space: ColourSpace::Rgb, white_point: wp, primaries, tf, rendering_intent })
     } else {
         Err(Error::UnsupportedIccProfile)
     }
@@ -612,10 +551,7 @@ mod tests {
                 colour_space: ColourSpace::Rgb,
                 white_point: WhitePoint::D65,
                 primaries: Primaries::Srgb,
-                tf: TransferFunction::Gamma {
-                    g: 21999000..=22001000,
-                    inverted: false
-                },
+                tf: TransferFunction::Gamma { g: 21999000..=22001000, inverted: false },
                 rendering_intent: RenderingIntent::Relative,
             },
         ));

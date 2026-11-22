@@ -43,10 +43,7 @@ pub enum BlockInfo {
     /// The block is occupied by a varblock.
     Occupied,
     /// The block is the top-left block of a varblock.
-    Data {
-        dct_select: TransformType,
-        hf_mul: i32,
-    },
+    Data { dct_select: TransformType, hf_mul: i32 },
 }
 
 impl Bundle<HfMetadataParams<'_, '_, '_>> for HfMetadata {
@@ -79,8 +76,7 @@ impl Bundle<HfMetadataParams<'_, '_, '_>> for HfMetadata {
             bh = bh.div_ceil(2) * 2;
         }
 
-        let nb_blocks =
-            1 + bitstream.read_bits((bw * bh).next_power_of_two().trailing_zeros() as usize)?;
+        let nb_blocks = 1 + bitstream.read_bits((bw * bh).next_power_of_two().trailing_zeros() as usize)?;
 
         let channels = vec![
             ModularChannelParams::new(lf_width.div_ceil(64), lf_height.div_ceil(64)),
@@ -88,8 +84,7 @@ impl Bundle<HfMetadataParams<'_, '_, '_>> for HfMetadata {
             ModularChannelParams::new(nb_blocks, 2),
             ModularChannelParams::new(bw as u32, bh as u32),
         ];
-        let params =
-            ModularParams::with_channels(0, bits_per_sample, channels, global_ma_config, tracker);
+        let params = ModularParams::with_channels(0, bits_per_sample, channels, global_ma_config, tracker);
         let mut modular = Modular::parse(bitstream, params)?;
         let image = modular.image_mut().unwrap();
         let mut subimage = image.prepare_subimage()?;
@@ -107,12 +102,7 @@ impl Bundle<HfMetadataParams<'_, '_, '_>> for HfMetadata {
 
         let mut epf_sigma = AlignedGrid::with_alloc_tracker(bw, bh, tracker)?;
         let epf_sigma_buf = epf_sigma.buf_mut();
-        let epf = epf.map(|(quant_mul, sharp_lut)| {
-            (
-                quant_mul * 65536.0 / quantizer_global_scale as f32,
-                sharp_lut,
-            )
-        });
+        let epf = epf.map(|(quant_mul, sharp_lut)| (quant_mul * 65536.0 / quantizer_global_scale as f32, sharp_lut));
 
         let mut block_info = AlignedGrid::<BlockInfo>::with_alloc_tracker(bw, bh, tracker)?;
         let mut x;
@@ -125,19 +115,14 @@ impl Bundle<HfMetadataParams<'_, '_, '_>> for HfMetadata {
                 if !block_info.get(x, y).is_occupied() {
                     let Some(&dct_select) = block_info_raw.try_get_ref(data_idx, 0) else {
                         tracing::error!(lf_group_idx, x, y, "BlockInfo doesn't fill LF group");
-                        return Err(jxl_bitstream::Error::ValidationFailed(
-                            "BlockInfo doesn't fill LF group",
-                        )
-                        .into());
+                        return Err(jxl_bitstream::Error::ValidationFailed("BlockInfo doesn't fill LF group").into());
                     };
                     let dct_select = TransformType::try_from(dct_select as u8)?;
                     let mul = block_info_raw.get(data_idx, 1);
                     let hf_mul = mul + 1;
                     if hf_mul <= 0 {
                         tracing::error!(lf_group_idx, x, y, hf_mul, "non-positive HfMul");
-                        return Err(
-                            jxl_bitstream::Error::ValidationFailed("non-positive HfMul").into()
-                        );
+                        return Err(jxl_bitstream::Error::ValidationFailed("non-positive HfMul").into());
                     }
 
                     let (dw, dh) = dct_select.dct_select_size();
@@ -157,8 +142,7 @@ impl Bundle<HfMetadataParams<'_, '_, '_>> for HfMetadata {
                         .into());
                     }
 
-                    let epf =
-                        epf.map(|(quant_mul, sharp_lut)| (quant_mul / hf_mul as f32, sharp_lut));
+                    let epf = epf.map(|(quant_mul, sharp_lut)| (quant_mul / hf_mul as f32, sharp_lut));
                     for dy in 0..dh as usize {
                         for dx in 0..dw as usize {
                             if let Some(info) = block_info.try_get_ref(x + dx, y + dy) {
@@ -172,10 +156,7 @@ impl Bundle<HfMetadataParams<'_, '_, '_>> for HfMetadata {
                                         y = y + dy,
                                         "varblocks overlap",
                                     );
-                                    return Err(jxl_bitstream::Error::ValidationFailed(
-                                        "varblocks overlap",
-                                    )
-                                    .into());
+                                    return Err(jxl_bitstream::Error::ValidationFailed("varblocks overlap").into());
                                 }
                             } else {
                                 tracing::error!(
@@ -200,10 +181,9 @@ impl Bundle<HfMetadataParams<'_, '_, '_>> for HfMetadata {
                             if let Some((sigma, sharp_lut)) = epf {
                                 let sharpness = sharpness[(y + dy) * bw + (x + dx)];
                                 if !(0..8).contains(&sharpness) {
-                                    return Err(jxl_bitstream::Error::ValidationFailed(
-                                        "invalid EPF sharpness value",
-                                    )
-                                    .into());
+                                    return Err(
+                                        jxl_bitstream::Error::ValidationFailed("invalid EPF sharpness value").into()
+                                    );
                                 }
                                 let sigma = sigma * sharp_lut[sharpness as usize];
                                 epf_sigma_buf[(y + dy) * bw + (x + dx)] = sigma;
@@ -220,12 +200,7 @@ impl Bundle<HfMetadataParams<'_, '_, '_>> for HfMetadata {
             y += 1;
         }
 
-        Ok(Self {
-            x_from_y,
-            b_from_y,
-            block_info,
-            epf_sigma,
-        })
+        Ok(Self { x_from_y, b_from_y, block_info, epf_sigma })
     }
 }
 

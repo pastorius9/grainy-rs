@@ -30,12 +30,7 @@ pub fn apply_gabor_like(
     for (idx, grid) in fb_scratch.iter_mut().enumerate() {
         let width = grid.width() as u32;
         let height = grid.height() as u32;
-        let region = Region {
-            width,
-            height,
-            left,
-            top,
-        };
+        let region = Region { width, height, left, top };
         fb.swap_channel_f32(idx, grid, region);
     }
 }
@@ -82,25 +77,14 @@ pub(super) unsafe fn run_gabor_rows_unsafe<'buf>(
     }
 
     let (inner_rows, bottom_row) = output_buf[width..].split_at_mut((height - 2) * width);
-    let output_rows = inner_rows
-        .chunks_mut(width * 8)
-        .enumerate()
-        .collect::<Vec<_>>();
+    let output_rows = inner_rows.chunks_mut(width * 8).enumerate().collect::<Vec<_>>();
 
     pool.for_each_vec(output_rows, |(y8, output_rows)| {
         let it = output_rows.chunks_exact_mut(width);
         for (dy, output_row) in it.enumerate() {
             let y_up = y8 * 8 + dy;
-            let input_rows = [
-                input.get_row(y_up),
-                input.get_row(y_up + 1),
-                input.get_row(y_up + 2),
-            ];
-            let row = GaborRow {
-                input_rows,
-                output_row,
-                weights,
-            };
+            let input_rows = [input.get_row(y_up), input.get_row(y_up + 1), input.get_row(y_up + 2)];
+            let row = GaborRow { input_rows, output_row, weights };
             unsafe {
                 handle_row(row);
             }

@@ -70,8 +70,8 @@ impl<Ctx> Bundle<Ctx> for HfBlockContext {
             (
                 15,
                 vec![
-                    0, 1, 2, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6, 7, 8, 9, 9, 10, 11, 12, 13, 14, 14, 14,
-                    14, 14, 7, 8, 9, 9, 10, 11, 12, 13, 14, 14, 14, 14, 14,
+                    0, 1, 2, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6, 7, 8, 9, 9, 10, 11, 12, 13, 14, 14, 14, 14, 14, 7, 8, 9, 9,
+                    10, 11, 12, 13, 14, 14, 14, 14, 14,
                 ],
             )
         } else {
@@ -104,12 +104,7 @@ impl<Ctx> Bundle<Ctx> for HfBlockContext {
             (num_clusters, ctx_map)
         };
 
-        Ok(Self {
-            qf_thresholds,
-            lf_thresholds,
-            block_ctx_map,
-            num_block_clusters,
-        })
+        Ok(Self { qf_thresholds, lf_thresholds, block_ctx_map, num_block_clusters })
     }
 }
 
@@ -155,28 +150,15 @@ impl<S: Sample> Bundle<LfCoeffParams<'_, '_, '_>> for LfCoeff<S> {
 
         let width = lf_width.div_ceil(8);
         let height = lf_height.div_ceil(8);
-        let channel_shifts = [1, 0, 2]
-            .into_iter()
-            .map(|idx| ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx))
-            .collect();
-        let lf_quant_params = ModularParams::new(
-            width,
-            height,
-            0,
-            bits_per_sample,
-            channel_shifts,
-            global_ma_config,
-            tracker,
-        );
+        let channel_shifts =
+            [1, 0, 2].into_iter().map(|idx| ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx)).collect();
+        let lf_quant_params =
+            ModularParams::new(width, height, 0, bits_per_sample, channel_shifts, global_ma_config, tracker);
         let mut lf_quant = Modular::parse(bitstream, lf_quant_params)?;
         let image = lf_quant.image_mut().unwrap();
         let mut subimage = image.prepare_subimage()?;
         subimage.decode(bitstream, 1 + lf_group_idx, allow_partial)?;
         let complete = subimage.finish(pool);
-        Ok(Self {
-            extra_precision,
-            lf_quant,
-            partial: !complete,
-        })
+        Ok(Self { extra_precision, lf_quant, partial: !complete })
     }
 }

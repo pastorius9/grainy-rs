@@ -31,10 +31,7 @@ impl Bundle<&FrameHeader> for Splines {
         let num_splines = num_splines + 1;
 
         let mut start_points = vec![(0i64, 0i64); num_splines];
-        let mut prev_point = (
-            decoder.read_varint(bitstream, 1)? as i64,
-            decoder.read_varint(bitstream, 1)? as i64,
-        );
+        let mut prev_point = (decoder.read_varint(bitstream, 1)? as i64, decoder.read_varint(bitstream, 1)? as i64);
         start_points[0] = prev_point;
         for next_point in &mut start_points[1..] {
             let x = decoder.read_varint(bitstream, 1)?;
@@ -60,10 +57,7 @@ impl Bundle<&FrameHeader> for Splines {
 
         decoder.finalize()?;
 
-        Ok(Self {
-            quant_adjust,
-            quant_splines: splines,
-        })
+        Ok(Self { quant_adjust, quant_splines: splines })
     }
 }
 
@@ -78,10 +72,7 @@ impl Splines {
         for quant_spline in &self.quant_splines {
             let log_color = {
                 let mut color_xyb = quant_spline.xyb_dct.map(|quant_color_dct| -> u64 {
-                    quant_color_dct
-                        .into_iter()
-                        .map(|q| div_ceil_qa(q.unsigned_abs(), quant_adjust))
-                        .sum()
+                    quant_color_dct.into_iter().map(|q| div_ceil_qa(q.unsigned_abs(), quant_adjust)).sum()
                 });
 
                 color_xyb[0] += corr_x * color_xyb[1];
@@ -128,18 +119,8 @@ struct QuantSplineParams<'d> {
 }
 
 impl<'d> QuantSplineParams<'d> {
-    fn new(
-        start_point: (i64, i64),
-        num_pixels: usize,
-        decoder: &'d mut Decoder,
-        acc_control_points: usize,
-    ) -> Self {
-        Self {
-            start_point,
-            num_pixels,
-            decoder,
-            acc_control_points,
-        }
+    fn new(start_point: (i64, i64), num_pixels: usize, decoder: &'d mut Decoder, acc_control_points: usize) -> Self {
+        Self { start_point, num_pixels, decoder, acc_control_points }
     }
 }
 
@@ -155,16 +136,8 @@ pub struct QuantSpline {
 impl Bundle<QuantSplineParams<'_>> for QuantSpline {
     type Error = crate::Error;
 
-    fn parse(
-        bitstream: &mut Bitstream,
-        params: QuantSplineParams<'_>,
-    ) -> std::result::Result<Self, Self::Error> {
-        let QuantSplineParams {
-            start_point,
-            num_pixels,
-            decoder,
-            acc_control_points,
-        } = params;
+    fn parse(bitstream: &mut Bitstream, params: QuantSplineParams<'_>) -> std::result::Result<Self, Self::Error> {
+        let QuantSplineParams { start_point, num_pixels, decoder, acc_control_points } = params;
 
         let num_points = decoder.read_varint(bitstream, 3)? as usize;
         let acc_num_points = acc_control_points + num_points;
@@ -187,12 +160,14 @@ impl Bundle<QuantSplineParams<'_>> for QuantSpline {
             cur_delta.0 += delta_x;
             cur_delta.1 += delta_y;
             manhattan_distance += (cur_delta.0.abs() + cur_delta.1.abs()) as u64;
-            cur_value.0 = cur_value.0.checked_add(cur_delta.0).ok_or(
-                jxl_bitstream::Error::ValidationFailed("control point overflowed"),
-            )?;
-            cur_value.1 = cur_value.1.checked_add(cur_delta.1).ok_or(
-                jxl_bitstream::Error::ValidationFailed("control point overflowed"),
-            )?;
+            cur_value.0 = cur_value
+                .0
+                .checked_add(cur_delta.0)
+                .ok_or(jxl_bitstream::Error::ValidationFailed("control point overflowed"))?;
+            cur_value.1 = cur_value
+                .1
+                .checked_add(cur_delta.1)
+                .ok_or(jxl_bitstream::Error::ValidationFailed("control point overflowed"))?;
             if cur_value == prev_value {
                 return Err(jxl_bitstream::Error::ValidationFailed(
                     "two consecutive control points have the same value",
@@ -214,11 +189,6 @@ impl Bundle<QuantSplineParams<'_>> for QuantSpline {
             *i = unpack_signed(decoder.read_varint(bitstream, 5)?);
         }
 
-        Ok(Self {
-            quant_points,
-            manhattan_distance,
-            xyb_dct,
-            sigma_dct,
-        })
+        Ok(Self { quant_points, manhattan_distance, xyb_dct, sigma_dct })
     }
 }

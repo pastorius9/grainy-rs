@@ -7,8 +7,8 @@ use jxl_modular::Sample;
 use jxl_threadpool::JxlThreadPool;
 
 use crate::{
-    Error, ImageWithRegion, IndexedFrame, Reference, ReferenceFrames, Region, Result, blend,
-    features, filter, modular, state::RenderCache, util, vardct,
+    Error, ImageWithRegion, IndexedFrame, Reference, ReferenceFrames, Region, Result, blend, features, filter, modular,
+    state::RenderCache, util, vardct,
 };
 
 pub(crate) fn render_frame<S: Sample>(
@@ -20,39 +20,24 @@ pub(crate) fn render_frame<S: Sample>(
     frame_visibility: (usize, usize),
 ) -> Result<ImageWithRegion> {
     let frame_region = util::image_region_to_frame(frame, image_region, false);
-    tracing::debug!(
-        index = frame.idx,
-        ?image_region,
-        ?frame_region,
-        "Rendering frame"
-    );
+    tracing::debug!(index = frame.idx, ?image_region, ?frame_region, "Rendering frame");
 
     let image_header = frame.image_header();
     let frame_header = frame.header();
     let frame_region = util::pad_lf_region(frame_header, frame_region);
 
-    let upsampled_full_frame_region =
-        Region::with_size(frame_header.sample_width(1), frame_header.sample_height(1));
-    let upsampling_valid_region = util::pad_upsampling(image_header, frame_header, frame_region)
-        .intersection(upsampled_full_frame_region);
+    let upsampled_full_frame_region = Region::with_size(frame_header.sample_width(1), frame_header.sample_height(1));
+    let upsampling_valid_region =
+        util::pad_upsampling(image_header, frame_header, frame_region).intersection(upsampled_full_frame_region);
 
-    let full_frame_region = Region::with_size(
-        frame_header.color_sample_width(),
-        frame_header.color_sample_height(),
-    );
-    let color_padded_region = util::pad_color_region(image_header, frame_header, frame_region)
-        .intersection(full_frame_region);
+    let full_frame_region = Region::with_size(frame_header.color_sample_width(), frame_header.color_sample_height());
+    let color_padded_region =
+        util::pad_color_region(image_header, frame_header, frame_region).intersection(full_frame_region);
 
     let mut fb = match frame_header.encoding {
         Encoding::Modular => modular::render_modular(frame, cache, color_padded_region, &pool)?,
         Encoding::VarDct => {
-            let result = vardct::render_vardct(
-                frame,
-                reference_frames.lf.as_ref(),
-                cache,
-                color_padded_region,
-                &pool,
-            );
+            let result = vardct::render_vardct(frame, reference_frames.lf.as_ref(), cache, color_padded_region, &pool);
             match (result, reference_frames.lf) {
                 (Ok(grid), _) => grid,
                 (Err(e), Some(lf)) if matches!(e, Error::IncompleteFrame) || e.unexpected_eof() => {
@@ -90,13 +75,7 @@ pub(crate) fn render_frame<S: Sample>(
                 AlignedGrid::with_alloc_tracker(width, height, tracker)?,
             ]
         };
-        filter::apply_gabor_like(
-            &mut fb,
-            color_padded_region,
-            &mut fb_scratch,
-            weights,
-            &pool,
-        );
+        filter::apply_gabor_like(&mut fb, color_padded_region, &mut fb_scratch, weights, &pool);
         scratch_buffer = Some(fb_scratch);
     }
 
@@ -119,15 +98,7 @@ pub(crate) fn render_frame<S: Sample>(
                 AlignedGrid::with_alloc_tracker(width, height, tracker)?,
             ]
         };
-        filter::apply_epf(
-            &mut fb,
-            fb_scratch,
-            color_padded_region,
-            &cache.lf_groups,
-            frame_header,
-            epf_params,
-            &pool,
-        );
+        filter::apply_epf(&mut fb, fb_scratch, color_padded_region, &cache.lf_groups, frame_header, epf_params, &pool);
     }
 
     // Truncate cloned gray channels.
@@ -172,12 +143,8 @@ fn render_features<S: Sample>(
         tracing::trace!("LfGlobal not available, skipping feature rendering");
         return Ok(());
     };
-    let base_correlations_xb = lf_global.vardct.as_ref().map(|x| {
-        (
-            x.lf_chan_corr.base_correlation_x,
-            x.lf_chan_corr.base_correlation_b,
-        )
-    });
+    let base_correlations_xb =
+        lf_global.vardct.as_ref().map(|x| (x.lf_chan_corr.base_correlation_x, x.lf_chan_corr.base_correlation_b));
 
     if let Some(patches) = &lf_global.patches {
         grid.upsample_nonseparable(image_header, frame_header, upsampling_valid_region, true)?;
@@ -187,8 +154,8 @@ fn render_features<S: Sample>(
                 return Err(Error::InvalidReference(patch.ref_idx));
             };
             let ref_header = ref_grid.frame.f.header();
-            let oriented_image_region = Region::with_size(ref_header.width, ref_header.height)
-                .translate(ref_header.x0, ref_header.y0);
+            let oriented_image_region =
+                Region::with_size(ref_header.width, ref_header.height).translate(ref_header.x0, ref_header.y0);
             let ref_grid_image = std::sync::Arc::clone(&ref_grid.image).run_with_image()?;
             let ref_grid_image = ref_grid_image.blend(Some(oriented_image_region), pool)?;
             blend::patch(image_header, grid, &ref_grid_image, patch)?;

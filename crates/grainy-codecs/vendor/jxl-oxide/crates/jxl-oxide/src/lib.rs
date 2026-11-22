@@ -547,9 +547,7 @@ impl JxlImage {
     pub fn rendered_icc(&self) -> Vec<u8> {
         let encoding = self.ctx.requested_color_encoding();
         match encoding.encoding() {
-            color::ColourEncoding::Enum(encoding) => {
-                jxl_color::icc::colour_encoding_to_icc(encoding)
-            }
+            color::ColourEncoding::Enum(encoding) => jxl_color::icc::colour_encoding_to_icc(encoding),
             color::ColourEncoding::IccProfile(_) => encoding.icc_profile().to_vec(),
         }
     }
@@ -691,16 +689,14 @@ impl JxlImage {
     /// # Errors
     /// This function will return an error if it cannot parse the ICC profile.
     pub fn request_icc(&mut self, icc_profile: &[u8]) -> Result<()> {
-        self.ctx
-            .request_color_encoding(ColorEncodingWithProfile::with_icc(icc_profile)?);
+        self.ctx.request_color_encoding(ColorEncodingWithProfile::with_icc(icc_profile)?);
         Ok(())
     }
 
     /// Requests the decoder to render in specific color encoding, described by
     /// `EnumColourEncoding`.
     pub fn request_color_encoding(&mut self, color_encoding: EnumColourEncoding) {
-        self.ctx
-            .request_color_encoding(ColorEncodingWithProfile::new(color_encoding))
+        self.ctx.request_color_encoding(ColorEncodingWithProfile::new(color_encoding))
     }
 }
 
@@ -715,10 +711,7 @@ impl JxlImage {
     pub fn render_frame_cropped(&self, keyframe_index: usize) -> Result<Render> {
         let image = self.ctx.render_keyframe(keyframe_index)?;
 
-        let image_region = self
-            .ctx
-            .image_region()
-            .apply_orientation(&self.image_header);
+        let image_region = self.ctx.image_region().apply_orientation(&self.image_header);
         let frame = self.ctx.keyframe(keyframe_index).unwrap();
         let frame_header = frame.header();
         let target_frame_region = image_region.translate(-frame_header.x0, -frame_header.y0);
@@ -751,15 +744,9 @@ impl JxlImage {
         let name = frame_header.name.clone();
         let duration = frame_header.duration;
 
-        let image_region = self
-            .ctx
-            .image_region()
-            .apply_orientation(&self.image_header);
-        let frame = self
-            .ctx
-            .frame(self.ctx.loaded_frames())
-            .or_else(|| self.ctx.frame(self.ctx.loaded_frames() - 1))
-            .unwrap();
+        let image_region = self.ctx.image_region().apply_orientation(&self.image_header);
+        let frame =
+            self.ctx.frame(self.ctx.loaded_frames()).or_else(|| self.ctx.frame(self.ctx.loaded_frames() - 1)).unwrap();
         let frame_header = frame.header();
         let target_frame_region = image_region.translate(-frame_header.x0, -frame_header.y0);
 
@@ -877,11 +864,7 @@ impl JxlImage {
         let expected_exif_len = jbrd_header.expected_exif_len();
         let expected_xmp_len = jbrd_header.expected_xmp_len();
 
-        let icc = if expected_icc_len > 0 {
-            self.original_icc().unwrap_or(&[])
-        } else {
-            &[]
-        };
+        let icc = if expected_icc_len > 0 { self.original_icc().unwrap_or(&[]) } else { &[] };
 
         let exif = if expected_exif_len > 0 {
             let b = aux_boxes.first_exif()?;
@@ -890,15 +873,10 @@ impl JxlImage {
             &[]
         };
 
-        let xmp = if expected_xmp_len > 0 {
-            aux_boxes.first_xml().unwrap_or(&[])
-        } else {
-            &[]
-        };
+        let xmp = if expected_xmp_len > 0 { aux_boxes.first_xml().unwrap_or(&[]) } else { &[] };
 
         let frame = self.frame(0).unwrap();
-        jbrd.reconstruct(frame, icc, exif, xmp, &self.pool)?
-            .write(jpeg_output)?;
+        jbrd.reconstruct(frame, icc, exif, xmp, &self.pool)?.write(jpeg_output)?;
 
         Ok(())
     }
@@ -911,11 +889,7 @@ impl JxlImage {
             .metadata
             .ec_info
             .iter()
-            .map(|ec_info| ExtraChannel {
-                ty: ec_info.ty,
-                name: ec_info.name.clone(),
-                bit_depth: ec_info.bit_depth,
-            })
+            .map(|ec_info| ExtraChannel { ty: ec_info.ty, name: ec_info.name.clone(), bit_depth: ec_info.bit_depth })
             .collect()
     }
 }
@@ -1042,10 +1016,7 @@ impl PixelFormat {
     /// Returns whether the image has an alpha channel.
     #[inline]
     pub fn has_alpha(self) -> bool {
-        matches!(
-            self,
-            PixelFormat::Graya | PixelFormat::Rgba | PixelFormat::Cmyka
-        )
+        matches!(self, PixelFormat::Graya | PixelFormat::Rgba | PixelFormat::Cmyka)
     }
 
     /// Returns whether the image has a black channel.
@@ -1153,20 +1124,9 @@ impl Render {
         for ec in &self.extra_channels {
             bit_depth.push(ec.bit_depth);
         }
-        let regions: Vec<_> = self
-            .image
-            .regions_and_shifts()
-            .iter()
-            .map(|(region, _)| *region)
-            .collect();
+        let regions: Vec<_> = self.image.regions_and_shifts().iter().map(|(region, _)| *region).collect();
 
-        FrameBuffer::from_grids(
-            &fb,
-            &bit_depth,
-            &regions,
-            self.target_frame_region,
-            self.orientation,
-        )
+        FrameBuffer::from_grids(&fb, &bit_depth, &regions, self.target_frame_region, self.orientation)
     }
 
     /// Creates a separate buffer by channel, with orientation applied.
@@ -1176,23 +1136,13 @@ impl Render {
         let grids = self.image.buffer();
         let bit_depth_it = std::iter::repeat_n(self.color_bit_depth, self.image.color_channels())
             .chain(self.extra_channels.iter().map(|ec| ec.bit_depth));
-        let region_it = self
-            .image
-            .regions_and_shifts()
-            .iter()
-            .map(|(region, _)| *region);
+        let region_it = self.image.regions_and_shifts().iter().map(|(region, _)| *region);
 
         bit_depth_it
             .zip(region_it)
             .zip(grids)
             .map(|((bit_depth, region), x)| {
-                FrameBuffer::from_grids(
-                    &[x],
-                    &[bit_depth],
-                    &[region],
-                    self.target_frame_region,
-                    self.orientation,
-                )
+                FrameBuffer::from_grids(&[x], &[bit_depth], &[region], self.target_frame_region, self.orientation)
             })
             .collect()
     }
@@ -1267,23 +1217,13 @@ pub struct CropInfo {
 
 impl From<CropInfo> for jxl_render::Region {
     fn from(value: CropInfo) -> Self {
-        Self {
-            left: value.left as i32,
-            top: value.top as i32,
-            width: value.width,
-            height: value.height,
-        }
+        Self { left: value.left as i32, top: value.top as i32, width: value.width, height: value.height }
     }
 }
 
 impl From<jxl_render::Region> for CropInfo {
     fn from(value: jxl_render::Region) -> Self {
-        Self {
-            left: value.left.max(0) as u32,
-            top: value.top.max(0) as u32,
-            width: value.width,
-            height: value.height,
-        }
+        Self { left: value.left.max(0) as u32, top: value.top.max(0) as u32, width: value.width, height: value.height }
     }
 }
 

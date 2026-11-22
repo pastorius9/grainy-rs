@@ -78,16 +78,7 @@ impl Default for EdgePreservingFilter {
     }
 }
 
-const EPF_SHARP_LUT_DEFAULT: [f32; 8] = [
-    0.0,
-    1.0 / 7.0,
-    2.0 / 7.0,
-    3.0 / 7.0,
-    4.0 / 7.0,
-    5.0 / 7.0,
-    6.0 / 7.0,
-    1.0,
-];
+const EPF_SHARP_LUT_DEFAULT: [f32; 8] = [0.0, 1.0 / 7.0, 2.0 / 7.0, 3.0 / 7.0, 4.0 / 7.0, 5.0 / 7.0, 6.0 / 7.0, 1.0];
 const EPF_CHANNEL_SCALE_DEFAULT: [f32; 3] = [40.0, 5.0, 3.5];
 
 impl Default for EpfParams {
@@ -111,11 +102,7 @@ impl Bundle<Encoding> for EdgePreservingFilter {
             return Ok(Self::Disabled);
         }
 
-        let sharp_custom = if encoding == Encoding::VarDct {
-            bitstream.read_bool()?
-        } else {
-            false
-        };
+        let sharp_custom = if encoding == Encoding::VarDct { bitstream.read_bool()? } else { false };
         let sharp_lut = if sharp_custom {
             let mut ret = [0.0; 8];
             for out in &mut ret {
@@ -139,11 +126,7 @@ impl Bundle<Encoding> for EdgePreservingFilter {
         };
 
         let sigma_custom = bitstream.read_bool()?;
-        let sigma = if sigma_custom {
-            EpfSigma::parse(bitstream, encoding)?
-        } else {
-            EpfSigma::default()
-        };
+        let sigma = if sigma_custom { EpfSigma::parse(bitstream, encoding)? } else { EpfSigma::default() };
 
         let sigma_for_modular = if encoding == Encoding::Modular {
             let out = bitstream.read_f16_as_f32()?;
@@ -155,13 +138,7 @@ impl Bundle<Encoding> for EdgePreservingFilter {
             1.0
         };
 
-        Ok(Self::Enabled(EpfParams {
-            iters,
-            sharp_lut,
-            channel_scale,
-            sigma,
-            sigma_for_modular,
-        }))
+        Ok(Self::Enabled(EpfParams { iters, sharp_lut, channel_scale, sigma, sigma_for_modular }))
     }
 }
 
@@ -175,12 +152,7 @@ pub struct EpfSigma {
 
 impl Default for EpfSigma {
     fn default() -> Self {
-        Self {
-            quant_mul: 0.46,
-            pass0_sigma_scale: 0.9,
-            pass2_sigma_scale: 6.5,
-            border_sad_mul: 2.0 / 3.0,
-        }
+        Self { quant_mul: 0.46, pass0_sigma_scale: 0.9, pass2_sigma_scale: 6.5, border_sad_mul: 2.0 / 3.0 }
     }
 }
 
@@ -189,11 +161,7 @@ impl Bundle<Encoding> for EpfSigma {
 
     fn parse(bitstream: &mut Bitstream, encoding: Encoding) -> Result<Self> {
         Ok(Self {
-            quant_mul: if encoding == Encoding::VarDct {
-                bitstream.read_f16_as_f32()?
-            } else {
-                0.46
-            },
+            quant_mul: if encoding == Encoding::VarDct { bitstream.read_f16_as_f32()? } else { 0.46 },
             pass0_sigma_scale: bitstream.read_f16_as_f32()?,
             pass2_sigma_scale: bitstream.read_f16_as_f32()?,
             border_sad_mul: bitstream.read_f16_as_f32()?,

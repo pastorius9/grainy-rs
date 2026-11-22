@@ -14,10 +14,7 @@ use crate::{
 #[derive(Debug)]
 pub enum TransformedGrid<'dest, S: Sample> {
     Single(MutableSubgrid<'dest, S>),
-    Merged {
-        leader: MutableSubgrid<'dest, S>,
-        members: Vec<TransformedGrid<'dest, S>>,
-    },
+    Merged { leader: MutableSubgrid<'dest, S>, members: Vec<TransformedGrid<'dest, S>> },
 }
 
 impl<'dest, S: Sample> From<MutableSubgrid<'dest, S>> for TransformedGrid<'dest, S> {
@@ -30,9 +27,7 @@ impl<S: Sample> TransformedGrid<'_, S> {
     fn reborrow(&mut self) -> TransformedGrid<'_, S> {
         match self {
             TransformedGrid::Single(g) => TransformedGrid::Single(g.split_horizontal(0).1),
-            TransformedGrid::Merged { leader, .. } => {
-                TransformedGrid::Single(leader.split_horizontal(0).1)
-            }
+            TransformedGrid::Merged { leader, .. } => TransformedGrid::Single(leader.split_horizontal(0).1),
         }
     }
 }
@@ -63,10 +58,7 @@ impl<'dest, S: Sample> TransformedGrid<'dest, S> {
                 let leader = std::mem::replace(leader, tmp);
                 *self = Self::Merged { leader, members };
             }
-            Self::Merged {
-                members: original_members,
-                ..
-            } => {
+            Self::Merged { members: original_members, .. } => {
                 original_members.extend(members);
             }
         }
@@ -121,20 +113,10 @@ impl<S: Sample> ModularImageDestination<S> {
         let image_channels = channels
             .info
             .iter()
-            .map(|ch| {
-                AlignedGrid::with_alloc_tracker(ch.width as usize, ch.height as usize, tracker)
-            })
+            .map(|ch| AlignedGrid::with_alloc_tracker(ch.width as usize, ch.height as usize, tracker))
             .collect::<std::result::Result<_, _>>()?;
 
-        Ok(Self {
-            header,
-            ma_ctx,
-            group_dim,
-            bit_depth,
-            channels,
-            meta_channels,
-            image_channels,
-        })
+        Ok(Self { header, ma_ctx, group_dim, bit_depth, channels, meta_channels, image_channels })
     }
 
     pub fn try_clone(&self) -> Result<Self> {
@@ -144,16 +126,8 @@ impl<S: Sample> ModularImageDestination<S> {
             group_dim: self.group_dim,
             bit_depth: self.bit_depth,
             channels: self.channels.clone(),
-            meta_channels: self
-                .meta_channels
-                .iter()
-                .map(|x| x.try_clone())
-                .collect::<std::result::Result<_, _>>()?,
-            image_channels: self
-                .image_channels
-                .iter()
-                .map(|x| x.try_clone())
-                .collect::<std::result::Result<_, _>>()?,
+            meta_channels: self.meta_channels.iter().map(|x| x.try_clone()).collect::<std::result::Result<_, _>>()?,
+            image_channels: self.image_channels.iter().map(|x| x.try_clone()).collect::<std::result::Result<_, _>>()?,
         })
     }
 
@@ -165,9 +139,7 @@ impl<S: Sample> ModularImageDestination<S> {
         self.image_channels
     }
 
-    pub fn into_image_channels_with_info(
-        self,
-    ) -> impl Iterator<Item = (AlignedGrid<S>, ModularChannelInfo)> {
+    pub fn into_image_channels_with_info(self) -> impl Iterator<Item = (AlignedGrid<S>, ModularChannelInfo)> {
         self.image_channels.into_iter().zip(self.channels.info)
     }
 
@@ -192,18 +164,12 @@ impl<S: Sample> ModularImageDestination<S> {
             .zip(subimage.grid)
             .enumerate()
             .take_while(|&(i, (ref info, _))| {
-                i < subimage.nb_meta_channels
-                    || (info.width <= group_dim && info.height <= group_dim)
+                i < subimage.nb_meta_channels || (info.width <= group_dim && info.height <= group_dim)
             })
             .map(|(_, x)| x)
             .unzip();
         let channel_indices = (0..channel_info.len()).collect();
-        Ok(TransformedModularSubimage {
-            channel_info,
-            channel_indices,
-            grid: grids,
-            ..subimage
-        })
+        Ok(TransformedModularSubimage { channel_info, channel_indices, grid: grids, ..subimage })
     }
 
     pub fn prepare_groups(
@@ -218,41 +184,22 @@ impl<S: Sample> ModularImageDestination<S> {
         let group_dim_shift = group_dim.trailing_zeros();
         let bit_depth = self.bit_depth;
         let subimage = self.prepare_subimage()?;
-        let it = subimage
-            .channel_info
-            .into_iter()
-            .zip(subimage.grid)
-            .enumerate()
-            .skip_while(|&(i, (ref info, _))| {
-                i < subimage.nb_meta_channels
-                    || (info.width <= group_dim && info.height <= group_dim)
-            });
+        let it = subimage.channel_info.into_iter().zip(subimage.grid).enumerate().skip_while(|&(i, (ref info, _))| {
+            i < subimage.nb_meta_channels || (info.width <= group_dim && info.height <= group_dim)
+        });
 
         let mut lf_groups = Vec::new();
         let mut pass_groups = Vec::with_capacity(num_passes);
         pass_groups.resize_with(num_passes, Vec::new);
         for (i, (info, grid)) in it {
-            let ModularChannelInfo {
-                original_width,
-                original_height,
-                hshift,
-                vshift,
-                original_shift,
-                ..
-            } = info;
+            let ModularChannelInfo { original_width, original_height, hshift, vshift, original_shift, .. } = info;
             assert!(hshift >= 0 && vshift >= 0);
 
             let grid = match grid {
                 TransformedGrid::Single(g) => g,
                 TransformedGrid::Merged { leader, .. } => leader,
             };
-            tracing::trace!(
-                i,
-                width = grid.width(),
-                height = grid.height(),
-                hshift,
-                vshift
-            );
+            tracing::trace!(i, width = grid.width(), height = grid.height(), hshift, vshift);
 
             let (groups, grids) = if hshift < 3 || vshift < 3 {
                 let shift = hshift.min(vshift); // shift < 3
@@ -266,12 +213,7 @@ impl<S: Sample> ModularImageDestination<S> {
                 let group_width = group_dim >> hshift;
                 let group_height = group_dim >> vshift;
                 if group_width == 0 || group_height == 0 {
-                    tracing::error!(
-                        group_dim,
-                        hshift,
-                        vshift,
-                        "Channel shift value too large after transform"
-                    );
+                    tracing::error!(group_dim, hshift, vshift, "Channel shift value too large after transform");
                     return Err(crate::Error::InvalidSqueezeParams);
                 }
 
@@ -287,12 +229,7 @@ impl<S: Sample> ModularImageDestination<S> {
                 let lf_group_width = group_dim >> (hshift - 3);
                 let lf_group_height = group_dim >> (vshift - 3);
                 if lf_group_width == 0 || lf_group_height == 0 {
-                    tracing::error!(
-                        group_dim,
-                        hshift,
-                        vshift,
-                        "Channel shift value too large after transform"
-                    );
+                    tracing::error!(group_dim, hshift, vshift, "Channel shift value too large after transform");
                     return Err(crate::Error::InvalidSqueezeParams);
                 }
                 let grids = grid.into_groups_with_fixed_count(
@@ -334,24 +271,13 @@ impl<S: Sample> ModularImageDestination<S> {
             }
         }
 
-        Ok(TransformedGlobalModular {
-            lf_groups,
-            pass_groups,
-        })
+        Ok(TransformedGlobalModular { lf_groups, pass_groups })
     }
 
     pub fn prepare_subimage(&mut self) -> Result<TransformedModularSubimage<'_, S>> {
         let mut channels = self.channels.clone();
-        let mut meta_channel_grids = self
-            .meta_channels
-            .iter_mut()
-            .map(MutableSubgrid::from)
-            .collect::<Vec<_>>();
-        let mut grids = self
-            .image_channels
-            .iter_mut()
-            .map(|g| g.as_subgrid_mut().into())
-            .collect::<Vec<_>>();
+        let mut meta_channel_grids = self.meta_channels.iter_mut().map(MutableSubgrid::from).collect::<Vec<_>>();
+        let mut grids = self.image_channels.iter_mut().map(|g| g.as_subgrid_mut().into()).collect::<Vec<_>>();
         for tr in &self.header.transform {
             tr.transform_channels(&mut channels, &mut meta_channel_grids, &mut grids)?;
         }
@@ -419,16 +345,9 @@ impl<'dest, S: Sample> TransformedModularSubimage<'dest, S> {
         global_ma_config: Option<&MaConfig>,
         tracker: Option<&AllocTracker>,
     ) -> Result<RecursiveModularImage<'dest, S>> {
-        let channels = crate::ModularChannels {
-            info: self.channel_info,
-            nb_meta_channels: 0,
-        };
-        let (header, ma_ctx) = crate::read_and_validate_local_modular_header(
-            bitstream,
-            &channels,
-            global_ma_config,
-            tracker,
-        )?;
+        let channels = crate::ModularChannels { info: self.channel_info, nb_meta_channels: 0 };
+        let (header, ma_ctx) =
+            crate::read_and_validate_local_modular_header(bitstream, &channels, global_ma_config, tracker)?;
 
         let mut image = RecursiveModularImage {
             header,
@@ -457,12 +376,7 @@ impl<S: Sample> TransformedModularSubimage<'_, S> {
         let span = tracing::span!(tracing::Level::TRACE, "decode channels", stream_index);
         let _guard = span.enter();
 
-        let dist_multiplier = self
-            .channel_info
-            .iter()
-            .map(|info| info.width)
-            .max()
-            .unwrap_or(0);
+        let dist_multiplier = self.channel_info.iter().map(|info| info.width).max().unwrap_or(0);
 
         let mut decoder = self.ma_ctx.decoder().clone();
         decoder.begin(bitstream)?;
@@ -484,9 +398,7 @@ impl<S: Sample> TransformedModularSubimage<'_, S> {
                 })
                 .count();
 
-            let ma_tree =
-                self.ma_ctx
-                    .make_flat_tree(i as u32, stream_index, filtered_prev_len as u32);
+            let ma_tree = self.ma_ctx.make_flat_tree(i as u32, stream_index, filtered_prev_len as u32);
             ma_tree_list.push(Some(ma_tree));
         }
 
@@ -497,12 +409,7 @@ impl<S: Sample> TransformedModularSubimage<'_, S> {
                     .map(|ma_tree| {
                         matches!(
                             ma_tree.single_node(),
-                            Some(MaTreeLeafClustered {
-                                predictor: Predictor::Gradient,
-                                offset: 0,
-                                multiplier: 1,
-                                ..
-                            })
+                            Some(MaTreeLeafClustered { predictor: Predictor::Gradient, offset: 0, multiplier: 1, .. })
                         )
                     })
                     .unwrap_or(true)
@@ -519,13 +426,7 @@ impl<S: Sample> TransformedModularSubimage<'_, S> {
 
                     let node = ma_tree.single_node().unwrap();
                     let cluster = node.cluster;
-                    decode_fast_lossless(
-                        bitstream,
-                        &mut rle_decoder,
-                        &mut rle_state,
-                        cluster,
-                        grid.grid_mut(),
-                    );
+                    decode_fast_lossless(bitstream, &mut rle_decoder, &mut rle_state, cluster, grid.grid_mut());
                 }
 
                 rle_state.check_error()?;
@@ -537,12 +438,7 @@ impl<S: Sample> TransformedModularSubimage<'_, S> {
         let wp_header = &self.header.wp_params;
         let mut predictor = PredictorState::new();
         let mut prev_map = HashMap::new();
-        for ((info, ma_tree), grid) in self
-            .channel_info
-            .iter()
-            .zip(ma_tree_list)
-            .zip(&mut self.grid)
-        {
+        for ((info, ma_tree), grid) in self.channel_info.iter().zip(ma_tree_list).zip(&mut self.grid) {
             let Some(ma_tree) = ma_tree else {
                 continue;
             };
@@ -575,14 +471,7 @@ impl<S: Sample> TransformedModularSubimage<'_, S> {
                 let filtered_prev = &filtered_prev[..ma_tree.max_prev_channel_depth()];
                 let wp_header = ma_tree.need_self_correcting().then_some(wp_header);
                 predictor.reset(grid.width() as u32, filtered_prev, wp_header);
-                decode_slow(
-                    bitstream,
-                    &mut decoder,
-                    dist_multiplier,
-                    &ma_tree,
-                    &mut predictor,
-                    grid,
-                )?;
+                decode_slow(bitstream, &mut decoder, dist_multiplier, &ma_tree, &mut predictor, grid)?;
             }
 
             filtered_prev.insert(0, grid.grid());
@@ -592,12 +481,7 @@ impl<S: Sample> TransformedModularSubimage<'_, S> {
         Ok(())
     }
 
-    pub fn decode(
-        &mut self,
-        bitstream: &mut Bitstream,
-        stream_index: u32,
-        allow_partial: bool,
-    ) -> Result<()> {
+    pub fn decode(&mut self, bitstream: &mut Bitstream, stream_index: u32, allow_partial: bool) -> Result<()> {
         match self.decode_inner(bitstream, stream_index) {
             Err(e) if e.unexpected_eof() && allow_partial => {
                 tracing::debug!("Partially decoded Modular image");
@@ -633,11 +517,7 @@ impl<S: Sample> RecursiveModularImage<'_, S> {
                 MutableSubgrid::from_buf(g.buf_mut(), width, height, width)
             })
             .collect::<Vec<_>>();
-        let mut grids = self
-            .image_channels
-            .iter_mut()
-            .map(|g| g.reborrow())
-            .collect();
+        let mut grids = self.image_channels.iter_mut().map(|g| g.reborrow()).collect();
         for tr in &self.header.transform {
             tr.transform_channels(&mut channels, &mut meta_channel_grids, &mut grids)?;
         }
@@ -666,20 +546,11 @@ struct RleState<S: Sample> {
 impl<S: Sample> RleState<S> {
     #[inline]
     fn new() -> Self {
-        Self {
-            value: S::default(),
-            repeat: 0,
-            error: None,
-        }
+        Self { value: S::default(), repeat: 0, error: None }
     }
 
     #[inline(always)]
-    fn decode(
-        &mut self,
-        bitstream: &mut Bitstream,
-        decoder: &mut DecoderRleMode,
-        cluster: u8,
-    ) -> S {
+    fn decode(&mut self, bitstream: &mut Bitstream, decoder: &mut DecoderRleMode, cluster: u8) -> S {
         if self.repeat == 0 {
             let result = decoder.read_varint_clustered(bitstream, cluster);
             match result {
@@ -722,12 +593,7 @@ fn decode_single_node<S: Sample>(
     grid: &mut MutableSubgrid<S>,
     node: &MaTreeLeafClustered,
 ) -> Result<()> {
-    let &MaTreeLeafClustered {
-        cluster,
-        predictor,
-        offset,
-        multiplier,
-    } = node;
+    let &MaTreeLeafClustered { cluster, predictor, offset, multiplier } = node;
     tracing::trace!(cluster, ?predictor, "Single MA tree node");
 
     let height = grid.height();
@@ -746,13 +612,8 @@ fn decode_single_node<S: Sample>(
             for y in 0..height {
                 let row = grid.get_row_mut(y);
                 for out in row {
-                    let token = decoder.read_varint_with_multiplier_clustered(
-                        bitstream,
-                        cluster,
-                        dist_multiplier,
-                    )?;
-                    *out =
-                        S::unpack_signed_u32(token).wrapping_muladd_i32(multiplier as i32, offset);
+                    let token = decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?;
+                    *out = S::unpack_signed_u32(token).wrapping_muladd_i32(multiplier as i32, offset);
                 }
             }
             Ok(())
@@ -764,14 +625,7 @@ fn decode_single_node<S: Sample>(
         _ => {
             let wp_header = (predictor == Predictor::SelfCorrecting).then_some(wp_header);
             predictor_state.reset(grid.width() as u32, &[], wp_header);
-            decode_single_node_slow(
-                bitstream,
-                decoder,
-                dist_multiplier,
-                node,
-                predictor_state,
-                grid,
-            )
+            decode_single_node_slow(bitstream, decoder, dist_multiplier, node, predictor_state, grid)
         }
     }
 }
@@ -832,11 +686,7 @@ fn decode_simple_grad<S: Sample>(
         let mut w = S::default();
         let out_row = grid.get_row_mut(0);
         for out in out_row[..width].iter_mut() {
-            let token = decoder.read_varint_with_multiplier_clustered(
-                bitstream,
-                cluster,
-                dist_multiplier,
-            )?;
+            let token = decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?;
             w = S::unpack_signed_u32(token).add(w);
             *out = w;
         }
@@ -847,8 +697,7 @@ fn decode_simple_grad<S: Sample>(
         let prev_row = u.get_row(y - 1);
         let out_row = d.get_row_mut(0);
 
-        let token =
-            decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?;
+        let token = decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?;
         let mut w = S::unpack_signed_u32(token).add(prev_row[0]);
         out_row[0] = w;
 
@@ -857,11 +706,7 @@ fn decode_simple_grad<S: Sample>(
             let n = window[1];
             let pred = S::grad_clamped(n, w, nw);
 
-            let token = decoder.read_varint_with_multiplier_clustered(
-                bitstream,
-                cluster,
-                dist_multiplier,
-            )?;
+            let token = decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?;
             let value = S::unpack_signed_u32(token).add(pred);
             *out = value;
             w = value;
@@ -905,8 +750,7 @@ fn decode_single_node_slow<S: Sample>(
 
         for out in row.iter_mut() {
             let properties = predictor.properties::<true>();
-            let true_value =
-                decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
+            let true_value = decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
@@ -924,22 +768,19 @@ fn decode_single_node_slow<S: Sample>(
 
         for out in row_left {
             let properties = predictor.properties::<true>();
-            let true_value =
-                decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
+            let true_value = decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
         for out in row_middle {
             let properties = predictor.properties::<false>();
-            let true_value =
-                decode_one::<_, false>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
+            let true_value = decode_one::<_, false>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
         for out in row_right {
             let properties = predictor.properties::<true>();
-            let true_value =
-                decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
+            let true_value = decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
@@ -957,42 +798,18 @@ fn decode_simple_table<S: Sample>(
     grid: &mut MutableSubgrid<S>,
     table: &SimpleMaTable,
 ) -> Result<()> {
-    let &SimpleMaTable {
-        decision_prop,
-        value_base,
-        predictor,
-        offset,
-        multiplier,
-        ref cluster_table,
-    } = table;
+    let &SimpleMaTable { decision_prop, value_base, predictor, offset, multiplier, ref cluster_table } = table;
 
     if offset == 0 && multiplier == 1 && decision_prop == 9 && predictor == Predictor::Gradient {
-        return decode_gradient_table(
-            bitstream,
-            decoder,
-            dist_multiplier,
-            grid,
-            value_base,
-            cluster_table,
-        );
+        return decode_gradient_table(bitstream, decoder, dist_multiplier, grid, value_base, cluster_table);
     }
 
-    decode_simple_table_slow(
-        bitstream,
-        decoder,
-        dist_multiplier,
-        predictor_state,
-        wp_header,
-        grid,
-        table,
-    )
+    decode_simple_table_slow(bitstream, decoder, dist_multiplier, predictor_state, wp_header, grid, table)
 }
 
 #[inline(always)]
 fn cluster_from_table(sample: i32, value_base: i32, cluster_table: &[u8]) -> u8 {
-    let index = sample
-        .saturating_sub(value_base)
-        .clamp(0, cluster_table.len() as i32 - 1);
+    let index = sample.saturating_sub(value_base).clamp(0, cluster_table.len() as i32 - 1);
     cluster_table[index as usize]
 }
 
@@ -1014,11 +831,7 @@ fn decode_gradient_table<S: Sample>(
         let out_row = grid.get_row_mut(0);
         for out in out_row[..width].iter_mut() {
             let cluster = cluster_from_table(w.to_i32(), value_base, cluster_table);
-            let token = decoder.read_varint_with_multiplier_clustered(
-                bitstream,
-                cluster,
-                dist_multiplier,
-            )?;
+            let token = decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?;
             w = S::unpack_signed_u32(token).add(w);
             *out = w;
         }
@@ -1030,26 +843,18 @@ fn decode_gradient_table<S: Sample>(
         let out_row = d.get_row_mut(0);
 
         let cluster = cluster_from_table(prev_row[0].to_i32(), value_base, cluster_table);
-        let token =
-            decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?;
+        let token = decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?;
         let mut w = S::unpack_signed_u32(token).add(prev_row[0]);
         out_row[0] = w;
 
         for (window, out) in prev_row.windows(2).zip(&mut out_row[1..]) {
             let nw = window[0];
             let n = window[1];
-            let prop = n
-                .to_i32()
-                .wrapping_add(w.to_i32())
-                .wrapping_sub(nw.to_i32());
+            let prop = n.to_i32().wrapping_add(w.to_i32()).wrapping_sub(nw.to_i32());
             let pred = S::grad_clamped(n, w, nw);
 
             let cluster = cluster_from_table(prop, value_base, cluster_table);
-            let token = decoder.read_varint_with_multiplier_clustered(
-                bitstream,
-                cluster,
-                dist_multiplier,
-            )?;
+            let token = decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?;
             let value = S::unpack_signed_u32(token).add(pred);
             *out = value;
             w = value;
@@ -1071,11 +876,8 @@ fn decode_table_one<S: Sample, const EDGE: bool>(
 
     let cluster = cluster_from_table(prop_value, table.value_base, &table.cluster_table);
 
-    let diff = S::unpack_signed_u32(decoder.read_varint_with_multiplier_clustered(
-        bitstream,
-        cluster,
-        dist_multiplier,
-    )?);
+    let diff =
+        S::unpack_signed_u32(decoder.read_varint_with_multiplier_clustered(bitstream, cluster, dist_multiplier)?);
     let diff = diff.wrapping_muladd_i32(table.multiplier as i32, table.offset);
     let predictor = table.predictor;
     let sample_prediction = predictor.predict::<_, EDGE>(properties);
@@ -1104,13 +906,7 @@ fn decode_simple_table_slow<S: Sample>(
 
         for out in row.iter_mut() {
             let properties = predictor_state.properties::<true>();
-            let true_value = decode_table_one::<_, true>(
-                bitstream,
-                decoder,
-                dist_multiplier,
-                table,
-                &properties,
-            )?;
+            let true_value = decode_table_one::<_, true>(bitstream, decoder, dist_multiplier, table, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
@@ -1128,37 +924,19 @@ fn decode_simple_table_slow<S: Sample>(
 
         for out in row_left {
             let properties = predictor_state.properties::<true>();
-            let true_value = decode_table_one::<_, true>(
-                bitstream,
-                decoder,
-                dist_multiplier,
-                table,
-                &properties,
-            )?;
+            let true_value = decode_table_one::<_, true>(bitstream, decoder, dist_multiplier, table, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
         for out in row_middle {
             let properties = predictor_state.properties::<false>();
-            let true_value = decode_table_one::<_, false>(
-                bitstream,
-                decoder,
-                dist_multiplier,
-                table,
-                &properties,
-            )?;
+            let true_value = decode_table_one::<_, false>(bitstream, decoder, dist_multiplier, table, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
         for out in row_right {
             let properties = predictor_state.properties::<true>();
-            let true_value = decode_table_one::<_, true>(
-                bitstream,
-                decoder,
-                dist_multiplier,
-                table,
-                &properties,
-            )?;
+            let true_value = decode_table_one::<_, true>(bitstream, decoder, dist_multiplier, table, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
@@ -1183,8 +961,7 @@ fn decode_slow<S: Sample>(
         for out in row.iter_mut() {
             let properties = predictor.properties::<true>();
             let leaf = ma_tree.get_leaf(&properties);
-            let true_value =
-                decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
+            let true_value = decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
@@ -1203,24 +980,21 @@ fn decode_slow<S: Sample>(
         for out in row_left {
             let properties = predictor.properties::<true>();
             let leaf = ma_tree.get_leaf(&properties);
-            let true_value =
-                decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
+            let true_value = decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
         for out in row_middle {
             let properties = predictor.properties::<false>();
             let leaf = ma_tree.get_leaf(&properties);
-            let true_value =
-                decode_one::<_, false>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
+            let true_value = decode_one::<_, false>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }
         for out in row_right {
             let properties = predictor.properties::<true>();
             let leaf = ma_tree.get_leaf(&properties);
-            let true_value =
-                decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
+            let true_value = decode_one::<_, true>(bitstream, decoder, dist_multiplier, leaf, &properties)?;
             *out = true_value;
             properties.record(true_value.to_i32());
         }

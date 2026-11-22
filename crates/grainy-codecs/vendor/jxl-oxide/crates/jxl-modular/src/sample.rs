@@ -127,11 +127,7 @@ impl Sealed for i32 {
 
     #[inline]
     fn grad_clamped(n: i32, w: i32, nw: i32) -> i32 {
-        let (n, w) = if w > n {
-            (w as i64, n as i64)
-        } else {
-            (n as i64, w as i64)
-        };
+        let (n, w) = if w > n { (w as i64, n as i64) } else { (n as i64, w as i64) };
         (w + n - nw as i64).clamp(w, n) as i32
     }
 }
@@ -177,11 +173,7 @@ impl Sealed for i16 {
 
     #[inline]
     fn grad_clamped(n: i16, w: i16, nw: i16) -> i16 {
-        let (n, w) = if w > n {
-            (w as i32, n as i32)
-        } else {
-            (n as i32, w as i32)
-        };
+        let (n, w) = if w > n { (w as i32, n as i32) } else { (n as i32, w as i32) };
         (w + n - nw as i32).clamp(w, n) as i16
     }
 }

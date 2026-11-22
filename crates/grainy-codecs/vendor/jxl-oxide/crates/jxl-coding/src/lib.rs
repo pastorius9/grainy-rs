@@ -32,11 +32,7 @@ impl Decoder {
     /// configuration from the bitstream.
     pub fn parse(bitstream: &mut Bitstream, num_dist: u32) -> CodingResult<Self> {
         let lz77 = Lz77::parse(bitstream)?;
-        let num_dist = if let Lz77::Disabled = &lz77 {
-            num_dist
-        } else {
-            num_dist + 1
-        };
+        let num_dist = if let Lz77::Disabled = &lz77 { num_dist } else { num_dist + 1 };
         let inner = DecoderInner::parse(bitstream, num_dist)?;
         Ok(Self { lz77, inner })
     }
@@ -47,10 +43,7 @@ impl Decoder {
             return Err(Error::Lz77NotAllowed);
         }
         let inner = DecoderInner::parse(bitstream, num_dist)?;
-        Ok(Self {
-            lz77: Lz77::Disabled,
-            inner,
-        })
+        Ok(Self { lz77: Lz77::Disabled, inner })
     }
 
     /// Read an integer from the bitstream with the given context.
@@ -81,12 +74,7 @@ impl Decoder {
         cluster: u8,
         dist_multiplier: u32,
     ) -> CodingResult<u32> {
-        if let Lz77::Enabled {
-            ref mut state,
-            min_symbol,
-            min_length,
-        } = self.lz77
-        {
+        if let Lz77::Enabled { ref mut state, min_symbol, min_length } = self.lz77 {
             self.inner.read_varint_with_multiplier_clustered_lz77(
                 bitstream,
                 cluster,
@@ -96,19 +84,13 @@ impl Decoder {
                 min_length,
             )
         } else {
-            self.inner
-                .read_varint_with_multiplier_clustered(bitstream, cluster)
+            self.inner.read_varint_with_multiplier_clustered(bitstream, cluster)
         }
     }
 
     /// Converts the decoder to one in RLE mode.
     pub fn as_rle(&mut self) -> Option<DecoderRleMode<'_>> {
-        let &Lz77::Enabled {
-            ref state,
-            min_symbol,
-            min_length,
-        } = &self.lz77
-        else {
+        let &Lz77::Enabled { ref state, min_symbol, min_length } = &self.lz77 else {
             return None;
         };
         let lz_cluster = self.inner.lz_dist_cluster();
@@ -124,18 +106,8 @@ impl Decoder {
 
     /// Converts the decoder to LZ77-enabled one.
     pub fn as_with_lz77(&mut self) -> Option<DecoderWithLz77<'_>> {
-        if let Lz77::Enabled {
-            ref mut state,
-            min_symbol,
-            min_length,
-        } = self.lz77
-        {
-            Some(DecoderWithLz77 {
-                inner: &mut self.inner,
-                state,
-                min_symbol,
-                min_length,
-            })
+        if let Lz77::Enabled { ref mut state, min_symbol, min_length } = self.lz77 {
+            Some(DecoderWithLz77 { inner: &mut self.inner, state, min_symbol, min_length })
         } else {
             None
         }
@@ -143,11 +115,7 @@ impl Decoder {
 
     /// Converts the decoder to one without LZ77.
     pub fn as_no_lz77(&mut self) -> Option<DecoderNoLz77<'_>> {
-        if let Lz77::Disabled = self.lz77 {
-            Some(DecoderNoLz77(&mut self.inner))
-        } else {
-            None
-        }
+        if let Lz77::Disabled = self.lz77 { Some(DecoderNoLz77(&mut self.inner)) } else { None }
     }
 
     /// Returns the token to be decoded if the decoder always emits single token repeatedly.
@@ -207,29 +175,14 @@ impl DecoderRleMode<'_> {
     ///
     /// Contexts can be converted to clusters using [the cluster map][Self::cluster_map].
     #[inline]
-    pub fn read_varint_clustered(
-        &mut self,
-        bitstream: &mut Bitstream,
-        cluster: u8,
-    ) -> CodingResult<RleToken> {
-        self.inner
-            .code
-            .read_symbol(bitstream, cluster)
-            .map(|token| {
-                if let Some(token) = token.checked_sub(self.min_symbol) {
-                    RleToken::Repeat(
-                        self.inner
-                            .read_uint_prefilled(bitstream, &self.len_config, token)
-                            + self.min_length,
-                    )
-                } else {
-                    RleToken::Value(self.inner.read_uint_prefilled(
-                        bitstream,
-                        &self.inner.configs[cluster as usize],
-                        token,
-                    ))
-                }
-            })
+    pub fn read_varint_clustered(&mut self, bitstream: &mut Bitstream, cluster: u8) -> CodingResult<RleToken> {
+        self.inner.code.read_symbol(bitstream, cluster).map(|token| {
+            if let Some(token) = token.checked_sub(self.min_symbol) {
+                RleToken::Repeat(self.inner.read_uint_prefilled(bitstream, &self.len_config, token) + self.min_length)
+            } else {
+                RleToken::Value(self.inner.read_uint_prefilled(bitstream, &self.inner.configs[cluster as usize], token))
+            }
+        })
     }
 
     /// Returns the cluster mapping of distributions.
@@ -285,13 +238,8 @@ impl DecoderNoLz77<'_> {
     ///
     /// Contexts can be converted to clusters using [the cluster map][Self::cluster_map].
     #[inline]
-    pub fn read_varint_clustered(
-        &mut self,
-        bitstream: &mut Bitstream,
-        cluster: u8,
-    ) -> CodingResult<u32> {
-        self.0
-            .read_varint_with_multiplier_clustered(bitstream, cluster)
+    pub fn read_varint_clustered(&mut self, bitstream: &mut Bitstream, cluster: u8) -> CodingResult<u32> {
+        self.0.read_varint_with_multiplier_clustered(bitstream, cluster)
     }
 
     /// Returns the token to be decoded if the decoder always emits single token repeatedly.
@@ -310,11 +258,7 @@ impl DecoderNoLz77<'_> {
 #[derive(Debug, Clone)]
 enum Lz77 {
     Disabled,
-    Enabled {
-        min_symbol: u32,
-        min_length: u32,
-        state: Lz77State,
-    },
+    Enabled { min_symbol: u32, min_length: u32, state: Lz77State },
 }
 
 impl Lz77 {
@@ -324,11 +268,7 @@ impl Lz77 {
             let min_symbol = bitstream.read_u32(224, 512, 4096, 8 + U(15))?;
             let min_length = bitstream.read_u32(3, 4, 5 + U(2), 9 + U(8))?;
             let lz_len_conf = IntegerConfig::parse(bitstream, 8)?;
-            Self::Enabled {
-                min_symbol,
-                min_length,
-                state: Lz77State::new(lz_len_conf),
-            }
+            Self::Enabled { min_symbol, min_length, state: Lz77State::new(lz_len_conf) }
         } else {
             Self::Disabled
         })
@@ -357,13 +297,7 @@ impl std::fmt::Debug for Lz77State {
 
 impl Lz77State {
     fn new(lz_len_conf: IntegerConfig) -> Self {
-        Self {
-            lz_len_conf,
-            window: Vec::new(),
-            num_to_copy: 0,
-            copy_pos: 0,
-            num_decoded: 0,
-        }
+        Self { lz_len_conf, window: Vec::new(), num_to_copy: 0, copy_pos: 0, num_decoded: 0 }
     }
 }
 
@@ -383,11 +317,7 @@ impl IntegerConfig {
             let msb_bits = add_log2_ceil(split_exponent) as usize;
             let msb_in_token = bitstream.read_bits(msb_bits)?;
             if msb_in_token > split_exponent {
-                return Err(Error::InvalidIntegerConfig {
-                    split_exponent,
-                    msb_in_token,
-                    lsb_in_token: None,
-                });
+                return Err(Error::InvalidIntegerConfig { split_exponent, msb_in_token, lsb_in_token: None });
             }
             let lsb_bits = add_log2_ceil(split_exponent - msb_in_token) as usize;
             let lsb_in_token = bitstream.read_bits(lsb_bits)?;
@@ -396,18 +326,9 @@ impl IntegerConfig {
             (0u32, 0u32)
         };
         if lsb_in_token + msb_in_token > split_exponent {
-            return Err(Error::InvalidIntegerConfig {
-                split_exponent,
-                msb_in_token,
-                lsb_in_token: Some(lsb_in_token),
-            });
+            return Err(Error::InvalidIntegerConfig { split_exponent, msb_in_token, lsb_in_token: Some(lsb_in_token) });
         }
-        Ok(Self {
-            split_exponent,
-            split: 1 << split_exponent,
-            msb_in_token,
-            lsb_in_token,
-        })
+        Ok(Self { split_exponent, split: 1 << split_exponent, msb_in_token, lsb_in_token })
     }
 }
 
@@ -422,11 +343,7 @@ impl DecoderInner {
     fn parse(bitstream: &mut Bitstream, num_dist: u32) -> CodingResult<Self> {
         let (num_clusters, clusters) = read_clusters(bitstream, num_dist)?;
         let use_prefix_code = bitstream.read_bool()?;
-        let log_alphabet_size = if use_prefix_code {
-            15
-        } else {
-            bitstream.read_bits(2)? + 5
-        };
+        let log_alphabet_size = if use_prefix_code { 15 } else { bitstream.read_bits(2)? + 5 };
         let configs = (0..num_clusters)
             .map(|_| IntegerConfig::parse(bitstream, log_alphabet_size))
             .collect::<CodingResult<Vec<_>>>()?;
@@ -454,17 +371,9 @@ impl DecoderInner {
             let dist = (0..num_clusters)
                 .map(|_| ans::Histogram::parse(bitstream, log_alphabet_size))
                 .collect::<CodingResult<Vec<_>>>()?;
-            Coder::Ans {
-                dist: Arc::new(dist),
-                state: 0,
-                initial: true,
-            }
+            Coder::Ans { dist: Arc::new(dist), state: 0, initial: true }
         };
-        Ok(Self {
-            clusters,
-            configs,
-            code,
-        })
+        Ok(Self { clusters, configs, code })
     }
 
     #[inline]
@@ -475,11 +384,7 @@ impl DecoderInner {
     }
 
     #[inline]
-    fn read_varint_with_multiplier_clustered(
-        &mut self,
-        bitstream: &mut Bitstream,
-        cluster: u8,
-    ) -> CodingResult<u32> {
+    fn read_varint_with_multiplier_clustered(&mut self, bitstream: &mut Bitstream, cluster: u8) -> CodingResult<u32> {
         let token = self.code.read_symbol(bitstream, cluster)?;
         Ok(self.read_uint_prefilled(bitstream, &self.configs[cluster as usize], token))
     }
@@ -524,8 +429,7 @@ impl DecoderInner {
 
                 let lz_dist_cluster = self.lz_dist_cluster();
 
-                let num_to_copy =
-                    self.read_uint_prefilled(bitstream, &state.lz_len_conf, token - min_symbol);
+                let num_to_copy = self.read_uint_prefilled(bitstream, &state.lz_len_conf, token - min_symbol);
                 let Some(num_to_copy) = num_to_copy.checked_add(min_length) else {
                     tracing::error!(num_to_copy, min_length, "LZ77 num_to_copy overflow");
                     return Err(Error::InvalidLz77Symbol);
@@ -533,11 +437,7 @@ impl DecoderInner {
                 state.num_to_copy = num_to_copy;
 
                 let token = self.code.read_symbol(bitstream, lz_dist_cluster)?;
-                let distance = self.read_uint_prefilled(
-                    bitstream,
-                    &self.configs[lz_dist_cluster as usize],
-                    token,
-                );
+                let distance = self.read_uint_prefilled(bitstream, &self.configs[lz_dist_cluster as usize], token);
                 let distance = if dist_multiplier == 0 {
                     distance
                 } else if distance < 120 {
@@ -569,25 +469,13 @@ impl DecoderInner {
     }
 
     #[inline]
-    fn read_uint_prefilled(
-        &self,
-        bitstream: &mut Bitstream,
-        config: &IntegerConfig,
-        token: u32,
-    ) -> u32 {
-        let &IntegerConfig {
-            split_exponent,
-            split,
-            msb_in_token,
-            lsb_in_token,
-            ..
-        } = config;
+    fn read_uint_prefilled(&self, bitstream: &mut Bitstream, config: &IntegerConfig, token: u32) -> u32 {
+        let &IntegerConfig { split_exponent, split, msb_in_token, lsb_in_token, .. } = config;
         if token < split {
             return token;
         }
 
-        let n = split_exponent - (msb_in_token + lsb_in_token)
-            + ((token - split) >> (msb_in_token + lsb_in_token));
+        let n = split_exponent - (msb_in_token + lsb_in_token) + ((token - split) >> (msb_in_token + lsb_in_token));
         // n < 32.
         let n = n & 31;
         let rest_bits = bitstream.peek_bits_prefilled(n as usize) as u64;
@@ -613,11 +501,7 @@ impl DecoderInner {
 #[derive(Debug, Clone)]
 enum Coder {
     PrefixCode(Arc<Vec<prefix::Histogram>>),
-    Ans {
-        dist: Arc<Vec<ans::Histogram>>,
-        state: u32,
-        initial: bool,
-    },
+    Ans { dist: Arc<Vec<ans::Histogram>>, state: u32, initial: bool },
 }
 
 impl Coder {
@@ -628,11 +512,7 @@ impl Coder {
                 let dist = &dist[cluster as usize];
                 dist.read_symbol(bitstream)
             }
-            Self::Ans {
-                dist,
-                state,
-                initial,
-            } => {
+            Self::Ans { dist, state, initial } => {
                 if *initial {
                     *state = bitstream.read_bits(32)?;
                     *initial = false;
@@ -677,11 +557,7 @@ impl Coder {
 }
 
 fn add_log2_ceil(x: u32) -> u32 {
-    if x >= 0x80000000 {
-        32
-    } else {
-        (x + 1).next_power_of_two().trailing_zeros()
-    }
+    if x >= 0x80000000 { 32 } else { (x + 1).next_power_of_two().trailing_zeros() }
 }
 
 /// Read a distribution clustering from the bitstream.
@@ -698,11 +574,8 @@ pub fn read_clusters(bitstream: &mut Bitstream, num_dist: u32) -> CodingResult<(
             .collect::<std::result::Result<Vec<_>, _>>()?
     } else {
         let use_mtf = bitstream.read_bool()?;
-        let mut decoder = if num_dist <= 2 {
-            Decoder::parse_assume_no_lz77(bitstream, 1)?
-        } else {
-            Decoder::parse(bitstream, 1)?
-        };
+        let mut decoder =
+            if num_dist <= 2 { Decoder::parse_assume_no_lz77(bitstream, 1)? } else { Decoder::parse(bitstream, 1)? };
         decoder.begin(bitstream)?;
         let mut ret = (0..num_dist)
             .map(|_| -> CodingResult<_> {
@@ -727,22 +600,12 @@ pub fn read_clusters(bitstream: &mut Bitstream, num_dist: u32) -> CodingResult<(
     };
 
     let num_clusters = *cluster.iter().max().unwrap() as u32 + 1;
-    let set = cluster
-        .iter()
-        .copied()
-        .collect::<std::collections::HashSet<_>>();
+    let set = cluster.iter().copied().collect::<std::collections::HashSet<_>>();
     let num_expected_clusters = num_clusters;
     let num_actual_clusters = set.len() as u32;
     if num_actual_clusters != num_expected_clusters {
-        tracing::error!(
-            num_expected_clusters,
-            num_actual_clusters,
-            "distribution cluster has a hole"
-        );
-        Err(Error::ClusterHole {
-            num_expected_clusters,
-            num_actual_clusters,
-        })
+        tracing::error!(num_expected_clusters, num_actual_clusters, "distribution cluster has a hole");
+        Err(Error::ClusterHole { num_expected_clusters, num_actual_clusters })
     } else {
         Ok((num_clusters, cluster))
     }

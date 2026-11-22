@@ -9,9 +9,7 @@ type Lane = __m128;
 
 #[inline(always)]
 pub(crate) fn transpose_lane(lanes: &mut [Lane]) {
-    let [row0, row1, row2, row3] = lanes else {
-        panic!()
-    };
+    let [row0, row1, row2, row3] = lanes else { panic!() };
     unsafe {
         _MM_TRANSPOSE4_PS(row0, row1, row2, row3);
     }
@@ -56,19 +54,9 @@ unsafe fn dct4_vec_forward(v: Lane) -> Lane {
     let addsub = v.muladd(mul, v_rev);
 
     let a = unsafe { _mm_shuffle_ps::<0b10011100>(addsub, addsub) };
-    let mul_a = Lane::set([
-        0.25,
-        (std::f32::consts::FRAC_1_SQRT_2 / 2.0 + 0.25) * SEC0,
-        -0.25,
-        -0.25 * SEC1,
-    ]);
+    let mul_a = Lane::set([0.25, (std::f32::consts::FRAC_1_SQRT_2 / 2.0 + 0.25) * SEC0, -0.25, -0.25 * SEC1]);
     let b = unsafe { _mm_shuffle_ps::<0b11001001>(addsub, addsub) };
-    let mul_b = Lane::set([
-        0.25,
-        (std::f32::consts::FRAC_1_SQRT_2 / 2.0 - 0.25) * SEC1,
-        0.25,
-        0.25 * SEC0,
-    ]);
+    let mul_b = Lane::set([0.25, (std::f32::consts::FRAC_1_SQRT_2 / 2.0 - 0.25) * SEC1, 0.25, 0.25 * SEC0]);
     a.muladd(mul_a, b.mul(mul_b))
 }
 
@@ -91,35 +79,22 @@ pub(crate) unsafe fn dct4_vec_inverse(v: Lane) -> Lane {
 #[inline]
 unsafe fn dct8_vec_forward(vl: Lane, vr: Lane) -> (Lane, Lane) {
     #[allow(clippy::excessive_precision)]
-    let sec_vec = Lane::set([
-        0.2548977895520796,
-        0.30067244346752264,
-        0.4499881115682078,
-        1.2814577238707527,
-    ]);
+    let sec_vec = Lane::set([0.2548977895520796, 0.30067244346752264, 0.4499881115682078, 1.2814577238707527]);
     let vr_rev = unsafe { _mm_shuffle_ps::<0b00011011>(vr, vr) };
     let input0 = vl.add(vr_rev).mul(Lane::splat_f32(0.5));
     let input1 = vl.sub(vr_rev).mul(sec_vec);
     let output0 = dct4_vec_forward(input0);
     let output1 = dct4_vec_forward(input1);
-    let output1_shifted =
-        unsafe { _mm_castsi128_ps(_mm_srli_si128::<4>(_mm_castps_si128(output1))) };
+    let output1_shifted = unsafe { _mm_castsi128_ps(_mm_srli_si128::<4>(_mm_castps_si128(output1))) };
     let output1_mul = Lane::set([std::f32::consts::SQRT_2, 1.0, 1.0, 1.0]);
     let output1 = output1.muladd(output1_mul, output1_shifted);
-    (unsafe { _mm_unpacklo_ps(output0, output1) }, unsafe {
-        _mm_unpackhi_ps(output0, output1)
-    })
+    (unsafe { _mm_unpacklo_ps(output0, output1) }, unsafe { _mm_unpackhi_ps(output0, output1) })
 }
 
 #[inline]
 pub(crate) unsafe fn dct8_vec_inverse(vl: Lane, vr: Lane) -> (Lane, Lane) {
     #[allow(clippy::excessive_precision)]
-    let sec_vec = Lane::set([
-        0.5097955791041592,
-        0.6013448869350453,
-        0.8999762231364156,
-        2.5629154477415055,
-    ]);
+    let sec_vec = Lane::set([0.5097955791041592, 0.6013448869350453, 0.8999762231364156, 2.5629154477415055]);
     let input0 = unsafe { _mm_shuffle_ps::<0b10001000>(vl, vr) };
     let input1 = unsafe { _mm_shuffle_ps::<0b11011101>(vl, vr) };
     let input1_shifted = unsafe { _mm_castsi128_ps(_mm_slli_si128::<4>(_mm_castps_si128(input1))) };
@@ -129,9 +104,7 @@ pub(crate) unsafe fn dct8_vec_inverse(vl: Lane, vr: Lane) -> (Lane, Lane) {
     let output1 = dct4_vec_inverse(input1);
     let output1 = output1.mul(sec_vec);
     let sub = output0.sub(output1);
-    (output0.add(output1), unsafe {
-        _mm_shuffle_ps::<0b00011011>(sub, sub)
-    })
+    (output0.add(output1), unsafe { _mm_shuffle_ps::<0b00011011>(sub, sub) })
 }
 
 unsafe fn dct8x8(io: &mut MutableSubgrid<'_, Lane>, direction: DctDirection) {
@@ -158,11 +131,7 @@ unsafe fn dct8x8(io: &mut MutableSubgrid<'_, Lane>, direction: DctDirection) {
     }
 }
 
-unsafe fn column_dct_lane(
-    io: &mut MutableSubgrid<'_, Lane>,
-    scratch: &mut [Lane],
-    direction: DctDirection,
-) {
+unsafe fn column_dct_lane(io: &mut MutableSubgrid<'_, Lane>, scratch: &mut [Lane], direction: DctDirection) {
     let width = io.width();
     let height = io.height();
     let (io_lanes, scratch_lanes) = scratch[..height * 2].split_at_mut(height);
@@ -180,11 +149,7 @@ unsafe fn column_dct_lane(
     }
 }
 
-unsafe fn row_dct_lane(
-    io: &mut MutableSubgrid<'_, Lane>,
-    scratch: &mut [Lane],
-    direction: DctDirection,
-) {
+unsafe fn row_dct_lane(io: &mut MutableSubgrid<'_, Lane>, scratch: &mut [Lane], direction: DctDirection) {
     let width = io.width() * LANE_SIZE;
     let height = io.height();
     let (io_lanes, scratch_lanes) = scratch[..width * 2].split_at_mut(width);
@@ -218,12 +183,7 @@ unsafe fn dct4_forward(input: [Lane; 4]) -> [Lane; 4] {
     let out0 = tmp0.add(tmp1);
     let out1 = tmp0.sub(tmp1);
 
-    [
-        sum03.add(sum12).mul(quarter),
-        out0.muladd(sqrt2, out1),
-        sum03.sub(sum12).mul(quarter),
-        out1,
-    ]
+    [sum03.add(sum12).mul(quarter), out0.muladd(sqrt2, out1), sum03.sub(sum12).mul(quarter), out1]
 }
 
 #[inline]
@@ -239,12 +199,7 @@ pub(crate) unsafe fn dct4_inverse(input: [Lane; 4]) -> [Lane; 4] {
     let sum02 = input[0].add(input[2]);
     let sub02 = input[0].sub(input[2]);
 
-    [
-        sum02.add(out0),
-        sub02.add(out1),
-        sub02.sub(out1),
-        sum02.sub(out0),
-    ]
+    [sum02.add(out0), sub02.add(out1), sub02.sub(out1), sum02.sub(out0)]
 }
 
 #[inline]
@@ -261,18 +216,10 @@ unsafe fn dct8_forward(io: &mut MutableSubgrid<'_, Lane>) {
         io.get(0, 3).add(io.get(0, 4)).mul(half),
     ];
     let input1 = [
-        io.get(0, 0)
-            .sub(io.get(0, 7))
-            .mul(Lane::splat_f32(sec[0] / 2.0)),
-        io.get(0, 1)
-            .sub(io.get(0, 6))
-            .mul(Lane::splat_f32(sec[1] / 2.0)),
-        io.get(0, 2)
-            .sub(io.get(0, 5))
-            .mul(Lane::splat_f32(sec[2] / 2.0)),
-        io.get(0, 3)
-            .sub(io.get(0, 4))
-            .mul(Lane::splat_f32(sec[3] / 2.0)),
+        io.get(0, 0).sub(io.get(0, 7)).mul(Lane::splat_f32(sec[0] / 2.0)),
+        io.get(0, 1).sub(io.get(0, 6)).mul(Lane::splat_f32(sec[1] / 2.0)),
+        io.get(0, 2).sub(io.get(0, 5)).mul(Lane::splat_f32(sec[2] / 2.0)),
+        io.get(0, 3).sub(io.get(0, 4)).mul(Lane::splat_f32(sec[3] / 2.0)),
     ];
     let output0 = dct4_forward(input0);
     for (idx, v) in output0.into_iter().enumerate() {

@@ -71,11 +71,7 @@ struct GroupData {
 
 impl From<TocGroup> for GroupData {
     fn from(value: TocGroup) -> Self {
-        Self {
-            toc_group: value,
-            bytes: Vec::new(),
-            handle: None,
-        }
+        Self { toc_group: value, bytes: Vec::new(), handle: None }
     }
 }
 
@@ -110,11 +106,7 @@ impl Bundle<FrameContext<'_>> for Frame {
     type Error = crate::Error;
 
     fn parse(bitstream: &mut Bitstream, ctx: FrameContext) -> Result<Self> {
-        let FrameContext {
-            image_header,
-            tracker,
-            pool,
-        } = ctx;
+        let FrameContext { image_header, tracker, pool } = ctx;
         let tracker = tracker.cloned();
 
         bitstream.zero_pad_to_byte()?;
@@ -132,24 +124,19 @@ impl Bundle<FrameContext<'_>> for Frame {
             return Err(jxl_bitstream::Error::ProfileConformance("frame height too large").into());
         }
         if (width * height) > (1 << 40) {
-            tracing::error!(
-                area = width * height,
-                "Frame area (width * height) too large; limit is 2^40"
-            );
+            tracing::error!(area = width * height, "Frame area (width * height) too large; limit is 2^40");
             return Err(jxl_bitstream::Error::ProfileConformance("frame area too large").into());
         }
 
         let has_extra = !header.ec_blending_info.is_empty();
-        for blending_info in std::iter::once(&header.blending_info).chain(&header.ec_blending_info)
-        {
+        for blending_info in std::iter::once(&header.blending_info).chain(&header.ec_blending_info) {
             if blending_info.mode.use_alpha() && has_extra {
                 let alpha_idx = blending_info.alpha_channel as usize;
                 let Some(alpha_ec_info) = image_header.metadata.ec_info.get(alpha_idx) else {
                     tracing::error!(?blending_info, "blending_info.alpha_channel out of range");
-                    return Err(jxl_bitstream::Error::ValidationFailed(
-                        "blending_info.alpha_channel out of range",
-                    )
-                    .into());
+                    return Err(
+                        jxl_bitstream::Error::ValidationFailed("blending_info.alpha_channel out of range").into()
+                    );
                 };
                 if !alpha_ec_info.is_alpha() {
                     tracing::error!(
@@ -170,11 +157,7 @@ impl Bundle<FrameContext<'_>> for Frame {
         }
 
         let color_upsampling_shift = header.upsampling.trailing_zeros();
-        for (ec_upsampling, ec_info) in header
-            .ec_upsampling
-            .iter()
-            .zip(image_header.metadata.ec_info.iter())
-        {
+        for (ec_upsampling, ec_info) in header.ec_upsampling.iter().zip(image_header.metadata.ec_info.iter()) {
             let ec_upsampling_shift = ec_upsampling.trailing_zeros();
             let dim_shift = ec_info.dim_shift;
 
@@ -191,10 +174,9 @@ impl Bundle<FrameContext<'_>> for Frame {
                     dim_shift = ec_info.dim_shift,
                     "Cumulative EC upsampling factor is too large"
                 );
-                return Err(jxl_bitstream::Error::ValidationFailed(
-                    "cumulative EC upsampling factor is too large",
-                )
-                .into());
+                return Err(
+                    jxl_bitstream::Error::ValidationFailed("cumulative EC upsampling factor is too large").into()
+                );
             }
 
             let actual_dim_shift = ec_upsampling_shift + dim_shift - color_upsampling_shift;
@@ -315,18 +297,11 @@ impl Frame {
             let mut bitstream = Bitstream::new(&group.bytes);
             let lf_global = LfGlobal::parse(
                 &mut bitstream,
-                LfGlobalParams::new(
-                    &self.image_header,
-                    &self.header,
-                    self.tracker.as_ref(),
-                    !loaded,
-                ),
+                LfGlobalParams::new(&self.image_header, &self.header, self.tracker.as_ref(), !loaded),
             );
             match lf_global {
                 Ok(lf_global) => {
-                    self.all_group_offsets
-                        .lf_group
-                        .store(bitstream.num_read_bits(), Ordering::Relaxed);
+                    self.all_group_offsets.lf_group.store(bitstream.num_read_bits(), Ordering::Relaxed);
                     Ok(lf_global)
                 }
                 Err(e) if !loaded && e.unexpected_eof() => Err(e),
@@ -343,12 +318,7 @@ impl Frame {
             let mut bitstream = Bitstream::new(&group.bytes);
             LfGlobal::parse(
                 &mut bitstream,
-                LfGlobalParams::new(
-                    &self.image_header,
-                    &self.header,
-                    self.tracker.as_ref(),
-                    allow_partial,
-                ),
+                LfGlobalParams::new(&self.image_header, &self.header, self.tracker.as_ref(), allow_partial),
             )
         })
     }
@@ -398,9 +368,7 @@ impl Frame {
 
             match result {
                 Ok(result) => {
-                    self.all_group_offsets
-                        .hf_global
-                        .store(bitstream.num_read_bits(), Ordering::Relaxed);
+                    self.all_group_offsets.hf_global.store(bitstream.num_read_bits(), Ordering::Relaxed);
                     Some(Ok(result))
                 }
                 Err(e) if !loaded && e.unexpected_eof() => None,
@@ -410,9 +378,7 @@ impl Frame {
                 }
             }
         } else {
-            let idx = self
-                .toc
-                .group_index_bitstream_order(TocGroupKind::LfGroup(lf_group_idx));
+            let idx = self.toc.group_index_bitstream_order(TocGroupKind::LfGroup(lf_group_idx));
             let group = self.data.get(idx)?;
             let allow_partial = group.bytes.len() < group.toc_group.size as usize;
 
@@ -437,10 +403,7 @@ impl Frame {
         }
     }
 
-    pub fn try_parse_hf_global<S: Sample>(
-        &self,
-        cached_lf_global: Option<&LfGlobal<S>>,
-    ) -> Option<Result<HfGlobal>> {
+    pub fn try_parse_hf_global<S: Sample>(&self, cached_lf_global: Option<&LfGlobal<S>>) -> Option<Result<HfGlobal>> {
         let is_modular = self.header.encoding == header::Encoding::Modular;
 
         if self.toc.is_single_entry() {
@@ -468,26 +431,15 @@ impl Frame {
                     Ok(gmodular) => gmodular,
                     Err(e) => return Some(Err(e)),
                 };
-                let groups = gmodular
-                    .modular
-                    .image_mut()
-                    .map(|x| x.prepare_groups(&self.pass_shifts))
-                    .transpose();
+                let groups = gmodular.modular.image_mut().map(|x| x.prepare_groups(&self.pass_shifts)).transpose();
                 let groups = match groups {
                     Ok(groups) => groups,
                     Err(e) => return Some(Err(e.into())),
                 };
                 let mlf_group = groups.and_then(|mut x| x.lf_groups.pop());
                 let lf_group = self
-                    .try_parse_lf_group(
-                        lf_global.vardct.as_ref(),
-                        lf_global.gmodular.ma_config(),
-                        mlf_group,
-                        0,
-                    )
-                    .ok_or(
-                        jxl_bitstream::Error::Io(std::io::ErrorKind::UnexpectedEof.into()).into(),
-                    )
+                    .try_parse_lf_group(lf_global.vardct.as_ref(), lf_global.gmodular.ma_config(), mlf_group, 0)
+                    .ok_or(jxl_bitstream::Error::Io(std::io::ErrorKind::UnexpectedEof.into()).into())
                     .and_then(|x| x);
                 if let Err(e) = lf_group {
                     return Some(Err(e));
@@ -496,9 +448,7 @@ impl Frame {
             let offset = self.all_group_offsets.hf_global.load(Ordering::Relaxed);
 
             if self.header.encoding == header::Encoding::Modular {
-                self.all_group_offsets
-                    .pass_group
-                    .store(offset, Ordering::Relaxed);
+                self.all_group_offsets.pass_group.store(offset, Ordering::Relaxed);
                 return None;
             }
 
@@ -517,9 +467,7 @@ impl Frame {
 
             Some(match result {
                 Ok(result) => {
-                    self.all_group_offsets
-                        .pass_group
-                        .store(bitstream.num_read_bits(), Ordering::Relaxed);
+                    self.all_group_offsets.pass_group.store(bitstream.num_read_bits(), Ordering::Relaxed);
                     Ok(result)
                 }
                 Err(e) if !loaded && e.unexpected_eof() => Err(e),
@@ -560,11 +508,7 @@ impl Frame {
         }
     }
 
-    pub fn pass_group_bitstream(
-        &self,
-        pass_idx: u32,
-        group_idx: u32,
-    ) -> Option<Result<PassGroupBitstream<'_>>> {
+    pub fn pass_group_bitstream(&self, pass_idx: u32, group_idx: u32) -> Option<Result<PassGroupBitstream<'_>>> {
         Some(if self.toc.is_single_entry() {
             if self.all_group_offsets.has_error.load(Ordering::Relaxed) != 0 {
                 return Some(Err(Error::HadError));
@@ -587,17 +531,9 @@ impl Frame {
             }
             bitstream.skip_bits(offset).unwrap();
 
-            Ok(PassGroupBitstream {
-                bitstream,
-                partial: !loaded,
-            })
+            Ok(PassGroupBitstream { bitstream, partial: !loaded })
         } else {
-            let idx = self
-                .toc
-                .group_index_bitstream_order(TocGroupKind::GroupPass {
-                    pass_idx,
-                    group_idx,
-                });
+            let idx = self.toc.group_index_bitstream_order(TocGroupKind::GroupPass { pass_idx, group_idx });
             let group = self.data.get(idx)?;
             let partial = group.bytes.len() < group.toc_group.size as usize;
 

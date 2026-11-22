@@ -17,12 +17,7 @@ impl Region {
 
     #[inline]
     pub fn with_size(width: u32, height: u32) -> Self {
-        Self {
-            left: 0,
-            top: 0,
-            width,
-            height,
-        }
+        Self { left: 0, top: 0, width, height }
     }
 
     #[inline]
@@ -52,21 +47,12 @@ impl Region {
     }
 
     pub fn translate(self, x: i32, y: i32) -> Self {
-        Self {
-            left: self.left + x,
-            top: self.top + y,
-            ..self
-        }
+        Self { left: self.left + x, top: self.top + y, ..self }
     }
 
     pub fn intersection(self, rhs: Region) -> Self {
         if self.width == 0 || rhs.width == 0 || self.height == 0 || rhs.height == 0 {
-            return Self {
-                left: 0,
-                top: 0,
-                width: 0,
-                height: 0,
-            };
+            return Self { left: 0, top: 0, width: 0, height: 0 };
         }
 
         let mut ax = (self.left, self.right());
@@ -81,12 +67,7 @@ impl Region {
         }
 
         if ax.1 <= bx.0 || ay.1 <= by.0 {
-            Self {
-                left: 0,
-                top: 0,
-                width: 0,
-                height: 0,
-            }
+            Self { left: 0, top: 0, width: 0, height: 0 }
         } else {
             Self {
                 left: bx.0,
@@ -108,23 +89,12 @@ impl Region {
 
         let left = self.left.min(other.left);
         let top = self.top.min(other.top);
-        let right = self
-            .left
-            .wrapping_add_unsigned(self.width)
-            .max(other.left.wrapping_add_unsigned(other.width));
-        let bottom = self
-            .top
-            .wrapping_add_unsigned(self.height)
-            .max(other.top.wrapping_add_unsigned(other.height));
+        let right = self.left.wrapping_add_unsigned(self.width).max(other.left.wrapping_add_unsigned(other.width));
+        let bottom = self.top.wrapping_add_unsigned(self.height).max(other.top.wrapping_add_unsigned(other.height));
         let width = right.abs_diff(left);
         let height = bottom.abs_diff(top);
 
-        Self {
-            left,
-            top,
-            width,
-            height,
-        }
+        Self { left, top, width, height }
     }
 
     #[inline]
@@ -148,12 +118,7 @@ impl Region {
         let new_top = self.top >> factor;
         let adj_width = self.width + self.left.abs_diff(new_left << factor);
         let adj_height = self.height + self.top.abs_diff(new_top << factor);
-        Self {
-            left: new_left,
-            top: new_top,
-            width: (adj_width + add) >> factor,
-            height: (adj_height + add) >> factor,
-        }
+        Self { left: new_left, top: new_top, width: (adj_width + add) >> factor, height: (adj_height + add) >> factor }
     }
 
     #[inline]
@@ -185,12 +150,7 @@ impl Region {
         let top = self.top >> factor_y;
         let (width, height) = shift.shift_size((self.width, self.height));
 
-        Self {
-            left,
-            top,
-            width,
-            height,
-        }
+        Self { left, top, width, height }
     }
 
     #[inline]
@@ -227,13 +187,8 @@ impl Region {
     pub fn apply_orientation(self, image_header: &ImageHeader) -> Self {
         let image_width = image_header.width_with_orientation();
         let image_height = image_header.height_with_orientation();
-        let (_, _, mut left, mut top) = image_header.metadata.apply_orientation(
-            image_width,
-            image_height,
-            self.left,
-            self.top,
-            true,
-        );
+        let (_, _, mut left, mut top) =
+            image_header.metadata.apply_orientation(image_width, image_height, self.left, self.top, true);
         let (_, _, mut right, mut bottom) = image_header.metadata.apply_orientation(
             image_width,
             image_height,
@@ -250,11 +205,6 @@ impl Region {
         }
         let width = right.abs_diff(left) + 1;
         let height = bottom.abs_diff(top) + 1;
-        Self {
-            left,
-            top,
-            width,
-            height,
-        }
+        Self { left, top, width, height }
     }
 }

@@ -560,8 +560,7 @@ pub fn export_photo_with_gpu(
 ) -> Result<(usize, usize)> {
     export_photo_impl(source_path.as_ref(), output_path.as_ref(), settings, request, |source, s, opts| {
         let ws = crate::working_settings(s);
-        let wants_gpu =
-            !ws.bool("hdr") && ws.str("working_space") != "ProPhoto" && request.color_space == "sRGB";
+        let wants_gpu = !ws.bool("hdr") && ws.str("working_space") != "ProPhoto" && request.color_space == "sRGB";
         if wants_gpu {
             if let Some(mutex) = gpu {
                 let mut guard = mutex.lock().unwrap_or_else(|e| e.into_inner());

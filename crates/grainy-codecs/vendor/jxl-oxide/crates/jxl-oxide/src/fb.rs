@@ -17,20 +17,12 @@ impl FrameBuffer {
     /// Note that framebuffer allocations are not tracked.
     pub fn new(width: usize, height: usize, channels: usize) -> Self {
         let len = Self::buffer_len(width, height, channels);
-        Self {
-            width,
-            height,
-            channels,
-            buf: vec![0.0f32; len],
-        }
+        Self { width, height, channels, buf: vec![0.0f32; len] }
     }
 
     #[inline]
     fn buffer_len(width: usize, height: usize, channels: usize) -> usize {
-        width
-            .checked_mul(height)
-            .and_then(|len| len.checked_mul(channels))
-            .expect("framebuffer dimensions overflow")
+        width.checked_mul(height).and_then(|len| len.checked_mul(channels)).expect("framebuffer dimensions overflow")
     }
 
     /// For internal use only.
@@ -50,12 +42,7 @@ impl FrameBuffer {
             panic!("Invalid orientation {orientation}");
         }
 
-        let Region {
-            left,
-            top,
-            width,
-            height,
-        } = copy_region;
+        let Region { left, top, width, height } = copy_region;
         let width = width as usize;
         let height = height as usize;
 
@@ -99,10 +86,12 @@ impl FrameBuffer {
 
                     buf[idx] = match g {
                         ImageBuffer::F32(g) => g.try_get_ref(x, y).copied().unwrap_or(0.0),
-                        ImageBuffer::I32(g) => bit_depth[c]
-                            .parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0)),
-                        ImageBuffer::I16(g) => bit_depth[c]
-                            .parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0) as i32),
+                        ImageBuffer::I32(g) => {
+                            bit_depth[c].parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0))
+                        }
+                        ImageBuffer::I16(g) => {
+                            bit_depth[c].parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0) as i32)
+                        }
                     };
                 }
             }
@@ -154,10 +143,7 @@ impl FrameBuffer {
     #[inline]
     pub fn buf_grouped<const N: usize>(&self) -> &[[f32; N]] {
         assert_eq!(self.channels, N);
-        let grouped_len = self
-            .width
-            .checked_mul(self.height)
-            .expect("framebuffer dimensions overflow");
+        let grouped_len = self.width.checked_mul(self.height).expect("framebuffer dimensions overflow");
         assert_eq!(self.buf.len(), Self::buffer_len(self.width, self.height, N));
         // SAFETY: Arrays have size of size_of::<T> * N, alignment of T.
         // Buffer length is checked above.
@@ -171,16 +157,11 @@ impl FrameBuffer {
     #[inline]
     pub fn buf_grouped_mut<const N: usize>(&mut self) -> &mut [[f32; N]] {
         assert_eq!(self.channels, N);
-        let grouped_len = self
-            .width
-            .checked_mul(self.height)
-            .expect("framebuffer dimensions overflow");
+        let grouped_len = self.width.checked_mul(self.height).expect("framebuffer dimensions overflow");
         assert_eq!(self.buf.len(), Self::buffer_len(self.width, self.height, N));
         // SAFETY: Arrays have size of size_of::<T> * N, alignment of T.
         // Buffer length is checked above.
-        unsafe {
-            std::slice::from_raw_parts_mut(self.buf.as_mut_ptr() as *mut [f32; N], grouped_len)
-        }
+        unsafe { std::slice::from_raw_parts_mut(self.buf.as_mut_ptr() as *mut [f32; N], grouped_len) }
     }
 }
 
@@ -232,12 +213,7 @@ impl<'r> ImageStream<'r> {
 
         let orientation = render.orientation;
         assert!((1..=8).contains(&orientation));
-        let Region {
-            left,
-            top,
-            mut width,
-            mut height,
-        } = render.target_frame_region;
+        let Region { left, top, mut width, mut height } = render.target_frame_region;
         if orientation >= 5 {
             std::mem::swap(&mut width, &mut height);
         }
@@ -256,11 +232,8 @@ impl<'r> ImageStream<'r> {
 
         // Find black
         if render.is_cmyk {
-            for (ec_idx, (ec, (region, _))) in render
-                .extra_channels
-                .iter()
-                .zip(&regions_and_shifts[color_channels..])
-                .enumerate()
+            for (ec_idx, (ec, (region, _))) in
+                render.extra_channels.iter().zip(&regions_and_shifts[color_channels..]).enumerate()
             {
                 if ec.is_black() {
                     grids.push(&fb[color_channels + ec_idx]);
@@ -273,11 +246,8 @@ impl<'r> ImageStream<'r> {
 
         // Find alpha
         if !skip_alpha {
-            for (ec_idx, (ec, (region, _))) in render
-                .extra_channels
-                .iter()
-                .zip(&regions_and_shifts[color_channels..])
-                .enumerate()
+            for (ec_idx, (ec, (region, _))) in
+                render.extra_channels.iter().zip(&regions_and_shifts[color_channels..]).enumerate()
             {
                 if ec.is_alpha() {
                     grids.push(&fb[color_channels + ec_idx]);
@@ -290,19 +260,10 @@ impl<'r> ImageStream<'r> {
 
         let mut spot_colors = Vec::new();
         if render.render_spot_color && color_channels == 3 {
-            for (ec_idx, (ec, (region, _))) in render
-                .extra_channels
-                .iter()
-                .zip(&regions_and_shifts[color_channels..])
-                .enumerate()
+            for (ec_idx, (ec, (region, _))) in
+                render.extra_channels.iter().zip(&regions_and_shifts[color_channels..]).enumerate()
             {
-                if let ExtraChannelType::SpotColour {
-                    red,
-                    green,
-                    blue,
-                    solidity,
-                } = ec.ty
-                {
+                if let ExtraChannelType::SpotColour { red, green, blue, solidity } = ec.ty {
                     let grid = &fb[color_channels + ec_idx];
                     let xy = (left - region.left, top - region.top);
                     spot_colors.push(ImageStreamSpotColor {
@@ -316,18 +277,7 @@ impl<'r> ImageStream<'r> {
             }
         }
 
-        ImageStream {
-            orientation,
-            width,
-            height,
-            grids,
-            bit_depth,
-            start_offset_xy,
-            spot_colors,
-            y: 0,
-            x: 0,
-            c: 0,
-        }
+        ImageStream { orientation, width, height, grids, bit_depth, start_offset_xy, spot_colors, y: 0, x: 0, c: 0 }
     }
 }
 
@@ -363,10 +313,8 @@ impl ImageStream<'_> {
                     };
                     let (start_x, start_y) = self.start_offset_xy[self.c as usize];
                     let (orig_x, orig_y) = self.to_original_coord(self.x, self.y);
-                    let (Some(x), Some(y)) = (
-                        orig_x.checked_add_signed(start_x),
-                        orig_y.checked_add_signed(start_y),
-                    ) else {
+                    let (Some(x), Some(y)) = (orig_x.checked_add_signed(start_x), orig_y.checked_add_signed(start_y))
+                    else {
                         *v = Sample::default();
                         count += 1;
                         self.c += 1;
@@ -392,10 +340,7 @@ impl ImageStream<'_> {
                                 solidity,
                             } = *spot;
                             let color = [r, g, b][self.c as usize];
-                            let xy = (
-                                orig_x.checked_add_signed(start_x),
-                                orig_y.checked_add_signed(start_y),
-                            );
+                            let xy = (orig_x.checked_add_signed(start_x), orig_y.checked_add_signed(start_y));
                             let mix = if let (Some(x), Some(y)) = xy {
                                 let x = x as usize;
                                 let y = y as usize;
@@ -483,12 +428,8 @@ mod private {
         fn copy_from_grid(&mut self, grid: &ImageBuffer, x: usize, y: usize, bit_depth: BitDepth) {
             *self = match grid {
                 ImageBuffer::F32(g) => g.try_get_ref(x, y).copied().unwrap_or(0.0),
-                ImageBuffer::I32(g) => {
-                    bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0))
-                }
-                ImageBuffer::I16(g) => {
-                    bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0) as i32)
-                }
+                ImageBuffer::I32(g) => bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0)),
+                ImageBuffer::I16(g) => bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0) as i32),
             };
         }
 
@@ -501,29 +442,21 @@ mod private {
     impl Sealed for u16 {
         #[inline]
         fn copy_from_grid(&mut self, grid: &ImageBuffer, x: usize, y: usize, bit_depth: BitDepth) {
-            if matches!(
-                bit_depth,
-                BitDepth::IntegerSample {
-                    bits_per_sample: 16
-                }
-            ) {
+            if matches!(bit_depth, BitDepth::IntegerSample { bits_per_sample: 16 }) {
                 *self = match grid {
-                    ImageBuffer::F32(g) => (g.try_get_ref(x, y).copied().unwrap_or(0.0) * 65535.0
-                        + 0.5)
-                        .clamp(0.0, 65535.0) as u16,
-                    ImageBuffer::I32(g) => {
-                        g.try_get_ref(x, y).copied().unwrap_or(0).clamp(0, 65535) as u16
+                    ImageBuffer::F32(g) => {
+                        (g.try_get_ref(x, y).copied().unwrap_or(0.0) * 65535.0 + 0.5).clamp(0.0, 65535.0) as u16
                     }
+                    ImageBuffer::I32(g) => g.try_get_ref(x, y).copied().unwrap_or(0).clamp(0, 65535) as u16,
                     ImageBuffer::I16(g) => g.try_get_ref(x, y).copied().unwrap_or(0).max(0) as u16,
                 };
             } else {
                 let flt = match grid {
                     ImageBuffer::F32(g) => g.try_get_ref(x, y).copied().unwrap_or(0.0),
-                    ImageBuffer::I32(g) => {
-                        bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0))
+                    ImageBuffer::I32(g) => bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0)),
+                    ImageBuffer::I16(g) => {
+                        bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0) as i32)
                     }
-                    ImageBuffer::I16(g) => bit_depth
-                        .parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0) as i32),
                 };
                 self.copy_from_f32(flt);
             }
@@ -540,24 +473,19 @@ mod private {
         fn copy_from_grid(&mut self, grid: &ImageBuffer, x: usize, y: usize, bit_depth: BitDepth) {
             if matches!(bit_depth, BitDepth::IntegerSample { bits_per_sample: 8 }) {
                 *self = match grid {
-                    ImageBuffer::F32(g) => (g.try_get_ref(x, y).copied().unwrap_or(0.0) * 255.0
-                        + 0.5)
-                        .clamp(0.0, 255.0) as u8,
-                    ImageBuffer::I32(g) => {
-                        g.try_get_ref(x, y).copied().unwrap_or(0).clamp(0, 255) as u8
+                    ImageBuffer::F32(g) => {
+                        (g.try_get_ref(x, y).copied().unwrap_or(0.0) * 255.0 + 0.5).clamp(0.0, 255.0) as u8
                     }
-                    ImageBuffer::I16(g) => {
-                        g.try_get_ref(x, y).copied().unwrap_or(0).clamp(0, 255) as u8
-                    }
+                    ImageBuffer::I32(g) => g.try_get_ref(x, y).copied().unwrap_or(0).clamp(0, 255) as u8,
+                    ImageBuffer::I16(g) => g.try_get_ref(x, y).copied().unwrap_or(0).clamp(0, 255) as u8,
                 };
             } else {
                 let flt = match grid {
                     ImageBuffer::F32(g) => g.try_get_ref(x, y).copied().unwrap_or(0.0),
-                    ImageBuffer::I32(g) => {
-                        bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0))
+                    ImageBuffer::I32(g) => bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0)),
+                    ImageBuffer::I16(g) => {
+                        bit_depth.parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0) as i32)
                     }
-                    ImageBuffer::I16(g) => bit_depth
-                        .parse_integer_sample(g.try_get_ref(x, y).copied().unwrap_or(0) as i32),
                 };
                 self.copy_from_f32(flt);
             }

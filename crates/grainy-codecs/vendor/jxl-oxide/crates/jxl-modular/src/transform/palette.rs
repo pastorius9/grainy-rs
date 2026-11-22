@@ -38,8 +38,7 @@ impl Palette {
             let height = index_grid.height();
             (0..height).all(|y| {
                 let row = index_grid.get_row(y);
-                row.iter()
-                    .all(|&index| (0..nb_colors).contains(&index.to_i32()))
+                row.iter().all(|&index| (0..nb_colors).contains(&index.to_i32()))
             })
         };
 
@@ -110,11 +109,7 @@ impl Palette {
         }
 
         let d_pred = self.d_pred;
-        let wp_header = if d_pred == Predictor::SelfCorrecting {
-            self.wp_header.as_ref()
-        } else {
-            None
-        };
+        let wp_header = if d_pred == Predictor::SelfCorrecting { self.wp_header.as_ref() } else { None };
         let mut predictor = PredictorState::<S>::new();
 
         'outer: for mut grid in targets {

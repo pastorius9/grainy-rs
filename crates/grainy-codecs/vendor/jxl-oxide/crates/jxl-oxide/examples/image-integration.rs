@@ -3,12 +3,8 @@ use jxl_oxide::integration::JxlDecoder;
 
 fn main() {
     let mut args = std::env::args_os().skip(1);
-    let path = args
-        .next()
-        .expect("expected input filename as a command line argument");
-    let output_path = args
-        .next()
-        .expect("expected output filename as a command line argument");
+    let path = args.next().expect("expected input filename as a command line argument");
+    let output_path = args.next().expect("expected output filename as a command line argument");
     assert!(args.next().is_none(), "extra command line argument found");
 
     let file = std::fs::File::open(path).expect("cannot open file");
@@ -16,9 +12,7 @@ fn main() {
 
     #[allow(unused)]
     let icc = decoder.icc_profile().unwrap();
-    let exif = decoder
-        .exif_metadata()
-        .expect("cannot decode Exif metadata");
+    let exif = decoder.exif_metadata().expect("cannot decode Exif metadata");
     if let Some(exif) = exif {
         println!("Exif metadata found ({} byte(s))", exif.len());
     }
@@ -33,7 +27,5 @@ fn main() {
     // if let Some(icc) = icc {
     //     encoder.set_icc_profile(icc).unwrap();
     // }
-    image
-        .write_with_encoder(encoder)
-        .expect("cannot encode image");
+    image.write_with_encoder(encoder).expect("cannot encode image");
 }

@@ -410,8 +410,7 @@ pub fn develop_gpu_resident<'a>(
     // develop ~2 MP instead of 45 MP with zero seams (now also supporting Film, DRT, and GPU local masks!).
     // Skip tiling when globally position- or frame-statistics-dependent stages are active so panning
     // never shifts grain patterns, wavelet thresholds, or multi-level Laplacian pyramids.
-    let tile_unsafe =
-        s.bool("grain") || s.bool("noise_luma") || (s.bool("clarity") && s.f64("detail_version") >= 4.0);
+    let tile_unsafe = s.bool("grain") || s.bool("noise_luma") || (s.bool("clarity") && s.f64("detail_version") >= 4.0);
     if let Some(req) = tile.filter(|_| !tile_unsafe && (!masks || masks_on_gpu) && full_w.max(full_h) > 1536) {
         let u0 = req.roi[0].clamp(0.0, 1.0);
         let v0 = req.roi[1].clamp(0.0, 1.0);

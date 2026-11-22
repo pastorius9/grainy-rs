@@ -1,9 +1,7 @@
 use jxl_bitstream::Bitstream;
 use jxl_grid::AllocTracker;
 use jxl_image::ImageHeader;
-use jxl_modular::{
-    ChannelShift, MaConfig, MaConfigParams, Modular, ModularChannelParams, ModularParams, Sample,
-};
+use jxl_modular::{ChannelShift, MaConfig, MaConfigParams, Modular, ModularChannelParams, ModularParams, Sample};
 use jxl_oxide_common::{Bundle, define_bundle};
 use jxl_vardct::{HfBlockContext, LfChannelCorrelation, LfChannelDequantization, Quantizer};
 
@@ -36,12 +34,7 @@ impl<'a, 'b> LfGlobalParams<'a, 'b> {
         tracker: Option<&'b AllocTracker>,
         allow_partial: bool,
     ) -> Self {
-        Self {
-            image_header,
-            frame_header,
-            tracker,
-            allow_partial,
-        }
+        Self { image_header, frame_header, tracker, allow_partial }
     }
 }
 
@@ -49,11 +42,7 @@ impl<S: Sample> Bundle<LfGlobalParams<'_, '_>> for LfGlobal<S> {
     type Error = crate::Error;
 
     fn parse(bitstream: &mut Bitstream, params: LfGlobalParams) -> Result<Self> {
-        let LfGlobalParams {
-            image_header,
-            frame_header: header,
-            ..
-        } = params;
+        let LfGlobalParams { image_header, frame_header: header, .. } = params;
         let image_size = (header.width * header.height) as u64;
 
         let patches = header
@@ -64,20 +53,15 @@ impl<S: Sample> Bundle<LfGlobalParams<'_, '_>> for LfGlobal<S> {
                 let _guard = span.enter();
 
                 let patches = Patches::parse(bitstream, (image_header, header))?;
-                let it = patches
-                    .patches
-                    .iter()
-                    .flat_map(|patch| &patch.patch_targets)
-                    .flat_map(|target| &target.blending);
+                let it =
+                    patches.patches.iter().flat_map(|patch| &patch.patch_targets).flat_map(|target| &target.blending);
                 for blending_info in it {
                     if blending_info.mode.use_alpha()
-                        && blending_info.alpha_channel as usize
-                            >= image_header.metadata.ec_info.len()
+                        && blending_info.alpha_channel as usize >= image_header.metadata.ec_info.len()
                     {
-                        return Err(jxl_bitstream::Error::ValidationFailed(
-                            "blending_info.alpha_channel out of range",
-                        )
-                        .into());
+                        return Err(
+                            jxl_bitstream::Error::ValidationFailed("blending_info.alpha_channel out of range").into()
+                        );
                     }
                 }
                 Ok(patches)
@@ -105,17 +89,11 @@ impl<S: Sample> Bundle<LfGlobalParams<'_, '_>> for LfGlobal<S> {
             .transpose()?;
         let lf_dequant = LfChannelDequantization::parse(bitstream, ())?;
 
-        let modular_dequants = [
-            lf_dequant.m_x_lf_unscaled(),
-            lf_dequant.m_y_lf_unscaled(),
-            lf_dequant.m_b_lf_unscaled(),
-        ];
+        let modular_dequants =
+            [lf_dequant.m_x_lf_unscaled(), lf_dequant.m_y_lf_unscaled(), lf_dequant.m_b_lf_unscaled()];
         if modular_dequants.into_iter().any(|v| v < 1e-8) {
             tracing::error!(?modular_dequants, "Modular dequant weight is too small");
-            return Err(jxl_bitstream::Error::ValidationFailed(
-                "Modular dequant weight is too small",
-            )
-            .into());
+            return Err(jxl_bitstream::Error::ValidationFailed("Modular dequant weight is too small").into());
         }
 
         let vardct = (header.encoding == crate::header::Encoding::VarDct)
@@ -125,45 +103,25 @@ impl<S: Sample> Bundle<LfGlobalParams<'_, '_>> for LfGlobal<S> {
         if let Some(splines) = &splines {
             let base_correlation_xb = vardct.as_ref().map(|vardct| {
                 let lf_chan_corr = &vardct.lf_chan_corr;
-                (
-                    lf_chan_corr.base_correlation_x,
-                    lf_chan_corr.base_correlation_b,
-                )
+                (lf_chan_corr.base_correlation_x, lf_chan_corr.base_correlation_b)
             });
             let estimated_area = splines.estimate_area(base_correlation_xb);
 
             // Maximum total_estimated_area_reached for Level 10
             let max_estimated_area = (1u64 << 42).min(1024 * image_size + (1u64 << 32));
             if estimated_area > max_estimated_area {
-                tracing::error!(
-                    estimated_area,
-                    max_estimated_area,
-                    "Too large estimated area for splines"
-                );
-                return Err(jxl_bitstream::Error::ProfileConformance(
-                    "too large estimated area for splines",
-                )
-                .into());
+                tracing::error!(estimated_area, max_estimated_area, "Too large estimated area for splines");
+                return Err(jxl_bitstream::Error::ProfileConformance("too large estimated area for splines").into());
             }
             // Maximum total_estimated_area_reached for Level 5
             if estimated_area > (1u64 << 30).min(8 * image_size + (1u64 << 25)) {
-                tracing::warn!(
-                    "Large estimated_area of splines, expect slower decoding: {}",
-                    estimated_area
-                );
+                tracing::warn!("Large estimated_area of splines, expect slower decoding: {}", estimated_area);
             }
         }
 
         let gmodular = GlobalModular::<S>::parse(bitstream, params)?;
 
-        Ok(Self {
-            patches,
-            splines,
-            noise,
-            lf_dequant,
-            vardct,
-            gmodular,
-        })
+        Ok(Self { patches, splines, noise, lf_dequant, vardct, gmodular })
     }
 }
 
@@ -211,29 +169,16 @@ impl<S: Sample> Bundle<LfGlobalParams<'_, '_>> for GlobalModular<S> {
     type Error = crate::Error;
 
     fn parse(bitstream: &mut Bitstream, params: LfGlobalParams) -> Result<Self> {
-        let LfGlobalParams {
-            image_header,
-            frame_header: header,
-            tracker,
-            allow_partial,
-        } = params;
+        let LfGlobalParams { image_header, frame_header: header, tracker, allow_partial } = params;
         let span = tracing::span!(tracing::Level::TRACE, "Decode GlobalModular");
         let _guard = span.enter();
 
-        let num_channels =
-            (header.encoded_color_channels() + image_header.metadata.ec_info.len()) as u64;
-        let max_global_ma_nodes =
-            1024 + header.width as u64 * header.height as u64 * num_channels / 16;
+        let num_channels = (header.encoded_color_channels() + image_header.metadata.ec_info.len()) as u64;
+        let max_global_ma_nodes = 1024 + header.width as u64 * header.height as u64 * num_channels / 16;
         let max_global_ma_nodes = (1 << 22).min(max_global_ma_nodes) as usize;
-        let ma_config_params = MaConfigParams {
-            tracker: params.tracker,
-            node_limit: max_global_ma_nodes,
-            depth_limit: 2048,
-        };
-        let ma_config = bitstream
-            .read_bool()?
-            .then(|| MaConfig::parse(bitstream, ma_config_params))
-            .transpose()?;
+        let ma_config_params =
+            MaConfigParams { tracker: params.tracker, node_limit: max_global_ma_nodes, depth_limit: 2048 };
+        let ma_config = bitstream.read_bool()?.then(|| MaConfig::parse(bitstream, ma_config_params)).transpose()?;
 
         let color_width = header.color_sample_width();
         let color_height = header.color_sample_height();
@@ -242,24 +187,9 @@ impl<S: Sample> Bundle<LfGlobalParams<'_, '_>> for GlobalModular<S> {
         if header.encoding == Encoding::Modular {
             if header.do_ycbcr {
                 // Cb, Y, Cr
-                shifts.push(ModularChannelParams::jpeg(
-                    color_width,
-                    color_height,
-                    header.jpeg_upsampling,
-                    0,
-                ));
-                shifts.push(ModularChannelParams::jpeg(
-                    color_width,
-                    color_height,
-                    header.jpeg_upsampling,
-                    1,
-                ));
-                shifts.push(ModularChannelParams::jpeg(
-                    color_width,
-                    color_height,
-                    header.jpeg_upsampling,
-                    2,
-                ));
+                shifts.push(ModularChannelParams::jpeg(color_width, color_height, header.jpeg_upsampling, 0));
+                shifts.push(ModularChannelParams::jpeg(color_width, color_height, header.jpeg_upsampling, 1));
+                shifts.push(ModularChannelParams::jpeg(color_width, color_height, header.jpeg_upsampling, 2));
             } else {
                 let channel_param = ModularChannelParams::new(color_width, color_height);
                 let channels = header.encoded_color_channels();
@@ -270,21 +200,13 @@ impl<S: Sample> Bundle<LfGlobalParams<'_, '_>> for GlobalModular<S> {
         let extra_channel_from = shifts.len();
         let color_upsampling_shift = header.upsampling.trailing_zeros();
 
-        for (&ec_upsampling, ec_info) in header
-            .ec_upsampling
-            .iter()
-            .zip(image_header.metadata.ec_info.iter())
-        {
+        for (&ec_upsampling, ec_info) in header.ec_upsampling.iter().zip(image_header.metadata.ec_info.iter()) {
             let ec_upsampling_shift = ec_upsampling.trailing_zeros();
             let dim_shift = ec_info.dim_shift;
             let actual_dim_shift = ec_upsampling_shift + dim_shift - color_upsampling_shift;
 
             let shift = ChannelShift::from_shift(actual_dim_shift);
-            shifts.push(ModularChannelParams::with_shift(
-                color_width,
-                color_height,
-                shift,
-            ));
+            shifts.push(ModularChannelParams::with_shift(color_width, color_height, shift));
         }
 
         let group_dim = header.group_dim();
@@ -303,11 +225,6 @@ impl<S: Sample> Bundle<LfGlobalParams<'_, '_>> for GlobalModular<S> {
             is_partial = gmodular.is_partial();
         }
 
-        Ok(Self {
-            ma_config,
-            modular,
-            extra_channel_from,
-            is_partial,
-        })
+        Ok(Self { ma_config, modular, extra_channel_from, is_partial })
     }
 }

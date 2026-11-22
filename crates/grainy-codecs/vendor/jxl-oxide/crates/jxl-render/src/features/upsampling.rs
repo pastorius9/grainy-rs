@@ -18,24 +18,12 @@ pub fn upsample(
     let up8 = factor / 3;
     let last_up = factor % 3;
     for _ in 0..up8 {
-        out = Some(upsample_inner::<8, 210>(
-            grid,
-            &metadata.up8_weight,
-            tracker,
-        )?);
+        out = Some(upsample_inner::<8, 210>(grid, &metadata.up8_weight, tracker)?);
         grid = out.as_ref().unwrap().as_subgrid();
     }
     out = match last_up {
-        1 => Some(upsample_inner::<2, 15>(
-            grid,
-            &metadata.up2_weight,
-            tracker,
-        )?),
-        2 => Some(upsample_inner::<4, 55>(
-            grid,
-            &metadata.up4_weight,
-            tracker,
-        )?),
+        1 => Some(upsample_inner::<2, 15>(grid, &metadata.up2_weight, tracker)?),
+        2 => Some(upsample_inner::<4, 55>(grid, &metadata.up4_weight, tracker)?),
         _ => out,
     };
     *out_region = out_region.upsample(factor);

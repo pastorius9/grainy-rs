@@ -64,13 +64,7 @@ pub fn apply_gabor_like(
         // SAFETY: Features are checked above.
         unsafe {
             for ((input, output), weights) in fb.into_iter().zip(fb_scratch).zip(weights) {
-                run_gabor_rows_unsafe(
-                    input,
-                    output,
-                    weights,
-                    pool,
-                    gabor_avx2::run_gabor_row_x86_64_avx2,
-                );
+                run_gabor_rows_unsafe(input, output, weights, pool, gabor_avx2::run_gabor_row_x86_64_avx2);
             }
         }
         return;

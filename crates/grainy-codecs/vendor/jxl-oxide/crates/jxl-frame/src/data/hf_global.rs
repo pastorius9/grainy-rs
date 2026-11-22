@@ -27,9 +27,7 @@ impl<'a, 'b> HfGlobalParams<'a, 'b> {
         tracker: Option<&'b AllocTracker>,
         pool: &'a JxlThreadPool,
     ) -> Self {
-        let Some(lf_vardct) = &lf_global.vardct else {
-            panic!("VarDCT not initialized")
-        };
+        let Some(lf_vardct) = &lf_global.vardct else { panic!("VarDCT not initialized") };
         Self {
             metadata,
             frame_header,
@@ -52,14 +50,7 @@ impl Bundle<HfGlobalParams<'_, '_>> for HfGlobal {
     type Error = crate::Error;
 
     fn parse(bitstream: &mut Bitstream, params: HfGlobalParams) -> Result<Self> {
-        let HfGlobalParams {
-            metadata,
-            frame_header,
-            ma_config,
-            hf_block_ctx,
-            tracker,
-            pool,
-        } = params;
+        let HfGlobalParams { metadata, frame_header, ma_config, hf_block_ctx, tracker, pool } = params;
         let dequant_matrix_params = DequantMatrixSetParams::new(
             metadata.bit_depth.bits_per_sample(),
             frame_header.num_lf_groups(),
@@ -70,18 +61,13 @@ impl Bundle<HfGlobalParams<'_, '_>> for HfGlobal {
         let dequant_matrices = DequantMatrixSet::parse(bitstream, dequant_matrix_params)?;
 
         let num_groups = frame_header.num_groups();
-        let num_hf_presets =
-            bitstream.read_bits(num_groups.next_power_of_two().trailing_zeros() as usize)? + 1;
+        let num_hf_presets = bitstream.read_bits(num_groups.next_power_of_two().trailing_zeros() as usize)? + 1;
 
         let hf_pass_params = HfPassParams::new(hf_block_ctx, num_hf_presets);
         let hf_passes = std::iter::repeat_with(|| HfPass::parse(bitstream, hf_pass_params))
             .take(frame_header.passes.num_passes as usize)
             .collect::<std::result::Result<Vec<_>, _>>()?;
 
-        Ok(Self {
-            dequant_matrices,
-            num_hf_presets,
-            hf_passes,
-        })
+        Ok(Self { dequant_matrices, num_hf_presets, hf_passes })
     }
 }

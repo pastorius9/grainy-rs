@@ -62,10 +62,7 @@ impl TryFrom<u32> for PatchBlendMode {
             6 => MulAddAbove,
             7 => MulAddBelow,
             _ => {
-                return Err(jxl_bitstream::Error::InvalidEnum {
-                    name: "PatchBlendMode",
-                    value,
-                });
+                return Err(jxl_bitstream::Error::InvalidEnum { name: "PatchBlendMode", value });
             }
         })
     }
@@ -74,20 +71,14 @@ impl TryFrom<u32> for PatchBlendMode {
 impl PatchBlendMode {
     #[inline]
     pub fn use_alpha(self) -> bool {
-        matches!(
-            self,
-            Self::BlendAbove | Self::BlendBelow | Self::MulAddAbove | Self::MulAddBelow
-        )
+        matches!(self, Self::BlendAbove | Self::BlendBelow | Self::MulAddAbove | Self::MulAddBelow)
     }
 }
 
 impl Bundle<(&ImageHeader, &FrameHeader)> for Patches {
     type Error = crate::Error;
 
-    fn parse(
-        bitstream: &mut Bitstream,
-        (image_header, frame_header): (&ImageHeader, &FrameHeader),
-    ) -> Result<Self> {
+    fn parse(bitstream: &mut Bitstream, (image_header, frame_header): (&ImageHeader, &FrameHeader)) -> Result<Self> {
         let num_extra = image_header.metadata.ec_info.len();
         let alpha_channel_indices = image_header
             .metadata
@@ -102,8 +93,7 @@ impl Bundle<(&ImageHeader, &FrameHeader)> for Patches {
 
         let frame_width = frame_header.width;
         let frame_height = frame_header.height;
-        let max_num_patch_refs =
-            (1 << 24).min((frame_width as u64 * frame_height as u64 / 16) as u32);
+        let max_num_patch_refs = (1 << 24).min((frame_width as u64 * frame_height as u64 / 16) as u32);
         let max_num_patches = max_num_patch_refs * 4; // from libjxl limits
 
         let num_patch_refs = decoder.read_varint(bitstream, 0)?;
@@ -118,9 +108,7 @@ impl Bundle<(&ImageHeader, &FrameHeader)> for Patches {
             let ref_idx = decoder.read_varint(bitstream, 1)?;
             if ref_idx >= 4 {
                 tracing::error!(ref_idx, "PatchRef index out of bounds");
-                return Err(
-                    jxl_bitstream::Error::ValidationFailed("PatchRef index out of bounds").into(),
-                );
+                return Err(jxl_bitstream::Error::ValidationFailed("PatchRef index out of bounds").into());
             }
             let x0 = decoder.read_varint(bitstream, 3)?;
             let y0 = decoder.read_varint(bitstream, 3)?;
@@ -146,16 +134,11 @@ impl Bundle<(&ImageHeader, &FrameHeader)> for Patches {
                     let y = dy.checked_add(py);
                     let (Some(x), Some(y)) = (x, y) else {
                         tracing::error!(px, py, dx, dy, "Patch coord overflow");
-                        return Err(
-                            jxl_bitstream::Error::ValidationFailed("patch coord overflow").into(),
-                        );
+                        return Err(jxl_bitstream::Error::ValidationFailed("patch coord overflow").into());
                     };
                     (x, y)
                 } else {
-                    (
-                        decoder.read_varint(bitstream, 4)? as i32,
-                        decoder.read_varint(bitstream, 4)? as i32,
-                    )
+                    (decoder.read_varint(bitstream, 4)? as i32, decoder.read_varint(bitstream, 4)? as i32)
                 };
                 prev_xy = Some((x, y));
 
@@ -167,17 +150,9 @@ impl Bundle<(&ImageHeader, &FrameHeader)> for Patches {
                     } else {
                         alpha_channel_indices.first().copied().unwrap_or_default()
                     };
-                    let clamp = if raw_mode >= 3 {
-                        decoder.read_varint(bitstream, 9)? != 0
-                    } else {
-                        false
-                    };
+                    let clamp = if raw_mode >= 3 { decoder.read_varint(bitstream, 9)? != 0 } else { false };
 
-                    Ok(BlendingModeInformation {
-                        mode,
-                        alpha_channel,
-                        clamp,
-                    })
+                    Ok(BlendingModeInformation { mode, alpha_channel, clamp })
                 })
                 .take(num_extra + 1)
                 .collect::<Result<Vec<_>>>()?;
@@ -187,14 +162,7 @@ impl Bundle<(&ImageHeader, &FrameHeader)> for Patches {
             .take(count as usize)
             .collect::<Result<Vec<_>>>()?;
 
-            Ok(PatchRef {
-                ref_idx,
-                x0,
-                y0,
-                width,
-                height,
-                patch_targets,
-            })
+            Ok(PatchRef { ref_idx, x0, y0, width, height, patch_targets })
         })
         .take(num_patch_refs as usize)
         .collect::<Result<Vec<_>>>()?;

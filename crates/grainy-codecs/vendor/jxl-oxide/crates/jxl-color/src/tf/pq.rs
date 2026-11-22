@@ -7,30 +7,12 @@ use std::arch::is_x86_feature_detected;
 
 use crate::fastmath::rational_poly;
 
-const EOTF_P: [f32; 5] = [
-    2.6297566e-4,
-    -6.235531e-3,
-    7.386023e-1,
-    2.6455317,
-    5.500349e-1,
-];
-const EOTF_Q: [f32; 5] = [
-    4.213501e2,
-    -4.2873682e2,
-    1.7436467e2,
-    -3.3907887e1,
-    2.6771877,
-];
+const EOTF_P: [f32; 5] = [2.6297566e-4, -6.235531e-3, 7.386023e-1, 2.6455317, 5.500349e-1];
+const EOTF_Q: [f32; 5] = [4.213501e2, -4.2873682e2, 1.7436467e2, -3.3907887e1, 2.6771877];
 
 const INV_EOTF_P: [f32; 5] = [1.351392e-2, -1.095778, 5.522776e1, 1.492516e2, 4.838434e1];
 const INV_EOTF_Q: [f32; 5] = [1.012416, 2.016708e1, 9.26371e1, 1.120607e2, 2.590418e1];
-const INV_EOTF_P_SMALL: [f32; 5] = [
-    9.863406e-6,
-    3.881234e-1,
-    1.352821e2,
-    6.889862e4,
-    -2.864824e5,
-];
+const INV_EOTF_P_SMALL: [f32; 5] = [9.863406e-6, 3.881234e-1, 1.352821e2, 6.889862e4, -2.864824e5];
 const INV_EOTF_Q_SMALL: [f32; 5] = [3.371868e1, 1.477719e3, 1.608477e4, -4.389884e4, -2.072546e5];
 
 /// Converts the linear samples with the PQ transfer function, where linear sample value of 1.0
@@ -45,10 +27,7 @@ pub fn linear_to_pq(mut samples: &mut [f32], intensity_target: f32) {
         let mut it = samples.chunks_exact_mut(8);
         for s in &mut it {
             let v = std::arch::x86_64::_mm256_loadu_ps(s.as_ptr());
-            std::arch::x86_64::_mm256_storeu_ps(
-                s.as_mut_ptr(),
-                linear_to_pq_x86_64_avx2(v, intensity_target),
-            );
+            std::arch::x86_64::_mm256_storeu_ps(s.as_mut_ptr(), linear_to_pq_x86_64_avx2(v, intensity_target));
         }
         it.into_remainder()
     }
@@ -60,10 +39,7 @@ pub fn linear_to_pq(mut samples: &mut [f32], intensity_target: f32) {
         let mut it = samples.chunks_exact_mut(4);
         for s in &mut it {
             let v = std::arch::x86_64::_mm_loadu_ps(s.as_ptr());
-            std::arch::x86_64::_mm_storeu_ps(
-                s.as_mut_ptr(),
-                linear_to_pq_x86_64_fma(v, intensity_target),
-            );
+            std::arch::x86_64::_mm_storeu_ps(s.as_mut_ptr(), linear_to_pq_x86_64_fma(v, intensity_target));
         }
         it.into_remainder()
     }
@@ -74,10 +50,7 @@ pub fn linear_to_pq(mut samples: &mut [f32], intensity_target: f32) {
         let mut it = samples.chunks_exact_mut(4);
         for s in &mut it {
             let v = std::arch::aarch64::vld1q_f32(s.as_ptr());
-            std::arch::aarch64::vst1q_f32(
-                s.as_mut_ptr(),
-                linear_to_pq_aarch64_neon(v, intensity_target),
-            );
+            std::arch::aarch64::vst1q_f32(s.as_mut_ptr(), linear_to_pq_aarch64_neon(v, intensity_target));
         }
         it.into_remainder()
     }
@@ -101,10 +74,7 @@ pub fn linear_to_pq(mut samples: &mut [f32], intensity_target: f32) {
         unsafe {
             for s in &mut it {
                 let v = std::arch::x86_64::_mm_loadu_ps(s.as_ptr());
-                std::arch::x86_64::_mm_storeu_ps(
-                    s.as_mut_ptr(),
-                    linear_to_pq_x86_64_sse2(v, intensity_target),
-                );
+                std::arch::x86_64::_mm_storeu_ps(s.as_mut_ptr(), linear_to_pq_x86_64_sse2(v, intensity_target));
             }
         }
         samples = it.into_remainder();
@@ -212,10 +182,7 @@ pub(crate) unsafe fn linear_to_pq_x86_64_sse2(
     let v_small = rational_poly::eval_x86_64_sse2(a_1_4, INV_EOTF_P_SMALL, INV_EOTF_Q_SMALL);
     let v_large = rational_poly::eval_x86_64_sse2(a_1_4, INV_EOTF_P, INV_EOTF_Q);
     let is_small = _mm_cmplt_ps(a, _mm_set1_ps(1e-4));
-    let v = _mm_or_ps(
-        _mm_andnot_ps(is_small, v_large),
-        _mm_and_ps(is_small, v_small),
-    );
+    let v = _mm_or_ps(_mm_andnot_ps(is_small, v_large), _mm_and_ps(is_small, v_small));
     _mm_or_ps(_mm_andnot_ps(sign_mask, v), sign)
 }
 
@@ -255,10 +222,7 @@ pub fn pq_to_linear(mut samples: &mut [f32], intensity_target: f32) {
         let mut it = samples.chunks_exact_mut(8);
         for s in &mut it {
             let v = std::arch::x86_64::_mm256_loadu_ps(s.as_ptr());
-            std::arch::x86_64::_mm256_storeu_ps(
-                s.as_mut_ptr(),
-                pq_to_linear_x86_64_avx2(v, intensity_target),
-            );
+            std::arch::x86_64::_mm256_storeu_ps(s.as_mut_ptr(), pq_to_linear_x86_64_avx2(v, intensity_target));
         }
         it.into_remainder()
     }
@@ -270,10 +234,7 @@ pub fn pq_to_linear(mut samples: &mut [f32], intensity_target: f32) {
         let mut it = samples.chunks_exact_mut(4);
         for s in &mut it {
             let v = std::arch::x86_64::_mm_loadu_ps(s.as_ptr());
-            std::arch::x86_64::_mm_storeu_ps(
-                s.as_mut_ptr(),
-                pq_to_linear_x86_64_fma(v, intensity_target),
-            );
+            std::arch::x86_64::_mm_storeu_ps(s.as_mut_ptr(), pq_to_linear_x86_64_fma(v, intensity_target));
         }
         it.into_remainder()
     }
@@ -284,10 +245,7 @@ pub fn pq_to_linear(mut samples: &mut [f32], intensity_target: f32) {
         let mut it = samples.chunks_exact_mut(4);
         for s in &mut it {
             let v = std::arch::aarch64::vld1q_f32(s.as_ptr());
-            std::arch::aarch64::vst1q_f32(
-                s.as_mut_ptr(),
-                pq_to_linear_aarch64_neon(v, intensity_target),
-            );
+            std::arch::aarch64::vst1q_f32(s.as_mut_ptr(), pq_to_linear_aarch64_neon(v, intensity_target));
         }
         it.into_remainder()
     }
@@ -311,10 +269,7 @@ pub fn pq_to_linear(mut samples: &mut [f32], intensity_target: f32) {
         unsafe {
             for s in &mut it {
                 let v = std::arch::x86_64::_mm_loadu_ps(s.as_ptr());
-                std::arch::x86_64::_mm_storeu_ps(
-                    s.as_mut_ptr(),
-                    pq_to_linear_x86_64_sse2(v, intensity_target),
-                );
+                std::arch::x86_64::_mm_storeu_ps(s.as_mut_ptr(), pq_to_linear_x86_64_sse2(v, intensity_target));
             }
         }
         samples = it.into_remainder();

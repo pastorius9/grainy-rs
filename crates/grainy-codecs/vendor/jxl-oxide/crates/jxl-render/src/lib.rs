@@ -3,8 +3,8 @@ use std::sync::{Arc, Mutex};
 
 use jxl_bitstream::Bitstream;
 use jxl_color::{
-    ColorEncodingWithProfile, ColorManagementSystem, ColorTransform, ColourEncoding, ColourSpace,
-    EnumColourEncoding, RenderingIntent, TransferFunction,
+    ColorEncodingWithProfile, ColorManagementSystem, ColorTransform, ColourEncoding, ColourSpace, EnumColourEncoding,
+    RenderingIntent, TransferFunction,
 };
 use jxl_frame::{Frame, FrameContext, header::FrameType};
 use jxl_grid::AllocTracker;
@@ -122,13 +122,10 @@ impl RenderContextBuilder {
 
                         let is_supported_icc = parsed_icc.icc_profile().is_empty();
                         if !is_supported_icc {
-                            tracing::trace!(
-                                "Failed to convert embedded ICC into enum color encoding"
-                            );
+                            tracing::trace!("Failed to convert embedded ICC into enum color encoding");
                         }
 
-                        let allow_parsed_icc =
-                            !image_header.metadata.xyb_encoded || is_supported_icc;
+                        let allow_parsed_icc = !image_header.metadata.xyb_encoded || is_supported_icc;
                         allow_parsed_icc.then_some(parsed_icc)
                     }
                     Err(e) => {
@@ -140,13 +137,9 @@ impl RenderContextBuilder {
                 if let Some(profile) = parsed_icc {
                     profile
                 } else if header_is_gray {
-                    ColorEncodingWithProfile::new(EnumColourEncoding::gray_srgb(
-                        RenderingIntent::Relative,
-                    ))
+                    ColorEncodingWithProfile::new(EnumColourEncoding::gray_srgb(RenderingIntent::Relative))
                 } else {
-                    ColorEncodingWithProfile::new(EnumColourEncoding::srgb(
-                        RenderingIntent::Relative,
-                    ))
+                    ColorEncodingWithProfile::new(EnumColourEncoding::srgb(RenderingIntent::Relative))
                 }
             }
         };
@@ -156,10 +149,8 @@ impl RenderContextBuilder {
             "Setting default output color encoding"
         );
 
-        let full_image_region = Region::with_size(
-            image_header.width_with_orientation(),
-            image_header.height_with_orientation(),
-        );
+        let full_image_region =
+            Region::with_size(image_header.width_with_orientation(), image_header.height_with_orientation());
 
         Ok(RenderContext {
             image_header,
@@ -304,10 +295,7 @@ impl RenderContext {
             }
         }
 
-        let deps = FrameDependence {
-            lf,
-            ref_slots: self.reference,
-        };
+        let deps = FrameDependence { lf, ref_slots: self.reference };
 
         if header.can_reference() {
             let ref_idx = header.save_as_reference as usize;
@@ -346,13 +334,7 @@ impl RenderContext {
 
             let render_op = self.render_op::<i16>(Arc::clone(&frame), reference_frames);
             let handle = if let Some(cache) = self.loading_render_cache_narrow.take() {
-                FrameRenderHandle::from_cache(
-                    Arc::clone(&frame),
-                    image_region,
-                    cache,
-                    render_op,
-                    refs,
-                )
+                FrameRenderHandle::from_cache(Arc::clone(&frame), image_region, cache, render_op, refs)
             } else {
                 FrameRenderHandle::new(Arc::clone(&frame), image_region, render_op, refs)
             };
@@ -374,13 +356,7 @@ impl RenderContext {
 
             let render_op = self.render_op::<i32>(Arc::clone(&frame), reference_frames);
             let handle = if let Some(cache) = self.loading_render_cache_wide.take() {
-                FrameRenderHandle::from_cache(
-                    Arc::clone(&frame),
-                    image_region,
-                    cache,
-                    render_op,
-                    refs,
-                )
+                FrameRenderHandle::from_cache(Arc::clone(&frame), image_region, cache, render_op, refs)
             } else {
                 FrameRenderHandle::new(Arc::clone(&frame), image_region, render_op, refs)
             };
@@ -392,10 +368,7 @@ impl RenderContext {
     }
 
     fn loading_frame(&self) -> Option<&IndexedFrame> {
-        let search_from = self
-            .keyframe_in_progress
-            .or_else(|| self.keyframes.last().map(|x| x + 1))
-            .unwrap_or(0);
+        let search_from = self.keyframe_in_progress.or_else(|| self.keyframes.last().map(|x| x + 1)).unwrap_or(0);
         self.frames[search_from..]
             .iter()
             .map(|r| &**r)
@@ -512,9 +485,7 @@ impl RenderContext {
             FrameRender::InProgress(cache) => cache,
             _ => {
                 state = FrameRender::InProgress(Box::new(RenderCache::new(frame)));
-                let FrameRender::InProgress(cache) = state else {
-                    unreachable!()
-                };
+                let FrameRender::InProgress(cache) = state else { unreachable!() };
                 cache
             }
         };
@@ -540,23 +511,12 @@ impl RenderContext {
         }
     }
 
-    fn render_op<S: Sample>(
-        &self,
-        frame: Arc<IndexedFrame>,
-        reference_frames: ReferenceFrames<S>,
-    ) -> RenderOp<S> {
+    fn render_op<S: Sample>(&self, frame: Arc<IndexedFrame>, reference_frames: ReferenceFrames<S>) -> RenderOp<S> {
         let prev_frame_visibility = self.get_previous_frames_visibility(&frame);
 
         let pool = self.pool.clone();
         Arc::new(move |state, image_region| {
-            Self::do_render(
-                &frame,
-                &reference_frames,
-                state,
-                image_region,
-                prev_frame_visibility,
-                &pool,
-            )
+            Self::do_render(&frame, &reference_frames, state, image_region, prev_frame_visibility, &pool)
         })
     }
 
@@ -608,13 +568,9 @@ impl RenderContext {
 
     fn render_by_index(&self, index: usize) -> Result<Arc<ImageWithRegion>> {
         if self.narrow_modular() {
-            Arc::clone(&self.renders_narrow[index])
-                .run_with_image()?
-                .blend(None, &self.pool)
+            Arc::clone(&self.renders_narrow[index]).run_with_image()?.blend(None, &self.pool)
         } else {
-            Arc::clone(&self.renders_wide[index])
-                .run_with_image()?
-                .blend(None, &self.pool)
+            Arc::clone(&self.renders_wide[index]).run_with_image()?.blend(None, &self.pool)
         }
     }
 
@@ -630,10 +586,7 @@ impl RenderContext {
     ///
     /// The keyframe should be loaded in prior to rendering, with one of the loading methods.
     pub fn render_keyframe(&self, keyframe_idx: usize) -> Result<Arc<ImageWithRegion>> {
-        let idx = *self
-            .keyframes
-            .get(keyframe_idx)
-            .ok_or(Error::IncompleteFrame)?;
+        let idx = *self.keyframes.get(keyframe_idx).ok_or(Error::IncompleteFrame)?;
         let grid = self.render_by_index(idx)?;
         let frame = &*self.frames[idx];
 
@@ -694,8 +647,7 @@ impl RenderContext {
                 let refs = reference_frames.refs.clone();
 
                 let render_op = self.render_op::<i16>(Arc::clone(frame), reference_frames);
-                let handle =
-                    FrameRenderHandle::new(Arc::clone(frame), image_region, render_op, refs);
+                let handle = FrameRenderHandle::new(Arc::clone(frame), image_region, render_op, refs);
                 self.renders_narrow[idx] = Arc::new(handle);
             } else {
                 let reference_frames = ReferenceFrames {
@@ -713,8 +665,7 @@ impl RenderContext {
                 let refs = reference_frames.refs.clone();
 
                 let render_op = self.render_op::<i32>(Arc::clone(frame), reference_frames);
-                let handle =
-                    FrameRenderHandle::new(Arc::clone(frame), image_region, render_op, refs);
+                let handle = FrameRenderHandle::new(Arc::clone(frame), image_region, render_op, refs);
                 self.renders_wide[idx] = Arc::new(handle);
             }
         }
@@ -775,14 +726,8 @@ impl RenderContext {
             let frame = self.loading_frame().unwrap();
             let prev_frame_visibility = self.get_previous_frames_visibility(frame);
 
-            let state = Self::do_render(
-                frame,
-                &reference_frames,
-                state,
-                image_region,
-                prev_frame_visibility,
-                &self.pool,
-            );
+            let state =
+                Self::do_render(frame, &reference_frames, state, image_region, prev_frame_visibility, &self.pool);
 
             match state {
                 FrameRender::InProgress(cache) => {
@@ -793,21 +738,12 @@ impl RenderContext {
                     return Err(e);
                 }
                 FrameRender::Done(mut image) => {
-                    let skip_composition =
-                        image::composite_preprocess(frame, &mut image, &self.pool)?;
+                    let skip_composition = image::composite_preprocess(frame, &mut image, &self.pool)?;
 
                     if !skip_composition {
-                        let oriented_image_region = util::apply_orientation_to_image_region(
-                            &self.image_header,
-                            image_region,
-                        );
-                        image::composite(
-                            frame,
-                            &mut image,
-                            reference_frames.refs,
-                            oriented_image_region,
-                            &self.pool,
-                        )?;
+                        let oriented_image_region =
+                            util::apply_orientation_to_image_region(&self.image_header, image_region);
+                        image::composite(frame, &mut image, reference_frames.refs, oriented_image_region, &self.pool)?;
                     }
 
                     image
@@ -837,14 +773,8 @@ impl RenderContext {
             let frame = self.loading_frame().unwrap();
             let prev_frame_visibility = self.get_previous_frames_visibility(frame);
 
-            let state = Self::do_render(
-                frame,
-                &reference_frames,
-                state,
-                image_region,
-                prev_frame_visibility,
-                &self.pool,
-            );
+            let state =
+                Self::do_render(frame, &reference_frames, state, image_region, prev_frame_visibility, &self.pool);
 
             match state {
                 FrameRender::InProgress(cache) => {
@@ -855,21 +785,12 @@ impl RenderContext {
                     return Err(e);
                 }
                 FrameRender::Done(mut image) => {
-                    let skip_composition =
-                        image::composite_preprocess(frame, &mut image, &self.pool)?;
+                    let skip_composition = image::composite_preprocess(frame, &mut image, &self.pool)?;
 
                     if !skip_composition {
-                        let oriented_image_region = util::apply_orientation_to_image_region(
-                            &self.image_header,
-                            image_region,
-                        );
-                        image::composite(
-                            frame,
-                            &mut image,
-                            reference_frames.refs,
-                            oriented_image_region,
-                            &self.pool,
-                        )?;
+                        let oriented_image_region =
+                            util::apply_orientation_to_image_region(&self.image_header, image_region);
+                        image::composite(frame, &mut image, reference_frames.refs, oriented_image_region, &self.pool)?;
                     }
 
                     image
@@ -922,11 +843,7 @@ impl RenderContext {
         Ok(())
     }
 
-    fn postprocess_keyframe(
-        &self,
-        frame: &IndexedFrame,
-        grid: Arc<ImageWithRegion>,
-    ) -> Result<Arc<ImageWithRegion>> {
+    fn postprocess_keyframe(&self, frame: &IndexedFrame, grid: Arc<ImageWithRegion>) -> Result<Arc<ImageWithRegion>> {
         let frame_header = frame.header();
         let metadata = self.metadata();
 
@@ -1007,10 +924,7 @@ pub struct IndexedFrame {
 
 impl IndexedFrame {
     fn new(frame: Frame, index: usize) -> Self {
-        IndexedFrame {
-            f: frame,
-            idx: index,
-        }
+        IndexedFrame { f: frame, idx: index }
     }
 
     /// Returns the frame index.

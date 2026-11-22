@@ -36,10 +36,7 @@ pub trait PreparedTransform: Send + Sync {
     ///
     /// # Errors
     /// This function will return an error if the internal CMS implementation returned an error.
-    fn transform(
-        &self,
-        channels: &mut [&mut [f32]],
-    ) -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>>;
+    fn transform(&self, channels: &mut [&mut [f32]]) -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>>;
 }
 
 /// "Null" color management system that fails on every operation.
@@ -51,8 +48,7 @@ impl ColorManagementSystem for NullCms {
         _: &[u8],
         _: &[u8],
         _: RenderingIntent,
-    ) -> Result<Box<dyn PreparedTransform>, Box<dyn std::error::Error + Send + Sync + 'static>>
-    {
+    ) -> Result<Box<dyn PreparedTransform>, Box<dyn std::error::Error + Send + Sync + 'static>> {
         Err(Box::new(crate::Error::CmsNotAvailable))
     }
 }

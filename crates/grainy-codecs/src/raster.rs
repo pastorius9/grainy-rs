@@ -335,7 +335,8 @@ fn decode_tiff(data: &[u8]) -> Result<DecodedBitmap> {
     if matches!(photo, 0 | 3 | 8 | 9) {
         let n = u16_at(data, root, le)? as usize;
         for i in 0..n {
-            let at = root.checked_add(2).and_then(|v| v.checked_add(i * 12)).ok_or_else(|| invalid("TIFF IFD overflow"))?;
+            let at =
+                root.checked_add(2).and_then(|v| v.checked_add(i * 12)).ok_or_else(|| invalid("TIFF IFD overflow"))?;
             if at.checked_add(12).is_none_or(|end| end > source.len()) {
                 return Err(invalid("truncated TIFF IFD"));
             }

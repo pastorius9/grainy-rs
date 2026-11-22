@@ -441,6 +441,8 @@ fn library_harness<'a>(name: &str) -> (Harness<'a, GrainyApp>, PathBuf) {
     // The folders that opened by themselves while the import's listing grew are not the same in every run.
     common::snapshot::open_folders(harness.state_mut(), &[name]);
     settle(&mut harness);
+    // Whether the preview reply or the import finish writes the status bar last depends on thread scheduling.
+    harness.state_mut().cx.set_status(grainy_app::text::tr("사진 가져오기 완료"));
     (harness, dir)
 }
 

@@ -32,9 +32,7 @@ pub struct JpegBitstreamData {
 
 impl std::fmt::Debug for JpegBitstreamData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("JpegBitstreamData")
-            .field("header", &self.header)
-            .finish_non_exhaustive()
+        f.debug_struct("JpegBitstreamData").field("header", &self.header).finish_non_exhaustive()
     }
 }
 
@@ -57,14 +55,9 @@ impl JpegBitstreamData {
         let bytes_read = bitstream.num_read_bits() / 8;
         let compressed_data = &data[bytes_read..];
         let mut data_stream = Box::new(DecompressorWriter::new(Vec::new(), 4096));
-        data_stream
-            .write_all(compressed_data)
-            .map_err(Error::Brotli)?;
+        data_stream.write_all(compressed_data).map_err(Error::Brotli)?;
 
-        Ok(Some(Self {
-            header,
-            data_stream,
-        }))
+        Ok(Some(Self { header, data_stream }))
     }
 
     /// Feeds more bytes to be decompressed.
@@ -100,19 +93,8 @@ impl JpegBitstreamData {
         xmp: &'meta [u8],
         pool: &jxl_threadpool::JxlThreadPool,
     ) -> Result<JpegBitstreamReconstructor<'jbrd, 'frame, 'meta>> {
-        let Self {
-            ref header,
-            ref data_stream,
-        } = *self;
-        JpegBitstreamReconstructor::new(
-            header,
-            data_stream.get_ref(),
-            frame,
-            icc_profile,
-            exif,
-            xmp,
-            pool,
-        )
+        let Self { ref header, ref data_stream } = *self;
+        JpegBitstreamReconstructor::new(header, data_stream.get_ref(), frame, icc_profile, exif, xmp, pool)
     }
 
     pub fn header(&self) -> &JpegBitstreamHeader {
@@ -162,17 +144,12 @@ impl Bundle for JpegBitstreamHeader {
             markers.push(marker_bits);
         }
 
-        let app_markers = (0..num_app_markers)
-            .map(|_| AppMarker::parse(bitstream, ()))
-            .collect::<Result<_, _>>()?;
-        let com_lengths = (0..num_com_markers)
-            .map(|_| bitstream.read_bits(16).map(|x| x + 1))
-            .collect::<Result<_, _>>()?;
+        let app_markers = (0..num_app_markers).map(|_| AppMarker::parse(bitstream, ())).collect::<Result<_, _>>()?;
+        let com_lengths =
+            (0..num_com_markers).map(|_| bitstream.read_bits(16).map(|x| x + 1)).collect::<Result<_, _>>()?;
 
         let num_quant_tables = bitstream.read_bits(2)? + 1;
-        let quant_tables = (0..num_quant_tables)
-            .map(|_| QuantTable::parse(bitstream, ()))
-            .collect::<Result<_, _>>()?;
+        let quant_tables = (0..num_quant_tables).map(|_| QuantTable::parse(bitstream, ())).collect::<Result<_, _>>()?;
 
         let comp_type = bitstream.read_bits(2)?;
         let component_ids = match comp_type {
@@ -181,9 +158,7 @@ impl Bundle for JpegBitstreamHeader {
             2 => vec![b'R', b'G', b'B'],
             3 => {
                 let num_comp = bitstream.read_bits(2)? as u8 + 1;
-                (0..num_comp)
-                    .map(|_| bitstream.read_bits(8).map(|x| x as u8))
-                    .collect::<Result<_, _>>()?
+                (0..num_comp).map(|_| bitstream.read_bits(8).map(|x| x as u8)).collect::<Result<_, _>>()?
             }
             _ => unreachable!(),
         };
@@ -196,28 +171,18 @@ impl Bundle for JpegBitstreamHeader {
             .collect::<Result<_, _>>()?;
 
         let num_huff = bitstream.read_u32(4, 2 + U(3), 10 + U(4), 26 + U(6))?;
-        let huffman_codes = (0..num_huff)
-            .map(|_| HuffmanCode::parse(bitstream, ()))
-            .collect::<Result<_, _>>()?;
+        let huffman_codes = (0..num_huff).map(|_| HuffmanCode::parse(bitstream, ())).collect::<Result<_, _>>()?;
 
-        let scan_info = (0..num_scans)
-            .map(|_| ScanInfo::parse(bitstream, ()))
-            .collect::<Result<_, _>>()?;
+        let scan_info = (0..num_scans).map(|_| ScanInfo::parse(bitstream, ())).collect::<Result<_, _>>()?;
         let restart_interval = if has_dri { bitstream.read_bits(16)? } else { 0 };
-        let scan_more_info = (0..num_scans)
-            .map(|_| ScanMoreInfo::parse(bitstream, ()))
-            .collect::<Result<_, _>>()?;
+        let scan_more_info = (0..num_scans).map(|_| ScanMoreInfo::parse(bitstream, ())).collect::<Result<_, _>>()?;
 
-        let intermarker_lengths = (0..num_intermarkers)
-            .map(|_| bitstream.read_bits(16))
-            .collect::<Result<_, _>>()?;
+        let intermarker_lengths = (0..num_intermarkers).map(|_| bitstream.read_bits(16)).collect::<Result<_, _>>()?;
 
         let tail_data_length = bitstream.read_u32(0, 1 + U(8), 257 + U(16), 65793 + U(22))?;
 
         let has_padding = bitstream.read_bool()?;
-        let padding_bits = has_padding
-            .then(|| Padding::parse(bitstream, ()))
-            .transpose()?;
+        let padding_bits = has_padding.then(|| Padding::parse(bitstream, ())).transpose()?;
 
         Ok(Self {
             is_gray,
@@ -239,10 +204,7 @@ impl Bundle for JpegBitstreamHeader {
 
 impl JpegBitstreamHeader {
     fn app_data_len(&self) -> usize {
-        self.app_markers
-            .iter()
-            .filter_map(|marker| (marker.ty == 0).then_some(marker.length as usize))
-            .sum::<usize>()
+        self.app_markers.iter().filter_map(|marker| (marker.ty == 0).then_some(marker.length as usize)).sum::<usize>()
     }
 
     fn com_data_len(&self) -> usize {
@@ -250,17 +212,11 @@ impl JpegBitstreamHeader {
     }
 
     fn intermarker_data_len(&self) -> usize {
-        self.intermarker_lengths
-            .iter()
-            .map(|&x| x as usize)
-            .sum::<usize>()
+        self.intermarker_lengths.iter().map(|&x| x as usize).sum::<usize>()
     }
 
     fn expected_data_len(&self) -> usize {
-        self.app_data_len()
-            + self.com_data_len()
-            + self.intermarker_data_len()
-            + self.tail_data_length as usize
+        self.app_data_len() + self.com_data_len() + self.intermarker_data_len() + self.tail_data_length as usize
     }
 
     pub fn expected_icc_len(&self) -> usize {
@@ -272,19 +228,11 @@ impl JpegBitstreamHeader {
     }
 
     pub fn expected_exif_len(&self) -> usize {
-        self.app_markers
-            .iter()
-            .find(|am| am.ty == 2)
-            .map(|am| am.length as usize - 3 - HEADER_EXIF.len())
-            .unwrap_or(0)
+        self.app_markers.iter().find(|am| am.ty == 2).map(|am| am.length as usize - 3 - HEADER_EXIF.len()).unwrap_or(0)
     }
 
     pub fn expected_xmp_len(&self) -> usize {
-        self.app_markers
-            .iter()
-            .find(|am| am.ty == 3)
-            .map(|am| am.length as usize - 3 - HEADER_XMP.len())
-            .unwrap_or(0)
+        self.app_markers.iter().find(|am| am.ty == 3).map(|am| am.length as usize - 3 - HEADER_XMP.len()).unwrap_or(0)
     }
 }
 
@@ -298,10 +246,7 @@ impl Bundle for AppMarker {
     type Error = jxl_bitstream::Error;
 
     fn parse(bitstream: &mut Bitstream, _: ()) -> Result<Self, Self::Error> {
-        Ok(Self {
-            ty: bitstream.read_u32(0, 1, 2 + U(1), 4 + U(2))?,
-            length: bitstream.read_bits(16)? + 1,
-        })
+        Ok(Self { ty: bitstream.read_u32(0, 1, 2 + U(1), 4 + U(2))?, length: bitstream.read_bits(16)? + 1 })
     }
 }
 
@@ -350,18 +295,10 @@ impl Bundle for ScanInfo {
         let se = bitstream.read_bits(6)? as u8;
         let al = bitstream.read_bits(4)? as u8;
         let ah = bitstream.read_bits(4)? as u8;
-        let component_info = (0..num_comps)
-            .map(|_| ScanComponentInfo::parse(bitstream, ()))
-            .collect::<Result<_, _>>()?;
+        let component_info =
+            (0..num_comps).map(|_| ScanComponentInfo::parse(bitstream, ())).collect::<Result<_, _>>()?;
         let last_needed_pass = bitstream.read_u32(0, 1, 2, 3 + U(3))? as u8;
-        Ok(Self {
-            ss,
-            se,
-            ah,
-            al,
-            component_info,
-            last_needed_pass,
-        })
+        Ok(Self { ss, se, ah, al, component_info, last_needed_pass })
     }
 }
 
@@ -412,9 +349,7 @@ impl Bundle for ScanMoreInfo {
                 };
                 if block_idx > (3 << 26) {
                     tracing::error!(value = block_idx, "reset_points too large");
-                    return Err(jxl_bitstream::Error::ValidationFailed(
-                        "reset_points too large",
-                    ));
+                    return Err(jxl_bitstream::Error::ValidationFailed("reset_points too large"));
                 }
                 last_block_idx = Some(block_idx);
                 Ok(block_idx)
@@ -425,10 +360,7 @@ impl Bundle for ScanMoreInfo {
         let mut last_block_idx: Option<u32> = None;
         let extra_zero_runs = (0..num_extra_zero_runs)
             .map(|_| -> Result<_, jxl_bitstream::Error> {
-                let ExtraZeroRun {
-                    num_runs,
-                    run_length,
-                } = ExtraZeroRun::parse(bitstream, ())?;
+                let ExtraZeroRun { num_runs, run_length } = ExtraZeroRun::parse(bitstream, ())?;
                 let block_idx = if let Some(last_block_idx) = last_block_idx {
                     last_block_idx.saturating_add(run_length + 1)
                 } else {
@@ -436,19 +368,14 @@ impl Bundle for ScanMoreInfo {
                 };
                 if block_idx > (3 << 26) {
                     tracing::error!(block_idx, "extra_zero_runs.block_idx too large");
-                    return Err(jxl_bitstream::Error::ValidationFailed(
-                        "extra_zero_runs.block_idx too large",
-                    ));
+                    return Err(jxl_bitstream::Error::ValidationFailed("extra_zero_runs.block_idx too large"));
                 }
                 last_block_idx = Some(block_idx);
                 Ok((block_idx, num_runs))
             })
             .collect::<Result<_, _>>()?;
 
-        Ok(Self {
-            reset_points,
-            extra_zero_runs,
-        })
+        Ok(Self { reset_points, extra_zero_runs })
     }
 }
 

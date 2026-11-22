@@ -62,13 +62,7 @@ impl<S> AlignedGrid<S> {
     /// Creates a zero-sized "empty" grid.
     #[inline]
     pub fn empty() -> Self {
-        Self {
-            width: 0,
-            height: 0,
-            offset: 0,
-            buf: Vec::new(),
-            handle: None,
-        }
+        Self { width: 0, height: 0, offset: 0, buf: Vec::new(), handle: None }
     }
 }
 
@@ -82,61 +76,35 @@ impl<S: Default + Clone> AlignedGrid<S> {
         height: usize,
         tracker: Option<&AllocTracker>,
     ) -> Result<Self, OutOfMemory> {
-        let len = width
-            .checked_mul(height)
-            .expect("grid dimensions overflow usize");
+        let len = width.checked_mul(height).expect("grid dimensions overflow usize");
         let buf_len = len
             .checked_add((Self::ALIGN - 1) / std::mem::size_of::<S>())
             .expect("aligned grid buffer length overflows usize");
-        let handle = tracker
-            .map(|tracker| tracker.alloc::<S>(buf_len))
-            .transpose()?;
+        let handle = tracker.map(|tracker| tracker.alloc::<S>(buf_len)).transpose()?;
         let mut buf = vec![S::default(); buf_len];
 
         let extra = buf.as_ptr() as usize & (Self::ALIGN - 1);
         let offset = ((Self::ALIGN - extra) % Self::ALIGN) / std::mem::size_of::<S>();
-        let len_with_offset = len
-            .checked_add(offset)
-            .expect("aligned grid buffer length overflows usize");
+        let len_with_offset = len.checked_add(offset).expect("aligned grid buffer length overflows usize");
         buf.resize_with(len_with_offset, S::default);
 
-        Ok(Self {
-            width,
-            height,
-            offset,
-            buf,
-            handle,
-        })
+        Ok(Self { width, height, offset, buf, handle })
     }
 
     #[inline]
-    fn empty_aligned(
-        width: usize,
-        height: usize,
-        tracker: Option<&AllocTracker>,
-    ) -> Result<Self, OutOfMemory> {
-        let len = width
-            .checked_mul(height)
-            .expect("grid dimensions overflow usize");
+    fn empty_aligned(width: usize, height: usize, tracker: Option<&AllocTracker>) -> Result<Self, OutOfMemory> {
+        let len = width.checked_mul(height).expect("grid dimensions overflow usize");
         let buf_len = len
             .checked_add((Self::ALIGN - 1) / std::mem::size_of::<S>())
             .expect("aligned grid buffer length overflows usize");
-        let handle = tracker
-            .map(|tracker| tracker.alloc::<S>(buf_len))
-            .transpose()?;
+        let handle = tracker.map(|tracker| tracker.alloc::<S>(buf_len)).transpose()?;
         let mut buf = Vec::with_capacity(buf_len);
 
         let extra = buf.as_ptr() as usize & (Self::ALIGN - 1);
         let offset = ((Self::ALIGN - extra) % Self::ALIGN) / std::mem::size_of::<S>();
         buf.resize_with(offset, S::default);
 
-        Ok(Self {
-            width,
-            height,
-            offset,
-            buf,
-            handle,
-        })
+        Ok(Self { width, height, offset, buf, handle })
     }
 
     /// Clones the buffer without recording an allocation.

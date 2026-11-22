@@ -62,13 +62,8 @@ impl<'a> BlendParams<'a> {
         let mode = match blending_info.mode {
             FrameBlendMode::Replace => BlendMode::Replace,
             FrameBlendMode::Add => BlendMode::Add,
-            FrameBlendMode::Blend
-                if channel_idx == blending_info.alpha_channel as usize + color_channels =>
-            {
-                BlendMode::MixAlpha {
-                    clamp: blending_info.clamp,
-                    swapped: false,
-                }
+            FrameBlendMode::Blend if channel_idx == blending_info.alpha_channel as usize + color_channels => {
+                BlendMode::MixAlpha { clamp: blending_info.clamp, swapped: false }
             }
             FrameBlendMode::Blend => BlendMode::Blend(BlendAlpha {
                 base: base_alpha,
@@ -77,9 +72,7 @@ impl<'a> BlendParams<'a> {
                 swapped: false,
                 premultiplied: premultiplied.unwrap_or(false),
             }),
-            FrameBlendMode::MulAdd
-                if channel_idx == blending_info.alpha_channel as usize + color_channels =>
-            {
+            FrameBlendMode::MulAdd if channel_idx == blending_info.alpha_channel as usize + color_channels => {
                 BlendMode::Skip
             }
             FrameBlendMode::MulAdd => BlendMode::MulAdd(BlendAlpha {
@@ -92,13 +85,7 @@ impl<'a> BlendParams<'a> {
             FrameBlendMode::Mul => BlendMode::Mul(blending_info.clamp),
         };
 
-        Self {
-            mode,
-            base_topleft: (0, 0),
-            new_topleft: (0, 0),
-            width: 0,
-            height: 0,
-        }
+        Self { mode, base_topleft: (0, 0), new_topleft: (0, 0), width: 0, height: 0 }
     }
 
     fn from_patch_blending_info(
@@ -119,10 +106,7 @@ impl<'a> BlendParams<'a> {
             PatchBlendMode::BlendAbove | PatchBlendMode::BlendBelow => {
                 let swapped = blending_info.mode == PatchBlendMode::BlendBelow;
                 if channel_idx == blending_info.alpha_channel as usize + color_channels {
-                    BlendMode::MixAlpha {
-                        clamp: blending_info.clamp,
-                        swapped,
-                    }
+                    BlendMode::MixAlpha { clamp: blending_info.clamp, swapped }
                 } else {
                     BlendMode::Blend(BlendAlpha {
                         base: base_alpha,
@@ -136,11 +120,7 @@ impl<'a> BlendParams<'a> {
             PatchBlendMode::MulAddAbove | PatchBlendMode::MulAddBelow => {
                 let swapped = blending_info.mode == PatchBlendMode::MulAddBelow;
                 if channel_idx == blending_info.alpha_channel as usize + color_channels {
-                    if swapped {
-                        BlendMode::Replace
-                    } else {
-                        BlendMode::Skip
-                    }
+                    if swapped { BlendMode::Replace } else { BlendMode::Skip }
                 } else {
                     BlendMode::MulAdd(BlendAlpha {
                         base: base_alpha,
@@ -153,20 +133,11 @@ impl<'a> BlendParams<'a> {
             }
         };
 
-        Some(Self {
-            mode,
-            base_topleft: (0, 0),
-            new_topleft: (0, 0),
-            width: 0,
-            height: 0,
-        })
+        Some(Self { mode, base_topleft: (0, 0), new_topleft: (0, 0), width: 0, height: 0 })
     }
 }
 
-fn source_and_alpha_from_blending_info(
-    blending_info: &BlendingInfo,
-    has_extra: bool,
-) -> (usize, Option<usize>) {
+fn source_and_alpha_from_blending_info(blending_info: &BlendingInfo, has_extra: bool) -> (usize, Option<usize>) {
     use jxl_frame::header::BlendMode;
 
     let source = blending_info.source as usize;
@@ -209,9 +180,7 @@ pub(crate) fn blend<S: Sample>(
     ref_list.sort_by_key(|grid| grid.frame.idx);
 
     for grid in ref_list {
-        Arc::clone(&grid.image)
-            .run_with_image()?
-            .blend(Some(output_image_region), pool)?;
+        Arc::clone(&grid.image).run_with_image()?.blend(Some(output_image_region), pool)?;
     }
 
     let color_channels = new_grid.color_channels();
@@ -219,9 +188,8 @@ pub(crate) fn blend<S: Sample>(
     output_grid.set_ct_done(new_grid.ct_done());
 
     let has_extra = !header.ec_blending_info.is_empty();
-    for (idx, blending_info) in std::iter::repeat_n(&header.blending_info, color_channels)
-        .chain(&header.ec_blending_info)
-        .enumerate()
+    for (idx, blending_info) in
+        std::iter::repeat_n(&header.blending_info, color_channels).chain(&header.ec_blending_info).enumerate()
     {
         let bit_depth = if let Some(ec_idx) = idx.checked_sub(color_channels) {
             image_header.metadata.ec_info[ec_idx].bit_depth
@@ -232,12 +200,9 @@ pub(crate) fn blend<S: Sample>(
         let (ref_idx, alpha_idx) = source_and_alpha_from_blending_info(blending_info, has_extra);
         let ref_grid = &reference_grids[ref_idx];
         let mut can_overwrite = idx < color_channels
-            && (header.is_last
-                || (header.can_reference() && ref_idx == header.save_as_reference as usize));
+            && (header.is_last || (header.can_reference() && ref_idx == header.save_as_reference as usize));
 
-        let original_frame_region = new_grid.regions_and_shifts()[idx]
-            .0
-            .intersection(full_frame_region);
+        let original_frame_region = new_grid.regions_and_shifts()[idx].0.intersection(full_frame_region);
         let clipped_original_frame_region = original_frame_region.intersection(output_frame_region);
 
         let mut base_alpha_grid;
@@ -266,8 +231,7 @@ pub(crate) fn blend<S: Sample>(
                 target_subgrid = target_grid.as_float_mut().unwrap().as_subgrid_mut();
             } else {
                 let base_frame_header = grid.frame.header();
-                let base_frame_region =
-                    output_image_region.translate(-base_frame_header.x0, -base_frame_header.y0);
+                let base_frame_region = output_image_region.translate(-base_frame_header.x0, -base_frame_header.y0);
 
                 target_grid = if can_overwrite {
                     if let Some(mut image) = base_grid_render.try_take_blended() {
@@ -279,25 +243,17 @@ pub(crate) fn blend<S: Sample>(
                 } else {
                     base_grid.buffer()[idx].try_clone()?
                 };
-                target_region = base_grid.regions_and_shifts()[idx].0.translate(
-                    base_frame_header.x0 - header.x0,
-                    base_frame_header.y0 - header.y0,
-                );
+                target_region = base_grid.regions_and_shifts()[idx]
+                    .0
+                    .translate(base_frame_header.x0 - header.x0, base_frame_header.y0 - header.y0);
                 let target_grid = target_grid.convert_to_float_modular(bit_depth)?;
                 target_subgrid = {
                     let grid_region = base_grid.regions_and_shifts()[idx].0;
                     let region = base_frame_region.translate(-grid_region.left, -grid_region.top);
-                    let Region {
-                        left,
-                        top,
-                        width,
-                        height,
-                    } = region;
+                    let Region { left, top, width, height } = region;
                     let right = left.wrapping_add_unsigned(width);
                     let bottom = top.wrapping_add_unsigned(height);
-                    target_grid
-                        .as_subgrid_mut()
-                        .subgrid(left as usize..right as usize, top as usize..bottom as usize)
+                    target_grid.as_subgrid_mut().subgrid(left as usize..right as usize, top as usize..bottom as usize)
                 };
 
                 if let Some(alpha_idx) = alpha_idx
@@ -305,19 +261,11 @@ pub(crate) fn blend<S: Sample>(
                 {
                     let alpha_bit_depth = image_header.metadata.ec_info[alpha_idx].bit_depth;
                     base_alpha_grid = base_grid.buffer()[alpha_idx + color_channels].try_clone()?;
-                    let base_alpha_grid =
-                        base_alpha_grid.convert_to_float_modular(alpha_bit_depth)?;
+                    let base_alpha_grid = base_alpha_grid.convert_to_float_modular(alpha_bit_depth)?;
                     base_alpha = Some({
-                        let grid_region =
-                            base_grid.regions_and_shifts()[alpha_idx + color_channels].0;
-                        let region =
-                            base_frame_region.translate(-grid_region.left, -grid_region.top);
-                        let Region {
-                            left,
-                            top,
-                            width,
-                            height,
-                        } = region;
+                        let grid_region = base_grid.regions_and_shifts()[alpha_idx + color_channels].0;
+                        let region = base_frame_region.translate(-grid_region.left, -grid_region.top);
+                        let Region { left, top, width, height } = region;
                         let right = left.wrapping_add_unsigned(width);
                         let bottom = top.wrapping_add_unsigned(height);
                         base_alpha_grid
@@ -344,55 +292,23 @@ pub(crate) fn blend<S: Sample>(
         new_grid.buffer_mut()[idx].convert_to_float_modular(bit_depth)?;
 
         let mut blend_params = if clone_empty {
-            let new_alpha = alpha_idx.map(|idx| {
-                new_grid.buffer()[idx + color_channels]
-                    .as_float()
-                    .unwrap()
-                    .as_subgrid()
-            });
-            let premultiplied =
-                alpha_idx.and_then(|idx| image_header.metadata.ec_info[idx].alpha_associated());
-            BlendParams::from_blending_info(
-                idx,
-                color_channels,
-                blending_info,
-                None,
-                new_alpha,
-                premultiplied,
-            )
+            let new_alpha =
+                alpha_idx.map(|idx| new_grid.buffer()[idx + color_channels].as_float().unwrap().as_subgrid());
+            let premultiplied = alpha_idx.and_then(|idx| image_header.metadata.ec_info[idx].alpha_associated());
+            BlendParams::from_blending_info(idx, color_channels, blending_info, None, new_alpha, premultiplied)
         } else {
-            let new_alpha = alpha_idx.map(|idx| {
-                new_grid.buffer()[idx + color_channels]
-                    .as_float()
-                    .unwrap()
-                    .as_subgrid()
-            });
-            let premultiplied =
-                alpha_idx.and_then(|idx| image_header.metadata.ec_info[idx].alpha_associated());
-            BlendParams::from_blending_info(
-                idx,
-                color_channels,
-                blending_info,
-                base_alpha,
-                new_alpha,
-                premultiplied,
-            )
+            let new_alpha =
+                alpha_idx.map(|idx| new_grid.buffer()[idx + color_channels].as_float().unwrap().as_subgrid());
+            let premultiplied = alpha_idx.and_then(|idx| image_header.metadata.ec_info[idx].alpha_associated());
+            BlendParams::from_blending_info(idx, color_channels, blending_info, base_alpha, new_alpha, premultiplied)
         };
         blend_params.base_topleft = (
-            clipped_original_frame_region
-                .left
-                .abs_diff(output_frame_region.left) as usize,
-            clipped_original_frame_region
-                .top
-                .abs_diff(output_frame_region.top) as usize,
+            clipped_original_frame_region.left.abs_diff(output_frame_region.left) as usize,
+            clipped_original_frame_region.top.abs_diff(output_frame_region.top) as usize,
         );
         blend_params.new_topleft = (
-            clipped_original_frame_region
-                .left
-                .abs_diff(original_frame_region.left) as usize,
-            clipped_original_frame_region
-                .top
-                .abs_diff(original_frame_region.top) as usize,
+            clipped_original_frame_region.left.abs_diff(original_frame_region.left) as usize,
+            clipped_original_frame_region.top.abs_diff(original_frame_region.top) as usize,
         );
         blend_params.width = clipped_original_frame_region.width as usize;
         blend_params.height = clipped_original_frame_region.height as usize;
@@ -426,9 +342,8 @@ pub fn patch(
     let color_channels = base_grid.color_channels();
     assert_eq!(patch_ref_grid.color_channels(), color_channels);
     for target in &patch_ref.patch_targets {
-        for (idx, blending_info) in std::iter::repeat_n(&target.blending[0], color_channels)
-            .chain(&target.blending[1..])
-            .enumerate()
+        for (idx, blending_info) in
+            std::iter::repeat_n(&target.blending[0], color_channels).chain(&target.blending[1..]).enumerate()
         {
             let base_grid_region = base_grid.regions_and_shifts()[idx].0;
             let ref_grid_region = patch_ref_grid.regions_and_shifts()[idx].0;
@@ -500,12 +415,8 @@ pub fn patch(
                         (&mut r[0], &l[alpha_idx + color_channels])
                     };
                     base_alpha = Some(alpha.as_float().unwrap().as_subgrid());
-                    new_alpha = Some(
-                        patch_ref_grid.buffer()[alpha_idx + color_channels]
-                            .as_float()
-                            .unwrap()
-                            .as_subgrid(),
-                    );
+                    new_alpha =
+                        Some(patch_ref_grid.buffer()[alpha_idx + color_channels].as_float().unwrap().as_subgrid());
                     premultiplied = image_header.metadata.ec_info[alpha_idx].alpha_associated();
                     base
                 }
@@ -533,32 +444,16 @@ pub fn patch(
             blend_params.width = width;
             blend_params.height = height;
 
-            blend_single(
-                base_grid,
-                patch_ref_grid.buffer()[idx]
-                    .as_float()
-                    .unwrap()
-                    .as_subgrid(),
-                &blend_params,
-            );
+            blend_single(base_grid, patch_ref_grid.buffer()[idx].as_float().unwrap().as_subgrid(), &blend_params);
         }
     }
 
     Ok(())
 }
 
-fn blend_single(
-    mut base: MutableSubgrid<f32>,
-    new_grid: SharedSubgrid<f32>,
-    blend_params: &BlendParams<'_>,
-) {
-    let &BlendParams {
-        ref mode,
-        base_topleft: (base_x, base_y),
-        new_topleft: (new_x, new_y),
-        width,
-        height,
-    } = blend_params;
+fn blend_single(mut base: MutableSubgrid<f32>, new_grid: SharedSubgrid<f32>, blend_params: &BlendParams<'_>) {
+    let &BlendParams { ref mode, base_topleft: (base_x, base_y), new_topleft: (new_x, new_y), width, height } =
+        blend_params;
 
     match mode {
         BlendMode::Replace | BlendMode::Blend(BlendAlpha { new: None, .. }) => {
@@ -604,13 +499,7 @@ fn blend_single(
                 }
             }
         }
-        BlendMode::Blend(BlendAlpha {
-            base: base_alpha,
-            new: Some(new_alpha),
-            clamp,
-            swapped,
-            premultiplied,
-        }) => {
+        BlendMode::Blend(BlendAlpha { base: base_alpha, new: Some(new_alpha), clamp, swapped, premultiplied }) => {
             let base_alpha = base_alpha.as_ref();
             for dy in 0..height {
                 let base_buf_y = base_y + dy;
@@ -649,24 +538,13 @@ fn blend_single(
                         let base_alpha_rev = 1.0 - base_alpha;
                         let new_alpha_rev = 1.0 - new_alpha;
                         let mixed_alpha = 1.0 - new_alpha_rev * base_alpha_rev;
-                        let mixed_alpha_recip = if mixed_alpha > 0.0 {
-                            mixed_alpha.recip()
-                        } else {
-                            0.0
-                        };
-                        (new_alpha * new_sample + base_alpha * base_sample * new_alpha_rev)
-                            * mixed_alpha_recip
+                        let mixed_alpha_recip = if mixed_alpha > 0.0 { mixed_alpha.recip() } else { 0.0 };
+                        (new_alpha * new_sample + base_alpha * base_sample * new_alpha_rev) * mixed_alpha_recip
                     };
                 }
             }
         }
-        BlendMode::MulAdd(BlendAlpha {
-            base: base_alpha,
-            new: Some(new_alpha),
-            clamp,
-            swapped,
-            ..
-        }) => {
+        BlendMode::MulAdd(BlendAlpha { base: base_alpha, new: Some(new_alpha), clamp, swapped, .. }) => {
             let base_alpha = base_alpha.as_ref();
             for dy in 0..height {
                 let base_buf_y = base_y + dy;

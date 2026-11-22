@@ -92,12 +92,7 @@ pub fn apply_epf<S: Sample>(
         for (idx, grid) in fb_scratch_arr.into_iter().enumerate() {
             let width = grid.width() as u32;
             let height = grid.height() as u32;
-            let region = Region {
-                width,
-                height,
-                left,
-                top,
-            };
+            let region = Region { width, height, left, top };
             fb_image.replace_channel(idx, crate::ImageBuffer::F32(grid), region);
         }
     }
@@ -136,12 +131,7 @@ pub(super) unsafe fn run_epf_rows(
 
     let input = input.each_ref().map(|g| g.as_shared());
     let [mut output0, mut output1, mut output2] = output.each_mut().map(|g| g.borrow_mut());
-    let Region {
-        left,
-        top,
-        width,
-        height,
-    } = color_padded_region;
+    let Region { left, top, width, height } = color_padded_region;
     assert!(left >= 0 && top >= 0);
     assert!(left % 8 == 0);
     assert!(top % 8 == 0);
@@ -159,12 +149,7 @@ pub(super) unsafe fn run_epf_rows(
         let next_output0 = output0.split_vertical_in_place(job_height);
         let next_output1 = output1.split_vertical_in_place(job_height);
         let next_output2 = output2.split_vertical_in_place(job_height);
-        jobs.push(EpfJob {
-            base_y: image_y - top,
-            output0,
-            output1,
-            output2,
-        });
+        jobs.push(EpfJob { base_y: image_y - top, output0, output1, output2 });
 
         output0 = next_output0;
         output1 = next_output1;
@@ -175,89 +160,78 @@ pub(super) unsafe fn run_epf_rows(
     let sigma_group_dim_mask = (frame_header.group_dim() - 1) as usize;
     let groups_per_row = frame_header.lf_groups_per_row() as usize;
     let sigma_len = width.div_ceil(8);
-    pool.for_each_vec_with(
-        jobs,
-        vec![epf_params.sigma_for_modular; sigma_len],
-        |sigma_row, job| {
-            let EpfJob {
-                base_y,
-                mut output0,
-                mut output1,
-                mut output2,
-            } = job;
-            let sigma_y = (top + base_y) / 8;
-            let sigma_group_y = sigma_y >> sigma_group_dim_shift;
-            let sigma_inner_y = sigma_y & sigma_group_dim_mask;
+    pool.for_each_vec_with(jobs, vec![epf_params.sigma_for_modular; sigma_len], |sigma_row, job| {
+        let EpfJob { base_y, mut output0, mut output1, mut output2 } = job;
+        let sigma_y = (top + base_y) / 8;
+        let sigma_group_y = sigma_y >> sigma_group_dim_shift;
+        let sigma_inner_y = sigma_y & sigma_group_dim_mask;
 
-            for (dx, sigma) in sigma_row.iter_mut().enumerate() {
-                let sigma_x = left / 8 + dx;
-                let sigma_group_x = sigma_x >> sigma_group_dim_shift;
-                let sigma_inner_x = sigma_x & sigma_group_dim_mask;
-                let sigma_grid_idx = sigma_group_y * groups_per_row + sigma_group_x;
-                if let Some(grid) = sigma_grid_map[sigma_grid_idx] {
-                    let width = grid.width();
-                    *sigma = grid.buf()[sigma_inner_y * width + sigma_inner_x];
-                }
+        for (dx, sigma) in sigma_row.iter_mut().enumerate() {
+            let sigma_x = left / 8 + dx;
+            let sigma_group_x = sigma_x >> sigma_group_dim_shift;
+            let sigma_inner_x = sigma_x & sigma_group_dim_mask;
+            let sigma_grid_idx = sigma_group_y * groups_per_row + sigma_group_x;
+            if let Some(grid) = sigma_grid_map[sigma_grid_idx] {
+                let width = grid.width();
+                *sigma = grid.buf()[sigma_inner_y * width + sigma_inner_x];
             }
+        }
 
-            let job_height = output0.height();
-            for dy in 0..job_height {
-                let y = base_y + dy;
-                let input_rows: [[_; 7]; 3] = std::array::from_fn(|c| {
-                    std::array::from_fn(|idx| {
-                        let y = util::mirror((y + idx) as isize - 3, height);
-                        input[c].get_row(y)
-                    })
-                });
-                let merged_input_rows = if y >= 3 && y + 4 <= height {
-                    Some(std::array::from_fn(|c| {
-                        input[c].subgrid(.., (y - 3)..(y + 4))
-                    }))
-                } else {
-                    None
-                };
+        let job_height = output0.height();
+        for dy in 0..job_height {
+            let y = base_y + dy;
+            let input_rows: [[_; 7]; 3] = std::array::from_fn(|c| {
+                std::array::from_fn(|idx| {
+                    let y = util::mirror((y + idx) as isize - 3, height);
+                    input[c].get_row(y)
+                })
+            });
+            let merged_input_rows = if y >= 3 && y + 4 <= height {
+                Some(std::array::from_fn(|c| input[c].subgrid(.., (y - 3)..(y + 4))))
+            } else {
+                None
+            };
 
-                let output0 = output0.get_row_mut(dy);
-                let output1 = output1.get_row_mut(dy);
-                let output2 = output2.get_row_mut(dy);
-                let image_y = top + base_y + dy;
+            let output0 = output0.get_row_mut(dy);
+            let output1 = output1.get_row_mut(dy);
+            let output2 = output2.get_row_mut(dy);
+            let image_y = top + base_y + dy;
 
-                let mut skip_inner = false;
-                if merged_input_rows.is_some()
-                    && let Some(handle_row_simd) = handle_row_simd
-                {
-                    skip_inner = true;
-                    let output_rows = [&mut *output0, &mut *output1, &mut *output2];
-                    let row = EpfRow {
-                        input_rows,
-                        merged_input_rows,
-                        output_rows,
-                        width,
-                        y: image_y,
-                        sigma_row,
-                        epf_params,
-                        skip_inner,
-                    };
-                    unsafe {
-                        handle_row_simd(row);
-                    }
-                }
-
-                let output_rows = [output0, output1, output2];
+            let mut skip_inner = false;
+            if merged_input_rows.is_some()
+                && let Some(handle_row_simd) = handle_row_simd
+            {
+                skip_inner = true;
+                let output_rows = [&mut *output0, &mut *output1, &mut *output2];
                 let row = EpfRow {
                     input_rows,
-                    output_rows,
                     merged_input_rows,
+                    output_rows,
                     width,
                     y: image_y,
                     sigma_row,
                     epf_params,
                     skip_inner,
                 };
-                handle_row_generic(row);
+                unsafe {
+                    handle_row_simd(row);
+                }
             }
-        },
-    );
+
+            let output_rows = [output0, output1, output2];
+            let row = EpfRow {
+                input_rows,
+                output_rows,
+                merged_input_rows,
+                width,
+                y: image_y,
+                sigma_row,
+                epf_params,
+                skip_inner,
+            };
+            handle_row_generic(row);
+        }
+    });
 }
 
 pub(super) const fn epf_kernel_offsets<const STEP: usize>() -> &'static [(isize, isize)] {

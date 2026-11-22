@@ -16,14 +16,9 @@ pub fn apply_gamma(samples: &mut [f32], gamma: f32) {
             for chunk in &mut it {
                 unsafe {
                     let v = std::arch::aarch64::vld1q_f32(chunk.as_ptr());
-                    let mask =
-                        std::arch::aarch64::vcleq_f32(v, std::arch::aarch64::vdupq_n_f32(1e-7));
+                    let mask = std::arch::aarch64::vcleq_f32(v, std::arch::aarch64::vdupq_n_f32(1e-7));
                     let exp = crate::fastmath::fast_powf_aarch64_neon(v, gamma);
-                    let v = std::arch::aarch64::vbslq_f32(
-                        mask,
-                        std::arch::aarch64::vdupq_n_f32(0.0),
-                        exp,
-                    );
+                    let v = std::arch::aarch64::vbslq_f32(mask, std::arch::aarch64::vdupq_n_f32(0.0), exp);
                     std::arch::aarch64::vst1q_f32(chunk.as_mut_ptr(), v);
                 }
             }
@@ -35,20 +30,15 @@ pub fn apply_gamma(samples: &mut [f32], gamma: f32) {
 
     #[cfg(target_arch = "x86_64")]
     let samples = {
-        if std::arch::is_x86_feature_detected!("avx2") && std::arch::is_x86_feature_detected!("fma")
-        {
+        if std::arch::is_x86_feature_detected!("avx2") && std::arch::is_x86_feature_detected!("fma") {
             unsafe { linear_to_gamma_x86_64_avx2(samples, gamma) }
         } else {
             let mut it = samples.chunks_exact_mut(4);
             for chunk in &mut it {
                 unsafe {
                     let v = std::arch::x86_64::_mm_loadu_ps(chunk.as_ptr());
-                    let mask =
-                        std::arch::x86_64::_mm_cmple_ps(v, std::arch::x86_64::_mm_set1_ps(1e-7));
-                    let exp = crate::fastmath::fast_powf_x86_64_sse2(
-                        v,
-                        std::arch::x86_64::_mm_set1_ps(gamma),
-                    );
+                    let mask = std::arch::x86_64::_mm_cmple_ps(v, std::arch::x86_64::_mm_set1_ps(1e-7));
+                    let exp = crate::fastmath::fast_powf_x86_64_sse2(v, std::arch::x86_64::_mm_set1_ps(gamma));
                     let v = std::arch::x86_64::_mm_andnot_ps(mask, exp);
                     std::arch::x86_64::_mm_storeu_ps(chunk.as_mut_ptr(), v);
                 }
@@ -59,11 +49,7 @@ pub fn apply_gamma(samples: &mut [f32], gamma: f32) {
 
     for x in samples {
         let a = *x;
-        *x = if a <= 1e-7 {
-            0.0
-        } else {
-            crate::fastmath::fast_powf_generic(a, gamma)
-        };
+        *x = if a <= 1e-7 { 0.0 } else { crate::fastmath::fast_powf_generic(a, gamma) };
     }
 }
 
@@ -98,11 +84,7 @@ unsafe fn linear_to_gamma_x86_64_avx2(samples: &mut [f32], gamma: f32) -> &mut [
 
 /// Converts scene luminance values to display luminance values using the hybrid log-gamma
 /// transfer function (HLG OOTF).
-pub fn hlg_oo(
-    [samples_r, samples_g, samples_b]: [&mut [f32]; 3],
-    [lr, lg, lb]: [f32; 3],
-    intensity_target: f32,
-) {
+pub fn hlg_oo([samples_r, samples_g, samples_b]: [&mut [f32]; 3], [lr, lg, lb]: [f32; 3], intensity_target: f32) {
     let gamma = 1.2f32 * 1.111f32.powf((intensity_target / 1e3).log2());
     // 1/g - 1
     let exp = gamma - 1.0;
@@ -149,12 +131,7 @@ const HLG_C: f32 = 0.5599107;
 pub fn linear_to_hlg(samples: &mut [f32]) {
     for s in samples {
         let a = s.abs();
-        *s = if a <= 1.0 / 12.0 {
-            (3.0 * a).sqrt()
-        } else {
-            HLG_A * a.mul_add(12.0, -HLG_B).ln() + HLG_C
-        }
-        .copysign(*s);
+        *s = if a <= 1.0 / 12.0 { (3.0 * a).sqrt() } else { HLG_A * a.mul_add(12.0, -HLG_B).ln() + HLG_C }.copysign(*s);
     }
 }
 
@@ -162,12 +139,7 @@ pub fn linear_to_hlg(samples: &mut [f32]) {
 pub fn hlg_to_linear(samples: &mut [f32]) {
     for s in samples {
         let a = s.abs();
-        *s = if a <= 0.5 {
-            a * a / 3.0
-        } else {
-            (((a - HLG_C) / HLG_A).exp() + HLG_B) / 12.0
-        }
-        .copysign(*s);
+        *s = if a <= 0.5 { a * a / 3.0 } else { (((a - HLG_C) / HLG_A).exp() + HLG_B) / 12.0 }.copysign(*s);
     }
 }
 

@@ -21,8 +21,7 @@ impl crate::ColorManagementSystem for Lcms2 {
         from_icc: &[u8],
         to_icc: &[u8],
         intent: RenderingIntent,
-    ) -> Result<Box<dyn crate::PreparedTransform>, Box<dyn std::error::Error + Send + Sync + 'static>>
-    {
+    ) -> Result<Box<dyn crate::PreparedTransform>, Box<dyn std::error::Error + Send + Sync + 'static>> {
         use lcms2::ColorSpaceSignatureExt;
 
         let prepared = LCMS2_CTX.with(|ctx| -> lcms2::LCMSResult<_> {
@@ -50,11 +49,7 @@ impl crate::ColorManagementSystem for Lcms2 {
                 lcms2::Flags::NO_CACHE,
             )?;
 
-            Ok(PreparedTransform {
-                transform,
-                from_channels,
-                to_channels,
-            })
+            Ok(PreparedTransform { transform, from_channels, to_channels })
         })?;
 
         Ok(Box::new(prepared) as Box<_>)
@@ -74,15 +69,8 @@ where
         self.to_channels
     }
 
-    fn transform(
-        &self,
-        channels: &mut [&mut [f32]],
-    ) -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>> {
-        let Self {
-            ref transform,
-            from_channels,
-            to_channels,
-        } = *self;
+    fn transform(&self, channels: &mut [&mut [f32]]) -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>> {
+        let Self { ref transform, from_channels, to_channels } = *self;
 
         let mut buf_in = vec![0f32; 1024 * from_channels];
         let mut buf_out = vec![0f32; 1024 * to_channels];
@@ -96,8 +84,7 @@ where
             }
 
             let transform_buf_in = bytemuck::cast_slice(&buf_in[..chunk_len * from_channels]);
-            let transform_buf_out =
-                bytemuck::cast_slice_mut(&mut buf_out[..chunk_len * to_channels]);
+            let transform_buf_out = bytemuck::cast_slice_mut(&mut buf_out[..chunk_len * to_channels]);
             transform.transform_pixels(transform_buf_in, transform_buf_out);
 
             for k in 0..chunk_len {

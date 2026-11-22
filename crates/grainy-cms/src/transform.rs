@@ -509,7 +509,13 @@ pub fn native_convert_bpc(
         let size = (128 * 1024).min(pixels.div_ceil(workers)) * 3;
         result.par_chunks_mut(size).zip(rgb.par_chunks(size)).try_for_each(|(out, input)| -> Result<()> {
             let existing = pool.lock().unwrap_or_else(std::sync::PoisonError::into_inner).pop();
-            let mut handle = PooledTransform { pool: &pool, inner: Some(match existing { Some(t) => t, None => make()? }) };
+            let mut handle = PooledTransform {
+                pool: &pool,
+                inner: Some(match existing {
+                    Some(t) => t,
+                    None => make()?,
+                }),
+            };
             handle.apply(input, out);
             Ok(())
         })?;
@@ -571,7 +577,13 @@ pub fn soft_proof(
         let size = (128 * 1024).min(pixels.div_ceil(workers)) * 3;
         result.par_chunks_mut(size).zip(rgb.par_chunks(size)).try_for_each(|(out, input)| -> Result<()> {
             let existing = pool.lock().unwrap_or_else(std::sync::PoisonError::into_inner).pop();
-            let mut handle = PooledTransform { pool: &pool, inner: Some(match existing { Some(t) => t, None => make()? }) };
+            let mut handle = PooledTransform {
+                pool: &pool,
+                inner: Some(match existing {
+                    Some(t) => t,
+                    None => make()?,
+                }),
+            };
             handle.apply(input, out);
             Ok(())
         })?;

@@ -24,15 +24,14 @@ pub fn write_hf_coeff<S: Sample>(
     hf_coeff_output: &mut [MutableSubgrid<i32>; 3],
 ) -> Result<()> {
     const COEFF_FREQ_CONTEXT: [u32; 63] = [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19,
-        20, 20, 21, 21, 22, 22, 23, 23, 23, 23, 24, 24, 24, 24, 25, 25, 25, 25, 26, 26, 26, 26, 27,
-        27, 27, 27, 28, 28, 28, 28, 29, 29, 29, 29, 30, 30, 30, 30,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22,
+        22, 23, 23, 23, 23, 24, 24, 24, 24, 25, 25, 25, 25, 26, 26, 26, 26, 27, 27, 27, 27, 28, 28, 28, 28, 29, 29, 29,
+        29, 30, 30, 30, 30,
     ];
     const COEFF_NUM_NONZERO_CONTEXT: [u32; 63] = [
-        0, 31, 62, 62, 93, 93, 93, 93, 123, 123, 123, 123, 152, 152, 152, 152, 152, 152, 152, 152,
-        180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 206, 206, 206, 206, 206, 206,
-        206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206,
-        206, 206, 206, 206, 206, 206, 206,
+        0, 31, 62, 62, 93, 93, 93, 93, 123, 123, 123, 123, 152, 152, 152, 152, 152, 152, 152, 152, 180, 180, 180, 180,
+        180, 180, 180, 180, 180, 180, 180, 180, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206,
+        206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206, 206,
     ];
 
     let HfCoeffParams {
@@ -47,17 +46,10 @@ pub fn write_hf_coeff<S: Sample>(
     } = params;
     let mut dist = hf_pass.clone_decoder();
 
-    let HfBlockContext {
-        qf_thresholds,
-        lf_thresholds,
-        block_ctx_map,
-        num_block_clusters,
-    } = hf_block_ctx;
-    let lf_idx_mul =
-        (lf_thresholds[0].len() + 1) * (lf_thresholds[1].len() + 1) * (lf_thresholds[2].len() + 1);
+    let HfBlockContext { qf_thresholds, lf_thresholds, block_ctx_map, num_block_clusters } = hf_block_ctx;
+    let lf_idx_mul = (lf_thresholds[0].len() + 1) * (lf_thresholds[1].len() + 1) * (lf_thresholds[2].len() + 1);
     let hf_idx_mul = qf_thresholds.len() + 1;
-    let upsampling_shifts: [_; 3] =
-        std::array::from_fn(|idx| ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx));
+    let upsampling_shifts: [_; 3] = std::array::from_fn(|idx| ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx));
     let hshifts = upsampling_shifts.map(|shift| shift.hshift());
     let vshifts = upsampling_shifts.map(|shift| shift.vshift());
 
@@ -65,9 +57,7 @@ pub fn write_hf_coeff<S: Sample>(
     let hfp = bitstream.read_bits(hfp_bits as usize)?;
     if hfp >= num_hf_presets {
         tracing::error!(hfp, num_hf_presets, "selected HF preset out of bounds");
-        return Err(
-            jxl_bitstream::Error::ValidationFailed("selected HF preset out of bounds").into(),
-        );
+        return Err(jxl_bitstream::Error::ValidationFailed("selected HF preset out of bounds").into());
     }
 
     let ctx_size = 495 * *num_block_clusters;
@@ -82,8 +72,7 @@ pub fn write_hf_coeff<S: Sample>(
 
     let _non_zeros_grid_handle = tracker
         .map(|tracker| {
-            let len =
-                non_zeros_grid_lengths[0] + non_zeros_grid_lengths[1] + non_zeros_grid_lengths[2];
+            let len = non_zeros_grid_lengths[0] + non_zeros_grid_lengths[1] + non_zeros_grid_lengths[2];
             tracker.alloc::<u32>(len)
         })
         .transpose()?;
@@ -95,11 +84,7 @@ pub fn write_hf_coeff<S: Sample>(
 
     for y in 0..height {
         for x in 0..width {
-            let BlockInfo::Data {
-                dct_select,
-                hf_mul: qf,
-            } = block_info.get(x, y)
-            else {
+            let BlockInfo::Data { dct_select, hf_mul: qf } = block_info.get(x, y) else {
                 continue;
             };
             let (w8, h8) = dct_select.dct_select_size();
@@ -158,11 +143,7 @@ pub fn write_hf_coeff<S: Sample>(
                 let block_ctx = block_ctx_map[idx] as u32;
                 let non_zeros_ctx = {
                     let predicted = if sy == 0 {
-                        if sx == 0 {
-                            32
-                        } else {
-                            non_zeros_grid_row[c][sx - 1]
-                        }
+                        if sx == 0 { 32 } else { non_zeros_grid_row[c][sx - 1] }
                     } else if sx == 0 {
                         non_zeros_grid_row[c][sx]
                     } else {
@@ -170,24 +151,15 @@ pub fn write_hf_coeff<S: Sample>(
                     };
                     debug_assert!(predicted < 64);
 
-                    let idx = if predicted >= 8 {
-                        4 + predicted / 2
-                    } else {
-                        predicted
-                    };
+                    let idx = if predicted >= 8 { 4 + predicted / 2 } else { predicted };
                     block_ctx + idx * num_block_clusters
                 };
 
-                let mut non_zeros = dist.read_varint_with_multiplier_clustered(
-                    bitstream,
-                    cluster_map[non_zeros_ctx as usize],
-                    0,
-                )?;
+                let mut non_zeros =
+                    dist.read_varint_with_multiplier_clustered(bitstream, cluster_map[non_zeros_ctx as usize], 0)?;
                 if non_zeros > (63 << num_blocks_log) {
                     tracing::error!(non_zeros, num_blocks, "non_zeros too large");
-                    return Err(
-                        jxl_bitstream::Error::ValidationFailed("non_zeros too large").into(),
-                    );
+                    return Err(jxl_bitstream::Error::ValidationFailed("non_zeros too large").into());
                 }
 
                 let non_zeros_val = (non_zeros + num_blocks - 1) >> num_blocks_log;
@@ -208,18 +180,14 @@ pub fn write_hf_coeff<S: Sample>(
                     let coeff_ctx = {
                         let non_zeros = (non_zeros - 1) >> num_blocks_log;
                         let idx = idx >> num_blocks_log;
-                        (COEFF_NUM_NONZERO_CONTEXT[non_zeros as usize] + COEFF_FREQ_CONTEXT[idx])
-                            * 2
+                        (COEFF_NUM_NONZERO_CONTEXT[non_zeros as usize] + COEFF_FREQ_CONTEXT[idx]) * 2
                             + is_prev_coeff_nonzero
                     };
                     let cluster = *cluster_map.get(coeff_ctx as usize).ok_or_else(|| {
                         tracing::error!("too many zeros in varblock HF coefficient");
-                        jxl_bitstream::Error::ValidationFailed(
-                            "too many zeros in varblock HF coefficient",
-                        )
+                        jxl_bitstream::Error::ValidationFailed("too many zeros in varblock HF coefficient")
                     })?;
-                    let ucoeff =
-                        dist.read_varint_with_multiplier_clustered(bitstream, cluster, 0)?;
+                    let ucoeff = dist.read_varint_with_multiplier_clustered(bitstream, cluster, 0)?;
                     if ucoeff == 0 {
                         is_prev_coeff_nonzero = 0;
                         continue;

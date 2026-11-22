@@ -180,14 +180,7 @@ struct CanvasSizeParams<'a> {
 
 impl FrameHeader {
     fn test_full_image(canvas_size: CanvasSizeParams) -> bool {
-        let CanvasSizeParams {
-            x0,
-            y0,
-            width,
-            height,
-            size,
-            ..
-        } = canvas_size;
+        let CanvasSizeParams { x0, y0, width, height, size, .. } = canvas_size;
 
         if x0 > 0 || y0 > 0 {
             return false;
@@ -199,16 +192,11 @@ impl FrameHeader {
     }
 
     fn resets_canvas(blending_mode: BlendMode, canvas_size: CanvasSizeParams) -> bool {
-        blending_mode == BlendMode::Replace
-            && (!canvas_size.have_crop || Self::test_full_image(canvas_size))
+        blending_mode == BlendMode::Replace && (!canvas_size.have_crop || Self::test_full_image(canvas_size))
     }
 
     fn compute_default_xqms(encoding: Encoding, xyb_encoded: bool) -> u32 {
-        if xyb_encoded && encoding == Encoding::VarDct {
-            3
-        } else {
-            2
-        }
+        if xyb_encoded && encoding == Encoding::VarDct { 3 } else { 2 }
     }
 
     /// Returns whether this frame is a keyframe that should be displayed.
@@ -219,17 +207,11 @@ impl FrameHeader {
 
     #[inline]
     pub fn can_reference(&self) -> bool {
-        !self.is_last
-            && (self.duration == 0 || self.save_as_reference != 0)
-            && self.frame_type != FrameType::LfFrame
+        !self.is_last && (self.duration == 0 || self.save_as_reference != 0) && self.frame_type != FrameType::LfFrame
     }
 
     pub fn sample_width(&self, upsampling: u32) -> u32 {
-        let &Self {
-            mut width,
-            lf_level,
-            ..
-        } = self;
+        let &Self { mut width, lf_level, .. } = self;
 
         if upsampling > 1 {
             width = width.div_ceil(upsampling);
@@ -243,11 +225,7 @@ impl FrameHeader {
     }
 
     pub fn sample_height(&self, upsampling: u32) -> u32 {
-        let &Self {
-            mut height,
-            lf_level,
-            ..
-        } = self;
+        let &Self { mut height, lf_level, .. } = self;
 
         if upsampling > 1 {
             height = height.div_ceil(upsampling);
@@ -334,16 +312,8 @@ impl FrameHeader {
         let row = group_idx / stride;
         let col = group_idx % stride;
 
-        let group_width = if col >= full_cols {
-            cols_remainder
-        } else {
-            group_dim
-        };
-        let group_height = if row >= full_rows {
-            rows_remainder
-        } else {
-            group_dim
-        };
+        let group_width = if col >= full_cols { cols_remainder } else { group_dim };
+        let group_height = if row >= full_rows { rows_remainder } else { group_dim };
         (group_width, group_height)
     }
 
@@ -359,11 +329,7 @@ impl FrameHeader {
         let group_x = x >> shift;
         let group_y = y >> shift;
         let group_idx = group_y * self.groups_per_row() + group_x;
-        if group_x >= self.groups_per_row() || group_idx >= self.num_groups() {
-            None
-        } else {
-            Some(group_idx)
-        }
+        if group_x >= self.groups_per_row() || group_idx >= self.num_groups() { None } else { Some(group_idx) }
     }
 
     pub fn is_group_collides_region(&self, group_idx: u32, region: (u32, u32, u32, u32)) -> bool {
@@ -374,11 +340,7 @@ impl FrameHeader {
         is_aabb_collides(region, (group_left, group_top, group_dim, group_dim))
     }
 
-    pub fn is_lf_group_collides_region(
-        &self,
-        lf_group_idx: u32,
-        region: (u32, u32, u32, u32),
-    ) -> bool {
+    pub fn is_lf_group_collides_region(&self, lf_group_idx: u32, region: (u32, u32, u32, u32)) -> bool {
         let lf_group_dim = self.lf_group_dim();
         let lf_group_per_row = self.lf_groups_per_row();
         let group_left = (lf_group_idx % lf_group_per_row) * lf_group_dim;
@@ -502,11 +464,7 @@ impl<Ctx> Bundle<Ctx> for BlendMode {
             3 => Self::MulAdd,
             4 => Self::Mul,
             value => {
-                return Err(jxl_bitstream::Error::InvalidEnum {
-                    name: "BlendMode",
-                    value,
-                }
-                .into());
+                return Err(jxl_bitstream::Error::InvalidEnum { name: "BlendMode", value }.into());
             }
         })
     }

@@ -1,16 +1,7 @@
 use crate::{filter::epf::*, util};
 
 pub(crate) fn epf_row<const STEP: usize>(epf_row: EpfRow<'_, '_>) {
-    let EpfRow {
-        input_rows,
-        output_rows,
-        width,
-        y,
-        sigma_row,
-        epf_params,
-        skip_inner,
-        ..
-    } = epf_row;
+    let EpfRow { input_rows, output_rows, width, y, sigma_row, epf_params, skip_inner, .. } = epf_row;
     let kernel_offsets = epf_kernel_offsets::<STEP>();
     let dist_offsets = epf_dist_offsets::<STEP>();
 
@@ -45,11 +36,7 @@ pub(crate) fn epf_row<const STEP: usize>(epf_row: EpfRow<'_, '_>) {
     let simd_range = {
         let start = 4;
         let end = (width - right_edge_width) & !3;
-        if start > end {
-            start..start
-        } else {
-            start..end
-        }
+        if start > end { start..start } else { start..end }
     };
 
     let (left_padding_end, right_padding_start) = if skip_inner {
@@ -84,8 +71,7 @@ pub(crate) fn epf_row<const STEP: usize>(epf_row: EpfRow<'_, '_>) {
                     let base_dy = (3 + iy) as usize;
                     let base_dx = util::mirror(dx as isize + ix, width);
 
-                    acc += (input_rows[c][kernel_dy][kernel_dx] - input_rows[c][base_dy][base_dx])
-                        .abs();
+                    acc += (input_rows[c][kernel_dy][kernel_dx] - input_rows[c][base_dy][base_dx]).abs();
                 }
                 dist += scale * acc;
             }
@@ -132,9 +118,7 @@ pub(crate) fn epf_row<const STEP: usize>(epf_row: EpfRow<'_, '_>) {
                         let base_dy = (3 + iy) as usize;
                         let base_dx = (dx as isize + ix) as usize;
 
-                        acc += (input_rows[c][kernel_dy][kernel_dx]
-                            - input_rows[c][base_dy][base_dx])
-                            .abs();
+                        acc += (input_rows[c][kernel_dy][kernel_dx] - input_rows[c][base_dy][base_dx]).abs();
                     }
                     dist += scale * acc;
                 }
@@ -181,8 +165,7 @@ pub(crate) fn epf_row<const STEP: usize>(epf_row: EpfRow<'_, '_>) {
                     let base_dy = (3 + iy) as usize;
                     let base_dx = util::mirror(dx as isize + ix, width);
 
-                    acc += (input_rows[c][kernel_dy][kernel_dx] - input_rows[c][base_dy][base_dx])
-                        .abs();
+                    acc += (input_rows[c][kernel_dy][kernel_dx] - input_rows[c][base_dy][base_dx]).abs();
                 }
                 dist += scale * acc;
             }

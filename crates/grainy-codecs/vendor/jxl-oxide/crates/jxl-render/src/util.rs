@@ -1,6 +1,4 @@
-use jxl_color::{
-    ColorEncodingWithProfile, ColorTransform, ColourEncoding, ColourSpace, EnumColourEncoding,
-};
+use jxl_color::{ColorEncodingWithProfile, ColorTransform, ColourEncoding, ColourSpace, EnumColourEncoding};
 use jxl_frame::{
     Frame, FrameHeader,
     data::{LfGlobal, LfGroup},
@@ -12,15 +10,9 @@ use jxl_image::ImageHeader;
 use jxl_modular::{ChannelShift, Sample, image::TransformedModularSubimage};
 use jxl_threadpool::JxlThreadPool;
 
-use crate::{
-    ImageWithRegion, IndexedFrame, Region, Result, image::ImageBuffer, vardct::copy_lf_dequant,
-};
+use crate::{ImageWithRegion, IndexedFrame, Region, Result, image::ImageBuffer, vardct::copy_lf_dequant};
 
-pub(crate) fn image_region_to_frame(
-    frame: &Frame,
-    image_region: Region,
-    ignore_lf_level: bool,
-) -> Region {
+pub(crate) fn image_region_to_frame(frame: &Frame, image_region: Region, ignore_lf_level: bool) -> Region {
     let image_header = frame.image_header();
     let frame_header = frame.header();
     let full_frame_region = Region::with_size(frame_header.width, frame_header.height);
@@ -29,22 +21,13 @@ pub(crate) fn image_region_to_frame(
         full_frame_region
     } else {
         let region = apply_orientation_to_image_region(image_header, image_region);
-        region
-            .translate(-frame_header.x0, -frame_header.y0)
-            .intersection(full_frame_region)
+        region.translate(-frame_header.x0, -frame_header.y0).intersection(full_frame_region)
     };
 
-    if ignore_lf_level {
-        frame_region
-    } else {
-        frame_region.downsample(frame_header.lf_level * 3)
-    }
+    if ignore_lf_level { frame_region } else { frame_region.downsample(frame_header.lf_level * 3) }
 }
 
-pub(crate) fn apply_orientation_to_image_region(
-    image_header: &ImageHeader,
-    image_region: Region,
-) -> Region {
+pub(crate) fn apply_orientation_to_image_region(image_header: &ImageHeader, image_region: Region) -> Region {
     image_region.apply_orientation(image_header)
 }
 
@@ -57,11 +40,7 @@ pub(crate) fn pad_lf_region(frame_header: &FrameHeader, frame_region: Region) ->
     }
 }
 
-pub(crate) fn pad_upsampling(
-    image_header: &ImageHeader,
-    frame_header: &FrameHeader,
-    frame_region: Region,
-) -> Region {
+pub(crate) fn pad_upsampling(image_header: &ImageHeader, frame_header: &FrameHeader, frame_region: Region) -> Region {
     let color_upsample_factor = frame_header.upsampling.trailing_zeros();
     let max_upsample_factor = frame_header
         .ec_upsampling
@@ -82,19 +61,13 @@ pub(crate) fn pad_upsampling(
     }
 }
 
-pub(crate) fn pad_color_region(
-    image_header: &ImageHeader,
-    frame_header: &FrameHeader,
-    frame_region: Region,
-) -> Region {
+pub(crate) fn pad_color_region(image_header: &ImageHeader, frame_header: &FrameHeader, frame_region: Region) -> Region {
     let color_upsample_factor = frame_header.upsampling.ilog2();
     let mut color_padded_region =
         pad_upsampling(image_header, frame_header, frame_region).downsample(color_upsample_factor);
 
     // TODO: actual region could be smaller.
-    if let EdgePreservingFilter::Enabled(EpfParams { iters, .. }) =
-        frame_header.restoration_filter.epf
-    {
+    if let EdgePreservingFilter::Enabled(EpfParams { iters, .. }) = frame_header.restoration_filter.epf {
         // EPF references adjacent samples.
         color_padded_region = if iters == 1 {
             color_padded_region.pad(2)
@@ -140,8 +113,7 @@ pub(crate) fn load_lf_groups<S: Sample>(
     let global_ma_config = lf_global.gmodular.ma_config();
     let has_lf_frame = frame_header.flags.use_lf_frame();
     let jpeg_upsampling = frame_header.jpeg_upsampling;
-    let shifts_cbycr: [_; 3] =
-        std::array::from_fn(|idx| ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx));
+    let shifts_cbycr: [_; 3] = std::array::from_fn(|idx| ChannelShift::from_jpeg_upsampling(jpeg_upsampling, idx));
     let mut lf_xyb = if lf_global_vardct.is_some() && !frame_header.flags.use_lf_frame() {
         let tracker = frame.alloc_tracker();
         let mut out = ImageWithRegion::new(3, tracker);
@@ -184,15 +156,9 @@ pub(crate) fn load_lf_groups<S: Sample>(
         })
     });
 
-    let mlf_groups = mlf_groups
-        .into_iter()
-        .map(Some)
-        .chain(std::iter::repeat_with(|| None));
+    let mlf_groups = mlf_groups.into_iter().map(Some).chain(std::iter::repeat_with(|| None));
     let mut lf_groups_out = (0..num_lf_groups)
-        .map(|idx| LfGroupJob {
-            idx,
-            ..Default::default()
-        })
+        .map(|idx| LfGroupJob { idx, ..Default::default() })
         .zip(mlf_groups)
         .filter_map(|(job, modular)| {
             let idx = job.idx;
@@ -200,12 +166,7 @@ pub(crate) fn load_lf_groups<S: Sample>(
             let lf_group_y = idx / lf_groups_per_row;
             let left = lf_group_x * group_dim;
             let top = lf_group_y * group_dim;
-            let lf_group_region = Region {
-                left: left as i32,
-                top: top as i32,
-                width: group_dim,
-                height: group_dim,
-            };
+            let lf_group_region = Region { left: left as i32, top: top as i32, width: group_dim, height: group_dim };
             if lf_region.intersection(lf_group_region).is_empty() {
                 return None;
             }
@@ -213,32 +174,22 @@ pub(crate) fn load_lf_groups<S: Sample>(
             let xyb_group_idx = lf_group_y.wrapping_add_signed(-lf_group_base_y) * num_cols
                 + lf_group_x.wrapping_add_signed(-lf_group_base_x);
             let lf_xyb = lf_xyb_groups.as_mut().map(|lf_xyb_groups| {
-                lf_xyb_groups.each_mut().map(|groups| {
-                    std::mem::replace(&mut groups[xyb_group_idx as usize], MutableSubgrid::empty())
-                })
+                lf_xyb_groups
+                    .each_mut()
+                    .map(|groups| std::mem::replace(&mut groups[xyb_group_idx as usize], MutableSubgrid::empty()))
             });
 
-            Some(LfGroupJob {
-                modular,
-                lf_xyb,
-                ..job
-            })
+            Some(LfGroupJob { modular, lf_xyb, ..job })
         })
         .collect::<Vec<_>>();
 
     let result = std::sync::RwLock::new(Result::Ok(()));
     pool.for_each_mut_slice(&mut lf_groups_out, |job| {
-        let LfGroupJob {
-            idx,
-            ref mut lf_group,
-            ref mut modular,
-            ref mut lf_xyb,
-        } = *job;
+        let LfGroupJob { idx, ref mut lf_group, ref mut modular, ref mut lf_xyb } = *job;
         let loaded = lf_group.as_ref().map(|g| !g.partial).unwrap_or(false);
 
         if !loaded {
-            let parse_result =
-                frame.try_parse_lf_group(lf_global_vardct, global_ma_config, modular.take(), idx);
+            let parse_result = frame.try_parse_lf_group(lf_global_vardct, global_ma_config, modular.take(), idx);
             match parse_result {
                 Some(Ok(g)) => {
                     *lf_group = Some(g);
@@ -262,12 +213,7 @@ pub(crate) fn load_lf_groups<S: Sample>(
             let lf_group_y = idx / lf_groups_per_row;
             let left = lf_group_x * frame_header.group_dim();
             let top = lf_group_y * frame_header.group_dim();
-            let lf_group_region = Region {
-                left: left as i32,
-                top: top as i32,
-                width: group_dim,
-                height: group_dim,
-            };
+            let lf_group_region = Region { left: left as i32, top: top as i32, width: group_dim, height: group_dim };
             if lf_region.intersection(lf_group_region).is_empty() {
                 return;
             }
@@ -275,27 +221,9 @@ pub(crate) fn load_lf_groups<S: Sample>(
             let quantizer = &lf_global_vardct.quantizer;
             let lf_coeff = lf_group.lf_coeff.as_ref().unwrap();
             let channel_data = lf_coeff.lf_quant.image().unwrap().image_channels();
-            copy_lf_dequant(
-                lf_x,
-                quantizer,
-                lf_global.lf_dequant.m_x_lf,
-                &channel_data[1],
-                lf_coeff.extra_precision,
-            );
-            copy_lf_dequant(
-                lf_y,
-                quantizer,
-                lf_global.lf_dequant.m_y_lf,
-                &channel_data[0],
-                lf_coeff.extra_precision,
-            );
-            copy_lf_dequant(
-                lf_b,
-                quantizer,
-                lf_global.lf_dequant.m_b_lf,
-                &channel_data[2],
-                lf_coeff.extra_precision,
-            );
+            copy_lf_dequant(lf_x, quantizer, lf_global.lf_dequant.m_x_lf, &channel_data[1], lf_coeff.extra_precision);
+            copy_lf_dequant(lf_y, quantizer, lf_global.lf_dequant.m_y_lf, &channel_data[0], lf_coeff.extra_precision);
+            copy_lf_dequant(lf_b, quantizer, lf_global.lf_dequant.m_b_lf, &channel_data[2], lf_coeff.extra_precision);
         }
     });
 
@@ -351,18 +279,15 @@ pub(crate) fn convert_color_for_record(
             let [x, y, b] = fb.as_color_floats_mut();
             tracing::trace!(colour_encoding = ?encoding);
             let transform = ColorTransform::new(
-                &ColorEncodingWithProfile::new(EnumColourEncoding::xyb(
-                    jxl_color::RenderingIntent::Perceptual,
-                )),
+                &ColorEncodingWithProfile::new(EnumColourEncoding::xyb(jxl_color::RenderingIntent::Perceptual)),
                 &ColorEncodingWithProfile::new(encoding.clone()),
                 &metadata.opsin_inverse_matrix,
                 &metadata.tone_mapping,
                 &jxl_color::NullCms,
             )
             .unwrap();
-            let output_channels = transform
-                .run_with_threads(&mut [x.buf_mut(), y.buf_mut(), b.buf_mut()], pool)
-                .unwrap();
+            let output_channels =
+                transform.run_with_threads(&mut [x.buf_mut(), y.buf_mut(), b.buf_mut()], pool).unwrap();
             fb.remove_color_channels(output_channels);
             Ok(())
         })?;
@@ -398,14 +323,7 @@ impl<S: Default + Clone> PaddedGrid<S> {
         padding: usize,
         tracker: Option<&jxl_grid::AllocTracker>,
     ) -> Result<Self> {
-        Ok(Self {
-            grid: AlignedGrid::with_alloc_tracker(
-                width + padding * 2,
-                height + padding * 2,
-                tracker,
-            )?,
-            padding,
-        })
+        Ok(Self { grid: AlignedGrid::with_alloc_tracker(width + padding * 2, height + padding * 2, tracker)?, padding })
     }
 }
 
@@ -437,18 +355,12 @@ impl<S: Clone> PaddedGrid<S> {
         // Mirror vertically.
         let (out_chunk, in_chunk) = buf.split_at_mut(stride * padding);
         let in_chunk = &in_chunk[..stride * padding];
-        for (out_row, in_row) in out_chunk
-            .chunks_exact_mut(stride)
-            .zip(in_chunk.chunks_exact(stride).rev())
-        {
+        for (out_row, in_row) in out_chunk.chunks_exact_mut(stride).zip(in_chunk.chunks_exact(stride).rev()) {
             out_row.clone_from_slice(in_row);
         }
 
         let (in_chunk, out_chunk) = buf.split_at_mut(stride * (height + padding));
-        for (out_row, in_row) in out_chunk
-            .chunks_exact_mut(stride)
-            .zip(in_chunk.chunks_exact(stride).rev())
-        {
+        for (out_row, in_row) in out_chunk.chunks_exact_mut(stride).zip(in_chunk.chunks_exact(stride).rev()) {
             out_row.clone_from_slice(in_row);
         }
     }

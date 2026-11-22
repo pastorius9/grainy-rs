@@ -8,9 +8,7 @@ pub struct RawExif<'image> {
 
 impl std::fmt::Debug for RawExif<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("RawExif")
-            .field("tiff_header_offset", &self.tiff_header_offset)
-            .finish_non_exhaustive()
+        f.debug_struct("RawExif").field("tiff_header_offset", &self.tiff_header_offset).finish_non_exhaustive()
     }
 }
 
@@ -29,16 +27,10 @@ impl<'image> RawExif<'image> {
                 tiff_header_offset,
                 "tiff_header_offset of Exif box is too large"
             );
-            return Err(jxl_bitstream::Error::ValidationFailed(
-                "tiff_header_offset of Exif box is too large",
-            )
-            .into());
+            return Err(jxl_bitstream::Error::ValidationFailed("tiff_header_offset of Exif box is too large").into());
         }
 
-        Ok(Self {
-            tiff_header_offset,
-            payload,
-        })
+        Ok(Self { tiff_header_offset, payload })
     }
 }
 

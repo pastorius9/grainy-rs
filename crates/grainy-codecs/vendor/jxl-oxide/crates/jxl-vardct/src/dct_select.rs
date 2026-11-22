@@ -39,10 +39,7 @@ impl TryFrom<u8> for TransformType {
             // SAFETY: TransformType is repr(u8) and all value <= Dct128x256 is valid
             Ok(unsafe { std::mem::transmute::<u8, Self>(value) })
         } else {
-            Err(jxl_bitstream::Error::InvalidEnum {
-                name: "TransformType",
-                value: value as u32,
-            })
+            Err(jxl_bitstream::Error::InvalidEnum { name: "TransformType", value: value as u32 })
         }
     }
 }
@@ -142,10 +139,7 @@ impl TransformType {
     pub fn need_transpose(&self) -> bool {
         use TransformType::*;
 
-        if matches!(
-            self,
-            Hornuss | Dct2 | Dct4 | Dct4x8 | Dct8x4 | Afv0 | Afv1 | Afv2 | Afv3
-        ) {
+        if matches!(self, Hornuss | Dct2 | Dct4 | Dct4x8 | Dct8x4 | Afv0 | Afv1 | Afv2 | Afv3) {
             false
         } else {
             let (w, h) = self.dct_select_size();

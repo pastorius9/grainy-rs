@@ -15,24 +15,11 @@ struct DequantMatrixParams {
 enum DequantMatrixParamsEncoding {
     Hornuss([[f32; 3]; 3]),
     Dct2([[f32; 6]; 3]),
-    Dct4 {
-        params: [[f32; 2]; 3],
-        dct_params: [Vec<f32>; 3],
-    },
-    Dct4x8 {
-        params: [[f32; 1]; 3],
-        dct_params: [Vec<f32>; 3],
-    },
-    Afv {
-        params: [[f32; 9]; 3],
-        dct_params: [Vec<f32>; 3],
-        dct4x4_params: [Vec<f32>; 3],
-    },
+    Dct4 { params: [[f32; 2]; 3], dct_params: [Vec<f32>; 3] },
+    Dct4x8 { params: [[f32; 1]; 3], dct_params: [Vec<f32>; 3] },
+    Afv { params: [[f32; 9]; 3], dct_params: [Vec<f32>; 3], dct4x4_params: [Vec<f32>; 3] },
     Dct([Vec<f32>; 3]),
-    Raw {
-        denominator: f32,
-        params: Modular<i32>,
-    },
+    Raw { denominator: f32, params: Modular<i32> },
 }
 
 impl DequantMatrixParamsEncoding {
@@ -46,11 +33,7 @@ impl DequantMatrixParamsEncoding {
         [764.36554, -0.926302, -0.967523, -0.2784529],
         [527.10754, -1.4594386, -1.4500821, -1.5843723],
     ];
-    const DCT4_PARAMS: [[f32; 4]; 3] = [
-        [2200.0, 0.0, 0.0, 0.0],
-        [392.0, 0.0, 0.0, 0.0],
-        [112.0, -0.25, -0.25, -0.5],
-    ];
+    const DCT4_PARAMS: [[f32; 4]; 3] = [[2200.0, 0.0, 0.0, 0.0], [392.0, 0.0, 0.0, 0.0], [112.0, -0.25, -0.25, -0.5]];
 
     fn make_dct_param_common_seq(a: f32, b: f32, c: f32) -> Self {
         Self::Dct([
@@ -150,10 +133,7 @@ impl DequantMatrixParamsEncoding {
 
 impl DequantMatrixParams {
     fn default_with(dct_select: TransformType) -> Self {
-        Self {
-            dct_select,
-            encoding: DequantMatrixParamsEncoding::default_with(dct_select),
-        }
+        Self { dct_select, encoding: DequantMatrixParamsEncoding::default_with(dct_select) }
     }
 
     fn into_matrix(self) -> Result<[Vec<f32>; 3]> {
@@ -190,10 +170,7 @@ impl DequantMatrixParams {
                 let band = last_band * mult(val);
                 if band <= 0.0 {
                     tracing::error!(band, "DCT dequant matrix: band <= 0");
-                    return Err(jxl_bitstream::Error::ValidationFailed(
-                        "DCT dequant matrix: band <= 0",
-                    )
-                    .into());
+                    return Err(jxl_bitstream::Error::ValidationFailed("DCT dequant matrix: band <= 0").into());
                 }
                 bands.push(band);
                 last_band = band;
@@ -257,9 +234,7 @@ impl DequantMatrixParams {
             }),
             Dct4 { params, dct_params } => {
                 let mut ret = [Vec::new(), Vec::new(), Vec::new()];
-                for (ret, (params, dct_params)) in
-                    ret.iter_mut().zip(params.into_iter().zip(dct_params))
-                {
+                for (ret, (params, dct_params)) in ret.iter_mut().zip(params.into_iter().zip(dct_params)) {
                     let mat = dct_quant_weights(&dct_params, 4, 4)?;
                     *ret = vec![0.0f32; 64];
                     for y in 0..4 {
@@ -278,36 +253,24 @@ impl DequantMatrixParams {
             }
             Dct4x8 { params, dct_params } => {
                 let mut ret = [Vec::new(), Vec::new(), Vec::new()];
-                for (ret, (params, dct_params)) in
-                    ret.iter_mut().zip(params.into_iter().zip(dct_params))
-                {
+                for (ret, (params, dct_params)) in ret.iter_mut().zip(params.into_iter().zip(dct_params)) {
                     let mat = dct_quant_weights(&dct_params, 8, 4)?;
-                    *ret = mat
-                        .chunks_exact(8)
-                        .flat_map(|v| [v, v])
-                        .flatten()
-                        .copied()
-                        .collect();
+                    *ret = mat.chunks_exact(8).flat_map(|v| [v, v]).flatten().copied().collect();
                     ret[8] /= params[0];
                 }
                 ret
             }
-            Afv {
-                params,
-                dct_params,
-                dct4x4_params,
-            } => {
+            Afv { params, dct_params, dct4x4_params } => {
                 const FREQS: [f32; 16] = [
-                    0.0, 0.0, 0.8517779, 5.3777843, 0.0, 0.0, 4.734748, 5.4492455, 1.659827, 4.0,
-                    7.275749, 10.423227, 2.6629324, 7.6306577, 8.962389, 12.971662,
+                    0.0, 0.0, 0.8517779, 5.3777843, 0.0, 0.0, 4.734748, 5.4492455, 1.659827, 4.0, 7.275749, 10.423227,
+                    2.6629324, 7.6306577, 8.962389, 12.971662,
                 ];
                 const FREQ_LO: f32 = FREQS[2];
                 const FREQ_HI: f32 = FREQS[15];
 
                 let mut ret = [Vec::new(), Vec::new(), Vec::new()];
-                for (ret, ((params, dct_params), dct4x4_params)) in ret
-                    .iter_mut()
-                    .zip(params.into_iter().zip(dct_params).zip(dct4x4_params))
+                for (ret, ((params, dct_params), dct4x4_params)) in
+                    ret.iter_mut().zip(params.into_iter().zip(dct_params).zip(dct4x4_params))
                 {
                     let weights_4x8 = dct_quant_weights(&dct_params, 8, 4)?;
                     let weights_4x4 = dct_quant_weights(&dct4x4_params, 4, 4)?;
@@ -326,48 +289,28 @@ impl DequantMatrixParams {
                                 (0, 1) => params[2],
                                 (1, 0) => params[3],
                                 (1, 1) => params[4],
-                                (x, y) => interpolate(
-                                    FREQS[y * 4 + x] - FREQ_LO,
-                                    FREQ_HI - FREQ_LO + 1e-6,
-                                    &bands,
-                                ),
+                                (x, y) => interpolate(FREQS[y * 4 + x] - FREQ_LO, FREQ_HI - FREQ_LO + 1e-6, &bands),
                             };
                         }
                     }
 
                     let weights_4x8 = weights_4x8.chunks_exact(8);
                     let weights_4x4 = weights_4x4.chunks_exact(4);
-                    for (y, ((rows, weights_8), weights_4)) in ret
-                        .chunks_exact_mut(16)
-                        .zip(weights_4x8)
-                        .zip(weights_4x4)
-                        .enumerate()
+                    for (y, ((rows, weights_8), weights_4)) in
+                        ret.chunks_exact_mut(16).zip(weights_4x8).zip(weights_4x4).enumerate()
                     {
                         let (row0, row1) = rows.split_at_mut(8);
                         for (x, (w, &dct_weight)) in row1.iter_mut().zip(weights_8).enumerate() {
-                            *w = if y == 0 && x == 0 {
-                                params[0]
-                            } else {
-                                dct_weight
-                            };
+                            *w = if y == 0 && x == 0 { params[0] } else { dct_weight };
                         }
-                        for (x, (pair, &dct_weight)) in
-                            row0.chunks_exact_mut(2).zip(weights_4).enumerate()
-                        {
-                            pair[1] = if y == 0 && x == 0 {
-                                params[1]
-                            } else {
-                                dct_weight
-                            };
+                        for (x, (pair, &dct_weight)) in row0.chunks_exact_mut(2).zip(weights_4).enumerate() {
+                            pair[1] = if y == 0 && x == 0 { params[1] } else { dct_weight };
                         }
                     }
                 }
                 ret
             }
-            Raw {
-                denominator,
-                params,
-            } => {
+            Raw { denominator, params } => {
                 let (width, height) = dct_select.dequant_matrix_size();
                 let channel_data = params.into_image().unwrap().into_image_channels();
                 [0usize, 1, 2].map(|c| {
@@ -457,11 +400,7 @@ impl Bundle<DequantMatrixSetParams<'_, '_, '_>> for DequantMatrixParams {
 
         fn read_dct_params(bitstream: &mut Bitstream) -> Result<[Vec<f32>; 3]> {
             let num_params = bitstream.read_bits(4)? as usize + 1;
-            let mut params = [
-                vec![0.0f32; num_params],
-                vec![0.0f32; num_params],
-                vec![0.0f32; num_params],
-            ];
+            let mut params = [vec![0.0f32; num_params], vec![0.0f32; num_params], vec![0.0f32; num_params]];
             for val in params.iter_mut().flatten() {
                 *val = bitstream.read_f16_as_f32()?;
             }
@@ -471,14 +410,7 @@ impl Bundle<DequantMatrixSetParams<'_, '_, '_>> for DequantMatrixParams {
             Ok(params)
         }
 
-        let DequantMatrixSetParams {
-            dct_select,
-            bit_depth,
-            stream_index,
-            global_ma_config,
-            tracker,
-            pool,
-        } = params;
+        let DequantMatrixSetParams { dct_select, bit_depth, stream_index, global_ma_config, tracker, pool } = params;
 
         let encoding_mode = bitstream.read_bits(3)?;
         if encoding_mode != 0 {
@@ -492,34 +424,18 @@ impl Bundle<DequantMatrixSetParams<'_, '_, '_>> for DequantMatrixParams {
         }
 
         if (1..=5).contains(&encoding_mode)
-            && !matches!(
-                dct_select.dequant_matrix_param_index(),
-                0 | 1 | 2 | 3 | 9 | 10
-            )
+            && !matches!(dct_select.dequant_matrix_param_index(), 0 | 1 | 2 | 3 | 9 | 10)
         {
-            tracing::error!(
-                ?dct_select,
-                encoding_mode,
-                "Invalid encoding mode for DctSelect value"
-            );
-            return Err(jxl_bitstream::Error::ValidationFailed(
-                "invalid encoding mode for DctSelect value",
-            )
-            .into());
+            tracing::error!(?dct_select, encoding_mode, "Invalid encoding mode for DctSelect value");
+            return Err(jxl_bitstream::Error::ValidationFailed("invalid encoding mode for DctSelect value").into());
         }
 
         let encoding = match encoding_mode {
             0 => DequantMatrixParamsEncoding::default_with(dct_select),
             1 => Hornuss(read_fixed(bitstream)?),
             2 => Dct2(read_fixed(bitstream)?),
-            3 => Dct4 {
-                params: read_fixed(bitstream)?,
-                dct_params: read_dct_params(bitstream)?,
-            },
-            4 => Dct4x8 {
-                params: read_fixed(bitstream)?,
-                dct_params: read_dct_params(bitstream)?,
-            },
+            3 => Dct4 { params: read_fixed(bitstream)?, dct_params: read_dct_params(bitstream)? },
+            4 => Dct4x8 { params: read_fixed(bitstream)?, dct_params: read_dct_params(bitstream)? },
             5 => {
                 let mut params = read_fixed::<9>(bitstream)?;
                 for params in &mut params {
@@ -528,11 +444,7 @@ impl Bundle<DequantMatrixSetParams<'_, '_, '_>> for DequantMatrixParams {
                     }
                 }
 
-                Afv {
-                    params,
-                    dct_params: read_dct_params(bitstream)?,
-                    dct4x4_params: read_dct_params(bitstream)?,
-                }
+                Afv { params, dct_params: read_dct_params(bitstream)?, dct4x4_params: read_dct_params(bitstream)? }
             }
             6 => Dct(read_dct_params(bitstream)?),
             7 => {
@@ -554,18 +466,12 @@ impl Bundle<DequantMatrixSetParams<'_, '_, '_>> for DequantMatrixParams {
                 subimage.decode(bitstream, stream_index, false)?;
                 subimage.finish(pool);
 
-                Raw {
-                    denominator,
-                    params,
-                }
+                Raw { denominator, params }
             }
             _ => unreachable!(),
         };
 
-        Ok(Self {
-            dct_select,
-            encoding,
-        })
+        Ok(Self { dct_select, encoding })
     }
 }
 
@@ -589,49 +495,35 @@ impl Bundle<DequantMatrixSetParams<'_, '_, '_>> for DequantMatrixSet {
     fn parse(bitstream: &mut Bitstream, params: DequantMatrixSetParams) -> Result<Self> {
         use TransformType::*;
         const DCT_SELECT_LIST: [TransformType; 17] = [
-            Dct8, Hornuss, Dct2, Dct4, Dct16, Dct32, Dct8x16, Dct8x32, Dct16x32, Dct4x8, Afv0,
-            Dct64, Dct32x64, Dct128, Dct64x128, Dct256, Dct128x256,
+            Dct8, Hornuss, Dct2, Dct4, Dct16, Dct32, Dct8x16, Dct8x32, Dct16x32, Dct4x8, Afv0, Dct64, Dct32x64, Dct128,
+            Dct64x128, Dct256, Dct128x256,
         ];
 
         let param_list: Vec<_> = if bitstream.read_bool()? {
-            DCT_SELECT_LIST
-                .into_iter()
-                .map(DequantMatrixParams::default_with)
-                .collect()
+            DCT_SELECT_LIST.into_iter().map(DequantMatrixParams::default_with).collect()
         } else {
             DCT_SELECT_LIST
                 .into_iter()
                 .enumerate()
                 .map(|(idx, dct_select)| {
-                    let local_params = DequantMatrixSetParams {
-                        dct_select,
-                        stream_index: params.stream_index + idx as u32,
-                        ..params
-                    };
+                    let local_params =
+                        DequantMatrixSetParams { dct_select, stream_index: params.stream_index + idx as u32, ..params };
                     DequantMatrixParams::parse(bitstream, local_params)
                 })
                 .collect::<Result<_>>()?
         };
 
         let jpeg_matrices = match &param_list[0].encoding {
-            DequantMatrixParamsEncoding::Raw {
-                denominator,
-                params,
-            } if (1.0 / denominator).round() as i32 == 2040 => params.image().map(|image| {
-                image
-                    .image_channels()
-                    .iter()
-                    .map(|channel| channel.buf().to_vec())
-                    .collect::<Vec<_>>()
-            }),
+            DequantMatrixParamsEncoding::Raw { denominator, params } if (1.0 / denominator).round() as i32 == 2040 => {
+                params.image().map(|image| {
+                    image.image_channels().iter().map(|channel| channel.buf().to_vec()).collect::<Vec<_>>()
+                })
+            }
             _ => None,
         };
         let jpeg_matrices = jpeg_matrices.unwrap_or_default();
 
-        let matrices: Vec<_> = param_list
-            .into_iter()
-            .map(|params| params.into_matrix())
-            .collect::<Result<_>>()?;
+        let matrices: Vec<_> = param_list.into_iter().map(|params| params.into_matrix()).collect::<Result<_>>()?;
         let matrices_tr = matrices
             .iter()
             .zip(DCT_SELECT_LIST)
@@ -650,11 +542,7 @@ impl Bundle<DequantMatrixSetParams<'_, '_, '_>> for DequantMatrixSet {
             })
             .collect();
 
-        Ok(Self {
-            matrices,
-            matrices_tr,
-            jpeg_matrices,
-        })
+        Ok(Self { matrices, matrices_tr, jpeg_matrices })
     }
 }
 

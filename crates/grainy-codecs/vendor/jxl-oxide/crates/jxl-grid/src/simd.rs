@@ -238,9 +238,7 @@ impl SimdVector for std::arch::x86_64::__m256 {
     #[inline]
     unsafe fn set<const N: usize>(val: [f32; N]) -> Self {
         assert_eq!(N, Self::SIZE);
-        std::arch::x86_64::_mm256_set_ps(
-            val[7], val[6], val[5], val[4], val[3], val[2], val[1], val[0],
-        )
+        std::arch::x86_64::_mm256_set_ps(val[7], val[6], val[5], val[4], val[3], val[2], val[1], val[0])
     }
 
     #[inline]
@@ -310,8 +308,7 @@ impl SimdVector for std::arch::x86_64::__m256 {
     #[target_feature(enable = "avx2")]
     unsafe fn abs(self) -> Self {
         let x = std::arch::x86_64::_mm256_undefined_si256();
-        let mask =
-            std::arch::x86_64::_mm256_srli_epi32::<1>(std::arch::x86_64::_mm256_cmpeq_epi32(x, x));
+        let mask = std::arch::x86_64::_mm256_srli_epi32::<1>(std::arch::x86_64::_mm256_cmpeq_epi32(x, x));
         std::arch::x86_64::_mm256_and_ps(std::arch::x86_64::_mm256_castsi256_ps(mask), self)
     }
 

@@ -9,22 +9,13 @@ type Vector = float32x4_t;
 #[target_feature(enable = "neon")]
 #[inline]
 unsafe fn weight_neon(scaled_distance: Vector, sigma: f32, step_multiplier: Vector) -> Vector {
-    let neg_inv_sigma =
-        vdupq_n_f32(6.6 * (std::f32::consts::FRAC_1_SQRT_2 - 1.0) / sigma).mul(step_multiplier);
+    let neg_inv_sigma = vdupq_n_f32(6.6 * (std::f32::consts::FRAC_1_SQRT_2 - 1.0) / sigma).mul(step_multiplier);
     let result = scaled_distance.mul(neg_inv_sigma).add(vdupq_n_f32(1.0));
     vmaxq_f32(result, Vector::zero())
 }
 
 pub(crate) unsafe fn epf_row_aarch64_neon<const STEP: usize>(epf_row: EpfRow) {
-    let EpfRow {
-        merged_input_rows,
-        output_rows,
-        width,
-        y,
-        sigma_row,
-        epf_params,
-        ..
-    } = epf_row;
+    let EpfRow { merged_input_rows, output_rows, width, y, sigma_row, epf_params, .. } = epf_row;
     let merged_input_rows = merged_input_rows.unwrap();
     let kernel_offsets = epf_kernel_offsets::<STEP>();
 
@@ -46,11 +37,7 @@ pub(crate) unsafe fn epf_row_aarch64_neon<const STEP: usize>(epf_row: EpfRow) {
     let simd_range = {
         let start = 4;
         let end = (width - padding) & !3;
-        if start > end {
-            start..start
-        } else {
-            start..end
-        }
+        if start > end { start..start } else { start..end }
     };
 
     let is_y_border = (y + 1) & 0b110 == 0;
@@ -71,9 +58,8 @@ pub(crate) unsafe fn epf_row_aarch64_neon<const STEP: usize>(epf_row: EpfRow) {
 
         let sigma_val = sigma_row[sigma_x];
 
-        let originals: [_; 3] = std::array::from_fn(|c| unsafe {
-            vld1q_f32(merged_input_rows[c].get_row(3).as_ptr().add(dx))
-        });
+        let originals: [_; 3] =
+            std::array::from_fn(|c| unsafe { vld1q_f32(merged_input_rows[c].get_row(3).as_ptr().add(dx)) });
 
         if sigma_val < 0.3 {
             for (c, val) in originals.into_iter().enumerate() {
@@ -188,10 +174,8 @@ pub(crate) unsafe fn epf_row_aarch64_neon<const STEP: usize>(epf_row: EpfRow) {
 
                 for (c, sum) in sum_channels.iter_mut().enumerate() {
                     let input_rows = &merged_input_rows[c];
-                    let weighted0 =
-                        weight0.mul(vld1q_f32(input_rows.get_row(3).as_ptr().add(dx - 1)));
-                    let weighted1 =
-                        weight1.mul(vld1q_f32(input_rows.get_row(3).as_ptr().add(dx + 1)));
+                    let weighted0 = weight0.mul(vld1q_f32(input_rows.get_row(3).as_ptr().add(dx - 1)));
+                    let weighted1 = weight1.mul(vld1q_f32(input_rows.get_row(3).as_ptr().add(dx + 1)));
                     *sum = sum.add(weighted0).add(weighted1);
                 }
             }
@@ -241,9 +225,7 @@ pub(crate) unsafe fn epf_row_aarch64_neon<const STEP: usize>(epf_row: EpfRow) {
                 sum_weights = sum_weights.add(weight);
 
                 for (c, sum) in sum_channels.iter_mut().enumerate() {
-                    *sum = weight
-                        .mul(vld1q_f32(merged_input_rows[c].get_row(ky).as_ptr().add(kx)))
-                        .add(*sum);
+                    *sum = weight.mul(vld1q_f32(merged_input_rows[c].get_row(ky).as_ptr().add(kx))).add(*sum);
                 }
             }
         }

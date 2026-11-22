@@ -79,9 +79,7 @@ impl<R: Read> JxlDecoder<R> {
 
     /// Initializes a decoder which reads from given image stream, with custom thread pool.
     pub fn with_thread_pool(reader: R, pool: crate::JxlThreadPool) -> ImageResult<Self> {
-        let builder = JxlImage::builder()
-            .pool(pool)
-            .alloc_tracker(AllocTracker::with_limit(usize::MAX));
+        let builder = JxlImage::builder().pool(pool).alloc_tracker(AllocTracker::with_limit(usize::MAX));
 
         Self::init(builder, reader)
     }
@@ -92,29 +90,15 @@ impl<R: Read> JxlDecoder<R> {
         let image = Self::init_image(builder, &mut reader, &mut buf, &mut buf_valid)
             .map_err(|e| ImageError::Decoding(DecodingError::new(ImageFormatHint::Unknown, e)))?;
 
-        let crop = CropInfo {
-            width: image.width(),
-            height: image.height(),
-            left: 0,
-            top: 0,
-        };
+        let crop = CropInfo { width: image.width(), height: image.height(), left: 0, top: 0 };
 
-        let mut decoder = Self {
-            reader,
-            image,
-            current_memory_limit: usize::MAX,
-            current_crop: crop,
-            buf,
-            buf_valid,
-        };
+        let mut decoder = Self { reader, image, current_memory_limit: usize::MAX, current_crop: crop, buf, buf_valid };
 
         // Convert CMYK to sRGB
         if decoder.image.pixel_format().has_black() {
             decoder
                 .image
-                .request_color_encoding(jxl_color::EnumColourEncoding::srgb(
-                    jxl_color::RenderingIntent::Relative,
-                ));
+                .request_color_encoding(jxl_color::EnumColourEncoding::srgb(jxl_color::RenderingIntent::Relative));
         }
 
         Ok(decoder)
@@ -196,13 +180,7 @@ impl<R: Read> JxlDecoder<R> {
         use crate::BitDepth;
 
         let metadata = &self.image.image_header().metadata;
-        matches!(
-            metadata.bit_depth,
-            BitDepth::FloatSample { .. }
-                | BitDepth::IntegerSample {
-                    bits_per_sample: 17..
-                }
-        )
+        matches!(metadata.bit_depth, BitDepth::FloatSample { .. } | BitDepth::IntegerSample { bits_per_sample: 17.. })
     }
 
     #[inline]
@@ -211,12 +189,7 @@ impl<R: Read> JxlDecoder<R> {
         metadata.bit_depth.bits_per_sample() > 8
     }
 
-    fn read_image_inner(
-        &mut self,
-        crop: CropInfo,
-        buf: &mut [u8],
-        buf_stride: Option<usize>,
-    ) -> crate::Result<()> {
+    fn read_image_inner(&mut self, crop: CropInfo, buf: &mut [u8], buf_stride: Option<usize>) -> crate::Result<()> {
         if self.current_crop != crop {
             self.image.set_image_region(crop);
             self.current_crop = crop;
@@ -229,12 +202,8 @@ impl<R: Read> JxlDecoder<R> {
         } else {
             self.image.render_loading_frame()
         };
-        let render = render.map_err(|e| {
-            ImageError::Decoding(DecodingError::new(
-                ImageFormatHint::PathExtension("jxl".into()),
-                e,
-            ))
-        })?;
+        let render = render
+            .map_err(|e| ImageError::Decoding(DecodingError::new(ImageFormatHint::PathExtension("jxl".into()), e)))?;
         let stream = render.stream();
 
         let stride_base = stream.width() as usize * stream.channels() as usize;
@@ -261,12 +230,7 @@ impl<R: Read> image::ImageDecoder for JxlDecoder<R> {
     fn color_type(&self) -> image::ColorType {
         let pixel_format = self.image.pixel_format();
 
-        match (
-            pixel_format.is_grayscale(),
-            pixel_format.has_alpha(),
-            self.is_float(),
-            self.need_16bit(),
-        ) {
+        match (pixel_format.is_grayscale(), pixel_format.has_alpha(), self.is_float(), self.need_16bit()) {
             (false, false, false, false) => ColorType::Rgb8,
             (false, false, false, true) => ColorType::Rgb16,
             (false, false, true, _) => ColorType::Rgb32F,
@@ -284,35 +248,17 @@ impl<R: Read> image::ImageDecoder for JxlDecoder<R> {
     where
         Self: Sized,
     {
-        let crop = CropInfo {
-            width: self.image.width(),
-            height: self.image.height(),
-            left: 0,
-            top: 0,
-        };
+        let crop = CropInfo { width: self.image.width(), height: self.image.height(), left: 0, top: 0 };
 
-        self.read_image_inner(crop, buf, None).map_err(|e| {
-            ImageError::Decoding(DecodingError::new(
-                ImageFormatHint::PathExtension("jxl".into()),
-                e,
-            ))
-        })
+        self.read_image_inner(crop, buf, None)
+            .map_err(|e| ImageError::Decoding(DecodingError::new(ImageFormatHint::PathExtension("jxl".into()), e)))
     }
 
     fn read_image_boxed(mut self: Box<Self>, buf: &mut [u8]) -> ImageResult<()> {
-        let crop = CropInfo {
-            width: self.image.width(),
-            height: self.image.height(),
-            left: 0,
-            top: 0,
-        };
+        let crop = CropInfo { width: self.image.width(), height: self.image.height(), left: 0, top: 0 };
 
-        self.read_image_inner(crop, buf, None).map_err(|e| {
-            ImageError::Decoding(DecodingError::new(
-                ImageFormatHint::PathExtension("jxl".into()),
-                e,
-            ))
-        })
+        self.read_image_inner(crop, buf, None)
+            .map_err(|e| ImageError::Decoding(DecodingError::new(ImageFormatHint::PathExtension("jxl".into()), e)))
     }
 
     fn icc_profile(&mut self) -> ImageResult<Option<Vec<u8>>> {
@@ -320,12 +266,8 @@ impl<R: Read> image::ImageDecoder for JxlDecoder<R> {
     }
 
     fn exif_metadata(&mut self) -> ImageResult<Option<Vec<u8>>> {
-        self.load_until_exif().map_err(|e| {
-            ImageError::Decoding(DecodingError::new(
-                ImageFormatHint::PathExtension("jxl".into()),
-                e,
-            ))
-        })?;
+        self.load_until_exif()
+            .map_err(|e| ImageError::Decoding(DecodingError::new(ImageFormatHint::PathExtension("jxl".into()), e)))?;
 
         let aux_boxes = self.image.aux_boxes();
         let AuxBoxData::Data(exif) = aux_boxes.first_exif().unwrap() else {
@@ -340,17 +282,13 @@ impl<R: Read> image::ImageDecoder for JxlDecoder<R> {
         if let Some(max_width) = limits.max_image_width
             && self.image.width() > max_width
         {
-            return Err(ImageError::Limits(LimitError::from_kind(
-                LimitErrorKind::DimensionError,
-            )));
+            return Err(ImageError::Limits(LimitError::from_kind(LimitErrorKind::DimensionError)));
         }
 
         if let Some(max_height) = limits.max_image_height
             && self.image.height() > max_height
         {
-            return Err(ImageError::Limits(LimitError::from_kind(
-                LimitErrorKind::DimensionError,
-            )));
+            return Err(ImageError::Limits(LimitError::from_kind(LimitErrorKind::DimensionError)));
         }
 
         let alloc_tracker = self.image.ctx.alloc_tracker();
@@ -362,23 +300,17 @@ impl<R: Read> image::ImageDecoder for JxlDecoder<R> {
                 } else {
                     tracker
                         .shrink_limit(self.current_memory_limit - new_memory_limit)
-                        .map_err(|_| {
-                            ImageError::Limits(LimitError::from_kind(
-                                LimitErrorKind::InsufficientMemory,
-                            ))
-                        })?;
+                        .map_err(|_| ImageError::Limits(LimitError::from_kind(LimitErrorKind::InsufficientMemory)))?;
                 }
 
                 self.current_memory_limit = new_memory_limit;
             }
             (None, None) => {}
             (None, Some(_)) => {
-                return Err(ImageError::Limits(LimitError::from_kind(
-                    LimitErrorKind::Unsupported {
-                        limits,
-                        supported: image::LimitSupport::default(),
-                    },
-                )));
+                return Err(ImageError::Limits(LimitError::from_kind(LimitErrorKind::Unsupported {
+                    limits,
+                    supported: image::LimitSupport::default(),
+                })));
             }
         }
 
@@ -396,20 +328,10 @@ impl<R: Read> image::ImageDecoderRect for JxlDecoder<R> {
         buf: &mut [u8],
         row_pitch: usize,
     ) -> ImageResult<()> {
-        let crop = CropInfo {
-            width,
-            height,
-            left: x,
-            top: y,
-        };
+        let crop = CropInfo { width, height, left: x, top: y };
 
         self.read_image_inner(crop, buf, Some(row_pitch))
-            .map_err(|e| {
-                ImageError::Decoding(DecodingError::new(
-                    ImageFormatHint::PathExtension("jxl".into()),
-                    e,
-                ))
-            })
+            .map_err(|e| ImageError::Decoding(DecodingError::new(ImageFormatHint::PathExtension("jxl".into()), e)))
     }
 }
 
@@ -418,8 +340,7 @@ fn stream_to_buf<Sample: crate::FrameBufferSample>(
     buf: &mut [u8],
     buf_stride: usize,
 ) {
-    let stride =
-        stream.width() as usize * stream.channels() as usize * std::mem::size_of::<Sample>();
+    let stride = stream.width() as usize * stream.channels() as usize * std::mem::size_of::<Sample>();
     assert!(buf_stride >= stride);
     assert_eq!(buf.len(), buf_stride * stream.height() as usize);
 
@@ -477,10 +398,8 @@ fn stream_to_buf<Sample: crate::FrameBufferSample>(
 /// # Ok(()) }
 /// ```
 pub fn register_image_decoding_hook() -> bool {
-    let registered_just_now = image::hooks::register_decoding_hook(
-        "jxl".into(),
-        Box::new(|r| Ok(Box::new(JxlDecoder::new(r)?))),
-    );
+    let registered_just_now =
+        image::hooks::register_decoding_hook("jxl".into(), Box::new(|r| Ok(Box::new(JxlDecoder::new(r)?))));
     if registered_just_now {
         // according to https://en.wikipedia.org/wiki/JPEG_XL there are two different magic byte sequences
         use jxl_bitstream::consts::{CODESTREAM_SIG, CONTAINER_SIG};

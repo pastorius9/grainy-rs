@@ -7,13 +7,7 @@ pub fn render_spot_color(
     ec_grid: &AlignedGrid<f32>,
     ec_ty: &ExtraChannelType,
 ) -> crate::Result<()> {
-    let ExtraChannelType::SpotColour {
-        red,
-        green,
-        blue,
-        solidity,
-    } = ec_ty
-    else {
+    let ExtraChannelType::SpotColour { red, green, blue, solidity } = ec_ty else {
         return Err(crate::Error::NotSupported("EC type is not SpotColour"));
     };
     if color_channels.len() != 3 {

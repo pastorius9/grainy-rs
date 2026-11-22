@@ -7,30 +7,15 @@ use crate::filter::epf::*;
 type Vector = v128;
 
 #[target_feature(enable = "simd128")]
-unsafe fn weight_wasm32_simd128(
-    scaled_distance: Vector,
-    sigma: f32,
-    step_multiplier: Vector,
-) -> Vector {
-    let neg_inv_sigma = Vector::splat_f32(6.6 * (std::f32::consts::FRAC_1_SQRT_2 - 1.0) / sigma)
-        .mul(step_multiplier);
-    let result = scaled_distance
-        .mul(neg_inv_sigma)
-        .add(Vector::splat_f32(1.0));
+unsafe fn weight_wasm32_simd128(scaled_distance: Vector, sigma: f32, step_multiplier: Vector) -> Vector {
+    let neg_inv_sigma = Vector::splat_f32(6.6 * (std::f32::consts::FRAC_1_SQRT_2 - 1.0) / sigma).mul(step_multiplier);
+    let result = scaled_distance.mul(neg_inv_sigma).add(Vector::splat_f32(1.0));
     f32x4_max(result, Vector::zero())
 }
 
 #[target_feature(enable = "simd128")]
 pub(crate) unsafe fn epf_row_wasm32_simd128<const STEP: usize>(epf_row: EpfRow) {
-    let EpfRow {
-        merged_input_rows,
-        output_rows,
-        width,
-        y,
-        sigma_row,
-        epf_params,
-        ..
-    } = epf_row;
+    let EpfRow { merged_input_rows, output_rows, width, y, sigma_row, epf_params, .. } = epf_row;
     let merged_input_rows = merged_input_rows.unwrap();
     let kernel_offsets = epf_kernel_offsets::<STEP>();
 
@@ -52,11 +37,7 @@ pub(crate) unsafe fn epf_row_wasm32_simd128<const STEP: usize>(epf_row: EpfRow) 
     let simd_range = {
         let start = 4;
         let end = (width - padding) & !3;
-        if start > end {
-            start..start
-        } else {
-            start..end
-        }
+        if start > end { start..start } else { start..end }
     };
 
     let is_y_border = (y + 1) & 0b110 == 0;
@@ -77,9 +58,8 @@ pub(crate) unsafe fn epf_row_wasm32_simd128<const STEP: usize>(epf_row: EpfRow) 
 
         let sigma_val = sigma_row[sigma_x];
 
-        let originals: [_; 3] = std::array::from_fn(|c| unsafe {
-            Vector::load(merged_input_rows[c].get_row(3).as_ptr().add(dx))
-        });
+        let originals: [_; 3] =
+            std::array::from_fn(|c| unsafe { Vector::load(merged_input_rows[c].get_row(3).as_ptr().add(dx)) });
 
         if sigma_val < 0.3 {
             for (c, val) in originals.into_iter().enumerate() {
@@ -142,10 +122,8 @@ pub(crate) unsafe fn epf_row_wasm32_simd128<const STEP: usize>(epf_row: EpfRow) 
 
                 for (c, sum) in sum_channels.iter_mut().enumerate() {
                     let input_rows = &merged_input_rows[c];
-                    let weighted0 =
-                        weight0.mul(Vector::load(input_rows.get_row(2).as_ptr().add(dx)));
-                    let weighted1 =
-                        weight1.mul(Vector::load(input_rows.get_row(4).as_ptr().add(dx)));
+                    let weighted0 = weight0.mul(Vector::load(input_rows.get_row(2).as_ptr().add(dx)));
+                    let weighted1 = weight1.mul(Vector::load(input_rows.get_row(4).as_ptr().add(dx)));
                     *sum = sum.add(weighted0).add(weighted1);
                 }
             }
@@ -192,10 +170,8 @@ pub(crate) unsafe fn epf_row_wasm32_simd128<const STEP: usize>(epf_row: EpfRow) 
 
                 for (c, sum) in sum_channels.iter_mut().enumerate() {
                     let input_rows = &merged_input_rows[c];
-                    let weighted0 =
-                        weight0.mul(Vector::load(input_rows.get_row(3).as_ptr().add(dx - 1)));
-                    let weighted1 =
-                        weight1.mul(Vector::load(input_rows.get_row(3).as_ptr().add(dx + 1)));
+                    let weighted0 = weight0.mul(Vector::load(input_rows.get_row(3).as_ptr().add(dx - 1)));
+                    let weighted1 = weight1.mul(Vector::load(input_rows.get_row(3).as_ptr().add(dx + 1)));
                     *sum = sum.add(weighted0).add(weighted1);
                 }
             }
@@ -239,18 +215,13 @@ pub(crate) unsafe fn epf_row_wasm32_simd128<const STEP: usize>(epf_row: EpfRow) 
                 sum_weights = sum_weights.add(weight);
 
                 for (c, sum) in sum_channels.iter_mut().enumerate() {
-                    *sum = weight
-                        .mul(Vector::load(
-                            merged_input_rows[c].get_row(ky).as_ptr().add(kx),
-                        ))
-                        .add(*sum);
+                    *sum = weight.mul(Vector::load(merged_input_rows[c].get_row(ky).as_ptr().add(kx))).add(*sum);
                 }
             }
         }
 
         for (c, sum) in sum_channels.into_iter().enumerate() {
-            sum.div(sum_weights)
-                .store(output_rows[c].as_mut_ptr().add(dx));
+            sum.div(sum_weights).store(output_rows[c].as_mut_ptr().add(dx));
         }
     }
 }

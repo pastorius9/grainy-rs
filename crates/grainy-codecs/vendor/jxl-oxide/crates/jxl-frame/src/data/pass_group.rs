@@ -28,10 +28,7 @@ pub struct PassGroupParamsVardct<'frame, 'buf, 'g> {
     pub hf_coeff_output: &'buf mut [MutableSubgrid<'g, i32>; 3],
 }
 
-pub fn decode_pass_group<S: Sample>(
-    bitstream: &mut Bitstream,
-    params: PassGroupParams<S>,
-) -> Result<()> {
+pub fn decode_pass_group<S: Sample>(bitstream: &mut Bitstream, params: PassGroupParams<S>) -> Result<()> {
     let PassGroupParams {
         frame_header,
         lf_group,
@@ -45,22 +42,11 @@ pub fn decode_pass_group<S: Sample>(
         pool,
     } = params;
 
-    if let (
-        Some(PassGroupParamsVardct {
-            lf_vardct,
-            hf_global,
-            hf_coeff_output,
-        }),
-        Some(hf_meta),
-    ) = (vardct, &lf_group.hf_meta)
+    if let (Some(PassGroupParamsVardct { lf_vardct, hf_global, hf_coeff_output }), Some(hf_meta)) =
+        (vardct, &lf_group.hf_meta)
     {
         let hf_pass = &hf_global.hf_passes[pass_idx as usize];
-        let coeff_shift = frame_header
-            .passes
-            .shift
-            .get(pass_idx as usize)
-            .copied()
-            .unwrap_or(0);
+        let coeff_shift = frame_header.passes.shift.get(pass_idx as usize).copied().unwrap_or(0);
 
         let group_col = group_idx % frame_header.groups_per_row();
         let group_row = group_idx / frame_header.groups_per_row();
@@ -76,10 +62,9 @@ pub fn decode_pass_group<S: Sample>(
         let block_height = (block_info.height() - block_top).min(group_dim_blocks);
 
         let jpeg_upsampling = frame_header.jpeg_upsampling;
-        let block_info = block_info.as_subgrid().subgrid(
-            block_left..(block_left + block_width),
-            block_top..(block_top + block_height),
-        );
+        let block_info = block_info
+            .as_subgrid()
+            .subgrid(block_left..(block_left + block_width), block_top..(block_top + block_height));
         let lf_quant: Option<[_; 3]> = lf_group.lf_coeff.as_ref().map(|lf_coeff| {
             let lf_quant_channels = lf_coeff.lf_quant.image().unwrap().image_channels();
             std::array::from_fn(|idx| {
@@ -88,8 +73,7 @@ pub fn decode_pass_group<S: Sample>(
 
                 let block_left = block_left >> shift.hshift();
                 let block_top = block_top >> shift.vshift();
-                let (block_width, block_height) =
-                    shift.shift_size((block_width as u32, block_height as u32));
+                let (block_width, block_height) = shift.shift_size((block_width as u32, block_height as u32));
                 lf_quant.as_subgrid().subgrid(
                     block_left..(block_left + block_width as usize),
                     block_top..(block_top + block_height as usize),
@@ -155,10 +139,7 @@ pub fn decode_pass_group_modular<S: Sample>(
     let mut subimage = modular.prepare_subimage()?;
     subimage.decode(
         bitstream,
-        1 + 3 * frame_header.num_lf_groups()
-            + 17
-            + pass_idx * frame_header.num_groups()
-            + group_idx,
+        1 + 3 * frame_header.num_lf_groups() + 17 + pass_idx * frame_header.num_groups() + group_idx,
         allow_partial,
     )?;
     subimage.finish(pool);

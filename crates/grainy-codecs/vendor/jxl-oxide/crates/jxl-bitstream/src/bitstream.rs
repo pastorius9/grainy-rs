@@ -18,11 +18,7 @@ impl std::fmt::Debug for Bitstream<'_> {
         f.debug_struct("Bitstream")
             .field(
                 "bytes",
-                &format_args!(
-                    "({} byte{} left)",
-                    self.bytes.len(),
-                    if self.bytes.len() == 1 { "" } else { "s" },
-                ),
+                &format_args!("({} byte{} left)", self.bytes.len(), if self.bytes.len() == 1 { "" } else { "s" },),
             )
             .field("buf", &format_args!("0x{:016x}", self.buf))
             .field("num_read_bits", &self.num_read_bits)
@@ -35,12 +31,7 @@ impl<'buf> Bitstream<'buf> {
     /// Create a new bitstream reader.
     #[inline]
     pub fn new(bytes: &'buf [u8]) -> Self {
-        Self {
-            bytes,
-            buf: 0,
-            num_read_bits: 0,
-            remaining_buf_bits: 0,
-        }
+        Self { bytes, buf: 0, num_read_bits: 0, remaining_buf_bits: 0 }
     }
 
     /// Returns the number of bits that are read or skipped.
@@ -61,10 +52,7 @@ impl Bitstream<'_> {
             self.remaining_buf_bits |= 56;
             // SAFETY: read_bytes < 8, self.bytes.len() >= 8 (from the pattern).
             self.bytes = unsafe {
-                std::slice::from_raw_parts(
-                    self.bytes.as_ptr().add(read_bytes),
-                    self.bytes.len() - read_bytes,
-                )
+                std::slice::from_raw_parts(self.bytes.as_ptr().add(read_bytes), self.bytes.len() - read_bytes)
             };
         } else {
             self.refill_slow()
@@ -131,10 +119,8 @@ impl Bitstream<'_> {
     /// bits in the bit buffer.
     #[inline]
     pub fn consume_bits(&mut self, n: usize) -> BitstreamResult<()> {
-        self.remaining_buf_bits = self
-            .remaining_buf_bits
-            .checked_sub(n)
-            .ok_or(Error::Io(std::io::ErrorKind::UnexpectedEof.into()))?;
+        self.remaining_buf_bits =
+            self.remaining_buf_bits.checked_sub(n).ok_or(Error::Io(std::io::ErrorKind::UnexpectedEof.into()))?;
         self.num_read_bits += n;
         self.buf >>= n;
         Ok(())
@@ -147,10 +133,8 @@ impl Bitstream<'_> {
     /// bits in the bit buffer.
     #[inline]
     pub fn consume_bits_const<const N: usize>(&mut self) -> BitstreamResult<()> {
-        self.remaining_buf_bits = self
-            .remaining_buf_bits
-            .checked_sub(N)
-            .ok_or(Error::Io(std::io::ErrorKind::UnexpectedEof.into()))?;
+        self.remaining_buf_bits =
+            self.remaining_buf_bits.checked_sub(N).ok_or(Error::Io(std::io::ErrorKind::UnexpectedEof.into()))?;
         self.num_read_bits += N;
         self.buf >>= N;
         Ok(())
@@ -186,10 +170,8 @@ impl Bitstream<'_> {
         self.bytes = &self.bytes[n / 8..];
         n %= 8;
         self.refill();
-        self.remaining_buf_bits = self
-            .remaining_buf_bits
-            .checked_sub(n)
-            .ok_or(Error::Io(std::io::ErrorKind::UnexpectedEof.into()))?;
+        self.remaining_buf_bits =
+            self.remaining_buf_bits.checked_sub(n).ok_or(Error::Io(std::io::ErrorKind::UnexpectedEof.into()))?;
         self.buf >>= n;
         Ok(())
     }
@@ -198,11 +180,7 @@ impl Bitstream<'_> {
     pub fn zero_pad_to_byte(&mut self) -> BitstreamResult<()> {
         let byte_boundary = self.num_read_bits.div_ceil(8) * 8;
         let n = byte_boundary - self.num_read_bits;
-        if self.read_bits(n)? != 0 {
-            Err(Error::NonZeroPadding)
-        } else {
-            Ok(())
-        }
+        if self.read_bits(n)? != 0 { Err(Error::NonZeroPadding) } else { Ok(()) }
     }
 }
 
@@ -236,9 +214,7 @@ impl Bitstream<'_> {
         };
         match d {
             U32Specifier::Constant(x) => Ok(x),
-            U32Specifier::BitsOffset(offset, n) => {
-                self.read_bits(n).map(|x| x.wrapping_add(offset))
-            }
+            U32Specifier::BitsOffset(offset, n) => self.read_bits(n).map(|x| x.wrapping_add(offset)),
         }
     }
 
@@ -305,10 +281,7 @@ impl Bitstream<'_> {
     /// Reads an enum as defined in the JPEG XL specification.
     pub fn read_enum<E: TryFrom<u32>>(&mut self) -> BitstreamResult<E> {
         let v = self.read_u32(0, 1, 2 + U(4), 18 + U(6))?;
-        E::try_from(v).map_err(|_| Error::InvalidEnum {
-            name: std::any::type_name::<E>(),
-            value: v,
-        })
+        E::try_from(v).map_err(|_| Error::InvalidEnum { name: std::any::type_name::<E>(), value: v })
     }
 }
 
