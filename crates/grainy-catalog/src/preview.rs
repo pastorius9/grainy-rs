@@ -161,12 +161,16 @@ pub fn inspect_snapshot(directory: impl AsRef<Path>, id: i64, current: Option<Va
         state: json!({"rebuild":rebuild,"status":status,"snapshot":current,"color_space":color_space}),
     })
 }
-/// Port of `preview_store.replace_file`; Windows permission collisions retry for up to 95 ms.
+/// Port of `preview_store.replace_file`; Windows permission/sharing collisions retry for up to 95 ms.
 pub fn replace_file(source: impl AsRef<Path>, target: impl AsRef<Path>) -> Result<()> {
     for attempt in 0..20 {
         match fs::rename(source.as_ref(), target.as_ref()) {
             Ok(()) => return Ok(()),
-            Err(e) if e.kind() == std::io::ErrorKind::PermissionDenied && attempt < 19 => {
+            Err(e)
+                if attempt < 19
+                    && (e.kind() == std::io::ErrorKind::PermissionDenied
+                        || matches!(e.raw_os_error(), Some(32 | 33))) =>
+            {
                 std::thread::sleep(Duration::from_millis(5))
             }
             Err(e) => return Err(e.into()),
@@ -524,25 +528,34 @@ pub struct PruneStats {
 }
 
 /// Removes orphaned `thumbnails/{id}.*` and `previews/{id}.*` cache entries (for deleted photos),
-/// cleans stale `.tmp` files, and evicts the oldest remaining cache entries (LRU by mtime) when
-/// total cache size exceeds `max_bytes`.
+/// cleans stale `.tmp` files, and evicts the oldest remaining thumbnail entries (LRU by mtime) when
+/// total thumbnail cache size exceeds `max_bytes`. Live offline Smart Previews (`previews/{id}.npz`)
+/// are never evicted by thumbnail LRU so offline editing packets stay intact.
 pub fn prune_cache(directory: impl AsRef<Path>, max_bytes: u64) -> Result<PruneStats> {
     let directory = directory.as_ref();
-    let catalog = Catalog::open_reader(directory)?;
+    // Open in standard read-only mode (not `immutable=1`) so live WAL rows from active writers are
+    // always visible and newly imported photos are never mistaken for orphans.
+    let db_path = directory.join("catalog.sqlite");
+    let conn = rusqlite::Connection::open_with_flags(
+        &db_path,
+        rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY | rusqlite::OpenFlags::SQLITE_OPEN_NO_MUTEX,
+    )?;
+    conn.busy_timeout(Duration::from_secs(2))?;
     let mut live_ids = std::collections::HashSet::<i64>::new();
-    let mut stmt = catalog.connection().prepare("SELECT id FROM photos")?;
-    for id in stmt.query_map([], |row| row.get::<_, i64>(0))? {
-        live_ids.insert(id?);
+    {
+        let mut stmt = conn.prepare("SELECT id FROM photos")?;
+        for id in stmt.query_map([], |row| row.get::<_, i64>(0))? {
+            live_ids.insert(id?);
+        }
     }
-    drop(stmt);
-    drop(catalog);
+    drop(conn);
 
     let now = SystemTime::now();
     let mut stats = PruneStats::default();
-    let mut groups: std::collections::HashMap<(u8, i64), (SystemTime, u64, Vec<PathBuf>)> =
+    let mut groups: std::collections::HashMap<i64, (SystemTime, u64, Vec<PathBuf>)> =
         std::collections::HashMap::new();
 
-    for (bucket, sub) in [(0u8, "thumbnails"), (1u8, "previews")] {
+    for (is_thumb, sub) in [(true, "thumbnails"), (false, "previews")] {
         let dir = directory.join(sub);
         let Ok(entries) = fs::read_dir(&dir) else { continue };
         for entry in entries.flatten() {
@@ -576,12 +589,15 @@ pub fn prune_cache(directory: impl AsRef<Path>, max_bytes: u64) -> Result<PruneS
                 }
                 continue;
             }
-            let slot = groups.entry((bucket, id)).or_insert_with(|| (mtime, 0, Vec::new()));
-            if mtime > slot.0 {
-                slot.0 = mtime;
+            // Only thumbnail cache entries participate in LRU eviction; keep live offline Smart Previews.
+            if is_thumb {
+                let slot = groups.entry(id).or_insert_with(|| (mtime, 0, Vec::new()));
+                if mtime > slot.0 {
+                    slot.0 = mtime;
+                }
+                slot.1 += size;
+                slot.2.push(path);
             }
-            slot.1 += size;
-            slot.2.push(path);
         }
     }
 
@@ -589,7 +605,7 @@ pub fn prune_cache(directory: impl AsRef<Path>, max_bytes: u64) -> Result<PruneS
     if total > max_bytes {
         let mut ordered: Vec<(SystemTime, u64, Vec<PathBuf>)> = groups.into_values().collect();
         ordered.sort_by_key(|(mtime, _, _)| *mtime);
-        for (_, group_bytes, paths) in ordered {
+        for (_, _, paths) in ordered {
             if total <= max_bytes {
                 break;
             }
@@ -598,9 +614,9 @@ pub fn prune_cache(directory: impl AsRef<Path>, max_bytes: u64) -> Result<PruneS
                 if fs::remove_file(&path).is_ok() {
                     stats.removed_files += 1;
                     stats.freed_bytes += bytes;
+                    total = total.saturating_sub(bytes);
                 }
             }
-            total = total.saturating_sub(group_bytes);
         }
     }
     Ok(stats)

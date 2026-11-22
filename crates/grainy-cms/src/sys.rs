@@ -380,12 +380,10 @@ pub struct Transform {
     _context: Context,
 }
 
-// SAFETY: the transform is immutable after creation (cmsFLAGS_NOCACHE disables its only mutable state, the
-// one-pixel cache) and owns a private context; LittleCMS allows concurrent cmsDoTransform calls on such a
-// transform with disjoint buffers, and freeing it from another thread.
+// SAFETY: the transform owns a private LittleCMS context and may be moved across threads and freed on another
+// thread. It is intentionally NOT Sync because LittleCMS 2.19's `EvalSegmentedFn` mutates `SegInterp[i]->Table`
+// during `cmsDoTransform` on ICC v4 float segmented curves; callers check out per-worker instances via a pool.
 unsafe impl Send for Transform {}
-// SAFETY: see Send.
-unsafe impl Sync for Transform {}
 
 fn sample_bytes(format: u32) -> usize {
     match format & 7 {
@@ -506,7 +504,7 @@ impl Transform {
 
     /// `cmsDoTransform` over `input.len() / 3` interleaved pixels. The sample types must be the ones the
     /// transform was created for (checked through their sizes); counts above `u32::MAX` are split.
-    pub fn apply<I: Sample, O: Sample>(&self, input: &[I], output: &mut [O]) {
+    pub fn apply<I: Sample, O: Sample>(&mut self, input: &[I], output: &mut [O]) {
         assert!(!self.planar_out, "planar transforms take rows");
         assert!(std::mem::size_of::<I>() * 3 == self.in_bytes && std::mem::size_of::<O>() * 3 == self.out_bytes);
         do_transform(self.handle.as_ptr(), input, output);
@@ -514,7 +512,7 @@ impl Transform {
 
     /// `cmsDoTransformLineStride` for 8-bit interleaved rows in, float planes out (`convert8_planar`):
     /// `lines` rows of `width` pixels; the output holds three planes of `lines * width` floats.
-    pub fn rows_to_planes(&self, input: &[u8], output: &mut [f32], width: usize, lines: usize) {
+    pub fn rows_to_planes(&mut self, input: &[u8], output: &mut [f32], width: usize, lines: usize) {
         assert!(self.planar_out && self.in_bytes == 3 && self.out_bytes == 12);
         let pixels = width * lines;
         assert!(input.len() >= pixels * 3 && output.len() >= pixels * 3, "buffer too small");

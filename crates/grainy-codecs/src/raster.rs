@@ -239,9 +239,32 @@ fn decode_jpeg(data: &[u8], options: &LoadOptions, ext: &str) -> Result<DecodedB
 fn tag_num(tags: &Ifd, tag: u16, default: f64) -> f64 {
     tags.get(&tag).map(|e| e.number()).unwrap_or(default)
 }
+fn decode_lzw_bounded(compressed: &[u8], limit: usize) -> Result<Vec<u8>> {
+    let mut decoder = weezl::decode::Decoder::with_tiff_size_switch(weezl::BitOrder::Msb, 8);
+    let mut out = Vec::new();
+    let mut input = compressed;
+    let mut buf = vec![0u8; 64 * 1024];
+    loop {
+        let res = decoder.decode_bytes(input, &mut buf);
+        input = &input[res.consumed_in..];
+        if out.len().checked_add(res.consumed_out).is_none_or(|n| n > limit) {
+            return Err(invalid("LZW allocation limit"));
+        }
+        out.extend_from_slice(&buf[..res.consumed_out]);
+        match res.status {
+            Ok(weezl::LzwStatus::Done) | Ok(weezl::LzwStatus::NoProgress) => break,
+            Ok(weezl::LzwStatus::Ok) if input.is_empty() && res.consumed_out == 0 => break,
+            Ok(weezl::LzwStatus::Ok) => {}
+            Err(e) => return Err(codec(e)),
+        }
+    }
+    Ok(out)
+}
+
 fn tiff_lzw_uncompressed(data: &mut Vec<u8>, tags: &Ifd, le: bool, root: usize) -> Result<()> {
     // tiff 0.11's streaming LZW reader loses buffered output for some small edge tiles.
-    // Decode each chunk completely and replace only its in-memory compression/offset fields.
+    // Decode each chunk completely with a hard 1 GiB cap and replace only in-memory fields.
+    const MAX_TIFF_BYTES: usize = 1024 * 1024 * 1024;
     let (offset_tag, count_tag) = if tags.contains_key(&324) { (324, 325) } else { (273, 279) };
     let offsets = tags.get(&offset_tag).ok_or_else(|| invalid("missing LZW offsets"))?.numbers();
     let lengths = tags.get(&count_tag).ok_or_else(|| invalid("missing LZW lengths"))?.numbers();
@@ -252,18 +275,18 @@ fn tiff_lzw_uncompressed(data: &mut Vec<u8>, tags: &Ifd, le: bool, root: usize) 
     let mut new_lengths = vec![];
     for (offset, n) in offsets.iter().zip(lengths) {
         let compressed = crate::metadata::get(data, *offset as usize, n as usize)?;
-        let mut decoder = weezl::decode::Decoder::with_tiff_size_switch(weezl::BitOrder::Msb, 8);
-        let decoded = decoder.decode(compressed).map_err(codec)?;
-        if data.len().checked_add(decoded.len()).is_none_or(|n| n > 1024 * 1024 * 1024) {
-            return Err(invalid("LZW allocation limit"));
-        }
+        let remaining = MAX_TIFF_BYTES.checked_sub(data.len()).ok_or_else(|| invalid("LZW allocation limit"))?;
+        let decoded = decode_lzw_bounded(compressed, remaining)?;
         new_offsets.push(u32::try_from(data.len()).map_err(codec)?);
         new_lengths.push(u32::try_from(decoded.len()).map_err(codec)?);
         data.extend(decoded);
     }
     let count = u16_at(data, root, le)? as usize;
     for i in 0..count {
-        let at = root + 2 + i * 12;
+        let at = root.checked_add(2).and_then(|v| v.checked_add(i * 12)).ok_or_else(|| invalid("TIFF IFD overflow"))?;
+        if at.checked_add(12).is_none_or(|end| end > data.len()) {
+            return Err(invalid("truncated TIFF IFD"));
+        }
         let tag = u16_at(data, at, le)?;
         if tag == 259 {
             data[at + 8..at + 10].copy_from_slice(&if le { 1u16.to_le_bytes() } else { 1u16.to_be_bytes() });
@@ -312,7 +335,10 @@ fn decode_tiff(data: &[u8]) -> Result<DecodedBitmap> {
     if matches!(photo, 0 | 3 | 8 | 9) {
         let n = u16_at(data, root, le)? as usize;
         for i in 0..n {
-            let at = root + 2 + i * 12;
+            let at = root.checked_add(2).and_then(|v| v.checked_add(i * 12)).ok_or_else(|| invalid("TIFF IFD overflow"))?;
+            if at.checked_add(12).is_none_or(|end| end > source.len()) {
+                return Err(invalid("truncated TIFF IFD"));
+            }
             if u16_at(data, at, le)? == 262 {
                 source[at + 8..at + 10].copy_from_slice(&if le { 1u16.to_le_bytes() } else { 1u16.to_be_bytes() });
             }
@@ -704,7 +730,12 @@ pub fn load_image_with_decoder(
         rgb = crate::resize_float(&rgb, max)?;
     }
     let stat = std::fs::metadata(path)?;
-    let canonical = std::fs::canonicalize(path)?.to_string_lossy().trim_start_matches("\\\\?\\").to_string();
+    let raw_canon = std::fs::canonicalize(path)?.to_string_lossy().into_owned();
+    let canonical = if let Some(unc) = raw_canon.strip_prefix(r"\\?\UNC\") {
+        format!(r"\\{unc}")
+    } else {
+        raw_canon.trim_start_matches(r"\\?\").to_string()
+    };
     let mtime = stat.modified()?.duration_since(UNIX_EPOCH).map_err(codec)?.as_nanos();
     let mut metadata = crate::read_metadata(path)?;
     metadata.extend(info);

@@ -69,6 +69,21 @@ impl Entry {
         if self.data.len() < 8 {
             return String::new();
         }
+        if self.typ == 10 {
+            let mut n = i32::from_be_bytes(self.data[..4].try_into().unwrap_or([0; 4])) as i64;
+            let mut d = i32::from_be_bytes(self.data[4..8].try_into().unwrap_or([0; 4])) as i64;
+            if d < 0 {
+                n = -n;
+                d = -d;
+            }
+            let (n, d) = if reduce {
+                let g = gcd64(n.unsigned_abs(), d.unsigned_abs()).max(1) as i64;
+                (n / g, d / g)
+            } else {
+                (n, d)
+            };
+            return if reduce && d == 1 { n.to_string() } else { format!("{n}/{d}") };
+        }
         let n = u32::from_be_bytes(self.data[..4].try_into().unwrap_or([0; 4]));
         let d = u32::from_be_bytes(self.data[4..8].try_into().unwrap_or([0; 4]));
         let (n, d) = if reduce {
@@ -85,6 +100,12 @@ impl Entry {
     }
 }
 fn gcd(mut a: u32, mut b: u32) -> u32 {
+    while b != 0 {
+        (a, b) = (b, a % b);
+    }
+    a
+}
+fn gcd64(mut a: u64, mut b: u64) -> u64 {
     while b != 0 {
         (a, b) = (b, a % b);
     }
@@ -137,7 +158,9 @@ pub(crate) fn parse_ifd(data: &[u8], offset: usize, le: bool) -> Result<Ifd> {
 pub(crate) fn parse_exif(data: &[u8]) -> Result<Exif> {
     let data = data.strip_prefix(b"Exif\0\0").unwrap_or(data);
     let le = data.starts_with(b"II");
-    if !(le || data.starts_with(b"MM")) || u16_at(data, 2, le)? != 42 {
+    let magic = u16_at(data, 2, le)?;
+    // Classic TIFF (42), Olympus ORF (0x4F52 / 0x5352), and Panasonic RW2/RWL (0x0055).
+    if !(le || data.starts_with(b"MM")) || !matches!(magic, 42 | 0x4F52 | 0x5352 | 0x0055) {
         return Err(invalid("not classic TIFF/EXIF"));
     }
     let root = parse_ifd(data, u32_at(data, 4, le)? as usize, le)?;
@@ -481,18 +504,27 @@ pub fn export_exif(
     let schema: Value = serde_json::from_str(include_str!("../assets/exif-types.json")).map_err(crate::codec)?;
     for (name, table) in [("0th", &mut data.root), ("Exif", &mut data.exif), ("GPS", &mut data.gps)] {
         table.retain(|tag, _| schema[name].get(tag.to_string()).is_some());
-        for (tag, e) in table {
+        let mut drop_tags = Vec::new();
+        for (&tag, e) in table.iter_mut() {
             let typ = schema[name][tag.to_string()].as_u64().unwrap_or(e.typ as u64) as u16;
             if typ != e.typ {
                 let numbers = e.numbers();
-                e.data = match typ {
-                    1 | 7 if matches!(e.typ, 1 | 7) => e.data.clone(),
-                    3 => numbers.iter().flat_map(|v| (*v as u16).to_be_bytes()).collect(),
-                    4 => numbers.iter().flat_map(|v| (*v as u32).to_be_bytes()).collect(),
-                    _ => return Err(invalid(format!("unsupported EXIF type conversion for {tag}"))),
+                let converted = match typ {
+                    1 | 7 if matches!(e.typ, 1 | 7) => Some(e.data.clone()),
+                    3 => Some(numbers.iter().flat_map(|v| (*v as u16).to_be_bytes()).collect()),
+                    4 => Some(numbers.iter().flat_map(|v| (*v as u32).to_be_bytes()).collect()),
+                    _ => None,
                 };
-                e.typ = typ;
+                if let Some(bytes) = converted {
+                    e.data = bytes;
+                    e.typ = typ;
+                } else {
+                    drop_tags.push(tag);
+                }
             }
+        }
+        for tag in drop_tags {
+            table.remove(&tag);
         }
     }
     data.root.remove(&34665);
@@ -534,20 +566,35 @@ pub fn export_exif(
             }
         }
     }
-    let np = 1 + usize::from(!data.gps.is_empty());
-    let root_size = piexif_ifd(&data.root, 8, true, &vec![(34665, 0); np])?.len();
-    let exif = piexif_ifd(&data.exif, 8 + root_size, false, &[])?;
-    let mut pointers = vec![(34665, (8 + root_size) as u32)];
-    if !data.gps.is_empty() {
-        pointers.push((34853, (8 + root_size + exif.len()) as u32));
+    let serialize_exif = |data: &Exif| -> Result<Vec<u8>> {
+        let np = 1 + usize::from(!data.gps.is_empty());
+        let root_size = piexif_ifd(&data.root, 8, true, &vec![(34665, 0); np])?.len();
+        let exif = piexif_ifd(&data.exif, 8 + root_size, false, &[])?;
+        let mut pointers = vec![(34665, (8 + root_size) as u32)];
+        if !data.gps.is_empty() {
+            pointers.push((34853, (8 + root_size + exif.len()) as u32));
+        }
+        let mut out = b"Exif\0\0MM\0*\0\0\0\x08".to_vec();
+        out.extend(piexif_ifd(&data.root, 8, true, &pointers)?);
+        out.extend(&exif);
+        if !data.gps.is_empty() {
+            out.extend(piexif_ifd(&data.gps, 8 + root_size + exif.len(), false, &[])?);
+        }
+        out.extend([0; 4]);
+        Ok(out)
+    };
+    let mut out = serialize_exif(&data)?;
+    // JPEG APP1 segments are capped at 65,533 payload bytes. Strip DNG structural/LUT blobs and
+    // oversized embedded profiles/IRB blocks when an input DNG/TIFF would overflow APP1.
+    if out.len() > 65533 {
+        data.root.retain(|&tag, _| !(50706..=51125).contains(&tag) && !matches!(tag, 700 | 34377 | 34675 | 50341));
+        out = serialize_exif(&data)?;
     }
-    let mut out = b"Exif\0\0MM\0*\0\0\0\x08".to_vec();
-    out.extend(piexif_ifd(&data.root, 8, true, &pointers)?);
-    out.extend(&exif);
-    if !data.gps.is_empty() {
-        out.extend(piexif_ifd(&data.gps, 8 + root_size + exif.len(), false, &[])?);
+    if out.len() > 65533 {
+        data.root.retain(|_, e| e.data.len() <= 4096);
+        data.exif.retain(|_, e| e.data.len() <= 4096);
+        out = serialize_exif(&data)?;
     }
-    out.extend([0; 4]);
     Ok(out)
 }
 
@@ -764,13 +811,27 @@ fn pillow_ifd(map: &Ifd, children: &[(u16, &Ifd)], offset: usize, le: bool) -> R
         if child.is_none() && e.typ == 4 && e.number() <= 65535. && matches!(tag, 40962 | 40963) {
             e = Entry::uint(3, e.number() as u32);
         }
-        if matches!(e.typ, 5 | 10) {
+        if e.typ == 5 {
             for pair in e.data.as_chunks_mut::<8>().0 {
                 let n = u32::from_be_bytes(pair[..4].try_into().unwrap_or([0; 4]));
                 let d = u32::from_be_bytes(pair[4..].try_into().unwrap_or([0; 4]));
                 let g = gcd(n, d).max(1);
                 pair[..4].copy_from_slice(&(n / g).to_be_bytes());
                 pair[4..].copy_from_slice(&(d / g).to_be_bytes());
+            }
+        } else if e.typ == 10 {
+            for pair in e.data.as_chunks_mut::<8>().0 {
+                let mut n = i32::from_be_bytes(pair[..4].try_into().unwrap_or([0; 4])) as i64;
+                let mut d = i32::from_be_bytes(pair[4..].try_into().unwrap_or([0; 4])) as i64;
+                if d < 0 {
+                    n = -n;
+                    d = -d;
+                }
+                let g = gcd64(n.unsigned_abs(), d.unsigned_abs()).max(1) as i64;
+                if let (Ok(rn), Ok(rd)) = (i32::try_from(n / g), i32::try_from(d / g)) {
+                    pair[..4].copy_from_slice(&rn.to_be_bytes());
+                    pair[4..].copy_from_slice(&rd.to_be_bytes());
+                }
             }
         }
         // Pillow reads TIFF ASCII bytes as Latin-1 and writes them as ASCII with replacement.

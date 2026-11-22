@@ -81,8 +81,15 @@ void* gr_extract_thumb(
         auto image = raw->dcraw_make_mem_thumb(error);
         if (!image) { delete raw; return nullptr; }
         *flip = raw->imgdata.sizes.flip;
-        *full_w = raw->imgdata.sizes.iwidth;
-        *full_h = raw->imgdata.sizes.iheight;
+        unsigned rw = raw->imgdata.sizes.width ? raw->imgdata.sizes.width : raw->imgdata.sizes.iwidth;
+        unsigned rh = raw->imgdata.sizes.height ? raw->imgdata.sizes.height : raw->imgdata.sizes.iheight;
+        if ((*flip & 4) != 0) {
+            *full_w = rh;
+            *full_h = rw;
+        } else {
+            *full_w = rw;
+            *full_h = rh;
+        }
         *is_jpeg = (image->type == LIBRAW_IMAGE_JPEG) ? 1 : 0;
         *data = image->data;
         *data_size = image->data_size;

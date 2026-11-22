@@ -380,7 +380,12 @@ fn raw_error(path: &Path, error: grainy_raw::Error) -> Error {
 
 /// `preview_store.signature(path)` as `load_image` stores it: resolved path, size and modification time (ns).
 fn fingerprint(path: &Path, size: u64, modified: std::time::SystemTime) -> Result<Value> {
-    let canonical = std::fs::canonicalize(path)?.to_string_lossy().trim_start_matches(r"\\?\").to_string();
+    let raw_canon = std::fs::canonicalize(path)?.to_string_lossy().into_owned();
+    let canonical = if let Some(unc) = raw_canon.strip_prefix(r"\\?\UNC\") {
+        format!(r"\\{unc}")
+    } else {
+        raw_canon.trim_start_matches(r"\\?\").to_string()
+    };
     let nanos = modified.duration_since(std::time::UNIX_EPOCH).map_err(|e| Error::Raw(e.to_string()))?.as_nanos();
     let nanos = u64::try_from(nanos).map_err(|e| Error::Raw(e.to_string()))?;
     Ok(serde_json::json!({"path": canonical, "size": size, "mtime_ns": nanos}))
@@ -416,9 +421,10 @@ fn load_raw(
     let sizes = raw.metadata().sizes;
     let flip = raw.metadata().flip;
     let num_colors = raw.metadata().num_colors;
+    let is_rgb_sensor = raw.metadata().color_desc.starts_with("RGB");
     let (width, height) = (sizes[3], sizes[2]);
     let (full_width, full_height) = if matches!(flip, 5 | 6) { (height, width) } else { (width, height) };
-    let photo = if grainy_raw::rawcolor::enabled(settings) && num_colors == 3 {
+    let photo = if grainy_raw::rawcolor::enabled(settings) && num_colors == 3 && is_rgb_sensor {
         let mut dictionary = Value::Object(std::mem::take(&mut metadata));
         let source = grainy_raw::rawcolor::decode(&mut raw, &mut dictionary, max_size.map(|v| v as u32), Some(path))
             .map_err(|e| raw_error(path, e));

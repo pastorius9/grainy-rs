@@ -1155,8 +1155,30 @@ fn finish_bundle(
         #[cfg(target_os = "macos")]
         let old = {
             use rustix::fs::{renameat_with, RenameFlags, CWD};
-            renameat_with(CWD, &incoming, CWD, app, RenameFlags::EXCHANGE)?;
-            incoming
+            match renameat_with(CWD, &incoming, CWD, app, RenameFlags::EXCHANGE) {
+                Ok(()) => incoming,
+                Err(err)
+                    if matches!(
+                        err,
+                        rustix::io::Errno::NOTSUP | rustix::io::Errno::INVAL | rustix::io::Errno::NOSYS
+                    ) =>
+                {
+                    let old = scratch.path().join("previous.app");
+                    std::fs::rename(app, &old)?;
+                    if let Err(install) = std::fs::rename(&incoming, app) {
+                        if let Err(rollback) = std::fs::rename(&old, app) {
+                            let recovery = scratch.keep();
+                            return Err(std::io::Error::other(format!(
+                                "{install}; restore from {}: {rollback}",
+                                recovery.display()
+                            )));
+                        }
+                        return Err(install);
+                    }
+                    old
+                }
+                Err(err) => return Err(err.into()),
+            }
         };
         // The cross-platform harness exercises staging and rollback on hosts without Darwin's exchange.
         #[cfg(not(target_os = "macos"))]

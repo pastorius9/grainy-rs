@@ -68,6 +68,12 @@ fn run(path: &Path, rgb: &[[u8; 3]]) -> windows::core::Result<(Vec<f32>, bool)> 
     }
     let cached = guard.as_ref().expect("cached WinML session");
     let binding = LearningModelBinding::CreateFromSession(&cached.session)?;
+    if rgb.len() != SIDE * SIDE {
+        return Err(windows::core::Error::new(
+            windows::core::HRESULT(0x80070057u32 as i32),
+            "Unexpected U²-Net input dimensions",
+        ));
+    }
     let max = rgb.iter().flatten().max().copied().unwrap_or(1).max(1) as f32;
     let mut input = vec![0.; 3 * SIDE * SIDE];
     for (c, (mean, sd)) in [(0.485, 0.229), (0.456, 0.224), (0.406, 0.225)].into_iter().enumerate() {

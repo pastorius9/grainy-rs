@@ -4,7 +4,7 @@
 #include <string.h>
 
 typedef struct {
-    uint32_t width, height, channels, depth, orientation, primaries, transfer;
+    uint32_t width, height, channels, depth, orientation, primaries, transfer, alpha_premultiplied;
     const uint16_t *pixels;
     const uint8_t *icc;
     size_t icc_size;
@@ -68,6 +68,7 @@ const char *grainy_avif_read(const uint8_t *data, size_t len, GrainyAvif **out) 
     r->pixels = (const uint16_t *)r->rgb.pixels;
     r->icc = d->image->icc.data; r->icc_size = d->image->icc.size;
     r->primaries = d->image->colorPrimaries; r->transfer = d->image->transferCharacteristics;
+    r->alpha_premultiplied = d->image->alphaPremultiplied ? 1 : 0;
     const avifImage *src = d->image;
     unsigned rotation = (src->transformFlags & AVIF_TRANSFORM_IROT) ? src->irot.angle : 0;
     // HEIF applies anticlockwise rotation before mirroring about a display axis.

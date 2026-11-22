@@ -293,7 +293,17 @@ fn q(namespace: &str, local: &str) -> String {
 pub fn write_sidecar(photo: &Value, path: &Path) -> Result<()> {
     let mut root = if path.exists() {
         let data = std::fs::read(path).map_err(|e| Error::os(&e, path, true))?;
-        parse_xml(&decode(&data)?)?
+        if data.len() > 16 * 1024 * 1024 {
+            return Err(Error::Parse("XMP sidecar exceeds 16 MiB limit".into()));
+        }
+        let text = decode(&data)?;
+        if has_doctype_or_entity(&text) {
+            return Err(Error::Parse("DTD or ENTITY declarations are not allowed in XMP".into()));
+        }
+        let options = roxmltree::ParsingOptions { allow_dtd: false, ..Default::default() };
+        let document =
+            roxmltree::Document::parse_with_options(&text, options).map_err(|e| Error::Parse(e.to_string()))?;
+        convert(document.root_element())
     } else {
         Element::new(&q(NS_X, "xmpmeta"))
     };

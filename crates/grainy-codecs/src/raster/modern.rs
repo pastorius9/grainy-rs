@@ -18,6 +18,7 @@ struct Avif {
     orientation: u32,
     primaries: u32,
     transfer: u32,
+    alpha_premultiplied: u32,
     pixels: *const u16,
     icc: *const u8,
     icc_size: usize,
@@ -83,6 +84,7 @@ pub(super) fn avif(data: &[u8]) -> Result<DecodedBitmap> {
     let mut out = base(values, model, "libavif/dav1d", im.depth as u8);
     out.divisor = 1.;
     out.orientation = im.orientation as u16;
+    out.associated = im.alpha_premultiplied != 0;
     out.linear = icc.is_none();
     out.profile = icc.map(Profile::Embedded);
     Ok(out)

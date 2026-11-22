@@ -112,8 +112,6 @@ struct MetalRenderer {
     id<MTLCommandQueue> queue = nil;
     id<MTLRenderPipelineState> pipeline = nil;
     id<MTLTexture> photo = nil;
-    id<MTLBuffer> staging = nil;
-    NSUInteger stagingBytes = 0;
     uint32_t iw = 0;
     uint32_t ih = 0;
 
@@ -158,12 +156,12 @@ struct MetalRenderer {
             iw = w;
             ih = h;
         }
-        if (!staging || stagingBytes < totalBytes) {
-            staging = [device newBufferWithLength:totalBytes options:MTLResourceStorageModeShared];
-            if (!staging) return kErrFail;
-            stagingBytes = totalBytes;
-        }
-        std::memcpy(staging.contents, pixels, totalBytes);
+        // Allocate a transient shared staging buffer per upload so the GPU never reads a buffer
+        // being overwritten by a subsequent upload; the command buffer retains it until completion.
+        id<MTLBuffer> staging = [device newBufferWithBytes:pixels
+                                                    length:totalBytes
+                                                   options:MTLResourceStorageModeShared];
+        if (!staging) return kErrFail;
         id<MTLCommandBuffer> cmd = [queue commandBuffer];
         if (!cmd) return kErrFail;
         id<MTLBlitCommandEncoder> blit = [cmd blitCommandEncoder];
@@ -246,7 +244,12 @@ struct MetalRenderer {
 float screen_edr_peak(NSScreen* screen) {
     if (!screen) return 1.0f;
     float current = static_cast<float>(screen.maximumExtendedDynamicRangeColorComponentValue);
-    float potential = static_cast<float>(screen.maximumPotentialExtendedDynamicRangeColorComponentValue);
+    float potential = current;
+    // maximumPotentialExtendedDynamicRangeColorComponentValue was introduced in macOS 12.0;
+    // guard with respondsToSelector: so macOS 11 (Big Sur) never raises NSInvalidArgumentException.
+    if ([screen respondsToSelector:@selector(maximumPotentialExtendedDynamicRangeColorComponentValue)]) {
+        potential = static_cast<float>(screen.maximumPotentialExtendedDynamicRangeColorComponentValue);
+    }
     float peak = std::max(current, potential);
     return std::isfinite(peak) && peak > 1.0f ? peak : 1.0f;
 }
@@ -432,17 +435,24 @@ API int32_t grainy_hdr_view_open(intptr_t owner, void** out) noexcept {
     if (!out) return kErrInvalidArg;
     *out = nullptr;
     @autoreleasepool {
-        auto viewer = std::make_unique<GrainyMacHdrViewer>();
-        int32_t hr = viewer->open(owner);
-        if (hr < 0) return hr;
-        *out = viewer.release();
-        return kOk;
+        @try {
+            auto viewer = std::make_unique<GrainyMacHdrViewer>();
+            int32_t hr = viewer->open(owner);
+            if (hr < 0) return hr;
+            *out = viewer.release();
+            return kOk;
+        } @catch (NSException*) {
+            return kErrFail;
+        }
     }
 }
 
 API void grainy_hdr_view_drop(void* viewer) noexcept {
     @autoreleasepool {
-        delete static_cast<GrainyMacHdrViewer*>(viewer);
+        @try {
+            delete static_cast<GrainyMacHdrViewer*>(viewer);
+        } @catch (NSException*) {
+        }
     }
 }
 
@@ -452,13 +462,17 @@ API int32_t grainy_hdr_view_state(void* raw, uint32_t* w, uint32_t* h, float* st
     if (viewer->error < 0) return viewer->error;
     if (viewer->closed || !viewer->window) return kFalse;
     @autoreleasepool {
-        viewer->refreshScreen();
-        NSView* content = viewer->window.contentView;
-        NSRect backing = content ? [content convertRectToBacking:content.bounds] : NSZeroRect;
-        *w = static_cast<uint32_t>(std::max(0.0, std::round(backing.size.width)));
-        *h = static_cast<uint32_t>(std::max(0.0, std::round(backing.size.height)));
-        *stops = std::log2(std::max(1.0f, viewer->peak));
-        return kOk;
+        @try {
+            viewer->refreshScreen();
+            NSView* content = viewer->window.contentView;
+            NSRect backing = content ? [content convertRectToBacking:content.bounds] : NSZeroRect;
+            *w = static_cast<uint32_t>(std::max(0.0, std::round(backing.size.width)));
+            *h = static_cast<uint32_t>(std::max(0.0, std::round(backing.size.height)));
+            *stops = std::log2(std::max(1.0f, viewer->peak));
+            return kOk;
+        } @catch (NSException*) {
+            return kErrFail;
+        }
     }
 }
 
@@ -466,17 +480,21 @@ API int32_t grainy_hdr_view_frame(void* raw, const float* rgba, uint32_t w, uint
     auto* viewer = static_cast<GrainyMacHdrViewer*>(raw);
     if (!viewer || !viewer->window || viewer->closed) return kErrInvalidArg;
     @autoreleasepool {
-        if (!rgba) {
-            [viewer->window orderOut:nil];
-            return kOk;
+        @try {
+            if (!rgba) {
+                [viewer->window orderOut:nil];
+                return kOk;
+            }
+            int32_t hr = viewer->renderer.upload(rgba, w, h);
+            if (hr < 0) return hr;
+            if (![viewer->window isVisible]) {
+                [viewer->window orderFront:nil];
+            }
+            viewer->paint();
+            return viewer->error < 0 ? viewer->error : kOk;
+        } @catch (NSException*) {
+            return kErrFail;
         }
-        int32_t hr = viewer->renderer.upload(rgba, w, h);
-        if (hr < 0) return hr;
-        if (![viewer->window isVisible]) {
-            [viewer->window orderFront:nil];
-        }
-        viewer->paint();
-        return viewer->error < 0 ? viewer->error : kOk;
     }
 }
 

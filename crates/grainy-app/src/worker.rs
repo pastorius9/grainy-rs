@@ -1080,23 +1080,43 @@ fn try_fast_raw_thumbnail(path: &Path, settings: &Settings) -> Option<(Preview, 
         return None;
     }
     let extracted = grainy_raw::extract_thumbnail(path).ok()?;
-    let dyn_img = match extracted.image {
+    let (dyn_img, jpeg_exif_orient) = match extracted.image {
         grainy_raw::EmbeddedThumb::Jpeg(bytes) => {
-            image::ImageReader::with_format(std::io::Cursor::new(bytes), image::ImageFormat::Jpeg).decode().ok()?
+            let orient = parse_jpeg_exif_orientation(&bytes);
+            let img =
+                image::ImageReader::with_format(std::io::Cursor::new(bytes), image::ImageFormat::Jpeg).decode().ok()?;
+            (img, orient)
         }
         grainy_raw::EmbeddedThumb::Rgb8 { width, height, data } => {
             let rgb = image::RgbImage::from_raw(width, height, data)?;
-            image::DynamicImage::ImageRgb8(rgb)
+            (image::DynamicImage::ImageRgb8(rgb), None)
         }
     };
     if dyn_img.width().max(dyn_img.height()) < 160 {
         return None;
     }
-    let oriented = match extracted.flip {
-        3 => dyn_img.rotate180(),
-        5 => dyn_img.rotate270(),
-        6 => dyn_img.rotate90(),
-        _ => dyn_img,
+    let (fw, fh) = extracted.full_size;
+    let already_oriented = fw > 0
+        && fh > 0
+        && fw != fh
+        && dyn_img.width() != dyn_img.height()
+        && (dyn_img.width() > dyn_img.height()) == (fw > fh);
+    let oriented = if let Some(orient) = jpeg_exif_orient.filter(|&o| o > 1 && o <= 8) {
+        apply_exif_orientation(dyn_img, orient)
+    } else if (extracted.flip & 4) != 0 && already_oriented {
+        // Embedded preview was already rotated by the camera (e.g. Apple ProRAW / Leica / Canon).
+        dyn_img
+    } else {
+        match extracted.flip {
+            1 => dyn_img.fliph(),
+            2 => dyn_img.flipv(),
+            3 => dyn_img.rotate180(),
+            4 => dyn_img.rotate270().fliph(),
+            5 => dyn_img.rotate270(),
+            6 => dyn_img.rotate90(),
+            7 => dyn_img.rotate90().fliph(),
+            _ => dyn_img,
+        }
     };
     let (w, h) = (oriented.width() as usize, oriented.height() as usize);
     let long = w.max(h);
@@ -1109,8 +1129,70 @@ fn try_fast_raw_thumbnail(path: &Path, settings: &Settings) -> Option<(Preview, 
         oriented
     };
     let rgba = resized.to_rgba8();
-    let full = (extracted.full_size.0 > 0 && extracted.full_size.1 > 0).then_some(extracted.full_size);
+    let full = (fw > 0 && fh > 0).then_some((fw, fh));
     Some((Preview { width: rgba.width() as usize, height: rgba.height() as usize, rgba: rgba.into_raw() }, full))
+}
+
+fn apply_exif_orientation(img: image::DynamicImage, orient: u16) -> image::DynamicImage {
+    match orient {
+        2 => img.fliph(),
+        3 => img.rotate180(),
+        4 => img.flipv(),
+        5 => img.rotate90().fliph(),
+        6 => img.rotate90(),
+        7 => img.rotate270().fliph(),
+        8 => img.rotate270(),
+        _ => img,
+    }
+}
+
+/// Lightweight parser for JPEG APP1 EXIF orientation (tag 0x0112) in embedded RAW previews.
+fn parse_jpeg_exif_orientation(bytes: &[u8]) -> Option<u16> {
+    if bytes.len() < 12 || &bytes[0..2] != b"\xff\xd8" {
+        return None;
+    }
+    let mut i = 2usize;
+    while i + 4 <= bytes.len() && bytes[i] == 0xff {
+        let marker = bytes[i + 1];
+        if marker == 0xda || marker == 0xd9 {
+            break;
+        }
+        let seg_len = u16::from_be_bytes([bytes[i + 2], bytes[i + 3]]) as usize;
+        if seg_len < 2 || i + 2 + seg_len > bytes.len() {
+            break;
+        }
+        if marker == 0xe1 && seg_len >= 16 && bytes.get(i + 4..i + 10) == Some(b"Exif\0\0") {
+            let tiff = &bytes[i + 10..i + 2 + seg_len];
+            let le = match tiff.get(0..2) {
+                Some(b"II") => true,
+                Some(b"MM") => false,
+                _ => return None,
+            };
+            let u16_at = |off: usize| -> Option<u16> {
+                let s = tiff.get(off..off + 2)?;
+                Some(if le { u16::from_le_bytes([s[0], s[1]]) } else { u16::from_be_bytes([s[0], s[1]]) })
+            };
+            let u32_at = |off: usize| -> Option<u32> {
+                let s = tiff.get(off..off + 4)?;
+                Some(if le {
+                    u32::from_le_bytes([s[0], s[1], s[2], s[3]])
+                } else {
+                    u32::from_be_bytes([s[0], s[1], s[2], s[3]])
+                })
+            };
+            let ifd = u32_at(4)? as usize;
+            let count = u16_at(ifd)? as usize;
+            for entry in 0..count {
+                let at = ifd.checked_add(2)?.checked_add(entry * 12)?;
+                if u16_at(at)? == 0x0112 {
+                    return u16_at(at + 8);
+                }
+            }
+            return None;
+        }
+        i += 2 + seg_len;
+    }
+    None
 }
 
 fn thumbnail_loop(shared: &Shared) {

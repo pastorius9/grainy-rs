@@ -170,10 +170,10 @@ pub fn scan_folders_with(
                 break;
             }
             *budget -= 1;
-            let Ok(entry) = entry else { return Vec::new() };
+            let Ok(entry) = entry else { continue };
             // Do not traverse symlinks or junctions. Cloud directories may carry other reparse tags and remain
             // browsable.
-            let Ok(kind) = entry.file_type() else { return Vec::new() };
+            let Ok(kind) = entry.file_type() else { continue };
             if kind.is_dir() && !kind.is_symlink() {
                 result.push(pathx::text(&entry.path()));
             }

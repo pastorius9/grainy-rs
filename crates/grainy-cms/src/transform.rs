@@ -23,26 +23,75 @@ pub const PARALLEL_PIXELS: usize = 128 * 1024;
 
 /// A reusable LittleCMS transform between two RGB profiles. Port of luma/native_color.py `Transform`: a
 /// private context, relative colorimetric intent, `cmsFLAGS_NOCACHE`; float RGB in and out, or (planar8)
-/// 8-bit RGB in and float planes out. Immutable and shared between threads.
+/// 8-bit RGB in and float planes out. Holds a small per-worker pool of `sys::Transform` handles so concurrent
+/// rayon workers never invoke `cmsDoTransform` on the same LittleCMS handle simultaneously (avoiding the
+/// `EvalSegmentedFn` `SegInterp[i]->Table` write race in LittleCMS 2.19).
 pub struct Transform {
-    inner: sys::Transform,
+    pool: Mutex<Vec<sys::Transform>>,
+    source: Arc<[u8]>,
+    destination: Arc<[u8]>,
     planar8: bool,
 }
 
+struct PooledTransform<'a> {
+    pool: &'a Mutex<Vec<sys::Transform>>,
+    inner: Option<sys::Transform>,
+}
+
+impl std::ops::Deref for PooledTransform<'_> {
+    type Target = sys::Transform;
+    fn deref(&self) -> &Self::Target {
+        self.inner.as_ref().expect("pooled transform")
+    }
+}
+
+impl std::ops::DerefMut for PooledTransform<'_> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        self.inner.as_mut().expect("pooled transform")
+    }
+}
+
+impl Drop for PooledTransform<'_> {
+    fn drop(&mut self) {
+        if let Some(inner) = self.inner.take() {
+            let mut guard = self.pool.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+            if guard.len() < 32 {
+                guard.push(inner);
+            }
+        }
+    }
+}
+
 impl Transform {
-    /// Port of `native_color.Transform.__init__`.
-    pub fn new(source: &Profile, destination: &Profile, planar8: bool) -> Result<Self> {
+    fn make_raw(source: &[u8], destination: &[u8], planar8: bool) -> Result<sys::Transform> {
         let (in_format, out_format) =
             if planar8 { (format::RGB_8, format::RGB_FLT_PLANAR) } else { (format::RGB_FLT, format::RGB_FLT) };
-        let inner = sys::Transform::new(source.bytes(), destination.bytes(), in_format, out_format).map_err(
-            |error| match error {
-                TransformError::Context => CmsError::Context,
-                TransformError::Profile => CmsError::InvalidProfile,
-                TransformError::NotRgb => CmsError::RgbRequired,
-                TransformError::Create => CmsError::TransformFailed,
-            },
-        )?;
-        Ok(Self { inner, planar8 })
+        sys::Transform::new(source, destination, in_format, out_format).map_err(|error| match error {
+            TransformError::Context => CmsError::Context,
+            TransformError::Profile => CmsError::InvalidProfile,
+            TransformError::NotRgb => CmsError::RgbRequired,
+            TransformError::Create => CmsError::TransformFailed,
+        })
+    }
+
+    /// Port of `native_color.Transform.__init__`.
+    pub fn new(source: &Profile, destination: &Profile, planar8: bool) -> Result<Self> {
+        let inner = Self::make_raw(source.bytes(), destination.bytes(), planar8)?;
+        Ok(Self {
+            pool: Mutex::new(vec![inner]),
+            source: source.shared().clone(),
+            destination: destination.shared().clone(),
+            planar8,
+        })
+    }
+
+    fn checkout(&self) -> Result<PooledTransform<'_>> {
+        let existing = self.pool.lock().unwrap_or_else(std::sync::PoisonError::into_inner).pop();
+        let inner = match existing {
+            Some(t) => t,
+            None => Self::make_raw(&self.source, &self.destination, self.planar8)?,
+        };
+        Ok(PooledTransform { pool: &self.pool, inner: Some(inner) })
     }
 
     /// Whether this is a `convert8_planar` transform.
@@ -191,13 +240,15 @@ pub fn native_convert(rgb: &[f32], source: &Profile, destination: &Profile) -> R
     let transform = CACHE.get(source, destination, false)?;
     let workers = rayon::current_num_threads().max(1);
     if pixels < PARALLEL_PIXELS || workers == 1 {
-        transform.inner.apply(rgb, &mut result);
+        let mut handle = transform.checkout()?;
+        handle.apply(rgb, &mut result);
     } else {
         let size = (128 * 1024).min(pixels.div_ceil(workers)) * 3;
-        result
-            .par_chunks_mut(size)
-            .zip(rgb.par_chunks(size))
-            .for_each(|(out, input)| transform.inner.apply(input, out));
+        result.par_chunks_mut(size).zip(rgb.par_chunks(size)).try_for_each(|(out, input)| -> Result<()> {
+            let mut handle = transform.checkout()?;
+            handle.apply(input, out);
+            Ok(())
+        })?;
     }
     Ok(result)
 }
@@ -349,7 +400,8 @@ pub fn convert8_planar(rgb8: ArrayView3<'_, u8>, source: &Profile, destination: 
     let workers = rayon::current_num_threads().max(1);
     let planes = result.as_slice_mut().expect("standard layout");
     if h * w < PARALLEL_PIXELS || workers == 1 {
-        transform.inner.rows_to_planes(samples, planes, w, h);
+        let mut handle = transform.checkout()?;
+        handle.rows_to_planes(samples, planes, w, h);
         return Ok(result);
     }
     let size = ((128 * 1024) / w.max(1)).min(h.div_ceil(workers)).max(1);
@@ -357,13 +409,14 @@ pub fn convert8_planar(rgb8: ArrayView3<'_, u8>, source: &Profile, destination: 
         .step_by(size)
         .collect::<Vec<_>>()
         .into_par_iter()
-        .map(|first| {
+        .map(|first| -> Result<(usize, Vec<f32>)> {
             let count = size.min(h - first);
             let mut block = vec![0f32; 3 * count * w];
-            transform.inner.rows_to_planes(&samples[first * w * 3..(first + count) * w * 3], &mut block, w, count);
-            (first, block)
+            let mut handle = transform.checkout()?;
+            handle.rows_to_planes(&samples[first * w * 3..(first + count) * w * 3], &mut block, w, count);
+            Ok((first, block))
         })
-        .collect();
+        .collect::<Result<Vec<_>>>()?;
     for (first, block) in blocks {
         let count = block.len() / (3 * w);
         for channel in 0..3 {
@@ -436,21 +489,30 @@ pub fn native_convert_bpc(
         return Ok(result);
     }
     let flags = if black_point_compensation { sys::FLAGS_BLACKPOINTCOMPENSATION } else { 0 };
-    let transform = sys::Transform::new_with_options(
-        source.bytes(),
-        destination.bytes(),
-        format::RGB_FLT,
-        format::RGB_FLT,
-        intent.raw(),
-        flags,
-    )
-    .map_err(map_sys_err)?;
+    let make = || {
+        sys::Transform::new_with_options(
+            source.bytes(),
+            destination.bytes(),
+            format::RGB_FLT,
+            format::RGB_FLT,
+            intent.raw(),
+            flags,
+        )
+        .map_err(map_sys_err)
+    };
+    let mut transform = make()?;
     let workers = rayon::current_num_threads().max(1);
     if pixels < PARALLEL_PIXELS || workers == 1 {
         transform.apply(rgb, &mut result);
     } else {
+        let pool = Mutex::new(vec![transform]);
         let size = (128 * 1024).min(pixels.div_ceil(workers)) * 3;
-        result.par_chunks_mut(size).zip(rgb.par_chunks(size)).for_each(|(out, input)| transform.apply(input, out));
+        result.par_chunks_mut(size).zip(rgb.par_chunks(size)).try_for_each(|(out, input)| -> Result<()> {
+            let existing = pool.lock().unwrap_or_else(std::sync::PoisonError::into_inner).pop();
+            let mut handle = PooledTransform { pool: &pool, inner: Some(match existing { Some(t) => t, None => make()? }) };
+            handle.apply(input, out);
+            Ok(())
+        })?;
     }
     Ok(result)
 }
@@ -486,24 +548,33 @@ pub fn soft_proof(
     } else {
         None
     };
-    let transform = sys::Transform::new_proofing(
-        source.bytes(),
-        display.bytes(),
-        proof.bytes(),
-        format::RGB_FLT,
-        format::RGB_FLT,
-        options.intent.raw(),
-        sys::INTENT_RELATIVE_COLORIMETRIC,
-        flags,
-        alarm,
-    )
-    .map_err(map_sys_err)?;
+    let make = || {
+        sys::Transform::new_proofing(
+            source.bytes(),
+            display.bytes(),
+            proof.bytes(),
+            format::RGB_FLT,
+            format::RGB_FLT,
+            options.intent.raw(),
+            sys::INTENT_RELATIVE_COLORIMETRIC,
+            flags,
+            alarm,
+        )
+        .map_err(map_sys_err)
+    };
+    let mut transform = make()?;
     let workers = rayon::current_num_threads().max(1);
     if pixels < PARALLEL_PIXELS || workers == 1 {
         transform.apply(rgb, &mut result);
     } else {
+        let pool = Mutex::new(vec![transform]);
         let size = (128 * 1024).min(pixels.div_ceil(workers)) * 3;
-        result.par_chunks_mut(size).zip(rgb.par_chunks(size)).for_each(|(out, input)| transform.apply(input, out));
+        result.par_chunks_mut(size).zip(rgb.par_chunks(size)).try_for_each(|(out, input)| -> Result<()> {
+            let existing = pool.lock().unwrap_or_else(std::sync::PoisonError::into_inner).pop();
+            let mut handle = PooledTransform { pool: &pool, inner: Some(match existing { Some(t) => t, None => make()? }) };
+            handle.apply(input, out);
+            Ok(())
+        })?;
     }
     Ok(result)
 }
