@@ -579,10 +579,29 @@ pub fn sample(cx: &mut AppContext, sample: Sample) {
     if photo.is_raw() && rawcolor::enabled(settings) && !settings.bool("negative") {
         return sample_raw(cx, sample);
     }
-    // The display branch: the colours as shown.
+    // The display branch: the colours as shown (lazily reads back zero-copy GPU textures on demand).
     let Some(frame) = cx.frame().filter(|f| f.photo == cx.doc.current_id()).cloned() else { return };
-    let pixel = preview_pixel(&frame.preview);
-    let picture = Picture { width: frame.preview.width, height: frame.preview.height, pixel: &pixel };
+    let rgba = frame.rgba();
+    let w = frame.preview.width;
+    let h = frame.preview.height;
+    let pixel = move |x: usize, y: usize| {
+        let i = (y * w + x) * 4;
+        [0, 1, 2].map(|k| f32::from(rgba.get(i + k).copied().unwrap_or(0)) / 255.0)
+    };
+    let sample = match (frame.tile_uv, sample) {
+        (Some([u0, v0, u1, v1]), Sample::Point([x, y])) => Sample::Point([
+            ((x - f64::from(u0)) / f64::from((u1 - u0).max(1e-6))).clamp(0.0, 1.0),
+            ((y - f64::from(v0)) / f64::from((v1 - v0).max(1e-6))).clamp(0.0, 1.0),
+        ]),
+        (Some([u0, v0, u1, v1]), Sample::Area([x0, y0, x1, y1])) => Sample::Area([
+            ((x0 - f64::from(u0)) / f64::from((u1 - u0).max(1e-6))).clamp(0.0, 1.0),
+            ((y0 - f64::from(v0)) / f64::from((v1 - v0).max(1e-6))).clamp(0.0, 1.0),
+            ((x1 - f64::from(u0)) / f64::from((u1 - u0).max(1e-6))).clamp(0.0, 1.0),
+            ((y1 - f64::from(v0)) / f64::from((v1 - v0).max(1e-6))).clamp(0.0, 1.0),
+        ]),
+        (_, s) => s,
+    };
+    let picture = Picture { width: w, height: h, pixel: &pixel };
     match apply_display(cx.doc.edit_mut(), &picture, &sample) {
         Ok(()) => {
             cx.before = false;
@@ -792,8 +811,8 @@ fn loupe_texture(cx: &AppContext, frame: &crate::render::Frame) -> TextureHandle
             return texture;
         }
     }
-    let image =
-        egui::ColorImage::from_rgba_unmultiplied([frame.preview.width, frame.preview.height], &frame.preview.rgba);
+    let rgba = frame.rgba();
+    let image = egui::ColorImage::from_rgba_unmultiplied([frame.preview.width, frame.preview.height], &rgba);
     let texture = cx.egui.load_texture("loupe", image, TextureOptions::NEAREST);
     cx.egui.data_mut(|d| d.insert_temp(id, (frame.id, texture.clone())));
     texture
@@ -909,10 +928,11 @@ fn draw_loupe(painter: &Painter, view: &ViewTransform, cx: &AppContext, pointer:
     );
     painter.rect_stroke(mark, 0.0, Stroke::new(1.0, Color32::WHITE), egui::StrokeKind::Middle);
     // The colour under the spot, as shown.
+    let rgba = frame.rgba();
     let x = (spot.x.max(0.0) as usize).min(w - 1);
     let y = (spot.y.max(0.0) as usize).min(h - 1);
     let at = (y * w + x) * 4;
-    let byte = |k: usize| frame.preview.rgba.get(at + k).copied().unwrap_or(0);
+    let byte = |k: usize| rgba.get(at + k).copied().unwrap_or(0);
     let text = format!("R {}   G {}   B {}", byte(0), byte(1), byte(2));
     let galley = painter.layout_no_wrap(text, FontId::proportional(12.0), Color32::from_rgb(0xf2, 0xf2, 0xf2));
     let wide = galley.size().x + 18.0;

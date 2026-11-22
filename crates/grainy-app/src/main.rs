@@ -44,7 +44,22 @@ fn main() -> eframe::Result {
     } else {
         grainy_app::window_state::viewport(viewport, &grainy_app::paths::Locations::current().data_folder())
     };
-    let options = eframe::NativeOptions { viewport, renderer: eframe::Renderer::Wgpu, ..Default::default() };
+    let mut setup = eframe::egui_wgpu::WgpuSetupCreateNew::without_display_handle();
+    setup.power_preference = eframe::wgpu::PowerPreference::HighPerformance;
+    setup.device_descriptor = std::sync::Arc::new(|adapter| {
+        let limits = adapter.limits();
+        eframe::wgpu::DeviceDescriptor {
+            label: Some("Grainy shared wgpu device"),
+            required_limits: limits,
+            ..Default::default()
+        }
+    });
+    let wgpu_options = eframe::egui_wgpu::WgpuConfiguration {
+        wgpu_setup: eframe::egui_wgpu::WgpuSetup::CreateNew(setup),
+        ..Default::default()
+    };
+    let options =
+        eframe::NativeOptions { viewport, renderer: eframe::Renderer::Wgpu, wgpu_options, ..Default::default() };
     eframe::run_native(
         "Grainy",
         options,
@@ -64,7 +79,11 @@ fn main() -> eframe::Result {
                     window.set_taskbar_icon(Some(icon));
                 }
             }
-            Ok(Box::new(grainy_app::GrainyApp::from_arguments(&cc.egui_ctx, args)))
+            Ok(Box::new(grainy_app::GrainyApp::from_arguments_with_wgpu(
+                &cc.egui_ctx,
+                cc.wgpu_render_state.clone(),
+                args,
+            )))
         }),
     )
 }

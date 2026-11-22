@@ -275,7 +275,10 @@ fn run(
     // RAW: camera colour (white balance, the camera profile) into the scene-linear working space.
     let (raw_key, camera_linear) = match source {
         Source::Camera(camera) => {
-            let key = key_of(&RAW_KEYS);
+            let mut key = key_of(&RAW_KEYS);
+            if s.i64("tone_version") >= 4 {
+                key.push_str("|pv4");
+            }
             let linear = stage(&mut cache, "raw", &key, || Ok(grainy_raw::rawcolor::develop_camera(camera, &s)?))?;
             (key, Frame::Stage(linear))
         }

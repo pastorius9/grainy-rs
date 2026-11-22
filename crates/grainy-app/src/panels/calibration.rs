@@ -179,6 +179,21 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
             raw::change_working(cx.doc.edit_mut(), spaces[chosen].0);
         }
     }
+    let processes = [(3_i64, "프로세스 3 · 클래식 (호환)"), (4_i64, "프로세스 4 · Grainy RS 네이티브")];
+    let pv = if cx.settings().i64("tone_version") >= 4 { 4 } else { 3 };
+    let pv_index = processes.iter().position(|(v, _)| *v == pv).unwrap_or(0);
+    let pv_names: Vec<String> = processes.iter().map(|(_, n)| tr(n)).collect();
+    if let Some(chosen) = controls::choice(ui, "process_version", "", &pv_names, pv_index, width) {
+        let next = processes[chosen].0;
+        if next != pv && cx.doc.current().is_some() {
+            let edit = cx.doc.edit_mut();
+            edit.commit("보정 변경");
+            edit.set("tone_version", next);
+            edit.set("detail_version", next);
+            edit.commit("프로세스 버전");
+            cx.before = false;
+        }
+    }
     let mut open = cx.foldouts.contains("raw_profile");
     widgets::foldout(ui, &tr("RAW 프로파일 상세"), &mut open);
     cx.set_foldout("raw_profile", open);

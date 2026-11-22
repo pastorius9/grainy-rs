@@ -298,7 +298,19 @@ pub fn started(cx: &mut AppContext, x: f64, y: f64) {
         return;
     }
     let Some(frame) = cx.frame().cloned() else { return };
-    let rgb = sample_preview(&frame.preview, x, y);
+    let (x, y) = match frame.tile_uv {
+        Some([u0, v0, u1, v1]) => (
+            ((x - f64::from(u0)) / f64::from((u1 - u0).max(1e-6))).clamp(0.0, 1.0),
+            ((y - f64::from(v0)) / f64::from((v1 - v0).max(1e-6))).clamp(0.0, 1.0),
+        ),
+        None => (x, y),
+    };
+    let rgba = frame.rgba();
+    let w = frame.preview.width;
+    let rgb = sample_with(w, frame.preview.height, x, y, |c, r| {
+        let i = (r * w + c) * 4;
+        [0, 1, 2].map(|k| f32::from(rgba.get(i + k).copied().unwrap_or(0)) / 255.0)
+    });
     let mut state = std::mem::take(cx.state::<TargetedAdjust>());
     state.started_with(cx.doc.edit_mut(), rgb);
     *cx.state::<TargetedAdjust>() = state;

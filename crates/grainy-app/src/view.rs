@@ -124,22 +124,52 @@ impl AppContext {
         let min = Pos2::new((min.x * ppp).round() / ppp, (min.y * ppp).round() / ppp);
         let rect = Rect::from_min_size(min, shown);
         self.photo_rect = Some(rect);
+        // Visible viewport ROI for true 1:1 GPU tile rendering when zoomed in past the viewport.
+        self.tile_need = if self.zoom != Zoom::Fit
+            && self.wgpu_render_state.is_some()
+            && rect.width() > 1.0
+            && rect.height() > 1.0
+            && (rect.width() > area.width() * 1.1 || rect.height() > area.height() * 1.1)
+        {
+            let vis = area.intersect(rect);
+            if vis.width() > 1.0 && vis.height() > 1.0 {
+                let u0 = ((vis.left() - rect.left()) / rect.width()).clamp(0.0, 1.0);
+                let v0 = ((vis.top() - rect.top()) / rect.height()).clamp(0.0, 1.0);
+                let u1 = ((vis.right() - rect.left()) / rect.width()).clamp(0.0, 1.0);
+                let v1 = ((vis.bottom() - rect.top()) / rect.height()).clamp(0.0, 1.0);
+                let pad_u = ((u1 - u0) * 0.2).max(0.03);
+                let pad_v = ((v1 - v0) * 0.2).max(0.03);
+                let q_lo = |x: f32| ((x * 16.0).floor() / 16.0).clamp(0.0, 1.0);
+                let q_hi = |x: f32| ((x * 16.0).ceil() / 16.0).clamp(0.0, 1.0);
+                let roi = [q_lo(u0 - pad_u), q_lo(v0 - pad_v), q_hi(u1 + pad_u), q_hi(v1 + pad_v)];
+                ((roi[2] - roi[0]) * (roi[3] - roi[1]) < 0.75).then_some(roi)
+            } else {
+                None
+            }
+        } else {
+            None
+        };
         let uv = Rect::from_min_max(Pos2::ZERO, Pos2::new(1.0, 1.0));
         let thumb = self.thumbs.get(&self.doc.current_id());
-        match (&self.texture, thumb.and_then(|t| t.texture.as_ref())) {
-            (Some(texture), _) => {
-                painter.image(texture.id(), rect, uv, Color32::WHITE);
-            }
-            (None, Some(texture)) => {
-                painter.image(texture.id(), rect, uv, Color32::WHITE);
-            }
-            (None, None) => {
-                if self.doc.current().is_some() {
-                    checkerboard(&painter, rect);
-                } else {
-                    crate::commands::settings::paint_empty(&painter, area);
-                }
-            }
+        let base_id = self
+            .gpu_texture
+            .as_ref()
+            .map(|(id, _)| *id)
+            .or_else(|| self.texture.as_ref().map(egui::TextureHandle::id))
+            .or_else(|| thumb.and_then(|t| t.texture.as_ref()).map(egui::TextureHandle::id));
+        if let Some(id) = base_id {
+            painter.image(id, rect, uv, Color32::WHITE);
+        } else if self.doc.current().is_some() {
+            checkerboard(&painter, rect);
+        } else {
+            crate::commands::settings::paint_empty(&painter, area);
+        }
+        if let Some((tile_id, [u0, v0, u1, v1], _)) = &self.gpu_tile_texture {
+            let tile_rect = Rect::from_min_max(
+                Pos2::new(rect.left() + u0 * rect.width(), rect.top() + v0 * rect.height()),
+                Pos2::new(rect.left() + u1 * rect.width(), rect.top() + v1 * rect.height()),
+            );
+            painter.image(*tile_id, tile_rect, uv, Color32::WHITE);
         }
         self.clipping_overlay(ui, &painter, rect);
         if self.doc.current().is_some() {
@@ -155,6 +185,47 @@ impl AppContext {
         let (shadows, highlights) = (self.clip_shadows, self.clip_highlights);
         let Some(frame) = self.frame.clone().filter(|_| shadows || highlights) else { return };
         let key = (frame.id, shadows, highlights);
+        let uv = Rect::from_min_max(Pos2::ZERO, Pos2::new(1.0, 1.0));
+        if let (Some(gpu_preview), Some(rs)) = (&frame.gpu, self.wgpu_render_state.clone()) {
+            let stale = self.gpu_clip_texture.as_ref().is_none_or(|c| c.key != key);
+            if stale {
+                if let Ok((tex, view)) = gpu_preview.gpu.render_clip_overlay(
+                    &gpu_preview.presented.clip_bits,
+                    gpu_preview.presented.width,
+                    gpu_preview.presented.height,
+                    shadows,
+                    highlights,
+                ) {
+                    let filter = grainy_gpu::wgpu::FilterMode::Nearest;
+                    let mut renderer = rs.renderer.write();
+                    let id = match &self.gpu_clip_texture {
+                        Some(clip) => {
+                            renderer.update_egui_texture_from_wgpu_texture(&rs.device, &view, filter, clip.id);
+                            clip.id
+                        }
+                        None => renderer.register_native_texture(&rs.device, &view, filter),
+                    };
+                    self.gpu_clip_texture = Some(crate::context::GpuClipTexture {
+                        id,
+                        key,
+                        tile_uv: frame.tile_uv,
+                        _texture: tex,
+                        _view: view,
+                    });
+                }
+            }
+            if let Some(clip) = &self.gpu_clip_texture {
+                let target = match clip.tile_uv {
+                    Some([u0, v0, u1, v1]) => Rect::from_min_max(
+                        Pos2::new(rect.left() + u0 * rect.width(), rect.top() + v0 * rect.height()),
+                        Pos2::new(rect.left() + u1 * rect.width(), rect.top() + v1 * rect.height()),
+                    ),
+                    None => rect,
+                };
+                painter.image(clip.id, target, uv, Color32::WHITE);
+            }
+            return;
+        }
         if self.clip_texture.as_ref().is_none_or(|(_, k)| *k != key) {
             let rgba = crate::histogram::overlay(&frame.clipping, shadows, highlights);
             let image = egui::ColorImage::from_rgba_unmultiplied([frame.preview.width, frame.preview.height], &rgba);
@@ -162,7 +233,6 @@ impl AppContext {
             self.clip_texture = Some((texture, key));
         }
         if let Some((texture, _)) = &self.clip_texture {
-            let uv = Rect::from_min_max(Pos2::ZERO, Pos2::new(1.0, 1.0));
             painter.image(texture.id(), rect, uv, Color32::WHITE);
         }
     }
@@ -172,11 +242,17 @@ impl AppContext {
     fn paint_debug_overlay(&self, ui: &Ui, area: Rect) {
         let changed = self.doc.edit().changed();
         let (undo, redo) = self.doc.edit().depth();
-        let mut text = format!("debug · undo {undo} · redo {redo} · {} changed", changed.len());
+        let pv = if self.settings().i64("tone_version") >= 4 { "PV4" } else { "PV3" };
+        let mut text = format!("debug · {pv} · undo {undo} · redo {redo} · {} changed", changed.len());
         if let Some(frame) = &self.frame {
+            let path = match (frame.gpu.is_some(), frame.tile_uv.is_some()) {
+                (true, true) => "GPU Zero-Copy 1:1 Tile",
+                (true, false) => "GPU Zero-Copy",
+                (false, _) => "CPU",
+            };
             text.push('\n');
             text.push_str(&format!(
-                "render {:.0} ms · {} × {} ({:?}) · cache hits {} misses {}",
+                "render {:.1} ms · {} × {} ({:?}, {path}) · cache hits {} misses {}",
                 frame.millis, frame.preview.width, frame.preview.height, frame.resolution, frame.hits, frame.misses
             ));
         }

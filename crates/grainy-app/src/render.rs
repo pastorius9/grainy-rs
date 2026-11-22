@@ -3,12 +3,46 @@
 //! real photos on background threads; [`TestCard`] answers at once with a fixed picture (the snapshot tests of
 //! the shell without photos).
 
+use std::borrow::Cow;
 use std::path::PathBuf;
-use std::sync::Arc;
+use std::sync::{Arc, OnceLock};
 
 use grainy_core::Settings;
 
 use crate::histogram::{self, Bins, Channels};
+
+/// A GPU-resident RGBA8 preview texture (already monitor-ICC corrected on the GPU) plus its
+/// packed 2-bit clipping mask and lazy CPU RGBA8 cache for interactive pickers.
+pub struct GpuPreview {
+    pub gpu: Arc<grainy_gpu::Gpu>,
+    pub presented: grainy_gpu::Presented,
+    rgba_cache: OnceLock<Vec<u8>>,
+}
+
+impl std::fmt::Debug for GpuPreview {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("GpuPreview")
+            .field("width", &self.presented.width)
+            .field("height", &self.presented.height)
+            .finish()
+    }
+}
+
+impl GpuPreview {
+    pub fn new(gpu: Arc<grainy_gpu::Gpu>, presented: grainy_gpu::Presented) -> Self {
+        Self { gpu, presented, rgba_cache: OnceLock::new() }
+    }
+
+    /// Lazily reads back the 8-bit RGBA texture to CPU memory (only when an interactive picker
+    /// such as the eyedropper or targeted curve tool samples pixels).
+    pub fn rgba_bytes(&self) -> &[u8] {
+        self.rgba_cache.get_or_init(|| {
+            self.gpu
+                .readback_texture_rgba(&self.presented.texture, self.presented.width, self.presented.height)
+                .unwrap_or_default()
+        })
+    }
+}
 
 /// A rendered picture for the screen: 8-bit sRGB, RGBA, rows top to bottom.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -81,12 +115,34 @@ pub struct Frame {
     pub hdr: Option<crate::hdr::FrameInfo>,
     /// Extended linear sRGB RGBA for the native HDR output, allocated only while its window is open.
     pub native_hdr: Option<Arc<[f32]>>,
+    /// Zero-copy GPU-resident preview texture + packed clip mask when developed on the shared `wgpu::Device`.
+    pub gpu: Option<Arc<GpuPreview>>,
+    /// Normalized `[u0, v0, u1, v1]` in `[0, 1]` cropped image coordinates when this frame is a 1:1 viewport tile.
+    pub tile_uv: Option<[f32; 4]>,
+    /// Full cropped frame dimensions `(width, height)` in pixels (matches `preview` except on 1:1 tiles).
+    pub full_size: (usize, usize),
 }
 
 impl Frame {
     /// The frame's size in original pixels (what 1:1 shows).
     pub fn logical_size(&self) -> (f64, f64) {
-        (self.preview.width as f64 * self.scale, self.preview.height as f64 * self.scale)
+        let (w, h) = if self.full_size.0 > 0 && self.full_size.1 > 0 {
+            self.full_size
+        } else {
+            (self.preview.width, self.preview.height)
+        };
+        (w as f64 * self.scale, h as f64 * self.scale)
+    }
+
+    /// CPU RGBA8 pixels of the frame, lazily read back from GPU only if this is a zero-copy GPU frame.
+    pub fn rgba(&self) -> Cow<'_, [u8]> {
+        if !self.preview.rgba.is_empty() {
+            Cow::Borrowed(&self.preview.rgba)
+        } else if let Some(gpu) = &self.gpu {
+            Cow::Borrowed(gpu.rgba_bytes())
+        } else {
+            Cow::Borrowed(&[])
+        }
     }
 }
 
@@ -198,6 +254,8 @@ pub trait Renderer {
     /// The long side in device pixels the fitted photo occupies on screen (`None`: not fitted). A fit preview is
     /// developed at that size instead of the whole preview source, as Lightroom does; a renderer may ignore it.
     fn set_view_size(&mut self, _long: Option<usize>) {}
+    /// Normalized `[u0, v0, u1, v1]` viewport region for true 1:1 tile rendering when zoomed in (`None`: full frame).
+    fn set_tile_roi(&mut self, _roi: Option<[f32; 4]>) {}
     /// Asks the second preview lane for a picture; replaces a waiting request of the same slot.
     fn side(&mut self, _job: SideJob) {}
     /// The second lane's answers that are ready.
@@ -277,6 +335,9 @@ impl TestCard {
             misses: 0,
             hdr: None,
             native_hdr: None,
+            gpu: None,
+            tile_uv: None,
+            full_size: (w, h),
         }
     }
 }

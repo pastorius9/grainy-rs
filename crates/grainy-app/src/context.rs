@@ -27,7 +27,7 @@ use crate::fonts;
 use crate::histogram::Bins;
 use crate::jobs::Jobs;
 use crate::panels::Tool;
-use crate::render::{Frame, PreviewJob, Renderer, Reply, Resolution, ThumbnailJob, Waker};
+use crate::render::{Frame, GpuPreview, PreviewJob, Renderer, Reply, Resolution, ThumbnailJob, Waker};
 use crate::session::Session;
 use crate::state::EditState;
 use crate::text::{tr, tr_with};
@@ -89,6 +89,17 @@ struct Wanted {
     hdr: u64,
     /// The fitted view's size the fit preview is developed at (`AppContext::view_need`; `None` for full size).
     view: Option<usize>,
+    /// Quantized `[u0, v0, u1, v1]` 1:1 viewport tile ROI (as raw f32 bits for exact `Eq`), `None` for full frame.
+    tile: Option<[u32; 4]>,
+}
+
+/// Native `egui_wgpu` texture for the GPU-rendered clipping overlay.
+pub(crate) struct GpuClipTexture {
+    pub id: egui::TextureId,
+    pub key: (u64, bool, bool),
+    pub tile_uv: Option<[f32; 4]>,
+    pub _texture: Arc<grainy_gpu::wgpu::Texture>,
+    pub _view: Arc<grainy_gpu::wgpu::TextureView>,
 }
 
 /// The application context.
@@ -110,6 +121,14 @@ pub struct AppContext {
     answered: u64,
     pub(crate) frame: Option<Arc<Frame>>,
     pub(crate) texture: Option<egui::TextureHandle>,
+    /// Shared `eframe` wgpu render state for zero-copy native texture binding (`None` in headless/CPU tests).
+    pub(crate) wgpu_render_state: Option<eframe::egui_wgpu::RenderState>,
+    /// Zero-copy native `egui_wgpu` texture for the full frame (no CPU readback or upload).
+    pub(crate) gpu_texture: Option<(egui::TextureId, Arc<GpuPreview>)>,
+    /// Zero-copy native `egui_wgpu` texture for the zoomed 1:1 viewport tile (`[u0, v0, u1, v1]`).
+    pub(crate) gpu_tile_texture: Option<(egui::TextureId, [f32; 4], Arc<GpuPreview>)>,
+    /// Zero-copy native `egui_wgpu` clipping overlay texture (generated on GPU in < 0.2 ms).
+    pub(crate) gpu_clip_texture: Option<GpuClipTexture>,
     /// The clipping overlay texture and the (frame id, shadows, highlights) it shows.
     pub(crate) clip_texture: Option<(egui::TextureHandle, (u64, bool, bool))>,
     pub(crate) picture_size: Vec2,
@@ -159,6 +178,8 @@ pub struct AppContext {
     /// The fitted photo's long side on screen in device pixels, rounded up (`None` when not fitted): the size the
     /// fit preview is developed at (`Renderer::set_view_size`).
     pub(crate) view_need: Option<usize>,
+    /// Visible normalized `[u0, v0, u1, v1]` ROI for true 1:1 GPU tile rendering when zoomed in.
+    pub(crate) tile_need: Option<[f32; 4]>,
     pub(crate) debug_overlay: bool,
     /// Status bar message (already translated).
     pub(crate) status: String,
@@ -200,6 +221,10 @@ impl AppContext {
             answered: 0,
             frame: None,
             texture: None,
+            wgpu_render_state: None,
+            gpu_texture: None,
+            gpu_tile_texture: None,
+            gpu_clip_texture: None,
             clip_texture: None,
             picture_size: Vec2::ZERO,
             bins: None,
@@ -234,6 +259,7 @@ impl AppContext {
             scroll_to_current: false,
             photo_rect: None,
             view_need: None,
+            tile_need: None,
             debug_overlay: false,
             status: tr("준비됨  ·  사진을 가져오면 시작할 수 있습니다."),
             auto_note: tr("자동톤: 검정·흰색 양끝 3% 여유\n목표 밝기 약 8–247 / 255"),
@@ -532,15 +558,37 @@ impl AppContext {
 
     // ---- editing ---------------------------------------------------------------------------------------------
 
+    /// Release any native zero-copy `egui_wgpu` textures registered with `eframe`.
+    pub(crate) fn free_gpu_textures(&mut self) {
+        if let Some(rs) = &self.wgpu_render_state {
+            let mut renderer = rs.renderer.write();
+            if let Some((id, _)) = self.gpu_texture.take() {
+                renderer.free_texture(&id);
+            }
+            if let Some((id, _, _)) = self.gpu_tile_texture.take() {
+                renderer.free_texture(&id);
+            }
+            if let Some(clip) = self.gpu_clip_texture.take() {
+                renderer.free_texture(&clip.id);
+            }
+        } else {
+            self.gpu_texture = None;
+            self.gpu_tile_texture = None;
+            self.gpu_clip_texture = None;
+        }
+    }
+
     /// What changes when another photo opens.
     pub(crate) fn photo_changed(&mut self) {
         crate::commands::auto_source::clear(self);
         self.texture = None;
+        self.free_gpu_textures();
         self.clip_texture = None;
         self.frame = None;
         self.bins = None;
         self.picture_size = Vec2::ZERO;
         self.pan = Vec2::ZERO;
+        self.tile_need = None;
         self.before = false;
         self.auto_note = tr("자동톤: 검정·흰색 양끝 3% 여유\n목표 밝기 약 8–247 / 255");
     }
@@ -838,11 +886,15 @@ impl AppContext {
         self.request_thumbnails();
     }
 
-    /// The resolution the view needs: the full-size source when zoomed in past the preview source, except while a
-    /// value is being dragged (the fit source keeps the drag fluid).
+    /// The resolution the view needs: the full-size source when zoomed in past the preview source.
+    /// With zero-copy GPU 1:1 viewport tiling active, stays at `Resolution::Full` even during
+    /// slider drags (developing only the visible ~2 MP tile at 60 fps instead of blurring to Fit).
     fn resolution(&self) -> Resolution {
         let long = self.doc.current().and_then(|p| p.original).map_or(0, |(w, h)| w.max(h) as usize);
-        if self.zoom != Zoom::Fit && long > PREVIEW_SIZE && !self.doc.edit().dirty() {
+        let tiled_gpu = self.tile_need.is_some()
+            && self.wgpu_render_state.is_some()
+            && self.renderer.gpu_status().is_some_and(|s| s.enabled);
+        if self.zoom != Zoom::Fit && long > PREVIEW_SIZE && (tiled_gpu || !self.doc.edit().dirty()) {
             Resolution::Full
         } else {
             Resolution::Fit
@@ -853,6 +905,7 @@ impl AppContext {
         let crop = crate::tools::crop::preview_crop(self);
         let Some(photo) = self.doc.current() else { return };
         let resolution = self.resolution();
+        let tile = self.tile_need.filter(|_| resolution == Resolution::Full);
         let wanted = Wanted {
             crop,
             photo: photo.id,
@@ -862,6 +915,7 @@ impl AppContext {
             display: crate::display::revision(self),
             hdr: crate::hdr::revision(self),
             view: self.view_need.filter(|_| resolution == Resolution::Fit),
+            tile: tile.map(|r| r.map(f32::to_bits)),
         };
         if self.wanted == Some(wanted) {
             return;
@@ -881,6 +935,7 @@ impl AppContext {
         let job =
             PreviewJob { id: self.requests, photo: wanted.photo, path, settings, resolution: wanted.resolution, crop };
         self.renderer.set_view_size(wanted.view);
+        self.renderer.set_tile_roi(tile);
         self.renderer.preview(job);
     }
 
@@ -937,6 +992,50 @@ impl AppContext {
     }
 
     fn show_frame(&mut self, frame: Arc<Frame>) {
+        if let (Some(gpu_preview), Some(rs)) = (frame.gpu.clone(), self.wgpu_render_state.clone()) {
+            let filter = grainy_gpu::wgpu::FilterMode::Linear;
+            if let Some(tile_uv) = frame.tile_uv {
+                let mut renderer = rs.renderer.write();
+                let id = match &self.gpu_tile_texture {
+                    Some((id, _, _)) => {
+                        renderer.update_egui_texture_from_wgpu_texture(
+                            &rs.device,
+                            &gpu_preview.presented.view,
+                            filter,
+                            *id,
+                        );
+                        *id
+                    }
+                    None => renderer.register_native_texture(&rs.device, &gpu_preview.presented.view, filter),
+                };
+                self.gpu_tile_texture = Some((id, tile_uv, gpu_preview));
+            } else {
+                let mut renderer = rs.renderer.write();
+                let id = match &self.gpu_texture {
+                    Some((id, _)) => {
+                        renderer.update_egui_texture_from_wgpu_texture(
+                            &rs.device,
+                            &gpu_preview.presented.view,
+                            filter,
+                            *id,
+                        );
+                        *id
+                    }
+                    None => renderer.register_native_texture(&rs.device, &gpu_preview.presented.view, filter),
+                };
+                if let Some((tile_id, _, _)) = self.gpu_tile_texture.take() {
+                    renderer.free_texture(&tile_id);
+                }
+                self.gpu_texture = Some((id, gpu_preview));
+                self.texture = None;
+            }
+            let (w, h) = frame.logical_size();
+            self.picture_size = Vec2::new(w as f32, h as f32);
+            self.bins = Some(frame.bins);
+            self.clip_texture = None;
+            self.frame = Some(frame);
+            return;
+        }
         let preview = &frame.preview;
         if preview.rgba.len() != preview.width * preview.height * 4 {
             log::warn!("renderer returned a picture of the wrong size");
@@ -953,6 +1052,7 @@ impl AppContext {
             Some(texture) => texture.set(image, options),
             None => self.texture = Some(self.egui.load_texture("photo", image, options)),
         }
+        self.free_gpu_textures();
         let (w, h) = frame.logical_size();
         self.picture_size = Vec2::new(w as f32, h as f32);
         self.bins = Some(frame.bins);

@@ -63,12 +63,15 @@ struct Shared {
     thumbnails: AtomicUsize,
     prefetched: AtomicUsize,
     gpu: Option<Arc<crate::gpu_worker::Control>>,
+    shared_wgpu: Option<crate::gpu_worker::SharedWgpu>,
     /// The monitor's profile (`Renderer::set_monitor`), read when a job starts.
     monitor: Mutex<Option<grainy_cms::Profile>>,
     /// The HDR viewing choices (`Renderer::set_hdr_view`), read when a job starts.
     hdr_view: Mutex<crate::hdr::View>,
     /// The fitted photo's long side on screen (`Renderer::set_view_size`), read when a job starts.
     view: Mutex<Option<usize>>,
+    /// Normalized `[u0, v0, u1, v1]` viewport region for true 1:1 tile rendering (`Renderer::set_tile_roi`).
+    tile_roi: Mutex<Option<[f32; 4]>>,
 }
 
 impl Shared {
@@ -96,16 +99,25 @@ impl Default for Worker {
 impl Worker {
     /// Starts the preview and thumbnail threads.
     pub fn new() -> Self {
-        Self::start(None, None)
+        Self::start(None, None, None)
     }
 
     /// Port of the oracle's preview worker with GPU warm-up and CPU retry on device failure.
     /// The ordinary constructor remains the CPU reference for tests and deterministic clients.
     pub fn with_gpu(enabled: bool) -> Self {
-        Self::start(Some(crate::gpu_worker::Control::new(enabled)), None)
+        Self::start(Some(crate::gpu_worker::Control::new(enabled)), None, None)
     }
 
-    fn start(gpu: Option<Arc<crate::gpu_worker::Control>>, library: Option<PathBuf>) -> Self {
+    /// Preview worker sharing `eframe`'s `wgpu::Device` for zero-copy GPU texture presentation.
+    pub fn with_gpu_shared(enabled: bool, shared_wgpu: Option<crate::gpu_worker::SharedWgpu>) -> Self {
+        Self::start(Some(crate::gpu_worker::Control::new(enabled)), shared_wgpu, None)
+    }
+
+    fn start(
+        gpu: Option<Arc<crate::gpu_worker::Control>>,
+        shared_wgpu: Option<crate::gpu_worker::SharedWgpu>,
+        library: Option<PathBuf>,
+    ) -> Self {
         let shared = Arc::new(Shared {
             library,
             analysis_seed: Mutex::default(),
@@ -121,9 +133,11 @@ impl Worker {
             thumbnails: AtomicUsize::new(0),
             prefetched: AtomicUsize::new(0),
             gpu,
+            shared_wgpu,
             monitor: Mutex::new(None),
             hdr_view: Mutex::new(crate::hdr::View::default()),
             view: Mutex::new(None),
+            tile_roi: Mutex::new(None),
         });
         let preview = shared.clone();
         let spawned = std::thread::Builder::new().name("grainy-preview".into()).spawn(move || preview_loop(&preview));
@@ -172,10 +186,11 @@ impl Drop for Worker {
 
 impl Renderer for Worker {
     fn set_library(&mut self, library: Option<PathBuf>) {
-        let next = Self::start(self.shared.gpu.clone(), library);
+        let next = Self::start(self.shared.gpu.clone(), self.shared.shared_wgpu.clone(), library);
         *lock(&next.shared.monitor) = lock(&self.shared.monitor).clone();
         *lock(&next.shared.hdr_view) = *lock(&self.shared.hdr_view);
         *lock(&next.shared.view) = *lock(&self.shared.view);
+        *lock(&next.shared.tile_roi) = *lock(&self.shared.tile_roi);
         *lock(&next.shared.waker) = lock(&self.shared.waker).clone();
         *self = next;
     }
@@ -248,6 +263,10 @@ impl Renderer for Worker {
 
     fn set_view_size(&mut self, long: Option<usize>) {
         *lock(&self.shared.view) = long;
+    }
+
+    fn set_tile_roi(&mut self, roi: Option<[f32; 4]>) {
+        *lock(&self.shared.tile_roi) = roi;
     }
 
     fn side(&mut self, job: SideJob) {
@@ -397,13 +416,15 @@ struct PreviewState {
     reduced: Option<(u64, usize, Source)>,
     tokens: u64,
     gpu: Option<crate::gpu_worker::PreviewGpu>,
+    /// Whole-frame histogram and clipping channels of the open photo, retained across 1:1 viewport tiles.
+    last_stats: Option<(u64, crate::histogram::Bins, crate::histogram::Channels)>,
 }
 
 /// A fit source is reduced to the view only when that saves at least this share of its long side.
 const REDUCE_BELOW: f64 = 0.85;
 
 impl PreviewState {
-    fn new(gpu: Option<Arc<crate::gpu_worker::Control>>) -> Self {
+    fn new(gpu: Option<Arc<crate::gpu_worker::Control>>, shared_wgpu: Option<crate::gpu_worker::SharedWgpu>) -> Self {
         // Grows to a few copies of the source (a full-size frame), at most 1.5 GB.
         Self {
             library: None,
@@ -413,7 +434,8 @@ impl PreviewState {
             sources: Vec::new(),
             reduced: None,
             tokens: 0,
-            gpu: gpu.map(crate::gpu_worker::PreviewGpu::new),
+            gpu: gpu.map(|c| crate::gpu_worker::PreviewGpu::with_shared(c, shared_wgpu)),
+            last_stats: None,
         }
     }
 
@@ -519,12 +541,17 @@ impl PreviewState {
         monitor: Option<&grainy_cms::Profile>,
         hdr_view: crate::hdr::View,
         view: Option<usize>,
+        tile_roi: Option<[f32; 4]>,
     ) -> Result<Frame, String> {
         let started = Instant::now();
+        let zero_copy_gpu = self.gpu.as_ref().is_some_and(|g| g.has_shared_device());
         // A new monitor's LittleCMS bounds depend only on its profile. Build them alongside
-        // the cold RAW decode, before the exact CPU presentation needs either result.
+        // the cold RAW decode when CPU monitor conversion will be needed.
         let at = if let Some(profile) = monitor.filter(|p| {
-            !self.monitor.is_cached(p) && !job.settings.bool("hdr") && job.settings.str("working_space") != "ProPhoto"
+            !zero_copy_gpu
+                && !self.monitor.is_cached(p)
+                && !job.settings.bool("hdr")
+                && job.settings.str("working_space") != "ProPhoto"
         }) {
             let mut cache = std::mem::take(&mut self.monitor);
             let (source, bounds) = rayon::join(|| self.source(job), || cache.table(profile).map(|_| ()));
@@ -572,6 +599,7 @@ impl PreviewState {
             let image = develop_cached(source.photo.source(), &job.settings.0, &working, cache, source.token)
                 .map_err(|e| e.to_string())?;
             let shown = crate::hdr::present(&image, &job.settings, hdr_view, monitor)?;
+            self.last_stats = Some((job.photo, shown.bins, shown.channels));
             return Ok(Frame {
                 id: job.id,
                 photo: job.photo,
@@ -587,44 +615,91 @@ impl PreviewState {
                 misses: cache.misses(),
                 hdr: Some(shown.info),
                 native_hdr: shown.native_hdr,
+                gpu: None,
+                tile_uv: None,
+                full_size: (shown.width, shown.height),
             });
         }
         options.output = Output::Working;
-        if let Photo::Linear(pixels) = &*source.photo {
-            if let Some(frame) = crate::basic_preview::render(pixels, &effective, monitor, &mut self.monitor)? {
-                let (height, width, _) = pixels.dim();
+        if !zero_copy_gpu {
+            if let Photo::Linear(pixels) = &*source.photo {
+                if let Some(frame) = crate::basic_preview::render(pixels, &effective, monitor, &mut self.monitor)? {
+                    let (height, width, _) = pixels.dim();
+                    self.last_stats = Some((job.photo, frame.bins, frame.channels));
+                    return Ok(Frame {
+                        id: job.id,
+                        photo: job.photo,
+                        resolution: job.resolution,
+                        preview: Preview { width, height, rgba: frame.rgba },
+                        bins: frame.bins,
+                        channels: frame.channels,
+                        clipping: frame.mask,
+                        scale: source.scale(),
+                        original: source.original,
+                        millis: started.elapsed().as_secs_f64() * 1000.,
+                        hits: cache.hits(),
+                        misses: cache.misses(),
+                        hdr: None,
+                        native_hdr: None,
+                        gpu: None,
+                        tile_uv: None,
+                        full_size: (width, height),
+                    });
+                }
+            }
+        }
+        let space = effective.str("working_space");
+        let tile = tile_roi
+            .filter(|_| job.resolution == Resolution::Full)
+            .map(|roi| grainy_engine::gpu::TileRequest { roi, halo: 96 });
+        let accelerated = self.gpu.as_mut().and_then(|gpu| {
+            gpu.render(
+                source.photo.source(),
+                &job.settings.0,
+                &options,
+                source.token,
+                job.resolution,
+                space,
+                monitor,
+                tile,
+            )
+        });
+        let (working, hits, misses) = match accelerated {
+            Some(Ok(crate::gpu_worker::PreviewGpuOutput::ZeroCopy { preview, bins, channels, tile_uv, full_size })) => {
+                let bins = *bins;
+                let (hits, misses) = self.gpu.as_ref().map_or((0, 0), |gpu| gpu.counters(job.resolution));
+                let (bins, channels) = if tile_uv.is_some() {
+                    self.last_stats.filter(|(p, _, _)| *p == job.photo).map_or((bins, channels), |(_, b, c)| (b, c))
+                } else {
+                    self.last_stats = Some((job.photo, bins, channels));
+                    (bins, channels)
+                };
+                let (width, height) = (preview.presented.width, preview.presented.height);
                 return Ok(Frame {
                     id: job.id,
                     photo: job.photo,
                     resolution: job.resolution,
-                    preview: Preview { width, height, rgba: frame.rgba },
-                    bins: frame.bins,
-                    channels: frame.channels,
-                    clipping: frame.mask,
+                    preview: Preview { width, height, rgba: Vec::new() },
+                    bins,
+                    channels,
+                    clipping: Vec::new(),
                     scale: source.scale(),
                     original: source.original,
-                    millis: started.elapsed().as_secs_f64() * 1000.,
-                    hits: cache.hits(),
-                    misses: cache.misses(),
+                    millis: started.elapsed().as_secs_f64() * 1000.0,
+                    hits,
+                    misses,
                     hdr: None,
                     native_hdr: None,
+                    gpu: Some(preview),
+                    tile_uv,
+                    full_size,
                 });
             }
-        }
-        let space = effective.str("working_space");
-        // The GPU develops the working pixels with or without a monitor profile: the profile is applied to them on the
-        // CPU afterwards. The screen may then differ from the CPU develop by a rounding step (a GPU ULP through the
-        // LittleCMS lookup), never visibly; exports always develop on the CPU. Without this, every edit of a photo
-        // with noise reduction or sharpening re-ran the detail stage on the CPU (1.5 s for a 24 MP RAW's preview).
-        let accelerated =
-            self.gpu.as_mut().filter(|_| space != "ProPhoto").and_then(|gpu| {
-                gpu.render(source.photo.source(), &job.settings.0, &options, source.token, job.resolution)
-            });
-        let (working, hits, misses) = match accelerated {
-            Some(result) => {
+            Some(Ok(crate::gpu_worker::PreviewGpuOutput::Host(image))) => {
                 let (hits, misses) = self.gpu.as_ref().map_or((0, 0), |gpu| gpu.counters(job.resolution));
-                (Arc::new(result?), hits, misses)
+                (Arc::new(image), hits, misses)
             }
+            Some(Err(err)) => return Err(err),
             None => {
                 let image = grainy_engine::preview_working(
                     source.photo.source(),
@@ -651,6 +726,7 @@ impl PreviewState {
             Some(profile) => self.monitor.rgba(&working, space, profile)?,
             None => converted.rgba,
         };
+        self.last_stats = Some((job.photo, bins, converted.channels));
         let millis = started.elapsed().as_secs_f64() * 1000.0;
         Ok(Frame {
             id: job.id,
@@ -667,6 +743,9 @@ impl PreviewState {
             misses,
             hdr: None,
             native_hdr: None,
+            gpu: None,
+            tile_uv: None,
+            full_size: (converted.width, converted.height),
         })
     }
 }
@@ -682,7 +761,7 @@ fn monitor_and_histogram_share_one_develop_and_zoom_keeps_the_fit_stages() {
     let settings = grainy_core::defaults();
     let mut job =
         PreviewJob { id: 1, photo: 1, path: path.clone(), settings, resolution: Resolution::Fit, crop: Crop::Cropped };
-    let mut state = PreviewState::new(None);
+    let mut state = PreviewState::new(None, None);
     for (token, resolution) in [(1, Resolution::Fit), (2, Resolution::Full)] {
         state.sources.push(Source {
             path: path.clone(),
@@ -695,19 +774,19 @@ fn monitor_and_histogram_share_one_develop_and_zoom_keeps_the_fit_stages() {
         });
     }
     let profile = grainy_cms::profile("Display P3").unwrap();
-    let first = state.render(&job, Some(&profile), Default::default(), None).unwrap();
+    let first = state.render(&job, Some(&profile), Default::default(), None, None).unwrap();
     assert_eq!((first.hits, first.misses), (0, 1), "one tone operation in the cold neutral frame");
     job.resolution = Resolution::Full;
-    state.render(&job, None, Default::default(), None).unwrap();
+    state.render(&job, None, Default::default(), None, None).unwrap();
     job.resolution = Resolution::Fit;
-    let plain = state.render(&job, None, Default::default(), None).unwrap();
+    let plain = state.render(&job, None, Default::default(), None, None).unwrap();
     assert_eq!((plain.hits, plain.misses), (1, 1));
     assert_eq!(plain.bins, first.bins);
     assert_eq!(plain.clipping, first.clipping);
 }
 
 fn preview_loop(shared: &Shared) {
-    let mut state = PreviewState::new(shared.gpu.clone());
+    let mut state = PreviewState::new(shared.gpu.clone(), shared.shared_wgpu.clone());
     state.library.clone_from(&shared.library);
     if let Some(waker) = lock(&shared.waker).clone() {
         waker();
@@ -745,6 +824,7 @@ fn preview_loop(shared: &Shared) {
         let monitor = lock(&shared.monitor).clone();
         let hdr_view = *lock(&shared.hdr_view);
         let view = *lock(&shared.view);
+        let tile_roi = *lock(&shared.tile_roi);
         {
             let mut seed = lock(&shared.analysis_seed);
             if seed
@@ -754,7 +834,7 @@ fn preview_loop(shared: &Shared) {
                 *seed = None;
             }
         }
-        let reply = match caught(|| state.render(&job, monitor.as_ref(), hdr_view, view)) {
+        let reply = match caught(|| state.render(&job, monitor.as_ref(), hdr_view, view, tile_roi)) {
             Ok(frame) => {
                 log::info!(
                     "render {}x{} ({:?}) in {:.0} ms, cache hits {} misses {}",

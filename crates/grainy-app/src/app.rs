@@ -96,6 +96,16 @@ impl GrainyApp {
     /// The window `cargo run` opens: the library of `--library` or of the data folder (`GRAINY_RS_HOME`, else
     /// `%LOCALAPPDATA%\GrainyRS`), or an in-memory session with `--memory`; the paths given are imported.
     pub fn from_arguments(ctx: &egui::Context, args: Arguments) -> Self {
+        Self::from_arguments_with_wgpu(ctx, None, args)
+    }
+
+    /// Like [`Self::from_arguments`], attaching `eframe`'s `wgpu_render_state` so GPU previews render
+    /// zero-copy directly into `egui_wgpu` textures.
+    pub fn from_arguments_with_wgpu(
+        ctx: &egui::Context,
+        render_state: Option<eframe::egui_wgpu::RenderState>,
+        args: Arguments,
+    ) -> Self {
         let locations = Locations::current();
         if !args.memory && !crate::paths::is_oracle_folder(&locations.data_folder(), &locations) {
             crate::commands::settings::apply_stored_language(&locations.data_folder());
@@ -107,7 +117,7 @@ impl GrainyApp {
             Self::with_library(ctx, &folder, Some(locations.data_folder()))
         };
         app.cx.debug_overlay = args.debug;
-        crate::gpu_worker::install(&mut app.cx);
+        crate::gpu_worker::install_with_wgpu(&mut app.cx, render_state);
         crate::network::install(&mut app.cx, args.offline);
         crate::startup::begin(&mut app.cx);
         crate::commands::settings::startup(&mut app.cx);
@@ -285,6 +295,7 @@ impl eframe::App for GrainyApp {
     }
 
     fn on_exit(&mut self) {
+        self.cx.free_gpu_textures();
         crate::ai::shutdown(&mut self.cx);
         self.cx.doc.edit_mut().commit("보정 변경");
         self.cx.flush();
