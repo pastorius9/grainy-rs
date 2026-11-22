@@ -49,78 +49,89 @@ fn paint_wheel(ui: &mut Ui, cx: &mut AppContext, index: usize, short_title: &str
         let s = g.get(index).and_then(|r| r.get(1)).and_then(Value::as_f64).unwrap_or(0.0) as f32;
         (h, s)
     };
-    ui.vertical_centered(|ui| {
-        let (rect, response) = ui.allocate_exact_size(Vec2::splat(diameter), Sense::click_and_drag());
-        let center = rect.center();
-        let radius = diameter * 0.44;
-        let painter = ui.painter();
-        // Subtle dark disc background
-        painter.circle_filled(center, radius, t::INPUT_BG);
-        // 36-segment hue ring around perimeter
-        let segments = 36usize;
-        for seg in 0..segments {
-            let a0 = (seg as f32 / segments as f32) * std::f32::consts::TAU;
-            let a1 = ((seg + 1) as f32 / segments as f32) * std::f32::consts::TAU;
-            let p0 = center + Vec2::new(a0.cos(), a0.sin()) * radius;
-            let p1 = center + Vec2::new(a1.cos(), a1.sin()) * radius;
-            let deg = seg as f32 * (360.0 / segments as f32);
-            painter.line_segment([p0, p1], Stroke::new(3.0, hsv_rgb(deg, 0.82, 0.85)));
-        }
-        // Subtle center crosshair
-        painter.line_segment([center - Vec2::new(4.0, 0.0), center + Vec2::new(4.0, 0.0)], Stroke::new(1.0, t::GROOVE));
-        painter.line_segment([center - Vec2::new(0.0, 4.0), center + Vec2::new(0.0, 4.0)], Stroke::new(1.0, t::GROOVE));
+    ui.allocate_ui_with_layout(
+        Vec2::new(diameter, diameter + 20.0),
+        egui::Layout::top_down(egui::Align::Center),
+        |ui| {
+            let (rect, response) = ui.allocate_exact_size(Vec2::splat(diameter), Sense::click_and_drag());
+            let center = rect.center();
+            let radius = diameter * 0.44;
+            let painter = ui.painter();
+            // Subtle dark disc background
+            painter.circle_filled(center, radius, t::INPUT_BG);
+            // 36-segment hue ring around perimeter
+            let segments = 36usize;
+            for seg in 0..segments {
+                let a0 = (seg as f32 / segments as f32) * std::f32::consts::TAU;
+                let a1 = ((seg + 1) as f32 / segments as f32) * std::f32::consts::TAU;
+                let p0 = center + Vec2::new(a0.cos(), a0.sin()) * radius;
+                let p1 = center + Vec2::new(a1.cos(), a1.sin()) * radius;
+                let deg = seg as f32 * (360.0 / segments as f32);
+                painter.line_segment([p0, p1], Stroke::new(3.0, hsv_rgb(deg, 0.82, 0.85)));
+            }
+            // Subtle center crosshair
+            painter.line_segment(
+                [center - Vec2::new(4.0, 0.0), center + Vec2::new(4.0, 0.0)],
+                Stroke::new(1.0, t::GROOVE),
+            );
+            painter.line_segment(
+                [center - Vec2::new(0.0, 4.0), center + Vec2::new(0.0, 4.0)],
+                Stroke::new(1.0, t::GROOVE),
+            );
 
-        let mut next: Option<(f64, f64)> = None;
-        let mut commit = false;
-        if has_photo {
-            if response.double_clicked() {
-                next = Some((0.0, 0.0));
-                commit = true;
-            } else if response.dragged_by(egui::PointerButton::Primary)
-                || response.clicked_by(egui::PointerButton::Primary)
-            {
-                if let Some(pos) = response.interact_pointer_pos() {
-                    let delta = pos - center;
-                    let dist = (delta.length() / radius).clamp(0.0, 1.0);
-                    let angle = delta.y.atan2(delta.x).to_degrees().rem_euclid(360.0);
-                    next = Some((f64::from(angle.round()), f64::from((dist * 100.0).round())));
+            let mut next: Option<(f64, f64)> = None;
+            let mut commit = false;
+            if has_photo {
+                if response.double_clicked_by(egui::PointerButton::Primary) {
+                    next = Some((0.0, 0.0));
+                    commit = true;
+                } else if response.dragged_by(egui::PointerButton::Primary)
+                    || response.clicked_by(egui::PointerButton::Primary)
+                {
+                    if let Some(pos) = response.interact_pointer_pos() {
+                        let delta = pos - center;
+                        let dist = (delta.length() / radius).clamp(0.0, 1.0);
+                        let angle = delta.y.atan2(delta.x).to_degrees().rem_euclid(360.0);
+                        next = Some((f64::from(angle.round()), f64::from((dist * 100.0).round())));
+                    }
+                    if response.clicked_by(egui::PointerButton::Primary) {
+                        commit = true;
+                    }
                 }
-                if response.clicked_by(egui::PointerButton::Primary) {
+                if response.drag_stopped_by(egui::PointerButton::Primary) {
                     commit = true;
                 }
             }
-            if response.drag_stopped() {
-                commit = true;
+            let (shown_h, shown_s) = match next {
+                Some((h, s)) => (h as f32, s as f32),
+                None => (hue, sat),
+            };
+            let rad = shown_h.to_radians();
+            let dot = center + Vec2::new(rad.cos(), rad.sin()) * (radius * (shown_s / 100.0).clamp(0.0, 1.0));
+            if shown_s > 0.5 {
+                painter.line_segment([center, dot], Stroke::new(1.0, Color32::from_white_alpha(120)));
             }
-        }
-        let (shown_h, shown_s) = match next {
-            Some((h, s)) => (h as f32, s as f32),
-            None => (hue, sat),
-        };
-        let rad = shown_h.to_radians();
-        let dot = center + Vec2::new(rad.cos(), rad.sin()) * (radius * (shown_s / 100.0).clamp(0.0, 1.0));
-        if shown_s > 0.5 {
-            painter.line_segment([center, dot], Stroke::new(1.0, Color32::from_white_alpha(120)));
-        }
-        let tint = if shown_s > 0.5 { hsv_rgb(shown_h, (shown_s / 100.0).clamp(0.2, 1.0), 0.95) } else { t::HANDLE };
-        painter.circle(dot, 4.5, tint, Stroke::new(1.2, Color32::WHITE));
-        widgets::muted(ui, &crate::text::tr(short_title));
+            let tint =
+                if shown_s > 0.5 { hsv_rgb(shown_h, (shown_s / 100.0).clamp(0.2, 1.0), 0.95) } else { t::HANDLE };
+            painter.circle(dot, 4.5, tint, Stroke::new(1.2, Color32::WHITE));
+            widgets::muted(ui, &crate::text::tr(short_title));
 
-        if let Some((h, s)) = next {
-            let mut values = cx.settings().value("grading").clone();
-            if let Some(row) = values.get_mut(index).and_then(Value::as_array_mut) {
-                if row.len() >= 2 {
-                    row[0] = Value::from(h);
-                    row[1] = Value::from(s);
-                    cx.doc.edit_mut().set("grading", values);
-                    cx.before = false;
+            if let Some((h, s)) = next {
+                let mut values = cx.settings().value("grading").clone();
+                if let Some(row) = values.get_mut(index).and_then(Value::as_array_mut) {
+                    if row.len() >= 2 {
+                        row[0] = Value::from(h);
+                        row[1] = Value::from(s);
+                        cx.doc.edit_mut().set("grading", values);
+                        cx.before = false;
+                    }
                 }
             }
-        }
-        if commit && has_photo {
-            cx.doc.edit_mut().commit("보정 변경");
-        }
-    });
+            if commit && has_photo {
+                cx.doc.edit_mut().commit("보정 변경");
+            }
+        },
+    );
 }
 
 fn body(ui: &mut Ui, cx: &mut AppContext) {

@@ -114,9 +114,10 @@ impl Panel for Metadata {
             if Button::new(&tr("현재 보정 복사")).width(width).show(ui).clicked() {
                 cx.run("develop.copy_edits");
             }
-            let mut crop = paste_crop();
+            let mut crop = cx.state::<crate::commands::sync::SyncState>().copy_crop;
             if widgets::checkbox(ui, &mut crop, &tr("붙여넣기에 크롭·회전도 포함")).changed() {
                 set_paste_crop(crop);
+                cx.run_with("sync.copy_crop", &Invocation::value(crop));
             }
             if Button::new(&tr("선택한 사진에 보정 붙여넣기")).width(width).show(ui).clicked() {
                 cx.run("develop.paste_edits");

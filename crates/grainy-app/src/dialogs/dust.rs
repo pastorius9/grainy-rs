@@ -1588,12 +1588,27 @@ impl DustDialog {
             let r = Rect::from_min_max(to_screen(Pos2::ZERO), to_screen(Pos2::new(scene.0, scene.1)));
             painter.image(texture.id(), r, Rect::from_min_max(Pos2::ZERO, Pos2::new(1.0, 1.0)), Color32::WHITE);
         }
-        // Wheel zoom (`wheelEvent`).
+        // Wheel zoom (`wheelEvent`): sum raw MouseWheel events so trackpads and mice scale smoothly without
+        // repeating fixed multipliers across multi-frame smoothing decay.
         if response.hovered() {
-            let scroll = ui.input(|i| i.smooth_scroll_delta.y);
-            if scroll != 0.0 {
+            let scroll: f32 = ui.input(|i| {
+                i.events
+                    .iter()
+                    .filter_map(|e| match e {
+                        egui::Event::MouseWheel { unit, delta, .. } if delta.y != 0.0 => {
+                            let step = match unit {
+                                egui::MouseWheelUnit::Point => delta.y / 50.0,
+                                egui::MouseWheelUnit::Line | egui::MouseWheelUnit::Page => delta.y,
+                            };
+                            Some(step)
+                        }
+                        _ => None,
+                    })
+                    .sum()
+            });
+            if scroll.abs() > 0.0 {
                 let mut d = shared.borrow_mut();
-                let factor = if scroll > 0.0 { 1.2 } else { 1.0 / 1.2 };
+                let factor = 1.2_f32.powf(scroll.clamp(-3.0, 3.0));
                 d.view.fitted = false;
                 if (0.015..16.0).contains(&(d.view.zoom * factor)) {
                     // AnchorUnderMouse: the scene point under the pointer stays.

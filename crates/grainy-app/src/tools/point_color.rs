@@ -441,6 +441,7 @@ pub fn start(cx: &mut AppContext) {
     }
     cx.wb_picker = false;
     cx.state::<TargetedAdjust>().stop();
+    crate::tools::guides::stop(cx);
     let state = state(cx);
     state.generation += 1;
     state.picking = true;

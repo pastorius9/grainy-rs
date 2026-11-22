@@ -66,7 +66,7 @@ fn adjustment_key(event: &Event) -> Option<(Key, bool)> {
         return None;
     }
     match key {
-        Key::ArrowUp | Key::ArrowDown | Key::Plus | Key::Minus => Some((*key, modifiers.shift)),
+        Key::ArrowUp | Key::ArrowDown | Key::Plus | Key::Equals | Key::Minus => Some((*key, modifiers.shift)),
         Key::Period | Key::Comma if !modifiers.shift => Some((*key, false)),
         _ => None,
     }
@@ -110,7 +110,7 @@ pub(crate) fn route(ctx: &Context) {
                 }
                 _ => {
                     let Some(n) = selected else { return true };
-                    let direction = if matches!(key, Key::ArrowUp | Key::Plus) { 1 } else { -1 };
+                    let direction = if matches!(key, Key::ArrowUp | Key::Plus | Key::Equals) { 1 } else { -1 };
                     nudges.push((rows.ids[n], direction * if shift { 10 } else { 1 }));
                 }
             }

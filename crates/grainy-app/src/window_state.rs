@@ -113,7 +113,7 @@ impl WindowState {
         state.size =
             pair(map.get("size")).map(|[w, h]| [w.clamp(MIN_SIZE[0], 16_000.0), h.clamp(MIN_SIZE[1], 16_000.0)]);
         state.position = pair(map.get("position"))
-            .filter(|[x, y]| (-16_000.0..=32_000.0).contains(x) && (-100.0..=32_000.0).contains(y));
+            .filter(|[x, y]| (-16_000.0..=32_000.0).contains(x) && (-16_000.0..=32_000.0).contains(y));
         let flag = |key: &str, default: bool| map.get(key).and_then(Value::as_bool).unwrap_or(default);
         state.maximized = flag("maximized", false);
         state.full_screen = flag("full_screen", false);

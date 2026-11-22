@@ -239,6 +239,15 @@ pub struct CatalogDocument {
     history: Vec<HistoryEntry>,
     /// The open photo's commits not yet handed to Auto Sync.
     commits: Vec<(u64, Commit)>,
+    prune_thread: Option<std::thread::JoinHandle<()>>,
+}
+
+impl Drop for CatalogDocument {
+    fn drop(&mut self) {
+        if let Some(handle) = self.prune_thread.take() {
+            let _ = handle.join();
+        }
+    }
 }
 
 impl CatalogDocument {
@@ -334,22 +343,28 @@ impl CatalogDocument {
             crate::paths::writable(&folder.join(name)).map_err(err)?;
         }
         std::fs::create_dir_all(folder).map_err(err)?;
-        let doc = Self::with_catalog(Catalog::new(folder).map_err(err)?)?;
-        if !crate::context::FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed) {
+        let mut doc = Self::with_catalog(Catalog::new(folder).map_err(err)?)?;
+        let has_cache_files = ["thumbnails", "previews"].iter().any(|sub| {
+            std::fs::read_dir(folder.join(sub)).ok().is_some_and(|mut it| it.next().is_some())
+        });
+        if has_cache_files && !crate::context::FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed) {
             let dir = folder.to_path_buf();
-            let _ = std::thread::Builder::new().name("grainy-cache-prune".into()).spawn(move || {
-                if let Ok(stats) =
-                    grainy_catalog::preview::prune_cache(&dir, grainy_catalog::preview::DEFAULT_CACHE_LIMIT_BYTES)
-                {
-                    if stats.removed_files > 0 {
-                        log::info!(
-                            "pruned {} stale/LRU cache files ({:.1} MiB freed)",
-                            stats.removed_files,
-                            stats.freed_bytes as f64 / (1024.0 * 1024.0)
-                        );
+            doc.prune_thread = std::thread::Builder::new()
+                .name("grainy-cache-prune".into())
+                .spawn(move || {
+                    if let Ok(stats) =
+                        grainy_catalog::preview::prune_cache(&dir, grainy_catalog::preview::DEFAULT_CACHE_LIMIT_BYTES)
+                    {
+                        if stats.removed_files > 0 {
+                            log::info!(
+                                "pruned {} stale/LRU cache files ({:.1} MiB freed)",
+                                stats.removed_files,
+                                stats.freed_bytes as f64 / (1024.0 * 1024.0)
+                            );
+                        }
                     }
-                }
-            });
+                })
+                .ok();
         }
         Ok(doc)
     }
@@ -441,6 +456,7 @@ impl CatalogDocument {
             overlay: HashMap::new(),
             history: Vec::new(),
             commits: Vec::new(),
+            prune_thread: None,
         }
     }
 

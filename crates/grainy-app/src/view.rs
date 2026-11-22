@@ -86,12 +86,19 @@ impl AppContext {
         let (zoom_delta, pointer) = ui.input(|i| (i.zoom_delta(), i.pointer.hover_pos()));
         if response.hovered() && (zoom_delta - 1.0).abs() > 1e-4 {
             if let Some(pointer) = pointer {
-                let new = (scale * zoom_delta).clamp(fit.min(1.0 / ppp), MAX_ZOOM / ppp);
-                let centre = area.center() + self.pan;
-                let at = (pointer - centre) / scale;
-                self.pan = pointer - at * new - area.center();
-                self.zoom = Zoom::Scale(new);
-                scale = new;
+                let min_scale = fit.min(1.0 / ppp);
+                let new = (scale * zoom_delta).clamp(min_scale, MAX_ZOOM / ppp);
+                if zoom_delta < 1.0 && new <= fit + 1e-4 {
+                    self.zoom = Zoom::Fit;
+                    self.pan = Vec2::ZERO;
+                    scale = fit;
+                } else {
+                    let centre = area.center() + self.pan;
+                    let at = (pointer - centre) / scale;
+                    self.pan = pointer - at * new - area.center();
+                    self.zoom = Zoom::Scale(new);
+                    scale = new;
+                }
             }
         }
         // macOS: a trackpad scroll moves the photo (the oracle's `wheelEvent` there); pinching zooms (above).
@@ -110,13 +117,13 @@ impl AppContext {
         // The open tool takes the pointer first (in frame coordinates); otherwise a drag pans.
         let view = ViewTransform { rect: self.photo_rect.unwrap_or(area) };
         let used = self.doc.current().is_some() && tools::dispatch(ui, &response, &view, self, tools);
-        if self.zoom != Zoom::Fit && response.dragged() && !used {
+        if self.zoom != Zoom::Fit && response.dragged_by(egui::PointerButton::Primary) && !used {
             self.pan += response.drag_delta();
         }
         // Keep the photo covering the view when it is larger, centred when smaller.
         let limit = ((shown - area.size()) / 2.0).max(Vec2::ZERO);
         self.pan = self.pan.clamp(-limit, limit);
-        if response.double_clicked() && !used {
+        if response.double_clicked_by(egui::PointerButton::Primary) && !used {
             self.run("view.zoom_toggle");
         }
         // Whole device pixels at the top left, so 1:1 shows each photo pixel on one screen pixel.
@@ -176,7 +183,7 @@ impl AppContext {
             painter.image(*tile_id, tile_rect, uv, Color32::WHITE);
         }
         self.clipping_overlay(ui, &painter, rect);
-        self.update_cursor_rgb(ui, rect);
+        self.update_cursor_rgb(ui, rect, response.hovered() && !self.modal_open());
         if self.soft_proof.enabled && self.doc.current().is_some() {
             let label = if self.soft_proof.gamut_warning {
                 crate::text::tr_with("소프트 프루핑 · {0} (색역 경고)", &[&self.soft_proof.target])
@@ -201,9 +208,10 @@ impl AppContext {
     }
 
     /// Samples the live pixel RGB % (0..100) under the pointer for the Histogram readout.
-    fn update_cursor_rgb(&mut self, ui: &Ui, rect: Rect) {
-        let pointer = ui
-            .input(|i| i.pointer.hover_pos())
+    fn update_cursor_rgb(&mut self, ui: &Ui, rect: Rect, hovered: bool) {
+        let pointer = hovered
+            .then(|| ui.input(|i| i.pointer.hover_pos()))
+            .flatten()
             .filter(|p| rect.contains(*p) && rect.width() > 0.0 && rect.height() > 0.0);
         let (Some(pos), Some(frame)) = (pointer, self.frame.clone()) else {
             self.cursor_rgb = None;
@@ -516,15 +524,21 @@ impl AppContext {
     fn library_toolbar(&mut self, ui: &mut Ui) {
         ui.spacing_mut().item_spacing.y = 8.0;
         let query = self.doc.query();
-        let source = match &query.folder {
-            Some(folder) => std::path::Path::new(folder)
+        let source = if let Some(cid) = query.collection {
+            self.doc
+                .collections()
+                .iter()
+                .find(|c| c.id == cid)
+                .map(|c| c.name.clone())
+                .unwrap_or_else(|| tr("컬렉션"))
+        } else if let Some(folder) = &query.folder {
+            std::path::Path::new(folder)
                 .file_name()
-                .map_or_else(|| folder.clone(), |n| n.to_string_lossy().into_owned()),
-            None => {
-                let filter =
-                    crate::context::FILTERS.iter().find(|(m, _)| *m == query.mode).map_or("모든 사진", |(_, l)| *l);
-                tr(filter)
-            }
+                .map_or_else(|| folder.clone(), |n| n.to_string_lossy().into_owned())
+        } else {
+            let filter =
+                crate::context::FILTERS.iter().find(|(m, _)| *m == query.mode).map_or("모든 사진", |(_, l)| *l);
+            tr(filter)
         };
         let count = if self.doc.listing_pending() {
             tr("불러오는 중…")
@@ -583,6 +597,16 @@ impl AppContext {
             let count = self.doc.len();
             let rows = count.div_ceil(columns);
             let (area, _) = ui.allocate_exact_size(Vec2::new(width, 8.0 + rows as f32 * step.y), Sense::hover());
+            if std::mem::take(&mut self.scroll_to_current) {
+                if let Some(target_idx) = self.selection_cursor.or_else(|| self.doc.current_index()) {
+                    let target_offset = Vec2::new(
+                        8.0 + (target_idx % columns) as f32 * step.x,
+                        8.0 + (target_idx / columns) as f32 * step.y,
+                    );
+                    let target_rect = Rect::from_min_size(area.min + target_offset, GRID_CELL);
+                    ui.scroll_to_rect(target_rect, None);
+                }
+            }
             let clip = ui.clip_rect();
             let first = ((clip.top() - area.top() - 8.0) / step.y).floor().max(0.) as usize;
             let end = ((clip.bottom() - area.top() - 8.0) / step.y).floor().max(0.) as usize + 1;

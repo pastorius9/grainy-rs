@@ -519,7 +519,7 @@ impl PictureView {
                 scale = new;
             }
         }
-        if self.zoom.is_some() && response.dragged() {
+        if self.zoom.is_some() && response.dragged_by(egui::PointerButton::Primary) {
             self.pan += response.drag_delta();
         }
         let shown = size * scale;

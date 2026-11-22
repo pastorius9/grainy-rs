@@ -22,7 +22,11 @@ fn rotate(cx: &mut AppContext, invocation: &Invocation) {
 }
 
 fn crop(cx: &mut AppContext, _: &Invocation) {
-    cx.open_tool(Tool::Crop);
+    if cx.tool() == Tool::Crop && !crate::tools::crop::is_open(cx) {
+        crate::tools::crop::toggle(cx);
+    } else {
+        cx.open_tool(Tool::Crop);
+    }
 }
 
 fn heal(cx: &mut AppContext, _: &Invocation) {

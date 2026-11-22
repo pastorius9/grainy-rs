@@ -58,6 +58,7 @@ impl AppContext {
             if let Some(slot) = slot {
                 *slot = Value::from(new);
                 self.doc.edit_mut().set(spec.key, list);
+                self.before = false;
             }
         }
         if event.commit {
@@ -72,6 +73,7 @@ impl AppContext {
             let edit = self.doc.edit_mut();
             edit.set(key, value);
             edit.commit("보정 변경");
+            self.before = false;
         }
     }
 }

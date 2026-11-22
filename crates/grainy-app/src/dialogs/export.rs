@@ -240,6 +240,10 @@ impl Dialog for QuickFolder {
         "export_quick_folder"
     }
 
+    fn modal(&self) -> bool {
+        false
+    }
+
     fn show(&mut self, _ctx: &egui::Context, cx: &mut AppContext) -> bool {
         match self.answer.try_recv() {
             Ok(chosen) => {

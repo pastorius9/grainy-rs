@@ -44,13 +44,15 @@ impl AppContext {
         let width = ui.available_width();
         let query = self.doc.query();
         for (mode, label) in FILTERS {
-            let checked = query.mode == mode && (mode != "all" || query.folder.is_none());
+            let checked =
+                query.mode == mode && (mode != "all" || (query.folder.is_none() && query.collection.is_none()));
             if Button::new(&tr(label)).kind(Kind::Nav).checked(checked).width(width).show(ui).clicked() {
-                // Port of `set_filter`: "all" also leaves the folder.
+                // Port of `set_filter`: "all" also leaves the folder and collection.
                 self.change_query(|q| {
                     q.mode = mode.to_owned();
                     if mode == "all" {
                         q.folder = None;
+                        q.collection = None;
                     }
                 });
                 self.set_mode(Mode::Library);

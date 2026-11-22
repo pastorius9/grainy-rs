@@ -159,6 +159,11 @@ impl DisplayState {
         self.configurations
     }
 
+    /// Whether a display profile check is queued or running.
+    pub(crate) fn busy(&self) -> bool {
+        self.running || self.wanted
+    }
+
     /// `DisplayTarget.schedule`.
     fn schedule(&mut self) {
         self.generation += 1;

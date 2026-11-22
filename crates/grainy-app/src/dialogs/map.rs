@@ -414,25 +414,35 @@ impl MapDialog {
             self.view = MapView::fit(rect.size());
             self.fitted = true;
         }
-        if response.dragged() {
+        if response.dragged_by(egui::PointerButton::Primary) {
             self.view.pan(rect.size(), response.drag_delta());
             ui.ctx().set_cursor_icon(egui::CursorIcon::Grabbing);
         } else if response.hovered() {
             ui.ctx().set_cursor_icon(egui::CursorIcon::Grab);
         }
         if let Some(pos) = response.hover_pos() {
-            // One step for each wheel event (`angleDelta().y()` of a notch).
-            let wheel: Vec<f32> = ui.input(|i| {
+            // Sum wheel scroll per frame and cap step count so high-frequency trackpad pixel events
+            // zoom smoothly instead of jumping across many zoom levels in a single swipe.
+            let scroll_y: f32 = ui.input(|i| {
                 i.events
                     .iter()
                     .filter_map(|e| match e {
-                        egui::Event::MouseWheel { delta, .. } if delta.y != 0.0 => Some(delta.y),
+                        egui::Event::MouseWheel { unit, delta, .. } if delta.y != 0.0 => {
+                            let step = match unit {
+                                egui::MouseWheelUnit::Point => delta.y / 50.0,
+                                egui::MouseWheelUnit::Line | egui::MouseWheelUnit::Page => delta.y,
+                            };
+                            Some(step)
+                        }
                         _ => None,
                     })
-                    .collect()
+                    .sum()
             });
-            for delta in wheel {
-                self.view.zoom(rect.size(), pos - rect.center(), delta > 0.0);
+            if scroll_y.abs() >= 0.25 {
+                let steps = scroll_y.abs().round().clamp(1.0, 2.0) as usize;
+                for _ in 0..steps {
+                    self.view.zoom(rect.size(), pos - rect.center(), scroll_y > 0.0);
+                }
             }
             if let Some(i) = self.view.marker_at(rect, &self.points, pos) {
                 response.clone().on_hover_text(self.points[i].tip());

@@ -318,6 +318,7 @@ pub fn keyword_groups(catalog: &Catalog) -> Result<Vec<(String, usize)>, String>
 /// keyword (the filter rules become `{'keywords': path}`, no collection, no folder) in the grid.
 pub fn filter_keyword(cx: &mut AppContext, path: &str) {
     let mut query = cx.doc.query();
+    query.mode = "all".to_owned();
     query.rules = json!({ "keywords": path });
     query.collection = None;
     query.folder = None;

@@ -257,30 +257,36 @@ pub fn show(ui: &mut Ui, editor: &mut CurveEditor, points: &[[f64; 2]], hdr: boo
     let local = |pos: Pos2| [f64::from(pos.x - rect.left()), f64::from(pos.y - rect.top())];
     let mut signals = Vec::new();
     let hovered = response.contains_pointer();
-    let events = ui.input(|i| i.events.clone());
+    let (events, any_down, modifiers) = ui.input(|i| (i.events.clone(), i.pointer.any_down(), i.modifiers));
     for event in events {
         match event {
             Event::PointerButton { pos, button, pressed: true, modifiers } => {
                 if !(hovered && rect.contains(pos)) {
                     continue;
                 }
-                editor.grabbed = true;
                 let button = match button {
                     PointerButton::Primary => Button::Left,
                     PointerButton::Secondary => Button::Right,
                     _ => continue,
                 };
+                editor.grabbed = button == Button::Left;
                 signals.extend(model.press(button, local(pos), modifiers.command));
             }
             Event::PointerMoved(pos) if editor.grabbed => signals.extend(model.drag(local(pos))),
-            Event::PointerButton { pressed: false, .. } if editor.grabbed => {
+            Event::PointerButton { button: PointerButton::Primary, pressed: false, .. } | Event::PointerGone
+                if editor.grabbed =>
+            {
                 editor.grabbed = false;
                 signals.extend(model.release());
             }
             _ => {}
         }
     }
-    if response.double_clicked() {
+    if editor.grabbed && !any_down {
+        editor.grabbed = false;
+        signals.extend(model.release());
+    }
+    if response.double_clicked_by(PointerButton::Primary) && !modifiers.any() {
         signals.extend(model.double_click());
     }
     paint(ui, rect, model);

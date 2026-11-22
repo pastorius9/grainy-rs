@@ -174,8 +174,15 @@ impl EditState {
     }
 
     /// Port of `undo`.
+    /// When uncommitted live changes exist (e.g. mid-drag), undo directly restores `last_saved`
+    /// without pushing a bogus commit to `self.commits` (so Auto Sync never broadcasts undone edits).
     pub fn undo(&mut self) -> bool {
-        self.commit("보정 변경");
+        if self.dirty() {
+            let previous = self.last_saved.clone();
+            self.redo.push(self.settings.clone());
+            self.restore(previous);
+            return true;
+        }
         let Some(previous) = self.undo.pop() else { return false };
         self.redo.push(self.settings.clone());
         self.restore(previous);

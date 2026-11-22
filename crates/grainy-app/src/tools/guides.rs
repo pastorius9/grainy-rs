@@ -126,6 +126,7 @@ pub fn start(cx: &mut AppContext) {
         }
         cx.wb_picker = false;
         cx.state::<TargetedAdjust>().stop();
+        crate::tools::point_color::stop(cx);
         let photo = cx.doc.current_id();
         let s = st(cx);
         s.on.set(true);
@@ -135,6 +136,13 @@ pub fn start(cx: &mut AppContext) {
         s.photo = photo;
     }
     cx.set_status(tr("좌상 → 우상 → 우하 → 좌하 순으로 클릭하세요."));
+}
+
+/// Silently cancels the guide tool when another canvas picker activates.
+pub fn stop(cx: &mut AppContext) {
+    let s = st(cx);
+    s.on.set(false);
+    s.stroke.clear();
 }
 
 /// Port of `mode('')` from the guide tool: the tool ends.

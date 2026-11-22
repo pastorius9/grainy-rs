@@ -458,6 +458,7 @@ pub fn rename_layer(cx: &mut AppContext, text: &str) {
         return;
     }
     layer_property(cx, "name", Value::from(text));
+    commit(cx, "보정 변경");
 }
 
 /// Port of `remove_layer`.

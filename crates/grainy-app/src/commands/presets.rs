@@ -439,7 +439,6 @@ fn store_job<T: Send + 'static>(
                 done(cx, value);
             }
             Err(message) => {
-                cx.state::<PresetState>().loaded_for = None;
                 preset_review::show_error(cx, &message);
             }
         },

@@ -313,6 +313,7 @@ fn tree(ui: &mut Ui, cx: &mut AppContext, action: &mut Option<Action>) {
 fn rename_box(ui: &mut Ui, cx: &mut AppContext) {
     let Some(mut text) = actions::state(cx).rename.clone() else { return };
     let mut answer = None;
+    let init_id = egui::Id::unique("mask_rename_init");
     let response =
         egui::Modal::new(egui::Id::unique("mask_rename")).frame(crate::dialogs::frame()).show(ui.ctx(), |ui| {
             ui.set_width(320.0);
@@ -320,6 +321,10 @@ fn rename_box(ui: &mut Ui, cx: &mut AppContext) {
             ui.add_space(6.0);
             widgets::label(ui, &tr("이름"), t::TEXT, t::FONT_SIZE);
             let edit = ui.add(egui::TextEdit::singleline(&mut text).desired_width(f32::INFINITY));
+            if !ui.ctx().data(|d| d.get_temp::<bool>(init_id).unwrap_or(false)) {
+                edit.request_focus();
+                ui.ctx().data_mut(|d| d.insert_temp(init_id, true));
+            }
             if edit.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter)) {
                 answer = Some(true);
             }
@@ -339,24 +344,22 @@ fn rename_box(ui: &mut Ui, cx: &mut AppContext) {
     }
     match answer {
         Some(true) => {
+            ui.ctx().data_mut(|d| d.remove::<bool>(init_id));
             actions::state(cx).rename = None;
             actions::rename_layer(cx, &text);
             actions::state(cx).rename = None;
         }
-        Some(false) => actions::state(cx).rename = None,
+        Some(false) => {
+            ui.ctx().data_mut(|d| d.remove::<bool>(init_id));
+            actions::state(cx).rename = None;
+        }
         None => actions::state(cx).rename = Some(text),
     }
 }
 
 fn body(ui: &mut Ui, cx: &mut AppContext) {
-    // Leaving the tool ends its mode (`tab_changed` → `set_tool('')`): noticed when the panel shows again.
-    let pass = cx.egui.cumulative_pass_nr();
-    let gap = actions::state(cx).seen + 1 < pass;
-    actions::state(cx).seen = pass;
+    actions::state(cx).seen = cx.egui.cumulative_pass_nr();
     actions::sync(cx);
-    if gap && actions::state(cx).mode != Mode::None {
-        actions::set_tool(cx, Mode::None);
-    }
     overlay::refresh(cx);
     let width = ui.available_width();
     let photo = cx.doc.current().is_some();
@@ -479,7 +482,7 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
     // The selected mask's adjustments.
     if let Some(layer) = &layer {
         let opacity = layer.get("opacity").and_then(Value::as_f64).unwrap_or(1.0);
-        let (set, commit) = row(ui, &spec("opacity", "양", 0.0, 100.0, 1.0, 0.0), opacity * 100.0, true);
+        let (set, commit) = row(ui, &spec("opacity", "양", 0.0, 100.0, 1.0, 100.0), opacity * 100.0, true);
         if let Some(value) = set {
             actions::pause_overlay(cx);
             actions::layer_property(cx, "opacity", Value::from(value / 100.0));

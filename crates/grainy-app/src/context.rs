@@ -355,6 +355,15 @@ impl AppContext {
         self.thumbs.clear();
         self.thumbs_asked.clear();
         self.wanted = None;
+        self.photo_rect = None;
+        self.selection_cursor = None;
+        if let Some(sync) = self.state_ref::<crate::commands::sync::SyncState>() {
+            let _ = sync;
+            self.state::<crate::commands::sync::SyncState>().reset_document();
+        }
+        if self.state_ref::<crate::views::compare::Compare>().is_some_and(|c| c.on) {
+            *self.state::<crate::views::compare::Compare>() = Default::default();
+        }
         self.photo_changed();
         true
     }
@@ -446,6 +455,9 @@ impl AppContext {
 
     /// Port of `set_mode`.
     pub fn set_mode(&mut self, mode: Mode) {
+        if self.mode == Mode::Develop && mode != Mode::Develop && self.tool == Tool::Masks {
+            self.leave_masks_mode();
+        }
         self.mode = mode;
     }
 
@@ -640,6 +652,7 @@ impl AppContext {
         edit.commit("보정 변경");
         edit.set(key, value);
         edit.commit(label);
+        self.before = false;
     }
 
     /// A button that is not wired yet: logs it.
@@ -668,6 +681,7 @@ impl AppContext {
         edit.set("crop", serde_json::Value::Null);
         edit.set("rotation", (rotation + if clockwise { 1 } else { 3 }) % 4);
         edit.commit("보정 변경");
+        self.before = false;
         self.pan = Vec2::ZERO;
     }
 
@@ -686,6 +700,7 @@ impl AppContext {
             }
         }
         edit.commit("필름");
+        self.before = false;
     }
 
     /// The largest centred crop with `ratio` (width / height) on the rotated photo (what `set_aspect` makes of a
@@ -699,15 +714,28 @@ impl AppContext {
         }
     }
 
+    fn leave_masks_mode(&mut self) {
+        if self.state_ref::<crate::masks::MaskState>().is_some_and(|s| s.mode != crate::masks::Mode::None) {
+            crate::masks::actions::set_tool(self, crate::masks::Mode::None);
+        }
+    }
+
     /// Port of `DevelopPanels.select_tool`: a second click on an open tool goes back to the panels.
     pub(crate) fn select_tool(&mut self, tool: Tool) {
         self.wb_picker = false;
-        self.tool = if tool == self.tool { Tool::Edit } else { tool };
+        let next = if tool == self.tool { Tool::Edit } else { tool };
+        if self.tool == Tool::Masks && next != Tool::Masks {
+            self.leave_masks_mode();
+        }
+        self.tool = next;
     }
 
     /// A tool's key: opens the tool (`open_tool`), in the Develop screen.
     pub fn open_tool(&mut self, tool: Tool) {
         self.set_mode(Mode::Develop);
+        if self.tool == Tool::Masks && tool != Tool::Masks {
+            self.leave_masks_mode();
+        }
         self.tool = tool;
     }
 
@@ -715,11 +743,17 @@ impl AppContext {
     pub(crate) fn toggle_panel(&mut self, key: &'static str, expanded: bool) {
         if crate::panels::TOOLS.contains(&key) {
             if !expanded {
+                if self.tool == Tool::Masks {
+                    self.leave_masks_mode();
+                }
                 self.tool = Tool::Edit;
             }
             return;
         }
         if expanded {
+            if self.tool == Tool::Masks {
+                self.leave_masks_mode();
+            }
             self.tool = Tool::Edit;
             if self.solo {
                 self.expanded.clear();

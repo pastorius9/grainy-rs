@@ -235,7 +235,7 @@ impl AppContext {
         ui.menu_button(crate::text::tr("소프트 프루핑"), |ui| {
             let mut proof = self.soft_proof.clone();
             let mut changed = false;
-            if entry(ui, &crate::text::tr("끄기"), "", true, Some(!proof.enabled)) {
+            if entry(ui, &crate::text::tr("소프트 프루핑 끄기"), "", true, Some(!proof.enabled)) {
                 proof.enabled = false;
                 changed = true;
             }

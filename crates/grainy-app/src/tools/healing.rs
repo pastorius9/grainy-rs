@@ -712,7 +712,7 @@ pub fn key(cx: &mut AppContext, key: Key) -> bool {
         Key::Escape => {
             if !st(cx).points.is_empty() {
                 view_cancel_stroke(cx);
-            } else if mode == HEAL && st(cx).overlay.is_some() {
+            } else if mode == HEAL && (!st(cx).staged.is_empty() || st(cx).overlay.is_some()) {
                 clear_healing(cx);
             } else {
                 set_tool(cx, None);

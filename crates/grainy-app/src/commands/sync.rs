@@ -87,6 +87,14 @@ impl Default for SyncState {
 }
 
 impl SyncState {
+    /// Clears document-scoped photo IDs when switching libraries.
+    pub fn reset_document(&mut self) {
+        self.previous = None;
+        self.seen = 0;
+        self.syncing = false;
+        self.local_commits.clear();
+    }
+
     /// Port of `copy_crop_changed`: the crop keys join or leave the copy set.
     pub fn set_copy_crop(&mut self, on: bool) {
         self.copy_crop = on;
@@ -310,6 +318,7 @@ pub fn paste(cx: &mut AppContext) {
             return;
         }
     }
+    cx.before = false;
     cx.status = tr_with("{0}장에 보정값을 적용했습니다.", &[&ids.len().to_string()]);
 }
 

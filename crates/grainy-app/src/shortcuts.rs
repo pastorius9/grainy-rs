@@ -46,10 +46,12 @@ impl Chord {
     fn matches(&self, key: Key, modifiers: Modifiers) -> bool {
         if self.key == Key::Slash && self.shift && !self.command {
             // "?" arrives as Questionmark on most layouts, or as Shift+/.
-            return (key == Key::Questionmark && !modifiers.command)
-                || (key == Key::Slash && modifiers.shift && !modifiers.command);
+            let no_cmd = !modifiers.command && !modifiers.ctrl && !modifiers.alt;
+            return (key == Key::Questionmark && no_cmd) || (key == Key::Slash && modifiers.shift && no_cmd);
         }
+        let extra_ctrl = !self.command && modifiers.ctrl;
         key == self.key
+            && !extra_ctrl
             && modifiers.command == self.command
             && modifiers.shift == self.shift
             && modifiers.alt == self.alt
@@ -90,8 +92,15 @@ impl AppContext {
     /// list. Port of `safe_shortcut` and `ScreenModes.leave` (Esc leaves full screen).
     pub(crate) fn handle_shortcuts(&mut self) {
         let ctx = self.egui.clone();
-        if ctx.input(|i| i.key_pressed(Key::Escape)) && !ctx.text_edit_focused() && self.dialogs.is_empty() {
-            crate::commands::settings::leave(self);
+        if ctx.input(|i| i.key_pressed(Key::Escape))
+            && !ctx.text_edit_focused()
+            && !egui::Popup::is_any_open(&ctx)
+            && self.dialogs.is_empty()
+            && crate::commands::settings::leave(self)
+        {
+            ctx.input_mut(|i| {
+                i.events.retain(|e| !matches!(e, Event::Key { key: Key::Escape, pressed: true, .. }));
+            });
         }
         if self.modal_open() {
             return;
@@ -146,6 +155,7 @@ impl AppContext {
                         let target = base.saturating_add_signed(step).min(self.doc.len() - 1);
                         self.doc.select_range(target, false);
                         self.selection_cursor = Some(target);
+                        self.scroll_to_current = true;
                     }
                 } else if let Some(current) = self.doc.current_index() {
                     let target = current.saturating_add_signed(step).min(self.doc.len() - 1);

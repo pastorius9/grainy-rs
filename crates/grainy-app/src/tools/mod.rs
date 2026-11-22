@@ -141,14 +141,27 @@ pub fn dispatch(
     let Some(tool) = tools.iter_mut().find(|t| t.active(cx)) else { return false };
     let modifiers = ui.input(|i| i.modifiers);
     let mut used = false;
-    let position = response.interact_pointer_pos().or_else(|| response.hover_pos());
+    let last_pos_id = egui::Id::unique("canvas_tool_last_pos");
+    let raw_pos = response
+        .interact_pointer_pos()
+        .or_else(|| response.hover_pos())
+        .or_else(|| ui.input(|i| i.pointer.latest_pos()));
+    if let Some(pos) = raw_pos {
+        ui.ctx().data_mut(|d| d.insert_temp(last_pos_id, pos));
+    }
+    let position = raw_pos.or_else(|| ui.ctx().data(|d| d.get_temp::<Pos2>(last_pos_id)));
     if let Some(screen) = position {
+        let press = response.drag_started_by(egui::PointerButton::Primary);
+        let drag = response.dragged_by(egui::PointerButton::Primary) && !press;
+        let release = response.drag_stopped_by(egui::PointerButton::Primary);
+        let click = response.clicked_by(egui::PointerButton::Primary);
+        let hover = response.hovered() && !response.dragged_by(egui::PointerButton::Primary) && raw_pos.is_some();
         let kinds = [
-            (response.drag_started(), PointerKind::Press),
-            (response.dragged() && !response.drag_started(), PointerKind::Drag),
-            (response.drag_stopped(), PointerKind::Release),
-            (response.clicked(), PointerKind::Click),
-            (response.hovered() && !response.dragged(), PointerKind::Hover),
+            (press, PointerKind::Press),
+            (drag, PointerKind::Drag),
+            (release, PointerKind::Release),
+            (click, PointerKind::Click),
+            (hover, PointerKind::Hover),
         ];
         for (happened, kind) in kinds {
             if happened {
@@ -168,17 +181,19 @@ pub fn dispatch(
             }
         }
     }
-    let keys: Vec<Key> = ui.input(|i| {
-        i.events
-            .iter()
-            .filter_map(|e| match e {
-                egui::Event::Key { key, pressed: true, .. } => Some(*key),
-                _ => None,
-            })
-            .collect()
-    });
-    for key in keys {
-        tool.key(key, modifiers, cx);
+    if !cx.modal_open() && !ui.ctx().text_edit_focused() && !egui::Popup::is_any_open(ui.ctx()) {
+        let keys: Vec<Key> = ui.input(|i| {
+            i.events
+                .iter()
+                .filter_map(|e| match e {
+                    egui::Event::Key { key, pressed: true, .. } => Some(*key),
+                    _ => None,
+                })
+                .collect()
+        });
+        for key in keys {
+            tool.key(key, modifiers, cx);
+        }
     }
     used
 }

@@ -21,6 +21,7 @@ pub struct DisplayDialog {
     path: String,
     /// The text set by 적용 / a refusal, until the monitor's state changes (`update_status`).
     notice: Option<String>,
+    checking: bool,
     seen_changes: u64,
     seen_configurations: u64,
 }
@@ -33,6 +34,7 @@ impl DisplayDialog {
             mode: state.mode.clone(),
             path: state.path.clone(),
             notice: None,
+            checking: false,
             seen_changes: state.changes(),
             seen_configurations: state.configurations(),
         }
@@ -78,6 +80,7 @@ impl DisplayDialog {
         let path = self.path.trim().to_owned();
         if self.mode == "manual" && path.is_empty() {
             self.notice = Some(tr("먼저 화면용 RGB ICC 파일을 선택하세요."));
+            self.checking = false;
             return;
         }
         if display::configure(cx, &self.mode.clone(), &path).is_ok() {
@@ -85,6 +88,7 @@ impl DisplayDialog {
             self.path = path;
             self.seen_configurations = cx.state::<DisplayState>().configurations();
             self.notice = Some(tr("화면 프로파일을 확인하고 있습니다…"));
+            self.checking = true;
         }
     }
 
@@ -104,6 +108,10 @@ impl DisplayDialog {
         if state.changes() != self.seen_changes {
             self.seen_changes = state.changes();
             self.notice = None;
+            self.checking = false;
+        } else if self.checking && !state.busy() {
+            self.notice = None;
+            self.checking = false;
         }
         if let Some(path) = state.chosen.take() {
             self.path = path.to_string_lossy().into_owned();

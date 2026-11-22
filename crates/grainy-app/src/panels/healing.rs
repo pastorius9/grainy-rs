@@ -65,9 +65,10 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
         cx.run("heal.detect_dust_batch");
     }
     widgets::muted(ui, &tr("검은 점과 흰 먼지를 찾아, 확인한 후보만 한 번에 제거합니다."));
+    let active_mode = cx.state::<HealingState>().mode;
     for (title, kind) in TOOLS {
         let text = tr(title);
-        let response = Button::new(&text).width(width).show(ui);
+        let response = Button::new(&text).checked(active_mode == Some(kind)).width(width).show(ui);
         let response =
             if kind == healing::HEAL { response.on_hover_text(format!("{text} ({})", hint("Q"))) } else { response };
         if response.clicked() {
