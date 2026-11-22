@@ -12,7 +12,7 @@ use crate::mapping;
 use crate::num::{clip, maximum, owned, pixels_mut, round_half_even, rows_mut, Float};
 use crate::response::{self, luma, ToneBase, ToneLocal, MAP_SIZE};
 use crate::srgb::to_srgb_value;
-use crate::{Error, FilmRender, Result};
+use crate::{v4, Error, FilmRender, Result};
 
 /// `SHOULDER_KNEE`: linear values below are never changed by the highlight roll-off.
 pub const SHOULDER_KNEE: f64 = 0.5;
@@ -69,10 +69,7 @@ fn check(a: &ArrayView3<'_, f32>) -> Result<()> {
     }
 }
 
-/// Port of luma/engine.py `_tone_encoded`: exposure, white balance, lens vignette lift and the highlight roll-off
-/// (or the DRT) on linear pixels, then sRGB encoding. `film` is `film_look.render` for these settings when
-/// `film_look.active(s)`; its print replaces the rendering, blended by `film_strength`.
-pub fn tone_encoded(a: ArrayView3<'_, f32>, s: &Settings, film: Option<FilmRender<'_>>) -> Result<Image> {
+fn linear_prepare(a: ArrayView3<'_, f32>, s: &Settings) -> Result<Image> {
     check(&a)?;
     let mut a = owned(a);
     let (height, width, channels) = a.dim();
@@ -86,7 +83,6 @@ pub fn tone_encoded(a: ArrayView3<'_, f32>, s: &Settings, film: Option<FilmRende
     });
     if s.bool("lens_vignette") {
         let lens = s.f64("lens_vignette");
-        // np.ogrid[-1:1:complex(n)]: arange(n) * (2 / (n - 1)) - 1 in float64.
         let axis = |n: usize| -> Vec<f64> {
             let step = if n > 1 { 2.0 / (n - 1) as f64 } else { 1.0 };
             (0..n).map(|i| i as f64 * step - 1.0).collect()
@@ -102,6 +98,18 @@ pub fn tone_encoded(a: ArrayView3<'_, f32>, s: &Settings, film: Option<FilmRende
             });
         }
     }
+    Ok(a)
+}
+
+fn uses_v4(s: &Settings, film: Option<FilmRender<'_>>) -> bool {
+    tone_version(s) >= 4.0 && !s.bool("hdr") && film.is_none() && !mapping::active(s)
+}
+
+/// Port of luma/engine.py `_tone_encoded`: exposure, white balance, lens vignette lift and the highlight roll-off
+/// (or the DRT) on linear pixels, then sRGB encoding. `film` is `film_look.render` for these settings when
+/// `film_look.active(s)`; its print replaces the rendering, blended by `film_strength`.
+pub fn tone_encoded(a: ArrayView3<'_, f32>, s: &Settings, film: Option<FilmRender<'_>>) -> Result<Image> {
+    let mut a = linear_prepare(a, s)?;
     let film = film.map(|render| {
         let mut print = render(a.view());
         pixels_mut(&mut print, |p| p.iter_mut().for_each(|v| *v = to_srgb_value(*v)));
@@ -115,6 +123,11 @@ pub fn tone_encoded(a: ArrayView3<'_, f32>, s: &Settings, film: Option<FilmRende
     }
     if mapping::active(s) {
         a = mapping::render(&a, s);
+    } else if tone_version(s) >= 4.0 && !s.bool("hdr") {
+        pixels_mut(&mut a, |p| {
+            let s_rgb = v4::filmic_shoulder_pixel([p[0], p[1], p[2]]);
+            p.copy_from_slice(&s_rgb);
+        });
     } else if tone_version(s) >= 2.0 && !s.bool("hdr") {
         highlight_rolloff_in_place(&mut a, rolloff_white(s), SHOULDER_KNEE);
     }
@@ -127,7 +140,8 @@ pub fn tone_encoded(a: ArrayView3<'_, f32>, s: &Settings, film: Option<FilmRende
 }
 
 /// Port of luma/engine.py `tone_base`: the whole-frame analysis of linear frame `a` for the process 3
-/// Highlights/Shadows (reduced to `MAP_SIZE` on the long edge with `INTER_AREA`).
+/// Highlights/Shadows (reduced to `MAP_SIZE` on the long edge with `INTER_AREA`), or the 12-stop
+/// log-luminance guided base for Process Version 4.
 pub fn tone_base(a: &Image, s: &Settings, film: Option<FilmRender<'_>>) -> Result<ToneBase> {
     check(&a.view())?;
     let (height, width, _) = a.dim();
@@ -139,6 +153,10 @@ pub fn tone_base(a: &Image, s: &Settings, film: Option<FilmRender<'_>>) -> Resul
     } else {
         a.clone()
     };
+    if uses_v4(s, film) {
+        let prepared = linear_prepare(small.view(), s)?;
+        return Ok(v4::analyse(&prepared, (height, width)));
+    }
     let encoded = tone_encoded(small.view(), s, film)?;
     Ok(response::analyse(&encoded, (height, width)))
 }
@@ -278,6 +296,19 @@ fn pixels_after_local(
     film: Option<FilmRender<'_>>,
 ) -> Result<Image> {
     let finish = Finish::new(s)?;
+    if uses_v4(s, film) {
+        let mut linear = linear_prepare(a, s)?;
+        if let Some(local) = local {
+            v4::apply_local_band(&mut linear, &local.base, first, s.f32("highlights"), s.f32("shadows"));
+        }
+        pixels_mut(&mut linear, |p| {
+            let shouldered = v4::filmic_shoulder_pixel([p[0], p[1], p[2]]);
+            for c in 0..3 {
+                p[c] = finish.value(to_srgb_value(shouldered[c]));
+            }
+        });
+        return Ok(linear);
+    }
     let mut encoded = tone_encoded(a, s, film)?;
     if let Some(local) = local {
         let applied = response::apply(encoded.view(), local, first);

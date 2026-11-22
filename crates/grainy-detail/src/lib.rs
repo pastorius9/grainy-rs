@@ -7,6 +7,7 @@
 //! filter is used (luminance noise reduction of `detail_version` 1 and 2: a few float32 ulps of L*).
 
 mod cv;
+pub mod laplacian;
 pub mod noise;
 mod np;
 mod stage;

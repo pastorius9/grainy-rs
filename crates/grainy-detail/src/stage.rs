@@ -26,11 +26,15 @@ pub fn develop_detail(image: &Image, s: &Settings, pixel_scale: f64) -> Result<I
         });
     }
     if s.bool("clarity") {
-        let (h, w, _) = a.dim();
-        let sigma = pixel_scale.max(h.min(w) as f64 / 80.0);
-        let blurred = blur(&a, sigma);
-        let amount = s.f32("clarity");
-        Zip::from(&mut a).and(&blurred).par_for_each(|v, &b| *v += (*v - b) * amount / 140.0);
+        if detail_version(s) >= 4 {
+            a = crate::laplacian::local_laplacian_clarity(&a, s.f64("clarity"), pixel_scale);
+        } else {
+            let (h, w, _) = a.dim();
+            let sigma = pixel_scale.max(h.min(w) as f64 / 80.0);
+            let blurred = blur(&a, sigma);
+            let amount = s.f32("clarity");
+            Zip::from(&mut a).and(&blurred).par_for_each(|v, &b| *v += (*v - b) * amount / 140.0);
+        }
     }
     if s.bool("sharpen") {
         let _timing = grainy_core::timing::Span::new("detail.sharpen");

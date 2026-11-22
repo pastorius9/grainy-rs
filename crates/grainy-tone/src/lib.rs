@@ -15,6 +15,7 @@ mod num;
 pub mod response;
 pub mod srgb;
 mod stage;
+pub mod v4;
 
 use grainy_core::Image;
 use ndarray::ArrayView3;

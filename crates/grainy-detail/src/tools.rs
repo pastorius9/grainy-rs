@@ -67,21 +67,30 @@ pub fn detail_tools(a: &Image, s: &Settings, pixel_scale: f64) -> Image {
         }
         a = grainy_color::lab_to_rgb(&lab);
     }
+    let v4 = detail_version(s) >= 4;
     let dehaze = s.f64("dehaze");
     if dehaze != 0.0 {
-        let strength = (dehaze / 100.0 * 0.8) as f32;
-        let darkest = a.map_axis(Axis(2), |p| np::minimum(np::minimum(p[0], p[1]), p[2]));
-        let dark = cv::erode(&darkest, d);
-        Zip::from(a.rows_mut()).and(&dark).par_for_each(|mut p, &dk| {
-            let transmission = clip(1.0 - strength * dk, 0.2, 1.8);
-            p.mapv_inplace(|v| (v - 1.0) / transmission + 1.0);
-        });
+        if v4 {
+            crate::laplacian::guided_dehaze(&mut a, dehaze, d);
+        } else {
+            let strength = (dehaze / 100.0 * 0.8) as f32;
+            let darkest = a.map_axis(Axis(2), |p| np::minimum(np::minimum(p[0], p[1]), p[2]));
+            let dark = cv::erode(&darkest, d);
+            Zip::from(a.rows_mut()).and(&dark).par_for_each(|mut p, &dk| {
+                let transmission = clip(1.0 - strength * dk, 0.2, 1.8);
+                p.mapv_inplace(|v| (v - 1.0) / transmission + 1.0);
+            });
+        }
     }
     let texture = s.f64("texture");
     if texture != 0.0 {
-        let blurred = blur(&a, 1.3 * pixel_scale);
-        let t = texture as f32;
-        Zip::from(&mut a).and(&blurred).par_for_each(|v, &b| *v += (*v - b) * t / 100.0);
+        if v4 {
+            crate::laplacian::edge_aware_texture(&mut a, texture, pixel_scale);
+        } else {
+            let blurred = blur(&a, 1.3 * pixel_scale);
+            let t = texture as f32;
+            Zip::from(&mut a).and(&blurred).par_for_each(|v, &b| *v += (*v - b) * t / 100.0);
+        }
     }
     let defringe = s.f64("defringe");
     if defringe != 0.0 {

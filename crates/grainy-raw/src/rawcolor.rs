@@ -267,7 +267,15 @@ pub fn develop_camera(source: &CameraSource, s: &Settings) -> Result<Image> {
         Some(white),
     )?;
     let transform = mm(dcp::xyz_prophoto()?, m).map(|r| r.map(|v| v as f32));
-    let mut a = math::map(&source.pixels, |v| transform.map(|r| v[0] * r[0] + v[1] * r[1] + v[2] * r[2]));
+    let mut a = if s.i64("tone_version") >= 4 {
+        let n = neutral.map(|v| v as f32);
+        math::map(&source.pixels, |v| {
+            let r = reconstruct_camera_highlight(v, n);
+            transform.map(|row| r[0] * row[0] + r[1] * row[1] + r[2] * row[2])
+        })
+    } else {
+        math::map(&source.pixels, |v| transform.map(|r| v[0] * r[0] + v[1] * r[1] + v[2] * r[2]))
+    };
     if has_record {
         let hs = dcp::interpolate_table(&p, dcp::weight(&p, t, Some(white))?)?;
         if s.bool("dcp_huesat") {
@@ -293,6 +301,37 @@ pub fn develop_camera(source: &CameraSource, s: &Settings) -> Result<Image> {
     }
     Ok(a)
 }
+/// Process Version 4 camera-space highlight reconstruction: when 1 or 2 sensor channels saturate
+/// before white balance, reconstruct clipped channels from the unclipped channels' white-balanced
+/// luminance so blown highlights roll off cleanly to neutral white instead of pink/magenta casts.
+/// Pixels with all channels <= 0.90 are returned bit-exact unchanged.
+#[inline]
+pub(crate) fn reconstruct_camera_highlight(c: [f32; 3], neutral: [f32; 3]) -> [f32; 3] {
+    let max_c = c[0].max(c[1]).max(c[2]);
+    if max_c <= 0.90 {
+        return c;
+    }
+    let smooth = |x: f32| {
+        let t = ((x - 0.90) / 0.095).clamp(0.0, 1.0);
+        t * t * (3.0 - 2.0 * t)
+    };
+    let cw = [smooth(c[0]), smooth(c[1]), smooth(c[2])];
+    let wb = [c[0] / neutral[0].max(1e-6), c[1] / neutral[1].max(1e-6), c[2] / neutral[2].max(1e-6)];
+    let unclipped_w = (1.0 - cw[0]) + (1.0 - cw[1]) + (1.0 - cw[2]);
+    let wb_max = wb[0].max(wb[1]).max(wb[2]);
+    let est = if unclipped_w > 0.01 {
+        ((1.0 - cw[0]) * wb[0] + (1.0 - cw[1]) * wb[1] + (1.0 - cw[2]) * wb[2]) / unclipped_w
+    } else {
+        wb_max
+    };
+    let all_clip = cw[0].min(cw[1]).min(cw[2]);
+    std::array::from_fn(|i| {
+        let lifted = wb[i] + (est.max(wb[i]) - wb[i]) * cw[i];
+        let recovered = lifted + (wb_max - lifted) * all_clip;
+        recovered * neutral[i]
+    })
+}
+
 /// Port of rawcolor.develop_camera's non-CameraSource identity branch.
 pub fn develop_plain(source: &Image) -> Result<Image> {
     math::image(source)?;
@@ -567,5 +606,28 @@ mod performance_tests {
                 assert_eq!(actual.mapv(f32::to_bits), expected, "{h}x{w}, {threads} threads");
             }
         }
+    }
+
+    #[test]
+    fn pv4_camera_highlight_reconstruction_eliminates_magenta_cast() {
+        let neutral = [0.5_f32, 1.0, 0.59];
+        // Unclipped midtone pixel is bit-exact untouched.
+        let mid = [0.3, 0.5, 0.25];
+        assert_eq!(reconstruct_camera_highlight(mid, neutral), mid);
+
+        // Blown cloud where green saturated at 1.0 while red/blue still carry real data ->
+        // without reconstruction wb = [1.70, 1.00, 1.61] (strong magenta); after reconstruction
+        // green recovers cleanly near 1.67 so wb is neutral white > 1.0!
+        let blown_green = [0.85_f32, 1.0, 0.95];
+        let rec = reconstruct_camera_highlight(blown_green, neutral);
+        let wb = [rec[0] / neutral[0], rec[1] / neutral[1], rec[2] / neutral[2]];
+        assert!(wb[1] > 1.55, "reconstructed green WB should lift above sensor clip, got {wb:?}");
+        assert!((wb[0] - wb[1]).abs() < 0.10 && (wb[2] - wb[1]).abs() < 0.10, "should be neutral, got {wb:?}");
+
+        // All 3 channels clipped -> neutral white at max WB headroom instead of magenta.
+        let all_blown = [1.0_f32, 1.0, 1.0];
+        let rec_all = reconstruct_camera_highlight(all_blown, neutral);
+        let wb_all = [rec_all[0] / neutral[0], rec_all[1] / neutral[1], rec_all[2] / neutral[2]];
+        assert!((wb_all[0] - wb_all[1]).abs() < 1e-4 && (wb_all[2] - wb_all[1]).abs() < 1e-4);
     }
 }
