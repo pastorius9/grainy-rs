@@ -913,7 +913,7 @@ impl AppContext {
         let long = self.doc.current().and_then(|p| p.original).map_or(0, |(w, h)| w.max(h) as usize);
         let tiled_gpu = self.tile_need.is_some()
             && self.wgpu_render_state.is_some()
-            && self.renderer.gpu_status().is_some_and(|s| s.enabled);
+            && self.renderer.gpu_status().is_some_and(|s| s.usable);
         if self.zoom != Zoom::Fit && long > PREVIEW_SIZE && (tiled_gpu || !self.doc.edit().dirty()) {
             Resolution::Full
         } else {

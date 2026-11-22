@@ -96,10 +96,11 @@ pub const COLOR_KEYS: [&str; 16] = [
     "monochrome",
 ];
 /// Settings of the detail stage (`engine.DETAIL_KEYS`).
-pub const DETAIL_KEYS: [&str; 21] = [
+pub const DETAIL_KEYS: [&str; 22] = [
     "ai_denoise",
     "noise_luma",
     "noise_color",
+    "wavelet_profiles",
     "dehaze",
     "texture",
     "defringe",

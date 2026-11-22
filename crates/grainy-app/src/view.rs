@@ -125,7 +125,11 @@ impl AppContext {
         let rect = Rect::from_min_size(min, shown);
         self.photo_rect = Some(rect);
         // Visible viewport ROI for true 1:1 GPU tile rendering when zoomed in past the viewport.
-        self.tile_need = if self.zoom != Zoom::Fit
+        // Wait until a full-frame base texture exists so switching photos while zoomed always
+        // populates the base frame and whole-frame histogram first.
+        let has_base_frame = self.gpu_texture.is_some() || self.texture.is_some();
+        self.tile_need = if has_base_frame
+            && self.zoom != Zoom::Fit
             && self.wgpu_render_state.is_some()
             && rect.width() > 1.0
             && rect.height() > 1.0
@@ -270,6 +274,8 @@ impl AppContext {
                         _texture: tex,
                         _view: view,
                     });
+                } else if let Some(old) = self.gpu_clip_texture.take() {
+                    rs.renderer.write().free_texture(&old.id);
                 }
             }
             if let Some(clip) = &self.gpu_clip_texture {

@@ -9,13 +9,9 @@ fn local_band(h: f32, center: f32, width: f32) -> f32 {
 
 fn local_reflect101(idx: i32, len: i32) -> u32 {
     if len <= 1 { return 0u; }
-    var i = idx;
-    loop {
-        if i < 0 { i = -i; }
-        else if i >= len { i = 2 * len - 2 - i; }
-        else { break; }
-    }
-    return u32(i);
+    let period = 2 * len - 2;
+    let m = ((idx % period) + period) % period;
+    return u32(select(period - m, m, m < len));
 }
 
 @compute @workgroup_size(16, 16, 1)

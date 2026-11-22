@@ -13,11 +13,10 @@ fn catmull_rom(t: f32) -> vec4<f32> {
     );
 }
 
-fn fetch_zero_ch(x: i32, y: i32, w: i32, h: i32, ch: u32) -> f32 {
-    if x < 0 || y < 0 || x >= w || y >= h {
-        return 0.0;
-    }
-    return source[(u32(y) * u32(w) + u32(x)) * 3u + ch];
+fn fetch_clamped_ch(x: i32, y: i32, w: i32, h: i32, ch: u32) -> f32 {
+    let cx = u32(clamp(x, 0, w - 1));
+    let cy = u32(clamp(y, 0, h - 1));
+    return source[(cy * u32(w) + cx) * 3u + ch];
 }
 
 fn sample_bicubic_ch(sx: f32, sy: f32, w: i32, h: i32, ch: u32) -> f32 {
@@ -31,10 +30,10 @@ fn sample_bicubic_ch(sx: f32, sy: f32, w: i32, h: i32, ch: u32) -> f32 {
     var sum = 0.0;
     for (var j = 0; j < 4; j++) {
         let yy = iy + j - 1;
-        let row = wx.x * fetch_zero_ch(ix - 1, yy, w, h, ch)
-            + wx.y * fetch_zero_ch(ix, yy, w, h, ch)
-            + wx.z * fetch_zero_ch(ix + 1, yy, w, h, ch)
-            + wx.w * fetch_zero_ch(ix + 2, yy, w, h, ch);
+        let row = wx.x * fetch_clamped_ch(ix - 1, yy, w, h, ch)
+            + wx.y * fetch_clamped_ch(ix, yy, w, h, ch)
+            + wx.z * fetch_clamped_ch(ix + 1, yy, w, h, ch)
+            + wx.w * fetch_clamped_ch(ix + 2, yy, w, h, ch);
         sum += wy[j] * row;
     }
     return sum;
@@ -50,14 +49,12 @@ fn sample_bicubic_rgb(sx: f32, sy: f32, w: i32, h: i32) -> vec3<f32> {
     let wy = catmull_rom(sy - f32(iy));
     var sum = vec3(0.0);
     for (var j = 0; j < 4; j++) {
-        let yy = iy + j - 1;
+        let yy = u32(clamp(iy + j - 1, 0, h - 1));
         var row = vec3(0.0);
         for (var i = 0; i < 4; i++) {
-            let xx = ix + i - 1;
-            if xx >= 0 && yy >= 0 && xx < w && yy < h {
-                let idx = (u32(yy) * u32(w) + u32(xx)) * 3u;
-                row += vec3(source[idx], source[idx + 1u], source[idx + 2u]) * wx[i];
-            }
+            let xx = u32(clamp(ix + i - 1, 0, w - 1));
+            let idx = (yy * u32(w) + xx) * 3u;
+            row += vec3(source[idx], source[idx + 1u], source[idx + 2u]) * wx[i];
         }
         sum += row * wy[j];
     }

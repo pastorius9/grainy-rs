@@ -553,12 +553,22 @@ pub fn export_photo_with_gpu(
     gpu: Option<&std::sync::Mutex<Option<grainy_gpu::Gpu>>>,
 ) -> Result<(usize, usize)> {
     export_photo_impl(source_path.as_ref(), output_path.as_ref(), settings, request, |source, s, opts| {
-        if let Some(mutex) = gpu {
-            let guard = mutex.lock().unwrap_or_else(|e| e.into_inner());
-            if let Some(gpu) = guard.as_ref() {
-                let mut cache = crate::gpu::GpuCache::default();
-                if let Ok(img) = crate::gpu::develop_gpu_cached(source, s, opts, gpu, &mut cache, 0) {
-                    return Ok(img);
+        let ws = crate::working_settings(s);
+        let wants_gpu =
+            !ws.bool("hdr") && ws.str("working_space") != "ProPhoto" && request.color_space == "sRGB";
+        if wants_gpu {
+            if let Some(mutex) = gpu {
+                let mut guard = mutex.lock().unwrap_or_else(|e| e.into_inner());
+                if let Some(dev) = guard.as_ref() {
+                    let mut cache = crate::gpu::GpuCache::default();
+                    match crate::gpu::develop_gpu_cached(source, s, opts, dev, &mut cache, 0) {
+                        Ok(img) => return Ok(img),
+                        Err(crate::gpu::Error::Engine(e)) => return Err(e),
+                        Err(crate::gpu::Error::Gpu(grainy_gpu::Error::Device(_))) => {
+                            *guard = None;
+                        }
+                        Err(crate::gpu::Error::Gpu(_)) => {}
+                    }
                 }
             }
         }

@@ -193,7 +193,16 @@ impl Drop for Worker {
 
 impl Renderer for Worker {
     fn set_library(&mut self, library: Option<PathBuf>) {
-        let next = Self::start(self.shared.gpu.clone(), self.shared.shared_wgpu.clone(), library);
+        // Stop old worker threads before spawning the replacement worker so both don't contend on GPU/CPU.
+        self.shared.shutdown.store(true, Ordering::SeqCst);
+        {
+            let _queues = lock(&self.shared.queues);
+            self.shared.preview_ready.notify_all();
+            self.shared.thumbnail_ready.notify_all();
+            self.shared.side_ready.notify_all();
+        }
+        let gpu = self.shared.gpu.as_ref().map(|c| crate::gpu_worker::Control::new(c.requested()));
+        let next = Self::start(gpu, self.shared.shared_wgpu.clone(), library);
         *lock(&next.shared.monitor) = lock(&self.shared.monitor).clone();
         *lock(&next.shared.soft_proof) = lock(&self.shared.soft_proof).clone();
         *lock(&next.shared.hdr_view) = *lock(&self.shared.hdr_view);
@@ -740,7 +749,8 @@ impl PreviewState {
         let converted = histogram::convert(srgb.as_ref().unwrap_or(&working));
         let bins = histogram::bins(&converted.rgba, converted.width, converted.height);
         let rgba = if soft_proof.enabled {
-            let src_prof = grainy_cms::profile(space).map_err(|e| e.to_string())?;
+            let src_name = if space == "ProPhoto" { "Luma Wide" } else { space };
+            let src_prof = grainy_cms::profile(src_name).map_err(|e| e.to_string())?;
             let proof_prof = grainy_cms::profile(&soft_proof.target).map_err(|e| e.to_string())?;
             let srgb_prof = grainy_cms::profile("sRGB").map_err(|e| e.to_string())?;
             let disp_prof = monitor.unwrap_or(&srgb_prof);
@@ -851,11 +861,14 @@ fn preview_loop(shared: &Shared) {
                     if caught(|| Ok(state.prefetch(&ahead))).unwrap_or(false) {
                         shared.prefetched.fetch_add(1, Ordering::SeqCst);
                     }
-                    queues = lock(&shared.queues);
-                    queues.running -= 1;
+                    {
+                        let mut q = lock(&shared.queues);
+                        q.running -= 1;
+                    }
                     if let Some(waker) = lock(&shared.waker).clone() {
                         waker();
                     }
+                    queues = lock(&shared.queues);
                     continue;
                 }
                 queues = shared.preview_ready.wait(queues).unwrap_or_else(|e| e.into_inner());
@@ -1276,22 +1289,24 @@ pub fn offline_photo(directory: &Path, id: i64, settings: &Settings) -> Result<g
 /// thumbnail of one photo made again from its original (or its offline packet), and published. Returns the oracle's
 /// status (`갱신 완료`, `최신`, `원본 없음`, `중단`…).
 pub fn rebuild_preview(cache: &ThumbCache, force: bool, cancel: &AtomicBool) -> String {
-    let _publication = crate::thumbjpeg::publication();
     if cancel.load(Ordering::SeqCst) {
         return "중단".into();
     }
-    let inspection = match grainy_catalog::preview::inspect(&cache.directory, cache.id) {
-        Ok(inspection) => inspection,
-        Err(error) => return format!("오류: {error}"),
-    };
-    let status = inspection.state["status"].as_str().unwrap_or("").to_owned();
-    if !force && inspection.state["rebuild"] != true {
-        return if status.is_empty() { "최신".into() } else { status };
-    }
-    let snapshot = match grainy_catalog::preview::snapshot(&cache.directory, cache.id, true) {
-        Ok(Some(snapshot)) => snapshot,
-        Ok(None) => return "제거됨".into(),
-        Err(error) => return format!("오류: {error}"),
+    let snapshot = {
+        let _publication = crate::thumbjpeg::publication();
+        let inspection = match grainy_catalog::preview::inspect(&cache.directory, cache.id) {
+            Ok(inspection) => inspection,
+            Err(error) => return format!("오류: {error}"),
+        };
+        let status = inspection.state["status"].as_str().unwrap_or("").to_owned();
+        if !force && inspection.state["rebuild"] != true {
+            return if status.is_empty() { "최신".into() } else { status };
+        }
+        match grainy_catalog::preview::snapshot(&cache.directory, cache.id, true) {
+            Ok(Some(snapshot)) => snapshot,
+            Ok(None) => return "제거됨".into(),
+            Err(error) => return format!("오류: {error}"),
+        }
     };
     let path = PathBuf::from(snapshot["path"].as_str().unwrap_or(""));
     if snapshot["source"].is_null() {
@@ -1319,6 +1334,7 @@ pub fn rebuild_preview(cache: &ThumbCache, force: bool, cancel: &AtomicBool) -> 
         Ok(jpeg) => jpeg,
         Err(error) => return format!("오류: {error}"),
     };
+    let _publication = crate::thumbjpeg::publication();
     match grainy_catalog::preview::publish(&cache.directory, &snapshot, &jpeg, None, "sRGB") {
         Ok(true) => "갱신 완료".into(),
         Ok(false) => "변경됨 · 다시 확인".into(),

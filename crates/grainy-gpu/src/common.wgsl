@@ -25,7 +25,7 @@ fn lin_srgb(x: f32) -> f32 {
 }
 // numpy.interp uses the last duplicate abscissa. Binary search also bounds arbitrary-size curves.
 fn interp(x: f32,first: u32,count: u32) -> f32 {
-    if x<table[first].x {return table[first].y;}
+    if !(x>=table[first].x) {return table[first].y;}
     var lo=0u; var hi=count;
     while lo<hi {
         let m=lo+(hi-lo)/2u;

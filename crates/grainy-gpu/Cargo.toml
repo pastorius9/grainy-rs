@@ -10,6 +10,7 @@ license.workspace = true
 grainy-core.workspace = true
 grainy-tone = { path = "../grainy-tone" }
 grainy-colorgrade = { path = "../grainy-colorgrade" }
+grainy-detail = { path = "../grainy-detail" }
 grainy-effects = { path = "../grainy-effects" }
 grainy-film = { path = "../grainy-film" }
 ndarray.workspace = true
@@ -21,7 +22,6 @@ bytemuck = "1.24"
 
 [dev-dependencies]
 grainy-testkit.workspace = true
-grainy-detail = { path = "../grainy-detail" }
 
 [lints]
 workspace = true

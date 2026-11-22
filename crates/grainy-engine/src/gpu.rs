@@ -57,6 +57,7 @@ pub enum Error {
 /// Port of `engine.develop`'s worker-owned host cache and `native_gpu` resident slots.
 pub struct GpuCache {
     cpu: DevelopmentCache,
+    bound_token: Option<u64>,
     resident: Option<(String, Resident)>,
     raw_gpu: Option<(String, GpuFrame)>,
     whole_base: Option<(String, ToneBase)>,
@@ -77,6 +78,7 @@ impl GpuCache {
     pub fn new(cpu: DevelopmentCache) -> Self {
         Self {
             cpu,
+            bound_token: None,
             resident: None,
             raw_gpu: None,
             whole_base: None,
@@ -262,6 +264,13 @@ pub fn develop_gpu_resident<'a>(
     }
     let s = working_settings(settings);
     let scale = pixel_scale(source.pixels(), options.original_size)?;
+    if cache.bound_token != Some(token) {
+        cache.bound_token = Some(token);
+        cache.raw_gpu = None;
+        cache.whole_base = None;
+        cache.mask_planes.clear();
+        cache.gpu_masks.clear();
+    }
     cache.cpu.bind(token, source.pixels().len() * std::mem::size_of::<f32>());
     // LittleCMS uses quantized tables: a GPU ULP can cross a table boundary and exceed the preview's
     // 2e-5 tolerance after conversion. Keep a canonical CPU input for nonidentity output transforms.
@@ -339,9 +348,13 @@ pub fn develop_gpu_resident<'a>(
         if cache.resident.as_ref().is_none_or(|(k, _)| *k != resident_key) {
             let raw_frame = &cache.raw_gpu.as_ref().unwrap().1;
             let warped = gpu.warp_geometry(raw_frame, &geom)?;
-            // Downscale source to <=512px before small analysis warp so ToneBase takes <1 ms.
+            // Downscale source before small analysis warp, scaled by inverse crop fraction so tight
+            // crops still yield ~512px of cropped content for ToneBase.
             let analysis_src = {
-                let small_limit = 512.0 / lin_w.max(lin_h) as f64;
+                let crop_frac = (geom.out_width as f64 / geom.rot_width.max(1) as f64)
+                    .min(geom.out_height as f64 / geom.rot_height.max(1) as f64)
+                    .clamp(0.125, 1.0);
+                let small_limit = (512.0 / crop_frac) / lin_w.max(lin_h) as f64;
                 let small = if small_limit < 1.0 {
                     let sw = ((lin_w as f64 * small_limit).round() as usize).max(1);
                     let sh = ((lin_h as f64 * small_limit).round() as usize).max(1);
@@ -373,6 +386,8 @@ pub fn develop_gpu_resident<'a>(
                 full_size: (geom.out_width, geom.out_height),
             });
         }
+    } else {
+        cache.raw_gpu = None;
     }
 
     let moved = match host.as_deref_mut().and_then(|host| host.lookup("geometry", &geometry_key)) {
@@ -386,13 +401,18 @@ pub fn develop_gpu_resident<'a>(
     let (full_h, full_w, _) = frame.dim();
     let gpu_masks_plan = gpu_eligible_masks(&s, scale);
     let masks_on_gpu = masks && gpu_masks_plan.is_some();
+    let active_gpu_masks = gpu_masks_plan.as_ref().is_some_and(|l| !l.is_empty());
     let (src_h, src_w, _) = source.pixels().dim();
     let mask_base_key = format!("{token}|{version}|{geometry_key}");
 
     // True 1:1 viewport tile fast path: slice only the visible tile + spatial halo from the
     // cached post-geometry frame and supply a shared whole-frame ToneBase so zoomed slider drags
     // develop ~2 MP instead of 45 MP with zero seams (now also supporting Film, DRT, and GPU local masks!).
-    if let Some(req) = tile.filter(|_| (!masks || masks_on_gpu) && full_w.max(full_h) > 1536) {
+    // Skip tiling when globally position- or frame-statistics-dependent stages are active so panning
+    // never shifts grain patterns, wavelet thresholds, or multi-level Laplacian pyramids.
+    let tile_unsafe =
+        s.bool("grain") || s.bool("noise_luma") || (s.bool("clarity") && s.f64("detail_version") >= 4.0);
+    if let Some(req) = tile.filter(|_| !tile_unsafe && (!masks || masks_on_gpu) && full_w.max(full_h) > 1536) {
         let u0 = req.roi[0].clamp(0.0, 1.0);
         let v0 = req.roi[1].clamp(0.0, 1.0);
         let u1 = req.roi[2].clamp(u0, 1.0);
@@ -473,7 +493,7 @@ pub fn develop_gpu_resident<'a>(
             };
             let resident =
                 &mut cache.resident.as_mut().ok_or_else(|| grainy_gpu::Error::Device("missing resident".into()))?.1;
-            let result = gpu.develop_resident_tile(resident, &s, scale, !masks_on_gpu, Some(tile_ctx), base_ref)?;
+            let result = gpu.develop_resident_tile(resident, &s, scale, !active_gpu_masks, Some(tile_ctx), base_ref)?;
             if result.fallback.is_none() {
                 cache.fallback = None;
                 let mut gpu_frame =

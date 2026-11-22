@@ -55,6 +55,7 @@ fn py_round(x: f64) -> f64 {
 fn straighten_padding(angle: f64, w: usize, h: usize) -> (usize, usize) {
     let rad = angle.abs().to_radians();
     let (s, c) = rad.sin_cos();
+    let (s, c) = (s.abs(), c.abs());
     let nw = (w as f64 * c + h as f64 * s).ceil() as usize;
     let nh = (w as f64 * s + h as f64 * c).ceil() as usize;
     (nw.saturating_sub(w).div_ceil(2), nh.saturating_sub(h).div_ceil(2))
@@ -112,6 +113,21 @@ impl GpuGeometryParams {
             (0, 0, rot_w, rot_h)
         };
         let zoom = (s.f64("transform_scale") / 100.0).max(0.2) as f32;
+        let ph = (s.f64("perspective_h") / 160.0) as f32;
+        let pv = (s.f64("perspective_v") / 160.0) as f32;
+        let aspect = 2f64.powf(s.f64("aspect_scale") / 100.0) as f32;
+        let sx = (s.f64("shift_x") / 100.0) as f32;
+        let sy = (s.f64("shift_y") / 100.0) as f32;
+        let d1 = (s.f64("distortion") / 100.0) as f32;
+        let d2 = (s.f64("distortion_k2") / 100.0) as f32;
+        let d3 = (s.f64("distortion_k3") / 100.0) as f32;
+        let ca_r = (s.f64("ca_red") / 10000.0) as f32;
+        let ca_b = (s.f64("ca_blue") / 10000.0) as f32;
+        if !straighten_deg.is_finite()
+            || ![zoom, ph, pv, aspect, sx, sy, d1, d2, d3, ca_r, ca_b].iter().all(|v| v.is_finite())
+        {
+            return None;
+        }
         Some(Self {
             out_width,
             out_height,
@@ -125,17 +141,17 @@ impl GpuGeometryParams {
             flip,
             straighten_deg,
             has_optical,
-            ph: (s.f64("perspective_h") / 160.0) as f32,
-            pv: (s.f64("perspective_v") / 160.0) as f32,
+            ph,
+            pv,
             zoom,
-            aspect: 2f64.powf(s.f64("aspect_scale") / 100.0) as f32,
-            sx: (s.f64("shift_x") / 100.0) as f32,
-            sy: (s.f64("shift_y") / 100.0) as f32,
-            d1: (s.f64("distortion") / 100.0) as f32,
-            d2: (s.f64("distortion_k2") / 100.0) as f32,
-            d3: (s.f64("distortion_k3") / 100.0) as f32,
-            ca_r: (s.f64("ca_red") / 10000.0) as f32,
-            ca_b: (s.f64("ca_blue") / 10000.0) as f32,
+            aspect,
+            sx,
+            sy,
+            d1,
+            d2,
+            d3,
+            ca_r,
+            ca_b,
         })
     }
 }

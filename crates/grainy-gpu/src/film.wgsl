@@ -10,13 +10,9 @@ const FILM_CUBE_OFF: u32 = 12288u;    // 6 * 2048
 
 fn reflect101(idx: i32, len: i32) -> u32 {
     if len <= 1 { return 0u; }
-    var i = idx;
-    loop {
-        if i < 0 { i = -i; }
-        else if i >= len { i = 2 * len - 2 - i; }
-        else { break; }
-    }
-    return u32(i);
+    let period = 2 * len - 2;
+    let m = ((idx % period) + period) % period;
+    return u32(select(period - m, m, m < len));
 }
 
 fn mat3_mul(v: vec3<f32>, off: u32) -> vec3<f32> {

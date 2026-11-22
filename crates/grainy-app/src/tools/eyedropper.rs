@@ -803,19 +803,23 @@ fn draw_eyedropper(painter: &Painter, pointer: Pos2) {
 }
 
 /// The frame as a texture that magnifies without smoothing, kept for the frame it was made from.
-fn loupe_texture(cx: &AppContext, frame: &crate::render::Frame) -> TextureHandle {
+fn loupe_texture(cx: &AppContext, frame: &crate::render::Frame) -> Option<TextureHandle> {
     static ID: std::sync::OnceLock<egui::Id> = std::sync::OnceLock::new();
     let id = *ID.get_or_init(|| egui::Id::unique("grainy-loupe"));
     if let Some((frame_id, texture)) = cx.egui.data(|d| d.get_temp::<(u64, TextureHandle)>(id)) {
         if frame_id == frame.id {
-            return texture;
+            return Some(texture);
         }
     }
     let rgba = frame.rgba();
+    let expected = frame.preview.width.checked_mul(frame.preview.height)?.checked_mul(4)?;
+    if rgba.len() != expected || expected == 0 {
+        return None;
+    }
     let image = egui::ColorImage::from_rgba_unmultiplied([frame.preview.width, frame.preview.height], &rgba);
     let texture = cx.egui.load_texture("loupe", image, TextureOptions::NEAREST);
     cx.egui.data_mut(|d| d.insert_temp(id, (frame.id, texture.clone())));
-    texture
+    Some(texture)
 }
 
 /// Sutherland-Hodgman: the convex polygon clipped to a rectangle.
@@ -885,11 +889,22 @@ fn draw_loupe(painter: &Painter, view: &ViewTransform, cx: &AppContext, pointer:
     let radius = LOUPE_RADIUS;
     let dark = Color32::from_rgb(0x10, 0x12, 0x15);
     painter.circle_filled(pointer, radius, dark);
+    // Remap through `tile_uv` when the frame holds a 1:1 viewport tile rather than the full image.
+    let tile_rect = match frame.tile_uv {
+        Some([u0, v0, u1, v1]) => Rect::from_min_max(
+            Pos2::new(view.rect.left() + u0 * view.rect.width(), view.rect.top() + v0 * view.rect.height()),
+            Pos2::new(view.rect.left() + u1 * view.rect.width(), view.rect.top() + v1 * view.rect.height()),
+        ),
+        None => view.rect,
+    };
+    if tile_rect.width() <= 0.0 || tile_rect.height() <= 0.0 {
+        return;
+    }
     // Screen points of the circle's edge and the texels they show: the spot is at the circle's centre.
-    let across = view.scale(w) * LOUPE_ZOOM;
+    let across = (tile_rect.width() / w as f32) * LOUPE_ZOOM;
     let spot = Vec2::new(
-        (pointer.x - view.rect.left()) / view.rect.width() * w as f32,
-        (pointer.y - view.rect.top()) / view.rect.height() * h as f32,
+        (pointer.x - tile_rect.left()) / tile_rect.width() * w as f32,
+        (pointer.y - tile_rect.top()) / tile_rect.height() * h as f32,
     );
     let to_uv = |p: Pos2| {
         let texel = spot + (p - pointer) / across;
@@ -907,15 +922,16 @@ fn draw_loupe(painter: &Painter, view: &ViewTransform, cx: &AppContext, pointer:
         .collect();
     let shown = clip_to(&circle, picture);
     if shown.len() >= 3 {
-        let texture = loupe_texture(cx, frame);
-        let mut mesh = epaint::Mesh::with_texture(texture.id());
-        for p in &shown {
-            mesh.vertices.push(epaint::Vertex { pos: *p, uv: to_uv(*p), color: Color32::WHITE });
+        if let Some(texture) = loupe_texture(cx, frame) {
+            let mut mesh = epaint::Mesh::with_texture(texture.id());
+            for p in &shown {
+                mesh.vertices.push(epaint::Vertex { pos: *p, uv: to_uv(*p), color: Color32::WHITE });
+            }
+            for i in 1..shown.len() as u32 - 1 {
+                mesh.indices.extend([0, i, i + 1]);
+            }
+            painter.add(Shape::mesh(mesh));
         }
-        for i in 1..shown.len() as u32 - 1 {
-            mesh.indices.extend([0, i, i + 1]);
-        }
-        painter.add(Shape::mesh(mesh));
     }
     painter.circle_stroke(pointer, radius, Stroke::new(4.0, Color32::from_rgba_unmultiplied(0, 0, 0, 150)));
     painter.circle_stroke(pointer, radius, Stroke::new(2.0, Color32::from_rgb(0xf2, 0xf2, 0xf2)));

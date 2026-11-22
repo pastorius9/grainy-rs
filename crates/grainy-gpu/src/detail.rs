@@ -246,14 +246,23 @@ impl Gpu {
             if v4 {
                 current = self.local_laplacian_in_batch(batch, &current, s.f64("clarity"), pixel_scale)?;
             } else {
-                let sigma = pixel_scale.max(frame.height.min(frame.width) as f64 / 80.0);
-                let blurred = self.filter(batch, &current, &p, &gaussian(sigma))?;
+                let (fw, fh) = tile.map_or((frame.width, frame.height), |t| t.full_size);
+                let sigma = pixel_scale.max(fh.min(fw) as f64 / 80.0);
+                let taps = gaussian(sigma);
+                if tile.is_some() && taps.len() / 2 > 96 {
+                    return Ok(None);
+                }
+                let blurred = self.filter(batch, &current, &p, &taps)?;
                 current = self.detail_pass(batch, &current, &p, 3, &[], [Some(&blurred), None, None, None])?;
             }
         }
         if s.bool("sharpen") {
             let sigma = s.f64("sharpen_radius") * pixel_scale;
-            let blurred = self.filter(batch, &current, &p, &gaussian(sigma))?;
+            let taps = gaussian(sigma);
+            if tile.is_some() && taps.len() / 2 > 96 {
+                return Ok(None);
+            }
+            let blurred = self.filter(batch, &current, &p, &taps)?;
             current = self.detail_pass(batch, &current, &p, 4, &[], [Some(&blurred), None, None, None])?;
         }
         if s.bool("vignette") {

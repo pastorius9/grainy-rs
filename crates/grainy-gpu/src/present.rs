@@ -247,6 +247,13 @@ impl Gpu {
         highlights: bool,
     ) -> Result<(Arc<wgpu::Texture>, Arc<wgpu::TextureView>)> {
         self.check()?;
+        if width == 0
+            || height == 0
+            || width as u32 > self.limits.max_texture_dimension_2d
+            || height as u32 > self.limits.max_texture_dimension_2d
+        {
+            return Err(Error::Input(format!("invalid clip overlay dimensions {width}x{height}")));
+        }
         let (out_w, out_h) = (width as u32, height as u32);
         let texture = Arc::new(self.device.create_texture(&wgpu::TextureDescriptor {
             label: Some("Grainy GPU clipping overlay"),
@@ -294,6 +301,9 @@ impl Gpu {
     /// (used only when an interactive picker such as the eyedropper or loupe samples the frame).
     pub fn readback_texture_rgba(&self, texture: &wgpu::Texture, width: usize, height: usize) -> Result<Vec<u8>> {
         self.check()?;
+        if width == 0 || height == 0 {
+            return Err(Error::Input("cannot read back zero-sized texture".into()));
+        }
         let unpadded_bpr = width * 4;
         let align = wgpu::COPY_BYTES_PER_ROW_ALIGNMENT as usize;
         let padded_bpr = unpadded_bpr.div_ceil(align) * align;

@@ -53,12 +53,15 @@ pub(crate) enum PreviewGpuOutput {
 pub struct Status {
     /// Whether the user requested acceleration (also respects `GRAINY_GPU=0`).
     pub enabled: bool,
+    /// Whether the GPU device has not failed into CPU fallback.
+    pub usable: bool,
     /// Adapter name, `off`, or `unavailable (reason)`, as in the oracle.
     pub text: String,
 }
 
 pub(crate) struct Control {
     enabled: AtomicBool,
+    usable: AtomicBool,
     environment_off: bool,
     status: Mutex<String>,
 }
@@ -67,10 +70,15 @@ impl Control {
     pub(crate) fn new(enabled: bool) -> Arc<Self> {
         Arc::new(Self {
             enabled: AtomicBool::new(enabled),
+            usable: AtomicBool::new(true),
             environment_off: std::env::var("GRAINY_GPU").as_deref() == Ok("0")
                 || crate::context::FROZEN_TIMING.load(Ordering::Relaxed),
             status: Mutex::new("enabled (on demand)".into()),
         })
+    }
+
+    pub(crate) fn requested(&self) -> bool {
+        self.enabled.load(Ordering::Relaxed)
     }
 
     pub(crate) fn enabled(&self) -> bool {
@@ -81,14 +89,20 @@ impl Control {
         self.enabled.store(enabled, Ordering::Relaxed);
     }
 
+    fn set_usable(&self, usable: bool) {
+        self.usable.store(usable, Ordering::Relaxed);
+    }
+
     fn message(&self, text: String) {
         *self.status.lock().unwrap_or_else(std::sync::PoisonError::into_inner) = text;
     }
 
     pub(crate) fn status(&self) -> Status {
         let enabled = self.enabled();
+        let usable = enabled && self.usable.load(Ordering::Relaxed);
         Status {
             enabled,
+            usable,
             text: if enabled {
                 self.status.lock().unwrap_or_else(std::sync::PoisonError::into_inner).clone()
             } else {
@@ -131,7 +145,7 @@ impl PreviewGpu {
     }
 
     pub(crate) fn has_shared_device(&self) -> bool {
-        self.shared.is_some()
+        self.control.enabled() && self.shared.is_some() && (!self.attempted || self.shared_device)
     }
 
     fn warm_up(&mut self) {
@@ -186,6 +200,7 @@ impl PreviewGpu {
         self.hits = 0;
         self.gpu = None;
         self.shared_device = false;
+        self.control.set_usable(false);
         self.control.message(format!("unavailable ({reason})"));
         log::warn!("GPU unavailable ({reason}); previews use CPU");
     }
@@ -195,7 +210,7 @@ impl PreviewGpu {
         space: &str,
         monitor: Option<&grainy_cms::Profile>,
         soft_proof: &crate::render::SoftProof,
-    ) -> Result<Option<MonitorLut>, String> {
+    ) -> Result<Option<MonitorLut>, (bool, String)> {
         let needs_srgb = space == "ProPhoto";
         if !needs_srgb && monitor.is_none() && !soft_proof.enabled {
             return Ok(None);
@@ -205,17 +220,18 @@ impl PreviewGpu {
                 return Ok(Some(lut.clone()));
             }
         }
-        let gpu = self.gpu.as_ref().ok_or_else(|| "missing GPU".to_owned())?;
+        let gpu = self.gpu.as_ref().ok_or_else(|| (true, "missing GPU".to_owned()))?;
         let grid = grainy_gpu::lut33_input_grid();
-        let src = grainy_cms::profile(space).map_err(|e| e.to_string())?;
-        let srgb = grainy_cms::profile("sRGB").map_err(|e| e.to_string())?;
+        let src_name = if space == "ProPhoto" { "Luma Wide" } else { space };
+        let src = grainy_cms::profile(src_name).map_err(|e| (false, e.to_string()))?;
+        let srgb = grainy_cms::profile("sRGB").map_err(|e| (false, e.to_string()))?;
         let srgb_lut = if needs_srgb {
-            Some(grainy_cms::native_convert(&grid, &src, &srgb).map_err(|e| e.to_string())?)
+            Some(grainy_cms::native_convert(&grid, &src, &srgb).map_err(|e| (false, e.to_string()))?)
         } else {
             None
         };
         let display_lut = if soft_proof.enabled {
-            let proof_profile = grainy_cms::profile(&soft_proof.target).map_err(|e| e.to_string())?;
+            let proof_profile = grainy_cms::profile(&soft_proof.target).map_err(|e| (false, e.to_string()))?;
             let display = monitor.unwrap_or(&srgb);
             Some(
                 grainy_cms::soft_proof(
@@ -229,15 +245,20 @@ impl PreviewGpu {
                         gamut_warning: soft_proof.gamut_warning,
                     },
                 )
-                .map_err(|e| e.to_string())?,
+                .map_err(|e| (false, e.to_string()))?,
             )
         } else {
             match monitor {
-                Some(profile) => Some(grainy_cms::native_convert(&grid, &src, profile).map_err(|e| e.to_string())?),
+                Some(profile) => {
+                    Some(grainy_cms::native_convert(&grid, &src, profile).map_err(|e| (false, e.to_string()))?)
+                }
                 None => srgb_lut.clone(),
             }
         };
-        let lut = gpu.upload_monitor_lut(display_lut.as_deref(), srgb_lut.as_deref()).map_err(|e| e.to_string())?;
+        let lut = gpu.upload_monitor_lut(display_lut.as_deref(), srgb_lut.as_deref()).map_err(|e| {
+            let device_err = !matches!(e, grainy_gpu::Error::Limit(_) | grainy_gpu::Error::Input(_));
+            (device_err, e.to_string())
+        })?;
         self.lut_cache = Some((space.to_owned(), monitor.cloned(), soft_proof.clone(), lut.clone()));
         Ok(Some(lut))
     }
@@ -295,7 +316,14 @@ impl PreviewGpu {
                         if self.shared_device {
                             let lut = match self.monitor_lut(space, monitor, soft_proof) {
                                 Ok(lut) => lut,
-                                Err(err) => return Some(Err(err)),
+                                Err((device_err, err)) => {
+                                    if device_err {
+                                        self.fail(&err);
+                                    } else {
+                                        log::warn!("GPU monitor LUT skipped ({err}); using CPU");
+                                    }
+                                    return None;
+                                }
                             };
                             let compute_hist = tile_uv.is_none();
                             match catch_unwind(AssertUnwindSafe(|| {
