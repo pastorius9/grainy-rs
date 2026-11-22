@@ -1,7 +1,7 @@
 //! Port of `luma/folders.py`; lexical catalog paths never scan source directories.
 use crate::{invalid, Result};
 use serde_json::{json, Value};
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, HashMap, HashSet};
 use unicode_normalization::UnicodeNormalization;
 
 /// Platform rules used by `folders.path_key` and `folders.stored_path`.
@@ -159,10 +159,33 @@ impl Platform {
         let count = self.split(folder).1.len();
         Ok(self.join_parts("", parts.get(count..).unwrap_or(&[])))
     }
+    /// Ancestor `path_key`s of `key` from shallowest to deepest (`key` must already be a `path_key`).
+    /// Matches `contains_folder` semantics across Windows, macOS, and POSIX in O(depth).
+    fn ancestor_keys(self, key: &str) -> Vec<String> {
+        let (anchor, parts) = self.split(key);
+        let common_anchor = if self != Self::Windows && !anchor.is_empty() { "/" } else { anchor.as_str() };
+        let mut out = Vec::with_capacity(parts.len() + 2);
+        if anchor != common_anchor {
+            out.push(key.to_owned());
+        }
+        for len in 0..=parts.len() {
+            let candidate = if common_anchor.is_empty() && len == 0 {
+                String::new()
+            } else {
+                self.join_parts(common_anchor, &parts[..len])
+            };
+            if !candidate.is_empty() {
+                out.push(candidate);
+            }
+        }
+        out
+    }
+
     /// Port of `folders.folder_nodes`; direct and recursive counts include virtual copies.
+    /// Runs in O(F log F) with respect to folder count `F` instead of O(F²).
     pub fn folder_nodes(self, photos: &[Value], registered: &[String]) -> Result<Vec<Value>> {
-        let mut roots = BTreeMap::new();
-        let mut parents = BTreeMap::new();
+        let mut roots: BTreeMap<String, String> = BTreeMap::new();
+        let mut parents: BTreeMap<String, String> = BTreeMap::new();
         for p in registered {
             roots.insert(self.path_key(p), self.normalized(p, false));
         }
@@ -170,38 +193,63 @@ impl Platform {
             let path = self.parent(crate::string(&p["path"])?);
             parents.insert(self.path_key(&path), path);
         }
+        // Build O(1) lookup of existing roots before merging parent folders that have no root ancestor.
+        let mut root_keys: HashSet<String> = roots.keys().cloned().collect();
         for (k, p) in &parents {
-            if !roots.values().any(|r| self.contains_folder(r, p)) {
+            let covered = self.ancestor_keys(k).iter().any(|anc| root_keys.contains(anc));
+            if !covered {
                 roots.insert(k.clone(), p.clone());
+                root_keys.insert(k.clone());
             }
         }
-        let mut sorted = roots.values().cloned().collect::<Vec<_>>();
-        sorted.sort_by_key(|p| (self.depth(p), self.path_key(p)));
-        let mut compact: Vec<String> = Vec::new();
-        for p in sorted {
-            if !compact.iter().any(|r| self.contains_folder(r, &p)) {
-                compact.push(p);
+        let mut sorted: Vec<(usize, String, String)> =
+            roots.iter().map(|(k, p)| (self.depth(p), k.clone(), p.clone())).collect();
+        sorted.sort_by(|a, b| a.0.cmp(&b.0).then_with(|| a.1.cmp(&b.1)));
+        let mut compact: Vec<(String, String)> = Vec::new();
+        let mut compact_keys: HashSet<String> = HashSet::new();
+        for (_, k, p) in sorted {
+            let covered = self.ancestor_keys(&k).iter().any(|anc| compact_keys.contains(anc));
+            if !covered {
+                compact_keys.insert(k.clone());
+                compact.push((k, p));
             }
         }
         let mut nodes: BTreeMap<String, Value> = BTreeMap::new();
         let add = |nodes: &mut BTreeMap<String, Value>, path: &str, parent: Option<&str>, drive: bool| {
             let key = self.path_key(path);
-            nodes.entry(key.clone()).or_insert_with(||json!({"key":key,"path":path,"parent":parent,"drive":drive,"name":if drive{path.trim_end_matches(['\\','/']).to_owned()}else{self.name(path)},"direct":0,"total":0}));
+            nodes.entry(key.clone()).or_insert_with(|| {
+                json!({
+                    "key": key,
+                    "path": path,
+                    "parent": parent,
+                    "drive": drive,
+                    "name": if drive { path.trim_end_matches(['\\', '/']).to_owned() } else { self.name(path) },
+                    "direct": 0,
+                    "total": 0
+                })
+            });
             key
         };
-        for root in compact {
+        let mut root_info: HashMap<String, (String, String)> = HashMap::with_capacity(compact.len());
+        for (rk_key, root) in compact {
             let anchor = self.split(&root).0;
             let anchor = if anchor.is_empty() { ".".into() } else { anchor };
             let dk = add(&mut nodes, &anchor, None, true);
-            let rk = if self.path_key(&root) != dk { add(&mut nodes, &root, Some(&dk), false) } else { dk };
-            for path in parents.values().chain(roots.values()).filter(|p| self.contains_folder(&root, p)) {
-                let relative = self.below(path, &root)?;
-                let mut current = root.clone();
-                let mut parent = rk.clone();
-                for part in self.split(&relative).1 {
-                    current = self.join(&current, &part);
-                    parent = add(&mut nodes, &current, Some(&parent), false);
-                }
+            let rk = if rk_key != dk { add(&mut nodes, &root, Some(&dk), false) } else { dk };
+            root_info.insert(rk_key, (root, rk));
+        }
+        // Attach each folder once to its unique compact ancestor root in O(depth).
+        for (key, path) in parents.iter().chain(roots.iter()) {
+            let owner = self.ancestor_keys(key).into_iter().find_map(|anc| root_info.get(&anc));
+            let Some((root, rk)) = owner else {
+                continue;
+            };
+            let relative = self.below(path, root)?;
+            let mut current = root.clone();
+            let mut parent = rk.clone();
+            for part in self.split(&relative).1 {
+                current = self.join(&current, &part);
+                parent = add(&mut nodes, &current, Some(&parent), false);
             }
         }
         for photo in photos {
@@ -218,10 +266,15 @@ impl Platform {
                 key = n["parent"].as_str().map(str::to_owned);
             }
         }
-        let mut result = nodes.into_values().collect::<Vec<_>>();
-        result.sort_by_key(|n| {
-            (self.depth(n["path"].as_str().unwrap_or("")), n["key"].as_str().unwrap_or("").to_owned())
-        });
-        Ok(result)
+        let mut keyed: Vec<(usize, String, Value)> = nodes
+            .into_values()
+            .map(|n| {
+                let d = self.depth(n["path"].as_str().unwrap_or(""));
+                let k = n["key"].as_str().unwrap_or("").to_owned();
+                (d, k, n)
+            })
+            .collect();
+        keyed.sort_by(|a, b| a.0.cmp(&b.0).then_with(|| a.1.cmp(&b.1)));
+        Ok(keyed.into_iter().map(|(_, _, n)| n).collect())
     }
 }

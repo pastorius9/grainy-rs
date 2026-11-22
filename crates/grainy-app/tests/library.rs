@@ -506,3 +506,103 @@ fn a_read_only_library_writes_nothing() {
         std::fs::read_dir(&library).unwrap().map(|e| e.unwrap().file_name().to_string_lossy().into_owned()).collect();
     assert_eq!(names, ["catalog.sqlite"], "nothing was added to the library folder");
 }
+
+#[test]
+fn large_listing_extracts_dimensions_and_tracks_incremental_folder_totals() {
+    let dir = common::temp_dir("large-listing");
+    let catalog = Catalog::new(&dir).unwrap();
+    let db_path = dir.join("catalog.sqlite");
+    catalog
+        .connection()
+        .execute_batch(
+            "BEGIN;
+             WITH RECURSIVE seq(i) AS (SELECT 1 UNION ALL SELECT i+1 FROM seq WHERE i<1200)
+             INSERT INTO photos(path,name,rating,edits,metadata,imported)
+             SELECT printf('C:/roll_%d/img%05d.arw', (i - 1) / 300, i),
+                    printf('img%05d.arw', i),
+                    i % 6,
+                    '{}',
+                    CASE WHEN i % 3 = 0 THEN '{\"width\":8192,\"height\":5464,\"camera\":\"Sony A7R V\"}'
+                         WHEN i % 3 = 1 THEN '{}'
+                         ELSE '{\"width\":4000.5,\"height\":3000}' END,
+                    '2026-11-22'
+             FROM seq;
+             COMMIT;",
+        )
+        .unwrap();
+    let all = grainy_app::document::catalog::read_listing(&db_path, &json!({}), now(), 1).unwrap();
+    assert_eq!(all.total, 1200);
+    assert_eq!(all.photos.len(), 1200);
+    assert_eq!(all.photos[0].original, None, "empty metadata");
+    assert_eq!(all.photos[1].original, None, "non-integer width ignored like serde_json as_u64");
+    assert_eq!(all.photos[2].original, Some((8192, 5464)), "SQLite json_extract dimensions");
+    // Trigger FTS5 + incremental folder totals table, then move and delete a photo.
+    let found =
+        grainy_app::document::catalog::read_listing(&db_path, &json!({"search": "img00500"}), now(), 2).unwrap();
+    assert_eq!(found.photos.len(), 1);
+    assert_eq!(found.photos[0].name, "img00500.arw");
+    catalog.connection().execute("UPDATE photos SET path='C:/moved/img00500.arw' WHERE id=500", []).unwrap();
+    let after_move = grainy_app::document::catalog::read_listing(&db_path, &json!({}), now(), 3).unwrap();
+    assert_eq!(after_move.total, 1200);
+    assert!(after_move.folder_inputs.rows.iter().any(|r| r["count"] == 1));
+    catalog.remove_photos(&[500]).unwrap();
+    let after_delete = grainy_app::document::catalog::read_listing(&db_path, &json!({}), now(), 4).unwrap();
+    assert_eq!(after_delete.total, 1199);
+    assert!(!after_delete.folder_inputs.rows.iter().any(|r| r["count"] == 1));
+}
+
+#[test]
+#[ignore = "measures 100K-photo full read_listing latency in release mode"]
+fn benchmark_100k_read_listing() {
+    let dir = common::temp_dir("bench-100k-listing");
+    let catalog = Catalog::new(&dir).unwrap();
+    let db_path = dir.join("catalog.sqlite");
+    catalog
+        .connection()
+        .execute_batch(
+            "BEGIN;
+             WITH RECURSIVE seq(i) AS (SELECT 1 UNION ALL SELECT i+1 FROM seq WHERE i<100000)
+             INSERT INTO photos(path,name,rating,flag,edits,metadata,imported)
+             SELECT printf('C:/archive/2026/roll_%03d/DSC%06d.ARW', i % 200, i),
+                    printf('DSC%06d.ARW', i),
+                    i % 6,
+                    CASE WHEN i % 10 = 0 THEN 1 ELSE 0 END,
+                    '{}',
+                    '{\"width\":8192,\"height\":5464,\"camera\":\"Sony ILCE-7RM5\",\"iso\":400,\"lens\":\"FE 50mm F1.2 GM\"}',
+                    '2026-11-22'
+             FROM seq;
+             COMMIT;",
+        )
+        .unwrap();
+    let t0 = std::time::Instant::now();
+    let warm =
+        grainy_app::document::catalog::read_listing(&db_path, &json!({"search": "DSC050000"}), now(), 1).unwrap();
+    let cold_ms = t0.elapsed().as_secs_f64() * 1000.0;
+    assert_eq!(warm.photos.len(), 1);
+    assert_eq!(warm.photos[0].original, Some((8192, 5464)));
+
+    let t1 = std::time::Instant::now();
+    let searched =
+        grainy_app::document::catalog::read_listing(&db_path, &json!({"search": "DSC099999"}), now(), 2).unwrap();
+    let search_ms = t1.elapsed().as_secs_f64() * 1000.0;
+    assert_eq!(searched.photos.len(), 1);
+
+    let t2 = std::time::Instant::now();
+    let folder = grainy_app::document::catalog::read_listing(
+        &db_path,
+        &json!({"folder": "C:/archive/2026/roll_042", "recursive": false}),
+        now(),
+        3,
+    )
+    .unwrap();
+    let folder_ms = t2.elapsed().as_secs_f64() * 1000.0;
+    assert_eq!(folder.photos.len(), 500);
+
+    let t3 = std::time::Instant::now();
+    let all = grainy_app::document::catalog::read_listing(&db_path, &json!({}), now(), 4).unwrap();
+    let all_ms = t3.elapsed().as_secs_f64() * 1000.0;
+    assert_eq!(all.photos.len(), 100_000);
+    println!(
+        "100K read_listing: cold_index+fts={cold_ms:.1}ms, warm_search={search_ms:.2}ms, folder_500={folder_ms:.2}ms, all_100k_rows={all_ms:.1}ms"
+    );
+}

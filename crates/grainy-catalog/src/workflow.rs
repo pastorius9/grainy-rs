@@ -3,7 +3,7 @@ use crate::{integer, invalid, json, object, profiles, query::fold, settings, str
 use grainy_core::Settings;
 use rusqlite::params;
 use serde_json::{json, Value};
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{HashMap, HashSet};
 
 /// Port of `workflow_data.edit_signature`; Python canonical JSON and SHA-256.
 pub fn edit_signature(value: &Settings) -> Result<String> {
@@ -13,24 +13,38 @@ pub fn edit_signature(value: &Settings) -> Result<String> {
 pub fn text_hash(text: &str) -> String {
     profiles::hash(text)
 }
-/// Port of `workflow_data.arrange_stacks`; duplicate saved entries follow the oracle unchanged.
-pub fn arrange_stacks(rows: &[Value], orders: &Value, collapsed: bool) -> Result<Vec<i64>> {
-    let mut groups: BTreeMap<i64, Vec<i64>> = BTreeMap::new();
-    for r in rows {
-        if let Some(k) = r["stack_id"].as_i64() {
-            groups.entry(k).or_default().push(integer(&r["id"])?);
+/// Typed fast path for [`arrange_stacks`] that avoids per-row JSON map allocations.
+pub fn arrange_stack_pairs(rows: &[(i64, Option<i64>)], orders: &Value, collapsed: bool) -> Result<Vec<i64>> {
+    let parsed_orders: HashMap<i64, Vec<i64>> = orders
+        .as_object()
+        .map(|map| {
+            map.iter()
+                .filter_map(|(k, v)| {
+                    let stack = k.parse::<i64>().ok()?;
+                    let list: Vec<i64> = v.as_array()?.iter().filter_map(Value::as_i64).collect();
+                    (!list.is_empty()).then_some((stack, list))
+                })
+                .collect()
+        })
+        .unwrap_or_default();
+    if (!collapsed && parsed_orders.is_empty()) || !rows.iter().any(|(_, stack)| stack.is_some()) {
+        return Ok(rows.iter().map(|&(id, _)| id).collect());
+    }
+    let mut groups: HashMap<i64, Vec<i64>> = HashMap::new();
+    for &(id, stack) in rows {
+        if let Some(k) = stack {
+            groups.entry(k).or_default().push(id);
         }
     }
-    let mut emitted = BTreeSet::new();
-    let mut result = Vec::new();
-    for r in rows {
-        let id = integer(&r["id"])?;
-        let Some(k) = r["stack_id"].as_i64() else {
+    let mut emitted: HashSet<i64> = HashSet::with_capacity(groups.len());
+    let mut result = Vec::with_capacity(rows.len());
+    for &(id, stack) in rows {
+        let Some(k) = stack else {
             result.push(id);
             continue;
         };
-        let saved = orders[k.to_string()].as_array().cloned().unwrap_or_default();
-        if !collapsed && saved.is_empty() {
+        let saved = parsed_orders.get(&k);
+        if !collapsed && saved.is_none() {
             result.push(id);
             continue;
         }
@@ -38,12 +52,28 @@ pub fn arrange_stacks(rows: &[Value], orders: &Value, collapsed: bool) -> Result
             continue;
         }
         let members = groups.get(&k).ok_or_else(|| invalid("stack group missing"))?;
-        let mut ordered = saved.iter().filter_map(Value::as_i64).filter(|i| members.contains(i)).collect::<Vec<_>>();
-        let seen = ordered.iter().copied().collect::<BTreeSet<_>>();
-        ordered.extend(members.iter().filter(|i| !seen.contains(i)));
+        let mut ordered = if let Some(saved) = saved {
+            saved.iter().copied().filter(|i| members.contains(i)).collect::<Vec<_>>()
+        } else {
+            Vec::new()
+        };
+        if ordered.is_empty() {
+            ordered.extend_from_slice(members);
+        } else {
+            let seen: HashSet<i64> = ordered.iter().copied().collect();
+            ordered.extend(members.iter().copied().filter(|i| !seen.contains(i)));
+        }
         result.extend(ordered.into_iter().take(if collapsed { 1 } else { usize::MAX }));
     }
     Ok(result)
+}
+/// Port of `workflow_data.arrange_stacks`; duplicate saved entries follow the oracle unchanged.
+pub fn arrange_stacks(rows: &[Value], orders: &Value, collapsed: bool) -> Result<Vec<i64>> {
+    let mut pairs = Vec::with_capacity(rows.len());
+    for r in rows {
+        pairs.push((integer(&r["id"])?, r["stack_id"].as_i64()));
+    }
+    arrange_stack_pairs(&pairs, orders, collapsed)
 }
 /// Port of `workflow_data.stack_members`.
 pub fn stack_members(c: &Catalog, id: i64) -> Result<Vec<i64>> {

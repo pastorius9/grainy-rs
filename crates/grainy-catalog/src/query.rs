@@ -23,65 +23,118 @@ fn cancelled(cancel: &AtomicBool) -> Result<()> {
         Ok(())
     }
 }
-fn connect(path: &Path) -> Result<Connection> {
+/// Opens a tuned SQLite connection for catalog listing and search queries.
+pub fn open_connection(path: &Path) -> Result<Connection> {
     let db = Connection::open(path)?;
     db.busy_timeout(Duration::from_secs(10))?;
+    crate::catalog::tune_connection(&db, true)?;
     Ok(db)
 }
-fn rows(db: &Connection, sql: &str) -> Result<Vec<Value>> {
-    Ok(db.prepare(sql)?.query_map([], row_value)?.collect::<rusqlite::Result<_>>()?)
+fn connect(path: &Path) -> Result<Connection> {
+    open_connection(path)
 }
 fn info(p: &Value) -> Result<Value> {
     let mut out = serde_json::Map::new();
     for key in ["metadata", "extras"] {
-        let v: Value = serde_json::from_str(p[key].as_str().filter(|s| !s.is_empty()).unwrap_or("{}"))?;
+        let raw = p[key].as_str().unwrap_or("");
+        if raw.is_empty() || raw == "{}" {
+            continue;
+        }
+        let v: Value = serde_json::from_str(raw)?;
         out.extend(object(&v)?.clone());
     }
     Ok(out.into())
 }
+fn capture_date(metadata: &str, extras: &str) -> Result<String> {
+    if (metadata.is_empty() || metadata == "{}") && (extras.is_empty() || extras == "{}") {
+        return Ok(String::new());
+    }
+    let mut out = serde_json::Map::new();
+    for raw in [metadata, extras] {
+        if raw.is_empty() || raw == "{}" {
+            continue;
+        }
+        let v: Value = serde_json::from_str(raw)?;
+        out.extend(object(&v)?.clone());
+    }
+    Ok(json::text(out.get("DateTimeOriginal").or_else(|| out.get("date")).unwrap_or(&json!(""))).replacen(':', "-", 2))
+}
 
-/// Port of `library_query.sync_index`; each 512-row batch is one IMMEDIATE transaction.
+/// Port of `library_query.sync_index`; each batch is one IMMEDIATE transaction.
 pub fn sync_index(db: &Connection, cancel: &AtomicBool) -> Result<()> {
     sync_index_on(Platform::native(), db, cancel)
 }
 
 /// [`sync_index`] with the path rules of `platform`.
 pub fn sync_index_on(platform: Platform, db: &Connection, cancel: &AtomicBool) -> Result<()> {
+    cancelled(cancel)?;
+    // Fast read-only check: avoid acquiring a BEGIN IMMEDIATE write lock when already clean.
+    let has_dirty: bool = db.query_row("SELECT EXISTS(SELECT 1 FROM browser_dirty)", [], |r| r.get(0))?;
+    let need_totals = !has_dirty && has_folder_totals(db)? && !folder_totals_ready(db)?;
+    if !has_dirty && !need_totals {
+        return Ok(());
+    }
     loop {
         cancelled(cancel)?;
         db.execute_batch("BEGIN IMMEDIATE")?;
         let work = (|| {
-            let rows = rows(
-                db,
-                "SELECT p.id,p.path,p.name,p.keywords,p.metadata,p.extras FROM browser_dirty d JOIN photos p ON p.id=d.id LIMIT 512",
-            )?;
-            for p in &rows {
-                let folder = platform.parent(string(&p["path"])?);
-                let i = info(p)?;
-                let date = json::text(i.get("DateTimeOriginal").or_else(|| i.get("date")).unwrap_or(&json!("")))
-                    .replacen(':', "-", 2);
-                db.execute(
-                    "INSERT OR REPLACE INTO browser_index VALUES(?,?,?,?,?,?)",
-                    params![
-                        integer(&p["id"])?,
+            upgrade_search_triggers(db)?;
+            let batch: Vec<(i64, String, String, String, String, String)> = {
+                let mut select = db.prepare_cached(
+                    "SELECT p.id,p.path,p.name,p.keywords,p.metadata,p.extras
+                     FROM browser_dirty d JOIN photos p ON p.id=d.id LIMIT 2048",
+                )?;
+                let rows = select
+                    .query_map([], |r| {
+                        Ok((
+                            r.get::<_, i64>(0)?,
+                            r.get::<_, String>(1)?,
+                            r.get::<_, String>(2)?,
+                            r.get::<_, Option<String>>(3)?.unwrap_or_default(),
+                            r.get::<_, Option<String>>(4)?.unwrap_or_default(),
+                            r.get::<_, Option<String>>(5)?.unwrap_or_default(),
+                        ))
+                    })?
+                    .collect::<rusqlite::Result<_>>()?;
+                rows
+            };
+            if !batch.is_empty() {
+                let mut upsert = db.prepare_cached(
+                    "INSERT INTO browser_index(id,folder,folder_key,name_key,keywords_key,capture_key)
+                     VALUES(?,?,?,?,?,?)
+                     ON CONFLICT(id) DO UPDATE SET
+                         folder=excluded.folder,
+                         folder_key=excluded.folder_key,
+                         name_key=excluded.name_key,
+                         keywords_key=excluded.keywords_key,
+                         capture_key=excluded.capture_key",
+                )?;
+                let mut clear_dirty = db.prepare_cached("DELETE FROM browser_dirty WHERE id=?")?;
+                for (idx, (id, path, name, keywords, metadata, extras)) in batch.iter().enumerate() {
+                    if (idx & 255) == 255 {
+                        cancelled(cancel)?;
+                    }
+                    let folder = platform.parent(path);
+                    let date = capture_date(metadata, extras)?;
+                    upsert.execute(params![
+                        id,
                         folder,
                         platform.path_key(&folder),
-                        fold(string(&p["name"])?),
-                        fold(string(&p["keywords"])?),
+                        fold(name),
+                        fold(keywords),
                         date
-                    ],
-                )?;
-                db.execute("DELETE FROM browser_dirty WHERE id=?", [integer(&p["id"])?])?;
+                    ])?;
+                    clear_dirty.execute([id])?;
+                }
             }
-            if rows.is_empty() && has_folder_totals(db)? && !folder_totals_ready(db)? {
-                // Rebuild once after an import or folder change. Ordinary queries read only
-                // the folder rows, including counts outside the user's current selection.
+            if batch.is_empty() && has_folder_totals(db)? && !folder_totals_ready(db)? {
+                // Rebuild once after an import or folder change when totals were cleared.
                 db.execute_batch(
                     "INSERT INTO browser_folder_totals
                     SELECT folder_key,MIN(folder),COUNT(*) FROM browser_index GROUP BY folder_key",
                 )?;
             }
-            Ok::<_, crate::Error>(rows.is_empty())
+            Ok::<_, crate::Error>(batch.is_empty())
         })();
         match work {
             Ok(empty) => {
@@ -110,6 +163,30 @@ fn folder_totals_ready(db: &Connection) -> Result<bool> {
     Ok(db.query_row("SELECT EXISTS(SELECT 1 FROM browser_folder_totals)", [], |row| row.get(0))?)
 }
 
+/// Upgrade legacy `browser_search.sql` triggers (`INSERT OR REPLACE` into FTS5 + full folder-total wipes)
+/// to incremental folder-total triggers and FTS5 DELETE+INSERT updates.
+fn upgrade_search_triggers(db: &Connection) -> Result<()> {
+    let legacy: bool = db.query_row(
+        "SELECT EXISTS(SELECT 1 FROM sqlite_master WHERE type='trigger' AND name='browser_text_changed' AND sql LIKE '%INSERT OR REPLACE%')",
+        [],
+        |row| row.get(0),
+    )?;
+    if !legacy {
+        return Ok(());
+    }
+    let full = include_str!("../assets/browser_search.sql");
+    if let Some(pos) = full.find("CREATE TRIGGER browser_text_added") {
+        db.execute_batch(
+            "DROP TRIGGER IF EXISTS browser_text_added;
+             DROP TRIGGER IF EXISTS browser_text_changed;
+             DROP TRIGGER IF EXISTS browser_text_removed;
+             DROP TRIGGER IF EXISTS browser_folder_changed;",
+        )?;
+        db.execute_batch(&full[pos..])?;
+    }
+    Ok(())
+}
+
 /// Install the trigram index when a library first needs substring search at scale.
 fn search_index(db: &Connection) -> Result<bool> {
     const EXISTS: &str = "SELECT EXISTS(SELECT 1 FROM sqlite_master WHERE name='browser_text' AND type='table')";
@@ -129,6 +206,14 @@ fn search_index(db: &Connection) -> Result<bool> {
     Ok(large)
 }
 
+/// Typed result of a browser catalog query, avoiding intermediate JSON serialization of large ID lists.
+pub struct QueryListing {
+    pub ids: Vec<i64>,
+    pub folders: Vec<Value>,
+    pub roots: Vec<String>,
+    pub total: i64,
+}
+
 /// Port of `library_query.query`; the caller owns cancellation and the query's local clock.
 pub fn query(path: impl AsRef<Path>, options: &Value, cancel: &Arc<AtomicBool>, now: NaiveDateTime) -> Result<Value> {
     query_on(Platform::native(), path, options, cancel, now)
@@ -142,28 +227,65 @@ pub fn query_on(
     cancel: &Arc<AtomicBool>,
     now: NaiveDateTime,
 ) -> Result<Value> {
-    let result = query_inner(platform, path.as_ref(), options, cancel, now);
+    let result = (|| {
+        let db = connect(path.as_ref())?;
+        let listing = query_listing_on(platform, &db, options, cancel, now)?;
+        Ok(json!({
+            "ids": listing.ids,
+            "folders": listing.folders,
+            "roots": listing.roots,
+            "total": listing.total,
+        }))
+    })();
     if cancel.load(Ordering::Relaxed) {
         Err(crate::Error::Cancelled)
     } else {
         result
     }
 }
-fn query_inner(
+
+/// Typed browser query running on an existing SQLite connection (eliminates extra connection opens
+/// and per-row JSON value allocations on 100K-500K photo libraries).
+pub fn query_listing_on(
     platform: Platform,
-    path: &Path,
+    db: &Connection,
     options: &Value,
     cancel: &Arc<AtomicBool>,
     now: NaiveDateTime,
-) -> Result<Value> {
+) -> Result<QueryListing> {
+    let result = query_listing_inner(platform, db, options, cancel, now);
+    if cancel.load(Ordering::Relaxed) {
+        Err(crate::Error::Cancelled)
+    } else {
+        result
+    }
+}
+
+fn query_listing_inner(
+    platform: Platform,
+    db: &Connection,
+    options: &Value,
+    cancel: &Arc<AtomicBool>,
+    now: NaiveDateTime,
+) -> Result<QueryListing> {
     object(options)?;
-    let db = connect(path)?;
-    sync_index_on(platform, &db, cancel)?;
+    sync_index_on(platform, db, cancel)?;
     let progress_cancel = Arc::clone(cancel);
     db.progress_handler(1000, Some(move || progress_cancel.load(Ordering::Relaxed)))?;
+    struct QueryGuard<'a>(&'a Connection, bool);
+    impl Drop for QueryGuard<'_> {
+        fn drop(&mut self) {
+            if self.1 {
+                let _ = self.0.execute_batch("COMMIT");
+            }
+            let _ = self.0.progress_handler(0, None::<fn() -> bool>);
+        }
+    }
+    let mut guard = QueryGuard(db, false);
     let search = fold(options["search"].as_str().unwrap_or(""));
-    let indexed_search = search.chars().take(3).count() == 3 && !search.contains('\0') && search_index(&db)?;
+    let indexed_search = search.chars().take(3).count() == 3 && !search.contains('\0') && search_index(db)?;
     db.execute_batch("BEGIN")?;
+    guard.1 = true;
     let mut filters = Vec::new();
     let mut bindings: Vec<rusqlite::types::Value> = Vec::new();
     let mut rules = Vec::new();
@@ -184,11 +306,20 @@ fn query_inner(
     }
     if indexed_search {
         // MATCH finds literal substrings in the pre-folded keys. SQLite FTS stops at NUL;
-        // include the (normally empty) partial index of such rows for exact verification below.
-        filters.push(
-            "i.id IN (SELECT rowid FROM browser_text WHERE browser_text MATCH ? UNION ALL
-            SELECT id FROM browser_index WHERE instr(name_key,char(0)) OR instr(keywords_key,char(0)))",
-        );
+        // check the partial NUL index first so the common (zero NUL rows) case avoids UNION ALL.
+        let has_nul: bool = db.query_row(
+            "SELECT EXISTS(SELECT 1 FROM browser_index WHERE instr(name_key,char(0)) OR instr(keywords_key,char(0)))",
+            [],
+            |row| row.get(0),
+        )?;
+        if has_nul {
+            filters.push(
+                "i.id IN (SELECT rowid FROM browser_text WHERE browser_text MATCH ? UNION ALL
+                SELECT id FROM browser_index WHERE instr(name_key,char(0)) OR instr(keywords_key,char(0)))",
+            );
+        } else {
+            filters.push("i.id IN (SELECT rowid FROM browser_text WHERE browser_text MATCH ?)");
+        }
         bindings.push(format!("\"{}\"", search.replace('"', "\"\"")).into());
     }
     if !search.is_empty() {
@@ -236,9 +367,9 @@ fn query_inner(
         "SELECT {columns} FROM photos p JOIN browser_index i ON i.id=p.id {where_clause}
                        ORDER BY {sort} {direction},p.id {direction}"
     );
-    let mut statement = db.prepare(&sql)?;
+    let mut statement = db.prepare_cached(&sql)?;
     let mut cursor = statement.query(rusqlite::params_from_iter(bindings))?;
-    let mut selected = Vec::new();
+    let mut selected: Vec<(i64, Option<i64>)> = Vec::new();
     while let Some(row) = cursor.next()? {
         cancelled(cancel)?;
         if !rules.is_empty() {
@@ -254,29 +385,37 @@ fn query_inner(
                 continue;
             }
         }
-        selected.push(json!({"id":row.get::<_,i64>(0)?, "stack_id":row.get::<_,Option<i64>>(1)?}));
+        selected.push((row.get::<_, i64>(0)?, row.get::<_, Option<i64>>(1)?));
     }
-    let ids = workflow::arrange_stacks(
+    drop(cursor);
+    drop(statement);
+    let ids = workflow::arrange_stack_pairs(
         &selected,
         options.get("stack_orders").unwrap_or(&json!({})),
         grainy_core::settings::truthy(&options["collapsed"]),
     )?;
-    let totals = if has_folder_totals(&db)? && folder_totals_ready(&db)? {
+    let totals = if has_folder_totals(db)? && folder_totals_ready(db)? {
         "SELECT folder,count FROM browser_folder_totals ORDER BY folder_key"
     } else {
         "SELECT MIN(folder) folder,COUNT(*) count FROM browser_index GROUP BY folder_key"
     };
-    let folders = rows(&db, totals)?
-        .into_iter()
-        .map(|r| Ok(json!({"path":platform.join(string(&r["folder"])?,"__count__"),"count":r["count"]})))
+    let mut total = 0i64;
+    let folders = db
+        .prepare_cached(totals)?
+        .query_map([], |r| Ok((r.get::<_, String>(0)?, r.get::<_, i64>(1)?)))?
+        .map(|row| {
+            let (folder, count) = row?;
+            total += count;
+            Ok(json!({"path": platform.join(&folder, "__count__"), "count": count}))
+        })
         .collect::<Result<Vec<_>>>()?;
-    let total: i64 = folders.iter().filter_map(|r| r["count"].as_i64()).sum();
-    let roots = rows(&db, "SELECT path FROM folder_roots ORDER BY path COLLATE NOCASE")?
-        .into_iter()
-        .map(|r| r["path"].clone())
-        .collect::<Vec<_>>();
+    let roots = db
+        .prepare_cached("SELECT path FROM folder_roots ORDER BY path COLLATE NOCASE")?
+        .query_map([], |r| r.get::<_, String>(0))?
+        .collect::<rusqlite::Result<Vec<_>>>()?;
     cancelled(cancel)?;
-    Ok(json!({"ids":ids,"folders":folders,"roots":roots,"total":total}))
+    drop(guard);
+    Ok(QueryListing { ids, folders, roots, total })
 }
 /// Port of `library_query.read_page`; keys are decimal photo ids in JSON.
 pub fn read_page(path: impl AsRef<Path>, ids: &[i64]) -> Result<Value> {

@@ -7,14 +7,14 @@
 //! A library opened read-only is read and listed from a private snapshot in the Rust app's data folder: nothing of the original folder is ever written, and edits,
 //! ratings and labels stay in memory.
 
-use std::collections::{BTreeSet, HashMap};
+use std::collections::{BTreeSet, HashMap, HashSet};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::AtomicBool;
 use std::sync::Arc;
 
 use chrono::NaiveDateTime;
 use grainy_catalog::folders::Platform;
-use grainy_catalog::rusqlite::{self, OpenFlags};
+use grainy_catalog::rusqlite::{self, types::ValueRef};
 use grainy_catalog::{query, Catalog};
 use grainy_core::{normalized, Settings};
 use serde_json::{json, Map, Value};
@@ -57,36 +57,64 @@ fn settings_value(value: &Value) -> Settings {
     }
 }
 
-/// The photo rows of `ids` from the catalogue file (read-only connection), in the order of `ids`.
-fn photo_rows(db: &Path, ids: &[i64]) -> Result<Vec<PhotoEntry>, String> {
-    let connection = rusqlite::Connection::open_with_flags(db, OpenFlags::SQLITE_OPEN_READ_ONLY).map_err(err)?;
-    let mut rows: HashMap<i64, PhotoEntry> = HashMap::new();
-    for part in ids.chunks(500) {
+fn dim_u32(r: &rusqlite::Row<'_>, index: usize) -> rusqlite::Result<Option<u32>> {
+    Ok(match r.get_ref(index)? {
+        ValueRef::Integer(v) if v >= 0 => u32::try_from(v).ok(),
+        _ => None,
+    })
+}
+
+fn photo_entry_from_row(r: &rusqlite::Row<'_>) -> rusqlite::Result<PhotoEntry> {
+    let id: i64 = r.get(0)?;
+    let source: Option<i64> = r.get(6)?;
+    let width = dim_u32(r, 8)?;
+    let height = dim_u32(r, 9)?;
+    Ok(PhotoEntry {
+        id: id as u64,
+        path: PathBuf::from(r.get::<_, String>(1)?),
+        name: r.get(2)?,
+        rating: r.get(3)?,
+        flag: r.get(4)?,
+        label: r.get::<_, Option<String>>(5)?.unwrap_or_default(),
+        virtual_source: source.filter(|s| *s != 0).map(|s| s as u64),
+        stack: r.get(7)?,
+        original: width.zip(height),
+    })
+}
+
+/// The photo rows of `ids` on an open catalogue connection, in the order of `ids`.
+/// Extracts `width`/`height` inside SQLite (`json_extract`) instead of deserializing the full EXIF JSON
+/// blob per photo, and uses a single sequential table scan for large unfiltered views.
+fn photo_rows_on(connection: &rusqlite::Connection, ids: &[i64], total: usize) -> Result<Vec<PhotoEntry>, String> {
+    if ids.is_empty() {
+        return Ok(Vec::new());
+    }
+    const COLS: &str = "id,path,name,rating,flag,label,virtual_source,stack_id,\
+        CASE WHEN metadata!='{}' AND json_valid(metadata) THEN json_extract(metadata,'$.width') END,\
+        CASE WHEN metadata!='{}' AND json_valid(metadata) THEN json_extract(metadata,'$.height') END";
+    // Large listing (e.g. All Photos / big folder): one sequential table scan beats hundreds of IN(...) B-tree probes.
+    if ids.len() > 1000 && ids.len().saturating_mul(4) >= total {
+        let mut positions: HashMap<i64, usize> = HashMap::with_capacity(ids.len());
+        for (pos, &id) in ids.iter().enumerate() {
+            positions.entry(id).or_insert(pos);
+        }
+        let mut slots: Vec<Option<PhotoEntry>> = vec![None; ids.len()];
+        let mut statement = connection.prepare_cached(&format!("SELECT {COLS} FROM photos")).map_err(err)?;
+        let mapped = statement.query_map([], photo_entry_from_row).map_err(err)?;
+        for row in mapped {
+            let entry = row.map_err(err)?;
+            if let Some(&pos) = positions.get(&(entry.id as i64)) {
+                slots[pos] = Some(entry);
+            }
+        }
+        return Ok(slots.into_iter().flatten().collect());
+    }
+    let mut rows: HashMap<i64, PhotoEntry> = HashMap::with_capacity(ids.len());
+    for part in ids.chunks(900) {
         let marks = vec!["?"; part.len()].join(",");
-        let sql = format!(
-            "SELECT id,path,name,rating,flag,label,virtual_source,stack_id,metadata FROM photos WHERE id IN ({marks})"
-        );
-        let mut statement = connection.prepare(&sql).map_err(err)?;
-        let mapped = statement
-            .query_map(rusqlite::params_from_iter(part), |r| {
-                let metadata: String = r.get::<_, Option<String>>(8)?.unwrap_or_default();
-                let info: Value = serde_json::from_str(&metadata).unwrap_or(Value::Null);
-                let size = |k: &str| info.get(k).and_then(Value::as_u64).map(|v| v as u32);
-                let id: i64 = r.get(0)?;
-                let source: Option<i64> = r.get(6)?;
-                Ok(PhotoEntry {
-                    id: id as u64,
-                    path: PathBuf::from(r.get::<_, String>(1)?),
-                    name: r.get(2)?,
-                    rating: r.get(3)?,
-                    flag: r.get(4)?,
-                    label: r.get::<_, Option<String>>(5)?.unwrap_or_default(),
-                    virtual_source: source.filter(|s| *s != 0).map(|s| s as u64),
-                    stack: r.get(7)?,
-                    original: size("width").zip(size("height")),
-                })
-            })
-            .map_err(err)?;
+        let sql = format!("SELECT {COLS} FROM photos WHERE id IN ({marks})");
+        let mut statement = connection.prepare_cached(&sql).map_err(err)?;
+        let mapped = statement.query_map(rusqlite::params_from_iter(part), photo_entry_from_row).map_err(err)?;
         for row in mapped {
             let entry = row.map_err(err)?;
             rows.insert(entry.id as i64, entry);
@@ -95,10 +123,9 @@ fn photo_rows(db: &Path, ids: &[i64]) -> Result<Vec<PhotoEntry>, String> {
     Ok(ids.iter().filter_map(|id| rows.remove(id)).collect())
 }
 
-fn collections_of(db: &Path) -> Result<Vec<Collection>, String> {
-    let connection = rusqlite::Connection::open_with_flags(db, OpenFlags::SQLITE_OPEN_READ_ONLY).map_err(err)?;
+fn collections_of(connection: &rusqlite::Connection) -> Result<Vec<Collection>, String> {
     let mut statement =
-        connection.prepare("SELECT id,name,parent_id,rules FROM collections ORDER BY name").map_err(err)?;
+        connection.prepare_cached("SELECT id,name,parent_id,rules FROM collections ORDER BY name").map_err(err)?;
     let rows = statement
         .query_map([], |r| {
             Ok(Collection {
@@ -112,11 +139,8 @@ fn collections_of(db: &Path) -> Result<Vec<Collection>, String> {
     rows.collect::<rusqlite::Result<Vec<_>>>().map_err(err)
 }
 
-/// `Catalog.removed_folders` read from the catalogue file (the listing job has no `Catalog`).
-fn removed_folders_of(db: &Path) -> Vec<String> {
-    let Ok(connection) = rusqlite::Connection::open_with_flags(db, OpenFlags::SQLITE_OPEN_READ_ONLY) else {
-        return Vec::new();
-    };
+/// `Catalog.removed_folders` read from the catalogue connection (the listing job has no `Catalog`).
+fn removed_folders_of(connection: &rusqlite::Connection) -> Vec<String> {
     let text: Option<String> =
         connection.query_row("SELECT value FROM preferences WHERE key='removed_folders'", [], |r| r.get(0)).ok();
     text.and_then(|t| serde_json::from_str::<Value>(&t).ok())
@@ -124,12 +148,18 @@ fn removed_folders_of(db: &Path) -> Vec<String> {
         .unwrap_or_default()
 }
 
-/// The flat `folder_nodes` list as a tree.
+/// The flat `folder_nodes` list as a tree in O(F) time.
 fn folder_tree(nodes: &[Value]) -> Vec<FolderNode> {
-    fn children(nodes: &[Value], parent: Option<&str>) -> Vec<FolderNode> {
-        nodes
+    let mut by_parent: HashMap<Option<&str>, Vec<&Value>> = HashMap::with_capacity(nodes.len());
+    for n in nodes {
+        by_parent.entry(n["parent"].as_str()).or_default().push(n);
+    }
+    fn build(by_parent: &HashMap<Option<&str>, Vec<&Value>>, parent: Option<&str>) -> Vec<FolderNode> {
+        let Some(children) = by_parent.get(&parent) else {
+            return Vec::new();
+        };
+        children
             .iter()
-            .filter(|n| n["parent"].as_str() == parent)
             .map(|n| {
                 let key = n["key"].as_str().unwrap_or("");
                 FolderNode {
@@ -137,35 +167,34 @@ fn folder_tree(nodes: &[Value]) -> Vec<FolderNode> {
                     name: n["name"].as_str().unwrap_or("").to_owned(),
                     direct: n["direct"].as_i64().unwrap_or(0),
                     total: n["total"].as_i64().unwrap_or(0),
-                    children: children(nodes, Some(key)),
+                    children: build(by_parent, Some(key)),
                 }
             })
             .collect()
     }
-    children(nodes, None)
+    build(&by_parent, None)
 }
 
 /// Port of `refresh_lists`' work: `library_query.query`, the rows of the result, the folder tree and the
-/// collections.
+/// collections, executed on a single tuned SQLite connection.
 pub fn read_listing(db: &Path, options: &Value, now: NaiveDateTime, generation: u64) -> Result<Listing, String> {
     let cancel = Arc::new(AtomicBool::new(false));
-    let result = query::query(db, options, &cancel, now).map_err(err)?;
-    let ids: Vec<i64> =
-        result["ids"].as_array().map(|a| a.iter().filter_map(Value::as_i64).collect()).unwrap_or_default();
-    let photos = photo_rows(db, &ids)?;
-    let roots: Vec<String> = result["roots"]
-        .as_array()
-        .map(|a| a.iter().filter_map(|v| v.as_str().map(str::to_owned)).collect())
-        .unwrap_or_default();
-    let folders = result["folders"].as_array().cloned().unwrap_or_default();
-    let nodes = Platform::native().folder_nodes(&folders, &roots).map_err(err)?;
+    let connection = query::open_connection(db).map_err(err)?;
+    let result = query::query_listing_on(Platform::native(), &connection, options, &cancel, now).map_err(err)?;
+    let total = result.total.max(0) as usize;
+    let photos = photo_rows_on(&connection, &result.ids, total)?;
+    let nodes = Platform::native().folder_nodes(&result.folders, &result.roots).map_err(err)?;
     Ok(Listing {
         generation,
         photos,
-        total: result["total"].as_u64().unwrap_or(0) as usize,
+        total,
         folders: folder_tree(&nodes),
-        collections: collections_of(db)?,
-        folder_inputs: FolderInputs { rows: folders, roots, removed: removed_folders_of(db) },
+        collections: collections_of(&connection)?,
+        folder_inputs: FolderInputs {
+            rows: result.folders,
+            roots: result.roots,
+            removed: removed_folders_of(&connection),
+        },
     })
 }
 
@@ -454,8 +483,18 @@ impl CatalogDocument {
             }
         }
         self.listing = listing;
-        let ids: BTreeSet<u64> = self.listing.photos.iter().map(|p| p.id).collect();
-        self.selection.retain(|id| ids.contains(id));
+        if !self.selection.is_empty() {
+            let mut present: HashSet<u64> = HashSet::with_capacity(self.selection.len());
+            for photo in &self.listing.photos {
+                if self.selection.contains(&photo.id) {
+                    present.insert(photo.id);
+                    if present.len() == self.selection.len() {
+                        break;
+                    }
+                }
+            }
+            self.selection.retain(|id| present.contains(id));
+        }
         let ensure = std::mem::take(&mut self.ensure_current);
         if ensure || self.open.is_some() {
             self.hold_first = false;
@@ -465,18 +504,17 @@ impl CatalogDocument {
             self.select(index);
             return;
         }
-        match self.open.as_ref().map(|p| p.id) {
-            Some(id) if ids.contains(&id) => {
-                if let Some(entry) = self.listing.photos.iter().find(|p| p.id == id) {
-                    let original = self.open.as_ref().and_then(|o| o.original);
-                    let mut entry = entry.clone();
-                    entry.original = entry.original.or(original);
-                    self.open = Some(entry);
-                }
+        let open_entry =
+            self.open.as_ref().and_then(|open| self.listing.photos.iter().find(|p| p.id == open.id).cloned());
+        match (self.open.as_ref().map(|p| p.id), open_entry) {
+            (Some(id), Some(mut entry)) => {
+                let original = self.open.as_ref().and_then(|o| o.original);
+                entry.original = entry.original.or(original);
+                self.open = Some(entry);
                 self.selection.insert(id);
             }
-            Some(_) if !ensure => {}
-            None if self.hold_first => {}
+            (Some(_), None) if !ensure => {}
+            (None, _) if self.hold_first => {}
             _ => {
                 if self.listing.photos.is_empty() {
                     if ensure || self.open.is_some() {

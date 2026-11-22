@@ -61,6 +61,19 @@ fn immutable_reader(path: &Path) -> Result<Connection> {
     )?)
 }
 
+pub(crate) fn tune_connection(db: &Connection, writable: bool) -> Result<()> {
+    // Connection-local memory tuning for 100K-500K photo catalogs; never modifies on-disk schema.
+    db.execute_batch("PRAGMA temp_store=MEMORY; PRAGMA cache_size=-65536;")?;
+    if writable {
+        let _ = db.execute_batch("PRAGMA mmap_size=268435456;");
+        let mode: String = db.query_row("PRAGMA journal_mode", [], |r| r.get(0)).unwrap_or_default();
+        if mode.eq_ignore_ascii_case("wal") {
+            let _ = db.execute_batch("PRAGMA synchronous=NORMAL;");
+        }
+    }
+    Ok(())
+}
+
 impl Catalog {
     /// Port of `Catalog.__init__`, including WAL, migrations and historical folder registration.
     pub fn new(directory: impl AsRef<Path>) -> Result<Self> {
@@ -74,6 +87,7 @@ impl Catalog {
         db.busy_timeout(Duration::from_secs(5))?;
         let c = Self { db, directory, platform: sources.platform, sources, reader: false };
         schema::migrate(&c)?;
+        tune_connection(&c.db, true)?;
         c.recover_trash()?;
         Ok(c)
     }
@@ -89,6 +103,7 @@ impl Catalog {
             immutable_reader(&path)?
         };
         db.busy_timeout(Duration::from_secs(2))?;
+        tune_connection(&db, false)?;
         db.execute_batch("BEGIN")?;
         Ok(Self { db, directory, platform: Platform::native(), sources: Sources::default(), reader: true })
     }
