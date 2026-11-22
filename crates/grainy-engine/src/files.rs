@@ -408,11 +408,17 @@ fn load_raw(
     }
     drop(timing);
     let mut raw = grainy_raw::RawFile::open(path).map_err(|e| raw_error(path, e))?;
+    // Fallback to LibRaw MakerNote lens name when standard EXIF tag 42036 is missing.
+    let lens_missing = metadata.get("lens").and_then(Value::as_str).is_none_or(|s| s.trim().is_empty());
+    if lens_missing && !raw.metadata().lens.trim().is_empty() {
+        metadata.insert("lens".into(), Value::String(raw.metadata().lens.trim().to_owned()));
+    }
     let sizes = raw.metadata().sizes;
     let flip = raw.metadata().flip;
+    let num_colors = raw.metadata().num_colors;
     let (width, height) = (sizes[3], sizes[2]);
     let (full_width, full_height) = if matches!(flip, 5 | 6) { (height, width) } else { (width, height) };
-    let photo = if grainy_raw::rawcolor::enabled(settings) {
+    let photo = if grainy_raw::rawcolor::enabled(settings) && num_colors == 3 {
         let mut dictionary = Value::Object(std::mem::take(&mut metadata));
         let source = grainy_raw::rawcolor::decode(&mut raw, &mut dictionary, max_size.map(|v| v as u32), Some(path))
             .map_err(|e| raw_error(path, e));
@@ -430,9 +436,16 @@ fn load_raw(
         };
         let decoded = raw.postprocess(mode, half).map_err(|e| raw_error(path, e))?;
         let timing = grainy_core::timing::Span::new("load.normalize16");
-        let mut rgb = decoded.mapv(|v| v as f32 / 65535.);
+        let mut rgb = if decoded.dim().2 == 1 {
+            // 1-channel monochrome sensor RAW (e.g. Leica M Monochrom / Pentax Monochrome):
+            // replicate neutral luminance cleanly into 3-channel linear RGB.
+            let (dh, dw, _) = decoded.dim();
+            grainy_core::Image::from_shape_fn((dh, dw, 3), |(y, x, _)| decoded[[y, x, 0]] as f32 / 65535.)
+        } else {
+            decoded.mapv(|v| v as f32 / 65535.)
+        };
         drop(timing);
-        if !half {
+        if !half && num_colors == 3 {
             rgb = grainy_raw::rawcolor::reduce_false_color(&rgb).map_err(|e| raw_error(path, e))?;
         }
         metadata.insert("raw_native".into(), Value::Bool(false));

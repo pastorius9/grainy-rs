@@ -5,7 +5,9 @@
 use grainy_i18n::Language;
 
 /// Korean source → English, for the strings this crate adds.
-pub const ENGLISH: [(&str, &str); 79] = [
+pub const ENGLISH: [(&str, &str); 81] = [
+    ("AI 노이즈 제거", "AI Denoise"),
+    ("GPU 협업 패치 AI 디노이즈 · 로컬 오프라인 처리", "GPU Collaborative Patch AI Denoise · Local Offline"),
     ("소프트 프루핑", "Soft Proofing"),
     ("끄기", "Off"),
     ("색역 경고 표시", "Show Gamut Warning"),

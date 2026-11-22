@@ -13,6 +13,7 @@ pub mod column;
 pub mod controls;
 pub mod crop;
 pub mod curve;
+pub mod detail;
 pub mod film;
 pub mod grading;
 pub mod healing;
@@ -70,6 +71,7 @@ pub fn registry() -> Vec<Box<dyn Panel>> {
         Box::new(curve::Curve),
         Box::new(mixer::Mixer),
         Box::new(grading::Grading),
+        Box::new(detail::Detail),
         Box::new(lens::Lens),
         Box::new(transform::Transform),
         Box::new(photo_filter::PhotoFilter),

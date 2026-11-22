@@ -6,6 +6,7 @@ use crate::{Error, Frame, Gpu, Result};
 use grainy_core::{Image, Settings};
 
 pub(crate) const KEYS: &[&str] = &[
+    "ai_denoise",
     "noise_luma",
     "noise_color",
     "dehaze",
@@ -195,6 +196,12 @@ impl Gpu {
         let v4 = s.f64("detail_version") >= 4.0;
         let none = [None; 4];
         let mut current = frame.clone();
+        let ai_amount = s.f64("ai_denoise");
+        if ai_amount.is_finite() && ai_amount > 0.0 {
+            let (h_luma_sq, h_chroma_sq, blend) = grainy_detail::ai_denoise::params(ai_amount, pixel_scale);
+            let ai_p = [frame.width as f32, frame.height as f32, -1.0 / h_luma_sq, -1.0 / h_chroma_sq, blend];
+            current = batch.dispatch(&current, 44, &ai_p, &[], &[])?;
+        }
         if p[18] > 0.0 && (s.bool("noise_luma") || s.bool("noise_color")) {
             current = self.detail_pass(batch, &current, &p, 6, &[], none)?;
             if s.bool("noise_color") {
@@ -683,5 +690,26 @@ mod tests {
         let edge_v4 = edge_contrast(&cpu_v4);
         assert!(std_v4 < std_v3 && std_v4 < std_raw * 0.45, "std raw={std_raw:.4} v3={std_v3:.4} v4={std_v4:.4}");
         assert!(edge_v4 >= edge_v3 * 0.99, "edge contrast v3={edge_v3:.4} v4={edge_v4:.4}");
+    }
+
+    #[test]
+    fn phase6_ai_denoise_gpu_matches_cpu() {
+        let Some(gpu) = Gpu::with_adapter(crate::AdapterKind::Hardware).expect("GPU init") else {
+            return;
+        };
+        let (h, w) = (64, 96);
+        let image = Image::from_shape_fn((h, w, 3), |(y, x, c)| {
+            let base = if x < w / 2 { 0.25 } else { 0.78 };
+            let hash = ((x.wrapping_mul(73856093) ^ y.wrapping_mul(19349663) ^ c.wrapping_mul(83492791)) % 1009) as f32
+                / 1009.0
+                - 0.5;
+            (base + hash * 0.14).clamp(0.0, 1.0)
+        });
+        let mut s = grainy_core::defaults();
+        s.set("ai_denoise", serde_json::json!(70.0));
+        let cpu = grainy_detail::develop_detail(&image, &s, 1.0).unwrap();
+        let gpu_out = gpu.detail(&image, &s, 1.0).unwrap().expect("GPU AI denoise");
+        let max_diff = cpu.iter().zip(gpu_out.iter()).map(|(a, b)| (a - b).abs()).fold(0.0f32, f32::max);
+        assert!(max_diff < 2e-5, "AI denoise GPU vs CPU max diff {max_diff}");
     }
 }

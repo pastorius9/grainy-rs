@@ -151,7 +151,14 @@ fn directory<R: Read + Seek>(
         if !selected {
             continue;
         }
-        if !dcp && count > if (52533..=52535).contains(&tag) { 8022 } else { 1024 } {
+        let max_count = if tag == crate::proraw::TAG_PROFILE_GAIN_TABLE_MAP {
+            4 * 1024 * 1024
+        } else if (52533..=52535).contains(&tag) {
+            8022
+        } else {
+            1024
+        };
+        if !dcp && count > max_count {
             return Err(invalid("DNG color tag too large"));
         }
         let data = get(r, pos, size, len)?;

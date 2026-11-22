@@ -80,6 +80,9 @@ pub struct CameraInfo {
     /// rawcolor.read_dng_calibration embedded profile.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub base_profile: Option<Profile>,
+    /// Apple ProRAW / DNG 1.6 `ProfileGainTableMap` (tag 52525) spatially-varying gain map.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub gain_table_map: Option<crate::proraw::ProfileGainTableMap>,
     /// rawcolor.decode camera metadata (make, camera, format, unique_camera).
     #[serde(flatten)]
     pub metadata: serde_json::Map<String, Value>,
@@ -94,6 +97,7 @@ impl Default for CameraInfo {
             calibration: None,
             calibration_signature: None,
             base_profile: None,
+            gain_table_map: None,
             metadata: Default::default(),
         }
     }
@@ -276,6 +280,9 @@ pub fn develop_camera(source: &CameraSource, s: &Settings) -> Result<Image> {
     } else {
         math::map(&source.pixels, |v| transform.map(|r| v[0] * r[0] + v[1] * r[1] + v[2] * r[2]))
     };
+    if let Some(gain_map) = &info.gain_table_map {
+        gain_map.apply(&mut a);
+    }
     if has_record {
         let hs = dcp::interpolate_table(&p, dcp::weight(&p, t, Some(white))?)?;
         if s.bool("dcp_huesat") {
@@ -390,8 +397,27 @@ pub fn read_dng_calibration(path: impl AsRef<Path>, info: &mut CameraInfo) -> Re
         return Ok(());
     }
     let wanted = [
-        50708, 50721, 50722, 50723, 50724, 50727, 50728, 50778, 50779, 50931, 50932, 50964, 50965, 52529, 52530, 52531,
-        52532, 52533, 52534, 52535,
+        50708,
+        50721,
+        50722,
+        50723,
+        50724,
+        50727,
+        50728,
+        50778,
+        50779,
+        50931,
+        50932,
+        50964,
+        50965,
+        crate::proraw::TAG_PROFILE_GAIN_TABLE_MAP,
+        52529,
+        52530,
+        52531,
+        52532,
+        52533,
+        52534,
+        52535,
     ];
     let (pages, le) = tiff::dng(path, &wanted, false)?;
     let mut tags = std::collections::BTreeMap::new();
@@ -429,6 +455,11 @@ pub fn read_dng_calibration(path: impl AsRef<Path>, info: &mut CameraInfo) -> Re
     if calibration.iter().any(Option::is_some) {
         info.calibration = Some(calibration.map(|m| m.unwrap_or(ID)).to_vec());
         info.calibration_signature = Some(tags.get(&50931).map(tiff::Tag::text).unwrap_or_default());
+    }
+    if let Some(bytes) = tags.get(&crate::proraw::TAG_PROFILE_GAIN_TABLE_MAP).and_then(tiff::Tag::bytes) {
+        if let Ok(map) = crate::proraw::ProfileGainTableMap::parse(bytes) {
+            info.gain_table_map = Some(map);
+        }
     }
     Ok(())
 }

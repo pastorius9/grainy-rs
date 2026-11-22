@@ -6,6 +6,7 @@
 //! opencv-python build, so results are bit-identical to the oracle's CPU path except where its Intel IPP bilateral
 //! filter is used (luminance noise reduction of `detail_version` 1 and 2: a few float32 ulps of L*).
 
+pub mod ai_denoise;
 mod cv;
 pub mod laplacian;
 pub mod noise;

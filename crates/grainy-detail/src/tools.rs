@@ -46,9 +46,14 @@ fn settings_profiles(s: &Settings) -> Option<Vec<[f32; WAVELET_BINS]>> {
 /// previews).
 pub fn detail_tools(a: &Image, s: &Settings, pixel_scale: f64) -> Image {
     let d = diameter(pixel_scale);
+    let ai_amount = s.f64("ai_denoise");
     let noise_luma = s.f64("noise_luma");
     let noise_color = s.f64("noise_color");
-    let mut a = a.as_standard_layout().into_owned();
+    let mut a = if ai_amount > 0.0 {
+        crate::ai_denoise::apply(a, ai_amount, pixel_scale)
+    } else {
+        a.as_standard_layout().into_owned()
+    };
     if d > 1 && (noise_luma != 0.0 || noise_color != 0.0) {
         let mut lab = grainy_color::rgb_to_lab(&a);
         // Colour first: its guide is the original luminance.

@@ -219,6 +219,10 @@ pub fn normalized(stored: &Map<String, Value>) -> Settings {
     for (key, value) in stored {
         if known.contains_key(key) {
             result.0.insert(key.clone(), value.clone());
+        } else if key == "ai_denoise" {
+            if let Some(v) = value.as_f64().filter(|v| v.is_finite() && *v > 0.0) {
+                result.0.insert(key.clone(), Value::from(v.clamp(0.0, 100.0)));
+            }
         }
     }
     if !hdr_feature() {
@@ -275,6 +279,9 @@ pub fn effective(settings: &Settings) -> Settings {
                     result.0.insert(key.clone(), value.clone());
                 }
             }
+        }
+        if panel == "detail" {
+            result.0.remove("ai_denoise");
         }
     }
     result

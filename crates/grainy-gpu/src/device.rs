@@ -209,6 +209,7 @@ impl Gpu {
             ("film", include_str!("film.wgsl"), 5, "film_stage"),
             ("local", include_str!("local.wgsl"), 3, "local_stage"),
             ("geometry", include_str!("geometry.wgsl"), 1, ""),
+            ("ai_denoise", include_str!("ai_denoise.wgsl"), 1, ""),
         ] {
             let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
                 label: Some(name),

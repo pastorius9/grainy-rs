@@ -10,6 +10,7 @@ use grainy_jpeg_sys as _;
 pub mod dcp;
 mod math;
 pub mod metadata;
+pub mod proraw;
 pub mod raw_defaults;
 pub mod rawcolor;
 #[allow(unsafe_code)]
