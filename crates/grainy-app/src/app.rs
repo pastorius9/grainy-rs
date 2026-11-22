@@ -138,12 +138,17 @@ impl GrainyApp {
     pub fn show(&mut self, ui: &mut Ui) {
         let ctx = ui.ctx().clone();
         let cx = &mut self.cx;
+        let status_before = cx.status().to_owned();
         cx.poll_background();
         crate::ai::frame(cx);
         crate::startup::frame(cx);
         cx.handle_shortcuts();
         cx.flush();
-        cx.refresh_picture();
+        // If a background job, command, or shortcut just posted a new status message this frame
+        // (e.g. import or export completion), don't let a simultaneous preview reply clobber it
+        // before it has been displayed for a single frame.
+        let preserve_status = cx.status() != status_before;
+        cx.refresh_picture_inner(preserve_status);
         // Lights out (L): the columns, the bars, the menus and the status bar are not drawn.
         let lights = crate::commands::settings::begin_frame(cx);
 

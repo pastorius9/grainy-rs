@@ -863,6 +863,10 @@ impl AppContext {
 
     /// Collects the renderer's replies and sends the requests the screen needs now.
     pub fn refresh_picture(&mut self) {
+        self.refresh_picture_inner(false);
+    }
+
+    pub(crate) fn refresh_picture_inner(&mut self, preserve_status: bool) {
         for reply in self.renderer.poll() {
             match reply {
                 Reply::Frame(frame) => {
@@ -871,24 +875,26 @@ impl AppContext {
                         continue;
                     }
                     self.doc.set_original(frame.photo, frame.original);
-                    self.status = if self.before {
-                        tr("원본 비교 중")
-                    } else {
-                        let source = match frame.resolution {
-                            Resolution::Fit => "미리보기 {0} × {1} · {2} ms",
-                            Resolution::Full => "원본 해상도 {0} × {1} · {2} ms",
+                    if !preserve_status {
+                        self.status = if self.before {
+                            tr("원본 비교 중")
+                        } else {
+                            let source = match frame.resolution {
+                                Resolution::Fit => "미리보기 {0} × {1} · {2} ms",
+                                Resolution::Full => "원본 해상도 {0} × {1} · {2} ms",
+                            };
+                            let values = [
+                                frame.preview.width.to_string(),
+                                frame.preview.height.to_string(),
+                                if FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed) {
+                                    "0".to_owned()
+                                } else {
+                                    format!("{:.0}", frame.millis)
+                                },
+                            ];
+                            tr_with(source, &[&values[0], &values[1], &values[2]])
                         };
-                        let values = [
-                            frame.preview.width.to_string(),
-                            frame.preview.height.to_string(),
-                            if FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed) {
-                                "0".to_owned()
-                            } else {
-                                format!("{:.0}", frame.millis)
-                            },
-                        ];
-                        tr_with(source, &[&values[0], &values[1], &values[2]])
-                    };
+                    }
                     self.show_frame(frame);
                     if self.renderer.prepares_analysis() {
                         crate::commands::auto_source::prepare(self);
