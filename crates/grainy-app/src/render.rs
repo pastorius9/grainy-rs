@@ -207,6 +207,22 @@ pub enum Reply {
 pub type Waker = Arc<dyn Fn() + Send + Sync>;
 
 /// Turns jobs into pictures without blocking the caller.
+/// Soft-proofing view state (simulated output profile + optional out-of-gamut overlay + BPC).
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub struct SoftProof {
+    pub enabled: bool,
+    pub target: String,
+    pub gamut_warning: bool,
+    pub bpc: bool,
+}
+
+impl Default for SoftProof {
+    fn default() -> Self {
+        Self { enabled: false, target: "sRGB".to_owned(), gamut_warning: false, bpc: true }
+    }
+}
+
+/// The monitor's ICC profile (`Renderer::set_monitor`), read when a job starts.
 pub trait Renderer {
     /// Start a new document with fresh source caches and its own offline packet directory.
     fn set_library(&mut self, _folder: Option<PathBuf>) {}
@@ -248,6 +264,8 @@ pub trait Renderer {
     /// clipping stay those of the sRGB frame). The window asks for the pictures again; a renderer without colour
     /// management ignores it.
     fn set_monitor(&mut self, _profile: Option<grainy_cms::Profile>) {}
+    /// Soft-proofing configuration (simulated output profile + gamut warning); ignored by simple renderers.
+    fn set_soft_proof(&mut self, _proof: SoftProof) {}
     /// The viewing choices for HDR photos (`crate::hdr::View`: SDR preview, HDR range view); a renderer without the
     /// HDR preview path ignores it.
     fn set_hdr_view(&mut self, _view: crate::hdr::View) {}

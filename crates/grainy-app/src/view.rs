@@ -172,12 +172,70 @@ impl AppContext {
             painter.image(*tile_id, tile_rect, uv, Color32::WHITE);
         }
         self.clipping_overlay(ui, &painter, rect);
+        self.update_cursor_rgb(ui, rect);
+        if self.soft_proof.enabled && self.doc.current().is_some() {
+            let label = if self.soft_proof.gamut_warning {
+                crate::text::tr_with("소프트 프루핑 · {0} (색역 경고)", &[&self.soft_proof.target])
+            } else {
+                crate::text::tr_with("소프트 프루핑 · {0}", &[&self.soft_proof.target])
+            };
+            let galley = painter.layout_no_wrap(label, t::font(t::FONT_SIZE), t::BRAND);
+            let badge = Rect::from_min_size(
+                Pos2::new(area.right() - galley.size().x - 22.0, area.top() + 10.0),
+                galley.size() + Vec2::new(12.0, 6.0),
+            );
+            painter.rect_filled(badge, CornerRadius::ZERO, Color32::from_rgba_unmultiplied(16, 18, 21, 210));
+            painter.rect_stroke(badge, CornerRadius::ZERO, Stroke::new(1.0, t::BRAND), StrokeKind::Inside);
+            painter.galley(badge.min + Vec2::new(6.0, 3.0), galley, t::BRAND);
+        }
         if self.doc.current().is_some() {
             tools::paint(ui, &ViewTransform { rect }, self, tools);
         }
         if self.debug_overlay {
             self.paint_debug_overlay(ui, area);
         }
+    }
+
+    /// Samples the live pixel RGB % (0..100) under the pointer for the Histogram readout.
+    fn update_cursor_rgb(&mut self, ui: &Ui, rect: Rect) {
+        let pointer = ui
+            .input(|i| i.pointer.hover_pos())
+            .filter(|p| rect.contains(*p) && rect.width() > 0.0 && rect.height() > 0.0);
+        let (Some(pos), Some(frame)) = (pointer, self.frame.clone()) else {
+            self.cursor_rgb = None;
+            self.cursor_sample_key = None;
+            return;
+        };
+        let u = ((pos.x - rect.left()) / rect.width()).clamp(0.0, 1.0);
+        let v = ((pos.y - rect.top()) / rect.height()).clamp(0.0, 1.0);
+        let (pw, ph) = (frame.preview.width, frame.preview.height);
+        if pw == 0 || ph == 0 {
+            self.cursor_rgb = None;
+            return;
+        }
+        let (lu, lv) = match frame.tile_uv {
+            Some([u0, v0, u1, v1]) if u >= u0 && u <= u1 && v >= v0 && v <= v1 => {
+                (((u - u0) / (u1 - u0).max(1e-6)).clamp(0.0, 1.0), ((v - v0) / (v1 - v0).max(1e-6)).clamp(0.0, 1.0))
+            }
+            Some(_) => return,
+            None => (u, v),
+        };
+        let px = ((lu * (pw - 1) as f32).round() as usize).min(pw - 1);
+        let py = ((lv * (ph - 1) as f32).round() as usize).min(ph - 1);
+        let key = (frame.id, px as u32, py as u32);
+        if self.cursor_sample_key == Some(key) {
+            return;
+        }
+        let sample = if !frame.preview.rgba.is_empty() {
+            let at = (py * pw + px) * 4;
+            frame.preview.rgba.get(at..at + 3).map(|c| [c[0], c[1], c[2]])
+        } else if let Some(gpu) = &frame.gpu {
+            gpu.gpu.read_pixel_rgba8(&gpu.presented.texture, px as u32, py as u32).ok().map(|c| [c[0], c[1], c[2]])
+        } else {
+            None
+        };
+        self.cursor_sample_key = Some(key);
+        self.cursor_rgb = sample.map(|[r, g, b]| [r as f32 / 2.55, g as f32 / 2.55, b as f32 / 2.55]);
     }
 
     /// The clipping overlay over the photo (`drawForeground`): highlights red, shadows blue.

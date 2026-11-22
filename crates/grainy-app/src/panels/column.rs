@@ -168,6 +168,14 @@ fn histogram(ui: &mut Ui, cx: &mut AppContext) {
     if cx.bins.is_some() {
         histogram_adjustments(ui, cx, rect, hdr.is_some());
     }
+    if let Some([r, g, b]) = cx.cursor_rgb {
+        let text = format!("R {r:4.1}%  G {g:4.1}%  B {b:4.1}%");
+        let galley = painter.layout_no_wrap(text, egui::FontId::monospace(10.0), t::TEXT);
+        let pill =
+            Rect::from_center_size(Pos2::new(rect.center().x, rect.top() + 12.0), galley.size() + Vec2::new(8.0, 2.0));
+        painter.rect_filled(pill, CornerRadius::ZERO, Color32::from_rgba_unmultiplied(16, 18, 21, 195));
+        painter.galley(pill.center() - galley.size() / 2.0, galley, t::TEXT);
+    }
     for (index, active) in [(0, cx.clip_shadows), (1, cx.clip_highlights)] {
         let min =
             if index == 0 { rect.min + Vec2::new(3.0, 3.0) } else { Pos2::new(rect.right() - 25.0, rect.top() + 3.0) };

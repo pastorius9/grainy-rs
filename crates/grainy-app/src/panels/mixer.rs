@@ -75,11 +75,49 @@ fn body(ui: &mut Ui, cx: &mut AppContext) {
         }
     }
 
-    // The colour box (`hsl_color`).
+    // The colour box (`hsl_color`) + 1-click 8-colour swatch bar.
     let color = cx.state::<TargetedAdjust>().hsl_color.min(7);
     let colours: Vec<String> = COLOURS.iter().map(|c| tr(c)).collect();
     if let Some(chosen) = controls::choice(ui, "hsl_color", "", &colours, color, width) {
         cx.state::<TargetedAdjust>().hsl_color = chosen;
+    }
+    let swatches = [
+        eframe::egui::Color32::from_rgb(0xd9, 0x4b, 0x45),
+        eframe::egui::Color32::from_rgb(0xe0, 0x84, 0x3b),
+        eframe::egui::Color32::from_rgb(0xdc, 0xc3, 0x44),
+        eframe::egui::Color32::from_rgb(0x52, 0xb3, 0x62),
+        eframe::egui::Color32::from_rgb(0x45, 0xb8, 0xc4),
+        eframe::egui::Color32::from_rgb(0x4c, 0x7e, 0xd9),
+        eframe::egui::Color32::from_rgb(0x8c, 0x5c, 0xd6),
+        eframe::egui::Color32::from_rgb(0xd4, 0x55, 0xa8),
+    ];
+    let active_color = cx.state::<TargetedAdjust>().hsl_color.min(7);
+    let mut picked_swatch = None;
+    let settings_hsl = cx.settings().clone();
+    ui.horizontal(|ui| {
+        let gap = 4.0;
+        let each = ((width - gap * 7.0) / 8.0).max(16.0);
+        ui.spacing_mut().item_spacing.x = gap;
+        for (i, swatch) in swatches.into_iter().enumerate() {
+            let (rect, resp) = ui.allocate_exact_size(eframe::egui::vec2(each, 16.0), eframe::egui::Sense::click());
+            let edited = shown_hsl(&settings_hsl, i).iter().any(|v| v.abs() > 0.01);
+            let painter = ui.painter();
+            painter.circle_filled(rect.center(), 5.5, swatch);
+            if i == active_color {
+                painter.circle_stroke(rect.center(), 7.5, eframe::egui::Stroke::new(1.5, eframe::egui::Color32::WHITE));
+            } else if resp.hovered() {
+                painter.circle_stroke(rect.center(), 7.0, eframe::egui::Stroke::new(1.0, crate::theme::MUTED));
+            }
+            if edited {
+                painter.circle_filled(rect.center() + eframe::egui::vec2(5.0, -5.0), 2.0, eframe::egui::Color32::WHITE);
+            }
+            if resp.on_hover_text(&colours[i]).clicked() {
+                picked_swatch = Some(i);
+            }
+        }
+    });
+    if let Some(i) = picked_swatch {
+        cx.state::<TargetedAdjust>().hsl_color = i;
     }
 
     // The targeted button and 사진에서 조정할 항목.

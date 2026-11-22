@@ -133,36 +133,67 @@ impl Dialog for ReferenceWindow {
         self.sync(cx);
         let label = self.label(cx);
         let fit_text = tr("맞춤");
+        let title = self.title();
         let mut open = true;
         let mut fit = false;
         let slot = self.slot();
-        egui::Window::new(self.title())
-            .id(egui::Id::unique(("reference_window", slot)))
-            .open(&mut open)
-            .frame(super::frame().inner_margin(egui::Margin::same(10)))
-            .default_size(Vec2::new(1000.0, 720.0))
-            .resizable(true)
-            .collapsible(false)
-            .show(ctx, |ui| {
-                widgets::label(ui, &label, t::TEXT, t::FONT_SIZE);
-                // Below the label, one rectangle of exactly the size that is left: the picture, then the button
-                // row at its bottom. (A bottom-up layout here was offered 10 pixels more than the window has, so
-                // the window grew by 10 pixels every frame until the screen stopped it, and its size depended on
-                // how many frames had run.)
-                let area = Rect::from_min_size(ui.cursor().min, ui.available_size());
-                ui.allocate_rect(area, egui::Sense::hover());
-                let fit_button = widgets::Button::new(&fit_text);
-                let row = fit_button.size(ui).y;
-                let bottom = (area.max.y - row - 6.0).max(area.min.y + 80.0);
-                let picture_rect = Rect::from_min_max(area.min, egui::pos2(area.max.x, bottom));
-                let picture = cx.state_ref::<SideLane>().and_then(|l| l.slot(slot)).and_then(|s| s.picture.as_ref());
-                self.view.show(ui, egui::Id::unique(("reference_view", slot)), picture_rect, picture);
-                let row_rect = Rect::from_min_max(egui::pos2(area.min.x, area.max.y - row), area.max);
-                let mut row_ui = ui.new_child(
-                    egui::UiBuilder::new().max_rect(row_rect).layout(egui::Layout::left_to_right(egui::Align::Center)),
-                );
-                fit = fit_button.show(&mut row_ui).clicked();
+        let draw_body = |ui: &mut egui::Ui, view: &mut PictureView, cx: &mut AppContext, fit: &mut bool| {
+            widgets::label(ui, &label, t::TEXT, t::FONT_SIZE);
+            // Below the label, one rectangle of exactly the size that is left: the picture, then the button
+            // row at its bottom.
+            let area = Rect::from_min_size(ui.cursor().min, ui.available_size());
+            ui.allocate_rect(area, egui::Sense::hover());
+            let fit_button = widgets::Button::new(&fit_text);
+            let row = fit_button.size(ui).y;
+            let bottom = (area.max.y - row - 6.0).max(area.min.y + 80.0);
+            let picture_rect = Rect::from_min_max(area.min, egui::pos2(area.max.x, bottom));
+            let picture = cx.state_ref::<SideLane>().and_then(|l| l.slot(slot)).and_then(|s| s.picture.as_ref());
+            view.show(ui, egui::Id::unique(("reference_view", slot)), picture_rect, picture);
+            let row_rect = Rect::from_min_max(egui::pos2(area.min.x, area.max.y - row), area.max);
+            let mut row_ui = ui.new_child(
+                egui::UiBuilder::new().max_rect(row_rect).layout(egui::Layout::left_to_right(egui::Align::Center)),
+            );
+            *fit = fit_button.show(&mut row_ui).clicked();
+        };
+
+        // Native OS secondary window (draggable across dual monitors on Windows & macOS);
+        // falls back to an embedded egui::Window in headless kittest snapshots.
+        let use_native_viewport = !crate::context::FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed);
+        if use_native_viewport {
+            let viewport_id = egui::ViewportId::from_hash_of(("reference_viewport", slot));
+            let builder = egui::ViewportBuilder::default()
+                .with_title(title.clone())
+                .with_inner_size(Vec2::new(1000.0, 720.0))
+                .with_resizable(true);
+            ctx.show_viewport_immediate(viewport_id, builder, |vctx, class| {
+                if class == egui::ViewportClass::Immediate {
+                    egui::CentralPanel::default()
+                        .frame(egui::Frame::new().fill(t::BG).inner_margin(egui::Margin::same(10)))
+                        .show(vctx, |ui| draw_body(ui, &mut self.view, cx, &mut fit));
+                    if vctx.input(|i| i.viewport().close_requested()) {
+                        open = false;
+                    }
+                } else {
+                    egui::Window::new(&title)
+                        .id(egui::Id::unique(("reference_window", slot)))
+                        .open(&mut open)
+                        .frame(super::frame().inner_margin(egui::Margin::same(10)))
+                        .default_size(Vec2::new(1000.0, 720.0))
+                        .resizable(true)
+                        .collapsible(false)
+                        .show(vctx, |ui| draw_body(ui, &mut self.view, cx, &mut fit));
+                }
             });
+        } else {
+            egui::Window::new(title)
+                .id(egui::Id::unique(("reference_window", slot)))
+                .open(&mut open)
+                .frame(super::frame().inner_margin(egui::Margin::same(10)))
+                .default_size(Vec2::new(1000.0, 720.0))
+                .resizable(true)
+                .collapsible(false)
+                .show(ctx, |ui| draw_body(ui, &mut self.view, cx, &mut fit));
+        }
         if fit {
             self.view.fit();
         }

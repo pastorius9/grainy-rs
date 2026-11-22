@@ -84,6 +84,18 @@ extern "C" {
         intent: u32,
         flags: u32,
     ) -> Handle;
+    fn cmsCreateProofingTransformTHR(
+        context: Handle,
+        input: Handle,
+        in_format: u32,
+        output: Handle,
+        out_format: u32,
+        proofing: Handle,
+        intent: u32,
+        proofing_intent: u32,
+        flags: u32,
+    ) -> Handle;
+    fn cmsSetAlarmCodesTHR(context: Handle, new_alarm: *const u16);
     fn cmsDeleteTransform(transform: Handle);
     fn cmsDoTransform(transform: Handle, input: *const c_void, output: *mut c_void, pixels: u32);
     fn cmsDoTransformLineStride(
@@ -182,10 +194,22 @@ pub mod format {
     }
 }
 
-/// `INTENT_RELATIVE_COLORIMETRIC`, the only intent the oracle uses.
+/// `INTENT_PERCEPTUAL`.
+pub const INTENT_PERCEPTUAL: u32 = 0;
+/// `INTENT_RELATIVE_COLORIMETRIC`, the default intent of the oracle.
 pub const INTENT_RELATIVE_COLORIMETRIC: u32 = 1;
+/// `INTENT_SATURATION`.
+pub const INTENT_SATURATION: u32 = 2;
+/// `INTENT_ABSOLUTE_COLORIMETRIC`.
+pub const INTENT_ABSOLUTE_COLORIMETRIC: u32 = 3;
 /// `cmsFLAGS_NOCACHE`.
 pub const FLAGS_NOCACHE: u32 = 0x0040;
+/// `cmsFLAGS_GAMUTCHECK`.
+pub const FLAGS_GAMUTCHECK: u32 = 0x1000;
+/// `cmsFLAGS_BLACKPOINTCOMPENSATION`.
+pub const FLAGS_BLACKPOINTCOMPENSATION: u32 = 0x2000;
+/// `cmsFLAGS_SOFTPROOFING`.
+pub const FLAGS_SOFTPROOFING: u32 = 0x4000;
 
 mod sealed {
     pub trait Sealed {}
@@ -375,6 +399,19 @@ impl Transform {
     /// `cmsCreateTransformTHR(context, in, in_format, out, out_format, INTENT_RELATIVE_COLORIMETRIC,
     /// cmsFLAGS_NOCACHE)`; the profiles are closed again.
     pub fn new(source: &[u8], destination: &[u8], in_format: u32, out_format: u32) -> Result<Self, TransformError> {
+        Self::new_with_options(source, destination, in_format, out_format, INTENT_RELATIVE_COLORIMETRIC, FLAGS_NOCACHE)
+    }
+
+    /// Creates a reentrant NOCACHE transform with explicit rendering intent and flags
+    /// (such as [`FLAGS_BLACKPOINTCOMPENSATION`]).
+    pub fn new_with_options(
+        source: &[u8],
+        destination: &[u8],
+        in_format: u32,
+        out_format: u32,
+        intent: u32,
+        flags: u32,
+    ) -> Result<Self, TransformError> {
         let context = Context::new().ok_or(TransformError::Context)?;
         let handle = {
             let incoming = ProfileHandle::open_in(&context, source);
@@ -393,8 +430,67 @@ impl Transform {
                     in_format,
                     outgoing.raw(),
                     out_format,
-                    INTENT_RELATIVE_COLORIMETRIC,
-                    FLAGS_NOCACHE,
+                    intent,
+                    flags | FLAGS_NOCACHE,
+                )
+            };
+            NonNull::new(raw).ok_or(TransformError::Create)?
+        };
+        Ok(Self {
+            handle,
+            in_bytes: 3 * sample_bytes(in_format),
+            out_bytes: 3 * sample_bytes(out_format),
+            planar_out: out_format & format::PLANAR != 0,
+            _context: context,
+        })
+    }
+
+    /// Creates a soft-proofing transform (`cmsCreateProofingTransformTHR`) from `source` simulated
+    /// through `proofing` onto `destination`, with optional out-of-gamut alarm color.
+    #[allow(clippy::too_many_arguments)]
+    pub fn new_proofing(
+        source: &[u8],
+        destination: &[u8],
+        proofing: &[u8],
+        in_format: u32,
+        out_format: u32,
+        intent: u32,
+        proofing_intent: u32,
+        flags: u32,
+        alarm_rgb: Option<[u16; 3]>,
+    ) -> Result<Self, TransformError> {
+        let context = Context::new().ok_or(TransformError::Context)?;
+        if let Some(alarm) = alarm_rgb {
+            // LittleCMS expects cmsMAXCHANNELS (16) u16 alarm entries.
+            let mut codes = [0u16; 16];
+            codes[0] = alarm[0];
+            codes[1] = alarm[1];
+            codes[2] = alarm[2];
+            // SAFETY: valid private context and 16-element u16 alarm buffer.
+            unsafe { cmsSetAlarmCodesTHR(context.0.as_ptr(), codes.as_ptr()) };
+        }
+        let handle = {
+            let incoming = ProfileHandle::open_in(&context, source);
+            let outgoing = ProfileHandle::open_in(&context, destination);
+            let proof = ProfileHandle::open_in(&context, proofing);
+            let (Some(incoming), Some(outgoing), Some(proof)) = (incoming, outgoing, proof) else {
+                return Err(TransformError::Profile);
+            };
+            if incoming.color_space() != sig::RGB_DATA || outgoing.color_space() != sig::RGB_DATA {
+                return Err(TransformError::NotRgb);
+            }
+            // SAFETY: valid context and profiles; LittleCMS copies what it needs into the transform.
+            let raw = unsafe {
+                cmsCreateProofingTransformTHR(
+                    context.0.as_ptr(),
+                    incoming.raw(),
+                    in_format,
+                    outgoing.raw(),
+                    out_format,
+                    proof.raw(),
+                    intent,
+                    proofing_intent,
+                    flags | FLAGS_NOCACHE | FLAGS_SOFTPROOFING,
                 )
             };
             NonNull::new(raw).ok_or(TransformError::Create)?

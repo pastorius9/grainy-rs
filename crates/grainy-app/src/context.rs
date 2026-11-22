@@ -183,6 +183,12 @@ pub struct AppContext {
     /// Visible normalized `[u0, v0, u1, v1]` ROI for true 1:1 GPU tile rendering when zoomed in.
     pub(crate) tile_need: Option<[f32; 4]>,
     pub(crate) debug_overlay: bool,
+    /// Soft-proofing state (target output profile + optional gamut warning + BPC).
+    pub(crate) soft_proof: crate::render::SoftProof,
+    /// Live RGB % (0..100) under the mouse cursor when hovering the photo canvas.
+    pub(crate) cursor_rgb: Option<[f32; 3]>,
+    /// Cache key `(frame_id, px, py)` to avoid redundant 1x1 GPU pixel readbacks while stationary.
+    pub(crate) cursor_sample_key: Option<(u64, u32, u32)>,
     /// Status bar message (already translated).
     pub(crate) status: String,
     /// The note under the automatic buttons (`auto_tone_note`).
@@ -264,6 +270,9 @@ impl AppContext {
             view_need: None,
             tile_need: None,
             debug_overlay: false,
+            soft_proof: crate::render::SoftProof::default(),
+            cursor_rgb: None,
+            cursor_sample_key: None,
             status: tr("준비됨  ·  사진을 가져오면 시작할 수 있습니다."),
             auto_note: tr("자동톤: 검정·흰색 양끝 3% 여유\n목표 밝기 약 8–247 / 255"),
             choices: HashMap::new(),
@@ -594,6 +603,13 @@ impl AppContext {
         self.tile_need = None;
         self.before = false;
         self.auto_note = tr("자동톤: 검정·흰색 양끝 3% 여유\n목표 밝기 약 8–247 / 255");
+    }
+
+    /// Applies a soft-proofing configuration change and refreshes the preview.
+    pub(crate) fn set_soft_proof(&mut self, proof: crate::render::SoftProof) {
+        self.soft_proof = proof.clone();
+        self.renderer.set_soft_proof(proof);
+        self.wanted = None;
     }
 
     /// Opens photo `index` of the list (filmstrip click, arrow keys).

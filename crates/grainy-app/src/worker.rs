@@ -66,6 +66,8 @@ struct Shared {
     shared_wgpu: Option<crate::gpu_worker::SharedWgpu>,
     /// The monitor's profile (`Renderer::set_monitor`), read when a job starts.
     monitor: Mutex<Option<grainy_cms::Profile>>,
+    /// Soft-proofing state (`Renderer::set_soft_proof`), read when a job starts.
+    soft_proof: Mutex<crate::render::SoftProof>,
     /// The HDR viewing choices (`Renderer::set_hdr_view`), read when a job starts.
     hdr_view: Mutex<crate::hdr::View>,
     /// The fitted photo's long side on screen (`Renderer::set_view_size`), read when a job starts.
@@ -135,6 +137,7 @@ impl Worker {
             gpu,
             shared_wgpu,
             monitor: Mutex::new(None),
+            soft_proof: Mutex::new(crate::render::SoftProof::default()),
             hdr_view: Mutex::new(crate::hdr::View::default()),
             view: Mutex::new(None),
             tile_roi: Mutex::new(None),
@@ -192,6 +195,7 @@ impl Renderer for Worker {
     fn set_library(&mut self, library: Option<PathBuf>) {
         let next = Self::start(self.shared.gpu.clone(), self.shared.shared_wgpu.clone(), library);
         *lock(&next.shared.monitor) = lock(&self.shared.monitor).clone();
+        *lock(&next.shared.soft_proof) = lock(&self.shared.soft_proof).clone();
         *lock(&next.shared.hdr_view) = *lock(&self.shared.hdr_view);
         *lock(&next.shared.view) = *lock(&self.shared.view);
         *lock(&next.shared.tile_roi) = *lock(&self.shared.tile_roi);
@@ -259,6 +263,13 @@ impl Renderer for Worker {
 
     fn set_monitor(&mut self, profile: Option<grainy_cms::Profile>) {
         *lock(&self.shared.monitor) = profile;
+    }
+
+    fn set_soft_proof(&mut self, proof: crate::render::SoftProof) {
+        *lock(&self.shared.soft_proof) = proof;
+        if let Some(job) = self.last_preview.clone() {
+            self.preview(job);
+        }
     }
 
     fn set_hdr_view(&mut self, view: crate::hdr::View) {
@@ -543,6 +554,7 @@ impl PreviewState {
         &mut self,
         job: &PreviewJob,
         monitor: Option<&grainy_cms::Profile>,
+        soft_proof: &crate::render::SoftProof,
         hdr_view: crate::hdr::View,
         view: Option<usize>,
         tile_roi: Option<[f32; 4]>,
@@ -625,7 +637,7 @@ impl PreviewState {
             });
         }
         options.output = Output::Working;
-        if !zero_copy_gpu {
+        if !zero_copy_gpu && !soft_proof.enabled {
             if let Photo::Linear(pixels) = &*source.photo {
                 if let Some(frame) = crate::basic_preview::render(pixels, &effective, monitor, &mut self.monitor)? {
                     let (height, width, _) = pixels.dim();
@@ -665,6 +677,7 @@ impl PreviewState {
                 job.resolution,
                 space,
                 monitor,
+                soft_proof,
                 tile,
             )
         });
@@ -726,9 +739,32 @@ impl PreviewState {
         };
         let converted = histogram::convert(srgb.as_ref().unwrap_or(&working));
         let bins = histogram::bins(&converted.rgba, converted.width, converted.height);
-        let rgba = match monitor {
-            Some(profile) => self.monitor.rgba(&working, space, profile)?,
-            None => converted.rgba,
+        let rgba = if soft_proof.enabled {
+            let src_prof = grainy_cms::profile(space).map_err(|e| e.to_string())?;
+            let proof_prof = grainy_cms::profile(&soft_proof.target).map_err(|e| e.to_string())?;
+            let srgb_prof = grainy_cms::profile("sRGB").map_err(|e| e.to_string())?;
+            let disp_prof = monitor.unwrap_or(&srgb_prof);
+            let layout = working.as_standard_layout();
+            let samples = layout.as_slice().ok_or_else(|| "non-contiguous image".to_owned())?;
+            let proofed = grainy_cms::soft_proof(
+                samples,
+                &src_prof,
+                &proof_prof,
+                disp_prof,
+                grainy_cms::ProofOptions {
+                    intent: grainy_cms::RenderingIntent::RelativeColorimetric,
+                    black_point_compensation: soft_proof.bpc,
+                    gamut_warning: soft_proof.gamut_warning,
+                },
+            )
+            .map_err(|e| e.to_string())?;
+            let img = ndarray::Array3::from_shape_vec(working.raw_dim(), proofed).map_err(|e| e.to_string())?;
+            histogram::convert(&img).rgba
+        } else {
+            match monitor {
+                Some(profile) => self.monitor.rgba(&working, space, profile)?,
+                None => converted.rgba,
+            }
         };
         self.last_stats = Some((job.photo, bins, converted.channels));
         let millis = started.elapsed().as_secs_f64() * 1000.0;
@@ -778,12 +814,13 @@ fn monitor_and_histogram_share_one_develop_and_zoom_keeps_the_fit_stages() {
         });
     }
     let profile = grainy_cms::profile("Display P3").unwrap();
-    let first = state.render(&job, Some(&profile), Default::default(), None, None).unwrap();
+    let proof = crate::render::SoftProof::default();
+    let first = state.render(&job, Some(&profile), &proof, Default::default(), None, None).unwrap();
     assert_eq!((first.hits, first.misses), (0, 1), "one tone operation in the cold neutral frame");
     job.resolution = Resolution::Full;
-    state.render(&job, None, Default::default(), None, None).unwrap();
+    state.render(&job, None, &proof, Default::default(), None, None).unwrap();
     job.resolution = Resolution::Fit;
-    let plain = state.render(&job, None, Default::default(), None, None).unwrap();
+    let plain = state.render(&job, None, &proof, Default::default(), None, None).unwrap();
     assert_eq!((plain.hits, plain.misses), (1, 1));
     assert_eq!(plain.bins, first.bins);
     assert_eq!(plain.clipping, first.clipping);
@@ -826,6 +863,7 @@ fn preview_loop(shared: &Shared) {
         };
         shared.renders.fetch_add(1, Ordering::SeqCst);
         let monitor = lock(&shared.monitor).clone();
+        let soft_proof = lock(&shared.soft_proof).clone();
         let hdr_view = *lock(&shared.hdr_view);
         let view = *lock(&shared.view);
         let tile_roi = *lock(&shared.tile_roi);
@@ -838,7 +876,7 @@ fn preview_loop(shared: &Shared) {
                 *seed = None;
             }
         }
-        let reply = match caught(|| state.render(&job, monitor.as_ref(), hdr_view, view, tile_roi)) {
+        let reply = match caught(|| state.render(&job, monitor.as_ref(), &soft_proof, hdr_view, view, tile_roi)) {
             Ok(frame) => {
                 log::info!(
                     "render {}x{} ({:?}) in {:.0} ms, cache hits {} misses {}",

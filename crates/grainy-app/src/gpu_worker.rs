@@ -98,12 +98,14 @@ impl Control {
     }
 }
 
+type LutCacheEntry = (String, Option<grainy_cms::Profile>, crate::render::SoftProof, MonitorLut);
+
 pub(crate) struct PreviewGpu {
     control: Arc<Control>,
     shared: Option<SharedWgpu>,
     shared_device: bool,
     gpu: Option<Arc<Gpu>>,
-    lut_cache: Option<(String, Option<grainy_cms::Profile>, MonitorLut)>,
+    lut_cache: Option<LutCacheEntry>,
     cache: [GpuCache; 2],
     attempted: bool,
     hits: u64,
@@ -192,13 +194,14 @@ impl PreviewGpu {
         &mut self,
         space: &str,
         monitor: Option<&grainy_cms::Profile>,
+        soft_proof: &crate::render::SoftProof,
     ) -> Result<Option<MonitorLut>, String> {
         let needs_srgb = space == "ProPhoto";
-        if !needs_srgb && monitor.is_none() {
+        if !needs_srgb && monitor.is_none() && !soft_proof.enabled {
             return Ok(None);
         }
-        if let Some((cached_space, cached_mon, lut)) = &self.lut_cache {
-            if cached_space == space && cached_mon.as_ref() == monitor {
+        if let Some((cached_space, cached_mon, cached_proof, lut)) = &self.lut_cache {
+            if cached_space == space && cached_mon.as_ref() == monitor && cached_proof == soft_proof {
                 return Ok(Some(lut.clone()));
             }
         }
@@ -211,12 +214,31 @@ impl PreviewGpu {
         } else {
             None
         };
-        let display_lut = match monitor {
-            Some(profile) => Some(grainy_cms::native_convert(&grid, &src, profile).map_err(|e| e.to_string())?),
-            None => srgb_lut.clone(),
+        let display_lut = if soft_proof.enabled {
+            let proof_profile = grainy_cms::profile(&soft_proof.target).map_err(|e| e.to_string())?;
+            let display = monitor.unwrap_or(&srgb);
+            Some(
+                grainy_cms::soft_proof(
+                    &grid,
+                    &src,
+                    &proof_profile,
+                    display,
+                    grainy_cms::ProofOptions {
+                        intent: grainy_cms::RenderingIntent::RelativeColorimetric,
+                        black_point_compensation: soft_proof.bpc,
+                        gamut_warning: soft_proof.gamut_warning,
+                    },
+                )
+                .map_err(|e| e.to_string())?,
+            )
+        } else {
+            match monitor {
+                Some(profile) => Some(grainy_cms::native_convert(&grid, &src, profile).map_err(|e| e.to_string())?),
+                None => srgb_lut.clone(),
+            }
         };
         let lut = gpu.upload_monitor_lut(display_lut.as_deref(), srgb_lut.as_deref()).map_err(|e| e.to_string())?;
-        self.lut_cache = Some((space.to_owned(), monitor.cloned(), lut.clone()));
+        self.lut_cache = Some((space.to_owned(), monitor.cloned(), soft_proof.clone(), lut.clone()));
         Ok(Some(lut))
     }
 
@@ -230,6 +252,7 @@ impl PreviewGpu {
         resolution: crate::render::Resolution,
         space: &str,
         monitor: Option<&grainy_cms::Profile>,
+        soft_proof: &crate::render::SoftProof,
         tile: Option<TileRequest>,
     ) -> Option<Result<PreviewGpuOutput, String>> {
         if !self.control.enabled() {
@@ -270,7 +293,7 @@ impl PreviewGpu {
                 match output {
                     GpuOutput::Resident { frame, present_crop, tile_uv, full_size } => {
                         if self.shared_device {
-                            let lut = match self.monitor_lut(space, monitor) {
+                            let lut = match self.monitor_lut(space, monitor, soft_proof) {
                                 Ok(lut) => lut,
                                 Err(err) => return Some(Err(err)),
                             };
@@ -420,6 +443,7 @@ mod tests {
                 crate::render::Resolution::Fit,
                 "sRGB",
                 None,
+                &crate::render::SoftProof::default(),
                 None,
             )
             .is_none());

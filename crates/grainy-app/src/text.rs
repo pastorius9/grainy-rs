@@ -5,7 +5,15 @@
 use grainy_i18n::Language;
 
 /// Korean source → English, for the strings this crate adds.
-pub const ENGLISH: [(&str, &str); 71] = [
+pub const ENGLISH: [(&str, &str); 79] = [
+    ("소프트 프루핑", "Soft Proofing"),
+    ("끄기", "Off"),
+    ("색역 경고 표시", "Show Gamut Warning"),
+    ("블랙 포인트 보정 (BPC)", "Black Point Compensation (BPC)"),
+    ("소프트 프루핑 · {0}", "Soft Proof · {0}"),
+    ("소프트 프루핑 · {0} (색역 경고)", "Soft Proof · {0} (Gamut Warning)"),
+    ("그림자", "Shadows"),
+    ("중간톤", "Midtones"),
     (
         "숫자를 입력하거나 ↑/↓(Shift: 10배) 키로 미세 조정한 뒤 Enter 또는 다른 곳을 클릭해 적용합니다.",
         "Type a number or press Up/Down (Shift: 10×) to fine-adjust, then press Enter or click away to apply.",

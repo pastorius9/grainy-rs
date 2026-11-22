@@ -232,6 +232,35 @@ impl AppContext {
                 }
             }
         });
+        ui.menu_button(crate::text::tr("소프트 프루핑"), |ui| {
+            let mut proof = self.soft_proof.clone();
+            let mut changed = false;
+            if entry(ui, &crate::text::tr("끄기"), "", true, Some(!proof.enabled)) {
+                proof.enabled = false;
+                changed = true;
+            }
+            ui.separator();
+            for target in ["sRGB", "Adobe RGB", "Display P3"] {
+                let active = proof.enabled && proof.target == target;
+                if entry(ui, target, "", true, Some(active)) {
+                    proof.enabled = true;
+                    proof.target = target.to_owned();
+                    changed = true;
+                }
+            }
+            ui.separator();
+            if entry(ui, &crate::text::tr("색역 경고 표시"), "", proof.enabled, Some(proof.gamut_warning)) {
+                proof.gamut_warning = !proof.gamut_warning;
+                changed = true;
+            }
+            if entry(ui, &crate::text::tr("블랙 포인트 보정 (BPC)"), "", proof.enabled, Some(proof.bpc)) {
+                proof.bpc = !proof.bpc;
+                changed = true;
+            }
+            if changed {
+                self.set_soft_proof(proof);
+            }
+        });
         ui.separator();
         command(ui, self, "전체 화면", "view.full_screen", Invocation::default());
         command(ui, self, "양옆 패널 숨기기·보이기", "view.sides", Invocation::default());

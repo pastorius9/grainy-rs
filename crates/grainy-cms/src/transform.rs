@@ -373,3 +373,173 @@ pub fn convert8_planar(rgb8: ArrayView3<'_, u8>, source: &Profile, destination: 
     }
     Ok(result)
 }
+
+/// ICC rendering intent.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]
+pub enum RenderingIntent {
+    Perceptual,
+    #[default]
+    RelativeColorimetric,
+    Saturation,
+    AbsoluteColorimetric,
+}
+
+impl RenderingIntent {
+    fn raw(self) -> u32 {
+        match self {
+            Self::Perceptual => sys::INTENT_PERCEPTUAL,
+            Self::RelativeColorimetric => sys::INTENT_RELATIVE_COLORIMETRIC,
+            Self::Saturation => sys::INTENT_SATURATION,
+            Self::AbsoluteColorimetric => sys::INTENT_ABSOLUTE_COLORIMETRIC,
+        }
+    }
+}
+
+/// Options for soft-proofing transforms (simulated output profile + optional gamut warning).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct ProofOptions {
+    pub intent: RenderingIntent,
+    pub black_point_compensation: bool,
+    pub gamut_warning: bool,
+}
+
+impl Default for ProofOptions {
+    fn default() -> Self {
+        Self { intent: RenderingIntent::RelativeColorimetric, black_point_compensation: true, gamut_warning: false }
+    }
+}
+
+fn map_sys_err(error: TransformError) -> CmsError {
+    match error {
+        TransformError::Context => CmsError::Context,
+        TransformError::Profile => CmsError::InvalidProfile,
+        TransformError::NotRgb => CmsError::RgbRequired,
+        TransformError::Create => CmsError::TransformFailed,
+    }
+}
+
+/// Converts interleaved float32 RGB samples with explicit rendering intent and Black Point Compensation.
+pub fn native_convert_bpc(
+    rgb: &[f32],
+    source: &Profile,
+    destination: &Profile,
+    intent: RenderingIntent,
+    black_point_compensation: bool,
+) -> Result<Vec<f32>> {
+    check_native_sizes(source, destination)?;
+    if !rgb.len().is_multiple_of(3) {
+        return Err(CmsError::Float32RgbRequired);
+    }
+    let pixels = rgb.len() / 3;
+    let mut result = vec![0f32; rgb.len()];
+    if pixels == 0 {
+        return Ok(result);
+    }
+    let flags = if black_point_compensation { sys::FLAGS_BLACKPOINTCOMPENSATION } else { 0 };
+    let transform = sys::Transform::new_with_options(
+        source.bytes(),
+        destination.bytes(),
+        format::RGB_FLT,
+        format::RGB_FLT,
+        intent.raw(),
+        flags,
+    )
+    .map_err(map_sys_err)?;
+    let workers = rayon::current_num_threads().max(1);
+    if pixels < PARALLEL_PIXELS || workers == 1 {
+        transform.apply(rgb, &mut result);
+    } else {
+        let size = (128 * 1024).min(pixels.div_ceil(workers)) * 3;
+        result.par_chunks_mut(size).zip(rgb.par_chunks(size)).for_each(|(out, input)| transform.apply(input, out));
+    }
+    Ok(result)
+}
+
+/// Soft-proofs interleaved float32 RGB samples from `source` simulated through `proof` onto `display`,
+/// highlighting out-of-gamut pixels in vivid cyan when `options.gamut_warning` is true.
+pub fn soft_proof(
+    rgb: &[f32],
+    source: &Profile,
+    proof: &Profile,
+    display: &Profile,
+    options: ProofOptions,
+) -> Result<Vec<f32>> {
+    check_native_sizes(source, display)?;
+    if !(128..=MAX_PROFILE_SIZE).contains(&proof.bytes().len()) {
+        return Err(CmsError::InvalidProfileSize);
+    }
+    if !rgb.len().is_multiple_of(3) {
+        return Err(CmsError::Float32RgbRequired);
+    }
+    let pixels = rgb.len() / 3;
+    let mut result = vec![0f32; rgb.len()];
+    if pixels == 0 {
+        return Ok(result);
+    }
+    let mut flags = sys::FLAGS_SOFTPROOFING;
+    if options.black_point_compensation {
+        flags |= sys::FLAGS_BLACKPOINTCOMPENSATION;
+    }
+    let alarm = if options.gamut_warning {
+        flags |= sys::FLAGS_GAMUTCHECK;
+        Some([0u16, 65535, 65535]) // vivid cyan out-of-gamut overlay
+    } else {
+        None
+    };
+    let transform = sys::Transform::new_proofing(
+        source.bytes(),
+        display.bytes(),
+        proof.bytes(),
+        format::RGB_FLT,
+        format::RGB_FLT,
+        options.intent.raw(),
+        sys::INTENT_RELATIVE_COLORIMETRIC,
+        flags,
+        alarm,
+    )
+    .map_err(map_sys_err)?;
+    let workers = rayon::current_num_threads().max(1);
+    if pixels < PARALLEL_PIXELS || workers == 1 {
+        transform.apply(rgb, &mut result);
+    } else {
+        let size = (128 * 1024).min(pixels.div_ceil(workers)) * 3;
+        result.par_chunks_mut(size).zip(rgb.par_chunks(size)).for_each(|(out, input)| transform.apply(input, out));
+    }
+    Ok(result)
+}
+
+#[cfg(test)]
+mod pro_cms_tests {
+    use super::*;
+
+    #[test]
+    fn bpc_and_soft_proof_gamut_warning_work() {
+        let prophoto = crate::profile("ProPhoto RGB").unwrap();
+        let srgb = crate::profile("sRGB").unwrap();
+        // Neutral gray stays gray; extreme ProPhoto pure green triggers sRGB out-of-gamut warning.
+        let samples = [0.0f32, 0.0, 0.0, 0.5, 0.5, 0.5, 0.0, 1.0, 0.0];
+        let bpc = native_convert_bpc(&samples, &prophoto, &srgb, RenderingIntent::RelativeColorimetric, true).unwrap();
+        assert!(bpc[0].abs() < 1e-4 && bpc[1].abs() < 1e-4 && bpc[2].abs() < 1e-4);
+        assert!((bpc[3] - bpc[4]).abs() < 1e-3 && (bpc[4] - bpc[5]).abs() < 1e-3);
+
+        let warned = soft_proof(
+            &samples,
+            &prophoto,
+            &srgb,
+            &srgb,
+            ProofOptions {
+                intent: RenderingIntent::RelativeColorimetric,
+                black_point_compensation: true,
+                gamut_warning: true,
+            },
+        )
+        .unwrap();
+        // Neutral mid-gray is in gamut (not cyan), while extreme ProPhoto green triggers vivid cyan [0, 1, 1].
+        assert!((warned[3] - warned[5]).abs() < 0.02, "mid-gray stays in gamut: {:?}", &warned[3..6]);
+        assert!(
+            warned[6] < 0.05 && warned[7] > 0.95 && warned[8] > 0.95,
+            "OOG triggers cyan alarm: {:?}",
+            &warned[6..9]
+        );
+    }
+}

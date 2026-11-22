@@ -23,8 +23,8 @@ pub use profiles::{
 pub use sys::Sample;
 pub use transform::{
     cache, cache_info, clear_cache, cms_transform, cms_transform_image, convert, convert8_planar, convert_samples,
-    native_convert, CacheInfo, ColorSpace, Transform, TransformCache, MAX_PROFILE_BYTES, MAX_PROFILE_SIZE,
-    MAX_TRANSFORMS, PARALLEL_PIXELS,
+    native_convert, native_convert_bpc, soft_proof, CacheInfo, ColorSpace, ProofOptions, RenderingIntent, Transform,
+    TransformCache, MAX_PROFILE_BYTES, MAX_PROFILE_SIZE, MAX_TRANSFORMS, PARALLEL_PIXELS,
 };
 
 /// Display profiles: the pure parts of luma/display_profiles.py.
