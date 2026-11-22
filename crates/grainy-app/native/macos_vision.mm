@@ -1,6 +1,7 @@
 // Grainy RS macOS native Apple Vision subject & portrait segmentation (Neural Engine / Metal).
-// Uses runtime @available checks so binaries keep MACOSX_DEPLOYMENT_TARGET=11.0 and link only
-// system frameworks (/System/Library/Frameworks).
+// Uses runtime NSProcessInfo + NSClassFromString checks (avoiding @available's compiler-rt
+// ___isPlatformVersionAtLeast symbol under -nodefaultlibs) so binaries keep
+// MACOSX_DEPLOYMENT_TARGET=11.0 and link only system frameworks (/System/Library/Frameworks).
 
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreVideo/CoreVideo.h>
@@ -123,39 +124,56 @@ API int32_t grainy_macos_vision_matte(const uint8_t* rgb320, uint32_t mode, uint
         int32_t status = 0;
         VNImageRequestHandler* handler = [[VNImageRequestHandler alloc] initWithCGImage:cgImage options:@{}];
         NSError* error = nil;
+        NSOperatingSystemVersion ver = [[NSProcessInfo processInfo] operatingSystemVersion];
 
         if (mode == 0) {
 #if defined(__MAC_14_0) && __MAC_OS_X_VERSION_MAX_ALLOWED >= __MAC_14_0
-            if (@available(macOS 14.0, *)) {
-                VNGenerateForegroundInstanceMaskRequest* req = [[VNGenerateForegroundInstanceMaskRequest alloc] init];
-                if ([handler performRequests:@[req] error:&error] && req.results.count > 0) {
-                    VNInstanceMaskObservation* obs = req.results.firstObject;
-                    if (obs && obs.allInstances.count > 0) {
-                        CVPixelBufferRef maskBuf =
-                            [obs generateScaledMaskForImageForInstances:obs.allInstances
-                                                     fromRequestHandler:handler
-                                                                  error:&error];
-                        if (maskBuf) {
-                            if (extract_pixel_buffer_to_u8_320(maskBuf, out_matte)) {
-                                status = 1;
+            if (ver.majorVersion >= 14) {
+                Class reqClass = NSClassFromString(@"VNGenerateForegroundInstanceMaskRequest");
+                if (reqClass != Nil) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability-new"
+                    VNRequest* req = [[reqClass alloc] init];
+                    if (req && [handler performRequests:@[req] error:&error] && req.results.count > 0) {
+                        VNInstanceMaskObservation* obs = (VNInstanceMaskObservation*)req.results.firstObject;
+                        if (obs && [obs respondsToSelector:@selector(allInstances)] &&
+                            [obs respondsToSelector:@selector(generateScaledMaskForImageForInstances:fromRequestHandler:error:)] &&
+                            obs.allInstances.count > 0) {
+                            CVPixelBufferRef maskBuf =
+                                [obs generateScaledMaskForImageForInstances:obs.allInstances
+                                                         fromRequestHandler:handler
+                                                                      error:&error];
+                            if (maskBuf) {
+                                if (extract_pixel_buffer_to_u8_320(maskBuf, out_matte)) {
+                                    status = 1;
+                                }
+                                CVPixelBufferRelease(maskBuf);
                             }
-                            CVPixelBufferRelease(maskBuf);
                         }
                     }
+#pragma clang diagnostic pop
                 }
             }
 #endif
         } else if (mode == 1) {
 #if defined(__MAC_12_0) && __MAC_OS_X_VERSION_MAX_ALLOWED >= __MAC_12_0
-            if (@available(macOS 12.0, *)) {
-                VNGeneratePersonSegmentationRequest* req = [[VNGeneratePersonSegmentationRequest alloc] init];
-                req.qualityLevel = VNGeneratePersonSegmentationRequestQualityLevelAccurate;
-                req.outputPixelFormat = kCVPixelFormatType_OneComponent8;
-                if ([handler performRequests:@[req] error:&error] && req.results.count > 0) {
-                    VNPixelBufferObservation* obs = req.results.firstObject;
-                    if (obs && obs.pixelBuffer && extract_pixel_buffer_to_u8_320(obs.pixelBuffer, out_matte)) {
-                        status = 1;
+            if (ver.majorVersion >= 12) {
+                Class reqClass = NSClassFromString(@"VNGeneratePersonSegmentationRequest");
+                if (reqClass != Nil) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability-new"
+                    VNGeneratePersonSegmentationRequest* req = [[reqClass alloc] init];
+                    if (req) {
+                        req.qualityLevel = VNGeneratePersonSegmentationRequestQualityLevelAccurate;
+                        req.outputPixelFormat = kCVPixelFormatType_OneComponent8;
+                        if ([handler performRequests:@[req] error:&error] && req.results.count > 0) {
+                            VNPixelBufferObservation* obs = (VNPixelBufferObservation*)req.results.firstObject;
+                            if (obs && obs.pixelBuffer && extract_pixel_buffer_to_u8_320(obs.pixelBuffer, out_matte)) {
+                                status = 1;
+                            }
+                        }
                     }
+#pragma clang diagnostic pop
                 }
             }
 #endif
