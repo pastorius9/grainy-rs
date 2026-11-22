@@ -5,7 +5,6 @@
 
 #![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
 
-use eframe::egui;
 use grainy_app::paths::Arguments;
 
 fn main() -> eframe::Result {
@@ -33,11 +32,7 @@ fn main() -> eframe::Result {
         grainy_app::session_state::show_refusal(&message);
         return Ok(());
     }
-    let viewport = egui::ViewportBuilder::default()
-        .with_title("Grainy")
-        .with_inner_size([1600.0, 1000.0])
-        .with_min_inner_size([1100.0, 700.0])
-        .with_drag_and_drop(true);
+    let viewport = grainy_app::window_state::default_viewport();
     // The size, position and mode the window had when it closed (the Rust app's own settings file).
     let viewport = if args.memory {
         viewport
@@ -71,6 +66,7 @@ fn main() -> eframe::Result {
                 use winit::window::Icon;
                 let icon_at = |size: u32| {
                     Icon::from_resource(1, Some(LogicalSize::new(size, size).to_physical(window.scale_factor())))
+                        .or_else(|_| Icon::from_resource(1, None))
                 };
                 if let Ok(icon) = icon_at(16) {
                     window.set_window_icon(Some(icon));

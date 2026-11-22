@@ -4,6 +4,7 @@
 #define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <shlobj.h>
 #include <d3d11.h>
 #include <dxgi1_6.h>
 #include <d3dcompiler.h>
@@ -331,4 +332,11 @@ API HRESULT grainy_hdr_test_readback(unsigned short* samples) noexcept {
     } catch (HRESULT e) { result = e; } catch (...) { result = E_FAIL; }
     DestroyWindow(window);
     return result;
+}
+
+// Refresh Explorer's cached icon for a replaced executable after an in-place update.
+API void grainy_shell_notify_updated(const wchar_t* path) noexcept {
+    if (path && *path) {
+        SHChangeNotify(SHCNE_UPDATEITEM, SHCNF_PATHW | SHCNF_FLUSHNOWAIT, path, nullptr);
+    }
 }

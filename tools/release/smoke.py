@@ -231,6 +231,10 @@ def main(argv=None) -> int:
         problems = check_imports.check(app_folder)
         c.check(not problems, 'no C/C++ runtime DLL is needed except vcomp140.dll; every imported DLL is found',
                 '; '.join(problems))
+        if sys.platform == 'win32':
+            import ctypes
+            icons = ctypes.windll.shell32.ExtractIconExW(str(app), -1, None, None, 0)
+            c.check(icons >= 1, f'{app.name} carries an embedded Windows icon resource', f'{icons} icon group(s)')
 
         exercise(c, app, cli, tmp, args.timeout)
     finally:

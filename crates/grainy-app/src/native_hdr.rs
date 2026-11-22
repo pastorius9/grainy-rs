@@ -17,6 +17,16 @@ unsafe extern "C" {
     fn grainy_hdr_view_drop(viewer: *mut c_void);
     fn grainy_hdr_view_state(viewer: *mut c_void, w: *mut u32, h: *mut u32, stops: *mut f32) -> i32;
     fn grainy_hdr_view_frame(viewer: *mut c_void, pixels: *const f32, w: u32, h: u32) -> i32;
+    #[cfg(windows)]
+    fn grainy_shell_notify_updated(path: *const u16);
+}
+
+#[cfg(windows)]
+pub(crate) fn notify_shell_item_updated(path: &std::path::Path) {
+    use std::os::windows::ffi::OsStrExt;
+    let wide: Vec<u16> = path.as_os_str().encode_wide().chain(std::iter::once(0)).collect();
+    // `wide` is NUL-terminated and lives across the synchronous Win32 shell notification call.
+    unsafe { grainy_shell_notify_updated(wide.as_ptr()) };
 }
 
 fn error(hr: i32) -> String {

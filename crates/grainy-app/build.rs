@@ -23,7 +23,7 @@ fn main() {
             .flag_if_supported("/EHsc")
             .file("native/hdr_display.cpp")
             .compile("grainy_hdr_view");
-        for lib in ["d3d11", "dxgi", "d3dcompiler", "user32", "gdi32"] {
+        for lib in ["d3d11", "dxgi", "d3dcompiler", "user32", "gdi32", "shell32"] {
             println!("cargo:rustc-link-lib={lib}");
         }
     }

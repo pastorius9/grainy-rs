@@ -15,7 +15,7 @@
 
 use std::time::{Duration, Instant};
 
-use eframe::egui::{Rect, ViewportBuilder};
+use eframe::egui::{IconData, Rect, ViewportBuilder};
 use serde_json::{json, Map, Value};
 
 use crate::context::AppContext;
@@ -140,6 +140,18 @@ impl WindowState {
 pub fn load(data_folder: &std::path::Path) -> Option<WindowState> {
     let preferences = grainy_platform::Preferences::new(data_folder.join("settings.json"));
     preferences.values.get(KEY).map(|v| WindowState::from_value(&crate::commands::settings::to_json(v)))
+}
+
+/// `main`'s base window builder: keeps OS-native icons (`grainy.ico` resource 1 via `winit` on Windows;
+/// `GrainyRS.icns` in the `.app` bundle on macOS) by setting `IconData::default()`, so `eframe`'s
+/// `AppTitleIconSetter` does not overwrite them on the first frame with `egui`'s default icon.
+pub fn default_viewport() -> ViewportBuilder {
+    ViewportBuilder::default()
+        .with_title("Grainy")
+        .with_icon(IconData::default())
+        .with_inner_size([1600.0, 1000.0])
+        .with_min_inner_size(MIN_SIZE)
+        .with_drag_and_drop(true)
 }
 
 /// `main`'s window: `builder` with the stored size, position and mode of the data folder.
@@ -277,5 +289,18 @@ pub fn flush(cx: &mut AppContext) {
     let value = current(cx).to_value();
     if cx.state::<Tracker>().saved.as_ref() != Some(&value) {
         write(cx, &value);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn default_viewport_preserves_os_native_icon() {
+        let builder = default_viewport();
+        assert_eq!(builder.icon.as_deref(), Some(&IconData::default()));
+        let restored = WindowState { maximized: true, ..WindowState::default() }.apply(builder);
+        assert_eq!(restored.icon.as_deref(), Some(&IconData::default()));
     }
 }

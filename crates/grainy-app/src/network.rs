@@ -281,6 +281,10 @@ pub fn run_finish(args: &[String]) -> Option<i32> {
         })
     } else {
         let target = app.join(updater::RS_PACKAGE.program);
+        #[cfg(windows)]
+        if target.is_file() {
+            crate::native_hdr::notify_shell_item_updated(&target);
+        }
         target.is_file().then(|| std::process::Command::new(&target).args(&arguments).current_dir(&app).spawn())
     };
     if let Some(Err(e)) = &started {
