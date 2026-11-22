@@ -16,6 +16,14 @@ fn list_id() -> Id {
     Id::unique("develop_basic_keys")
 }
 
+/// Slider steps per single Up/Down arrow press (`Shift` multiplies by 10).
+pub(super) fn arrow_step(spec: &Spec) -> i64 {
+    match spec.key {
+        "kelvin" | "wb_reference" | "raw_kelvin" => 50,
+        _ => 1,
+    }
+}
+
 /// Runs inside the widget so keyboard and pointer input go through the same edit code,
 /// including camera-relative RAW white balance.
 pub(super) fn on_row(response: &Response, spec: &Spec, value: f64, event: &mut RowEvent) {
@@ -42,10 +50,7 @@ pub(super) fn on_row(response: &Response, spec: &Spec, value: f64, event: &mut R
         response.request_focus();
     }
     if let Some(steps) = steps {
-        let step = match spec.key {
-            "kelvin" | "wb_reference" | "raw_kelvin" => 50,
-            _ => 1,
-        };
+        let step = arrow_step(spec);
         let (low, high) = spec.steps();
         let target = (spec.position(value) + steps * step).clamp(low, high);
         if target != spec.position(value) {

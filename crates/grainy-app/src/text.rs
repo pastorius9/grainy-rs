@@ -5,7 +5,11 @@
 use grainy_i18n::Language;
 
 /// Korean source → English, for the strings this crate adds.
-pub const ENGLISH: [(&str, &str); 70] = [
+pub const ENGLISH: [(&str, &str); 71] = [
+    (
+        "숫자를 입력하거나 ↑/↓(Shift: 10배) 키로 미세 조정한 뒤 Enter 또는 다른 곳을 클릭해 적용합니다.",
+        "Type a number or press Up/Down (Shift: 10×) to fine-adjust, then press Enter or click away to apply.",
+    ),
     ("16비트 무손실", "16-bit lossless"),
     ("품질", "Quality"),
     ("HDR 모니터 창 열기", "Open HDR monitor window"),

@@ -459,7 +459,7 @@ pub fn adjustment_row(ui: &mut Ui, id: &str, label: &str, spec: &Spec, value: f6
     painter.rect_filled(handle, CornerRadius::ZERO, handle_color);
     response.on_hover_text(tr("더블클릭하면 기본값으로 돌아갑니다."));
 
-    // Number field
+    // Number field (Lightroom-style: focus selects all, ↑/↓ fine-adjusts live, Shift+↑/↓ 10×, Esc reverts).
     let field_id = base.with("value");
     let focused = ui.memory(|m| m.has_focus(field_id));
     let shown_value = spec.value_at(shown);
@@ -468,6 +468,51 @@ pub fn adjustment_row(ui: &mut Ui, id: &str, label: &str, spec: &Spec, value: f6
     } else {
         spec.format(shown_value)
     };
+    let mut arrow_nudge: i64 = 0;
+    let mut escape_pressed = false;
+    let mut has_text_event = false;
+    if focused && enabled && ui.is_enabled() && !egui::Popup::is_any_open(ui.ctx()) {
+        ui.input_mut(|i| {
+            has_text_event = i.events.iter().any(|e| matches!(e, egui::Event::Text(_)));
+            i.events.retain(|e| {
+                let egui::Event::Key { key, pressed: true, modifiers, .. } = e else {
+                    return true;
+                };
+                if modifiers.command || modifiers.ctrl || modifiers.alt || modifiers.mac_cmd {
+                    return true;
+                }
+                match key {
+                    egui::Key::ArrowUp => {
+                        arrow_nudge += if modifiers.shift { 10 } else { 1 };
+                        false
+                    }
+                    egui::Key::ArrowDown => {
+                        arrow_nudge -= if modifiers.shift { 10 } else { 1 };
+                        false
+                    }
+                    egui::Key::Escape if !modifiers.shift => {
+                        escape_pressed = true;
+                        false
+                    }
+                    _ => true,
+                }
+            });
+        });
+    }
+    let apply_nudge = |text: &mut String, shown: i64, event: &mut RowEvent| {
+        let base_value = spec.parse(text).unwrap_or_else(|| spec.value_at(shown));
+        let (low, high) = spec.steps();
+        let target = (spec.position(base_value) + arrow_nudge * basic_keys::arrow_step(spec)).clamp(low, high);
+        let next_value = spec.value_at(target);
+        *text = spec.format(next_value);
+        if target != shown {
+            event.set = Some(next_value);
+        }
+    };
+    let nudged_before = arrow_nudge != 0 && !escape_pressed && !has_text_event;
+    if nudged_before {
+        apply_nudge(&mut text, shown, &mut event);
+    }
     let frame = if focused {
         egui::Frame::new().fill(t::INPUT_BG).stroke(Stroke::new(1.0, t::CHECKED_BORDER))
     } else {
@@ -496,27 +541,61 @@ pub fn adjustment_row(ui: &mut Ui, id: &str, label: &str, spec: &Spec, value: f6
         })
         .inner;
     let field = output.response.response;
-    if field.gained_focus() {
-        // Select everything, as AdjustmentNumber.focusInEvent does.
-        let mut state = output.state;
+    let select_all = |state: &egui::text_edit::TextEditState, text: &str| {
+        let mut state = state.clone();
         let all =
             egui::text::CCursorRange::two(egui::text::CCursor::new(0), egui::text::CCursor::new(text.chars().count()));
         state.cursor.set_char_range(Some(all));
         state.store(ui.ctx(), field_id);
+    };
+    if field.gained_focus() {
+        ui.data_mut(|d| d.insert_temp(field_id.with("initial"), shown_value));
+        // Select everything, as AdjustmentNumber.focusInEvent does.
+        select_all(&output.state, &text);
     }
-    if field.has_focus() {
-        ui.data_mut(|d| d.insert_temp(field_id, text.clone()));
-    }
-    if field.lost_focus() {
-        ui.data_mut(|d| d.remove::<String>(field_id));
-        if let Some(number) = spec.parse(&text) {
-            if spec.position(number) != shown {
-                event.set = Some(number);
+    if escape_pressed {
+        if let Some(initial) = ui.data_mut(|d| d.remove_temp::<f64>(field_id.with("initial"))) {
+            if spec.position(initial) != shown {
+                event.set = Some(initial);
             }
         }
-        event.commit = true;
+        ui.data_mut(|d| d.remove::<String>(field_id));
+        ui.memory_mut(|m| m.surrender_focus(field_id));
+    } else {
+        if arrow_nudge != 0 && !nudged_before {
+            apply_nudge(&mut text, shown, &mut event);
+            ui.ctx().request_repaint();
+        }
+        if arrow_nudge != 0 && field.has_focus() {
+            select_all(&output.state, &text);
+        }
+        if field.has_focus() {
+            ui.data_mut(|d| d.insert_temp(field_id, text.clone()));
+        }
+        if field.lost_focus() {
+            let initial = ui.data_mut(|d| {
+                d.remove::<String>(field_id);
+                d.remove_temp::<f64>(field_id.with("initial"))
+            });
+            if ui.input(|i| i.key_pressed(egui::Key::Escape)) {
+                if let Some(initial) = initial {
+                    if spec.position(initial) != shown {
+                        event.set = Some(initial);
+                    }
+                }
+            } else {
+                if let Some(number) = spec.parse(&text) {
+                    if spec.position(number) != shown {
+                        event.set = Some(number);
+                    }
+                }
+                event.commit = true;
+            }
+        }
     }
-    field.on_hover_text(tr("숫자를 입력한 뒤 Enter 또는 다른 곳을 클릭해 적용합니다."));
+    field.on_hover_text(crate::text::tr(
+        "숫자를 입력하거나 ↑/↓(Shift: 10배) 키로 미세 조정한 뒤 Enter 또는 다른 곳을 클릭해 적용합니다.",
+    ));
     event
 }
 

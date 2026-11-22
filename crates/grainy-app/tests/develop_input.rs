@@ -103,9 +103,10 @@ fn basic_focus_hover_cycle_text_and_filmstrip() {
     app.key_press(Key::ArrowDown);
     app.run_steps(1);
     assert_eq!(app.state().document().current_index(), Some(photo));
+    assert_eq!(app.state().settings().f64("exposure"), 1.74);
     app.key_press(Key::Enter);
     app.run_steps(2);
-    assert_eq!(app.state().settings().f64("exposure"), 1.75);
+    assert_eq!(app.state().settings().f64("exposure"), 1.74);
 
     app.hover_at(Pos2::new(400.0, 200.0));
     app.run_steps(1);
@@ -141,4 +142,71 @@ fn histogram_edits_only_the_initial_tone_zone_and_undoes_in_one_step() {
         app.run_steps(2);
         assert_eq!(app.state().settings().f64(key), 0.0, "one undo restores {key}");
     }
+}
+
+fn focus_field(app: &mut Harness<'static, GrainyApp>, key: &str) {
+    let field = Id::unique(("adjustment", key)).with("value");
+    let pos = app.ctx.read_response(field).unwrap().rect.center();
+    app.hover_at(pos);
+    app.run_steps(1);
+    app.drag_at(pos);
+    app.run_steps(1);
+    app.drop_at(pos);
+    app.run_steps(1);
+    assert!(app.ctx.memory(|m| m.has_focus(field)), "field {key} should be focused");
+}
+
+#[test]
+fn number_field_arrow_keys_fine_adjust_like_lightroom() {
+    let (_files, mut app) = window();
+    let photo = app.state().document().current_index().unwrap();
+
+    // Exposure numeric box: Up = +0.01, Shift+Up = +0.10, Down = -0.01, Enter commits as one undo step.
+    focus_field(&mut app, "exposure");
+    app.key_press(Key::ArrowUp);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("exposure"), 0.01);
+    assert_eq!(app.state().document().current_index(), Some(photo));
+    app.key_press_modifiers(Modifiers::SHIFT, Key::ArrowUp);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("exposure"), 0.11);
+    app.key_press(Key::ArrowDown);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("exposure"), 0.10);
+    assert!(app.ctx.text_edit_focused(), "focus stays in number field across arrow nudges");
+    app.key_press(Key::Enter);
+    app.run_steps(2);
+    assert_eq!(app.state().settings().f64("exposure"), 0.10);
+    app.state_mut().run("develop.undo");
+    app.run_steps(2);
+    assert_eq!(app.state().settings().f64("exposure"), 0.0);
+
+    // Contrast numeric box: Up = +1, Shift+Up = +10, Escape reverts live changes & blurs.
+    focus_field(&mut app, "contrast");
+    app.key_press(Key::ArrowUp);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("contrast"), 1.0);
+    app.key_press_modifiers(Modifiers::SHIFT, Key::ArrowUp);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("contrast"), 11.0);
+    app.key_press(Key::Escape);
+    app.run_steps(2);
+    assert!(!app.ctx.text_edit_focused());
+    assert_eq!(app.state().settings().f64("contrast"), 0.0);
+
+    // Works in non-Basic panels too (Detail -> sharpen) and clamps at bounds.
+    app.state_mut().open_panel("detail");
+    app.run_steps(2);
+    focus_field(&mut app, "sharpen");
+    app.key_press_modifiers(Modifiers::SHIFT, Key::ArrowUp);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("sharpen"), 10.0);
+    app.key_press(Key::ArrowDown);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("sharpen"), 9.0);
+    app.key_press_modifiers(Modifiers::SHIFT, Key::ArrowDown);
+    app.run_steps(1);
+    assert_eq!(app.state().settings().f64("sharpen"), 0.0);
+    app.key_press(Key::Enter);
+    app.run_steps(2);
 }
