@@ -117,6 +117,10 @@ impl GrainyApp {
             Self::with_library(ctx, &folder, Some(locations.data_folder()))
         };
         app.cx.debug_overlay = args.debug;
+        // A window larger than the GPU can draw must not end the program (window_state.rs, "a window of any size").
+        if let Some(state) = &render_state {
+            crate::window_state::guard_surface_errors(ctx, &state.device);
+        }
         crate::gpu_worker::install_with_wgpu(&mut app.cx, render_state);
         crate::network::install(&mut app.cx, args.offline);
         if !args.memory && args.smoke.is_none() {
@@ -287,6 +291,7 @@ fn status_bar(ui: &mut Ui, cx: &mut AppContext) {
 
 impl eframe::App for GrainyApp {
     fn ui(&mut self, ui: &mut Ui, frame: &mut eframe::Frame) {
+        crate::window_state::keep_drawable(ui.ctx(), frame);
         crate::display::watch_window(&mut self.cx, frame);
         self.show(ui);
         if ui.input(|i| i.viewport().close_requested()) {

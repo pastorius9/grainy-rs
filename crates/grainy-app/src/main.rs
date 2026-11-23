@@ -51,6 +51,8 @@ fn main() -> eframe::Result {
     });
     let wgpu_options = eframe::egui_wgpu::WgpuConfiguration {
         wgpu_setup: eframe::egui_wgpu::WgpuSetup::CreateNew(setup),
+        // A window whose picture could not be set up (a size the GPU cannot draw) sets it up again.
+        on_surface_status: grainy_app::window_state::on_surface_status(),
         ..Default::default()
     };
     let options =
