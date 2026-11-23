@@ -5,7 +5,9 @@
 use grainy_i18n::Language;
 
 /// Korean source → English, for the strings this crate adds.
-pub const ENGLISH: [(&str, &str); 112] = [
+pub const ENGLISH: [(&str, &str); 114] = [
+    ("Grainy RS {0}의 달라진 점", "What's new in Grainy RS {0}"),
+    ("Grainy RS가 {0} 버전으로 업데이트되었습니다.", "Grainy RS has been updated to version {0}."),
     ("AI에게 시키기 (로그인·모델 선택)…", "Ask AI (Sign In · Model)…"),
     ("프로그램 기본 모델", "Program default"),
     ("직접 입력", "Custom"),

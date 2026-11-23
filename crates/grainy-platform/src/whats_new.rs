@@ -107,11 +107,24 @@ fn read(path: &Path) -> Vec<Entry> {
 /// is unknown. `lang` defaults to the interface language in use.
 pub fn notes(previous: Option<&str>, current: &str, lang: Option<Language>, root: &Path) -> Vec<Entry> {
     let korean = read(&root.join("CHANGELOG.md"));
-    let mut english: Vec<Entry> = Vec::new();
-    for entry in read(&root.join("assets").join("whats-new-en.md")) {
-        match english.iter_mut().find(|e| e.version == entry.version) {
+    let english = read(&root.join("assets").join("whats-new-en.md"));
+    select(&korean, &english, previous, current, lang)
+}
+
+/// [`notes`] from change logs already read: `korean` is the full log, `english` the English notes (a version
+/// without an English entry keeps the Korean one; a version written twice keeps the later text).
+pub fn select(
+    korean: &[Entry],
+    english: &[Entry],
+    previous: Option<&str>,
+    current: &str,
+    lang: Option<Language>,
+) -> Vec<Entry> {
+    let mut translated: Vec<&Entry> = Vec::new();
+    for entry in english {
+        match translated.iter_mut().find(|e| e.version == entry.version) {
             Some(slot) => *slot = entry,
-            None => english.push(entry),
+            None => translated.push(entry),
         }
     }
     let (low, high) = (version_key(previous), version_key(Some(current)));
@@ -128,7 +141,7 @@ pub fn notes(previous: Option<&str>, current: &str, lang: Option<Language>, root
         .into_iter()
         .map(|entry| {
             if english_wanted {
-                english.iter().find(|e| e.version == entry.version).unwrap_or(entry).clone()
+                translated.iter().find(|e| e.version == entry.version).map_or(entry, |e| *e).clone()
             } else {
                 entry.clone()
             }
@@ -163,22 +176,39 @@ pub fn pending(
     lang: Option<Language>,
     root: &Path,
 ) -> Vec<Entry> {
-    let seen = preferences.values.get(KEY);
+    pending_with(preferences, KEY, first_run, current, |previous| notes(previous, current, lang, root))
+}
+
+/// [`pending`] with the last version opened stored under `key` and the notes given by `notes` (which receives that
+/// version, or none).
+pub fn pending_with(
+    preferences: &Preferences,
+    key: &str,
+    first_run: bool,
+    current: &str,
+    notes: impl FnOnce(Option<&str>) -> Vec<Entry>,
+) -> Vec<Entry> {
+    let seen = preferences.values.get(key);
     let text = previous_text(seen);
     let same = matches!(seen, Some(Value::Str(s)) if s == current);
     let older = text.as_deref().is_some_and(|t| version_key(Some(t)) >= version_key(Some(current)));
     if first_run || same || older {
         return Vec::new();
     }
-    notes(text.as_deref(), current, lang, root)
+    notes(text.as_deref())
 }
 
 /// Port of `remember`: keeps the version just opened (a failure to write is ignored).
 pub fn remember(preferences: &mut Preferences, current: &str) {
-    if matches!(preferences.values.get(KEY), Some(Value::Str(s)) if s == current) {
+    remember_as(preferences, KEY, current);
+}
+
+/// [`remember`] under the preference `key`.
+pub fn remember_as(preferences: &mut Preferences, key: &str, current: &str) {
+    if matches!(preferences.values.get(key), Some(Value::Str(s)) if s == current) {
         return;
     }
-    let _ = preferences.save(KEY, Value::from(current));
+    let _ = preferences.save(key, Value::from(current));
 }
 
 /// Port of `done`: `{version: [references]}`, the feedback each release addressed (empty when the file is missing

@@ -22,7 +22,7 @@ use super::{always, Command, Invocation};
 use crate::context::AppContext;
 use crate::dialogs::about::{self, Action, MessageBox};
 use crate::dialogs::language::LanguageDialog;
-use crate::dialogs::whats_new::WhatsNew;
+use crate::dialogs::whats_new::{self as whats_new_box, WhatsNew};
 use crate::text::{tr, tr_with};
 
 /// The interactive tutorial (`LEARN_URL` of luma/app.py).
@@ -233,45 +233,22 @@ pub fn language_cancelled(cx: &mut AppContext, first_run: bool) {
 
 // ---- what's new, about, learn, help -------------------------------------------------------------------------------
 
-/// The folder with `CHANGELOG.md` and `assets/whats-new-en.md`: next to the program when they ship there, else
-/// the copies in the platform crate (development).
-pub fn notes_root() -> PathBuf {
-    let exe = std::env::current_exe().unwrap_or_default();
-    let folder = exe.parent().unwrap_or(Path::new("."));
-    if folder.join("CHANGELOG.md").is_file() {
-        return folder.to_owned();
-    }
-    // A Cargo build can use the development assets relative to its target directory. An
-    // installed executable must never contain or look up a developer's absolute checkout.
-    for target in folder.ancestors().filter(|p| p.file_name().is_some_and(|n| n == "target")) {
-        if let Some(workspace) = target.parent() {
-            let assets = workspace.join("crates/grainy-platform/assets/root");
-            if assets.join("CHANGELOG.md").is_file() {
-                return assets;
-            }
-        }
-    }
-    folder.to_owned()
-}
-
 /// Port of `DesktopSession.whats_new`: once after an update of the shipped program, what changed since the
-/// version opened before, and the feedback sent from this computer that the update addressed. Returns whether
-/// the window opened. `packaged` is false for a program run from source.
+/// version opened before (Grainy RS's own notes and version, [`whats_new_box::pending`]). Returns whether the window
+/// opened. `packaged` is false for a program run from source. The oracle's `version_seen` is still written with the
+/// oracle's version, as the Python Grainy keeps it; the Rust version is kept apart under [`whats_new_box::SEEN`].
 pub fn whats_new_on_start(cx: &mut AppContext, first_run: bool, packaged: bool) -> bool {
     if !packaged {
         return false;
     }
     let Some(mut prefs) = preferences(cx) else { return false };
-    let root = notes_root();
-    let previous = prefs.values.get(whats_new::KEY).and_then(Pref::as_str).map(str::to_owned);
-    let entries = whats_new::pending(&prefs, first_run, APP_VERSION, None, &root);
-    let refs = if first_run { Vec::new() } else { whats_new::shipped(&prefs, previous.as_deref(), APP_VERSION, &root) };
+    let entries = whats_new_box::pending(&prefs, first_run, RS_VERSION, None);
     whats_new::remember(&mut prefs, APP_VERSION);
-    whats_new::thank(&mut prefs, &refs);
-    if entries.is_empty() && refs.is_empty() {
+    whats_new::remember_as(&mut prefs, whats_new_box::SEEN, RS_VERSION);
+    if entries.is_empty() {
         return false;
     }
-    cx.open_dialog(Box::new(WhatsNew::new(entries, refs)));
+    cx.open_dialog(Box::new(WhatsNew::new(entries, Vec::new())));
     true
 }
 

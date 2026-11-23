@@ -16,7 +16,9 @@ never use the network.
 The release packages are made by `tools/release/make_release.py` (Windows zip; checked with
 `tools/release/check_imports.py` and `tools/release/smoke.py`) and `tools/release/make_macos.py` (macOS app bundle
 and disk image, on a Mac; `--dry-run` shows what it makes on any system). `tools/release/scan_public.py` must find
-nothing before anything is published.
+nothing before anything is published. Each release's GitHub notes (`docs/releases/<version>.md`) have a short
+in-app section in `crates/grainy-app/assets/whats-new/ko.md` and `en.md`: the box shown once after an update
+(a test checks every release has both).
 
 The application's window tests compare rendered pictures with `crates/grainy-app/tests/snapshots/*.png`; to
 replace them after an intended change, run the tests with `GRAINY_UPDATE_SNAPSHOTS=1` and look at every changed

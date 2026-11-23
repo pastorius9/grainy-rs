@@ -1,17 +1,49 @@
 //! 이번 버전의 달라진 점… and the box shown once after an update (luma/whats_new.py `show`): the change log of the
-//! version (or of the versions since the one opened before) as formatted text, with the thanks for feedback sent
-//! from this computer above it. The notes come from `grainy_platform::whats_new`.
+//! version (or of the versions since the one opened before) as formatted text.
+//!
+//! The notes are Grainy RS's own (`assets/whats-new/ko.md` and `en.md`, built into the program) for its own version
+//! ([`RS_VERSION`]); how sections are chosen and formatted is the oracle's (`grainy_platform::whats_new`). The
+//! oracle's change log (the platform crate's `assets/root`) is the Python Grainy's and is never shown. The oracle
+//! also thanks for feedback a release addressed (its `feedback-done.json`); Grainy RS keeps no such list, so its
+//! start box has no thanks line.
 
 use eframe::egui::{self, text::LayoutJob, Color32, FontFamily, FontId, TextFormat};
+use grainy_i18n::Language;
+use grainy_platform::preferences::Preferences;
 use grainy_platform::whats_new::{self, Entry};
-use grainy_platform::APP_VERSION;
+use grainy_platform::RS_VERSION;
 
 use super::Dialog;
-use crate::commands::settings::notes_root;
 use crate::context::AppContext;
 use crate::text::{tr, tr_with};
 use crate::theme as t;
 use crate::widgets::{self, Button, Kind};
+
+/// Grainy RS's change log in Korean, in the oracle's format (`## 0.5.1 — title`).
+pub const NOTES_KO: &str = include_str!("../../assets/whats-new/ko.md");
+/// Grainy RS's change log in English (a version missing here shows the Korean text).
+pub const NOTES_EN: &str = include_str!("../../assets/whats-new/en.md");
+/// The preference remembering the last Grainy RS version opened. The oracle's `version_seen` keeps the oracle's
+/// version ([`grainy_platform::APP_VERSION`]), as the Python Grainy writes it.
+pub const SEEN: &str = "rs_version_seen";
+
+/// The sections of a built-in change log; a checkout with Windows line ends reads as one with `\n` (as the oracle
+/// reads its files).
+fn sections(text: &str) -> Vec<Entry> {
+    whats_new::sections(&text.replace("\r\n", "\n"))
+}
+
+/// Grainy RS's notes newer than `previous` up to `current`, newest first; only `current` when `previous` is
+/// unknown (the oracle's `notes`). `lang` defaults to the interface language in use.
+pub fn notes(previous: Option<&str>, current: &str, lang: Option<Language>) -> Vec<Entry> {
+    whats_new::select(&sections(NOTES_KO), &sections(NOTES_EN), previous, current, lang)
+}
+
+/// The notes to show at the start (the oracle's `pending`, with the version stored under [`SEEN`]): none for a
+/// first run, the same version or a downgrade.
+pub fn pending(preferences: &Preferences, first_run: bool, current: &str, lang: Option<Language>) -> Vec<Entry> {
+    whats_new::pending_with(preferences, SEEN, first_run, current, |previous| notes(previous, current, lang))
+}
 
 /// The box.
 pub struct WhatsNew {
@@ -36,14 +68,14 @@ impl WhatsNew {
 
     /// 설정 → 이번 버전의 달라진 점…: `show(parent)` without entries shows this version's own notes.
     pub fn this_version() -> Self {
-        Self::new(whats_new::notes(None, APP_VERSION, None, &notes_root()), Vec::new())
+        Self::new(notes(None, RS_VERSION, None), Vec::new())
     }
 
     /// The texts of the box in the interface language.
     pub fn texts(&self) -> Texts {
         Texts {
-            title: tr_with("Grainy {0}의 달라진 점", &[APP_VERSION]),
-            heading: tr_with("Grainy가 {0} 버전으로 업데이트되었습니다.", &[APP_VERSION]),
+            title: tr_with("Grainy RS {0}의 달라진 점", &[RS_VERSION]),
+            heading: tr_with("Grainy RS가 {0} 버전으로 업데이트되었습니다.", &[RS_VERSION]),
             thanks: (!self.refs.is_empty()).then(|| whats_new::thanks(&self.refs, grainy_i18n::language())),
             markdown: if self.entries.is_empty() {
                 tr("이 버전의 변경 기록을 찾지 못했습니다.")

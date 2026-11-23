@@ -25,9 +25,9 @@ pub use util::{rename_new, wait_for_exit};
 /// The oracle's `__version__` this port is made from.
 pub const APP_VERSION: &str = "0.6.8";
 
-/// The Rust build's own version: the workspace crate version. Updates compare against it and the update and About
-/// texts show it; [`APP_VERSION`] stays where data is shared with the Python Grainy (what's-new notes, preference
-/// records, safe start).
+/// The Rust build's own version: the workspace crate version. Updates compare against it, the update, About and
+/// what's-new texts show it, and the what's-new box picks Grainy RS's own notes by it; [`APP_VERSION`] stays where
+/// data is shared with the Python Grainy (preference records, safe start, the oracle's change log in the goldens).
 pub const RS_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// How this Rust build names its version where the receiving side sees it (the feedback form's version field and

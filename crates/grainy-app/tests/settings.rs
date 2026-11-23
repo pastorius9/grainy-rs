@@ -235,25 +235,35 @@ fn the_first_run_question_stores_the_language() {
 
 // ---- what's new, about, help ------------------------------------------------------------------------------------------
 
+/// The oracle's change log: the Python Grainy's own, which the goldens were made from. Grainy RS never shows it.
+fn oracle_notes() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../grainy-platform/assets/root")
+}
+
+/// The box lays out what the oracle's box does; its title and heading name Grainy RS and its own version where the
+/// oracle names itself and 0.6.8.
 #[test]
 fn whats_new_says_what_the_oracles_says() {
     use grainy_app::dialogs::whats_new::WhatsNew;
     let _turn = turn();
     let g = Case::open("app", "settings_whats_new").json().clone();
     assert_eq!(g["version"], APP_VERSION);
+    let as_oracle = |text: &str| text.replace("Grainy RS", "Grainy").replace(RS_VERSION, APP_VERSION);
     for case in g["cases"].as_array().unwrap() {
         grainy_i18n::set_language(language_of(case["language"].as_str().unwrap()));
         let dialog = match case["name"].as_str().unwrap() {
-            "this version" => WhatsNew::this_version(),
+            "this version" => WhatsNew::new(whats_new::notes(None, APP_VERSION, None, &oracle_notes()), Vec::new()),
             "none" => WhatsNew::new(Vec::new(), Vec::new()),
             _ => WhatsNew::new(Vec::new(), vec!["AB12".into(), "CD34".into()]),
         };
         let texts = dialog.texts();
         let name = format!("{} {}", case["language"], case["name"]);
-        assert_eq!(texts.title, case["title"], "{name}");
+        assert_eq!(as_oracle(&texts.title), case["title"], "{name}");
+        assert!(texts.title.contains(&format!("Grainy RS {RS_VERSION}")), "{name}: {}", texts.title);
         let labels = case["labels"].as_array().unwrap();
         let label = |object: &str| labels.iter().find(|l| l[0] == object).map(|l| l[1].as_str().unwrap().to_owned());
-        assert_eq!(Some(texts.heading.clone()), label(""), "{name}");
+        assert_eq!(Some(as_oracle(&texts.heading)), label(""), "{name}");
+        assert!(texts.heading.contains("Grainy RS") && texts.heading.contains(RS_VERSION), "{name}: {}", texts.heading);
         assert_eq!(texts.thanks, label("shipped"), "{name}");
         assert_eq!(texts.thanks.is_some(), case["thanks"].is_string(), "{name}");
         assert_eq!(texts.markdown, case["markdown"].as_str().unwrap(), "{name}");
@@ -261,15 +271,60 @@ fn whats_new_says_what_the_oracles_says() {
     grainy_i18n::set_language(Language::Korean);
 }
 
-/// The oracle's notes come from the files that ship with the app: the Korean change log and the English notes.
+/// 이번 버전의 달라진 점… shows Grainy RS's own notes of its own version, in Korean and in English; the oracle's
+/// change log (the Python Grainy's 0.6.8) is read only the oracle's way, for the goldens.
 #[test]
-fn the_notes_of_this_version_are_the_change_logs_own() {
+fn the_notes_of_this_version_are_grainy_rs_own() {
+    use grainy_app::dialogs::whats_new::{self as whats_new_box, WhatsNew};
     let _turn = turn();
-    let korean = whats_new::notes(None, APP_VERSION, Some(Language::Korean), &settings::notes_root());
-    let english = whats_new::notes(None, APP_VERSION, Some(Language::English), &settings::notes_root());
-    assert_eq!(korean.len(), 1);
-    assert_eq!(korean[0].version, APP_VERSION);
-    assert!(korean[0].title.contains("안전 시작") && english[0].title.contains("Safe start"));
+    let oracle_ko = whats_new::notes(None, APP_VERSION, Some(Language::Korean), &oracle_notes());
+    let oracle_en = whats_new::notes(None, APP_VERSION, Some(Language::English), &oracle_notes());
+    assert_eq!(oracle_ko.len(), 1);
+    assert_eq!(oracle_ko[0].version, APP_VERSION);
+    assert!(oracle_ko[0].title.contains("안전 시작") && oracle_en[0].title.contains("Safe start"));
+
+    let korean = whats_new_box::notes(None, RS_VERSION, Some(Language::Korean));
+    let english = whats_new_box::notes(None, RS_VERSION, Some(Language::English));
+    assert_eq!(korean.len(), 1, "assets/whats-new/ko.md has a section for {RS_VERSION}");
+    assert_eq!(english.len(), 1);
+    assert_eq!((korean[0].version.as_str(), english[0].version.as_str()), (RS_VERSION, RS_VERSION));
+    assert_ne!(korean[0].body, english[0].body, "assets/whats-new/en.md has an English section for {RS_VERSION}");
+    for (language, entry, title) in [
+        (Language::Korean, &korean[0], format!("Grainy RS {RS_VERSION}의 달라진 점")),
+        (Language::English, &english[0], format!("What's new in Grainy RS {RS_VERSION}")),
+    ] {
+        grainy_i18n::set_language(language);
+        let texts = WhatsNew::this_version().texts();
+        assert_eq!(texts.title, title);
+        assert_eq!(texts.markdown, whats_new::markdown(std::slice::from_ref(entry)));
+        assert!(texts.markdown.starts_with(&format!("## {RS_VERSION} \u{2014} ")), "{}", texts.markdown);
+        for oracle in [&oracle_ko[0], &oracle_en[0]] {
+            assert!(!texts.markdown.contains(&oracle.title), "the Python Grainy's notes: {}", oracle.title);
+        }
+    }
+    grainy_i18n::set_language(Language::Korean);
+}
+
+/// Every Grainy RS release (its GitHub notes in `docs/releases`) has its section in both in-app change logs.
+#[test]
+fn every_release_has_in_app_notes() {
+    use grainy_app::dialogs::whats_new::{NOTES_EN, NOTES_KO};
+    let versions = |text: &str| -> Vec<String> { whats_new::sections(text).into_iter().map(|e| e.version).collect() };
+    let (korean, english) = (versions(NOTES_KO), versions(NOTES_EN));
+    assert_eq!(korean, english, "ko.md and en.md list the same versions in the same order");
+    let releases = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../docs/releases");
+    let mut released: Vec<String> = std::fs::read_dir(&releases)
+        .unwrap()
+        .filter_map(|entry| {
+            let path = entry.ok()?.path();
+            (path.extension()? == "md").then(|| path.file_stem()?.to_str().map(str::to_owned))?
+        })
+        .collect();
+    released.sort();
+    assert!(released.len() >= 5, "{released:?}");
+    for version in &released {
+        assert!(korean.contains(version), "docs/releases/{version}.md has no section in assets/whats-new/ko.md");
+    }
 }
 
 #[test]
@@ -535,14 +590,16 @@ fn the_settings_file_equals_the_oracles_after_the_same_writes() {
     let order = |folder: &std::path::Path| -> Vec<String> {
         Preferences::new(folder.join("settings.json")).values.iter().map(|(k, _)| k.clone()).collect()
     };
-    // The window's own key (`window`) is the Rust app's addition; the oracle's keys are compared.
+    // The window's own key (`window`) and the Grainy RS version opened (`rs_version_seen`) are the Rust app's
+    // additions; the oracle's keys are compared.
+    let own = |key: &str| key == "window" || key == grainy_app::dialogs::whats_new::SEEN;
     let check = |cx: &AppContext, step: &str| {
         let folder = cx.data_folder().unwrap();
         let want = trace.iter().find(|t| t["step"] == step).unwrap();
         let mut file = stored(folder);
-        file.as_object_mut().unwrap().remove("window");
+        file.as_object_mut().unwrap().retain(|key, _| !own(key));
         assert_eq!(file, want["file"], "{step}");
-        let keys: Vec<String> = order(folder).into_iter().filter(|k| k != "window").collect();
+        let keys: Vec<String> = order(folder).into_iter().filter(|k| !own(k)).collect();
         assert_eq!(Value::from(keys), want["order"], "{step}: key order");
     };
     assert!(settings::change_language(&mut cx, Language::English));
@@ -563,48 +620,68 @@ fn the_settings_file_equals_the_oracles_after_the_same_writes() {
     assert_eq!(g["rejected"], true);
 }
 
-/// `whats_new.pending` through the start of the program: what opens for each stored version, and never for a
-/// first run, a program run from source, the same version or a downgrade.
+/// `whats_new.pending`: the oracle's choice over its own change log is the golden's; the start of the program makes
+/// the same choice with Grainy RS's version and notes, remembered under its own key, and opens nothing for a first
+/// run, a program run from source, the same version or a downgrade.
 #[test]
 fn whats_new_opens_for_the_versions_the_oracle_lists() {
+    use grainy_app::dialogs::whats_new as whats_new_box;
     let _turn = turn();
     grainy_i18n::set_language(Language::Korean);
     let g = Case::open("app", "settings_preferences").json().clone();
     let pending = &g["pending"];
-    let versions = |cx: &mut AppContext| -> Vec<String> {
-        // The dialog's own text lists the versions it shows, newest first.
-        let notes = whats_new::pending(
-            &Preferences::new(cx.data_folder().unwrap().join("settings.json")),
-            false,
-            APP_VERSION,
-            None,
-            &settings::notes_root(),
-        );
-        notes.iter().map(|e| e.version.clone()).collect()
+    let oracle = |seen: &str| -> Value {
+        let file = common::temp_dir("settings-pending-oracle").join("settings.json");
+        Preferences::new(file.clone()).save(whats_new::KEY, seen.into()).unwrap();
+        let notes = whats_new::pending(&Preferences::new(file), false, APP_VERSION, None, &oracle_notes());
+        Value::from(notes.iter().map(|e| e.version.clone()).collect::<Vec<_>>())
     };
-    let start = |seen: Option<&str>| {
-        let (mut cx, folder) = with_data("settings-pending");
-        if let Some(seen) = seen {
-            Preferences::new(folder.join("settings.json")).save("version_seen", seen.into()).unwrap();
+    assert_eq!(oracle("0.6.5"), pending["from 0.6.5"]);
+    assert_eq!(oracle("9.0.0"), pending["downgrade"]);
+    assert_eq!(oracle(APP_VERSION), pending["same version"]);
+
+    // A data folder holding only the language, and the given versions opened before.
+    let start = |seen: &[(&str, &str)]| {
+        let (cx, folder) = with_data("settings-pending");
+        let mut prefs = Preferences::new(folder.join("settings.json"));
+        prefs.save("language", "ko".into()).unwrap();
+        for (key, version) in seen {
+            prefs.save(key, (*version).into()).unwrap();
         }
-        (cx.data_folder().map(ToOwned::to_owned), versions(&mut cx), cx)
+        let notes = whats_new_box::pending(&Preferences::new(folder.join("settings.json")), false, RS_VERSION, None);
+        (notes.into_iter().map(|e| e.version).collect::<Vec<_>>(), cx)
     };
-    let (_, listed, mut cx) = start(Some("0.6.5"));
-    assert_eq!(Value::from(listed), pending["from 0.6.5"]);
+    // Nothing remembered (a fresh start, or an older Grainy RS that kept only the oracle's 0.6.8): this version.
+    for seen in [&[][..], &[("version_seen", APP_VERSION)][..]] {
+        let (listed, mut cx) = start(seen);
+        assert_eq!(listed, [RS_VERSION]);
+        assert!(settings::whats_new_on_start(&mut cx, false, true));
+        assert!(cx.dialog_open("whats_new"));
+        let file = stored(cx.data_folder().unwrap());
+        assert_eq!(file[whats_new_box::SEEN], RS_VERSION);
+        assert_eq!(file["version_seen"], APP_VERSION, "the oracle's record stays as the Python Grainy keeps it");
+        cx.close_dialog("whats_new");
+        assert!(
+            !settings::whats_new_on_start(&mut cx, false, true),
+            "the version is remembered: nothing the second time"
+        );
+    }
+    // From an older Grainy RS: the versions since, newest first.
+    let (listed, mut cx) = start(&[(whats_new_box::SEEN, "0.3.0")]);
+    assert_eq!(listed.first().map(String::as_str), Some(RS_VERSION));
+    assert!(listed.len() > 1 && !listed.iter().any(|v| v == "0.3.0"), "{listed:?}");
     assert!(settings::whats_new_on_start(&mut cx, false, true));
-    assert!(!settings::whats_new_on_start(&mut cx, false, true), "the version is remembered: nothing the second time");
-    let (_, listed, mut cx) = start(Some("9.0.0"));
-    assert_eq!(Value::from(listed), pending["downgrade"]);
-    assert!(!settings::whats_new_on_start(&mut cx, false, true));
-    let (_, listed, mut cx) = start(Some(APP_VERSION));
-    assert_eq!(Value::from(listed), pending["same version"]);
-    assert!(!settings::whats_new_on_start(&mut cx, false, true));
-    let (_, _, mut cx) = start(None);
+    for seen in ["9.0.0", RS_VERSION] {
+        let (listed, mut cx) = start(&[(whats_new_box::SEEN, seen)]);
+        assert!(listed.is_empty(), "{seen}");
+        assert!(!settings::whats_new_on_start(&mut cx, false, true), "{seen}");
+    }
+    let (_, mut cx) = start(&[]);
     assert!(!settings::whats_new_on_start(&mut cx, true, true), "a first run shows nothing");
-    assert_eq!(stored(cx.data_folder().unwrap())["version_seen"], APP_VERSION, "but remembers the version");
-    let (_, _, mut cx) = start(Some("0.6.5"));
+    assert_eq!(stored(cx.data_folder().unwrap())[whats_new_box::SEEN], RS_VERSION, "but remembers the version");
+    let (_, mut cx) = start(&[(whats_new_box::SEEN, "0.3.0")]);
     assert!(!settings::whats_new_on_start(&mut cx, false, false), "a program run from source shows nothing");
-    assert_eq!(stored(cx.data_folder().unwrap())["version_seen"], "0.6.5");
+    assert_eq!(stored(cx.data_folder().unwrap())[whats_new_box::SEEN], "0.3.0");
 }
 
 /// `toggle_drt_advanced` stores the library preference `drt_advanced`, and a library opened later has the switch
