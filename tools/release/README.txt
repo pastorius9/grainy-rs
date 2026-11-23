@@ -24,8 +24,11 @@ Grainy RS keeps its library and settings in %LOCALAPPDATA%\GrainyRS (its own fol
 Python Grainy). Other places:
     GrainyRS.exe --library <folder>    use another library folder
     set GRAINY_RS_HOME=<folder>         use another data folder
-The Python Grainy's library can be opened read-only (File menu > Open the Grainy Library Read-Only);
-nothing in it is changed.
+Moving from the Python Grainy: on the first start with an empty library, Grainy RS offers once to bring
+over the Python Grainy's library (photos, edits, history, collections, thumbnails, camera profiles);
+later the same is in File menu > Import the Python Grainy Library... The Python Grainy's library is
+only read, never changed. It can also be opened read-only (File menu > Open the Grainy Library
+Read-Only).
 
 Network
 -------

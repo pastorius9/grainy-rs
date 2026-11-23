@@ -27,8 +27,11 @@ Grainy RS keeps its library and settings in ~/Library/Application Support/Grainy
 from the Python Grainy). Other places:
     "Grainy RS.app/Contents/MacOS/GrainyRS" --library <folder>    use another library folder
     GRAINY_RS_HOME=<folder>                                        use another data folder
-The Python Grainy's library can be opened read-only (File menu > Open the Grainy Library Read-Only);
-nothing in it is changed.
+Moving from the Python Grainy: on the first start with an empty library, Grainy RS offers once to bring
+over the Python Grainy's library (photos, edits, history, collections, thumbnails, camera profiles);
+later the same is in File menu > Import the Python Grainy Library... The Python Grainy's library is
+only read, never changed. It can also be opened read-only (File menu > Open the Grainy Library
+Read-Only).
 To uninstall: move the app to the Trash. To remove the edits as well, delete the data folder above.
 
 Network

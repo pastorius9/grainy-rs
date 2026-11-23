@@ -3,8 +3,24 @@
 Grainy RS is the Rust rewrite of [Grainy](https://github.com/pastorius9/grainy), a photo editor for film scans
 and digital photos. Shared development stages are tested against reference data from Python Grainy 0.6.8.
 
-**This is an early release.** The Python Grainy at <https://github.com/pastorius9/grainy> stays the main product
-for now; use Grainy RS to try it out and report what you find.
+**Grainy continues as Grainy RS.** New features and fixes come only here; the Python Grainy at
+<https://github.com/pastorius9/grainy> gets no more updates after its last version, 0.6.9. Project page:
+<https://pastorius9.github.io/grainy/>.
+
+## Moving from the Python Grainy
+
+Grainy RS is a separate program with its own data folder; it is installed beside the Python Grainy and does not
+change it.
+
+- **The library comes over on first start.** When Grainy RS starts with an empty library and finds the Python
+  Grainy's library, it asks once whether to bring it over: photos, edits, history, collections, thumbnails and
+  camera profiles. The Python Grainy's library is only read (from a snapshot copy) and never changed. Close the
+  Python Grainy first.
+- **Later:** *File management* menu › *Import the Python Grainy Library…* does the same at any time. If the Grainy RS
+  library already has photos, it asks first and keeps a backup of it (*File management* › *Restore catalog* brings it
+  back).
+- **AI connection:** set it up again from Grainy RS (*AI Connection (MCP)…*). Its install line replaces an
+  earlier `grainy` entry in Claude Code or Codex, so the AI programs talk to Grainy RS instead.
 
 ## Download and run
 
@@ -111,7 +127,14 @@ per part of the engine (`crates/grainy-*`); the application's structure is descr
 ## 한국어
 
 Grainy RS는 사진 편집기 [Grainy](https://github.com/pastorius9/grainy)를 Rust로 새로 만든 버전입니다. Grainy 0.6.8과
-같은 보정, 같은 픽셀 결과를 냅니다. **아직 초기 버전**이며, 당분간은 Python으로 된 Grainy가 주 제품입니다.
+같은 보정, 같은 픽셀 결과를 냅니다. **Grainy는 이제 Grainy RS로 이어집니다.** 새 기능과 수정은 여기에만 나오고,
+파이썬판 Grainy는 마지막 버전 0.6.9 이후 업데이트가 없습니다. 웹페이지: <https://pastorius9.github.io/grainy/>
+
+- 파이썬판을 쓰던 분: Grainy RS는 따로 설치되는 별도 프로그램이라 파이썬판을 바꾸지 않습니다. 라이브러리가 빈 상태로 처음
+  켜면 파이썬판 라이브러리(사진, 보정, 기록, 컬렉션, 썸네일, 카메라 프로필)를 가져올지 한 번 묻습니다. 파이썬판 라이브러리는
+  읽기만 하고 바꾸지 않습니다(가져오기 전에 파이썬판을 닫아 주세요). 나중에 파일 관리 메뉴 › "파이썬 Grainy 라이브러리 가져오기…"로도
+  가져올 수 있고, 이미 사진이 있으면 먼저 묻고 기존 라이브러리를 백업해 둡니다. AI 연결은 Grainy RS의 "AI 연결 (MCP)…" 창에서
+  다시 설정하세요(예전 grainy 연결이 이 연결로 바뀝니다).
 
 - 설치: [Releases](https://github.com/pastorius9/grainy-rs/releases)에서 `GrainyRS-<버전>-windows-x64.zip`을 받아 압축을
   풀고 `GrainyRS.exe`를 실행합니다. Microsoft Visual C++ 재배포 패키지는 필요 없습니다.
