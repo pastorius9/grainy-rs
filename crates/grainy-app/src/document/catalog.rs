@@ -250,6 +250,56 @@ impl Drop for CatalogDocument {
     }
 }
 
+/// A verified private copy of the catalogue in `folder` and its committed WAL, in a new temporary folder under
+/// `scratch` (removed when the returned guard is dropped), with the WAL frames folded in: a self-contained
+/// database at the returned path. The source is only read; a source that changes while it is copied is refused.
+pub fn snapshot_catalog(folder: &Path, scratch: &Path) -> Result<(tempfile::TempDir, PathBuf), String> {
+    // Validate before creating a directory or removing an old snapshot. In particular,
+    // scratch == folder must never unlink the source catalogue and its WAL.
+    if crate::paths::is_oracle_folder(scratch, &crate::paths::Locations::current())
+        || crate::paths::is_within(scratch, folder)
+    {
+        return Err("the snapshot folder must be the Rust app's own".into());
+    }
+    // SQLite may create a shared-memory index even for a read-only live WAL connection.
+    // Only open SQLite on our private copy. Reject a changing source instead of mixing generations.
+    std::fs::create_dir_all(scratch).map_err(err)?;
+    let snapshot = tempfile::tempdir_in(scratch).map_err(err)?;
+    let db = "catalog.sqlite";
+    let wal = "catalog.sqlite-wal";
+    let journal = folder.join("catalog.sqlite-journal");
+    if journal.try_exists().map_err(err)? {
+        return Err("the source library has a rollback journal; close it before opening a snapshot".into());
+    }
+    let fingerprint = |name: &str| -> std::io::Result<Option<[u8; 32]>> {
+        match grainy_library::fsops::digest_bytes(&folder.join(name)) {
+            Ok(hash) => Ok(Some(hash)),
+            Err(e) if name == wal && e.kind() == std::io::ErrorKind::NotFound => Ok(None),
+            Err(e) => Err(e),
+        }
+    };
+    let before = [fingerprint(db).map_err(err)?, fingerprint(wal).map_err(err)?];
+    for (name, hash) in [db, wal].into_iter().zip(before) {
+        if let Some(expected) = hash {
+            let target = snapshot.path().join(name);
+            let mut input = std::fs::File::open(folder.join(name)).map_err(err)?;
+            std::io::copy(&mut input, &mut std::fs::File::create(&target).map_err(err)?).map_err(err)?;
+            if grainy_library::fsops::digest_bytes(&target).map_err(err)? != expected {
+                return Err("the source library changed while taking the snapshot; try again".into());
+            }
+        }
+    }
+    if journal.try_exists().map_err(err)? || before != [fingerprint(db).map_err(err)?, fingerprint(wal).map_err(err)?] {
+        return Err("the source library changed while taking the snapshot; try again".into());
+    }
+    let listing = snapshot.path().join(db);
+    // Recover committed WAL frames in the copy and leave a self-contained read-only database.
+    let copied = rusqlite::Connection::open(&listing).map_err(err)?;
+    copied.execute_batch("PRAGMA journal_mode=DELETE").map_err(err)?;
+    drop(copied);
+    Ok((snapshot, listing))
+}
+
 impl CatalogDocument {
     /// The writer of [`Document::edit_photos_batch`] (`retarget`: the values are fitted to each photo's file) and
     /// [`Document::edit_photos_batch_own`].
@@ -379,51 +429,7 @@ impl CatalogDocument {
 
     /// Opens a verified private copy of the catalogue and its committed WAL in `scratch`.
     pub fn open_read_only(folder: &Path, scratch: &Path) -> Result<Self, String> {
-        // Validate before creating a directory or removing an old snapshot. In particular,
-        // scratch == folder must never unlink the source catalogue and its WAL.
-        if crate::paths::is_oracle_folder(scratch, &crate::paths::Locations::current())
-            || crate::paths::is_within(scratch, folder)
-        {
-            return Err("the snapshot folder must be the Rust app's own".into());
-        }
-        // SQLite may create a shared-memory index even for a read-only live WAL connection.
-        // Only open SQLite on our private copy. Reject a changing source instead of mixing generations.
-        std::fs::create_dir_all(scratch).map_err(err)?;
-        let snapshot = tempfile::tempdir_in(scratch).map_err(err)?;
-        let db = "catalog.sqlite";
-        let wal = "catalog.sqlite-wal";
-        let journal = folder.join("catalog.sqlite-journal");
-        if journal.try_exists().map_err(err)? {
-            return Err("the source library has a rollback journal; close it before opening a snapshot".into());
-        }
-        let fingerprint = |name: &str| -> std::io::Result<Option<[u8; 32]>> {
-            match grainy_library::fsops::digest_bytes(&folder.join(name)) {
-                Ok(hash) => Ok(Some(hash)),
-                Err(e) if name == wal && e.kind() == std::io::ErrorKind::NotFound => Ok(None),
-                Err(e) => Err(e),
-            }
-        };
-        let before = [fingerprint(db).map_err(err)?, fingerprint(wal).map_err(err)?];
-        for (name, hash) in [db, wal].into_iter().zip(before) {
-            if let Some(expected) = hash {
-                let target = snapshot.path().join(name);
-                let mut input = std::fs::File::open(folder.join(name)).map_err(err)?;
-                std::io::copy(&mut input, &mut std::fs::File::create(&target).map_err(err)?).map_err(err)?;
-                if grainy_library::fsops::digest_bytes(&target).map_err(err)? != expected {
-                    return Err("the source library changed while taking the snapshot; try again".into());
-                }
-            }
-        }
-        if journal.try_exists().map_err(err)?
-            || before != [fingerprint(db).map_err(err)?, fingerprint(wal).map_err(err)?]
-        {
-            return Err("the source library changed while taking the snapshot; try again".into());
-        }
-        let listing = snapshot.path().join(db);
-        // Recover committed WAL frames in the copy and leave a self-contained read-only database.
-        let copied = rusqlite::Connection::open(&listing).map_err(err)?;
-        copied.execute_batch("PRAGMA journal_mode=DELETE").map_err(err)?;
-        drop(copied);
+        let (snapshot, listing) = snapshot_catalog(folder, scratch)?;
         let catalog = Catalog::open_reader(snapshot.path()).map_err(err)?;
         let mut doc = Self::build(catalog, folder.to_owned(), listing, true);
         doc.snapshot = Some(snapshot);

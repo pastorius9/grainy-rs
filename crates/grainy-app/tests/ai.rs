@@ -1025,8 +1025,20 @@ fn the_mcp_dialog_shows_what_the_oracles_shows() {
         assert_eq!(got.export_folder, text(&expected["export_folder"]), "{name}");
         let setups = unplace(&expected["setups"], &root);
         for ((key, _), (instruction, copied)) in grainy_app::ai::connection::CLIENTS.iter().zip(&got.setups) {
-            assert_eq!(instruction, text(&setups[key][0]), "{name} {key}");
-            assert_eq!(copied, text(&setups[key][1]), "{name} {key}");
+            // The Claude Code and Codex lines first remove an earlier grainy entry (the Python Grainy's, for one):
+            // the oracle's line behind the removal, and this app's own instruction saying so.
+            let oracle = text(&setups[key][1]);
+            let windows = oracle.contains("powershell");
+            let shell = if windows { "PowerShell".to_owned() } else { grainy_app::text::tr("터미널") };
+            let own = match *key {
+                "claude_code" => Some("{0}에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 예전 grainy 연결(파이썬 Grainy 등)이 있으면 이 연결로 바뀝니다."),
+                "codex" => Some("{0}에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list. 예전 grainy 연결이 있으면 이 연결로 바뀝니다."),
+                _ => None,
+            };
+            let want =
+                own.map_or_else(|| text(&setups[key][0]).to_owned(), |own| grainy_app::text::tr_with(own, &[&shell]));
+            assert_eq!(instruction, &want, "{name} {key}");
+            assert_eq!(copied, &grainy_app::ai::connection::replacing_earlier(key, windows, oracle), "{name} {key}");
         }
         assert_eq!(got.undo_label, text(&expected["undo_label"]), "{name}");
         assert_eq!(got.undo_enabled, expected["undo_enabled"].as_bool().unwrap(), "{name}");

@@ -5,7 +5,7 @@
 use grainy_i18n::Language;
 
 /// Korean source → English, for the strings this crate adds.
-pub const ENGLISH: [(&str, &str); 93] = [
+pub const ENGLISH: [(&str, &str); 112] = [
     ("AI에게 시키기 (로그인·모델 선택)…", "Ask AI (Sign In · Model)…"),
     ("프로그램 기본 모델", "Program default"),
     ("직접 입력", "Custom"),
@@ -120,6 +120,25 @@ pub const ENGLISH: [(&str, &str); 93] = [
         "렌즈 보정 데이터베이스는 Lensfun(https://lensfun.github.io/)의 것으로, CC BY-SA 3.0 라이선스(https://creativecommons.org/licenses/by-sa/3.0/)에 따라 수정 없이 들어 있습니다. 저작권은 Lensfun 기여자들에게 있습니다.",
         "The lens correction database is Lensfun's (https://lensfun.github.io/), included unmodified under the CC BY-SA 3.0 licence (https://creativecommons.org/licenses/by-sa/3.0/). Copyright: the Lensfun contributors.",
     ),
+    ("파이썬 Grainy 라이브러리 가져오기…", "Import the Python Grainy Library…"),
+    ("Grainy RS 라이브러리를 연 상태에서 가져오세요.", "Open a Grainy RS library first, then import."),
+    ("가져오기·내보내기 완료 후 다시 시도하세요.", "Try again once imports and exports have finished."),
+    ("파이썬 Grainy 라이브러리를 찾지 못했습니다.", "The Python Grainy library was not found."),
+    ("파이썬 Grainy 라이브러리를 읽는 중…", "Reading the Python Grainy library…"),
+    ("파이썬 Grainy 라이브러리에 가져올 사진이 없습니다.", "The Python Grainy library has no photos to import."),
+    ("지금 라이브러리(사진 {1}장)를 백업해 두고 파이썬 Grainy 라이브러리(사진 {0}장)로 바꿀까요?\n\n백업은 파일 관리의 '카탈로그 복원'으로 되돌릴 수 있습니다. 파이썬 Grainy의 라이브러리와 원본 사진은 바뀌지 않습니다.", "Back up the current library ({1} photos) and replace it with the Python Grainy library ({0} photos)?\n\nFile management › Restore catalog brings the backup back. The Python Grainy's library and your original photos are not changed."),
+    ("파이썬 Grainy 라이브러리의 사진 {0}장을 보정·기록·컬렉션과 함께 가져올까요?\n\n파이썬 Grainy의 라이브러리와 원본 사진은 바뀌지 않습니다.", "Import the {0} photos of the Python Grainy library with their edits, history and collections?\n\nThe Python Grainy's library and your original photos are not changed."),
+    ("파이썬 Grainy가 라이브러리를 쓰는 중입니다. 파이썬 Grainy를 닫고 다시 시도하세요.", "The Python Grainy is writing to its library. Close it and try again."),
+    ("파이썬 Grainy 라이브러리를 읽지 못했습니다.", "The Python Grainy library could not be read."),
+    ("파이썬 Grainy 라이브러리의 사진 {0}장을 가져왔습니다.", "Imported {0} photos from the Python Grainy library."),
+    ("이제부터 파이썬 Grainy에서 고친 내용은 옮겨지지 않습니다. 파이썬 Grainy의 라이브러리와 원본 사진은 그대로입니다.", "Edits made in the Python Grainy from now on are not carried over. The Python Grainy's library and your original photos stay as they are."),
+    ("파이썬 Grainy에서 쓰던 라이브러리를 가져올까요?", "Import the library you used in the Python Grainy?"),
+    ("사진·보정·기록·컬렉션을 그대로 옮겨 옵니다. 파이썬 Grainy의 라이브러리와 원본 사진은 바뀌지 않습니다. 나중에 파일 관리 메뉴에서도 가져올 수 있습니다.", "Photos, edits, history and collections come over as they are. The Python Grainy's library and your original photos are not changed. You can also import it later from the File management menu."),
+    ("AI 프로그램(Claude, Codex 등)을 파이썬 Grainy에 연결해 두셨다면, AI 연결 창의 설치 명령을 한 번 다시 실행해야 Grainy RS에 연결됩니다.", "If you connected AI programs (Claude, Codex…) to the Python Grainy, run the install command of the AI Connection window once more to connect them to Grainy RS."),
+    ("AI 연결 열기", "Open AI Connection"),
+    ("파이썬 Grainy 라이브러리 가져오기", "Import the Python Grainy Library"),
+    ("{0}에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 예전 grainy 연결(파이썬 Grainy 등)이 있으면 이 연결로 바뀝니다.", "Run the line below once in {0}, then restart Claude Code. Check with claude mcp list. An earlier grainy connection (such as the Python Grainy's) is replaced by this one."),
+    ("{0}에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list. 예전 grainy 연결이 있으면 이 연결로 바뀝니다.", "Run the line below once in {0}, then restart Codex. Check with codex mcp list. An earlier grainy connection is replaced by this one."),
 ];
 
 /// The translation of `source` for the current language: the app's table first, then the oracle's.

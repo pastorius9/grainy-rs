@@ -34,6 +34,7 @@ mod native_hdr;
 pub mod network;
 pub mod panels;
 pub mod paths;
+pub mod python_import;
 pub mod render;
 pub mod session;
 pub mod session_state;

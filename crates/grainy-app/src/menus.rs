@@ -207,6 +207,7 @@ impl AppContext {
         ui.separator();
         command(ui, self, "라이브러리 폴더 열기…", "file.open_library", Invocation::default());
         command(ui, self, "Grainy 라이브러리 읽기 전용으로 열기", "file.open_grainy_library", Invocation::default());
+        command(ui, self, crate::python_import::LABEL, "file.import_python_library", Invocation::default());
         ui.separator();
         entries(ui, self, FILES);
     }

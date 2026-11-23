@@ -119,6 +119,9 @@ impl GrainyApp {
         app.cx.debug_overlay = args.debug;
         crate::gpu_worker::install_with_wgpu(&mut app.cx, render_state);
         crate::network::install(&mut app.cx, args.offline);
+        if !args.memory && args.smoke.is_none() {
+            app.cx.state::<crate::python_import::PythonLibrary>().offer = Some(locations.oracle_library());
+        }
         crate::startup::begin(&mut app.cx);
         crate::commands::settings::startup(&mut app.cx);
         crate::ai::install(&mut app.cx, args.ask_ai);

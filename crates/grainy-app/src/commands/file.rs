@@ -29,6 +29,7 @@ pub const COMMANDS: &[Command] = &[
         enabled: always,
         run: open_grainy_library,
     },
+    crate::python_import::COMMAND,
     Command { id: "file.remove", label: "카탈로그에서만 제거", enabled: removable, run: remove },
 ];
 

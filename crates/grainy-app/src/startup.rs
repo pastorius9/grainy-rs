@@ -62,6 +62,8 @@ pub enum Step {
     AfterCrash,
     /// `UpdateController.startup`: the first-run question, the daily check.
     UpdateStartup,
+    /// 파이썬 Grainy 라이브러리 가져오기: the question once, for an empty library ([`crate::python_import::offer`]).
+    PythonLibrary,
     /// `file_access.check_folders`.
     CheckFolders,
 }
@@ -111,7 +113,7 @@ pub fn plan(cx: &mut AppContext, folder: &Path, crashed: bool) {
     let steps: VecDeque<Step> = if crashed {
         [Step::AfterCrash, Step::CheckFolders].into()
     } else {
-        [Step::UpdateStartup, Step::CheckFolders].into()
+        [Step::UpdateStartup, Step::PythonLibrary, Step::CheckFolders].into()
     };
     let startup = cx.state::<Startup>();
     startup.begun = true;
@@ -160,6 +162,7 @@ pub fn run_step(cx: &mut AppContext, step: Step) {
     match step {
         Step::AfterCrash => update::after_crash(cx),
         Step::UpdateStartup => update::startup(cx),
+        Step::PythonLibrary => crate::python_import::offer(cx),
         Step::CheckFolders => check_folders(cx),
     }
 }

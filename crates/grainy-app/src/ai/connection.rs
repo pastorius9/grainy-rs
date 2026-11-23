@@ -112,6 +112,19 @@ pub fn install_commands(windows: bool, folder: Option<&Path>, standard: Option<&
     })
 }
 
+/// The Claude Code and Codex lines as the AI Connection window shows them: an earlier `grainy` entry is removed
+/// first (an error when there is none is hidden), so the one line also moves AI programs set up for the Python
+/// Grainy, whose bridge reaches the Python Grainy, over to this app. Unlike the oracle's lines, where adding over an
+/// existing entry fails. Other keys (the Claude Desktop JSON) are returned as they are.
+pub fn replacing_earlier(key: &str, windows: bool, line: &str) -> String {
+    let quiet = if windows { "2>$null" } else { "2>/dev/null" };
+    match key {
+        "claude_code" => format!("claude mcp remove --scope user grainy {quiet}; {line}"),
+        "codex" => format!("codex mcp remove grainy {quiet}; {line}"),
+        _ => line.to_owned(),
+    }
+}
+
 /// `str(path)` of the oracle's `Path`: on Windows every `/` reads `\`.
 fn host_text(path: &Path) -> String {
     let text = path.to_string_lossy().into_owned();

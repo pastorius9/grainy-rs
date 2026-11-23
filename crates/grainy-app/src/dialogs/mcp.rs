@@ -9,7 +9,9 @@ use std::sync::mpsc::{channel, Receiver};
 use eframe::egui::{self, RichText, Vec2};
 
 use super::Dialog;
-use crate::ai::connection::{activity_text, install_commands, install_text, standard_folder, Connection, CLIENTS};
+use crate::ai::connection::{
+    activity_text, install_commands, install_text, replacing_earlier, standard_folder, Connection, CLIENTS,
+};
 use crate::ai::system::{Os, System};
 use crate::ai::AiState;
 use crate::context::AppContext;
@@ -136,8 +138,8 @@ pub fn refresh(state: &mut McpState, shown: &dyn Shown, sys: &dyn System, undo: 
     let windows = sys.os() == Os::Windows;
     let shell = if windows { "PowerShell".to_owned() } else { tr("터미널") };
     let instructions = [
-        tr_with("{0}에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 이미 있다고 나오면 먼저 claude mcp remove grainy --scope user를 실행하세요.", &[&shell]),
-        tr_with("{0}에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list.", &[&shell]),
+        tr_with("{0}에서 아래 한 줄을 한 번 실행한 뒤 Claude Code를 다시 시작하세요. 확인은 claude mcp list. 예전 grainy 연결(파이썬 Grainy 등)이 있으면 이 연결로 바뀝니다.", &[&shell]),
+        tr_with("{0}에서 아래 한 줄을 한 번 실행한 뒤 Codex를 다시 시작하세요. 확인은 codex mcp list. 예전 grainy 연결이 있으면 이 연결로 바뀝니다.", &[&shell]),
         tr("Claude 데스크톱에서 설정 › 개발자 › 구성 편집을 눌러 claude_desktop_config.json을 열고, \"mcpServers\" 안에 아래 \"grainy\" 항목을 넣은 뒤(파일이 비어 있으면 아래 내용을 그대로 붙여 넣으세요) Claude 데스크톱을 다시 시작하세요."),
     ];
     let standard = standard_folder(sys, windows);
@@ -145,7 +147,7 @@ pub fn refresh(state: &mut McpState, shown: &dyn Shown, sys: &dyn System, undo: 
     let setups = CLIENTS
         .iter()
         .zip(instructions)
-        .map(|((key, _), instruction)| (instruction, install_text(&commands[*key])))
+        .map(|((key, _), instruction)| (instruction, replacing_earlier(key, windows, &install_text(&commands[*key]))))
         .collect();
     let activity = shown
         .activity()
