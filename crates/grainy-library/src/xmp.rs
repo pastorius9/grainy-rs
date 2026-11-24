@@ -292,7 +292,7 @@ fn q(namespace: &str, local: &str) -> String {
 /// `user_metadata`, `keywords`).
 pub fn write_sidecar(photo: &Value, path: &Path) -> Result<()> {
     let mut root = if path.exists() {
-        let data = std::fs::read(path).map_err(|e| Error::os(&e, path, true))?;
+        let data = sidecar_bytes(path)?;
         if data.len() > 16 * 1024 * 1024 {
             return Err(Error::Parse("XMP sidecar exceeds 16 MiB limit".into()));
         }
@@ -382,13 +382,17 @@ pub struct Sidecar {
     pub keywords: Option<String>,
 }
 
-/// Port of `library.read_sidecar`.
-pub fn read_sidecar(path: &Path) -> Result<Sidecar> {
+fn sidecar_bytes(path: &Path) -> Result<Vec<u8>> {
     use std::io::Read;
     let file = std::fs::File::open(path).map_err(|e| Error::os(&e, path, true))?;
     let mut data = Vec::new();
     file.take(16 * 1024 * 1024 + 1).read_to_end(&mut data).map_err(|e| Error::os(&e, path, true))?;
-    let root = xmp_root(&data)?;
+    Ok(data)
+}
+
+/// Port of `library.read_sidecar`.
+pub fn read_sidecar(path: &Path) -> Result<Sidecar> {
+    let root = xmp_root(&sidecar_bytes(path)?)?;
     let mut result = Sidecar::default();
     let mut descriptions = Vec::new();
     root.iter(&q(NS_RDF, "Description"), &mut descriptions);
@@ -447,4 +451,13 @@ pub fn read_sidecar(path: &Path) -> Result<Sidecar> {
         result.keywords = Some(unique.join(", "));
     }
     Ok(result)
+}
+
+#[test]
+fn oversized_existing_sidecar_is_bounded_before_writing() {
+    let file = tempfile::NamedTempFile::new().unwrap();
+    file.as_file().set_len(32 * 1024 * 1024).unwrap();
+    assert_eq!(sidecar_bytes(file.path()).unwrap().len(), 16 * 1024 * 1024 + 1);
+    assert!(write_sidecar(&Value::Null, file.path()).is_err());
+    assert_eq!(file.as_file().metadata().unwrap().len(), 32 * 1024 * 1024);
 }
