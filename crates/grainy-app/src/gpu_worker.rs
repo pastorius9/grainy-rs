@@ -454,6 +454,52 @@ mod tests {
     use super::*;
 
     #[test]
+    fn installing_gpu_worker_keeps_the_offline_library() {
+        use crate::render::{PreviewJob, Reply, Resolution, TestCard};
+        use grainy_catalog::preview::{write_offline, OfflinePacket, Pixels};
+        let root = tempfile::tempdir().unwrap();
+        let library = root.path().join("library");
+        let original = root.path().join("missing.png");
+        let catalog = grainy_catalog::Catalog::new(&library).unwrap();
+        let id = catalog.add(&original.to_string_lossy(), None, None, false).unwrap();
+        let packet = OfflinePacket {
+            pixels: Pixels { shape: [3, 4, 3], values: vec![0.3; 36], half: false },
+            info: serde_json::json!({"width":4,"height":3,"working_space":"sRGB"}),
+            legacy_pixels: None,
+        };
+        std::fs::create_dir_all(library.join("previews")).unwrap();
+        write_offline(library.join(format!("previews/{id}.npz")), &packet).unwrap();
+        let doc = crate::document::catalog::CatalogDocument::with_catalog(catalog).unwrap();
+        let mut cx = crate::context::AppContext::new(&Default::default(), Box::<TestCard>::default(), Box::new(doc));
+        grainy_platform::Preferences::new(root.path().join("settings.json")).save_use_gpu(false).unwrap();
+        cx.data_folder = Some(root.path().to_owned());
+        install_with_wgpu(&mut cx, None);
+        cx.renderer.preview(PreviewJob {
+            id: 1,
+            photo: id as u64,
+            path: original,
+            settings: grainy_core::defaults(),
+            resolution: Resolution::Fit,
+            crop: grainy_engine::Crop::Cropped,
+        });
+        let start = std::time::Instant::now();
+        loop {
+            for reply in cx.renderer.poll() {
+                match reply {
+                    Reply::Frame(frame) => {
+                        assert_eq!((frame.preview.width, frame.preview.height), (4, 3));
+                        return;
+                    }
+                    Reply::Failed { message, .. } => panic!("{message}"),
+                    _ => {}
+                }
+            }
+            assert!(start.elapsed() < std::time::Duration::from_secs(30));
+            std::thread::sleep(std::time::Duration::from_millis(5));
+        }
+    }
+
+    #[test]
     fn initialization_is_lazy_when_disabled_and_failure_releases_the_context() {
         let control = Control::new(false);
         let mut state = PreviewGpu::new(control.clone());

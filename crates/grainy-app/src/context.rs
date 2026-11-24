@@ -1333,3 +1333,14 @@ fn painted_texture_survives_until_the_next_frame() {
     retire_textures(&mut pending, None, |id| freed.push(id));
     assert_eq!(freed, [first, second]);
 }
+
+#[test]
+fn range_cursor_tracks_the_photo_after_an_earlier_row_is_removed() {
+    let root = tempfile::tempdir().unwrap();
+    let mut session = crate::session::Session::default();
+    session.add(["a.jpg", "b.jpg", "c.jpg"].map(|name| root.path().join(name)));
+    let mut cx = AppContext::new(&Default::default(), Box::<crate::render::TestCard>::default(), Box::new(session));
+    cx.selection_cursor = Some(cx.doc.photos()[2].id);
+    cx.doc.remove_selected().unwrap();
+    assert_eq!(cx.selection_cursor_index(), Some(1));
+}
