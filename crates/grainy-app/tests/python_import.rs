@@ -242,9 +242,9 @@ fn a_real_python_library_comes_over() {
     let started = Instant::now();
     python_import::apply(&mut cx, prepared);
     let took = (copied, started.elapsed());
-    assert!(cx.dialog_open("python_import_done"), "status: {}", cx.status());
     let started = Instant::now();
     drain(&mut cx);
+    assert!(cx.dialog_open("python_import_done"), "status: {}", cx.status());
     let took = (took.0, took.1, started.elapsed());
     cx.doc.refresh().unwrap();
     let listed = cx.doc.photos().len();
