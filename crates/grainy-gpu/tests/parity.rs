@@ -239,6 +239,24 @@ fn software_cpu_matrices() {
 }
 
 #[test]
+fn resident_retry_after_color_encoding_failure_recomputes_tone() {
+    let _guard = test_lock();
+    let Some(g) = gpu(AdapterKind::Hardware) else {
+        return;
+    };
+    let source = input("garden");
+    let mut cache = Resident::new(&g, &source).unwrap();
+    let mut settings = changes(json!({"exposure": 1.0}));
+    settings.set("saturation", 1e200);
+    let before = cache.runs();
+    assert!(g.develop_resident(&mut cache, &settings, 1.0).is_err());
+    assert_eq!(cache.runs(), before);
+    settings.set("saturation", 0);
+    let frame = g.develop_resident(&mut cache, &settings, 1.0).unwrap().unwrap();
+    assert_close(&g.readback(&frame).unwrap(), &cpu_chain(&source, &settings, 1.0), 2e-5, "retried batch");
+}
+
+#[test]
 fn resident_invalidation_and_chain() {
     let _guard = test_lock();
     let Some(g) = gpu(AdapterKind::Hardware) else {
