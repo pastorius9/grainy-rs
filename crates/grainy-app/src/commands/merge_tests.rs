@@ -77,7 +77,15 @@ fn panorama_matches_overlapping_exposures_and_exclusive_output() {
     assert!(
         merge_to_tiff(&paths, &dir.path().join("cancel.tif"), Mode::Panorama, &AtomicBool::new(true), &|_| {}).is_err()
     );
-    assert!(!dir.path().join("cancel.tif").exists());
+    let path = dir.path().join("cancel.tif");
+    let cancelled = AtomicBool::new(false);
+    let result = merge_to_tiff(&paths, &path, Mode::Panorama, &cancelled, &|step| {
+        if step == 2 * paths.len() {
+            cancelled.store(true, std::sync::atomic::Ordering::Relaxed);
+        }
+    });
+    assert_eq!(result.unwrap_err(), "Photo merge cancelled.");
+    assert!(!path.exists());
 }
 
 #[test]

@@ -99,16 +99,25 @@ pub(crate) fn save_derived(
         kind,
         label,
         move |handle| {
-            work(handle, &output)?;
+            if let Err(error) = work(handle, &output) {
+                if handle.cancelled() {
+                    return Ok(false);
+                }
+                return Err(error);
+            }
             // Once the file is committed, register it even if cancellation arrived during the final write.
             if let Some(library) = library {
                 add_to_catalog(&library, &output, hdr).map_err(|e| import_error(&output, &e))?;
             }
-            Ok(())
+            Ok(true)
         },
         move |cx, result| {
+            if matches!(result, Ok(false)) {
+                cx.status.clear();
+                return;
+            }
             cx.doc.request_refresh(false);
-            let result = result.and_then(|()| {
+            let result = result.and_then(|_| {
                 if session {
                     cx.doc.add_files(vec![saved.clone()], &[]).map_err(|e| import_error(&saved, &e))?;
                     if let Some(i) = cx.doc.photos().iter().position(|p| p.path == saved) {

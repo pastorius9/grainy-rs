@@ -373,8 +373,9 @@ fn blend(
         }
         progress(paths.len() + i + 1);
     }
+    check_cancel(cancel)?;
     let (pixels, _) = sums.as_chunks_mut::<3>();
-    pixels.par_iter_mut().zip(weights.par_iter()).try_for_each(|(px, &w)| {
+    let normalized = pixels.par_iter_mut().zip(weights.par_iter()).try_for_each(|(px, &w)| {
         if w <= 0. {
             return Err("The selected photos leave a gap in the panorama.".to_string());
         }
@@ -382,7 +383,9 @@ fn blend(
             *c /= w;
         }
         Ok(())
-    })?;
+    });
+    check_cancel(cancel)?;
+    normalized?;
     Image::from_shape_vec((h, w, 3), sums).map_err(|e| e.to_string())
 }
 
