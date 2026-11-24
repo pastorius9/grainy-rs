@@ -108,7 +108,14 @@ pub(super) fn foreground(rgb: &[[u8; 3]]) -> Result<Option<Inference>, String> {
     let Some(path) = model_path() else {
         return Ok(None);
     };
-    let (mask, gpu) = run(&path, rgb).map_err(|e| format!("U²-Net ({}): {e}", path.display()))?;
+    let (mask, gpu) = match run(&path, rgb) {
+        Ok(output) => output,
+        Err(error) => {
+            *SESSION_CACHE.lock().unwrap_or_else(|e| e.into_inner()) = None;
+            log::warn!("Windows ML inference failed: {error}");
+            return Ok(None);
+        }
+    };
     let (lo, hi) = mask.iter().fold((f32::INFINITY, f32::NEG_INFINITY), |(lo, hi), v| (lo.min(*v), hi.max(*v)));
     if mask.iter().any(|v| !v.is_finite()) || hi - lo < 1e-5 {
         return Err(crate::text::tr("피사체의 경계를 찾지 못했습니다. 개체를 더 가깝게 둘러싸 주세요."));
