@@ -1,4 +1,5 @@
 {
+  "모델 이름과 세션 ID는 하이픈으로 시작할 수 없습니다.": "Model names and session IDs cannot start with a hyphen.",
   "설치…": "Install…",
   "설치 확인": "Confirm installation",
   "설치": "Install",

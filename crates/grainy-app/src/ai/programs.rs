@@ -123,8 +123,16 @@ fn path_text(path: &Path) -> String {
     path.to_string_lossy().into_owned()
 }
 
+fn validate_options(r: &Request) -> Result<(), BuildError> {
+    if r.model.starts_with('-') || r.session_id.starts_with('-') {
+        return Err(BuildError::Value(crate::text::tr("모델 이름과 세션 ID는 하이픈으로 시작할 수 없습니다.")));
+    }
+    Ok(())
+}
+
 /// Port of `claude_command`.
 pub fn claude_command(r: &Request, _sys: &dyn System) -> Result<Vec<String>, BuildError> {
+    validate_options(r)?;
     let config = r.workspace.join("claude-mcp.json");
     write_json(&config, &json!({"mcpServers": {"grainy": r.server}}))?;
     let mut args = r.executable.clone();
@@ -161,6 +169,10 @@ pub fn claude_command(r: &Request, _sys: &dyn System) -> Result<Vec<String>, Bui
     }
     if !r.model.is_empty() {
         args.extend(["--model".to_owned(), r.model.clone()]);
+    }
+    if r.prompt.starts_with('-') {
+        args.remove(r.executable.len() + 1);
+        args.extend(["--".into(), r.prompt.clone()]);
     }
     Ok(args)
 }
@@ -252,6 +264,7 @@ pub fn codex_catalog(r: &Request, sys: &dyn System) -> Result<PathBuf, BuildErro
 
 /// Port of `codex_command`.
 pub fn codex_command(r: &Request, sys: &dyn System) -> Result<Vec<String>, BuildError> {
+    validate_options(r)?;
     let mut args = r.executable.clone();
     args.extend(
         [
@@ -305,6 +318,7 @@ pub fn codex_command(r: &Request, sys: &dyn System) -> Result<Vec<String>, Build
 /// Port of `gemini_command`: Gemini's settings for this run, and a small Node entry that keeps its conversation
 /// storage in the run folder (it never opens the credentials).
 pub fn gemini_command(r: &Request, _sys: &dyn System) -> Result<Vec<String>, BuildError> {
+    validate_options(r)?;
     let mut server = r.server.as_object().cloned().unwrap_or_default();
     server.insert("trust".into(), json!(true));
     let settings = json!({
@@ -355,7 +369,7 @@ pub fn gemini_command(r: &Request, _sys: &dyn System) -> Result<Vec<String>, Bui
         "--output-format".into(),
         "stream-json".into(),
         "-p".into(),
-        format!("{}\n\n{}", r.prompt, r.instruction()),
+        format!("{}{}\n\n{}", if r.prompt.starts_with('-') { " " } else { "" }, r.prompt, r.instruction()),
     ];
     if !r.model.is_empty() {
         args.extend(["--model".to_owned(), r.model.clone()]);

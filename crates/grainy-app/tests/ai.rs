@@ -426,6 +426,14 @@ fn program_arguments_and_run_files_are_the_oracles() {
             session_id: text(&request["session_id"]).into(),
             context: text(&request["context"]).into(),
         };
+        if text(&row["kind"]) == "claude" {
+            let mut dash = r.clone();
+            dash.prompt = "- sample".into();
+            let cmd = claude_command(&dash, &sys).unwrap();
+            assert_eq!(&cmd[cmd.len() - 2..], ["--", "- sample"]);
+            dash.model = "-sample".into();
+            assert!(claude_command(&dash, &sys).is_err());
+        }
         let built = match text(&row["kind"]) {
             "claude" => claude_command(&r, &sys),
             "codex" => codex_command(&r, &sys),

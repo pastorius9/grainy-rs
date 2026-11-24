@@ -70,7 +70,7 @@ pub fn which(sys: &dyn System, cmd: &str) -> Option<String> {
     let os = sys.os();
     let separator = if os == Os::Windows { ';' } else { ':' };
     let given = Path::new(cmd);
-    let (mut dirs, file): (Vec<String>, String) = match (given.parent(), given.file_name()) {
+    let (dirs, file): (Vec<String>, String) = match (given.parent(), given.file_name()) {
         (Some(parent), Some(name)) if !parent.as_os_str().is_empty() => {
             (vec![parent.to_string_lossy().into_owned()], name.to_string_lossy().into_owned())
         }
@@ -79,16 +79,17 @@ pub fn which(sys: &dyn System, cmd: &str) -> Option<String> {
             if path.is_empty() {
                 return None;
             }
-            (path.split(separator).map(str::to_owned).collect(), cmd.to_owned())
+            (
+                path.split(separator)
+                    .filter(|dir| os != Os::Windows || Path::new(dir).is_absolute())
+                    .map(str::to_owned)
+                    .collect(),
+                cmd.to_owned(),
+            )
         }
     };
     let mut files = vec![file.clone()];
     if os == Os::Windows {
-        if given.parent().is_none_or(|p| p.as_os_str().is_empty())
-            && sys.var("NoDefaultCurrentDirectoryInExePath").is_none()
-        {
-            dirs.insert(0, ".".to_owned());
-        }
         let source = var_nonempty(sys, "PATHEXT").unwrap_or_else(|| DEFAULT_PATHEXT.to_owned());
         let exts: Vec<String> =
             source.split(';').filter(|e| !e.is_empty()).map(|e| e.trim_end_matches('.').to_owned()).collect();
