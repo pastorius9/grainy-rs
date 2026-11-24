@@ -243,15 +243,16 @@ pub fn publish(
             replace_file(&temp, &jpeg)?;
             replace_file(&temp_meta, &meta)?;
             db.execute_batch(
-                "CREATE TABLE IF NOT EXISTS rs_thumbnail_receipts (
-                id INTEGER PRIMARY KEY, jpeg_hash TEXT NOT NULL, stamp_hash TEXT NOT NULL)",
+                "CREATE TABLE IF NOT EXISTS rs_published_thumbnails (
+                id INTEGER PRIMARY KEY, jpeg_hash TEXT NOT NULL, stamp_hash TEXT NOT NULL, publication TEXT NOT NULL)",
             )?;
             db.execute(
-                "INSERT OR REPLACE INTO rs_thumbnail_receipts VALUES(?,?,?)",
+                "INSERT OR REPLACE INTO rs_published_thumbnails(id,jpeg_hash,stamp_hash,publication) VALUES(?,?,?,?)",
                 rusqlite::params![
                     id,
                     stamp["sha256"].as_str(),
-                    profiles::hash(json::dumps(&stamp, true, false, false).as_bytes())
+                    profiles::hash(json::dumps(&stamp, true, false, false).as_bytes()),
+                    unique
                 ],
             )?;
             Ok(true)
@@ -560,10 +561,15 @@ pub struct PruneStats {
 /// Only thumbnail pairs published with a content receipt can be reclaimed. Legacy pairs,
 /// loose files and offline packets have no such proof and stay in place.
 pub fn prune_cache(directory: impl AsRef<Path>, max_bytes: u64) -> Result<PruneStats> {
-    prune_before(directory.as_ref(), max_bytes, SystemTime::now())
+    prune_before(directory.as_ref(), max_bytes, SystemTime::now(), || {})
 }
 
-fn prune_before(directory: &Path, max_bytes: u64, started: SystemTime) -> Result<PruneStats> {
+fn prune_before(
+    directory: &Path,
+    max_bytes: u64,
+    started: SystemTime,
+    after_scan: impl FnOnce(),
+) -> Result<PruneStats> {
     let mut stats = PruneStats::default();
     let safe_dir = || fs::symlink_metadata(directory.join("thumbnails")).is_ok_and(|m| m.file_type().is_dir());
     if !safe_dir() {
@@ -574,7 +580,7 @@ fn prune_before(directory: &Path, max_bytes: u64, started: SystemTime) -> Result
         rusqlite::OpenFlags::SQLITE_OPEN_READ_WRITE,
     )?;
     db.busy_timeout(Duration::from_secs(2))?;
-    if !db.table_exists(None, "rs_thumbnail_receipts")? {
+    if !db.table_exists(None, "rs_published_thumbnails")? {
         return Ok(stats);
     }
     let mut candidates = Vec::new();
@@ -585,20 +591,21 @@ fn prune_before(directory: &Path, max_bytes: u64, started: SystemTime) -> Result
     };
     {
         let mut stmt =
-            db.prepare("SELECT r.id, p.id IS NOT NULL FROM rs_thumbnail_receipts r LEFT JOIN photos p ON r.id=p.id")?;
-        for row in stmt.query_map([], |r| Ok((r.get::<_, i64>(0)?, r.get::<_, bool>(1)?)))? {
-            let (id, live) = row?;
+            db.prepare("SELECT r.id, p.id IS NOT NULL, r.publication FROM rs_published_thumbnails r LEFT JOIN photos p ON r.id=p.id")?;
+        for row in stmt.query_map([], |r| Ok((r.get::<_, i64>(0)?, r.get::<_, bool>(1)?, r.get::<_, String>(2)?)))? {
+            let (id, live, publication) = row?;
             let (jpg, stamp) = files(directory, id);
             if let (Some((j, a)), Some((s, b))) = (file_info(&jpg), file_info(&stamp)) {
                 if j.max(s) < started && a <= 4 * 1024 * 1024 && b <= 8192 {
-                    candidates.push((live, j.max(s), id, a + b));
+                    candidates.push((live, j.max(s), id, a + b, publication));
                     total += a + b;
                 }
             }
         }
     }
+    after_scan();
     candidates.sort_unstable();
-    for (live, _, id, size) in candidates {
+    for (live, _, id, size, publication) in candidates {
         if live && total <= max_bytes {
             break;
         }
@@ -608,8 +615,8 @@ fn prune_before(directory: &Path, max_bytes: u64, started: SystemTime) -> Result
         let receipt = tx
             .query_row(
                 "SELECT jpeg_hash,stamp_hash,EXISTS(SELECT 1 FROM photos WHERE id=?1)
-            FROM rs_thumbnail_receipts WHERE id=?1",
-                [id],
+            FROM rs_published_thumbnails WHERE id=?1 AND publication=?2",
+                rusqlite::params![id, publication],
                 |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?, r.get::<_, bool>(2)?)),
             )
             .optional()?;
@@ -625,7 +632,7 @@ fn prune_before(directory: &Path, max_bytes: u64, started: SystemTime) -> Result
         if verified(&jpg, &jpeg_hash, 4 * 1024 * 1024) && verified(&stamp, &stamp_hash, 8192) {
             fs::remove_file(jpg)?;
             fs::remove_file(stamp)?;
-            tx.execute("DELETE FROM rs_thumbnail_receipts WHERE id=?", [id])?;
+            tx.execute("DELETE FROM rs_published_thumbnails WHERE id=?", [id])?;
             tx.commit()?;
             total = total.saturating_sub(size);
             stats.removed_files += 2;
@@ -653,19 +660,27 @@ mod prune_tests {
         fs::write(&jpg, b"published").unwrap();
         fs::write(&stamp, b"stamp").unwrap();
         let db = catalog.connection();
-        db.execute_batch("CREATE TABLE rs_thumbnail_receipts(id INTEGER PRIMARY KEY,jpeg_hash TEXT,stamp_hash TEXT)")
+        db.execute_batch("CREATE TABLE rs_published_thumbnails(id INTEGER PRIMARY KEY,jpeg_hash TEXT,stamp_hash TEXT,publication TEXT)")
             .unwrap();
         db.execute(
-            "INSERT INTO rs_thumbnail_receipts VALUES(1,?,?)",
+            "INSERT INTO rs_published_thumbnails VALUES(1,?,?,'first')",
             [profiles::hash(b"published"), profiles::hash(b"stamp")],
         )
         .unwrap();
-        assert_eq!(prune_before(dir.path(), 0, UNIX_EPOCH).unwrap().removed_files, 0);
+        assert_eq!(prune_before(dir.path(), 0, UNIX_EPOCH, || {}).unwrap().removed_files, 0);
         fs::write(&jpg, b"user replacement").unwrap();
         assert_eq!(prune_cache(dir.path(), 0).unwrap().removed_files, 0);
         fs::write(&jpg, b"published").unwrap();
         let later = SystemTime::now() + Duration::from_secs(1);
-        assert_eq!(prune_before(dir.path(), 0, later).unwrap().removed_files, 2);
+        // A second publisher replaced both files with identical bytes while the pruner
+        // walked. A coarse filesystem timestamp can still precede the cutoff.
+        let republished = prune_before(dir.path(), 0, later, || {
+            db.execute("UPDATE rs_published_thumbnails SET publication='second' WHERE id=1", []).unwrap();
+        })
+        .unwrap();
+        assert_eq!(republished.removed_files, 0);
+        assert!(jpg.exists() && stamp.exists());
+        assert_eq!(prune_before(dir.path(), 0, later, || {}).unwrap().removed_files, 2);
         for name in ["thumbnails/2024.jpg", "previews/2024.jpg", "previews/2.npz", "thumbnails/a.tmp"] {
             assert_eq!(fs::read(dir.path().join(name)).unwrap(), b"original");
         }
