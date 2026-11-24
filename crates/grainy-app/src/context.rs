@@ -108,6 +108,20 @@ pub(crate) struct GpuClipTexture {
     pub _view: Arc<grainy_gpu::wgpu::TextureView>,
 }
 
+fn retire_textures(
+    pending: &mut Vec<(u64, egui::TextureId)>,
+    frame: Option<u64>,
+    mut release: impl FnMut(egui::TextureId),
+) {
+    pending.retain(|&(queued, id)| {
+        if frame.is_some_and(|current| current <= queued) {
+            return true;
+        }
+        release(id);
+        false
+    });
+}
+
 pub(crate) type CursorReadback = ((u64, u32, u32), std::sync::mpsc::Receiver<Option<[u8; 3]>>);
 
 /// The application context.
@@ -622,14 +636,7 @@ impl AppContext {
         if let Some(rs) = &self.wgpu_render_state {
             let frame = self.egui.cumulative_frame_nr();
             let mut renderer = rs.renderer.write();
-            self.pending_gpu_frees.retain(|&(queued, id)| {
-                if exiting || queued < frame {
-                    renderer.free_texture(&id);
-                    false
-                } else {
-                    true
-                }
-            });
+            retire_textures(&mut self.pending_gpu_frees, (!exiting).then_some(frame), |id| renderer.free_texture(&id));
         } else {
             self.pending_gpu_frees.clear();
         }
@@ -1312,4 +1319,17 @@ fn tiles_require_a_whole_image_with_matching_edits() {
     assert!(tile.same_development(base));
     assert!(!Wanted { version: 3, ..tile }.same_development(base));
     assert!(!Wanted { before: true, ..tile }.same_development(base));
+}
+
+#[test]
+fn painted_texture_survives_until_the_next_frame() {
+    let first = egui::TextureId::User(4);
+    let second = egui::TextureId::User(5);
+    let mut pending = vec![(2, first), (3, second)];
+    let mut freed = Vec::new();
+    retire_textures(&mut pending, Some(3), |id| freed.push(id));
+    assert_eq!(freed, [first]);
+    assert_eq!(pending, [(3, second)]);
+    retire_textures(&mut pending, None, |id| freed.push(id));
+    assert_eq!(freed, [first, second]);
 }
