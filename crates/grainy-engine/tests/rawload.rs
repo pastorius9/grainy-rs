@@ -299,7 +299,8 @@ fn native_dng_loads_color_matrix_and_profile_gain_map_together() {
     let old = u32::from_le_bytes(bytes[4..8].try_into().unwrap()) as usize;
     let count = u16::from_le_bytes(bytes[old..old + 2].try_into().unwrap());
     let end = old + 2 + 12 * usize::from(count);
-    let mut entries: Vec<Vec<u8>> = bytes[old + 2..end].chunks_exact(12).map(<[u8]>::to_vec).collect();
+    let mut entries: Vec<Vec<u8>> =
+        bytes[old + 2..end].as_chunks::<12>().0.iter().map(|entry| entry.to_vec()).collect();
     let next = bytes[end..end + 4].to_vec();
     let gain_offset = bytes.len() as u32;
     for n in [1u32, 1] {
