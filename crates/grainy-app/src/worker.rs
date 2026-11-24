@@ -429,6 +429,23 @@ fn loaded_source(
     }
 }
 
+struct WholeStats {
+    photo: u64,
+    settings: Settings,
+    crop: Crop,
+    bins: crate::histogram::Bins,
+    channels: crate::histogram::Channels,
+}
+
+impl WholeStats {
+    fn new(job: &PreviewJob, bins: crate::histogram::Bins, channels: crate::histogram::Channels) -> Self {
+        Self { photo: job.photo, settings: job.settings.clone(), crop: job.crop, bins, channels }
+    }
+    fn matches(&self, job: &PreviewJob) -> bool {
+        self.photo == job.photo && self.crop == job.crop && self.settings == job.settings
+    }
+}
+
 /// The preview thread's state: the development cache and the loaded sources.
 struct PreviewState {
     library: Option<PathBuf>,
@@ -441,7 +458,7 @@ struct PreviewState {
     tokens: u64,
     gpu: Option<crate::gpu_worker::PreviewGpu>,
     /// Whole-frame histogram and clipping channels of the open photo, retained across 1:1 viewport tiles.
-    last_stats: Option<(u64, crate::histogram::Bins, crate::histogram::Channels)>,
+    last_stats: Option<WholeStats>,
 }
 
 /// A fit source is reduced to the view only when that saves at least this share of its long side.
@@ -624,7 +641,7 @@ impl PreviewState {
             let image = develop_cached(source.photo.source(), &job.settings.0, &working, cache, source.token)
                 .map_err(|e| e.to_string())?;
             let shown = crate::hdr::present(&image, &job.settings, hdr_view, monitor)?;
-            self.last_stats = Some((job.photo, shown.bins, shown.channels));
+            self.last_stats = Some(WholeStats::new(job, shown.bins, shown.channels));
             return Ok(Frame {
                 id: job.id,
                 photo: job.photo,
@@ -650,7 +667,7 @@ impl PreviewState {
             if let Photo::Linear(pixels) = &*source.photo {
                 if let Some(frame) = crate::basic_preview::render(pixels, &effective, monitor, &mut self.monitor)? {
                     let (height, width, _) = pixels.dim();
-                    self.last_stats = Some((job.photo, frame.bins, frame.channels));
+                    self.last_stats = Some(WholeStats::new(job, frame.bins, frame.channels));
                     return Ok(Frame {
                         id: job.id,
                         photo: job.photo,
@@ -674,7 +691,9 @@ impl PreviewState {
             }
         }
         let space = effective.str("working_space");
+        let stats = self.last_stats.as_ref().filter(|s| s.matches(job));
         let tile = tile_roi
+            .filter(|_| stats.is_some())
             .filter(|_| job.resolution == Resolution::Full)
             .map(|roi| grainy_engine::gpu::TileRequest { roi, halo: 96 });
         let accelerated = self.gpu.as_mut().and_then(|gpu| {
@@ -695,9 +714,9 @@ impl PreviewState {
                 let bins = *bins;
                 let (hits, misses) = self.gpu.as_ref().map_or((0, 0), |gpu| gpu.counters(job.resolution));
                 let (bins, channels) = if tile_uv.is_some() {
-                    self.last_stats.filter(|(p, _, _)| *p == job.photo).map_or((bins, channels), |(_, b, c)| (b, c))
+                    stats.map_or((bins, channels), |s| (s.bins, s.channels))
                 } else {
-                    self.last_stats = Some((job.photo, bins, channels));
+                    self.last_stats = Some(WholeStats::new(job, bins, channels));
                     (bins, channels)
                 };
                 let (width, height) = (preview.presented.width, preview.presented.height);
@@ -776,7 +795,7 @@ impl PreviewState {
                 None => converted.rgba,
             }
         };
-        self.last_stats = Some((job.photo, bins, converted.channels));
+        self.last_stats = Some(WholeStats::new(job, bins, converted.channels));
         let millis = started.elapsed().as_secs_f64() * 1000.0;
         Ok(Frame {
             id: job.id,
