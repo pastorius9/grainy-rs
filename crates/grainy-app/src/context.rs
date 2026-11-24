@@ -180,6 +180,7 @@ pub struct AppContext {
     pub(crate) grid_columns: usize,
     /// Photo ID last reached during Shift+Click / Shift+Arrow range selection.
     pub(crate) selection_cursor: Option<u64>,
+    pending_gpu_frees: Vec<(u64, egui::TextureId)>,
     /// The filmstrip scrolls to the open photo on its next drawing.
     pub(crate) scroll_to_current: bool,
     /// Where the photo was drawn at the last frame (screen points).
@@ -273,6 +274,7 @@ impl AppContext {
             search: String::new(),
             grid_columns: 1,
             selection_cursor: None,
+            pending_gpu_frees: Vec::new(),
             scroll_to_current: false,
             photo_rect: None,
             view_need: None,
@@ -592,21 +594,39 @@ impl AppContext {
 
     /// Release any native zero-copy `egui_wgpu` textures registered with `eframe`.
     pub(crate) fn free_gpu_textures(&mut self) {
+        for id in [
+            self.gpu_texture.take().map(|v| v.0),
+            self.gpu_tile_texture.take().map(|v| v.0),
+            self.gpu_clip_texture.take().map(|v| v.id),
+        ]
+        .into_iter()
+        .flatten()
+        {
+            self.defer_gpu_free(id);
+        }
+    }
+
+    pub(crate) fn defer_gpu_free(&mut self, id: egui::TextureId) {
+        self.pending_gpu_frees.push((self.egui.cumulative_frame_nr(), id));
+    }
+
+    pub(crate) fn release_gpu_textures(&mut self, exiting: bool) {
+        if self.pending_gpu_frees.is_empty() {
+            return;
+        }
         if let Some(rs) = &self.wgpu_render_state {
+            let frame = self.egui.cumulative_frame_nr();
             let mut renderer = rs.renderer.write();
-            if let Some((id, _)) = self.gpu_texture.take() {
-                renderer.free_texture(&id);
-            }
-            if let Some((id, _, _)) = self.gpu_tile_texture.take() {
-                renderer.free_texture(&id);
-            }
-            if let Some(clip) = self.gpu_clip_texture.take() {
-                renderer.free_texture(&clip.id);
-            }
+            self.pending_gpu_frees.retain(|&(queued, id)| {
+                if exiting || queued < frame {
+                    renderer.free_texture(&id);
+                    false
+                } else {
+                    true
+                }
+            });
         } else {
-            self.gpu_texture = None;
-            self.gpu_tile_texture = None;
-            self.gpu_clip_texture = None;
+            self.pending_gpu_frees.clear();
         }
     }
 
@@ -1112,7 +1132,7 @@ impl AppContext {
                     None => renderer.register_native_texture(&rs.device, &gpu_preview.presented.view, filter),
                 };
                 if let Some((tile_id, _, _)) = self.gpu_tile_texture.take() {
-                    renderer.free_texture(&tile_id);
+                    self.defer_gpu_free(tile_id);
                 }
                 self.gpu_texture = Some((id, gpu_preview));
                 self.texture = None;

@@ -287,7 +287,7 @@ impl AppContext {
                         _view: view,
                     });
                 } else if let Some(old) = self.gpu_clip_texture.take() {
-                    rs.renderer.write().free_texture(&old.id);
+                    self.defer_gpu_free(old.id);
                 }
             }
             if let Some(clip) = &self.gpu_clip_texture {

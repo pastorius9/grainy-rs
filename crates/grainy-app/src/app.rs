@@ -145,6 +145,7 @@ impl GrainyApp {
     pub fn show(&mut self, ui: &mut Ui) {
         let ctx = ui.ctx().clone();
         let cx = &mut self.cx;
+        cx.release_gpu_textures(false);
         let status_before = cx.status().to_owned();
         cx.poll_background();
         crate::ai::frame(cx);
@@ -309,6 +310,7 @@ impl eframe::App for GrainyApp {
 
     fn on_exit(&mut self) {
         self.cx.free_gpu_textures();
+        self.cx.release_gpu_textures(true);
         crate::ai::shutdown(&mut self.cx);
         self.cx.doc.edit_mut().commit("보정 변경");
         self.cx.flush();
