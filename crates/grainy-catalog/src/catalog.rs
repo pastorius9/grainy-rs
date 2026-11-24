@@ -66,10 +66,7 @@ pub(crate) fn tune_connection(db: &Connection, writable: bool) -> Result<()> {
     db.execute_batch("PRAGMA temp_store=MEMORY; PRAGMA cache_size=-65536;")?;
     if writable {
         let _ = db.execute_batch("PRAGMA mmap_size=268435456;");
-        let mode: String = db.query_row("PRAGMA journal_mode", [], |r| r.get(0)).unwrap_or_default();
-        if mode.eq_ignore_ascii_case("wal") {
-            let _ = db.execute_batch("PRAGMA synchronous=NORMAL;");
-        }
+        db.execute_batch("PRAGMA synchronous=FULL")?;
     }
     Ok(())
 }
@@ -681,4 +678,11 @@ impl Catalog {
         fields.insert("extras".into(), json::dumps(&current.into(), false, false, false).into());
         self.update(id, &fields)
     }
+}
+
+#[test]
+fn writable_catalog_commits_with_full_sync() {
+    let dir = tempfile::tempdir().unwrap();
+    let db = Catalog::new(dir.path()).unwrap();
+    assert_eq!(db.db.query_row("PRAGMA synchronous", [], |r| r.get::<_, i32>(0)).unwrap(), 2);
 }
