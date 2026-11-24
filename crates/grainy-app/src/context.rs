@@ -633,6 +633,8 @@ impl AppContext {
     /// What changes when another photo opens.
     pub(crate) fn photo_changed(&mut self) {
         crate::commands::auto_source::clear(self);
+        self.state::<crate::tools::point_color::PointColors>().overlay = Default::default();
+        self.state::<crate::masks::MaskState>().overlay = Default::default();
         self.base_wanted = None;
         self.texture = None;
         self.free_gpu_textures();

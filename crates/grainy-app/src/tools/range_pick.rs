@@ -594,11 +594,18 @@ pub(crate) fn image_overlay(cx: &mut AppContext, input: &OverlayInput) -> bool {
     }
     state.overlay.running = Some(key.clone());
     let (settings, index) = (input.settings.clone(), input.layer);
-    cx.jobs.spawn(
+    let photo = cx.doc.current_id();
+    cx.spawn_document_job(
         "mask_overlay",
         "",
         move |_| overlay_job(&path, original, &settings, index),
         move |cx: &mut AppContext, result| {
+            if cx.doc.current_id() != photo {
+                return;
+            }
+            if actions::state(cx).overlay.running.as_ref() != Some(&key) {
+                return;
+            }
             let picture = result.unwrap_or_else(|message| {
                 log::warn!("mask overlay: {message}");
                 None

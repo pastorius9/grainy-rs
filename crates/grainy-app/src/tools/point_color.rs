@@ -354,7 +354,7 @@ pub fn preview_key(settings: &Settings, index: usize) -> String {
 /// A loaded source of the open photo and its oriented, uncropped size.
 pub struct Loaded {
     path: PathBuf,
-    working_space: String,
+    raw_key: String,
     max_size: Option<usize>,
     photo: Photo,
     original: (f64, f64),
@@ -367,13 +367,11 @@ fn load(path: &std::path::Path, max_size: Option<usize>, settings: &Settings) ->
         loaded.metadata.get(key).and_then(Value::as_u64).map_or(fallback as f64, |v| v as f64)
     };
     let original = (size("width", w), size("height", h));
-    Ok(Loaded {
-        path: path.to_path_buf(),
-        working_space: settings.str("working_space").to_owned(),
-        max_size,
-        photo: loaded.photo,
-        original,
-    })
+    Ok(Loaded { path: path.to_path_buf(), raw_key: raw_key(settings), max_size, photo: loaded.photo, original })
+}
+
+fn raw_key(settings: &Settings) -> String {
+    format!("{}|{}", grainy_engine::settings_key(settings, &grainy_engine::RAW_KEYS), settings.value("camera_matrix"))
 }
 
 /// The cached source when it is the one asked for.
@@ -386,7 +384,7 @@ fn cached(
     state
         .source
         .as_ref()
-        .filter(|s| s.path == path && s.max_size == max_size && s.working_space == settings.str("working_space"))
+        .filter(|s| s.path == path && s.max_size == max_size && s.raw_key == raw_key(settings))
         .cloned()
 }
 
@@ -622,7 +620,7 @@ pub fn refresh(cx: &mut AppContext) {
         return;
     };
     let settings = cx.settings().clone();
-    let key = format!("{}|{}", path.display(), preview_key(&settings, index));
+    let key = format!("{}|{}|{}", path.display(), raw_key(&settings), preview_key(&settings, index));
     let max = Some(crate::worker::PREVIEW_SIZE);
     let have = {
         let state = state(cx);
@@ -632,7 +630,8 @@ pub fn refresh(cx: &mut AppContext) {
         state.overlay.running = Some(key.clone());
         cached(state, &path, max, &settings)
     };
-    cx.jobs.spawn(
+    let photo = cx.doc.current_id();
+    cx.spawn_document_job(
         "point_overlay",
         "",
         move |_| {
@@ -643,6 +642,12 @@ pub fn refresh(cx: &mut AppContext) {
             Ok((source, overlay_picture(&coverage)))
         },
         move |cx: &mut AppContext, result| {
+            if cx.doc.current_id() != photo {
+                return;
+            }
+            if state(cx).overlay.running.as_ref() != Some(&key) {
+                return;
+            }
             let picture = match result {
                 Ok((source, picture)) => {
                     cx.state::<PointColors>().source = Some(source);
@@ -773,4 +778,12 @@ mod tests {
         let c = settings(json!([{"rgb": [0.1, 0.2, 0.3], "range": 0.3}]));
         assert_ne!(preview_key(&a, 0), preview_key(&c, 0));
     }
+}
+
+#[test]
+fn point_color_source_changes_with_raw_development() {
+    let mut s = grainy_core::defaults();
+    let key = raw_key(&s);
+    s.set("raw_kelvin", 3150);
+    assert_ne!(raw_key(&s), key);
 }

@@ -168,17 +168,24 @@ pub fn refresh(cx: &mut AppContext) {
     if crate::tools::range_pick::image_overlay(cx, &input) {
         return;
     }
-    let wanted_key = key(&input);
+    let wanted_key = format!("{:?}|{}", cx.doc.current_id(), key(&input));
     let state = actions::state(cx);
     if state.overlay.shown.as_ref() == Some(&wanted_key) || state.overlay.running.is_some() {
         return;
     }
     state.overlay.running = Some(wanted_key.clone());
-    cx.jobs.spawn(
+    let photo = cx.doc.current_id();
+    cx.spawn_document_job(
         "mask_overlay",
         "",
         move |_| compute(&input),
         move |cx: &mut AppContext, result| {
+            if cx.doc.current_id() != photo {
+                return;
+            }
+            if actions::state(cx).overlay.running.as_ref() != Some(&wanted_key) {
+                return;
+            }
             let picture = match result {
                 Ok(picture) => picture,
                 Err(message) => {
