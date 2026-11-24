@@ -142,6 +142,7 @@ pub fn copy_original(record: &Value, destination: &Path) -> Result<(Value, Value
         }
         return Err(error);
     }
+    crate::folder_sync::note_output(platform, &destination_text);
     let info = record.get("info").cloned().unwrap_or(json!({}));
     Ok((info.get("width").cloned().unwrap_or(json!(0)), info.get("height").cloned().unwrap_or(json!(0))))
 }
