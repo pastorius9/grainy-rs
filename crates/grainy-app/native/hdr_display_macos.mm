@@ -466,7 +466,9 @@ API int32_t grainy_hdr_view_state(void* raw, uint32_t* w, uint32_t* h, float* st
     if (viewer->closed || !viewer->window) return kFalse;
     @autoreleasepool {
         @try {
+            const float previousPeak = viewer->peak;
             viewer->refreshScreen();
+            if (viewer->peak != previousPeak) viewer->paint();
             NSView* content = viewer->window.contentView;
             NSRect backing = content ? [content convertRectToBacking:content.bounds] : NSZeroRect;
             *w = static_cast<uint32_t>(std::max(0.0, std::round(backing.size.width)));
