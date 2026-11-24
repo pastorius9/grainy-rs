@@ -93,6 +93,12 @@ struct Wanted {
     tile: Option<[u32; 4]>,
 }
 
+impl Wanted {
+    fn same_development(self, base: Self) -> bool {
+        Self { resolution: base.resolution, tile: base.tile, view: base.view, ..self } == base
+    }
+}
+
 /// Native `egui_wgpu` texture for the GPU-rendered clipping overlay.
 pub(crate) struct GpuClipTexture {
     pub id: egui::TextureId,
@@ -114,6 +120,7 @@ pub struct AppContext {
     pub renderer: Box<dyn Renderer>,
     pub(crate) waker: Option<Waker>,
     wanted: Option<Wanted>,
+    base_wanted: Option<Wanted>,
     requests: u64,
     /// Changes even when the new catalogue reuses the old photo ids and edit versions.
     pub(crate) document_generation: u64,
@@ -224,6 +231,7 @@ impl AppContext {
             renderer,
             waker: Some(waker),
             wanted: None,
+            base_wanted: None,
             requests: 0,
             document_generation: 0,
             answered: 0,
@@ -605,6 +613,7 @@ impl AppContext {
     /// What changes when another photo opens.
     pub(crate) fn photo_changed(&mut self) {
         crate::commands::auto_source::clear(self);
+        self.base_wanted = None;
         self.texture = None;
         self.free_gpu_textures();
         self.clip_texture = None;
@@ -619,6 +628,7 @@ impl AppContext {
 
     /// Applies a soft-proofing configuration change and refreshes the preview.
     pub(crate) fn set_soft_proof(&mut self, proof: crate::render::SoftProof) {
+        self.base_wanted = None;
         self.soft_proof = proof.clone();
         self.renderer.set_soft_proof(proof);
         self.wanted = None;
@@ -895,6 +905,9 @@ impl AppContext {
                             tr_with(source, &[&values[0], &values[1], &values[2]])
                         };
                     }
+                    if frame.tile_uv.is_none() {
+                        self.base_wanted = self.wanted;
+                    }
                     self.show_frame(frame);
                     if self.renderer.prepares_analysis() {
                         crate::commands::auto_source::prepare(self);
@@ -966,7 +979,7 @@ impl AppContext {
         let Some(photo) = self.doc.current() else { return };
         let resolution = self.resolution();
         let tile = self.tile_need.filter(|_| resolution == Resolution::Full);
-        let wanted = Wanted {
+        let mut wanted = Wanted {
             crop,
             photo: photo.id,
             version: self.doc.edit().version(),
@@ -977,6 +990,13 @@ impl AppContext {
             view: self.view_need.filter(|_| resolution == Resolution::Fit),
             tile: tile.map(|r| r.map(f32::to_bits)),
         };
+        // Refresh the reduced whole-image background and its histogram before painting
+        // a tile developed with a new edit, crop or display configuration.
+        if wanted.tile.is_some() && !self.base_wanted.is_some_and(|base| wanted.same_development(base)) {
+            wanted.resolution = Resolution::Fit;
+            wanted.view = self.view_need;
+            wanted.tile = None;
+        }
         if self.wanted == Some(wanted) {
             return;
         }
@@ -995,7 +1015,7 @@ impl AppContext {
         let job =
             PreviewJob { id: self.requests, photo: wanted.photo, path, settings, resolution: wanted.resolution, crop };
         self.renderer.set_view_size(wanted.view);
-        self.renderer.set_tile_roi(tile);
+        self.renderer.set_tile_roi(wanted.tile.map(|t| t.map(f32::from_bits)));
         self.renderer.preview(job);
     }
 
@@ -1238,4 +1258,23 @@ mod review_tests {
         drop(cx);
         std::fs::remove_dir_all(root).unwrap();
     }
+}
+
+#[test]
+fn tiles_require_a_whole_image_with_matching_edits() {
+    let base = Wanted {
+        photo: 1,
+        version: 2,
+        before: false,
+        resolution: Resolution::Fit,
+        crop: grainy_engine::Crop::Cropped,
+        display: 0,
+        hdr: 0,
+        view: None,
+        tile: None,
+    };
+    let tile = Wanted { resolution: Resolution::Full, tile: Some([0; 4]), ..base };
+    assert!(tile.same_development(base));
+    assert!(!Wanted { version: 3, ..tile }.same_development(base));
+    assert!(!Wanted { before: true, ..tile }.same_development(base));
 }

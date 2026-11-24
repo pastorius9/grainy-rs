@@ -285,6 +285,10 @@ impl PreviewGpu {
         if space == "ProPhoto" && !self.shared_device {
             return None;
         }
+        let tile = tile.filter(|_| self.shared_device);
+        if soft_proof.enabled && soft_proof.gamut_warning {
+            return None;
+        }
         let cache_idx = usize::from(resolution == crate::render::Resolution::Full);
         let before = self.cache[cache_idx].runs();
         let outcome = catch_unwind(AssertUnwindSafe(|| {
@@ -415,6 +419,7 @@ pub(crate) fn install_with_wgpu(
     let mut worker = crate::worker::Worker::with_gpu_shared(enabled, shared);
     let ctx = cx.egui.clone();
     crate::render::Renderer::set_waker(&mut worker, Arc::new(move || ctx.request_repaint()));
+    crate::render::Renderer::set_library(&mut worker, cx.doc.asset_folder());
     cx.renderer = Box::new(worker);
 }
 
