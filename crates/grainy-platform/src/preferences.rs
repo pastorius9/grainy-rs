@@ -44,7 +44,11 @@ fn read_object(path: &Path) -> Option<Object> {
 
 fn replace_file(temporary: &Path, path: &Path, text: &str) -> std::io::Result<()> {
     // A failed exclusive create does not give us ownership of an existing temporary file.
-    let mut output = std::fs::OpenOptions::new().write(true).create_new(true).open(temporary)?;
+    let mut options = std::fs::OpenOptions::new();
+    options.write(true).create_new(true);
+    #[cfg(unix)]
+    std::os::unix::fs::OpenOptionsExt::mode(&mut options, 0o600);
+    let mut output = options.open(temporary)?;
     let result = (|| {
         output.write_all(text.as_bytes())?;
         output.flush()?;
@@ -137,4 +141,17 @@ mod tests {
         assert_eq!(std::fs::read(&settings).unwrap(), b"old settings");
         std::fs::remove_dir_all(root).unwrap();
     }
+}
+
+#[cfg(all(test, unix))]
+#[test]
+fn settings_are_private_from_creation() {
+    use std::os::unix::fs::PermissionsExt;
+    let dir = std::env::temp_dir().join(crate::util::unique_hex());
+    std::fs::create_dir(&dir).unwrap();
+    let path = dir.join("settings.json");
+    replace_file(&dir.join("stage"), &path, "{}").unwrap();
+    assert_eq!(path.metadata().unwrap().permissions().mode() & 0o077, 0);
+    std::fs::remove_file(path).unwrap();
+    std::fs::remove_dir(dir).unwrap();
 }
