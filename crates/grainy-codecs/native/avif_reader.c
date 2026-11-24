@@ -57,6 +57,7 @@ const char *grainy_avif_read(const uint8_t *data, size_t len, GrainyAvif **out) 
         im = &view;
     }
     avifRGBImageSetDefaults(&r->rgb, im);
+    r->rgb.alphaPremultiplied = AVIF_FALSE;
     r->rgb.depth = 16;
     r->rgb.format = im->alphaPlane ? AVIF_RGB_FORMAT_RGBA : AVIF_RGB_FORMAT_RGB;
     status = avifRGBImageAllocatePixels(&r->rgb);
@@ -68,7 +69,7 @@ const char *grainy_avif_read(const uint8_t *data, size_t len, GrainyAvif **out) 
     r->pixels = (const uint16_t *)r->rgb.pixels;
     r->icc = d->image->icc.data; r->icc_size = d->image->icc.size;
     r->primaries = d->image->colorPrimaries; r->transfer = d->image->transferCharacteristics;
-    r->alpha_premultiplied = d->image->alphaPremultiplied ? 1 : 0;
+    r->alpha_premultiplied = r->rgb.alphaPremultiplied ? 1 : 0;
     const avifImage *src = d->image;
     unsigned rotation = (src->transformFlags & AVIF_TRANSFORM_IROT) ? src->irot.angle : 0;
     // HEIF applies anticlockwise rotation before mirroring about a display axis.
