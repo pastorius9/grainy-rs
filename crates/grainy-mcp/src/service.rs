@@ -19,8 +19,6 @@ use crate::util::{eq, get, lock};
 pub const GRACE_SECONDS: f64 = 8.0;
 /// `QUEUE_SECONDS`: the longest wait for the GUI thread to start a call.
 pub const QUEUE_SECONDS: f64 = 10.0;
-/// `WAIT_SECONDS`: the longest a tool waits for its job before returning the job id.
-pub const WAIT_SECONDS: f64 = 40.0;
 /// `RETRY_SECONDS`: a finished job waits this long for Grainy to be ready to write.
 pub const RETRY_SECONDS: f64 = 60.0;
 /// `MAX_IMPORT`: image files one import_folder call takes.
@@ -118,15 +116,13 @@ pub fn default_pictures() -> PathBuf {
 /// Timings the tests shorten (the oracle's module constants, patched by its tests).
 #[derive(Clone, Copy, Debug)]
 pub struct Limits {
-    /// `WAIT_SECONDS`.
-    pub wait_seconds: f64,
     /// `RETRY_SECONDS`.
     pub retry_seconds: f64,
 }
 
 impl Default for Limits {
     fn default() -> Self {
-        Self { wait_seconds: WAIT_SECONDS, retry_seconds: RETRY_SECONDS }
+        Self { retry_seconds: RETRY_SECONDS }
     }
 }
 

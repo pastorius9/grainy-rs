@@ -472,9 +472,7 @@ fn replay(name: &str) -> Measure {
             }
             "stop_job" => service.stop_job(),
             "restart" => service.restart(),
-            "limits" => {
-                service.set_limits(Limits { wait_seconds: 0.0, retry_seconds: args["retry"].as_f64().unwrap() })
-            }
+            "limits" => service.set_limits(Limits { retry_seconds: args["retry"].as_f64().unwrap() }),
             "preference" => headless
                 .with(|h| h.catalog_ref().save_preference(args["key"].as_str().unwrap(), &args["value"]).unwrap()),
             "mcp_preference" => service.set_preference(args["key"].as_str().unwrap(), args["value"].clone()),
