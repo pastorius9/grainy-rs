@@ -47,3 +47,14 @@ fn invalid(message: impl Into<String>) -> Error {
 }
 
 pub use sys::{extract_thumbnail, libraw_version, DecodeMode, EmbeddedThumb, RawFile, RawMetadata, RawThumbnail};
+
+/// EXIF orientation corresponding to the sensor-to-display transform in LibRaw.
+pub fn exif_orientation(flip: i32) -> u16 {
+    [1, 2, 4, 3, 5, 8, 6, 7].get(flip as usize).copied().unwrap_or(1)
+}
+
+#[test]
+fn mirrored_transposes_match_exif() {
+    assert_eq!(exif_orientation(4), 5);
+    assert_eq!(exif_orientation(7), 7);
+}

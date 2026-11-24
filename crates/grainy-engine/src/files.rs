@@ -423,7 +423,7 @@ fn load_raw(
     let num_colors = raw.metadata().num_colors;
     let is_rgb_sensor = raw.metadata().color_desc.starts_with("RGB");
     let (width, height) = (sizes[3], sizes[2]);
-    let (full_width, full_height) = if matches!(flip, 5 | 6) { (height, width) } else { (width, height) };
+    let (full_width, full_height) = if (flip & 4) != 0 { (height, width) } else { (width, height) };
     let photo = if grainy_raw::rawcolor::enabled(settings) && num_colors == 3 && is_rgb_sensor {
         let mut dictionary = Value::Object(std::mem::take(&mut metadata));
         let source = grainy_raw::rawcolor::decode(&mut raw, &mut dictionary, max_size.map(|v| v as u32), Some(path))
@@ -460,12 +460,7 @@ fn load_raw(
     metadata.insert("width".into(), Value::from(full_width));
     metadata.insert("height".into(), Value::from(full_height));
     metadata.insert("decoder".into(), Value::String("LibRaw".into()));
-    let orientation = match flip {
-        3 => 3,
-        5 => 8,
-        6 => 6,
-        _ => 1,
-    };
+    let orientation = grainy_raw::exif_orientation(flip);
     metadata.insert("source_orientation".into(), Value::from(orientation));
     let photo = match max_size.filter(|m| *m > 0) {
         Some(longest) => {

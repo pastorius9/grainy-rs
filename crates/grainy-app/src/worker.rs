@@ -1107,16 +1107,7 @@ fn try_fast_raw_thumbnail(path: &Path, settings: &Settings) -> Option<(Preview, 
         // Embedded preview was already rotated by the camera (e.g. Apple ProRAW / Leica / Canon).
         dyn_img
     } else {
-        match extracted.flip {
-            1 => dyn_img.fliph(),
-            2 => dyn_img.flipv(),
-            3 => dyn_img.rotate180(),
-            4 => dyn_img.rotate270().fliph(),
-            5 => dyn_img.rotate270(),
-            6 => dyn_img.rotate90(),
-            7 => dyn_img.rotate90().fliph(),
-            _ => dyn_img,
-        }
+        apply_exif_orientation(dyn_img, grainy_raw::exif_orientation(extracted.flip))
     };
     let (w, h) = (oriented.width() as usize, oriented.height() as usize);
     let long = w.max(h);
