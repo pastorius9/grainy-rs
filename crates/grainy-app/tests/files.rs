@@ -565,6 +565,11 @@ fn offline_packets_equal_the_oracle_and_replace_a_missing_original() {
     let loaded = grainy_app::worker::offline_photo(&env.root.join("library"), 3, &settings).expect("offline source");
     assert_eq!(loaded.photo.pixels().dim(), (30, 20, 3));
     assert_eq!(loaded.metadata["offline_preview"], true);
+    let mut unrelated = packet.clone();
+    unrelated.info["file_fingerprint"] = json!({"path": env.root.join("other.jpg"), "size": 321});
+    grainy_catalog::preview::write_offline(&packet_path, &unrelated).unwrap();
+    assert!(grainy_app::worker::offline_photo(&env.root.join("library"), 3, &settings).is_err());
+    grainy_catalog::preview::write_offline(&packet_path, &packet).unwrap();
     // The thumbnail is made again from the packet (선택 사진 미리보기 다시 만들기).
     files::start_batch(&mut cx, &[3, 1]);
     drain(&mut cx);

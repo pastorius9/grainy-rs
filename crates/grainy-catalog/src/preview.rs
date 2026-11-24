@@ -499,6 +499,22 @@ pub fn load_offline(
     let mut source = packet.pixels;
     let mut info = packet.info;
     object(&info)?;
+    if let Some(recorded_path) = info["file_fingerprint"]["path"].as_str() {
+        let catalog = Catalog::open_reader(directory.as_ref())?;
+        let row = catalog.photo(id)?.ok_or_else(|| invalid("offline preview has no catalog photo"))?;
+        // Relinking may have changed the catalog path since import. Compare the original
+        // fingerprints when available, otherwise compare against the catalog path itself.
+        let original = &row["info"]["file_fingerprint"];
+        let expected = original["path"].as_str().or_else(|| row["path"].as_str()).unwrap_or_default();
+        let platform = catalog.platform();
+        if platform.path_key(recorded_path) != platform.path_key(expected)
+            || (original["size"].is_number()
+                && info["file_fingerprint"]["size"].is_number()
+                && original["size"] != info["file_fingerprint"]["size"])
+        {
+            return Err(invalid("offline preview belongs to a different source"));
+        }
+    }
     let enabled = settings.str("raw_mode") != "legacy" || settings.bool("dcp_profile") || settings.bool("negative");
     if !enabled {
         if let Some(legacy) = packet.legacy_pixels {
