@@ -303,12 +303,12 @@ pub trait Document {
     /// Whether a photo is selected.
     fn is_selected(&self, id: u64) -> bool;
 
-    /// The selected photos' indices in order (at least the open photo): `selected_ids`.
     /// Whether more than one visible photo is selected.
     fn multiple_selected(&self) -> bool {
         self.selected_indices().len() > 1
     }
 
+    /// The selected photos' indices in order (at least the open photo): `selected_ids`.
     fn selected_indices(&self) -> Vec<usize>;
 
     /// The open photo's edit state (a scratch state when none is open).

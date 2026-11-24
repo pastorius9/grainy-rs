@@ -108,6 +108,8 @@ pub(crate) struct GpuClipTexture {
     pub _view: Arc<grainy_gpu::wgpu::TextureView>,
 }
 
+pub(crate) type CursorReadback = ((u64, u32, u32), std::sync::mpsc::Receiver<Option<[u8; 3]>>);
+
 /// The application context.
 pub struct AppContext {
     /// The egui context (textures, viewport commands, repaints).
@@ -197,6 +199,7 @@ pub struct AppContext {
     pub(crate) cursor_rgb: Option<[f32; 3]>,
     /// Cache key `(frame_id, px, py)` to avoid redundant 1x1 GPU pixel readbacks while stationary.
     pub(crate) cursor_sample_key: Option<(u64, u32, u32)>,
+    pub(crate) cursor_readback: Option<CursorReadback>,
     /// Status bar message (already translated).
     pub(crate) status: String,
     /// The note under the automatic buttons (`auto_tone_note`).
@@ -283,6 +286,7 @@ impl AppContext {
             soft_proof: crate::render::SoftProof::default(),
             cursor_rgb: None,
             cursor_sample_key: None,
+            cursor_readback: None,
             status: tr("준비됨  ·  사진을 가져오면 시작할 수 있습니다."),
             auto_note: tr("자동톤: 검정·흰색 양끝 3% 여유\n목표 밝기 약 8–247 / 255"),
             choices: HashMap::new(),

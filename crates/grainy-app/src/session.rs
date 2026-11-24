@@ -364,6 +364,10 @@ impl Document for Session {
         Session::is_selected(self, id)
     }
 
+    fn multiple_selected(&self) -> bool {
+        self.selection.len() > 1
+    }
+
     fn selected_indices(&self) -> Vec<usize> {
         Session::selected_indices(self)
     }

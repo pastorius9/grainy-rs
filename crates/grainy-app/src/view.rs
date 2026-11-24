@@ -246,7 +246,34 @@ impl AppContext {
             let at = (py * pw + px) * 4;
             frame.preview.rgba.get(at..at + 3).map(|c| [c[0], c[1], c[2]])
         } else if let Some(gpu) = &frame.gpu {
-            gpu.gpu.read_pixel_rgba8(&gpu.presented.texture, px as u32, py as u32).ok().map(|c| [c[0], c[1], c[2]])
+            if let Some((asked, rx)) = &self.cursor_readback {
+                match rx.try_recv() {
+                    Ok(sample) if *asked == key => {
+                        self.cursor_readback = None;
+                        self.cursor_sample_key = Some(key);
+                        self.cursor_rgb = sample.map(|[r, g, b]| [r as f32 / 2.55, g as f32 / 2.55, b as f32 / 2.55]);
+                        return;
+                    }
+                    Err(std::sync::mpsc::TryRecvError::Empty) => {
+                        self.cursor_rgb = None;
+                        return;
+                    }
+                    _ => self.cursor_readback = None,
+                }
+            }
+            let gpu = gpu.clone();
+            let ctx = ui.ctx().clone();
+            let (tx, rx) = std::sync::mpsc::channel();
+            self.cursor_readback = Some((key, rx));
+            self.cursor_rgb = None;
+            self.cursor_sample_key = None;
+            rayon::spawn(move || {
+                let sample =
+                    gpu.gpu.read_pixel_rgba8(&gpu.presented.texture, key.1, key.2).ok().map(|c| [c[0], c[1], c[2]]);
+                let _ = tx.send(sample);
+                ctx.request_repaint();
+            });
+            return;
         } else {
             None
         };
