@@ -91,10 +91,19 @@ impl Catalog {
     /// Port of `Catalog.open_reader`; no migration, directory creation, or write connection.
     /// `immutable=1` avoids creating WAL sidecars for closed catalogs; live WAL uses SQLite read-only mode.
     pub fn open_reader(directory: impl AsRef<Path>) -> Result<Self> {
+        Self::reader(directory.as_ref(), false)
+    }
+
+    /// Read a database whose indexes or rows may change, including a private writable snapshot.
+    pub fn open_live_reader(directory: &Path) -> Result<Self> {
+        Self::reader(directory, true)
+    }
+
+    fn reader(directory: &Path, live: bool) -> Result<Self> {
         let directory = std::path::absolute(directory)?;
         let path = directory.join("catalog.sqlite");
         let flags = OpenFlags::SQLITE_OPEN_READ_ONLY | OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_NO_MUTEX;
-        let db = if directory.join("catalog.sqlite-wal").exists() {
+        let db = if live || directory.join("catalog.sqlite-wal").exists() {
             Connection::open_with_flags(&path, flags - OpenFlags::SQLITE_OPEN_URI)?
         } else {
             immutable_reader(&path)?
@@ -483,17 +492,29 @@ impl Catalog {
         if self.reader {
             return Err(invalid("catalog is read-only"));
         }
+        // A failing migration must affect only the private candidate. Install its pages
+        // in a single SQLite backup transaction after validation and recovery succeed.
+        let stage = tempfile::tempdir_in(&self.directory)?;
+        let mut candidate = Connection::open(stage.path().join("catalog.sqlite"))?;
+        {
+            let backup = rusqlite::backup::Backup::new(source, &mut candidate)?;
+            if !matches!(backup.step(-1)?, rusqlite::backup::StepResult::Done) {
+                return Err(invalid("catalogue busy during restore"));
+            }
+        }
+        drop(candidate);
+        let migrated = Self::new(stage.path())?;
         let mut target = Connection::open(self.directory.join("catalog.sqlite"))?;
+        tune_connection(&target, true)?;
         target.busy_timeout(Duration::from_secs(5))?;
         {
-            let backup = rusqlite::backup::Backup::new(source, &mut target)?;
+            let backup = rusqlite::backup::Backup::new(&migrated.db, &mut target)?;
             // A restore is one transaction: leave the current catalogue intact when another writer owns it.
             if !matches!(backup.step(-1)?, rusqlite::backup::StepResult::Done) {
                 return Err(invalid("catalogue busy during restore"));
             }
         }
-        drop(target);
-        Self::new(&self.directory)?;
+
         Ok(())
     }
     /// Port of `Catalog.backup`; uses SQLite's online backup API, including committed WAL pages.
@@ -685,4 +706,15 @@ fn writable_catalog_commits_with_full_sync() {
     let dir = tempfile::tempdir().unwrap();
     let db = Catalog::new(dir.path()).unwrap();
     assert_eq!(db.db.query_row("PRAGMA synchronous", [], |r| r.get::<_, i32>(0)).unwrap(), 2);
+}
+
+#[test]
+fn failed_migration_preserves_open_catalog() {
+    let dir = tempfile::tempdir().unwrap();
+    let c = Catalog::new(dir.path()).unwrap();
+    c.save_preference("marker", &json!("original")).unwrap();
+    let source = Connection::open_in_memory().unwrap();
+    source.execute_batch("CREATE TABLE photos(x); INSERT INTO photos VALUES(1)").unwrap();
+    assert!(c.restore_from(&source).is_err());
+    assert_eq!(c.preference("marker", Value::Null).unwrap(), "original");
 }

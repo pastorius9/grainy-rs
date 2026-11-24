@@ -438,7 +438,11 @@ impl CatalogDocument {
     /// Opens a verified private copy of the catalogue and its committed WAL in `scratch`.
     pub fn open_read_only(folder: &Path, scratch: &Path) -> Result<Self, String> {
         let (snapshot, listing) = snapshot_catalog(folder, scratch)?;
-        let catalog = Catalog::open_reader(snapshot.path()).map_err(err)?;
+        // Listing jobs update browser indexes in this private copy. A normal WAL
+        // reader can coexist with them; immutable readers assume its pages never change.
+        let writer = rusqlite::Connection::open(&listing).map_err(err)?;
+        writer.execute_batch("PRAGMA journal_mode=WAL").map_err(err)?;
+        let catalog = Catalog::open_live_reader(snapshot.path()).map_err(err)?;
         let mut doc = Self::build(catalog, folder.to_owned(), listing, true);
         doc.snapshot = Some(snapshot);
         Ok(doc)
