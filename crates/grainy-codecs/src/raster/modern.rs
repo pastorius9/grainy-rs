@@ -50,6 +50,28 @@ fn samples(width: usize, height: usize, channels: usize) -> Result<Vec<f32>> {
     Ok(out)
 }
 
+pub(crate) fn avif_exif(data: &[u8]) -> Option<Vec<u8>> {
+    use std::ffi::c_void;
+    unsafe extern "C" {
+        fn grainy_avif_exif(
+            data: *const u8,
+            len: usize,
+            receive: unsafe extern "C" fn(*const u8, usize, *mut c_void),
+            context: *mut c_void,
+        );
+    }
+    unsafe extern "C" fn receive(ptr: *const u8, len: usize, context: *mut c_void) {
+        // The synchronous callback borrows the live decoder's checked TIFF payload.
+        let bytes = unsafe { std::slice::from_raw_parts(ptr, len) };
+        unsafe { *context.cast::<Option<Vec<u8>>>() = Some(bytes.to_vec()) };
+    }
+    let mut result: Option<Vec<u8>> = None;
+    unsafe {
+        grainy_avif_exif(data.as_ptr(), data.len(), receive, (&raw mut result).cast());
+    }
+    result
+}
+
 pub(super) fn avif(data: &[u8]) -> Result<DecodedBitmap> {
     let mut image = std::ptr::null_mut();
     // The decoder borrows the bytes only while this function owns the native result.

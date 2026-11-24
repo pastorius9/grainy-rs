@@ -1,5 +1,6 @@
 #[allow(unsafe_code)]
 mod modern;
+pub(crate) use modern::avif_exif;
 
 use crate::metadata::{extract_exif, jpeg_segments, parse_exif, png_chunks, u16_at, u32_at, webp_chunks, Ifd};
 use crate::{codec, invalid, validate, ColorManager, ColorModel, Error, Metadata, Profile, Result};
