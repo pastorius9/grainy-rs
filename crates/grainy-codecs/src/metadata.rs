@@ -400,9 +400,12 @@ pub(crate) fn python_str(v: &Value) -> String {
 
 fn fraction(v: f64) -> (u32, u32) {
     // Continued-fraction limit_denominator(100000), matching Fraction(float).
+    if !v.is_finite() || v <= 0.0 {
+        return (0, 1);
+    }
     let mut x = v;
     let (mut p0, mut q0, mut p1, mut q1) = (0u64, 1u64, 1u64, 0u64);
-    loop {
+    for _ in 0..64 {
         let a = x.floor() as u64;
         let Some(q2) = a.checked_mul(q1).and_then(|v| v.checked_add(q0)) else { break };
         if q2 > 100000 {
@@ -432,7 +435,7 @@ fn coordinate(v: f64) -> Result<Entry> {
     let v = v.abs();
     let d = v as u32;
     let m = ((v - d as f64) * 60.) as u32;
-    let s = fraction((v - d as f64 - m as f64 / 60.) * 3600.);
+    let s = fraction(((v - d as f64 - m as f64 / 60.) * 3600.).clamp(0., 60.));
     let data = [(d, 1), (m, 1), s].into_iter().flat_map(|(n, d)| [n.to_be_bytes(), d.to_be_bytes()].concat()).collect();
     Ok(Entry { typ: 5, count: 3, data })
 }
@@ -979,5 +982,26 @@ mod tests {
         let parsed = parse_exif(&exported).unwrap();
         assert_eq!(parsed.root.get(&271).map(Entry::text).as_deref(), Some("Canon"));
         assert_eq!(parsed.exif.get(&34855).map(Entry::number), Some(400.0));
+    }
+}
+
+#[cfg(test)]
+mod gps_regression {
+    use super::*;
+
+    #[test]
+    fn whole_minutes_and_coordinate_limits() {
+        for (d, m) in [(2., 23.), (1., 23.), (4., 46.), (0., 0.), (90., 0.), (180., 0.)] {
+            for sign in [1., -1.] {
+                let value = sign * (d + m / 60.);
+                assert_eq!(coordinate(value).unwrap().numbers(), [d, m, 0.]);
+            }
+        }
+        for value in [f64::NAN, f64::INFINITY, f64::NEG_INFINITY] {
+            assert!(coordinate(value).is_err());
+            assert_eq!(fraction(value), (0, 1));
+        }
+        assert_eq!(fraction(-2e-13), (0, 1));
+        assert_eq!(fraction(0.), (0, 1));
     }
 }
