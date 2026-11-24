@@ -493,3 +493,15 @@ impl FolderSync {
         self.revision
     }
 }
+
+#[test]
+fn original_copy_is_excluded_from_folder_import() {
+    let dir = tempfile::tempdir().unwrap();
+    let original = dir.path().join("input.jpg");
+    let copy = dir.path().join("copy.jpg");
+    std::fs::write(&original, b"original bytes").unwrap();
+    let record = json!({"path":original, "rating":0,"settings":{},"keywords":""});
+    crate::quick_export::copy_original(&record, &copy).unwrap();
+    let platform = Platform::native();
+    assert!(outputs().contains(&platform.path_key(&resolve(platform, &copy.to_string_lossy()))));
+}
