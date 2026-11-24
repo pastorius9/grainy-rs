@@ -239,44 +239,47 @@ impl AppContext {
         let px = ((lu * (pw - 1) as f32).round() as usize).min(pw - 1);
         let py = ((lv * (ph - 1) as f32).round() as usize).min(ph - 1);
         let key = (frame.id, px as u32, py as u32);
+        if let Some((asked, rx)) = &self.cursor_readback {
+            match rx.try_recv() {
+                Ok(sample) => {
+                    let asked = *asked;
+                    self.cursor_readback = None;
+                    if asked.0 == frame.id {
+                        self.show_cursor_sample(asked, sample);
+                    }
+                }
+                Err(std::sync::mpsc::TryRecvError::Disconnected) => self.cursor_readback = None,
+                Err(std::sync::mpsc::TryRecvError::Empty) => {}
+            }
+        }
         if self.cursor_sample_key == Some(key) {
             return;
         }
-        let sample = if !frame.preview.rgba.is_empty() {
+        if !frame.preview.rgba.is_empty() {
             let at = (py * pw + px) * 4;
-            frame.preview.rgba.get(at..at + 3).map(|c| [c[0], c[1], c[2]])
+            self.show_cursor_sample(key, frame.preview.rgba.get(at..at + 3).map(|c| [c[0], c[1], c[2]]));
         } else if let Some(gpu) = &frame.gpu {
-            if let Some((asked, rx)) = &self.cursor_readback {
-                match rx.try_recv() {
-                    Ok(sample) if *asked == key => {
-                        self.cursor_readback = None;
-                        self.cursor_sample_key = Some(key);
-                        self.cursor_rgb = sample.map(|[r, g, b]| [r as f32 / 2.55, g as f32 / 2.55, b as f32 / 2.55]);
-                        return;
-                    }
-                    Err(std::sync::mpsc::TryRecvError::Empty) => {
-                        self.cursor_rgb = None;
-                        return;
-                    }
-                    _ => self.cursor_readback = None,
-                }
+            if self.cursor_sample_key.is_none_or(|last| last.0 != frame.id) {
+                self.cursor_rgb = None;
             }
-            let gpu = gpu.clone();
-            let ctx = ui.ctx().clone();
-            let (tx, rx) = std::sync::mpsc::channel();
-            self.cursor_readback = Some((key, rx));
-            self.cursor_rgb = None;
-            self.cursor_sample_key = None;
-            rayon::spawn(move || {
-                let sample =
-                    gpu.gpu.read_pixel_rgba8(&gpu.presented.texture, key.1, key.2).ok().map(|c| [c[0], c[1], c[2]]);
-                let _ = tx.send(sample);
-                ctx.request_repaint();
-            });
-            return;
+            if self.cursor_readback.is_none() {
+                let gpu = gpu.clone();
+                let ctx = ui.ctx().clone();
+                let (tx, rx) = std::sync::mpsc::channel();
+                self.cursor_readback = Some((key, rx));
+                rayon::spawn(move || {
+                    let sample =
+                        gpu.gpu.read_pixel_rgba8(&gpu.presented.texture, key.1, key.2).ok().map(|c| [c[0], c[1], c[2]]);
+                    let _ = tx.send(sample);
+                    ctx.request_repaint();
+                });
+            }
         } else {
-            None
-        };
+            self.show_cursor_sample(key, None);
+        }
+    }
+
+    fn show_cursor_sample(&mut self, key: (u64, u32, u32), sample: Option<[u8; 3]>) {
         self.cursor_sample_key = Some(key);
         self.cursor_rgb = sample.map(|[r, g, b]| [r as f32 / 2.55, g as f32 / 2.55, b as f32 / 2.55]);
     }
