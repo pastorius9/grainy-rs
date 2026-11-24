@@ -139,6 +139,29 @@ impl Gpu {
         tile: Option<TileContext>,
         external_base: Option<&ToneBase>,
     ) -> Result<ResidentResult> {
+        let runs = r.runs;
+        let result = self.encode_resident(r, s, pixel_scale, clip, tile, external_base);
+        if result.is_err() {
+            // Recorded commands may have been discarded before submission. No frame
+            // derived from that encoder may be reused on the next request.
+            r.tone = None;
+            r.color = None;
+            r.detail = None;
+            r.finish = None;
+            r.runs = runs;
+        }
+        result
+    }
+
+    fn encode_resident(
+        &self,
+        r: &mut Resident,
+        s: &Settings,
+        pixel_scale: f64,
+        clip: bool,
+        tile: Option<TileContext>,
+        external_base: Option<&ToneBase>,
+    ) -> Result<ResidentResult> {
         self.check_frame(&r.frame)?;
         if !pixel_scale.is_finite() || pixel_scale <= 0.0 {
             return Err(Error::Input("pixel_scale must be finite and positive".into()));
