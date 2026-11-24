@@ -167,6 +167,8 @@ fn take_over(
     for key in keys {
         if let Some(v) = source.get(key) {
             value.insert(key.clone(), v.clone());
+        } else if key == "ai_denoise" {
+            value.remove(key);
         }
     }
     let panels = panels_of(keys.iter().map(String::as_str));
@@ -211,11 +213,14 @@ pub fn synced(values: &Settings, target: &Settings, info: &Value, keys: &BTreeSe
 /// follow them (the changed values' panels and the switched panels the copy set owns).
 pub fn auto_changes(commit: &Commit, keys: &BTreeSet<String>) -> (Map<String, Value>, Vec<&'static str>) {
     let (previous, live) = (&commit.previous.0, &commit.settings.0);
-    let changes: Map<String, Value> = live
+    let mut changes: Map<String, Value> = live
         .iter()
         .filter(|(k, v)| keys.contains(*k) && !py_eq(previous.get(*k).unwrap_or(&Value::Null), v))
         .map(|(k, v)| (k.clone(), v.clone()))
         .collect();
+    if keys.contains("ai_denoise") && previous.contains_key("ai_denoise") && !live.contains_key("ai_denoise") {
+        changes.insert("ai_denoise".into(), 0.into());
+    }
     let off = |s: &Map<String, Value>| -> BTreeSet<String> {
         s.get("panels_off")
             .and_then(Value::as_array)
@@ -475,6 +480,7 @@ pub fn reset_photos(cx: &mut AppContext) -> Result<usize, String> {
     let defaults = grainy_core::defaults();
     for id in &ids {
         let mut value = cx.doc.stored_settings_of(*id)?;
+        value.0.remove("ai_denoise");
         for (key, v) in &defaults.0 {
             value.0.insert(key.clone(), v.clone());
         }
@@ -490,4 +496,17 @@ fn reset_selected(cx: &mut AppContext, _: &Invocation) {
     if let Err(message) = reset_photos(cx) {
         failed(cx, &message);
     }
+}
+
+#[test]
+fn detail_sync_carries_denoise_and_process_version_including_legacy_zero() {
+    let keys = crate::dialogs::copy_items::keys_of(&[("디테일", true)]);
+    assert!(keys.contains("detail_version") && keys.contains("ai_denoise"));
+    assert!(grainy_service::edits::copy_keys(None).unwrap().contains("ai_denoise"));
+    let old = grainy_core::defaults();
+    let mut src = old.clone();
+    src.set("ai_denoise", 42);
+    let result = synced(&src, &old, &Value::Null, &keys).unwrap();
+    assert_eq!(result.i64("ai_denoise"), 42);
+    assert_eq!(synced(&old, &result, &Value::Null, &keys).unwrap().i64("ai_denoise"), 0);
 }

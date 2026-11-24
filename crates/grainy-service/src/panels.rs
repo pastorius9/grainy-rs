@@ -7,6 +7,7 @@ pub(crate) const EDIT_GROUPS: [(&str, &[&str]); 16] = [
     (
         "빛",
         &[
+            "tone_version",
             "exposure",
             "contrast",
             "highlights",
@@ -64,6 +65,8 @@ pub(crate) const EDIT_GROUPS: [(&str, &[&str]); 16] = [
             "sharpen_radius",
             "sharpen_detail",
             "sharpen_mask",
+            "detail_version",
+            "ai_denoise",
             "noise_luma",
             "noise_color",
         ],

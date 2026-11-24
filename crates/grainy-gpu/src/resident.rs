@@ -241,6 +241,7 @@ impl Gpu {
             r.runs.color += 1;
         }
         let neutral_detail = [
+            "ai_denoise",
             "noise_luma",
             "noise_color",
             "dehaze",

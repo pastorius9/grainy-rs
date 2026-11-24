@@ -371,6 +371,7 @@ pub fn copy_keys(groups: Option<&[String]>) -> Result<BTreeSet<String>> {
                 .keys()
                 .filter(|k| !crop.contains(&k.as_str()) && *k != "panels_off")
                 .cloned()
+                .chain(std::iter::once("ai_denoise".to_owned()))
                 .collect())
         }
     }
@@ -389,6 +390,8 @@ pub fn copied_settings(
     for key in keys {
         if let Some(v) = source_map.get(key) {
             value.insert(key.clone(), v.clone());
+        } else if key == "ai_denoise" {
+            value.remove(key);
         }
     }
     let panels = panels_of(keys.iter().map(String::as_str));

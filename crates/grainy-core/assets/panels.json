@@ -83,6 +83,7 @@
    "sharpen_radius",
    "sharpen_detail",
    "sharpen_mask",
+   "ai_denoise",
    "noise_luma",
    "noise_color"
   ],

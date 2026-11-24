@@ -716,6 +716,11 @@ mod tests {
         });
         let mut s = grainy_core::defaults();
         s.set("ai_denoise", serde_json::json!(70.0));
+        let mut resident = crate::Resident::new(&gpu, &image).unwrap();
+        let frame = gpu.develop_resident(&mut resident, &grainy_core::defaults(), 1.).unwrap().unwrap();
+        let before = gpu.readback(&frame).unwrap();
+        let frame = gpu.develop_resident(&mut resident, &s, 1.).unwrap().unwrap();
+        assert_ne!(before, gpu.readback(&frame).unwrap());
         let cpu = grainy_detail::develop_detail(&image, &s, 1.0).unwrap();
         let gpu_out = gpu.detail(&image, &s, 1.0).unwrap().expect("GPU AI denoise");
         let max_diff = cpu.iter().zip(gpu_out.iter()).map(|(a, b)| (a - b).abs()).fold(0.0f32, f32::max);
