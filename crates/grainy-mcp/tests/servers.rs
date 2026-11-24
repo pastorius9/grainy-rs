@@ -67,6 +67,8 @@ fn stdio_server_loop_initialize_list_and_call() {
             .to_string(),
         json!({"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"name": "auto_tone", "arguments": {"ids": [1]}}})
             .to_string(),
+        json!({"jsonrpc": "2.0", "id": 7, "method": "tools/call",
+               "params": {"name":"get_job","arguments":{"job":"j1","wait":20}}}).to_string(),
         json!({"jsonrpc": "2.0", "id": 5, "method": "tools/call",
                "params": {"name": "get_preview", "arguments": {"ids": [1], "size": 128}}})
         .to_string(),
@@ -79,7 +81,7 @@ fn stdio_server_loop_initialize_list_and_call() {
     grainy_mcp::stdio::serve(input.as_bytes(), &mut output, &protocol, tools.as_ref()).unwrap();
     let lines: Vec<Value> =
         output.split(|b| *b == b'\n').filter(|l| !l.is_empty()).map(|l| serde_json::from_slice(l).unwrap()).collect();
-    assert_eq!(lines.len(), 7, "one reply per request, none for the notification or the empty line");
+    assert_eq!(lines.len(), 8, "one reply per request, none for the notification or the empty line");
     assert_eq!(lines[0]["result"]["protocolVersion"], "2025-06-18");
     assert_eq!(lines[0]["result"]["serverInfo"]["name"], "grainy");
     let listed = String::from_utf8(dumps(&lines[1]["result"]["tools"])).unwrap();
@@ -89,15 +91,17 @@ fn stdio_server_loop_initialize_list_and_call() {
         serde_json::from_str(content.last().unwrap()["text"].as_str().unwrap()).unwrap()
     };
     assert_eq!(text(&lines[2])["total"], 1);
-    let tone = text(&lines[3]);
+    let handle = text(&lines[3]);
+    assert_eq!(handle["job"], "j1");
+    let tone = text(&lines[4]);
     assert_eq!(lines[3]["result"]["isError"], false);
-    assert_eq!(tone["changed"], 1, "auto_tone waited for its job and wrote the batch: {tone}");
+    assert_eq!(tone["changed"], 1, "get_job returned the completed batch: {tone}");
     assert!(tone["batch"].as_str().unwrap().starts_with('b'));
-    let preview = &lines[4]["result"]["content"];
+    let preview = &lines[5]["result"]["content"];
     assert_eq!(preview[0]["type"], "image");
-    assert_eq!(text(&lines[4])["previews"], json!([{"id": 1, "w": 128, "h": 85}]));
-    assert_eq!(lines[5], json!({"jsonrpc": "2.0", "id": null, "error": {"code": -32700, "message": "Parse error"}}));
-    assert_eq!(text(&lines[6])["undone"], tone["batch"]);
+    assert_eq!(text(&lines[5])["previews"], json!([{"id": 1, "w": 128, "h": 85}]));
+    assert_eq!(lines[6], json!({"jsonrpc": "2.0", "id": null, "error": {"code": -32700, "message": "Parse error"}}));
+    assert_eq!(text(&lines[7])["undone"], tone["batch"]);
 }
 
 fn request(port: u16, raw: &str) -> (u16, Vec<(String, String)>, Vec<u8>) {
