@@ -276,3 +276,22 @@ fn prepared_import_is_bound_to_library_and_repairs_partial_profile() {
     drain(&mut a);
     assert_eq!(std::fs::read(profile).unwrap(), b"profile");
 }
+
+#[test]
+fn invalid_source_cache_directory_stops_import_before_replacement() {
+    let root = common::temp_dir("python-import-source-error");
+    let source = python_library(&root, 1);
+    let (_cx, data) = rust_app(&root, 2);
+    let library = data.join("Library");
+    let before = rows(&library);
+    for name in ["previews", "camera-profiles"] {
+        let path = source.join(name);
+        if path.is_dir() {
+            std::fs::remove_dir(&path).unwrap();
+        }
+        std::fs::write(&path, b"regular file").unwrap();
+        assert!(python_import::prepare(&source, &data, &library, &|| false).is_err());
+        assert_eq!(rows(&library), before);
+        std::fs::remove_file(path).unwrap();
+    }
+}

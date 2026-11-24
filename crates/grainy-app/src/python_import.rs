@@ -189,7 +189,9 @@ pub fn prepare(source: &Path, data: &Path, library: &Path, cancelled: &dyn Fn() 
     .map_err(|_| "파이썬 Grainy 라이브러리를 읽지 못했습니다.".to_owned())?;
     let stage = snapshot.path().join("stage");
     let previews = stage.join("previews");
-    if let Ok(entries) = std::fs::read_dir(source.join("previews")) {
+    let source_previews = source.join("previews");
+    if source_previews.try_exists().map_err(|e| e.to_string())? {
+        let entries = std::fs::read_dir(source_previews).map_err(|e| e.to_string())?;
         std::fs::create_dir_all(&previews).map_err(|e| e.to_string())?;
         for entry in entries {
             if cancelled() {
@@ -216,10 +218,12 @@ pub fn prepare(source: &Path, data: &Path, library: &Path, cancelled: &dyn Fn() 
             .into_iter()
             .enumerate()
     {
-        let Some(from) = from.filter(|f| f.is_dir()) else { continue };
+        let Some(from) = from else { continue };
         let copy = stage.join(format!("profiles-{n}"));
         copy_tree(&from, &copy, true, false, cancelled)?;
-        profiles.push((copy, to));
+        if copy.try_exists().map_err(|e| e.to_string())? {
+            profiles.push((copy, to));
+        }
     }
     Ok(Prepared {
         snapshot,
