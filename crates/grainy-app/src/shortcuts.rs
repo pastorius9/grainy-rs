@@ -147,14 +147,14 @@ impl AppContext {
                 self.doc.select_all();
             } else if deselect {
                 self.doc.deselect_others();
-                self.selection_cursor = self.doc.current_index();
+                self.selection_cursor = Some(self.doc.current_id());
             }
             if step != 0 {
                 if shift {
-                    if let Some(base) = self.selection_cursor.or_else(|| self.doc.current_index()) {
+                    if let Some(base) = self.selection_cursor_index() {
                         let target = base.saturating_add_signed(step).min(self.doc.len() - 1);
                         self.doc.select_range(target, false);
-                        self.selection_cursor = Some(target);
+                        self.selection_cursor = self.doc.photos().get(target).map(|p| p.id);
                         self.scroll_to_current = true;
                     }
                 } else if let Some(current) = self.doc.current_index() {

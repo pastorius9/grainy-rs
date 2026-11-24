@@ -833,6 +833,10 @@ impl Document for CatalogDocument {
         self.selection.contains(&id)
     }
 
+    fn multiple_selected(&self) -> bool {
+        self.selection.len() > 1
+    }
+
     fn selected_indices(&self) -> Vec<usize> {
         let out: Vec<usize> = self
             .listing

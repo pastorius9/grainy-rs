@@ -178,8 +178,8 @@ pub struct AppContext {
     pub(crate) search: String,
     /// Columns of the library grid at its last drawing (Up/Down move by a row).
     pub(crate) grid_columns: usize,
-    /// Last index reached during Shift+Click / Shift+Arrow range selection.
-    pub(crate) selection_cursor: Option<usize>,
+    /// Photo ID last reached during Shift+Click / Shift+Arrow range selection.
+    pub(crate) selection_cursor: Option<u64>,
     /// The filmstrip scrolls to the open photo on its next drawing.
     pub(crate) scroll_to_current: bool,
     /// Where the photo was drawn at the last frame (screen points).
@@ -626,6 +626,14 @@ impl AppContext {
         self.auto_note = tr("자동톤: 검정·흰색 양끝 3% 여유\n목표 밝기 약 8–247 / 255");
     }
 
+    pub(crate) fn selection_cursor_index(&self) -> Option<usize> {
+        self.selection_cursor.and_then(|id| self.doc.index_of(id)).or_else(|| self.doc.current_index())
+    }
+
+    pub(crate) fn proof_available(&self) -> bool {
+        !(crate::hdr::enabled() && self.settings().bool("hdr"))
+    }
+
     /// Applies a soft-proofing configuration change and refreshes the preview.
     pub(crate) fn set_soft_proof(&mut self, proof: crate::render::SoftProof) {
         self.base_wanted = None;
@@ -641,7 +649,7 @@ impl AppContext {
             crate::views::compare::left(self, leaving);
             self.photo_changed();
         }
-        self.selection_cursor = Some(index);
+        self.selection_cursor = self.doc.photos().get(index).map(|p| p.id);
         self.scroll_to_current = true;
     }
 

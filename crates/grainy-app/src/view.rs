@@ -184,7 +184,7 @@ impl AppContext {
         }
         self.clipping_overlay(ui, &painter, rect);
         self.update_cursor_rgb(ui, rect, response.hovered() && !self.modal_open());
-        if self.soft_proof.enabled && self.doc.current().is_some() {
+        if self.soft_proof.enabled && self.proof_available() && self.doc.current().is_some() {
             let label = if self.soft_proof.gamut_warning {
                 crate::text::tr_with("소프트 프루핑 · {0} (색역 경고)", &[&self.soft_proof.target])
             } else {
@@ -229,7 +229,11 @@ impl AppContext {
             Some([u0, v0, u1, v1]) if u >= u0 && u <= u1 && v >= v0 && v <= v1 => {
                 (((u - u0) / (u1 - u0).max(1e-6)).clamp(0.0, 1.0), ((v - v0) / (v1 - v0).max(1e-6)).clamp(0.0, 1.0))
             }
-            Some(_) => return,
+            Some(_) => {
+                self.cursor_rgb = None;
+                self.cursor_sample_key = None;
+                return;
+            }
             None => (u, v),
         };
         let px = ((lu * (pw - 1) as f32).round() as usize).min(pw - 1);
@@ -442,10 +446,10 @@ impl AppContext {
         });
         if shift {
             self.doc.select_range(index, command);
-            self.selection_cursor = Some(index);
+            self.selection_cursor = self.doc.photos().get(index).map(|p| p.id);
         } else if command {
             self.doc.toggle_selected(index);
-            self.selection_cursor = Some(index);
+            self.selection_cursor = self.doc.photos().get(index).map(|p| p.id);
         } else {
             self.select_photo(index);
         }
@@ -457,9 +461,9 @@ impl AppContext {
         let photo = &self.doc.photos()[index];
         let id = photo.id;
         let rect = Rect::from_min_max(cell.min + Vec2::new(4.0, 3.0), cell.max - Vec2::new(4.0, 3.0));
-        let current = Some(index) == self.doc.current_index();
+        let current = id == self.doc.current_id();
         let selected = current || self.doc.is_selected(id);
-        let multi = selected && self.doc.selected_indices().len() > 1;
+        let multi = selected && self.doc.multiple_selected();
         let (border, fill) = if current && multi {
             (t::BRAND, t::LIST_SELECTED)
         } else if selected {
@@ -593,7 +597,7 @@ impl AppContext {
             let rows = count.div_ceil(columns);
             let (area, _) = ui.allocate_exact_size(Vec2::new(width, 8.0 + rows as f32 * step.y), Sense::hover());
             if std::mem::take(&mut self.scroll_to_current) {
-                if let Some(target_idx) = self.selection_cursor.or_else(|| self.doc.current_index()) {
+                if let Some(target_idx) = self.selection_cursor_index() {
                     let target_offset = Vec2::new(
                         8.0 + (target_idx % columns) as f32 * step.x,
                         8.0 + (target_idx / columns) as f32 * step.y,
