@@ -411,7 +411,12 @@ impl Default for AppExporter {
 
 impl AppExporter {
     pub fn new() -> Self {
-        let use_gpu = std::env::var("GRAINY_GPU").as_deref() != Ok("0")
+        Self::with_gpu(true)
+    }
+
+    fn with_gpu(enabled: bool) -> Self {
+        let use_gpu = enabled
+            && std::env::var("GRAINY_GPU").as_deref() != Ok("0")
             && !crate::context::FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed);
         let gpu = if use_gpu {
             grainy_gpu::Gpu::with_adapter(grainy_gpu::AdapterKind::Hardware).ok().flatten()
@@ -519,11 +524,21 @@ pub fn run_records(
     progress: &(dyn Fn(usize, usize) + Sync),
     cancel: &AtomicBool,
 ) -> Result<Outcome, String> {
+    run_records_with_gpu(records, options, progress, cancel, true)
+}
+
+pub(crate) fn run_records_with_gpu(
+    records: &[Value],
+    options: &ExportOptions,
+    progress: &(dyn Fn(usize, usize) + Sync),
+    cancel: &AtomicBool,
+    enabled: bool,
+) -> Result<Outcome, String> {
     crate::paths::writable(Path::new(&options.folder)).map_err(|e| e.to_string())?;
     let total = records.len();
     let workers = grainy_library::quick_export::rs_export_concurrency_here(records).map_err(|e| e.to_string())?;
     let report = |done: usize| progress(done, total);
-    let exporter = AppExporter::new();
+    let exporter = AppExporter::with_gpu(enabled);
     let result = grainy_service::export::export_records(
         records,
         Path::new(&options.folder),
@@ -600,4 +615,9 @@ pub fn spawn(items: Vec<(PathBuf, Settings)>, options: ExportOptions, waker: Opt
         log::error!("cannot start the export thread: {error}");
     }
     rx
+}
+
+#[test]
+fn disabled_export_gpu_opens_no_adapter() {
+    assert!(AppExporter::with_gpu(false).gpu.lock().unwrap().is_none());
 }

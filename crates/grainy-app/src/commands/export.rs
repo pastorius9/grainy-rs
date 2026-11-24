@@ -215,6 +215,7 @@ pub fn start_export(cx: &mut AppContext, options: ExportOptions) {
         Vec::new()
     };
     cx.status = tr_with("사진 {0}장 내보내는 중…", &[&ids.len().to_string()]);
+    let enabled = cx.renderer.gpu_status().is_some_and(|s| s.enabled && s.usable);
     let work_options = options.clone();
     cx.jobs.spawn(
         "export",
@@ -230,7 +231,7 @@ pub fn start_export(cx: &mut AppContext, options: ExportOptions) {
             let progress = |done: usize, total: usize| {
                 handle.progress(done, total, tr_with("내보내는 중… {0}/{1}", &[&done.to_string(), &total.to_string()]));
             };
-            export::run_records(&records, &work_options, &progress, handle.cancel_flag())
+            export::run_records_with_gpu(&records, &work_options, &progress, handle.cancel_flag(), enabled)
         },
         move |cx: &mut AppContext, result: Result<Outcome, String>| finished(cx, &options, library, result),
     );
