@@ -424,6 +424,7 @@ pub fn read_dng_calibration(path: impl AsRef<Path>, info: &mut CameraInfo) -> Re
     for page in pages {
         tags.extend(page);
     }
+    let gain_tag = tags.remove(&crate::proraw::TAG_PROFILE_GAIN_TABLE_MAP);
     if let Some(cm) = dcp::matrix_tag(&tags, 50721, false)? {
         info.base_profile = Some(dcp::parse_tags(&tags, le)?);
         info.xyz_to_camera = cm;
@@ -456,7 +457,7 @@ pub fn read_dng_calibration(path: impl AsRef<Path>, info: &mut CameraInfo) -> Re
         info.calibration = Some(calibration.map(|m| m.unwrap_or(ID)).to_vec());
         info.calibration_signature = Some(tags.get(&50931).map(tiff::Tag::text).unwrap_or_default());
     }
-    if let Some(bytes) = tags.get(&crate::proraw::TAG_PROFILE_GAIN_TABLE_MAP).and_then(tiff::Tag::bytes) {
+    if let Some(bytes) = gain_tag.as_ref().and_then(tiff::Tag::bytes) {
         if let Ok(map) = crate::proraw::ProfileGainTableMap::parse(bytes) {
             info.gain_table_map = Some(map);
         }

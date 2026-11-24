@@ -290,3 +290,42 @@ fn a_failed_raw_export_leaves_no_file() {
     assert_eq!(error.to_string(), "지원하지 않는 RAW 형식입니다.");
     assert!(!output.exists());
 }
+
+#[test]
+fn native_dng_loads_color_matrix_and_profile_gain_map_together() {
+    // Append an IFD to the generated linear DNG so all original data offsets remain valid.
+    let mut bytes = fs::read(file("linear.dng")).unwrap();
+    assert_eq!(&bytes[..2], b"II");
+    let old = u32::from_le_bytes(bytes[4..8].try_into().unwrap()) as usize;
+    let count = u16::from_le_bytes(bytes[old..old + 2].try_into().unwrap());
+    let end = old + 2 + 12 * usize::from(count);
+    let mut entries: Vec<Vec<u8>> = bytes[old + 2..end].chunks_exact(12).map(<[u8]>::to_vec).collect();
+    let next = bytes[end..end + 4].to_vec();
+    let gain_offset = bytes.len() as u32;
+    for n in [1u32, 1] {
+        bytes.extend(n.to_be_bytes());
+    }
+    for v in [1.0f64, 1., 0., 0.] {
+        bytes.extend(v.to_be_bytes());
+    }
+    bytes.extend(1u32.to_be_bytes());
+    for v in [1.0f32, 0., 0., 0., 0., 1.25] {
+        bytes.extend(v.to_be_bytes());
+    }
+    let entry =
+        [52525u16.to_le_bytes().as_slice(), &7u16.to_le_bytes(), &68u32.to_le_bytes(), &gain_offset.to_le_bytes()]
+            .concat();
+    entries.push(entry);
+    entries.sort_by_key(|e| u16::from_le_bytes([e[0], e[1]]));
+    let new = bytes.len() as u32;
+    bytes[4..8].copy_from_slice(&new.to_le_bytes());
+    bytes.extend((count + 1).to_le_bytes());
+    bytes.extend(entries.into_iter().flatten());
+    bytes.extend(next);
+    let dir = tempfile::tempdir().unwrap();
+    let path = dir.path().join("gain.dng");
+    fs::write(&path, bytes).unwrap();
+    let loaded = load_photo(path, None, &settings(&serde_json::json!({"raw_mode":"native"}), "sRGB")).unwrap();
+    let Photo::Camera(cam) = loaded.photo else { panic!("native camera") };
+    assert_eq!(cam.raw_info().gain_table_map.as_ref().unwrap().table, [1.25]);
+}
