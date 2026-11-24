@@ -276,7 +276,7 @@ fn replay(name: &str) -> Measure {
         Box::new(move |_| Ok(format!("{:06x}", counter.fetch_add(1, Ordering::SeqCst) + 1))),
         Box::new(move || local.clone()),
     );
-    service.set_limits(Limits { wait_seconds: 0.0, retry_seconds: 60.0 });
+    // Deferred jobs must return their handles immediately under production defaults.
     let headless = Headless::new(catalog, Mode::Deferred);
     let gui: Arc<dyn Gui> = headless.clone();
     let tools = GrainyTools::new(service.clone(), Some(gui));

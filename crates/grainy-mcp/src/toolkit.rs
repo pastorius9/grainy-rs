@@ -15,7 +15,7 @@ use serde_json::{json, Map, Value};
 
 use crate::host::{CallError, Gui, Host};
 use crate::images::{self, Cell};
-use crate::service::{capped, ready, safe_commit, write_batch_raw, Job, McpService, Ready};
+use crate::service::{capped, ready, safe_commit, write_batch_raw, McpService, Ready};
 use crate::tools::{call_checked, definitions, image_block, text_block, ToolError, ToolResult, Tools};
 use crate::util::{casefold, english, get, id_of, is_video, path_text, repr, strip, truthy};
 
@@ -328,19 +328,6 @@ impl GrainyTools {
     }
 
     /// Port of `Tools.job_reply`.
-    fn job_reply(&self, job: Arc<Job>, deadline: Instant) -> R<Vec<Value>> {
-        job.wait(self.service.limits().wait_seconds.min(left(deadline) - 2.0));
-        let state = job.state_name();
-        if state == "done" {
-            return Ok(vec![text_block(&object(job.result().unwrap_or_default()))]);
-        }
-        if state == "failed" || state == "cancelled" {
-            let reason = job.error().filter(|e| !e.is_empty()).unwrap_or_else(|| "no reason given".into());
-            return Err(ToolError::Job { message: format!("job {} {state}: {reason}", job.id), view: job.view() });
-        }
-        Ok(vec![text_block(&job.running_view())])
-    }
-
     fn run(&self, name: &str, a: &Value, deadline: Instant) -> R<Vec<Value>> {
         match name {
             "list_photos" => self.list_photos(a, deadline),
@@ -1123,7 +1110,7 @@ impl GrainyTools {
             }
             Ok(service.start_auto(host, kind, records, label, tool, value.unwrap_or(1.0), errors)?)
         })?;
-        self.job_reply(job, deadline)
+        Ok(vec![text_block(&job.running_view())])
     }
 
     fn export_photos(&self, a: &Value, deadline: Instant) -> R<Vec<Value>> {
@@ -1232,7 +1219,7 @@ impl GrainyTools {
             let ids: Vec<i64> = records.iter().map(id_of).collect();
             Ok(service.start_export(host, ids, folder, options, errors)?)
         })?;
-        self.job_reply(job, deadline)
+        Ok(vec![text_block(&job.running_view())])
     }
 
     fn import_folder(&self, a: &Value, deadline: Instant) -> R<Vec<Value>> {
@@ -1253,7 +1240,7 @@ impl GrainyTools {
             ready(host, &service, &Ready { write: true, ..Ready::default() })?;
             Ok(service.start_import(host, folder, recursive))
         })?;
-        self.job_reply(job, deadline)
+        Ok(vec![text_block(&job.running_view())])
     }
 
     fn create_virtual_copies(&self, a: &Value, deadline: Instant) -> R<Vec<Value>> {
