@@ -48,8 +48,20 @@ fn create_session(model: &LearningModel) -> windows::core::Result<(LearningModel
 }
 
 fn run(path: &Path, rgb: &[[u8; 3]]) -> windows::core::Result<(Vec<f32>, bool)> {
+    let mut cache = SESSION_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    let result = evaluate(&mut cache, path, rgb);
+    if result.is_err() {
+        *cache = None;
+    }
+    result
+}
+
+fn evaluate(
+    guard: &mut Option<CachedSession>,
+    path: &Path,
+    rgb: &[[u8; 3]],
+) -> windows::core::Result<(Vec<f32>, bool)> {
     let stamp = file_stamp(path);
-    let mut guard = SESSION_CACHE.lock().unwrap_or_else(|e| e.into_inner());
     let needs_load = guard.as_ref().is_none_or(|c| c.path != path || c.stamp != stamp);
     if needs_load {
         let model = LearningModel::LoadFromFilePath(&HSTRING::from(path.as_os_str()))?;
@@ -108,10 +120,13 @@ pub(super) fn foreground(rgb: &[[u8; 3]]) -> Result<Option<Inference>, String> {
     let Some(path) = model_path() else {
         return Ok(None);
     };
-    let (mask, gpu) = match run(&path, rgb) {
+    foreground_with_model(&path, rgb)
+}
+
+fn foreground_with_model(path: &Path, rgb: &[[u8; 3]]) -> Result<Option<Inference>, String> {
+    let (mask, gpu) = match run(path, rgb) {
         Ok(output) => output,
         Err(error) => {
-            *SESSION_CACHE.lock().unwrap_or_else(|e| e.into_inner()) = None;
             log::warn!("Windows ML inference failed: {error}");
             return Ok(None);
         }
@@ -127,6 +142,13 @@ pub(super) fn foreground(rgb: &[[u8; 3]]) -> Result<Option<Inference>, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn unavailable_model_falls_back_to_analytic_selection() {
+        let temp = tempfile::tempdir().unwrap();
+        let pixels = vec![[32, 64, 96]; SIDE * SIDE];
+        assert!(foreground_with_model(&temp.path().join("missing.onnx"), &pixels).unwrap().is_none());
+    }
+
     /// Feed the same 320×320 RGB bytes to Windows ML and an external CPU ONNX Runtime reference.
     #[test]
     #[ignore = "requires installed U²-Net and a reference RGB/matte pair"]
