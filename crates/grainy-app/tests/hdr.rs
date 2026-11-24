@@ -326,3 +326,16 @@ fn hdr_in_the_window_korean() {
 fn hdr_in_the_window_english() {
     hdr_in_the_window(Language::English, "en");
 }
+
+#[test]
+fn hdr_photo_disables_the_soft_proof_menu() {
+    use egui_kittest::kittest::{NodeT, Queryable};
+    let _turn = common::language_lock();
+    on();
+    let mut harness = photo_harness(garden_photo("hdr-proof-menu"));
+    harness.state_mut().cx.run("develop.hdr");
+    common::snapshot::settle(&mut harness);
+    harness.get_by_label(&grainy_i18n::tr("보기·필터")).click();
+    harness.run_steps(4);
+    assert!(harness.get_by_label(&grainy_i18n::tr("소프트 프루핑")).accesskit_node().is_disabled());
+}
