@@ -1505,3 +1505,22 @@ fn writable_opens_hold_lock_until_document_closes() {
     drop(doc);
     assert!(CatalogDocument::open(dir.path()).is_ok());
 }
+
+#[test]
+fn opening_an_ordinary_folder_preserves_numeric_user_files() {
+    let dir = tempfile::tempdir().unwrap();
+    for folder in ["previews", "thumbnails"] {
+        std::fs::create_dir(dir.path().join(folder)).unwrap();
+        for extension in ["jpg", "json", "npz"] {
+            std::fs::write(dir.path().join(format!("{folder}/2024.{extension}")), b"original").unwrap();
+        }
+    }
+    for _ in 0..2 {
+        drop(CatalogDocument::open(dir.path()).unwrap());
+    }
+    for folder in ["previews", "thumbnails"] {
+        for extension in ["jpg", "json", "npz"] {
+            assert_eq!(std::fs::read(dir.path().join(format!("{folder}/2024.{extension}"))).unwrap(), b"original");
+        }
+    }
+}
