@@ -40,7 +40,7 @@ pub struct MetadataState {
     /// Bumped by every command that changed catalogue rows: the panel reads them again.
     pub revision: u64,
     /// The photo and revision the texts below were read for.
-    shown: Option<(u64, u64)>,
+    shown: Option<(u64, u64, u64)>,
     /// The keywords field's text (what is typed, saved on focus loss).
     pub keywords: String,
     /// The keywords as stored.
@@ -144,9 +144,10 @@ impl Panel for Metadata {
 /// and the file facts when the photo's metadata job ended (the oracle fills them when the load is done).
 pub fn sync(cx: &mut AppContext) {
     let id = cx.doc.current_id();
+    let generation = cx.document_generation;
     let reading = cx.jobs.running("metadata");
     let state = cx.state::<MetadataState>();
-    let key = (id, state.revision);
+    let key = (generation, id, state.revision);
     let finished = state.reading && !reading;
     state.reading = reading;
     let same = state.shown == Some(key);
@@ -172,4 +173,28 @@ pub fn sync(cx: &mut AppContext) {
         state.keywords = keywords.clone();
     }
     state.stored = keywords;
+}
+
+#[test]
+fn library_switch_discards_keyword_draft_for_reused_id() {
+    use crate::{document::catalog::CatalogDocument, render::TestCard};
+    let root = tempfile::tempdir().unwrap();
+    let document = |name: &str| {
+        let dir = root.path().join(name);
+        let c = grainy_catalog::Catalog::new(&dir).unwrap();
+        let id = c.add(dir.join("absent.jpg").to_str().unwrap(), None, None, false).unwrap();
+        c.connection()
+            .execute("UPDATE photos SET keywords=? WHERE id=?", grainy_catalog::rusqlite::params![name, id])
+            .unwrap();
+        let mut doc = CatalogDocument::with_catalog(c).unwrap();
+        doc.refresh_now().unwrap();
+        Box::new(doc)
+    };
+    let mut cx = AppContext::new(&Default::default(), Box::<TestCard>::default(), document("first"));
+    sync(&mut cx);
+    assert_eq!(cx.state::<MetadataState>().keywords, "first");
+    cx.state::<MetadataState>().keywords = "unfinished".into();
+    cx.set_document(document("second"));
+    sync(&mut cx);
+    assert_eq!(cx.state::<MetadataState>().keywords, "second");
 }
