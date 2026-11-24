@@ -169,7 +169,7 @@ fn apply_luma(@builtin(global_invocation_id) id: vec3<u32>) {
     let pix = id.y * w + id.x;
     let i = pix * 3u;
     let scale = (clamp(src2[pix], 0.0, 1.0) + 0.03) / (src1[pix] + 0.03);
-    dst[i] = clamp(src0[i] * scale, 0.0, 1.0);
-    dst[i + 1u] = clamp(src0[i + 1u] * scale, 0.0, 1.0);
-    dst[i + 2u] = clamp(src0[i + 2u] * scale, 0.0, 1.0);
+    dst[i] = max(src0[i] * scale, 0.0);
+    dst[i + 1u] = max(src0[i + 1u] * scale, 0.0);
+    dst[i + 2u] = max(src0[i + 2u] * scale, 0.0);
 }

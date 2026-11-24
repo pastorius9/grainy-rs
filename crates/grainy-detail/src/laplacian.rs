@@ -200,7 +200,7 @@ pub fn local_laplacian_clarity(a: &Image, clarity: f64, pixel_scale: f64) -> Ima
         for x in 0..w {
             let scale = (row_new[x].clamp(0.0, 1.0) + LUMA_FLOOR) / (row_y[x] + LUMA_FLOOR);
             for c in 0..3 {
-                out_row[x * 3 + c] = clip(row_src[x * 3 + c] * scale, 0.0, 1.0);
+                out_row[x * 3 + c] = (row_src[x * 3 + c] * scale).max(0.0);
             }
         }
     });
@@ -301,5 +301,14 @@ mod tests {
         let tex_in = (image[[32, 20, 0]] - image[[32, 22, 0]]).abs();
         let tex_v4 = (out_v4[[32, 20, 0]] - out_v4[[32, 22, 0]]).abs();
         assert!(tex_v4 > tex_in * 1.25, "PV4 Local Laplacian must still boost fine texture ({tex_v4} vs {tex_in})");
+    }
+}
+
+#[test]
+fn clarity_preserves_extended_highlights() {
+    let image = Image::from_elem((16, 16, 3), 2.0);
+    for amount in [-75., 75.] {
+        let out = local_laplacian_clarity(&image, amount, 1.);
+        assert!(out.iter().all(|&v| (v - 2.).abs() < 1e-5));
     }
 }
