@@ -13,6 +13,8 @@
 #include <cstdint>
 #include <cstring>
 #include <vector>
+#include <memory>
+#include <type_traits>
 
 #define API extern "C"
 
@@ -57,6 +59,10 @@ static bool extract_pixel_buffer_to_u8_320(CVPixelBufferRef buf, uint8_t* out_ma
     if (CVPixelBufferLockBaseAddress(buf, kCVPixelBufferLock_ReadOnly) != kCVReturnSuccess) {
         return false;
     }
+    struct Unlock {
+        CVPixelBufferRef buffer;
+        ~Unlock() { CVPixelBufferUnlockBaseAddress(buffer, kCVPixelBufferLock_ReadOnly); }
+    } unlock{buf};
     const size_t w = CVPixelBufferGetWidth(buf);
     const size_t h = CVPixelBufferGetHeight(buf);
     const size_t bpr = CVPixelBufferGetBytesPerRow(buf);
@@ -107,7 +113,6 @@ static bool extract_pixel_buffer_to_u8_320(CVPixelBufferRef buf, uint8_t* out_ma
             }
         }
     }
-    CVPixelBufferUnlockBaseAddress(buf, kCVPixelBufferLock_ReadOnly);
     return ok;
 }
 
@@ -116,11 +121,12 @@ static bool extract_pixel_buffer_to_u8_320(CVPixelBufferRef buf, uint8_t* out_ma
 // mode = 0: Foreground subject/object (macOS 14+ VNGenerateForegroundInstanceMaskRequest)
 // mode = 1: Person/portrait prior (macOS 12+ VNGeneratePersonSegmentationRequest)
 // Returns 1 if a valid matte was written, 0 if unavailable or no distinct subject found, -1 on error.
-API int32_t grainy_macos_vision_matte(const uint8_t* rgb320, uint32_t mode, uint8_t* out_matte) noexcept {
+static int32_t vision_matte(const uint8_t* rgb320, uint32_t mode, uint8_t* out_matte) {
     if (!rgb320 || !out_matte) return -1;
     @autoreleasepool {
         CGImageRef cgImage = create_cgimage_from_rgb320(rgb320);
         if (!cgImage) return -1;
+        std::unique_ptr<std::remove_pointer_t<CGImageRef>, decltype(&CGImageRelease)> imageOwner(cgImage, CGImageRelease);
         int32_t status = 0;
         VNImageRequestHandler* handler = [[VNImageRequestHandler alloc] initWithCGImage:cgImage options:@{}];
         NSError* error = nil;
@@ -144,10 +150,10 @@ API int32_t grainy_macos_vision_matte(const uint8_t* rgb320, uint32_t mode, uint
                                                          fromRequestHandler:handler
                                                                       error:&error];
                             if (maskBuf) {
+                                std::unique_ptr<std::remove_pointer_t<CVPixelBufferRef>, decltype(&CVPixelBufferRelease)> maskOwner(maskBuf, CVPixelBufferRelease);
                                 if (extract_pixel_buffer_to_u8_320(maskBuf, out_matte)) {
                                     status = 1;
                                 }
-                                CVPixelBufferRelease(maskBuf);
                             }
                         }
                     }
@@ -179,7 +185,18 @@ API int32_t grainy_macos_vision_matte(const uint8_t* rgb320, uint32_t mode, uint
 #endif
         }
 
-        CGImageRelease(cgImage);
         return status;
+    }
+}
+
+API int32_t grainy_macos_vision_matte(const uint8_t* rgb320, uint32_t mode, uint8_t* out_matte) noexcept {
+    try {
+        @try {
+            return vision_matte(rgb320, mode, out_matte);
+        } @catch (NSException*) {
+            return -1;
+        }
+    } catch (...) {
+        return -1;
     }
 }

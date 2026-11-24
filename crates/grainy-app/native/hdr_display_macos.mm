@@ -241,13 +241,13 @@ struct MetalRenderer {
     }
 };
 
-float screen_edr_peak(NSScreen* screen) {
+float screen_edr_peak(NSScreen* screen, bool potentialHeadroom = true) {
     if (!screen) return 1.0f;
     float current = static_cast<float>(screen.maximumExtendedDynamicRangeColorComponentValue);
     float potential = current;
     // maximumPotentialExtendedDynamicRangeColorComponentValue was introduced in macOS 12.0;
     // guard with respondsToSelector: so macOS 11 (Big Sur) never raises NSInvalidArgumentException.
-    if ([screen respondsToSelector:@selector(maximumPotentialExtendedDynamicRangeColorComponentValue)]) {
+    if (potentialHeadroom && [screen respondsToSelector:@selector(maximumPotentialExtendedDynamicRangeColorComponentValue)]) {
         potential = static_cast<float>(screen.maximumPotentialExtendedDynamicRangeColorComponentValue);
     }
     float peak = std::max(current, potential);
@@ -278,6 +278,7 @@ struct GrainyMacHdrViewer {
     bool closed = false;
 
     ~GrainyMacHdrViewer() {
+        delegate.viewer = nullptr;
         if (window) {
             window.delegate = nil;
             window.viewer = nil;
@@ -292,7 +293,7 @@ struct GrainyMacHdrViewer {
     void refreshScreen() {
         NSScreen* screen = window ? window.screen : nil;
         if (!screen) screen = [NSScreen mainScreen];
-        peak = screen_edr_peak(screen);
+        peak = screen_edr_peak(screen, false);
         if (layer && window) {
             layer.contentsScale = window.backingScaleFactor > 0.0 ? window.backingScaleFactor : 1.0;
         }
@@ -303,7 +304,7 @@ struct GrainyMacHdrViewer {
             return;
         }
         refreshScreen();
-        if (peak <= 1.01f) {
+        if (screen_edr_peak(window.screen) <= 1.01f) {
             error = kErrUnsupported;
             [window orderOut:nil];
             return;
@@ -322,6 +323,8 @@ struct GrainyMacHdrViewer {
         id<CAMetalDrawable> drawable = [layer nextDrawable];
         if (!drawable) return;
 
+        w = static_cast<uint32_t>(drawable.texture.width);
+        h = static_cast<uint32_t>(drawable.texture.height);
         float fw = static_cast<float>(w);
         float fh = static_cast<float>(h);
         float scale = std::min(fw / static_cast<float>(renderer.iw), fh / static_cast<float>(renderer.ih));
@@ -391,8 +394,8 @@ struct GrainyMacHdrViewer {
         }
 
         NSView* content = window.contentView;
-        content.wantsLayer = YES;
         content.layer = layer;
+        content.wantsLayer = YES;
         refreshScreen();
         return kOk;
     }
