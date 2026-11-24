@@ -1164,7 +1164,7 @@ impl GrainyTools {
         let scope = a.get("scope").and_then(Value::as_str).map(String::from);
         let dry_run = truthy(get(a, "dry_run"));
         let service = self.service.clone();
-        let (records, errors, note) = self.gui(deadline, move |host| {
+        let (records, errors, note, library) = self.gui(deadline, move |host| {
             ready(host, &service, &Ready::default())?;
             let targets = limit(match ids {
                 Some(ids) => ids,
@@ -1173,14 +1173,12 @@ impl GrainyTools {
             let selection = scope.as_deref() == Some("selection");
             ready(host, &service, &Ready { export: true, ids: &targets, selection, ..Ready::default() })?;
             let note = if dry_run { None } else { read_commit(host, &service, &targets)? };
-            let mut records = Vec::new();
-            for ident in &targets {
-                records.push(host.catalog().photo(*ident)?);
-            }
+            let (mut records, errors) = grainy_service::targets::freeze_export_rows(host.catalog(), &targets)?;
+            usable(&records, &errors)?;
             if dry_run {
                 let current = host.current_id();
                 let editor = host.editor_settings();
-                for record in records.iter_mut().flatten() {
+                for record in &mut records {
                     if Some(id_of(record)) == current {
                         if let Some(settings) = &editor {
                             record["settings"] = settings.clone();
@@ -1188,11 +1186,7 @@ impl GrainyTools {
                     }
                 }
             }
-            let (valid, errors) = grainy_service::targets::freeze(host.catalog(), &targets)?;
-            let allowed: Vec<i64> = valid.iter().map(id_of).collect();
-            usable(&valid, &errors)?;
-            let records: Vec<Value> = records.into_iter().flatten().filter(|r| allowed.contains(&id_of(r))).collect();
-            Ok((records, errors, note))
+            Ok((records, errors, note, host.catalog().directory().to_owned()))
         })?;
         let folder = self.destination(a, deadline, !dry_run)?;
         if dry_run {
@@ -1228,8 +1222,10 @@ impl GrainyTools {
         let service = self.service.clone();
         let job = self.gui(deadline, move |host| {
             ready(host, &service, &Ready { export: true, ..Ready::default() })?;
-            let ids: Vec<i64> = records.iter().map(id_of).collect();
-            Ok(service.start_export(host, ids, folder, options, errors)?)
+            if host.catalog().directory() != library {
+                return Err(service_error("the open library changed before export"));
+            }
+            Ok(service.start_export(host, records, folder, options, errors)?)
         })?;
         self.job_reply(job)
     }

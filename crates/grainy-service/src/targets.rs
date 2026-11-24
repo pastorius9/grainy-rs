@@ -201,6 +201,19 @@ pub fn folder_rows(directory: &Path, under: Option<&str>, cancel: Option<&Atomic
 
 /// Port of `photo_service.freeze`: `(records, errors)`, the photos as they are now.
 pub fn freeze(catalog: &Catalog, ids: &[i64]) -> Result<(Vec<Value>, Vec<Value>)> {
+    let (rows, errors) = freeze_export_rows(catalog, ids)?;
+    let records = rows
+        .iter()
+        .map(|row| {
+            json!({"id":get(row,"id"),"path":get(row,"path"),
+        "name":get(row,"name"),"settings":get(row,"settings"),"info":get(row,"info")})
+        })
+        .collect();
+    Ok((records, errors))
+}
+
+/// Freeze full export metadata in the same lookup that validates each target.
+pub fn freeze_export_rows(catalog: &Catalog, ids: &[i64]) -> Result<(Vec<Value>, Vec<Value>)> {
     let (mut records, mut errors) = (vec![], vec![]);
     for ident in ids {
         let Some(row) = catalog.photo(*ident)? else {
@@ -212,8 +225,7 @@ pub fn freeze(catalog: &Catalog, ids: &[i64]) -> Result<(Vec<Value>, Vec<Value>)
             errors.push(json!({"id": ident, "error": "video files cannot be edited"}));
             continue;
         }
-        records.push(json!({"id": ident, "path": path, "name": get(&row, "name"), "settings": get(&row, "settings"),
-                            "info": get(&row, "info")}));
+        records.push(row);
     }
     Ok((records, errors))
 }

@@ -48,8 +48,8 @@ pub type OnError = Box<dyn FnOnce(&mut dyn Host, String) + Send>;
 /// color_space, keep_metadata, naming, True, True, remember=False, on_done, on_error, cancel, progress,
 /// protocol=True)`).
 pub struct ExportStart {
-    /// The photos, in order.
-    pub ids: Vec<i64>,
+    /// Catalog records captured at dispatch, in selection order.
+    pub records: Vec<Value>,
     /// The destination folder (exists).
     pub folder: std::path::PathBuf,
     /// Format, quality, size, colour space, metadata and naming.

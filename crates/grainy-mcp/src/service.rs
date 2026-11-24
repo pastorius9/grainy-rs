@@ -614,12 +614,12 @@ impl McpService {
     pub fn start_export(
         self: &Arc<Self>,
         host: &mut dyn Host,
-        ids: Vec<i64>,
+        records: Vec<Value>,
         folder: PathBuf,
         options: grainy_service::export::ExportOptions,
         extra_errors: Vec<Value>,
     ) -> grainy_service::Result<Arc<Job>> {
-        let job = self.new_job("export_photos", ids.len());
+        let job = self.new_job("export_photos", records.len());
         let (service, done_job, folder_text) = (self.clone(), job.clone(), crate::util::path_text(&folder));
         let on_done = Box::new(move |_host: &mut dyn Host, result: Value| {
             let outputs = result.get("outputs").and_then(Value::as_array).cloned().unwrap_or_default();
@@ -657,7 +657,7 @@ impl McpService {
         });
         let progress_job = job.clone();
         let export = ExportStart {
-            ids,
+            records,
             folder,
             options,
             cancel: job.cancel.clone(),

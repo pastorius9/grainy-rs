@@ -374,16 +374,11 @@ impl Host for HeadlessHost {
         }
     }
     fn start_export(&mut self, export: ExportStart) -> grainy_service::Result<bool> {
-        if self.export_running || export.ids.is_empty() {
+        if self.export_running || export.records.is_empty() {
             return Ok(false);
         }
         self.commit()?;
-        let mut records = Vec::new();
-        for id in &export.ids {
-            if let Some(record) = self.catalog.photo(*id)? {
-                records.push(record);
-            }
-        }
+        let records = export.records;
         self.export_running = true;
         self.events.push(json!(["export_started", records.len()]));
         let ExportStart { folder, options, cancel, progress, on_done, on_error, .. } = export;

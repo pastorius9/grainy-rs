@@ -264,16 +264,11 @@ impl Host for AppHost<'_> {
         self.cx.egui.request_repaint_after(Duration::from_millis(ms));
     }
     fn start_export(&mut self, export: ExportStart) -> grainy_service::Result<bool> {
-        if self.cx.jobs.running("export") || export.ids.is_empty() {
+        if self.cx.jobs.running("export") || export.records.is_empty() {
             return Ok(false);
         }
         self.commit()?;
-        let mut records = Vec::new();
-        for id in &export.ids {
-            if let Some(record) = self.catalog().photo(*id)? {
-                records.push(record);
-            }
-        }
+        let records = export.records;
         let ExportStart { folder, options, cancel, progress, on_done, on_error, .. } = export;
         let library = self.cx.doc.library_folder();
         let total = records.len();
