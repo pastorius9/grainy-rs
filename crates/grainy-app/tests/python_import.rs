@@ -154,8 +154,8 @@ fn a_library_with_photos_is_asked_about_and_backed_up() {
     let prepared = python_import::prepare(&source, &data, &library, &|| false).unwrap();
     assert_eq!(prepared.photos, 2);
     python_import::apply(&mut cx, prepared);
-    assert!(cx.dialog_open("python_import_done"));
     drain(&mut cx);
+    assert!(cx.dialog_open("python_import_done"));
     drop(cx);
     assert_eq!(rows(&library), expected);
     assert!(library.join("thumbnails").join("1.jpg").is_file(), "the thumbnails are placed after the catalogue");
@@ -248,4 +248,22 @@ fn a_real_python_library_comes_over() {
         expected.len(),
         data.display()
     );
+}
+
+#[test]
+fn prepared_import_is_bound_to_library_and_repairs_partial_profile() {
+    let root = common::temp_dir("python-import-target");
+    let source = python_library(&root, 2);
+    let (mut a, data) = rust_app(&root, 0);
+    let (mut b, bdata) = rust_app(&root.join("other"), 1);
+    let prepare = || python_import::prepare(&source, &data, &data.join("Library"), &|| false).unwrap();
+    let before = rows(&bdata.join("Library"));
+    python_import::apply(&mut b, prepare());
+    assert_eq!(rows(&bdata.join("Library")), before);
+    let profile = data.join("CameraProfiles/Maker/Mine.dcp");
+    std::fs::create_dir_all(profile.parent().unwrap()).unwrap();
+    std::fs::write(&profile, b"pro").unwrap();
+    python_import::apply(&mut a, prepare());
+    drain(&mut a);
+    assert_eq!(std::fs::read(profile).unwrap(), b"profile");
 }

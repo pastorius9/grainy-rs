@@ -55,6 +55,8 @@ pub struct PythonLibrary {
 /// removes the snapshot.
 pub struct Prepared {
     snapshot: tempfile::TempDir,
+    library: PathBuf,
+    generation: Option<u64>,
     /// The self-contained copy of the Python Grainy's catalogue.
     catalog: PathBuf,
     /// Photos in it (virtual copies included).
@@ -113,7 +115,8 @@ pub fn start(cx: &mut AppContext, source: &Path, ask: bool) {
     let Some(library) = cx.doc.library_folder() else { return };
     let source = source.to_path_buf();
     cx.status = tr("파이썬 Grainy 라이브러리를 읽는 중…");
-    cx.jobs.spawn(
+    let generation = cx.document_generation;
+    cx.spawn_document_job(
         JOB,
         tr(TITLE),
         move |handle| prepare(&source, &data, &library, &|| handle.cancelled()),
@@ -126,7 +129,8 @@ pub fn start(cx: &mut AppContext, source: &Path, ask: bool) {
                     tr(TITLE),
                     tr("파이썬 Grainy 라이브러리에 가져올 사진이 없습니다."),
                 ))),
-                Ok(prepared) => {
+                Ok(mut prepared) => {
+                    prepared.generation = Some(generation);
                     let current = current_photos(cx).unwrap_or(0);
                     if ask || current > 0 {
                         confirm(cx, prepared, current);
@@ -191,7 +195,7 @@ pub fn prepare(source: &Path, data: &Path, library: &Path, cancelled: &dyn Fn() 
         copy_tree(&from, &copy, true, false, cancelled)?;
         profiles.push((copy, to));
     }
-    Ok(Prepared { snapshot, catalog, photos, thumbnails, profiles })
+    Ok(Prepared { snapshot, catalog, photos, thumbnails, profiles, library: library.to_owned(), generation: None })
 }
 
 /// Copies the regular files of `from` into `to` (created), keeping files already there; `deep` follows
@@ -221,13 +225,39 @@ fn copy_tree(
                     .extension()
                     .and_then(|e| e.to_str())
                     .is_some_and(|e| e.eq_ignore_ascii_case("jpg") || e.eq_ignore_ascii_case("json"));
-            if wanted && !target.exists() {
-                std::fs::copy(entry.path(), &target).map_err(|e| e.to_string())?;
+            // Preserve a locally installed profile. A truncated prefix left by an older
+            // import is repairable without replacing an unrelated profile with the same name.
+            let repair = !thumbnails_only
+                && target.is_file()
+                && truncated_copy(&entry.path(), &target).map_err(|e| e.to_string())?;
+            if wanted && (!target.exists() || repair) {
+                publish_copy(&entry.path(), &target).map_err(|e| e.to_string())?;
                 copied += 1;
             }
         }
     }
     Ok(copied)
+}
+
+fn truncated_copy(source: &Path, target: &Path) -> std::io::Result<bool> {
+    use std::io::Read;
+    let len = std::fs::metadata(target)?.len();
+    if len >= std::fs::metadata(source)?.len() {
+        return Ok(false);
+    }
+    let mut src = std::fs::File::open(source)?;
+    let mut dst = std::fs::File::open(target)?;
+    let (mut a, mut b) = ([0u8; 8192], [0u8; 8192]);
+    loop {
+        let n = dst.read(&mut a)?;
+        if n == 0 {
+            return Ok(true);
+        }
+        src.read_exact(&mut b[..n])?;
+        if a[..n] != b[..n] {
+            return Ok(false);
+        }
+    }
 }
 
 /// Publish through a new inode on the destination volume, even when the old name
@@ -261,6 +291,9 @@ pub fn apply(cx: &mut AppContext, prepared: Prepared) {
     let Some(library) = cx.doc.library_folder() else {
         return fail(cx, "Grainy RS 라이브러리를 연 상태에서 가져오세요.");
     };
+    if prepared.library != library || prepared.generation.is_some_and(|g| g != cx.document_generation) {
+        return;
+    }
     stop_batch(cx);
     if let Err(message) = cx.doc.file_op(FileOp::Restore { path: prepared.catalog.clone() }) {
         cx.photo_changed();
@@ -273,22 +306,22 @@ pub fn apply(cx: &mut AppContext, prepared: Prepared) {
     // photo shows the thumbnail made meanwhile; both are checked against their stamps before use.
     let Prepared { snapshot, thumbnails, profiles, photos, .. } = prepared;
     let target = library.join("thumbnails");
-    cx.jobs.spawn(
+    cx.spawn_document_job(
         FILES_JOB,
         "",
         move |_| {
             place_thumbnails(&thumbnails, &target)?;
             for (copy, folder) in &profiles {
-                if let Err(error) = copy_tree(copy, folder, true, false, &|| false) {
-                    log::warn!("camera profiles not copied to {}: {error}", folder.display());
-                }
+                copy_tree(copy, folder, true, false, &|| false)?;
             }
             drop(snapshot);
             Ok(())
         },
-        |_: &mut AppContext, _: Result<(), String>| {},
+        move |cx: &mut AppContext, result: Result<(), String>| match result {
+            Ok(()) => cx.open_dialog(Box::new(done_box(photos, python_mcp_used()))),
+            Err(message) => fail(cx, &message),
+        },
     );
-    cx.open_dialog(Box::new(done_box(photos, python_mcp_used())));
 }
 
 /// Whether the Python Grainy's AI connection was set up on this computer: its bridge is in its settings folder.
