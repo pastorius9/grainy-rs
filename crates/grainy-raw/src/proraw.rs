@@ -102,6 +102,20 @@ impl ProfileGainTableMap {
         })
     }
 
+    pub(crate) fn validate(&self) -> Result<()> {
+        if !(1..=512).contains(&self.map_points_v)
+            || !(1..=512).contains(&self.map_points_h)
+            || !(1..=256).contains(&self.map_points_n)
+            || self.table.len() != (self.map_points_v * self.map_points_h * self.map_points_n) as usize
+            || ![self.map_spacing_v, self.map_spacing_h].iter().all(|v| v.is_finite() && *v > 0.)
+            || ![self.map_origin_v, self.map_origin_h].iter().all(|v| v.is_finite())
+            || !self.map_input_weights.iter().chain(&self.table).all(|v| v.is_finite())
+        {
+            return Err(invalid("invalid stored ProfileGainTableMap"));
+        }
+        Ok(())
+    }
+
     #[inline]
     fn sample_n(&self, r: usize, c: usize, n_pos: f32) -> f32 {
         let nv = self.map_points_n as usize;
@@ -150,6 +164,23 @@ impl ProfileGainTableMap {
 
     /// Applies the spatially-varying linear gain table map in-place across an H×W×3 linear image.
     pub fn apply(&self, image: &mut Image) {
+        self.apply_oriented(image, 0);
+    }
+
+    pub(crate) fn apply_oriented(&self, image: &mut Image, flip: i32) {
+        // Invert LibRaw's output orientation to sample the sensor-coordinate table.
+        let gain_at = |mut v, mut h, rgb| {
+            if flip & 4 != 0 {
+                std::mem::swap(&mut v, &mut h);
+            }
+            if flip & 2 != 0 {
+                v = 1. - v;
+            }
+            if flip & 1 != 0 {
+                h = 1. - h;
+            }
+            self.gain_at(v, h, rgb)
+        };
         let (h, w, c) = image.dim();
         if h == 0 || w == 0 || c != 3 {
             return;
@@ -161,7 +192,7 @@ impl ProfileGainTableMap {
                 let v_norm = (y as f64 + 0.5) * inv_h;
                 for (x, px) in row.as_chunks_mut::<3>().0.iter_mut().enumerate() {
                     let h_norm = (x as f64 + 0.5) * inv_w;
-                    let gain = self.gain_at(v_norm, h_norm, *px);
+                    let gain = gain_at(v_norm, h_norm, *px);
                     px[0] *= gain;
                     px[1] *= gain;
                     px[2] *= gain;
@@ -173,7 +204,7 @@ impl ProfileGainTableMap {
                 for x in 0..w {
                     let h_norm = (x as f64 + 0.5) * inv_w;
                     let px = [image[[y, x, 0]], image[[y, x, 1]], image[[y, x, 2]]];
-                    let gain = self.gain_at(v_norm, h_norm, px);
+                    let gain = gain_at(v_norm, h_norm, px);
                     for ch in 0..3 {
                         image[[y, x, ch]] *= gain;
                     }
@@ -238,4 +269,25 @@ mod tests {
         assert!(img[[0, 0, 0]] > img[[0, 3, 0]], "left shadow lifted more than right");
         assert!(ProfileGainTableMap::parse(&bytes[..32]).is_err());
     }
+}
+
+#[test]
+fn gain_map_validates_cached_shape_and_uses_sensor_axes() {
+    let mut map = ProfileGainTableMap {
+        map_points_v: 1,
+        map_points_h: 2,
+        map_points_n: 1,
+        map_spacing_v: 1.,
+        map_spacing_h: 0.5,
+        map_origin_v: 0.,
+        map_origin_h: 0.25,
+        map_input_weights: [0.; 5],
+        table: vec![1., 3.],
+    };
+    let mut image = Image::ones((2, 1, 3));
+    map.apply_oriented(&mut image, 4);
+    assert_eq!((image[[0, 0, 0]], image[[1, 0, 0]]), (1., 3.));
+    map.table.pop();
+    let info = crate::rawcolor::CameraInfo { gain_table_map: Some(map), ..Default::default() };
+    assert!(crate::rawcolor::CameraSource::new(image, info).is_err());
 }

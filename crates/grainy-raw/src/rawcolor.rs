@@ -112,6 +112,9 @@ impl CameraSource {
     /// Port of rawcolor.CameraSource.__new__; owns an immutable copy of the calibration record.
     pub fn new(pixels: Image, info: CameraInfo) -> Result<Self> {
         math::image(&pixels)?;
+        if let Some(map) = &info.gain_table_map {
+            map.validate()?;
+        }
         Ok(Self { pixels, info })
     }
     /// Port of numpy.asarray(CameraSource), the camera-space pixels.
@@ -281,7 +284,8 @@ pub fn develop_camera(source: &CameraSource, s: &Settings) -> Result<Image> {
         math::map(&source.pixels, |v| transform.map(|r| v[0] * r[0] + v[1] * r[1] + v[2] * r[2]))
     };
     if let Some(gain_map) = &info.gain_table_map {
-        gain_map.apply(&mut a);
+        let flip = info.metadata.get("gain_map_flip").and_then(Value::as_i64).unwrap_or(0);
+        gain_map.apply_oriented(&mut a, flip as i32);
     }
     if has_record {
         let hs = dcp::interpolate_table(&p, dcp::weight(&p, t, Some(white))?)?;
@@ -566,6 +570,9 @@ pub fn decode(
     }
     if let Some(path) = path {
         read_dng_calibration(path, &mut info)?;
+        if info.gain_table_map.is_some() {
+            info.metadata.insert("gain_map_flip".into(), m.flip.into());
+        }
     }
     let p = default_profile(&info)?;
     let half = max_size.is_some_and(|v| u64::from(m.sizes[2].max(m.sizes[3])) > u64::from(v) * 2);
