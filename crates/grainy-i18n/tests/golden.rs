@@ -35,7 +35,15 @@ fn tr_every_key_of_the_table_in_both_languages() {
     let case = Case::open("i18n", "tr_table");
     let rows = case.json()["rows"].as_array().unwrap();
     assert_eq!(rows.len() as u64, case.json()["count"].as_u64().unwrap());
-    assert_eq!(rows.len(), grainy_i18n::english_table().len());
+    let rs_only = [(
+        "모델 이름과 세션 ID는 하이픈으로 시작할 수 없습니다.",
+        "Model names and session IDs cannot start with a hyphen.",
+    )];
+    assert_eq!(rows.len() + rs_only.len(), grainy_i18n::english_table().len());
+    for (source, english) in rs_only {
+        assert_eq!(try_tr_in(Language::Korean, source, &[]).unwrap(), source);
+        assert_eq!(try_tr_in(Language::English, source, &[]).unwrap(), english);
+    }
     let many = ["v0", "v1", "v2", "v3", "v4", "v5", "v6"];
     for row in rows {
         let source = row["source"].as_str().unwrap();
