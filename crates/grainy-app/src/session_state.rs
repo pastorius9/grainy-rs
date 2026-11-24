@@ -575,7 +575,17 @@ impl LibraryLock {
     }
 }
 
-static HELD: Mutex<Vec<LibraryLock>> = Mutex::new(Vec::new());
+// main reserves the startup library before creating a window. Transfer that reservation
+// to its document, so switching away releases it just like a library opened from the menu.
+static STARTUP_LOCK: Mutex<Option<(std::path::PathBuf, LibraryLock)>> = Mutex::new(None);
+
+pub(crate) fn document_lock(folder: &Path) -> Result<LibraryLock, String> {
+    let mut pending = STARTUP_LOCK.lock().unwrap_or_else(|e| e.into_inner());
+    if pending.as_ref().is_some_and(|(path, _)| path == folder) {
+        return Ok(pending.take().unwrap().1);
+    }
+    LibraryLock::acquire(folder)
+}
 
 /// Locks the library the arguments name for the life of the process. Nothing is locked for `--memory` and for
 /// the Python Grainy's folders (they only open read-only). `Err` carries the message to show before exiting.
@@ -589,9 +599,7 @@ pub fn lock_library(args: &crate::paths::Arguments) -> Result<(), String> {
         return Ok(());
     }
     let lock = LibraryLock::acquire(&folder)?;
-    if let Ok(mut held) = HELD.lock() {
-        held.push(lock);
-    }
+    *STARTUP_LOCK.lock().unwrap_or_else(|e| e.into_inner()) = Some((folder, lock));
     Ok(())
 }
 

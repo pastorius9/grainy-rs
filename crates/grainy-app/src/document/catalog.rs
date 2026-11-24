@@ -239,6 +239,7 @@ pub struct CatalogDocument {
     history: Vec<HistoryEntry>,
     /// The open photo's commits not yet handed to Auto Sync.
     commits: Vec<(u64, Commit)>,
+    _library_lock: Option<crate::session_state::LibraryLock>,
     prune_thread: Option<std::thread::JoinHandle<()>>,
 }
 
@@ -393,8 +394,11 @@ impl CatalogDocument {
             crate::paths::writable(&folder.join(name)).map_err(err)?;
         }
         std::fs::create_dir_all(folder).map_err(err)?;
+        let lock = crate::session_state::document_lock(folder)?;
         let existing = folder.join("catalog.sqlite").is_file();
-        let mut doc = Self::with_catalog(Catalog::new(folder).map_err(err)?)?;
+        let catalog = Catalog::new(folder).map_err(err)?;
+        let mut doc = Self::build(catalog, folder.to_path_buf(), folder.join("catalog.sqlite"), false);
+        doc._library_lock = Some(lock);
         let has_cache_files = ["thumbnails", "previews"]
             .iter()
             .any(|sub| std::fs::read_dir(folder.join(sub)).ok().is_some_and(|mut it| it.next().is_some()));
@@ -425,7 +429,10 @@ impl CatalogDocument {
         let folder = catalog.directory().to_path_buf();
         let read_only = catalog.is_reader();
         let listing_db = folder.join("catalog.sqlite");
-        Ok(Self::build(catalog, folder, listing_db, read_only))
+        let lock = if read_only { None } else { Some(crate::session_state::document_lock(&folder)?) };
+        let mut doc = Self::build(catalog, folder, listing_db, read_only);
+        doc._library_lock = lock;
+        Ok(doc)
     }
 
     /// Opens a verified private copy of the catalogue and its committed WAL in `scratch`.
@@ -463,6 +470,7 @@ impl CatalogDocument {
             overlay: HashMap::new(),
             history: Vec::new(),
             commits: Vec::new(),
+            _library_lock: None,
             prune_thread: None,
         }
     }
@@ -1477,4 +1485,13 @@ fn failed_undo_write_retains_edit_and_rolls_back_history_before_retry() {
     doc.flush().unwrap();
     assert_eq!(doc.catalog.histories(first).unwrap().len(), 1);
     assert_eq!(doc.catalog.photo(first).unwrap().unwrap()["settings"]["exposure"], json!(1.5));
+}
+
+#[test]
+fn writable_opens_hold_lock_until_document_closes() {
+    let dir = tempfile::tempdir().unwrap();
+    let doc = CatalogDocument::open(dir.path()).unwrap();
+    assert_eq!(CatalogDocument::open(dir.path()).err().unwrap(), crate::session_state::ALREADY_OPEN);
+    drop(doc);
+    assert!(CatalogDocument::open(dir.path()).is_ok());
 }
