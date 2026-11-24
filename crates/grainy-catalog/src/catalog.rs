@@ -83,8 +83,8 @@ impl Catalog {
         let db = Connection::open(directory.join("catalog.sqlite"))?;
         db.busy_timeout(Duration::from_secs(5))?;
         let c = Self { db, directory, platform: sources.platform, sources, reader: false };
-        schema::migrate(&c)?;
         tune_connection(&c.db, true)?;
+        schema::migrate(&c)?;
         c.recover_trash()?;
         Ok(c)
     }

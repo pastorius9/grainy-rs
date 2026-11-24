@@ -8,7 +8,6 @@
 //! (`refresh_lists(ensure_current=True)` or without).
 
 use std::path::Path;
-use std::time::Duration;
 
 use grainy_catalog::json::dumps;
 use grainy_catalog::rusqlite::{self, params, Connection};
@@ -80,8 +79,7 @@ fn collection_of(row: &Value) -> Collection {
 /// A second connection for the two statements `Catalog` has no method for (the oracle runs them on its own
 /// connection: `UPDATE collections` and `DELETE FROM collection_members`).
 fn write(folder: &Path, work: impl FnOnce(&Connection) -> rusqlite::Result<()>) -> Result<(), String> {
-    let connection = Connection::open(folder.join("catalog.sqlite")).map_err(err)?;
-    connection.busy_timeout(Duration::from_secs(10)).map_err(err)?;
+    let connection = grainy_catalog::query::open_connection(&folder.join("catalog.sqlite")).map_err(err)?;
     work(&connection).map_err(err)
 }
 

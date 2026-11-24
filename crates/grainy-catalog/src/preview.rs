@@ -216,8 +216,7 @@ pub fn publish(
     let work = (|| -> Result<bool> {
         fs::write(&temp, jpeg_payload)?;
         fs::write(&temp_meta, json::dumps(&stamp, true, false, false))?;
-        let db = rusqlite::Connection::open(directory.join("catalog.sqlite"))?;
-        db.busy_timeout(Duration::from_secs(10))?;
+        let db = crate::query::open_connection(&directory.join("catalog.sqlite"))?;
         db.execute_batch("BEGIN IMMEDIATE")?;
         let result = (|| -> Result<bool> {
             let row = db
@@ -580,6 +579,7 @@ fn prune_before(
         rusqlite::OpenFlags::SQLITE_OPEN_READ_WRITE,
     )?;
     db.busy_timeout(Duration::from_secs(2))?;
+    crate::catalog::tune_connection(&db, true)?;
     if !db.table_exists(None, "rs_published_thumbnails")? {
         return Ok(stats);
     }
