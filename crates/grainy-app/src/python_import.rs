@@ -63,6 +63,7 @@ pub struct Prepared {
     pub photos: i64,
     /// Copies of its thumbnails (`<id>.jpg`, `<id>.json`).
     thumbnails: PathBuf,
+    previews: PathBuf,
     /// Copies of its camera profiles and where they go: (copy, folder in this app).
     profiles: Vec<(PathBuf, PathBuf)>,
 }
@@ -179,6 +180,23 @@ pub fn prepare(source: &Path, data: &Path, library: &Path, cancelled: &dyn Fn() 
     .and_then(|db| db.query_row("SELECT COUNT(*) FROM photos", [], |r| r.get(0)))
     .map_err(|_| "파이썬 Grainy 라이브러리를 읽지 못했습니다.".to_owned())?;
     let stage = snapshot.path().join("stage");
+    let previews = stage.join("previews");
+    if let Ok(entries) = std::fs::read_dir(source.join("previews")) {
+        std::fs::create_dir_all(&previews).map_err(|e| e.to_string())?;
+        for entry in entries {
+            if cancelled() {
+                return Err("cancelled".into());
+            }
+            let entry = entry.map_err(|e| e.to_string())?;
+            let p = entry.path();
+            if entry.file_type().map_err(|e| e.to_string())?.is_file()
+                && p.extension().is_some_and(|x| x == "npz")
+                && p.file_stem().and_then(|x| x.to_str()).and_then(|x| x.parse::<i64>().ok()).is_some()
+            {
+                std::fs::copy(&p, previews.join(entry.file_name())).map_err(|e| e.to_string())?;
+            }
+        }
+    }
     let thumbnails = stage.join("thumbnails");
     std::fs::create_dir_all(&thumbnails).map_err(|e| e.to_string())?;
     copy_tree(&source.join("thumbnails"), &thumbnails, false, true, cancelled)?;
@@ -195,7 +213,16 @@ pub fn prepare(source: &Path, data: &Path, library: &Path, cancelled: &dyn Fn() 
         copy_tree(&from, &copy, true, false, cancelled)?;
         profiles.push((copy, to));
     }
-    Ok(Prepared { snapshot, catalog, photos, thumbnails, profiles, library: library.to_owned(), generation: None })
+    Ok(Prepared {
+        snapshot,
+        catalog,
+        photos,
+        thumbnails,
+        previews,
+        profiles,
+        library: library.to_owned(),
+        generation: None,
+    })
 }
 
 /// Copies the regular files of `from` into `to` (created), keeping files already there; `deep` follows
@@ -295,7 +322,32 @@ pub fn apply(cx: &mut AppContext, prepared: Prepared) {
         return;
     }
     stop_batch(cx);
+    // Detach the previous preview namespace before any replacement rows become visible.
+    // Keep its contents alongside the safety backup, including files of unknown ownership.
+    let previous = library.join("previews");
+    let saved = if previous.exists() {
+        let backup = library.join("backups");
+        let save = (|| -> std::io::Result<PathBuf> {
+            std::fs::create_dir_all(&backup)?;
+            let dir = tempfile::Builder::new().prefix("before-python-import-").tempdir_in(backup)?;
+            let to = dir.path().join("previews");
+            std::fs::rename(&previous, &to)?;
+            dir.keep();
+            Ok(to)
+        })();
+        match save {
+            Ok(path) => Some(path),
+            Err(e) => return fail(cx, &e.to_string()),
+        }
+    } else {
+        None
+    };
     if let Err(message) = cx.doc.file_op(FileOp::Restore { path: prepared.catalog.clone() }) {
+        if let Some(saved) = saved {
+            if let Err(error) = std::fs::rename(saved, &previous) {
+                return fail(cx, &format!("{message} ({error})"));
+            }
+        }
         cx.photo_changed();
         return fail(cx, &message);
     }
@@ -304,13 +356,16 @@ pub fn apply(cx: &mut AppContext, prepared: Prepared) {
     cx.state::<crate::session_state::ColumnState>().rescan();
     // Thousands of thumbnails take seconds to move on Windows: off the window's thread. Until one is in place its
     // photo shows the thumbnail made meanwhile; both are checked against their stamps before use.
-    let Prepared { snapshot, thumbnails, profiles, photos, .. } = prepared;
+    let Prepared { snapshot, thumbnails, previews, profiles, photos, .. } = prepared;
     let target = library.join("thumbnails");
     cx.spawn_document_job(
         FILES_JOB,
         "",
         move |_| {
             place_thumbnails(&thumbnails, &target)?;
+            if previews.is_dir() {
+                place_thumbnails(&previews, &previous)?;
+            }
             for (copy, folder) in &profiles {
                 copy_tree(copy, folder, true, false, &|| false)?;
             }

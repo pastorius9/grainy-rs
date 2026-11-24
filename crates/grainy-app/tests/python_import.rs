@@ -144,6 +144,11 @@ fn a_library_with_photos_is_asked_about_and_backed_up() {
     let source = python_library(&root, 2);
     let (mut cx, data) = rust_app(&root, 1);
     let library = data.join("Library");
+    let old = library.join("previews/1.npz");
+    std::fs::create_dir_all(old.parent().unwrap()).unwrap();
+    std::fs::write(&old, b"former photo").unwrap();
+    std::fs::create_dir_all(source.join("previews")).unwrap();
+    std::fs::write(source.join("previews/2.npz"), b"incoming photo").unwrap();
     let mine = rows(&library);
     let expected = rows_of_file(&source.join("catalog.sqlite"), &root.join("check"));
     python_import::start(&mut cx, &source, false);
@@ -158,6 +163,8 @@ fn a_library_with_photos_is_asked_about_and_backed_up() {
     assert!(cx.dialog_open("python_import_done"));
     drop(cx);
     assert_eq!(rows(&library), expected);
+    assert!(!old.exists());
+    assert_eq!(std::fs::read(library.join("previews/2.npz")).unwrap(), b"incoming photo");
     assert!(library.join("thumbnails").join("1.jpg").is_file(), "the thumbnails are placed after the catalogue");
     let backups: Vec<String> = std::fs::read_dir(library.join("backups"))
         .unwrap()
