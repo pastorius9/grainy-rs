@@ -242,12 +242,26 @@ pub fn publish(
             }
             replace_file(&temp, &jpeg)?;
             replace_file(&temp_meta, &meta)?;
+            db.execute_batch(
+                "CREATE TABLE IF NOT EXISTS rs_thumbnail_receipts (
+                id INTEGER PRIMARY KEY, jpeg_hash TEXT NOT NULL, stamp_hash TEXT NOT NULL)",
+            )?;
+            db.execute(
+                "INSERT OR REPLACE INTO rs_thumbnail_receipts VALUES(?,?,?)",
+                rusqlite::params![
+                    id,
+                    stamp["sha256"].as_str(),
+                    profiles::hash(json::dumps(&stamp, true, false, false).as_bytes())
+                ],
+            )?;
             Ok(true)
         })();
-        let rollback = db.execute_batch("ROLLBACK");
-        let result = result?;
-        rollback?;
-        Ok(result)
+        if matches!(result, Ok(true)) {
+            db.execute_batch("COMMIT")?;
+        } else {
+            db.execute_batch("ROLLBACK")?;
+        }
+        result
     })();
     let _ = fs::remove_file(temp);
     let _ = fs::remove_file(temp_meta);
@@ -527,95 +541,79 @@ pub struct PruneStats {
     pub freed_bytes: u64,
 }
 
-/// Removes orphaned `thumbnails/{id}.*` and `previews/{id}.*` cache entries (for deleted photos),
-/// cleans stale `.tmp` files, and evicts the oldest remaining thumbnail entries (LRU by mtime) when
-/// total thumbnail cache size exceeds `max_bytes`. Live offline Smart Previews (`previews/{id}.npz`)
-/// are never evicted by thumbnail LRU so offline editing packets stay intact.
+/// Only thumbnail pairs published with a content receipt can be reclaimed. Legacy pairs,
+/// loose files and offline packets have no such proof and stay in place.
 pub fn prune_cache(directory: impl AsRef<Path>, max_bytes: u64) -> Result<PruneStats> {
-    let directory = directory.as_ref();
-    // Open in standard read-only mode (not `immutable=1`) so live WAL rows from active writers are
-    // always visible and newly imported photos are never mistaken for orphans.
-    let db_path = directory.join("catalog.sqlite");
-    let conn = rusqlite::Connection::open_with_flags(
-        &db_path,
-        rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY | rusqlite::OpenFlags::SQLITE_OPEN_NO_MUTEX,
-    )?;
-    conn.busy_timeout(Duration::from_secs(2))?;
-    let mut live_ids = std::collections::HashSet::<i64>::new();
-    {
-        let mut stmt = conn.prepare("SELECT id FROM photos")?;
-        for id in stmt.query_map([], |row| row.get::<_, i64>(0))? {
-            live_ids.insert(id?);
-        }
-    }
-    drop(conn);
+    prune_before(directory.as_ref(), max_bytes, SystemTime::now())
+}
 
-    let now = SystemTime::now();
+fn prune_before(directory: &Path, max_bytes: u64, started: SystemTime) -> Result<PruneStats> {
     let mut stats = PruneStats::default();
-    let mut groups: std::collections::HashMap<i64, (SystemTime, u64, Vec<PathBuf>)> = std::collections::HashMap::new();
-
-    for (is_thumb, sub) in [(true, "thumbnails"), (false, "previews")] {
-        let dir = directory.join(sub);
-        let Ok(entries) = fs::read_dir(&dir) else { continue };
-        for entry in entries.flatten() {
-            let path = entry.path();
-            let Ok(meta) = entry.metadata() else { continue };
-            if !meta.is_file() {
-                continue;
-            }
-            let size = meta.len();
-            let mtime = meta.modified().unwrap_or(UNIX_EPOCH);
-            let name = entry.file_name();
-            let Some(name) = name.to_str() else { continue };
-            if name.ends_with(".tmp") {
-                if now.duration_since(mtime).unwrap_or_default() > Duration::from_secs(300)
-                    && fs::remove_file(&path).is_ok()
-                {
-                    stats.removed_files += 1;
-                    stats.freed_bytes += size;
+    let safe_dir = || fs::symlink_metadata(directory.join("thumbnails")).is_ok_and(|m| m.file_type().is_dir());
+    if !safe_dir() {
+        return Ok(stats);
+    }
+    let mut db = rusqlite::Connection::open_with_flags(
+        directory.join("catalog.sqlite"),
+        rusqlite::OpenFlags::SQLITE_OPEN_READ_WRITE,
+    )?;
+    db.busy_timeout(Duration::from_secs(2))?;
+    if !db.table_exists(None, "rs_thumbnail_receipts")? {
+        return Ok(stats);
+    }
+    let mut candidates = Vec::new();
+    let mut total = 0;
+    let file_info = |path: &Path| {
+        let m = fs::symlink_metadata(path).ok()?;
+        m.file_type().is_file().then_some((m.modified().ok()?, m.len()))
+    };
+    {
+        let mut stmt =
+            db.prepare("SELECT r.id, p.id IS NOT NULL FROM rs_thumbnail_receipts r LEFT JOIN photos p ON r.id=p.id")?;
+        for row in stmt.query_map([], |r| Ok((r.get::<_, i64>(0)?, r.get::<_, bool>(1)?)))? {
+            let (id, live) = row?;
+            let (jpg, stamp) = files(directory, id);
+            if let (Some((j, a)), Some((s, b))) = (file_info(&jpg), file_info(&stamp)) {
+                if j.max(s) < started && a <= 4 * 1024 * 1024 && b <= 8192 {
+                    candidates.push((live, j.max(s), id, a + b));
+                    total += a + b;
                 }
-                continue;
-            }
-            let Some((stem, ext)) = name.rsplit_once('.') else { continue };
-            if !matches!(ext, "jpg" | "json" | "npz") {
-                continue;
-            }
-            let Ok(id) = stem.parse::<i64>() else { continue };
-            if !live_ids.contains(&id) {
-                if fs::remove_file(&path).is_ok() {
-                    stats.removed_files += 1;
-                    stats.freed_bytes += size;
-                }
-                continue;
-            }
-            // Only thumbnail cache entries participate in LRU eviction; keep live offline Smart Previews.
-            if is_thumb {
-                let slot = groups.entry(id).or_insert_with(|| (mtime, 0, Vec::new()));
-                if mtime > slot.0 {
-                    slot.0 = mtime;
-                }
-                slot.1 += size;
-                slot.2.push(path);
             }
         }
     }
-
-    let mut total: u64 = groups.values().map(|g| g.1).sum();
-    if total > max_bytes {
-        let mut ordered: Vec<(SystemTime, u64, Vec<PathBuf>)> = groups.into_values().collect();
-        ordered.sort_by_key(|(mtime, _, _)| *mtime);
-        for (_, _, paths) in ordered {
-            if total <= max_bytes {
-                break;
-            }
-            for path in paths {
-                let bytes = fs::metadata(&path).map(|m| m.len()).unwrap_or(0);
-                if fs::remove_file(&path).is_ok() {
-                    stats.removed_files += 1;
-                    stats.freed_bytes += bytes;
-                    total = total.saturating_sub(bytes);
-                }
-            }
+    candidates.sort_unstable();
+    for (live, _, id, size) in candidates {
+        if live && total <= max_bytes {
+            break;
+        }
+        // Serialize the final ownership and age checks with catalog restore, import and publish.
+        let tx = db.transaction_with_behavior(rusqlite::TransactionBehavior::Immediate)?;
+        use rusqlite::OptionalExtension;
+        let receipt = tx
+            .query_row(
+                "SELECT jpeg_hash,stamp_hash,EXISTS(SELECT 1 FROM photos WHERE id=?1)
+            FROM rs_thumbnail_receipts WHERE id=?1",
+                [id],
+                |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?, r.get::<_, bool>(2)?)),
+            )
+            .optional()?;
+        let Some((jpeg_hash, stamp_hash, still_live)) = receipt else { continue };
+        if live != still_live || !safe_dir() {
+            continue;
+        }
+        let (jpg, stamp) = files(directory, id);
+        let verified = |path: &Path, hash: &str, limit| {
+            file_info(path).is_some_and(|(time, len)| time < started && len <= limit)
+                && fs::read(path).is_ok_and(|bytes| profiles::hash(&bytes) == hash)
+        };
+        if verified(&jpg, &jpeg_hash, 4 * 1024 * 1024) && verified(&stamp, &stamp_hash, 8192) {
+            fs::remove_file(jpg)?;
+            fs::remove_file(stamp)?;
+            tx.execute("DELETE FROM rs_thumbnail_receipts WHERE id=?", [id])?;
+            tx.commit()?;
+            total = total.saturating_sub(size);
+            stats.removed_files += 2;
+            stats.freed_bytes += size;
         }
     }
     Ok(stats)
@@ -626,30 +624,34 @@ mod prune_tests {
     use super::*;
 
     #[test]
-    fn prune_cache_removes_orphans_and_evicts_oldest_over_budget() {
+    fn prune_requires_unchanged_receipts_and_skips_new_publications() {
         let dir = tempfile::tempdir().unwrap();
         let catalog = Catalog::new(dir.path()).unwrap();
-        let p1 = dir.path().join("a.jpg");
-        let p2 = dir.path().join("b.jpg");
-        fs::write(&p1, b"a").unwrap();
-        fs::write(&p2, b"b").unwrap();
-        let id1 = catalog.add(p1.to_str().unwrap(), None, None, false).unwrap();
-        let id2 = catalog.add(p2.to_str().unwrap(), None, None, false).unwrap();
-        drop(catalog);
-
-        let thumbs = dir.path().join("thumbnails");
-        fs::create_dir_all(&thumbs).unwrap();
-        fs::write(thumbs.join("9999.jpg"), vec![0u8; 400]).unwrap();
-        fs::write(thumbs.join("9999.json"), b"{}").unwrap();
-        fs::write(thumbs.join(format!("{id1}.jpg")), vec![1u8; 500]).unwrap();
-        std::thread::sleep(Duration::from_millis(25));
-        fs::write(thumbs.join(format!("{id2}.jpg")), vec![2u8; 500]).unwrap();
-
-        let stats = prune_cache(dir.path(), 600).unwrap();
-        assert!(!thumbs.join("9999.jpg").exists(), "orphan removed");
-        assert!(!thumbs.join("9999.json").exists(), "orphan stamp removed");
-        assert!(!thumbs.join(format!("{id1}.jpg")).exists(), "oldest entry evicted by LRU");
-        assert!(thumbs.join(format!("{id2}.jpg")).exists(), "newest entry retained under budget");
-        assert!(stats.removed_files >= 3 && stats.freed_bytes >= 900);
+        let bytes = |name| fs::write(dir.path().join(name), b"original").unwrap();
+        bytes("thumbnails/2024.jpg");
+        fs::create_dir(dir.path().join("previews")).unwrap();
+        bytes("previews/2024.jpg");
+        bytes("previews/2.npz");
+        bytes("thumbnails/a.tmp");
+        let (jpg, stamp) = files(dir.path(), 1);
+        fs::write(&jpg, b"published").unwrap();
+        fs::write(&stamp, b"stamp").unwrap();
+        let db = catalog.connection();
+        db.execute_batch("CREATE TABLE rs_thumbnail_receipts(id INTEGER PRIMARY KEY,jpeg_hash TEXT,stamp_hash TEXT)")
+            .unwrap();
+        db.execute(
+            "INSERT INTO rs_thumbnail_receipts VALUES(1,?,?)",
+            [profiles::hash(b"published"), profiles::hash(b"stamp")],
+        )
+        .unwrap();
+        assert_eq!(prune_before(dir.path(), 0, UNIX_EPOCH).unwrap().removed_files, 0);
+        fs::write(&jpg, b"user replacement").unwrap();
+        assert_eq!(prune_cache(dir.path(), 0).unwrap().removed_files, 0);
+        fs::write(&jpg, b"published").unwrap();
+        let later = SystemTime::now() + Duration::from_secs(1);
+        assert_eq!(prune_before(dir.path(), 0, later).unwrap().removed_files, 2);
+        for name in ["thumbnails/2024.jpg", "previews/2024.jpg", "previews/2.npz", "thumbnails/a.tmp"] {
+            assert_eq!(fs::read(dir.path().join(name)).unwrap(), b"original");
+        }
     }
 }

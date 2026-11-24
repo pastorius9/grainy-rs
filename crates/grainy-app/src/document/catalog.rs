@@ -393,11 +393,12 @@ impl CatalogDocument {
             crate::paths::writable(&folder.join(name)).map_err(err)?;
         }
         std::fs::create_dir_all(folder).map_err(err)?;
+        let existing = folder.join("catalog.sqlite").is_file();
         let mut doc = Self::with_catalog(Catalog::new(folder).map_err(err)?)?;
         let has_cache_files = ["thumbnails", "previews"]
             .iter()
             .any(|sub| std::fs::read_dir(folder.join(sub)).ok().is_some_and(|mut it| it.next().is_some()));
-        if has_cache_files && !crate::context::FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed) {
+        if existing && has_cache_files && !crate::context::FROZEN_TIMING.load(std::sync::atomic::Ordering::Relaxed) {
             let dir = folder.to_path_buf();
             doc.prune_thread = std::thread::Builder::new()
                 .name("grainy-cache-prune".into())
