@@ -451,6 +451,32 @@ mod tests {
     use super::*;
 
     #[test]
+    fn standalone_gpu_returns_a_whole_image_for_a_tile_request() {
+        let mut gpu = PreviewGpu::new(Control::new(true));
+        let image = Image::from_elem((320, 480, 3), 0.25);
+        let mut settings = grainy_core::defaults();
+        settings.set("working_space", "sRGB");
+        let result = gpu.render(
+            Source::Linear(&image),
+            &settings.0,
+            &Options::default(),
+            1,
+            crate::render::Resolution::Full,
+            "sRGB",
+            None,
+            &Default::default(),
+            Some(TileRequest { roi: [0.4, 0.4, 0.6, 0.6], halo: 16 }),
+        );
+        if gpu.gpu.is_none() {
+            return;
+        }
+        match result.unwrap().unwrap() {
+            PreviewGpuOutput::Host(developed) => assert_eq!(developed.dim(), image.dim()),
+            PreviewGpuOutput::ZeroCopy { .. } => panic!("dedicated device returned a shared texture"),
+        }
+    }
+
+    #[test]
     fn gamut_warning_uses_the_exact_proof_transform() {
         let mut state = PreviewGpu::new(Control::new(true));
         let image = Image::zeros((2, 3, 3));
