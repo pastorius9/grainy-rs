@@ -207,6 +207,9 @@ impl System for FakeSystem {
     fn home(&self) -> PathBuf {
         PathBuf::from(self.var("USERPROFILE").unwrap_or_default())
     }
+    fn current_dir(&self) -> PathBuf {
+        self.var("FAKE_CWD").map_or_else(|| PathBuf::from("."), PathBuf::from)
+    }
     fn piped(&self, launch: &Launch) -> std::io::Result<Box<dyn Piped>> {
         let script = self.script.lock().unwrap().clone().unwrap_or((Vec::new(), Vec::new(), 0, false));
         if script.3 {
@@ -365,6 +368,26 @@ fn server_order(server: &Value) -> Value {
         }
     }
     Value::Object(out)
+}
+
+#[cfg(windows)]
+#[test]
+fn windows_program_search_uses_absolute_path_entries_only() {
+    let dir = tempfile::tempdir().unwrap();
+    let installed = dir.path().join("bin");
+    std::fs::create_dir(&installed).unwrap();
+    std::fs::write(dir.path().join("example.EXE"), b"working directory marker").unwrap();
+    let mut sys = FakeSystem::isolated(
+        dir.path(),
+        &[("FAKE_CWD", dir.path().display().to_string()), ("PATH", format!(".;;{}", installed.display()))],
+    );
+    sys.env.remove("NoDefaultCurrentDirectoryInExePath");
+    assert!(grainy_app::ai::discover::which(&sys, "example").is_none());
+    std::fs::write(installed.join("example.EXE"), b"installed marker").unwrap();
+    assert_eq!(
+        grainy_app::ai::discover::which(&sys, "example").map(PathBuf::from),
+        Some(installed.join("example.EXE"))
+    );
 }
 
 #[test]
