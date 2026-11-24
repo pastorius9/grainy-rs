@@ -191,6 +191,24 @@ fn pure_functions_match_the_oracle() {
         let mut expected = c.as_object().unwrap().clone();
         expected.shift_remove("fn");
         expected.shift_remove("args");
+        if f == "copy_keys" {
+            if let Some(keys) = expected.get_mut("result").and_then(Value::as_array_mut) {
+                // RS extends the legacy light and detail groups.
+                let mut extra = Vec::new();
+                if keys.contains(&json!("exposure")) {
+                    extra.push("tone_version");
+                }
+                if keys.contains(&json!("sharpen")) {
+                    extra.extend(["detail_version", "ai_denoise"]);
+                }
+                for key in extra {
+                    if !keys.contains(&json!(key)) {
+                        keys.push(json!(key));
+                    }
+                }
+                keys.sort_by(|a, b| a.as_str().cmp(&b.as_str()));
+            }
+        }
         if f == "summaries" && !cfg!(windows) {
             // The folders are `str(Path(path).parent)` of paths given with slashes (`D:/Film/a.png`): Windows
             // writes them with backslashes (the goldens), macOS as given.
