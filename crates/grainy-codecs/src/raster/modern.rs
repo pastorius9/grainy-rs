@@ -139,3 +139,24 @@ pub(super) fn jxl(data: &[u8]) -> Result<DecodedBitmap> {
     out.profile = Some(Profile::Embedded(image.rendered_icc()));
     Ok(out)
 }
+
+#[test]
+fn premultiplied_avif_decodes_to_straight_color_once() {
+    let pixels = vec![ravif::RGBA8::new(150, 110, 85, 128); 16 * 16];
+    let encode = |mode| {
+        ravif::Encoder::new()
+            .with_bit_depth(ravif::BitDepth::Eight)
+            .with_quality(100.0)
+            .with_alpha_quality(100.0)
+            .with_speed(10)
+            .with_alpha_color_mode(mode)
+            .encode_rgba(ravif::Img::new(&pixels, 16, 16))
+            .unwrap()
+    };
+    let associated = avif(&encode(ravif::AlphaColorMode::Premultiplied).avif_file).unwrap();
+    let straight = avif(&encode(ravif::AlphaColorMode::UnassociatedDirty).avif_file).unwrap();
+    assert!(!associated.associated);
+    for c in 0..4 {
+        assert!((associated.samples[[8, 8, c]] - straight.samples[[8, 8, c]]).abs() < 0.035);
+    }
+}
