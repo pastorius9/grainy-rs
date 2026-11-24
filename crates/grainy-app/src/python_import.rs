@@ -242,14 +242,19 @@ fn copy_tree(
     thumbnails_only: bool,
     cancelled: &dyn Fn() -> bool,
 ) -> Result<usize, String> {
-    let Ok(entries) = std::fs::read_dir(from) else { return Ok(0) };
+    let entries = match std::fs::read_dir(from) {
+        Ok(entries) => entries,
+        Err(e) if e.kind() == std::io::ErrorKind::NotFound => return Ok(0),
+        Err(e) => return Err(e.to_string()),
+    };
     std::fs::create_dir_all(to).map_err(|e| e.to_string())?;
     let mut copied = 0;
-    for entry in entries.flatten() {
+    for entry in entries {
+        let entry = entry.map_err(|e| e.to_string())?;
         if cancelled() {
             return Err("cancelled".into());
         }
-        let Ok(kind) = entry.file_type() else { continue };
+        let kind = entry.file_type().map_err(|e| e.to_string())?;
         let name = entry.file_name();
         let target = to.join(&name);
         if kind.is_dir() && deep {
@@ -317,6 +322,39 @@ fn place_thumbnails(staged: &Path, folder: &Path) -> Result<(), String> {
     Ok(())
 }
 
+fn restore_caches(library: &Path, backup: &Path) -> std::io::Result<()> {
+    for name in ["previews", "thumbnails"] {
+        let saved = backup.join(name);
+        if saved.try_exists()? {
+            std::fs::rename(saved, library.join(name))?;
+        }
+    }
+    Ok(())
+}
+
+fn detach_caches(library: &Path) -> Result<PathBuf, String> {
+    let backups = library.join("backups");
+    std::fs::create_dir_all(&backups).map_err(|e| e.to_string())?;
+    // Persist before moving the first directory. Even if rollback itself fails, a
+    // temporary-directory destructor must never remove the user's previous files.
+    let backup =
+        tempfile::Builder::new().prefix("before-python-import-").tempdir_in(backups).map_err(|e| e.to_string())?.keep();
+    for name in ["previews", "thumbnails"] {
+        let old = library.join(name);
+        match std::fs::rename(&old, backup.join(name)) {
+            Ok(()) => {}
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {}
+            Err(error) => {
+                if let Err(rollback) = restore_caches(library, &backup) {
+                    return Err(format!("{error} ({rollback})"));
+                }
+                return Err(error.to_string());
+            }
+        }
+    }
+    Ok(backup)
+}
+
 /// Replaces the open library's catalogue with the prepared copy (after backing it up, as 카탈로그 복원 does), then
 /// places the thumbnails and the camera profiles that are not there yet, and says what came over.
 pub fn apply(cx: &mut AppContext, prepared: Prepared) {
@@ -333,28 +371,13 @@ pub fn apply(cx: &mut AppContext, prepared: Prepared) {
     // Detach the previous preview namespace before any replacement rows become visible.
     // Keep its contents alongside the safety backup, including files of unknown ownership.
     let previous = library.join("previews");
-    let saved = if previous.exists() {
-        let backup = library.join("backups");
-        let save = (|| -> std::io::Result<PathBuf> {
-            std::fs::create_dir_all(&backup)?;
-            let dir = tempfile::Builder::new().prefix("before-python-import-").tempdir_in(backup)?;
-            let to = dir.path().join("previews");
-            std::fs::rename(&previous, &to)?;
-            let _ = dir.keep();
-            Ok(to)
-        })();
-        match save {
-            Ok(path) => Some(path),
-            Err(e) => return fail(cx, &e.to_string()),
-        }
-    } else {
-        None
+    let backup = match detach_caches(&library) {
+        Ok(backup) => backup,
+        Err(error) => return fail(cx, &error),
     };
     if let Err(message) = cx.doc.file_op(FileOp::Restore { path: prepared.catalog.clone() }) {
-        if let Some(saved) = saved {
-            if let Err(error) = std::fs::rename(saved, &previous) {
-                return fail(cx, &format!("{message} ({error})"));
-            }
+        if let Err(error) = restore_caches(&library, &backup) {
+            return fail(cx, &format!("{message} ({error})"));
         }
         cx.photo_changed();
         return fail(cx, &message);
