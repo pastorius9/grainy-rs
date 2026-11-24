@@ -149,6 +149,7 @@ fn a_library_with_photos_is_asked_about_and_backed_up() {
     std::fs::write(&old, b"former photo").unwrap();
     std::fs::create_dir_all(source.join("previews")).unwrap();
     std::fs::write(source.join("previews/2.npz"), b"incoming photo").unwrap();
+    std::fs::write(library.join("thumbnails/999.jpg"), b"old thumbnail").unwrap();
     let mine = rows(&library);
     let expected = rows_of_file(&source.join("catalog.sqlite"), &root.join("check"));
     python_import::start(&mut cx, &source, false);
@@ -164,6 +165,7 @@ fn a_library_with_photos_is_asked_about_and_backed_up() {
     drop(cx);
     assert_eq!(rows(&library), expected);
     assert!(!old.exists());
+    assert!(!library.join("thumbnails/999.jpg").exists());
     assert_eq!(std::fs::read(library.join("previews/2.npz")).unwrap(), b"incoming photo");
     assert!(library.join("thumbnails").join("1.jpg").is_file(), "the thumbnails are placed after the catalogue");
     let backups: Vec<String> = std::fs::read_dir(library.join("backups"))
