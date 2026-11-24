@@ -209,6 +209,18 @@ fn run_step(cx: &mut AppContext, step: &Value) {
 
 /// A scenario of the generator through the Rust commands: after every step the messages, the copy set and the
 /// previous photo equal the oracle's; at every checkpoint (and at the end) the catalogue equals the oracle's.
+// The Python fixtures predate the RS denoiser and the process-version group choices.
+fn rs_copy_keys(legacy: &Value) -> Vec<String> {
+    let mut keys: std::collections::BTreeSet<String> = serde_json::from_value(legacy.clone()).unwrap();
+    if keys.contains("sharpen") {
+        keys.extend(["ai_denoise".to_owned(), "detail_version".to_owned()]);
+    }
+    if keys.contains("exposure") {
+        keys.insert("tone_version".to_owned());
+    }
+    keys.into_iter().collect()
+}
+
 fn run_session(name: &str) {
     // The interface language is process-wide and the status lines are compared in Korean: not while a window test
     // renders in English.
@@ -242,7 +254,7 @@ fn run_session(name: &str) {
         }
         let state = cx.state::<SyncState>().clone();
         let keys: Vec<String> = state.copy_keys.iter().cloned().collect();
-        assert_eq!(json!(keys), expected["copy_keys"], "{at}: the copy set");
+        assert_eq!(keys, rs_copy_keys(&expected["copy_keys"]), "{at}: the copy set");
         assert_eq!(state.copy_crop, expected["copy_crop"].as_bool().unwrap(), "{at}: crop and rotation");
         assert_eq!(state.previous, expected["previous"].as_u64(), "{at}: the previous photo");
     }
@@ -268,7 +280,15 @@ fn the_copy_groups_and_the_default_copy_set_are_the_oracle_s() {
     let groups = meta["groups"].as_object().unwrap();
     assert_eq!(groups.len(), EDIT_GROUPS.len());
     for (title, keys) in EDIT_GROUPS {
-        let expected: Vec<&str> = groups[title].as_array().unwrap().iter().map(|k| k.as_str().unwrap()).collect();
+        let mut expected: Vec<&str> = groups[title].as_array().unwrap().iter().map(|k| k.as_str().unwrap()).collect();
+        match title {
+            "빛" => expected.insert(0, "tone_version"),
+            "디테일" => {
+                let index = expected.iter().position(|k| *k == "noise_luma").unwrap();
+                expected.splice(index..index, ["detail_version", "ai_denoise"]);
+            }
+            _ => {}
+        }
         assert_eq!(keys, expected.as_slice(), "{title}");
     }
     // The dialog lists the groups in the oracle's order (`EDIT_GROUPS` is a dict in the oracle's source order).
@@ -294,8 +314,7 @@ fn the_copy_groups_and_the_default_copy_set_are_the_oracle_s() {
             "복구"
         ]
     );
-    let default: Vec<String> =
-        meta["default_copy_keys"].as_array().unwrap().iter().map(|k| k.as_str().unwrap().to_owned()).collect();
+    let default = rs_copy_keys(&meta["default_copy_keys"]);
     let state = SyncState::default();
     assert_eq!(state.copy_keys.iter().cloned().collect::<Vec<_>>(), default, "everything but crop and rotation");
     assert!(!state.copy_crop && !state.auto && state.previous.is_none());
