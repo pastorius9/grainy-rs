@@ -235,7 +235,43 @@ pub(crate) fn webp_chunks(data: &[u8]) -> Result<Vec<([u8; 4], &[u8])>> {
     }
     Ok(out)
 }
+fn avif_exif(data: &[u8]) -> Option<Vec<u8>> {
+    use std::ffi::c_void;
+    unsafe extern "C" {
+        fn grainy_avif_exif(
+            data: *const u8,
+            len: usize,
+            receive: unsafe extern "C" fn(*const u8, usize, *mut c_void),
+            context: *mut c_void,
+        );
+    }
+    unsafe extern "C" fn receive(ptr: *const u8, len: usize, context: *mut c_void) {
+        // The synchronous callback borrows the live decoder's checked TIFF payload.
+        let bytes = unsafe { std::slice::from_raw_parts(ptr, len) };
+        unsafe { *context.cast::<Option<Vec<u8>>>() = Some(bytes.to_vec()) };
+    }
+    let mut result: Option<Vec<u8>> = None;
+    unsafe {
+        grainy_avif_exif(data.as_ptr(), data.len(), receive, (&raw mut result).cast());
+    }
+    result
+}
+
 pub(crate) fn extract_exif(data: &[u8]) -> Result<Option<Vec<u8>>> {
+    if data.starts_with(b"\0\0\0\x0cJXL \r\n\x87\n") {
+        let Ok(image) = jxl_oxide::JxlImage::read_with_defaults(data) else { return Ok(None) };
+        if let Ok(jxl_oxide::AuxBoxData::Data(exif)) = image.aux_boxes().first_exif() {
+            return Ok(exif
+                .payload()
+                .get(exif.tiff_header_offset() as usize..)
+                .filter(|tiff| tiff.len() <= 16 * 1024 * 1024)
+                .map(<[u8]>::to_vec));
+        }
+        return Ok(None);
+    }
+    if data.get(4..8) == Some(b"ftyp") {
+        return Ok(avif_exif(data));
+    }
     if data.starts_with(b"II") || data.starts_with(b"MM") {
         return Ok(Some(data.to_vec()));
     }

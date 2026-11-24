@@ -368,6 +368,16 @@ fn write_exports_for_independent_pillow_check() {
                 ..Default::default()
             };
             export_image(&a, root().join("metadata_jpg/input.jpg"), &path, &o, &cms).unwrap();
+            if o.keep_metadata && matches!(format, ExportFormat::Avif | ExportFormat::JpegXl) {
+                let metadata = read_metadata(&path).unwrap();
+                let original = read_metadata(root().join("metadata_jpg/input.jpg")).unwrap();
+                assert!(original.contains_key("camera"));
+                assert_eq!(metadata.get("camera"), original.get("camera"), "{format:?}");
+                let reexported = export_exif(&path, &Metadata::new(), None, "sRGB").unwrap();
+                assert!(reexported
+                    .windows(original["camera"].as_str().unwrap().len())
+                    .any(|w| w == original["camera"].as_str().unwrap().as_bytes()));
+            }
             let gray = o.grayscale
                 && matches!(
                     format,

@@ -31,6 +31,26 @@ void grainy_avif_close(GrainyAvif *r) {
     free(r);
 }
 
+// Deliver only the primary image's TIFF payload while the decoder owns it.
+void grainy_avif_exif(const uint8_t *data, size_t len,
+                      void (*receive)(const uint8_t *, size_t, void *), void *context) {
+    avifROData input = { data, len };
+    if (!avifPeekCompatibleFileType(&input)) return;
+    avifDecoder *decoder = avifDecoderCreate();
+    if (!decoder) return;
+    decoder->ignoreXMP = AVIF_TRUE;
+    if (avifDecoderSetIOMemory(decoder, data, len) == AVIF_RESULT_OK &&
+        avifDecoderParse(decoder) == AVIF_RESULT_OK) {
+        const avifRWData *exif = &decoder->image->exif;
+        size_t offset;
+        if (exif->size && exif->size <= 16 * 1024 * 1024 &&
+            avifGetExifTiffHeaderOffset(exif->data, exif->size, &offset) == AVIF_RESULT_OK) {
+            receive(exif->data + offset, exif->size - offset, context);
+        }
+    }
+    avifDecoderDestroy(decoder);
+}
+
 const char *grainy_avif_read(const uint8_t *data, size_t len, GrainyAvif **out) {
     GrainyAvif *r = calloc(1, sizeof(*r));
     if (!r) return "AVIF allocation failed";
