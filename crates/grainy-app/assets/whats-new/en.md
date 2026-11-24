@@ -2,6 +2,15 @@
 
 The notes Grainy RS shows the first time it opens after an update (Korean: ko.md). Each new version adds a `## version — title` section to this file and to ko.md. The GitHub release notes are in docs/releases.
 
+## 0.5.4 — Stability fixes, including photos that could be deleted
+
+- **Photos could be deleted.** Opening an ordinary photo folder with Open Library Folder could delete numeric-named images (such as `2024.jpg`) in its `previews` and `thumbnails` subfolders as if they were cache files. Grainy RS now cleans up only thumbnails it created.
+- Exporting with metadata no longer hangs on some GPS positions.
+- Edits saved just before a power cut or forced shutdown are kept. Two windows can no longer edit the same library at once.
+- Keywords are no longer overwritten after switching libraries. Several risky cases in the Python-library import are fixed.
+- Apple ProRAW opens. AI Denoise on its own is no longer skipped in the preview, exports or Copy. The histogram updates at 1:1 zoom.
+- The AI connection (MCP) returns a job id at once for export, import and Auto Tone. Moving the pointer over the photo no longer stutters.
+
 ## 0.5.3 — No more quitting over the window size
 
 - **Grainy RS no longer quits when another program makes its window very large.** A script or a window manager or screen capture tool that made the window larger than the graphics card can draw (usually 16384 to 32768 pixels) or larger than all the monitors together closed Grainy RS without a message. Now the window goes back to the size of its monitor.
