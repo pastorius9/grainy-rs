@@ -2,6 +2,11 @@
 
 The notes Grainy RS shows the first time it opens after an update (Korean: ko.md). Each new version adds a `## version — title` section to this file and to ko.md. The GitHub release notes are in docs/releases.
 
+## 0.5.3 — No more quitting over the window size
+
+- **Grainy RS no longer quits when another program makes its window very large.** A script or a window manager or screen capture tool that made the window larger than the graphics card can draw (usually 16384 to 32768 pixels) or larger than all the monitors together closed Grainy RS without a message. Now the window goes back to the size of its monitor.
+- After a moment the window could not be drawn, it draws again instead of staying dark.
+
 ## 0.5.2 — Import the Python Grainy's library
 
 - **Grainy continues as Grainy RS.** The Python Grainy ends with 0.6.9; new features and fixes come only in Grainy RS.
