@@ -230,21 +230,26 @@ fn copy_tree(
     Ok(copied)
 }
 
-/// Moves the staged thumbnails into the library's `thumbnails` folder, replacing the files of the same ids (their
-/// photos were replaced with the catalogue); a file that cannot be moved is copied.
-fn place_thumbnails(staged: &Path, folder: &Path) -> usize {
-    let Ok(entries) = std::fs::read_dir(staged) else { return 0 };
-    if std::fs::create_dir_all(folder).is_err() {
-        return 0;
-    }
-    let mut placed = 0;
-    for entry in entries.flatten() {
+/// Publish through a new inode on the destination volume, even when the old name
+/// is a hard link to an original photo.
+fn publish_copy(source: &Path, target: &Path) -> std::io::Result<()> {
+    let mut staged = tempfile::NamedTempFile::new_in(target.parent().unwrap_or(Path::new(".")))?;
+    std::io::copy(&mut std::fs::File::open(source)?, staged.as_file_mut())?;
+    staged.as_file().sync_all()?;
+    staged.persist(target).map_err(|e| e.error)?;
+    Ok(())
+}
+
+fn place_thumbnails(staged: &Path, folder: &Path) -> Result<(), String> {
+    std::fs::create_dir_all(folder).map_err(|e| e.to_string())?;
+    for entry in std::fs::read_dir(staged).map_err(|e| e.to_string())? {
+        let entry = entry.map_err(|e| e.to_string())?;
         let target = folder.join(entry.file_name());
-        if std::fs::rename(entry.path(), &target).is_ok() || std::fs::copy(entry.path(), &target).is_ok() {
-            placed += 1;
+        if std::fs::rename(entry.path(), &target).is_err() {
+            publish_copy(&entry.path(), &target).map_err(|e| e.to_string())?;
         }
     }
-    placed
+    Ok(())
 }
 
 /// Replaces the open library's catalogue with the prepared copy (after backing it up, as 카탈로그 복원 does), then
@@ -272,7 +277,7 @@ pub fn apply(cx: &mut AppContext, prepared: Prepared) {
         FILES_JOB,
         "",
         move |_| {
-            place_thumbnails(&thumbnails, &target);
+            place_thumbnails(&thumbnails, &target)?;
             for (copy, folder) in &profiles {
                 if let Err(error) = copy_tree(copy, folder, true, false, &|| false) {
                     log::warn!("camera profiles not copied to {}: {error}", folder.display());
@@ -353,4 +358,23 @@ pub fn offer(cx: &mut AppContext) {
         (tr("나중에"), Some(Box::new(remember))),
     ];
     cx.open_dialog(Box::new(message));
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn cross_volume_copy_replaces_hard_link_without_changing_original() {
+        let dir = tempfile::tempdir().unwrap();
+        let original = dir.path().join("original.jpg");
+        let target = dir.path().join("1.jpg");
+        let source = dir.path().join("import.jpg");
+        std::fs::write(&original, b"original").unwrap();
+        std::fs::hard_link(&original, &target).unwrap();
+        std::fs::write(&source, b"thumbnail").unwrap();
+        publish_copy(&source, &target).unwrap();
+        assert_eq!(std::fs::read(original).unwrap(), b"original");
+        assert_eq!(std::fs::read(target).unwrap(), b"thumbnail");
+    }
 }
