@@ -277,7 +277,7 @@ impl PreviewGpu {
         soft_proof: &crate::render::SoftProof,
         tile: Option<TileRequest>,
     ) -> Option<Result<PreviewGpuOutput, String>> {
-        if !self.control.enabled() {
+        if !self.control.enabled() || (soft_proof.enabled && soft_proof.gamut_warning) {
             return None;
         }
         self.warm_up();
@@ -287,9 +287,6 @@ impl PreviewGpu {
             return None;
         }
         let tile = tile.filter(|_| self.shared_device);
-        if soft_proof.enabled && soft_proof.gamut_warning {
-            return None;
-        }
         let cache_idx = usize::from(resolution == crate::render::Resolution::Full);
         let before = self.cache[cache_idx].runs();
         let outcome = catch_unwind(AssertUnwindSafe(|| {
@@ -452,6 +449,27 @@ pub(crate) fn menu(ui: &mut eframe::egui::Ui, cx: &mut crate::context::AppContex
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn gamut_warning_uses_the_exact_proof_transform() {
+        let mut state = PreviewGpu::new(Control::new(true));
+        let image = Image::zeros((2, 3, 3));
+        let proof = crate::render::SoftProof { enabled: true, gamut_warning: true, ..Default::default() };
+        assert!(state
+            .render(
+                Source::Linear(&image),
+                &Map::new(),
+                &Options::default(),
+                1,
+                crate::render::Resolution::Fit,
+                "sRGB",
+                None,
+                &proof,
+                None
+            )
+            .is_none());
+        assert!(!state.attempted);
+    }
 
     #[test]
     fn installing_gpu_worker_keeps_the_offline_library() {
