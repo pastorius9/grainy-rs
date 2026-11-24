@@ -504,6 +504,9 @@ impl Catalog {
         }
         drop(candidate);
         let migrated = Self::new(stage.path())?;
+        // A restored catalog can come from another folder. Its publication receipts
+        // cannot attest to ownership of files in this destination.
+        migrated.db.execute_batch("DROP TABLE IF EXISTS rs_published_thumbnails")?;
         let mut target = Connection::open(self.directory.join("catalog.sqlite"))?;
         tune_connection(&target, true)?;
         target.busy_timeout(Duration::from_secs(5))?;
@@ -717,4 +720,15 @@ fn failed_migration_preserves_open_catalog() {
     source.execute_batch("CREATE TABLE photos(x); INSERT INTO photos VALUES(1)").unwrap();
     assert!(c.restore_from(&source).is_err());
     assert_eq!(c.preference("marker", Value::Null).unwrap(), "original");
+}
+
+#[test]
+fn restore_cannot_transfer_cache_ownership_between_libraries() {
+    let root = tempfile::tempdir().unwrap();
+    let source = Catalog::new(root.path().join("source")).unwrap();
+    source.connection().execute_batch("CREATE TABLE rs_published_thumbnails(id INTEGER PRIMARY KEY)").unwrap();
+    let dest = Catalog::new(root.path().join("dest")).unwrap();
+    dest.restore_from(source.connection()).unwrap();
+    assert!(!dest.connection().table_exists(None, "rs_published_thumbnails").unwrap());
+    assert!(source.connection().table_exists(None, "rs_published_thumbnails").unwrap());
 }
