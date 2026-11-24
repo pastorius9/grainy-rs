@@ -357,6 +357,7 @@ impl AppContext {
             return false;
         }
         crate::folder_watch::shutdown(self);
+        self.jobs.join_kind(crate::python_import::FILES_JOB);
         self.renderer.set_library(doc.asset_folder());
         self.doc = doc;
         self.document_generation += 1;

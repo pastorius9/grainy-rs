@@ -170,6 +170,7 @@ pub fn run_step(cx: &mut AppContext, step: Step) {
 /// Port of the close of the window: a normal close removes this run's marker, then the final cloud backup
 /// (`CloudBackup.shutdown`, "catalog still open").
 pub fn shutdown(cx: &mut AppContext) {
+    crate::python_import::shutdown(cx);
     cloud_backup::shutdown(cx);
     if let Some(folder) = cx.state::<Startup>().folder.take() {
         safe_start::end(&folder);

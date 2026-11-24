@@ -66,6 +66,7 @@ struct Running<C> {
     label: String,
     handle: JobHandle,
     done: Done<C>,
+    thread: Option<std::thread::JoinHandle<()>>,
 }
 
 /// The job service of a context `C` (the application context).
@@ -126,13 +127,14 @@ impl<C: 'static> Jobs<C> {
             let result = payload.and_then(|b| b.downcast::<T>().map(|t| *t).map_err(|_| "job result".to_owned()));
             done(cx, result);
         });
-        self.running.insert(id, Running { kind, label: label.into(), handle, done });
-        if let Err(error) = std::thread::Builder::new().name(format!("grainy-{kind}")).spawn(run) {
-            if let Some(job) = self.running.get_mut(&id) {
-                job.label = format!("{}: {error}", job.label);
+        let thread = match std::thread::Builder::new().name(format!("grainy-{kind}")).spawn(run) {
+            Ok(thread) => Some(thread),
+            Err(error) => {
+                let _ = self.tx.send((id, Err(error.to_string())));
+                None
             }
-            let _ = self.tx.send((id, Err(error.to_string())));
-        }
+        };
+        self.running.insert(id, Running { kind, label: label.into(), handle, done, thread });
         id
     }
 
@@ -156,6 +158,15 @@ impl<C: 'static> Jobs<C> {
             }
         }
         out
+    }
+
+    /// Waits for this kind of worker to release its files, leaving delivery to the normal poll.
+    pub(crate) fn join_kind(&mut self, kind: &str) {
+        for job in self.running.values_mut().filter(|j| j.kind == kind) {
+            if let Some(thread) = job.thread.take() {
+                let _ = thread.join();
+            }
+        }
     }
 
     /// Asks a job to stop.
@@ -225,6 +236,25 @@ mod tests {
             assert!(started.elapsed() < Duration::from_secs(20));
             std::thread::sleep(Duration::from_millis(2));
         }
+    }
+
+    #[test]
+    fn joins_publication_before_library_unlock() {
+        let mut jobs = Jobs::<()>::default();
+        let published = Arc::new(AtomicBool::new(false));
+        let worker = Arc::clone(&published);
+        jobs.spawn(
+            "files",
+            "",
+            move |_| {
+                worker.store(true, Ordering::SeqCst);
+                Ok(())
+            },
+            |_, _| {},
+        );
+        jobs.join_kind("files");
+        assert!(published.load(Ordering::SeqCst));
+        assert_eq!(jobs.poll().len(), 1);
     }
 
     #[test]

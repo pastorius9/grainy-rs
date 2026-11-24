@@ -397,7 +397,9 @@ impl CatalogDocument {
         let lock = crate::session_state::document_lock(folder)?;
         let existing = folder.join("catalog.sqlite").is_file();
         let catalog = Catalog::new(folder).map_err(err)?;
-        let mut doc = Self::build(catalog, folder.to_path_buf(), folder.join("catalog.sqlite"), false);
+        let folder = catalog.directory().to_owned();
+        let listing = folder.join("catalog.sqlite");
+        let mut doc = Self::build(catalog, folder.clone(), listing, false);
         doc._library_lock = Some(lock);
         let has_cache_files = ["thumbnails", "previews"]
             .iter()

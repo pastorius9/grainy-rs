@@ -42,7 +42,7 @@ pub const OFFERED: &str = "python_library_offered";
 /// The kind of the preparing job.
 const JOB: &str = "python_import";
 /// The kind of the job that places the thumbnails and camera profiles after the catalogue was replaced.
-const FILES_JOB: &str = "python_import_files";
+pub(crate) const FILES_JOB: &str = "python_import_files";
 
 /// The Python Grainy's library to offer at start (`cx.state::<PythonLibrary>()`).
 #[derive(Debug, Default, Clone)]
@@ -77,6 +77,14 @@ impl Prepared {
 
 fn can_import(cx: &AppContext) -> bool {
     writable_library(cx) && !cx.jobs.running(JOB) && !cx.jobs.running(FILES_JOB)
+}
+
+pub(crate) fn shutdown(cx: &mut AppContext) {
+    cx.jobs.cancel_kind(JOB);
+    for kind in [JOB, FILES_JOB] {
+        cx.jobs.join_kind(kind);
+        drop(cx.jobs.poll_kind(Some(kind)));
+    }
 }
 
 fn import_command(cx: &mut AppContext, _: &Invocation) {
