@@ -332,7 +332,7 @@ pub fn apply(cx: &mut AppContext, prepared: Prepared) {
             let dir = tempfile::Builder::new().prefix("before-python-import-").tempdir_in(backup)?;
             let to = dir.path().join("previews");
             std::fs::rename(&previous, &to)?;
-            dir.keep();
+            let _ = dir.keep();
             Ok(to)
         })();
         match save {
