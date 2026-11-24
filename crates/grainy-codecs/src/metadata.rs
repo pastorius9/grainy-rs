@@ -135,6 +135,7 @@ pub(crate) fn u32_at(data: &[u8], offset: usize, le: bool) -> Result<u32> {
 pub(crate) fn parse_ifd(data: &[u8], offset: usize, le: bool) -> Result<Ifd> {
     let count = u16_at(data, offset, le)? as usize;
     get(data, offset + 2, count * 12)?;
+    let mut remaining = 16 * 1024 * 1024usize;
     let mut map = Ifd::new();
     for i in 0..count {
         let at = offset + 2 + i * 12;
@@ -143,6 +144,7 @@ pub(crate) fn parse_ifd(data: &[u8], offset: usize, le: bool) -> Result<Ifd> {
         let count = u32_at(data, at + 4, le)?;
         let Some(size) = unit(typ) else { continue };
         let n = (count as usize).checked_mul(size).ok_or_else(|| invalid("tag size overflow"))?;
+        remaining = remaining.checked_sub(n).ok_or_else(|| invalid("EXIF directory exceeds metadata limit"))?;
         let from = if n <= 4 { at + 8 } else { u32_at(data, at + 8, le)? as usize };
         let mut bytes = get(data, from, n)?.to_vec();
         if le {

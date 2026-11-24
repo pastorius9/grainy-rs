@@ -521,6 +521,16 @@ fn decode_tiff(data: &[u8]) -> Result<DecodedBitmap> {
     Ok(out)
 }
 
+fn webp_buffer_len(len: Option<usize>) -> Result<usize> {
+    len.filter(|&n| n <= 512 * 1024 * 1024).ok_or_else(|| invalid("WebP too large"))
+}
+
+#[test]
+fn webp_allocation_is_bounded() {
+    assert!(webp_buffer_len(Some(512 * 1024 * 1024 + 1)).is_err());
+    assert_eq!(webp_buffer_len(Some(240 * 160 * 3)).unwrap(), 240 * 160 * 3);
+}
+
 /// Port of `luma/rasterio.py read_bitmap`'s decode stage, including Pillow-compatible JPEG draft scaling.
 pub fn decode_bitmap(path: impl AsRef<Path>, options: &LoadOptions) -> Result<DecodedBitmap> {
     let path = path.as_ref();
@@ -545,7 +555,8 @@ pub fn decode_bitmap(path: impl AsRef<Path>, options: &LoadOptions) -> Result<De
         let mut d = image_webp::WebPDecoder::new(Cursor::new(&data)).map_err(codec)?;
         let (w, h) = d.dimensions();
         let c = if d.has_alpha() { 4 } else { 3 };
-        let mut bytes = vec![0; d.output_buffer_size().ok_or_else(|| invalid("WebP too large"))?];
+        let len = webp_buffer_len(d.output_buffer_size())?;
+        let mut bytes = vec![0; len];
         d.read_image(&mut bytes).map_err(codec)?;
         let mut out = base(from_bytes(h as usize, w as usize, c, bytes)?, ColorModel::Rgb, "WEBP · 8-bit", 8);
         out.orientation = source_orientation(&data);

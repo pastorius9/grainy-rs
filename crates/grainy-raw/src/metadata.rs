@@ -151,11 +151,9 @@ pub fn read_metadata(path: impl AsRef<Path>) -> Result<Value> {
             // Adapt the owned parser buffer only; the source file stays read-only.
             file.seek(SeekFrom::Start(0))?;
             let mut bytes = Vec::new();
-            file.read_to_end(&mut bytes)?;
-            if magic.starts_with(b"II") {
-                bytes[2..4].copy_from_slice(b"*\0");
-            } else {
-                bytes[2..4].copy_from_slice(b"\0*");
+            (&mut file).take(32 * 1024 * 1024).read_to_end(&mut bytes)?;
+            if let Some(word) = bytes.get_mut(2..4) {
+                word.copy_from_slice(if magic.starts_with(b"II") { b"*\0" } else { b"\0*" });
             }
             if let Some(exif) = accept(reader.read_raw(bytes)) {
                 collect(&exif, None, &mut tags);
