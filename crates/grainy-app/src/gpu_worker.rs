@@ -165,6 +165,7 @@ impl PreviewGpu {
                     Gpu::from_shared(&shared.adapter, shared.device.clone(), shared.queue.clone())
                 })) {
                     Ok(Ok(gpu)) => {
+                        gpu.watch_device_loss();
                         self.control.message(format!("{} (Zero-Copy)", gpu.adapter_info().name));
                         self.gpu = Some(Arc::new(gpu));
                         self.shared_device = true;

@@ -169,11 +169,6 @@ impl Gpu {
         let failed = Arc::new(Mutex::new(None));
         if own_callbacks {
             let state = failed.clone();
-            device.set_device_lost_callback(move |reason, message| {
-                *state.lock().unwrap_or_else(std::sync::PoisonError::into_inner) =
-                    Some(format!("device lost ({reason:?}): {message}"));
-            });
-            let state = failed.clone();
             device.on_uncaptured_error(Arc::new(move |e| {
                 *state.lock().unwrap_or_else(std::sync::PoisonError::into_inner) = Some(format!("{e}"));
             }));
@@ -459,8 +454,21 @@ impl Gpu {
             reduce_profiles: Pool::new(64 * 1024, 8),
             film_stocks: Mutex::new(HashMap::new()),
         };
+        if own_callbacks {
+            gpu.watch_device_loss();
+        }
         gpu.check()?;
         Ok(gpu)
+    }
+
+    /// Route device loss to this compute context when the host owns the device-loss callback.
+    /// The window's independent uncaptured-error handler keeps handling surface errors.
+    pub fn watch_device_loss(&self) {
+        let state = self.failed.clone();
+        self.device.set_device_lost_callback(move |reason, message| {
+            *state.lock().unwrap_or_else(std::sync::PoisonError::into_inner) =
+                Some(format!("device lost ({reason:?}): {message}"));
+        });
     }
 
     /// Underlying `wgpu::Device` (shared with `eframe` when initialized via [`Self::from_shared`]).
