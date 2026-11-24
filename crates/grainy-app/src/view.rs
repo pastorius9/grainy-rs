@@ -239,19 +239,7 @@ impl AppContext {
         let px = ((lu * (pw - 1) as f32).round() as usize).min(pw - 1);
         let py = ((lv * (ph - 1) as f32).round() as usize).min(ph - 1);
         let key = (frame.id, px as u32, py as u32);
-        if let Some((asked, rx)) = &self.cursor_readback {
-            match rx.try_recv() {
-                Ok(sample) => {
-                    let asked = *asked;
-                    self.cursor_readback = None;
-                    if asked.0 == frame.id {
-                        self.show_cursor_sample(asked, sample);
-                    }
-                }
-                Err(std::sync::mpsc::TryRecvError::Disconnected) => self.cursor_readback = None,
-                Err(std::sync::mpsc::TryRecvError::Empty) => {}
-            }
-        }
+        self.poll_cursor_readback(frame.id);
         if self.cursor_sample_key == Some(key) {
             return;
         }
@@ -276,6 +264,22 @@ impl AppContext {
             }
         } else {
             self.show_cursor_sample(key, None);
+        }
+    }
+
+    fn poll_cursor_readback(&mut self, current_frame: u64) {
+        if let Some((asked, rx)) = &self.cursor_readback {
+            match rx.try_recv() {
+                Ok(sample) => {
+                    let asked = *asked;
+                    self.cursor_readback = None;
+                    if asked.0 == current_frame {
+                        self.show_cursor_sample(asked, sample);
+                    }
+                }
+                Err(std::sync::mpsc::TryRecvError::Disconnected) => self.cursor_readback = None,
+                Err(std::sync::mpsc::TryRecvError::Empty) => {}
+            }
         }
     }
 
@@ -699,6 +703,29 @@ pub(crate) fn trackpad_pan(events: &[egui::Event]) -> Vec2 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn hovered_pixels_poll_one_readback_and_discard_old_frames() {
+        let mut cx = AppContext::new(
+            &Default::default(),
+            Box::<crate::render::TestCard>::default(),
+            Box::<crate::session::Session>::default(),
+        );
+        let key = (9, 2, 3);
+        let (tx, rx) = std::sync::mpsc::channel();
+        cx.cursor_readback = Some((key, rx));
+        cx.poll_cursor_readback(9);
+        assert!(cx.cursor_readback.is_some());
+        tx.send(Some([100, 50, 125])).unwrap();
+        cx.poll_cursor_readback(9);
+        assert_eq!(cx.cursor_sample_key, Some(key));
+        assert!(cx.cursor_readback.is_none());
+        let (tx, rx) = std::sync::mpsc::channel();
+        cx.cursor_readback = Some(((8, 0, 0), rx));
+        tx.send(Some([0; 3])).unwrap();
+        cx.poll_cursor_readback(9);
+        assert_eq!(cx.cursor_sample_key, Some(key));
+    }
 
     #[test]
     fn a_trackpad_scroll_pans_and_a_wheel_or_command_scroll_does_not() {
